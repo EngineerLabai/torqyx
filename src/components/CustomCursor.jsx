@@ -30,15 +30,12 @@ const CustomCursor = () => {
   }, []);
 
   return (
-    <>
-      <style jsx global>{`body, a, button { cursor: none !important; }`}</style>
-      <div
-        ref={cursorRef}
-        className={`fixed top-0 left-0 w-8 h-8 border-2 border-white rounded-full pointer-events-none z-[9999] mix-blend-difference transition-all duration-200 ease-out ${
-          isHovering ? 'scale-[2.5] bg-white' : 'scale-100 bg-transparent'
-        }`}
-      />
-    </>
+    <div
+      ref={cursorRef}
+      className={`fixed top-0 left-0 w-8 h-8 border-2 border-white rounded-full pointer-events-none z-[9999] mix-blend-difference transition-all duration-200 ease-out ${
+        isHovering ? 'scale-[2.5] bg-white' : 'scale-100 bg-transparent'
+      }`}
+    />
   );
 };
 
