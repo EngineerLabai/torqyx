@@ -10,7 +10,8 @@
   --accent: #0f172a;
   --accent-soft: #cbd5e1;
   --accent-cta: #059669; /* emerald-600 */
-  --accent-2: #facc15; /* warm yellow accent */
+  --accent-2: #fb923c; /* accent orange */
+  --accent-alt: #0ea5e9; /* accent blue (optional) */
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-jetbrains-mono);
 }
@@ -80,7 +81,7 @@ h3 {
 
 /* Brand gradient and animations */
 :root {
-  --accent-gradient: linear-gradient(90deg, rgba(5,150,105,1) 0%, rgba(250,204,21,0.95) 100%);
+  --accent-gradient: linear-gradient(90deg, rgba(5,150,105,1) 0%, rgba(251,146,60,0.95) 100%);
 }
 
 @keyframes float {
@@ -166,7 +167,7 @@ h3 {
 :root {
   --brand-bg-1: #081226;
   --brand-bg-2: #071013;
-  --brand-gradient: linear-gradient(120deg, rgba(5,150,105,0.12), rgba(250,204,21,0.06));
+  --brand-gradient: linear-gradient(120deg, rgba(5,150,105,0.12), rgba(251,146,60,0.08));
   --card-radius: 1rem;
 }
 
