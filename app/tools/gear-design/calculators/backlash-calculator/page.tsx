@@ -2,18 +2,22 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 const STEEL_ALPHA = 12e-6; // 1/°C
 
 export default function BacklashCalculatorPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/calculators/backlash-calculator">
       <Header
         title="Backlash Hesaplayıcı"
         description="Modül, yüz genişliği, merkez mesafesi ve sıcaklık farkı ile min/nom/max backlash tahmini yapar (basit rehber)."
       />
       <BacklashCalculator />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -165,3 +169,5 @@ function Result({ label, value, tone = "neutral" }: { label: string; value: stri
     </div>
   );
 }
+
+

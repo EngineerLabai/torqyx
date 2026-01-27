@@ -1,5 +1,6 @@
-// app/project-hub/devreye-alma/page.tsx
 "use client";
+// app/project-hub/devreye-alma/page.tsx
+import PageShell from "@/components/layout/PageShell";
 
 const STEPS = [
   {
@@ -30,7 +31,7 @@ const STEPS = [
 
 export default function DevreyeAlmaPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -62,6 +63,6 @@ export default function DevreyeAlmaPage() {
           Not: Basinc/sicaklik testlerinde tedarikci prosedurleri ve emniyet izinleri kontrol edilmelidir.
         </p>
       </section>
-    </div>
+    </PageShell>
   );
 }

@@ -2,6 +2,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 type MaterialGroup =
   | "carbon"
@@ -185,7 +187,8 @@ export default function HeatTreatmentPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="heat-treatment">
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2 text-xs">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -279,6 +282,9 @@ export default function HeatTreatmentPage() {
           </div>
         </div>
       </section>
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
+
+

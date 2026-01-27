@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import PageShell from "@/components/layout/PageShell";
 
 type ActionRow = {
   id: string;
@@ -84,7 +85,7 @@ export default function KaizenPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -280,7 +281,7 @@ export default function KaizenPage() {
           <li>Riskler ve engeller için B planı var mı?</li>
         </ul>
       </section>
-    </div>
+    </PageShell>
   );
 }
 

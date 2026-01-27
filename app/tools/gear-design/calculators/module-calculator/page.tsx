@@ -2,18 +2,22 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 const STANDARD_MODULES = [0.5, 0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20];
 
 export default function ModuleCalculatorPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/calculators/module-calculator">
       <Header
         title="Modül Hesaplayıcı"
         description="Hatve çapı ve diş sayısına göre ham modül hesaplar, en yakın standart modül ve önerilen çapı verir."
       />
       <ModuleCalculator />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -164,3 +168,5 @@ function Result({ label, value, tone = "neutral" }: { label: string; value: stri
     </div>
   );
 }
+
+

@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
+import PageShell from "@/components/layout/PageShell";
 
 type FiveN1KForm = {
   what: string;   // Ne?
@@ -59,7 +60,7 @@ export default function FiveN1KPage() {
   const isEmpty = Object.values(form).every((v) => !v.trim());
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       {/* Başlık ve açıklama */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
@@ -217,7 +218,7 @@ export default function FiveN1KPage() {
           <PremiumExportNotice />
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 }
 

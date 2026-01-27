@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
+import PageShell from "@/components/layout/PageShell";
 
 type WhyStep = {
   why: string;       // Neden cevabı
@@ -55,7 +56,7 @@ export default function FiveWhyPage() {
     form.steps.every((s) => !s.why.trim() && !s.actionHint.trim());
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       {/* Başlık ve açıklama */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
@@ -169,7 +170,7 @@ export default function FiveWhyPage() {
           classification={classification}
         />
       </section>
-    </div>
+    </PageShell>
   );
 }
 

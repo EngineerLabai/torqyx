@@ -2,6 +2,8 @@
 "use client";
 
 import { useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 type ThreadInfo = {
   name: string;
@@ -125,7 +127,8 @@ export default function BoltDatabasePage() {
   const grade = BOLT_GRADES.find((g) => g.grade === selectedGrade)!;
 
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="bolt-database">
       <section className="rounded-2xl border border-slate-200 bg-white p-6 text-sm shadow-sm">
         <h1 className="mb-4 text-2xl font-bold text-slate-900">
           Standart Cıvata Veri Merkezi
@@ -243,6 +246,9 @@ export default function BoltDatabasePage() {
           </p>
         </div>
       </section>
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
+
+

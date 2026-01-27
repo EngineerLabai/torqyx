@@ -2,6 +2,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 type MaterialCategory =
   | "steel"
@@ -194,7 +196,8 @@ export default function MaterialCardsPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="material-cards">
       {/* Başlık + filtre alanı */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
@@ -270,7 +273,8 @@ export default function MaterialCardsPage() {
           </article>
         ))}
       </section>
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -295,3 +299,5 @@ function FilterChip({ label, active, onClick }: FilterChipProps) {
     </button>
   );
 }
+
+

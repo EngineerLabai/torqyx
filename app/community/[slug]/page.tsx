@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PageShell from "@/components/layout/PageShell";
 import { threads } from "../data";
 
 type PageProps = { params: { slug: string } };
@@ -9,8 +10,8 @@ export default function CommunityDetailPage({ params }: PageProps) {
   if (!thread) return notFound();
 
   return (
-    <div className="space-y-5">
-      <Link href="/community" className="text-sm font-semibold text-sky-700 hover:text-sky-600">
+    <PageShell>
+      <Link href="/community" className="tap-target inline-flex items-center text-sm font-semibold text-sky-700 hover:text-sky-600">
         ← Tüm başlıklar
       </Link>
 
@@ -68,6 +69,6 @@ export default function CommunityDetailPage({ params }: PageProps) {
           </div>
         </form>
       </section>
-    </div>
+    </PageShell>
   );
 }

@@ -2,16 +2,20 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 export default function HelixAxialCalculatorPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/calculators/helix-axial-calculator">
       <Header
         title="Helis Aksiyel Kuvvet Hesaplayıcı"
         description="Helis açısı ve basınç açısıyla aksiyel kuvveti hesaplar; Ft ve Fr bilgisini verir."
       />
       <HelixAxialCalculator />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -153,3 +157,5 @@ function Result({ label, value, tone = "neutral" }: { label: string; value: stri
     </div>
   );
 }
+
+

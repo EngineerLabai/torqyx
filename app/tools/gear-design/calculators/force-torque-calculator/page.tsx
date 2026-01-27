@@ -2,16 +2,20 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 export default function ForceTorqueCalculatorPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/calculators/force-torque-calculator">
       <Header
         title="Çevresel Kuvvet / Tork Hesaplayıcı"
         description="Güç/rpm veya tork gir; Ft, Fr (basınç açısı) ve Fa (helis açısı) otomatik hesaplanır."
       />
       <ForceTorqueCalculator />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -153,3 +157,5 @@ function Result({ label, value, tone = "neutral" }: { label: string; value: stri
     </div>
   );
 }
+
+

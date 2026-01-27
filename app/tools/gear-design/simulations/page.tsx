@@ -1,3 +1,6 @@
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
+
 const simulations = [
   {
     title: "MAAG Sistemi Hareket Animasyonu",
@@ -28,7 +31,8 @@ const simulations = [
 
 export default function GearSimulationsPage() {
   return (
-    <div className="space-y-8">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/simulations">
       <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_24%)]" />
         <div className="relative space-y-3">
@@ -77,6 +81,9 @@ export default function GearSimulationsPage() {
           </article>
         ))}
       </section>
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
+
+

@@ -2,16 +2,20 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 export default function WeightOptimizationPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/calculators/weight-optimization">
       <Header
         title="Dişli Ağırlığı / Gövde Optimizasyonu"
         description="Dış çap, yüz genişliği, iç çap ve malzeme yoğunluğuna göre ağırlık ve hafifletme tasarrufunu hesaplar."
       />
       <WeightCalculator />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -224,3 +228,5 @@ function Result({ label, value, tone = "neutral" }: { label: string; value: stri
     </div>
   );
 }
+
+

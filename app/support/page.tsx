@@ -1,6 +1,7 @@
-﻿export default function SupportPage() {
+import PageShell from "@/components/layout/PageShell";
+export default function SupportPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <p className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-semibold text-emerald-700">
@@ -8,8 +9,7 @@
           </p>
           <h1 className="text-2xl font-semibold leading-snug text-slate-900">Hızlı teknik destek ve yönlendirme</h1>
           <p className="text-sm leading-relaxed text-slate-700">
-            Cıvata, tork, malzeme ya da fikstür tasarımında takıldığın yerde hızlıca bir talep oluşturabilirsin. Mesajın
-            ekibimize düşer; uygun uzman geri dönüş yapar.
+            Kisa bir talep birak, uzman ekip hizlica geri donsun.
           </p>
         </div>
 
@@ -71,14 +71,12 @@
               type="file"
               className="block w-full text-sm text-slate-700 file:mr-3 file:rounded-lg file:border-0 file:bg-emerald-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-emerald-500"
             />
-            <p className="text-[11px] text-slate-600">
-              Not: Gönder butonu e-posta istemcinizi açacak; eklediğiniz dosya orada ekli kalır.
-            </p>
+            <p className="text-[11px] text-slate-600">Not: E-posta istemcisi acilir, dosya orada ekli kalir.</p>
           </div>
 
           <button
             type="submit"
-            className="w-full rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500"
+            className="tap-target w-full rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500"
           >
             Gönder
           </button>
@@ -88,11 +86,10 @@
       <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-base font-semibold text-slate-900">Talep oluştururken öneriler</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-slate-700">
-          <li>Kısa bir konu başlığı ekle (örn. "M12 10.9 cıvata torku").</li>
+          <li>Kısa bir konu başlığı ekle (örn. &quot;M12 10.9 cıvata torku&quot;).</li>
           <li>Varsa malzeme, yük, limit veya standartları belirt.</li>
-          <li>Çizim veya fotoğraf ekleyebiliyorsan iliştirmen süreci hızlandırır.</li>
         </ul>
       </section>
-    </div>
+    </PageShell>
   );
 }
