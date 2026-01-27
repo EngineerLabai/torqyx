@@ -201,15 +201,17 @@ const validateFrontmatter = (data: Record<string, unknown>, sourcePath: string):
     throw new Error(`[content] Invalid frontmatter in ${sourcePath}: ${errors.join("; ")}`);
   }
 
+  const frontmatter = data as ContentFrontmatter;
+
   return {
-    title: data.title.trim(),
-    description: data.description.trim(),
-    date: data.date,
-    tags: data.tags.map((tag) => tag.trim()).filter(Boolean),
-    category: data.category.trim(),
-    draft: data.draft,
-    readingTime: data.readingTime,
-    canonical: data.canonical,
+    title: frontmatter.title.trim(),
+    description: frontmatter.description.trim(),
+    date: frontmatter.date,
+    tags: frontmatter.tags.map((tag) => tag.trim()).filter(Boolean),
+    category: frontmatter.category.trim(),
+    draft: frontmatter.draft,
+    readingTime: frontmatter.readingTime,
+    canonical: frontmatter.canonical,
   };
 };
 

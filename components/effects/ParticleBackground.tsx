@@ -10,6 +10,7 @@ const ParticleBackground = () => {
     if (!canvas) return;
     const context = canvas.getContext("2d");
     if (!context) return;
+    const ctx = context;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let animationFrameId = 0;
@@ -50,10 +51,10 @@ const ParticleBackground = () => {
         if (this.y < 0 || this.y > height) this.vy *= -1;
       }
       draw() {
-        context.fillStyle = "rgba(34, 211, 238, 0.5)";
-        context.beginPath();
-        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        context.fill();
+        ctx.fillStyle = "rgba(34, 211, 238, 0.5)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
@@ -63,7 +64,7 @@ const ParticleBackground = () => {
     };
 
     const animate = () => {
-      context.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
@@ -72,12 +73,12 @@ const ParticleBackground = () => {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < connectionDistance) {
-            context.beginPath();
-            context.strokeStyle = `rgba(34, 211, 238, ${1 - dist / connectionDistance})`;
-            context.lineWidth = 0.5;
-            context.moveTo(particles[i].x, particles[i].y);
-            context.lineTo(particles[j].x, particles[j].y);
-            context.stroke();
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(34, 211, 238, ${1 - dist / connectionDistance})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
           }
         }
       }
