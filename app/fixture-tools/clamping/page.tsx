@@ -2,6 +2,8 @@
 "use client";
 
 import { useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import { trackEvent } from "@/utils/analytics";
 
 type Inputs = {
   weightKg: string;
@@ -90,6 +92,7 @@ export default function ClampingPage() {
     }
 
     setError(null);
+    trackEvent("calculate_click", { tool_id: "fixture-clamping", tool_title: "Clamping Force" });
 
     const g = 9.81; // m/s2
     const totalNormal = (weight * g * safety) / mu; // N
@@ -99,7 +102,7 @@ export default function ClampingPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -252,7 +255,7 @@ export default function ClampingPage() {
           </span>
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-slate-200">
+        <div className="overflow-x-auto rounded-xl border border-slate-200">
           <table className="min-w-full text-left text-[11px]">
             <thead className="bg-slate-50 text-slate-700">
               <tr>
@@ -273,7 +276,7 @@ export default function ClampingPage() {
           </table>
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 }
 

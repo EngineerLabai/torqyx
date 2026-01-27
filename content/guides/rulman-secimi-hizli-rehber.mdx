@@ -1,0 +1,79 @@
+---
+title: "Rulman secimi icin hizli rehber"
+description: "Yuk, hiz ve servis sartlarini kisa adimlarla degerlendirmek icin ozet kontrol listesi."
+date: "2026-01-12"
+tags: ["rulman", "rehber", "bakim"]
+category: "Guide"
+draft: false
+---
+
+<Callout type="warning" title="Dikkat">
+Bu rehber, ilk hizli degerlendirme icindir. Kritik uygulamalarda uretici kataloglarini mutlaka kontrol et.
+</Callout>
+
+## Problem / Amac
+
+Rulman seciminde hedef, yuk ve hiz kosullarini dengeli sekilde tasiyacak uygun rulman tipini belirlemektir.
+
+## Varsayimlar
+
+- Yuk dagilimi dengeli kabul edilir.
+- Yaglama ve sicaklik kosullari tipik uretim sartlarindadir.
+- Montaj toleranslari katalog sinirlari icindedir.
+
+## Adim adim yontem
+
+<StepList
+  title="Hizli secim adimlari"
+  steps={["Yuku ve hiz araligini belirle", "Calisma sicakligini not et", "Servis faktorlerini hesapla", "Uygun rulman tipini sec"]}
+/>
+
+## Sik hatalar
+
+<Callout type="info" title="Kontrol noktasi">
+Hizli secimlerde servis faktorunun atlanmasi, rulman omrunu dramatik sekilde kisalabilir.
+</Callout>
+
+- Radyal ve eksenel yuku karistirmak.
+- Yetersiz yaglama kosullarini goz ardi etmek.
+- Servis faktorunu 1 varsaymak.
+
+## Ilgili hesaplayicilar
+
+<ToolLink
+  href="/tools/torque-power"
+  title="Tork / Guc hesaplayici"
+  description="Hiz ve guc degerlerinden tork hesapla."
+  badge="Hesaplayici"
+/>
+
+<ToolLink
+  href="/tools/quality-tools"
+  title="Kalite araclari"
+  description="Olcu ve kontrol akislarini tek yerde topla."
+  badge="Arac"
+/>
+
+## Basit kontrol tablosu
+
+<Table>
+  <thead>
+    <tr>
+      <th>Durum</th>
+      <th>Oncelik</th>
+      <th>Not</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Yuksek hiz</td>
+      <td>Dusuk surtunme</td>
+      <td>Kafes yapisi kritik</td>
+    </tr>
+    <tr>
+      <td>Agir yuk</td>
+      <td>Dayanim</td>
+      <td>Temas acisi artar</td>
+    </tr>
+  </tbody>
+</Table>

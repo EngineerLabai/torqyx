@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Motor torku hesaplama",
+    "description": "Guc, devir ve verim girilerek tork hesaplanir.",
+    "inputs": {
+      "P": "5.5 kW",
+      "n": "1500 rpm",
+      "verim": "95%"
+    },
+    "outputs": {
+      "T": "35.0 Nm",
+      "T_verim": "33.2 Nm"
+    },
+    "notes": ["T = 9550 * P / n formulu kullanilir."]
+  }
+]

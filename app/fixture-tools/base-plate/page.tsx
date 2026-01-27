@@ -2,6 +2,8 @@
 "use client";
 
 import { useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import { trackEvent } from "@/utils/analytics";
 
 type Inputs = {
   length: string; // mm
@@ -163,7 +165,8 @@ export default function BasePlatePage() {
       return;
     }
 
-    setError(null);
+      setError(null);
+      trackEvent("calculate_click", { tool_id: "fixture-base-plate", tool_title: "Base Plate" });
 
     const span = Math.min(L, W);
     const tBase = 0.03 * span; // mm, kaba kural
@@ -312,7 +315,7 @@ export default function BasePlatePage() {
   }
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -649,7 +652,7 @@ export default function BasePlatePage() {
           </ul>
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 }
 

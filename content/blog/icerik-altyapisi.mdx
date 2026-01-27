@@ -1,0 +1,60 @@
+---
+title: "Icerik altyapisina hizli giris"
+description: "MDX tabanli icerikler icin ortak yapi ve hesaplama odakli ornekler."
+date: "2026-01-10"
+tags: ["icerik", "mdx", "surec"]
+category: "Blog"
+draft: false
+readingTime: 4
+canonical: "https://aiengineerslab.com/blog/icerik-altyapisina-hizli-giris"
+---
+
+<Callout type="info" title="Not">
+Bu sayfa, manuel hesaplama ve gorsel analiz odakli icerikler icin MDX kullanimini ornekler.
+</Callout>
+
+## Neden MDX?
+
+MDX, duz metin aciklamalarin yanina yeniden kullanilabilir bile-senleri eklemek icin iyi bir secenektir.
+
+<Formula label="Temel iliski">
+T = 9550 * P / n
+</Formula>
+
+<StepList title="Hizli kontrol" steps={["Veri topla", "Birimleri cevir", "Sonucu dogrula"]} />
+
+<Table>
+  <thead>
+    <tr>
+      <th>Parametre</th>
+      <th>Aciklama</th>
+      <th>Birim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>T</td>
+      <td>Tork</td>
+      <td>N*m</td>
+    </tr>
+    <tr>
+      <td>P</td>
+      <td>Guc</td>
+      <td>kW</td>
+    </tr>
+    <tr>
+      <td>n</td>
+      <td>Devir</td>
+      <td>rpm</td>
+    </tr>
+  </tbody>
+</Table>
+
+<Image src="/icons/logo-mark.svg" alt="Logo mark" width={96} height={96} caption="Basit gorsel referans." />
+
+<ToolLink
+  href="/tools/torque-power"
+  title="Tork / Guc hesaplayici"
+  description="Guc, devir ve tork iliskisini hizlica hesapla."
+  badge="Hesaplayici"
+/>

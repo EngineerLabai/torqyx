@@ -2,6 +2,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 type TaktInputs = {
   netTime: string; // available time per shift (min)
@@ -53,7 +55,8 @@ const POWER_INIT: PowerInputs = {
 
 export default function ProductionProjectPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="production-project">
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -81,7 +84,8 @@ export default function ProductionProjectPage() {
       <OeeBlock />
       <PressForceBlock />
       <MotorPowerBlock />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -277,7 +281,7 @@ function PressForceBlock() {
         <p className="mt-2 text-[11px] text-red-600">Pozitif degerler gir.</p>
       )}
       <p className="mt-2 text-[11px] text-slate-600">
-        Not: Kesme icin kullanilir. Delme/blanking icin P, parcanin kesim cevresidir; malzeme kesme dayanimi datasheet'ten alinmalidir.
+        Not: Kesme icin kullanilir. Delme/blanking icin P, parcanin kesim cevresidir; malzeme kesme dayanimi datasheet&apos;ten alinmalidir.
       </p>
     </section>
   );
@@ -354,3 +358,5 @@ function ResultRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+
+

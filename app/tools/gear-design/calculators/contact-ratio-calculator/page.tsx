@@ -2,16 +2,20 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 export default function ContactRatioCalculatorPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/calculators/contact-ratio-calculator">
       <Header
         title="Kontak Oranı Hesaplayıcı"
         description="ISO/DIN full-depth varsayımlarıyla e_alpha (profil) ve e_beta (overlap) hesaplar, toplam temas oranını verir."
       />
       <ContactRatioCalculator />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -187,3 +191,5 @@ function Result({ label, value, tone = "neutral" }: { label: string; value: stri
     </div>
   );
 }
+
+

@@ -2,6 +2,9 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
+import { trackEvent } from "@/utils/analytics";
 
 type CrossSectionType = "rect" | "circle";
 
@@ -104,6 +107,7 @@ export default function BendingStressPage() {
       return;
     }
 
+    trackEvent("calculate_click", { tool_id: "bending-stress", tool_title: "Bending Stress" });
     // Hesaplar
     // F [kN] -> [N]
     const F = FkN * 1000; // [N]
@@ -166,7 +170,8 @@ export default function BendingStressPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="bending-stress">
       {/* Başlık ve açıklama */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
@@ -429,7 +434,8 @@ export default function BendingStressPage() {
           <MomentDiagram results={results} />
         </div>
       </section>
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -671,3 +677,5 @@ function MomentDiagram({ results }: MomentDiagramProps) {
     </div>
   );
 }
+
+

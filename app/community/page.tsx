@@ -1,10 +1,11 @@
 ﻿// app/community/page.tsx
 import Link from "next/link";
+import PageShell from "@/components/layout/PageShell";
 import { threads } from "./data";
 
 export default function CommunityPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-3">
           <p className="inline-flex items-center rounded-full bg-purple-50 px-3 py-1 text-[11px] font-semibold text-purple-700">
@@ -12,8 +13,7 @@ export default function CommunityPage() {
           </p>
           <h1 className="text-2xl font-semibold leading-snug text-slate-900">Topluluk alanı</h1>
           <p className="text-sm leading-relaxed text-slate-700">
-            Donanım Arşivi tarzında, herkesin başlık açıp detaylı bilgi paylaşabildiği forum. Proje günlükleri, teknik tartışmalar ve
-            tecrübe paylaşımları için başlık açabilir, yorum yazabilir ya da dosya/link ekleyebilirsin.
+            Teknik basliklar ac, deneyim paylas ve kisa notlarla tartismayi baslat.
           </p>
         </div>
 
@@ -61,10 +61,10 @@ export default function CommunityPage() {
           </div>
 
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-            <p className="text-[11px] text-slate-600">Gönder butonu başlığı yayınlar; hassas verileri paylaşma.</p>
+            <p className="text-[11px] text-slate-600">Hassas verileri paylasma.</p>
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-full bg-purple-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-purple-500"
+              className="tap-target inline-flex items-center justify-center rounded-full bg-purple-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-purple-500"
             >
               Başlık aç
             </button>
@@ -87,15 +87,11 @@ export default function CommunityPage() {
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-slate-900/5 px-2 py-0.5 text-[11px] font-semibold text-slate-700">{thread.category}</span>
-                <span className="font-semibold text-slate-900">{thread.title}</span>
+                <h3 className="font-semibold text-slate-900">{thread.title}</h3>
               </div>
               <p className="mt-2 text-slate-700">{thread.excerpt}</p>
               <div className="mt-2 flex flex-wrap items-center gap-2 text-[12px] text-slate-600">
-                <span>Yazan: {thread.author}</span>
-                <span className="h-1 w-1 rounded-full bg-slate-400" />
                 <span>{thread.replies.length} yanıt</span>
-                <span className="h-1 w-1 rounded-full bg-slate-400" />
-                <span>{thread.views} görüntüleme</span>
                 <span className="h-1 w-1 rounded-full bg-slate-400" />
                 <span>{thread.updated}</span>
                 <div className="flex flex-wrap gap-1">
@@ -110,6 +106,6 @@ export default function CommunityPage() {
           ))}
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 }

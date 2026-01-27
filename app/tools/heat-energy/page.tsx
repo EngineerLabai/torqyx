@@ -2,6 +2,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 type HxInputs = {
   q: string; // kW
@@ -59,7 +61,8 @@ const PV_INIT: PvInputs = {
 
 export default function HeatEnergyPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="heat-energy">
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -82,7 +85,8 @@ export default function HeatEnergyPage() {
       <HxBlock />
       <ConductionBlock />
       <PvBlock />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -265,3 +269,5 @@ function ResultRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+
+

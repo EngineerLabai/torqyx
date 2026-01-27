@@ -2,6 +2,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
 
 type Topic = {
   slug: string;
@@ -84,7 +85,7 @@ export default function ForumPage() {
   const answers = answersByTopic[selectedTopic.slug] ?? [];
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-3">
           <p className="inline-flex items-center rounded-full bg-sky-50 px-3 py-1 text-[11px] font-semibold text-sky-700">
@@ -92,8 +93,7 @@ export default function ForumPage() {
           </p>
           <h1 className="text-2xl font-semibold leading-snug text-slate-900">Topluluk forumu</h1>
           <p className="text-sm leading-relaxed text-slate-700">
-            Başlık aç, diğer mühendislerin sorularına yanıt ver veya deneyimlerini paylaş. Teknik detay, fotoğraf veya çizim ekleyerek daha hızlı
-            geri dönüş al.
+            Soru sor, kisa yanitlar al ve deneyim paylas.
           </p>
         </div>
       </section>
@@ -141,7 +141,7 @@ export default function ForumPage() {
             placeholder="Tecrübeni, hesabını veya önerini yaz..."
           />
           <div className="flex justify-end">
-            <button type="button" className="rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-sky-500">
+            <button type="button" className="tap-target inline-flex items-center justify-center rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-sky-500">
               Yanıt paylaş
             </button>
           </div>
@@ -173,6 +173,6 @@ export default function ForumPage() {
           ))}
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 }

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 type MaterialInfo = {
   name: string;
@@ -37,16 +39,16 @@ export default function SimpleStressPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#E5E5E7] flex items-center justify-center px-4 py-10">
-      <div className="max-w-xl w-full bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+    <PageShell>
+      <ToolDocTabs slug="simple-stress">
+        <main className="min-h-screen bg-[#E5E5E7] flex items-center justify-center px-4 py-10">
+          <div className="max-w-xl w-full bg-white shadow-lg rounded-xl p-6 border border-gray-200">
         <h1 className="text-2xl font-bold text-[#2A2A2E] mb-3">
           Basit Çekme Gerilmesi Hesaplayıcı
         </h1>
 
         <p className="text-sm text-gray-700 mb-4">
-          Bu araç çekme kuvveti ve kesit alanına göre gerilme hesaplar ve
-          seçilen malzemenin akma dayanımı ile karşılaştırıp emniyet katsayısını
-          çıkarır.
+          Kuvvet ve kesit alaniyla gerilmeyi hesapla, malzeme dayanimi ile karsilastir.
         </p>
 
         {/* INPUT ALANI */}
@@ -134,7 +136,9 @@ export default function SimpleStressPage() {
           Not: Hesaplamalar teoriktir. Kritik tasarımlarda ilgili standartlara
           başvurulmalıdır.
         </p>
-      </div>
-    </main>
+          </div>
+        </main>
+      </ToolDocTabs>
+    </PageShell>
   );
 }

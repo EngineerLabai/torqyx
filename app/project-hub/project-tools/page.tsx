@@ -8,6 +8,7 @@ import {
   FormEvent,
 } from "react";
 import type { ReactNode } from "react";
+import PageShell from "@/components/layout/PageShell";
 
 type ProjectStatus = "open" | "in-progress" | "blocked" | "done";
 type ProjectPriority = "low" | "medium" | "high";
@@ -54,7 +55,7 @@ export default function ProjectToolsPage() {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       const parsed = JSON.parse(raw) as Project[];
-      setProjects(parsed);
+      Promise.resolve().then(() => setProjects(parsed));
     } catch {
       // ignore
     }
@@ -99,8 +100,8 @@ export default function ProjectToolsPage() {
     });
   }
 
-  function handleFilterChange(key: keyof Filter, value: Filter[keyof Filter]) {
-    setFilter((prev) => ({ ...prev, [key]: value as any }));
+  function handleFilterChange<K extends keyof Filter>(key: K, value: Filter[K]) {
+    setFilter((prev) => ({ ...prev, [key]: value }));
   }
 
   function toggleStatus(id: string) {
@@ -135,7 +136,7 @@ export default function ProjectToolsPage() {
   });
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       {/* Başlık */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
@@ -458,7 +459,7 @@ export default function ProjectToolsPage() {
           </div>
         )}
       </section>
-    </div>
+    </PageShell>
   );
 }
 

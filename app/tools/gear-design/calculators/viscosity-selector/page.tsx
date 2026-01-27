@@ -2,16 +2,20 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import PageShell from "@/components/layout/PageShell";
+import ToolDocTabs from "@/components/tools/ToolDocTabs";
 
 export default function ViscositySelectorPage() {
   return (
-    <div className="space-y-6">
+    <PageShell>
+      <ToolDocTabs slug="gear-design/calculators/viscosity-selector">
       <Header
         title="Yağ Viskozitesi Seçici"
         description="ks/v faktörüne ve yağlama yöntemine göre ISO VG önerir; hız ve sıcaklığa göre ayarlanır."
       />
       <ViscositySelector />
-    </div>
+          </ToolDocTabs>
+    </PageShell>
   );
 }
 
@@ -206,3 +210,5 @@ function Result({ label, value, tone = "neutral" }: { label: string; value: stri
     </div>
   );
 }
+
+

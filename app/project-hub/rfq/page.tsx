@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import PageShell from "@/components/layout/PageShell";
 
 type RfqItem = {
   id: number;
@@ -95,7 +96,7 @@ export default function RfqSummaryPage() {
       : items.filter((item) => item.status === statusFilter);
 
   return (
-    <div className="space-y-6">
+    <PageShell>
       {/* Baş kısım */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
@@ -369,7 +370,7 @@ export default function RfqSummaryPage() {
           </div>
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 }
 
