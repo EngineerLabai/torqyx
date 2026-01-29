@@ -91,7 +91,7 @@ const drawerSectionsByLocale: Record<
     {
       title: "Calculators",
       items: [
-        { label: "Tool Library", href: "/tools" },
+        { label: "Calculator Library", href: "/tools" },
         { label: "Gear calculators", href: "/tools/gear-design/calculators" },
         { label: "Torque / Power", href: "/tools/torque-power" },
         { label: "Simple stress", href: "/tools/simple-stress" },

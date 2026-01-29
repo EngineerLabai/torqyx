@@ -3,14 +3,23 @@ import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import { threads } from "./data";
 
+const isDemoContent = true;
+
 export default function CommunityPage() {
   return (
     <PageShell>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-3">
-          <p className="inline-flex items-center rounded-full bg-purple-50 px-3 py-1 text-[11px] font-semibold text-purple-700">
-            Topluluk forumu
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center rounded-full bg-purple-50 px-3 py-1 text-[11px] font-semibold text-purple-700">
+              Topluluk forumu
+            </span>
+            {isDemoContent ? (
+              <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-[11px] font-semibold text-amber-700">
+                Demo
+              </span>
+            ) : null}
+          </div>
           <h1 className="text-2xl font-semibold leading-snug text-slate-900">Topluluk alanı</h1>
           <p className="text-sm leading-relaxed text-slate-700">
             Teknik basliklar ac, deneyim paylas ve kisa notlarla tartismayi baslat.
@@ -75,7 +84,14 @@ export default function CommunityPage() {
       <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-base font-semibold text-slate-900">Son başlıklar</h2>
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-700">{threads.length} başlık</span>
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-700">{threads.length} başlık</span>
+            {isDemoContent ? (
+              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">
+                Demo
+              </span>
+            ) : null}
+          </div>
         </div>
 
         <div className="mt-3 space-y-2">
@@ -87,6 +103,11 @@ export default function CommunityPage() {
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-slate-900/5 px-2 py-0.5 text-[11px] font-semibold text-slate-700">{thread.category}</span>
+                {isDemoContent ? (
+                  <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">
+                    Demo
+                  </span>
+                ) : null}
                 <h3 className="font-semibold text-slate-900">{thread.title}</h3>
               </div>
               <p className="mt-2 text-slate-700">{thread.excerpt}</p>

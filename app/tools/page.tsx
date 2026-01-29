@@ -7,14 +7,14 @@ export default async function ToolsIndexPage() {
   const copy =
     locale === "en"
       ? {
-          badge: "Tool Library",
+          badge: "Calculator Library",
           title: "All calculators in one place",
-          description: "Browse tools by use case and open the one you need in a click.",
+          description: "Browse calculators by use case and open the one you need in a click.",
         }
       : {
-          badge: "Tool Library",
-          title: "Tum hesaplama araclari tek sayfada",
-          description: "Araclari kullanim alanina gore incele, ihtiyacin olani tek tikla ac.",
+          badge: "Hesaplayici Kutuphanesi",
+          title: "Tum hesaplayicilar tek sayfada",
+          description: "Hesaplayicilari kullanim alanina gore incele, ihtiyacin olani tek tikla ac.",
         };
 
   return (

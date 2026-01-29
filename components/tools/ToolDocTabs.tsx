@@ -4,10 +4,13 @@ import type { ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ActionCard from "@/components/ui/ActionCard";
+import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
 import Callout from "@/components/mdx/Callout";
 import MDXClient from "@/components/mdx/MDXClient";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { trackEvent } from "@/utils/analytics";
+import { addRecent } from "@/utils/tool-storage";
+import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 const TABS = {
   tr: [
@@ -68,19 +71,23 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const didTrackOpen = useRef<string | null>(null);
+  const didTrackRecent = useRef<string | null>(null);
 
   const copy =
     locale === "en"
       ? {
-          tabsTitle: "Tool tabs",
+          tabsTitle: "Calculator tabs",
           explanationTitle: "Calculation explanation",
           examplesTitle: "Examples",
-          loadingExamples: "Loading examples...",
-          loadingExplanation: "Loading explanation...",
-          docsFailed: "Documentation could not be loaded.",
-          examplesEmptyTitle: "Example",
-          examplesEmptyBody: "No example set yet for this tool.",
-          examplesEmptyHint: "Example set is empty. Update the JSON file to add samples.",
+          loadingTitle: "Documentation is preparing",
+          loadingBody: "If it stays here, this calculator may not have explanation/examples yet.",
+          docsFailedTitle: "Documentation unavailable",
+          docsFailedBody: "We could not load the explanation and examples right now.",
+          explanationEmptyTitle: "Explanation (coming soon)",
+          explanationEmptyBody: "This calculator does not have an explanation card yet. You can still use it.",
+          examplesEmptyTitle: "Examples (coming soon)",
+          examplesEmptyBody: "No examples are available yet. We will add sample inputs soon.",
+          examplesEmptyHint: "Examples are being prepared.",
           inputs: "Inputs",
           outputs: "Outputs",
           note: "Note",
@@ -89,28 +96,31 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
           guidesDesc: "Browse guides with similar tags.",
           glossaryTitle: "Glossary",
           glossaryHeading: "Related terms",
-          glossaryDesc: "Terms that share the same concepts as this tool.",
+          glossaryDesc: "Terms that share the same concepts as this calculator.",
           read: "Read",
         }
       : {
-          tabsTitle: "Tool Sekmeleri",
+          tabsTitle: "Hesaplayici Sekmeleri",
           explanationTitle: "Hesaplama Aciklamasi",
           examplesTitle: "Ornekler",
-          loadingExamples: "Ornekler yukleniyor...",
-          loadingExplanation: "Aciklama yukleniyor...",
-          docsFailed: "Dokumantasyon yuklenemedi.",
-          examplesEmptyTitle: "Ornek",
-          examplesEmptyBody: "Bu arac icin ornek seti henuz eklenmedi.",
-          examplesEmptyHint: "Ornek seti bos. Yeni ornekler eklemek icin JSON dosyasini guncelle.",
+          loadingTitle: "Dokumantasyon hazirlaniyor",
+          loadingBody: "Kisa surede gelmezse bu hesaplayici icin aciklama/ornekler henuz yayinlanmamis olabilir.",
+          docsFailedTitle: "Dokumantasyon erisilemedi",
+          docsFailedBody: "Su anda aciklama ve ornekler getirilemiyor.",
+          explanationEmptyTitle: "Aciklama (yakinda)",
+          explanationEmptyBody: "Bu hesaplayici icin aciklama henuz eklenmedi. Simdilik kullanabilirsin.",
+          examplesEmptyTitle: "Ornekler (yakinda)",
+          examplesEmptyBody: "Bu hesaplayici icin ornekler henuz eklenmedi. Yakinda ornek girdiler eklenecek.",
+          examplesEmptyHint: "Ornekler hazirlaniyor.",
           inputs: "Girdiler",
           outputs: "Ciktilar",
           note: "Not",
-          guidesTitle: "Guides",
+          guidesTitle: "Rehberler",
           guidesHeading: "Ilgili rehberler",
           guidesDesc: "Benzer etiketli rehberlere goz at.",
-          glossaryTitle: "Glossary",
+          glossaryTitle: "Sozluk",
           glossaryHeading: "Ilgili terimler",
-          glossaryDesc: "Aracla ayni kavramlara bakan terimler.",
+          glossaryDesc: "Hesaplayiciyla ayni kavramlara bakan terimler.",
           read: "Oku",
         };
 
@@ -140,7 +150,7 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
       })
       .catch(() => {
         if (!ignore) {
-          setError(copy.docsFailed);
+          setError(copy.docsFailedBody);
           setLoading(false);
         }
       });
@@ -148,7 +158,7 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
     return () => {
       ignore = true;
     };
-  }, [slug, copy.docsFailed]);
+  }, [slug, copy.docsFailedBody]);
 
   useEffect(() => {
     if (!slug) return;
@@ -156,6 +166,22 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
     didTrackOpen.current = slug;
     trackEvent("tool_open", { tool_id: slug });
   }, [slug]);
+
+  const resolvedTool = useMemo(() => {
+    if (docs?.tool) return docs.tool;
+    const normalized = slug.replace(/^\/+|\/+$/g, "");
+    const match = toolCatalog.find((tool) => tool.href.replace(/^\/tools\//, "") === normalized);
+    if (!match) return null;
+    const copy = getToolCopy(match, locale);
+    return { id: match.id, title: copy.title, tags: match.tags ?? [] };
+  }, [docs?.tool, slug, locale]);
+
+  useEffect(() => {
+    if (!resolvedTool?.id) return;
+    if (didTrackRecent.current === resolvedTool.id) return;
+    didTrackRecent.current = resolvedTool.id;
+    addRecent(resolvedTool.id);
+  }, [resolvedTool?.id]);
 
   const { relatedGuides, relatedGlossary, hasRelated } = useMemo(() => {
     const guides = docs?.related.guides ?? [];
@@ -167,20 +193,54 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
     };
   }, [docs]);
 
-  const renderExamples = () => {
+  const loadingCallout = (
+    <Callout type="info" title={copy.loadingTitle}>
+      {copy.loadingBody}
+    </Callout>
+  );
+
+  const errorCallout = (
+    <Callout type="warning" title={copy.docsFailedTitle}>
+      {error || copy.docsFailedBody}
+    </Callout>
+  );
+
+  const renderExplanation = () => {
     if (loading) {
-      return <p className="text-sm text-slate-500">{copy.loadingExamples}</p>;
+      return loadingCallout;
     }
 
     if (error) {
-      return <p className="text-sm text-rose-600">{error}</p>;
+      return errorCallout;
+    }
+
+    if (docs?.explanation) {
+      return (
+        <div className="mdx-content space-y-6">
+          <MDXClient source={docs.explanation} />
+        </div>
+      );
+    }
+
+    return (
+      <Callout type="info" title={copy.explanationEmptyTitle}>
+        {copy.explanationEmptyBody}
+      </Callout>
+    );
+  };
+
+  const renderExamples = () => {
+    if (loading) {
+      return loadingCallout;
+    }
+
+    if (error) {
+      return errorCallout;
     }
 
     if (!docs?.examples) {
       return (
-        <Callout type="info" title={copy.examplesEmptyTitle}>
-          {copy.examplesEmptyBody}
-        </Callout>
+        <Callout type="info" title={copy.examplesEmptyTitle}>{copy.examplesEmptyBody}</Callout>
       );
     }
 
@@ -231,24 +291,29 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.tabsTitle}</div>
-        <div className="flex flex-wrap gap-2">
-          {TABS[locale].map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id)}
-              className={`rounded-full border px-4 py-2 text-[11px] font-semibold transition ${
-                activeTab === tab.id
-                  ? "border-emerald-300 bg-emerald-50 text-emerald-700"
-                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+      <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.tabsTitle}</div>
+          <div className="flex flex-wrap gap-2">
+            {TABS[locale].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`rounded-full border px-4 py-2 text-[11px] font-semibold transition ${
+                  activeTab === tab.id
+                    ? "border-emerald-300 bg-emerald-50 text-emerald-700"
+                    : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
+        {resolvedTool?.id ? (
+          <ToolFavoriteButton toolId={resolvedTool.id} toolTitle={resolvedTool.title} size="sm" />
+        ) : null}
       </div>
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>{children}</div>
@@ -256,18 +321,7 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
       <section className={activeTab === "explanation" ? "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" : "hidden"}>
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-slate-900">{copy.explanationTitle}</h2>
-          {loading ? <p className="text-sm text-slate-500">{copy.loadingExplanation}</p> : null}
-          {error ? <p className="text-sm text-rose-600">{error}</p> : null}
-          {!loading && !error && docs?.explanation ? (
-            <div className="mdx-content space-y-6">
-              <MDXClient source={docs.explanation} />
-            </div>
-          ) : null}
-          {!loading && !error && !docs?.explanation ? (
-            <Callout type="info" title={copy.explanationTitle}>
-              {copy.examplesEmptyBody}
-            </Callout>
-          ) : null}
+          {renderExplanation()}
         </div>
       </section>
 

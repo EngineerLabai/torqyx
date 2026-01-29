@@ -61,15 +61,15 @@ export default function ToolLinkSection() {
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-              {locale === "en" ? "Similar tools" : "Benzer araclar"}
+              {locale === "en" ? "Similar calculators" : "Benzer hesaplayicilar"}
             </p>
             <h2 className="text-lg font-semibold text-slate-900">
-              {locale === "en" ? "Related calculators" : "Benzer hesaplama araclari"}
+              {locale === "en" ? "Related calculators" : "Ilgili hesaplayicilar"}
             </h2>
             <p className="text-sm text-slate-600">
               {locale === "en"
-                ? "Explore tools with similar categories or tags."
-                : "Ayni kategori veya benzer etiketlere sahip araclari burada bulabilirsin."}
+                ? "Explore calculators with similar categories or tags."
+                : "Ayni kategori veya benzer etiketlere sahip hesaplayicilari burada bulabilirsin."}
             </p>
           </div>
 
@@ -82,7 +82,8 @@ export default function ToolLinkSection() {
                   title={copy.title}
                   description={copy.description}
                   href={tool.href}
-                  ctaLabel={locale === "en" ? "Open tool" : "Araci Ac"}
+                  toolId={tool.id}
+                  ctaLabel={locale === "en" ? "Open calculator" : "Hesaplayiciyi Ac"}
                 />
               );
             })}
@@ -101,8 +102,8 @@ export default function ToolLinkSection() {
             </h2>
             <p className="text-sm text-slate-600">
               {locale === "en"
-                ? "Review alternative tools for adjacent needs."
-                : "Yaklasik ihtiyaclar icin farkli araclari gozden gecirebilirsin."}
+                ? "Review alternative calculators for adjacent needs."
+                : "Yaklasik ihtiyaclar icin farkli hesaplayicilari gozden gecirebilirsin."}
             </p>
           </div>
 
@@ -115,7 +116,8 @@ export default function ToolLinkSection() {
                   title={copy.title}
                   description={copy.description}
                   href={tool.href}
-                  ctaLabel={locale === "en" ? "Open tool" : "Araci Ac"}
+                  toolId={tool.id}
+                  ctaLabel={locale === "en" ? "Open calculator" : "Hesaplayiciyi Ac"}
                 />
               );
             })}

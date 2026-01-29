@@ -1,9 +1,9 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
-import { buildCanonical } from "@/utils/seo";
+import { DEFAULT_OG_IMAGE_META, buildCanonical } from "@/utils/seo";
 
-const NOT_FOUND_DESCRIPTION = "Aradigin sayfa bulunamadi. Tool Library ile devam et.";
+const NOT_FOUND_DESCRIPTION = "Aradigin sayfa bulunamadi. Hesaplayici Kutuphanesi ile devam et.";
 
 export const metadata: Metadata = {
   title: "Sayfa bulunamadi",
@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     title: "Sayfa bulunamadi",
     description: NOT_FOUND_DESCRIPTION,
     type: "website",
+    images: [DEFAULT_OG_IMAGE_META],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Sayfa bulunamadi",
     description: NOT_FOUND_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE_META.url],
   },
 };
 
@@ -35,14 +37,14 @@ export default function NotFound() {
             Sayfa bulunamadi
           </h1>
           <p className="text-[15px] leading-relaxed text-slate-700 md:text-base">
-            Bu baglanti kaldirilmis veya tasinmis olabilir. Tool Library ile hesaplayicilara hizli ulasabilirsin.
+            Bu baglanti kaldirilmis veya tasinmis olabilir. Hesaplayici Kutuphanesi ile hesaplayicilara hizli ulasabilirsin.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/tools"
               className="rounded-full bg-emerald-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700"
             >
-              Tool Library
+              Hesaplayici Kutuphanesi
             </Link>
             <Link href="/" className="text-xs font-semibold text-slate-500 hover:text-slate-700">
               Ana sayfaya don

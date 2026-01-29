@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import { getContentList } from "@/utils/content";
-import { buildCanonical } from "@/utils/seo";
+import { DEFAULT_OG_IMAGE_META, buildCanonical } from "@/utils/seo";
 
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium" }).format(new Date(value));
@@ -11,21 +11,23 @@ const GLOSSARY_DESCRIPTION = "Teknik terimler ve kisa tanimlar.";
 const GLOSSARY_CANONICAL = buildCanonical("/glossary");
 
 export const metadata: Metadata = {
-  title: "Glossary",
+  title: "Sozluk",
   description: GLOSSARY_DESCRIPTION,
   alternates: {
     canonical: GLOSSARY_CANONICAL ?? "/glossary",
   },
   openGraph: {
-    title: "Glossary",
+    title: "Sozluk",
     description: GLOSSARY_DESCRIPTION,
     type: "website",
     url: GLOSSARY_CANONICAL ?? "/glossary",
+    images: [DEFAULT_OG_IMAGE_META],
   },
   twitter: {
-    card: "summary",
-    title: "Glossary",
+    card: "summary_large_image",
+    title: "Sozluk",
     description: GLOSSARY_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE_META.url],
   },
 };
 
@@ -48,7 +50,7 @@ export default async function GlossaryIndexPage() {
               <path d="M8 8h8M8 12h5M8 16h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-100 bg-orange-50 px-3 py-1 text-[11px] text-orange-700 md:text-xs">
-              <span className="font-semibold">Glossary</span>
+              <span className="font-semibold">Sozluk</span>
             </div>
           </div>
           <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-4xl">

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
-import { auth, googleProvider } from "@/utils/firebase";
+import { getFirebaseServices, getFirebaseInitError } from "@/utils/firebase";
 
 type AuthContextValue = {
   user: User | null;
@@ -18,19 +18,62 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (nextUser) => {
-      setUser(nextUser);
+    const services = getFirebaseServices();
+    if (!services) {
+      const error = getFirebaseInitError();
+      if (error) {
+        console.warn("[auth] Firebase init error:", error.message);
+      }
       setLoading(false);
-    });
-    return () => unsub();
+      return;
+    }
+
+    try {
+      const unsub = onAuthStateChanged(
+        services.auth,
+        (nextUser) => {
+          setUser(nextUser);
+          setLoading(false);
+        },
+        (error) => {
+          console.error("[auth] State listener error:", error);
+          setUser(null);
+          setLoading(false);
+        },
+      );
+      return () => unsub();
+    } catch (error) {
+      console.error("[auth] Failed to attach auth listener:", error);
+      setUser(null);
+      setLoading(false);
+      return;
+    }
   }, []);
 
   const loginWithGoogle = async () => {
-    await signInWithPopup(auth, googleProvider);
+    const services = getFirebaseServices();
+    if (!services) {
+      const error = getFirebaseInitError();
+      if (error) {
+        console.warn("[auth] Firebase init error:", error.message);
+      }
+      return;
+    }
+    try {
+      await signInWithPopup(services.auth, services.googleProvider);
+    } catch (error) {
+      console.error("[auth] Google sign-in failed:", error);
+    }
   };
 
   const logout = async () => {
-    await signOut(auth);
+    const services = getFirebaseServices();
+    if (!services) return;
+    try {
+      await signOut(services.auth);
+    } catch (error) {
+      console.error("[auth] Sign out failed:", error);
+    }
   };
 
   return <AuthContext.Provider value={{ user, loading, loginWithGoogle, logout }}>{children}</AuthContext.Provider>;

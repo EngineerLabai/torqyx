@@ -3,6 +3,8 @@
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
+import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
+import { toolCatalog } from "@/tools/_shared/catalog";
 
 type CalcCard = {
   name: string;
@@ -11,6 +13,8 @@ type CalcCard = {
   href: string;
   badge: string;
 };
+
+const resolveToolId = (href: string) => toolCatalog.find((tool) => tool.href === href)?.id ?? "";
 
 const calculators: CalcCard[] = [
   {
@@ -117,6 +121,9 @@ export default function GearCalculatorsPage() {
                 <span className="rounded-full bg-slate-100 px-2 py-0.5 font-semibold text-slate-700">{calc.badge}</span>
               </div>
               <p className="break-words text-[12px] leading-relaxed text-slate-700">{calc.description}</p>
+              {calc.status === "Aktif" && resolveToolId(calc.href) ? (
+                <ToolFavoriteButton toolId={resolveToolId(calc.href)} toolTitle={calc.name} size="sm" />
+              ) : null}
             </div>
             <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
               <span>{calc.status === "Aktif" ? "" : "Hazırlanacak"}</span>

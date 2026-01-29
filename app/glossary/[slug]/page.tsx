@@ -2,11 +2,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import Formula from "@/components/mdx/Formula";
 import ActionCard from "@/components/ui/ActionCard";
 import { getContentBySlug, getContentList } from "@/utils/content";
-import { buildCanonical } from "@/utils/seo";
+import { BRAND_NAME } from "@/utils/brand";
+import { DEFAULT_OG_IMAGE_META, buildCanonical, SITE_URL } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 import { toolCatalog } from "@/tools/_shared/catalog";
 
@@ -48,7 +50,7 @@ export async function generateMetadata({ params }: GlossaryPageProps): Promise<M
   }
 
   return {
-    title: `${term.title} | Glossary`,
+    title: `${term.title} | Sozluk`,
     description: term.description,
     keywords: term.tags,
     alternates: {
@@ -59,11 +61,13 @@ export async function generateMetadata({ params }: GlossaryPageProps): Promise<M
       description: term.description,
       type: "article",
       url: term.canonical ?? buildCanonical(`/glossary/${term.slug}`) ?? `/glossary/${term.slug}`,
+      images: [DEFAULT_OG_IMAGE_META],
     },
     twitter: {
       card: "summary_large_image",
       title: term.title,
       description: term.description,
+      images: [DEFAULT_OG_IMAGE_META.url],
     },
   };
 }
@@ -74,6 +78,54 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
   if (!term) {
     notFound();
   }
+
+  const canonical = term.canonical ?? buildCanonical(`/glossary/${term.slug}`) ?? `/glossary/${term.slug}`;
+  const glossaryIndexUrl = buildCanonical("/glossary") ?? `${SITE_URL}/glossary`;
+  const termJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        name: `${term.title} | Sozluk`,
+        description: term.description,
+        url: canonical,
+        mainEntity: {
+          "@type": "DefinedTerm",
+          name: term.title,
+          description: term.description,
+          url: canonical,
+          inDefinedTermSet: {
+            "@type": "DefinedTermSet",
+            name: `${BRAND_NAME} Sozluk`,
+            url: glossaryIndexUrl,
+          },
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Ana sayfa",
+            item: buildCanonical("/") ?? `${SITE_URL}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Sozluk",
+            item: glossaryIndexUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: term.title,
+            item: canonical,
+          },
+        ],
+      },
+    ],
+  };
 
   const [blog, guides] = await Promise.all([
     getContentList("blog"),
@@ -91,10 +143,11 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
 
   return (
     <PageShell>
+      <JsonLd data={termJsonLd} />
       <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-4">
           <Link href="/glossary" className="text-xs font-semibold text-orange-700 hover:underline">
-            Glossary listesine don
+            Sozluk listesine don
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
             <Link
@@ -181,7 +234,7 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
 
             {relatedGuides.length > 0 ? (
               <div className="space-y-3">
-                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Guides</h4>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Rehberler</h4>
                 <div className="space-y-3">
                   {relatedGuides.map((item) => (
                     <ActionCard
@@ -199,7 +252,7 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
 
             {relatedTools.length > 0 ? (
               <div className="space-y-3">
-                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Tools</h4>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Hesaplayicilar</h4>
                 <div className="space-y-3">
                   {relatedTools.map((tool) => (
                     <ActionCard
@@ -208,7 +261,8 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
                       description={tool.description}
                       href={tool.href}
                       badge={tool.category}
-                      ctaLabel="Araci Ac"
+                      toolId={tool.id}
+                      ctaLabel="Hesaplayiciyi Ac"
                     />
                   ))}
                 </div>

@@ -83,7 +83,7 @@ export default async function ProjectHubPage() {
           cta: "Open module",
         }
       : {
-          badgeTitle: "Proje Muhendisleri Alani",
+          badgeTitle: "Proje Merkezi",
           badgeSubtitle: "Proje · RFQ · Parca / Revizyon Takibi",
           title: "Proje, RFQ ve revizyonlari tek panelden yonet",
           description: "Projeleri, RFQ teklif sureclerini ve parca revizyonlarini tek ekranda takip et.",

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
 import { getContentList } from "@/utils/content";
-import { buildCanonical } from "@/utils/seo";
+import { BRAND_NAME } from "@/utils/brand";
+import { DEFAULT_OG_IMAGE_META, buildCanonical } from "@/utils/seo";
 import { getTagIndex, matchesSlug, resolveLabelBySlug } from "@/utils/taxonomy";
 import { slugify } from "@/utils/slugify";
 import { toolCatalog } from "@/tools/_shared/catalog";
@@ -26,21 +27,23 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
   const label = resolveLabelBySlug(tagSlug, tags) ?? tagSlug.replace(/-/g, " ");
 
   return {
-    title: `${label} etiketi | AI Engineers Lab`,
-    description: `${label} etiketi ile iliskili blog, guide ve araclari kesfet.`,
+    title: `${label} etiketi | ${BRAND_NAME}`,
+    description: `${label} etiketi ile iliskili blog, rehber ve hesaplayicilari kesfet.`,
     alternates: {
       canonical: buildCanonical(`/tags/${tagSlug}`),
     },
     openGraph: {
       title: `${label} etiketi`,
-      description: `${label} etiketi ile iliskili blog, guide ve araclari kesfet.`,
+      description: `${label} etiketi ile iliskili blog, rehber ve hesaplayicilari kesfet.`,
       type: "website",
       url: buildCanonical(`/tags/${tagSlug}`) ?? `/tags/${tagSlug}`,
+      images: [DEFAULT_OG_IMAGE_META],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: `${label} etiketi`,
-      description: `${label} etiketi ile iliskili blog, guide ve araclari kesfet.`,
+      description: `${label} etiketi ile iliskili blog, rehber ve hesaplayicilari kesfet.`,
+      images: [DEFAULT_OG_IMAGE_META.url],
     },
   };
 }
@@ -82,7 +85,7 @@ export default async function TagPage({ params }: TagPageProps) {
           </div>
           <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-4xl">#{label}</h1>
           <p className="text-[15px] leading-relaxed text-slate-700 md:text-base">
-            Bu etiketle iliskili blog yazilari, rehberler ve araclar.
+            Bu etiketle iliskili blog yazilari, rehberler ve hesaplayicilar.
           </p>
         </div>
       </section>
@@ -103,7 +106,7 @@ export default async function TagPage({ params }: TagPageProps) {
         />
 
         <ContentSection
-          title="Guides"
+          title="Rehberler"
           description="Etikete uygun rehberler."
           items={guideMatches.map((item) => ({
             href: `/guides/${item.slug}`,
@@ -217,13 +220,13 @@ function ToolSection({ tools }: { tools: typeof toolCatalog }) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="space-y-2">
-        <h2 className="text-lg font-semibold text-slate-900">Tools</h2>
-        <p className="text-sm text-slate-600">Etikete uygun araclar.</p>
+        <h2 className="text-lg font-semibold text-slate-900">Hesaplayicilar</h2>
+        <p className="text-sm text-slate-600">Etikete uygun hesaplayicilar.</p>
       </div>
 
       {tools.length === 0 ? (
         <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
-          Bu etikette arac bulunamadi.
+          Bu etikette hesaplayici bulunamadi.
         </div>
       ) : (
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -234,7 +237,8 @@ function ToolSection({ tools }: { tools: typeof toolCatalog }) {
               description={tool.description}
               href={tool.href}
               badge={tool.category}
-              ctaLabel="Araci Ac"
+              toolId={tool.id}
+              ctaLabel="Hesaplayiciyi Ac"
             />
           ))}
         </div>

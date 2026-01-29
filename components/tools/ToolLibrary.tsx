@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
 import ToolLibraryCard from "@/components/tools/ToolLibraryCard";
+import RecentToolsStrip from "@/components/tools/RecentToolsStrip";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getToolCopy, toolCatalog, toolCategories, toolTags } from "@/tools/_shared/catalog";
 import type { Locale } from "@/utils/locale";
 
 const CATEGORY_ALL = "All" as const;
 const TAG_ALL = "All" as const;
+const NEW_WINDOW_DAYS = 14;
 
 type CategoryFilter = typeof CATEGORY_ALL | (typeof toolCategories)[number];
 type TagFilter = typeof TAG_ALL | (typeof toolTags)[number];
@@ -135,6 +137,7 @@ export default function ToolLibrary() {
 
   return (
     <div className="space-y-6">
+      <RecentToolsStrip />
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -145,8 +148,8 @@ export default function ToolLibrary() {
           </h2>
           <p className="text-sm text-slate-600">
             {locale === "en"
-              ? "Reach the right tools quickly based on common needs."
-              : "En yaygin ihtiyaca gore ilgili araclara hizli ulas."}
+              ? "Reach the right calculators quickly based on common needs."
+              : "En yaygin ihtiyaca gore ilgili hesaplayicilara hizli ulas."}
           </p>
         </div>
 
@@ -176,6 +179,28 @@ export default function ToolLibrary() {
         </div>
       </section>
 
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-2">
+            <h2 className="text-lg font-semibold text-slate-900">
+              {locale === "en" ? "Need a new calculator?" : "Yeni bir araca mi ihtiyacin var?"}
+            </h2>
+            <p className="text-sm text-slate-600">
+              {locale === "en"
+                ? "Tell us the inputs and outputs. We will prioritize the most requested tools."
+                : "Input ve cikti ihtiyacini yaz. En cok talep edilen araclari onceleyecegiz."}
+            </p>
+          </div>
+          <Link
+            href="/request-tool"
+            className="inline-flex items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 px-5 py-2 text-[12px] font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+            aria-label={locale === "en" ? "Request a tool" : "Bir arac iste"}
+          >
+            {locale === "en" ? "Request a tool" : "Bir arac iste"}
+          </Link>
+        </div>
+      </section>
+
       <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -189,8 +214,8 @@ export default function ToolLibrary() {
             </div>
             <p className="text-xs text-slate-500">
               {locale === "en"
-                ? "Filter tools by category and tag."
-                : "Kategori ve etiket secerek araclari daraltabilirsin."}
+                ? "Filter calculators by category and tag."
+                : "Kategori ve etiket secerek hesaplayicilari daraltabilirsin."}
             </p>
           </div>
           <button
@@ -256,7 +281,7 @@ export default function ToolLibrary() {
               onChange={(event) => startTransition(() => setQuery(event.target.value))}
               placeholder={locale === "en" ? "e.g., torque, pressure, bolt" : "Orn. tork, basinc, civata"}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              aria-label={locale === "en" ? "Search tools" : "Arac ara"}
+              aria-label={locale === "en" ? "Search calculators" : "Hesaplayici ara"}
             />
           </div>
         </div>
@@ -265,7 +290,7 @@ export default function ToolLibrary() {
       {filtered.length === 0 ? (
         <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center">
           <p className="text-sm font-semibold text-slate-700">
-            {locale === "en" ? "No matching tools found." : "Eslesen arac bulunamadi."}
+            {locale === "en" ? "No matching calculators found." : "Eslesen hesaplayici bulunamadi."}
           </p>
           <p className="mt-1 text-xs text-slate-500">
             {locale === "en"
@@ -290,16 +315,21 @@ export default function ToolLibrary() {
                 ? "General"
                 : "Genel";
             const tagLabels = (tool.tags ?? []).map((tag) => TAG_LABELS[locale][tag]);
+            const isNew = tool.lastUpdated
+              ? Date.now() - new Date(tool.lastUpdated).getTime() <= NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000
+              : false;
             return (
               <ToolLibraryCard
                 key={tool.id}
+                toolId={tool.id}
                 title={title}
                 description={description}
                 href={tool.href}
                 usageLabel={categoryLabel}
                 tags={tagLabels}
-                ctaLabel={locale === "en" ? "Open tool" : "Araci Ac"}
-                ariaLabel={locale === "en" ? `Open ${title}` : `${title} aracina git`}
+                ctaLabel={locale === "en" ? "Open calculator" : "Hesaplayiciyi Ac"}
+                ariaLabel={locale === "en" ? `Open ${title}` : `${title} hesaplayicisini ac`}
+                isNew={isNew}
               />
             );
           })}

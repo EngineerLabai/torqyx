@@ -1,4 +1,5 @@
 import type { Locale } from "@/utils/locale";
+import { BRAND_TAGLINE } from "@/utils/brand";
 
 type HeroSectionProps = {
   locale: Locale;
@@ -10,24 +11,22 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       ? {
           kicker: "ENGINEERS LAB",
           title: "Clear, fast, and reliable mechanical calculations.",
-          lead:
-            "No AI integration. AI is positioned as a mindset and methodology; calculations are manual and visually supported.",
+          lead: BRAND_TAGLINE,
           ctaPrimary: "Go to Calculators",
           ctaSecondary: "Explore Tools",
-          valueKicker: "Value Proposition",
+          valueKicker: "Methodology",
           valueText:
-            "Complete technical calculations step by step with formulas and visual explanations. AI guides the thinking flow and methodology; the result is produced with manual math and visual support.",
+            "Step through formulas and checklists with visual support. Manual calculations keep the flow transparent and repeatable.",
         }
       : {
           kicker: "MUHENDISLER LAB",
           title: "Net, hizli ve guvenilir mekanik hesaplar.",
-          lead:
-            "AI entegrasyonu yok. AI burada bir dusunce ve metodoloji olarak konumlanir; hesaplamalar manuel ve gorsel desteklidir.",
-          ctaPrimary: "Hesaplamalara Git",
+          lead: BRAND_TAGLINE,
+          ctaPrimary: "Hesaplayicilara Git",
           ctaSecondary: "Araclari Kesfet",
-          valueKicker: "Acik Deger Onerisi",
+          valueKicker: "Metodoloji",
           valueText:
-            "Teknik hesaplamalari adim adim, formullerle ve gorsel aciklamalarla tamamlarsin. AI, dusunce akisini ve metodolojiyi yonlendirir; sonuc manuel hesap ve gorsel destekle uretilir.",
+            "Formuller, kontrol listeleri ve gorsel destekle adim adim ilerle. Manuel hesapla akisi net ve tekrarlanabilir tut.",
         };
   return (
     <section

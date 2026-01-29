@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
+import { BRAND_NAME, BRAND_TAGLINE } from "@/utils/brand";
 import { SITE_URL } from "@/utils/seo";
 
-const DEFAULT_TITLE = "AI Engineers Lab";
-const DEFAULT_DESCRIPTION = "Gelecegi kodluyoruz.";
+const DEFAULT_TITLE = BRAND_NAME;
+const DEFAULT_DESCRIPTION = BRAND_TAGLINE;
 
 type WebPageJsonLdProps = {
   title?: string;

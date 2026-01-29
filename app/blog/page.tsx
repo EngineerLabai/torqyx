@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import { getContentList } from "@/utils/content";
-import { buildCanonical } from "@/utils/seo";
+import { DEFAULT_OG_IMAGE_META, buildCanonical } from "@/utils/seo";
 
 type BlogIndexPageProps = {
   searchParams?: Record<string, string | string[] | undefined>;
@@ -24,11 +24,13 @@ export const metadata: Metadata = {
     description: BLOG_DESCRIPTION,
     type: "website",
     url: BLOG_CANONICAL ?? "/blog",
+    images: [DEFAULT_OG_IMAGE_META],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Blog",
     description: BLOG_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE_META.url],
   },
 };
 

@@ -12,9 +12,9 @@
   Ornek: "Yuk sabit kabul edilir (0-2% dalgalanma). Sonucu dogrudan etkiler."
 - Belirsiz ifadelerden kacinin ("genelde", "yaklasik").
 
-## "AI entegrasyonu yok" konumlandirma dili
+## "AI yok, metodoloji var" konumlandirma dili
 - Standart ifade:
-  "Bu icerik AI entegrasyonu icermez. Tum hesaplamalar manuel ve analitik dogrulamalara dayanir."
+  "AI yok, metodoloji var. Tum hesaplamalar manuel ve analitik dogrulamalara dayanir."
 - Ust kisimda bir Callout icinde verin.
 
 ## Kaynak / uyari notlari formati

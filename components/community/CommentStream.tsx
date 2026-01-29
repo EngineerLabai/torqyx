@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { addDoc, collection, limit, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "@/components/auth/AuthProvider";
-import { firestore } from "@/utils/firebase";
+import { getFirebaseServices, getFirebaseInitError } from "@/utils/firebase";
 
 type Comment = {
   id: string;
@@ -20,11 +20,27 @@ export default function CommentStream() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const q = query(collection(firestore, "comments"), orderBy("createdAt", "desc"), limit(6));
-    const unsub = onSnapshot(q, (snapshot) => {
-      const next = snapshot.docs.map((doc) => ({ id: doc.id, ...(doc.data() as Omit<Comment, "id">) }));
-      setComments(next);
-    });
+    const services = getFirebaseServices();
+    if (!services) {
+      const initError = getFirebaseInitError();
+      if (initError) {
+        setError(initError.message);
+      }
+      return;
+    }
+
+    const q = query(collection(services.firestore, "comments"), orderBy("createdAt", "desc"), limit(6));
+    const unsub = onSnapshot(
+      q,
+      (snapshot) => {
+        const next = snapshot.docs.map((doc) => ({ id: doc.id, ...(doc.data() as Omit<Comment, "id">) }));
+        setComments(next);
+      },
+      (err) => {
+        console.error("[comments] Firestore listen failed:", err);
+        setError("Yorumlar yuklenemedi. Lutfen tekrar deneyin.");
+      },
+    );
     return () => unsub();
   }, []);
 
@@ -35,7 +51,14 @@ export default function CommentStream() {
     setSaving(true);
     setError(null);
     try {
-      await addDoc(collection(firestore, "comments"), {
+      const services = getFirebaseServices();
+      if (!services) {
+        const initError = getFirebaseInitError();
+        setError(initError?.message ?? "Yorum kaydedilemedi. Lutfen tekrar deneyin.");
+        return;
+      }
+
+      await addDoc(collection(services.firestore, "comments"), {
         content: content.trim(),
         displayName: user.displayName ?? user.email ?? "Kullanıcı",
         uid: user.uid,

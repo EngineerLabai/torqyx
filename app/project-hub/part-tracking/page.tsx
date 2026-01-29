@@ -1,6 +1,7 @@
 // app/project-hub/part-tracking/page.tsx
 "use client";
 
+import Link from "next/link";
 import { useState, FormEvent } from "react";
 import PageShell from "@/components/layout/PageShell";
 
@@ -131,10 +132,13 @@ export default function PartTrackingPage() {
           Parça Durumu Takip Panosu
         </h1>
         <p className="mt-2 text-xs text-slate-600">
-          Kick-off&apos;tan SOP&apos;a kadar proje parçalarının durumunu takip
-          etmek için hafif bir dashboard. Aşamalar: Kick-off, Tasarım, Numune,
-          PPAP, SOP. Girdiğin satırlar bu sayfada tutulur. Dışa aktarma (PDF/Excel)
-          ileride <strong>Premium</strong> için planlanabilir.
+          Kick-off'tan SOP'a kadar proje parcalarinin durumunu takip
+          etmek icin hafif bir dashboard. Asamalar: Kick-off, Tasarim, Numune,
+          PPAP, SOP. Girdigin satirlar bu sayfada tutulur. Disa aktarma (PDF/Excel)
+          premium paket iceriginde; odeme yok,{" "}
+          <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
+            bekleme listesi acik
+          </Link>.
         </p>
       </section>
 

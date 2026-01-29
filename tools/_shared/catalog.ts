@@ -15,6 +15,7 @@ export type ToolCatalogItem = {
   href: string;
   category?: ToolCategory;
   tags?: ToolTag[];
+  lastUpdated?: string;
 };
 
 export const toolCatalog: ToolCatalogItem[] = [
@@ -113,6 +114,7 @@ export const toolCatalog: ToolCatalogItem[] = [
     href: "/tools/torque-power",
     category: "Mechanical",
     tags: ["torque"],
+    lastUpdated: "2026-01-29",
   },
   {
     id: "strength-statics",

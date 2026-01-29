@@ -12,13 +12,13 @@ export default function AuthButtons() {
     locale === "en"
       ? {
           login: "Sign in",
-          premium: "Premium",
+          premium: "Join the waitlist",
           userFallback: "User",
           logout: "Sign out",
         }
       : {
           login: "Giris Yap",
-          premium: "Premium",
+          premium: "Premium bekleme listesi",
           userFallback: "Kullanici",
           logout: "Cikis",
         };
@@ -39,7 +39,7 @@ export default function AuthButtons() {
         </button>
         <Link
           className="tap-target inline-flex items-center justify-center rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-500"
-          href="#"
+          href="/premium"
         >
           {copy.premium}
         </Link>

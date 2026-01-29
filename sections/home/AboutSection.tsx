@@ -1,4 +1,5 @@
 import type { Locale } from "@/utils/locale";
+import { BRAND_TAGLINE } from "@/utils/brand";
 
 type AboutSectionProps = {
   locale: Locale;
@@ -9,27 +10,27 @@ export default function AboutSection({ locale }: AboutSectionProps) {
     locale === "en"
       ? {
           kicker: "About",
-          title: "AI is not a tool here; it is a mindset.",
+          title: BRAND_TAGLINE,
           lead:
-            "There is no AI integration on this platform. AI is positioned as thinking and methodology; calculations stay manual and visually supported.",
-          cardOneTitle: "Thinking / Guidance",
+            "A methodology-first workspace for practical engineering decisions and repeatable calculations.",
+          cardOneTitle: "Methodology / Flow",
           cardOneBody:
-            "AI helps break down problems, ask the right questions, and choose the method.",
+            "Break the problem into steps, define assumptions, and follow a consistent calculation path.",
           cardTwoTitle: "Manual + Visual",
           cardTwoBody:
-            "Results are produced with manual math, formulas, and visual explanations so the process stays readable.",
+            "Use formulas, tables, and visual cues so the reasoning stays clear and auditable.",
         }
       : {
           kicker: "Hakkinda",
-          title: "AI burada arac degil, yaklasimdir.",
+          title: BRAND_TAGLINE,
           lead:
-            "Bu platformda AI entegrasyonu yok. AI, dusunce ve metodoloji olarak konumlanir; hesaplamalar ise manuel ve gorsel destekli ilerler.",
-          cardOneTitle: "Dusunce / Yonlendirme",
+            "Pratik muhendislik kararlarini ve tekrarlanabilir hesaplari metodoloji odakli bir akista topla.",
+          cardOneTitle: "Metodoloji / Akis",
           cardOneBody:
-            "AI, problemi parcalama, sorulari dogru sorma ve metodoloji secimi icin yol gosterir.",
+            "Problemi adimlara bol, varsayimlari netlestir ve tutarli hesap akisini izle.",
           cardTwoTitle: "Manuel + Gorsel",
           cardTwoBody:
-            "Sonuclar; manuel hesap, formuller ve gorsel anlatimla uretilir. Bu sayede surec okunur kalir.",
+            "Formuller, tablolar ve gorsel ipuclariyla sureci okunur ve izlenebilir tut.",
         };
 
   return (

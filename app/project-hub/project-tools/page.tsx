@@ -1,6 +1,7 @@
 // app/project-hub/project-tools/page.tsx
 "use client";
 
+import Link from "next/link";
 import {
   useEffect,
   useState,
@@ -152,11 +153,13 @@ export default function ProjectToolsPage() {
           Proje &amp; İyileştirme Takip Paneli
         </h1>
         <p className="mt-2 text-xs text-slate-600">
-          Müşteri projeleri, proses iyileştirmeleri ve Kaizen çalışmalarını tek
-          yerden takip etmek için hafif bir proje listesi. Kayıtlar şu an sadece
-          bu tarayıcıda (localStorage) tutuluyor. İleride PDF/Excel çıktı ve
-          hesap açarak çoklu cihazdan erişim özellikleri premium pakete
-          taşınabilir.
+          Musteri projeleri, proses iyilestirmeleri ve Kaizen calismalarini tek
+          yerden takip etmek icin hafif bir proje listesi. Kayitlar su an sadece
+          bu tarayicida (localStorage) tutuluyor. PDF/Excel cikti ve coklu cihaz
+          erisimi premium paket planinda; odeme yok,{" "}
+          <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
+            bekleme listesi acik
+          </Link>.
         </p>
       </section>
 
@@ -367,11 +370,14 @@ export default function ProjectToolsPage() {
               Mühendis gözüyle kullanım notu
             </p>
             <p>
-              Bu alanı, hem üretim hattı küçük iyileştirmeleri (Kaizen) hem de
-              müşteri projelerinin kritik maddelerini takip etmek için
-              kullanabilirsin. İleride her kayıt; 8D, FMEA ve kalite araçlarıyla
-              ilişkilendirilebilir ve PDF/Excel çıktıları premium paket
-              kapsamında alınabilir.
+              Bu alani, hem uretim hatti kucuk iyilestirmeleri (Kaizen) hem de
+              musteri projelerinin kritik maddelerini takip etmek icin
+              kullanabilirsin. Ileride her kayit; 8D, FMEA ve kalite araclariyla
+              iliskilendirilebilir ve PDF/Excel cikti premium paket planinda yer alir.
+              Odeme yok,{" "}
+              <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
+                bekleme listesi acik
+              </Link>.
             </p>
           </div>
         </aside>

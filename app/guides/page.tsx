@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import { getContentList } from "@/utils/content";
-import { buildCanonical } from "@/utils/seo";
+import { DEFAULT_OG_IMAGE_META, buildCanonical } from "@/utils/seo";
 
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium" }).format(new Date(value));
@@ -11,21 +11,23 @@ const GUIDES_DESCRIPTION = "Adim adim hesaplama ve uygulama rehberleri.";
 const GUIDES_CANONICAL = buildCanonical("/guides");
 
 export const metadata: Metadata = {
-  title: "Guides",
+  title: "Rehberler",
   description: GUIDES_DESCRIPTION,
   alternates: {
     canonical: GUIDES_CANONICAL ?? "/guides",
   },
   openGraph: {
-    title: "Guides",
+    title: "Rehberler",
     description: GUIDES_DESCRIPTION,
     type: "website",
     url: GUIDES_CANONICAL ?? "/guides",
+    images: [DEFAULT_OG_IMAGE_META],
   },
   twitter: {
-    card: "summary",
-    title: "Guides",
+    card: "summary_large_image",
+    title: "Rehberler",
     description: GUIDES_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE_META.url],
   },
 };
 
@@ -56,7 +58,7 @@ export default async function GuidesIndexPage() {
               <path d="M9 6l1-2 1 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
             <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
-              <span className="font-semibold">Guides</span>
+              <span className="font-semibold">Rehberler</span>
             </div>
           </div>
           <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-4xl">

@@ -149,6 +149,7 @@ export default async function QualityToolsPage() {
           planned: "Planned",
           basic: "Basic level",
           advanced: "Advanced level",
+          premiumBadge: "Premium (waitlist)",
           openTool: "Open tool",
           comingSoon: "Coming soon",
           footerActive: "Interactive form available (draft).",
@@ -164,6 +165,7 @@ export default async function QualityToolsPage() {
           planned: "Planlandi",
           basic: "Temel seviye",
           advanced: "Ileri seviye",
+          premiumBadge: "Premium (bekleme listesi)",
           openTool: "Araci Ac",
           comingSoon: "Yakinda",
           footerActive: "Etkilesimli form ile calisilabilir (taslak).",
@@ -203,7 +205,7 @@ export default async function QualityToolsPage() {
                     <StatusBadge status={tool.status} activeLabel={copy.active} plannedLabel={copy.planned} />
                     {tool.premium && (
                       <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-                        Premium
+                        {copy.premiumBadge}
                       </span>
                     )}
                   </div>

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { BRAND_NAME, BRAND_TAGLINE } from "@/utils/brand";
 import type { Locale } from "@/utils/locale";
 
 type NavSection = {
@@ -25,10 +26,10 @@ const navSectionsByLocale: Record<Locale, NavSection[]> = {
     {
       id: "tools",
       label: "Hesaplayicilar",
-      description: "Disli, tork, kuvvet ve mekanik hesap araclari.",
+      description: "Disli, tork, kuvvet ve mekanik hesaplayicilar.",
       links: [
         { label: "Disli hesaplayicilari", href: "/tools/gear-design/calculators", badge: "Yeni" },
-        { label: "Mekanik hesaplamalar", href: "/tools" },
+        { label: "Hesaplayici Kutuphanesi", href: "/tools" },
         { label: "Tork / Guc", href: "/tools/torque-power" },
       ],
     },
@@ -37,9 +38,9 @@ const navSectionsByLocale: Record<Locale, NavSection[]> = {
       label: "Araclar",
       description: "Sablon, rehber ve proje araclari.",
       links: [
-        { label: "Proje alani", href: "/project-hub", badge: "Guncel" },
+        { label: "Proje merkezi", href: "/project-hub", badge: "Guncel" },
         { label: "Kalite araclari", href: "/quality-tools" },
-        { label: "Fikstur & aparat", href: "/fixture-tools" },
+        { label: "Fikstur araclari", href: "/fixture-tools" },
       ],
     },
     {
@@ -62,21 +63,21 @@ const navSectionsByLocale: Record<Locale, NavSection[]> = {
     {
       id: "tools",
       label: "Calculators",
-      description: "Gear, torque, force, and mechanical calculation tools.",
+      description: "Gear, torque, force, and mechanical calculators.",
       links: [
         { label: "Gear calculators", href: "/tools/gear-design/calculators", badge: "New" },
-        { label: "Mechanical calculators", href: "/tools" },
+        { label: "Calculator Library", href: "/tools" },
         { label: "Torque / Power", href: "/tools/torque-power" },
       ],
     },
     {
       id: "resources",
-      label: "Workflows",
+      label: "Tools",
       description: "Templates, guides, and project tools.",
       links: [
         { label: "Project hub", href: "/project-hub", badge: "Updated" },
         { label: "Quality tools", href: "/quality-tools" },
-        { label: "Fixture & tooling", href: "/fixture-tools" },
+        { label: "Fixture tools", href: "/fixture-tools" },
       ],
     },
     {
@@ -109,7 +110,7 @@ const sidebarSectionsByLocale: Record<Locale, SidebarSection[]> = {
     {
       label: "Araclar",
       links: [
-        { label: "Proje Alani", href: "/project-hub" },
+        { label: "Proje merkezi", href: "/project-hub" },
         { label: "Kalite Araclari", href: "/quality-tools" },
         { label: "Fikstur Araclari", href: "/fixture-tools" },
       ],
@@ -135,7 +136,7 @@ const sidebarSectionsByLocale: Record<Locale, SidebarSection[]> = {
       ],
     },
     {
-      label: "Workflows",
+      label: "Tools",
       links: [
         { label: "Project hub", href: "/project-hub" },
         { label: "Quality tools", href: "/quality-tools" },
@@ -162,28 +163,44 @@ const headerCopyByLocale: Record<
     brandTitle: string;
     brandSubtitle: string;
     premiumTitle: string;
+    premiumStatus: string;
+    premiumItemsTitle: string;
     premiumItems: string[];
+    premiumCta: string;
+    premiumHref: string;
   }
 > = {
   tr: {
-    brandTitle: "AI Engineers Lab",
-    brandSubtitle: "Acik ve ozgun muhendislik",
-    premiumTitle: "Premium uyelik",
+    brandTitle: BRAND_NAME,
+    brandSubtitle: BRAND_TAGLINE,
+    premiumTitle: "Premium paket",
+    premiumStatus: "Odeme altyapisi acik degil. Bekleme listesi acik.",
+    premiumItemsTitle: "Paket icerigi",
     premiumItems: [
       "Detayli tork ve dis tablolar",
       "Gelismis mekanik hesaplayicilar",
       "Malzeme ve kaplama oneri kartlari",
+      "PDF/Excel disa aktarma (RFQ, kalite, proje listeleri)",
+      "Coklu cihaz erisimi ve kayitli projeler",
     ],
+    premiumCta: "Bekleme listesine katil",
+    premiumHref: "/premium",
   },
   en: {
-    brandTitle: "AI Engineers Lab",
-    brandSubtitle: "Clear and original engineering",
-    premiumTitle: "Premium membership",
+    brandTitle: BRAND_NAME,
+    brandSubtitle: BRAND_TAGLINE,
+    premiumTitle: "Premium package",
+    premiumStatus: "Payments are not open. The waitlist is available.",
+    premiumItemsTitle: "Package scope",
     premiumItems: [
       "Detailed torque and gear tables",
       "Advanced mechanical calculators",
       "Material and coating suggestion cards",
+      "PDF/Excel exports (RFQ, quality, project lists)",
+      "Multi-device access and saved projects",
     ],
+    premiumCta: "Join the waitlist",
+    premiumHref: "/premium",
   },
 };
 
@@ -194,10 +211,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const headerCopy = headerCopyByLocale[locale];
   const pathname = usePathname();
   const isHome = pathname === "/";
-
-  if (isHome) {
-    return <>{children}</>;
-  }
+  const year = new Date().getFullYear();
 
   return (
     <div className="flex min-h-screen flex-col bg-[radial-gradient(circle_at_20%_20%,rgba(100,116,139,0.05),transparent_30%),radial-gradient(circle_at_80%_0%,rgba(16,185,129,0.05),transparent_25%)]">
@@ -211,7 +225,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         <div className="site-container flex items-center justify-between py-3">
           <Link href="/" className="flex items-center gap-3">
             <div className="relative flex h-12 w-12 items-center justify-center">
-              <img src="/icons/logo-mark.svg" alt="AI" className="h-10 w-10 anim-blob" />
+              <img src="/icons/logo-mark.svg" alt={BRAND_NAME} className="h-10 w-10 anim-blob" />
               <span className="absolute -inset-1 rounded-2xl blur-2xl opacity-30 brand-gradient" aria-hidden />
             </div>
             <div className="flex flex-col leading-tight">
@@ -272,32 +286,86 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="flex-1">
-        <div className="mx-auto flex max-w-8xl flex-col gap-6 px-4 py-6 lg:flex-row">
-          <aside className="lg:w-64 lg:shrink-0">
-            <div className="sticky top-4 space-y-3 text-xs">
-              {sidebarSections.map((section) => (
-                <SidebarSectionCard key={section.label} section={section} />
-              ))}
-            </div>
-          </aside>
-
-          <section className="flex-1">{children}</section>
-
-          <aside className="hidden w-72 shrink-0 xl:block">
-            <div className="sticky top-4 space-y-4 text-xs">
-              <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur">
-                <h2 className="mb-1 text-sm font-semibold text-slate-900">{headerCopy.premiumTitle}</h2>
-                <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-600">
-                  {headerCopy.premiumItems.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+      {isHome ? (
+        children
+      ) : (
+        <main className="flex-1">
+          <div className="mx-auto flex max-w-8xl flex-col gap-6 px-4 py-6 lg:flex-row">
+            <aside className="lg:w-64 lg:shrink-0">
+              <div className="sticky top-4 space-y-3 text-xs">
+                {sidebarSections.map((section) => (
+                  <SidebarSectionCard key={section.label} section={section} />
+                ))}
               </div>
+            </aside>
+
+            <section className="flex-1">{children}</section>
+
+            <aside className="hidden w-72 shrink-0 xl:block">
+              <div className="sticky top-4 space-y-4 text-xs">
+                <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur">
+                  <h2 className="mb-1 text-sm font-semibold text-slate-900">{headerCopy.premiumTitle}</h2>
+                  <p className="text-[11px] text-slate-600">{headerCopy.premiumStatus}</p>
+                  <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    {headerCopy.premiumItemsTitle}
+                  </p>
+                  <ul className="mt-2 list-disc space-y-1 pl-4 text-[11px] text-slate-600">
+                    {headerCopy.premiumItems.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={headerCopy.premiumHref}
+                    className="mt-3 inline-flex items-center justify-center rounded-full border border-slate-300 px-3 py-1.5 text-[11px] font-semibold text-slate-700 hover:border-slate-400 hover:bg-slate-50"
+                  >
+                    {headerCopy.premiumCta}
+                  </Link>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </main>
+      )}
+
+      <footer className="border-t border-slate-200 bg-white/80">
+        <div className="site-container grid gap-6 py-8 md:grid-cols-[1.1fr_2fr]">
+          <div className="space-y-3">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              {BRAND_NAME}
             </div>
-          </aside>
+            <p className="text-sm font-semibold text-slate-900">{BRAND_TAGLINE}</p>
+            <p className="text-xs text-slate-500">
+              {locale === "en"
+                ? "Methodology-first engineering notes and calculators."
+                : "Metodoloji odakli muhendislik notlari ve hesaplayicilar."}
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {sidebarSections.map((section) => (
+              <div key={section.label} className="space-y-2 text-xs">
+                <div className="font-semibold uppercase tracking-[0.12em] text-slate-500">{section.label}</div>
+                <div className="space-y-1">
+                  {section.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="block text-[13px] font-semibold text-slate-700 hover:text-slate-900"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
+
+        <div className="site-container flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 py-4 text-[11px] text-slate-500">
+          <span>(c) {year} {BRAND_NAME}</span>
+          <span>{BRAND_TAGLINE}</span>
+        </div>
+      </footer>
     </div>
   );
 }
@@ -317,27 +385,21 @@ function MegaMenuItem({ section }: { section: NavSection }) {
         <div className="rounded-2xl border border-white/15 bg-black/80 p-4 shadow-[10px_10px_0px_0px_rgba(0,255,65,0.12)] ring-1 ring-green-500/10 backdrop-blur">
           <p className="mb-3 text-[11px] leading-relaxed text-slate-300">{section.description}</p>
           <div className="grid gap-2">
-            {section.links.map((link, idx) => {
-              const id = String(idx + 1).padStart(3, "0");
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="group/card relative block overflow-hidden border border-white/10 bg-black/40 p-4 transition-colors duration-200 hover:border-green-500/50"
-                >
-                  <div className="absolute top-2 right-2 text-[10px] font-mono text-gray-500 group-hover/card:text-green-400">
-                    SYS_ID: {id}
-                  </div>
-                  <h3 className="mb-1 text-sm font-semibold text-gray-200 group-hover/card:text-white">{link.label}</h3>
-                  {link.badge ? (
-                    <span className="mt-2 inline-flex items-center gap-1 rounded border border-green-500/30 px-2 py-0.5 text-[10px] font-semibold text-green-300">
-                      {link.badge}
-                    </span>
-                  ) : null}
-                  <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-green-500 transition-all duration-300 group-hover/card:w-full" />
-                </Link>
-              );
-            })}
+            {section.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group/card relative block overflow-hidden border border-white/10 bg-black/40 p-4 transition-colors duration-200 hover:border-green-500/50"
+              >
+                <h3 className="mb-1 text-sm font-semibold text-gray-200 group-hover/card:text-white">{link.label}</h3>
+                {link.badge ? (
+                  <span className="mt-2 inline-flex items-center gap-1 rounded border border-green-500/30 px-2 py-0.5 text-[10px] font-semibold text-green-300">
+                    {link.badge}
+                  </span>
+                ) : null}
+                <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-green-500 transition-all duration-300 group-hover/card:w-full" />
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -352,22 +414,16 @@ function SidebarSectionCard({ section }: { section: SidebarSection }) {
         {section.label}
       </h3>
       <div className="space-y-2">
-        {section.links.map((link, idx) => {
-          const id = String(idx + 1).padStart(2, "0");
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="group relative block overflow-hidden border border-white/10 bg-black/40 p-3 text-[11px] font-semibold text-gray-200 transition-colors duration-200 hover:border-green-500/50 hover:text-white"
-            >
-              <div className="absolute top-2 right-2 text-[10px] font-mono text-gray-500 group-hover:text-green-400">
-                ID: {id}
-              </div>
-              <div className="text-sm">{link.label}</div>
-              <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full" />
-            </Link>
-          );
-        })}
+        {section.links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="group relative block overflow-hidden border border-white/10 bg-black/40 p-3 text-[11px] font-semibold text-gray-200 transition-colors duration-200 hover:border-green-500/50 hover:text-white"
+          >
+            <div className="text-sm">{link.label}</div>
+            <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full" />
+          </Link>
+        ))}
       </div>
     </div>
   );

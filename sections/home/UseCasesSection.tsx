@@ -53,15 +53,15 @@ export default function UseCasesSection({ locale }: UseCasesSectionProps) {
           kicker: "What can I do?",
           title: "A fast start based on your need",
           lead:
-            "Pick your goal, open the right tool, and validate results quickly. Everything is mobile-first and smooth.",
+            "Pick your goal, open the right calculator, and validate results quickly. Everything is mobile-first and smooth.",
           ctaPrimary: "Go to Calculators",
           ctaSecondary: "Explore Tools",
         }
       : {
           kicker: "Ne yapabilirim?",
           title: "Ihtiyacina gore hizli bir baslangic",
-          lead: "Amacini sec, ilgili araca git, sonucu hemen test et. Her sey mobile-first ve akici.",
-          ctaPrimary: "Hesaplamalara Git",
+          lead: "Amacini sec, ilgili hesaplayiciya git, sonucu hemen test et. Her sey mobile-first ve akici.",
+          ctaPrimary: "Hesaplayicilara Git",
           ctaSecondary: "Araclari Kesfet",
         };
 

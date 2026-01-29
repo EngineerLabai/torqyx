@@ -1,6 +1,7 @@
 // app/quality-tools/5n1k/page.tsx
 "use client";
 
+import Link from "next/link";
 import { useState, ChangeEvent } from "react";
 import PageShell from "@/components/layout/PageShell";
 
@@ -201,9 +202,12 @@ export default function FiveN1KPage() {
           </div>
 
           <p className="mt-3 text-[11px] text-slate-500">
-            Not: Buraya girilen bilgiler yalnızca bu tarayıcı oturumunda saklanır.
-            Gelecekte PDF/Excel çıktı ve hesap açarak kayıt tutma özellikleri
-            premium paket kapsamında eklenebilir.
+            Not: Buraya girilen bilgiler yalnizca bu tarayici oturumunda saklanir.
+            Gelecekte PDF/Excel cikti ve hesap acarak kayit tutma ozellikleri
+            premium paket planinda. Odeme yok,{" "}
+            <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
+              bekleme listesi acik
+            </Link>.
           </p>
         </div>
 
@@ -382,12 +386,14 @@ function PremiumExportNotice() {
   return (
     <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
       <h3 className="mb-1 text-sm font-semibold">
-        PDF / Excel&apos;e Aktar – Premium Özellik
+        PDF / Excel'e Aktar - Premium (bekleme listesi)
       </h3>
       <p className="mb-2">
-        5N1K problem tanımlama kayıtlarını PDF veya Excel olarak dışa aktarma
-        ve ekiplerle paylaşma özelliği <strong>Premium üyelik</strong> kapsamında
-        planlanmaktadır.
+        5N1K problem tanimlama kayitlarini PDF veya Excel olarak disa aktarma
+        ve ekiplerle paylasma ozelligi premium paket planinda. Odeme yok,{" "}
+        <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
+          bekleme listesi acik
+        </Link>.
       </p>
       <div className="flex gap-2">
         <button

@@ -7,7 +7,8 @@ import JsonLd from "@/components/seo/JsonLd";
 import ActionCard from "@/components/ui/ActionCard";
 import { extractToc, getContentBySlug, getContentList } from "@/utils/content";
 import { getRelatedForBlogPost } from "@/utils/related-items";
-import { buildCanonical, SITE_URL } from "@/utils/seo";
+import { BRAND_NAME } from "@/utils/brand";
+import { DEFAULT_OG_IMAGE_META, buildCanonical, SITE_URL } from "@/utils/seo";
 
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium" }).format(new Date(value));
@@ -45,11 +46,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       url: canonical ?? `/blog/${post.slug}`,
       publishedTime: post.date,
       tags: post.tags,
+      images: [DEFAULT_OG_IMAGE_META],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [DEFAULT_OG_IMAGE_META.url],
     },
   };
 }
@@ -64,7 +67,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const canonical = post.canonical ?? buildCanonical(`/blog/${post.slug}`) ?? `/blog/${post.slug}`;
   const logoUrl = new URL("/icons/logo-mark.svg", SITE_URL).toString();
   const blogPostingJsonLd = {
-    "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
@@ -77,11 +79,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     author: {
       "@type": "Organization",
-      name: "AI Engineers Lab",
+      name: BRAND_NAME,
     },
     publisher: {
       "@type": "Organization",
-      name: "AI Engineers Lab",
+      name: BRAND_NAME,
       logo: {
         "@type": "ImageObject",
         url: logoUrl,
@@ -91,6 +93,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     keywords: post.tags.join(", "),
     inLanguage: "tr-TR",
   };
+  const breadcrumbJsonLd = {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Ana sayfa",
+        item: buildCanonical("/") ?? `${SITE_URL}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: buildCanonical("/blog") ?? `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: canonical,
+      },
+    ],
+  };
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [blogPostingJsonLd, breadcrumbJsonLd],
+  };
 
   const toc = extractToc(post.content);
   const allPosts = await getContentList("blog");
@@ -98,7 +127,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <PageShell>
-      <JsonLd data={blogPostingJsonLd} />
+      <JsonLd data={blogJsonLd} />
       <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <header className="space-y-4">
           <Link href="/blog" className="text-xs font-semibold text-emerald-700 hover:underline">
@@ -191,7 +220,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       description={tool.description}
                       href={tool.href}
                       badge={tool.category}
-                      ctaLabel="Araci Ac"
+                      toolId={tool.id}
+                      ctaLabel="Hesaplayiciyi Ac"
                     />
                   ))}
                 </div>

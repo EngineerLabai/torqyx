@@ -1,5 +1,6 @@
 ﻿import { NextResponse } from "next/server";
 import { getContentList } from "@/utils/content";
+import { BRAND_NAME } from "@/utils/brand";
 import { SITE_URL } from "@/utils/seo";
 
 const escapeXml = (value: string) =>
@@ -31,7 +32,7 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml("AI Engineers Lab Blog")}</title>
+    <title>${escapeXml(`${BRAND_NAME} Blog`)}</title>
     <link>${siteUrl}/blog</link>
     <description>${escapeXml("Hesaplama ve analiz odakli blog yazilari.")}</description>
     <language>tr-TR</language>
