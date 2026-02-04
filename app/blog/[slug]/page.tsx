@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
@@ -7,11 +6,17 @@ import JsonLd from "@/components/seo/JsonLd";
 import ActionCard from "@/components/ui/ActionCard";
 import { extractToc, getContentBySlug, getContentList } from "@/utils/content";
 import { getRelatedForBlogPost } from "@/utils/related-items";
-import { BRAND_NAME } from "@/utils/brand";
-import { DEFAULT_OG_IMAGE_META, buildCanonical, SITE_URL } from "@/utils/seo";
+import { getBrandCopy } from "@/config/brand";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { formatMessage, getMessages } from "@/utils/messages";
+import { buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
+import { buildPageMetadata } from "@/utils/metadata";
+import { withLocalePrefix } from "@/utils/locale-path";
 
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium" }).format(new Date(value));
+const formatDate = (value: string, locale: "tr" | "en") =>
+  new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
+    new Date(value),
+  );
 
 type BlogPostPageProps = {
   params: { slug: string };
@@ -22,50 +27,50 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps) {
   const post = await getContentBySlug("blog", params.slug);
+  const locale = await getLocaleFromCookies();
+  const notFoundCopy = getMessages(locale).pages.notFound;
 
   if (!post) {
-    return {
-      title: "Icerik bulunamadi",
-      description: "Istenen blog yazisi bulunamadi.",
-    };
+    return buildPageMetadata({
+      title: notFoundCopy.title,
+      description: notFoundCopy.description,
+      path: `/blog/${params.slug}`,
+      locale,
+    });
   }
 
-  const canonical = post.canonical ?? buildCanonical(`/blog/${post.slug}`);
-
-  return {
+  return buildPageMetadata({
     title: post.title,
     description: post.description,
+    path: `/blog/${post.slug}`,
+    locale,
+    type: "article",
     keywords: post.tags,
-    alternates: canonical ? { canonical } : undefined,
     openGraph: {
-      title: post.title,
-      description: post.description,
       type: "article",
-      url: canonical ?? `/blog/${post.slug}`,
       publishedTime: post.date,
       tags: post.tags,
-      images: [DEFAULT_OG_IMAGE_META],
     },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [DEFAULT_OG_IMAGE_META.url],
-    },
-  };
+  });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getContentBySlug("blog", params.slug);
+  const [post, locale] = await Promise.all([
+    getContentBySlug("blog", params.slug),
+    getLocaleFromCookies(),
+  ]);
 
   if (!post) {
     notFound();
   }
 
-  const canonical = post.canonical ?? buildCanonical(`/blog/${post.slug}`) ?? `/blog/${post.slug}`;
-  const logoUrl = new URL("/icons/logo-mark.svg", SITE_URL).toString();
+  const brandContent = getBrandCopy(locale);
+  const copy = getMessages(locale).pages.blog;
+  const canonical = buildLocalizedCanonical(`/blog/${post.slug}`, locale);
+  const logoUrl = new URL("/brand/logo-mark.svg", SITE_URL).toString();
+  const blogListHref = withLocalePrefix("/blog", locale);
   const blogPostingJsonLd = {
     "@type": "BlogPosting",
     headline: post.title,
@@ -79,11 +84,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     author: {
       "@type": "Organization",
-      name: BRAND_NAME,
+      name: brandContent.siteName,
     },
     publisher: {
       "@type": "Organization",
-      name: BRAND_NAME,
+      name: brandContent.siteName,
       logo: {
         "@type": "ImageObject",
         url: logoUrl,
@@ -91,7 +96,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     image: [logoUrl],
     keywords: post.tags.join(", "),
-    inLanguage: "tr-TR",
+    inLanguage: locale === "tr" ? "tr-TR" : "en-US",
   };
   const breadcrumbJsonLd = {
     "@type": "BreadcrumbList",
@@ -99,14 +104,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Ana sayfa",
-        item: buildCanonical("/") ?? `${SITE_URL}/`,
+        name: locale === "tr" ? "Ana sayfa" : "Home",
+        item: buildLocalizedCanonical("/", locale),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: buildCanonical("/blog") ?? `${SITE_URL}/blog`,
+        item: buildLocalizedCanonical("/blog", locale),
       },
       {
         "@type": "ListItem",
@@ -123,21 +128,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const toc = extractToc(post.content);
   const allPosts = await getContentList("blog");
-  const { relatedPosts, relatedTools } = getRelatedForBlogPost(post, allPosts);
+  const { relatedPosts, relatedTools } = getRelatedForBlogPost(post, allPosts, { locale });
 
   return (
     <PageShell>
       <JsonLd data={blogJsonLd} />
       <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <header className="space-y-4">
-          <Link href="/blog" className="text-xs font-semibold text-emerald-700 hover:underline">
-            Blog listesine don
+          <Link href={blogListHref} className="text-xs font-semibold text-emerald-700 hover:underline">
+            {copy.back}
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
             <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-emerald-700">{post.category}</span>
-            <span>{formatDate(post.date)}</span>
+            <span>{formatDate(post.date, locale)}</span>
             <span>|</span>
-            <span>{post.readingTimeMinutes} dk okuma</span>
+            <span>{formatMessage(copy.readingTime, { count: post.readingTimeMinutes })}</span>
           </div>
           <h1 className="text-balance text-3xl font-semibold leading-tight text-slate-900 md:text-4xl">
             {post.title}
@@ -155,9 +160,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_260px]">
           <aside className="order-1 lg:order-2">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm lg:sticky lg:top-24">
-              <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Icerik</div>
+              <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.tocTitle}</div>
               {toc.length === 0 ? (
-                <p className="text-xs text-slate-500">Bu yazida baslik bulunmuyor.</p>
+                <p className="text-xs text-slate-500">{copy.tocEmpty}</p>
               ) : (
                 <ul className="space-y-2 text-xs text-slate-600">
                   {toc.map((item) => (
@@ -179,12 +184,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {relatedPosts.length > 0 ? (
               <section className="space-y-4">
-                <h2 className="text-xl font-semibold text-slate-900">Benzer yazilar</h2>
+                <h2 className="text-xl font-semibold text-slate-900">{copy.relatedPostsTitle}</h2>
                 <div className="grid gap-3 md:grid-cols-2">
                   {relatedPosts.map((item) => (
                     <Link
                       key={item.slug}
-                      href={`/blog/${item.slug}`}
+                      href={withLocalePrefix(`/blog/${item.slug}`, locale)}
                       className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-slate-300"
                     >
                       <div className="flex items-start justify-between gap-3">
@@ -199,9 +204,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         </span>
                       </div>
                       <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] text-slate-500">
-                        <span>{formatDate(item.date)}</span>
+                        <span>{formatDate(item.date, locale)}</span>
                         <span>|</span>
-                        <span>{item.readingTimeMinutes} dk</span>
+                        <span>{formatMessage(copy.readingTime, { count: item.readingTimeMinutes })}</span>
                       </div>
                     </Link>
                   ))}
@@ -211,17 +216,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {relatedTools.length > 0 ? (
               <section className="space-y-4">
-                <h2 className="text-xl font-semibold text-slate-900">Ilgili araclar</h2>
+                <h2 className="text-xl font-semibold text-slate-900">{copy.relatedToolsTitle}</h2>
                 <div className="grid gap-3 md:grid-cols-2">
                   {relatedTools.map((tool) => (
                     <ActionCard
                       key={tool.href}
                       title={tool.title}
                       description={tool.description}
-                      href={tool.href}
+                      href={withLocalePrefix(tool.href, locale)}
                       badge={tool.category}
                       toolId={tool.id}
-                      ctaLabel="Hesaplayiciyi Ac"
+                      ctaLabel={copy.relatedToolsCta}
                     />
                   ))}
                 </div>

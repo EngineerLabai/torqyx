@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
+import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 import useToolRecents from "@/components/tools/useToolRecents";
+import { formatMessage, getMessages } from "@/utils/messages";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 type RecentToolsStripProps = {
@@ -15,6 +16,7 @@ type RecentToolsStripProps = {
 
 export default function RecentToolsStrip({ tone = "light", className = "", maxItems = 6 }: RecentToolsStripProps) {
   const { locale } = useLocale();
+  const copy = getMessages(locale).components.recentTools;
   const { recents } = useToolRecents();
 
   const items = useMemo(() => {
@@ -26,21 +28,6 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
       .filter((item): item is { entry: typeof recents[number]; tool: (typeof toolCatalog)[number] } => Boolean(item.tool));
     return mapped.slice(0, maxItems);
   }, [recents, maxItems]);
-
-  const copy =
-    locale === "en"
-      ? {
-          title: "Recently used",
-          description: "Jump back into the calculators you opened last.",
-          empty: "No recent calculators yet.",
-          open: (title: string) => `Open ${title}`,
-        }
-      : {
-          title: "Son kullanilanlar",
-          description: "En son actigin hesaplayicilara buradan hizlica don.",
-          empty: "Henuz son kullanilan hesaplayici yok.",
-          open: (title: string) => `${title} hesaplayicisini ac`,
-        };
 
   const toneClasses =
     tone === "dark"
@@ -88,14 +75,14 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
                 </div>
                 <Link
                   href={tool.href}
-                  aria-label={copy.open(toolCopy.title)}
+                  aria-label={formatMessage(copy.open, { title: toolCopy.title })}
                   className="block space-y-2 pr-10"
                 >
                   <p className={`text-sm font-semibold ${toneClasses.title}`}>{toolCopy.title}</p>
                   <p className={`text-xs leading-relaxed ${toneClasses.cardText}`}>{toolCopy.description}</p>
                 </Link>
                 <p className={`mt-3 text-[10px] uppercase tracking-[0.2em] ${toneClasses.cardMuted}`}>
-                  {tool.category ?? (locale === "en" ? "General" : "Genel")}
+                  {tool.category ?? copy.generalCategory}
                 </p>
               </div>
             );

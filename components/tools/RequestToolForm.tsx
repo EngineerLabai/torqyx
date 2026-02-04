@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 import {
   REQUESTS_EVENT,
   addToolRequest,
@@ -71,6 +72,7 @@ const buildIssueUrl = (data: ToolRequestData) => {
 
 export default function RequestToolForm() {
   const { locale } = useLocale();
+  const copy = getMessages(locale).components.requestToolForm;
   const [values, setValues] = useState<ToolRequestData>({
     problem: "",
     inputs: "",
@@ -98,49 +100,6 @@ export default function RequestToolForm() {
     window.addEventListener(REQUESTS_EVENT, handleUpdate);
     return () => window.removeEventListener(REQUESTS_EVENT, handleUpdate);
   }, []);
-
-  const copy =
-    locale === "en"
-      ? {
-          title: "Request a tool",
-          description: "Describe the problem and the input/output structure to help us build the calculator.",
-          back: "Back to Tool Library",
-          submit: "Submit request",
-          github: "Create GitHub Issue",
-          copy: "Copy",
-          copied: "Copied to clipboard.",
-          copyFail: "Copy failed. You can copy the text manually.",
-          history: "Submitted requests",
-          emptyHistory: "No requests yet.",
-          required: "This field is required.",
-          fields: {
-            problem: "Problem / Use case",
-            inputs: "Inputs (input list)",
-            outputs: "Expected output (result)",
-            standards: "Units / standards",
-            examples: "Example values",
-          },
-        }
-      : {
-          title: "Arac iste",
-          description: "Problemi ve input/output yapisini yazarak yeni araci hizla tarif edebilirsin.",
-          back: "Hesaplayici Kutuphanesi",
-          submit: "Istek Gonder",
-          github: "GitHub Issue Olustur",
-          copy: "Kopyala",
-          copied: "Kopyalandi.",
-          copyFail: "Kopyalama basarisiz. Metni manuel kopyalayabilirsin.",
-          history: "Gonderilen istekler",
-          emptyHistory: "Henuz istek yok.",
-          required: "Bu alan zorunlu.",
-          fields: {
-            problem: "Problem / Kullanim alani",
-            inputs: "Girdiler (input listesi)",
-            outputs: "Beklenen cikti (result)",
-            standards: "Birimler / standartlar",
-            examples: "Ornek degerler",
-          },
-        };
 
   const handleChange = (key: FieldKey, value: string) => {
     setValues((prev) => ({ ...prev, [key]: value }));
@@ -285,11 +244,7 @@ export default function RequestToolForm() {
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <h2 className="text-lg font-semibold text-slate-900">{copy.history}</h2>
-          <p className="text-xs text-slate-500">
-            {locale === "en"
-              ? "Stored locally in your browser."
-              : "Tarayicinizda yerel olarak saklanir."}
-          </p>
+          <p className="text-xs text-slate-500">{copy.storageNote}</p>
         </div>
         {history.length === 0 ? (
           <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">

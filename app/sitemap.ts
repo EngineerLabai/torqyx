@@ -3,8 +3,10 @@ import { getContentList } from "@/utils/content";
 import { getCategoryIndex, getTagIndex } from "@/utils/taxonomy";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import { SITE_URL } from "@/utils/seo";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
+const locales = ["tr", "en"] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [blog, guides, glossary, tags, categories] = await Promise.all([
@@ -17,7 +19,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const entries: MetadataRoute.Sitemap = [];
   const addEntry = (path: string, lastModified?: Date) => {
-    entries.push({ url: resolveUrl(path), lastModified });
+    locales.forEach((locale) => {
+      entries.push({ url: resolveUrl(withLocalePrefix(path, locale)), lastModified });
+    });
   };
 
   [
@@ -30,7 +34,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/guides",
     "/glossary",
     "/premium",
-    "/forum",
+    "/login",
+    "/qa",
     "/community",
     "/support",
     "/project-hub",
@@ -51,24 +56,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].forEach((path) => addEntry(path));
 
   blog.forEach((post) => {
-    entries.push({
-      url: resolveUrl(`/blog/${post.slug}`),
-      lastModified: new Date(post.date),
-    });
+    addEntry(`/blog/${post.slug}`, new Date(post.date));
   });
 
   guides.forEach((guide) => {
-    entries.push({
-      url: resolveUrl(`/guides/${guide.slug}`),
-      lastModified: new Date(guide.date),
-    });
+    addEntry(`/guides/${guide.slug}`, new Date(guide.date));
   });
 
   glossary.forEach((term) => {
-    entries.push({
-      url: resolveUrl(`/glossary/${term.slug}`),
-      lastModified: new Date(term.date),
-    });
+    addEntry(`/glossary/${term.slug}`, new Date(term.date));
   });
 
   toolCatalog.forEach((tool) => {

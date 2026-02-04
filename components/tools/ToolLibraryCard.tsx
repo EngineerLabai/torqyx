@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
+import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 
 type ToolLibraryCardProps = {
   toolId: string;
@@ -7,6 +7,8 @@ type ToolLibraryCardProps = {
   description: string;
   href: string;
   usageLabel: string;
+  typeLabel?: string;
+  typeTone?: "calculator" | "bundle" | "guide";
   tags?: string[];
   ctaLabel: string;
   ariaLabel: string;
@@ -19,11 +21,19 @@ export default function ToolLibraryCard({
   description,
   href,
   usageLabel,
+  typeLabel,
+  typeTone = "calculator",
   tags,
   ctaLabel,
   ariaLabel,
   isNew = false,
 }: ToolLibraryCardProps) {
+  const typeToneClass = {
+    calculator: "bg-emerald-100 text-emerald-700",
+    bundle: "bg-amber-100 text-amber-700",
+    guide: "bg-sky-100 text-sky-700",
+  }[typeTone];
+
   return (
     <article className="group relative flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-sm shadow-sm transition hover:border-slate-300 hover:shadow-md">
       <Link
@@ -40,6 +50,11 @@ export default function ToolLibraryCard({
         <div className="flex items-start justify-between gap-2 pr-12">
           <h3 className="break-words text-base font-semibold leading-snug text-slate-900">{title}</h3>
           <div className="flex flex-col items-end gap-1">
+            {typeLabel ? (
+              <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${typeToneClass}`.trim()}>
+                {typeLabel}
+              </span>
+            ) : null}
             <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
               {usageLabel}
             </span>

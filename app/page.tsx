@@ -1,33 +1,38 @@
-import ParticleBackground from "@/components/effects/ParticleBackground";
 import WebPageJsonLd from "@/components/seo/WebPageJsonLd";
-import UpdatesBanner from "@/components/home/UpdatesBanner";
-import AboutSection from "@/sections/home/AboutSection";
-import CommentsSection from "@/sections/home/CommentsSection";
+import ChangelogSection from "@/sections/home/ChangelogSection";
 import HeroSection from "@/sections/home/HeroSection";
 import UseCasesSection from "@/sections/home/UseCasesSection";
-import RecentToolsStrip from "@/components/tools/RecentToolsStrip";
+import PopularToolsSection from "@/sections/home/PopularToolsSection";
+import { getBrandCopy } from "@/config/brand";
 import { getLatestChangelogEntry } from "@/utils/changelog";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const brandContent = getBrandCopy(locale);
+
+  return buildPageMetadata({
+    title: brandContent.siteName,
+    description: brandContent.description,
+    path: "/",
+    locale,
+    openGraph: {
+      siteName: brandContent.siteName,
+    },
+  });
+}
 
 export default async function Home() {
   const locale = await getLocaleFromCookies();
   const latestChangelog = await getLatestChangelogEntry();
   return (
-    <main className="relative min-h-screen overflow-hidden bg-neutral-950 text-white">
+    <main className="relative min-h-screen">
       <WebPageJsonLd />
-      <ParticleBackground />
       <HeroSection locale={locale} />
-      <div className="px-4 md:px-10 lg:px-16">
-        <UpdatesBanner
-          latestVersion={latestChangelog?.version}
-          latestDate={latestChangelog?.date}
-          summary={latestChangelog?.description}
-        />
-        <RecentToolsStrip tone="dark" className="mx-auto w-full max-w-5xl" />
-      </div>
-      <AboutSection locale={locale} />
+      <PopularToolsSection locale={locale} />
       <UseCasesSection locale={locale} />
-      <CommentsSection locale={locale} />
+      <ChangelogSection locale={locale} latest={latestChangelog} />
     </main>
   );
 }

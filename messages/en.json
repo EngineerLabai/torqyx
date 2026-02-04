@@ -1,0 +1,812 @@
+{
+    "nav":  {
+                "labels":  {
+                               "sectionCalculators":  "Calculators",
+                               "sectionTools":  "Tools",
+                               "sectionCommunity":  "Community",
+                               "sectionContact":  "Contact",
+                               "sectionGeneral":  "General",
+                               "linkGearCalculators":  "Gear Calculators",
+                               "linkToolLibrary":  "Calculator Library",
+                               "linkTorquePower":  "Torque / Power",
+                               "linkProjectHub":  "Project Hub",
+                               "linkQualityTools":  "Quality Tools",
+                               "linkFixtureTools":  "Fixture Tools",
+                               "linkCommunity":  "Community",
+                               "linkQa":  "Q\u0026A",
+                               "linkSupport":  "Get in Touch",
+                               "linkHome":  "Home"
+                           },
+                "descriptions":  {
+                                     "sectionCalculators":  "Gear, torque, force, and mechanical calculators.",
+                                     "sectionTools":  "Templates, guides, and project tools.",
+                                     "sectionCommunity":  "Community discussions and knowledge sharing.",
+                                     "sectionContact":  "Feedback and support channels."
+                                 },
+                "badges":  {
+                               "new":  "New",
+                               "fresh":  "Updated"
+                           }
+            },
+    "languageSwitcher":  {
+                             "trLabel":  "Turkish",
+                             "enLabel":  "English"
+                         },
+    "authButtons":  {
+                        "login":  "Sign in",
+                        "premium":  "Join the waitlist",
+                        "userFallback":  "User",
+                        "logout":  "Sign out",
+                        "unavailable":  "Auth is unavailable right now."
+                    },
+    "home":  {
+                 "hero":  {
+                              "title":  "Professional mechanical calculations, made clear.",
+                              "subtitle":  "Engineering Calculators \u0026 Visual Analysis Lab",
+                              "description":  "Premium-ready calculators, visual checks, and methodical notes for fast, reliable decisions.",
+                              "ctaPrimary":  "Go to Calculators",
+                              "ctaSecondary":  "Sanity Check Lab",
+                              "imageAlt":  "Engineering dashboard with charts, cards, and calculation tiles"
+                          },
+                 "popularTools":  {
+                                      "kicker":  "Popular tools",
+                                      "title":  "Most used calculators",
+                                      "description":  "Six quick-start tools to jump into sizing, checks, and conversions.",
+                                      "cta":  "Open tool library",
+                                      "defaultCategory":  "General"
+                                  },
+                 "about":  {
+                               "kicker":  "About",
+                               "title":  "A methodology-first engineering workspace",
+                               "lead":  "A methodology-first workspace for practical engineering decisions and repeatable calculations.",
+                               "cardOneTitle":  "Methodology / Flow",
+                               "cardOneBody":  "Break the problem into steps, define assumptions, and follow a consistent calculation path.",
+                               "cardTwoTitle":  "Manual + Visual",
+                               "cardTwoBody":  "Use formulas, tables, and visual cues so the reasoning stays clear and auditable."
+                           },
+                 "useCases":  {
+                                  "kicker":  "What is it for?",
+                                  "title":  "Where the lab helps",
+                                  "lead":  "Short, focused flows for the most common engineering decisions.",
+                                  "items":  [
+                                                {
+                                                    "title":  "Validate calculations",
+                                                    "description":  "Check formulas, units, and assumptions in minutes."
+                                                },
+                                                {
+                                                    "title":  "Make decisions faster",
+                                                    "description":  "Use consistent inputs and visual cards to reduce back-and-forth."
+                                                },
+                                                {
+                                                    "title":  "Keep method notes",
+                                                    "description":  "Capture small checklists and references for repeatable work."
+                                                }
+                                            ]
+                              },
+                 "changelog":  {
+                                    "kicker":  "New",
+                                    "title":  "Latest updates",
+                                    "description":  "New tools and fixes, summarized for quick review.",
+                                    "latestLabel":  "Latest release",
+                                    "ctaPrimary":  "View changelog",
+                                    "ctaSecondary":  "Read the blog",
+                                    "empty":  "No updates yet. The first release note will land soon."
+                                }
+             },
+    "pages":  {
+                  "tools":  {
+                                "badge":  "Tool Library",
+                                "title":  "All tools in one place",
+                                "description":  "Filter calculators, packages, and guides, then open what you need.",
+                                "imageAlt":  "Tool library overview with filters and calculator cards"
+                            },
+                  "sanityCheck":  {
+                                      "badge":  "Engineering Sanity Check Lab",
+                                      "title":  "Engineering Sanity Check Lab",
+                                      "description":  "Validate variables, units, and formulas on one screen.",
+                                      "howToTitle":  "How it works",
+                                      "howToSteps":  [
+                                                         "Add variables with units and ranges.",
+                                                         "Write the formula and set expected output unit.",
+                                                         "Run sweep or Monte Carlo to inspect sensitivity."
+                                                     ],
+                                      "tabs":  {
+                                                    "sweep":  "Sensitivity Sweep",
+                                                    "monteCarlo":  "Monte Carlo"
+                                                }
+                                  },
+                  "guides":  {
+                                 "badge":  "Guides",
+                                 "title":  "Step-by-step calculation and application guides",
+                                 "description":  "Practical notes for material selection, quality checks, and production flows.",
+                                 "imageAlt":  "Guides library with categories and highlighted cards",
+                                 "empty":  "No guides published yet.",
+                                 "countLabel":  "{count} guides",
+                                 "readingTime":  "{count} min read",
+                                 "fallbackCategory":  "Other",
+                                 "back":  "Back to guides",
+                                 "tocTitle":  "Contents",
+                                 "tocEmpty":  "This guide has no headings yet."
+                             },
+                  "glossary":  {
+                                   "badge":  "Glossary",
+                                   "title":  "Technical terms and short definitions",
+                                   "description":  "Key concepts from gear, torque, and manufacturing terminology in one place.",
+                                   "imageAlt":  "Glossary list of technical terms with categories",
+                                   "empty":  "No terms published yet.",
+                                   "readingTime":  "{count} min read",
+                                   "back":  "Back to glossary",
+                                   "definitionTitle":  "Definition",
+                                   "formulaTitle":  "Formulas",
+                                   "formulaEmpty":  "No formulas added for this term.",
+                                   "relatedTitle":  "Related resources",
+                                   "relatedDescription":  "Sources with similar tags.",
+                                   "relatedEmpty":  "No related content found.",
+                                   "relatedBlog":  "Blog",
+                                   "relatedGuides":  "Guides",
+                                   "relatedTools":  "Calculators",
+                                   "readCta":  "Read",
+                                   "openToolCta":  "Open calculator"
+                               },
+                  "categories":  {
+                                     "badge":  "Category",
+                                     "description":  "Blog posts, guides, and calculators under this category.",
+                                     "blogTitle":  "Blog",
+                                     "blogDesc":  "Blog posts in this category.",
+                                     "guidesTitle":  "Guides",
+                                     "guidesDesc":  "Guides in this category.",
+                                     "toolsTitle":  "Calculators",
+                                     "toolsDesc":  "Calculators in this category.",
+                                     "relatedTagsTitle":  "Related tags",
+                                     "relatedTagsEmpty":  "No related tags found.",
+                                     "contentEmpty":  "No content found in this category.",
+                                     "toolsEmpty":  "No calculators found in this category.",
+                                     "readCta":  "Read",
+                                     "openToolCta":  "Open calculator",
+                                     "readingTimeShort":  "{count} min"
+                                 },
+                  "tags":  {
+                               "badge":  "Tag",
+                               "description":  "Blog posts, guides, and calculators related to this tag.",
+                               "blogTitle":  "Blog",
+                               "blogDesc":  "Blog posts for this tag.",
+                               "guidesTitle":  "Guides",
+                               "guidesDesc":  "Guides for this tag.",
+                               "toolsTitle":  "Calculators",
+                               "toolsDesc":  "Calculators for this tag.",
+                               "relatedTagsTitle":  "Related tags",
+                               "relatedTagsEmpty":  "No other tags found.",
+                               "contentEmpty":  "No content found for this tag.",
+                               "toolsEmpty":  "No calculators found for this tag.",
+                               "readCta":  "Read",
+                               "openToolCta":  "Open calculator",
+                               "readingTimeShort":  "{count} min"
+                           },
+                  "qualityTools":  {
+                                       "badge":  "Quality tools: 5W1H - 5 Why - 8D - Kaizen - Poka-Yoke",
+                                       "title":  "Digital templates for problem definition and root cause actions",
+                                       "description":  "Simple quality templates for definition, root cause, and action follow-up.",
+                                       "typical":  "Typical use",
+                                       "free":  "Free",
+                                       "active":  "Active (Beta)",
+                                       "planned":  "Planned",
+                                       "basic":  "Basic level",
+                                       "advanced":  "Advanced level",
+                                       "premiumBadge":  "Premium (waitlist)",
+                                       "openTool":  "Open tool",
+                                       "comingSoon":  "Coming soon",
+                                       "footerActive":  "Interactive form available (draft).",
+                                       "footerPlanned":  "Template and form design in progress."
+                                   },
+                  "fixtureTools":  {
+                                       "badge":  "Fixture tools",
+                                       "title":  "Practical cards for locating, clamping, and base plates",
+                                       "description":  "Quick calculators and checklists for fixture design.",
+                                       "focus":  "Focus",
+                                       "active":  "Active (Beta)",
+                                       "planned":  "Planned",
+                                       "openTool":  "Open tool",
+                                       "comingSoon":  "Coming soon",
+                                       "footerActive":  "Interactive card available.",
+                                       "footerPlanned":  "Card in preparation."
+                                   },
+                  "projectHub":  {
+                                     "badgeTitle":  "Project Hub",
+                                     "badgeSubtitle":  "Project - RFQ - Part / Revision Tracking",
+                                     "title":  "Manage projects, RFQs, and revisions in one place",
+                                     "description":  "Track projects, RFQ processes, and part revisions from a single view.",
+                                     "cta":  "Open module"
+                                 },
+                  "savedCalculations":  {
+                                            "kicker":  "Saved Calculations",
+                                            "title":  "My saved calculations",
+                                            "description":  "Review, reopen, or clear the calculations you saved before."
+                                        },
+                  "blog":  {
+                               "badge":  "Blog",
+                               "title":  "Calculation and analysis focused posts",
+                               "description":  "Short pieces for manual calculation, visual analysis, and methodical notes.",
+                               "imageAlt":  "Blog feed with articles, filters, and tags",
+                               "back":  "Back to blog",
+                               "tocTitle":  "Contents",
+                               "tocEmpty":  "This post has no headings yet.",
+                               "relatedPostsTitle":  "Related posts",
+                               "relatedToolsTitle":  "Related calculators",
+                               "relatedToolsCta":  "Open calculator",
+                               "searchLabel":  "Search",
+                               "searchPlaceholder":  "Title, tag, or category...",
+                               "searchButton":  "Search",
+                               "clearSearch":  "Clear search",
+                               "categoriesTitle":  "Categories",
+                               "allCategories":  "All categories",
+                               "tagsTitle":  "Tags",
+                               "allTags":  "All tags",
+                               "summary":  "{start}-{end} / {total} posts",
+                               "pageSummary":  "Page {page} / {total}",
+                               "clearFilters":  "Clear all filters",
+                               "empty":  "No posts match your filters.",
+                               "readingTime":  "{count} min read",
+                               "prev":  "Previous",
+                               "next":  "Next"
+                           },
+                  "community":  {
+                                    "badge":  "Community",
+                                    "title":  "Community discussions and threads",
+                                    "description":  "Start technical threads, share experience, and keep engineering knowledge flowing.",
+                                    "imageAlt":  "Community discussion cards and thread highlights",
+                                    "sampleBadge":  "Sample",
+                                    "form":  {
+                                                 "title":  "Start a new thread",
+                                                 "description":  "Open a topic, share context, and invite the community to help.",
+                                                 "titleLabel":  "Title",
+                                                 "titlePlaceholder":  "e.g., 3-2-1 locating for a 3-axis fixture",
+                                                 "categoryLabel":  "Category",
+                                                 "categories":  [
+                                                                    "Fixture / Tooling",
+                                                                    "Quality / Measurement",
+                                                                    "Material / Heat Treatment",
+                                                                    "Project / Process",
+                                                                    "General"
+                                                                ],
+                                                 "bodyLabel":  "Description",
+                                                 "bodyPlaceholder":  "Add context, measurements, links, or quick sketches...",
+                                                 "helper":  "Avoid sharing sensitive data.",
+                                                 "submit":  "Open thread"
+                                             },
+                                    "stream":  {
+                                                   "kicker":  "Live",
+                                                   "title":  "Community comment stream",
+                                                   "description":  "See recent comments in real time and add your own note."
+                                               },
+                                    "recent":  {
+                                                   "title":  "Recent threads",
+                                                   "countLabel":  "{count} threads",
+                                                   "replyCount":  "{count} replies"
+                                               },
+                                    "thread":  {
+                                                   "backLabel":  "<- Back to community",
+                                                   "authorLabel":  "Posted by {author}",
+                                                   "repliesTitle":  "Replies",
+                                                   "replyLabel":  "Your reply",
+                                                   "replyPlaceholder":  "Share your experience, calculation, or suggestion...",
+                                                   "replyCta":  "Post reply",
+                                                   "missingTitle":  "Thread not found",
+                                                   "missingDescription":  "This community thread could not be found."
+                                               }
+                                },
+                  "support":  {
+                                  "badge":  "Support",
+                                  "title":  "Technical support and guidance",
+                                  "description":  "Submit a short request and our team will follow up quickly.",
+                                  "imageAlt":  "Support form with request details and attachment field",
+                                  "tipsTitle":  "Tips for a better request",
+                                  "tips":  [
+                                               "Add a short subject line (e.g., \"M12 10.9 bolt torque\").",
+                                               "Share materials, loads, limits, or standards if available."
+                                           ]
+                              },
+                  "premium":  {
+                                  "badge":  "Premium",
+                                  "title":  "Premium package preview",
+                                  "description":  "Payments are not open yet. Join the waitlist to follow upcoming features.",
+                                  "imageAlt":  "Premium roadmap cards with feature highlights"
+                              },
+                  "changelog":  {
+                                    "badge":  "Changelog",
+                                    "title":  "Updates and changes",
+                                    "description":  "New tools, fixes, and general changes are listed here.",
+                                    "emptyTitle":  "No changelog entries yet.",
+                                    "emptyDescription":  "The first update will be added soon.",
+                                    "addedTitle":  "Added tools",
+                                    "addedEmpty":  "No new tools in this release.",
+                                    "fixesTitle":  "Fixes",
+                                    "fixesEmpty":  "No fixes logged for this release."
+                                },
+                  "notFound":  {
+                                   "title":  "Page not found",
+                                   "description":  "This link may have been removed or moved. Use the Calculator Library to keep exploring.",
+                                   "primaryCta":  "Calculator Library",
+                                   "secondaryCta":  "Back to home"
+                               }
+              },
+    "components":  {
+                       "updatesBanner":  {
+                                             "title":  "New updates are live",
+                                             "cta":  "View changelog",
+                                             "dismiss":  "Dismiss"
+                                         },
+                       "premiumCTA":  {
+                                          "badge":  "Premium waitlist",
+                                          "title":  "Premium package",
+                                          "description":  "Payments are not open. We share the roadmap via the waitlist.",
+                                          "ctaPrimary":  "Join the waitlist",
+                                          "ctaSecondary":  "View details",
+                                          "supportNote":  "Opens the support form.",
+                                          "packageTitle":  "Package scope (planned)",
+                                          "packageItems":  [
+                                                               "Detailed torque and gear tables",
+                                                               "Advanced mechanical calculators",
+                                                               "PDF/Excel exports (RFQ, quality tools, project lists)",
+                                                               "Multi-device access and saved projects",
+                                                               "Material and coating suggestion cards"
+                                                           ],
+                                          "statusTitle":  "Status",
+                                          "statusBody":  "There is no payment flow yet. We collect interest and prioritize development based on waitlist demand.",
+                                          "stepsTitle":  "What happens next",
+                                          "steps":  [
+                                                        "Join the waitlist",
+                                                        "Short needs questionnaire",
+                                                       "Beta access opens in small batches"
+                                                   ]
+                                      },
+                       "supportForm":  {
+                                           "submit":  {
+                                                          "idle":  "Send request",
+                                                          "uploading":  "Uploading file...",
+                                                          "submitting":  "Submitting..."
+                                                      },
+                                           "fields":  {
+                                                          "name":  {
+                                                                       "label":  "Full name",
+                                                                       "placeholder":  "e.g., Alex Stone"
+                                                                   },
+                                                          "email":  {
+                                                                        "label":  "Email",
+                                                                        "placeholder":  "name@company.com"
+                                                                    },
+                                                          "message":  {
+                                                                          "label":  "Request details",
+                                                                          "placeholder":  "Context, inputs, standards, constraints..."
+                                                                      },
+                                                          "attachment":  {
+                                                                             "label":  "Attach file (optional)",
+                                                                             "helper":  "File uploads to Firebase Storage and links to the ticket.",
+                                                                             "unavailable":  "File upload is disabled. You can submit text-only."
+                                                                         }
+                                                      },
+                                           "errors":  {
+                                                          "fileTooLarge":  "File size exceeds 10 MB.",
+                                                          "uploadUnavailable":  "File upload is currently unavailable.",
+                                                          "required":  "Please fill all required fields.",
+                                                          "supportUnavailable":  "Support is not ready yet. Please try again later.",
+                                                          "submitFailed":  "Request could not be sent."
+                                                      },
+                                           "success":  "Request received. We will get back to you soon."
+                                       },
+                       "commentStream":  {
+                                             "kicker":  "Live",
+                                             "title":  "Community stream",
+                                             "realtimeBadge":  "Realtime",
+                                             "demoBadge":  "Demo mode",
+                                             "authChecking":  "Checking auth...",
+                                             "authUnavailable":  "Auth unavailable",
+                                             "login":  "Sign in with Google",
+                                             "loginPending":  "Signing in...",
+                                             "logout":  "Sign out",
+                                             "logoutPending":  "Signing out...",
+                                             "placeholders":  {
+                                                                  "loading":  "Connecting...",
+                                                                  "demo":  "Leave a demo comment...",
+                                                                  "authUnavailable":  "Auth is unavailable right now.",
+                                                                  "signedIn":  "Write your note...",
+                                                                  "signedOut":  "Sign in to comment."
+                                                              },
+                                             "helpers":  {
+                                                             "loading":  "Comment system is loading.",
+                                                             "demo":  "Demo comments are not saved.",
+                                                             "authUnavailable":  "Authentication is currently disabled.",
+                                                             "signedIn":  "Comments will be saved to Firestore.",
+                                                             "signedOut":  "Please sign in first."
+                                                         },
+                                             "submit":  {
+                                                            "idle":  "Send comment",
+                                                            "saving":  "Sending..."
+                                                        },
+                                             "errors":  {
+                                                            "loadFailed":  "Comments could not be loaded. Please try again.",
+                                                            "loginFailed":  "Sign-in failed. Please try again.",
+                                                            "logoutFailed":  "Sign-out failed. Please try again.",
+                                                            "saveFailed":  "Comment could not be saved. Please try again."
+                                                        },
+                                             "demoUser":  "Demo User",
+                                             "userFallback":  "User",
+                                             "loading":  "Loading comments...",
+                                             "empty":  "Be the first to comment.",
+                                             "newLabel":  "New"
+                                         },
+                       "toolLibrary":  {
+                                           "scenarioSection":  {
+                                                                   "kicker":  "What do you want to do?",
+                                                                   "title":  "Scenario-based shortcuts",
+                                                                   "description":  "Reach the right calculators quickly based on common needs."
+                                                               },
+                                           "scenarios":  [
+                                                             {
+                                                                 "id":  "convert",
+                                                                 "title":  "I need to convert a value",
+                                                                 "description":  "Quick unit conversion and basic checks.",
+                                                                 "links":  [
+                                                                               {
+                                                                                   "label":  "Unit Converter",
+                                                                                   "href":  "/tools/unit-converter"
+                                                                               }
+                                                                           ]
+                                                             },
+                                                             {
+                                                                 "id":  "calculate",
+                                                                 "title":  "I need to run an engineering calculation",
+                                                                 "description":  "Fast access to core calculators with manual inputs.",
+                                                                 "links":  [
+                                                                               {
+                                                                                   "label":  "Bolt Torque",
+                                                                                   "href":  "/tools/bolt-calculator"
+                                                                               },
+                                                                               {
+                                                                                   "label":  "Tensile Stress",
+                                                                                   "href":  "/tools/simple-stress"
+                                                                               },
+                                                                               {
+                                                                                   "label":  "Heat Flow",
+                                                                                   "href":  "/tools/basic-engineering"
+                                                                               }
+                                                                           ]
+                                                             },
+                                                             {
+                                                                 "id":  "visualize",
+                                                                 "title":  "I want to visualize a chart",
+                                                                 "description":  "Generate charts or curves from input parameters.",
+                                                                 "links":  [
+                                                                               {
+                                                                                   "label":  "Spring Force Chart",
+                                                                                   "href":  "/tools/param-chart"
+                                                                               },
+                                                                               {
+                                                                                   "label":  "Gear Calculators",
+                                                                                   "href":  "/tools/gear-design/calculators"
+                                                                               }
+                                                                           ]
+                                                             }
+                                                         ],
+                                           "requestSection":  {
+                                                                  "title":  "Need a new calculator?",
+                                                                  "description":  "Tell us the inputs and outputs. We will prioritize the most requested tools.",
+                                                                  "cta":  "Request a tool",
+                                                                  "ctaAria":  "Request a tool"
+                                                              },
+                                           "filterSection":  {
+                                                                 "title":  "Filter",
+                                                                 "loading":  "Filtering...",
+                                                                 "description":  "Filter tools by type, category, and tag.",
+                                                                 "clear":  "Clear filters",
+                                                                 "apply":  "Apply filters",
+                                                                 "note":  "Apply filters to refresh the results.",
+                                                                 "typeLabel":  "Type",
+                                                                 "categoryLabel":  "Category",
+                                                                 "allCategories":  "All categories",
+                                                                 "tagLabel":  "Tag",
+                                                                 "allTags":  "All tags",
+                                                                 "searchLabel":  "Quick search",
+                                                                 "searchPlaceholder":  "e.g., torque, pressure, bolt",
+                                                                 "searchAria":  "Search tools"
+                                                             },
+                                           "emptyState":  {
+                                                              "title":  "No matching tools found.",
+                                                              "description":  "Try another category, tag, or search term.",
+                                                              "reset":  "Reset filters"
+                                                          },
+                                           "labels":  {
+                                                          "typeFilter":  {
+                                                                             "All":  "All types",
+                                                                             "calculator":  "Calculator",
+                                                                             "bundle":  "Package",
+                                                                             "guide":  "Guide"
+                                                                         },
+                                                          "type":  {
+                                                                       "calculator":  "Calculator",
+                                                                       "bundle":  "Package",
+                                                                       "guide":  "Guide"
+                                                                   },
+                                                          "category":  {
+                                                                           "Mechanical":  "Mechanical",
+                                                                           "Automotive":  "Automotive",
+                                                                           "General Engineering":  "General Engineering"
+                                                                       },
+                                                          "tag":  {
+                                                                      "pressure":  "pressure",
+                                                                      "torque":  "torque",
+                                                                      "flow":  "flow",
+                                                                      "thermal":  "thermal",
+                                                                      "units":  "units",
+                                                                      "validation":  "validation",
+                                                                      "sensitivity":  "sensitivity",
+                                                                      "montecarlo":  "monte carlo",
+                                                                      "engineering":  "engineering"
+                                                                  },
+                                                          "cta":  {
+                                                                      "calculator":  "Open calculator",
+                                                                      "bundle":  "Open package",
+                                                                      "guide":  "Open guide"
+                                                                  },
+                                                          "generalCategory":  "General",
+                                                          "openAria":  "Open {title}"
+                                                      }
+                                       },
+                       "sanityCheck":  {
+                                            "session":  {
+                                                            "titleLabel":  "Session title",
+                                                            "untitled":  "Untitled session",
+                                                            "save":  "Save",
+                                                            "saveAs":  "Save new",
+                                                            "savedTitle":  "Saved sessions",
+                                                            "load":  "Load",
+                                                            "delete":  "Delete",
+                                                            "share":  "Copy share link",
+                                                            "shareCopied":  "Link copied.",
+                                                            "shareFailed":  "Copy failed. You can copy manually.",
+                                                            "export":  "Open report",
+                                                            "lastSaved":  "Last saved",
+                                                            "restoreNotice":  "Session restored from shared link."
+                                                        },
+                                            "variableTable":  {
+                                                                  "title":  "Variables",
+                                                                  "add":  "Add variable",
+                                                                  "symbol":  "Symbol",
+                                                                  "name":  "Name",
+                                                                  "defaultName":  "Variable",
+                                                                  "description":  "Description",
+                                                                  "value":  "Value",
+                                                                  "unit":  "Unit",
+                                                                  "unitPlaceholder":  "e.g., N m",
+                                                                  "min":  "Min",
+                                                                  "max":  "Max",
+                                                                  "distribution":  "Distribution",
+                                                                  "distributionNone":  "Manual",
+                                                                  "distributionUniform":  "Uniform",
+                                                                  "distributionNormal":  "Normal",
+                                                                  "remove":  "Remove"
+                                                              },
+                                            "formulaEditor":  {
+                                                                 "title":  "Formula",
+                                                                 "description":  "Use symbols defined above. You can write P = T * w.",
+                                                                 "placeholder":  "e.g., P = T * w"
+                                                             },
+                                            "resultPanel":  {
+                                                                "title":  "Result",
+                                                                "outputLabel":  "Output",
+                                                                "computedUnit":  "Computed unit",
+                                                                "expectedUnit":  "Expected unit",
+                                                                "unitMismatch":  "Unit mismatch: expected {expected}, got {actual}",
+                                                                "unitMatch":  "Unit check OK",
+                                                                "dimensionless":  "dimensionless",
+                                                                "errorTitle":  "Formula error",
+                                                                "errorBody":  "Check symbols, units, and syntax."
+                                                            },
+                                            "sweepPanel":  {
+                                                              "title":  "Sensitivity sweep",
+                                                              "description":  "Sweep one variable from min to max and plot the result.",
+                                                              "variableLabel":  "Variable",
+                                                              "pointsLabel":  "Points",
+                                                              "run":  "Run sweep",
+                                                              "chartTitle":  "Sweep chart",
+                                                              "resultLabel":  "Result",
+                                                              "empty":  "Run sweep to see the chart.",
+                                                              "rangeMissing":  "Set min/max for the selected variable."
+                                                          },
+                                            "monteCarloPanel":  {
+                                                                    "title":  "Monte Carlo",
+                                                                    "description":  "Simulate with distributions and inspect output spread.",
+                                                                    "iterationsLabel":  "Iterations",
+                                                                    "run":  "Run simulation",
+                                                                    "running":  "Running...",
+                                                                    "chartTitle":  "Histogram",
+                                                                    "countLabel":  "Count",
+                                                                    "statsTitle":  "Summary statistics",
+                                                                    "mean":  "Mean",
+                                                                    "stdev":  "Std dev",
+                                                                    "p05":  "P05",
+                                                                    "p50":  "P50",
+                                                                    "p95":  "P95",
+                                                                    "empty":  "Run simulation to see results."
+                                                                },
+                                            "report":  {
+                                                           "title":  "Sanity Check Report",
+                                                           "print":  "Print / Save PDF",
+                                                           "missing":  "No session data provided.",
+                                                           "variablesTitle":  "Variables",
+                                                           "formulaTitle":  "Formula",
+                                                           "resultTitle":  "Result",
+                                                           "sweepTitle":  "Sensitivity sweep",
+                                                           "monteCarloTitle":  "Monte Carlo"
+                                                       },
+                                            "errorBoundary":  {
+                                                                  "title":  "Something went wrong.",
+                                                                  "description":  "Check the formula and inputs, then try again.",
+                                                                  "cta":  "Reload"
+                                                              }
+                                        },
+                       "toolLinkSection":  {
+                                               "similar":  {
+                                                               "eyebrow":  "Similar calculators",
+                                                               "title":  "Related calculators",
+                                                               "description":  "Explore calculators with similar categories or tags.",
+                                                               "cta":  "Open calculator"
+                                                           },
+                                               "helpful":  {
+                                                               "eyebrow":  "Other picks",
+                                                               "title":  "These might help too",
+                                                               "description":  "Review alternative calculators for adjacent needs.",
+                                                               "cta":  "Open calculator"
+                                                           }
+                                           },
+                       "toolDocTabs":  {
+                                           "tabsTitle":  "Calculator tabs",
+                                           "tabs":  {
+                                                        "calculator":  "Calculator",
+                                                        "explanation":  "Explanation",
+                                                        "examples":  "Examples"
+                                                    },
+                                           "explanationTitle":  "Calculation explanation",
+                                           "examplesTitle":  "Examples",
+                                           "loadingTitle":  "Documentation is preparing",
+                                           "loadingBody":  "If it stays here, this calculator may not have explanation/examples yet.",
+                                           "docsFailedTitle":  "Documentation unavailable",
+                                           "docsFailedBody":  "We could not load the explanation and examples right now.",
+                                           "docsMissingTitle":  "Documentation coming soon",
+                                           "docsMissingBody":  "Documentation for this tool is coming soon.",
+                                           "explanationEmptyTitle":  "Explanation (coming soon)",
+                                           "explanationEmptyBody":  "This calculator does not have an explanation card yet. You can still use it.",
+                                           "examplesEmptyTitle":  "Examples (coming soon)",
+                                           "examplesEmptyBody":  "No examples are available yet. We will add sample inputs soon.",
+                                           "examplesEmptyHint":  "Examples are being prepared.",
+                                           "inputs":  "Inputs",
+                                           "outputs":  "Outputs",
+                                           "note":  "Note",
+                                           "guidesTitle":  "Guides",
+                                           "guidesHeading":  "Related guides",
+                                           "guidesDesc":  "Browse guides with similar tags.",
+                                           "glossaryTitle":  "Glossary",
+                                           "glossaryHeading":  "Related terms",
+                                           "glossaryDesc":  "Terms that share the same concepts as this calculator.",
+                                           "read":  "Read"
+                                       },
+                       "comparePanel":  {
+                                            "title":  "Compare mode",
+                                            "description":  "Build 2-3 scenarios with the same input set and compare results side by side.",
+                                            "scenario":  "Scenario",
+                                            "label":  "Optional label",
+                                            "add":  "Add scenario",
+                                            "remove":  "Remove",
+                                            "reset":  "Reset",
+                                            "share":  "Share Link",
+                                            "tableTitle":  "Comparison table",
+                                            "metricLabel":  "Metric",
+                                            "emptyMetrics":  "No comparable metrics available.",
+                                            "shareSuccess":  "Link copied.",
+                                            "shareFail":  "Copy failed. You can copy the link manually.",
+                                            "separator":  " - "
+                                        },
+                       "genericToolPage":  {
+                                               "inputs":  "Inputs",
+                                               "results":  "Results",
+                                               "formula":  "Formula",
+                                               "chart":  "Chart",
+                                               "chartEmpty":  "Provide valid values to render the chart.",
+                                               "resultEmpty":  "Fix the highlighted inputs to see results.",
+                                               "required":  "Required field.",
+                                               "invalidNumber":  "Enter a valid number.",
+                                               "invalidOption":  "Select a valid option.",
+                                               "min":  "Min",
+                                               "max":  "Max"
+                                           },
+        "dashboard":  {
+                          "badge":  "Dashboard",
+                          "title":  "Your dashboard",
+                          "description":  "Favorites, recent work, and recommendations in one place.",
+                          "imageAlt":  "Dashboard overview with saved, recent, and recommended tools",
+                          "favorites":  "Favorites",
+                                         "favoritesDescription":  "Pinned calculators you want to keep close.",
+                                         "favoritesEmpty":  "You have no favorites yet.",
+                                         "recents":  "Recently used",
+                                         "recentsDescription":  "Pick up where you left off.",
+                                         "recentsEmpty":  "No calculators opened yet.",
+                                         "recommended":  "Recommended",
+                                         "recommendedDescription":  "Based on categories or tags from your recent activity.",
+                                         "recommendedEmpty":  "Add favorites to see recommendations.",
+                                         "open":  "Open calculator",
+                                         "lastUsed":  "Last used"
+                                     },
+                       "recentTools":  {
+                                           "title":  "Recently used",
+                                           "description":  "Jump back into the calculators you opened last.",
+                                           "empty":  "No recent calculators yet.",
+                                           "open":  "Open {title}",
+                                           "generalCategory":  "General"
+                                       },
+                       "savedCalculations":  {
+                                                 "title":  "Saved calculations",
+                                                 "description":  "Saved items live only on this device. Reopen or delete entries from the list below.",
+                                                 "loading":  "Loading saved items...",
+                                                 "emptyTitle":  "No saved calculations yet.",
+                                                 "emptyHint":  "Use the \"Save\" button inside a calculator to create one.",
+                                                 "toolLibrary":  "Go to Calculator Library",
+                                                 "reopen":  "Open again",
+                                                 "delete":  "Delete",
+                                                 "details":  "Input and result details",
+                                                 "inputs":  "Inputs",
+                                                 "outputs":  "Result"
+                                             },
+                       "requestToolForm":  {
+                                               "title":  "Request a tool",
+                                               "description":  "Describe the problem and the input/output structure to help us build the calculator.",
+                                               "back":  "Back to Tool Library",
+                                               "submit":  "Submit request",
+                                               "github":  "Create GitHub Issue",
+                                               "copy":  "Copy",
+                                               "copied":  "Copied to clipboard.",
+                                               "copyFail":  "Copy failed. You can copy the text manually.",
+                                               "history":  "Submitted requests",
+                                               "emptyHistory":  "No requests yet.",
+                                               "storageNote":  "Stored locally in your browser.",
+                                               "required":  "This field is required.",
+                                               "fields":  {
+                                                              "problem":  "Problem / Use case",
+                                                              "inputs":  "Inputs (input list)",
+                                                              "outputs":  "Expected output (result)",
+                                                              "standards":  "Units / standards",
+                                                              "examples":  "Example values"
+                                                          }
+                                           },
+                       "toolFavoriteButton":  {
+                                                  "addLabel":  "Add to favorites",
+                                                  "removeLabel":  "Favorited",
+                                                  "addAria":  "Add {title} to favorites",
+                                                  "removeAria":  "Remove {title} from favorites",
+                                                  "fallbackTitle":  "tool"
+                                              },
+                       "toolHistory":  {
+                                           "title":  "Saved calculations",
+                                           "description":  "Saved calculations live on this device only. The last {count} entries are kept.",
+                                           "viewAll":  "View all saved",
+                                           "save":  "Save",
+                                           "clear":  "Clear saved",
+                                           "errorNoResult":  "You cannot save without a valid result.",
+                                           "hintSave":  "Save the current result with one click.",
+                                           "feedback":  {
+                                                            "storeError":  "Save failed. Browser storage may be full.",
+                                                            "saveSuccess":  "Saved successfully.",
+                                                            "saveError":  "Save failed.",
+                                                            "clearSuccess":  "Saved entries cleared.",
+                                                            "clearError":  "Failed to clear saved entries."
+                                                        },
+                                           "loading":  "Loading saved entries...",
+                                           "empty":  "No saved calculations yet. Use the button above to save the result.",
+                                           "inputs":  "Inputs",
+                                           "outputs":  "Result"
+                                       }
+                   },
+    "common":  {
+                   "yes":  "Yes",
+                   "no":  "No",
+                   "general":  "General"
+               }
+}

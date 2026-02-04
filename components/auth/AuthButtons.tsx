@@ -3,28 +3,27 @@
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useAuth } from "./AuthProvider";
+import { getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 export default function AuthButtons() {
-  const { user, loading, loginWithGoogle, logout } = useAuth();
+  const { user, loading, available, error, loginWithGoogle, logout } = useAuth();
   const { locale } = useLocale();
-
-  const copy =
-    locale === "en"
-      ? {
-          login: "Sign in",
-          premium: "Join the waitlist",
-          userFallback: "User",
-          logout: "Sign out",
-        }
-      : {
-          login: "Giris Yap",
-          premium: "Premium bekleme listesi",
-          userFallback: "Kullanici",
-          logout: "Cikis",
-        };
+  const copy = getMessages(locale).authButtons;
+  const premiumHref = withLocalePrefix("/premium", locale);
 
   if (loading) {
     return <div className="h-9 w-28 animate-pulse rounded-full bg-white/20" />;
+  }
+
+  if (!available) {
+    const detail = process.env.NODE_ENV !== "production" && error ? ` (${error})` : "";
+    return (
+      <div className="rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-[11px] font-semibold text-amber-700">
+        {copy.unavailable}
+        {detail}
+      </div>
+    );
   }
 
   if (!user) {
@@ -39,7 +38,7 @@ export default function AuthButtons() {
         </button>
         <Link
           className="tap-target inline-flex items-center justify-center rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-500"
-          href="/premium"
+          href={premiumHref}
         >
           {copy.premium}
         </Link>

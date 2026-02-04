@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import ActionCard from "@/components/ui/ActionCard";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 const MAX_LINKS = 4;
@@ -23,6 +24,7 @@ const buildList = (primary: typeof toolCatalog, fallback: typeof toolCatalog) =>
 export default function ToolLinkSection() {
   const pathname = usePathname() ?? "";
   const { locale } = useLocale();
+  const copy = getMessages(locale).components.toolLinkSection;
 
   const { similarLinks, helpfulLinks } = useMemo(() => {
     const normalized = pathname.replace(/\/$/, "");
@@ -61,29 +63,27 @@ export default function ToolLinkSection() {
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-              {locale === "en" ? "Similar calculators" : "Benzer hesaplayicilar"}
+              {copy.similar.eyebrow}
             </p>
             <h2 className="text-lg font-semibold text-slate-900">
-              {locale === "en" ? "Related calculators" : "Ilgili hesaplayicilar"}
+              {copy.similar.title}
             </h2>
             <p className="text-sm text-slate-600">
-              {locale === "en"
-                ? "Explore calculators with similar categories or tags."
-                : "Ayni kategori veya benzer etiketlere sahip hesaplayicilari burada bulabilirsin."}
+              {copy.similar.description}
             </p>
           </div>
 
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {similarLinks.map((tool) => {
-              const copy = getToolCopy(tool, locale);
+              const toolCopy = getToolCopy(tool, locale);
               return (
                 <ActionCard
                   key={tool.id}
-                  title={copy.title}
-                  description={copy.description}
+                  title={toolCopy.title}
+                  description={toolCopy.description}
                   href={tool.href}
                   toolId={tool.id}
-                  ctaLabel={locale === "en" ? "Open calculator" : "Hesaplayiciyi Ac"}
+                  ctaLabel={copy.similar.cta}
                 />
               );
             })}
@@ -95,29 +95,27 @@ export default function ToolLinkSection() {
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-              {locale === "en" ? "Other picks" : "Diger oneriler"}
+              {copy.helpful.eyebrow}
             </p>
             <h2 className="text-lg font-semibold text-slate-900">
-              {locale === "en" ? "These might help too" : "Sunlar da isine yarayabilir"}
+              {copy.helpful.title}
             </h2>
             <p className="text-sm text-slate-600">
-              {locale === "en"
-                ? "Review alternative calculators for adjacent needs."
-                : "Yaklasik ihtiyaclar icin farkli hesaplayicilari gozden gecirebilirsin."}
+              {copy.helpful.description}
             </p>
           </div>
 
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {helpfulLinks.map((tool) => {
-              const copy = getToolCopy(tool, locale);
+              const toolCopy = getToolCopy(tool, locale);
               return (
                 <ActionCard
                   key={tool.id}
-                  title={copy.title}
-                  description={copy.description}
+                  title={toolCopy.title}
+                  description={toolCopy.description}
                   href={tool.href}
                   toolId={tool.id}
-                  ctaLabel={locale === "en" ? "Open calculator" : "Hesaplayiciyi Ac"}
+                  ctaLabel={copy.helpful.cta}
                 />
               );
             })}

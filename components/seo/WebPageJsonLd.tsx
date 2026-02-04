@@ -2,11 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
-import { BRAND_NAME, BRAND_TAGLINE } from "@/utils/brand";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getBrandCopy } from "@/config/brand";
 import { SITE_URL } from "@/utils/seo";
-
-const DEFAULT_TITLE = BRAND_NAME;
-const DEFAULT_DESCRIPTION = BRAND_TAGLINE;
 
 type WebPageJsonLdProps = {
   title?: string;
@@ -14,18 +12,21 @@ type WebPageJsonLdProps = {
 };
 
 export default function WebPageJsonLd({ title, description }: WebPageJsonLdProps) {
+  const { locale } = useLocale();
+  const brandContent = getBrandCopy(locale);
   const pathname = usePathname() ?? "/";
+
   const [meta, setMeta] = useState({
-    title: title ?? DEFAULT_TITLE,
-    description: description ?? DEFAULT_DESCRIPTION,
+    title: title ?? brandContent.siteName,
+    description: description ?? brandContent.description,
   });
 
   useEffect(() => {
     if (!title || !description) {
-      const docTitle = document.title || DEFAULT_TITLE;
+      const docTitle = document.title || brandContent.siteName;
       const metaDescription =
         document.querySelector('meta[name="description"]')?.getAttribute("content") ??
-        DEFAULT_DESCRIPTION;
+        brandContent.description;
 
       Promise.resolve().then(() =>
         setMeta({
@@ -34,7 +35,7 @@ export default function WebPageJsonLd({ title, description }: WebPageJsonLdProps
         }),
       );
     }
-  }, [title, description]);
+  }, [title, description, brandContent]);
 
   const data = useMemo(
     () => ({
@@ -45,12 +46,12 @@ export default function WebPageJsonLd({ title, description }: WebPageJsonLdProps
       url: new URL(pathname, SITE_URL).toString(),
       isPartOf: {
         "@type": "WebSite",
-        name: DEFAULT_TITLE,
+        name: brandContent.siteName,
         url: SITE_URL,
       },
-      inLanguage: "tr-TR",
+      inLanguage: locale === "tr" ? "tr-TR" : "en-US",
     }),
-    [meta, pathname],
+    [meta, pathname, brandContent, locale],
   );
 
   return (

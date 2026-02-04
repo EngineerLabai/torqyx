@@ -1,7 +1,23 @@
 // app/project-hub/page.tsx
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
+import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const copy = getMessages(locale).pages.projectHub;
+  const brandContent = getBrandCopy(locale);
+
+  return buildPageMetadata({
+    title: `${copy.badgeTitle} | ${brandContent.siteName}`,
+    description: copy.description,
+    path: "/project-hub",
+    locale,
+  });
+}
 
 type HubCardProps = {
   title: string;
@@ -73,23 +89,7 @@ const hubsByLocale = {
 
 export default async function ProjectHubPage() {
   const locale = await getLocaleFromCookies();
-  const copy =
-    locale === "en"
-      ? {
-          badgeTitle: "Project Hub",
-          badgeSubtitle: "Project · RFQ · Part / Revision Tracking",
-          title: "Manage projects, RFQs, and revisions in one place",
-          description: "Track projects, RFQ processes, and part revisions from a single view.",
-          cta: "Open module",
-        }
-      : {
-          badgeTitle: "Proje Merkezi",
-          badgeSubtitle: "Proje · RFQ · Parca / Revizyon Takibi",
-          title: "Proje, RFQ ve revizyonlari tek panelden yonet",
-          description: "Projeleri, RFQ teklif sureclerini ve parca revizyonlarini tek ekranda takip et.",
-          cta: "Modulu Ac",
-        };
-
+  const copy = getMessages(locale).pages.projectHub;
   const hubs = hubsByLocale[locale];
 
   return (

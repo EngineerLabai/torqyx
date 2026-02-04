@@ -1,15 +1,20 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import { extractToc, getContentBySlug, getContentList } from "@/utils/content";
-import { BRAND_NAME } from "@/utils/brand";
-import { DEFAULT_OG_IMAGE_META, buildCanonical, SITE_URL } from "@/utils/seo";
+import { getBrandCopy } from "@/config/brand";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { formatMessage, getMessages } from "@/utils/messages";
+import { buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
+import { buildPageMetadata } from "@/utils/metadata";
+import { withLocalePrefix } from "@/utils/locale-path";
 
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium" }).format(new Date(value));
+const formatDate = (value: string, locale: "tr" | "en") =>
+  new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
+    new Date(value),
+  );
 
 type GuidePageProps = {
   params: { slug: string };
@@ -20,50 +25,50 @@ export async function generateStaticParams() {
   return guides.map((guide) => ({ slug: guide.slug }));
 }
 
-export async function generateMetadata({ params }: GuidePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: GuidePageProps) {
   const guide = await getContentBySlug("guides", params.slug);
+  const locale = await getLocaleFromCookies();
+  const notFoundCopy = getMessages(locale).pages.notFound;
 
   if (!guide) {
-    return {
-      title: "Icerik bulunamadi",
-      description: "Istenen rehber bulunamadi.",
-    };
+    return buildPageMetadata({
+      title: notFoundCopy.title,
+      description: notFoundCopy.description,
+      path: `/guides/${params.slug}`,
+      locale,
+    });
   }
 
-  const canonical = guide.canonical ?? buildCanonical(`/guides/${guide.slug}`);
-
-  return {
+  return buildPageMetadata({
     title: guide.title,
     description: guide.description,
+    path: `/guides/${guide.slug}`,
+    locale,
+    type: "article",
     keywords: guide.tags,
-    alternates: canonical ? { canonical } : undefined,
     openGraph: {
-      title: guide.title,
-      description: guide.description,
       type: "article",
-      url: canonical ?? `/guides/${guide.slug}`,
       publishedTime: guide.date,
       tags: guide.tags,
-      images: [DEFAULT_OG_IMAGE_META],
     },
-    twitter: {
-      card: "summary_large_image",
-      title: guide.title,
-      description: guide.description,
-      images: [DEFAULT_OG_IMAGE_META.url],
-    },
-  };
+  });
 }
 
 export default async function GuidePage({ params }: GuidePageProps) {
-  const guide = await getContentBySlug("guides", params.slug);
+  const [guide, locale] = await Promise.all([
+    getContentBySlug("guides", params.slug),
+    getLocaleFromCookies(),
+  ]);
 
   if (!guide) {
     notFound();
   }
 
-  const canonical = guide.canonical ?? buildCanonical(`/guides/${guide.slug}`) ?? `/guides/${guide.slug}`;
-  const logoUrl = new URL("/icons/logo-mark.svg", SITE_URL).toString();
+  const brandContent = getBrandCopy(locale);
+  const copy = getMessages(locale).pages.guides;
+  const canonical = buildLocalizedCanonical(`/guides/${guide.slug}`, locale);
+  const logoUrl = new URL("/brand/logo-mark.svg", SITE_URL).toString();
+  const listHref = withLocalePrefix("/guides", locale);
   const articleJsonLd = {
     "@type": "TechArticle",
     headline: guide.title,
@@ -77,11 +82,11 @@ export default async function GuidePage({ params }: GuidePageProps) {
     },
     author: {
       "@type": "Organization",
-      name: BRAND_NAME,
+      name: brandContent.siteName,
     },
     publisher: {
       "@type": "Organization",
-      name: BRAND_NAME,
+      name: brandContent.siteName,
       logo: {
         "@type": "ImageObject",
         url: logoUrl,
@@ -89,7 +94,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
     },
     image: [logoUrl],
     keywords: guide.tags.join(", "),
-    inLanguage: "tr-TR",
+    inLanguage: locale === "tr" ? "tr-TR" : "en-US",
   };
   const breadcrumbJsonLd = {
     "@type": "BreadcrumbList",
@@ -97,14 +102,14 @@ export default async function GuidePage({ params }: GuidePageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Ana sayfa",
-        item: buildCanonical("/") ?? `${SITE_URL}/`,
+        name: locale === "tr" ? "Ana sayfa" : "Home",
+        item: buildLocalizedCanonical("/", locale),
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Rehberler",
-        item: buildCanonical("/guides") ?? `${SITE_URL}/guides`,
+        name: copy.badge,
+        item: buildLocalizedCanonical("/guides", locale),
       },
       {
         "@type": "ListItem",
@@ -126,14 +131,14 @@ export default async function GuidePage({ params }: GuidePageProps) {
       <JsonLd data={guideJsonLd} />
       <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-4">
-          <Link href="/guides" className="text-xs font-semibold text-sky-700 hover:underline">
-            Rehberler listesine don
+          <Link href={listHref} className="text-xs font-semibold text-sky-700 hover:underline">
+            {copy.back}
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
             <span className="rounded-full bg-sky-50 px-2 py-0.5 text-sky-700">{guide.category}</span>
-            <span>{formatDate(guide.date)}</span>
+            <span>{formatDate(guide.date, locale)}</span>
             <span>|</span>
-            <span>{guide.readingTimeMinutes} dk okuma</span>
+            <span>{formatMessage(copy.readingTime, { count: guide.readingTimeMinutes })}</span>
           </div>
           <h1 className="text-balance text-3xl font-semibold leading-tight text-slate-900 md:text-4xl">
             {guide.title}
@@ -151,9 +156,9 @@ export default async function GuidePage({ params }: GuidePageProps) {
         <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_260px]">
           <aside className="order-1 lg:order-2">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm lg:sticky lg:top-24">
-              <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Icerik</div>
+              <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.tocTitle}</div>
               {toc.length === 0 ? (
-                <p className="text-xs text-slate-500">Bu rehberde baslik bulunmuyor.</p>
+                <p className="text-xs text-slate-500">{copy.tocEmpty}</p>
               ) : (
                 <ul className="space-y-2 text-xs text-slate-600">
                   {toc.map((item) => (

@@ -1,0 +1,812 @@
+{
+    "nav":  {
+                "labels":  {
+                               "sectionCalculators":  "Hesaplayicilar",
+                               "sectionTools":  "Araclar",
+                               "sectionCommunity":  "Forum",
+                               "sectionContact":  "Iletisim",
+                               "sectionGeneral":  "Genel",
+                               "linkGearCalculators":  "Disli Hesaplayicilar",
+                               "linkToolLibrary":  "Hesaplayici Kutuphanesi",
+                               "linkTorquePower":  "Tork / Guc",
+                               "linkProjectHub":  "Proje Merkezi",
+                               "linkQualityTools":  "Kalite Araclari",
+                               "linkFixtureTools":  "Fikstur Araclari",
+                               "linkCommunity":  "Topluluk",
+                               "linkQa":  "Soru-Cevap",
+                               "linkSupport":  "Bize Ulasin",
+                               "linkHome":  "Ana Sayfa"
+                           },
+                "descriptions":  {
+                                     "sectionCalculators":  "Disli, tork, kuvvet ve mekanik hesaplayicilar.",
+                                     "sectionTools":  "Sablon, rehber ve proje araclari.",
+                                     "sectionCommunity":  "Topluluk tartismalari ve paylasimlar.",
+                                     "sectionContact":  "Geri bildirim ve destek kanallari."
+                                 },
+                "badges":  {
+                               "new":  "Yeni",
+                               "fresh":  "Guncel"
+                           }
+            },
+    "languageSwitcher":  {
+                             "trLabel":  "Turkce",
+                             "enLabel":  "Ingilizce"
+                         },
+    "authButtons":  {
+                        "login":  "Giris Yap",
+                        "premium":  "Premium bekleme listesi",
+                        "userFallback":  "Kullanici",
+                        "logout":  "Cikis",
+                        "unavailable":  "Auth su an kullanilamiyor."
+                    },
+    "home":  {
+                 "hero":  {
+                              "title":  "Profesyonel muhendislik hesaplari, net ve hizli.",
+                              "subtitle":  "Muhendislik Hesaplayicilari ve Gorsel Analiz Laboratuvari",
+                              "description":  "Hizli karar icin premium gorunumlu hesaplayicilar, gorsel kontroller ve metodik notlar.",
+                              "ctaPrimary":  "Hesaplayicilara Git",
+                              "ctaSecondary":  "Sanity Check Lab",
+                              "imageAlt":  "Grafikler, kartlar ve hesap kutulari iceren muhendislik kontrol paneli"
+                          },
+                 "popularTools":  {
+                                      "kicker":  "Populer araclar",
+                                      "title":  "En cok kullanilan hesaplayicilar",
+                                      "description":  "Boyutlama, kontrol ve donusum icin hizli baslangic saglayan 6 arac.",
+                                      "cta":  "Arac kutuphanesine git",
+                                      "defaultCategory":  "Genel"
+                                  },
+                 "about":  {
+                               "kicker":  "Hakkinda",
+                               "title":  "Metodoloji odakli muhendislik calisma alani",
+                               "lead":  "Pratik muhendislik kararlarini ve tekrarlanabilir hesaplari metodoloji odakli bir akista topla.",
+                               "cardOneTitle":  "Metodoloji / Akis",
+                               "cardOneBody":  "Problemi adimlara bol, varsayimlari netlestir ve tutarli hesap akisini izle.",
+                               "cardTwoTitle":  "Manuel + Gorsel",
+                               "cardTwoBody":  "Formuller, tablolar ve gorsel ipuclariyla sureci okunur ve izlenebilir tut."
+                           },
+                 "useCases":  {
+                                  "kicker":  "Ne icin kullanilir?",
+                                  "title":  "Lab nerede yardim eder?",
+                                  "lead":  "En sik muhendislik kararlarina kisa ve net akislariyla destek olur.",
+                                  "items":  [
+                                                {
+                                                    "title":  "Hesaplari dogrula",
+                                                    "description":  "Formulleri, birimleri ve varsayimlari dakikalar icinde kontrol et."
+                                                },
+                                                {
+                                                    "title":  "Kararlari hizlandir",
+                                                    "description":  "Tutarli girdiler ve kartlarla geri donusu azalt."
+                                                },
+                                                {
+                                                    "title":  "Metod notlarini topla",
+                                                    "description":  "Tekrarlanabilir isler icin kisa kontrol listeleri biriktir."
+                                                }
+                                            ]
+                              },
+                 "changelog":  {
+                                    "kicker":  "Yeni",
+                                    "title":  "Son guncellemeler",
+                                    "description":  "Yeni araclar ve duzeltmeler kisa bir ozetle burada.",
+                                    "latestLabel":  "Son surum",
+                                    "ctaPrimary":  "Guncelleme gunlugunu gor",
+                                    "ctaSecondary":  "Blog'u oku",
+                                    "empty":  "Henuz guncelleme yok. Ilk not yakinda."
+                                }
+             },
+    "pages":  {
+                  "tools":  {
+                                "badge":  "Arac Kutuphanesi",
+                                "title":  "Tum araclar tek sayfada",
+                                "description":  "Hesaplayici, paket ve rehberleri filtrele, ihtiyacin olani tek tikla ac.",
+                                "imageAlt":  "Hesaplayici kutuphanesi filtreleri ve arac kartlari"
+                            },
+                  "sanityCheck":  {
+                                      "badge":  "Muhendislik Kontrol Laboratuvari",
+                                      "title":  "Muhendislik Kontrol Laboratuvari",
+                                      "description":  "Degiskenleri, birimleri ve formul sonucunu tek ekranda dogrula.",
+                                      "howToTitle":  "Nasil kullanilir?",
+                                      "howToSteps":  [
+                                                         "Degiskenleri birimleri ve araliklariyla gir.",
+                                                         "Formulu yaz ve beklenen cikti birimini sec.",
+                                                         "Tarama veya Monte Carlo ile duyarliligi incele."
+                                                     ],
+                                      "tabs":  {
+                                                    "sweep":  "Duyarlilik Tarama",
+                                                    "monteCarlo":  "Monte Carlo"
+                                                }
+                                  },
+                  "guides":  {
+                                 "badge":  "Rehberler",
+                                 "title":  "Adim adim hesaplama ve uygulama rehberleri",
+                                 "description":  "Malzeme secimi, kalite kontrolu ve uretim akislari icin pratik notlar.",
+                                 "imageAlt":  "Rehber listesi, kategori rozetleri ve kartlar",
+                                 "empty":  "Henuz yayinlanmis rehber yok.",
+                                 "countLabel":  "{count} rehber",
+                                 "readingTime":  "{count} dk okuma",
+                                 "fallbackCategory":  "Diger",
+                                 "back":  "Rehberler listesine don",
+                                 "tocTitle":  "Icerik",
+                                 "tocEmpty":  "Bu rehberde baslik bulunmuyor."
+                             },
+                  "glossary":  {
+                                   "badge":  "Sozluk",
+                                   "title":  "Teknik terimler ve kisa tanimlar",
+                                   "description":  "Disli, tork ve uretim terminolojisindeki kritik kavramlar tek yerde.",
+                                   "imageAlt":  "Sozluk terim listesi ve kategori etiketleri",
+                                   "empty":  "Henuz yayinlanmis terim yok.",
+                                   "readingTime":  "{count} dk okuma",
+                                   "back":  "Sozluk listesine don",
+                                   "definitionTitle":  "Tanim",
+                                   "formulaTitle":  "Formuller",
+                                   "formulaEmpty":  "Bu terim icin formuller eklenmedi.",
+                                   "relatedTitle":  "Ilgili icerikler",
+                                   "relatedDescription":  "Benzer etiketli kaynaklar.",
+                                   "relatedEmpty":  "Ilgili icerik bulunamadi.",
+                                   "relatedBlog":  "Blog",
+                                   "relatedGuides":  "Rehberler",
+                                   "relatedTools":  "Hesaplayicilar",
+                                   "readCta":  "Oku",
+                                   "openToolCta":  "Hesaplayiciyi Ac"
+                               },
+                  "categories":  {
+                                     "badge":  "Kategori",
+                                     "description":  "Bu kategori altindaki blog yazilari, rehberler ve hesaplayicilar.",
+                                     "blogTitle":  "Blog",
+                                     "blogDesc":  "Kategoriye ait blog yazilari.",
+                                     "guidesTitle":  "Rehberler",
+                                     "guidesDesc":  "Kategoriye ait rehberler.",
+                                     "toolsTitle":  "Hesaplayicilar",
+                                     "toolsDesc":  "Kategoriye ait hesaplayicilar.",
+                                     "relatedTagsTitle":  "Ilgili etiketler",
+                                     "relatedTagsEmpty":  "Ilgili etiket bulunamadi.",
+                                     "contentEmpty":  "Bu kategoride icerik bulunamadi.",
+                                     "toolsEmpty":  "Bu kategoride hesaplayici bulunamadi.",
+                                     "readCta":  "Oku",
+                                     "openToolCta":  "Hesaplayiciyi Ac",
+                                     "readingTimeShort":  "{count} dk"
+                                 },
+                  "tags":  {
+                               "badge":  "Etiket",
+                               "description":  "Bu etiketle iliskili blog yazilari, rehberler ve hesaplayicilar.",
+                               "blogTitle":  "Blog",
+                               "blogDesc":  "Etikete ait blog yazilari.",
+                               "guidesTitle":  "Rehberler",
+                               "guidesDesc":  "Etikete uygun rehberler.",
+                               "toolsTitle":  "Hesaplayicilar",
+                               "toolsDesc":  "Etikete uygun hesaplayicilar.",
+                               "relatedTagsTitle":  "Ilgili etiketler",
+                               "relatedTagsEmpty":  "Baska etiket bulunamadi.",
+                               "contentEmpty":  "Bu etikette icerik bulunamadi.",
+                               "toolsEmpty":  "Bu etikette hesaplayici bulunamadi.",
+                               "readCta":  "Oku",
+                               "openToolCta":  "Hesaplayiciyi Ac",
+                               "readingTimeShort":  "{count} dk"
+                           },
+                  "qualityTools":  {
+                                       "badge":  "Kalite araclari: 5N1K - 5 Why - 8D - Kaizen - Poka-Yoke",
+                                       "title":  "Problem tanimi, kok neden analizi ve kalici aksiyonlar icin dijital sablonlar",
+                                       "description":  "Problem tanimi, kok neden ve aksiyon takibi icin sade kalite sablonlari.",
+                                       "typical":  "Tipik kullanim:",
+                                       "free":  "Ucretsiz",
+                                       "active":  "Aktif (Beta)",
+                                       "planned":  "Planlandi",
+                                       "basic":  "Temel seviye",
+                                       "advanced":  "Ileri seviye",
+                                       "premiumBadge":  "Premium (bekleme listesi)",
+                                       "openTool":  "Araci Ac",
+                                       "comingSoon":  "Yakinda",
+                                       "footerActive":  "Etkilesimli form ile calisilabilir (taslak).",
+                                       "footerPlanned":  "Sablon ve form tasarimi uzerinde calisiliyor."
+                                   },
+                  "fixtureTools":  {
+                                       "badge":  "Fikstur araclari",
+                                       "title":  "Konumlama, sikistirma ve taban plaka icin pratik kartlar",
+                                       "description":  "Fikstur tasarimi icin hizli hesaplar ve kontrol listeleri.",
+                                       "focus":  "Odak",
+                                       "active":  "Aktif (Beta)",
+                                       "planned":  "Planlandi",
+                                       "openTool":  "Araci ac",
+                                       "comingSoon":  "Yakinda",
+                                       "footerActive":  "Etkilesimli kart hazir.",
+                                       "footerPlanned":  "Kart hazirlaniyor."
+                                   },
+                  "projectHub":  {
+                                     "badgeTitle":  "Proje Merkezi",
+                                     "badgeSubtitle":  "Proje - RFQ - Parca / Revizyon Takibi",
+                                     "title":  "Proje, RFQ ve revizyonlari tek panelden yonet",
+                                     "description":  "Projeleri, RFQ teklif sureclerini ve parca revizyonlarini tek ekranda takip et.",
+                                     "cta":  "Modulu Ac"
+                                 },
+                  "savedCalculations":  {
+                                            "kicker":  "Kayitli Hesaplar",
+                                            "title":  "Kayitli Hesaplarim",
+                                            "description":  "Daha once kaydettigin hesaplari gor, tekrar ac veya temizle."
+                                        },
+                  "blog":  {
+                               "badge":  "Blog",
+                               "title":  "Hesaplama ve analiz odakli paylasimlar",
+                               "description":  "Manual hesaplama, gorsel analiz ve metodik notlar icin kisa icerikler.",
+                               "imageAlt":  "Blog yazilari, filtreler ve etiketler ile liste gorunumu",
+                               "back":  "Blog listesine don",
+                               "tocTitle":  "Icerik",
+                               "tocEmpty":  "Bu yazida baslik bulunmuyor.",
+                               "relatedPostsTitle":  "Benzer yazilar",
+                               "relatedToolsTitle":  "Ilgili araclar",
+                               "relatedToolsCta":  "Hesaplayiciyi Ac",
+                               "searchLabel":  "Arama",
+                               "searchPlaceholder":  "Baslik, tag veya kategori...",
+                               "searchButton":  "Ara",
+                               "clearSearch":  "Aramayi temizle",
+                               "categoriesTitle":  "Kategoriler",
+                               "allCategories":  "Tum kategoriler",
+                               "tagsTitle":  "Tagler",
+                               "allTags":  "Tum tagler",
+                               "summary":  "{start}-{end} / {total} yazi",
+                               "pageSummary":  "Sayfa {page} / {total}",
+                               "clearFilters":  "Tum filtreleri temizle",
+                               "empty":  "Aradigin kriterlere uygun yazi bulunamadi.",
+                               "readingTime":  "{count} dk okuma",
+                               "prev":  "Onceki",
+                               "next":  "Sonraki"
+                           },
+                  "community":  {
+                                    "badge":  "Topluluk",
+                                    "title":  "Topluluk tartismalari ve basliklari",
+                                    "description":  "Teknik baslik ac, deneyim paylas ve muhendislik bilgisini akista tut.",
+                                    "imageAlt":  "Topluluk basliklari ve tartisma kartlari",
+                                    "sampleBadge":  "Ornek",
+                                    "form":  {
+                                                 "title":  "Yeni baslik ac",
+                                                 "description":  "Konuyu ac, baglam ekle ve topluluktan destek iste.",
+                                                 "titleLabel":  "Baslik",
+                                                 "titlePlaceholder":  "Orn: 3 eksenli fikstur icin 3-2-1 referans secimi",
+                                                 "categoryLabel":  "Kategori",
+                                                 "categories":  [
+                                                                    "Fikstur / Aparat",
+                                                                    "Kalite / Olcum",
+                                                                    "Malzeme / Isil Islem",
+                                                                    "Proje / Surec",
+                                                                    "Genel"
+                                                                ],
+                                                 "bodyLabel":  "Aciklama",
+                                                 "bodyPlaceholder":  "Detay, olcu, link veya kisa cizim notlari...",
+                                                 "helper":  "Hassas verileri paylasma.",
+                                                 "submit":  "Baslik ac"
+                                             },
+                                    "stream":  {
+                                                   "kicker":  "Canli",
+                                                   "title":  "Topluluk yorum akisi",
+                                                   "description":  "Son yorumlari gercek zamanli gor ve not ekle."
+                                               },
+                                    "recent":  {
+                                                   "title":  "Son basliklar",
+                                                   "countLabel":  "{count} baslik",
+                                                   "replyCount":  "{count} yanit"
+                                               },
+                                    "thread":  {
+                                                   "backLabel":  "<- Topluluga don",
+                                                   "authorLabel":  "Yazan: {author}",
+                                                   "repliesTitle":  "Yanitlar",
+                                                   "replyLabel":  "Senin yanitin",
+                                                   "replyPlaceholder":  "Tecrubeni, hesabini veya onerini yaz...",
+                                                   "replyCta":  "Yaniti paylas",
+                                                   "missingTitle":  "Baslik bulunamadi",
+                                                   "missingDescription":  "Bu topluluk basligi bulunamadi."
+                                               }
+                                },
+                  "support":  {
+                                  "badge":  "Destek",
+                                  "title":  "Teknik destek ve yonlendirme",
+                                  "description":  "Kisa bir talep birak, ekip hizlica geri donsun.",
+                                  "imageAlt":  "Talep detaylari ve dosya yukleme alani olan destek formu",
+                                  "tipsTitle":  "Talep olustururken oneriler",
+                                  "tips":  [
+                                               "Kisa bir konu basligi ekle (orn. \"M12 10.9 civata torku\").",
+                                               "Varsa malzeme, yuk, limit veya standartlari belirt."
+                                           ]
+                              },
+                  "premium":  {
+                                  "badge":  "Premium",
+                                  "title":  "Premium paket onizleme",
+                                  "description":  "Odeme altyapisi henuz acik degil. Bekleme listesi ile yeni ozellikleri takip et.",
+                                  "imageAlt":  "Premium yol haritasi kartlari ve ozellik listesi"
+                              },
+                  "changelog":  {
+                                    "badge":  "Guncelleme Gunlugu",
+                                    "title":  "Yenilikler ve guncellemeler",
+                                    "description":  "Yeni eklenen araclar, duzeltmeler ve genel degisiklikler burada listelenir.",
+                                    "emptyTitle":  "Henuz guncelleme gunlugu yok.",
+                                    "emptyDescription":  "Ilk guncelleme yakinda eklenecek.",
+                                    "addedTitle":  "Eklenen araclar",
+                                    "addedEmpty":  "Bu surumde yeni arac eklenmedi.",
+                                    "fixesTitle":  "Duzeltmeler",
+                                    "fixesEmpty":  "Bu surumde duzeltme kaydi yok."
+                                },
+                  "notFound":  {
+                                   "title":  "Sayfa bulunamadi",
+                                   "description":  "Bu baglanti kaldirilmis veya tasinmis olabilir. Hesaplayici Kutuphanesi ile hesaplayicilara hizli ulasabilirsin.",
+                                   "primaryCta":  "Hesaplayici Kutuphanesi",
+                                   "secondaryCta":  "Ana sayfaya don"
+                               }
+              },
+    "components":  {
+                       "updatesBanner":  {
+                                             "title":  "Yeni guncellemeler var",
+                                             "cta":  "Guncelleme gunlugunu gor",
+                                             "dismiss":  "Kapat"
+                                         },
+                       "premiumCTA":  {
+                                          "badge":  "Premium bekleme listesi",
+                                          "title":  "Premium paket",
+                                          "description":  "Odeme altyapisi acik degil. Bekleme listesiyle yol haritasini paylasiyoruz.",
+                                          "ctaPrimary":  "Bekleme listesine katil",
+                                          "ctaSecondary":  "Detaylari gor",
+                                          "supportNote":  "Destek formuna yonlendirir.",
+                                          "packageTitle":  "Paket icerigi (plan)",
+                                          "packageItems":  [
+                                                               "Detayli tork ve disli tablolar",
+                                                               "Gelismis mekanik hesaplayicilar",
+                                                               "PDF/Excel disa aktarma (RFQ, kalite araclari, proje listeleri)",
+                                                               "Coklu cihaz erisimi ve kayitli projeler",
+                                                               "Malzeme ve kaplama oneri kartlari"
+                                                           ],
+                                          "statusTitle":  "Durum",
+                                          "statusBody":  "Odeme akisi yok. Ilgiyi topluyoruz ve bekleme listesine gore gelistirme onceliklerini belirliyoruz.",
+                                          "stepsTitle":  "Sonraki adimlar",
+                                          "steps":  [
+                                                        "Bekleme listesine kayit",
+                                                        "Kisa bir ihtiyac formu",
+                                                        "Kucuk gruplarla beta davetleri"
+                                                    ]
+                                      },
+                       "supportForm":  {
+                                           "submit":  {
+                                                          "idle":  "Talebi Gonder",
+                                                          "uploading":  "Dosya yukleniyor...",
+                                                          "submitting":  "Gonderiliyor..."
+                                                      },
+                                           "fields":  {
+                                                          "name":  {
+                                                                       "label":  "Ad Soyad",
+                                                                       "placeholder":  "Orn: Burak Yilmaz"
+                                                                   },
+                                                          "email":  {
+                                                                        "label":  "E-posta",
+                                                                        "placeholder":  "ornek@domain.com"
+                                                                    },
+                                                          "message":  {
+                                                                          "label":  "Talep detaylari",
+                                                                          "placeholder":  "Konu, varsa hesap degerleri, standartlar, sinirlar..."
+                                                                      },
+                                                          "attachment":  {
+                                                                             "label":  "Dosya yukle (istege bagli)",
+                                                                             "helper":  "Dosya Firebase Storage'a yuklenir, destek kaydina link eklenir.",
+                                                                             "unavailable":  "Dosya yukleme su anda devre disi. Talebini metinle iletebilirsin."
+                                                                         }
+                                                      },
+                                           "errors":  {
+                                                          "fileTooLarge":  "Dosya boyutu 10 MB sinirini asiyor.",
+                                                          "uploadUnavailable":  "Dosya yukleme su anda kullanilamiyor.",
+                                                          "required":  "Lutfen tum zorunlu alanlari doldurun.",
+                                                          "supportUnavailable":  "Destek altyapisi hazir degil. Lutfen daha sonra deneyin.",
+                                                          "submitFailed":  "Talep gonderilemedi."
+                                                      },
+                                           "success":  "Talebin alindi. En kisa surede geri donecegiz."
+                                       },
+                       "commentStream":  {
+                                             "kicker":  "Canli",
+                                             "title":  "Topluluk akisi",
+                                             "realtimeBadge":  "Gercek zamanli",
+                                             "demoBadge":  "Demo modu",
+                                             "authChecking":  "Giris kontrol ediliyor...",
+                                             "authUnavailable":  "Auth su an kullanilamiyor",
+                                             "login":  "Google ile giris yap",
+                                             "loginPending":  "Giris yapiliyor...",
+                                             "logout":  "Cikis yap",
+                                             "logoutPending":  "Cikis yapiliyor...",
+                                             "placeholders":  {
+                                                                  "loading":  "Baglanti hazirlaniyor...",
+                                                                  "demo":  "Demo modunda yorum birak...",
+                                                                  "authUnavailable":  "Auth su an kullanilamiyor.",
+                                                                  "signedIn":  "Fikrini yaz...",
+                                                                  "signedOut":  "Yorum gondermek icin giris yap."
+                                                              },
+                                             "helpers":  {
+                                                             "loading":  "Yorum sistemi yukleniyor.",
+                                                             "demo":  "Demo modunda yorumlar kayit edilmez.",
+                                                             "authUnavailable":  "Kimlik dogrulama su anda devre disi.",
+                                                             "signedIn":  "Yorumlar Firestore'a kaydedilecek.",
+                                                             "signedOut":  "Once giris yapmalisin."
+                                                         },
+                                             "submit":  {
+                                                            "idle":  "Yorumu Gonder",
+                                                            "saving":  "Gonderiliyor..."
+                                                        },
+                                             "errors":  {
+                                                            "loadFailed":  "Yorumlar yuklenemedi. Lutfen tekrar deneyin.",
+                                                            "loginFailed":  "Giris basarisiz. Lutfen tekrar deneyin.",
+                                                            "logoutFailed":  "Cikis basarisiz. Lutfen tekrar deneyin.",
+                                                            "saveFailed":  "Yorum kaydedilemedi. Lutfen tekrar deneyin."
+                                                        },
+                                             "demoUser":  "Demo Kullanici",
+                                             "userFallback":  "Kullanici",
+                                             "loading":  "Yorumlar yukleniyor...",
+                                             "empty":  "Ilk yorumu sen birak.",
+                                             "newLabel":  "Yeni"
+                                         },
+                       "toolLibrary":  {
+                                           "scenarioSection":  {
+                                                                   "kicker":  "Ne yapmak istiyorsun?",
+                                                                   "title":  "Senaryoya gore hizli yonlendirme",
+                                                                   "description":  "En yaygin ihtiyaca gore ilgili hesaplayicilara hizli ulas."
+                                                               },
+                                           "scenarios":  [
+                                                             {
+                                                                 "id":  "convert",
+                                                                 "title":  "Bir degeri donusturmek istiyorum",
+                                                                 "description":  "Hizli birim cevirisi ve temel kontrol icin.",
+                                                                 "links":  [
+                                                                               {
+                                                                                   "label":  "Birim Donusturucu",
+                                                                                   "href":  "/tools/unit-converter"
+                                                                               }
+                                                                           ]
+                                                             },
+                                                             {
+                                                                 "id":  "calculate",
+                                                                 "title":  "Bir muhendislik hesabi yapacagim",
+                                                                 "description":  "Manuel girdilerle temel hesaplamalara hizli eris.",
+                                                                 "links":  [
+                                                                               {
+                                                                                   "label":  "Civata Tork",
+                                                                                   "href":  "/tools/bolt-calculator"
+                                                                               },
+                                                                               {
+                                                                                   "label":  "Cekme Gerilmesi",
+                                                                                   "href":  "/tools/simple-stress"
+                                                                               },
+                                                                               {
+                                                                                   "label":  "Isi Akisi",
+                                                                                   "href":  "/tools/basic-engineering"
+                                                                               }
+                                                                           ]
+                                                             },
+                                                             {
+                                                                 "id":  "visualize",
+                                                                 "title":  "Grafik gormek istiyorum",
+                                                                 "description":  "Parametrelerden grafik veya egriler olustur.",
+                                                                 "links":  [
+                                                                               {
+                                                                                   "label":  "Yay Kuvvet Grafigi",
+                                                                                   "href":  "/tools/param-chart"
+                                                                               },
+                                                                               {
+                                                                                   "label":  "Disli Hesaplayicilar",
+                                                                                   "href":  "/tools/gear-design/calculators"
+                                                                               }
+                                                                           ]
+                                                             }
+                                                         ],
+                                           "requestSection":  {
+                                                                  "title":  "Yeni bir araca mi ihtiyacin var?",
+                                                                  "description":  "Input ve cikti ihtiyacini yaz. En cok talep edilen araclari onceleyecegiz.",
+                                                                  "cta":  "Bir arac iste",
+                                                                  "ctaAria":  "Bir arac iste"
+                                                              },
+                                           "filterSection":  {
+                                                             "title":  "Filtrele",
+                                                             "loading":  "Filtreleniyor...",
+                                                             "description":  "Tur, kategori ve etiket secerek araclari daraltabilirsin.",
+                                                             "clear":  "Filtreleri Temizle",
+                                                             "apply":  "Filtreleri Uygula",
+                                                             "note":  "Secimleri yaptiktan sonra filtreleri uygula.",
+                                                                 "typeLabel":  "Tur",
+                                                                 "categoryLabel":  "Kategori",
+                                                                 "allCategories":  "Tum kategoriler",
+                                                                 "tagLabel":  "Etiket",
+                                                                 "allTags":  "Tum etiketler",
+                                                                 "searchLabel":  "Hizli arama",
+                                                                 "searchPlaceholder":  "Orn. tork, basinc, civata",
+                                                                 "searchAria":  "Arac ara"
+                                                             },
+                                           "emptyState":  {
+                                                              "title":  "Eslesen arac bulunamadi.",
+                                                              "description":  "Baska bir kategori, etiket veya arama terimi deneyebilirsin.",
+                                                              "reset":  "Tum filtreleri sifirla"
+                                                          },
+                                           "labels":  {
+                                                          "typeFilter":  {
+                                                                             "All":  "Tum turler",
+                                                                             "calculator":  "Hesaplayici",
+                                                                             "bundle":  "Paket",
+                                                                             "guide":  "Rehber"
+                                                                         },
+                                                          "type":  {
+                                                                       "calculator":  "Hesaplayici",
+                                                                       "bundle":  "Paket",
+                                                                       "guide":  "Rehber"
+                                                                   },
+                                                          "category":  {
+                                                                           "Mechanical":  "Mekanik",
+                                                                           "Automotive":  "Otomotiv",
+                                                                           "General Engineering":  "Genel Muhendislik"
+                                                                       },
+                                                          "tag":  {
+                                                                      "pressure":  "basinc",
+                                                                      "torque":  "tork",
+                                                                      "flow":  "akis",
+                                                                      "thermal":  "termal",
+                                                                      "units":  "birimler",
+                                                                      "validation":  "dogrulama",
+                                                                      "sensitivity":  "duyarlilik",
+                                                                      "montecarlo":  "monte carlo",
+                                                                      "engineering":  "muhendislik"
+                                                                  },
+                                                          "cta":  {
+                                                                      "calculator":  "Hesaplayiciyi Ac",
+                                                                      "bundle":  "Paketi Ac",
+                                                                      "guide":  "Rehberi Ac"
+                                                                  },
+                                                          "generalCategory":  "Genel",
+                                                          "openAria":  "{title} sayfasini ac"
+                                                      }
+                                       },
+                       "sanityCheck":  {
+                                            "session":  {
+                                                            "titleLabel":  "Oturum basligi",
+                                                            "untitled":  "Adsiz oturum",
+                                                            "save":  "Kaydet",
+                                                            "saveAs":  "Yeni kaydet",
+                                                            "savedTitle":  "Kayitli oturumlar",
+                                                            "load":  "Yukle",
+                                                            "delete":  "Sil",
+                                                            "share":  "Paylasim linki kopyala",
+                                                            "shareCopied":  "Link kopyalandi.",
+                                                            "shareFailed":  "Kopyalama basarisiz. Linki manuel kopyalayabilirsin.",
+                                                            "export":  "Raporu ac",
+                                                            "lastSaved":  "Son kayit",
+                                                            "restoreNotice":  "Paylasim linkinden oturum geri yuklendi."
+                                                        },
+                                            "variableTable":  {
+                                                                  "title":  "Degiskenler",
+                                                                  "add":  "Degisken ekle",
+                                                                  "symbol":  "Sembol",
+                                                                  "name":  "Isim",
+                                                                  "defaultName":  "Degisken",
+                                                                  "description":  "Aciklama",
+                                                                  "value":  "Deger",
+                                                                  "unit":  "Birim",
+                                                                  "unitPlaceholder":  "orn. N m",
+                                                                  "min":  "Min",
+                                                                  "max":  "Maks",
+                                                                  "distribution":  "Dagilim",
+                                                                  "distributionNone":  "Manuel",
+                                                                  "distributionUniform":  "Tekduze",
+                                                                  "distributionNormal":  "Normal",
+                                                                  "remove":  "Sil"
+                                                              },
+                                            "formulaEditor":  {
+                                                                 "title":  "Formul",
+                                                                 "description":  "Yukaridaki sembolleri kullan. Ornek: P = T * w",
+                                                                 "placeholder":  "orn. P = T * w"
+                                                             },
+                                            "resultPanel":  {
+                                                                "title":  "Sonuc",
+                                                                "outputLabel":  "Cikti",
+                                                                "computedUnit":  "Hesaplanan birim",
+                                                                "expectedUnit":  "Beklenen birim",
+                                                                "unitMismatch":  "Birim uyusmazligi: beklenen {expected}, gelen {actual}",
+                                                                "unitMatch":  "Birim kontrolu uygun",
+                                                                "dimensionless":  "birimsiz",
+                                                                "errorTitle":  "Formul hatasi",
+                                                                "errorBody":  "Sembolleri, birimleri ve formulu kontrol et."
+                                                            },
+                                            "sweepPanel":  {
+                                                              "title":  "Duyarlilik tarama",
+                                                              "description":  "Tek bir degiskeni min-maks araliginda tarayip sonucu ciz.",
+                                                              "variableLabel":  "Degisken",
+                                                              "pointsLabel":  "Nokta",
+                                                              "run":  "Tarama calistir",
+                                                              "chartTitle":  "Tarama grafigi",
+                                                              "resultLabel":  "Sonuc",
+                                                              "empty":  "Tarama calistirinca grafik gorunur.",
+                                                              "rangeMissing":  "Secilen degisken icin min/maks gir."
+                                                          },
+                                            "monteCarloPanel":  {
+                                                                    "title":  "Monte Carlo",
+                                                                    "description":  "Dagilimlari kullanarak cikti dagilimini gor.",
+                                                                    "iterationsLabel":  "Iterasyon",
+                                                                    "run":  "Monte Carlo calistir",
+                                                                    "running":  "Calisiyor...",
+                                                                    "chartTitle":  "Histogram",
+                                                                    "countLabel":  "Adet",
+                                                                    "statsTitle":  "Ozet istatistik",
+                                                                    "mean":  "Ortalama",
+                                                                    "stdev":  "Std sapma",
+                                                                    "p05":  "P05",
+                                                                    "p50":  "P50",
+                                                                    "p95":  "P95",
+                                                                    "empty":  "Simulasyon calistirinca sonuc gorunur."
+                                                                },
+                                            "report":  {
+                                                           "title":  "Muhendislik Kontrol Raporu",
+                                                           "print":  "Yazdir / PDF",
+                                                           "missing":  "Oturum verisi bulunamadi.",
+                                                           "variablesTitle":  "Degiskenler",
+                                                           "formulaTitle":  "Formul",
+                                                           "resultTitle":  "Sonuc",
+                                                           "sweepTitle":  "Duyarlilik tarama",
+                                                           "monteCarloTitle":  "Monte Carlo"
+                                                       },
+                                            "errorBoundary":  {
+                                                                  "title":  "Bir hata oldu.",
+                                                                  "description":  "Formulu ve girdileri kontrol edip tekrar dene.",
+                                                                  "cta":  "Yenile"
+                                                              }
+                                        },
+                       "toolLinkSection":  {
+                                               "similar":  {
+                                                               "eyebrow":  "Benzer hesaplayicilar",
+                                                               "title":  "Ilgili hesaplayicilar",
+                                                               "description":  "Ayni kategori veya benzer etiketlere sahip hesaplayicilari burada bulabilirsin.",
+                                                               "cta":  "Hesaplayiciyi Ac"
+                                                           },
+                                               "helpful":  {
+                                                               "eyebrow":  "Diger oneriler",
+                                                               "title":  "Sunlar da isine yarayabilir",
+                                                               "description":  "Yaklasik ihtiyaclar icin farkli hesaplayicilari gozden gecirebilirsin.",
+                                                               "cta":  "Hesaplayiciyi Ac"
+                                                           }
+                                           },
+                       "toolDocTabs":  {
+                                           "tabsTitle":  "Hesaplayici Sekmeleri",
+                                           "tabs":  {
+                                                        "calculator":  "Hesaplayici",
+                                                        "explanation":  "Aciklama",
+                                                        "examples":  "Ornekler"
+                                                    },
+                                           "explanationTitle":  "Hesaplama Aciklamasi",
+                                           "examplesTitle":  "Ornekler",
+                                           "loadingTitle":  "Dokumantasyon hazirlaniyor",
+                                           "loadingBody":  "Kisa surede gelmezse bu hesaplayici icin aciklama/ornekler henuz yayinlanmamis olabilir.",
+                                           "docsFailedTitle":  "Dokumantasyon erisilemedi",
+                                           "docsFailedBody":  "Su anda aciklama ve ornekler getirilemiyor.",
+                                           "docsMissingTitle":  "Dokumantasyon yakinda",
+                                           "docsMissingBody":  "Bu arac icin dokumantasyon yakinda.",
+                                           "explanationEmptyTitle":  "Aciklama (yakinda)",
+                                           "explanationEmptyBody":  "Bu hesaplayici icin aciklama henuz eklenmedi. Simdilik kullanabilirsin.",
+                                           "examplesEmptyTitle":  "Ornekler (yakinda)",
+                                           "examplesEmptyBody":  "Bu hesaplayici icin ornekler henuz eklenmedi. Yakinda ornek girdiler eklenecek.",
+                                           "examplesEmptyHint":  "Ornekler hazirlaniyor.",
+                                           "inputs":  "Girdiler",
+                                           "outputs":  "Ciktilar",
+                                           "note":  "Not",
+                                           "guidesTitle":  "Rehberler",
+                                           "guidesHeading":  "Ilgili rehberler",
+                                           "guidesDesc":  "Benzer etiketli rehberlere goz at.",
+                                           "glossaryTitle":  "Sozluk",
+                                           "glossaryHeading":  "Ilgili terimler",
+                                           "glossaryDesc":  "Hesaplayiciyla ayni kavramlara bakan terimler.",
+                                           "read":  "Oku"
+                                       },
+                       "comparePanel":  {
+                                            "title":  "Karsilastirma Modu",
+                                            "description":  "Ayni girdi setiyle 2-3 senaryo olustur, sonuclari yan yana karsilastir.",
+                                            "scenario":  "Senaryo",
+                                            "label":  "Opsiyonel etiket",
+                                            "add":  "Senaryo Ekle",
+                                            "remove":  "Kaldir",
+                                            "reset":  "Sifirla",
+                                            "share":  "Linki Paylas",
+                                            "tableTitle":  "Karsilastirma Tablosu",
+                                            "metricLabel":  "Metrik",
+                                            "emptyMetrics":  "Karsilastirilabilir metrik bulunamadi.",
+                                            "shareSuccess":  "Link kopyalandi.",
+                                            "shareFail":  "Kopyalama basarisiz. Linki manuel kopyalayabilirsin.",
+                                            "separator":  " - "
+                                        },
+                       "genericToolPage":  {
+                                               "inputs":  "Girdiler",
+                                               "results":  "Sonuclar",
+                                               "formula":  "Formul",
+                                               "chart":  "Grafik",
+                                               "chartEmpty":  "Grafik icin gecerli degerler girin.",
+                                               "resultEmpty":  "Sonuclari gormek icin hatali alanlari duzeltin.",
+                                               "required":  "Zorunlu alan.",
+                                               "invalidNumber":  "Gecerli sayi girin.",
+                                               "invalidOption":  "Gecerli bir secim yapin.",
+                                               "min":  "Min",
+                                               "max":  "Max"
+                                           },
+                       "dashboard":  {
+                                         "badge":  "Panel",
+                                         "title":  "Kontrol paneli",
+                                         "description":  "Favoriler, son kullanilanlar ve ozel oneriler tek yerde.",
+                                         "imageAlt":  "Kayitli, son kullanilan ve onerilen araclari gosteren panel",
+                                         "favorites":  "Favoriler",
+                                         "favoritesDescription":  "Sik kullandigin hesaplayicilarin listesi.",
+                                         "favoritesEmpty":  "Henuz favori eklemedin.",
+                                         "recents":  "Son kullanilanlar",
+                                         "recentsDescription":  "Kaldigin yerden devam et.",
+                                         "recentsEmpty":  "Henuz bir hesaplayici acilmadi.",
+                                         "recommended":  "Onerilen",
+                                         "recommendedDescription":  "Son kullanilanlarinla benzer kategori veya etiketlerden secildi.",
+                                         "recommendedEmpty":  "Favori ekledikce oneriler burada gorunur.",
+                                         "open":  "Hesaplayiciyi Ac",
+                                         "lastUsed":  "Son kullanim"
+                                     },
+                       "recentTools":  {
+                                           "title":  "Son kullanilanlar",
+                                           "description":  "En son actigin hesaplayicilara buradan hizlica don.",
+                                           "empty":  "Henuz son kullanilan hesaplayici yok.",
+                                           "open":  "{title} hesaplayicisini ac",
+                                           "generalCategory":  "Genel"
+                                       },
+                       "savedCalculations":  {
+                                                 "title":  "Kayitli Hesaplarim",
+                                                 "description":  "Kayitlar sadece bu cihazda saklanir. Tekrar acmak veya silmek icin listeden istedigin kaydi kullanabilirsin.",
+                                                 "loading":  "Kayitlar yukleniyor...",
+                                                 "emptyTitle":  "Kayitli hesap bulunamadi.",
+                                                 "emptyHint":  "Bir hesaplayicida \"Kaydet\" butonunu kullanarak kayit olusturabilirsin.",
+                                                 "toolLibrary":  "Hesaplayici Kutuphanesi\u0027ne git",
+                                                 "reopen":  "Tekrar Ac",
+                                                 "delete":  "Sil",
+                                                 "details":  "Parametre ve sonuc detaylari",
+                                                 "inputs":  "Parametreler",
+                                                 "outputs":  "Sonuc"
+                                             },
+                       "requestToolForm":  {
+                                               "title":  "Arac iste",
+                                               "description":  "Problemi ve input/output yapisini yazarak yeni araci hizla tarif edebilirsin.",
+                                               "back":  "Hesaplayici Kutuphanesi",
+                                               "submit":  "Istek Gonder",
+                                               "github":  "GitHub Issue Olustur",
+                                               "copy":  "Kopyala",
+                                               "copied":  "Kopyalandi.",
+                                               "copyFail":  "Kopyalama basarisiz. Metni manuel kopyalayabilirsin.",
+                                               "history":  "Gonderilen istekler",
+                                               "emptyHistory":  "Henuz istek yok.",
+                                               "storageNote":  "Tarayicinizda yerel olarak saklanir.",
+                                               "required":  "Bu alan zorunlu.",
+                                               "fields":  {
+                                                              "problem":  "Problem / Kullanim alani",
+                                                              "inputs":  "Girdiler (input listesi)",
+                                                              "outputs":  "Beklenen cikti (result)",
+                                                              "standards":  "Birimler / standartlar",
+                                                              "examples":  "Ornek degerler"
+                                                          }
+                                           },
+                       "toolFavoriteButton":  {
+                                                  "addLabel":  "Favoriye Ekle",
+                                                  "removeLabel":  "Favorilerde",
+                                                  "addAria":  "{title} favorilere ekle",
+                                                  "removeAria":  "{title} favorilerden cikar",
+                                                  "fallbackTitle":  "Arac"
+                                              },
+                       "toolHistory":  {
+                                           "title":  "Kayitli Hesaplar",
+                                           "description":  "Kaydettigin hesaplar sadece bu cihazda saklanir. En son {count} kayit tutulur.",
+                                           "viewAll":  "Tum kayitlari gor",
+                                           "save":  "Kaydet",
+                                           "clear":  "Kayitlari Temizle",
+                                           "errorNoResult":  "Gecerli sonuc olmadan kayit alamazsin.",
+                                           "hintSave":  "Mevcut sonucu tek tikla sakla.",
+                                           "feedback":  {
+                                                            "storeError":  "Kayit islemi basarisiz. Tarayici alani dolu olabilir.",
+                                                            "saveSuccess":  "Kayit basariyla olusturuldu.",
+                                                            "saveError":  "Kayit islemi basarisiz oldu.",
+                                                            "clearSuccess":  "Kayitlar temizlendi.",
+                                                            "clearError":  "Kayitlari temizlerken hata oldu."
+                                                        },
+                                           "loading":  "Kayitlar yukleniyor...",
+                                           "empty":  "Henuz kayitli hesap yok. Sonucu kaydetmek icin yukaridaki butonu kullan.",
+                                           "inputs":  "Parametreler",
+                                           "outputs":  "Sonuc"
+                                       }
+                   },
+    "common":  {
+                   "yes":  "Evet",
+                   "no":  "Hayir",
+                   "general":  "Genel"
+               }
+}

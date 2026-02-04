@@ -1,13 +1,27 @@
-import type { Locale } from "@/utils/locale";
+﻿import type { Locale } from "@/utils/locale";
 
 export const toolCategories = ["Mechanical", "Automotive", "General Engineering"] as const;
 export type ToolCategory = (typeof toolCategories)[number];
 
-export const toolTags = ["pressure", "torque", "flow", "thermal"] as const;
+export const toolTags = [
+  "pressure",
+  "torque",
+  "flow",
+  "thermal",
+  "units",
+  "validation",
+  "sensitivity",
+  "montecarlo",
+  "engineering",
+] as const;
 export type ToolTag = (typeof toolTags)[number];
+
+export const toolTypes = ["calculator", "bundle", "guide"] as const;
+export type ToolType = (typeof toolTypes)[number];
 
 export type ToolCatalogItem = {
   id: string;
+  type: ToolType;
   title: string;
   description: string;
   titleEn?: string;
@@ -21,6 +35,7 @@ export type ToolCatalogItem = {
 export const toolCatalog: ToolCatalogItem[] = [
   {
     id: "bolt-calculator",
+    type: "calculator",
     title: "Civata Boyut ve Tork",
     description: "Nominal cap, dis adimi ve kalite sinifina gore gerilme alani ve on yuk hesabini yap.",
     titleEn: "Bolt Size & Torque",
@@ -31,6 +46,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "unit-converter",
+    type: "calculator",
     title: "Birim Donusturucu",
     description: "Uzunluk, kuvvet, basinc ve enerji icin hizli birim donusumleri.",
     titleEn: "Unit Converter",
@@ -39,7 +55,20 @@ export const toolCatalog: ToolCatalogItem[] = [
     category: "General Engineering",
   },
   {
+    id: "sanity-check",
+    type: "calculator",
+    title: "Muhendislik Kontrol Laboratuvari",
+    description: "Degiskenleri, birimleri ve formul sonucunu tek ekranda dogrula.",
+    titleEn: "Engineering Sanity Check Lab",
+    descriptionEn: "Validate variables, units, and formulas in one screen.",
+    href: "/tools/sanity-check",
+    category: "General Engineering",
+    tags: ["units", "validation", "sensitivity", "montecarlo", "engineering"],
+    lastUpdated: "2026-02-02",
+  },
+  {
     id: "basic-engineering",
+    type: "calculator",
     title: "Basit Isi Akisi",
     description: "Tek katmanli iletim icin isi akisini manuel parametrelerle hesapla.",
     titleEn: "Basic Heat Flow",
@@ -50,6 +79,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "param-chart",
+    type: "calculator",
     title: "Yay Kuvvet Grafigi",
     description: "Yay sabiti ve yer degistirme ile F-x grafigi uret.",
     titleEn: "Spring Force Chart",
@@ -59,6 +89,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "simple-stress",
+    type: "calculator",
     title: "Cekme Gerilmesi",
     description: "Kuvvet ve kesit alanina gore cekme gerilmesini hesapla.",
     titleEn: "Tensile Stress",
@@ -69,6 +100,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "bending-stress",
+    type: "calculator",
     title: "Egilme ve Sehim",
     description: "Basit mesnetli kiris icin egilme gerilmesi ve maksimum sehim hesabi.",
     titleEn: "Bending & Deflection",
@@ -79,6 +111,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "bolt-database",
+    type: "guide",
     title: "Civata Veri Merkezi",
     description: "Metrik ve imperial civata olculerine hizli erisim sagla.",
     titleEn: "Bolt Data Center",
@@ -88,6 +121,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "compressor-cc",
+    type: "calculator",
     title: "Kompresor CC",
     description: "Piston capi, strok ve rpm ile hacimsel kapasiteyi tahmin et.",
     titleEn: "Compressor CC",
@@ -98,6 +132,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "belt-length",
+    type: "calculator",
     title: "Kasnak Kayis Uzunlugu",
     description: "Iki kasnak capi ve merkez mesafesine gore kayis uzunlugunu hesapla.",
     titleEn: "Pulley Belt Length",
@@ -107,6 +142,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "torque-power",
+    type: "calculator",
     title: "Guc - Tork - Devir",
     description: "kW, hp ve rpm iliskisine gore tork veya guc hesabini yap.",
     titleEn: "Power - Torque - RPM",
@@ -118,6 +154,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "strength-statics",
+    type: "bundle",
     title: "Mukavemet ve Statik",
     description: "Eksenel, kesme ve burkulma icin hizli mukavemet hesaplari.",
     titleEn: "Strength & Statics",
@@ -128,6 +165,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "machine-elements",
+    type: "bundle",
     title: "Makine Elemanlari",
     description: "Rulman omru, kamali mil ve disli yukleri icin hesaplar.",
     titleEn: "Machine Elements",
@@ -137,6 +175,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "fluids-hvac",
+    type: "bundle",
     title: "Akiskanlar ve HVAC",
     description: "Reynolds, basinc kaybi ve kanal hizi icin hizli hesaplar.",
     titleEn: "Fluids & HVAC",
@@ -147,6 +186,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "heat-energy",
+    type: "bundle",
     title: "Isi Transferi ve Enerji",
     description: "LMTD, iletim ve enerji tahminleri icin temel hesaplar.",
     titleEn: "Heat Transfer & Energy",
@@ -157,6 +197,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "materials-manufacturing",
+    type: "bundle",
     title: "Malzeme ve Imalat",
     description: "Kesme parametreleri ve toleranslari icin hizli karar yardimi.",
     titleEn: "Materials & Manufacturing",
@@ -166,6 +207,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "production-project",
+    type: "bundle",
     title: "Uretim ve Proje",
     description: "Takt, OEE ve proje sureleri icin pratik hesaplamalar.",
     titleEn: "Production & Project",
@@ -175,6 +217,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-design",
+    type: "guide",
     title: "Disli Tasarimi",
     description: "Disli tasarimi icin genel bakis ve temel hesaplama girisi.",
     titleEn: "Gear Design",
@@ -185,6 +228,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-calculators",
+    type: "bundle",
     title: "Disli Hesaplayicilar",
     description: "Disli orani, modulu ve temas degerleri icin hesaplayicilar.",
     titleEn: "Gear Calculators",
@@ -194,6 +238,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-backlash",
+    type: "calculator",
     title: "Disli Backlash",
     description: "Backlash degisini ve uygun ayar araligini hesapla.",
     titleEn: "Gear Backlash",
@@ -203,6 +248,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-contact-ratio",
+    type: "calculator",
     title: "Disli Temas Orani",
     description: "Disli temas oranini ve guvenli temas sinirini hesapla.",
     titleEn: "Gear Contact Ratio",
@@ -212,6 +258,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-force-torque",
+    type: "calculator",
     title: "Disli Kuvvet ve Tork",
     description: "Disli torku ve tasiyici kuvvetleri hesapla.",
     titleEn: "Gear Force & Torque",
@@ -222,6 +269,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-helix-axial",
+    type: "calculator",
     title: "Helis Disli Aksiyel",
     description: "Helis dislilerde aksiyel kuvvet ve helis etkisini hesapla.",
     titleEn: "Helical Gear Axial",
@@ -231,6 +279,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-module",
+    type: "calculator",
     title: "Disli Modul",
     description: "Disli modulunu ve temel boyutlari hesapla.",
     titleEn: "Gear Module",
@@ -240,6 +289,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-ratio",
+    type: "calculator",
     title: "Disli Oran",
     description: "Disli oranini ve cikis hizini hesapla.",
     titleEn: "Gear Ratio",
@@ -249,6 +299,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-viscosity",
+    type: "calculator",
     title: "Disli Yag Viskozitesi",
     description: "Disli yaglama viskozitesi icin hizli secim araci.",
     titleEn: "Gear Oil Viscosity",
@@ -258,6 +309,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-weight",
+    type: "calculator",
     title: "Disli Agirlik Optimizasyonu",
     description: "Disli agirligini azaltmak icin basit optimizasyon araci.",
     titleEn: "Gear Weight Optimization",
@@ -267,6 +319,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "gear-simulations",
+    type: "bundle",
     title: "Disli Simulasyonlari",
     description: "Disli davranisini test etmek icin simulasyon sayfasi.",
     titleEn: "Gear Simulations",
@@ -276,6 +329,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "sealing-guide",
+    type: "guide",
     title: "Sizdirmazlik Rehberi",
     description: "Conta ve sizdirmazlik elemanlari icin pratik referanslar.",
     titleEn: "Sealing Guide",
@@ -285,6 +339,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "coating-guide",
+    type: "guide",
     title: "Kaplama Rehberi",
     description: "Kaplama turleri ve korozyon korumasi icin ozet bilgi.",
     titleEn: "Coating Guide",
@@ -294,6 +349,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "material-cards",
+    type: "guide",
     title: "Malzeme Kartlari",
     description: "Malzeme ozelliklerine hizli ulasim icin kartlar.",
     titleEn: "Material Cards",
@@ -303,6 +359,7 @@ export const toolCatalog: ToolCatalogItem[] = [
   },
   {
     id: "heat-treatment",
+    type: "guide",
     title: "Isil Islem",
     description: "Isil islem adimlari ve pratik kalite kontrol notlari.",
     titleEn: "Heat Treatment",
@@ -321,3 +378,4 @@ export const getToolCopy = (tool: ToolCatalogItem, locale: Locale) => {
   }
   return { title: tool.title, description: tool.description };
 };
+

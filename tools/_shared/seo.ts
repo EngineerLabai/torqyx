@@ -1,5 +1,8 @@
-﻿import { toolCatalog } from "./catalog";
-import { buildCanonical, SITE_URL } from "@/utils/seo";
+import { getToolCopy, toolCatalog } from "./catalog";
+import { getBrandCopy } from "@/config/brand";
+import type { Locale } from "@/utils/locale";
+import { DEFAULT_LOCALE } from "@/utils/locale";
+import { buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
 
 export type ToolSeo = {
   name: string;
@@ -7,6 +10,10 @@ export type ToolSeo = {
   description: string;
   href: string;
   canonical: string;
+  alternates: {
+    tr: string;
+    en: string;
+  };
 };
 
 const toolById = new Map(toolCatalog.map((tool) => [tool.id, tool]));
@@ -24,7 +31,7 @@ const titleize = (value: string) => {
     .join(" ");
 };
 
-export function getToolSeo(toolPath: string): ToolSeo {
+export function getToolSeo(toolPath: string, locale: Locale = DEFAULT_LOCALE): ToolSeo {
   const normalized = normalizePath(toolPath);
   const href = normalized ? `/tools/${normalized}` : "/tools";
 
@@ -32,24 +39,34 @@ export function getToolSeo(toolPath: string): ToolSeo {
   const byHref = toolByHref.get(href) ?? toolByHref.get(`/${normalized}`);
   const tool = byId ?? byHref ?? null;
 
-  const name = tool?.title ?? titleize(normalized);
+  const toolCopy = tool ? getToolCopy(tool, locale) : null;
+  const name = toolCopy?.title ?? tool?.title ?? titleize(normalized);
   const description =
+    toolCopy?.description ??
     tool?.description ??
-    "Mekanik hesaplama araci. Parametreleri gir, sonucu adim adim gor.";
+    (locale === "tr"
+      ? "Mekanik hesaplama araci. Parametreleri gir, sonucu adim adim gor."
+      : "Engineering calculator. Enter parameters and review step-by-step results.");
 
-  const canonical = buildCanonical(href) ?? new URL(href, SITE_URL).toString();
+  const brandName = getBrandCopy(locale).siteName;
+  const suffix = locale === "tr" ? "Hesaplayici" : "Calculator";
+  const title = `${name} ${suffix} | ${brandName}`;
+
+  const canonical = buildLocalizedCanonical(tool?.href ?? href, locale);
+  const alternates = buildLanguageAlternates(tool?.href ?? href);
 
   return {
     name,
-    title: `${name} | AI Engineers Lab`,
+    title,
     description,
     href: tool?.href ?? href,
     canonical,
+    alternates,
   };
 }
 
-export function buildToolSchema(toolPath: string) {
-  const meta = getToolSeo(toolPath);
+export function buildToolSchema(toolPath: string, locale: Locale = DEFAULT_LOCALE) {
+  const meta = getToolSeo(toolPath, locale);
 
   return {
     "@context": "https://schema.org",
@@ -58,7 +75,7 @@ export function buildToolSchema(toolPath: string) {
     description: meta.description,
     applicationCategory: "Engineering Calculator",
     operatingSystem: "Web",
-    inLanguage: "tr-TR",
+    inLanguage: locale === "tr" ? "tr-TR" : "en-US",
     url: meta.canonical,
   };
 }

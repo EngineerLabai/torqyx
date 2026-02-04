@@ -1,8 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Locale } from "@/utils/locale";
+import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
+import { getMessages } from "@/utils/messages";
 
 type LanguageSwitcherProps = {
   className?: string;
@@ -12,7 +14,11 @@ type LanguageSwitcherProps = {
 
 export default function LanguageSwitcher({ className = "", size = "sm", tone = "dark" }: LanguageSwitcherProps) {
   const { locale, setLocale } = useLocale();
+  const messages = getMessages(locale);
+  const copy = messages.languageSwitcher;
   const router = useRouter();
+  const pathname = usePathname() ?? "/";
+  const searchParams = useSearchParams();
   const buttonClass =
     size === "md" ? "rounded-full border px-2 py-1.5" : "rounded-full border px-1.5 py-1";
   const inactiveClass =
@@ -22,8 +28,11 @@ export default function LanguageSwitcher({ className = "", size = "sm", tone = "
 
   const handleSelect = (next: Locale) => {
     if (next === locale) return;
+    const basePath = stripLocaleFromPath(pathname);
+    const nextPath = withLocalePrefix(basePath, next);
+    const query = searchParams?.toString();
     setLocale(next);
-    router.refresh();
+    router.push(query ? `${nextPath}?${query}` : nextPath);
   };
 
   return (
@@ -32,7 +41,7 @@ export default function LanguageSwitcher({ className = "", size = "sm", tone = "
         type="button"
         onClick={() => handleSelect("tr")}
         className={`${buttonClass} transition ${locale === "tr" ? activeClass : inactiveClass}`}
-        aria-label="Turkce"
+        aria-label={copy.trLabel}
       >
         <FlagTR size={size} />
       </button>
@@ -40,7 +49,7 @@ export default function LanguageSwitcher({ className = "", size = "sm", tone = "
         type="button"
         onClick={() => handleSelect("en")}
         className={`${buttonClass} transition ${locale === "en" ? activeClass : inactiveClass}`}
-        aria-label="English"
+        aria-label={copy.enLabel}
       >
         <FlagEN size={size} />
       </button>

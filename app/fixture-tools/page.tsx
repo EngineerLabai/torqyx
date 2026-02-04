@@ -1,7 +1,24 @@
 // app/fixture-tools/page.tsx
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
+import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { withLocalePrefix } from "@/utils/locale-path";
+import { getMessages } from "@/utils/messages";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const copy = getMessages(locale).pages.fixtureTools;
+  const brandContent = getBrandCopy(locale);
+
+  return buildPageMetadata({
+    title: `${copy.title} | ${brandContent.siteName}`,
+    description: copy.description,
+    path: "/fixture-tools",
+    locale,
+  });
+}
 
 type FixtureToolStatus = "planned" | "beta";
 
@@ -85,33 +102,8 @@ const FIXTURE_TOOLS_BY_LOCALE: Record<"tr" | "en", FixtureTool[]> = {
 export default async function FixtureToolsPage() {
   const locale = await getLocaleFromCookies();
   const tools = FIXTURE_TOOLS_BY_LOCALE[locale];
-
-  const copy =
-    locale === "en"
-      ? {
-          badge: "Fixture tools",
-          title: "Practical cards for locating, clamping, and base plates",
-          description: "Quick calculators and checklists for fixture design.",
-          focus: "Focus",
-          active: "Active (Beta)",
-          planned: "Planned",
-          openTool: "Open tool",
-          comingSoon: "Coming soon",
-          footerActive: "Interactive card available.",
-          footerPlanned: "Card in preparation.",
-        }
-      : {
-          badge: "Fikstur araclari",
-          title: "Konumlama, sikistirma ve taban plaka icin pratik kartlar",
-          description: "Fikstur tasarimi icin hizli hesaplar ve kontrol listeleri.",
-          focus: "Odak",
-          active: "Aktif (Beta)",
-          planned: "Planlandi",
-          openTool: "Araci ac",
-          comingSoon: "Yakinda",
-          footerActive: "Etkilesimli kart hazir.",
-          footerPlanned: "Kart hazirlaniyor.",
-        };
+  const copy = getMessages(locale).pages.fixtureTools;
+  const localizeHref = (href?: string) => (href ? withLocalePrefix(href, locale) : undefined);
 
   return (
     <PageShell>
@@ -169,7 +161,7 @@ export default async function FixtureToolsPage() {
 
               {tool.href ? (
                 <Link
-                  href={tool.href}
+                  href={localizeHref(tool.href) ?? tool.href}
                   className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold text-white hover:bg-slate-800"
                 >
                   {copy.openTool}

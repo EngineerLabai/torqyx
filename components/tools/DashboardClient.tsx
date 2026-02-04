@@ -5,6 +5,7 @@ import ActionCard from "@/components/ui/ActionCard";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import useToolFavorites from "@/components/tools/useToolFavorites";
 import useToolRecents from "@/components/tools/useToolRecents";
+import { getMessages } from "@/utils/messages";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 const formatShortDate = (value: string, locale: "tr" | "en") => {
@@ -15,6 +16,7 @@ const formatShortDate = (value: string, locale: "tr" | "en") => {
 
 export default function DashboardClient() {
   const { locale } = useLocale();
+  const copy = getMessages(locale).components.dashboard;
   const { favorites, favoritesSet } = useToolFavorites();
   const { recents } = useToolRecents();
 
@@ -57,33 +59,6 @@ export default function DashboardClient() {
       .slice(0, 8);
   }, [favoriteTools, recentTools, favoritesSet]);
 
-  const copy =
-    locale === "en"
-      ? {
-          title: "Your dashboard",
-          description: "Favorites, recent work, and recommendations in one place.",
-          favorites: "Favorites",
-          favoritesEmpty: "You have no favorites yet.",
-          recents: "Recently used",
-          recentsEmpty: "No calculators opened yet.",
-          recommended: "Recommended",
-          recommendedEmpty: "Add favorites to see recommendations.",
-          open: "Open calculator",
-          lastUsed: "Last used",
-        }
-      : {
-          title: "Kontrol paneli",
-          description: "Favoriler, son kullanilanlar ve ozel oneriler tek yerde.",
-          favorites: "Favoriler",
-          favoritesEmpty: "Henuz favori eklemedin.",
-          recents: "Son kullanilanlar",
-          recentsEmpty: "Henuz bir hesaplayici acilmadi.",
-          recommended: "Onerilen",
-          recommendedEmpty: "Favori ekledikce oneriler burada gorunur.",
-          open: "Hesaplayiciyi Ac",
-          lastUsed: "Son kullanim",
-        };
-
   return (
     <div className="space-y-6">
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -96,9 +71,7 @@ export default function DashboardClient() {
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <h2 className="text-lg font-semibold text-slate-900">{copy.favorites}</h2>
-          <p className="text-sm text-slate-600">
-            {locale === "en" ? "Pinned calculators you want to keep close." : "Sik kullandigin hesaplayicilarin listesi."}
-          </p>
+          <p className="text-sm text-slate-600">{copy.favoritesDescription}</p>
         </div>
         {favoriteTools.length === 0 ? (
           <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
@@ -127,9 +100,7 @@ export default function DashboardClient() {
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <h2 className="text-lg font-semibold text-slate-900">{copy.recents}</h2>
-          <p className="text-sm text-slate-600">
-            {locale === "en" ? "Pick up where you left off." : "Kaldigin yerden devam et."}
-          </p>
+          <p className="text-sm text-slate-600">{copy.recentsDescription}</p>
         </div>
         {recentTools.length === 0 ? (
           <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
@@ -165,11 +136,7 @@ export default function DashboardClient() {
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <h2 className="text-lg font-semibold text-slate-900">{copy.recommended}</h2>
-          <p className="text-sm text-slate-600">
-            {locale === "en"
-              ? "Based on categories or tags from your recent activity."
-              : "Son kullanilanlarinla benzer kategori veya etiketlerden secildi."}
-          </p>
+          <p className="text-sm text-slate-600">{copy.recommendedDescription}</p>
         </div>
         {recommendedTools.length === 0 ? (
           <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">

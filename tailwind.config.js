@@ -10,12 +10,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // Basliklar icin Space Grotesk
-        display: ['var(--font-space-grotesk)', '"Space Grotesk"', 'sans-serif'],
-        // Genel metinler icin Space Grotesk
-        sans: ['"Space Grotesk"', 'sans-serif'],
+        // Basliklar icin Sora
+        display: ['var(--font-display)', '"Sora"', 'sans-serif'],
+        // Genel metinler icin Inter
+        sans: ['var(--font-sans)', '"Inter"', 'system-ui', 'sans-serif'],
         // Kod ve metinler icin JetBrains Mono
-        mono: ['var(--font-jetbrains-mono)', '"JetBrains Mono"', 'monospace'],
+        mono: ['var(--font-mono)', '"JetBrains Mono"', 'monospace'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -9,6 +9,7 @@ import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import { isLocale, LOCALE_COOKIE, type Locale } from "@/utils/locale";
 
 export const runtime = "nodejs";
+export const revalidate = 3600;
 
 const getToolBySlug = (slug: string) => {
   const normalizedSlug = slug.replace(/^\/+|\/+$/g, "");
@@ -44,11 +45,10 @@ export async function GET(request: NextRequest) {
     : null;
 
   type SerializedMdx = Awaited<ReturnType<typeof serialize>>;
-  type ExampleJson = import("@/utils/tool-docs").ToolExampleItem[];
-  let examples: null | { kind: "mdx"; source: SerializedMdx } | { kind: "json"; items: ExampleJson } = null;
+  let examples: null | { kind: "mdx"; source: SerializedMdx } = null;
 
-  if (docs.examples?.kind === "mdx") {
-    const serialized = await serialize(docs.examples.source, {
+  if (docs.examples) {
+    const serialized = await serialize(docs.examples, {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
         rehypePlugins: [rehypeSlug],
@@ -57,14 +57,11 @@ export async function GET(request: NextRequest) {
     examples = { kind: "mdx", source: serialized };
   }
 
-  if (docs.examples?.kind === "json") {
-    examples = { kind: "json", items: docs.examples.items };
-  }
-
   return NextResponse.json({
     tool: tool
       ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] }
       : null,
+    hasDocs: docs.hasDocs,
     explanation,
     examples,
     related,

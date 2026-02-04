@@ -1,37 +1,12 @@
 import type { Locale } from "@/utils/locale";
-import { BRAND_TAGLINE } from "@/utils/brand";
+import { getMessages } from "@/utils/messages";
 
 type AboutSectionProps = {
   locale: Locale;
 };
 
 export default function AboutSection({ locale }: AboutSectionProps) {
-  const copy =
-    locale === "en"
-      ? {
-          kicker: "About",
-          title: BRAND_TAGLINE,
-          lead:
-            "A methodology-first workspace for practical engineering decisions and repeatable calculations.",
-          cardOneTitle: "Methodology / Flow",
-          cardOneBody:
-            "Break the problem into steps, define assumptions, and follow a consistent calculation path.",
-          cardTwoTitle: "Manual + Visual",
-          cardTwoBody:
-            "Use formulas, tables, and visual cues so the reasoning stays clear and auditable.",
-        }
-      : {
-          kicker: "Hakkinda",
-          title: BRAND_TAGLINE,
-          lead:
-            "Pratik muhendislik kararlarini ve tekrarlanabilir hesaplari metodoloji odakli bir akista topla.",
-          cardOneTitle: "Metodoloji / Akis",
-          cardOneBody:
-            "Problemi adimlara bol, varsayimlari netlestir ve tutarli hesap akisini izle.",
-          cardTwoTitle: "Manuel + Gorsel",
-          cardTwoBody:
-            "Formuller, tablolar ve gorsel ipuclariyla sureci okunur ve izlenebilir tut.",
-        };
+  const copy = getMessages(locale).home.about;
 
   return (
     <section id="about" className="relative z-10 px-4 pb-16 md:px-10 lg:px-16">

@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 import type {
   ToolCompareMetric,
   ToolCompareScenario,
@@ -82,6 +83,9 @@ export default function ComparePanel<TInput, TResult>({
   CompareVisualizationSection,
 }: ComparePanelProps<TInput, TResult>) {
   const { locale } = useLocale();
+  const messages = getMessages(locale);
+  const copy = messages.components.comparePanel;
+  const common = messages.common;
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const [shareMessage, setShareMessage] = useState("");
@@ -145,7 +149,7 @@ export default function ComparePanel<TInput, TResult>({
   const formatValue = (value: string | number | boolean | null | undefined) => {
     if (value === null || value === undefined || value === "") return "-";
     if (typeof value === "boolean") {
-      return locale === "en" ? (value ? "Yes" : "No") : value ? "Evet" : "Hayir";
+      return value ? common.yes : common.no;
     }
     if (typeof value === "number") {
       if (!Number.isFinite(value)) return "-";
@@ -153,39 +157,6 @@ export default function ComparePanel<TInput, TResult>({
     }
     return value;
   };
-
-  const copy =
-    locale === "en"
-      ? {
-          title: "Compare mode",
-          description: "Build 2-3 scenarios with the same input set and compare results side by side.",
-          scenario: "Scenario",
-          label: "Optional label",
-          add: "Add scenario",
-          remove: "Remove",
-          reset: "Reset",
-          share: "Share Link",
-          tableTitle: "Comparison table",
-          metricLabel: "Metric",
-          emptyMetrics: "No comparable metrics available.",
-          shareSuccess: "Link copied.",
-          shareFail: "Copy failed. You can copy the link manually.",
-        }
-      : {
-          title: "Compare Mode",
-          description: "Ayni input setiyle 2-3 senaryo olustur, sonuclari yan yana karsilastir.",
-          scenario: "Senaryo",
-          label: "Opsiyonel etiket",
-          add: "Senaryo Ekle",
-          remove: "Kaldir",
-          reset: "Sifirla",
-          share: "Share Link",
-          tableTitle: "Karsilastirma Tablosu",
-          metricLabel: "Metrik",
-          emptyMetrics: "Karsilastirilabilir metrik bulunamadi.",
-          shareSuccess: "Link kopyalandi.",
-          shareFail: "Kopyalama basarisiz. Linki manuel kopyalayabilirsin.",
-        };
 
   const handleScenarioChange = (id: ScenarioState<TInput>["id"], nextInput: TInput) => {
     setScenarios((prev) =>
@@ -256,8 +227,8 @@ export default function ComparePanel<TInput, TResult>({
     window.setTimeout(() => setShareMessage(""), 2000);
   };
 
-  const headingFor = (scenario: ScenarioState<TInput>) =>
-    scenario.label ? `${scenario.title} · ${scenario.label}` : scenario.title;
+  const headingFor = (scenario: { title: string; label?: string }) =>
+    scenario.label ? `${scenario.title}${copy.separator}${scenario.label}` : scenario.title;
 
   return (
     <section

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 
 const DISMISS_KEY = "aielab:changelog-dismissed";
 
@@ -36,18 +37,7 @@ export default function UpdatesBanner({ latestVersion, latestDate, summary }: Up
       )
     : "";
 
-  const copy =
-    locale === "en"
-      ? {
-          title: "New updates are live",
-          cta: "View changelog",
-          dismiss: "Dismiss",
-        }
-      : {
-          title: "Yeni guncellemeler var",
-          cta: "Changelog'u gor",
-          dismiss: "Kapat",
-        };
+  const copy = getMessages(locale).components.updatesBanner;
 
   const handleDismiss = () => {
     try {

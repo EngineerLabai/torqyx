@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
-import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
+import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 
 type ActionCardProps = {
   title: string;

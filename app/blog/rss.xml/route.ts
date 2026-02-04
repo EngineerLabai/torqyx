@@ -1,6 +1,6 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getContentList } from "@/utils/content";
-import { BRAND_NAME } from "@/utils/brand";
+import { BRAND_NAME } from "@/config/brand";
 import { SITE_URL } from "@/utils/seo";
 
 const escapeXml = (value: string) =>
@@ -47,3 +47,4 @@ export async function GET() {
     },
   });
 }
+

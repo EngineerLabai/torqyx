@@ -1,19 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f8fb;
+  --background: #f8fafc;
   --foreground: #0f172a;
   --surface: #ffffff;
   --surface-muted: #f1f5f9;
   --border: #e2e8f0;
-  --muted: #64748b;
+  --muted: #475569;
   --accent: #0f172a;
   --accent-soft: #cbd5e1;
   --accent-cta: #059669; /* emerald-600 */
   --accent-2: #fb923c; /* accent orange */
-  --accent-alt: #0ea5e9; /* accent blue (optional) */
-  --font-sans: var(--font-space-grotesk);
-  --font-mono: var(--font-jetbrains-mono);
+  --accent-alt: #0ea5e9; /* accent blue */
 }
 
 @theme inline {
@@ -26,8 +24,15 @@
 body {
   background-color: var(--surface-muted);
   color: var(--foreground);
-  font-family: var(--font-sans), "Space Grotesk", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans), "Inter", system-ui, -apple-system, sans-serif;
   line-height: 1.6;
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 17px;
+  }
 }
 
 img,
@@ -65,10 +70,10 @@ a:hover {
 h1,
 h2,
 h3 {
-  font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display), "Sora", sans-serif;
+  letter-spacing: -0.02em;
   color: var(--foreground);
-  line-height: 1.05;
+  line-height: 1.1;
 }
 
 /* Subtle card outer gradient to make cards feel bespoke */
@@ -178,7 +183,10 @@ h3 {
 }
 
 body {
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(5,150,105,0.03), transparent 8%), radial-gradient(900px 400px at 90% 0%, rgba(250,204,21,0.02), transparent 12%), var(--surface-muted);
+  background:
+    radial-gradient(1200px 600px at 12% 8%, rgba(16, 185, 129, 0.06), transparent 50%),
+    radial-gradient(900px 480px at 88% 0%, rgba(14, 165, 233, 0.05), transparent 45%),
+    var(--surface-muted);
 }
 
 .site-container {
@@ -355,8 +363,8 @@ header.site-header {
 
 /* Selection color */
 ::selection {
-  background-color: #00ff41;
-  color: #000;
+  background-color: #bbf7d0;
+  color: #064e3b;
 }
 
 /* MDX helpers */

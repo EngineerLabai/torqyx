@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ComponentProps } from "react";
 import { z } from "zod";
 import {
   Chart,
@@ -17,6 +17,7 @@ import {
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 import type {
   ToolChartConfig,
   ToolDefinition,
@@ -38,6 +39,7 @@ Chart.register(
 
 type GenericToolPageProps<TInputs extends Record<string, unknown>, TResult> = {
   tool: ToolDefinition<TInputs, TResult>;
+  initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
 };
 
 const getDefaultValues = (inputs: ToolInputDefinition[]) =>
@@ -63,8 +65,12 @@ const isPrimitive = (value: unknown) =>
 
 export default function GenericToolPage<TInputs extends Record<string, unknown>, TResult>({
   tool,
+  initialDocs,
 }: GenericToolPageProps<TInputs, TResult>) {
   const { locale } = useLocale();
+  const messages = getMessages(locale);
+  const copy = messages.components.genericToolPage;
+  const common = messages.common;
   const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool.inputs));
   const chartRef = useRef<Chart | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -72,35 +78,6 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
   useEffect(() => {
     setValues(getDefaultValues(tool.inputs));
   }, [tool.id, tool.inputs]);
-
-  const copy =
-    locale === "en"
-      ? {
-          inputs: "Inputs",
-          results: "Results",
-          formula: "Formula",
-          chart: "Chart",
-          chartEmpty: "Provide valid values to render the chart.",
-          resultEmpty: "Fix the highlighted inputs to see results.",
-          required: "Required field.",
-          invalidNumber: "Enter a valid number.",
-          invalidOption: "Select a valid option.",
-          min: "Min",
-          max: "Max",
-        }
-      : {
-          inputs: "Girdiler",
-          results: "Sonuclar",
-          formula: "Formul",
-          chart: "Grafik",
-          chartEmpty: "Grafik icin gecerli degerler girin.",
-          resultEmpty: "Sonuclari gormek icin hatali alanlari duzeltin.",
-          required: "Zorunlu alan.",
-          invalidNumber: "Gecerli sayi girin.",
-          invalidOption: "Gecerli bir secim yapin.",
-          min: "Min",
-          max: "Max",
-        };
 
   const schema = useMemo(() => {
     const shape: Record<string, z.ZodTypeAny> = {};
@@ -209,7 +186,7 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
 
   return (
     <PageShell>
-      <ToolDocTabs slug={tool.id}>
+      <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {tool.categories.map((category) => (
@@ -255,7 +232,7 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
             {parsed.success && results ? (
               <div className="space-y-2">
                 {resultEntries.map(([key, value]) => (
-                  <ResultRow key={key} label={formatKey(key)} value={formatValue(value, locale)} />
+                  <ResultRow key={key} label={formatKey(key)} value={formatValue(value, locale, common)} />
                 ))}
               </div>
             ) : (
@@ -296,35 +273,27 @@ function buildFieldSchema(input: ToolInputDefinition, copy: Record<string, strin
   if (input.type === "select") {
     const options = (input.options ?? []).map((option) => String(option.value));
     return z
-      .string({ required_error: copy.required })
+      .string()
+      .min(1, copy.required)
       .refine((value) => options.includes(String(value)), copy.invalidOption);
   }
 
-  const numberSchema = z.preprocess(
-    (value) => {
-      if (typeof value === "string") {
-        const trimmed = value.trim();
-        if (!trimmed) return NaN;
-        return Number(trimmed);
-      }
-      return value;
-    },
-    z.number({
-      invalid_type_error: copy.invalidNumber,
-      required_error: copy.required,
-    }),
-  );
+  let schema = z
+    .string()
+    .min(1, copy.required)
+    .refine((value) => Number.isFinite(Number(value)), copy.invalidNumber)
+    .transform((value) => Number(value));
 
-  let schema = numberSchema.refine((value) => Number.isFinite(value), copy.invalidNumber);
-
-  if (typeof input.min === "number") {
-    const minLabel = input.unit ? `${copy.min} ${input.min} ${input.unit}` : `${copy.min} ${input.min}`;
-    schema = schema.min(input.min, minLabel);
+  const minValue = input.min;
+  if (typeof minValue === "number") {
+    const minLabel = input.unit ? `${copy.min} ${minValue} ${input.unit}` : `${copy.min} ${minValue}`;
+    schema = schema.refine((value) => value >= minValue, minLabel);
   }
 
-  if (typeof input.max === "number") {
-    const maxLabel = input.unit ? `${copy.max} ${input.max} ${input.unit}` : `${copy.max} ${input.max}`;
-    schema = schema.max(input.max, maxLabel);
+  const maxValue = input.max;
+  if (typeof maxValue === "number") {
+    const maxLabel = input.unit ? `${copy.max} ${maxValue} ${input.unit}` : `${copy.max} ${maxValue}`;
+    schema = schema.refine((value) => value <= maxValue, maxLabel);
   }
 
   return schema;
@@ -430,10 +399,10 @@ function ResultRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-function formatValue(value: unknown, locale: "tr" | "en") {
+function formatValue(value: unknown, locale: "tr" | "en", common: { yes: string; no: string }) {
   if (value === null || value === undefined || value === "") return "-";
   if (typeof value === "boolean") {
-    return locale === "en" ? (value ? "Yes" : "No") : value ? "Evet" : "Hayir";
+    return value ? common.yes : common.no;
   }
   if (typeof value === "number") {
     if (!Number.isFinite(value)) return "-";

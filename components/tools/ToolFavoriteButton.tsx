@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import useToolFavorites from "@/components/tools/useToolFavorites";
+import { formatMessage, getMessages } from "@/utils/messages";
 
 type ToolFavoriteButtonProps = {
   toolId: string;
@@ -16,26 +17,10 @@ export default function ToolFavoriteButton({ toolId, toolTitle, size = "md", cla
   const { isFavorite, toggleFavorite } = useToolFavorites();
   const active = isFavorite(toolId);
 
-  const copy = useMemo(
-    () =>
-      locale === "en"
-        ? {
-            addLabel: "☆ Add to favorites",
-            removeLabel: "★ Favorited",
-            addAria: (title?: string) => `Add ${title ?? "tool"} to favorites`,
-            removeAria: (title?: string) => `Remove ${title ?? "tool"} from favorites`,
-          }
-        : {
-            addLabel: "☆ Favoriye Ekle",
-            removeLabel: "★ Favorilerde",
-            addAria: (title?: string) => `${title ?? "Arac"} favorilere ekle`,
-            removeAria: (title?: string) => `${title ?? "Arac"} favorilerden cikar`,
-          },
-    [locale],
-  );
-
+  const copy = useMemo(() => getMessages(locale).components.toolFavoriteButton, [locale]);
+  const title = toolTitle ?? copy.fallbackTitle;
   const label = active ? copy.removeLabel : copy.addLabel;
-  const ariaLabel = active ? copy.removeAria(toolTitle) : copy.addAria(toolTitle);
+  const ariaLabel = formatMessage(active ? copy.removeAria : copy.addAria, { title });
   const sizeClasses = size === "sm" ? "px-2.5 py-1 text-[10px]" : "px-3 py-1 text-[11px]";
   const toneClasses = active
     ? "border-amber-200 bg-amber-50 text-amber-700 hover:border-amber-300"
@@ -49,8 +34,7 @@ export default function ToolFavoriteButton({ toolId, toolTitle, size = "md", cla
       aria-label={ariaLabel}
       aria-pressed={active}
     >
-      <span aria-hidden>{label.split(" ")[0]}</span>
-      <span>{label.replace(/^[^ ]+ /, "")}</span>
+      <span>{label}</span>
     </button>
   );
 }

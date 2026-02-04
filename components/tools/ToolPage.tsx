@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ComponentProps } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
@@ -11,6 +11,7 @@ import { trackEvent } from "@/utils/analytics";
 
 type ToolPageProps<TInput, TResult> = {
   tool: ToolDefinition<TInput, TResult>;
+  initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
 };
 
 const safeDecode = <TInput,>(value: string | null): TInput | null => {
@@ -31,7 +32,7 @@ const safeEncode = <TInput,>(value: TInput) => {
   }
 };
 
-export default function ToolPage<TInput, TResult>({ tool }: ToolPageProps<TInput, TResult>) {
+export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPageProps<TInput, TResult>) {
   const [input, setInput] = useState<TInput>(tool.initialInput);
   const result = useMemo(() => tool.calculate(input), [input, tool]);
   const searchParams = useSearchParams();
@@ -113,7 +114,7 @@ export default function ToolPage<TInput, TResult>({ tool }: ToolPageProps<TInput
 
   return (
     <PageShell>
-      <ToolDocTabs slug={tool.id}>
+      <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">
             <p className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">

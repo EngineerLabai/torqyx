@@ -1,16 +1,19 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
 import { getContentList } from "@/utils/content";
-import { BRAND_NAME } from "@/utils/brand";
-import { DEFAULT_OG_IMAGE_META, buildCanonical } from "@/utils/seo";
+import { getBrandCopy } from "@/config/brand";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { formatMessage, getMessages } from "@/utils/messages";
+import { buildPageMetadata } from "@/utils/metadata";
 import { getCategoryIndex, matchesSlug, resolveLabelBySlug } from "@/utils/taxonomy";
 import { slugify } from "@/utils/slugify";
 import { toolCatalog } from "@/tools/_shared/catalog";
 
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium" }).format(new Date(value));
+const formatDate = (value: string, locale: "tr" | "en") =>
+  new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
+    new Date(value),
+  );
 
 type CategoryPageProps = {
   params: { category: string };
@@ -21,40 +24,35 @@ export async function generateStaticParams() {
   return categories.map((category) => ({ category: category.slug }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CategoryPageProps) {
+  const locale = await getLocaleFromCookies();
+  const brandContent = getBrandCopy(locale);
   const categories = await getCategoryIndex();
   const categorySlug = decodeURIComponent(params.category);
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");
+  const titleBase = locale === "tr" ? `${label} kategorisi` : `${label} category`;
+  const description =
+    locale === "tr"
+      ? `${label} kategorisine ait blog, rehber ve hesaplayici listesi.`
+      : `Blog posts, guides, and calculators listed under ${label}.`;
 
-  return {
-    title: `${label} kategorisi | ${BRAND_NAME}`,
-    description: `${label} kategorisine ait blog, rehber ve hesaplayici listesi.`,
-    alternates: {
-      canonical: buildCanonical(`/categories/${categorySlug}`),
-    },
-    openGraph: {
-      title: `${label} kategorisi`,
-      description: `${label} kategorisine ait blog, rehber ve hesaplayici listesi.`,
-      type: "website",
-      url: buildCanonical(`/categories/${categorySlug}`) ?? `/categories/${categorySlug}`,
-      images: [DEFAULT_OG_IMAGE_META],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${label} kategorisi`,
-      description: `${label} kategorisine ait blog, rehber ve hesaplayici listesi.`,
-      images: [DEFAULT_OG_IMAGE_META.url],
-    },
-  };
+  return buildPageMetadata({
+    title: `${titleBase} | ${brandContent.siteName}`,
+    description,
+    path: `/categories/${categorySlug}`,
+    locale,
+  });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const categorySlug = decodeURIComponent(params.category);
-  const [blog, guides, categories] = await Promise.all([
+  const [blog, guides, categories, locale] = await Promise.all([
     getContentList("blog"),
     getContentList("guides"),
     getCategoryIndex(),
+    getLocaleFromCookies(),
   ]);
+  const copy = getMessages(locale).pages.categories;
 
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");
 
@@ -79,52 +77,54 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
-            <span className="font-semibold">Kategori</span>
+            <span className="font-semibold">{copy.badge}</span>
           </div>
           <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-4xl">{label}</h1>
           <p className="text-[15px] leading-relaxed text-slate-700 md:text-base">
-            Bu kategori altindaki blog yazilari, rehberler ve hesaplayicilar.
+            {copy.description}
           </p>
         </div>
       </section>
 
       <section className="space-y-6">
         <ContentSection
-          title="Blog"
-          description="Kategoriye ait blog yazilari."
+          title={copy.blogTitle}
+          description={copy.blogDesc}
+          copy={copy}
           items={blogMatches.map((item) => ({
             href: `/blog/${item.slug}`,
             title: item.title,
             description: item.description,
             category: item.category,
-            date: formatDate(item.date),
-            readingTime: `${item.readingTimeMinutes} dk`,
+            date: formatDate(item.date, locale),
+            readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
             tags: item.tags,
           }))}
         />
 
         <ContentSection
-          title="Rehberler"
-          description="Kategoriye ait rehberler."
+          title={copy.guidesTitle}
+          description={copy.guidesDesc}
+          copy={copy}
           items={guideMatches.map((item) => ({
             href: `/guides/${item.slug}`,
             title: item.title,
             description: item.description,
             category: item.category,
-            date: formatDate(item.date),
-            readingTime: `${item.readingTimeMinutes} dk`,
+            date: formatDate(item.date, locale),
+            readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
             tags: item.tags,
           }))}
         />
 
-        <ToolSection tools={toolMatches} />
+        <ToolSection tools={toolMatches} copy={copy} />
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Ilgili etiketler</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.relatedTagsTitle}</h2>
           {relatedTags.length === 0 ? (
-            <p className="text-sm text-slate-600">Ilgili etiket bulunamadi.</p>
+            <p className="text-sm text-slate-600">{copy.relatedTagsEmpty}</p>
           ) : (
             <div className="flex flex-wrap gap-2">
               {relatedTags.map((tag) => (
@@ -154,7 +154,17 @@ type ContentItem = {
   tags: string[];
 };
 
-function ContentSection({ title, description, items }: { title: string; description: string; items: ContentItem[] }) {
+function ContentSection({
+  title,
+  description,
+  items,
+  copy,
+}: {
+  title: string;
+  description: string;
+  items: ContentItem[];
+  copy: { contentEmpty: string; readCta: string };
+}) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="space-y-2">
@@ -164,7 +174,7 @@ function ContentSection({ title, description, items }: { title: string; descript
 
       {items.length === 0 ? (
         <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
-          Bu kategoride icerik bulunamadi.
+          {copy.contentEmpty}
         </div>
       ) : (
         <div className="mt-5 grid gap-4 lg:grid-cols-2">
@@ -203,7 +213,7 @@ function ContentSection({ title, description, items }: { title: string; descript
               </div>
               <div className="mt-4">
                 <Link href={item.href} className="text-xs font-semibold text-sky-700 hover:underline">
-                  Oku
+                  {copy.readCta}
                 </Link>
               </div>
             </article>
@@ -214,17 +224,17 @@ function ContentSection({ title, description, items }: { title: string; descript
   );
 }
 
-function ToolSection({ tools }: { tools: typeof toolCatalog }) {
+function ToolSection({ tools, copy }: { tools: typeof toolCatalog; copy: { toolsTitle: string; toolsDesc: string; toolsEmpty: string; openToolCta: string } }) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="space-y-2">
-        <h2 className="text-lg font-semibold text-slate-900">Hesaplayicilar</h2>
-        <p className="text-sm text-slate-600">Kategoriye ait hesaplayicilar.</p>
+        <h2 className="text-lg font-semibold text-slate-900">{copy.toolsTitle}</h2>
+        <p className="text-sm text-slate-600">{copy.toolsDesc}</p>
       </div>
 
       {tools.length === 0 ? (
         <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
-          Bu kategoride hesaplayici bulunamadi.
+          {copy.toolsEmpty}
         </div>
       ) : (
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -236,7 +246,7 @@ function ToolSection({ tools }: { tools: typeof toolCatalog }) {
               href={tool.href}
               badge={tool.category}
               toolId={tool.id}
-              ctaLabel="Hesaplayiciyi Ac"
+              ctaLabel={copy.openToolCta}
             />
           ))}
         </div>

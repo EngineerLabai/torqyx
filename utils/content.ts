@@ -13,6 +13,8 @@ const CONTENT_DIRS = {
   glossary: "glossary",
 } as const;
 
+const CONTENT_EXTENSIONS = new Set([".mdx", ".md"]);
+
 export type ContentType = keyof typeof CONTENT_DIRS;
 
 export type ContentFrontmatter = {
@@ -220,7 +222,7 @@ const readContentFiles = async (type: ContentType) => {
   try {
     const entries = await fs.readdir(dir, { withFileTypes: true });
     return entries
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".mdx"))
+      .filter((entry) => entry.isFile() && CONTENT_EXTENSIONS.has(path.extname(entry.name)))
       .map((entry) => path.join(dir, entry.name));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import type { StoredCalculation } from "@/components/tools/ToolHistory";
 
@@ -31,6 +32,7 @@ const formatDate = (value: string, locale: string) => {
 
 export default function SavedCalculations() {
   const { locale } = useLocale();
+  const copy = getMessages(locale).components.savedCalculations;
   const [entries, setEntries] = useState<StoredCalculation<unknown, unknown>[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -70,37 +72,6 @@ export default function SavedCalculations() {
 
     setEntries((prev) => prev.filter((item) => item.id !== entry.id));
   };
-
-  const copy =
-    locale === "en"
-      ? {
-          title: "Saved calculations",
-          description:
-            "Saved items live only on this device. Reopen or delete entries from the list below.",
-          loading: "Loading saved items...",
-          emptyTitle: "No saved calculations yet.",
-          emptyHint: 'Use the "Save" button inside a calculator to create one.',
-          toolLibrary: "Go to Calculator Library",
-          reopen: "Open again",
-          delete: "Delete",
-          details: "Input and result details",
-          inputs: "Inputs",
-          outputs: "Result",
-        }
-      : {
-          title: "Kayitli Hesaplarim",
-          description:
-            "Kayitlar sadece bu cihazda saklanir. Tekrar acmak veya silmek icin listeden istedigin kaydi kullanabilirsin.",
-          loading: "Kayitlar yukleniyor...",
-          emptyTitle: "Kayitli hesap bulunamadi.",
-          emptyHint: 'Bir hesaplayicida "Kaydet" butonunu kullanarak kayit olusturabilirsin.',
-          toolLibrary: "Hesaplayici Kutuphanesi'ne git",
-          reopen: "Tekrar Ac",
-          delete: "Sil",
-          details: "Parametre ve sonuc detaylari",
-          inputs: "Parametreler",
-          outputs: "Sonuc",
-        };
 
   return (
     <div className="space-y-6">

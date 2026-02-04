@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatMessage, getMessages } from "@/utils/messages";
 import { trackEvent } from "@/utils/analytics";
 
 export type StoredCalculation<TInput, TResult> = {
@@ -41,9 +43,9 @@ const createId = () => {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 };
 
-const formatDate = (value: string) => {
+const formatDate = (value: string, locale: "tr" | "en") => {
   try {
-    return new Date(value).toLocaleString("tr-TR", {
+    return new Date(value).toLocaleString(locale === "en" ? "en-US" : "tr-TR", {
       dateStyle: "medium",
       timeStyle: "short",
     });
@@ -58,6 +60,8 @@ const hasError = (result: unknown) => {
 };
 
 export default function ToolHistory<TInput, TResult>({ toolId, toolTitle, input, result }: ToolHistoryProps<TInput, TResult>) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).components.toolHistory;
   const [entries, setEntries] = useState<StoredCalculation<TInput, TResult>[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -80,7 +84,7 @@ export default function ToolHistory<TInput, TResult>({ toolId, toolTitle, input,
     try {
       localStorage.setItem(storageKey, JSON.stringify(next));
     } catch {
-      setFeedback({ type: "error", text: "Kayit islemi basarisiz. Tarayici alani dolu olabilir." });
+      setFeedback({ type: "error", text: copy.feedback.storeError });
     }
   };
 
@@ -97,10 +101,10 @@ export default function ToolHistory<TInput, TResult>({ toolId, toolTitle, input,
     const next = [nextEntry, ...entries].slice(0, MAX_ENTRIES);
     try {
       persist(next);
-      setFeedback({ type: "success", text: "Kayit basariyla olusturuldu." });
+      setFeedback({ type: "success", text: copy.feedback.saveSuccess });
       trackEvent("save_result", { tool_id: toolId, tool_title: toolTitle });
     } catch {
-      setFeedback({ type: "error", text: "Kayit islemi basarisiz oldu." });
+      setFeedback({ type: "error", text: copy.feedback.saveError });
     }
     window.setTimeout(() => setFeedback(null), 2000);
   };
@@ -108,9 +112,9 @@ export default function ToolHistory<TInput, TResult>({ toolId, toolTitle, input,
   const handleClear = () => {
     try {
       persist([]);
-      setFeedback({ type: "success", text: "Kayitlar temizlendi." });
+      setFeedback({ type: "success", text: copy.feedback.clearSuccess });
     } catch {
-      setFeedback({ type: "error", text: "Kayitlari temizlerken hata oldu." });
+      setFeedback({ type: "error", text: copy.feedback.clearError });
     }
     window.setTimeout(() => setFeedback(null), 2000);
   };
@@ -118,12 +122,12 @@ export default function ToolHistory<TInput, TResult>({ toolId, toolTitle, input,
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Kayitli Hesaplar</h2>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
         <p className="text-xs text-slate-500">
-          Kaydettigin hesaplar sadece bu cihazda saklanir. En son {MAX_ENTRIES} kayit tutulur.
+          {formatMessage(copy.description, { count: MAX_ENTRIES })}
         </p>
         <Link href="/saved-calculations" className="text-[11px] font-semibold text-slate-700 underline">
-          Tum kayitlari gor
+          {copy.viewAll}
         </Link>
       </div>
 
@@ -134,19 +138,19 @@ export default function ToolHistory<TInput, TResult>({ toolId, toolTitle, input,
           disabled={resultHasError}
           className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
         >
-          Kaydet
+          {copy.save}
         </button>
         <button
           type="button"
           onClick={handleClear}
           className="rounded-full border border-slate-200 px-4 py-2 text-[11px] font-semibold text-slate-600 transition hover:border-slate-400 hover:bg-slate-50"
         >
-          Kayitlari Temizle
+          {copy.clear}
         </button>
         {resultHasError ? (
-          <span className="text-[11px] text-slate-500">Gecerli sonuc olmadan kayit alamazsin.</span>
+          <span className="text-[11px] text-slate-500">{copy.errorNoResult}</span>
         ) : (
-          <span className="text-[11px] text-slate-500">Mevcut sonucu tek tikla sakla.</span>
+          <span className="text-[11px] text-slate-500">{copy.hintSave}</span>
         )}
         {feedback ? (
           <span
@@ -163,28 +167,28 @@ export default function ToolHistory<TInput, TResult>({ toolId, toolTitle, input,
 
       {!isLoaded ? (
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-500">
-          Kayitlar yukleniyor...
+          {copy.loading}
         </div>
       ) : entries.length === 0 ? (
         <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-500">
-          Henuz kayitli hesap yok. Sonucu kaydetmek icin yukaridaki butonu kullan.
+          {copy.empty}
         </div>
       ) : (
         <div className="space-y-3">
           {entries.map((entry) => (
             <details key={entry.id} className="rounded-xl border border-slate-200 bg-white px-4 py-3">
               <summary className="cursor-pointer text-xs font-semibold text-slate-700">
-                {formatDate(entry.createdAt)} - {entry.toolTitle}
+                {formatDate(entry.createdAt, locale)} - {entry.toolTitle}
               </summary>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                  <p className="text-[11px] font-medium text-slate-500">Parametreler</p>
+                  <p className="text-[11px] font-medium text-slate-500">{copy.inputs}</p>
                   <pre className="mt-1 max-h-48 overflow-auto text-[11px] text-slate-700">
                     {JSON.stringify(entry.input, null, 2)}
                   </pre>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                  <p className="text-[11px] font-medium text-slate-500">Sonuc</p>
+                  <p className="text-[11px] font-medium text-slate-500">{copy.outputs}</p>
                   <pre className="mt-1 max-h-48 overflow-auto text-[11px] text-slate-700">
                     {JSON.stringify(entry.result, null, 2)}
                   </pre>

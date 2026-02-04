@@ -7,25 +7,16 @@ import ActionCard from "@/components/ui/ActionCard";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
 import Callout from "@/components/mdx/Callout";
 import MDXClient from "@/components/mdx/MDXClient";
+import PremiumCTA from "@/components/premium/PremiumCTA";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 import { trackEvent } from "@/utils/analytics";
 import { addRecent } from "@/utils/tool-storage";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
-const TABS = {
-  tr: [
-    { id: "calculator", label: "Hesaplayici" },
-    { id: "explanation", label: "Aciklama" },
-    { id: "examples", label: "Ornekler" },
-  ],
-  en: [
-    { id: "calculator", label: "Calculator" },
-    { id: "explanation", label: "Explanation" },
-    { id: "examples", label: "Examples" },
-  ],
-} as const;
+const TAB_IDS = ["calculator", "explanation", "examples"] as const;
 
-type TabId = (typeof TABS)["tr"][number]["id"];
+type TabId = (typeof TAB_IDS)[number];
 
 type RelatedItem = {
   slug: string;
@@ -45,6 +36,7 @@ type ExampleItem = {
 
 type ToolDocsResponse = {
   tool: { id: string; title: string; tags: string[] } | null;
+  hasDocs: boolean;
   explanation: import("next-mdx-remote").MDXRemoteSerializeResult | null;
   examples:
     | { kind: "mdx"; source: import("next-mdx-remote").MDXRemoteSerializeResult }
@@ -56,86 +48,52 @@ type ToolDocsResponse = {
 type ToolDocTabsProps = {
   slug: string;
   children: ReactNode;
+  initialDocs?: ToolDocsResponse | null;
 };
 
-const isValidTab = (value: string | null, locale: "tr" | "en"): value is TabId =>
-  Boolean(value && TABS[locale].some((tab) => tab.id === value));
+const isValidTab = (value: string | null): value is TabId =>
+  Boolean(value && TAB_IDS.includes(value as TabId));
 
-export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
+export default function ToolDocTabs({ slug, children, initialDocs = null }: ToolDocTabsProps) {
   const { locale } = useLocale();
+  const copy = getMessages(locale).components.toolDocTabs;
+  const allTabs = useMemo(() => TAB_IDS.map((id) => ({ id, label: copy.tabs[id] })), [copy]);
   const searchParams = useSearchParams();
   const tabParam = searchParams?.get("tab");
-  const initialTab = isValidTab(tabParam, locale) ? tabParam : "calculator";
+  const initialTab = isValidTab(tabParam) ? tabParam : "calculator";
   const [activeTab, setActiveTab] = useState<TabId>(initialTab);
-  const [docs, setDocs] = useState<ToolDocsResponse | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [docs, setDocs] = useState<ToolDocsResponse | null>(initialDocs);
+  const [loading, setLoading] = useState<boolean>(!initialDocs);
   const [error, setError] = useState<string>("");
   const didTrackOpen = useRef<string | null>(null);
   const didTrackRecent = useRef<string | null>(null);
 
-  const copy =
-    locale === "en"
-      ? {
-          tabsTitle: "Calculator tabs",
-          explanationTitle: "Calculation explanation",
-          examplesTitle: "Examples",
-          loadingTitle: "Documentation is preparing",
-          loadingBody: "If it stays here, this calculator may not have explanation/examples yet.",
-          docsFailedTitle: "Documentation unavailable",
-          docsFailedBody: "We could not load the explanation and examples right now.",
-          explanationEmptyTitle: "Explanation (coming soon)",
-          explanationEmptyBody: "This calculator does not have an explanation card yet. You can still use it.",
-          examplesEmptyTitle: "Examples (coming soon)",
-          examplesEmptyBody: "No examples are available yet. We will add sample inputs soon.",
-          examplesEmptyHint: "Examples are being prepared.",
-          inputs: "Inputs",
-          outputs: "Outputs",
-          note: "Note",
-          guidesTitle: "Guides",
-          guidesHeading: "Related guides",
-          guidesDesc: "Browse guides with similar tags.",
-          glossaryTitle: "Glossary",
-          glossaryHeading: "Related terms",
-          glossaryDesc: "Terms that share the same concepts as this calculator.",
-          read: "Read",
-        }
-      : {
-          tabsTitle: "Hesaplayici Sekmeleri",
-          explanationTitle: "Hesaplama Aciklamasi",
-          examplesTitle: "Ornekler",
-          loadingTitle: "Dokumantasyon hazirlaniyor",
-          loadingBody: "Kisa surede gelmezse bu hesaplayici icin aciklama/ornekler henuz yayinlanmamis olabilir.",
-          docsFailedTitle: "Dokumantasyon erisilemedi",
-          docsFailedBody: "Su anda aciklama ve ornekler getirilemiyor.",
-          explanationEmptyTitle: "Aciklama (yakinda)",
-          explanationEmptyBody: "Bu hesaplayici icin aciklama henuz eklenmedi. Simdilik kullanabilirsin.",
-          examplesEmptyTitle: "Ornekler (yakinda)",
-          examplesEmptyBody: "Bu hesaplayici icin ornekler henuz eklenmedi. Yakinda ornek girdiler eklenecek.",
-          examplesEmptyHint: "Ornekler hazirlaniyor.",
-          inputs: "Girdiler",
-          outputs: "Ciktilar",
-          note: "Not",
-          guidesTitle: "Rehberler",
-          guidesHeading: "Ilgili rehberler",
-          guidesDesc: "Benzer etiketli rehberlere goz at.",
-          glossaryTitle: "Sozluk",
-          glossaryHeading: "Ilgili terimler",
-          glossaryDesc: "Hesaplayiciyla ayni kavramlara bakan terimler.",
-          read: "Oku",
-        };
-
   useEffect(() => {
-    if (isValidTab(tabParam, locale)) {
+    if (isValidTab(tabParam)) {
       Promise.resolve().then(() => setActiveTab(tabParam));
     }
-  }, [tabParam, locale]);
+  }, [tabParam]);
+
+  useEffect(() => {
+    if (!initialDocs) return;
+    setDocs(initialDocs);
+    setLoading(false);
+  }, [initialDocs]);
 
   useEffect(() => {
     let ignore = false;
     Promise.resolve().then(() => {
-      setLoading(true);
-      setError("");
+      if (!initialDocs) {
+        setLoading(true);
+        setError("");
+      }
     });
+
+    if (initialDocs) {
+      return () => {
+        ignore = true;
+      };
+    }
 
     fetch(`/api/tools/docs?slug=${encodeURIComponent(slug)}`)
       .then(async (res) => {
@@ -158,7 +116,7 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
     return () => {
       ignore = true;
     };
-  }, [slug, copy.docsFailedBody]);
+  }, [slug, copy.docsFailedBody, initialDocs]);
 
   useEffect(() => {
     if (!slug) return;
@@ -193,6 +151,42 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
     };
   }, [docs]);
 
+  const hasExplanation = Boolean(docs?.explanation);
+  const hasExamples = Boolean(
+    docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0),
+  );
+  const shouldShowMissingNote = !loading && !error && docs && !docs.hasDocs;
+
+  const availableTabs = useMemo(() => {
+    if (loading || error) return allTabs;
+
+    const calculatorTab = allTabs.find((tab) => tab.id === "calculator");
+    const explanationTab = allTabs.find((tab) => tab.id === "explanation");
+    const examplesTab = allTabs.find((tab) => tab.id === "examples");
+
+    const next = calculatorTab ? [calculatorTab] : [];
+
+    if (!docs || !docs.hasDocs) {
+      return next;
+    }
+
+    if (hasExplanation && explanationTab) {
+      next.push(explanationTab);
+    }
+
+    if (hasExamples && examplesTab) {
+      next.push(examplesTab);
+    }
+
+    return next;
+  }, [docs, hasExplanation, hasExamples, loading, error, allTabs]);
+
+  useEffect(() => {
+    if (!availableTabs.some((tab) => tab.id === activeTab)) {
+      setActiveTab("calculator");
+    }
+  }, [availableTabs, activeTab]);
+
   const loadingCallout = (
     <Callout type="info" title={copy.loadingTitle}>
       {copy.loadingBody}
@@ -205,6 +199,12 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
     </Callout>
   );
 
+  const missingDocsCallout = (
+    <Callout type="info" title={copy.docsMissingTitle}>
+      {copy.docsMissingBody}
+    </Callout>
+  );
+
   const renderExplanation = () => {
     if (loading) {
       return loadingCallout;
@@ -212,6 +212,10 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
 
     if (error) {
       return errorCallout;
+    }
+
+    if (shouldShowMissingNote) {
+      return missingDocsCallout;
     }
 
     if (docs?.explanation) {
@@ -236,6 +240,10 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
 
     if (error) {
       return errorCallout;
+    }
+
+    if (shouldShowMissingNote) {
+      return missingDocsCallout;
     }
 
     if (!docs?.examples) {
@@ -295,7 +303,7 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
         <div className="flex flex-wrap items-center gap-2">
           <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.tabsTitle}</div>
           <div className="flex flex-wrap gap-2">
-            {TABS[locale].map((tab) => (
+            {availableTabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
@@ -316,7 +324,12 @@ export default function ToolDocTabs({ slug, children }: ToolDocTabsProps) {
         ) : null}
       </div>
 
-      <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>{children}</div>
+      {shouldShowMissingNote ? missingDocsCallout : null}
+
+      <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
+        {children}
+        <PremiumCTA variant="compact" />
+      </div>
 
       <section className={activeTab === "explanation" ? "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" : "hidden"}>
         <div className="space-y-4">

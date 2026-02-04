@@ -1,29 +1,22 @@
-import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import RequestToolForm from "@/components/tools/RequestToolForm";
-import { BRAND_NAME } from "@/utils/brand";
-import { DEFAULT_OG_IMAGE_META, buildCanonical } from "@/utils/seo";
+import { getBrandCopy } from "@/config/brand";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
+import { buildPageMetadata } from "@/utils/metadata";
 
-export const metadata: Metadata = {
-  title: `Tool Request | ${BRAND_NAME}`,
-  description: "Ihtiyac duydugun araclari hizla tarif et ve talep olustur.",
-  alternates: {
-    canonical: buildCanonical("/request-tool") ?? "/request-tool",
-  },
-  openGraph: {
-    title: `Tool Request | ${BRAND_NAME}`,
-    description: "Ihtiyac duydugun araclari hizla tarif et ve talep olustur.",
-    type: "website",
-    url: buildCanonical("/request-tool") ?? "/request-tool",
-    images: [DEFAULT_OG_IMAGE_META],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `Tool Request | ${BRAND_NAME}`,
-    description: "Ihtiyac duydugun araclari hizla tarif et ve talep olustur.",
-    images: [DEFAULT_OG_IMAGE_META.url],
-  },
-};
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const copy = getMessages(locale).components.requestToolForm;
+  const brandContent = getBrandCopy(locale);
+
+  return buildPageMetadata({
+    title: `${copy.title} | ${brandContent.siteName}`,
+    description: copy.description,
+    path: "/request-tool",
+    locale,
+  });
+}
 
 export default function RequestToolPage() {
   return (

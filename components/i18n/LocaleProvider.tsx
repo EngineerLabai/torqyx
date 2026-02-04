@@ -2,7 +2,9 @@
 
 import type { ReactNode } from "react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { DEFAULT_LOCALE, LOCALE_COOKIE, LOCALE_STORAGE_KEY, isLocale, type Locale } from "@/utils/locale";
+import { getLocaleFromPathname } from "@/utils/locale-path";
 
 type LocaleContextValue = {
   locale: Locale;
@@ -18,14 +20,22 @@ type LocaleProviderProps = {
 
 export function LocaleProvider({ children, initialLocale = DEFAULT_LOCALE }: LocaleProviderProps) {
   const [locale, setLocale] = useState<Locale>(initialLocale);
+  const pathname = usePathname();
+  const pathLocale = pathname ? getLocaleFromPathname(pathname) : null;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (pathLocale) return;
     const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
     if (isLocale(stored)) {
       Promise.resolve().then(() => setLocale(stored));
     }
-  }, []);
+  }, [pathLocale]);
+
+  useEffect(() => {
+    if (!pathLocale || pathLocale === locale) return;
+    setLocale(pathLocale);
+  }, [pathLocale, locale]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;

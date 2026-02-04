@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
@@ -7,13 +6,19 @@ import MDXRenderer from "@/components/mdx/MDXRenderer";
 import Formula from "@/components/mdx/Formula";
 import ActionCard from "@/components/ui/ActionCard";
 import { getContentBySlug, getContentList } from "@/utils/content";
-import { BRAND_NAME } from "@/utils/brand";
-import { DEFAULT_OG_IMAGE_META, buildCanonical, SITE_URL } from "@/utils/seo";
+import { BRAND_NAME } from "@/config/brand";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { formatMessage, getMessages } from "@/utils/messages";
+import { buildLocalizedCanonical } from "@/utils/seo";
+import { buildPageMetadata } from "@/utils/metadata";
 import { slugify } from "@/utils/slugify";
-import { toolCatalog } from "@/tools/_shared/catalog";
+import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
+import { withLocalePrefix } from "@/utils/locale-path";
 
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium" }).format(new Date(value));
+const formatDate = (value: string, locale: "tr" | "en") =>
+  new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
+    new Date(value),
+  );
 
 const extractFormulas = (content: string) => {
   const regex = /<Formula(?:[^>]*label=(?:"([^"]+)"|'([^']+)'))?[^>]*>([\s\S]*?)<\/Formula>/g;
@@ -39,54 +44,48 @@ export async function generateStaticParams() {
   return terms.map((term) => ({ slug: term.slug }));
 }
 
-export async function generateMetadata({ params }: GlossaryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: GlossaryPageProps) {
   const term = await getContentBySlug("glossary", params.slug);
+  const locale = await getLocaleFromCookies();
+  const notFoundCopy = getMessages(locale).pages.notFound;
 
   if (!term) {
-    return {
-      title: "Icerik bulunamadi",
-      description: "Istenen terim bulunamadi.",
-    };
+    return buildPageMetadata({
+      title: notFoundCopy.title,
+      description: notFoundCopy.description,
+      path: `/glossary/${params.slug}`,
+      locale,
+    });
   }
 
-  return {
-    title: `${term.title} | Sozluk`,
+  return buildPageMetadata({
+    title: term.title,
     description: term.description,
+    path: `/glossary/${term.slug}`,
+    locale,
+    type: "article",
     keywords: term.tags,
-    alternates: {
-      canonical: term.canonical ?? buildCanonical(`/glossary/${term.slug}`),
-    },
-    openGraph: {
-      title: term.title,
-      description: term.description,
-      type: "article",
-      url: term.canonical ?? buildCanonical(`/glossary/${term.slug}`) ?? `/glossary/${term.slug}`,
-      images: [DEFAULT_OG_IMAGE_META],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: term.title,
-      description: term.description,
-      images: [DEFAULT_OG_IMAGE_META.url],
-    },
-  };
+  });
 }
 
 export default async function GlossaryPage({ params }: GlossaryPageProps) {
-  const term = await getContentBySlug("glossary", params.slug);
+  const [term, locale] = await Promise.all([getContentBySlug("glossary", params.slug), getLocaleFromCookies()]);
 
   if (!term) {
     notFound();
   }
 
-  const canonical = term.canonical ?? buildCanonical(`/glossary/${term.slug}`) ?? `/glossary/${term.slug}`;
-  const glossaryIndexUrl = buildCanonical("/glossary") ?? `${SITE_URL}/glossary`;
+  const copy = getMessages(locale).pages.glossary;
+  const canonical = buildLocalizedCanonical(`/glossary/${term.slug}`, locale);
+  const glossaryIndexUrl = buildLocalizedCanonical("/glossary", locale);
+  const glossaryHref = withLocalePrefix("/glossary", locale);
+  const categoriesHref = withLocalePrefix(`/categories/${slugify(term.category)}`, locale);
   const termJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        name: `${term.title} | Sozluk`,
+        name: `${term.title} | ${copy.badge}`,
         description: term.description,
         url: canonical,
         mainEntity: {
@@ -96,7 +95,7 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
           url: canonical,
           inDefinedTermSet: {
             "@type": "DefinedTermSet",
-            name: `${BRAND_NAME} Sozluk`,
+            name: `${BRAND_NAME} ${copy.badge}`,
             url: glossaryIndexUrl,
           },
         },
@@ -107,13 +106,13 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
           {
             "@type": "ListItem",
             position: 1,
-            name: "Ana sayfa",
-            item: buildCanonical("/") ?? `${SITE_URL}/`,
+            name: locale === "tr" ? "Ana sayfa" : "Home",
+            item: buildLocalizedCanonical("/", locale),
           },
           {
             "@type": "ListItem",
             position: 2,
-            name: "Sozluk",
+            name: copy.badge,
             item: glossaryIndexUrl,
           },
           {
@@ -137,7 +136,8 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
   const relatedGuides = guides.filter((item) => item.tags.some((tag) => tagSlugs.has(slugify(tag)))).slice(0, 4);
   const relatedTools = toolCatalog
     .filter((tool) => (tool.tags ?? []).some((tag) => tagSlugs.has(slugify(tag))))
-    .slice(0, 4);
+    .slice(0, 4)
+    .map((tool) => ({ tool, copy: getToolCopy(tool, locale) }));
 
   const formulas = extractFormulas(term.content);
 
@@ -146,19 +146,19 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
       <JsonLd data={termJsonLd} />
       <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-4">
-          <Link href="/glossary" className="text-xs font-semibold text-orange-700 hover:underline">
-            Sozluk listesine don
+          <Link href={glossaryHref} className="text-xs font-semibold text-orange-700 hover:underline">
+            {copy.back}
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
             <Link
-              href={`/categories/${slugify(term.category)}`}
+              href={categoriesHref}
               className="rounded-full bg-orange-50 px-2 py-0.5 text-orange-700"
             >
               {term.category}
             </Link>
-            <span>{formatDate(term.date)}</span>
+            <span>{formatDate(term.date, locale)}</span>
             <span>|</span>
-            <span>{term.readingTimeMinutes} dk okuma</span>
+            <span>{formatMessage(copy.readingTime, { count: term.readingTimeMinutes })}</span>
           </div>
           <h1 className="text-balance text-3xl font-semibold leading-tight text-slate-900 md:text-4xl">
             {term.title}
@@ -168,7 +168,7 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
             {term.tags.map((tag) => (
               <Link
                 key={tag}
-                href={`/tags/${slugify(tag)}`}
+                href={withLocalePrefix(`/tags/${slugify(tag)}`, locale)}
                 className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600"
               >
                 #{tag}
@@ -180,16 +180,16 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
         <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-8">
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold text-slate-900">Tanim</h2>
+              <h2 className="text-xl font-semibold text-slate-900">{copy.definitionTitle}</h2>
               <div className="mdx-content space-y-6">
                 <MDXRenderer source={term.content} />
               </div>
             </section>
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold text-slate-900">Formuller</h2>
+              <h2 className="text-xl font-semibold text-slate-900">{copy.formulaTitle}</h2>
               {formulas.length === 0 ? (
-                <p className="text-sm text-slate-600">Bu terim icin formuller eklenmedi.</p>
+                <p className="text-sm text-slate-600">{copy.formulaEmpty}</p>
               ) : (
                 <div className="space-y-4">
                   {formulas.map((formula, index) => (
@@ -204,28 +204,28 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
 
           <aside className="space-y-4">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">Ilgili icerikler</h3>
-              <p className="mt-1 text-xs text-slate-600">Benzer etiketli kaynaklar.</p>
+              <h3 className="text-sm font-semibold text-slate-900">{copy.relatedTitle}</h3>
+              <p className="mt-1 text-xs text-slate-600">{copy.relatedDescription}</p>
             </div>
 
             {relatedBlog.length === 0 && relatedGuides.length === 0 && relatedTools.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4 text-sm text-slate-500">
-                Ilgili icerik bulunamadi.
+                {copy.relatedEmpty}
               </div>
             ) : null}
 
             {relatedBlog.length > 0 ? (
               <div className="space-y-3">
-                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Blog</h4>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.relatedBlog}</h4>
                 <div className="space-y-3">
                   {relatedBlog.map((item) => (
                     <ActionCard
                       key={item.slug}
                       title={item.title}
                       description={item.description}
-                      href={`/blog/${item.slug}`}
+                      href={withLocalePrefix(`/blog/${item.slug}`, locale)}
                       badge={item.category}
-                      ctaLabel="Oku"
+                      ctaLabel={copy.readCta}
                     />
                   ))}
                 </div>
@@ -234,16 +234,16 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
 
             {relatedGuides.length > 0 ? (
               <div className="space-y-3">
-                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Rehberler</h4>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.relatedGuides}</h4>
                 <div className="space-y-3">
                   {relatedGuides.map((item) => (
                     <ActionCard
                       key={item.slug}
                       title={item.title}
                       description={item.description}
-                      href={`/guides/${item.slug}`}
+                      href={withLocalePrefix(`/guides/${item.slug}`, locale)}
                       badge={item.category}
-                      ctaLabel="Oku"
+                      ctaLabel={copy.readCta}
                     />
                   ))}
                 </div>
@@ -252,17 +252,17 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
 
             {relatedTools.length > 0 ? (
               <div className="space-y-3">
-                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Hesaplayicilar</h4>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.relatedTools}</h4>
                 <div className="space-y-3">
-                  {relatedTools.map((tool) => (
+                  {relatedTools.map(({ tool, copy: toolCopy }) => (
                     <ActionCard
                       key={tool.id}
-                      title={tool.title}
-                      description={tool.description}
-                      href={tool.href}
+                      title={toolCopy.title}
+                      description={toolCopy.description}
+                      href={withLocalePrefix(tool.href, locale)}
                       badge={tool.category}
                       toolId={tool.id}
-                      ctaLabel="Hesaplayiciyi Ac"
+                      ctaLabel={copy.openToolCta}
                     />
                   ))}
                 </div>

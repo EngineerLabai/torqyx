@@ -1,21 +1,26 @@
 import PageShell from "@/components/layout/PageShell";
 import SavedCalculations from "@/components/tools/SavedCalculations";
+import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const copy = getMessages(locale).pages.savedCalculations;
+  const brandContent = getBrandCopy(locale);
+
+  return buildPageMetadata({
+    title: `${copy.title} | ${brandContent.siteName}`,
+    description: copy.description,
+    path: "/saved-calculations",
+    locale,
+  });
+}
 
 export default async function SavedCalculationsPage() {
   const locale = await getLocaleFromCookies();
-  const copy =
-    locale === "en"
-      ? {
-          kicker: "Saved Calculations",
-          title: "My saved calculations",
-          description: "Review, reopen, or clear the calculations you saved before.",
-        }
-      : {
-          kicker: "Kayitli Hesaplar",
-          title: "Kayitli Hesaplarim",
-          description: "Daha once kaydettigin hesaplari gor, tekrar ac veya temizle.",
-        };
+  const copy = getMessages(locale).pages.savedCalculations;
 
   return (
     <PageShell>

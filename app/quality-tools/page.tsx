@@ -1,7 +1,23 @@
 // app/quality-tools/page.tsx
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
+import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const copy = getMessages(locale).pages.qualityTools;
+  const brandContent = getBrandCopy(locale);
+
+  return buildPageMetadata({
+    title: `${copy.badge} | ${brandContent.siteName}`,
+    description: copy.description,
+    path: "/quality-tools",
+    locale,
+  });
+}
 
 type QualityToolStatus = "planned" | "beta";
 type QualityToolLevel = "basic" | "advanced";
@@ -136,41 +152,7 @@ const QUALITY_TOOLS_BY_LOCALE: Record<"tr" | "en", QualityTool[]> = {
 export default async function QualityToolsPage() {
   const locale = await getLocaleFromCookies();
   const tools = QUALITY_TOOLS_BY_LOCALE[locale];
-
-  const copy =
-    locale === "en"
-      ? {
-          badge: "Quality tools: 5W1H · 5 Why · 8D · Kaizen · Poka-Yoke",
-          title: "Digital templates for problem definition and root cause actions",
-          description: "Simple quality templates for definition, root cause, and action follow-up.",
-          typical: "Typical use",
-          free: "Free",
-          active: "Active (Beta)",
-          planned: "Planned",
-          basic: "Basic level",
-          advanced: "Advanced level",
-          premiumBadge: "Premium (waitlist)",
-          openTool: "Open tool",
-          comingSoon: "Coming soon",
-          footerActive: "Interactive form available (draft).",
-          footerPlanned: "Template and form design in progress.",
-        }
-      : {
-          badge: "Kalite araclari: 5N1K · 5 Why · 8D · Kaizen · Poka-Yoke",
-          title: "Problem tanimi, kok neden analizi ve kalici aksiyonlar icin dijital sablonlar",
-          description: "Problem tanimi, kok neden ve aksiyon takibi icin sade kalite sablonlari.",
-          typical: "Tipik kullanim:",
-          free: "Free",
-          active: "Aktif (Beta)",
-          planned: "Planlandi",
-          basic: "Temel seviye",
-          advanced: "Ileri seviye",
-          premiumBadge: "Premium (bekleme listesi)",
-          openTool: "Araci Ac",
-          comingSoon: "Yakinda",
-          footerActive: "Etkilesimli form ile calisilabilir (taslak).",
-          footerPlanned: "Sablon ve form tasarimi uzerinde calisiliyor.",
-        };
+  const copy = getMessages(locale).pages.qualityTools;
 
   return (
     <PageShell>

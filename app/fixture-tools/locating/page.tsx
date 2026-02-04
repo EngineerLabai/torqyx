@@ -1,4 +1,29 @@
 import PageShell from "@/components/layout/PageShell";
+import { getBrandCopy } from "@/config/brand";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const brandContent = getBrandCopy(locale);
+  const copy =
+    locale === "tr"
+      ? {
+          title: "Referanslama",
+          description: "3-2-1 referanslama, pim yerlesimi ve dayama bloklari icin pratik kart.",
+        }
+      : {
+          title: "Locating",
+          description: "A practical card for 3-2-1 locating, pin placement, and locating blocks.",
+        };
+
+  return buildPageMetadata({
+    title: `${copy.title} | ${brandContent.siteName}`,
+    description: copy.description,
+    path: "/fixture-tools/locating",
+    locale,
+  });
+}
 // app/fixture-tools/locating/page.tsx
 export default function LocatingPage() {
   return (
