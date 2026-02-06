@@ -37,7 +37,12 @@
                         "premium":  "Join the waitlist",
                         "userFallback":  "User",
                         "logout":  "Sign out",
-                        "unavailable":  "Auth is unavailable right now."
+                        "unavailable":  "Auth is unavailable right now.",
+                        "checking":  "Checking sign-in...",
+                        "readOnlyFallback":  "You're in anonymous mode - you can still read the content.",
+                        "errorTitle":  "Sign-in check failed",
+                        "errorDescription":  "Auth didn't respond. Please try again.",
+                        "retry":  "Retry"
                     },
     "home":  {
                  "hero":  {
@@ -322,6 +327,132 @@
                                     "fixesTitle":  "Fixes",
                                     "fixesEmpty":  "No fixes logged for this release."
                                 },
+                  "gearRatio":  {
+                                    "header":  {
+                                                   "back":  "← All calculators",
+                                                   "badge":  "Ratios",
+                                                   "title":  "Gear Ratio Calculator",
+                                                   "description":  "Enter tooth counts and input speed to estimate ratio, output speed, and torque (incl. efficiency)."
+                                               },
+                                    "card":  {
+                                                  "title":  "Gear Ratio Calculator",
+                                                  "description":  "Enter tooth counts and input speed; the tool calculates ratio, output speed, and torque (incl. efficiency).",
+                                                  "status":  "Active"
+                                              },
+                                    "fields":  {
+                                                   "z1":  "Input tooth count z1",
+                                                   "z2":  "Output tooth count z2",
+                                                   "rpm1":  "Input speed n1 [rpm]",
+                                                   "torque1":  "Input torque T1 [Nm]",
+                                                   "efficiency":  "Efficiency η (0-1)",
+                                                   "sample":  "Fill with sample values"
+                                               },
+                                    "results":  {
+                                                    "ratio":  "Ratio i = z2 / z1",
+                                                    "rpm2":  "Output speed n2 [rpm]",
+                                                    "torque2":  "Output torque T2 [Nm]",
+                                                    "efficiency":  "Efficiency η"
+                                                },
+                                    "note":  "Note: Output torque includes efficiency factor η."
+                                },
+                  "bendingStress":  {
+                                        "badges":  {
+                                                       "primary":  "Mechanical Calculator",
+                                                       "secondary":  "Bending Stress & Deflection"
+                                                   },
+                                        "header":  {
+                                                       "title":  "Simply Supported Beam — Bending Stress & Deflection",
+                                                       "description":  "Compute bending moment, section modulus, bending stress, and deflection for a simply supported beam with a central point load."
+                                                   },
+                                        "inputs":  {
+                                                       "title":  "Inputs",
+                                                       "beamLength":  "Beam length L [mm]",
+                                                       "force":  "Center load F [kN]",
+                                                       "sectionType":  "Section type",
+                                                       "sectionRect":  "Rectangular",
+                                                       "sectionCircle":  "Circular",
+                                                       "width":  "Width b [mm]",
+                                                       "height":  "Height h [mm]",
+                                                       "diameter":  "Diameter d [mm]",
+                                                       "youngModulus":  "Young's modulus E [MPa]",
+                                                       "yieldStrength":  "Yield strength Re [MPa]",
+                                                       "calculate":  "Calculate"
+                                                   },
+                                        "results":  {
+                                                        "title":  "Results",
+                                                        "maxMoment":  "Max bending moment Mmax",
+                                                        "inertia":  "Area moment of inertia I",
+                                                        "sectionModulus":  "Section modulus W",
+                                                        "sigma":  "Bending stress σ",
+                                                        "deflection":  "Max deflection δ",
+                                                        "safety":  "Safety factor S",
+                                                        "note":  "Formulas assume a simply supported beam with a mid-span point load. Verify against applicable standards for critical designs."
+                                                    },
+                                        "notes":  {
+                                                      "title":  "Design notes",
+                                                      "empty":  "Complete the inputs and the notes will update automatically.",
+                                                      "safety":  {
+                                                                     "unsafe":  "Unsafe — yielding expected.",
+                                                                     "veryLow":  "Very low safety. Risky with tolerances and load uncertainty.",
+                                                                     "low":  "Low safety. Acceptable for prototype checks; review for production.",
+                                                                     "ok":  "Typical safety for static steel structures.",
+                                                                     "comfortable":  "Comfortable safety. Better for fatigue/impact.",
+                                                                     "veryHigh":  "Very high safety. Consider weight optimization."
+                                                                 },
+                                                      "deflectionMissing":  "Deflection information is not available.",
+                                                      "deflectionBase":  "Deflection ratio is approximately L/δ ≈ {ratio}.",
+                                                      "deflectionLow":  "This is quite flexible (below L/150) and may cause alignment issues.",
+                                                      "deflectionMid":  "Borderline for many applications (around L/150–L/250).",
+                                                      "deflectionOk":  "Acceptable for most machine components (L/250–L/400).",
+                                                      "deflectionHigh":  "Very stiff in terms of deflection (L/400 and above).",
+                                                      "stress":  "Computed bending stress is about {sigma} MPa. Safety factor is based on yield strength.",
+                                                      "fatigue":  "If the design sees fatigue or dynamic loads, static safety alone is insufficient; check fatigue limits and stress concentrations.",
+                                                      "local":  "Connections, weld roots, and section changes can cause local stress peaks; this check uses nominal section values."
+                                                  },
+                                        "diagram":  {
+                                                        "title":  "Bending Moment Diagram (schematic)",
+                                                        "empty":  "This section shows the schematic moment diagram for a simply supported beam with a central point load. Fill the inputs to render it.",
+                                                        "description":  "The diagram shows moment rising to Mmax ≈ {value} kN·m at midspan and dropping to zero at the supports."
+                                                    }
+                                    },
+                  "fluidsHvac":  {
+                                     "header":  {
+                                                    "badge":  "Fluids & HVAC",
+                                                    "subBadge":  "Multi-check",
+                                                    "title":  "Fluids & HVAC Quick Pack",
+                                                    "description":  "Three fast checks: (1) Reynolds, friction factor, and pressure loss for water, (2) duct diameter from velocity method, (3) ACH to flow conversion. For concept sizing; use standards for detailed design."
+                                                },
+                                     "pipe":  {
+                                                  "title":  "1) Water Reynolds, f, and Pressure Drop (Darcy-Weisbach)",
+                                                  "flow":  "Flow Q [m³/h]",
+                                                  "diameter":  "Diameter D [mm]",
+                                                  "length":  "Pipe length L [m]",
+                                                  "roughness":  "Roughness ε [mm]",
+                                                  "roughnessHelp":  "Typical steel ~0.05 mm",
+                                                  "resultRe":  "Re",
+                                                  "resultF":  "f (Darcy)",
+                                                  "resultVelocity":  "Velocity v",
+                                                  "resultDp":  "Δp (along L)",
+                                                  "note":  "Assumptions: water at 20°C (ρ=1000 kg/m³, μ=1 cP). Δp = f·(L/D)·ρv²/2. Minor losses, fittings, and temperature effects are excluded."
+                                              },
+                                     "duct":  {
+                                                  "title":  "2) Duct Velocity Method (equivalent diameter)",
+                                                  "flow":  "Flow Q [m³/h]",
+                                                  "velocity":  "Target velocity v [m/s]",
+                                                  "resultArea":  "Area A",
+                                                  "resultDiameter":  "Equivalent D",
+                                                  "resultPressure":  "Dynamic pressure q",
+                                                  "note":  "Typical velocities: offices 4–6 m/s, industrial 6–10 m/s. Check manufacturer catalogs for noise and loss; elbows/dampers add extra losses."
+                                              },
+                                     "ach":  {
+                                                 "title":  "3) Air Changes per Hour (ACH) ↔ Flow",
+                                                 "volume":  "Volume V [m³]",
+                                                 "rate":  "ACH [1/h]",
+                                                 "resultFlow":  "Flow",
+                                                 "resultFlowPerSecond":  "Flow (m³/s)",
+                                                 "note":  "Typical ACH: offices 4–8, classrooms 6–10, labs 8–15. Check building codes and indoor air quality standards."
+                                             }
+                                 },
                   "notFound":  {
                                    "title":  "Page not found",
                                    "description":  "This link may have been removed or moved. Use the Calculator Library to keep exploring.",
@@ -381,9 +512,9 @@
                                                           "attachment":  {
                                                                              "label":  "Attach file (optional)",
                                                                              "helper":  "File uploads to Firebase Storage and links to the ticket.",
-                                                                             "unavailable":  "File upload is disabled. You can submit text-only."
+                                                                             "unavailable":  "File upload is disabled. You can add a Drive link in your message."
                                                                          }
-                                                      },
+                                                       },
                                            "errors":  {
                                                           "fileTooLarge":  "File size exceeds 10 MB.",
                                                           "uploadUnavailable":  "File upload is currently unavailable.",
@@ -391,7 +522,8 @@
                                                           "supportUnavailable":  "Support is not ready yet. Please try again later.",
                                                           "submitFailed":  "Request could not be sent."
                                                       },
-                                           "success":  "Request received. We will get back to you soon."
+                                           "success":  "Request received. We will get back to you soon.",
+                                           "successToast":  "Request received - we'll follow up shortly."
                                        },
                        "commentStream":  {
                                              "kicker":  "Live",
@@ -705,6 +837,47 @@
                                             "shareFail":  "Copy failed. You can copy the link manually.",
                                             "separator":  " - "
                                         },
+                       "toolActions":  {
+                                           "shareTitle":  "Share & Report",
+                                           "shareDescription":  "Create a shareable link or open a print-ready report.",
+                                           "share":  "Copy link",
+                                           "report":  "PDF / Print report",
+                                           "shareSuccess":  "Link copied.",
+                                           "shareFail":  "Copy failed. You can copy the link manually."
+                                       },
+                       "toolTrustPanel":  {
+                                               "formula":  "Formula",
+                                               "assumptions":  "Assumptions",
+                                               "references":  "References"
+                                           },
+                       "toolValidation":  {
+                                               "required":  "Invalid value: {field} is required.",
+                                               "invalidNumber":  "Invalid value: {field} must be a number.",
+                                               "invalidOption":  "Invalid value: {field} selection is not valid.",
+                                               "min":  "Invalid value: {field} must be \u2265 {min}.",
+                                               "max":  "Invalid value: {field} must be \u2264 {max}.",
+                                               "resultFix":  "Fix the highlighted inputs to see results.",
+                                               "calcFailed":  "Calculation failed. Check inputs."
+                                           },
+                       "toolReport":  {
+                                          "title":  "Tool report",
+                                          "subtitle":  "Print-friendly summary",
+                                          "dateLabel":  "Date",
+                                          "inputs":  "Inputs",
+                                          "results":  "Results",
+                                          "formula":  "Formula",
+                                          "assumptions":  "Assumptions",
+                                          "references":  "References",
+                                          "print":  "Print / Save PDF",
+                                          "back":  "Back to tool",
+                                          "missing":  "No report data. Return to the tool and generate a report."
+                                      },
+                       "toolsError":  {
+                                          "title":  "Something went wrong",
+                                          "description":  "We couldn't load this tool right now. Try refreshing or return to the tools list.",
+                                          "refresh":  "Refresh page",
+                                          "back":  "Back to tools"
+                                      },
                        "genericToolPage":  {
                                                "inputs":  "Inputs",
                                                "results":  "Results",
@@ -712,6 +885,9 @@
                                                "chart":  "Chart",
                                                "chartEmpty":  "Provide valid values to render the chart.",
                                                "resultEmpty":  "Fix the highlighted inputs to see results.",
+                                               "actionsTitle":  "Share & Report",
+                                               "actionsDescription":  "Create a shareable link or open a print-ready report.",
+                                               "calcFailed":  "Calculation failed. Check inputs.",
                                                "required":  "Required field.",
                                                "invalidNumber":  "Enter a valid number.",
                                                "invalidOption":  "Select a valid option.",

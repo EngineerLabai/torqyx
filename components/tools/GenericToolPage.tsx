@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ComponentProps } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { z } from "zod";
 import {
   Chart,
@@ -16,14 +17,14 @@ import {
 } from "chart.js";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
+import ToolActions from "@/components/tools/ToolActions";
+import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
-import type {
-  ToolChartConfig,
-  ToolDefinition,
-  ToolInputDefinition,
-  ToolInputOption,
-} from "@/tools/registry";
+import { formatMessage, getMessages } from "@/utils/messages";
+import { resolveLocalizedValue } from "@/utils/locale-values";
+import { withLocalePrefix } from "@/utils/locale-path";
+import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
+import type { ToolDefinition, ToolInputDefinition, ToolInputOption } from "@/tools/registry";
 
 Chart.register(
   LineController,
@@ -70,22 +71,41 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const copy = messages.components.genericToolPage;
+  const validationCopy = messages.components.toolValidation;
+  const calcFailedCopy = copy.calcFailed;
   const common = messages.common;
   const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool.inputs));
   const chartRef = useRef<Chart | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const hasHydrated = useRef(false);
 
   useEffect(() => {
-    setValues(getDefaultValues(tool.inputs));
+    Promise.resolve().then(() => setValues(getDefaultValues(tool.inputs)));
   }, [tool.id, tool.inputs]);
+
+  useEffect(() => {
+    if (hasHydrated.current) return;
+    const shared = decodeToolState<Record<string, string | number>>(searchParams?.get("input") ?? null);
+    if (shared) {
+      const defaults = getDefaultValues(tool.inputs);
+      const normalized: Record<string, string> = { ...defaults };
+      Object.entries(shared).forEach(([key, value]) => {
+        normalized[key] = String(value);
+      });
+      Promise.resolve().then(() => setValues(normalized));
+    }
+    hasHydrated.current = true;
+  }, [searchParams, tool.inputs]);
 
   const schema = useMemo(() => {
     const shape: Record<string, z.ZodTypeAny> = {};
     tool.inputs.forEach((input) => {
-      shape[input.key] = buildFieldSchema(input, copy);
+      shape[input.key] = buildFieldSchema(input, validationCopy);
     });
     return z.object(shape);
-  }, [tool.inputs, copy]);
+  }, [tool.inputs, validationCopy]);
 
   const parsed = useMemo(() => schema.safeParse(values), [schema, values]);
   const errors = useMemo(() => {
@@ -115,10 +135,14 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
     return normalized as TInputs;
   }, [parsed, tool.inputs]);
 
-  const results = useMemo(
-    () => (normalizedInputs ? tool.calculate(normalizedInputs) : null),
-    [normalizedInputs, tool],
-  );
+  const { results, calcError } = useMemo(() => {
+    if (!normalizedInputs) return { results: null, calcError: "" };
+    try {
+      return { results: tool.calculate(normalizedInputs), calcError: "" };
+    } catch {
+      return { results: null, calcError: calcFailedCopy };
+    }
+  }, [normalizedInputs, tool, calcFailedCopy]);
 
   const resultEntries = useMemo(() => {
     if (!results || typeof results !== "object") return [];
@@ -127,8 +151,24 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
 
   const chartConfig = useMemo(() => {
     if (!results || !normalizedInputs || !tool.chartConfig) return null;
-    return tool.chartConfig(results, normalizedInputs);
+    try {
+      return tool.chartConfig(results, normalizedInputs);
+    } catch {
+      return null;
+    }
   }, [results, normalizedInputs, tool]);
+
+  const formula = resolveLocalizedValue(tool.formula, locale) ?? tool.formulaDisplay;
+  const assumptions = resolveLocalizedValue(tool.assumptions, locale);
+  const references = resolveLocalizedValue(tool.references, locale);
+
+  const encodedState = useMemo(() => encodeToolState(values), [values]);
+  const shareUrl = useMemo(() => {
+    if (!pathname || typeof window === "undefined") return "";
+    return buildShareUrl(`${window.location.origin}${pathname}`, values);
+  }, [pathname, values]);
+  const reportBase = withLocalePrefix(`/tools/${tool.id}/report`, locale);
+  const reportUrl = encodedState ? `${reportBase}?input=${encodedState}` : reportBase;
 
   useEffect(() => {
     if (!chartConfig || !canvasRef.current) {
@@ -236,19 +276,22 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
                 ))}
               </div>
             ) : (
-              <p className="text-[11px] text-red-600">{copy.resultEmpty}</p>
+              <p className="text-[11px] text-red-600">{calcError || copy.resultEmpty}</p>
             )}
           </div>
         </section>
 
-        {tool.formulaDisplay ? (
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-            <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.formula}</h2>
-            <p className="rounded-lg bg-slate-50 px-3 py-2 font-mono text-[11px] text-slate-700">
-              {tool.formulaDisplay}
-            </p>
-          </section>
-        ) : null}
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+          <div className="space-y-2">
+            <h2 className="text-sm font-semibold text-slate-900">{copy.actionsTitle}</h2>
+            <p className="text-[11px] text-slate-500">{copy.actionsDescription}</p>
+          </div>
+          <div className="mt-3">
+            <ToolActions shareUrl={shareUrl} reportUrl={reportUrl} />
+          </div>
+        </section>
+
+        <ToolTrustPanel formula={formula} assumptions={assumptions} references={references} />
 
         {chartConfig ? (
           <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
@@ -270,29 +313,36 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
 }
 
 function buildFieldSchema(input: ToolInputDefinition, copy: Record<string, string>) {
+  const label = input.unit ? `${input.label} (${input.unit})` : input.label;
   if (input.type === "select") {
     const options = (input.options ?? []).map((option) => String(option.value));
     return z
       .string()
-      .min(1, copy.required)
-      .refine((value) => options.includes(String(value)), copy.invalidOption);
+      .min(1, formatMessage(copy.required, { field: label }))
+      .refine((value) => options.includes(String(value)), formatMessage(copy.invalidOption, { field: label }));
   }
 
   let schema = z
     .string()
-    .min(1, copy.required)
-    .refine((value) => Number.isFinite(Number(value)), copy.invalidNumber)
+    .min(1, formatMessage(copy.required, { field: label }))
+    .refine((value) => Number.isFinite(Number(value)), formatMessage(copy.invalidNumber, { field: label }))
     .transform((value) => Number(value));
 
   const minValue = input.min;
   if (typeof minValue === "number") {
-    const minLabel = input.unit ? `${copy.min} ${minValue} ${input.unit}` : `${copy.min} ${minValue}`;
+    const minLabel = formatMessage(copy.min, {
+      field: label,
+      min: input.unit ? `${minValue} ${input.unit}` : minValue,
+    });
     schema = schema.refine((value) => value >= minValue, minLabel);
   }
 
   const maxValue = input.max;
   if (typeof maxValue === "number") {
-    const maxLabel = input.unit ? `${copy.max} ${maxValue} ${input.unit}` : `${copy.max} ${maxValue}`;
+    const maxLabel = formatMessage(copy.max, {
+      field: label,
+      max: input.unit ? `${maxValue} ${input.unit}` : maxValue,
+    });
     schema = schema.refine((value) => value <= maxValue, maxLabel);
   }
 

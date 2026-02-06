@@ -1,8 +1,26 @@
 import type { ComponentType } from "react";
+import type { LocalizedValue } from "@/utils/locale-values";
+
+export type ToolReference = {
+  title: string;
+  url?: string;
+  note?: string;
+};
+
+export type ToolInputMeta = {
+  key: string;
+  label: string;
+  unit?: string;
+  type?: "number" | "select";
+  min?: number;
+  max?: number;
+  options?: Array<string | number>;
+};
 
 export type ToolInputProps<TInput> = {
   input: TInput;
   onChange: (next: TInput) => void;
+  errors?: Record<string, string>;
 };
 
 export type ToolResultProps<TResult> = {
@@ -44,4 +62,8 @@ export type ToolDefinition<TInput, TResult> = {
   VisualizationSection: ComponentType<ToolVisualizationProps<TInput, TResult>>;
   compareMetrics?: ToolCompareMetric<TInput, TResult>[];
   CompareVisualizationSection?: ComponentType<ToolCompareVisualizationProps<TInput, TResult>>;
+  formula?: LocalizedValue<string>;
+  assumptions?: LocalizedValue<string[]>;
+  references?: LocalizedValue<ToolReference[]>;
+  inputMeta?: ToolInputMeta[];
 };

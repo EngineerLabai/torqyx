@@ -1,5 +1,6 @@
 import PageHero from "@/components/layout/PageHero";
 import { getBrandCopy } from "@/config/brand";
+import { getHeroImageSrc } from "@/lib/assets";
 import type { Locale } from "@/utils/locale";
 import { getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -13,6 +14,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const copy = getMessages(locale).home.hero;
   const toolsHref = withLocalePrefix("/tools", locale);
   const sanityHref = withLocalePrefix("/tools/sanity-check", locale);
+  const heroImage = getHeroImageSrc("home");
   return (
     <section id="home" className="px-4 pb-10 pt-14 md:px-10 md:pt-20 lg:px-16">
       <div className="mx-auto w-full max-w-6xl">
@@ -21,7 +23,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
           description={copy.description}
           subtitle={copy.subtitle}
           eyebrow={brandContent.siteName}
-          imageSrc="/illustrations/home-hero.png"
+          imageSrc={heroImage}
           imageAlt={copy.imageAlt}
           priority
         >

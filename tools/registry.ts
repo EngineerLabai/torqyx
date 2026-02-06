@@ -1,3 +1,5 @@
+import type { LocalizedValue } from "@/utils/locale-values";
+
 export type ToolInputType = "number" | "select" | "slider";
 
 export type ToolInputOption = {
@@ -34,6 +36,12 @@ export type ToolChartConfig = {
   yLabel?: string;
 };
 
+export type ToolReference = {
+  title: string;
+  url?: string;
+  note?: string;
+};
+
 export type ToolDefinition<TInputs extends Record<string, unknown>, TResult> = {
   id: string;
   title: string;
@@ -45,6 +53,9 @@ export type ToolDefinition<TInputs extends Record<string, unknown>, TResult> = {
   calculate: (inputs: TInputs) => TResult;
   chartConfig?: (results: TResult, inputs: TInputs) => ToolChartConfig | null;
   formulaDisplay?: string;
+  formula?: LocalizedValue<string>;
+  assumptions?: LocalizedValue<string[]>;
+  references?: LocalizedValue<ToolReference[]>;
 };
 
 type TorquePowerInputs = {
@@ -120,6 +131,24 @@ export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResul
   }),
   formulaDisplay:
     "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * eta",
+  formula: {
+    tr: "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
+    en: "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
+  },
+  assumptions: {
+    tr: ["Sürekli rejim, kayıplar mekanik verim ile temsil edilir.", "RPM sabit ve moment dalgalanması ihmal edilir."],
+    en: ["Steady-state operation; losses are represented by mechanical efficiency.", "RPM is constant and torque ripple is ignored."],
+  },
+  references: {
+    tr: [
+      { title: "DIN 70020 (Motor gücü tanımları)", note: "kW-hp dönüşümü için temel referans." },
+      { title: "ISO 3046 (İçten yanmalı motor performansı)" },
+    ],
+    en: [
+      { title: "DIN 70020 (Engine power definitions)", note: "Reference for kW-hp conversion." },
+      { title: "ISO 3046 (Reciprocating engine performance)" },
+    ],
+  },
 };
 
 export const toolRegistry = [torquePowerTool] as const;

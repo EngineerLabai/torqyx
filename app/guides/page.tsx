@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -29,6 +30,7 @@ export async function generateMetadata() {
 export default async function GuidesIndexPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.guides;
+  const heroImage = getHeroImageSrc("guides");
   const guides = await getContentList("guides");
   const grouped = guides.reduce<Record<string, typeof guides>>((acc, guide) => {
     const key = guide.category || copy.fallbackCategory;
@@ -46,7 +48,7 @@ export default async function GuidesIndexPage() {
         title={copy.title}
         description={copy.description}
         eyebrow={copy.badge}
-        imageSrc="/illustrations/guides-hero.png"
+        imageSrc={heroImage}
         imageAlt={copy.imageAlt}
       />
 

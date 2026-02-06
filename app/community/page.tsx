@@ -5,6 +5,7 @@ import CommentStream from "@/components/community/CommentStream";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -31,6 +32,7 @@ export default async function CommunityPage() {
   const copy = getMessages(locale).pages.community;
   const threads = getThreads(locale);
   const baseHref = withLocalePrefix("/community", locale);
+  const heroImage = getHeroImageSrc("community");
 
   return (
     <PageShell>
@@ -39,7 +41,7 @@ export default async function CommunityPage() {
           title={copy.title}
           description={copy.description}
           eyebrow={copy.badge}
-          imageSrc="/illustrations/community-hero.png"
+          imageSrc={heroImage}
           imageAlt={copy.imageAlt}
         >
           {isSampleContent ? (

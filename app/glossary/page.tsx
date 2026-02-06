@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -29,6 +30,7 @@ export async function generateMetadata() {
 export default async function GlossaryIndexPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.glossary;
+  const heroImage = getHeroImageSrc("glossary");
   const terms = await getContentList("glossary");
 
   return (
@@ -37,7 +39,7 @@ export default async function GlossaryIndexPage() {
         title={copy.title}
         description={copy.description}
         eyebrow={copy.badge}
-        imageSrc="/illustrations/glossary-hero.png"
+        imageSrc={heroImage}
         imageAlt={copy.imageAlt}
       />
 

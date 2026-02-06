@@ -2,6 +2,7 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import SupportForm from "@/components/support/SupportForm";
 import { getBrandCopy } from "@/config/brand";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
@@ -22,6 +23,7 @@ export async function generateMetadata() {
 export default async function SupportPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.support;
+  const heroImage = getHeroImageSrc("support");
 
   return (
     <PageShell>
@@ -29,7 +31,7 @@ export default async function SupportPage() {
         title={copy.title}
         description={copy.description}
         eyebrow={copy.badge}
-        imageSrc="/illustrations/support-hero.png"
+        imageSrc={heroImage}
         imageAlt={copy.imageAlt}
       />
 

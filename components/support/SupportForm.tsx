@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import useFirebaseServices from "@/components/firebase/useFirebaseServices";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -26,6 +26,7 @@ export default function SupportForm() {
   const [attachment, setAttachment] = useState<File | null>(null);
   const [status, setStatus] = useState<"idle" | "uploading" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const isBusy = status === "uploading" || status === "submitting";
 
@@ -34,6 +35,17 @@ export default function SupportForm() {
     if (status === "submitting") return copy.submit.submitting;
     return copy.submit.idle;
   }, [status, copy]);
+
+  useEffect(() => {
+    if (status !== "success") return;
+    setToastMessage(copy.successToast ?? copy.success);
+  }, [status, copy.successToast, copy.success]);
+
+  useEffect(() => {
+    if (!toastMessage) return;
+    const timer = setTimeout(() => setToastMessage(null), 4000);
+    return () => clearTimeout(timer);
+  }, [toastMessage]);
 
   const handleChange = (field: "name" | "email" | "message") =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -125,6 +137,15 @@ export default function SupportForm() {
       onSubmit={handleSubmit}
       className="mt-4 space-y-4 rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 shadow-sm"
     >
+      {toastMessage ? (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-6 right-6 z-50 rounded-2xl border border-emerald-200 bg-white px-4 py-3 text-xs font-semibold text-emerald-700 shadow-lg"
+        >
+          {toastMessage}
+        </div>
+      ) : null}
       <div className="grid gap-3 md:grid-cols-2">
         <div className="space-y-1">
           <label className="text-xs font-semibold text-slate-700" htmlFor="name">

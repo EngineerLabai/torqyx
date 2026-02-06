@@ -2,6 +2,7 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import ToolLibrary from "@/components/tools/ToolLibrary";
 import { getBrandCopy } from "@/config/brand";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
@@ -26,6 +27,7 @@ type ToolsIndexPageProps = {
 export default async function ToolsIndexPage({ searchParams }: ToolsIndexPageProps) {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.tools;
+  const heroImage = getHeroImageSrc("tools");
 
   return (
     <PageShell>
@@ -33,7 +35,7 @@ export default async function ToolsIndexPage({ searchParams }: ToolsIndexPagePro
         title={copy.title}
         description={copy.description}
         eyebrow={copy.badge}
-        imageSrc="/illustrations/tools-hero.png"
+        imageSrc={heroImage}
         imageAlt={copy.imageAlt}
       />
 

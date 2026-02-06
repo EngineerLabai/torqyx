@@ -16,7 +16,7 @@ const FRICTION_OPTIONS: { value: FrictionKey; label: string }[] = [
   { value: "coated", label: "Kaplamali" },
 ];
 
-export default function InputSection({ input, onChange }: ToolInputProps<BoltInput>) {
+export default function InputSection({ input, onChange, errors }: ToolInputProps<BoltInput>) {
   const handleFieldChange = <K extends keyof BoltInput>(key: K, value: BoltInput[K]) => {
     const next: BoltInput = { ...input, [key]: value };
 
@@ -76,6 +76,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<BoltInp
           <p className="text-[11px] text-slate-500">
             Preset secersen d ve P alanlari otomatik dolar; istersen elle guncelleyebilirsin.
           </p>
+          {errors?.presetId ? <p className="text-[10px] text-red-600">{errors.presetId}</p> : null}
         </div>
 
         <div className="grid gap-2 sm:grid-cols-2">
@@ -91,6 +92,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<BoltInp
               step="0.1"
               min="0"
             />
+            {errors?.d ? <p className="text-[10px] text-red-600">{errors.d}</p> : null}
           </div>
 
           <div className="space-y-1">
@@ -105,6 +107,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<BoltInp
               step="0.01"
               min="0"
             />
+            {errors?.P ? <p className="text-[10px] text-red-600">{errors.P}</p> : null}
           </div>
         </div>
 
@@ -122,6 +125,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<BoltInp
                 </option>
               ))}
             </select>
+            {errors?.grade ? <p className="text-[10px] text-red-600">{errors.grade}</p> : null}
           </div>
 
           <div className="space-y-1">
@@ -137,6 +141,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<BoltInp
                 </option>
               ))}
             </select>
+            {errors?.friction ? <p className="text-[10px] text-red-600">{errors.friction}</p> : null}
           </div>
         </div>
 
@@ -151,6 +156,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<BoltInp
             min={1}
             max={90}
           />
+          {errors?.preloadPercent ? <p className="text-[10px] text-red-600">{errors.preloadPercent}</p> : null}
         </div>
       </div>
     </div>

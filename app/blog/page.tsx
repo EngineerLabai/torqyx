@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -49,6 +50,7 @@ const uniqueSorted = (items: string[], locale: "tr" | "en") =>
 export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps) {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.blog;
+  const heroImage = getHeroImageSrc("blog");
   const posts = await getContentList("blog");
   const basePath = withLocalePrefix("/blog", locale);
 
@@ -126,7 +128,7 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
         title={copy.title}
         description={copy.description}
         eyebrow={copy.badge}
-        imageSrc="/illustrations/blog-hero.png"
+        imageSrc={heroImage}
         imageAlt={copy.imageAlt}
       />
 

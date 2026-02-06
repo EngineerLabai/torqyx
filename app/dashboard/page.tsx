@@ -3,6 +3,7 @@ import PageShell from "@/components/layout/PageShell";
 import DashboardClient from "@/components/tools/DashboardClient";
 import AuthGate from "@/components/auth/AuthGate";
 import { getBrandCopy } from "@/config/brand";
+import { HERO_PLACEHOLDER } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
@@ -30,7 +31,7 @@ export default async function DashboardPage() {
         title={copy.title}
         description={copy.description}
         eyebrow={copy.badge}
-        imageSrc="/illustrations/placeholder-dashboard.png"
+        imageSrc={HERO_PLACEHOLDER}
         imageAlt={copy.imageAlt}
       />
       <AuthGate>
