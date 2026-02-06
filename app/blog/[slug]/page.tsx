@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const brandContent = getBrandCopy(locale);
   const copy = getMessages(locale).pages.blog;
   const canonical = buildLocalizedCanonical(`/blog/${post.slug}`, locale);
-  const logoUrl = new URL("/brand/logo-mark.svg", SITE_URL).toString();
+  const logoUrl = new URL("/brand/logo.svg", SITE_URL).toString();
   const blogListHref = withLocalePrefix("/blog", locale);
   const blogPostingJsonLd = {
     "@type": "BlogPosting",

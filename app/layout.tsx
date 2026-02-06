@@ -54,7 +54,7 @@ export async function generateMetadata() {
   };
 }
 
-const LOGO_URL = new URL("/brand/logo-mark.svg", SITE_URL).toString();
+const LOGO_URL = new URL("/brand/logo.svg", SITE_URL).toString();
 
 async function getWebsiteJsonLd() {
   const locale = await getLocaleFromCookies();

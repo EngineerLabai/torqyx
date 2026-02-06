@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
-import BrandLogo from "@/components/brand/BrandLogo";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import PremiumCTA from "@/components/premium/PremiumCTA";
@@ -71,13 +70,9 @@ export default function SiteShell({ children }: { children: ReactNode }) {
 
       <header className="site-header sticky top-0 z-50 border-b border-slate-200/80 bg-white/80">
         <div className="site-container flex items-center justify-between gap-6 py-4">
-          <Link href={localizeHref("/")} className="flex items-center gap-3" aria-label={brandContent.siteName}>
-            <BrandLogo
-              name={brandContent.siteName}
-              markClassName="h-9 w-9"
-              wordClassName="h-7"
-              textClassName="text-[15px] font-semibold"
-            />
+          <Link href={localizeHref("/")} className="flex items-center gap-2" aria-label={brandContent.siteName}>
+            <img src="/brand/logo.svg" alt={brandContent.siteName} className="h-8 w-auto shrink-0" />
+            <span className="text-base font-semibold tracking-tight text-slate-900">{brandContent.siteName}</span>
           </Link>
 
           <nav className="hidden items-center gap-2 lg:flex">
