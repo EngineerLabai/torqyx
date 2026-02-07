@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "Poka-Yoke Fikir Karti",
-    description: "Hata onleyici fikirleri tanimla, uygulanabilirligini degerlendir.",
+    title: "Poka-Yoke Fikir Kartı",
+    description: "Hata önleyici fikirleri tanımla, uygulanabilirliğini değerlendir.",
   },
   en: {
     title: "Poka-Yoke Idea Card",

@@ -60,20 +60,20 @@ export default function ProductionProjectPage() {
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-            Uretim & Proje
+            Üretim & Proje
           </span>
           <span className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-medium text-indigo-700">
-            Coklu Hesap
+            Çoklu Hesap
           </span>
         </div>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
           <div>
             <h1 className="text-lg font-semibold text-slate-900">
-              Uretim & Proje Hizli Paket
+              Üretim & Proje Hızlı Paket
             </h1>
             <p className="mt-2 text-xs text-slate-600">
-              Uretim icin hizli hesaplar: (1) takt time, (2) OEE, (3) pres tonaj tahmini, (4) motor guc/torque.
-              Hizli fikir verir; sahada detayli analiz ve verifikasyon sart.
+              Üretim için hızlı hesaplar: (1) takt time, (2) OEE, (3) pres tonaj tahmini, (4) motor güç/tork.
+              Hızlı fikir verir; sahada detaylı analiz ve verifikasyon şart.
             </p>
           </div>
           <ProductionGraphic />
@@ -94,15 +94,15 @@ function ProductionGraphic() {
     { label: "Takt", value: 68 },
     { label: "OEE", value: 82 },
     { label: "Pres", value: 74 },
-    { label: "Guc", value: 88 },
+    { label: "Güç", value: 88 },
   ];
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-indigo-50 via-white to-slate-50 p-4 shadow-[0_12px_35px_-22px_rgba(15,23,42,0.4)]">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-indigo-700">Hizli gorsellestirme</p>
-          <p className="text-[11px] text-slate-600">Takt/OEE/pres/guc nabzi</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-indigo-700">Hızlı görselleştirme</p>
+          <p className="text-[11px] text-slate-600">Takt/OEE/pres/güç nabzı</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-[11px] font-semibold text-white">
           Ops
@@ -266,9 +266,9 @@ function PressForceBlock() {
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
       <h2 className="mb-3 text-sm font-semibold text-slate-900">3) Pres Tonaj Tahmini (kesme)</h2>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Field label="Kalinlik t (mm)" value={inp.thickness} onChange={(v) => setInp({ ...inp, thickness: v })} />
-        <Field label="Kesim cevresi P (mm)" value={inp.perimeter} onChange={(v) => setInp({ ...inp, perimeter: v })} />
-        <Field label="Kesme dayanimi (MPa)" value={inp.shear} onChange={(v) => setInp({ ...inp, shear: v })} />
+        <Field label="Kalınlık t (mm)" value={inp.thickness} onChange={(v) => setInp({ ...inp, thickness: v })} />
+        <Field label="Kesim çevresi P (mm)" value={inp.perimeter} onChange={(v) => setInp({ ...inp, perimeter: v })} />
+        <Field label="Kesme dayanımı (MPa)" value={inp.shear} onChange={(v) => setInp({ ...inp, shear: v })} />
         <Field label="Emniyet kats." value={inp.safety} onChange={(v) => setInp({ ...inp, safety: v })} />
       </div>
       {res ? (
@@ -278,10 +278,10 @@ function PressForceBlock() {
           <ResultRow label="F (N)" value={res.forceN.toFixed(0)} />
         </div>
       ) : (
-        <p className="mt-2 text-[11px] text-red-600">Pozitif degerler gir.</p>
+        <p className="mt-2 text-[11px] text-red-600">Pozitif değerler gir.</p>
       )}
       <p className="mt-2 text-[11px] text-slate-600">
-        Not: Kesme icin kullanilir. Delme/blanking icin P, parcanin kesim cevresidir; malzeme kesme dayanimi datasheet&apos;ten alinmalidir.
+        Not: Kesme için kullanılır. Delme/blanking için P, parçanın kesim çevresidir; malzeme kesme dayanımı datasheet&apos;ten alınmalıdır.
       </p>
     </section>
   );
@@ -303,23 +303,23 @@ function MotorPowerBlock() {
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold text-slate-900">4) Motor Guc/Tork</h2>
+      <h2 className="mb-3 text-sm font-semibold text-slate-900">4) Motor Güç/Tork</h2>
       <div className="grid gap-3 sm:grid-cols-3">
         <Field label="Tork (Nm)" value={inp.torque} onChange={(v) => setInp({ ...inp, torque: v })} />
         <Field label="Devir (rpm)" value={inp.rpm} onChange={(v) => setInp({ ...inp, rpm: v })} />
-        <Field label="Yukleme [%]" value={inp.load} onChange={(v) => setInp({ ...inp, load: v })} helper="Tipik: 70-90%" />
+        <Field label="Yükleme [%]" value={inp.load} onChange={(v) => setInp({ ...inp, load: v })} helper="Tipik: 70-90%" />
       </div>
       {res ? (
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
           <ResultRow label="P (kW)" value={res.p_kw.toFixed(2)} />
-          <ResultRow label="P (kW) - yukte" value={res.p_loaded.toFixed(2)} />
+          <ResultRow label="P (kW) - yükte" value={res.p_loaded.toFixed(2)} />
           <ResultRow label="omega (rad/s)" value={res.omega.toFixed(1)} />
         </div>
       ) : (
-        <p className="mt-2 text-[11px] text-red-600">Pozitif degerler gir.</p>
+        <p className="mt-2 text-[11px] text-red-600">Pozitif değerler gir.</p>
       )}
       <p className="mt-2 text-[11px] text-slate-600">
-        Not: P[kW] = T[Nm] x n[rpm] / 9550. Servis faktorleri ve verim icin motor datasina bak.
+        Not: P[kW] = T[Nm] x n[rpm] / 9550. Servis faktörleri ve verim için motor datasına bak.
       </p>
     </section>
   );

@@ -36,7 +36,7 @@ export default function MaterialCardsPage() {
       })
       .catch(() => {
         if (!active) return;
-        setLoadError("Kartlar yuklenemedi.");
+        setLoadError("Kartlar yüklenemedi.");
         setLoading(false);
       });
 
@@ -103,7 +103,7 @@ export default function MaterialCardsPage() {
           <span className="text-slate-700">Kategori filtresi:</span>
           {data ? (
             <>
-              <FilterChip label="Tumu" active={categoryFilter === "all"} onClick={() => setCategoryFilter("all")} />
+              <FilterChip label="Tümü" active={categoryFilter === "all"} onClick={() => setCategoryFilter("all")} />
               {categories.map((cat) => (
                 <FilterChip
                   key={cat}
@@ -114,7 +114,7 @@ export default function MaterialCardsPage() {
               ))}
             </>
           ) : (
-            <span className="text-[11px] text-slate-500">{loadError || "Kartlar yukleniyor..."}</span>
+            <span className="text-[11px] text-slate-500">{loadError || "Kartlar yükleniyor..."}</span>
           )}
         </div>
       </section>
@@ -166,7 +166,7 @@ export default function MaterialCardsPage() {
                           <p className="mb-2 text-[11px] text-slate-700">{m.description}</p>
 
                           <p className="mb-1 text-[11px] text-slate-700">
-                            <span className="font-semibold">Tipik kullan??m:</span> {m.typicalUse}
+                            <span className="font-semibold">Tipik kullanım:</span> {m.typicalUse}
                           </p>
 
                           <ul className="mb-1 list-inside list-disc text-[11px] text-slate-700">
@@ -179,8 +179,8 @@ export default function MaterialCardsPage() {
                         </div>
 
                         <footer className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-                          <span>Genel m??hendislik referans??</span>
-                          <span className="rounded-full bg-slate-100 px-2 py-0.5">Free i??erik</span>
+                          <span>Genel mühendislik referansı</span>
+                          <span className="rounded-full bg-slate-100 px-2 py-0.5">Ücretsiz içerik</span>
                         </footer>
                       </article>
                     ))}
@@ -199,7 +199,7 @@ export default function MaterialCardsPage() {
               }
               className="rounded-full border border-slate-200 bg-white px-5 py-2 text-xs font-semibold text-slate-700 hover:border-slate-300"
             >
-              Daha fazla kategori yukle
+              Daha fazla kategori yükle
             </button>
           </div>
         ) : null}

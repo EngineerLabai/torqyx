@@ -36,8 +36,8 @@ export const toolCatalog: ToolCatalogItem[] = [
   {
     id: "bolt-calculator",
     type: "calculator",
-    title: "Cıvata Boyut ve Tork",
-    description: "Nominal çap, diş adımı ve kalite sınıfına göre gerilme alanı ve ön yük hesabını yap.",
+    title: "Cıvata Boyut ve Ön Yük Hesabı",
+    description: "Nominal çap, diş adımı ve malzeme sınıfına göre gerilme alanı, ön yük ve torku hesaplar.",
     titleEn: "Bolt Size & Torque",
     descriptionEn: "Calculate stress area and preload from nominal diameter, pitch, and grade.",
     href: "/tools/bolt-calculator",

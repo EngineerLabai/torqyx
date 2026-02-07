@@ -13,9 +13,9 @@ export default function ResultSection({ result }: ToolResultProps<ChartResult>) 
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Sonuc Akisi</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Sonuç Akışı</h2>
         <p className="text-xs text-slate-500">
-          Sonucu, ne yaptik / nasil hesapladik / ne anlama geliyor seklinde asama asama gorursun.
+          Sonucu, ne yaptık / nasıl hesapladık / ne anlama geliyor şeklinde aşama aşama görürsün.
         </p>
       </div>
 
@@ -27,15 +27,15 @@ export default function ResultSection({ result }: ToolResultProps<ChartResult>) 
 
       <div className="space-y-3">
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">1. Ne yaptik?</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">1. Ne yaptık?</p>
           <p className="mt-1 text-xs text-slate-600">
-            Yay sabiti ve maksimum yer degistirmeye gore F-x noktalarini olusturduk.
+            Yay sabiti ve maksimum yer değiştirmeye göre F-x noktalarını oluşturduk.
           </p>
         </div>
 
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">2. Nasil hesapladik?</p>
-          <p className="mt-2 text-[11px] font-medium text-slate-500">Formul</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">2. Nasıl hesapladık?</p>
+          <p className="mt-2 text-[11px] font-medium text-slate-500">Formül</p>
           <p className="mt-1 font-mono text-[12px] text-slate-900">{result.formula}</p>
           <ol className="mt-2 list-decimal space-y-1 pl-4 text-[11px] text-slate-600">
             {result.steps.map((step, index) => (
@@ -46,11 +46,11 @@ export default function ResultSection({ result }: ToolResultProps<ChartResult>) 
 
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-            3. Sonuc ne anlama geliyor?
+            3. Sonuç ne anlama geliyor?
           </p>
           <p className="mt-1 text-lg font-semibold text-slate-900">{formatNumber(result.maxForce)} N</p>
           <p className="text-[11px] text-slate-500">
-            Bu, secilen maksimum yer degistirmedeki kuvvettir.
+            Bu, seçilen maksimum yer değiştirmedeki kuvvettir.
           </p>
         </div>
 
@@ -59,19 +59,19 @@ export default function ResultSection({ result }: ToolResultProps<ChartResult>) 
           variables={[
             { symbol: "F", description: "Kuvvet (N)." },
             { symbol: "k", description: "Yay sabiti (N/m)." },
-            { symbol: "x", description: "Yer degistirme (m). Grafikte mm kullanilir ve m'e cevrilir." },
+            { symbol: "x", description: "Yer değiştirme (m). Grafikte mm kullanılır ve m'ye çevrilir." },
           ]}
           notes={[
-            "Hooke yasasi lineer bolge icin gecerlidir.",
-            "Gercek sistemlerde plastik bolgeye geciste dogrusal olmayan davranis gorulebilir.",
-            "Grafik, hizli on boyutlama icin kullanilabilir.",
+            "Hooke yasası lineer bölge için geçerlidir.",
+            "Gerçek sistemlerde plastik bölgeye geçişte doğrusal olmayan davranış görülebilir.",
+            "Grafik, hızlı ön boyutlama için kullanılabilir.",
           ]}
         />
       </div>
 
       {preview.length > 0 && (
         <div className="rounded-lg border border-slate-200 bg-white px-3 py-2">
-          <p className="text-[11px] font-medium text-slate-500">Ornek Noktalar</p>
+          <p className="text-[11px] font-medium text-slate-500">Örnek Noktalar</p>
           <div className="mt-2 overflow-x-auto">
             <table className="w-full text-left text-[11px]">
               <thead className="text-slate-500">

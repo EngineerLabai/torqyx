@@ -106,9 +106,9 @@ export function calculateUnit(input: UnitInput): UnitResult {
 
   const formula = `V_out = V_in * ${from.toBase} / ${to.toBase}`;
   const steps = [
-    `Giris: ${numericValue} ${from.label}`,
-    `Temel birime cevir: ${numericValue} * ${from.toBase} = ${baseValue} ${category.baseUnit}`,
-    `Cikis birimine cevir: ${baseValue} / ${to.toBase} = ${output} ${to.label}`,
+    `Giriş: ${numericValue} ${from.label}`,
+    `Temel birime çevir: ${numericValue} * ${from.toBase} = ${baseValue} ${category.baseUnit}`,
+    `Çıkış birimine çevir: ${baseValue} / ${to.toBase} = ${output} ${to.label}`,
   ];
 
   return {

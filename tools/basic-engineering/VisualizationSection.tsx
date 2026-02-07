@@ -22,17 +22,17 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Gorsel Ozet</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Görsel Özet</h2>
         <p className="text-xs text-slate-500">
-          Tek katmanli plakadan gecen isi akisini basit bir diyagramla gosterir.
+          Tek katmanlı plakadan geçen ısı akışını basit bir diyagramla gösterir.
         </p>
       </div>
 
       <ExportPanel
         label="Gorseli Indir"
         previewUrl={previewUrl}
-        previewAlt="Isi akisi onizleme"
-        helperText="PNG net gorunum saglar, SVG ise vektor cikti icindir."
+        previewAlt="Isı akışı önizleme"
+        helperText="PNG net görünüm sağlar, SVG ise vektör çıktı içindir."
         onPng={() => exportSvgToPng(svgRef.current, { filename: "isi-akisi.png" })}
         onSvg={() => exportSvg(svgRef.current, "isi-akisi.svg")}
       />

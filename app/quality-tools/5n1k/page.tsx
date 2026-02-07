@@ -202,11 +202,11 @@ export default function FiveN1KPage() {
           </div>
 
           <p className="mt-3 text-[11px] text-slate-500">
-            Not: Buraya girilen bilgiler yalnizca bu tarayici oturumunda saklanir.
-            Gelecekte PDF/Excel cikti ve hesap acarak kayit tutma ozellikleri
-            premium paket planinda. Odeme yok,{" "}
+            Not: Buraya girilen bilgiler yalnızca bu tarayıcı oturumunda saklanır.
+            Gelecekte PDF/Excel çıktı ve hesap açarak kayıt tutma özellikleri
+            premium paket planında. Ödeme yok,{" "}
             <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-              bekleme listesi acik
+              bekleme listesi açık
             </Link>.
           </p>
         </div>
@@ -389,10 +389,10 @@ function PremiumExportNotice() {
         PDF / Excel&apos;e Aktar - Premium (bekleme listesi)
       </h3>
       <p className="mb-2">
-        5N1K problem tanimlama kayitlarini PDF veya Excel olarak disa aktarma
-        ve ekiplerle paylasma ozelligi premium paket planinda. Odeme yok,{" "}
+        5N1K problem tanımlama kayıtlarını PDF veya Excel olarak dışa aktarma
+        ve ekiplerle paylaşma özelliği premium paket planında. Ödeme yok,{" "}
         <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-          bekleme listesi acik
+          bekleme listesi açık
         </Link>.
       </p>
       <div className="flex gap-2">

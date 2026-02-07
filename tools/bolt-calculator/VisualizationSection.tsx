@@ -33,18 +33,18 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Gorsel Ozet</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Görsel Özet</h2>
         <p className="text-xs text-slate-500">
-          Boyut ve on yuk hedefini gorsel olarak gosterir. Degerler manuel hesaplama
-          sonucunu yansitir.
+          Boyut ve ön yük hedefini görsel olarak gösterir. Değerler manuel hesaplama
+          sonucunu yansıtır.
         </p>
       </div>
 
       <ExportPanel
-        label="Gorseli Indir"
+        label="Görseli İndir"
         previewUrl={previewUrl}
-        previewAlt="Civata onizleme"
-        helperText="PNG net gorunum saglar, SVG ise vektor cikti icindir."
+        previewAlt="Civata önizleme"
+        helperText="PNG net görünüm sağlar, SVG ise vektör çıktı içindir."
         onPng={() => exportSvgToPng(svgRef.current, { filename: "civata-ozet.png" })}
         onSvg={() => exportSvg(svgRef.current, "civata-ozet.svg")}
       />
@@ -53,26 +53,26 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
         <div className="space-y-4 rounded-xl bg-slate-50 p-4">
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">Nominal cap d</span>
+              <span className="text-slate-500">Nominal çap d</span>
               <span className="font-mono font-semibold text-slate-900">{dLabel}</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">Dis adimi P</span>
+              <span className="text-slate-500">Diş adımı P</span>
               <span className="font-mono font-semibold text-slate-900">{pLabel}</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">Onerilen tork</span>
+              <span className="text-slate-500">Önerilen tork</span>
               <span className="font-mono font-semibold text-slate-900">{torqueLabel}</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">On yuk (Fv)</span>
+              <span className="text-slate-500">Ön yük (Fv)</span>
               <span className="font-mono font-semibold text-slate-900">{fvLabel}</span>
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs text-slate-600">
-              <span>On yuk hedefi</span>
+              <span>Ön yük hedefi</span>
               <span className="font-semibold">{Number.isFinite(preloadValue) ? `${preloadValue}%` : "-"}</span>
             </div>
             <div className="h-2 w-full rounded-full bg-white">
@@ -81,7 +81,7 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
                 style={{ width: `${preloadPercent}%` }}
               />
             </div>
-            <p className="text-[11px] text-slate-500">%90 ustu degerler hesaplamada kabul edilmez.</p>
+            <p className="text-[11px] text-slate-500">%90 üstü değerler hesaplamada kabul edilmez.</p>
           </div>
         </div>
 

@@ -21,7 +21,7 @@ export function calculateHeat(input: HeatInput): HeatResult {
       resistance: null,
       steps: [],
       formula: "Q = k * A * dT / L",
-      error: "k ve A degerleri pozitif olmali.",
+      error: "k ve A değerleri pozitif olmalı.",
     };
   }
 
@@ -41,7 +41,7 @@ export function calculateHeat(input: HeatInput): HeatResult {
       resistance: null,
       steps: [],
       formula: "Q = k * A * dT / L",
-      error: "dT degeri gecerli olmali.",
+      error: "dT değeri geçerli olmalı.",
     };
   }
 

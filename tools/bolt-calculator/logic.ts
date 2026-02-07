@@ -42,7 +42,7 @@ export function calculateBolt(input: BoltInput): BoltResult {
       torque: null,
       sigma: null,
       safety: null,
-      error: "d ve P degerlerini pozitif sayi olarak girin.",
+      error: "d ve P değerlerini pozitif sayı olarak girin.",
     };
   }
 
@@ -53,7 +53,7 @@ export function calculateBolt(input: BoltInput): BoltResult {
       torque: null,
       sigma: null,
       safety: null,
-      error: "On yuk yuzdesi 1-90 araliginda olmali.",
+      error: "Ön yük yüzdesi 1-90 aralığında olmalı.",
     };
   }
 

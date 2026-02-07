@@ -714,14 +714,14 @@
                                                             "untitled":  "Adsiz oturum",
                                                             "save":  "Kaydet",
                                                             "saveAs":  "Yeni kaydet",
-                                                            "savedTitle":  "Kayitli oturumlar",
+                                                            "savedTitle":  "Kayıtlı oturumlar",
                                                             "load":  "Yukle",
                                                             "delete":  "Sil",
                                                             "share":  "Paylasim linki kopyala",
                                                             "shareCopied":  "Link kopyalandi.",
                                                             "shareFailed":  "Kopyalama basarisiz. Linki manuel kopyalayabilirsin.",
                                                             "export":  "Raporu aç",
-                                                            "lastSaved":  "Son kayit",
+                                                            "lastSaved":  "Son kayıt",
                                                             "restoreNotice":  "Paylasim linkinden oturum geri yuklendi."
                                                         },
                                             "variableTable":  {
@@ -748,30 +748,30 @@
                                                                  "placeholder":  "orn. P = T * w"
                                                              },
                                             "resultPanel":  {
-                                                                "title":  "Sonuc",
-                                                                "outputLabel":  "Cikti",
+                                                                "title":  "Sonuç",
+                                                                "outputLabel":  "Çıktı",
                                                                 "computedUnit":  "Hesaplanan birim",
                                                                 "expectedUnit":  "Beklenen birim",
-                                                                "unitMismatch":  "Birim uyusmazligi: beklenen {expected}, gelen {actual}",
-                                                                "unitMatch":  "Birim kontrolu uygun",
+                                                                "unitMismatch":  "Birim uyuşmazlığı: beklenen {expected}, gelen {actual}",
+                                                                "unitMatch":  "Birim kontrolü uygun",
                                                                 "dimensionless":  "birimsiz",
-                                                                "errorTitle":  "Formul hatasi",
-                                                                "errorBody":  "Sembolleri, birimleri ve formulu kontrol et."
+                                                                "errorTitle":  "Formül hatası",
+                                                                "errorBody":  "Sembolleri, birimleri ve formülü kontrol et."
                                                             },
                                             "sweepPanel":  {
-                                                              "title":  "Duyarlilik tarama",
-                                                              "description":  "Tek bir degiskeni min-maks araliginda tarayip sonucu ciz.",
-                                                              "variableLabel":  "Degisken",
+                                                              "title":  "Duyarlılık tarama",
+                                                              "description":  "Tek bir değişkeni min-maks aralığında tarayıp sonucu çiz.",
+                                                              "variableLabel":  "Değişken",
                                                               "pointsLabel":  "Nokta",
-                                                              "run":  "Tarama calistir",
-                                                              "chartTitle":  "Tarama grafigi",
-                                                              "resultLabel":  "Sonuc",
-                                                              "empty":  "Tarama calistirinca grafik gorunur.",
-                                                              "rangeMissing":  "Secilen degisken için min/maks gir."
+                                                              "run":  "Tarama çalıştır",
+                                                              "chartTitle":  "Tarama grafiği",
+                                                              "resultLabel":  "Sonuç",
+                                                              "empty":  "Tarama çalıştırınca grafik görünür.",
+                                                              "rangeMissing":  "Seçilen değişken için min/maks gir."
                                                           },
                                             "monteCarloPanel":  {
                                                                     "title":  "Monte Carlo",
-                                                                    "description":  "Dagilimlari kullanarak cikti dagilimini gor.",
+                                                                    "description":  "Dağılımları kullanarak çıktı dağılımını gör.",
                                                                     "iterationsLabel":  "Iterasyon",
                                                                     "run":  "Monte Carlo çalıştır",
                                                                     "running":  "Çalışıyor...",
@@ -981,28 +981,28 @@
                                                   "addLabel":  "Favoriye Ekle",
                                                   "removeLabel":  "Favorilerde",
                                                   "addAria":  "{title} favorilere ekle",
-                                                  "removeAria":  "{title} favorilerden cikar",
+                                                  "removeAria":  "{title} favorilerden çıkar",
                                                   "fallbackTitle":  "Araç"
                                               },
                        "toolHistory":  {
-                                           "title":  "Kayitli Hesaplar",
-                                           "description":  "Kaydettigin hesaplar sadece bu cihazda saklanir. En son {count} kayit tutulur.",
-                                           "viewAll":  "Tum kayitlari gor",
+                                           "title":  "Kayıtlı Hesaplar",
+                                           "description":  "Kaydettiğin hesaplar sadece bu cihazda saklanır. En son {count} kayıt tutulur.",
+                                           "viewAll":  "Tüm kayıtları gör",
                                            "save":  "Kaydet",
-                                           "clear":  "Kayitlari Temizle",
-                                           "errorNoResult":  "Gecerli sonuc olmadan kayit alamazsin.",
-                                           "hintSave":  "Mevcut sonucu tek tikla sakla.",
+                                           "clear":  "Kayıtları Temizle",
+                                           "errorNoResult":  "Geçerli sonuç olmadan kayıt alamazsın.",
+                                           "hintSave":  "Mevcut sonucu tek tıkla sakla.",
                                            "feedback":  {
-                                                            "storeError":  "Kayit islemi basarisiz. Tarayici alanı dolu olabilir.",
-                                                            "saveSuccess":  "Kayit basariyla olusturuldu.",
-                                                            "saveError":  "Kayit islemi basarisiz oldu.",
-                                                            "clearSuccess":  "Kayitlar temizlendi.",
-                                                            "clearError":  "Kayitlari temizlerken hata oldu."
+                                                            "storeError":  "Kayıt işlemi başarısız. Tarayıcı alanı dolu olabilir.",
+                                                            "saveSuccess":  "Kayıt başarıyla oluşturuldu.",
+                                                            "saveError":  "Kayıt işlemi başarısız oldu.",
+                                                            "clearSuccess":  "Kayıtlar temizlendi.",
+                                                            "clearError":  "Kayıtları temizlerken hata oldu."
                                                         },
-                                           "loading":  "Kayitlar yukleniyor...",
-                                           "empty":  "Henüz kayitli hesap yok. Sonucu kaydetmek için yukaridaki butonu kullan.",
+                                           "loading":  "Kayıtlar yükleniyor...",
+                                           "empty":  "Henüz kayıtlı hesap yok. Sonucu kaydetmek için yukarıdaki butonu kullan.",
                                            "inputs":  "Parametreler",
-                                           "outputs":  "Sonuc"
+                                           "outputs":  "Sonuç"
                                        }
                    },
     "common":  {

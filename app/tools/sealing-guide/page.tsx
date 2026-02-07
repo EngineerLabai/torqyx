@@ -276,7 +276,7 @@ function SealGraphic() {
       <div className="mb-3 flex items-center justify-between">
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-700">Conta kesiti</p>
-          <p className="text-[11px] text-slate-600">Basit sizdirmazlik ve akis gorsellestirmesi</p>
+          <p className="text-[11px] text-slate-600">Basit sızdırmazlık ve akış görselleştirmesi</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-semibold text-white">
           PSI
@@ -309,7 +309,7 @@ function SealGraphic() {
         <path d="M245 46 L245 92" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
       </svg>
       <p className="mt-2 text-[11px] text-slate-600">
-        Bu eskizi tedarikci verisiyle destekleyin: yuzey puruzluluk, sikma torku, sicaklik ve basinc cok kritiktir.
+        Bu eskizi tedarikçi verisiyle destekleyin: yüzey pürüzlülük, sıkma torku, sıcaklık ve basınç çok kritiktir.
       </p>
       <style jsx>{`
         @keyframes sealPulse {

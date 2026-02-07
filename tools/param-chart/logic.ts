@@ -21,7 +21,7 @@ export function calculateChart(input: ChartInput): ChartResult {
       maxForce: null,
       steps: [],
       formula: "F = k * x",
-      error: "k degeri pozitif olmali.",
+      error: "k değeri pozitif olmalı.",
     };
   }
 
@@ -32,7 +32,7 @@ export function calculateChart(input: ChartInput): ChartResult {
       maxForce: null,
       steps: [],
       formula: "F = k * x",
-      error: "Maksimum yer degistirme pozitif olmali.",
+      error: "Maksimum yer değiştirme pozitif olmalı.",
     };
   }
 

@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "Proje ve Iyilestirme Takip",
-    description: "Proje, degisiklik ve iyilestirme aksiyonlarini tek panelde takip et.",
+    title: "Proje ve İyileştirme Takip",
+    description: "Proje, değişiklik ve iyileştirme aksiyonlarını tek panelde takip et.",
   },
   en: {
     title: "Project & Improvement Tracking",

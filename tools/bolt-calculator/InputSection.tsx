@@ -12,8 +12,8 @@ const GRADE_OPTIONS: { value: GradeKey; label: string }[] = [
 
 const FRICTION_OPTIONS: { value: FrictionKey; label: string }[] = [
   { value: "dry", label: "Kuru" },
-  { value: "oiled", label: "Hafif yagli" },
-  { value: "coated", label: "Kaplamali" },
+  { value: "oiled", label: "Hafif yağlı" },
+  { value: "coated", label: "Kaplamalı" },
 ];
 
 export default function InputSection({ input, onChange, errors }: ToolInputProps<BoltInput>) {
@@ -47,24 +47,24 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Giris Parametreleri</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Giriş Parametreleri</h2>
         <p className="text-xs text-slate-500">
-          Boyut, malzeme sinifi ve surtunme varsayimina gore temel civata degerlerini hesapla.
-          Degerleri guncelledikce sonuc otomatik hesaplanir.
+          Boyut, malzeme sınıfı ve sürtünme varsayımına göre temel civata değerlerini hesapla.
+          Değerleri güncelledikçe sonuç otomatik hesaplanır.
         </p>
       </div>
 
       <div className="space-y-3 text-xs">
         <div className="space-y-1">
           <label className="block text-[11px] font-medium text-slate-700">
-            Standart civata sec (opsiyonel)
+            Standart civata seç (opsiyonel)
           </label>
           <select
             value={input.presetId}
             onChange={(event) => handlePresetChange(event.target.value as BoltPresetId)}
             className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
           >
-            <option value="custom">Manuel giris</option>
+            <option value="custom">Manuel giriş</option>
             <optgroup label="Metrik (ISO)">
               {BOLT_PRESETS.map((preset) => (
                 <option key={preset.id} value={preset.id}>
@@ -74,21 +74,21 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
             </optgroup>
           </select>
           <p className="text-[11px] text-slate-500">
-            Preset secersen d ve P alanlari otomatik dolar; istersen elle guncelleyebilirsin.
+            Preset seçersen d ve P alanları otomatik dolar; istersen elle güncelleyebilirsin.
           </p>
           {errors?.presetId ? <p className="text-[10px] text-red-600">{errors.presetId}</p> : null}
         </div>
 
         <div className="grid gap-2 sm:grid-cols-2">
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-slate-700">Nominal cap d [mm]</label>
+            <label className="block text-[11px] font-medium text-slate-700">Nominal çap d [mm]</label>
             <input
               type="number"
               inputMode="decimal"
               value={input.d}
               onChange={(event) => handleFieldChange("d", event.target.value)}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              placeholder="Orn. 8"
+              placeholder="Örn. 8"
               step="0.1"
               min="0"
             />
@@ -96,14 +96,14 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
           </div>
 
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-slate-700">Dis adimi P [mm]</label>
+            <label className="block text-[11px] font-medium text-slate-700">Diş adımı P [mm]</label>
             <input
               type="number"
               inputMode="decimal"
               value={input.P}
               onChange={(event) => handleFieldChange("P", event.target.value)}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              placeholder="Orn. 1.25"
+              placeholder="Örn. 1.25"
               step="0.01"
               min="0"
             />
@@ -113,7 +113,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
 
         <div className="grid gap-2 sm:grid-cols-2">
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-slate-700">Kalite sinifi</label>
+            <label className="block text-[11px] font-medium text-slate-700">Kalite sınıfı</label>
             <select
               value={input.grade}
               onChange={(event) => handleFieldChange("grade", event.target.value as GradeKey)}
@@ -129,7 +129,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
           </div>
 
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-slate-700">Surtunme durumu</label>
+            <label className="block text-[11px] font-medium text-slate-700">Sürtünme durumu</label>
             <select
               value={input.friction}
               onChange={(event) => handleFieldChange("friction", event.target.value as FrictionKey)}
@@ -146,7 +146,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">On yuk seviyesi [%Re]</label>
+          <label className="block text-[11px] font-medium text-slate-700">Ön yük seviyesi [%Re]</label>
           <input
             type="number"
             inputMode="decimal"

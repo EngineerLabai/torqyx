@@ -29,15 +29,15 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
       )}
 
       <div className="space-y-2 text-xs">
-        <ResultRow label="Gerilme alani As" value={formatValue(result.As, 1, "mm^2")} />
-        <ResultRow label="On yuk Fv" value={formatValue(result.Fv, 2, "kN")} />
-        <ResultRow label="Onerilen tork T" value={formatValue(result.torque, 1, "Nm")} />
-        <ResultRow label="Cekme gerilmesi sigma" value={formatValue(result.sigma, 0, "MPa")} />
-        <ResultRow label="Guvenlik katsayisi S" value={formatValue(result.safety, 2)} />
+        <ResultRow label="Gerilme alanı As" value={formatValue(result.As, 1, "mm^2")} />
+        <ResultRow label="Ön yük Fv" value={formatValue(result.Fv, 2, "kN")} />
+        <ResultRow label="Önerilen tork T" value={formatValue(result.torque, 1, "Nm")} />
+        <ResultRow label="Çekme gerilmesi sigma" value={formatValue(result.sigma, 0, "MPa")} />
+        <ResultRow label="Güvenlik katsayısı S" value={formatValue(result.safety, 2)} />
       </div>
 
       <p className="text-[11px] text-slate-500">
-        Metrik disler icin gerilme alani yaklasik olarak hesaplanir. ISO 898-1 gibi
+        Metrik dişler için gerilme alanı yaklaşık olarak hesaplanır. ISO 898-1 gibi
         standartlar ve OEM tablolar ile dogrulama onerilir.
       </p>
 
@@ -50,20 +50,20 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
           "S = Re / sigma",
         ]}
         variables={[
-          { symbol: "d", description: "Nominal cap (mm)." },
-          { symbol: "P", description: "Dis adimi (mm)." },
-          { symbol: "As", description: "Gerilme alani (mm^2)." },
-          { symbol: "Re", description: "Akma dayanimi (MPa)." },
-          { symbol: "Fv", description: "On yuk (N)." },
-          { symbol: "K", description: "Surtunme katsayisi (tork faktoru)." },
-          { symbol: "T", description: "Tork (Nm). d metreye cevrilerek kullanilir." },
-          { symbol: "sigma", description: "Cekme gerilmesi (MPa)." },
-          { symbol: "S", description: "Guvenlik katsayisi." },
+          { symbol: "d", description: "Nominal çap (mm)." },
+          { symbol: "P", description: "Diş adımı (mm)." },
+          { symbol: "As", description: "Gerilme alanı (mm^2)." },
+          { symbol: "Re", description: "Akma dayanımı (MPa)." },
+          { symbol: "Fv", description: "Ön yük (N)." },
+          { symbol: "K", description: "Sürtünme katsayısı (tork faktörü)." },
+          { symbol: "T", description: "Tork (Nm). d metreye çevrilerek kullanılır." },
+          { symbol: "sigma", description: "Çekme gerilmesi (MPa)." },
+          { symbol: "S", description: "Güvenlik katsayısı." },
         ]}
         notes={[
-          "Metrik disler icin yaklasik gerilme alani formulu kullanilir.",
-          "Surtunme katsayisi, yaglama ve kaplamaya gore degisir.",
-          "Kritik uygulamalarda standart tablolari referans alin.",
+          "Metrik dişler için yaklaşık gerilme alanı formülü kullanılır.",
+          "Sürtünme katsayısı, yağlama ve kaplamaya göre değişir.",
+          "Kritik uygulamalarda standart tabloları referans alın.",
         ]}
       />
     </div>

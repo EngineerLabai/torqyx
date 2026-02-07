@@ -7,8 +7,8 @@ import VisualizationSection from "./VisualizationSection";
 
 export const unitConverterTool: ToolDefinition<UnitInput, UnitResult> = {
   id: "unit-converter",
-  title: "Birim Donusturucu",
-  description: "Uzunluk, kuvvet, basinc ve enerji icin hizli donusum yapar.",
+  title: "Birim Dönüştürücü",
+  description: "Uzunluk, kuvvet, basınç ve enerji için hızlı birim dönüşümleri.",
   initialInput: DEFAULT_INPUT,
   calculate: calculateUnit,
   InputSection,

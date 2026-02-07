@@ -30,25 +30,25 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Gorsel Akis</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Görsel Akış</h2>
         <p className="text-xs text-slate-500">
-          Donusum akisi tek bakista gorunsun diye degerleri yan yana listeler.
+          Dönüşüm akışı tek bakışta görünsün diye değerleri yan yana listeler.
         </p>
       </div>
 
       <ExportPanel
-        label="Gorseli Indir"
+        label="Görseli İndir"
         previewUrl={previewUrl}
-        previewAlt="Donusum onizleme"
-        helperText="PNG net, SVG ise vektor cikti icin uygundur."
-        onPng={() => exportSvgToPng(svgRef.current, { filename: "donusum.png" })}
-        onSvg={() => exportSvg(svgRef.current, "donusum.svg")}
+        previewAlt="Dönüşüm önizleme"
+        helperText="PNG net, SVG ise vektör çıktı için uygundur."
+        onPng={() => exportSvgToPng(svgRef.current, { filename: "dönüşüm.png" })}
+        onSvg={() => exportSvg(svgRef.current, "dönüşüm.svg")}
       />
 
       <div className="grid gap-4 sm:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <div className="grid gap-3 sm:grid-cols-1">
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-            <p className="text-[11px] font-medium text-slate-500">Giris ({input.fromUnit})</p>
+            <p className="text-[11px] font-medium text-slate-500">Giriş ({input.fromUnit})</p>
             <p className="mt-1 text-sm font-semibold text-slate-900">{inputValue}</p>
           </div>
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
@@ -56,7 +56,7 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
             <p className="mt-1 text-sm font-semibold text-slate-900">{baseValue}</p>
           </div>
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-            <p className="text-[11px] font-medium text-slate-500">Cikis ({input.toUnit})</p>
+            <p className="text-[11px] font-medium text-slate-500">Çıkış ({input.toUnit})</p>
             <p className="mt-1 text-sm font-semibold text-slate-900">{outputValue}</p>
           </div>
         </div>

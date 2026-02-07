@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "Kaizen / Surekli Iyilestirme",
-    description: "Kucuk ama surekli iyilestirmeleri tanimla ve takip et.",
+    title: "Kaizen / Sürekli İyileştirme",
+    description: "Küçük ama sürekli iyileştirmeleri tanımla ve takip et.",
   },
   en: {
     title: "Kaizen / Continuous Improvement",

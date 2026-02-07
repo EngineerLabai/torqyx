@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "Taban Plakasi",
-    description: "Taban plaka kalinligi, civata yerlesimi ve tabla uyumu icin hizli kart.",
+    title: "Taban Plakası",
+    description: "Taban plaka kalınlığı, cıvata yerleşimi ve tabla uyumu için hızlı kart.",
   },
   en: {
     title: "Base Plate",

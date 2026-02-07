@@ -95,8 +95,8 @@ export default function CompareVisualizationSection({
   return (
     <div className="space-y-3">
       <div className="space-y-1">
-        <h3 className="text-sm font-semibold text-slate-900">Karsilastirma Grafigi</h3>
-        <p className="text-xs text-slate-500">Senaryolari ayni grafik uzerinde karsilastir.</p>
+        <h3 className="text-sm font-semibold text-slate-900">Karşılaştırma Grafiği</h3>
+        <p className="text-xs text-slate-500">Senaryoları aynı grafik üzerinde karşılaştır.</p>
       </div>
       {hasData ? (
         <div className="h-72 w-full">
@@ -104,7 +104,7 @@ export default function CompareVisualizationSection({
         </div>
       ) : (
         <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs text-slate-500">
-          Grafik icin gecerli degerler girin.
+          Grafik için geçerli değerler girin.
         </div>
       )}
     </div>

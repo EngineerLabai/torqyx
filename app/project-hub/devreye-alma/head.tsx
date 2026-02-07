@@ -5,7 +5,7 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 const copy = {
   tr: {
     title: "Devreye Alma Paneli",
-    description: "Devreye alma checklisti: torklama, test, sicak/soguk cevrim ve loglama.",
+    description: "Devreye alma checklisti: torklama, test, sıcak/soğuk çevrim ve loglama.",
   },
   en: {
     title: "Commissioning Panel",

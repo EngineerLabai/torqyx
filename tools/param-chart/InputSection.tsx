@@ -9,9 +9,9 @@ export default function InputSection({ input, onChange }: ToolInputProps<ChartIn
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Hangi senaryoyu gorsellestirmek istiyorsun?</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Hangi senaryoyu görselleştirmek istiyorsun?</h2>
         <p className="text-xs text-slate-500">
-          Yay sabiti ve maksimum yer degistirmeyi gir. Grafik otomatik olusur.
+          Yay sabiti ve maksimum yer değiştirmeyi gir. Grafik otomatik oluşur.
         </p>
       </div>
 
@@ -30,7 +30,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<ChartIn
 
         <div className="space-y-1">
           <label className="block text-[11px] font-medium text-slate-700">
-            Maksimum yer degistirme kac mm?
+            Maksimum yer değiştirme kaç mm?
           </label>
           <input
             type="number"
@@ -43,7 +43,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<ChartIn
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Kac adimda ornekleyelim?</label>
+          <label className="block text-[11px] font-medium text-slate-700">Kaç adımda örnekleyelim?</label>
           <input
             type="number"
             inputMode="numeric"

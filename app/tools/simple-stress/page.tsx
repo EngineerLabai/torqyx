@@ -48,7 +48,7 @@ export default function SimpleStressPage() {
         </h1>
 
         <p className="text-sm text-gray-700 mb-4">
-          Kuvvet ve kesit alaniyla gerilmeyi hesapla, malzeme dayanimi ile karsilastir.
+          Kuvvet ve kesit alanıyla gerilmeyi hesapla, malzeme dayanımı ile karşılaştır.
         </p>
 
         {/* INPUT ALANI */}

@@ -102,15 +102,15 @@ export default function VisualizationSection({ result }: ToolVisualizationProps<
       <div className="space-y-1">
         <h2 className="text-sm font-semibold text-slate-900">Grafik</h2>
         <p className="text-xs text-slate-500">
-          Parametrelere gore olusan kuvvet-deplasman egimini cizdirir.
+          Parametrelere göre oluşan kuvvet-deplasman eğimini çizdirir.
         </p>
       </div>
 
       <ExportPanel
         label="Grafigi Indir"
         previewUrl={previewUrl}
-        previewAlt="Grafik onizleme"
-        helperText="PNG daha net cikti verir. SVG ise gorevli onizleme icindir."
+        previewAlt="Grafik önizleme"
+        helperText="PNG daha net çıktı verir. SVG ise vektörel önizleme içindir."
         onPng={() => exportCanvasPng(canvasRef.current, "grafik.png")}
         onSvg={() => exportCanvasSvg(canvasRef.current, "grafik.svg")}
       />
@@ -121,18 +121,18 @@ export default function VisualizationSection({ result }: ToolVisualizationProps<
           <p className="mt-1 text-sm font-semibold text-slate-900">{formatNumber(result.maxForce)} N</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-medium text-slate-500">Adim boyu</p>
+          <p className="text-[11px] font-medium text-slate-500">Adım boyu</p>
           <p className="mt-1 text-sm font-semibold text-slate-900">{formatNumber(result.stepSize)} mm</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-medium text-slate-500">Nokta sayisi</p>
+          <p className="text-[11px] font-medium text-slate-500">Nokta sayısı</p>
           <p className="mt-1 text-sm font-semibold text-slate-900">{result.points.length || "-"}</p>
         </div>
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-4">
         {labels.length === 0 ? (
-          <p className="text-xs text-slate-500">Grafik icin gecerli degerler girin.</p>
+          <p className="text-xs text-slate-500">Grafik için geçerli değerler girin.</p>
         ) : (
           <div className="h-64 w-full">
             <canvas ref={canvasRef} className="h-full w-full" />

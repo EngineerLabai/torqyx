@@ -7,8 +7,8 @@ import VisualizationSection from "./VisualizationSection";
 
 export const basicEngineeringTool: ToolDefinition<HeatInput, HeatResult> = {
   id: "basic-engineering",
-  title: "Basit Isi Akisi Hesabi",
-  description: "Tek katmanli iletim icin isi akisini (Q) manuel parametrelerle hesaplar.",
+  title: "Basit Isı Akışı Hesabı",
+  description: "Tek katmanlı iletim için ısı akışını (Q) manuel parametrelerle hesaplar.",
   initialInput: DEFAULT_INPUT,
   calculate: calculateHeat,
   InputSection,
@@ -22,7 +22,7 @@ export const basicEngineeringTool: ToolDefinition<HeatInput, HeatResult> = {
     },
     {
       key: "heatFlow",
-      label: "Isi Akisi Q (W)",
+      label: "Isı Akışı Q (W)",
       getValue: (result) => (result.heatFlow === null ? null : Number(result.heatFlow.toFixed(4))),
     },
     {

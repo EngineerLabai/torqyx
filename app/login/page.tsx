@@ -10,7 +10,7 @@ export async function generateMetadata() {
   const brandContent = getBrandCopy(locale);
   const copy =
     locale === "tr"
-      ? { title: "Giris", description: "Google ile giris yap ve kayitli alanlari ac." }
+      ? { title: "Giriş", description: "Google ile giriş yap ve kayıtlı alanları aç." }
       : { title: "Sign in", description: "Sign in with Google to access saved areas." };
 
   return buildPageMetadata({
@@ -25,9 +25,9 @@ export default async function LoginPage() {
   const locale = await getLocaleFromCookies();
   const copy =
     locale === "tr"
-      ? { title: "Giris", description: "Google ile giris yaparak kayitli hesaplara ve favorilere ulasin." }
+      ? { title: "Giriş", description: "Google ile giriş yaparak kayıtlı hesaplara ve favorilere ulaşın." }
       : { title: "Sign in", description: "Sign in with Google to access favorites and saved areas." };
-  const badgeLabel = locale === "tr" ? "Erisim" : "Access";
+  const badgeLabel = locale === "tr" ? "Erişim" : "Access";
 
   return (
     <PageShell>

@@ -36,31 +36,31 @@ const FIXTURE_TOOLS_BY_LOCALE: Record<"tr" | "en", FixtureTool[]> = {
   tr: [
     {
       id: "locating",
-      name: "3-2-1 Referanslama Karti",
+      name: "3-2-1 Referanslama Kartı",
       label: "Konumlama",
       description:
-        "3-2-1 prensibi, sabit/kayan pim secimi ve konumlama kontrol listesi.",
-      highlights: ["Referans yuzeyi secimi", "Sabit/kayan pim planlama", "Hizli kontrol listesi"],
+        "3-2-1 prensibi, sabit/kayan pim seçimi ve konumlama kontrol listesi.",
+      highlights: ["Referans yüzeyi seçimi", "Sabit/kayan pim planlama", "Hızlı kontrol listesi"],
       status: "beta",
       href: "/fixture-tools/locating",
     },
     {
       id: "clamping",
-      name: "Sikistirma Kuvveti Karti",
-      label: "Sikistirma",
+      name: "Sıkıştırma Kuvveti Kartı",
+      label: "Sıkıştırma",
       description:
-        "Hizli normal kuvvet tahmini ve kuvvet yolu icin not karti.",
-      highlights: ["Kiskac sayisi planlama", "Kayma riski kontrolu", "Reaksiyon noktasi notlari"],
+        "Hızlı normal kuvvet tahmini ve kuvvet yolu için not kartı.",
+      highlights: ["Kıskaç sayısı planlama", "Kayma riski kontrolü", "Reaksiyon noktası notları"],
       status: "beta",
       href: "/fixture-tools/clamping",
     },
     {
       id: "base-plate",
-      name: "Taban Plakasi Boyutlandirma",
+      name: "Taban Plakası Boyutlandırma",
       label: "Taban plaka",
       description:
-        "Kalinlik tahmini ve standart plaka secimi icin pratik yardimci.",
-      highlights: ["Hizli kalinlik hesabi", "Standart plaka onerisi", "Makine tabla uyumu"],
+        "Kalınlık tahmini ve standart plaka seçimi için pratik yardımcı.",
+      highlights: ["Hızlı kalınlık hesabı", "Standart plaka önerisi", "Makine tabla uyumu"],
       status: "beta",
       href: "/fixture-tools/base-plate",
     },

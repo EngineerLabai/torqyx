@@ -30,28 +30,28 @@ const hubsByLocale = {
   tr: [
     {
       title: "Devreye Alma Paneli",
-      description: "Komisyoning adimlari: hazirlik, temizlik, torklama, on test, sicak/soguk cevrim, loglama.",
+      description: "Komisyoning adımları: hazırlık, temizlik, torklama, ön test, sıcak/soğuk çevrim, loglama.",
       href: "/project-hub/devreye-alma",
       badge: "Yeni",
     },
     {
-      title: "Yeni Proje / Iyilestirme Takip Paneli",
+      title: "Yeni Proje / İyileştirme Takip Paneli",
       description:
-        "Musteri projeleri, hat iyilestirmeleri ve Kaizen calismalarini kayit altina al ve durum / oncelik bazli takip et.",
+        "Müşteri projeleri, hat iyileştirmeleri ve Kaizen çalışmalarını kayıt altına al ve durum / öncelik bazlı takip et.",
       href: "/project-hub/project-tools",
       badge: "Aktif",
     },
     {
       title: "RFQ / Teklif Takip Paneli",
       description:
-        "Musteri RFQ'larinin (Request for Quotation) son tarihlerini, durumlarini ve sorumlu kisileri kaydet.",
+        "Müşteri RFQ'larının (Request for Quotation) son tarihlerini, durumlarını ve sorumlu kişileri kaydet.",
       href: "/project-hub/rfq",
       badge: "Aktif",
     },
     {
-      title: "Parca / Revizyon Takip Paneli",
+      title: "Parça / Revizyon Takip Paneli",
       description:
-        "Parca revizyonlari, degisen cizimler ve etkilenen dokumanlari izlemek icin hafif bir takip listesi.",
+        "Parça revizyonları, değişen çizimler ve etkilenen dokümanları izlemek için hafif bir takip listesi.",
       href: "/project-hub/part-tracking",
       badge: "Aktif",
     },

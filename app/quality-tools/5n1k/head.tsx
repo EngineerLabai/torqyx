@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "5N1K Problem Tanimlama",
-    description: "Problem tanimi icin 5N1K sorularini hizlica topla.",
+    title: "5N1K Problem Tanımlama",
+    description: "Problem tanımı için 5N1K sorularını hızlıca topla.",
   },
   en: {
     title: "5W1H Problem Definition",

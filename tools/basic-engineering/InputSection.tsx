@@ -9,16 +9,16 @@ export default function InputSection({ input, onChange }: ToolInputProps<HeatInp
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Hangi isi aktarimini hesaplamak istiyorsun?</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Hangi ısı aktarımını hesaplamak istiyorsun?</h2>
         <p className="text-xs text-slate-500">
-          Tek katmanli iletim icin k, A, dT ve L degerlerini gir. Sonucu adim adim goreceksin.
+          Tek katmanlı iletim için k, A, dT ve L değerlerini gir. Sonucu adım adım göreceksin.
         </p>
       </div>
 
       <div className="grid gap-3 text-xs sm:grid-cols-2">
         <div className="space-y-1">
           <label className="block text-[11px] font-medium text-slate-700">
-            Malzemenin isil iletkenligi (k) nedir?
+            Malzemenin ısıl iletkenliği (k) nedir?
           </label>
           <input
             type="number"
@@ -31,7 +31,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<HeatInp
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Isi gecen alan (A) ne kadar?</label>
+          <label className="block text-[11px] font-medium text-slate-700">Isı geçen alan (A) ne kadar?</label>
           <input
             type="number"
             inputMode="decimal"
@@ -44,7 +44,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<HeatInp
 
         <div className="space-y-1">
           <label className="block text-[11px] font-medium text-slate-700">
-            Iki yuzey arasindaki sicaklik farki (dT) nedir?
+            İki yüzey arasındaki sıcaklık farkı (dT) nedir?
           </label>
           <input
             type="number"
@@ -58,7 +58,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<HeatInp
 
         <div className="space-y-1">
           <label className="block text-[11px] font-medium text-slate-700">
-            Malzeme kalinligi (L) kac metre?
+            Malzeme kalınlığı (L) kaç metre?
           </label>
           <input
             type="number"

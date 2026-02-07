@@ -9,7 +9,7 @@ import CompareVisualizationSection from "./CompareVisualizationSection";
 export const paramChartTool: ToolDefinition<ChartInput, ChartResult> = {
   id: "param-chart",
   title: "Yay Kuvvet Grafigi",
-  description: "Girilen yay sabiti ve yer degistirme ile F-x grafigi uretir.",
+  description: "Girilen yay sabiti ve yer değiştirme ile F-x grafiği üretir.",
   initialInput: DEFAULT_INPUT,
   calculate: calculateChart,
   InputSection,

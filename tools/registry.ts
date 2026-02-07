@@ -72,21 +72,21 @@ type TorquePowerResults = {
 
 export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResults> = {
   id: "torque-power",
-  title: "Guc - Tork - Devir",
-  description: "P(kW/hp) - T(Nm) - n(rpm) iliskisini hesapla ve verim etkisini gor.",
+  title: "Güç - Tork - Devir",
+  description: "kW, hp ve rpm ilişkisine göre tork veya güç hesabını yap.",
   categories: ["Mechanical"],
   tags: ["torque"],
   lastUpdated: "2026-01-29",
   inputs: [
     {
       key: "powerKw",
-      label: "Guc",
+      label: "Güç",
       unit: "kW",
       type: "number",
       min: 0.1,
       step: 0.1,
       default: 5.5,
-      help: "Elektrik motoru gucu (kW).",
+      help: "Elektrik motoru gücü (kW).",
     },
     {
       key: "rpm",
@@ -107,7 +107,7 @@ export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResul
       max: 100,
       step: 1,
       default: 95,
-      help: "Shaft cikis verimi. Tipik 90-98%.",
+      help: "Mil çıkış verimi. Tipik %90–98.",
     },
   ],
   calculate: (inputs) => {
@@ -118,19 +118,19 @@ export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResul
   },
   chartConfig: (results) => ({
     type: "bar",
-    labels: ["Tork (ideal)", "Tork (verim)", "Guc (hp)"],
+    labels: ["Tork (ideal)", "Tork (verim)", "Güç (hp)"],
     datasets: [
       {
-        label: "Deger",
+        label: "Değer",
         data: [results.torqueNm, results.torqueNmEff, results.powerHp],
         backgroundColor: "rgba(16, 185, 129, 0.25)",
         borderColor: "#10b981",
       },
     ],
-    yLabel: "Deger",
+    yLabel: "Değer",
   }),
   formulaDisplay:
-    "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * eta",
+    "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
   formula: {
     tr: "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
     en: "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",

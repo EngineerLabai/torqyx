@@ -45,11 +45,11 @@ export function getToolSeo(toolPath: string, locale: Locale = DEFAULT_LOCALE): T
     toolCopy?.description ??
     tool?.description ??
     (locale === "tr"
-      ? "Mekanik hesaplama araci. Parametreleri gir, sonucu adim adim gor."
+      ? "Mekanik hesaplama aracı. Parametreleri gir, sonucu adım adım gör."
       : "Engineering calculator. Enter parameters and review step-by-step results.");
 
   const brandName = getBrandCopy(locale).siteName;
-  const suffix = locale === "tr" ? "Hesaplayici" : "Calculator";
+  const suffix = locale === "tr" ? "Hesaplayıcı" : "Calculator";
   const title = `${name} ${suffix} | ${brandName}`;
 
   const canonical = buildLocalizedCanonical(tool?.href ?? href, locale);
