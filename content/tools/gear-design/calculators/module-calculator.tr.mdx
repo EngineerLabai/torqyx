@@ -1,0 +1,61 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Hatve çapı ve diş sayısını gir", "Ham modülü oku", "Önerilen standart modülle karşılaştır"]} />
+</Callout>
+
+<Formula label="Modül">
+m = d / z
+p = π · m
+</Formula>
+
+**Varsayımlar**
+- Öneri için ISO standart modül listesi kullanılır.
+- Profil kaydırma yoktur; referans çap esas alınır.
+
+**Birimler**
+- d: mm
+- m, p: mm
+
+**Kaynak/Referans**
+- ISO 54 (Standart modüller)
+- ISO 53 (Evolvent dişli referans profili)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Undercut sınırları ve profil kaydırma kontrol edilmez. Düşük diş sayılarında undercut ve düzeltme katsayılarını kontrol edin.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Standart modül serisi", "Profil kaydırma yok"]}
+  references={["ISO 54", "ISO 53"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Basit modül
+
+**Girdiler**
+- d = 200 mm
+- z = 40
+
+**Çıktılar**
+- m = 5.000 mm
+- p = 15.708 mm
+- Önerilen m = 5
+- Önerilen d = 200 mm
+
+### Örnek 2: Standart dışı çap
+
+**Girdiler**
+- d = 180 mm
+- z = 44
+
+**Çıktılar**
+- m = 4.091 mm
+- p = 12.852 mm
+- Önerilen m = 4
+- Önerilen d = 176 mm
+- Sapma = -2.2%

@@ -1,90 +1,68 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: bolt-calculator -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Select a bolt size and grade", "Set preload percentage and friction", "Read stress area, preload, and torque"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Stress area, preload, torque">
+As = (π/4) · (d - 0.9382·P)^2
+Fv = (preload% / 100) · Re · As
+T = K · Fv · (d / 1000)
 </Formula>
 
-## Degisken aciklamalari
+**Assumptions**
+- ISO metric thread profile is used for the stress area.
+- Nut factor K is a lumped friction factor (dry/oiled/coated).
+- Preload is based on yield strength Re; joint stiffness is neglected.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Units**
+- d, P: mm
+- Re: MPa (N/mm²)
+- As: mm²
+- Fv: kN
+- T: N·m
 
-## Birimler
+**References**
+- VDI 2230 (Systematic calculation of bolted joints)
+- ISO 898-1 (Mechanical properties of fasteners)
+- ISO 68-1 (Thread profile)
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+This is not a full bolted joint analysis. Dynamic loading, gasketed joints, relaxation, and lubrication changes require a detailed joint calculation.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["ISO metric thread", "Single nut factor K", "Preload based on Re"]}
+  references={["VDI 2230", "ISO 898-1", "ISO 68-1"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: M12 8.8 civata icin on yuk
+### Example 1: M8 dry joint
 
-Standart bir M12 civata icin gerilme alani ve on yuk tahmini.
+**Inputs**
+- d = 8 mm, P = 1.25 mm
+- Grade: 8.8 (Re = 640 MPa)
+- Preload: 70%
+- Friction K: 0.25 (dry)
 
-**Girdiler**
-- Nominal cap: 12 mm
-- Dis adimi: 1.75 mm
-- Kalite sinifi: 8.8
-- Hedef on yuk: %70 proof
+**Outputs**
+- As = 36.61 mm²
+- Fv = 16.40 kN
+- T = 32.8 N·m
 
-**Ciktilar**
-- Gerilme alani (As): ~84 mm2
-- On yuk: ~37 kN
+### Example 2: M10 oiled joint
 
-**Notlar**
-- Gercek tork, surtunme katsayisina gore degisir.
+**Inputs**
+- d = 10 mm, P = 1.5 mm
+- Grade: 10.9 (Re = 940 MPa)
+- Preload: 70%
+- Friction K: 0.20 (oiled)
 
-## Ornek 2: M16 10.9 yuklu baglanti
-
-Daha yuksek dayanima sahip M16 civata icin on yuk kontrolu.
-
-**Girdiler**
-- Nominal cap: 16 mm
-- Dis adimi: 2.0 mm
-- Kalite sinifi: 10.9
-- Hedef on yuk: %75 proof
-
-**Ciktilar**
-- Gerilme alani (As): ~157 mm2
-- On yuk: ~90 kN
-
-**Notlar**
-- Kritik baglantilarda katalog verisini kontrol et.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- As = 57.99 mm²
+- Fv = 38.16 kN
+- T = 76.3 N·m

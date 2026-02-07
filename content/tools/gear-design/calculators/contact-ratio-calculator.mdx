@@ -1,86 +1,64 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: gear-design/calculators/contact-ratio-calculator -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Enter module, tooth counts, and angles", "Set face width and addendum", "Read eα, eβ, and total contact ratio"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Contact ratio">
+m_t = m_n / cos(β)
+α_t = atan(tan(α_n) / cos(β))
+p_b = π · m_t · cos(α_t)
+e_α = (s1 + s2 − a · sin(α_t)) / p_b
+e_β = b · sin(β) / (π · m_n)
+e = e_α + e_β
 </Formula>
 
-## Degisken aciklamalari
+**Assumptions**
+- Standard full-depth gears (ha* ≈ 1).
+- No profile shift; ISO/DIN reference geometry.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Units**
+- m_n, b, a: mm
+- Angles: degrees
 
-## Birimler
+**References**
+- ISO 6336 (Cylindrical gears)
+- ISO 21771 (Gear geometry definitions)
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+Profile shift, internal gears, and high correction factors are not covered. Check undercut and root strength separately.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Standard full-depth", "No profile shift"]}
+  references={["ISO 6336", "ISO 21771"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: Duz disli
+### Example 1: Helical pair
 
-Duz disli temas orani.
+**Inputs**
+- m_n = 2, z1 = 18, z2 = 54
+- α_n = 20°, β = 15°
+- b = 35 mm, ha* = 1
 
-**Girdiler**
-- Z1=20, Z2=40
-- Modul 2
-- Basinc acisi 20
+**Outputs**
+- e_α = 1.573
+- e_β = 1.442
+- e = 3.014
 
-**Ciktilar**
-- Temas orani ~1.6
+### Example 2: Spur gear
 
-**Notlar**
-- 1.2 altina dusme.
+**Inputs**
+- m_n = 3, z1 = 20, z2 = 40
+- α_n = 20°, β = 0°
+- b = 30 mm, ha* = 1
 
-## Ornek 2: Helisel disli
-
-Helisel dislide temas orani.
-
-**Girdiler**
-- Helis acisi 15
-- Z1=24, Z2=48
-- Modul 2.5
-
-**Ciktilar**
-- Toplam temas orani ~2.1
-
-**Notlar**
-- Helis etkisini dahil et.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- e_α = 1.635
+- e_β = 0.000
+- e = 1.635

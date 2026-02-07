@@ -1,0 +1,62 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["ks ve hatve hızını gir", "Yağlama yöntemi ve sıcaklığı seç", "ISO VG önerisini oku"]} />
+</Callout>
+
+<Formula label="Seçim faktörü">
+Faktör = ks / v
+</Formula>
+
+Araç, faktör ve çalışma koşullarını pratik bir ISO VG sınıfına eşler ve yakın aralığı gösterir.
+
+**Varsayımlar**
+- ks/v rehberine dayalı sezgisel seçim.
+- Sıcaklık ve yöntem küçük düzeltmeler uygular.
+
+**Birimler**
+- ks: N/mm
+- v: m/s
+- Sıcaklık: °C
+
+**Kaynak/Referans**
+- ISO 3448 (ISO viskozite sınıfları)
+- AGMA 9005 (Yağlama rehberleri)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Bu hızlı bir seçicidir; OEM tablolarının yerine geçmez. Nihai seçim için üretici ve yağ tedarikçisi verisini kullanın.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Sezgisel ks/v eşlemesi", "Sıcaklık düzeltmesi"]}
+  references={["ISO 3448", "AGMA 9005"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Splash yağlama
+
+**Girdiler**
+- ks = 25 N/mm
+- v = 12 m/s
+- Yöntem: splash
+- T = 70 °C
+
+**Çıktılar**
+- Faktör = 2.08
+- Öneri: VG 100 (aralık 68–150)
+
+### Örnek 2: Daldırma yağlama, yüksek yük
+
+**Girdiler**
+- ks = 45 N/mm
+- v = 4 m/s
+- Yöntem: bath
+- T = 90 °C
+
+**Çıktılar**
+- Faktör = 11.25
+- Öneri: VG 460 (aralık 320–680)

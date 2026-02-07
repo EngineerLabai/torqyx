@@ -1,0 +1,62 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Güç ve deviri ya da torku gir", "Hatve çapı ve açıları ayarla", "Ft, Fr, Fa sonuçlarını oku"]} />
+</Callout>
+
+<Formula label="Dişli kuvvetleri">
+T = 9550 · P / n
+Ft = 2000 · T / d
+Fr = Ft · tan(α)
+Fa = Ft · tan(β)
+</Formula>
+
+**Varsayımlar**
+- Sabit tork, dinamik katsayı yok.
+- Kuvvet hesabında hatve çapı kullanılır.
+
+**Birimler**
+- P: kW, n: rpm, T: N·m
+- d: mm
+- Kuvvetler: N
+
+**Kaynak/Referans**
+- ISO 6336 (Silindirik dişliler)
+- AGMA 2001 (Dişli tasarımı temel esaslar)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Dinamik katsayılar, yük dağılımı ve emniyet faktörleri dahil değildir. Son tasarım için standartları kullanın.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Sabit tork", "Hatve çapı ile kuvvet hesabı"]}
+  references={["ISO 6336", "AGMA 2001"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Güçten hesap
+
+**Girdiler**
+- P = 5 kW, n = 1500 rpm
+- d = 120 mm, α = 20°, β = 0°
+
+**Çıktılar**
+- T = 31.83 N·m
+- Ft = 530.6 N
+- Fr = 193.1 N
+- Fa = 0 N
+
+### Örnek 2: Torktan hesap
+
+**Girdiler**
+- T = 120 N·m
+- d = 150 mm, α = 20°, β = 15°
+
+**Çıktılar**
+- Ft = 1600 N
+- Fr = 582.4 N
+- Fa = 428.7 N

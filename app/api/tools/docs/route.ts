@@ -29,10 +29,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "invalid slug" }, { status: 400 });
   }
 
-  const docs = await getToolDocs(slug);
-  const tool = getToolBySlug(slug);
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
   const locale: Locale = isLocale(cookieLocale) ? cookieLocale : "tr";
+  const docs = await getToolDocs(slug, locale);
+  const tool = getToolBySlug(slug);
   const related = tool ? await getRelatedForTool(tool, { locale }) : { guides: [], glossary: [] };
 
   const explanation = docs.explanation

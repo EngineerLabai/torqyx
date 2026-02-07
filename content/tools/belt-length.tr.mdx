@@ -1,0 +1,56 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Kasnak çapları ve merkez mesafesini gir", "C > (D1 + D2)/2 koşulunu kontrol et", "Kayış uzunluğu ve sarma açısını oku"]} />
+</Callout>
+
+<Formula label="Açık kayış uzunluğu">
+L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
+β = π − 2·arcsin((D2 − D1)/(2C))
+</Formula>
+
+**Varsayımlar**
+- Açık kayış düzeni (çapraz değil).
+- Kayış kalınlığı ve germe etkisi ihmal edilir; geometrik yaklaşım yapılır.
+
+**Birimler**
+- D1, D2, C: mm
+- L: mm
+- β: derece
+
+**Kaynak/Referans**
+- Makine elemanları el kitapları (kayış geometrisi)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Triger veya çapraz kayışlar ve germe payı dahil değildir. Üretici verisine göre germe payı eklenmelidir.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Açık kayış geometrisi", "Germe ve kalınlık ihmal"]}
+  references={["Makine elemanları el kitapları"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Farklı kasnak çapları
+
+**Girdiler**
+- D1 = 120 mm, D2 = 80 mm
+- C = 400 mm
+
+**Çıktılar**
+- L = 1115.2 mm
+- β = 185.7°
+
+### Örnek 2: Eş kasnaklar
+
+**Girdiler**
+- D1 = 150 mm, D2 = 150 mm
+- C = 500 mm
+
+**Çıktılar**
+- L = 1471.2 mm
+- β = 180°

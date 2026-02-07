@@ -1,86 +1,68 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: gear-design/calculators/backlash-calculator -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Enter module, face width, and center distance", "Add temperature delta and thermal expansion", "Review nominal and adjusted backlash"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Backlash estimate">
+j_nom = 0.04 · m + 0.001 · b
+j_min = 0.8 · j_nom
+j_max = 1.2 · j_nom
+Δa = a · α_th · ΔT
+j_adj = j + Δa
 </Formula>
 
-## Degisken aciklamalari
+**Assumptions**
+- Simple ISO/DIN-inspired heuristic for initial sizing.
+- Thermal expansion is applied to center distance only.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Units**
+- m, b, a: mm
+- α_th: µm/m·°C
+- j: mm
 
-## Birimler
+**References**
+- ISO 1328 (Accuracy of cylindrical gears)
+- DIN 3967 (Backlash guidance)
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+Not a substitute for tolerance class selection or assembly analysis. Confirm backlash with detailed standards and drawings.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Heuristic backlash estimate", "Thermal expansion on center distance"]}
+  references={["ISO 1328", "DIN 3967"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: Modul 2
+### Example 1: Mild thermal shift
 
-Modul 2 disli icin bosluk.
+**Inputs**
+- m = 2, b = 30 mm
+- a = 150 mm, ΔT = 10 °C
+- α_th = 12 µm/m·°C
 
-**Girdiler**
-- Modul 2
-- Dis sayisi 20/40
-- Bosluk hedefi 0.05-0.10 mm
+**Outputs**
+- j_nom = 0.110 mm
+- j_min = 0.088 mm
+- j_max = 0.132 mm
+- Δa = 0.018 mm
+- j_nom_adj = 0.128 mm
 
-**Ciktilar**
-- Backlash araligi 0.05-0.10 mm
+### Example 2: Larger gear, higher ΔT
 
-**Notlar**
-- Isil genlesme icin pay birak.
+**Inputs**
+- m = 3, b = 40 mm
+- a = 200 mm, ΔT = 20 °C
+- α_th = 12 µm/m·°C
 
-## Ornek 2: Modul 4
-
-Modul 4 disli icin bosluk.
-
-**Girdiler**
-- Modul 4
-- Dis sayisi 18/54
-- Bosluk hedefi 0.10-0.20 mm
-
-**Ciktilar**
-- Backlash araligi 0.10-0.20 mm
-
-**Notlar**
-- Montaj toleransi ile kontrol et.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- j_nom = 0.160 mm
+- j_min = 0.128 mm
+- j_max = 0.192 mm
+- Δa = 0.048 mm
+- j_nom_adj = 0.208 mm

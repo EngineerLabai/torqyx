@@ -824,7 +824,7 @@
                                                     },
                                            "explanationTitle":  "Hesaplama Açıklaması",
                                            "examplesTitle":  "Örnekler",
-                                           "loadingTitle":  "Dokümantasyon hazırlanıyor",
+                                           "loadingTitle":  "İçerik yükleniyor",
                                            "loadingBody":  "Kısa sürede gelmezse bu hesaplayıcı için açıklama/örnekler henüz yayınlanmamış olabilir.",
                                            "docsFailedTitle":  "Dokümantasyon erişilemedi",
                                            "docsFailedBody":  "Şu anda açıklama ve örnekler getirilemiyor.",

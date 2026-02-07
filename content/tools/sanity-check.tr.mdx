@@ -1,0 +1,56 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Birimli değişkenleri tanımla", "Formülü yaz", "Beklenen birimi gir ve uyarıları kontrol et"]} />
+</Callout>
+
+<Formula label="Birimli değerlendirme">
+Sonuç = f(birimli değişkenler)
+</Formula>
+
+Laboratuvar, formülleri birim sistemiyle değerlendirir. Beklenen birim verildiğinde boyutsal uyumsuzlukları uyarı olarak gösterir.
+
+**Varsayımlar**
+- MathJS birim sistemi kullanılır.
+- Açısal birimler (rad) boyutsuz kabul edilir.
+
+**Birimler**
+- SI ve yaygın mühendislik birimleri (N, m, Pa, W, Hz, rpm vb.).
+
+**Kaynak/Referans**
+- ISO 80000 (SI büyüklük ve birimler)
+- MathJS unit referansı
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Bu araç detaylı tasarım doğrulamasının yerini tutmaz. Ampirik bağıntılar, geçici etkiler ve malzeme sınırları ayrıca kontrol edilmelidir.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["MathJS birim sistemi", "rad boyutsuz kabulü"]}
+  references={["ISO 80000", "MathJS unit referansı"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Tork ve açısal hızdan güç
+
+**Girdiler**
+- T = 10 N·m
+- ω = 100 rad/s
+- Formül: P = T · ω
+
+**Çıktılar**
+- P = 1000 W
+
+### Örnek 2: Kuvvet ve hızdan güç
+
+**Girdiler**
+- F = 200 N
+- v = 0.5 m/s
+- Formül: P = F · v
+
+**Çıktılar**
+- P = 100 W

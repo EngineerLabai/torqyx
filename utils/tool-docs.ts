@@ -1,6 +1,7 @@
 import "server-only";
 import fs from "node:fs/promises";
 import path from "node:path";
+import type { Locale } from "@/utils/locale";
 
 export type ToolExampleItem = {
   title: string;
@@ -28,11 +29,11 @@ const normalizeText = (value: string) =>
     .replace(/\s+/g, " ")
     .trim();
 
-const resolveDocFilePath = (slug: string) => {
-  const safeSlug = slug.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
-  if (!safeSlug || safeSlug.includes("..")) return null;
+const resolveDocFilePath = (relativePath: string) => {
+  const safePath = relativePath.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
+  if (!safePath || safePath.includes("..")) return null;
 
-  const fullPath = path.resolve(TOOL_CONTENT_ROOT, `${safeSlug}.mdx`);
+  const fullPath = path.resolve(TOOL_CONTENT_ROOT, safePath);
   if (!fullPath.startsWith(TOOL_CONTENT_ROOT)) return null;
   return fullPath;
 };
@@ -45,6 +46,31 @@ const readFileIfExists = async (filePath: string | null) => {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return null;
     throw error;
   }
+};
+
+const buildCandidates = (slug: string, locale?: Locale) => {
+  const safeSlug = slug.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
+  if (!safeSlug || safeSlug.includes("..")) return [];
+
+  const candidates: string[] = [];
+  if (locale) {
+    candidates.push(`${safeSlug}.${locale}.mdx`);
+  }
+  candidates.push(`${safeSlug}.mdx`);
+  return candidates;
+};
+
+const readFirstAvailable = async (slug: string, locale?: Locale) => {
+  const candidates = buildCandidates(slug, locale)
+    .map(resolveDocFilePath)
+    .filter((value): value is string => Boolean(value));
+
+  for (const filePath of candidates) {
+    const content = await readFileIfExists(filePath);
+    if (content) return content;
+  }
+
+  return null;
 };
 
 const EXPLANATION_TITLES = new Set([
@@ -113,9 +139,8 @@ const parseSections = (content: string) => {
   return result;
 };
 
-export const getToolDocs = async (slug: string): Promise<ToolDocs> => {
-  const filePath = resolveDocFilePath(slug);
-  const content = await readFileIfExists(filePath);
+export const getToolDocs = async (slug: string, locale?: Locale): Promise<ToolDocs> => {
+  const content = await readFirstAvailable(slug, locale);
   if (!content) {
     return { hasDocs: false, explanation: null, examples: null };
   }

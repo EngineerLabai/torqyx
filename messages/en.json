@@ -824,7 +824,7 @@
                                                     },
                                            "explanationTitle":  "Calculation explanation",
                                            "examplesTitle":  "Examples",
-                                           "loadingTitle":  "Documentation is preparing",
+                                           "loadingTitle":  "Loading documentation",
                                            "loadingBody":  "If it stays here, this calculator may not have explanation/examples yet.",
                                            "docsFailedTitle":  "Documentation unavailable",
                                            "docsFailedBody":  "We could not load the explanation and examples right now.",

@@ -1,86 +1,62 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: gear-design/calculators/viscosity-selector -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Enter ks and pitch line speed", "Select lubrication method and temperature", "Read the ISO VG recommendation"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Selection factor">
+Factor = ks / v
 </Formula>
 
-## Degisken aciklamalari
+The tool maps the factor and operating conditions to a practical ISO VG grade and shows a neighboring range.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Assumptions**
+- Heuristic selector based on ks/v guidelines.
+- Temperature and method apply small adjustments.
 
-## Birimler
+**Units**
+- ks: N/mm
+- v: m/s
+- Temperature: °C
 
-- X: birim burada
-- Y: birim burada
+**References**
+- ISO 3448 (ISO viscosity grades)
+- AGMA 9005 (Lubrication guidelines)
 
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+This is a quick selector, not a substitute for OEM charts. Always verify with gearbox and oil supplier data.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Heuristic ks/v mapping", "Temperature adjustment"]}
+  references={["ISO 3448", "AGMA 9005"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: Dusuk hiz, yuksek yuk
+### Example 1: Splash lubrication
 
-Dusuk hiz yuksek yuk icin viskozite secimi.
+**Inputs**
+- ks = 25 N/mm
+- v = 12 m/s
+- Method: splash
+- T = 70 °C
 
-**Girdiler**
-- Yuk: yuksek
-- Hiz: dusuk
-- Sicaklik: 60 C
+**Outputs**
+- Factor = 2.08
+- Recommended: VG 100 (range 68–150)
 
-**Ciktilar**
-- Oneri: ISO VG 220
+### Example 2: Bath lubrication, high load
 
-**Notlar**
-- Uretici tavsiyesi oncelikli.
+**Inputs**
+- ks = 45 N/mm
+- v = 4 m/s
+- Method: bath
+- T = 90 °C
 
-## Ornek 2: Yuksek hiz
-
-Yuksek hiz orta yuk icin secim.
-
-**Girdiler**
-- Yuk: orta
-- Hiz: yuksek
-- Sicaklik: 80 C
-
-**Ciktilar**
-- Oneri: ISO VG 68
-
-**Notlar**
-- Saha kosullarina gore revize et.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- Factor = 11.25
+- Recommended: VG 460 (range 320–680)

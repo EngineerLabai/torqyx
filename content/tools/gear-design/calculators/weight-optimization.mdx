@@ -1,84 +1,61 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: gear-design/calculators/weight-optimization -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Enter outer diameter, bore, and face width", "Set material density and lighten factor", "Read solid and lightened mass"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Mass estimate">
+V = (π/4)(D² − d²) · b
+m = V · 1e-9 · ρ
+m_light = m · (1 − lighten)
 </Formula>
 
-## Degisken aciklamalari
+**Assumptions**
+- Gear body is modeled as a hollow cylinder.
+- Lighten factor removes a uniform fraction of mass.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Units**
+- D, d, b: mm
+- ρ: kg/m³
+- Mass: kg
 
-## Birimler
+**References**
+- Machine design handbooks (gear blank mass estimates)
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+Webs, spokes, keyways, and holes are not modeled. Structural checks and balance are required for final design.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Hollow cylinder model", "Uniform lighten factor"]}
+  references={["Machine design handbooks"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: Rim inceltme
+### Example 1: Steel gear
 
-Rim inceltme ile agirlik dusurme.
+**Inputs**
+- D = 250 mm, d = 60 mm
+- b = 40 mm, ρ = 7850 kg/m³
+- Lighten = 0.20
 
-**Girdiler**
-- Disli genisligi 20 mm
-- Rim kalinligi 8 -> 6 mm
+**Outputs**
+- Solid mass = 14.53 kg
+- Lightened mass = 11.62 kg
+- Volume = 0.00185 m³
 
-**Ciktilar**
-- Tahmini agirlik dususu ~12%
+### Example 2: Aluminum gear
 
-**Notlar**
-- Rijitlik kontrol et.
+**Inputs**
+- D = 200 mm, d = 50 mm
+- b = 30 mm, ρ = 2700 kg/m³
+- Lighten = 0.30
 
-## Ornek 2: Delik optimizasyonu
-
-Delik optimizasyonu ile hafifletme.
-
-**Girdiler**
-- Delik sayisi 6
-- Delik capi 18 mm
-
-**Ciktilar**
-- Tahmini agirlik dususu ~8%
-
-**Notlar**
-- Gerilme yigilmasi icin FEA oner.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- Solid mass = 2.39 kg
+- Lightened mass = 1.67 kg
+- Volume = 0.000884 m³

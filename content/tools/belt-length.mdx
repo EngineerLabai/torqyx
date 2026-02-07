@@ -1,86 +1,56 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: belt-length -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Enter pulley diameters and center distance", "Check that C > (D1 + D2)/2", "Read belt length and wrap angle"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Open belt length">
+L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
+β = π − 2·arcsin((D2 − D1)/(2C))
 </Formula>
 
-## Degisken aciklamalari
+**Assumptions**
+- Open belt configuration (not crossed).
+- Belt thickness and stretch are ignored; geometric approximation only.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Units**
+- D1, D2, C: mm
+- L: mm
+- β: degrees
 
-## Birimler
+**References**
+- Machine design handbooks (belt drive geometry)
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+Timing belts, crossed belts, and tensioning allowances are not included. Add a stretch/tension allowance per manufacturer data.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Open belt geometry", "No stretch or belt thickness"]}
+  references={["Machine design handbooks"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: Tipik aktarim
+### Example 1: Different pulley diameters
 
-Iki kasnakli tipik aktarim.
+**Inputs**
+- D1 = 120 mm, D2 = 80 mm
+- C = 400 mm
 
-**Girdiler**
-- D1=200 mm
-- D2=100 mm
-- Merkez mesafe 500 mm
+**Outputs**
+- L = 1115.2 mm
+- β = 185.7°
 
-**Ciktilar**
-- Kayis uzunlugu ~1476 mm
+### Example 2: Equal pulleys
 
-**Notlar**
-- Stok boylara yuvarla.
+**Inputs**
+- D1 = 150 mm, D2 = 150 mm
+- C = 500 mm
 
-## Ornek 2: Kisa merkez mesafe
-
-Daha kisa merkez mesafesi.
-
-**Girdiler**
-- D1=150 mm
-- D2=75 mm
-- Merkez mesafe 400 mm
-
-**Ciktilar**
-- Kayis uzunlugu ~1157 mm
-
-**Notlar**
-- Gerdirme payi birak.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- L = 1471.2 mm
+- β = 180°

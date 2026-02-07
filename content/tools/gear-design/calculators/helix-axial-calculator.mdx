@@ -1,84 +1,62 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: gear-design/calculators/helix-axial-calculator -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Enter power & speed or torque", "Set pitch diameter and angles", "Read axial and radial forces"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Helical gear forces">
+T = 9550 · P / n
+Ft = 2000 · T / d
+Fa = Ft · tan(β)
+Fr = Ft · tan(α)
 </Formula>
 
-## Degisken aciklamalari
+**Assumptions**
+- Steady torque with constant geometry.
+- Pitch diameter is used for force calculation.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Units**
+- P: kW, n: rpm, T: N·m
+- d: mm
+- Forces: N
 
-## Birimler
+**References**
+- ISO 6336 (Cylindrical gears)
+- AGMA 2001 (Fundamental gear design)
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+Does not include dynamic load factors or bearing reactions. Use full gear calculations for final sizing.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Steady torque", "Pitch diameter forces"]}
+  references={["ISO 6336", "AGMA 2001"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: Helis 20 derece
+### Example 1: Helical power case
 
-Helis acisi 20 derece icin aksiyel kuvvet.
+**Inputs**
+- P = 7.5 kW, n = 1450 rpm
+- d = 140 mm, α = 20°, β = 15°
 
-**Girdiler**
-- Tangensiyel kuvvet 1500 N
-- Helis acisi 20
+**Outputs**
+- T = 49.40 N·m
+- Ft = 705.7 N
+- Fr = 256.8 N
+- Fa = 189.1 N
 
-**Ciktilar**
-- Aksiyel kuvvet ~546 N
+### Example 2: Torque input
 
-**Notlar**
-- Rulman seciminde kullan.
+**Inputs**
+- T = 80 N·m
+- d = 100 mm, α = 20°, β = 30°
 
-## Ornek 2: Helis 15 derece
-
-Helis acisi 15 derece icin aksiyel kuvvet.
-
-**Girdiler**
-- Tangensiyel kuvvet 3000 N
-- Helis acisi 15
-
-**Ciktilar**
-- Aksiyel kuvvet ~804 N
-
-**Notlar**
-- Beta artarsa eksenel kuvvet artar.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- Ft = 1600 N
+- Fr = 582.4 N
+- Fa = 923.8 N

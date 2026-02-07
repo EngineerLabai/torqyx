@@ -5,6 +5,7 @@ import StepList from "./StepList";
 import Table from "./Table";
 import MdxImage from "./Image";
 import ToolLink from "./ToolLink";
+import Confidence from "./Confidence";
 
 const mergeClassName = (base: string, extra?: string) => (extra ? `${base} ${extra}` : base);
 
@@ -80,6 +81,7 @@ export const mdxComponents = {
   StepList,
   Table,
   ToolLink,
+  Confidence,
   Image: MdxImage,
   img: MdxImage,
   table: Table,

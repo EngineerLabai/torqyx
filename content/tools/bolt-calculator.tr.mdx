@@ -1,0 +1,68 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Cıvata ölçüsü ve sınıfını seç", "Ön yük yüzdesi ve sürtünmeyi gir", "Gerilme alanı, ön yük ve torku oku"]} />
+</Callout>
+
+<Formula label="Gerilme alanı, ön yük, tork">
+As = (π/4) · (d - 0.9382·P)^2
+Fv = (Ön yük % / 100) · Re · As
+T = K · Fv · (d / 1000)
+</Formula>
+
+**Varsayımlar**
+- ISO metrik diş profili (gerilme alanı formülü) kullanılır.
+- K somun faktörü sürtünmeyi tek katsayıda temsil eder.
+- Ön yük Re akma dayanımına göre hesaplanır; bağlantı rijitliği ihmal edilir.
+
+**Birimler**
+- d, P: mm
+- Re: MPa (N/mm²)
+- As: mm²
+- Fv: kN
+- T: N·m
+
+**Kaynak/Referans**
+- VDI 2230 (Cıvatalı bağlantıların sistematik hesabı)
+- ISO 898-1 (Bağlantı elemanları mekanik özellikleri)
+- ISO 68-1 (Diş profili)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Bu araç tam cıvata bağlantısı analizi değildir. Dinamik yükler, conta etkisi, gevşeme ve yağlama değişimleri için detaylı hesap gerekir.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["ISO metrik diş", "Tek K katsayısı", "Ön yük Re’ye göre"]}
+  references={["VDI 2230", "ISO 898-1", "ISO 68-1"]}
+/>
+
+## Örnekler
+
+### Örnek 1: M8 kuru bağlantı
+
+**Girdiler**
+- d = 8 mm, P = 1.25 mm
+- Sınıf: 8.8 (Re = 640 MPa)
+- Ön yük: %70
+- Sürtünme K: 0.25 (kuru)
+
+**Çıktılar**
+- As = 36.61 mm²
+- Fv = 16.40 kN
+- T = 32.8 N·m
+
+### Örnek 2: M10 yağlı bağlantı
+
+**Girdiler**
+- d = 10 mm, P = 1.5 mm
+- Sınıf: 10.9 (Re = 940 MPa)
+- Ön yük: %70
+- Sürtünme K: 0.20 (yağlı)
+
+**Çıktılar**
+- As = 57.99 mm²
+- Fv = 38.16 kN
+- T = 76.3 N·m

@@ -1,0 +1,64 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Diş sayılarını gir", "Giriş hız ve torkunu ekle", "Verimi girip sonuçları oku"]} />
+</Callout>
+
+<Formula label="Dişli oranı">
+i = z2 / z1
+n2 = n1 / i
+T2 = T1 · i · η
+</Formula>
+
+**Varsayımlar**
+- Tek dişli çifti ve rijit diş varsayımı.
+- Verim tek bir katsayı (η) ile temsil edilir.
+
+**Birimler**
+- z: diş sayısı (boyutsuz)
+- n: rpm
+- T: N·m
+
+**Kaynak/Referans**
+- AGMA 2001 (Dişli tasarımı temel esaslar)
+- ISO 6336 (Silindirik dişliler)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Backlash, dinamik katsayılar ve çok kademeli redüktör etkileri hesaba katılmaz.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Tek dişli çifti", "Tek verim katsayısı"]}
+  references={["AGMA 2001", "ISO 6336"]}
+/>
+
+## Örnekler
+
+### Örnek 1: 3:1 oran
+
+**Girdiler**
+- z1 = 20, z2 = 60
+- n1 = 1500 rpm
+- T1 = 50 N·m
+- η = 0.97
+
+**Çıktılar**
+- i = 3.0
+- n2 = 500 rpm
+- T2 = 145.5 N·m
+
+### Örnek 2: 2:1 oran
+
+**Girdiler**
+- z1 = 18, z2 = 36
+- n1 = 1200 rpm
+- T1 = 80 N·m
+- η = 0.95
+
+**Çıktılar**
+- i = 2.0
+- n2 = 600 rpm
+- T2 = 152 N·m

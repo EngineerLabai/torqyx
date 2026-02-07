@@ -1,0 +1,59 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Kategori ve birimleri seç", "Değeri gir", "Sonuçları oku ve kopyala"]} />
+</Callout>
+
+<Formula label="Genel dönüşüm">
+V_out = V_in × factor_from / factor_to
+</Formula>
+
+Dönüşüm, seçilen birimin taban birime (Pa, N, m, J) katsayısı ile yapılır ve hedef birime geri çevrilir.
+
+**Varsayımlar**
+- Dönüşümler doğrusal katsayılara dayanır (sıcaklık gibi doğrusal olmayan dönüşümler yoktur).
+- Birimler SI tabanlıdır; tablo dışı birim/önek kullanılmaz.
+
+**Birimler**
+- Uzunluk: m tabanlı (mm, cm, km, in, ft)
+- Kuvvet: N tabanlı (kN, lbf)
+- Basınç: Pa tabanlı (kPa, MPa, bar, psi)
+- Enerji: J tabanlı (kJ, MJ, Wh, kWh, cal)
+
+**Kaynak/Referans**
+- ISO 80000 (SI büyüklük ve birimler)
+- NIST Conversion Factors (genel katsayı referansı)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Sıcaklık dönüşümleri (°C/°F), hacimsel gaz dönüşümleri ve yoğunluk/viskozite gibi ölçeğe bağlı birimler bu aracın kapsamı dışındadır.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Doğrusal katsayı dönüşümü", "SI taban birimler"]}
+  references={["ISO 80000", "NIST Conversion Factors"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Basınç dönüşümü
+
+**Girdiler**
+- Kategori: Basınç
+- Değer: 120
+- Birim: psi → bar
+
+**Çıktılar**
+- 8.27 bar
+
+### Örnek 2: Enerji dönüşümü
+
+**Girdiler**
+- Kategori: Enerji
+- Değer: 25
+- Birim: kWh → MJ
+
+**Çıktılar**
+- 90 MJ

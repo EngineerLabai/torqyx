@@ -1,0 +1,56 @@
+﻿## Calculation Explanation
+
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Define variables with units", "Write the formula", "Set expected unit and review warnings"]} />
+</Callout>
+
+<Formula label="Unit-aware evaluation">
+Result = f(variables with units)
+</Formula>
+
+The lab evaluates formulas with a unit system. If you provide an expected unit, it checks dimensional consistency and flags mismatches.
+
+**Assumptions**
+- Units follow the MathJS unit system.
+- Angular units (rad) are treated as dimensionless.
+
+**Units**
+- Supports SI and common engineering units (N, m, Pa, W, Hz, rpm, etc.).
+
+**References**
+- ISO 80000 (Quantities and units)
+- MathJS unit reference
+
+<Callout type="warning" title="Out of scope / Warning">
+This tool does not replace a detailed design verification. Empirical correlations, transient effects, and material limits must be checked separately.
+</Callout>
+
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["MathJS unit system", "rad treated as dimensionless"]}
+  references={["ISO 80000", "MathJS units"]}
+/>
+
+## Examples
+
+### Example 1: Power from torque and speed
+
+**Inputs**
+- T = 10 N·m
+- ω = 100 rad/s
+- Formula: P = T · ω
+
+**Outputs**
+- P = 1000 W
+
+### Example 2: Power from force and velocity
+
+**Inputs**
+- F = 200 N
+- v = 0.5 m/s
+- Formula: P = F · v
+
+**Outputs**
+- P = 100 W

@@ -1,84 +1,61 @@
-# Aciklama
+﻿## Calculation Explanation
 
-<!-- Tool: gear-design/calculators/module-calculator -->
-<Callout type="info" title="Taslak">
-Bu aciklama taslak olarak olusturuldu. Formuller ve degiskenleri araca gore guncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Enter pitch diameter and tooth count", "Read the raw module", "Compare with the suggested standard module"]} />
 </Callout>
 
-## Formuller
-
-<Formula label="Temel iliski">
-Formul burada.
+<Formula label="Module">
+m = d / z
+p = π · m
 </Formula>
 
-## Degisken aciklamalari
+**Assumptions**
+- Standard ISO modules list is used for suggestion.
+- No profile shift; reference diameter is used.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Degisken</th>
-      <th>Aciklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Degisken aciklamasi</td>
-      <td>Aralik/varsayim</td>
-    </tr>
-  </tbody>
-</Table>
+**Units**
+- d: mm
+- m, p: mm
 
-## Birimler
+**References**
+- ISO 54 (Standard modules)
+- ISO 53 (Reference profile for involute gears)
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanim senaryolari
-
-<StepList title="Kullanim akisi" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyari notlari
-
-<Callout type="warning" title="Uyari">
-Gecerli araliklari kontrol et. Kritik uygulamalarda standartlari ve uretici verilerini dogrula.
+<Callout type="warning" title="Out of scope / Warning">
+Undercut limits and profile shift are not evaluated. For low tooth counts, check undercut and correction factors.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Standard module series", "No profile shift"]}
+  references={["ISO 54", "ISO 53"]}
+/>
 
-# Ornekler
+## Examples
 
-## Ornek 1: Modul hesapla
+### Example 1: Simple module
 
-Hatve capindan modul hesaplama.
+**Inputs**
+- d = 200 mm
+- z = 40
 
-**Girdiler**
-- Hatve capi 40 mm
-- Dis sayisi 20
+**Outputs**
+- m = 5.000 mm
+- p = 15.708 mm
+- Suggested m = 5
+- Suggested d = 200 mm
 
-**Ciktilar**
-- Modul 2
+### Example 2: Off-standard diameter
 
-**Notlar**
-- Standart modul tablosuna yuvarla.
+**Inputs**
+- d = 180 mm
+- z = 44
 
-## Ornek 2: Cap hesapla
-
-Modulden hatve capi hesaplama.
-
-**Girdiler**
-- Modul 3
-- Dis sayisi 30
-
-**Ciktilar**
-- Hatve capi 90 mm
-
-**Notlar**
-- Dis capi = (z+2)m yaklasimi.
-
-
-## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman secimi icin hizli rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Icerik altyapisina hizli giris</a>
-
+**Outputs**
+- m = 4.091 mm
+- p = 12.852 mm
+- Suggested m = 4
+- Suggested d = 176 mm
+- Deviation = -2.2%

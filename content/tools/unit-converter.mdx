@@ -1,82 +1,59 @@
-# Açıklama
+﻿## Calculation Explanation
 
-<!-- Tool: unit-converter -->
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="How to use?">
+<StepList title="Quick steps" steps={["Pick a category and units", "Enter the value", "Read and copy the converted result"]} />
 </Callout>
 
-## Formüller
-
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="General conversion">
+V_out = V_in × factor_from / factor_to
 </Formula>
 
-## Değişken açıklamaları
+The tool converts the selected unit to the category base unit (Pa, N, m, J) and then back to the target unit.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
+**Assumptions**
+- Linear conversion factors only (no temperature or non-linear conversions).
+- SI base units are used as the reference.
 
-## Birimler
+**Units**
+- Length: m (mm, cm, km, in, ft)
+- Force: N (kN, lbf)
+- Pressure: Pa (kPa, MPa, bar, psi)
+- Energy: J (kJ, MJ, Wh, kWh, cal)
 
-- X: birim burada
-- Y: birim burada
+**References**
+- ISO 80000 (Quantities and units)
+- NIST conversion factors
 
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Out of scope / Warning">
+Temperature conversions (°C/°F), gas volume corrections, and property conversions (density, viscosity) are not covered.
 </Callout>
 
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Linear conversion factors", "SI base units"]}
+  references={["ISO 80000", "NIST conversion factors"]}
+/>
 
-# Örnekler
+## Examples
 
-## Örnek 1: Basınç çevirme
+### Example 1: Pressure conversion
 
-Basınç birimlerini hızlı çevirme.
+**Inputs**
+- Category: Pressure
+- Value: 120
+- Unit: psi → bar
 
-**Girdiler**
-- 120 psi
-
-**Çıktılar**
+**Outputs**
 - 8.27 bar
 
-**Notlar**
-- Yuvarlama 2 ondalık.
+### Example 2: Energy conversion
 
-## Örnek 2: Güç çevirme
+**Inputs**
+- Category: Energy
+- Value: 25
+- Unit: kWh → MJ
 
-Güç birimlerini karşılaştırma.
-
-**Girdiler**
-- 25 kW
-
-**Çıktılar**
-- 33.5 hp
-
-**Notlar**
-- Mekanik hp kabul edildi.
-
-
-## İlgili içerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
-
+**Outputs**
+- 90 MJ

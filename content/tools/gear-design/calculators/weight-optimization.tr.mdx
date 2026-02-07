@@ -1,0 +1,61 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Dış çap, iç çap ve yüz genişliğini gir", "Yoğunluk ve hafifletme faktörünü seç", "Katı ve hafifletilmiş ağırlığı oku"]} />
+</Callout>
+
+<Formula label="Ağırlık tahmini">
+V = (π/4)(D² − d²) · b
+m = V · 1e-9 · ρ
+m_light = m · (1 − hafifletme)
+</Formula>
+
+**Varsayımlar**
+- Gövde, içi boş silindir olarak modellenir.
+- Hafifletme faktörü kütleden uniform bir oran çıkarır.
+
+**Birimler**
+- D, d, b: mm
+- ρ: kg/m³
+- Kütle: kg
+
+**Kaynak/Referans**
+- Makine elemanları el kitapları (dişli gövde ağırlığı tahmini)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Kaburga, göbek, kama kanalı ve delikler modellenmez. Nihai tasarım için yapısal kontrol ve balans gerekir.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["İçi boş silindir modeli", "Uniform hafifletme faktörü"]}
+  references={["Makine elemanları el kitapları"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Çelik dişli
+
+**Girdiler**
+- D = 250 mm, d = 60 mm
+- b = 40 mm, ρ = 7850 kg/m³
+- Hafifletme = 0.20
+
+**Çıktılar**
+- Katı ağırlık = 14.53 kg
+- Hafifletilmiş ağırlık = 11.62 kg
+- Hacim = 0.00185 m³
+
+### Örnek 2: Alüminyum dişli
+
+**Girdiler**
+- D = 200 mm, d = 50 mm
+- b = 30 mm, ρ = 2700 kg/m³
+- Hafifletme = 0.30
+
+**Çıktılar**
+- Katı ağırlık = 2.39 kg
+- Hafifletilmiş ağırlık = 1.67 kg
+- Hacim = 0.000884 m³

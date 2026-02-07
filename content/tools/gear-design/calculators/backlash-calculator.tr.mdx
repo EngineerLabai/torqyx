@@ -1,0 +1,68 @@
+﻿## Hesaplama Açıklaması
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Kısa adımlar" steps={["Modül, yüz genişliği ve merkez mesafesini gir", "Sıcaklık farkı ve genleşmeyi ekle", "Nominal ve düzeltilmiş backlash değerlerini incele"]} />
+</Callout>
+
+<Formula label="Backlash tahmini">
+j_nom = 0.04 · m + 0.001 · b
+j_min = 0.8 · j_nom
+j_max = 1.2 · j_nom
+Δa = a · α_th · ΔT
+j_adj = j + Δa
+</Formula>
+
+**Varsayımlar**
+- İlk boyutlandırma için basit ISO/DIN rehber yaklaşımı.
+- Termal genleşme sadece merkez mesafesine uygulanır.
+
+**Birimler**
+- m, b, a: mm
+- α_th: µm/m·°C
+- j: mm
+
+**Kaynak/Referans**
+- ISO 1328 (Silindirik dişliler doğruluk sınıfları)
+- DIN 3967 (Backlash rehberi)
+
+<Callout type="warning" title="Kapsam dışı / Uyarı">
+Tolerans sınıfı seçiminin yerine geçmez. Nihai backlash için standart tablolar ve çizim gereksinimleri kontrol edilmelidir.
+</Callout>
+
+<Confidence
+  locale="tr"
+  version="v1.0"
+  lastUpdated="2026-02-07"
+  assumptions={["Basit backlash tahmini", "Merkez mesafesine termal düzeltme"]}
+  references={["ISO 1328", "DIN 3967"]}
+/>
+
+## Örnekler
+
+### Örnek 1: Düşük sıcaklık farkı
+
+**Girdiler**
+- m = 2, b = 30 mm
+- a = 150 mm, ΔT = 10 °C
+- α_th = 12 µm/m·°C
+
+**Çıktılar**
+- j_nom = 0.110 mm
+- j_min = 0.088 mm
+- j_max = 0.132 mm
+- Δa = 0.018 mm
+- j_nom_adj = 0.128 mm
+
+### Örnek 2: Daha büyük dişli, yüksek ΔT
+
+**Girdiler**
+- m = 3, b = 40 mm
+- a = 200 mm, ΔT = 20 °C
+- α_th = 12 µm/m·°C
+
+**Çıktılar**
+- j_nom = 0.160 mm
+- j_min = 0.128 mm
+- j_max = 0.192 mm
+- Δa = 0.048 mm
+- j_nom_adj = 0.208 mm
