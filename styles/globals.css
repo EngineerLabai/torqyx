@@ -56,6 +56,22 @@ a:hover {
   text-decoration: none;
 }
 
+.fade-out-short {
+  animation: fade-out-short 1.2s ease forwards;
+}
+
+@keyframes fade-out-short {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+    visibility: hidden;
+  }
+}
+
 .mega-shadow {
   box-shadow: 0 22px 45px -32px rgba(15, 23, 42, 0.35);
 }

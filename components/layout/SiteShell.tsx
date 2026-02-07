@@ -32,27 +32,25 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     descriptions?: Record<string, string>;
     badges?: Record<string, string>;
   };
-  const isDebug = process.env.NODE_ENV !== "production";
   const resolveLabel = (key: string) => navCopy.labels?.[key] ?? key;
   const resolveDescription = (key?: string) => (key ? navCopy.descriptions?.[key] ?? "" : "");
   const resolveBadge = (key?: string) => (key ? navCopy.badges?.[key] : undefined);
-  const withDebug = (label: string, id: string) => (isDebug ? `${label} (${id})` : label);
   const localizeHref = (href: string) => withLocalePrefix(href, locale);
 
   const navSections: NavSection[] = (navConfig.megaMenu as unknown as NavSectionConfig[]).map((section) => ({
-    label: withDebug(resolveLabel(section.labelKey), section.id),
+    label: resolveLabel(section.labelKey),
     description: resolveDescription(section.descriptionKey ?? section.labelKey),
     links: (section.links as NavLinkConfig[]).map((link) => ({
-      label: withDebug(resolveLabel(link.labelKey), link.id),
+      label: resolveLabel(link.labelKey),
       href: localizeHref(link.href),
       badge: resolveBadge(link.badgeKey),
     })),
   }));
 
   const sidebarSections: SidebarSection[] = (navConfig.sidebar as unknown as NavSectionConfig[]).map((section) => ({
-    label: withDebug(resolveLabel(section.labelKey), section.id),
+    label: resolveLabel(section.labelKey),
     links: (section.links as NavLinkConfig[]).map((link) => ({
-      label: withDebug(resolveLabel(link.labelKey), link.id),
+      label: resolveLabel(link.labelKey),
       href: localizeHref(link.href),
     })),
   }));
@@ -68,11 +66,21 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         <div className="absolute left-1/2 top-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/60 blur-[160px]" />
       </div>
 
-      <header className="site-header sticky top-0 z-50 border-b border-slate-200/80 bg-white/80">
+      <header className="site-header relative z-50 border-b border-slate-200/80 bg-white/80">
         <div className="site-container flex items-center justify-between gap-6 py-4">
-          <Link href={localizeHref("/")} className="flex items-center gap-2" aria-label={brandContent.siteName}>
-            <img src="/brand/logo.svg" alt={brandContent.siteName} className="h-8 w-auto shrink-0" />
-            <span className="text-base font-semibold tracking-tight text-slate-900">{brandContent.siteName}</span>
+          <Link href={localizeHref("/")} className="flex items-center gap-3" aria-label={brandContent.siteName}>
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
+              <img
+                src="/brand/logo-mark-light.svg"
+                alt={`${brandContent.siteName} logo`}
+                width={24}
+                height={24}
+                className="h-6 w-6"
+              />
+            </div>
+            <span className="text-left text-base font-semibold tracking-tight text-slate-900">
+              {brandContent.siteName}
+            </span>
           </Link>
 
           <nav className="hidden items-center gap-2 lg:flex">
@@ -161,13 +169,13 @@ function MegaMenuItem({ section }: { section: NavSection }) {
     <div className="group relative">
       <button
         type="button"
-        className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 transition hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
+        className="flex cursor-pointer items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 transition hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
         aria-expanded="false"
       >
         {section.label}
         <span className="text-[10px] text-slate-400">v</span>
       </button>
-      <div className="pointer-events-none absolute left-0 top-full z-30 w-[360px] translate-y-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-3 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-3 group-focus-within:opacity-100">
+      <div className="pointer-events-none absolute left-0 top-full z-30 w-[360px] opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-[10px_10px_0px_0px_rgba(15,23,42,0.06)] ring-1 ring-emerald-200/40 backdrop-blur">
           <p className="mb-3 text-[11px] leading-relaxed text-slate-500">{section.description}</p>
           <div className="grid gap-2">

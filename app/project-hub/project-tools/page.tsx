@@ -153,12 +153,11 @@ export default function ProjectToolsPage() {
           Proje &amp; İyileştirme Takip Paneli
         </h1>
         <p className="mt-2 text-xs text-slate-600">
-          Musteri projeleri, proses iyilestirmeleri ve Kaizen calismalarini tek
-          yerden takip etmek icin hafif bir proje listesi. Kayitlar su an sadece
-          bu tarayicida (localStorage) tutuluyor. PDF/Excel cikti ve coklu cihaz
-          erisimi premium paket planinda; odeme yok,{" "}
+          Müşteri projeleri, proses iyileştirmeleri ve Kaizen çalışmalarını tek yerden takip etmek için hafif bir proje
+          listesi. Kayıtlar şu an sadece bu tarayıcıda (localStorage) tutuluyor. PDF/Excel çıktı ve çoklu cihaz erişimi
+          premium paket planında; ödeme yok,{" "}
           <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-            bekleme listesi acik
+            bekleme listesi açık
           </Link>.
         </p>
       </section>
@@ -370,13 +369,11 @@ export default function ProjectToolsPage() {
               Mühendis gözüyle kullanım notu
             </p>
             <p>
-              Bu alani, hem uretim hatti kucuk iyilestirmeleri (Kaizen) hem de
-              musteri projelerinin kritik maddelerini takip etmek icin
-              kullanabilirsin. Ileride her kayit; 8D, FMEA ve kalite araclariyla
-              iliskilendirilebilir ve PDF/Excel cikti premium paket planinda yer alir.
-              Odeme yok,{" "}
+              Bu alanı, hem üretim hattı küçük iyileştirmeleri (Kaizen) hem de müşteri projelerinin kritik maddelerini
+              takip etmek için kullanabilirsin. İleride her kayıt; 8D, FMEA ve kalite araçlarıyla ilişkilendirilebilir ve
+              PDF/Excel çıktı premium paket planında yer alır. Ödeme yok,{" "}
               <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-                bekleme listesi acik
+                bekleme listesi açık
               </Link>.
             </p>
           </div>

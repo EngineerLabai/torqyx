@@ -113,12 +113,11 @@ export default function RfqSummaryPage() {
           RFQ / Teknik Şartname Özeti
         </h1>
         <p className="mt-2 text-xs text-slate-600">
-          Musteriden gelen RFQ ve teknik sartnameleri; musteri, proje kodu,
-          parca adi, hedef adet ve SOP bilgisi ile ozetlemek icin hafif bir
-          takip ekrani. Girdigin satirlar bu sayfada tutulur. PDF/Excel
-          disa aktarma premium paket planinda; odeme yok,{" "}
+          Müşteriden gelen RFQ ve teknik şartnameleri; müşteri, proje kodu, parça adı, hedef adet ve SOP bilgisi ile
+          özetlemek için hafif bir takip ekranı. Girdiğin satırlar bu sayfada tutulur. PDF/Excel dışa aktarma premium
+          paket planında; ödeme yok,{" "}
           <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-            bekleme listesi acik
+            bekleme listesi açık
           </Link>.
         </p>
       </section>
@@ -346,14 +345,12 @@ export default function RfqSummaryPage() {
 
           {/* Premium export kutusu */}
           <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
-            <h3 className="mb-1 text-sm font-semibold">
-        PDF / Excel'e Aktar - Premium (bekleme listesi)
-      </h3>
+            <h3 className="mb-1 text-sm font-semibold">PDF / Excel&apos;e Aktar - Premium (bekleme listesi)</h3>
             <p className="mb-2">
-              RFQ listenizi PDF veya Excel olarak disa aktarma ve ekiplerle
-              paylasma ozelligi premium paket planinda. Odeme yok,{" "}
+              RFQ listenizi PDF veya Excel olarak dışa aktarma ve ekiplerle paylaşma özelliği premium paket planında.
+              Ödeme yok,{" "}
               <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-                bekleme listesi acik
+                bekleme listesi açık
               </Link>.
             </p>
             <div className="flex gap-2">

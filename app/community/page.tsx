@@ -2,6 +2,7 @@
 import Link from "next/link";
 import AuthGate from "@/components/auth/AuthGate";
 import CommentStream from "@/components/community/CommentStream";
+import CommunityAuthCta from "@/components/community/CommunityAuthCta";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
@@ -50,6 +51,8 @@ export default async function CommunityPage() {
             </span>
           ) : null}
         </PageHero>
+
+        <CommunityAuthCta />
 
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-2">
@@ -110,7 +113,7 @@ export default async function CommunityPage() {
           </form>
         </section>
 
-        <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <section id="community-topics" className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-600">{copy.stream.kicker}</p>
             <h2 className="text-base font-semibold text-slate-900">{copy.stream.title}</h2>

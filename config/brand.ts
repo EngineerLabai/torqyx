@@ -9,7 +9,7 @@ export type BrandCopy = {
 export const brandByLocale: Record<Locale, BrandCopy> = {
   tr: {
     siteName: "AI Engineers Lab",
-    description: "Metodoloji odakli muhendislik notlari ve hesaplayicilar.",
+    description: "Metodoloji odaklı mühendislik notları ve hesaplayıcılar.",
   },
   en: {
     siteName: "AI Engineers Lab",

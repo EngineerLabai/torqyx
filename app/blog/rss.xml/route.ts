@@ -34,7 +34,7 @@ export async function GET() {
   <channel>
     <title>${escapeXml(`${BRAND_NAME} Blog`)}</title>
     <link>${siteUrl}/blog</link>
-    <description>${escapeXml("Hesaplama ve analiz odakli blog yazilari.")}</description>
+    <description>${escapeXml("Hesaplama ve analiz odaklı blog yazıları.")}</description>
     <language>tr-TR</language>
     <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />${items}
   </channel>

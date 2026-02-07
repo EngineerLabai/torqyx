@@ -1,7 +1,7 @@
 {
     "nav":  {
                 "labels":  {
-                               "sectionCalculators":  "Calculators",
+                               "sectionCalculators":  "Calculator",
                                "sectionTools":  "Tools",
                                "sectionCommunity":  "Community",
                                "sectionContact":  "Contact",
@@ -260,6 +260,12 @@
                                     "description":  "Start technical threads, share experience, and keep engineering knowledge flowing.",
                                     "imageAlt":  "Community discussion cards and thread highlights",
                                     "sampleBadge":  "Sample",
+                                    "authCta":  {
+                                                    "title":  "Join the community",
+                                                    "description":  "Sign in to open threads and add comments.",
+                                                    "login":  "Sign in",
+                                                    "guest":  "View threads as guest"
+                                                },
                                     "form":  {
                                                  "title":  "Start a new thread",
                                                  "description":  "Open a topic, share context, and invite the community to help.",
@@ -299,6 +305,11 @@
                                                    "missingDescription":  "This community thread could not be found."
                                                }
                                 },
+                  "qa":  {
+                             "badge":  "Q&A",
+                             "title":  "Q&A",
+                             "description":  "Get fast answers, share experience, and discuss technical topics."
+                         },
                   "support":  {
                                   "badge":  "Support",
                                   "title":  "Technical support and guidance",

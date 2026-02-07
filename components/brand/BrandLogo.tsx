@@ -26,7 +26,7 @@ export default function BrandLogo({
       <div className="flex items-center sm:hidden">
         {markVisible ? (
           <Image
-            src="/brand/logo-mark.svg"
+            src="/brand/logo-mark-dark.svg"
             alt={`${name} logo mark`}
             width={40}
             height={40}
@@ -47,7 +47,7 @@ export default function BrandLogo({
       <div className="hidden items-center gap-3 sm:flex">
         {wordVisible ? (
           <Image
-            src="/brand/logo.svg"
+            src="/brand/logo.png"
             alt={`${name} logo`}
             width={180}
             height={36}

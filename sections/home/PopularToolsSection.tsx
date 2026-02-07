@@ -9,7 +9,9 @@ type PopularToolsSectionProps = {
 };
 
 export default function PopularToolsSection({ locale }: PopularToolsSectionProps) {
-  const copy = getMessages(locale).home.popularTools;
+  const messages = getMessages(locale);
+  const copy = messages.home.popularTools;
+  const categoryLabels = messages.components.toolLibrary.labels;
   const tools = toolCatalog.slice(0, 6);
   const libraryHref = withLocalePrefix("/tools", locale);
 
@@ -25,6 +27,7 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((tool) => {
             const toolCopy = getToolCopy(tool, locale);
+            const categoryLabel = tool.category ? categoryLabels.category[tool.category] : categoryLabels.generalCategory;
             return (
               <Link
                 key={tool.id}
@@ -34,7 +37,7 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-base font-semibold text-slate-900 group-hover:text-slate-950">{toolCopy.title}</h3>
                   <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600">
-                    {tool.category ?? copy.defaultCategory}
+                    {categoryLabel}
                   </span>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{toolCopy.description}</p>

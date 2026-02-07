@@ -23,6 +23,7 @@ export function middleware(request: NextRequest) {
   if (isLocale(segment)) {
     const rewritten = request.nextUrl.clone();
     rewritten.pathname = stripLocaleFromPath(pathname);
+    rewritten.search = request.nextUrl.search;
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-locale", segment);
     const response = NextResponse.rewrite(rewritten, { request: { headers: requestHeaders } });
@@ -32,5 +33,6 @@ export function middleware(request: NextRequest) {
 
   const redirected = request.nextUrl.clone();
   redirected.pathname = `/${DEFAULT_LOCALE}${pathname === "/" ? "" : pathname}`;
+  redirected.search = request.nextUrl.search;
   return NextResponse.redirect(redirected);
 }

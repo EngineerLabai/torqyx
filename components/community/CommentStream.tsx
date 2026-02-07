@@ -177,11 +177,7 @@ export default function CommentStream() {
                 {copy.demoBadge}
               </span>
             ) : null}
-            {authLoading ? (
-              <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-600">
-                {copy.authChecking}
-              </span>
-            ) : authUnavailable ? (
+            {authLoading ? null : authUnavailable ? (
               <span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-semibold text-amber-700">
                 {copy.authUnavailable}
               </span>
