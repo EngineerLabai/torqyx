@@ -1,0 +1,39 @@
+{
+  "id": "threads",
+  "title": {
+    "tr": "Diş & Delik",
+    "en": "Threads & Holes"
+  },
+  "description": {
+    "tr": "ISO metrik kaba dişler (M3-M24) için hızlı delik ve gerilme alanı özeti.",
+    "en": "Quick summary for ISO metric coarse threads (M3-M24)."
+  },
+  "columns": [
+    { "key": "size", "label": { "tr": "Ölçü", "en": "Size" } },
+    { "key": "pitch", "label": { "tr": "Hatve (mm)", "en": "Pitch (mm)" } },
+    { "key": "stressArea", "label": { "tr": "As (mm2)", "en": "Stress area As (mm2)" } },
+    { "key": "tapDrill", "label": { "tr": "Kılavuz deliği (mm)", "en": "Tap drill (mm)" } },
+    { "key": "clearanceClose", "label": { "tr": "Boşluk yakın (mm)", "en": "Clearance close (mm)" } },
+    { "key": "clearanceNormal", "label": { "tr": "Boşluk normal (mm)", "en": "Clearance normal (mm)" } },
+    { "key": "clearanceLoose", "label": { "tr": "Boşluk geniş (mm)", "en": "Clearance loose (mm)" } }
+  ],
+  "rows": [
+    { "size": "M3", "pitch": 0.5, "stressArea": 5.0, "tapDrill": 2.5, "clearanceClose": 3.2, "clearanceNormal": 3.4, "clearanceLoose": 3.6 },
+    { "size": "M4", "pitch": 0.7, "stressArea": 8.8, "tapDrill": 3.3, "clearanceClose": 4.3, "clearanceNormal": 4.5, "clearanceLoose": 4.8 },
+    { "size": "M5", "pitch": 0.8, "stressArea": 14.2, "tapDrill": 4.2, "clearanceClose": 5.3, "clearanceNormal": 5.5, "clearanceLoose": 5.8 },
+    { "size": "M6", "pitch": 1.0, "stressArea": 20.1, "tapDrill": 5.0, "clearanceClose": 6.4, "clearanceNormal": 6.6, "clearanceLoose": 7.0 },
+    { "size": "M8", "pitch": 1.25, "stressArea": 36.6, "tapDrill": 6.8, "clearanceClose": 8.4, "clearanceNormal": 9.0, "clearanceLoose": 10.0 },
+    { "size": "M10", "pitch": 1.5, "stressArea": 58.0, "tapDrill": 8.5, "clearanceClose": 10.5, "clearanceNormal": 11.0, "clearanceLoose": 12.0 },
+    { "size": "M12", "pitch": 1.75, "stressArea": 84.3, "tapDrill": 10.2, "clearanceClose": 13.0, "clearanceNormal": 13.5, "clearanceLoose": 14.0 },
+    { "size": "M14", "pitch": 2.0, "stressArea": 115.4, "tapDrill": 12.0, "clearanceClose": 15.0, "clearanceNormal": 15.5, "clearanceLoose": 16.5 },
+    { "size": "M16", "pitch": 2.0, "stressArea": 156.7, "tapDrill": 14.0, "clearanceClose": 17.0, "clearanceNormal": 17.5, "clearanceLoose": 18.0 },
+    { "size": "M18", "pitch": 2.5, "stressArea": 192.5, "tapDrill": 15.5, "clearanceClose": 19.0, "clearanceNormal": 20.0, "clearanceLoose": 21.0 },
+    { "size": "M20", "pitch": 2.5, "stressArea": 244.8, "tapDrill": 17.5, "clearanceClose": 21.0, "clearanceNormal": 22.0, "clearanceLoose": 24.0 },
+    { "size": "M22", "pitch": 2.5, "stressArea": 303.4, "tapDrill": 19.5, "clearanceClose": 23.0, "clearanceNormal": 24.0, "clearanceLoose": 26.0 },
+    { "size": "M24", "pitch": 3.0, "stressArea": 352.5, "tapDrill": 21.0, "clearanceClose": 25.0, "clearanceNormal": 26.0, "clearanceLoose": 28.0 }
+  ],
+  "note": {
+    "tr": "Delik değerleri ISO 273 tipik aralıklarından alınmıştır.",
+    "en": "Clearance holes are typical ISO 273 values."
+  }
+}

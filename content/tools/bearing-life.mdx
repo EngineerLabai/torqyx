@@ -1,0 +1,32 @@
+﻿# Açıklama
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Hızlı adımlar" steps={["C ve P değerlerini gir", "Rulman tipini seç", "Devir ve gerekiyorsa a1 faktörünü ekle", "L10 ve L10h sonuçlarını oku"]} />
+</Callout>
+
+<Formula label="Temel ilişki">
+L10 = a1 * (C / P)^p
+</Formula>
+
+- p: bilyalı rulmanlar için 3, makaralı rulmanlar için 10/3
+- L10h, L10 değerinin devirle saat cinsine çevrilmiş halidir.
+
+Birim dönüşümleri için <a href="/reference#units">Hızlı Referans Merkezi</a> sayfasına göz atabilirsin.
+
+# Örnekler
+
+## Örnek: 25 kN dinamik yükte L10 hesabı
+
+**Girdiler**
+- C: 25 kN
+- P: 10 kN
+- Rulman tipi: Bilyalı
+- n: 1500 rpm
+- a1: 1.0
+
+**Çıktılar**
+- L10: ~15.63 milyon devir
+- L10h: ~173.6 saat
+
+**Notlar**
+- a1 = 1 değeri %90 güvenilirlik içindir.

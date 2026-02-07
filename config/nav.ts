@@ -51,6 +51,11 @@ export const navConfig = {
           badgeKey: "fresh",
         },
         {
+          id: "reference",
+          labelKey: "linkReference",
+          href: "/reference",
+        },
+        {
           id: "quality-tools",
           labelKey: "linkQualityTools",
           href: "/quality-tools",
@@ -117,6 +122,11 @@ export const navConfig = {
           id: "project-hub",
           labelKey: "linkProjectHub",
           href: "/project-hub",
+        },
+        {
+          id: "reference",
+          labelKey: "linkReference",
+          href: "/reference",
         },
         {
           id: "quality-tools",

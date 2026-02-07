@@ -1,0 +1,31 @@
+﻿# Açıklama
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Hızlı adımlar" steps={["Basınç ve silindir çaplarını gir", "Mil çapını ekle", "Debiyi belirle", "İleri/geri kuvvet ve hızları incele"]} />
+</Callout>
+
+<Formula label="Temel ilişki">
+F = p * A
+</Formula>
+
+Basınç birimleri için <a href="/reference#units">Birim & Prefix</a> tablosunu kullanabilirsin.
+
+# Örnekler
+
+## Örnek: 160 bar, 80/45 mm silindir
+
+**Girdiler**
+- p: 160 bar
+- D: 80 mm
+- d: 45 mm
+- Q: 25 L/dk
+
+**Çıktılar**
+- İleri kuvvet: ~80.4 kN
+- Geri kuvvet: ~55.0 kN
+- İleri hız: ~82.9 mm/s
+- Geri hız: ~121.3 mm/s
+- Hidrolik güç: ~6.67 kW
+
+**Notlar**
+- Hidrolik güç hesapları verim kayıplarını içermez.

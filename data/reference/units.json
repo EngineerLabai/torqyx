@@ -1,0 +1,52 @@
+{
+  "id": "units",
+  "title": {
+    "tr": "Birim & Prefix",
+    "en": "Units & Prefixes"
+  },
+  "description": {
+    "tr": "Sık kullanılan ön ekler ve hızlı birim ipuçları.",
+    "en": "Common prefixes and quick unit tips."
+  },
+  "columns": [
+    { "key": "item", "label": { "tr": "Kart", "en": "Card" } },
+    { "key": "value", "label": { "tr": "Değer", "en": "Value" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    {
+      "item": "k (kilo)",
+      "value": "10^3",
+      "note": { "tr": "1 kN = 1000 N", "en": "1 kN = 1000 N" }
+    },
+    {
+      "item": "M (mega)",
+      "value": "10^6",
+      "note": { "tr": "1 MW = 10^6 W", "en": "1 MW = 10^6 W" }
+    },
+    {
+      "item": "G (giga)",
+      "value": "10^9",
+      "note": { "tr": "1 GPa = 10^9 Pa", "en": "1 GPa = 10^9 Pa" }
+    },
+    {
+      "item": "1 MPa",
+      "value": "1 N/mm^2",
+      "note": { "tr": "Gerilme biriminde eşitlik", "en": "Stress unit equivalence" }
+    },
+    {
+      "item": "1 bar",
+      "value": "100 kPa",
+      "note": { "tr": "0.1 MPa", "en": "0.1 MPa" }
+    },
+    {
+      "item": "1 Pa",
+      "value": "1 N/m^2",
+      "note": { "tr": "SI temel basınç birimi", "en": "SI base pressure unit" }
+    }
+  ],
+  "note": {
+    "tr": "Birim dönüşümleri için Birim Dönüştürücü aracını kullanabilirsin.",
+    "en": "Use the Unit Converter for full conversions."
+  }
+}

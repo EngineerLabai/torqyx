@@ -1,0 +1,30 @@
+﻿# Açıklama
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Hızlı adımlar" steps={["Torku ve mil çapını gir", "Mil uzunluğunu ve G değerini ekle", "Opsiyonel izin verilen tau değerini yaz", "Burulma gerilmesi ve açıyı kontrol et"]} />
+</Callout>
+
+<Formula label="Temel ilişki">
+τ = 16T / (π d^3)
+</Formula>
+
+Kayma modülü (G) için <a href="/reference#materials">Malzemeler tablosunu</a> kullanabilirsin.
+
+# Örnekler
+
+## Örnek: 250 N·m torkta burulma
+
+**Girdiler**
+- T: 250 N·m
+- d: 30 mm
+- L: 800 mm
+- G: 80 GPa
+- İzin verilen τ: 120 MPa
+
+**Çıktılar**
+- τ: ~47.16 MPa
+- θ: ~1.801°
+- Güvenlik: ~2.55
+
+**Notlar**
+- Burulma açısı dereceye çevrilmiştir.

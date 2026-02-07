@@ -1,0 +1,28 @@
+﻿# Açıklama
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Hızlı adımlar" steps={["Toplam yükü ve kaynak boyunu gir", "İzin verilen gerilmeyi belirle", "Varsa mevcut a değerini ekle", "Gereken a ve kontrol sonucunu incele"]} />
+</Callout>
+
+<Formula label="Temel ilişki">
+σ = F / (0.707 * a * L)
+</Formula>
+
+İzin verilen gerilme için <a href="/reference#materials">malzeme tablosuna</a> göz atabilirsin.
+
+# Örnekler
+
+## Örnek: 15 kN yük için köşe kaynak
+
+**Girdiler**
+- F: 15000 N
+- L: 120 mm
+- σ_izin: 140 MPa
+- a: 3 mm
+
+**Çıktılar**
+- Gereken a: ~1.26 mm
+- Gerilme kontrolü: ~58.9 MPa (Uygun)
+
+**Notlar**
+- 0.707 katsayısı boğaz kalınlığına karşılık gelir.

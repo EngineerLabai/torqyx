@@ -1,0 +1,32 @@
+﻿# Açıklama
+
+<Callout type="info" title="Nasıl kullanılır?">
+<StepList title="Hızlı adımlar" steps={["Akışkan yoğunluğu ve viskozitesini gir", "Debi ve boru çapını ekle", "Hat uzunluğu ve pürüzlülüğü belirle", "Re, f ve ΔP sonuçlarını kontrol et"]} />
+</Callout>
+
+<Formula label="Temel ilişki">
+ΔP = f * (L/D) * (ρ v^2 / 2)
+</Formula>
+
+Birim dönüşümleri için <a href="/reference#units">Hızlı Referans Merkezi</a> sayfasını kullanabilirsin.
+
+# Örnekler
+
+## Örnek: 50 mm boruda su akışı
+
+**Girdiler**
+- ρ: 998 kg/m3
+- μ: 0.001 Pa·s
+- Q: 0.01 m3/s
+- D: 50 mm
+- L: 30 m
+- ε: 0.045 mm
+
+**Çıktılar**
+- Re: ~254000
+- f: ~0.0205
+- ΔP: ~159 kPa (~1.592 bar)
+- Pompa gücü: ~2.27 kW
+
+**Notlar**
+- Re < 2000 ise laminer kabul edilir.

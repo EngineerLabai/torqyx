@@ -1,0 +1,127 @@
+{
+  "id": "materials",
+  "title": {
+    "tr": "Malzemeler",
+    "en": "Materials"
+  },
+  "description": {
+    "tr": "Tipik oda sıcaklığı değerleri. Isıl işlem ve standartlara göre değişebilir.",
+    "en": "Typical room-temperature values. Vary by heat treatment and standards."
+  },
+  "columns": [
+    { "key": "material", "label": { "tr": "Malzeme", "en": "Material" } },
+    { "key": "density", "label": { "tr": "Yoğunluk (kg/m3)", "en": "Density (kg/m3)" } },
+    { "key": "e", "label": { "tr": "E (GPa)", "en": "E (GPa)" } },
+    { "key": "g", "label": { "tr": "G (GPa)", "en": "G (GPa)" } },
+    { "key": "yield", "label": { "tr": "Akma (MPa)", "en": "Yield (MPa)" } },
+    { "key": "uts", "label": { "tr": "Çekme (MPa)", "en": "UTS (MPa)" } },
+    { "key": "alpha", "label": { "tr": "Alfa (10^-6/K)", "en": "Alpha (10^-6/K)" } },
+    { "key": "k", "label": { "tr": "k (W/mK)", "en": "k (W/mK)" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    {
+      "material": "S235",
+      "density": 7850,
+      "e": 210,
+      "g": 81,
+      "yield": 235,
+      "uts": 360,
+      "alpha": 12,
+      "k": 54,
+      "note": { "tr": "EN 10025 tipik", "en": "Typical EN 10025" }
+    },
+    {
+      "material": "S355",
+      "density": 7850,
+      "e": 210,
+      "g": 81,
+      "yield": 355,
+      "uts": 470,
+      "alpha": 12,
+      "k": 54,
+      "note": { "tr": "EN 10025 tipik", "en": "Typical EN 10025" }
+    },
+    {
+      "material": "C45",
+      "density": 7850,
+      "e": 210,
+      "g": 81,
+      "yield": 310,
+      "uts": 600,
+      "alpha": 12,
+      "k": 50,
+      "note": { "tr": "Isıl işleme bağlı", "en": "Depends on heat treatment" }
+    },
+    {
+      "material": "42CrMo4",
+      "density": 7850,
+      "e": 210,
+      "g": 80,
+      "yield": 900,
+      "uts": 1000,
+      "alpha": 12,
+      "k": 42,
+      "note": { "tr": "QT için tipik", "en": "Typical QT" }
+    },
+    {
+      "material": "304",
+      "density": 8000,
+      "e": 193,
+      "g": 74,
+      "yield": 215,
+      "uts": 505,
+      "alpha": 17.3,
+      "k": 16.2,
+      "note": { "tr": "AISI 304", "en": "AISI 304" }
+    },
+    {
+      "material": "316L",
+      "density": 8000,
+      "e": 193,
+      "g": 74,
+      "yield": 170,
+      "uts": 485,
+      "alpha": 16,
+      "k": 14,
+      "note": { "tr": "AISI 316L", "en": "AISI 316L" }
+    },
+    {
+      "material": "6061-T6",
+      "density": 2700,
+      "e": 69,
+      "g": 26,
+      "yield": 275,
+      "uts": 310,
+      "alpha": 23.6,
+      "k": 167,
+      "note": { "tr": "T6", "en": "T6" }
+    },
+    {
+      "material": "6082-T6",
+      "density": 2700,
+      "e": 70,
+      "g": 26,
+      "yield": 250,
+      "uts": 290,
+      "alpha": 23.4,
+      "k": 180,
+      "note": { "tr": "T6", "en": "T6" }
+    },
+    {
+      "material": "7075-T6",
+      "density": 2810,
+      "e": 72,
+      "g": 26.9,
+      "yield": 505,
+      "uts": 570,
+      "alpha": 23.2,
+      "k": 130,
+      "note": { "tr": "T6", "en": "T6" }
+    }
+  ],
+  "note": {
+    "tr": "Değerler tipiktir; standarda ve teslim durumuna göre değişir.",
+    "en": "Values are typical; they vary by standard and delivery condition."
+  }
+}

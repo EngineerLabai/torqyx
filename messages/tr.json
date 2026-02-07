@@ -12,6 +12,7 @@
                                "linkProjectHub":  "Proje Merkezi",
                                "linkQualityTools":  "Kalite Araçları",
                                "linkFixtureTools":  "Fikstür Araçları",
+                               "linkReference":  "Hızlı Referans",
                                "linkCommunity":  "Topluluk",
                                "linkQa":  "Soru-Cevap",
                                "linkSupport":  "Bize Ulaşın",
@@ -105,6 +106,19 @@
                                 "description":  "Hesaplayıcı, paket ve rehberleri filtrele, ihtiyacın olanı tek tıkla aç.",
                                 "imageAlt":  "Hesaplayıcı kütüphanesi filtreleri ve araç kartları"
                             },
+                  "reference":  {
+                                    "badge":  "Hızlı Referans",
+                                    "title":  "Hızlı Referans Merkezi",
+                                    "description":  "Malzeme, diş, sürtünme ve temel birimler tek sayfada. Aradığını hızlıca bul.",
+                                    "imageAlt":  "Malzeme, diş ve sürtünme tabloları içeren hızlı referans merkezi",
+                                    "searchTitle":  "Tek arama, tüm tablolar",
+                                    "searchDescription":  "Tüm referans tablolarını tek kutudan filtrele.",
+                                    "searchLabel":  "Tüm tabloları ara",
+                                    "searchPlaceholder":  "Malzeme, M12, sürtünme, MPa...",
+                                    "exportCta":  "CSV indir",
+                                    "emptyState":  "Eşleşen kayıt bulunamadı.",
+                                    "disclaimer":  "Referans amaçlıdır; kritik tasarımda standart/doküman kontrolü gerekir."
+                                },
                   "sanityCheck":  {
                                       "badge":  "Mühendislik Kontrol Laboratuvarı",
                                       "title":  "Mühendislik Kontrol Laboratuvarı",

@@ -1,0 +1,53 @@
+{
+  "id": "fits",
+  "title": {
+    "tr": "Geçmeler",
+    "en": "Fits"
+  },
+  "description": {
+    "tr": "Hızlı geçme özetleri. Standart tablo yerine karar kolaylaştıran notlar.",
+    "en": "Quick fit summaries to aid selection without full standard tables."
+  },
+  "columns": [
+    { "key": "fit", "label": { "tr": "Geçme", "en": "Fit" } },
+    { "key": "type", "label": { "tr": "Tip", "en": "Type" } },
+    { "key": "meaning", "label": { "tr": "Kullanım", "en": "Use" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    {
+      "fit": "H7/g6",
+      "type": { "tr": "Boşluklu", "en": "Clearance" },
+      "meaning": { "tr": "Hassas hareketli bağlantılar", "en": "Precision sliding fits" },
+      "note": { "tr": "Mil taşlama, delik rayba", "en": "Ground shaft, reamed hole" }
+    },
+    {
+      "fit": "H8/f7",
+      "type": { "tr": "Boşluklu", "en": "Clearance" },
+      "meaning": { "tr": "Genel amaçlı kayar geçme", "en": "General-purpose sliding fit" },
+      "note": { "tr": "Montaj kolay, servis için uygun", "en": "Easy assembly, service-friendly" }
+    },
+    {
+      "fit": "H7/k6",
+      "type": { "tr": "Geçiş", "en": "Transition" },
+      "meaning": { "tr": "Konumlama gereken bağlantılar", "en": "Locating fits" },
+      "note": { "tr": "Hafif pres ya da hafif boşluk", "en": "Light press or light clearance" }
+    },
+    {
+      "fit": "H7/p6",
+      "type": { "tr": "Sıkı", "en": "Interference" },
+      "meaning": { "tr": "Orta pres geçme", "en": "Medium press fit" },
+      "note": { "tr": "Isıtma/soğutma önerilir", "en": "Heating/cooling recommended" }
+    },
+    {
+      "fit": "H7/s6",
+      "type": { "tr": "Sıkı", "en": "Interference" },
+      "meaning": { "tr": "Yük taşıyan sabit bağlantılar", "en": "Load-bearing fixed joints" },
+      "note": { "tr": "Sıkma kuvveti yüksektir", "en": "High press force" }
+    }
+  ],
+  "note": {
+    "tr": "Boyut toleransları için ISO 286 tablosu kullanılmalıdır.",
+    "en": "Use ISO 286 tables for detailed tolerance values."
+  }
+}

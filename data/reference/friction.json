@@ -1,0 +1,71 @@
+{
+  "id": "friction",
+  "title": {
+    "tr": "Sürtünme",
+    "en": "Friction"
+  },
+  "description": {
+    "tr": "Ortalama sürtünme katsayıları. Yüzey durumu ve hız etkisini unutma.",
+    "en": "Average friction coefficients. Surface condition and speed matter."
+  },
+  "columns": [
+    { "key": "pair", "label": { "tr": "Yüzey çiftleri", "en": "Surface pair" } },
+    { "key": "condition", "label": { "tr": "Durum", "en": "Condition" } },
+    { "key": "mu", "label": { "tr": "Mu", "en": "Mu" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    {
+      "pair": { "tr": "Çelik - çelik", "en": "Steel - steel" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "mu": 0.6,
+      "note": { "tr": "Tipik aralık 0.5-0.8", "en": "Typical range 0.5-0.8" }
+    },
+    {
+      "pair": { "tr": "Çelik - çelik", "en": "Steel - steel" },
+      "condition": { "tr": "Yağlı", "en": "Oiled" },
+      "mu": 0.15,
+      "note": { "tr": "Yağ viskozitesine bağlı", "en": "Depends on oil viscosity" }
+    },
+    {
+      "pair": { "tr": "Çelik - alüminyum", "en": "Steel - aluminum" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "mu": 0.45,
+      "note": { "tr": "Yüzey kaplamasına bağlı", "en": "Depends on coating" }
+    },
+    {
+      "pair": { "tr": "Çelik - alüminyum", "en": "Steel - aluminum" },
+      "condition": { "tr": "Yağlı", "en": "Oiled" },
+      "mu": 0.2,
+      "note": { "tr": "Orta seviye yağlama", "en": "Moderate lubrication" }
+    },
+    {
+      "pair": { "tr": "Çelik - bronz", "en": "Steel - bronze" },
+      "condition": { "tr": "Yağlı", "en": "Oiled" },
+      "mu": 0.08,
+      "note": { "tr": "Kaymalı yatak için tipik", "en": "Typical for plain bearings" }
+    },
+    {
+      "pair": { "tr": "Dökme demir - çelik", "en": "Cast iron - steel" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "mu": 0.4,
+      "note": { "tr": "Yüzey işlemine bağlı", "en": "Depends on surface finish" }
+    },
+    {
+      "pair": { "tr": "PTFE - çelik", "en": "PTFE - steel" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "mu": 0.04,
+      "note": { "tr": "Düşük sürtünme", "en": "Low friction" }
+    },
+    {
+      "pair": { "tr": "Lastik - çelik", "en": "Rubber - steel" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "mu": 1.0,
+      "note": { "tr": "Geniş aralık", "en": "Wide range" }
+    }
+  ],
+  "note": {
+    "tr": "Değerler referans seviyesindedir; kritik tasarımda test ve standart gerekir.",
+    "en": "Values are indicative; use standards or tests for critical design."
+  }
+}

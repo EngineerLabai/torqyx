@@ -21,6 +21,7 @@ const TOOL_CONTENT_ROOT = path.join(process.cwd(), "content", "tools");
 const normalizeText = (value: string) =>
   value
     .toLowerCase()
+    .replace(/ı/g, "i")
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9\s-]/g, " ")

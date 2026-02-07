@@ -12,6 +12,7 @@
                                "linkProjectHub":  "Project Hub",
                                "linkQualityTools":  "Quality Tools",
                                "linkFixtureTools":  "Fixture Tools",
+                               "linkReference":  "Quick Reference",
                                "linkCommunity":  "Community",
                                "linkQa":  "Q\u0026A",
                                "linkSupport":  "Get in Touch",
@@ -105,6 +106,19 @@
                                 "description":  "Filter calculators, packages, and guides, then open what you need.",
                                 "imageAlt":  "Tool library overview with filters and calculator cards"
                             },
+                  "reference":  {
+                                    "badge":  "Quick Reference",
+                                    "title":  "Quick Reference Center",
+                                    "description":  "Materials, threads, friction, and core unit cheats in one place.",
+                                    "imageAlt":  "Quick reference center with materials and thread tables",
+                                    "searchTitle":  "One search, all tables",
+                                    "searchDescription":  "Filter every reference table from a single search box.",
+                                    "searchLabel":  "Search across tables",
+                                    "searchPlaceholder":  "Material, M12, friction, MPa...",
+                                    "exportCta":  "Download CSV",
+                                    "emptyState":  "No matching rows found.",
+                                    "disclaimer":  "For reference only; verify standards and documentation for critical design."
+                                },
                   "sanityCheck":  {
                                       "badge":  "Engineering Sanity Check Lab",
                                       "title":  "Engineering Sanity Check Lab",
