@@ -9,6 +9,9 @@ const paths = [
   "/tr/reference",
   "/tr/support",
   "/tr/tools/torque-power",
+  "/tr/quality-tools",
+  "/tr/fixture-tools",
+  "/tr/changelog",
 ];
 
 test.describe("smoke routes", () => {
