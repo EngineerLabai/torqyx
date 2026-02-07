@@ -13,6 +13,7 @@
                                "linkQualityTools":  "Quality Tools",
                                "linkFixtureTools":  "Fixture Tools",
                                "linkReference":  "Quick Reference",
+                               "linkStandards":  "Standards",
                                "linkCommunity":  "Community",
                                "linkQa":  "Q\u0026A",
                                "linkSupport":  "Get in Touch",
@@ -119,6 +120,26 @@
                                     "emptyState":  "No matching rows found.",
                                     "disclaimer":  "For reference only; verify standards and documentation for critical design."
                                 },
+                  "standards":  {
+                                   "badge":  "Standards Hub",
+                                   "title":  "Standards Hub",
+                                   "description":  "Reference tables and quick standards by category.",
+                                   "imageAlt":  "Standards tables for threads, materials, and fits",
+                                   "categoriesTitle":  "Categories",
+                                   "categoriesDescription":  "Explore standards and cheat sheets by topic.",
+                                   "categoryBadge":  "Category",
+                                   "categoryCta":  "Open category",
+                                   "categoryPage":  {
+                                                        "searchTitle":  "Search within standards",
+                                                        "searchDescription":  "Filter every table in this category.",
+                                                        "searchLabel":  "Search tables",
+                                                        "searchPlaceholder":  "ISO 286, M12, roughness...",
+                                                        "exportCta":  "Download CSV",
+                                                        "emptyState":  "No matching rows found.",
+                                                        "sourcesTitle":  "Sources",
+                                                        "sourcesLabel":  "Source"
+                                                    }
+                               },
                   "sanityCheck":  {
                                       "badge":  "Engineering Sanity Check Lab",
                                       "title":  "Engineering Sanity Check Lab",
@@ -591,6 +612,24 @@
                                              "empty":  "Be the first to comment.",
                                              "newLabel":  "New"
                                          },
+                       "search":  {
+                                       "paletteTitle":  "Search",
+                                       "palettePlaceholder":  "Search tools, standards, guides...",
+                                       "paletteHint":  "Type to search",
+                                       "paletteEmpty":  "No results found.",
+                                       "paletteOpen":  "Open search",
+                                       "inlineTitle":  "Quick search",
+                                       "inlineDescription":  "Search tools, standards, and content from one field.",
+                                       "inlinePlaceholder":  "Tool, ISO 286, M12, friction...",
+                                       "inlineEmpty":  "No results found.",
+                                       "typeLabels":  {
+                                                          "tool":  "Tool",
+                                                          "standard":  "Standard",
+                                                          "blog":  "Blog",
+                                                          "guide":  "Guide",
+                                                          "glossary":  "Glossary"
+                                                      }
+                                   },
                        "toolLibrary":  {
                                            "scenarioSection":  {
                                                                    "kicker":  "What do you want to do?",
@@ -846,6 +885,12 @@
                                            "glossaryDesc":  "Terms that share the same concepts as this calculator.",
                                            "read":  "Read"
                                        },
+                       "toolDocStandard":  {
+                                               "howToTitle":  "How to use",
+                                               "formulaTitle":  "Formula",
+                                               "commonMistakesTitle":  "Common mistakes",
+                                               "referencesTitle":  "References"
+                                           },
                        "comparePanel":  {
                                             "title":  "Compare mode",
                                             "description":  "Build 2-3 scenarios with the same input set and compare results side by side.",

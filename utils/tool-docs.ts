@@ -2,6 +2,7 @@ import "server-only";
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { Locale } from "@/utils/locale";
+import { toolDocStandardSchema, type ToolDocStandard } from "@/lib/tool-docs/schema";
 
 export type ToolExampleItem = {
   title: string;
@@ -15,6 +16,7 @@ export type ToolDocs = {
   hasDocs: boolean;
   explanation: string | null;
   examples: string | null;
+  standard: ToolDocStandard | null;
 };
 
 const TOOL_CONTENT_ROOT = path.join(process.cwd(), "content", "tools");
@@ -48,20 +50,20 @@ const readFileIfExists = async (filePath: string | null) => {
   }
 };
 
-const buildCandidates = (slug: string, locale?: Locale) => {
+const buildCandidates = (slug: string, locale?: Locale, extension = "mdx") => {
   const safeSlug = slug.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
   if (!safeSlug || safeSlug.includes("..")) return [];
 
   const candidates: string[] = [];
   if (locale) {
-    candidates.push(`${safeSlug}.${locale}.mdx`);
+    candidates.push(`${safeSlug}.${locale}.${extension}`);
   }
-  candidates.push(`${safeSlug}.mdx`);
+  candidates.push(`${safeSlug}.${extension}`);
   return candidates;
 };
 
-const readFirstAvailable = async (slug: string, locale?: Locale) => {
-  const candidates = buildCandidates(slug, locale)
+const readFirstAvailable = async (slug: string, locale?: Locale, extension = "mdx") => {
+  const candidates = buildCandidates(slug, locale, extension)
     .map(resolveDocFilePath)
     .filter((value): value is string => Boolean(value));
 
@@ -71,6 +73,26 @@ const readFirstAvailable = async (slug: string, locale?: Locale) => {
   }
 
   return null;
+};
+
+const readToolDocStandard = async (slug: string, locale?: Locale): Promise<ToolDocStandard | null> => {
+  const content = await readFirstAvailable(slug, locale, "json");
+  if (!content) return null;
+
+  let data: unknown;
+  try {
+    data = JSON.parse(content);
+  } catch {
+    throw new Error(`[tool-docs] Invalid JSON for ${slug} (${locale ?? "default"}).`);
+  }
+
+  const parsed = toolDocStandardSchema.safeParse(data);
+  if (!parsed.success) {
+    const issues = parsed.error.issues.map((issue) => issue.message).join("; ");
+    throw new Error(`[tool-docs] Invalid standard doc for ${slug} (${locale ?? "default"}): ${issues}`);
+  }
+
+  return parsed.data;
 };
 
 const EXPLANATION_TITLES = new Set([
@@ -140,9 +162,19 @@ const parseSections = (content: string) => {
 };
 
 export const getToolDocs = async (slug: string, locale?: Locale): Promise<ToolDocs> => {
+  const standard = await readToolDocStandard(slug, locale);
+  if (standard) {
+    return {
+      hasDocs: true,
+      explanation: null,
+      examples: null,
+      standard,
+    };
+  }
+
   const content = await readFirstAvailable(slug, locale);
   if (!content) {
-    return { hasDocs: false, explanation: null, examples: null };
+    return { hasDocs: false, explanation: null, examples: null, standard: null };
   }
 
   const sections = parseSections(content);
@@ -151,5 +183,8 @@ export const getToolDocs = async (slug: string, locale?: Locale): Promise<ToolDo
     hasDocs: hasSections,
     explanation: sections.explanation,
     examples: sections.examples,
+    standard: null,
   };
 };
+
+export const getToolDocStandard = async (slug: string, locale?: Locale) => readToolDocStandard(slug, locale);

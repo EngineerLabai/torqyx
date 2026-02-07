@@ -1,0 +1,27 @@
+{
+  "id": "bolt-grades",
+  "title": {
+    "tr": "Cıvata Sınıfları (Özet)",
+    "en": "Bolt Property Classes (Summary)"
+  },
+  "description": {
+    "tr": "Akma ve çekme dayanımı için tipik değerler.",
+    "en": "Typical yield and tensile values."
+  },
+  "columns": [
+    { "key": "grade", "label": { "tr": "Sınıf", "en": "Class" } },
+    { "key": "yield", "label": { "tr": "Akma Re (MPa)", "en": "Yield Re (MPa)" } },
+    { "key": "uts", "label": { "tr": "Çekme Rm (MPa)", "en": "UTS Rm (MPa)" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    { "grade": "8.8", "yield": 640, "uts": 800, "note": { "tr": "Genel amaç", "en": "General purpose" } },
+    { "grade": "10.9", "yield": 940, "uts": 1040, "note": { "tr": "Yüksek dayanım", "en": "High strength" } },
+    { "grade": "12.9", "yield": 1100, "uts": 1220, "note": { "tr": "Ağır yük", "en": "Heavy duty" } }
+  ],
+  "note": {
+    "tr": "Değerler ISO 898-1 tipik sınıf değerleridir.",
+    "en": "Values are typical per ISO 898-1."
+  }
+}
+

@@ -1,0 +1,28 @@
+{
+  "id": "pipe-roughness",
+  "title": {
+    "tr": "Boru Pürüzlülüğü",
+    "en": "Pipe Roughness"
+  },
+  "description": {
+    "tr": "Darcy-Weisbach için tipik mutlak pürüzlülük değerleri.",
+    "en": "Typical absolute roughness values for Darcy-Weisbach."
+  },
+  "columns": [
+    { "key": "material", "label": { "tr": "Malzeme", "en": "Material" } },
+    { "key": "roughness", "label": { "tr": "ε (mm)", "en": "ε (mm)" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    { "material": { "tr": "Çelik (ticari)", "en": "Steel (commercial)" }, "roughness": 0.045, "note": { "tr": "Yeni boru", "en": "New pipe" } },
+    { "material": { "tr": "Dökme demir", "en": "Cast iron" }, "roughness": 0.26, "note": { "tr": "Yaşlı hat", "en": "Aged line" } },
+    { "material": { "tr": "Bakır", "en": "Copper" }, "roughness": 0.0015, "note": { "tr": "Pürüzsüz", "en": "Smooth" } },
+    { "material": { "tr": "PVC", "en": "PVC" }, "roughness": 0.0015, "note": { "tr": "Plastik", "en": "Plastic" } },
+    { "material": { "tr": "Beton", "en": "Concrete" }, "roughness": 0.3, "note": { "tr": "Büyük hat", "en": "Large line" } }
+  ],
+  "note": {
+    "tr": "Pürüzlülük işletme şartına göre artar; ölçüm yapılması önerilir.",
+    "en": "Roughness increases with service; verify with inspection when critical."
+  }
+}
+

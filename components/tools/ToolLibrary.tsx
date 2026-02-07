@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ToolLibraryCard from "@/components/tools/ToolLibraryCard";
 import RecentToolsStrip from "@/components/tools/RecentToolsStripLazy";
+import InlineSearch from "@/components/search/InlineSearch";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
 import {
@@ -110,6 +111,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   return (
     <div className="space-y-6">
       <RecentToolsStrip tone="light" />
+      <InlineSearch />
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">

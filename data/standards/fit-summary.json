@@ -1,0 +1,28 @@
+{
+  "id": "fit-summary",
+  "title": {
+    "tr": "Hızlı Geçme Özeti",
+    "en": "Fit Summary (Quick Guide)"
+  },
+  "description": {
+    "tr": "H7 tabanlı yaygın geçme sınıfları.",
+    "en": "Common fits based on H7 holes."
+  },
+  "columns": [
+    { "key": "fit", "label": { "tr": "Geçme", "en": "Fit" } },
+    { "key": "type", "label": { "tr": "Tip", "en": "Type" } },
+    { "key": "use", "label": { "tr": "Tipik kullanım", "en": "Typical use" } }
+  ],
+  "rows": [
+    { "fit": "H7/g6", "type": { "tr": "Boşluklu", "en": "Clearance" }, "use": { "tr": "Hassas kaymalı", "en": "Precision sliding" } },
+    { "fit": "H7/f7", "type": { "tr": "Boşluklu", "en": "Clearance" }, "use": { "tr": "Hafif geçme", "en": "Light running" } },
+    { "fit": "H7/h6", "type": { "tr": "Geçiş", "en": "Transition" }, "use": { "tr": "Konumlama", "en": "Location" } },
+    { "fit": "H7/p6", "type": { "tr": "Sıkı", "en": "Interference" }, "use": { "tr": "Sabit bağlantı", "en": "Press fit" } },
+    { "fit": "H7/s6", "type": { "tr": "Ağır sıkı", "en": "Heavy interference" }, "use": { "tr": "Isıl geçme", "en": "Shrink fit" } }
+  ],
+  "note": {
+    "tr": "Geçme seçimi yük, malzeme ve üretim toleranslarına göre yapılmalıdır.",
+    "en": "Fit selection depends on load, material, and manufacturing tolerances."
+  }
+}
+

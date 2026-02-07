@@ -11,6 +11,7 @@ export const ROUTES = {
   unitConverter: "/tools/unit-converter",
   sanityCheck: "/tools/sanity-check",
   reference: "/reference",
+  standards: "/standards",
   projectHub: "/project-hub",
   qualityTools: "/quality-tools",
   fixtureTools: "/fixture-tools",

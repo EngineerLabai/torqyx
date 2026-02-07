@@ -9,6 +9,8 @@ const paths = [
   "/tr/reference",
   "/tr/support",
   "/tr/tools/torque-power",
+  "/tr/standards",
+  "/tr/blog",
   "/tr/quality-tools",
   "/tr/fixture-tools",
   "/tr/changelog",

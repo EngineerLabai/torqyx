@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ActionCard from "@/components/ui/ActionCard";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
+import ToolDocStandard from "@/components/tools/ToolDocStandard";
 import Callout from "@/components/mdx/Callout";
 import MDXClient from "@/components/mdx/MDXClient";
 import PremiumCTA from "@/components/premium/PremiumCTA";
@@ -34,9 +35,21 @@ type ExampleItem = {
   notes?: string[];
 };
 
+type StandardDoc = {
+  version: string;
+  lastUpdated: string;
+  howTo: string[];
+  formula: string;
+  examples: ExampleItem[];
+  references: Array<{ title: string; note?: string; href?: string }>;
+  commonMistakes: string[];
+  assumptions?: string[];
+};
+
 type ToolDocsResponse = {
   tool: { id: string; title: string; tags: string[] } | null;
   hasDocs: boolean;
+  standard?: StandardDoc | null;
   explanation: import("next-mdx-remote").MDXRemoteSerializeResult | null;
   examples:
     | { kind: "mdx"; source: import("next-mdx-remote").MDXRemoteSerializeResult }
@@ -57,6 +70,7 @@ const isValidTab = (value: string | null): value is TabId =>
 export default function ToolDocTabs({ slug, children, initialDocs = null }: ToolDocTabsProps) {
   const { locale } = useLocale();
   const copy = getMessages(locale).components.toolDocTabs;
+  const standardCopy = getMessages(locale).components.toolDocStandard;
   const allTabs = useMemo(() => TAB_IDS.map((id) => ({ id, label: copy.tabs[id] })), [copy]);
   const searchParams = useSearchParams();
   const tabParam = searchParams?.get("tab");
@@ -153,11 +167,12 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     };
   }, [docs]);
 
-  const hasExplanation = Boolean(docs?.explanation);
+  const hasExplanation = Boolean(docs?.standard || docs?.explanation);
   const hasExamples = Boolean(
     docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0),
   );
-  const shouldShowMissingNote = !loading && !error && docs && !docs.hasDocs;
+  const isDev = process.env.NODE_ENV !== "production";
+  const shouldShowMissingNote = isDev && !loading && !error && docs && !docs.hasDocs;
 
   const availableTabs = useMemo(() => {
     if (loading || error) return allTabs;
@@ -218,6 +233,10 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
     if (shouldShowMissingNote) {
       return missingDocsCallout;
+    }
+
+    if (docs?.standard) {
+      return <ToolDocStandard doc={docs.standard} locale={locale} copy={standardCopy} />;
     }
 
     if (docs?.explanation) {

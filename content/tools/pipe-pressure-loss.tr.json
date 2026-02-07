@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Akışkan özelliklerini (ρ, μ) ve debiyi gir.",
+    "Boru çapı, boyu ve pürüzlülük değerini ekle.",
+    "Re, sürtünme katsayısı ve basınç kaybını kontrol et."
+  ],
+  "formula": "Re = ρ·v·D/μ | f = 0.25/[log10(ε/(3.7D)+5.74/Re^0.9)]^2 | ΔP = f·(L/D)·ρ·v^2/2",
+  "examples": [
+    {
+      "title": "DN50 örnek",
+      "description": "Su 20°C varsayımıyla.",
+      "inputs": {
+        "ρ": "998 kg/m³",
+        "μ": "0,001 Pa·s",
+        "Debi": "0,01 m³/s",
+        "Çap": "50 mm",
+        "Boru boyu": "30 m",
+        "Pürüzlülük": "0,045 mm"
+      },
+      "outputs": {
+        "Hız": "5,09 m/s",
+        "Re": "254138",
+        "f": "0,0205",
+        "ΔP": "159159 Pa",
+        "ΔP (bar)": "1,592 bar",
+        "Pompa gücü": "2,27 kW"
+      },
+      "inputValues": {
+        "rho": "998",
+        "mu": "0.001",
+        "flow": "0.01",
+        "diameter": "50",
+        "length": "30",
+        "roughness": "0.045"
+      },
+      "expected": {
+        "velocity": 5.093,
+        "reynolds": 254138.6131,
+        "frictionFactor": 0.02049,
+        "deltaP": 159158.53,
+        "deltaPBar": 1.5916,
+        "pumpPower": 2.2737
+      }
+    },
+    {
+      "title": "DN40 kısa hat",
+      "description": "Daha düşük debi ve pürüzlülük.",
+      "inputs": {
+        "ρ": "1000 kg/m³",
+        "μ": "0,0012 Pa·s",
+        "Debi": "0,005 m³/s",
+        "Çap": "40 mm",
+        "Boru boyu": "20 m",
+        "Pürüzlülük": "0,02 mm"
+      },
+      "outputs": {
+        "Hız": "3,98 m/s",
+        "Re": "132629",
+        "f": "0,0197",
+        "ΔP": "78107 Pa",
+        "ΔP (bar)": "0,781 bar",
+        "Pompa gücü": "0,56 kW"
+      },
+      "inputValues": {
+        "rho": "1000",
+        "mu": "0.0012",
+        "flow": "0.005",
+        "diameter": "40",
+        "length": "20",
+        "roughness": "0.02"
+      },
+      "expected": {
+        "velocity": 3.9789,
+        "reynolds": 132629.1192,
+        "frictionFactor": 0.01973,
+        "deltaP": 78106.83,
+        "deltaPBar": 0.7811,
+        "pumpPower": 0.5579
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "Crane TP-410",
+      "note": "Darcy–Weisbach ve sürtünme katsayısı."
+    }
+  ],
+  "commonMistakes": [
+    "Çapı mm yerine m girmek.",
+    "Pürüzlülük değerini unutmak.",
+    "Debiyi m³/h ile m³/s karıştırmak."
+  ],
+  "assumptions": [
+    "Akış tek fazlı ve tam gelişmiş kabul edilir.",
+    "Yerel kayıplar ve armatürler dahil değildir."
+  ]
+}

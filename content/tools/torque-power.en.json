@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Enter the power and speed.",
+    "Set mechanical efficiency (η) as a percentage.",
+    "Review ideal torque, efficiency torque, and hp outputs."
+  ],
+  "formula": "P(kW) = T(N·m) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
+  "examples": [
+    {
+      "title": "5.5 kW motor",
+      "description": "1500 rpm with 95% efficiency.",
+      "inputs": {
+        "Power": "5.5 kW",
+        "Speed": "1500 rpm",
+        "Mechanical efficiency": "95%"
+      },
+      "outputs": {
+        "Torque (ideal)": "35.02 N·m",
+        "Torque (efficiency)": "33.27 N·m",
+        "Power (hp)": "7.38 hp"
+      },
+      "inputValues": {
+        "powerKw": 5.5,
+        "rpm": 1500,
+        "mechEff": 95
+      },
+      "expected": {
+        "torqueNm": 35.0166667,
+        "torqueNmEff": 33.2658333,
+        "powerHp": 7.37561
+      }
+    },
+    {
+      "title": "12 kW drive",
+      "description": "1200 rpm with 90% efficiency.",
+      "inputs": {
+        "Power": "12 kW",
+        "Speed": "1200 rpm",
+        "Mechanical efficiency": "90%"
+      },
+      "outputs": {
+        "Torque (ideal)": "95.50 N·m",
+        "Torque (efficiency)": "85.95 N·m",
+        "Power (hp)": "16.09 hp"
+      },
+      "inputValues": {
+        "powerKw": 12,
+        "rpm": 1200,
+        "mechEff": 90
+      },
+      "expected": {
+        "torqueNm": 95.5,
+        "torqueNmEff": 85.95,
+        "powerHp": 16.09224
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "DIN 70020 (Engine power definitions)",
+      "note": "Reference for kW-hp conversion."
+    },
+    {
+      "title": "ISO 3046 (Reciprocating engine performance)"
+    }
+  ],
+  "commonMistakes": [
+    "Entering horsepower instead of kW.",
+    "Using rad/s instead of rpm for speed.",
+    "Typing efficiency as 0.95 instead of 95."
+  ],
+  "assumptions": [
+    "Steady-state operation with constant speed.",
+    "Losses are represented by a single mechanical efficiency."
+  ]
+}

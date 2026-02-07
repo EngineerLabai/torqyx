@@ -13,6 +13,7 @@
                                "linkQualityTools":  "Kalite Araçları",
                                "linkFixtureTools":  "Fikstür Araçları",
                                "linkReference":  "Hızlı Referans",
+                               "linkStandards":  "Standartlar",
                                "linkCommunity":  "Topluluk",
                                "linkQa":  "Soru-Cevap",
                                "linkSupport":  "Bize Ulaşın",
@@ -119,6 +120,26 @@
                                     "emptyState":  "Eşleşen kayıt bulunamadı.",
                                     "disclaimer":  "Referans amaçlıdır; kritik tasarımda standart/doküman kontrolü gerekir."
                                 },
+                  "standards":  {
+                                   "badge":  "Standartlar",
+                                   "title":  "Standartlar Merkezi",
+                                   "description":  "Diş, malzeme, geçme ve akışkan özetlerini tek merkezde topla.",
+                                   "imageAlt":  "Diş ve geçme tablolarını içeren standartlar merkezi",
+                                   "categoriesTitle":  "Kategoriler",
+                                   "categoriesDescription":  "Standart ve özet tabloları konuya göre keşfet.",
+                                   "categoryBadge":  "Kategori",
+                                   "categoryCta":  "Kategoriyi aç",
+                                   "categoryPage":  {
+                                                        "searchTitle":  "Standartlarda arama",
+                                                        "searchDescription":  "Bu kategorideki tüm tabloları filtrele.",
+                                                        "searchLabel":  "Tablolarda ara",
+                                                        "searchPlaceholder":  "ISO 286, M12, pürüzlülük...",
+                                                        "exportCta":  "CSV indir",
+                                                        "emptyState":  "Eşleşen kayıt bulunamadı.",
+                                                        "sourcesTitle":  "Kaynaklar",
+                                                        "sourcesLabel":  "Kaynak"
+                                                    }
+                               },
                   "sanityCheck":  {
                                       "badge":  "Mühendislik Kontrol Laboratuvarı",
                                       "title":  "Mühendislik Kontrol Laboratuvarı",
@@ -591,6 +612,24 @@
                                              "empty":  "İlk yorumu sen bırak.",
                                              "newLabel":  "Yeni"
                                          },
+                       "search":  {
+                                       "paletteTitle":  "Hızlı Arama",
+                                       "palettePlaceholder":  "Araç, standart, rehber...",
+                                       "paletteHint":  "Aramak için yazmaya başla",
+                                       "paletteEmpty":  "Sonuç bulunamadı.",
+                                       "paletteOpen":  "Hızlı arama",
+                                       "inlineTitle":  "Hızlı arama",
+                                       "inlineDescription":  "Araç, standart ve içerikleri tek kutudan ara.",
+                                       "inlinePlaceholder":  "Araç, ISO 286, M12, sürtünme...",
+                                       "inlineEmpty":  "Sonuç bulunamadı.",
+                                       "typeLabels":  {
+                                                          "tool":  "Araç",
+                                                          "standard":  "Standart",
+                                                          "blog":  "Blog",
+                                                          "guide":  "Rehber",
+                                                          "glossary":  "Sözlük"
+                                                      }
+                                   },
                        "toolLibrary":  {
                                            "scenarioSection":  {
                                                                    "kicker":  "Ne yapmak istiyorsun?",
@@ -846,6 +885,12 @@
                                            "glossaryDesc":  "Hesaplayıcıyla aynı kavramlara bakan terimler.",
                                            "read":  "Oku"
                                        },
+                       "toolDocStandard":  {
+                                               "howToTitle":  "Nasıl kullanılır?",
+                                               "formulaTitle":  "Formül",
+                                               "commonMistakesTitle":  "Sık hatalar",
+                                               "referencesTitle":  "Referanslar"
+                                           },
                        "comparePanel":  {
                                             "title":  "Karşılaştırma Modu",
                                             "description":  "Aynı girdi setiyle 2-3 senaryo oluştur, sonuçları yan yana karşılaştır.",

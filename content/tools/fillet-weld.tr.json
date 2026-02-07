@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Yük, kaynak boyu ve izin verilen gerilmeyi gir.",
+    "Fillet a değeri bilinmiyorsa boş bırak.",
+    "Gerekli a, boğaz kalınlığı ve gerilme kontrolünü incele."
+  ],
+  "formula": "a = F / (0.707·L·σ_allow) | throat = 0.707·a | σ = F / (0.707·a·L)",
+  "examples": [
+    {
+      "title": "Gerekli a hesabı",
+      "description": "F=15 kN, L=120 mm, σ_allow=140 MPa.",
+      "inputs": {
+        "Yük": "15000 N",
+        "Kaynak boyu": "120 mm",
+        "İzin verilen": "140 MPa",
+        "Fillet a": "-"
+      },
+      "outputs": {
+        "Gerekli a": "1,26 mm",
+        "Boğaz": "0,89 mm"
+      },
+      "inputValues": {
+        "load": "15000",
+        "length": "120",
+        "allowable": "140",
+        "fillet": "0"
+      },
+      "expected": {
+        "requiredA": 1.2629,
+        "throat": 0.8929
+      }
+    },
+    {
+      "title": "Gerilme kontrolü",
+      "description": "F=20 kN, L=150 mm, σ_allow=160 MPa, a=6 mm.",
+      "inputs": {
+        "Yük": "20000 N",
+        "Kaynak boyu": "150 mm",
+        "İzin verilen": "160 MPa",
+        "Fillet a": "6 mm"
+      },
+      "outputs": {
+        "Gerekli a": "1,18 mm",
+        "Gerilme": "31,43 MPa",
+        "Güvenli": "Evet"
+      },
+      "inputValues": {
+        "load": "20000",
+        "length": "150",
+        "allowable": "160",
+        "fillet": "6"
+      },
+      "expected": {
+        "requiredA": 1.1787,
+        "stress": 31.4317
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "AWS D1.1",
+      "note": "Kaynak tasarım notları."
+    }
+  ],
+  "commonMistakes": [
+    "Kaynak boyunu toplam yerine tek hat uzunluğu olarak almak.",
+    "İzin verilen gerilmeyi malzeme akmasıyla karıştırmak.",
+    "a değerini boğaz kalınlığı sanmak."
+  ],
+  "assumptions": [
+    "Yük tek eksenli ve statik kabul edilir.",
+    "Kaynak dikişi düzgün ve tam nüfuziyetli değildir."
+  ]
+}

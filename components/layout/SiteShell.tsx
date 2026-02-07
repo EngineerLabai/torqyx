@@ -7,6 +7,7 @@ import AuthButtons from "@/components/auth/AuthButtons";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import PremiumCTA from "@/components/premium/PremiumCTA";
+import CommandPalette from "@/components/search/CommandPalette";
 import { getBrandCopy } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
@@ -161,6 +162,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           <span>{brandContent.description}</span>
         </div>
       </footer>
+
+      <CommandPalette />
     </div>
   );
 }

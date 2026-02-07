@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Enter load, weld length, and allowable stress.",
+    "Leave fillet size empty if unknown.",
+    "Review required a, throat size, and stress check."
+  ],
+  "formula": "a = F / (0.707·L·σ_allow) | throat = 0.707·a | σ = F / (0.707·a·L)",
+  "examples": [
+    {
+      "title": "Required a sizing",
+      "description": "F=15 kN, L=120 mm, σ_allow=140 MPa.",
+      "inputs": {
+        "Load": "15000 N",
+        "Weld length": "120 mm",
+        "Allowable": "140 MPa",
+        "Fillet a": "-"
+      },
+      "outputs": {
+        "Required a": "1.26 mm",
+        "Throat": "0.89 mm"
+      },
+      "inputValues": {
+        "load": "15000",
+        "length": "120",
+        "allowable": "140",
+        "fillet": "0"
+      },
+      "expected": {
+        "requiredA": 1.2629,
+        "throat": 0.8929
+      }
+    },
+    {
+      "title": "Stress check",
+      "description": "F=20 kN, L=150 mm, σ_allow=160 MPa, a=6 mm.",
+      "inputs": {
+        "Load": "20000 N",
+        "Weld length": "150 mm",
+        "Allowable": "160 MPa",
+        "Fillet a": "6 mm"
+      },
+      "outputs": {
+        "Required a": "1.18 mm",
+        "Stress": "31.43 MPa",
+        "Safe": "Yes"
+      },
+      "inputValues": {
+        "load": "20000",
+        "length": "150",
+        "allowable": "160",
+        "fillet": "6"
+      },
+      "expected": {
+        "requiredA": 1.1787,
+        "stress": 31.4317
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "AWS D1.1",
+      "note": "Welding design guidance."
+    }
+  ],
+  "commonMistakes": [
+    "Using single weld length instead of total effective length.",
+    "Confusing allowable stress with yield strength.",
+    "Treating a as throat thickness."
+  ],
+  "assumptions": [
+    "Load is static and uniaxial.",
+    "Fillet weld is continuous and uniform."
+  ]
+}

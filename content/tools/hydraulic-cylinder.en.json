@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Enter pressure, bore, rod diameter, and flow.",
+    "Check extend/retract forces from piston areas.",
+    "Review speeds and hydraulic power output."
+  ],
+  "formula": "F_ext = P·A_bore | F_ret = P·(A_bore - A_rod) | v = Q/A | P_h = P·Q",
+  "examples": [
+    {
+      "title": "80/45 mm cylinder",
+      "description": "160 bar and 25 L/min.",
+      "inputs": {
+        "Pressure": "160 bar",
+        "Bore": "80 mm",
+        "Rod": "45 mm",
+        "Flow": "25 L/min"
+      },
+      "outputs": {
+        "Extend force": "80.42 kN",
+        "Retract force": "54.98 kN",
+        "Extend speed": "82.9 mm/s",
+        "Retract speed": "121.3 mm/s",
+        "Hydraulic power": "6.67 kW"
+      },
+      "inputValues": {
+        "pressure": "160",
+        "bore": "80",
+        "rod": "45",
+        "flow": "25"
+      },
+      "expected": {
+        "forceExtend": 80.4248,
+        "forceRetract": 54.9779,
+        "speedExtend": 82.8932,
+        "speedRetract": 121.2609,
+        "hydraulicPower": 6.6667
+      }
+    },
+    {
+      "title": "100/50 mm cylinder",
+      "description": "200 bar and 40 L/min.",
+      "inputs": {
+        "Pressure": "200 bar",
+        "Bore": "100 mm",
+        "Rod": "50 mm",
+        "Flow": "40 L/min"
+      },
+      "outputs": {
+        "Extend force": "157.08 kN",
+        "Retract force": "117.81 kN",
+        "Extend speed": "84.9 mm/s",
+        "Retract speed": "113.18 mm/s",
+        "Hydraulic power": "13.33 kW"
+      },
+      "inputValues": {
+        "pressure": "200",
+        "bore": "100",
+        "rod": "50",
+        "flow": "40"
+      },
+      "expected": {
+        "forceExtend": 157.0796,
+        "forceRetract": 117.8097,
+        "speedExtend": 84.8826,
+        "speedRetract": 113.1768,
+        "hydraulicPower": 13.3333
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 4413",
+      "note": "Hydraulic system safety and calculation notes."
+    }
+  ],
+  "commonMistakes": [
+    "Entering rod diameter larger than bore.",
+    "Mixing flow units (L/min vs m³/s).",
+    "Entering pressure in Pa instead of bar."
+  ],
+  "assumptions": [
+    "Leakage and efficiency losses are ignored.",
+    "Pressure is assumed constant."
+  ]
+}

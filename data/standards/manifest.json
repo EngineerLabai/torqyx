@@ -1,0 +1,119 @@
+{
+  "categories": [
+    {
+      "id": "threads",
+      "slug": "threads",
+      "title": {
+        "tr": "Vidalar ve Dişler",
+        "en": "Screws & Threads"
+      },
+      "description": {
+        "tr": "Metrik diş ölçüleri, delik çapları ve cıvata sınıfları için hızlı özet tablolar.",
+        "en": "Quick tables for metric threads, tap drills, and bolt property classes."
+      },
+      "tables": ["threads-metric.json", "bolt-grades.json"],
+      "sources": {
+        "tr": {
+          "text": "Boyutlar ISO metrik diş profili ve yaygın atölye referanslarından derlenmiştir.",
+          "links": [
+            { "label": "ISO 965-1", "href": "https://www.iso.org/standard/17240.html" },
+            { "label": "ISO 898-1", "href": "https://www.iso.org/standard/69717.html" }
+          ]
+        },
+        "en": {
+          "text": "Dimensions follow ISO metric thread profiles and common workshop references.",
+          "links": [
+            { "label": "ISO 965-1", "href": "https://www.iso.org/standard/17240.html" },
+            { "label": "ISO 898-1", "href": "https://www.iso.org/standard/69717.html" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "materials",
+      "slug": "materials",
+      "title": {
+        "tr": "Malzemeler",
+        "en": "Materials"
+      },
+      "description": {
+        "tr": "EN/ASTM/JIS eşdeğerleri ve hızlı seçim notları.",
+        "en": "EN/ASTM/JIS equivalents with quick selection notes."
+      },
+      "tables": ["steel-equivalents.json", "stainless-equivalents.json"],
+      "sources": {
+        "tr": {
+          "text": "Eşdeğerler tipik uygulama rehberlerinden alınmıştır; tedarikçi datası kontrol edilmelidir.",
+          "links": [
+            { "label": "EN 10025", "href": "https://www.en-standard.eu/bs-en-10025-2-2004/" },
+            { "label": "ASTM A36", "href": "https://www.astm.org/a0036_a0036m-19.html" }
+          ]
+        },
+        "en": {
+          "text": "Equivalents are compiled from typical application guides; verify with supplier data sheets.",
+          "links": [
+            { "label": "EN 10025", "href": "https://www.en-standard.eu/bs-en-10025-2-2004/" },
+            { "label": "ASTM A36", "href": "https://www.astm.org/a0036_a0036m-19.html" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "fits",
+      "slug": "fits",
+      "title": {
+        "tr": "Geçmeler ve Toleranslar",
+        "en": "Fits & Tolerances"
+      },
+      "description": {
+        "tr": "Hızlı geçme sınıfı özeti ve tolerans temelleri.",
+        "en": "Quick fit class summary and tolerance basics."
+      },
+      "tables": ["fit-summary.json", "basis-cheat-sheet.json"],
+      "sources": {
+        "tr": {
+          "text": "Geçme yorumları ISO tolerans sisteminin pratik kullanım özetidir.",
+          "links": [
+            { "label": "ISO 286-1", "href": "https://www.iso.org/standard/63537.html" }
+          ]
+        },
+        "en": {
+          "text": "Fit guidance follows ISO tolerance system quick-use notes.",
+          "links": [
+            { "label": "ISO 286-1", "href": "https://www.iso.org/standard/63537.html" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "fluids",
+      "slug": "fluids",
+      "title": {
+        "tr": "Akışkanlar ve Borular",
+        "en": "Fluids & Pipes"
+      },
+      "description": {
+        "tr": "Pürüzlülük, K katsayıları ve hızlı boru verileri.",
+        "en": "Roughness, K-values, and quick pipe data."
+      },
+      "tables": ["pipe-roughness.json", "minor-losses.json"],
+      "sources": {
+        "tr": {
+          "text": "Hızlı tasarım için tipik değerler; kritik hesaplar için detaylı standart kullanılmalıdır.",
+          "links": [
+            { "label": "Crane TP-410", "href": "https://www.cranecpe.com" },
+            { "label": "Idelchik Handbook", "href": "https://www.idelchik.com" }
+          ]
+        },
+        "en": {
+          "text": "Typical values for quick sizing; use detailed standards for critical calculations.",
+          "links": [
+            { "label": "Crane TP-410", "href": "https://www.cranecpe.com" },
+            { "label": "Idelchik Handbook", "href": "https://www.idelchik.com" }
+          ]
+        }
+      }
+    }
+  ]
+}
+

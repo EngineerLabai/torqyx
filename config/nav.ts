@@ -58,6 +58,11 @@ export const navConfig = {
           route: "reference",
         },
         {
+          id: "standards",
+          labelKey: "linkStandards",
+          route: "standards",
+        },
+        {
           id: "quality-tools",
           labelKey: "linkQualityTools",
           route: "qualityTools",
@@ -129,6 +134,11 @@ export const navConfig = {
           id: "reference",
           labelKey: "linkReference",
           route: "reference",
+        },
+        {
+          id: "standards",
+          labelKey: "linkStandards",
+          route: "standards",
         },
         {
           id: "quality-tools",

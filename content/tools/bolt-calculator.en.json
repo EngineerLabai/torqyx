@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Select the bolt size (d, P) and grade.",
+    "Set preload percentage and friction condition.",
+    "Check stress area, preload, and torque outputs."
+  ],
+  "formula": "As = (π/4)·(d - 0.9382·P)^2 | Fv = (preload/100)·Re·As | T = K·Fv·d",
+  "examples": [
+    {
+      "title": "M8 dry joint",
+      "description": "Grade 8.8, 70% preload, dry friction.",
+      "inputs": {
+        "Bolt": "M8 x 1.25",
+        "Grade": "8.8",
+        "Preload": "70%",
+        "Friction": "Dry (K=0.25)"
+      },
+      "outputs": {
+        "As": "36.61 mm²",
+        "Preload Fv": "16.40 kN",
+        "Torque": "32.8 N·m"
+      },
+      "inputValues": {
+        "presetId": "M8",
+        "d": "8",
+        "P": "1.25",
+        "grade": "8.8",
+        "preloadPercent": "70",
+        "friction": "dry"
+      },
+      "expected": {
+        "As": 36.61,
+        "Fv": 16.40,
+        "torque": 32.8
+      }
+    },
+    {
+      "title": "M10 lubricated joint",
+      "description": "Grade 10.9, 70% preload, oiled friction.",
+      "inputs": {
+        "Bolt": "M10 x 1.5",
+        "Grade": "10.9",
+        "Preload": "70%",
+        "Friction": "Oiled (K=0.20)"
+      },
+      "outputs": {
+        "As": "57.99 mm²",
+        "Preload Fv": "38.16 kN",
+        "Torque": "76.3 N·m"
+      },
+      "inputValues": {
+        "presetId": "M10",
+        "d": "10",
+        "P": "1.5",
+        "grade": "10.9",
+        "preloadPercent": "70",
+        "friction": "oiled"
+      },
+      "expected": {
+        "As": 57.99,
+        "Fv": 38.16,
+        "torque": 76.3141
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 898-1 (Mechanical properties of bolts)"
+    },
+    {
+      "title": "VDI 2230",
+      "note": "Practical reference for preload and torque."
+    }
+  ],
+  "commonMistakes": [
+    "Entering preload as 0.70 instead of 70%.",
+    "Picking the wrong friction condition.",
+    "Mixing units for d and pitch."
+  ],
+  "assumptions": [
+    "Preload is static and axial.",
+    "Friction factors are typical values."
+  ]
+}

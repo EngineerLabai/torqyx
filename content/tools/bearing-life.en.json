@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Enter dynamic load C and equivalent load P.",
+    "Select bearing type and speed.",
+    "Set reliability factor a1 if needed and review L10/L10h."
+  ],
+  "formula": "L10 = a1·(C/P)^p | L10h = (L10·10^6)/(60·n) | p = 3 (ball), p = 10/3 (roller)",
+  "examples": [
+    {
+      "title": "Ball bearing",
+      "description": "C=25 kN, P=10 kN, 1500 rpm, a1=1.",
+      "inputs": {
+        "C": "25 kN",
+        "P": "10 kN",
+        "Type": "Ball",
+        "Speed": "1500 rpm",
+        "a1": "1.0"
+      },
+      "outputs": {
+        "L10": "15.63 million rev",
+        "L10h": "173.6 hours"
+      },
+      "inputValues": {
+        "C": "25",
+        "P": "10",
+        "bearingType": "ball",
+        "rpm": "1500",
+        "a1": "1"
+      },
+      "expected": {
+        "L10": 15.625,
+        "L10h": 173.6111
+      }
+    },
+    {
+      "title": "Roller bearing",
+      "description": "C=35 kN, P=12 kN, 900 rpm, a1=0.62.",
+      "inputs": {
+        "C": "35 kN",
+        "P": "12 kN",
+        "Type": "Roller",
+        "Speed": "900 rpm",
+        "a1": "0.62"
+      },
+      "outputs": {
+        "L10": "21.98 million rev",
+        "L10h": "407.0 hours"
+      },
+      "inputValues": {
+        "C": "35",
+        "P": "12",
+        "bearingType": "roller",
+        "rpm": "900",
+        "a1": "0.62"
+      },
+      "expected": {
+        "L10": 21.9793,
+        "L10h": 407.0245
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 281 (Rolling bearing life)"
+    }
+  ],
+  "commonMistakes": [
+    "Mixing units for C and P.",
+    "Entering speed in rad/s instead of rpm.",
+    "Ignoring the a1 reliability factor."
+  ],
+  "assumptions": [
+    "Loads are assumed constant.",
+    "L10 corresponds to 90% reliability."
+  ]
+}

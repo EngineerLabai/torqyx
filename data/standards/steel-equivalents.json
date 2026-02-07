@@ -1,0 +1,28 @@
+{
+  "id": "steel-equivalents",
+  "title": {
+    "tr": "Karbon Çelik Eşdeğerleri",
+    "en": "Carbon Steel Equivalents"
+  },
+  "description": {
+    "tr": "Yaygın EN/ASTM/JIS karşılıkları.",
+    "en": "Common EN/ASTM/JIS equivalences."
+  },
+  "columns": [
+    { "key": "en", "label": { "tr": "EN", "en": "EN" } },
+    { "key": "astm", "label": { "tr": "ASTM", "en": "ASTM" } },
+    { "key": "jis", "label": { "tr": "JIS", "en": "JIS" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    { "en": "S235", "astm": "A36", "jis": "SS400", "note": { "tr": "Yapısal", "en": "Structural" } },
+    { "en": "S355", "astm": "A572 Gr50", "jis": "SM490", "note": { "tr": "Yapısal", "en": "Structural" } },
+    { "en": "C45", "astm": "1045", "jis": "S45C", "note": { "tr": "Orta karbon", "en": "Medium carbon" } },
+    { "en": "42CrMo4", "astm": "4140", "jis": "SCM440", "note": { "tr": "Isıl işlem", "en": "Heat treated" } }
+  ],
+  "note": {
+    "tr": "Eşdeğerlikler uygulama ve sertlik şartlarına göre değişebilir.",
+    "en": "Equivalency depends on application and hardness requirements."
+  }
+}
+

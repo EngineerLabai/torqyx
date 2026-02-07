@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Dinamik yük C ve eşdeğer yük P değerlerini gir.",
+    "Rulman tipini (bilyalı/masuralı) ve devir değerini seç.",
+    "Gerekirse güvenilirlik katsayısı a1 gir, L10 ve L10h sonuçlarını kontrol et."
+  ],
+  "formula": "L10 = a1·(C/P)^p | L10h = (L10·10^6)/(60·n) | p = 3 (bilyalı), p = 10/3 (masuralı)",
+  "examples": [
+    {
+      "title": "Bilyalı rulman",
+      "description": "C=25 kN, P=10 kN, 1500 rpm, a1=1.",
+      "inputs": {
+        "C": "25 kN",
+        "P": "10 kN",
+        "Tip": "Bilyalı",
+        "Devir": "1500 rpm",
+        "a1": "1,0"
+      },
+      "outputs": {
+        "L10": "15,63 milyon devir",
+        "L10h": "173,6 saat"
+      },
+      "inputValues": {
+        "C": "25",
+        "P": "10",
+        "bearingType": "ball",
+        "rpm": "1500",
+        "a1": "1"
+      },
+      "expected": {
+        "L10": 15.625,
+        "L10h": 173.6111
+      }
+    },
+    {
+      "title": "Masuralı rulman",
+      "description": "C=35 kN, P=12 kN, 900 rpm, a1=0,62.",
+      "inputs": {
+        "C": "35 kN",
+        "P": "12 kN",
+        "Tip": "Masuralı",
+        "Devir": "900 rpm",
+        "a1": "0,62"
+      },
+      "outputs": {
+        "L10": "21,98 milyon devir",
+        "L10h": "407,0 saat"
+      },
+      "inputValues": {
+        "C": "35",
+        "P": "12",
+        "bearingType": "roller",
+        "rpm": "900",
+        "a1": "0.62"
+      },
+      "expected": {
+        "L10": 21.9793,
+        "L10h": 407.0245
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 281 (Rulman ömrü hesapları)"
+    }
+  ],
+  "commonMistakes": [
+    "C ve P birimlerini karıştırmak.",
+    "Devir değerini rpm yerine rad/s girmek.",
+    "a1 güvenilirlik katsayısını ihmal etmek."
+  ],
+  "assumptions": [
+    "Yükler sabit kabul edilir.",
+    "L10, %90 güvenilirlik tanımıdır."
+  ]
+}

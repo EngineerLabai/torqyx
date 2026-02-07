@@ -1,0 +1,27 @@
+{
+  "id": "stainless-equivalents",
+  "title": {
+    "tr": "Paslanmaz Çelik Eşdeğerleri",
+    "en": "Stainless Steel Equivalents"
+  },
+  "description": {
+    "tr": "AISI ve EN kalite karşılıkları.",
+    "en": "AISI and EN grade matches."
+  },
+  "columns": [
+    { "key": "grade", "label": { "tr": "Kalite", "en": "Grade" } },
+    { "key": "en", "label": { "tr": "EN", "en": "EN" } },
+    { "key": "aisi", "label": { "tr": "AISI", "en": "AISI" } },
+    { "key": "jis", "label": { "tr": "JIS", "en": "JIS" } }
+  ],
+  "rows": [
+    { "grade": "304", "en": "1.4301", "aisi": "304", "jis": "SUS304" },
+    { "grade": "316L", "en": "1.4404", "aisi": "316L", "jis": "SUS316L" },
+    { "grade": "430", "en": "1.4016", "aisi": "430", "jis": "SUS430" }
+  ],
+  "note": {
+    "tr": "Korozyon ve mekanik özellikler tedarikçiye göre farklılaşabilir.",
+    "en": "Corrosion and mechanical properties vary by supplier."
+  }
+}
+

@@ -1,0 +1,28 @@
+{
+  "id": "minor-losses",
+  "title": {
+    "tr": "Yerel Kayıp Katsayıları",
+    "en": "Minor Loss K-Values"
+  },
+  "description": {
+    "tr": "K = Δp / (ρ v² / 2) yaklaşımı için tipik değerler.",
+    "en": "Typical values for K = Δp / (ρ v² / 2)."
+  },
+  "columns": [
+    { "key": "fitting", "label": { "tr": "Eleman", "en": "Fitting" } },
+    { "key": "k", "label": { "tr": "K", "en": "K" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    { "fitting": { "tr": "90° dirsek", "en": "90° elbow" }, "k": "0.3 - 0.9", "note": { "tr": "Yarıçap bağlı", "en": "Depends on radius" } },
+    { "fitting": { "tr": "Tee (ana hat)", "en": "Tee (through)" }, "k": "0.2 - 0.6", "note": { "tr": "Akış doğrultusu", "en": "Through flow" } },
+    { "fitting": { "tr": "Tee (branşman)", "en": "Tee (branch)" }, "k": "1.0 - 2.0", "note": { "tr": "Yan çıkış", "en": "Branch flow" } },
+    { "fitting": { "tr": "Sürgülü vana (açık)", "en": "Gate valve (open)" }, "k": "0.15", "note": { "tr": "Tam açık", "en": "Fully open" } },
+    { "fitting": { "tr": "Glob vana (açık)", "en": "Globe valve (open)" }, "k": "8 - 12", "note": { "tr": "Yüksek kayıp", "en": "High loss" } }
+  ],
+  "note": {
+    "tr": "K değerleri üretici geometrisine göre değişir.",
+    "en": "K-values vary with geometry and manufacturer."
+  }
+}
+

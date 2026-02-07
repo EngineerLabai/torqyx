@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Güç ve devir değerini gir.",
+    "Mekanik verimi (η) yüzde olarak belirle.",
+    "Tablodan ideal tork, verimli tork ve hp değerini kontrol et."
+  ],
+  "formula": "P(kW) = T(N·m) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
+  "examples": [
+    {
+      "title": "5,5 kW motor",
+      "description": "1500 rpm ve %95 verim ile tork.",
+      "inputs": {
+        "Güç": "5,5 kW",
+        "Devir": "1500 rpm",
+        "Mekanik verim": "%95"
+      },
+      "outputs": {
+        "Tork (ideal)": "35,02 N·m",
+        "Tork (verimli)": "33,27 N·m",
+        "Güç (hp)": "7,38 hp"
+      },
+      "inputValues": {
+        "powerKw": 5.5,
+        "rpm": 1500,
+        "mechEff": 95
+      },
+      "expected": {
+        "torqueNm": 35.0166667,
+        "torqueNmEff": 33.2658333,
+        "powerHp": 7.37561
+      }
+    },
+    {
+      "title": "12 kW sistem",
+      "description": "1200 rpm ve %90 verim.",
+      "inputs": {
+        "Güç": "12 kW",
+        "Devir": "1200 rpm",
+        "Mekanik verim": "%90"
+      },
+      "outputs": {
+        "Tork (ideal)": "95,50 N·m",
+        "Tork (verimli)": "85,95 N·m",
+        "Güç (hp)": "16,09 hp"
+      },
+      "inputValues": {
+        "powerKw": 12,
+        "rpm": 1200,
+        "mechEff": 90
+      },
+      "expected": {
+        "torqueNm": 95.5,
+        "torqueNmEff": 85.95,
+        "powerHp": 16.09224
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "DIN 70020 (Motor güç tanımları)",
+      "note": "kW-hp dönüşümü için referans."
+    },
+    {
+      "title": "ISO 3046 (İçten yanmalı motor performansı)"
+    }
+  ],
+  "commonMistakes": [
+    "kW yerine hp değeri girmek.",
+    "Devir birimini rpm yerine rad/s sanmak.",
+    "Verimi yüzde yerine 0,95 gibi oranla girmek."
+  ],
+  "assumptions": [
+    "Sürekli rejim ve sabit devir kabul edilir.",
+    "Kayıplar tek bir mekanik verim katsayısıyla temsil edilir."
+  ]
+}

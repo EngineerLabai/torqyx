@@ -2,6 +2,7 @@
 import { getContentList } from "@/utils/content";
 import { getCategoryIndex, getTagIndex } from "@/utils/taxonomy";
 import { toolCatalog } from "@/tools/_shared/catalog";
+import { standardsManifest } from "@/data/standards";
 import { SITE_URL } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -38,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/qa",
     "/community",
     "/support",
+    "/standards",
     "/project-hub",
     "/project-hub/devreye-alma",
     "/project-hub/part-tracking",
@@ -69,6 +71,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   toolCatalog.forEach((tool) => {
     addEntry(tool.href);
+  });
+
+  standardsManifest.categories.forEach((category) => {
+    addEntry(`/standards/${category.slug}`);
   });
 
   tags.forEach((tag) => {

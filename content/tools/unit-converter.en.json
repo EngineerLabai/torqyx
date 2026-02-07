@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Pick the quantity and value to convert.",
+    "Select source and target units.",
+    "Review the converted result."
+  ],
+  "formula": "Output = Input × conversion factor",
+  "examples": [
+    {
+      "title": "120 psi → bar",
+      "description": "Pressure conversion.",
+      "inputs": {
+        "Category": "Pressure",
+        "Input": "120 psi",
+        "Target": "bar"
+      },
+      "outputs": {
+        "Result": "8.27 bar"
+      },
+      "inputValues": {
+        "category": "pressure",
+        "value": "120",
+        "fromUnit": "psi",
+        "toUnit": "bar"
+      },
+      "expected": {
+        "output": 8.27
+      }
+    },
+    {
+      "title": "25 kWh → MJ",
+      "description": "Energy conversion.",
+      "inputs": {
+        "Category": "Energy",
+        "Input": "25 kWh",
+        "Target": "MJ"
+      },
+      "outputs": {
+        "Result": "90 MJ"
+      },
+      "inputValues": {
+        "category": "energy",
+        "value": "25",
+        "fromUnit": "kWh",
+        "toUnit": "MJ"
+      },
+      "expected": {
+        "output": 90
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "SI Unit System (BIPM)",
+      "note": "Base unit definitions."
+    }
+  ],
+  "commonMistakes": [
+    "Choosing the wrong category (pressure vs force).",
+    "Mixing source and target units.",
+    "Typing the decimal separator incorrectly."
+  ],
+  "assumptions": [
+    "Standard SI conversion factors are used.",
+    "Reference conditions are assumed constant."
+  ]
+}

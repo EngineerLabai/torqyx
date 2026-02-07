@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Cıvata ölçüsünü (d, P) ve sınıfını seç.",
+    "Ön yük yüzdesi ile sürtünme durumunu belirle.",
+    "Gerilme alanı, ön yük ve tork sonuçlarını kontrol et."
+  ],
+  "formula": "As = (π/4)·(d - 0.9382·P)^2 | Fv = (preload/100)·Re·As | T = K·Fv·d",
+  "examples": [
+    {
+      "title": "M8 kuru bağlantı",
+      "description": "Sınıf 8.8, %70 ön yük, kuru sürtünme.",
+      "inputs": {
+        "Cıvata": "M8 x 1,25",
+        "Sınıf": "8.8",
+        "Ön yük": "%70",
+        "Sürtünme": "Kuru (K=0,25)"
+      },
+      "outputs": {
+        "As": "36,61 mm²",
+        "Ön yük Fv": "16,40 kN",
+        "Tork": "32,8 N·m"
+      },
+      "inputValues": {
+        "presetId": "M8",
+        "d": "8",
+        "P": "1.25",
+        "grade": "8.8",
+        "preloadPercent": "70",
+        "friction": "dry"
+      },
+      "expected": {
+        "As": 36.61,
+        "Fv": 16.40,
+        "torque": 32.8
+      }
+    },
+    {
+      "title": "M10 yağlı bağlantı",
+      "description": "Sınıf 10.9, %70 ön yük, yağlı sürtünme.",
+      "inputs": {
+        "Cıvata": "M10 x 1,5",
+        "Sınıf": "10.9",
+        "Ön yük": "%70",
+        "Sürtünme": "Yağlı (K=0,20)"
+      },
+      "outputs": {
+        "As": "57,99 mm²",
+        "Ön yük Fv": "38,16 kN",
+        "Tork": "76,3 N·m"
+      },
+      "inputValues": {
+        "presetId": "M10",
+        "d": "10",
+        "P": "1.5",
+        "grade": "10.9",
+        "preloadPercent": "70",
+        "friction": "oiled"
+      },
+      "expected": {
+        "As": 57.99,
+        "Fv": 38.16,
+        "torque": 76.3141
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 898-1 (Cıvata mekanik özellikleri)"
+    },
+    {
+      "title": "VDI 2230",
+      "note": "Ön yük ve tork ilişkisi için pratik referans."
+    }
+  ],
+  "commonMistakes": [
+    "Ön yük yüzdesini 0,70 gibi oranla girmek.",
+    "Sürtünme tipini yanlış seçmek.",
+    "d ve P birimlerini karıştırmak."
+  ],
+  "assumptions": [
+    "Ön yük statik ve eksenel kabul edilir.",
+    "Sürtünme katsayıları tipik değerlerdir."
+  ]
+}

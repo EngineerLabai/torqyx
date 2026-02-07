@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Tork, çap, uzunluk ve kayma modülünü gir.",
+    "İzin verilen kayma gerilmesi varsa ekle.",
+    "Kayma gerilmesi, dönme açısı ve emniyeti kontrol et."
+  ],
+  "formula": "τ = 16·T / (π·d^3) | J = π·d^4/32 | θ = (T·L)/(J·G)",
+  "examples": [
+    {
+      "title": "Ø30 mm mil",
+      "description": "T=250 N·m, L=800 mm, G=80 GPa.",
+      "inputs": {
+        "Tork": "250 N·m",
+        "Çap": "30 mm",
+        "Uzunluk": "800 mm",
+        "G": "80 GPa",
+        "İzin verilen τ": "80 MPa"
+      },
+      "outputs": {
+        "τ": "47,16 MPa",
+        "θ": "1,80°",
+        "Emniyet": "1,70"
+      },
+      "inputValues": {
+        "torque": "250",
+        "diameter": "30",
+        "length": "800",
+        "shearModulus": "80",
+        "allowableShear": "80"
+      },
+      "expected": {
+        "tau": 47.157,
+        "thetaDeg": 1.8013,
+        "safety": 1.6965
+      }
+    },
+    {
+      "title": "Ø40 mm mil",
+      "description": "T=120 N·m, L=600 mm, G=79 GPa.",
+      "inputs": {
+        "Tork": "120 N·m",
+        "Çap": "40 mm",
+        "Uzunluk": "600 mm",
+        "G": "79 GPa",
+        "İzin verilen τ": "60 MPa"
+      },
+      "outputs": {
+        "τ": "9,55 MPa",
+        "θ": "0,21°",
+        "Emniyet": "6,28"
+      },
+      "inputValues": {
+        "torque": "120",
+        "diameter": "40",
+        "length": "600",
+        "shearModulus": "79",
+        "allowableShear": "60"
+      },
+      "expected": {
+        "tau": 9.5493,
+        "thetaDeg": 0.2078,
+        "safety": 6.2832
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Burulma gerilmesi ve açı formülleri."
+    }
+  ],
+  "commonMistakes": [
+    "Çapı metre yerine mm girmek.",
+    "G değerini GPa yerine MPa sanmak.",
+    "Uzunluğu mm yerine m girmek."
+  ],
+  "assumptions": [
+    "Dairesel ve homojen kesit kabul edilir.",
+    "Lineer elastik davranış varsayılır."
+  ]
+}

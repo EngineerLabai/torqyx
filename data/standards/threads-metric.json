@@ -1,0 +1,34 @@
+{
+  "id": "metric-threads",
+  "title": {
+    "tr": "ISO Metrik Dişler (Kısa Liste)",
+    "en": "ISO Metric Threads (Quick List)"
+  },
+  "description": {
+    "tr": "Standart hatve ve tipik delik çapları. Atölye kontrolü için kullanılır.",
+    "en": "Standard pitch and typical hole sizes for workshop checks."
+  },
+  "columns": [
+    { "key": "size", "label": { "tr": "Ölçü", "en": "Size" } },
+    { "key": "pitch", "label": { "tr": "Hatve P (mm)", "en": "Pitch P (mm)" } },
+    { "key": "tapDrill", "label": { "tr": "Kılavuz delik (mm)", "en": "Tap drill (mm)" } },
+    { "key": "clearance", "label": { "tr": "Geçme deliği (S/N/L)", "en": "Clearance hole (C/N/L)" } }
+  ],
+  "rows": [
+    { "size": "M3", "pitch": 0.5, "tapDrill": 2.5, "clearance": "3.2 / 3.4 / 3.6" },
+    { "size": "M4", "pitch": 0.7, "tapDrill": 3.3, "clearance": "4.3 / 4.5 / 4.8" },
+    { "size": "M5", "pitch": 0.8, "tapDrill": 4.2, "clearance": "5.3 / 5.5 / 5.8" },
+    { "size": "M6", "pitch": 1.0, "tapDrill": 5.0, "clearance": "6.4 / 6.6 / 7.0" },
+    { "size": "M8", "pitch": 1.25, "tapDrill": 6.8, "clearance": "8.4 / 8.6 / 9.0" },
+    { "size": "M10", "pitch": 1.5, "tapDrill": 8.5, "clearance": "10.5 / 10.8 / 11.0" },
+    { "size": "M12", "pitch": 1.75, "tapDrill": 10.2, "clearance": "13.0 / 13.5 / 14.0" },
+    { "size": "M16", "pitch": 2.0, "tapDrill": 14.0, "clearance": "17.0 / 17.5 / 18.0" },
+    { "size": "M20", "pitch": 2.5, "tapDrill": 17.5, "clearance": "21.0 / 22.0 / 24.0" },
+    { "size": "M24", "pitch": 3.0, "tapDrill": 21.0, "clearance": "25.0 / 26.0 / 28.0" }
+  ],
+  "note": {
+    "tr": "S/N/L = sıkı/normal/geniş açıklık. Değerler tipiktir.",
+    "en": "C/N/L = close/normal/loose clearance. Values are typical."
+  }
+}
+

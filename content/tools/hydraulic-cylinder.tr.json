@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "howTo": [
+    "Basınç, silindir çapı, mil çapı ve debiyi gir.",
+    "İleri/geri alanları üzerinden kuvvetleri kontrol et.",
+    "Hız ve hidrolik güç sonuçlarını incele."
+  ],
+  "formula": "F_ext = P·A_bore | F_ret = P·(A_bore - A_rod) | v = Q/A | P_h = P·Q",
+  "examples": [
+    {
+      "title": "80/45 mm silindir",
+      "description": "160 bar ve 25 L/dk.",
+      "inputs": {
+        "Basınç": "160 bar",
+        "Çap": "80 mm",
+        "Mil": "45 mm",
+        "Debi": "25 L/dk"
+      },
+      "outputs": {
+        "İleri kuvvet": "80,42 kN",
+        "Geri kuvvet": "54,98 kN",
+        "İleri hız": "82,9 mm/s",
+        "Geri hız": "121,3 mm/s",
+        "Hidrolik güç": "6,67 kW"
+      },
+      "inputValues": {
+        "pressure": "160",
+        "bore": "80",
+        "rod": "45",
+        "flow": "25"
+      },
+      "expected": {
+        "forceExtend": 80.4248,
+        "forceRetract": 54.9779,
+        "speedExtend": 82.8932,
+        "speedRetract": 121.2609,
+        "hydraulicPower": 6.6667
+      }
+    },
+    {
+      "title": "100/50 mm silindir",
+      "description": "200 bar ve 40 L/dk.",
+      "inputs": {
+        "Basınç": "200 bar",
+        "Çap": "100 mm",
+        "Mil": "50 mm",
+        "Debi": "40 L/dk"
+      },
+      "outputs": {
+        "İleri kuvvet": "157,08 kN",
+        "Geri kuvvet": "117,81 kN",
+        "İleri hız": "84,9 mm/s",
+        "Geri hız": "113,18 mm/s",
+        "Hidrolik güç": "13,33 kW"
+      },
+      "inputValues": {
+        "pressure": "200",
+        "bore": "100",
+        "rod": "50",
+        "flow": "40"
+      },
+      "expected": {
+        "forceExtend": 157.0796,
+        "forceRetract": 117.8097,
+        "speedExtend": 84.8826,
+        "speedRetract": 113.1768,
+        "hydraulicPower": 13.3333
+      }
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 4413",
+      "note": "Hidrolik sistemler için güvenlik ve hesap notları."
+    }
+  ],
+  "commonMistakes": [
+    "Mil çapı silindir çapından büyük girmek.",
+    "Debi birimini L/dk yerine m³/s sanmak.",
+    "Basıncı bar yerine Pa girmek."
+  ],
+  "assumptions": [
+    "Sızıntı ve verim kayıpları ihmal edilir.",
+    "Basınç sabit kabul edilir."
+  ]
+}

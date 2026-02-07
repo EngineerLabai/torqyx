@@ -1,0 +1,25 @@
+{
+  "id": "basis-cheat-sheet",
+  "title": {
+    "tr": "Delik/Mil Tabanlı Sistem",
+    "en": "Hole/Shaft Basis Cheat Sheet"
+  },
+  "description": {
+    "tr": "Tolerans bölgelerinin hızlı yorumu.",
+    "en": "Quick interpretation of tolerance zones."
+  },
+  "columns": [
+    { "key": "basis", "label": { "tr": "Sistem", "en": "System" } },
+    { "key": "meaning", "label": { "tr": "Anlam", "en": "Meaning" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    { "basis": { "tr": "Delik tabanlı (H)", "en": "Hole basis (H)" }, "meaning": { "tr": "Delik toleransı sabit, mil seçimi değişken", "en": "Hole tolerance fixed, shaft varies" }, "note": { "tr": "Atölye için yaygın", "en": "Common in machining" } },
+    { "basis": { "tr": "Mil tabanlı (h)", "en": "Shaft basis (h)" }, "meaning": { "tr": "Mil toleransı sabit, delik seçimi değişken", "en": "Shaft tolerance fixed, hole varies" }, "note": { "tr": "Mil hazır tedarik", "en": "Shaft stock" } }
+  ],
+  "note": {
+    "tr": "Seçim tedarik ve işleme kabiliyetine göre yapılır.",
+    "en": "Choose based on supply chain and machining capability."
+  }
+}
+
