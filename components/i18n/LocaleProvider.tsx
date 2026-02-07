@@ -34,7 +34,7 @@ export function LocaleProvider({ children, initialLocale = DEFAULT_LOCALE }: Loc
 
   useEffect(() => {
     if (!pathLocale || pathLocale === locale) return;
-    setLocale(pathLocale);
+    Promise.resolve().then(() => setLocale(pathLocale));
   }, [pathLocale, locale]);
 
   useEffect(() => {

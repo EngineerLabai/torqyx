@@ -92,7 +92,7 @@ export default function RequestToolForm() {
   const [copyStatus, setCopyStatus] = useState("");
 
   useEffect(() => {
-    setHistory(readToolRequests());
+    Promise.resolve().then(() => setHistory(readToolRequests()));
   }, []);
 
   useEffect(() => {

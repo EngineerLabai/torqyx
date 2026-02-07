@@ -76,8 +76,10 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
   useEffect(() => {
     if (!initialDocs) return;
-    setDocs(initialDocs);
-    setLoading(false);
+    Promise.resolve().then(() => {
+      setDocs(initialDocs);
+      setLoading(false);
+    });
   }, [initialDocs]);
 
   useEffect(() => {
@@ -125,14 +127,14 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     trackEvent("tool_open", { tool_id: slug });
   }, [slug]);
 
-  const resolvedTool = useMemo(() => {
+  const resolvedTool = (() => {
     if (docs?.tool) return docs.tool;
     const normalized = slug.replace(/^\/+|\/+$/g, "");
     const match = toolCatalog.find((tool) => tool.href.replace(/^\/tools\//, "") === normalized);
     if (!match) return null;
     const copy = getToolCopy(match, locale);
     return { id: match.id, title: copy.title, tags: match.tags ?? [] };
-  }, [docs?.tool, slug, locale]);
+  })();
 
   useEffect(() => {
     if (!resolvedTool?.id) return;
@@ -183,7 +185,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
   useEffect(() => {
     if (!availableTabs.some((tab) => tab.id === activeTab)) {
-      setActiveTab("calculator");
+      Promise.resolve().then(() => setActiveTab("calculator"));
     }
   }, [availableTabs, activeTab]);
 

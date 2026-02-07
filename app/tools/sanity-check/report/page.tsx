@@ -5,7 +5,7 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 
 type ReportPageProps = {
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams?: Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
 };
 
 const resolveParam = (value?: string | string[]) => (Array.isArray(value) ? value[0] : value);
@@ -13,7 +13,8 @@ const resolveParam = (value?: string | string[]) => (Array.isArray(value) ? valu
 export default async function SanityCheckReportPage({ searchParams }: ReportPageProps) {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).components.sanityCheck.report;
-  const sessionParam = resolveParam(searchParams?.session);
+  const resolvedSearchParams = (await searchParams) ?? undefined;
+  const sessionParam = resolveParam(resolvedSearchParams?.session);
   const session = sessionParam ? decodeSession(sessionParam) : null;
 
   return (

@@ -18,6 +18,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const headerLocale = request.headers.get("x-locale");
+  if (isLocale(headerLocale)) {
+    return NextResponse.next();
+  }
+
   const segment = pathname.split("/")[1];
 
   if (isLocale(segment)) {

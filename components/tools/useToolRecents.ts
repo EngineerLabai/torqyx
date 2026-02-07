@@ -7,7 +7,7 @@ export default function useToolRecents() {
   const [recents, setRecents] = useState<RecentToolEntry[]>([]);
 
   useEffect(() => {
-    setRecents(readRecents());
+    Promise.resolve().then(() => setRecents(readRecents()));
   }, []);
 
   useEffect(() => {

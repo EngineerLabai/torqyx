@@ -17,6 +17,7 @@ const CATEGORY_ALL = "All" as const;
 const TAG_ALL = "All" as const;
 const NEW_WINDOW_DAYS = 14;
 const DEFAULT_TYPE: ToolType = "calculator";
+const NOW = Date.now();
 
 type TypeFilter = typeof TYPE_ALL | ToolType;
 type CategoryFilter = typeof CATEGORY_ALL | (typeof toolCategories)[number];
@@ -282,7 +283,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
             const categoryLabel = tool.category ? labels.category[tool.category] : labels.generalCategory;
             const tagLabels = (tool.tags ?? []).map((tagValue) => labels.tag[tagValue]);
             const isNew = tool.lastUpdated
-              ? Date.now() - new Date(tool.lastUpdated).getTime() <= NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000
+              ? NOW - new Date(tool.lastUpdated).getTime() <= NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000
               : false;
             return (
               <ToolLibraryCard

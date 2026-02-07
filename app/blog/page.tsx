@@ -10,7 +10,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
 
 type BlogIndexPageProps = {
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams?: Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
 };
 
 const ITEMS_PER_PAGE = 12;
@@ -53,10 +53,11 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
   const heroImage = getHeroImageSrc("blog");
   const posts = await getContentList("blog");
   const basePath = withLocalePrefix("/blog", locale);
+  const resolvedSearchParams = (await searchParams) ?? undefined;
 
-  const searchText = getParam(searchParams?.q)?.trim() ?? "";
-  const activeTag = getParam(searchParams?.tag)?.trim() ?? "";
-  const activeCategory = getParam(searchParams?.category)?.trim() ?? "";
+  const searchText = getParam(resolvedSearchParams?.q)?.trim() ?? "";
+  const activeTag = getParam(resolvedSearchParams?.tag)?.trim() ?? "";
+  const activeCategory = getParam(resolvedSearchParams?.category)?.trim() ?? "";
 
   const normalizedQuery = normalizeText(searchText);
   const normalizedTag = normalizeText(activeTag);
@@ -82,7 +83,7 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
 
   const totalItems = filteredPosts.length;
   const totalPages = Math.max(1, Math.ceil(totalItems / ITEMS_PER_PAGE));
-  const pageParam = Number.parseInt(getParam(searchParams?.page) ?? "1", 10);
+  const pageParam = Number.parseInt(getParam(resolvedSearchParams?.page) ?? "1", 10);
   const currentPage = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
   const safePage = Math.min(currentPage, totalPages);
 

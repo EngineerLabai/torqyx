@@ -117,17 +117,20 @@ export default function SanityCheckLab() {
     if (shared) {
       const decoded = decodeSession(shared);
       if (decoded) {
-        setSession(decoded);
-        setStatusMessage(copy.session.restoreNotice);
+        Promise.resolve().then(() => {
+          setSession(decoded);
+          setStatusMessage(copy.session.restoreNotice);
+        });
       }
     } else {
       const last = readLastSession();
       if (last) {
-        setSession(last);
+        Promise.resolve().then(() => setSession(last));
       }
     }
 
-    setSavedSessions(readSavedSessions());
+    const nextSaved = readSavedSessions();
+    Promise.resolve().then(() => setSavedSessions(nextSaved));
   }, [copy.session.restoreNotice, searchParams]);
 
   useEffect(() => {

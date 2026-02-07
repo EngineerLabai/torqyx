@@ -1,7 +1,9 @@
+import type { RouteKey } from "@/config/routes";
+
 export type NavLinkConfig = {
   id: string;
   labelKey: string;
-  href: string;
+  route: RouteKey;
   badgeKey?: string;
   debugId?: string;
 };
@@ -24,18 +26,18 @@ export const navConfig = {
         {
           id: "gear-calculators",
           labelKey: "linkGearCalculators",
-          href: "/tools/gear-design/calculators",
+          route: "gearCalculators",
           badgeKey: "new",
         },
         {
           id: "tool-library",
           labelKey: "linkToolLibrary",
-          href: "/tools",
+          route: "tools",
         },
         {
           id: "torque-power",
           labelKey: "linkTorquePower",
-          href: "/tools/torque-power",
+          route: "torquePower",
         },
       ],
     },
@@ -47,23 +49,23 @@ export const navConfig = {
         {
           id: "project-hub",
           labelKey: "linkProjectHub",
-          href: "/project-hub",
+          route: "projectHub",
           badgeKey: "fresh",
         },
         {
           id: "reference",
           labelKey: "linkReference",
-          href: "/reference",
+          route: "reference",
         },
         {
           id: "quality-tools",
           labelKey: "linkQualityTools",
-          href: "/quality-tools",
+          route: "qualityTools",
         },
         {
           id: "fixture-tools",
           labelKey: "linkFixtureTools",
-          href: "/fixture-tools",
+          route: "fixtureTools",
         },
       ],
     },
@@ -75,12 +77,12 @@ export const navConfig = {
         {
           id: "community",
           labelKey: "linkCommunity",
-          href: "/community",
+          route: "community",
         },
         {
           id: "qa",
           labelKey: "linkQa",
-          href: "/qa",
+          route: "qa",
         },
       ],
     },
@@ -92,7 +94,7 @@ export const navConfig = {
         {
           id: "support",
           labelKey: "linkSupport",
-          href: "/support",
+          route: "support",
         },
       ],
     },
@@ -105,12 +107,12 @@ export const navConfig = {
         {
           id: "home",
           labelKey: "linkHome",
-          href: "/",
+          route: "home",
         },
         {
           id: "tool-library",
           labelKey: "linkToolLibrary",
-          href: "/tools",
+          route: "tools",
         },
       ],
     },
@@ -121,22 +123,22 @@ export const navConfig = {
         {
           id: "project-hub",
           labelKey: "linkProjectHub",
-          href: "/project-hub",
+          route: "projectHub",
         },
         {
           id: "reference",
           labelKey: "linkReference",
-          href: "/reference",
+          route: "reference",
         },
         {
           id: "quality-tools",
           labelKey: "linkQualityTools",
-          href: "/quality-tools",
+          route: "qualityTools",
         },
         {
           id: "fixture-tools",
           labelKey: "linkFixtureTools",
-          href: "/fixture-tools",
+          route: "fixtureTools",
         },
       ],
     },
@@ -147,12 +149,12 @@ export const navConfig = {
         {
           id: "community",
           labelKey: "linkCommunity",
-          href: "/community",
+          route: "community",
         },
         {
           id: "qa",
           labelKey: "linkQa",
-          href: "/qa",
+          route: "qa",
         },
       ],
     },
@@ -163,7 +165,7 @@ export const navConfig = {
         {
           id: "support",
           labelKey: "linkSupport",
-          href: "/support",
+          route: "support",
         },
       ],
     },

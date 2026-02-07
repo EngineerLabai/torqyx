@@ -12,16 +12,20 @@ export default function useFirebaseServices() {
     const next = getFirebaseServices();
     if (!next) {
       const initError = getFirebaseInitError();
-      if (initError) {
-        setError(initError.message);
-      }
-      setReady(true);
+      Promise.resolve().then(() => {
+        if (initError) {
+          setError(initError.message);
+        }
+        setReady(true);
+      });
       return;
     }
 
-    setServices(next);
-    setError(null);
-    setReady(true);
+    Promise.resolve().then(() => {
+      setServices(next);
+      setError(null);
+      setReady(true);
+    });
   }, []);
 
   return { services, error, ready };

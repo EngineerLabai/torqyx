@@ -22,10 +22,10 @@ export default function UpdatesBanner({ latestVersion, latestDate, summary }: Up
     try {
       const dismissed = window.localStorage.getItem(DISMISS_KEY);
       if (dismissed !== latestVersion) {
-        setVisible(true);
+        Promise.resolve().then(() => setVisible(true));
       }
     } catch {
-      setVisible(true);
+      Promise.resolve().then(() => setVisible(true));
     }
   }, [latestVersion]);
 

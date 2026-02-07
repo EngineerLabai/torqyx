@@ -25,17 +25,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const services = getFirebaseServices();
     if (!services) {
       const initError = getFirebaseInitError();
-      if (initError) {
-        console.warn("[auth] Firebase init error:", initError.message);
-        setError(initError.message);
-      }
-      setAvailable(false);
-      setLoading(false);
+      Promise.resolve().then(() => {
+        if (initError) {
+          console.warn("[auth] Firebase init error:", initError.message);
+          setError(initError.message);
+        }
+        setAvailable(false);
+        setLoading(false);
+      });
       return;
     }
 
-    setAvailable(true);
-    setError(null);
+    Promise.resolve().then(() => {
+      setAvailable(true);
+      setError(null);
+    });
 
     try {
       const unsub = onAuthStateChanged(
@@ -55,10 +59,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return () => unsub();
     } catch (error) {
       console.error("[auth] Failed to attach auth listener:", error);
-      setUser(null);
-      setError(error instanceof Error ? error.message : "Auth listener failed.");
-      setAvailable(false);
-      setLoading(false);
+      Promise.resolve().then(() => {
+        setUser(null);
+        setError(error instanceof Error ? error.message : "Auth listener failed.");
+        setAvailable(false);
+        setLoading(false);
+      });
       return;
     }
   }, []);

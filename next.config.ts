@@ -10,6 +10,7 @@ const localeRedirectRoots = [
   "quality-tools",
   "fixture-tools",
 ];
+const localeMissing: { type: "header"; key: string }[] = [{ type: "header", key: "x-locale" }];
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -18,11 +19,13 @@ const nextConfig: NextConfig = {
         source: `/${root}`,
         destination: `/tr/${root}`,
         permanent: true,
+        missing: localeMissing,
       },
       {
         source: `/${root}/:path*`,
         destination: `/tr/${root}/:path*`,
         permanent: true,
+        missing: localeMissing,
       },
     ]);
 
@@ -32,6 +35,7 @@ const nextConfig: NextConfig = {
         source: "/forum",
         destination: "/tr/qa",
         permanent: true,
+        missing: localeMissing,
       },
     ];
   },

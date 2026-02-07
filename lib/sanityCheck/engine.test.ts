@@ -16,8 +16,8 @@ describe("sanity check engine", () => {
     const session: LabSession = {
       ...baseSession,
       variables: [
-        { id: "t", symbol: "T", name: "Torque", value: 10, unit: "N m", min: 8, max: 12 },
-        { id: "w", symbol: "w", name: "Omega", value: 2, unit: "rad/s", min: 1, max: 3 },
+        { id: "t", symbol: "T", name: "Torque", description: "", value: 10, unit: "N m", min: 8, max: 12 },
+        { id: "w", symbol: "w", name: "Omega", description: "", value: 2, unit: "rad/s", min: 1, max: 3 },
       ],
       formula: "T * w",
     };
@@ -28,10 +28,28 @@ describe("sanity check engine", () => {
     expect(result.unit).toContain("N");
   });
 
+  it("treats rad as dimensionless so power units match", () => {
+    const session: LabSession = {
+      ...baseSession,
+      variables: [
+        { id: "t", symbol: "T", name: "Torque", description: "", value: 50, unit: "N m" },
+        { id: "w", symbol: "w", name: "Omega", description: "", value: 2, unit: "rad/s" },
+      ],
+      formula: "T * w",
+      expectedUnit: "W",
+    };
+
+    const result = evaluateFormula(session);
+    expect(result.error).toBeUndefined();
+    expect(result.warnings.some((warning) => warning.type === "unit-mismatch")).toBe(false);
+  });
+
   it("detects unit mismatch when expected unit differs", () => {
     const session: LabSession = {
       ...baseSession,
-      variables: [{ id: "p", symbol: "P", name: "Pressure", value: 2, unit: "Pa", min: 1, max: 3 }],
+      variables: [
+        { id: "p", symbol: "P", name: "Pressure", description: "", value: 2, unit: "Pa", min: 1, max: 3 },
+      ],
       formula: "P",
       expectedUnit: "N",
     };
@@ -43,7 +61,7 @@ describe("sanity check engine", () => {
   it("returns sweep points using variable min/max", () => {
     const session: LabSession = {
       ...baseSession,
-      variables: [{ id: "x", symbol: "x", name: "X", value: 5, unit: "", min: 0, max: 10 }],
+      variables: [{ id: "x", symbol: "x", name: "X", description: "", value: 5, unit: "", min: 0, max: 10 }],
       formula: "x * 2",
       sweep: { points: 5, variableId: "x" },
     };
@@ -57,7 +75,7 @@ describe("sanity check engine", () => {
   it("computes Monte Carlo stats for constant input", () => {
     const session: LabSession = {
       ...baseSession,
-      variables: [{ id: "x", symbol: "x", name: "X", value: 5, unit: "", min: 5, max: 5 }],
+      variables: [{ id: "x", symbol: "x", name: "X", description: "", value: 5, unit: "", min: 5, max: 5 }],
       formula: "x * 2",
       monteCarlo: { iterations: 200 },
     };
@@ -70,7 +88,7 @@ describe("sanity check engine", () => {
   it("returns error when formula is empty", () => {
     const session: LabSession = {
       ...baseSession,
-      variables: [{ id: "x", symbol: "x", name: "X", value: 1, unit: "" }],
+      variables: [{ id: "x", symbol: "x", name: "X", description: "", value: 1, unit: "" }],
       formula: "",
     };
 
@@ -81,7 +99,7 @@ describe("sanity check engine", () => {
   it("flags mismatch when expected unit is set for dimensionless output", () => {
     const session: LabSession = {
       ...baseSession,
-      variables: [{ id: "x", symbol: "x", name: "X", value: 1, unit: "" }],
+      variables: [{ id: "x", symbol: "x", name: "X", description: "", value: 1, unit: "" }],
       formula: "x + 1",
       expectedUnit: "m",
     };

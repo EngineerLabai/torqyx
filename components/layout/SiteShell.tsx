@@ -8,8 +8,9 @@ import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import PremiumCTA from "@/components/premium/PremiumCTA";
 import { getBrandCopy } from "@/config/brand";
+import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
-import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
+import { stripLocaleFromPath } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 
 type NavSection = {
@@ -35,14 +36,14 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const resolveLabel = (key: string) => navCopy.labels?.[key] ?? key;
   const resolveDescription = (key?: string) => (key ? navCopy.descriptions?.[key] ?? "" : "");
   const resolveBadge = (key?: string) => (key ? navCopy.badges?.[key] : undefined);
-  const localizeHref = (href: string) => withLocalePrefix(href, locale);
+  const resolveHref = (route: NavLinkConfig["route"]) => getRoute(route, locale);
 
   const navSections: NavSection[] = (navConfig.megaMenu as unknown as NavSectionConfig[]).map((section) => ({
     label: resolveLabel(section.labelKey),
     description: resolveDescription(section.descriptionKey ?? section.labelKey),
     links: (section.links as NavLinkConfig[]).map((link) => ({
       label: resolveLabel(link.labelKey),
-      href: localizeHref(link.href),
+      href: resolveHref(link.route),
       badge: resolveBadge(link.badgeKey),
     })),
   }));
@@ -51,7 +52,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     label: resolveLabel(section.labelKey),
     links: (section.links as NavLinkConfig[]).map((link) => ({
       label: resolveLabel(link.labelKey),
-      href: localizeHref(link.href),
+      href: resolveHref(link.route),
     })),
   }));
   const pathname = usePathname() ?? "/";
@@ -68,7 +69,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
 
       <header className="site-header relative z-50 border-b border-slate-200/80 bg-white/80">
         <div className="site-container flex items-center justify-between gap-6 py-4">
-          <Link href={localizeHref("/")} className="flex items-center gap-3" aria-label={brandContent.siteName}>
+          <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
               <img
                 src="/brand/logo-mark-light.svg"

@@ -24,7 +24,7 @@ import { formatMessage, getMessages } from "@/utils/messages";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
-import type { ToolDefinition, ToolInputDefinition, ToolInputOption } from "@/tools/registry";
+import { getToolById, type ToolDefinition, type ToolInputDefinition, type ToolInputOption } from "@/tools/registry";
 
 Chart.register(
   LineController,
@@ -38,8 +38,8 @@ Chart.register(
   BarElement,
 );
 
-type GenericToolPageProps<TInputs extends Record<string, unknown>, TResult> = {
-  tool: ToolDefinition<TInputs, TResult>;
+type GenericToolPageProps = {
+  toolId: string;
   initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
 };
 
@@ -48,6 +48,8 @@ const getDefaultValues = (inputs: ToolInputDefinition[]) =>
     acc[input.key] = String(input.default ?? "");
     return acc;
   }, {});
+
+type GenericToolInputs = Record<string, unknown>;
 
 const formatKey = (value: string) =>
   value
@@ -64,17 +66,15 @@ const isPrimitive = (value: unknown) =>
   typeof value === "number" ||
   typeof value === "boolean";
 
-export default function GenericToolPage<TInputs extends Record<string, unknown>, TResult>({
-  tool,
-  initialDocs,
-}: GenericToolPageProps<TInputs, TResult>) {
+export default function GenericToolPage({ toolId, initialDocs }: GenericToolPageProps) {
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const copy = messages.components.genericToolPage;
   const validationCopy = messages.components.toolValidation;
   const calcFailedCopy = copy.calcFailed;
   const common = messages.common;
-  const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool.inputs));
+  const tool = getToolById(toolId) as ToolDefinition<GenericToolInputs, Record<string, unknown>> | null;
+  const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool?.inputs ?? []));
   const chartRef = useRef<Chart | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const searchParams = useSearchParams();
@@ -82,10 +82,12 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
   const hasHydrated = useRef(false);
 
   useEffect(() => {
+    if (!tool) return;
     Promise.resolve().then(() => setValues(getDefaultValues(tool.inputs)));
-  }, [tool.id, tool.inputs]);
+  }, [tool]);
 
   useEffect(() => {
+    if (!tool) return;
     if (hasHydrated.current) return;
     const shared = decodeToolState<Record<string, string | number>>(searchParams?.get("input") ?? null);
     if (shared) {
@@ -97,19 +99,20 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
       Promise.resolve().then(() => setValues(normalized));
     }
     hasHydrated.current = true;
-  }, [searchParams, tool.inputs]);
+  }, [searchParams, tool]);
 
-  const schema = useMemo(() => {
+  const schema = (() => {
+    if (!tool) return null;
     const shape: Record<string, z.ZodTypeAny> = {};
     tool.inputs.forEach((input) => {
       shape[input.key] = buildFieldSchema(input, validationCopy);
     });
     return z.object(shape);
-  }, [tool.inputs, validationCopy]);
+  })();
 
-  const parsed = useMemo(() => schema.safeParse(values), [schema, values]);
-  const errors = useMemo(() => {
-    if (parsed.success) return {};
+  const parsed = schema ? schema.safeParse(values) : null;
+  const errors = (() => {
+    if (!parsed || parsed.success) return {};
     const flattened = parsed.error.flatten().fieldErrors;
     return Object.entries(flattened).reduce<Record<string, string>>((acc, [key, value]) => {
       if (value && value.length > 0) {
@@ -117,10 +120,10 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
       }
       return acc;
     }, {});
-  }, [parsed]);
+  })();
 
-  const normalizedInputs = useMemo(() => {
-    if (!parsed.success) return null;
+  const normalizedInputs = (() => {
+    if (!parsed || !parsed.success || !tool) return null;
     const data = parsed.data as Record<string, unknown>;
     const normalized: Record<string, unknown> = {};
     tool.inputs.forEach((input) => {
@@ -132,42 +135,44 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
         normalized[input.key] = raw;
       }
     });
-    return normalized as TInputs;
-  }, [parsed, tool.inputs]);
+    return normalized as GenericToolInputs;
+  })();
 
-  const { results, calcError } = useMemo(() => {
-    if (!normalizedInputs) return { results: null, calcError: "" };
+  let results: Record<string, unknown> | null = null;
+  let calcError = "";
+  if (normalizedInputs && tool) {
     try {
-      return { results: tool.calculate(normalizedInputs), calcError: "" };
+      results = tool.calculate(normalizedInputs);
     } catch {
-      return { results: null, calcError: calcFailedCopy };
+      results = null;
+      calcError = calcFailedCopy;
     }
-  }, [normalizedInputs, tool, calcFailedCopy]);
+  }
 
-  const resultEntries = useMemo(() => {
-    if (!results || typeof results !== "object") return [];
-    return Object.entries(results).filter(([, value]) => isPrimitive(value));
-  }, [results]);
+  const resultEntries =
+    results && typeof results === "object"
+      ? Object.entries(results).filter(([, value]) => isPrimitive(value))
+      : [];
 
-  const chartConfig = useMemo(() => {
-    if (!results || !normalizedInputs || !tool.chartConfig) return null;
+  const chartConfig = (() => {
+    if (!results || !normalizedInputs || !tool?.chartConfig) return null;
     try {
       return tool.chartConfig(results, normalizedInputs);
     } catch {
       return null;
     }
-  }, [results, normalizedInputs, tool]);
+  })();
 
-  const formula = resolveLocalizedValue(tool.formula, locale) ?? tool.formulaDisplay;
-  const assumptions = resolveLocalizedValue(tool.assumptions, locale);
-  const references = resolveLocalizedValue(tool.references, locale);
+  const formula = tool ? resolveLocalizedValue(tool.formula, locale) ?? tool.formulaDisplay : "";
+  const assumptions = tool ? resolveLocalizedValue(tool.assumptions, locale) : undefined;
+  const references = tool ? resolveLocalizedValue(tool.references, locale) : undefined;
 
   const encodedState = useMemo(() => encodeToolState(values), [values]);
   const shareUrl = useMemo(() => {
     if (!pathname || typeof window === "undefined") return "";
     return buildShareUrl(`${window.location.origin}${pathname}`, values);
   }, [pathname, values]);
-  const reportBase = withLocalePrefix(`/tools/${tool.id}/report`, locale);
+  const reportBase = tool ? withLocalePrefix(`/tools/${tool.id}/report`, locale) : "";
   const reportUrl = encodedState ? `${reportBase}?input=${encodedState}` : reportBase;
 
   useEffect(() => {
@@ -224,6 +229,38 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
     };
   }, [chartConfig]);
 
+  if (!tool) {
+    const notFoundCopy = messages.pages.notFound;
+    return (
+      <PageShell>
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-rose-100 bg-rose-50 px-3 py-1 text-[11px] text-rose-700 md:text-xs">
+              <span className="font-semibold">404</span>
+            </div>
+            <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-4xl">
+              {notFoundCopy.title}
+            </h1>
+            <p className="text-[15px] leading-relaxed text-slate-700 md:text-base">
+              {notFoundCopy.description}
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={withLocalePrefix("/tools", locale)}
+                className="rounded-full bg-emerald-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+              >
+                {notFoundCopy.primaryCta}
+              </a>
+              <a href={withLocalePrefix("/", locale)} className="text-xs font-semibold text-slate-500 hover:text-slate-700">
+                {notFoundCopy.secondaryCta}
+              </a>
+            </div>
+          </div>
+        </section>
+      </PageShell>
+    );
+  }
+
   return (
     <PageShell>
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
@@ -269,7 +306,7 @@ export default function GenericToolPage<TInputs extends Record<string, unknown>,
 
           <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.results}</h2>
-            {parsed.success && results ? (
+            {parsed?.success && results ? (
               <div className="space-y-2">
                 {resultEntries.map(([key, value]) => (
                   <ResultRow key={key} label={formatKey(key)} value={formatValue(value, locale, common)} />

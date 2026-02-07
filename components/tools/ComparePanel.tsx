@@ -110,7 +110,7 @@ export default function ComparePanel<TInput, TResult>({
     if (sharedC) {
       nextScenarios.push({ id: "c", title: "C", label: "", input: sharedC });
     }
-    setScenarios(nextScenarios);
+    Promise.resolve().then(() => setScenarios(nextScenarios));
     didInit.current = true;
   }, [searchParams, defaultInput]);
 
@@ -145,6 +145,32 @@ export default function ComparePanel<TInput, TResult>({
       getValue: (result: TResult) => (result as Record<string, unknown>)[key] as string | number | boolean | null,
     }));
   }, [compareMetrics, scenarioResults]);
+
+  const normalizedMetrics = useMemo(() => {
+    const errorLabel = locale === "tr" ? "Hata" : "Error";
+    const errorMetric = metrics.find((metric) => metric.key === "error");
+    if (!errorMetric) return metrics;
+
+    const hasError = scenarioResults.some((scenario) => {
+      const value = errorMetric.getValue(scenario.result, scenario.input);
+      if (value === null || value === undefined) return false;
+      if (typeof value === "string") return value.trim().length > 0;
+      return Boolean(value);
+    });
+
+    if (!hasError) {
+      return metrics.filter((metric) => metric.key !== "error");
+    }
+
+    return metrics.map((metric) =>
+      metric.key === "error"
+        ? {
+            ...metric,
+            label: errorLabel,
+          }
+        : metric,
+    );
+  }, [metrics, scenarioResults, locale]);
 
   const formatValue = (value: string | number | boolean | null | undefined) => {
     if (value === null || value === undefined || value === "") return "-";
@@ -310,7 +336,7 @@ export default function ComparePanel<TInput, TResult>({
 
       <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
         <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">{copy.tableTitle}</h3>
-        {metrics.length === 0 ? (
+        {normalizedMetrics.length === 0 ? (
           <p className="mt-2 text-xs text-slate-500">{copy.emptyMetrics}</p>
         ) : (
           <div className="mt-3 overflow-x-auto">
@@ -326,7 +352,7 @@ export default function ComparePanel<TInput, TResult>({
                 </tr>
               </thead>
               <tbody>
-                {metrics.map((metric) => (
+                {normalizedMetrics.map((metric) => (
                   <tr key={metric.key} className="border-t border-slate-200">
                     <td className="py-2 font-medium text-slate-600">{metric.label}</td>
                     {scenarioResults.map((scenario) => (

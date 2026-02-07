@@ -21,13 +21,14 @@ export async function generateMetadata() {
 }
 
 type ToolsIndexPageProps = {
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams?: Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
 };
 
 export default async function ToolsIndexPage({ searchParams }: ToolsIndexPageProps) {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.tools;
   const heroImage = getHeroImageSrc("tools");
+  const resolvedSearchParams = (await searchParams) ?? undefined;
 
   return (
     <PageShell>
@@ -39,7 +40,7 @@ export default async function ToolsIndexPage({ searchParams }: ToolsIndexPagePro
         imageAlt={copy.imageAlt}
       />
 
-      <ToolLibrary locale={locale} searchParams={searchParams} />
+      <ToolLibrary locale={locale} searchParams={resolvedSearchParams} />
     </PageShell>
   );
 }

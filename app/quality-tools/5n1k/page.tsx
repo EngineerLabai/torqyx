@@ -386,7 +386,7 @@ function PremiumExportNotice() {
   return (
     <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
       <h3 className="mb-1 text-sm font-semibold">
-        PDF / Excel'e Aktar - Premium (bekleme listesi)
+        PDF / Excel&apos;e Aktar - Premium (bekleme listesi)
       </h3>
       <p className="mb-2">
         5N1K problem tanimlama kayitlarini PDF veya Excel olarak disa aktarma

@@ -22,12 +22,24 @@ const normalizeFormula = (formula: string) => {
 
 const parseNumber = (value: number) => (Number.isFinite(value) ? value : 0);
 
+const normalizeUnit = (value: string) => {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  if (!/rad/i.test(trimmed)) return trimmed;
+  const replaced = trimmed.replace(/rad/gi, "1").replace(/\s+/g, "");
+  const simplified = replaced
+    .replace(/\*1/g, "")
+    .replace(/1\*/g, "")
+    .replace(/\/1/g, "");
+  return simplified === "1" ? "" : simplified;
+};
+
 const buildScope = (variables: VariableEntry[], overrides?: Record<string, number>) => {
   const scope: Record<string, unknown> = {};
   variables.forEach((variable) => {
     const nextValue = overrides && variable.symbol in overrides ? overrides[variable.symbol] : variable.value;
     const numeric = parseNumber(nextValue);
-    const unit = variable.unit?.trim();
+    const unit = variable.unit ? normalizeUnit(variable.unit) : "";
     if (unit) {
       scope[variable.symbol] = math.unit(numeric, unit);
     } else {
@@ -90,8 +102,12 @@ export const evaluateFormula = (session: LabSession): EvaluateResult => {
     const { value, unit, isUnit } = extractUnit(result);
 
     if (parsed.data.expectedUnit?.trim()) {
-      const expected = parsed.data.expectedUnit.trim();
-      if (!isUnit) {
+      const expected = normalizeUnit(parsed.data.expectedUnit);
+      if (!expected) {
+        if (isUnit) {
+          warnings.push(buildUnitMismatchWarning("dimensionless", unit));
+        }
+      } else if (!isUnit) {
         warnings.push(buildUnitMismatchWarning(expected, unit));
       } else {
         try {

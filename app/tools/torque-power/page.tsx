@@ -1,6 +1,11 @@
+import { notFound } from "next/navigation";
 import GenericToolPage from "@/components/tools/GenericToolPage";
-import { torquePowerTool } from "@/tools/registry";
+import { getToolById } from "@/tools/registry";
 
 export default function TorquePowerPage() {
-  return <GenericToolPage tool={torquePowerTool} />;
+  const toolId = "torque-power";
+  if (!getToolById(toolId)) {
+    notFound();
+  }
+  return <GenericToolPage toolId={toolId} />;
 }

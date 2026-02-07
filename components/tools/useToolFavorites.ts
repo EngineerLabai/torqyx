@@ -7,7 +7,7 @@ export default function useToolFavorites() {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
-    setFavorites(readFavorites());
+    Promise.resolve().then(() => setFavorites(readFavorites()));
   }, []);
 
   useEffect(() => {
