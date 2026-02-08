@@ -1,4 +1,4 @@
-﻿export type ShaftTorsionInput = {
+export type ShaftTorsionInput = {
   torque: string;
   diameter: string;
   length: string;

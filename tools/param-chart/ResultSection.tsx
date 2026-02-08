@@ -1,13 +1,16 @@
+"use client";
+
 import ExplanationPanel from "@/components/tools/ExplanationPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatNumberFixed } from "@/utils/number-format";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { ChartResult } from "./types";
 
-const formatNumber = (value: number | null, digits = 3) => {
-  if (value === null || Number.isNaN(value)) return "-";
-  return value.toFixed(digits);
-};
+const formatNumber = (value: number | null, digits = 3, locale: "tr" | "en") =>
+  formatNumberFixed(value, locale, digits);
 
 export default function ResultSection({ result }: ToolResultProps<ChartResult>) {
+  const { locale } = useLocale();
   const preview = result.points.slice(0, 6);
 
   return (
@@ -48,7 +51,7 @@ export default function ResultSection({ result }: ToolResultProps<ChartResult>) 
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
             3. Sonuç ne anlama geliyor?
           </p>
-          <p className="mt-1 text-lg font-semibold text-slate-900">{formatNumber(result.maxForce)} N</p>
+          <p className="mt-1 text-lg font-semibold text-slate-900">{formatNumber(result.maxForce, 3, locale)} N</p>
           <p className="text-[11px] text-slate-500">
             Bu, seçilen maksimum yer değiştirmedeki kuvvettir.
           </p>
@@ -83,8 +86,8 @@ export default function ResultSection({ result }: ToolResultProps<ChartResult>) 
               <tbody>
                 {preview.map((point) => (
                   <tr key={`${point.x}-${point.y}`} className="border-t border-slate-100">
-                    <td className="py-1 font-mono text-slate-700">{formatNumber(point.x, 2)}</td>
-                    <td className="py-1 font-mono text-slate-700">{formatNumber(point.y, 2)}</td>
+                    <td className="py-1 font-mono text-slate-700">{formatNumber(point.x, 2, locale)}</td>
+                    <td className="py-1 font-mono text-slate-700">{formatNumber(point.y, 2, locale)}</td>
                   </tr>
                 ))}
               </tbody>

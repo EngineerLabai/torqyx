@@ -1,9 +1,14 @@
-﻿import type { ToolVisualizationProps } from "@/tools/_shared/types";
+"use client";
+
+import type { ToolVisualizationProps } from "@/tools/_shared/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatNumberFixed } from "@/utils/number-format";
 import type { ShaftTorsionInput, ShaftTorsionResult } from "./types";
 
 const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
 
 export default function VisualizationSection({ input }: ToolVisualizationProps<ShaftTorsionInput, ShaftTorsionResult>) {
+  const { locale } = useLocale();
   const diameter = toNumber(input.diameter);
   const polarMoment = Number.isFinite(diameter) && diameter > 0
     ? (Math.PI * Math.pow(diameter, 4)) / 32
@@ -19,7 +24,7 @@ export default function VisualizationSection({ input }: ToolVisualizationProps<S
         <div className="flex items-center justify-between">
           <span className="text-slate-500">J (mm4)</span>
           <span className="font-mono text-[12px] font-semibold text-slate-900">
-            {polarMoment ? polarMoment.toFixed(0) : "-"}
+            {formatNumberFixed(polarMoment, locale, 0)}
           </span>
         </div>
       </div>

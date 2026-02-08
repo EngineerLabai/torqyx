@@ -1,4 +1,4 @@
-﻿export type HydraulicCylinderInput = {
+export type HydraulicCylinderInput = {
   pressure: string;
   bore: string;
   rod: string;

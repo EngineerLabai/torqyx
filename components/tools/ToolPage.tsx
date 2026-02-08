@@ -26,7 +26,11 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const copy = messages.components.toolActions;
+  const toolPageCopy = messages.components.toolPage;
   const validationCopy = messages.components.toolValidation;
+  const toolCopy = messages.tools?.[tool.id];
+  const toolTitle = toolCopy?.title ?? tool.title;
+  const toolDescription = toolCopy?.description ?? tool.description;
   const [input, setInput] = useState<TInput>(tool.initialInput);
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -68,14 +72,23 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
     }
   }, [searchParams, tool.id, loadedHistoryId]);
 
-  const schema = useMemo(() => {
+  const resolvedInputMeta = useMemo(() => {
     if (!tool.inputMeta) return null;
+    const inputCopy = toolCopy?.inputMeta;
+    return tool.inputMeta.map((meta) => ({
+      ...meta,
+      label: inputCopy?.[meta.key] ?? meta.label,
+    }));
+  }, [tool.inputMeta, toolCopy?.inputMeta]);
+
+  const schema = useMemo(() => {
+    if (!resolvedInputMeta) return null;
     const shape: Record<string, z.ZodTypeAny> = {};
-    tool.inputMeta.forEach((meta) => {
+    resolvedInputMeta.forEach((meta) => {
       shape[meta.key] = buildToolFieldSchema(meta, validationCopy);
     });
     return z.object(shape);
-  }, [tool.inputMeta, validationCopy]);
+  }, [resolvedInputMeta, validationCopy]);
 
   const validation = useMemo(() => {
     if (!schema) return { success: true, data: input } as const;
@@ -115,7 +128,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
     }
 
     calculateTimeout.current = window.setTimeout(() => {
-      trackEvent("calculate_click", { tool_id: tool.id, tool_title: tool.title });
+      trackEvent("calculate_click", { tool_id: tool.id, tool_title: toolTitle });
     }, 600);
 
     return () => {
@@ -123,7 +136,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
         window.clearTimeout(calculateTimeout.current);
       }
     };
-  }, [input, tool.id, tool.title]);
+  }, [input, tool.id, toolTitle]);
 
   const encodedState = useMemo(() => encodeToolState(input as Record<string, unknown>), [input]);
   const shareUrl = useMemo(() => {
@@ -141,6 +154,14 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
   const ResultSection = tool.ResultSection;
   const VisualizationSection = tool.VisualizationSection;
   const CompareVisualizationSection = tool.CompareVisualizationSection;
+  const resolvedCompareMetrics = useMemo(() => {
+    if (!tool.compareMetrics) return undefined;
+    const metricCopy = toolCopy?.compareMetrics;
+    return tool.compareMetrics.map((metric) => ({
+      ...metric,
+      label: metricCopy?.[metric.key] ?? metric.label,
+    }));
+  }, [tool.compareMetrics, toolCopy?.compareMetrics]);
 
   return (
     <PageShell>
@@ -148,10 +169,10 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">
             <p className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-              Hesaplayici
+              {toolPageCopy.badge}
             </p>
-            <h1 className="text-lg font-semibold text-slate-900">{tool.title}</h1>
-            <p className="text-sm text-slate-600">{tool.description}</p>
+            <h1 className="text-lg font-semibold text-slate-900">{toolTitle}</h1>
+            <p className="text-sm text-slate-600">{toolDescription}</p>
           </div>
         </section>
 
@@ -188,13 +209,13 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
           baseInput={input}
           calculate={tool.calculate}
           InputSection={InputSection}
-          compareMetrics={tool.compareMetrics}
+          compareMetrics={resolvedCompareMetrics}
           CompareVisualizationSection={CompareVisualizationSection}
         />
 
         {result ? (
           <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <ToolHistory toolId={tool.id} toolTitle={tool.title} input={input} result={result} />
+            <ToolHistory toolId={tool.id} toolTitle={toolTitle} input={input} result={result} />
           </section>
         ) : null}
       </ToolDocTabs>

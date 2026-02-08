@@ -1,4 +1,4 @@
-﻿import type { Locale } from "@/utils/locale";
+import type { Locale } from "@/utils/locale";
 
 export const toolCategories = ["Mechanical", "Automotive", "General Engineering"] as const;
 export type ToolCategory = (typeof toolCategories)[number];

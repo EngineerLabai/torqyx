@@ -1,4 +1,4 @@
-﻿export type FilletWeldInput = {
+export type FilletWeldInput = {
   load: string;
   length: string;
   allowable: string;

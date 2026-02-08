@@ -1,6 +1,8 @@
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
 type Bullet = { title: string; points: string[] };
 
@@ -74,7 +76,7 @@ const sections: Section[] = [
       {
         title: "2.6 Zincir ve Kremayer Dişliler",
         points: [
-          "Kremayer: lineer hız = dairesel hız · π·m; backlash ve hizalama ömrü belirler.",
+          "Kremayer: lineer hız = dairesel hız · π·m; backlash ve hızalama ömrü belirler.",
           "Zincir: hatve seçimi, uzama ve yağlama planı; sproket hatve toleransı kritik.",
           "Hizalama ve germe ayarı hem ömür hem gürültü için ana parametre.",
         ],
@@ -143,7 +145,7 @@ const sections: Section[] = [
         points: [
           "Dişli temas oranı artırma teknikleri",
           "Profil modifikasyonları: tip relief, lead correction, crowning",
-          "Üretim sapmalarının NVH etkisi; tolerans ve hizalama kontrolleri",
+          "Üretim sapmalarının NVH etkisi; tolerans ve hızalama kontrolleri",
         ],
       },
     ],
@@ -468,7 +470,7 @@ const sections: Section[] = [
         title: "9.4 Tooth Tip Fracture (Diş Ucu Kırığı)",
         points: [
           "Yanlış temas çizgisi veya aşırı backlash → diş ucu darbeleri.",
-          "Önleme: doğru backlash ayarı, profil modifikasyonu, hizalama kontrolü.",
+          "Önleme: doğru backlash ayarı, profil modifikasyonu, hızalama kontrolü.",
           "Foto notu: diş ucunda lokal kopma ve kırık yüzeyi.",
         ],
       },
@@ -483,7 +485,7 @@ const sections: Section[] = [
       {
         title: "9.6 Hizasızlık Kaynaklı Arızalar",
         points: [
-          "Yanlış hizalama → kenar yüklenmesi, lokal pitting/scuffing.",
+          "Yanlış hızalama → kenar yüklenmesi, lokal pitting/scuffing.",
           "Önleme: şim/mesnet ayarı, lead correction/crowning ile yük dağılımı düzeltme.",
           "Foto notu: sadece bir kenarda yoğun hasar veya renk değişimi.",
         ],
@@ -604,10 +606,12 @@ const sections: Section[] = [
   },
 ];
 
-export default function GearDesignPage() {
+export default async function GearDesignPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("gear-design", locale);
   return (
     <PageShell>
-      <ToolDocTabs slug="gear-design">
+      <ToolDocTabs slug="gear-design" initialDocs={initialDocs}>
       <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_24%)]" />
         <div className="relative space-y-3">

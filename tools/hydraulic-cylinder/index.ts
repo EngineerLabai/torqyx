@@ -1,4 +1,4 @@
-﻿import type { ToolCompareMetric, ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
+import type { ToolCompareMetric, ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
 import type { HydraulicCylinderInput, HydraulicCylinderResult } from "./types";
 import { calculateHydraulicCylinder, DEFAULT_INPUT } from "./logic";
 import InputSection from "./InputSection";

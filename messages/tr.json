@@ -44,6 +44,7 @@
                         "readOnlyFallback":  "Şu an anonim moddasın - içerikleri okuyabilirsin.",
                         "errorTitle":  "Giriş kontrolünde hata",
                         "errorDescription":  "Kimlik doğrulama yanıt vermedi. Lütfen tekrar dene.",
+                        "loginHint":  "Google ile güvenli giriş yaparak favori ve kayıtlı hesaplara ulaşın.",
                         "retry":  "Tekrar dene"
                     },
     "home":  {
@@ -233,7 +234,7 @@
                                        "basic":  "Temel seviye",
                                        "advanced":  "İleri seviye",
                                        "premiumBadge":  "Premium (bekleme listesi)",
-                                       "openTool":  "Aracı Aç",
+                                       "openTool":  "Araçı Aç",
                                        "comingSoon":  "Yakında",
                                        "footerActive":  "Etkileşimli form ile çalışılabilir (taslak).",
                                        "footerPlanned":  "Şablon ve form tasarımı üzerinde çalışılıyor."
@@ -245,7 +246,7 @@
                                        "focus":  "Odak",
                                        "active":  "Aktif (Beta)",
                                        "planned":  "Planlandı",
-                                       "openTool":  "Aracı aç",
+                                       "openTool":  "Araçı aç",
                                        "comingSoon":  "Yakında",
                                        "footerActive":  "Etkileşimli kart hazır.",
                                        "footerPlanned":  "Kart hazırlanıyor."
@@ -764,13 +765,13 @@
                                                             "restoreNotice":  "Paylasim linkinden oturum geri yuklendi."
                                                         },
                                             "variableTable":  {
-                                                                  "title":  "Degiskenler",
-                                                                  "add":  "Degisken ekle",
+                                                                  "title":  "Değişkenler",
+                                                                  "add":  "Değişken ekle",
                                                                   "symbol":  "Sembol",
-                                                                  "name":  "Isim",
-                                                                  "defaultName":  "Degisken",
+                                                                  "name":  "İsim",
+                                                                  "defaultName":  "Değişken",
                                                                   "description":  "Açıklama",
-                                                                  "value":  "Deger",
+                                                                  "value":  "Değer",
                                                                   "unit":  "Birim",
                                                                   "unitPlaceholder":  "orn. N m",
                                                                   "min":  "Min",
@@ -782,9 +783,9 @@
                                                                   "remove":  "Sil"
                                                               },
                                             "formulaEditor":  {
-                                                                 "title":  "Formul",
-                                                                 "description":  "Yukaridaki sembolleri kullan. Ornek: P = T * w",
-                                                                 "placeholder":  "orn. P = T * w"
+                                                                 "title":  "Formül",
+                                                                 "description":  "Yukarıdaki sembolleri kullan. örnek: P = T * w",
+                                                                 "placeholder":  "örn. P = T * w"
                                                              },
                                             "resultPanel":  {
                                                                 "title":  "Sonuç",
@@ -944,7 +945,7 @@
                                       },
                        "toolsError":  {
                                           "title":  "Beklenmeyen bir hata oluştu",
-                                          "description":  "Bu aracı şu anda yükleyemedik. Sayfayı yenileyin veya araç listesine dönün.",
+                                          "description":  "Bu araçı şu anda yükleyemedik. Sayfayı yenileyin veya araç listesine dönün.",
                                           "refresh":  "Sayfayı yenile",
                                           "back":  "Araçlara dön"
                                       },
@@ -1003,7 +1004,9 @@
                                              },
                        "requestToolForm":  {
                                                "title":  "Araç iste",
-                                               "description":  "Problemi ve input/output yapısını yazarak yeni aracı hızla tarif edebilirsin.",
+                                               "description":  "Problemi ve input/output yapısını yazarak yeni araçı hızla tarif edebilirsin.",
+                                               "issueTitle":  "Araç isteği",
+                                               "issueTitlePrefix":  "Araç isteği",
                                                "back":  "Hesaplayıcı Kütüphanesi",
                                                "submit":  "İstek Gönder",
                                                "github":  "GitHub Issue Oluştur",
@@ -1022,6 +1025,204 @@
                                                               "examples":  "Örnek değerler"
                                                           }
                                            },
+                       "exportPanel":  {
+                                           "previewAlt":  "Önizleme",
+                                           "previewFallback":  "Önizleme",
+                                           "downloadStarted":  "İndirme başladı.",
+                                           "downloadFailed":  "İndirme başarısız. Tekrar deneyin.",
+                                           "downloadError":  "İndirme sırasında hata oluştu.",
+                                           "pngDownloading":  "PNG indiriliyor.",
+                                           "svgDownloading":  "SVG indiriliyor.",
+                                           "pdfDownloading":  "PDF indiriliyor."
+                                       },
+                       "explanationPanel":  {
+                                                 "title":  "Açıklama Modu (ileri seviye)",
+                                                 "formulasTitle":  "Kullanılan Formüller",
+                                                 "variablesTitle":  "Değişkenler",
+                                                 "notesTitle":  "Kullanım Notları"
+                                             },
+                       "toolPage":  {
+                                        "badge":  "Hesaplayıcı"
+                                    },
+                       "confidence":  {
+                                          "title":  "Güven Özeti",
+                                          "version":  "Sürüm",
+                                          "updated":  "Son güncelleme",
+                                          "assumptions":  "Varsayımlar",
+                                          "references":  "Referanslar"
+                                      },
+                       "qaBoard":  {
+                                       "badge":  "Soru-cevap",
+                                       "sampleBadge":  "Örnek",
+                                       "title":  "Soru-cevap alanı",
+                                       "description":  "Soru sor, kısa yanıtlar al ve deneyim paylaş.",
+                                       "answersTitle":  "Yanıtlar",
+                                       "replyLabel":  "Senin yanıtın",
+                                       "replyPlaceholder":  "Tecrübeni, hesabını veya önerini yaz...",
+                                       "replyButton":  "Yanıt paylaş",
+                                       "topicsTitle":  "Aktif başlıklar",
+                                       "topicCountLabel":  "{count} başlık",
+                                       "replyCountLabel":  "{count} yanıt",
+                                       "authorLabel":  "Yazan",
+                                       "topics":  [
+                                                      {
+                                                          "slug":  "m12-civata-torku",
+                                                          "title":  "M12 10.9 cıvata torku ve yağlama",
+                                                          "author":  "Ayşe Yılmaz",
+                                                          "category":  "Tork / Bağlantı",
+                                                          "details":  "Tablo değerleriyle gerçek sıkma arasında fark var. Moment anahtarı kalibrasyonu ve yağlama seçimi torku nasıl etkiler?",
+                                                          "updated":  "2 saat önce",
+                                                          "tags":  [
+                                                                       "tork",
+                                                                       "cıvata",
+                                                                       "yağlama"
+                                                                   ],
+                                                          "replies":  4
+                                                      },
+                                                      {
+                                                          "slug":  "kaynak-sonrasi-sehim",
+                                                          "title":  "S235 plakada kaynak sonrası sehim",
+                                                          "author":  "Mehmet A.",
+                                                          "category":  "Kaynak / Yapı",
+                                                          "details":  "300x500x10 mm plakayı köşe kaynak ile birleştirdikten sonra sehim oluştu; fikstürleme ve ön ısıtma önerisi?",
+                                                          "updated":  "5 saat önce",
+                                                          "tags":  [
+                                                                       "kaynak",
+                                                                       "sehim",
+                                                                       "fikstür"
+                                                                   ],
+                                                          "replies":  3
+                                                      },
+                                                      {
+                                                          "slug":  "h8d9-yuzey-puruzluluk",
+                                                          "title":  "H8/d9 geçme için yüzey pürüzlülüğü",
+                                                          "author":  "Selin K.",
+                                                          "category":  "Tolerans / GD&T",
+                                                          "details":  "Ø25 delik ve mil için H8/d9 seçtim. Preslemede gevşeme olmaması için yüzey pürüzlülüğü ne olmalı?",
+                                                          "updated":  "1 gün önce",
+                                                          "tags":  [
+                                                                       "tolerans",
+                                                                       "geçme",
+                                                                       "yüzey"
+                                                                   ],
+                                                          "replies":  1
+                                                      }
+                                                  ],
+                                       "answers":  {
+                                                       "m12-civata-torku":  [
+                                                                                {
+                                                                                    "user":  "Kadir",
+                                                                                    "text":  "DIN tablosu yağsız değer verir, yağlı kullanıyorsan %20-25 düş. Moment anahtarını yılda bir kalibre ettir.",
+                                                                                    "time":  "1s önce"
+                                                                                },
+                                                                                {
+                                                                                    "user":  "Elif",
+                                                                                    "text":  "M12 10.9 için tipik ~90 Nm (kuru). Yağlıysa 65-70 Nm aralığı yeterli. Yüzeyleri temiz tut.",
+                                                                                    "time":  "12s önce"
+                                                                                },
+                                                                                {
+                                                                                    "user":  "Selim",
+                                                                                    "text":  "Kaymalı rondela kullanıyorsan sürtünme düşer; torku biraz azalt. Turn-of-nut ile ön yükü kontrol edebilirsin.",
+                                                                                    "time":  "25s önce"
+                                                                                }
+                                                                            ],
+                                                       "kaynak-sonrasi-sehim":  [
+                                                                                   {
+                                                                                       "user":  "Hakan",
+                                                                                       "text":  "Simetrik puntolar ve karşılıklı kaynat, sonra tamamını doldur. Ön ısı 120-150°C ise yarar.",
+                                                                                       "time":  "10dk önce"
+                                                                                   },
+                                                                                   {
+                                                                                       "user":  "Derya",
+                                                                                       "text":  "Sehim için ters kamber verip kaynatmayı dene. Fikstürle baskı altına almak da işe yarar.",
+                                                                                       "time":  "35dk önce"
+                                                                                   }
+                                                                               ],
+                                                       "h8d9-yuzey-puruzluluk":  [
+                                                                                    {
+                                                                                        "user":  "Elif",
+                                                                                        "text":  "Ra 1.6-3.2 µm aralığı genelde yeterli. Temizlik ve çapaksızlık kritik.",
+                                                                                        "time":  "2s önce"
+                                                                                    }
+                                                                                ]
+                                                   }
+                                   },
+                       "unitConverter":  {
+                                             "input":  {
+                                                           "title":  "Hangi dönüşümü yapmak istiyorsun?",
+                                                           "description":  "Önce kategoriyi seç, sonra kaynak ve hedef birimi belirle. Değeri girdiğinde sonuç otomatik güncellenir.",
+                                                           "categoryLabel":  "Hangi kategori üzerinde çalışıyorsun?",
+                                                           "fromLabel":  "Hangi birimden başlıyorsun?",
+                                                           "toLabel":  "Hangi birime dönüşecek?",
+                                                           "valueLabel":  "Kaç birim?",
+                                                           "valuePlaceholder":  "Örn. 100",
+                                                           "swapLabel":  "Değiştir",
+                                                           "categories":  {
+                                                                              "length":  "Uzunluk",
+                                                                              "force":  "Kuvvet",
+                                                                              "pressure":  "Basınç",
+                                                                              "energy":  "Enerji"
+                                                                          }
+                                                       },
+                                             "result":  {
+                                                            "title":  "Sonuç Akışı",
+                                                            "description":  "Sonucu, ne yaptık / nasıl hesapladık / ne anlama geliyor şeklinde aşama aşama görürsün.",
+                                                            "step1Title":  "1. Ne yaptık?",
+                                                            "step1Body":  "Girdiğin değeri önce temel birime çevirdik, sonra hedef birime dönüştürdük.",
+                                                            "step2Title":  "2. Nasıl hesapladık?",
+                                                            "formulaLabel":  "Formül",
+                                                            "step3Title":  "3. Sonuç ne anlama geliyor?",
+                                                            "step3Body":  "Bu değer, girdiğin miktarın hedef birimdeki karşılığıdır. Temel birim: {baseValue} {baseUnit}"
+                                                        },
+                                             "visual":  {
+                                                            "title":  "Görsel Akış",
+                                                            "description":  "Dönüşüm akışı tek bakışta görünsün diye değerleri yan yana listeler.",
+                                                            "downloadLabel":  "Görseli İndir",
+                                                            "previewAlt":  "Dönüşüm önizleme",
+                                                            "helperText":  "PNG net, SVG ise vektör çıktı için uygundur.",
+                                                            "downloadPng":  "donusum.png",
+                                                            "downloadSvg":  "donusum.svg",
+                                                            "inputLabel":  "Giriş",
+                                                            "baseLabel":  "Temel",
+                                                            "outputLabel":  "Çıkış",
+                                                            "diagramLabel":  "Dönüşüm akışı"
+                                                        },
+                                             "errors":  {
+                                                            "missingUnits":  "Seçili birimler bulunamadı.",
+                                                            "invalidNumber":  "Lütfen geçerli bir değer girin."
+                                                        },
+                                             "steps":  {
+                                                           "input":  "Giriş: {value} {unit}",
+                                                           "toBase":  "Temel birime çevir: {input} * {factor} = {value} {unit}",
+                                                           "toOutput":  "Çıkış birimine çevir: {base} / {factor} = {value} {unit}"
+                                                       },
+                                             "explanation":  {
+                                                                 "title":  "Formül ve değişkenler",
+                                                                 "variables":  [
+                                                                                   {
+                                                                                       "symbol":  "V_in",
+                                                                                       "description":  "Girdiğin değer."
+                                                                                   },
+                                                                                   {
+                                                                                       "symbol":  "V_out",
+                                                                                       "description":  "Hedef birimdeki sonuç."
+                                                                                   },
+                                                                                   {
+                                                                                       "symbol":  "factor_from",
+                                                                                       "description":  "Kaynak birimin temel birime çevrim katsayısı."
+                                                                                   },
+                                                                                   {
+                                                                                       "symbol":  "factor_to",
+                                                                                       "description":  "Hedef birimin temel birime çevrim katsayısı."
+                                                                                   }
+                                                                               ],
+                                                                 "notes":  [
+                                                                               "Dönüşümler seçilen kategoriye ait temel birim üzerinden yapılır.",
+                                                                               "Raporlama ve hızlı kontrol için kullanılabilir.",
+                                                                               "Yuvarlama görünüm içindir; ham değerler hesaplamada kullanılır."
+                                                                           ]
+                                                             }
+                                         },
                        "toolFavoriteButton":  {
                                                   "addLabel":  "Favoriye Ekle",
                                                   "removeLabel":  "Favorilerde",

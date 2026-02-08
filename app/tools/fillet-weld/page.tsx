@@ -1,8 +1,9 @@
-﻿"use client";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
-import ToolPage from "@/components/tools/ToolPage";
-import { filletWeldTool } from "@/tools/fillet-weld";
-
-export default function FilletWeldPage() {
-  return <ToolPage tool={filletWeldTool} />;
+export default async function FilletWeldPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("fillet-weld", locale);
+  return <ToolPageClient toolId="fillet-weld" initialDocs={initialDocs} />;
 }

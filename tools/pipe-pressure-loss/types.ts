@@ -1,4 +1,4 @@
-﻿export type PipePressureLossInput = {
+export type PipePressureLossInput = {
   rho: string;
   mu: string;
   flow: string;

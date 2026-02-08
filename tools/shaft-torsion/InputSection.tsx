@@ -1,7 +1,11 @@
-﻿import type { ToolInputProps } from "@/tools/_shared/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
+import type { ToolInputProps } from "@/tools/_shared/types";
 import type { ShaftTorsionInput } from "./types";
 
 export default function InputSection({ input, onChange, errors }: ToolInputProps<ShaftTorsionInput>) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).tools["shaft-torsion"].input;
   const handleChange = <K extends keyof ShaftTorsionInput>(key: K, value: ShaftTorsionInput[K]) => {
     onChange({ ...input, [key]: value });
   };
@@ -9,15 +13,13 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Mil burulma hesabını yap</h2>
-        <p className="text-xs text-slate-500">
-          Tork, mil çapı ve uzunluğu ile burulma gerilmesi ve dönme açısını görürsün.
-        </p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       <div className="grid gap-3 text-xs sm:grid-cols-2">
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Tork (N·m)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.torqueLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -29,7 +31,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Mil çapı d (mm)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.diameterLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -41,7 +43,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Uzunluk L (mm)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.lengthLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -53,7 +55,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Kayma modülü G (GPa)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.shearModulusLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -65,7 +67,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">İzin verilen τ (MPa) opsiyonel</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.allowableShearLabel}</label>
           <input
             type="number"
             inputMode="decimal"

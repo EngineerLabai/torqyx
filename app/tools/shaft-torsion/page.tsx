@@ -1,8 +1,9 @@
-﻿"use client";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
-import ToolPage from "@/components/tools/ToolPage";
-import { shaftTorsionTool } from "@/tools/shaft-torsion";
-
-export default function ShaftTorsionPage() {
-  return <ToolPage tool={shaftTorsionTool} />;
+export default async function ShaftTorsionPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("shaft-torsion", locale);
+  return <ToolPageClient toolId="shaft-torsion" initialDocs={initialDocs} />;
 }

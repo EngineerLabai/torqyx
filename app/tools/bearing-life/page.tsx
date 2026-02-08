@@ -1,8 +1,9 @@
-﻿"use client";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
-import ToolPage from "@/components/tools/ToolPage";
-import { bearingLifeTool } from "@/tools/bearing-life";
-
-export default function BearingLifePage() {
-  return <ToolPage tool={bearingLifeTool} />;
+export default async function BearingLifePage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("bearing-life", locale);
+  return <ToolPageClient toolId="bearing-life" initialDocs={initialDocs} />;
 }

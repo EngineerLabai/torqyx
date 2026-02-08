@@ -1,4 +1,4 @@
-﻿import type { ShaftTorsionInput, ShaftTorsionResult } from "./types";
+import type { ShaftTorsionInput, ShaftTorsionResult } from "./types";
 
 export const DEFAULT_INPUT: ShaftTorsionInput = {
   torque: "250",

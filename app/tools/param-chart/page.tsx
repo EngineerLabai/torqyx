@@ -1,8 +1,9 @@
-"use client";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
-import ToolPage from "@/components/tools/ToolPage";
-import { paramChartTool } from "@/tools/param-chart";
-
-export default function ParamChartPage() {
-  return <ToolPage tool={paramChartTool} />;
+export default async function ParamChartPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("param-chart", locale);
+  return <ToolPageClient toolId="param-chart" initialDocs={initialDocs} />;
 }

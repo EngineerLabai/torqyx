@@ -34,7 +34,7 @@ export const paramChartTool: ToolDefinition<ChartInput, ChartResult> = {
     },
     {
       key: "points",
-      label: "Nokta sayisi",
+      label: "Nokta sayısı",
       getValue: (result) => result.points.length,
     },
   ] satisfies ToolCompareMetric<ChartInput, ChartResult>[],

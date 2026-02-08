@@ -10,10 +10,12 @@ export type UnitInput = {
 export type UnitResult = {
   output: number | null;
   baseValue: number | null;
-  steps: string[];
+  inputValue: number | null;
+  fromFactor: number | null;
+  toFactor: number | null;
   formula: string;
   baseUnitLabel: string;
   fromLabel: string;
   toLabel: string;
-  error?: string;
+  errorKey?: "missingUnits" | "invalidNumber";
 };

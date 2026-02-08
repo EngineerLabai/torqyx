@@ -31,7 +31,7 @@ export function calculateHeat(input: HeatInput): HeatResult {
       resistance: null,
       steps: [],
       formula: "Q = k * A * dT / L",
-      error: "L (kalinlik) pozitif olmali.",
+      error: "L (kalınlık) pozitif olmalı.",
     };
   }
 

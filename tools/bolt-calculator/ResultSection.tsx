@@ -1,17 +1,22 @@
+"use client";
+
 import ExplanationPanel from "@/components/tools/ExplanationPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatNumberFixed } from "@/utils/number-format";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { BoltResult } from "./types";
 
-const formatValue = (value: number | null, decimals: number, unit?: string) => {
+const formatValue = (value: number | null, decimals: number, locale: "tr" | "en", unit?: string) => {
   if (value === null || Number.isNaN(value)) {
     return "-";
   }
 
-  const formatted = value.toFixed(decimals);
+  const formatted = formatNumberFixed(value, locale, decimals);
   return unit ? `${formatted} ${unit}` : formatted;
 };
 
 export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
+  const { locale } = useLocale();
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
@@ -29,11 +34,11 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
       )}
 
       <div className="space-y-2 text-xs">
-        <ResultRow label="Gerilme alanı As" value={formatValue(result.As, 1, "mm^2")} />
-        <ResultRow label="Ön yük Fv" value={formatValue(result.Fv, 2, "kN")} />
-        <ResultRow label="Önerilen tork T" value={formatValue(result.torque, 1, "Nm")} />
-        <ResultRow label="Çekme gerilmesi sigma" value={formatValue(result.sigma, 0, "MPa")} />
-        <ResultRow label="Güvenlik katsayısı S" value={formatValue(result.safety, 2)} />
+        <ResultRow label="Gerilme alanı As" value={formatValue(result.As, 1, locale, "mm^2")} />
+        <ResultRow label="Ön yük Fv" value={formatValue(result.Fv, 2, locale, "kN")} />
+        <ResultRow label="Önerilen tork T" value={formatValue(result.torque, 1, locale, "Nm")} />
+        <ResultRow label="Çekme gerilmesi sigma" value={formatValue(result.sigma, 0, locale, "MPa")} />
+        <ResultRow label="Güvenlik katsayısı S" value={formatValue(result.safety, 2, locale)} />
       </div>
 
       <p className="text-[11px] text-slate-500">

@@ -5,21 +5,26 @@ import type { ToolVisualizationProps } from "@/tools/_shared/types";
 import type { UnitInput, UnitResult } from "./types";
 import { CATEGORY_MAP } from "./logic";
 import ExportPanel from "@/components/tools/ExportPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 import { exportSvg, exportSvgToPng, getSvgPreview } from "@/utils/export";
+import { formatNumber, formatNumberFixed } from "@/utils/number-format";
 
-const formatNumber = (value: number | null) => {
+const formatAdaptiveNumber = (value: number | null, locale: "tr" | "en") => {
   if (value === null || Number.isNaN(value)) return "-";
   const abs = Math.abs(value);
-  if (abs >= 1000) return value.toFixed(2);
-  if (abs >= 1) return value.toFixed(4);
-  return value.toExponential(3);
+  if (abs >= 1000) return formatNumberFixed(value, locale, 2);
+  if (abs >= 1) return formatNumberFixed(value, locale, 4);
+  return formatNumber(value, locale, { notation: "scientific", maximumFractionDigits: 3 });
 };
 
 export default function VisualizationSection({ input, result }: ToolVisualizationProps<UnitInput, UnitResult>) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).components.unitConverter;
   const category = CATEGORY_MAP[input.category];
   const inputValue = input.value || "-";
-  const baseValue = formatNumber(result.baseValue);
-  const outputValue = formatNumber(result.output);
+  const baseValue = formatAdaptiveNumber(result.baseValue, locale);
+  const outputValue = formatAdaptiveNumber(result.output, locale);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");
 
@@ -30,33 +35,37 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Görsel Akış</h2>
-        <p className="text-xs text-slate-500">
-          Dönüşüm akışı tek bakışta görünsün diye değerleri yan yana listeler.
-        </p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.visual.title}</h2>
+        <p className="text-xs text-slate-500">{copy.visual.description}</p>
       </div>
 
       <ExportPanel
-        label="Görseli İndir"
+        label={copy.visual.downloadLabel}
         previewUrl={previewUrl}
-        previewAlt="Dönüşüm önizleme"
-        helperText="PNG net, SVG ise vektör çıktı için uygundur."
-        onPng={() => exportSvgToPng(svgRef.current, { filename: "dönüşüm.png" })}
-        onSvg={() => exportSvg(svgRef.current, "dönüşüm.svg")}
+        previewAlt={copy.visual.previewAlt}
+        helperText={copy.visual.helperText}
+        onPng={() => exportSvgToPng(svgRef.current, { filename: copy.visual.downloadPng })}
+        onSvg={() => exportSvg(svgRef.current, copy.visual.downloadSvg)}
       />
 
       <div className="grid gap-4 sm:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <div className="grid gap-3 sm:grid-cols-1">
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-            <p className="text-[11px] font-medium text-slate-500">Giriş ({input.fromUnit})</p>
+            <p className="text-[11px] font-medium text-slate-500">
+              {copy.visual.inputLabel} ({input.fromUnit})
+            </p>
             <p className="mt-1 text-sm font-semibold text-slate-900">{inputValue}</p>
           </div>
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-            <p className="text-[11px] font-medium text-slate-500">Temel ({category.baseUnit})</p>
+            <p className="text-[11px] font-medium text-slate-500">
+              {copy.visual.baseLabel} ({category.baseUnit})
+            </p>
             <p className="mt-1 text-sm font-semibold text-slate-900">{baseValue}</p>
           </div>
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-            <p className="text-[11px] font-medium text-slate-500">Çıkış ({input.toUnit})</p>
+            <p className="text-[11px] font-medium text-slate-500">
+              {copy.visual.outputLabel} ({input.toUnit})
+            </p>
             <p className="mt-1 text-sm font-semibold text-slate-900">{outputValue}</p>
           </div>
         </div>
@@ -67,7 +76,7 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
             viewBox="0 0 280 160"
             className="h-auto w-full"
             role="img"
-            aria-label="Conversion flow"
+            aria-label={copy.visual.diagramLabel}
           >
             <circle cx="50" cy="80" r="28" fill="#e2e8f0" stroke="#94a3b8" />
             <circle cx="140" cy="80" r="28" fill="#e2e8f0" stroke="#94a3b8" />

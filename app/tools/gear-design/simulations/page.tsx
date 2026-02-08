@@ -1,5 +1,7 @@
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const simulations = [
   {
@@ -29,10 +31,12 @@ const simulations = [
   },
 ];
 
-export default function GearSimulationsPage() {
+export default async function GearSimulationsPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("gear-design/simulations", locale);
   return (
     <PageShell>
-      <ToolDocTabs slug="gear-design/simulations">
+      <ToolDocTabs slug="gear-design/simulations" initialDocs={initialDocs}>
       <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_24%)]" />
         <div className="relative space-y-3">

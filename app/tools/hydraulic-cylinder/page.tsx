@@ -1,8 +1,9 @@
-﻿"use client";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
-import ToolPage from "@/components/tools/ToolPage";
-import { hydraulicCylinderTool } from "@/tools/hydraulic-cylinder";
-
-export default function HydraulicCylinderPage() {
-  return <ToolPage tool={hydraulicCylinderTool} />;
+export default async function HydraulicCylinderPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("hydraulic-cylinder", locale);
+  return <ToolPageClient toolId="hydraulic-cylinder" initialDocs={initialDocs} />;
 }

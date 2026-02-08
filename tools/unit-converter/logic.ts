@@ -35,7 +35,7 @@ export const CATEGORY_MAP: Record<UnitCategory, CategoryDefinition> = {
     ],
   },
   pressure: {
-    label: "Basinc",
+    label: "Basınç",
     baseUnit: "Pa",
     units: [
       { id: "Pa", label: "Pa", toBase: 1 },
@@ -79,12 +79,14 @@ export function calculateUnit(input: UnitInput): UnitResult {
     return {
       output: null,
       baseValue: null,
-      steps: [],
+      inputValue: Number.isFinite(numericValue) ? numericValue : null,
+      fromFactor: from?.toBase ?? null,
+      toFactor: to?.toBase ?? null,
       formula: "V_out = V_in * factor_from / factor_to",
       baseUnitLabel: category.baseUnit,
       fromLabel: from?.label ?? "-",
       toLabel: to?.label ?? "-",
-      error: "Secili birimler bulunamadi.",
+      errorKey: "missingUnits",
     };
   }
 
@@ -92,12 +94,14 @@ export function calculateUnit(input: UnitInput): UnitResult {
     return {
       output: null,
       baseValue: null,
-      steps: [],
+      inputValue: null,
+      fromFactor: from.toBase,
+      toFactor: to.toBase,
       formula: "V_out = V_in * factor_from / factor_to",
       baseUnitLabel: category.baseUnit,
       fromLabel: from.label,
       toLabel: to.label,
-      error: "Lutfen gecerli bir deger girin.",
+      errorKey: "invalidNumber",
     };
   }
 
@@ -105,16 +109,12 @@ export function calculateUnit(input: UnitInput): UnitResult {
   const output = baseValue / to.toBase;
 
   const formula = `V_out = V_in * ${from.toBase} / ${to.toBase}`;
-  const steps = [
-    `Giriş: ${numericValue} ${from.label}`,
-    `Temel birime çevir: ${numericValue} * ${from.toBase} = ${baseValue} ${category.baseUnit}`,
-    `Çıkış birimine çevir: ${baseValue} / ${to.toBase} = ${output} ${to.label}`,
-  ];
-
   return {
     output,
     baseValue,
-    steps,
+    inputValue: numericValue,
+    fromFactor: from.toBase,
+    toFactor: to.toBase,
     formula,
     baseUnitLabel: category.baseUnit,
     fromLabel: from.label,

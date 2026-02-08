@@ -45,11 +45,7 @@ export default function LoginPanel() {
 
   return (
     <div className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4 text-sm">
-      <p className="text-slate-600">
-        {locale === "tr"
-          ? "Google ile güvenli giriş yaparak favori ve kayıtlı hesaplara ulaşın."
-          : "Sign in with Google to access favorites and saved calculations."}
-      </p>
+      <p className="text-slate-600">{copy.loginHint}</p>
       <button
         type="button"
         onClick={loginWithGoogle}

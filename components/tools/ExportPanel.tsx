@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { trackEvent } from "@/utils/analytics";
+import { getMessages } from "@/utils/messages";
 
 type ExportPanelProps = {
   label: string;
@@ -16,12 +18,15 @@ type ExportPanelProps = {
 export default function ExportPanel({
   label,
   previewUrl,
-  previewAlt = "Onizleme",
+  previewAlt,
   helperText,
   onPng,
   onSvg,
   onPdf,
 }: ExportPanelProps) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).components.exportPanel;
+  const resolvedPreviewAlt = previewAlt ?? copy.previewAlt;
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const run = async (action?: () => Promise<boolean> | boolean, successText?: string, eventName?: "export_pdf") => {
@@ -29,15 +34,15 @@ export default function ExportPanel({
     try {
       const result = await action();
       if (result) {
-        setMessage({ type: "success", text: successText ?? "Indirme basladi." });
+        setMessage({ type: "success", text: successText ?? copy.downloadStarted });
         if (eventName) {
           trackEvent(eventName, { label });
         }
       } else {
-        setMessage({ type: "error", text: "Indirme basarisiz. Tekrar deneyin." });
+        setMessage({ type: "error", text: copy.downloadFailed });
       }
     } catch {
-      setMessage({ type: "error", text: "Indirme sirasinda hata olustu." });
+      setMessage({ type: "error", text: copy.downloadError });
     }
 
     window.setTimeout(() => setMessage(null), 2000);
@@ -48,9 +53,9 @@ export default function ExportPanel({
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex h-16 w-24 items-center justify-center rounded-lg border border-slate-200 bg-white">
           {previewUrl ? (
-            <img src={previewUrl} alt={previewAlt} className="h-full w-full object-contain" />
+            <img src={previewUrl} alt={resolvedPreviewAlt} className="h-full w-full object-contain" />
           ) : (
-            <span className="text-[10px] text-slate-400">Onizleme</span>
+            <span className="text-[10px] text-slate-400">{copy.previewFallback}</span>
           )}
         </div>
         <div className="space-y-2">
@@ -58,7 +63,7 @@ export default function ExportPanel({
             {onPng ? (
               <button
                 type="button"
-                onClick={() => run(onPng, "PNG indiriliyor.")}
+                onClick={() => run(onPng, copy.pngDownloading)}
                 className="rounded-full bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white transition hover:bg-slate-800"
               >
                 {label}
@@ -67,7 +72,7 @@ export default function ExportPanel({
             {onSvg ? (
               <button
                 type="button"
-                onClick={() => run(onSvg, "SVG indiriliyor.")}
+                onClick={() => run(onSvg, copy.svgDownloading)}
                 className="rounded-full border border-slate-200 px-3 py-1.5 text-[11px] font-semibold text-slate-600 transition hover:border-slate-400"
               >
                 SVG
@@ -76,7 +81,7 @@ export default function ExportPanel({
             {onPdf ? (
               <button
                 type="button"
-                onClick={() => run(onPdf, "PDF indiriliyor.", "export_pdf")}
+                onClick={() => run(onPdf, copy.pdfDownloading, "export_pdf")}
                 className="rounded-full border border-slate-200 px-3 py-1.5 text-[11px] font-semibold text-slate-600 transition hover:border-slate-400"
               >
                 PDF

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "predev": "tsx scripts/buildSearchIndex.ts",
-    "prebuild": "node scripts/check-assets.mjs && node scripts/validate-i18n.mjs && tsx scripts/buildSearchIndex.ts",
+    "prebuild": "node scripts/check-assets.mjs && node scripts/check-i18n.mjs && tsx scripts/buildSearchIndex.ts && node scripts/check-tool-docs.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

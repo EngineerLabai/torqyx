@@ -1,4 +1,4 @@
-﻿import type { ToolInputProps } from "@/tools/_shared/types";
+import type { ToolInputProps } from "@/tools/_shared/types";
 import type { HydraulicCylinderInput } from "./types";
 
 export default function InputSection({ input, onChange, errors }: ToolInputProps<HydraulicCylinderInput>) {

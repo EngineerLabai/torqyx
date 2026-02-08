@@ -1,9 +1,16 @@
-﻿import type { ToolVisualizationProps } from "@/tools/_shared/types";
+"use client";
+
+import type { ToolVisualizationProps } from "@/tools/_shared/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatNumberFixed } from "@/utils/number-format";
+import { getMessages } from "@/utils/messages";
 import type { BearingLifeInput, BearingLifeResult } from "./types";
 
 const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
 
 export default function VisualizationSection({ input }: ToolVisualizationProps<BearingLifeInput, BearingLifeResult>) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).tools["bearing-life"].visualization;
   const C = toNumber(input.C);
   const P = toNumber(input.P);
   const ratio = Number.isFinite(C) && Number.isFinite(P) && P > 0 ? C / P : null;
@@ -11,14 +18,14 @@ export default function VisualizationSection({ input }: ToolVisualizationProps<B
   return (
     <div className="space-y-3 text-sm">
       <div className="space-y-1">
-        <h3 className="text-sm font-semibold text-slate-900">Hızlı yorum</h3>
-        <p className="text-xs text-slate-500">C/P oranı yüksekse ömür hızla artar.</p>
+        <h3 className="text-sm font-semibold text-slate-900">{copy.title}</h3>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
       <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs">
         <div className="flex items-center justify-between">
-          <span className="text-slate-500">C/P oranı</span>
+          <span className="text-slate-500">{copy.ratioLabel}</span>
           <span className="font-mono text-[12px] font-semibold text-slate-900">
-            {ratio ? ratio.toFixed(2) : "-"}
+            {formatNumberFixed(ratio, locale, 2)}
           </span>
         </div>
       </div>

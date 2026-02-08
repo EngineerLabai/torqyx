@@ -4,14 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import type { ToolVisualizationProps } from "@/tools/_shared/types";
 import type { HeatInput, HeatResult } from "./types";
 import ExportPanel from "@/components/tools/ExportPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { exportSvg, exportSvgToPng, getSvgPreview } from "@/utils/export";
-
-const formatNumber = (value: number | null, digits = 2) => {
-  if (value === null || Number.isNaN(value)) return "-";
-  return value.toFixed(digits);
-};
+import { formatNumberFixed } from "@/utils/number-format";
+import { getMessages } from "@/utils/messages";
 
 export default function VisualizationSection({ input, result }: ToolVisualizationProps<HeatInput, HeatResult>) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).tools["basic-engineering"].visualization;
+  const formatNumber = (value: number | null, digits = 2) => formatNumberFixed(value, locale, digits);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");
 
@@ -22,17 +23,15 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Görsel Özet</h2>
-        <p className="text-xs text-slate-500">
-          Tek katmanlı plakadan geçen ısı akışını basit bir diyagramla gösterir.
-        </p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       <ExportPanel
-        label="Gorseli Indir"
+        label={copy.exportLabel}
         previewUrl={previewUrl}
-        previewAlt="Isı akışı önizleme"
-        helperText="PNG net görünüm sağlar, SVG ise vektör çıktı içindir."
+        previewAlt={copy.previewAlt}
+        helperText={copy.helperText}
         onPng={() => exportSvgToPng(svgRef.current, { filename: "isi-akisi.png" })}
         onSvg={() => exportSvg(svgRef.current, "isi-akisi.svg")}
       />
@@ -67,7 +66,7 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
             viewBox="0 0 360 140"
             className="h-auto w-full"
             role="img"
-            aria-label="Heat flow diagram"
+            aria-label={copy.diagramLabel}
           >
             <rect x="30" y="35" width="300" height="70" rx="12" fill="#e2e8f0" stroke="#94a3b8" />
             <rect x="30" y="35" width="140" height="70" rx="12" fill="#fef3c7" />
@@ -75,8 +74,8 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
             <path d="M80 20 C90 10, 110 10, 120 20" stroke="#f59e0b" strokeWidth="2" fill="none" />
             <path d="M240 20 C250 10, 270 10, 280 20" stroke="#3b82f6" strokeWidth="2" fill="none" />
             <line x1="150" y1="70" x2="210" y2="70" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrow)" />
-            <text x="60" y="120" fontSize="10" fill="#0f172a">Hot</text>
-            <text x="270" y="120" fontSize="10" fill="#0f172a">Cold</text>
+            <text x="60" y="120" fontSize="10" fill="#0f172a">{copy.hotLabel}</text>
+            <text x="270" y="120" fontSize="10" fill="#0f172a">{copy.coldLabel}</text>
             <text x="165" y="58" fontSize="10" fill="#0f172a">Q</text>
             <defs>
               <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">

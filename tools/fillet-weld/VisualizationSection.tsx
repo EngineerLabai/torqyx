@@ -1,4 +1,4 @@
-﻿import type { ToolVisualizationProps } from "@/tools/_shared/types";
+import type { ToolVisualizationProps } from "@/tools/_shared/types";
 import type { FilletWeldInput, FilletWeldResult } from "./types";
 
 const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));

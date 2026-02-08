@@ -1,4 +1,4 @@
-﻿import type { ToolCompareMetric, ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
+import type { ToolCompareMetric, ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
 import type { ShaftTorsionInput, ShaftTorsionResult } from "./types";
 import { calculateShaftTorsion, DEFAULT_INPUT } from "./logic";
 import InputSection from "./InputSection";

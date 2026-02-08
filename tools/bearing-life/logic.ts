@@ -1,4 +1,4 @@
-﻿import type { BearingLifeInput, BearingLifeResult } from "./types";
+import type { BearingLifeInput, BearingLifeResult } from "./types";
 
 export const DEFAULT_INPUT: BearingLifeInput = {
   C: "25",

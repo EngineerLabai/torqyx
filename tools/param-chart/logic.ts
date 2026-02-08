@@ -43,7 +43,7 @@ export function calculateChart(input: ChartInput): ChartResult {
       maxForce: null,
       steps: [],
       formula: "F = k * x",
-      error: "En az 2 adim secin.",
+      error: "En az 2 adım seçin.",
     };
   }
 

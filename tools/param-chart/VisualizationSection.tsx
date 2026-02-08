@@ -4,7 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { ToolVisualizationProps } from "@/tools/_shared/types";
 import type { ChartInput, ChartResult } from "./types";
 import ExportPanel from "@/components/tools/ExportPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { exportCanvasPng, exportCanvasSvg, getCanvasPreview } from "@/utils/export";
+import { formatNumberFixed } from "@/utils/number-format";
 import {
   Chart,
   LineController,
@@ -18,17 +20,17 @@ import {
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Filler);
 
-const formatNumber = (value: number | null, digits = 2) => {
-  if (value === null || Number.isNaN(value)) return "-";
-  return value.toFixed(digits);
-};
-
 export default function VisualizationSection({ result }: ToolVisualizationProps<ChartInput, ChartResult>) {
+  const { locale } = useLocale();
+  const formatNumber = (value: number | null, digits = 2) => formatNumberFixed(value, locale, digits);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<Chart | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");
 
-  const labels = useMemo(() => result.points.map((point) => point.x.toFixed(1)), [result.points]);
+  const labels = useMemo(
+    () => result.points.map((point) => formatNumberFixed(point.x, locale, 1)),
+    [result.points, locale],
+  );
   const data = useMemo(() => result.points.map((point) => point.y), [result.points]);
 
   useEffect(() => {
@@ -107,7 +109,7 @@ export default function VisualizationSection({ result }: ToolVisualizationProps<
       </div>
 
       <ExportPanel
-        label="Grafigi Indir"
+        label="Grafiği İndir"
         previewUrl={previewUrl}
         previewAlt="Grafik önizleme"
         helperText="PNG daha net çıktı verir. SVG ise vektörel önizleme içindir."

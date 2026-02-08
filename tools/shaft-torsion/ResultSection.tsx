@@ -1,18 +1,23 @@
-﻿import ExplanationPanel from "@/components/tools/ExplanationPanel";
+"use client";
+
+import ExplanationPanel from "@/components/tools/ExplanationPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatNumberFixed } from "@/utils/number-format";
+import { getMessages } from "@/utils/messages";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { ShaftTorsionResult } from "./types";
 
-const formatNumber = (value: number | null, digits = 2) => {
-  if (value === null || !Number.isFinite(value)) return "-";
-  return value.toFixed(digits);
-};
+const formatNumber = (value: number | null, digits = 2, locale: "tr" | "en") =>
+  formatNumberFixed(value, locale, digits);
 
 export default function ResultSection({ result }: ToolResultProps<ShaftTorsionResult>) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).tools["shaft-torsion"].result;
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Sonuçlar</h2>
-        <p className="text-xs text-slate-500">Burulma gerilmesi, dönme açısı ve güvenlik katsayısı.</p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       {result.error ? (
@@ -23,31 +28,26 @@ export default function ResultSection({ result }: ToolResultProps<ShaftTorsionRe
 
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Kayma gerilmesi</p>
-          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.tau)} MPa</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.shearStressLabel}</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.tau, 2, locale)} MPa</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Dönme açısı</p>
-          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.thetaDeg, 3)} deg</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.twistAngleLabel}</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.thetaDeg, 3, locale)} deg</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Güvenlik</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.safetyLabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">
-            {result.safety === null ? "-" : formatNumber(result.safety, 2)}
+            {result.safety === null ? "-" : formatNumber(result.safety, 2, locale)}
           </p>
         </div>
       </div>
 
       <ExplanationPanel
-        title="Formül ve değişkenler"
+        title={copy.explanationTitle}
         formulas={["tau = 16T / (pi * d^3)", "theta = T * L / (J * G)", "J = pi * d^4 / 32"]}
-        variables={[
-          { symbol: "T", description: "Tork (N·m)." },
-          { symbol: "d", description: "Mil çapı (mm)." },
-          { symbol: "L", description: "Mil uzunluğu (mm)." },
-          { symbol: "G", description: "Kayma modülü (GPa)." },
-        ]}
-        notes={["Theta dereceye çevrilmiş değerdir.", "Opsiyonel τ limiti ile güvenlik hesaplanır."]}
+        variables={copy.variables}
+        notes={copy.notes}
       />
     </div>
   );

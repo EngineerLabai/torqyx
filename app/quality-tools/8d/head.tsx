@@ -5,7 +5,7 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 const copy = {
   tr: {
     title: "8D Raporu",
-    description: "8D adimlarini doldurmak icin etkilesimli rapor taslagi.",
+    description: "8D adımlarını doldurmak için etkileşimli rapor taslağı.",
   },
   en: {
     title: "8D Report",

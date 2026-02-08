@@ -16,53 +16,55 @@ const GITHUB_ISSUE_URL = "https://github.com/EngineerLabai/aiengineerslab/issues
 
 type FieldKey = keyof ToolRequestData;
 
-const buildReadableText = (data: ToolRequestData) => {
+type RequestToolCopy = ReturnType<typeof getMessages>["components"]["requestToolForm"];
+
+const buildReadableText = (data: ToolRequestData, copy: RequestToolCopy) => {
   return [
-    "Tool Request",
+    copy.issueTitle,
     "",
-    "Problem / Kullanim alani:",
+    `${copy.fields.problem}:`,
     data.problem,
     "",
-    "Girdiler (input listesi):",
+    `${copy.fields.inputs}:`,
     data.inputs,
     "",
-    "Beklenen cikti (result):",
+    `${copy.fields.outputs}:`,
     data.outputs,
     "",
-    "Birimler / standartlar:",
+    `${copy.fields.standards}:`,
     data.standards,
     "",
-    "Ornek degerler:",
+    `${copy.fields.examples}:`,
     data.examples,
     "",
   ].join("\n");
 };
 
-const buildIssueBody = (data: ToolRequestData) => {
+const buildIssueBody = (data: ToolRequestData, copy: RequestToolCopy) => {
   return [
-    "## Tool Request",
+    `## ${copy.issueTitle}`,
     "",
-    "### Problem / Kullanim alani",
+    `### ${copy.fields.problem}`,
     data.problem,
     "",
-    "### Girdiler (input listesi)",
+    `### ${copy.fields.inputs}`,
     data.inputs,
     "",
-    "### Beklenen cikti (result)",
+    `### ${copy.fields.outputs}`,
     data.outputs,
     "",
-    "### Birimler / standartlar",
+    `### ${copy.fields.standards}`,
     data.standards,
     "",
-    "### Ornek degerler",
+    `### ${copy.fields.examples}`,
     data.examples,
   ].join("\n");
 };
 
-const buildIssueUrl = (data: ToolRequestData) => {
+const buildIssueUrl = (data: ToolRequestData, copy: RequestToolCopy) => {
   const titleBase = data.problem.trim().slice(0, 70);
-  const title = titleBase ? `Tool request: ${titleBase}` : "Tool request";
-  const body = buildIssueBody(data);
+  const title = titleBase ? `${copy.issueTitlePrefix}: ${titleBase}` : copy.issueTitle;
+  const body = buildIssueBody(data, copy);
   const params = new URLSearchParams({
     title,
     body,
@@ -139,7 +141,7 @@ export default function RequestToolForm() {
       createdAt: lastEntry.createdAt,
       ...lastEntry.data,
     };
-    const readable = buildReadableText(lastEntry.data);
+    const readable = buildReadableText(lastEntry.data, copy);
     const text = `${readable}\n\nJSON:\n${JSON.stringify(payload, null, 2)}`;
 
     try {
@@ -152,7 +154,10 @@ export default function RequestToolForm() {
     window.setTimeout(() => setCopyStatus(""), 2000);
   };
 
-  const issueUrl = useMemo(() => (lastEntry ? buildIssueUrl(lastEntry.data) : ""), [lastEntry]);
+  const issueUrl = useMemo(
+    () => (lastEntry ? buildIssueUrl(lastEntry.data, copy) : ""),
+    [lastEntry, copy.issueTitle, copy.issueTitlePrefix],
+  );
 
   return (
     <>

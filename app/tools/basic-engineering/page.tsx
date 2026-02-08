@@ -1,8 +1,9 @@
-"use client";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
-import ToolPage from "@/components/tools/ToolPage";
-import { basicEngineeringTool } from "@/tools/basic-engineering";
-
-export default function BasicEngineeringPage() {
-  return <ToolPage tool={basicEngineeringTool} />;
+export default async function BasicEngineeringPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("basic-engineering", locale);
+  return <ToolPageClient toolId="basic-engineering" initialDocs={initialDocs} />;
 }

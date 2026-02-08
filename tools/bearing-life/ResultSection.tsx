@@ -1,18 +1,23 @@
-﻿import ExplanationPanel from "@/components/tools/ExplanationPanel";
+"use client";
+
+import ExplanationPanel from "@/components/tools/ExplanationPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatNumberFixed } from "@/utils/number-format";
+import { getMessages } from "@/utils/messages";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { BearingLifeResult } from "./types";
 
-const formatNumber = (value: number | null, digits = 2) => {
-  if (value === null || !Number.isFinite(value)) return "-";
-  return value.toFixed(digits);
-};
+const formatNumber = (value: number | null, digits = 2, locale: "tr" | "en") =>
+  formatNumberFixed(value, locale, digits);
 
 export default function ResultSection({ result }: ToolResultProps<BearingLifeResult>) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).tools["bearing-life"].result;
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Sonuçlar</h2>
-        <p className="text-xs text-slate-500">L10 ömrü ve saate çevrilmiş L10h değerleri.</p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       {result.error ? (
@@ -23,32 +28,26 @@ export default function ResultSection({ result }: ToolResultProps<BearingLifeRes
 
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">L10 (milyon devir)</p>
-          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.L10)}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.l10Label}</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.L10, 2, locale)}</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">L10h (saat)</p>
-          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.L10h)}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.l10hLabel}</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.L10h, 2, locale)}</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Üs p</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.exponentLabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">
-            {result.exponent ? formatNumber(result.exponent, 3) : "-"}
+            {result.exponent ? formatNumber(result.exponent, 3, locale) : "-"}
           </p>
         </div>
       </div>
 
       <ExplanationPanel
-        title="Hesap adımları"
+        title={copy.explanationTitle}
         formulas={["L10 = a1 * (C / P)^p", "L10h = (L10 * 10^6) / (60 * n)"]}
-        variables={[
-          { symbol: "C", description: "Dinamik yük (kN)." },
-          { symbol: "P", description: "Eşdeğer yük (kN)." },
-          { symbol: "p", description: "Bilyalı için 3, makaralı için 10/3." },
-          { symbol: "a1", description: "Güvenilirlik faktörü (1=90%)." },
-          { symbol: "n", description: "Devir (rpm)." },
-        ]}
-        notes={["L10 ömrü %90 güvenilirlik tanımına göre hesaplanır.", "a1 faktörü ile güvenilirlik ayarlanır."]}
+        variables={copy.variables}
+        notes={copy.notes}
       />
     </div>
   );

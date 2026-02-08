@@ -1,26 +1,11 @@
+import { getMessages } from "@/utils/messages";
+
 type ConfidenceProps = {
   locale?: "tr" | "en";
   version?: string;
   lastUpdated?: string;
   assumptions?: string[];
   references?: string[];
-};
-
-const COPY = {
-  tr: {
-    title: "Güven Özeti",
-    version: "Sürüm",
-    updated: "Son güncelleme",
-    assumptions: "Varsayımlar",
-    references: "Referanslar",
-  },
-  en: {
-    title: "Confidence Snapshot",
-    version: "Version",
-    updated: "Last updated",
-    assumptions: "Assumptions",
-    references: "References",
-  },
 };
 
 export default function Confidence({
@@ -30,7 +15,7 @@ export default function Confidence({
   assumptions,
   references,
 }: ConfidenceProps) {
-  const copy = COPY[locale] ?? COPY.tr;
+  const copy = getMessages(locale).components.confidence;
   const hasAssumptions = assumptions && assumptions.length > 0;
   const hasReferences = references && references.length > 0;
 

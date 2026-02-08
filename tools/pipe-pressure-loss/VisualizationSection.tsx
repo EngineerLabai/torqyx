@@ -1,4 +1,4 @@
-﻿import type { ToolVisualizationProps } from "@/tools/_shared/types";
+import type { ToolVisualizationProps } from "@/tools/_shared/types";
 import type { PipePressureLossInput, PipePressureLossResult } from "./types";
 
 export default function VisualizationSection({ result }: ToolVisualizationProps<PipePressureLossInput, PipePressureLossResult>) {

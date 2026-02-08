@@ -1,4 +1,4 @@
-﻿import type { LocalizedValue } from "@/utils/locale-values";
+import type { LocalizedValue } from "@/utils/locale-values";
 import type { ToolReference } from "@/tools/_shared/types";
 
 export type ReportToolInput = {

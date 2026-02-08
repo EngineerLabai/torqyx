@@ -1,8 +1,9 @@
-"use client";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 
-import ToolPage from "@/components/tools/ToolPage";
-import { unitConverterTool } from "@/tools/unit-converter";
-
-export default function UnitConverterPage() {
-  return <ToolPage tool={unitConverterTool} />;
+export default async function UnitConverterPage() {
+  const locale = await getLocaleFromCookies();
+  const initialDocs = await getToolDocsResponse("unit-converter", locale);
+  return <ToolPageClient toolId="unit-converter" initialDocs={initialDocs} />;
 }

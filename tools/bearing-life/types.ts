@@ -1,4 +1,4 @@
-﻿export type BearingLifeInput = {
+export type BearingLifeInput = {
   C: string;
   P: string;
   bearingType: "ball" | "roller";

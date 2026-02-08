@@ -1,13 +1,16 @@
-﻿import ExplanationPanel from "@/components/tools/ExplanationPanel";
+"use client";
+
+import ExplanationPanel from "@/components/tools/ExplanationPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { formatNumberFixed } from "@/utils/number-format";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { FilletWeldResult } from "./types";
 
-const formatNumber = (value: number | null, digits = 2) => {
-  if (value === null || !Number.isFinite(value)) return "-";
-  return value.toFixed(digits);
-};
+const formatNumber = (value: number | null, digits = 2, locale: "tr" | "en") =>
+  formatNumberFixed(value, locale, digits);
 
 export default function ResultSection({ result }: ToolResultProps<FilletWeldResult>) {
+  const { locale } = useLocale();
   const statusLabel = result.isSafe === null ? "-" : result.isSafe ? "Uygun" : "Yetersiz";
 
   return (
@@ -26,16 +29,16 @@ export default function ResultSection({ result }: ToolResultProps<FilletWeldResu
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Gereken a</p>
-          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.requiredA)} mm</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.requiredA, 2, locale)} mm</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Boğaz kalınlığı</p>
-          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.throat)} mm</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.throat, 2, locale)} mm</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Gerilme kontrolü</p>
           <p className="mt-1 text-base font-semibold text-slate-900">
-            {result.stress === null ? "-" : `${formatNumber(result.stress)} MPa`}
+            {result.stress === null ? "-" : `${formatNumber(result.stress, 2, locale)} MPa`}
           </p>
           <p className="text-[11px] text-slate-500">{statusLabel}</p>
         </div>

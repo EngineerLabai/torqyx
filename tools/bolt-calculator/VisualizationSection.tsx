@@ -4,14 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import type { ToolVisualizationProps } from "@/tools/_shared/types";
 import type { BoltInput, BoltResult } from "./types";
 import ExportPanel from "@/components/tools/ExportPanel";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { exportSvg, exportSvgToPng, getSvgPreview } from "@/utils/export";
+import { formatNumberFixed } from "@/utils/number-format";
 
-const formatLabel = (value: number, suffix: string) => {
+const formatLabel = (value: number, suffix: string, locale: "tr" | "en") => {
   if (!Number.isFinite(value) || value <= 0) return "-";
-  return `${value.toFixed(2)} ${suffix}`;
+  return `${formatNumberFixed(value, locale, 2)} ${suffix}`;
 };
 
 export default function VisualizationSection({ input, result }: ToolVisualizationProps<BoltInput, BoltResult>) {
+  const { locale } = useLocale();
   const dValue = Number(input.d);
   const pValue = Number(input.P);
   const preloadValue = Number(input.preloadPercent);
@@ -21,10 +24,10 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   const preloadSafe = Number.isFinite(preloadValue) ? Math.min(Math.max(preloadValue, 0), 90) : 0;
   const preloadPercent = (preloadSafe / 90) * 100;
 
-  const dLabel = formatLabel(dValue, "mm");
-  const pLabel = formatLabel(pValue, "mm");
-  const torqueLabel = result.torque !== null ? `${result.torque.toFixed(1)} Nm` : "-";
-  const fvLabel = result.Fv !== null ? `${result.Fv.toFixed(2)} kN` : "-";
+  const dLabel = formatLabel(dValue, "mm", locale);
+  const pLabel = formatLabel(pValue, "mm", locale);
+  const torqueLabel = result.torque !== null ? `${formatNumberFixed(result.torque, locale, 1)} Nm` : "-";
+  const fvLabel = result.Fv !== null ? `${formatNumberFixed(result.Fv, locale, 2)} kN` : "-";
 
   useEffect(() => {
     setPreviewUrl(getSvgPreview(svgRef.current));
@@ -73,7 +76,9 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs text-slate-600">
               <span>Ön yük hedefi</span>
-              <span className="font-semibold">{Number.isFinite(preloadValue) ? `${preloadValue}%` : "-"}</span>
+              <span className="font-semibold">
+                {Number.isFinite(preloadValue) ? `${formatNumberFixed(preloadValue, locale, 0)}%` : "-"}
+              </span>
             </div>
             <div className="h-2 w-full rounded-full bg-white">
               <div

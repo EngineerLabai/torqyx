@@ -1,4 +1,4 @@
-﻿import type { HydraulicCylinderInput, HydraulicCylinderResult } from "./types";
+import type { HydraulicCylinderInput, HydraulicCylinderResult } from "./types";
 
 export const DEFAULT_INPUT: HydraulicCylinderInput = {
   pressure: "160",

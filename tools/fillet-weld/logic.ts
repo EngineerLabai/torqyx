@@ -1,4 +1,4 @@
-﻿import type { FilletWeldInput, FilletWeldResult } from "./types";
+import type { FilletWeldInput, FilletWeldResult } from "./types";
 
 export const DEFAULT_INPUT: FilletWeldInput = {
   load: "15000",

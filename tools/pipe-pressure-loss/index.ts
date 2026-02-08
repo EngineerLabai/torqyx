@@ -1,4 +1,4 @@
-﻿import type { ToolCompareMetric, ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
+import type { ToolCompareMetric, ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
 import type { PipePressureLossInput, PipePressureLossResult } from "./types";
 import { calculatePipePressureLoss, DEFAULT_INPUT } from "./logic";
 import InputSection from "./InputSection";

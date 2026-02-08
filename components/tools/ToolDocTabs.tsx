@@ -14,49 +14,11 @@ import { getMessages } from "@/utils/messages";
 import { trackEvent } from "@/utils/analytics";
 import { addRecent } from "@/utils/tool-storage";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
+import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 
 const TAB_IDS = ["calculator", "explanation", "examples"] as const;
 
 type TabId = (typeof TAB_IDS)[number];
-
-type RelatedItem = {
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  readingTimeMinutes: number;
-};
-
-type ExampleItem = {
-  title: string;
-  description?: string;
-  inputs?: Record<string, string>;
-  outputs?: Record<string, string>;
-  notes?: string[];
-};
-
-type StandardDoc = {
-  version: string;
-  lastUpdated: string;
-  howTo: string[];
-  formula: string;
-  examples: ExampleItem[];
-  references: Array<{ title: string; note?: string; href?: string }>;
-  commonMistakes: string[];
-  assumptions?: string[];
-};
-
-type ToolDocsResponse = {
-  tool: { id: string; title: string; tags: string[] } | null;
-  hasDocs: boolean;
-  standard?: StandardDoc | null;
-  explanation: import("next-mdx-remote").MDXRemoteSerializeResult | null;
-  examples:
-    | { kind: "mdx"; source: import("next-mdx-remote").MDXRemoteSerializeResult }
-    | { kind: "json"; items: ExampleItem[] }
-    | null;
-  related: { guides: RelatedItem[]; glossary: RelatedItem[] };
-};
 
 type ToolDocTabsProps = {
   slug: string;
@@ -76,9 +38,18 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const tabParam = searchParams?.get("tab");
   const initialTab = isValidTab(tabParam) ? tabParam : "calculator";
   const [activeTab, setActiveTab] = useState<TabId>(initialTab);
-  const [docs, setDocs] = useState<ToolDocsResponse | null>(initialDocs);
-  const [loading, setLoading] = useState<boolean>(!initialDocs);
-  const [error, setError] = useState<string>("");
+  const docs = useMemo<ToolDocsResponse>(() => {
+    return (
+      initialDocs ?? {
+        tool: null,
+        hasDocs: false,
+        standard: null,
+        explanation: null,
+        examples: null,
+        related: { guides: [], glossary: [] },
+      }
+    );
+  }, [initialDocs]);
   const didTrackOpen = useRef<string | null>(null);
   const didTrackRecent = useRef<string | null>(null);
 
@@ -87,52 +58,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
       Promise.resolve().then(() => setActiveTab(tabParam));
     }
   }, [tabParam]);
-
-  useEffect(() => {
-    if (!initialDocs) return;
-    Promise.resolve().then(() => {
-      setDocs(initialDocs);
-      setLoading(false);
-    });
-  }, [initialDocs]);
-
-  useEffect(() => {
-    let ignore = false;
-    Promise.resolve().then(() => {
-      if (!initialDocs) {
-        setLoading(true);
-        setError("");
-      }
-    });
-
-    if (initialDocs) {
-      return () => {
-        ignore = true;
-      };
-    }
-
-    fetch(`/api/tools/docs?slug=${encodeURIComponent(slug)}`)
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error("Docs load failed");
-        }
-        const data = (await res.json()) as ToolDocsResponse;
-        if (!ignore) {
-          setDocs(data);
-          setLoading(false);
-        }
-      })
-      .catch(() => {
-        if (!ignore) {
-          setError(copy.docsFailedBody);
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      ignore = true;
-    };
-  }, [slug, copy.docsFailedBody, initialDocs]);
 
   useEffect(() => {
     if (!slug) return;
@@ -171,12 +96,9 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const hasExamples = Boolean(
     docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0),
   );
-  const isDev = process.env.NODE_ENV !== "production";
-  const shouldShowMissingNote = isDev && !loading && !error && docs && !docs.hasDocs;
+  const shouldShowMissingNote = docs && !docs.hasDocs;
 
   const availableTabs = useMemo(() => {
-    if (loading || error) return allTabs;
-
     const calculatorTab = allTabs.find((tab) => tab.id === "calculator");
     const explanationTab = allTabs.find((tab) => tab.id === "explanation");
     const examplesTab = allTabs.find((tab) => tab.id === "examples");
@@ -196,25 +118,13 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     }
 
     return next;
-  }, [docs, hasExplanation, hasExamples, loading, error, allTabs]);
+  }, [docs, hasExplanation, hasExamples, allTabs]);
 
   useEffect(() => {
     if (!availableTabs.some((tab) => tab.id === activeTab)) {
       Promise.resolve().then(() => setActiveTab("calculator"));
     }
   }, [availableTabs, activeTab]);
-
-  const loadingCallout = (
-    <Callout type="info" title={copy.loadingTitle}>
-      {copy.loadingBody}
-    </Callout>
-  );
-
-  const errorCallout = (
-    <Callout type="warning" title={copy.docsFailedTitle}>
-      {error || copy.docsFailedBody}
-    </Callout>
-  );
 
   const missingDocsCallout = (
     <Callout type="info" title={copy.docsMissingTitle}>
@@ -223,14 +133,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   );
 
   const renderExplanation = () => {
-    if (loading) {
-      return loadingCallout;
-    }
-
-    if (error) {
-      return errorCallout;
-    }
-
     if (shouldShowMissingNote) {
       return missingDocsCallout;
     }
@@ -255,14 +157,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   };
 
   const renderExamples = () => {
-    if (loading) {
-      return loadingCallout;
-    }
-
-    if (error) {
-      return errorCallout;
-    }
-
     if (shouldShowMissingNote) {
       return missingDocsCallout;
     }

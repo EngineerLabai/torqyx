@@ -44,6 +44,7 @@
                         "readOnlyFallback":  "You're in anonymous mode - you can still read the content.",
                         "errorTitle":  "Sign-in check failed",
                         "errorDescription":  "Auth didn't respond. Please try again.",
+                        "loginHint":  "Sign in with Google to access favorites and saved calculations.",
                         "retry":  "Retry"
                     },
     "home":  {
@@ -1004,6 +1005,8 @@
                        "requestToolForm":  {
                                                "title":  "Request a tool",
                                                "description":  "Describe the problem and the input/output structure to help us build the calculator.",
+                                               "issueTitle":  "Tool request",
+                                               "issueTitlePrefix":  "Tool request",
                                                "back":  "Back to Tool Library",
                                                "submit":  "Submit request",
                                                "github":  "Create GitHub Issue",
@@ -1022,6 +1025,204 @@
                                                               "examples":  "Example values"
                                                           }
                                            },
+                       "exportPanel":  {
+                                           "previewAlt":  "Preview",
+                                           "previewFallback":  "Preview",
+                                           "downloadStarted":  "Download started.",
+                                           "downloadFailed":  "Download failed. Please try again.",
+                                           "downloadError":  "An error occurred during download.",
+                                           "pngDownloading":  "Downloading PNG.",
+                                           "svgDownloading":  "Downloading SVG.",
+                                           "pdfDownloading":  "Downloading PDF."
+                                       },
+                       "explanationPanel":  {
+                                                 "title":  "Explanation Mode (advanced)",
+                                                 "formulasTitle":  "Formulas used",
+                                                 "variablesTitle":  "Variables",
+                                                 "notesTitle":  "Usage notes"
+                                             },
+                       "toolPage":  {
+                                        "badge":  "Calculator"
+                                    },
+                       "confidence":  {
+                                          "title":  "Confidence Snapshot",
+                                          "version":  "Version",
+                                          "updated":  "Last updated",
+                                          "assumptions":  "Assumptions",
+                                          "references":  "References"
+                                      },
+                       "qaBoard":  {
+                                       "badge":  "Q\u0026A",
+                                       "sampleBadge":  "Sample",
+                                       "title":  "Q\u0026A board",
+                                       "description":  "Ask a question, get short replies, and share experience.",
+                                       "answersTitle":  "Replies",
+                                       "replyLabel":  "Your reply",
+                                       "replyPlaceholder":  "Share your experience, calculation, or suggestion...",
+                                       "replyButton":  "Post reply",
+                                       "topicsTitle":  "Active topics",
+                                       "topicCountLabel":  "{count} topics",
+                                       "replyCountLabel":  "{count} replies",
+                                       "authorLabel":  "Author",
+                                       "topics":  [
+                                                      {
+                                                          "slug":  "m12-civata-torku",
+                                                          "title":  "M12 10.9 bolt torque and lubrication",
+                                                          "author":  "Ayşe Yılmaz",
+                                                          "category":  "Torque / Fastening",
+                                                          "details":  "There is a gap between table values and actual tightening. How do torque wrench calibration and lubrication choice affect torque?",
+                                                          "updated":  "2 hours ago",
+                                                          "tags":  [
+                                                                       "torque",
+                                                                       "bolt",
+                                                                       "lubrication"
+                                                                   ],
+                                                          "replies":  4
+                                                      },
+                                                      {
+                                                          "slug":  "kaynak-sonrasi-sehim",
+                                                          "title":  "Post-weld deflection on S235 plate",
+                                                          "author":  "Mehmet A.",
+                                                          "category":  "Welding / Structure",
+                                                          "details":  "After welding a 300x500x10 mm plate with a corner weld, deflection appeared; any fixture and preheat advice?",
+                                                          "updated":  "5 hours ago",
+                                                          "tags":  [
+                                                                       "welding",
+                                                                       "deflection",
+                                                                       "fixture"
+                                                                   ],
+                                                          "replies":  3
+                                                      },
+                                                      {
+                                                          "slug":  "h8d9-yuzey-puruzluluk",
+                                                          "title":  "Surface roughness for H8/d9 fit",
+                                                          "author":  "Selin K.",
+                                                          "category":  "Tolerances / GD\u0026T",
+                                                          "details":  "I picked H8/d9 for \u00d825 hole/shaft. What surface roughness should I target to avoid loosening in press fit?",
+                                                          "updated":  "1 day ago",
+                                                          "tags":  [
+                                                                       "tolerance",
+                                                                       "fit",
+                                                                       "surface"
+                                                                   ],
+                                                          "replies":  1
+                                                      }
+                                                  ],
+                                       "answers":  {
+                                                       "m12-civata-torku":  [
+                                                                                {
+                                                                                    "user":  "Kadir",
+                                                                                    "text":  "DIN table gives dry values; if you use lubrication, drop by 20-25%. Calibrate your torque wrench yearly.",
+                                                                                    "time":  "1s ago"
+                                                                                },
+                                                                                {
+                                                                                    "user":  "Elif",
+                                                                                    "text":  "Typical ~90 Nm for M12 10.9 (dry). With lubrication 65-70 Nm is enough. Keep surfaces clean.",
+                                                                                    "time":  "12s ago"
+                                                                                },
+                                                                                {
+                                                                                    "user":  "Selim",
+                                                                                    "text":  "If you use a slip washer, friction drops; reduce torque. You can verify preload with turn-of-nut.",
+                                                                                    "time":  "25s ago"
+                                                                                }
+                                                                            ],
+                                                       "kaynak-sonrasi-sehim":  [
+                                                                                   {
+                                                                                       "user":  "Hakan",
+                                                                                       "text":  "Tack symmetrically and weld alternately, then fill in. A 120-150\u00b0C preheat helps.",
+                                                                                       "time":  "10m ago"
+                                                                                   },
+                                                                                   {
+                                                                                       "user":  "Derya",
+                                                                                       "text":  "Try welding with a reverse camber. Clamping in a fixture can also help.",
+                                                                                       "time":  "35m ago"
+                                                                                   }
+                                                                               ],
+                                                       "h8d9-yuzey-puruzluluk":  [
+                                                                                    {
+                                                                                        "user":  "Elif",
+                                                                                        "text":  "Ra 1.6-3.2 \u00b5m usually works. Cleanliness and deburring are critical.",
+                                                                                        "time":  "2s ago"
+                                                                                    }
+                                                                                ]
+                                                   }
+                                   },
+                       "unitConverter":  {
+                                             "input":  {
+                                                           "title":  "What conversion do you need?",
+                                                           "description":  "Pick the category first, then select source and target units. Results update automatically.",
+                                                           "categoryLabel":  "Which category are you working on?",
+                                                           "fromLabel":  "Which unit are you starting from?",
+                                                           "toLabel":  "Which unit should it convert to?",
+                                                           "valueLabel":  "How many units?",
+                                                           "valuePlaceholder":  "e.g. 100",
+                                                           "swapLabel":  "Swap",
+                                                           "categories":  {
+                                                                              "length":  "Length",
+                                                                              "force":  "Force",
+                                                                              "pressure":  "Pressure",
+                                                                              "energy":  "Energy"
+                                                                          }
+                                                       },
+                                             "result":  {
+                                                            "title":  "Result Flow",
+                                                            "description":  "See what we did, how we calculated, and what it means.",
+                                                            "step1Title":  "1. What did we do?",
+                                                            "step1Body":  "We first converted the input to the base unit, then to the target unit.",
+                                                            "step2Title":  "2. How did we calculate?",
+                                                            "formulaLabel":  "Formula",
+                                                            "step3Title":  "3. What does the result mean?",
+                                                            "step3Body":  "This value is the equivalent in the target unit. Base unit: {baseValue} {baseUnit}"
+                                                        },
+                                             "visual":  {
+                                                            "title":  "Visual Flow",
+                                                            "description":  "Shows the conversion path at a glance.",
+                                                            "downloadLabel":  "Download visual",
+                                                            "previewAlt":  "Conversion preview",
+                                                            "helperText":  "PNG is crisp; SVG is ideal for vector output.",
+                                                            "downloadPng":  "conversion.png",
+                                                            "downloadSvg":  "conversion.svg",
+                                                            "inputLabel":  "Input",
+                                                            "baseLabel":  "Base",
+                                                            "outputLabel":  "Output",
+                                                            "diagramLabel":  "Conversion flow"
+                                                        },
+                                             "errors":  {
+                                                            "missingUnits":  "Selected units were not found.",
+                                                            "invalidNumber":  "Please enter a valid value."
+                                                        },
+                                             "steps":  {
+                                                           "input":  "Input: {value} {unit}",
+                                                           "toBase":  "Convert to base unit: {input} * {factor} = {value} {unit}",
+                                                           "toOutput":  "Convert to output unit: {base} / {factor} = {value} {unit}"
+                                                       },
+                                             "explanation":  {
+                                                                 "title":  "Formula and variables",
+                                                                 "variables":  [
+                                                                                   {
+                                                                                       "symbol":  "V_in",
+                                                                                       "description":  "The input value."
+                                                                                   },
+                                                                                   {
+                                                                                       "symbol":  "V_out",
+                                                                                       "description":  "The result in the target unit."
+                                                                                   },
+                                                                                   {
+                                                                                       "symbol":  "factor_from",
+                                                                                       "description":  "Conversion factor from the source unit to the base unit."
+                                                                                   },
+                                                                                   {
+                                                                                       "symbol":  "factor_to",
+                                                                                       "description":  "Conversion factor from the target unit to the base unit."
+                                                                                   }
+                                                                               ],
+                                                                 "notes":  [
+                                                                               "Conversions are based on the selected category's base unit.",
+                                                                               "Useful for reporting and quick checks.",
+                                                                               "Rounding is for display only; raw values are used in calculations."
+                                                                           ]
+                                                             }
+                                         },
                        "toolFavoriteButton":  {
                                                   "addLabel":  "Add to favorites",
                                                   "removeLabel":  "Favorited",

@@ -10,7 +10,7 @@ export async function generateMetadata() {
     locale === "tr"
       ? {
           title: "Referanslama",
-          description: "3-2-1 referanslama, pim yerlesimi ve dayama bloklari icin pratik kart.",
+          description: "3-2-1 referanslama, pim yerleşimi ve dayama blokları için pratik kart.",
         }
       : {
           title: "Locating",

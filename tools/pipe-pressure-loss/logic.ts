@@ -1,4 +1,4 @@
-﻿import type { PipePressureLossInput, PipePressureLossResult } from "./types";
+import type { PipePressureLossInput, PipePressureLossResult } from "./types";
 
 export const DEFAULT_INPUT: PipePressureLossInput = {
   rho: "998",
