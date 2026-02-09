@@ -1,5 +1,7 @@
 ﻿"use client";
 
+import { isAnalyticsAllowed } from "@/utils/consent";
+
 type EventProperties = Record<string, string | number | boolean | null>;
 
 export type AnalyticsEventName =
@@ -30,6 +32,7 @@ const ANALYTICS_ENABLED = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED !== "false";
 const sendPayload = (payload: Record<string, unknown>) => {
   if (!ANALYTICS_ENABLED) return;
   if (typeof window === "undefined") return;
+  if (!isAnalyticsAllowed()) return;
 
   const body = JSON.stringify(payload);
 
@@ -97,3 +100,5 @@ export const trackPageView = (path: string, title?: string) => {
 export const trackEvent = (name: AnalyticsEventName, properties?: EventProperties) => {
   activeProvider.track({ name, properties });
 };
+
+

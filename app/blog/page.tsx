@@ -51,7 +51,7 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.blog;
   const heroImage = getHeroImageSrc("blog");
-  const posts = await getContentList("blog");
+  const posts = await getContentList("blog", { locale });
   const basePath = withLocalePrefix("/blog", locale);
   const resolvedSearchParams = (await searchParams) ?? undefined;
 

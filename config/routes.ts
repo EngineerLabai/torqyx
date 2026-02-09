@@ -18,6 +18,11 @@ export const ROUTES = {
   community: "/community",
   qa: "/qa",
   support: "/support",
+  contact: "/iletisim",
+  privacy: "/gizlilik",
+  cookies: "/cerez-politikasi",
+  terms: "/kullanim-sartlari",
+  about: "/hakkinda",
   blog: "/blog",
   premium: "/premium",
 } as const;

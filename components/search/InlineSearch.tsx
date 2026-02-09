@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { BookOpen, Compass, FileText, Scale, Wrench } from "lucide-react";
+import { BookOpen, Bookmark, Compass, FileText, Scale, Wrench } from "lucide-react";
 import { useSearchIndex, filterSearchResults } from "@/components/search/useSearchIndex";
+import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
 import type { SearchIndexItem } from "@/utils/search-index";
@@ -11,6 +12,7 @@ import type { SearchIndexItem } from "@/utils/search-index";
 const ICONS = {
   tool: Wrench,
   standard: Scale,
+  reference: Bookmark,
   blog: FileText,
   guide: Compass,
   glossary: BookOpen,
@@ -19,6 +21,7 @@ const ICONS = {
 const BADGE_STYLES: Record<SearchIndexItem["type"], string> = {
   tool: "border-emerald-200 bg-emerald-50 text-emerald-700",
   standard: "border-sky-200 bg-sky-50 text-sky-700",
+  reference: "border-sky-200 bg-sky-50 text-sky-700",
   blog: "border-amber-200 bg-amber-50 text-amber-700",
   guide: "border-teal-200 bg-teal-50 text-teal-700",
   glossary: "border-slate-200 bg-slate-50 text-slate-700",
@@ -29,7 +32,8 @@ export default function InlineSearch() {
   const copy = getMessages(locale).components.search;
   const { items, loading } = useSearchIndex();
   const [query, setQuery] = useState("");
-  const results = useMemo(() => filterSearchResults(items, query, 8), [items, query]);
+  const debouncedQuery = useDebouncedValue(query, 100);
+  const results = useMemo(() => filterSearchResults(items, debouncedQuery, 8), [items, debouncedQuery]);
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" data-testid="inline-search">

@@ -12,6 +12,7 @@ type PageMetadataOptions = {
   image?: typeof DEFAULT_OG_IMAGE_META;
   openGraph?: Metadata["openGraph"];
   twitter?: Metadata["twitter"];
+  alternatesLanguages?: Metadata["alternates"] extends { languages?: infer L } ? L | null : Metadata["alternates"]["languages"] | null;
 };
 
 export const buildPageMetadata = ({
@@ -24,11 +25,13 @@ export const buildPageMetadata = ({
   image,
   openGraph,
   twitter,
+  alternatesLanguages: alternatesLanguagesArg,
 }: PageMetadataOptions): Metadata => {
   const canonical = buildLocalizedCanonical(path, locale);
+  const alternatesLanguages = alternatesLanguagesArg === undefined ? buildLanguageAlternates(path) : alternatesLanguagesArg;
   const alternates = {
     canonical,
-    languages: buildLanguageAlternates(path),
+    ...(alternatesLanguages ? { languages: alternatesLanguages } : {}),
   };
   const resolvedImage = image ?? DEFAULT_OG_IMAGE_META;
   const openGraphMeta: Metadata["openGraph"] = {

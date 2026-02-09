@@ -31,7 +31,7 @@ export default async function GlossaryIndexPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.glossary;
   const heroImage = getHeroImageSrc("glossary");
-  const terms = await getContentList("glossary");
+  const terms = await getContentList("glossary", { locale });
 
   return (
     <PageShell>

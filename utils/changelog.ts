@@ -3,8 +3,10 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 import { slugify } from "@/utils/slugify";
+import type { Locale } from "@/utils/locale";
 
 const CHANGELOG_DIR = path.join(process.cwd(), "content", "changelog");
+const CONTENT_EXTENSIONS = new Set([".mdx", ".md"]);
 
 export type ChangelogEntry = {
   slug: string;
@@ -63,11 +65,24 @@ const parseChangelogFile = async (filePath: string): Promise<ChangelogEntry> => 
   };
 };
 
-export const getChangelogEntries = async (options: { includeDrafts?: boolean } = {}) => {
+const parseChangelogFilename = (name: string) => {
+  const match = /^(.*)\.(tr|en)(\.(?:mdx|md))$/i.exec(name);
+  if (!match) return null;
+  return { locale: match[2] as Locale, pathSuffix: match[0] };
+};
+
+export const getChangelogEntries = async (
+  locale: Locale,
+  options: { includeDrafts?: boolean } = {},
+) => {
   let files: string[] = [];
   try {
     const entries = await fs.readdir(CHANGELOG_DIR, { withFileTypes: true });
-    files = entries.filter((entry) => entry.isFile() && entry.name.endsWith(".mdx")).map((entry) => path.join(CHANGELOG_DIR, entry.name));
+    files = entries
+      .filter((entry) => entry.isFile() && CONTENT_EXTENSIONS.has(path.extname(entry.name)))
+      .map((entry) => ({ entry, parsed: parseChangelogFilename(entry.name) }))
+      .filter((item) => item.parsed && item.parsed.locale === locale)
+      .map((item) => path.join(CHANGELOG_DIR, item.entry.name));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
       return [];
@@ -82,7 +97,7 @@ export const getChangelogEntries = async (options: { includeDrafts?: boolean } =
   return filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
-export const getLatestChangelogEntry = async () => {
-  const entries = await getChangelogEntries();
+export const getLatestChangelogEntry = async (locale: Locale) => {
+  const entries = await getChangelogEntries(locale);
   return entries[0] ?? null;
 };

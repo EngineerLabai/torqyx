@@ -3,6 +3,7 @@ import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 type Bullet = { title: string; points: string[] };
 
@@ -609,6 +610,8 @@ const sections: Section[] = [
 export default async function GearDesignPage() {
   const locale = await getLocaleFromCookies();
   const initialDocs = await getToolDocsResponse("gear-design", locale);
+  const calculatorsHref = withLocalePrefix("/tools/gear-design/calculators", locale);
+  const simulationsHref = withLocalePrefix("/tools/gear-design/simulations", locale);
   return (
     <PageShell>
       <ToolDocTabs slug="gear-design" initialDocs={initialDocs}>
@@ -646,7 +649,7 @@ export default async function GearDesignPage() {
                 <p className="text-sm text-slate-700">{section.intro}</p>
                 {section.title.startsWith("10.") && (
                   <Link
-                    href="/tools/gear-design/calculators"
+                    href={calculatorsHref}
                     className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-semibold text-sky-700 transition hover:border-sky-300 hover:bg-sky-100"
                   >
                     Online hesaplayıcıları aç
@@ -660,7 +663,7 @@ export default async function GearDesignPage() {
                 </span>
                 {section.title.startsWith("11.") && (
                   <Link
-                    href="/tools/gear-design/simulations"
+                    href={simulationsHref}
                     className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-semibold text-slate-800 transition hover:border-slate-400 hover:bg-slate-100"
                   >
                     Simülasyon sayfasını aç

@@ -17,6 +17,11 @@
                                "linkCommunity":  "Topluluk",
                                "linkQa":  "Soru-Cevap",
                                "linkSupport":  "Bize Ulaşın",
+                               "linkPrivacy":  "Gizlilik",
+                               "linkCookies":  "Çerez Politikası",
+                               "linkTerms":  "Kullanım Şartları",
+                               "linkAbout":  "Hakkında",
+                               "linkContact":  "İletişim",
                                "linkHome":  "Ana Sayfa"
                            },
                 "descriptions":  {
@@ -108,6 +113,10 @@
                                 "description":  "Hesaplayıcı, paket ve rehberleri filtrele, ihtiyacın olanı tek tıkla aç.",
                                 "imageAlt":  "Hesaplayıcı kütüphanesi filtreleri ve araç kartları"
                             },
+                  "contentFallback":  {
+                                          "title":  "Bu içerik henüz Türkçe mevcut değil.",
+                                          "description":  "Türkçe sürüm yakında eklenecek. Lütfen daha sonra tekrar kontrol edin."
+                                      },
                   "reference":  {
                                     "badge":  "Hızlı Referans",
                                     "title":  "Hızlı Referans Merkezi",
@@ -624,12 +633,31 @@
                                        "inlinePlaceholder":  "Araç, ISO 286, M12, sürtünme...",
                                        "inlineEmpty":  "Sonuç bulunamadı.",
                                        "typeLabels":  {
-                                                          "tool":  "Araç",
-                                                          "standard":  "Standart",
-                                                          "blog":  "Blog",
-                                                          "guide":  "Rehber",
-                                                          "glossary":  "Sözlük"
-                                                      }
+                                                            "tool":  "Araç",
+                                                            "standard":  "Standart",
+                                                            "reference":  "Referans",
+                                                            "blog":  "Blog",
+                                       "guide":  "Rehber",
+                                       "glossary":  "Sözlük"
+                                    }
+                                   },
+                       "consent":  {
+                                       "title":  "Çerez tercihleri",
+                                       "description":  "Sitenin çalışması için gerekli çerezleri kullanıyoruz. İstersen analitik ve reklam çerezlerine izin verebilirsin.",
+                                       "accept":  "Kabul et",
+                                       "reject":  "Reddet",
+                                       "preferences":  "Tercihler",
+                                       "preferencesTitle":  "Çerez tercihleri",
+                                       "preferencesDescription":  "Hangi çerez kategorilerini etkinleştirmek istediğini seç.",
+                                       "save":  "Tercihleri kaydet",
+                                       "close":  "Kapat",
+                                       "necessaryLabel":  "Gerekli",
+                                       "necessaryDescription":  "Temel işlevler için zorunlu.",
+                                       "analyticsLabel":  "Analitik",
+                                       "analyticsDescription":  "Kullanımı anlamamıza ve deneyimi iyileştirmemize yardımcı olur.",
+                                       "advertisingLabel":  "Reklam",
+                                       "advertisingDescription":  "İlgili reklamlar ve performans ölçümü için kullanılır.",
+                                       "alwaysOn":  "Her zaman açık"
                                    },
                        "toolLibrary":  {
                                            "scenarioSection":  {

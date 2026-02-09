@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -153,6 +154,7 @@ export default async function QualityToolsPage() {
   const locale = await getLocaleFromCookies();
   const tools = QUALITY_TOOLS_BY_LOCALE[locale];
   const copy = getMessages(locale).pages.qualityTools;
+  const localizeHref = (href?: string) => (href ? withLocalePrefix(href, locale) : undefined);
 
   return (
     <PageShell>
@@ -224,7 +226,7 @@ export default async function QualityToolsPage() {
 
               {tool.href ? (
                 <Link
-                  href={tool.href}
+                  href={localizeHref(tool.href) ?? tool.href}
                   className="rounded-full bg-sky-600 px-3 py-1 text-[10px] font-semibold text-white hover:bg-sky-500"
                 >
                   {copy.openTool}

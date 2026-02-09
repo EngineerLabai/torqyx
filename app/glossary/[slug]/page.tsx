@@ -5,11 +5,11 @@ import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import Formula from "@/components/mdx/Formula";
 import ActionCard from "@/components/ui/ActionCard";
-import { getContentBySlug, getContentList } from "@/utils/content";
+import { getContentBySlug, getContentList, getContentLocaleAvailability, getContentSlugs } from "@/utils/content";
 import { BRAND_NAME } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
-import { buildLocalizedCanonical } from "@/utils/seo";
+import { buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
 import { slugify } from "@/utils/slugify";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
@@ -40,21 +40,30 @@ type GlossaryPageProps = {
 };
 
 export async function generateStaticParams() {
-  const terms = await getContentList("glossary");
-  return terms.map((term) => ({ slug: term.slug }));
+  const slugs = await getContentSlugs("glossary");
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: GlossaryPageProps) {
-  const term = await getContentBySlug("glossary", params.slug);
   const locale = await getLocaleFromCookies();
   const notFoundCopy = getMessages(locale).pages.notFound;
+  const fallbackCopy = getMessages(locale).pages.contentFallback;
+  const [term, availability] = await Promise.all([
+    getContentBySlug("glossary", params.slug, { locale }),
+    getContentLocaleAvailability("glossary", params.slug),
+  ]);
 
   if (!term) {
+    const hasAnyLocale = availability.tr || availability.en;
+    const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
+    const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
+    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/glossary/${params.slug}`) : null;
     return buildPageMetadata({
-      title: notFoundCopy.title,
-      description: notFoundCopy.description,
+      title,
+      description,
       path: `/glossary/${params.slug}`,
       locale,
+      alternatesLanguages,
     });
   }
 
@@ -65,14 +74,31 @@ export async function generateMetadata({ params }: GlossaryPageProps) {
     locale,
     type: "article",
     keywords: term.tags,
+    alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/glossary/${term.slug}`) : null,
   });
 }
 
 export default async function GlossaryPage({ params }: GlossaryPageProps) {
-  const [term, locale] = await Promise.all([getContentBySlug("glossary", params.slug), getLocaleFromCookies()]);
+  const locale = await getLocaleFromCookies();
+  const fallbackCopy = getMessages(locale).pages.contentFallback;
+  const [term, availability] = await Promise.all([
+    getContentBySlug("glossary", params.slug, { locale }),
+    getContentLocaleAvailability("glossary", params.slug),
+  ]);
 
   if (!term) {
-    notFound();
+    const hasAnyLocale = availability.tr || availability.en;
+    if (!hasAnyLocale) {
+      notFound();
+    }
+    return (
+      <PageShell>
+        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h1 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{fallbackCopy.title}</h1>
+          <p className="mt-3 text-sm text-slate-600">{fallbackCopy.description}</p>
+        </article>
+      </PageShell>
+    );
   }
 
   const copy = getMessages(locale).pages.glossary;
@@ -127,8 +153,8 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
   };
 
   const [blog, guides] = await Promise.all([
-    getContentList("blog"),
-    getContentList("guides"),
+    getContentList("blog", { locale }),
+    getContentList("guides", { locale }),
   ]);
 
   const tagSlugs = new Set(term.tags.map((tag) => slugify(tag)));

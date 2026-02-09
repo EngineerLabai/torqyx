@@ -4,10 +4,12 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
+import ConsentBanner from "@/components/consent/ConsentBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import PremiumCTA from "@/components/premium/PremiumCTA";
 import CommandPalette from "@/components/search/CommandPalette";
+import { openCommandPalette } from "@/components/search/commandPaletteEvents";
 import { getBrandCopy } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
@@ -29,6 +31,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const { locale } = useLocale();
   const brandContent = getBrandCopy(locale);
   const messages = getMessages(locale);
+  const searchCopy = messages.components.search;
   const navCopy = messages.nav as {
     labels: Record<string, string>;
     descriptions?: Record<string, string>;
@@ -91,6 +94,14 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={openCommandPalette}
+              className="tap-target inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm lg:hidden"
+              aria-label={searchCopy.paletteOpen}
+            >
+              {searchCopy.paletteTitle}
+            </button>
             <LanguageSwitcher tone="light" />
             <AuthButtons />
           </div>
@@ -163,6 +174,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         </div>
       </footer>
 
+      <ConsentBanner />
       <CommandPalette />
     </div>
   );

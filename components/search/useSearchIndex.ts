@@ -40,16 +40,35 @@ export const useSearchIndex = () => {
   return { ...state, loading };
 };
 
-export const filterSearchResults = (items: SearchIndexItem[], query: string, limit = 12) => {
+const buildIndexField = (value?: string | string[] | null) => {
+  if (!value) return "";
+  if (Array.isArray(value)) return normalizeSearchText(value.join(" "));
+  return normalizeSearchText(value);
+};
+
+export const filterSearchResults = (items: SearchIndexItem[], query: string, limit = 20) => {
   const needle = normalizeSearchText(query);
   if (!needle) return [];
 
   const scored = items
     .map((item) => {
-      const index = item.searchText.indexOf(needle);
-      if (index === -1) return null;
-      const titleMatch = normalizeSearchText(item.title).includes(needle);
-      return { item, score: (titleMatch ? 0 : 1000) + index };
+      const titleText = [item.title, ...(item.localeTitles ? Object.values(item.localeTitles) : [])]
+        .filter(Boolean)
+        .join(" ");
+      const titleIndex = buildIndexField(titleText).indexOf(needle);
+      const tagIndex = buildIndexField([...(item.tags ?? []), ...(item.keywords ?? [])]).indexOf(needle);
+      const descriptionIndex = buildIndexField(item.description).indexOf(needle);
+      const searchIndex = item.searchText.indexOf(needle);
+
+      if (titleIndex === -1 && tagIndex === -1 && descriptionIndex === -1 && searchIndex === -1) {
+        return null;
+      }
+
+      const tier = titleIndex !== -1 ? 0 : tagIndex !== -1 ? 1 : descriptionIndex !== -1 ? 2 : 3;
+      const position =
+        titleIndex !== -1 ? titleIndex : tagIndex !== -1 ? tagIndex : descriptionIndex !== -1 ? descriptionIndex : searchIndex;
+
+      return { item, score: tier * 10000 + Math.max(0, position) };
     })
     .filter((entry): entry is { item: SearchIndexItem; score: number } => Boolean(entry))
     .sort((a, b) => a.score - b.score);

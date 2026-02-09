@@ -27,7 +27,7 @@ export async function generateMetadata() {
 export default async function ChangelogPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.changelog;
-  const entries = await getChangelogEntries();
+  const entries = await getChangelogEntries(locale);
 
   return (
     <PageShell>

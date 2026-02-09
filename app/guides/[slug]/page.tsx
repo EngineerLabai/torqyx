@@ -3,11 +3,11 @@ import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
-import { extractToc, getContentBySlug, getContentList } from "@/utils/content";
+import { extractToc, getContentBySlug, getContentLocaleAvailability, getContentSlugs } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
-import { buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
+import { buildLanguageAlternates, buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -21,21 +21,30 @@ type GuidePageProps = {
 };
 
 export async function generateStaticParams() {
-  const guides = await getContentList("guides");
-  return guides.map((guide) => ({ slug: guide.slug }));
+  const slugs = await getContentSlugs("guides");
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: GuidePageProps) {
-  const guide = await getContentBySlug("guides", params.slug);
   const locale = await getLocaleFromCookies();
   const notFoundCopy = getMessages(locale).pages.notFound;
+  const fallbackCopy = getMessages(locale).pages.contentFallback;
+  const [guide, availability] = await Promise.all([
+    getContentBySlug("guides", params.slug, { locale }),
+    getContentLocaleAvailability("guides", params.slug),
+  ]);
 
   if (!guide) {
+    const hasAnyLocale = availability.tr || availability.en;
+    const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
+    const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
+    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/guides/${params.slug}`) : null;
     return buildPageMetadata({
-      title: notFoundCopy.title,
-      description: notFoundCopy.description,
+      title,
+      description,
       path: `/guides/${params.slug}`,
       locale,
+      alternatesLanguages,
     });
   }
 
@@ -46,6 +55,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
     locale,
     type: "article",
     keywords: guide.tags,
+    alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/guides/${guide.slug}`) : null,
     openGraph: {
       type: "article",
       publishedTime: guide.date,
@@ -55,13 +65,26 @@ export async function generateMetadata({ params }: GuidePageProps) {
 }
 
 export default async function GuidePage({ params }: GuidePageProps) {
-  const [guide, locale] = await Promise.all([
-    getContentBySlug("guides", params.slug),
-    getLocaleFromCookies(),
+  const locale = await getLocaleFromCookies();
+  const fallbackCopy = getMessages(locale).pages.contentFallback;
+  const [guide, availability] = await Promise.all([
+    getContentBySlug("guides", params.slug, { locale }),
+    getContentLocaleAvailability("guides", params.slug),
   ]);
 
   if (!guide) {
-    notFound();
+    const hasAnyLocale = availability.tr || availability.en;
+    if (!hasAnyLocale) {
+      notFound();
+    }
+    return (
+      <PageShell>
+        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h1 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{fallbackCopy.title}</h1>
+          <p className="mt-3 text-sm text-slate-600">{fallbackCopy.description}</p>
+        </article>
+      </PageShell>
+    );
   }
 
   const brandContent = getBrandCopy(locale);

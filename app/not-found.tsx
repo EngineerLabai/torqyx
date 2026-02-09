@@ -4,10 +4,13 @@ import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.notFound;
+  const toolsHref = withLocalePrefix("/tools", locale);
+  const homeHref = withLocalePrefix("/", locale);
   const brandContent = getBrandCopy(locale);
 
   return buildPageMetadata({
@@ -37,12 +40,12 @@ export default async function NotFound() {
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/tools"
+              href={toolsHref}
               className="rounded-full bg-emerald-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700"
             >
               {copy.primaryCta}
             </Link>
-            <Link href="/" className="text-xs font-semibold text-slate-500 hover:text-slate-700">
+            <Link href={homeHref} className="text-xs font-semibold text-slate-500 hover:text-slate-700">
               {copy.secondaryCta}
             </Link>
           </div>

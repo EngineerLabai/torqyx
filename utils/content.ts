@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 import GithubSlugger from "github-slugger";
-import { slugify } from "@/utils/slugify";
+import type { Locale } from "@/utils/locale";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -11,9 +11,11 @@ const CONTENT_DIRS = {
   blog: "blog",
   guides: "guides",
   glossary: "glossary",
+  qa: "qa",
 } as const;
 
 const CONTENT_EXTENSIONS = new Set([".mdx", ".md"]);
+const LOCALES: Locale[] = ["tr", "en"];
 
 export type ContentType = keyof typeof CONTENT_DIRS;
 
@@ -54,6 +56,7 @@ type ParsedContentItem = ContentItem & { sourcePath: string };
 
 type ContentQueryOptions = {
   includeDrafts?: boolean;
+  locale?: Locale;
 };
 
 const REQUIRED_FIELDS: (keyof ContentFrontmatter)[] = [
@@ -68,6 +71,15 @@ const REQUIRED_FIELDS: (keyof ContentFrontmatter)[] = [
 const WORDS_PER_MINUTE = 200;
 
 const getContentDirectory = (type: ContentType) => path.join(CONTENT_ROOT, CONTENT_DIRS[type]);
+
+const parseContentFilename = (name: string) => {
+  const match = /^(.*)\.(tr|en)(\.(?:mdx|md))$/i.exec(name);
+  if (!match) return null;
+  const slug = match[1];
+  const locale = match[2] as Locale;
+  const extension = match[3];
+  return { slug, locale, extension };
+};
 
 const estimateReadingTime = (text: string) => {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
@@ -218,13 +230,22 @@ const validateFrontmatter = (data: Record<string, unknown>, sourcePath: string):
   };
 };
 
-const readContentFiles = async (type: ContentType) => {
+const readContentFiles = async (type: ContentType, locale?: Locale) => {
   const dir = getContentDirectory(type);
   try {
     const entries = await fs.readdir(dir, { withFileTypes: true });
     return entries
       .filter((entry) => entry.isFile() && CONTENT_EXTENSIONS.has(path.extname(entry.name)))
-      .map((entry) => path.join(dir, entry.name));
+      .map((entry) => {
+        const parsed = parseContentFilename(entry.name);
+        if (!parsed) return null;
+        if (locale && parsed.locale !== locale) return null;
+        return {
+          ...parsed,
+          path: path.join(dir, entry.name),
+        };
+      })
+      .filter((entry): entry is { slug: string; locale: Locale; extension: string; path: string } => Boolean(entry));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
       return [];
@@ -233,20 +254,20 @@ const readContentFiles = async (type: ContentType) => {
   }
 };
 
-const ensureUniqueSlugs = (items: ParsedContentItem[], type: ContentType) => {
+const ensureUniqueSlugs = (items: ParsedContentItem[], type: ContentType, locale: Locale) => {
   const seen = new Map<string, string>();
   for (const item of items) {
     const existing = seen.get(item.slug);
     if (existing) {
       throw new Error(
-        `[content] Duplicate slug "${item.slug}" in ${type}: ${existing} and ${item.sourcePath}`,
+        `[content] Duplicate slug "${item.slug}" in ${type} (${locale}): ${existing} and ${item.sourcePath}`,
       );
     }
     seen.set(item.slug, item.sourcePath);
   }
 };
 
-const parseContentFile = async (sourcePath: string, type: ContentType): Promise<ParsedContentItem> => {
+const parseContentFile = async (sourcePath: string, type: ContentType, slug: string): Promise<ParsedContentItem> => {
   const raw = await fs.readFile(sourcePath, "utf8");
   const { data, content } = matter(raw);
   const frontmatter = validateFrontmatter(data as Record<string, unknown>, sourcePath);
@@ -255,7 +276,6 @@ const parseContentFile = async (sourcePath: string, type: ContentType): Promise<
     ensureGuideSections(content, sourcePath);
   }
 
-  const slug = slugify(frontmatter.title);
   const readingTimeMinutes = normalizeReadingTime(frontmatter.readingTime, content);
 
   return {
@@ -274,10 +294,27 @@ const parseContentFile = async (sourcePath: string, type: ContentType): Promise<
   };
 };
 
+const resolveContentPath = async (type: ContentType, slug: string, locale: Locale) => {
+  const dir = getContentDirectory(type);
+  for (const extension of CONTENT_EXTENSIONS) {
+    const filePath = path.join(dir, `${slug}.${locale}${extension}`);
+    try {
+      await fs.access(filePath);
+      return filePath;
+    } catch {
+      // ignore
+    }
+  }
+  return null;
+};
+
 export const getContentItems = async (type: ContentType, options: ContentQueryOptions = {}) => {
-  const files = await readContentFiles(type);
-  const items = await Promise.all(files.map((file) => parseContentFile(file, type)));
-  ensureUniqueSlugs(items, type);
+  const locale = options.locale ?? "tr";
+  const files = await readContentFiles(type, locale);
+  const items = await Promise.all(
+    files.map((file) => parseContentFile(file.path, type, file.slug)),
+  );
+  ensureUniqueSlugs(items, type, locale);
 
   const includeDrafts = options.includeDrafts ?? process.env.NODE_ENV !== "production";
   const filtered = includeDrafts ? items : items.filter((item) => !item.draft);
@@ -293,6 +330,29 @@ export const getContentList = async (type: ContentType, options: ContentQueryOpt
 };
 
 export const getContentBySlug = async (type: ContentType, slug: string, options: ContentQueryOptions = {}) => {
-  const items = await getContentItems(type, options);
-  return items.find((item) => item.slug === slug) ?? null;
+  const locale = options.locale ?? "tr";
+  const includeDrafts = options.includeDrafts ?? process.env.NODE_ENV !== "production";
+  const resolvedPath = await resolveContentPath(type, slug, locale);
+  if (!resolvedPath) return null;
+
+  const item = await parseContentFile(resolvedPath, type, slug);
+  if (!includeDrafts && item.draft) return null;
+  return item;
+};
+
+export const getContentSlugs = async (type: ContentType) => {
+  const entries = await Promise.all(LOCALES.map((locale) => readContentFiles(type, locale)));
+  const slugs = new Set(entries.flat().map((entry) => entry.slug));
+  return Array.from(slugs.values());
+};
+
+export const getContentLocaleAvailability = async (type: ContentType, slug: string) => {
+  const availability: Record<Locale, boolean> = { tr: false, en: false };
+  await Promise.all(
+    LOCALES.map(async (locale) => {
+      const found = await resolveContentPath(type, slug, locale);
+      availability[locale] = Boolean(found);
+    }),
+  );
+  return availability;
 };

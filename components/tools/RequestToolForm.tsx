@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
 import {
   REQUESTS_EVENT,
   addToolRequest,
@@ -75,6 +76,7 @@ const buildIssueUrl = (data: ToolRequestData, copy: RequestToolCopy) => {
 export default function RequestToolForm() {
   const { locale } = useLocale();
   const copy = getMessages(locale).components.requestToolForm;
+  const backHref = withLocalePrefix("/tools", locale);
   const [values, setValues] = useState<ToolRequestData>({
     problem: "",
     inputs: "",
@@ -163,7 +165,7 @@ export default function RequestToolForm() {
     <>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
-          <Link href="/tools" className="text-xs font-semibold text-emerald-700 hover:underline">
+          <Link href={backHref} className="text-xs font-semibold text-emerald-700 hover:underline">
             {copy.back}
           </Link>
           <h1 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{copy.title}</h1>

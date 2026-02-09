@@ -8,7 +8,9 @@ import { formatMessage, getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 import { getCategoryIndex, matchesSlug, resolveLabelBySlug } from "@/utils/taxonomy";
 import { slugify } from "@/utils/slugify";
-import { toolCatalog } from "@/tools/_shared/catalog";
+import { buildLanguageAlternates } from "@/utils/seo";
+import { withLocalePrefix } from "@/utils/locale-path";
+import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
   new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
@@ -20,14 +22,22 @@ type CategoryPageProps = {
 };
 
 export async function generateStaticParams() {
-  const categories = await getCategoryIndex();
-  return categories.map((category) => ({ category: category.slug }));
+  const [trCategories, enCategories] = await Promise.all([
+    getCategoryIndex("tr"),
+    getCategoryIndex("en"),
+  ]);
+  const slugs = new Set([...trCategories, ...enCategories].map((category) => category.slug));
+  return Array.from(slugs.values()).map((category) => ({ category }));
 }
 
 export async function generateMetadata({ params }: CategoryPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const categories = await getCategoryIndex();
+  const [trCategories, enCategories] = await Promise.all([
+    getCategoryIndex("tr"),
+    getCategoryIndex("en"),
+  ]);
+  const categories = locale === "tr" ? trCategories : enCategories;
   const categorySlug = decodeURIComponent(params.category);
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} kategorisi` : `${label} category`;
@@ -35,22 +45,26 @@ export async function generateMetadata({ params }: CategoryPageProps) {
     locale === "tr"
       ? `${label} kategorisine ait blog, rehber ve hesaplayici listesi.`
       : `Blog posts, guides, and calculators listed under ${label}.`;
+  const hasTr = trCategories.some((entry) => entry.slug === categorySlug);
+  const hasEn = enCategories.some((entry) => entry.slug === categorySlug);
+  const alternatesLanguages = hasTr && hasEn ? buildLanguageAlternates(`/categories/${categorySlug}`) : null;
 
   return buildPageMetadata({
     title: `${titleBase} | ${brandContent.siteName}`,
     description,
     path: `/categories/${categorySlug}`,
     locale,
+    alternatesLanguages,
   });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
+  const locale = await getLocaleFromCookies();
   const categorySlug = decodeURIComponent(params.category);
-  const [blog, guides, categories, locale] = await Promise.all([
-    getContentList("blog"),
-    getContentList("guides"),
-    getCategoryIndex(),
-    getLocaleFromCookies(),
+  const [blog, guides, categories] = await Promise.all([
+    getContentList("blog", { locale }),
+    getContentList("guides", { locale }),
+    getCategoryIndex(locale),
   ]);
   const copy = getMessages(locale).pages.categories;
 
@@ -92,7 +106,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           description={copy.blogDesc}
           copy={copy}
           items={blogMatches.map((item) => ({
-            href: `/blog/${item.slug}`,
+            href: withLocalePrefix(`/blog/${item.slug}`, locale),
             title: item.title,
             description: item.description,
             category: item.category,
@@ -100,6 +114,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
             tags: item.tags,
           }))}
+          locale={locale}
         />
 
         <ContentSection
@@ -107,7 +122,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           description={copy.guidesDesc}
           copy={copy}
           items={guideMatches.map((item) => ({
-            href: `/guides/${item.slug}`,
+            href: withLocalePrefix(`/guides/${item.slug}`, locale),
             title: item.title,
             description: item.description,
             category: item.category,
@@ -115,9 +130,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
             tags: item.tags,
           }))}
+          locale={locale}
         />
 
-        <ToolSection tools={toolMatches} copy={copy} />
+        <ToolSection tools={toolMatches} copy={copy} locale={locale} />
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -130,7 +146,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               {relatedTags.map((tag) => (
                 <Link
                   key={tag.slug}
-                  href={`/tags/${tag.slug}`}
+                  href={withLocalePrefix(`/tags/${tag.slug}`, locale)}
                   className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 hover:border-slate-300"
                 >
                   #{tag.label}
@@ -159,11 +175,13 @@ function ContentSection({
   description,
   items,
   copy,
+  locale,
 }: {
   title: string;
   description: string;
   items: ContentItem[];
   copy: { contentEmpty: string; readCta: string };
+  locale: "tr" | "en";
 }) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -191,7 +209,7 @@ function ContentSection({
                   <p className="text-[15px] leading-relaxed text-slate-600 md:text-base">{item.description}</p>
                 </div>
                 <Link
-                  href={`/categories/${slugify(item.category)}`}
+                  href={withLocalePrefix(`/categories/${slugify(item.category)}`, locale)}
                   className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600"
                 >
                   {item.category}
@@ -204,7 +222,7 @@ function ContentSection({
                 {item.tags.slice(0, 3).map((tag) => (
                   <Link
                     key={tag}
-                    href={`/tags/${slugify(tag)}`}
+                    href={withLocalePrefix(`/tags/${slugify(tag)}`, locale)}
                     className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600"
                   >
                     #{tag}
@@ -224,7 +242,15 @@ function ContentSection({
   );
 }
 
-function ToolSection({ tools, copy }: { tools: typeof toolCatalog; copy: { toolsTitle: string; toolsDesc: string; toolsEmpty: string; openToolCta: string } }) {
+function ToolSection({
+  tools,
+  copy,
+  locale,
+}: {
+  tools: typeof toolCatalog;
+  copy: { toolsTitle: string; toolsDesc: string; toolsEmpty: string; openToolCta: string };
+  locale: "tr" | "en";
+}) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="space-y-2">
@@ -238,17 +264,20 @@ function ToolSection({ tools, copy }: { tools: typeof toolCatalog; copy: { tools
         </div>
       ) : (
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          {tools.map((tool) => (
-            <ActionCard
-              key={tool.id}
-              title={tool.title}
-              description={tool.description}
-              href={tool.href}
-              badge={tool.category}
-              toolId={tool.id}
-              ctaLabel={copy.openToolCta}
-            />
-          ))}
+          {tools.map((tool) => {
+            const toolCopy = getToolCopy(tool, locale);
+            return (
+              <ActionCard
+                key={tool.id}
+                title={toolCopy.title}
+                description={toolCopy.description}
+                href={withLocalePrefix(tool.href, locale)}
+                badge={tool.category}
+                toolId={tool.id}
+                ctaLabel={copy.openToolCta}
+              />
+            );
+          })}
         </div>
       )}
     </section>

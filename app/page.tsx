@@ -25,7 +25,7 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const locale = await getLocaleFromCookies();
-  const latestChangelog = await getLatestChangelogEntry();
+  const latestChangelog = await getLatestChangelogEntry(locale);
   return (
     <main className="relative min-h-screen">
       <WebPageJsonLd />

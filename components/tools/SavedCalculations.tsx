@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import type { StoredCalculation } from "@/components/tools/ToolHistory";
 
@@ -33,6 +34,7 @@ const formatDate = (value: string, locale: string) => {
 export default function SavedCalculations() {
   const { locale } = useLocale();
   const copy = getMessages(locale).components.savedCalculations;
+  const toolLibraryHref = withLocalePrefix("/tools", locale);
   const [entries, setEntries] = useState<StoredCalculation<unknown, unknown>[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -91,7 +93,7 @@ export default function SavedCalculations() {
           <p className="text-sm font-semibold text-slate-700">{copy.emptyTitle}</p>
           <p className="mt-1 text-xs text-slate-500">{copy.emptyHint}</p>
           <Link
-            href="/tools"
+            href={toolLibraryHref}
             className="mt-4 inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-[11px] font-semibold text-slate-700 hover:border-slate-400"
           >
             {copy.toolLibrary}
@@ -103,7 +105,7 @@ export default function SavedCalculations() {
             const tool = toolMap.get(entry.toolId);
             const toolCopy = tool ? getToolCopy(tool, locale) : null;
             const title = toolCopy?.title ?? entry.toolTitle ?? entry.toolId;
-            const href = tool?.href ?? `/tools/${entry.toolId}`;
+            const href = withLocalePrefix(tool?.href ?? `/tools/${entry.toolId}`, locale);
 
             return (
               <article key={entry.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

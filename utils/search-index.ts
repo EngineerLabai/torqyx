@@ -1,6 +1,8 @@
 import type { Locale } from "@/utils/locale";
 
-export type SearchIndexItemType = "tool" | "standard" | "blog" | "guide" | "glossary";
+export type SearchIndexItemType = "tool" | "standard" | "reference" | "blog" | "guide" | "glossary";
+
+export type SearchIndexLocaleTitles = Partial<Record<Locale, string>>;
 
 export type SearchIndexItem = {
   id: string;
@@ -10,6 +12,8 @@ export type SearchIndexItem = {
   href: string;
   searchText: string;
   tags?: string[];
+  keywords?: string[];
+  localeTitles?: SearchIndexLocaleTitles;
 };
 
 export type SearchIndexData = {

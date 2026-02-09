@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 import { getContentList } from "@/utils/content";
 import { BRAND_NAME } from "@/config/brand";
 import { SITE_URL } from "@/utils/seo";
+import { withLocalePrefix } from "@/utils/locale-path";
+import { getMessages } from "@/utils/messages";
+import { isLocale, type Locale } from "@/utils/locale";
 
 const escapeXml = (value: string) =>
   value
@@ -11,14 +15,22 @@ const escapeXml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&apos;");
 
+const resolveLocale = (): Locale => {
+  const headerLocale = headers().get("x-locale");
+  return isLocale(headerLocale) ? headerLocale : "tr";
+};
+
 export async function GET() {
-  const posts = await getContentList("blog", { includeDrafts: false });
+  const locale = resolveLocale();
+  const posts = await getContentList("blog", { includeDrafts: false, locale });
   const siteUrl = SITE_URL.replace(/\/$/, "");
-  const feedUrl = `${siteUrl}/blog/rss.xml`;
+  const feedUrl = `${siteUrl}${withLocalePrefix("/blog/rss.xml", locale)}`;
+  const listHref = `${siteUrl}${withLocalePrefix("/blog", locale)}`;
+  const copy = getMessages(locale).pages.blog;
 
   const items = posts
     .map((post) => {
-      const url = `${siteUrl}/blog/${post.slug}`;
+      const url = `${siteUrl}${withLocalePrefix(`/blog/${post.slug}`, locale)}`;
       return `\n    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${url}</link>
@@ -33,9 +45,9 @@ export async function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(`${BRAND_NAME} Blog`)}</title>
-    <link>${siteUrl}/blog</link>
-    <description>${escapeXml("Hesaplama ve analiz odaklı blog yazıları.")}</description>
-    <language>tr-TR</language>
+    <link>${listHref}</link>
+    <description>${escapeXml(copy.description)}</description>
+    <language>${locale === "en" ? "en-US" : "tr-TR"}</language>
     <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />${items}
   </channel>
 </rss>`;

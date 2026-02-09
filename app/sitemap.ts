@@ -10,19 +10,9 @@ const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
 const locales = ["tr", "en"] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [blog, guides, glossary, tags, categories] = await Promise.all([
-    getContentList("blog"),
-    getContentList("guides"),
-    getContentList("glossary"),
-    getTagIndex(),
-    getCategoryIndex(),
-  ]);
-
   const entries: MetadataRoute.Sitemap = [];
-  const addEntry = (path: string, lastModified?: Date) => {
-    locales.forEach((locale) => {
-      entries.push({ url: resolveUrl(withLocalePrefix(path, locale)), lastModified });
-    });
+  const addEntry = (path: string, locale: (typeof locales)[number], lastModified?: Date) => {
+    entries.push({ url: resolveUrl(withLocalePrefix(path, locale)), lastModified });
   };
 
   [
@@ -39,6 +29,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/qa",
     "/community",
     "/support",
+    "/iletisim",
+    "/gizlilik",
+    "/cerez-politikasi",
+    "/kullanim-sartlari",
+    "/hakkinda",
     "/standards",
     "/project-hub",
     "/project-hub/devreye-alma",
@@ -55,35 +50,47 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/fixture-tools/locating",
     "/fixture-tools/clamping",
     "/fixture-tools/base-plate",
-  ].forEach((path) => addEntry(path));
-
-  blog.forEach((post) => {
-    addEntry(`/blog/${post.slug}`, new Date(post.date));
+  ].forEach((path) => {
+    locales.forEach((locale) => addEntry(path, locale));
   });
 
-  guides.forEach((guide) => {
-    addEntry(`/guides/${guide.slug}`, new Date(guide.date));
-  });
+  for (const locale of locales) {
+    const [blog, guides, glossary, tags, categories] = await Promise.all([
+      getContentList("blog", { locale }),
+      getContentList("guides", { locale }),
+      getContentList("glossary", { locale }),
+      getTagIndex(locale),
+      getCategoryIndex(locale),
+    ]);
 
-  glossary.forEach((term) => {
-    addEntry(`/glossary/${term.slug}`, new Date(term.date));
-  });
+    blog.forEach((post) => {
+      addEntry(`/blog/${post.slug}`, locale, new Date(post.date));
+    });
 
-  toolCatalog.forEach((tool) => {
-    addEntry(tool.href);
-  });
+    guides.forEach((guide) => {
+      addEntry(`/guides/${guide.slug}`, locale, new Date(guide.date));
+    });
 
-  standardsManifest.categories.forEach((category) => {
-    addEntry(`/standards/${category.slug}`);
-  });
+    glossary.forEach((term) => {
+      addEntry(`/glossary/${term.slug}`, locale, new Date(term.date));
+    });
 
-  tags.forEach((tag) => {
-    addEntry(`/tags/${tag.slug}`);
-  });
+    toolCatalog.forEach((tool) => {
+      addEntry(tool.href, locale);
+    });
 
-  categories.forEach((category) => {
-    addEntry(`/categories/${category.slug}`);
-  });
+    standardsManifest.categories.forEach((category) => {
+      addEntry(`/standards/${category.slug}`, locale);
+    });
+
+    tags.forEach((tag) => {
+      addEntry(`/tags/${tag.slug}`, locale);
+    });
+
+    categories.forEach((category) => {
+      addEntry(`/categories/${category.slug}`, locale);
+    });
+  }
 
   return entries;
 }

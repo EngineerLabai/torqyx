@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
-import { BookOpen, Compass, FileText, Scale, Wrench } from "lucide-react";
+import { BookOpen, Bookmark, Compass, FileText, Scale, Wrench } from "lucide-react";
 import { useSearchIndex, filterSearchResults } from "@/components/search/useSearchIndex";
+import { COMMAND_PALETTE_OPEN_EVENT } from "@/components/search/commandPaletteEvents";
+import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
 import type { SearchIndexItem } from "@/utils/search-index";
@@ -11,6 +13,7 @@ import type { SearchIndexItem } from "@/utils/search-index";
 const ICONS = {
   tool: Wrench,
   standard: Scale,
+  reference: Bookmark,
   blog: FileText,
   guide: Compass,
   glossary: BookOpen,
@@ -19,6 +22,7 @@ const ICONS = {
 const BADGE_STYLES: Record<SearchIndexItem["type"], string> = {
   tool: "border-emerald-200 bg-emerald-50 text-emerald-700",
   standard: "border-sky-200 bg-sky-50 text-sky-700",
+  reference: "border-sky-200 bg-sky-50 text-sky-700",
   blog: "border-amber-200 bg-amber-50 text-amber-700",
   guide: "border-teal-200 bg-teal-50 text-teal-700",
   glossary: "border-slate-200 bg-slate-50 text-slate-700",
@@ -33,8 +37,9 @@ export default function CommandPalette() {
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const debouncedQuery = useDebouncedValue(query, 100);
 
-  const results = useMemo(() => filterSearchResults(items, query, 10), [items, query]);
+  const results = useMemo(() => filterSearchResults(items, debouncedQuery, 20), [items, debouncedQuery]);
 
   useEffect(() => {
     if (!open) return;
@@ -46,19 +51,27 @@ export default function CommandPalette() {
   }, [open]);
 
   useEffect(() => {
+    const openPalette = () => {
+      setOpen(true);
+      setQuery("");
+      setActiveIndex(0);
+    };
+
     const handler = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
-        setOpen(true);
-        setQuery("");
-        setActiveIndex(0);
+        openPalette();
       } else if (event.key === "Escape") {
         setOpen(false);
       }
     };
 
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    window.addEventListener(COMMAND_PALETTE_OPEN_EVENT, openPalette);
+    return () => {
+      window.removeEventListener("keydown", handler);
+      window.removeEventListener(COMMAND_PALETTE_OPEN_EVENT, openPalette);
+    };
   }, []);
 
   const handleNavigate = (item: SearchIndexItem) => {
@@ -97,7 +110,7 @@ export default function CommandPalette() {
               <p className="text-xs text-slate-500">{copy.paletteHint}</p>
             </div>
             <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[10px] font-semibold text-slate-500">
-              Ctrl/⌘ + K
+              Ctrl/Cmd + K
             </span>
           </div>
           <input

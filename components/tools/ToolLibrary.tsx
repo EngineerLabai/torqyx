@@ -1,9 +1,16 @@
+﻿"use client";
+
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import ToolLibraryCard from "@/components/tools/ToolLibraryCard";
 import RecentToolsStrip from "@/components/tools/RecentToolsStripLazy";
 import InlineSearch from "@/components/search/InlineSearch";
+import { filterSearchResults, useSearchIndex } from "@/components/search/useSearchIndex";
+import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
+import { buildSearchText } from "@/utils/search-index";
 import {
   getToolCopy,
   toolCatalog,
@@ -11,7 +18,9 @@ import {
   toolTags,
   toolTypes,
   type ToolType,
+  type ToolCatalogItem,
 } from "@/tools/_shared/catalog";
+import type { SearchIndexItem } from "@/utils/search-index";
 
 const TYPE_ALL = "All" as const;
 const CATEGORY_ALL = "All" as const;
@@ -60,7 +69,7 @@ const resolveTagFilter = (value: string): TagFilter => {
   return TAG_ALL;
 };
 
-const buildHref = ({ type, category, tag, query }: FilterState) => {
+const buildHref = (basePath: string, { type, category, tag, query }: FilterState) => {
   const params = new URLSearchParams();
 
   if (type === TYPE_ALL) {
@@ -82,31 +91,109 @@ const buildHref = ({ type, category, tag, query }: FilterState) => {
   }
 
   const qs = params.toString();
-  return qs ? `/tools?${qs}` : "/tools";
+  return qs ? `${basePath}?${qs}` : basePath;
+};
+
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const highlightMatch = (text: string, query: string): ReactNode => {
+  const needle = query.trim();
+  if (!needle) return text;
+  const regex = new RegExp(`(${escapeRegExp(needle)})`, "ig");
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <mark key={`${part}-${index}`} className="rounded bg-amber-100 px-1 py-0.5 text-slate-900">
+        {part}
+      </mark>
+    ) : (
+      <span key={`${part}-${index}`}>{part}</span>
+    ),
+  );
 };
 
 export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) {
   const messages = getMessages(locale);
   const copy = messages.components.toolLibrary;
   const labels = copy.labels;
+  const basePath = withLocalePrefix("/tools", locale);
 
   const typeFilter = resolveTypeFilter(getParam(searchParams?.type));
   const category = resolveCategoryFilter(getParam(searchParams?.category));
   const tag = resolveTagFilter(getParam(searchParams?.tag));
-  const query = getParam(searchParams?.q).trim();
-  const typeOptions: TypeFilter[] = [...toolTypes, TYPE_ALL];
-  const filterState: FilterState = { type: typeFilter, category, tag, query };
+  const initialQuery = getParam(searchParams?.q).trim();
+  const [query, setQuery] = useState(initialQuery);
+  const debouncedQuery = useDebouncedValue(query, 100);
+  const { items: searchItems, loading: searchLoading } = useSearchIndex();
 
-  const filtered = toolCatalog.filter((tool) => {
-    const typeMatch = typeFilter === TYPE_ALL || tool.type === typeFilter;
-    const categoryMatch = category === CATEGORY_ALL || tool.category === category;
-    const tagMatch = tag === TAG_ALL || (tool.tags ?? []).includes(tag);
-    const { title, description } = getToolCopy(tool, locale);
-    const text = `${title} ${description}`.toLowerCase();
-    const needle = query.toLowerCase();
-    const queryMatch = needle.length === 0 || text.includes(needle);
-    return typeMatch && categoryMatch && tagMatch && queryMatch;
-  });
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
+
+  const typeOptions: TypeFilter[] = [...toolTypes, TYPE_ALL];
+  const filterState: FilterState = { type: typeFilter, category, tag, query: query.trim() };
+
+  const toolById = useMemo(() => new Map(toolCatalog.map((tool) => [tool.id, tool])), []);
+
+  const baseTools = useMemo(
+    () =>
+      toolCatalog.filter((tool) => {
+        const typeMatch = typeFilter === TYPE_ALL || tool.type === typeFilter;
+        const categoryMatch = category === CATEGORY_ALL || tool.category === category;
+        const tagMatch = tag === TAG_ALL || (tool.tags ?? []).includes(tag);
+        return typeMatch && categoryMatch && tagMatch;
+      }),
+    [typeFilter, category, tag],
+  );
+
+  const baseToolIds = useMemo(() => new Set(baseTools.map((tool) => tool.id)), [baseTools]);
+
+  const localSearchItems = useMemo<SearchIndexItem[]>(
+    () =>
+      toolCatalog.map((tool) => {
+        const copy = getToolCopy(tool, locale);
+        const tags = tool.tags ?? [];
+        const localeTitles = { tr: tool.title, en: tool.titleEn ?? tool.title };
+        return {
+          id: `tool:${tool.id}`,
+          type: "tool",
+          title: copy.title,
+          description: copy.description,
+          href: tool.href,
+          tags,
+          localeTitles,
+          searchText: buildSearchText(
+            copy.title,
+            copy.description,
+            tool.id,
+            tags.join(" "),
+            tool.category ?? "",
+            tool.type,
+            ...Object.values(localeTitles),
+          ),
+        };
+      }),
+    [locale],
+  );
+
+  const toolSearchItems = useMemo(() => {
+    const source = !searchLoading && searchItems.length > 0 ? searchItems : localSearchItems;
+    return source.filter((item) => item.id.startsWith("tool:"));
+  }, [searchItems, localSearchItems, searchLoading]);
+
+  const rankedTools = useMemo(() => {
+    if (!debouncedQuery.trim()) return [];
+    const ranked = filterSearchResults(toolSearchItems, debouncedQuery, 200);
+    return ranked
+      .map((item) => item.id.replace(/^tool:/, ""))
+      .filter((id) => baseToolIds.has(id))
+      .map((id) => toolById.get(id))
+      .filter((tool): tool is ToolCatalogItem => Boolean(tool))
+      .slice(0, 20);
+  }, [debouncedQuery, toolSearchItems, baseToolIds, toolById]);
+
+  const filtered = debouncedQuery.trim().length > 0 ? rankedTools : baseTools;
 
   return (
     <div className="space-y-6">
@@ -135,7 +222,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                 {scenario.links.map((link) => (
                   <Link
                     key={link.href}
-                    href={link.href}
+                    href={withLocalePrefix(link.href, locale)}
                     className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
                   >
                     {link.label}
@@ -154,7 +241,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
             <p className="text-sm text-slate-600">{copy.requestSection.description}</p>
           </div>
           <Link
-            href="/request-tool"
+            href={withLocalePrefix("/request-tool", locale)}
             className="inline-flex items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 px-5 py-2 text-[12px] font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
             aria-label={copy.requestSection.ctaAria}
           >
@@ -178,7 +265,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
               {copy.filterSection.apply}
             </button>
             <Link
-              href="/tools"
+              href={basePath}
               className="rounded-full border border-slate-200 px-4 py-2 text-[11px] font-semibold text-slate-600 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
             >
               {copy.filterSection.clear}
@@ -193,7 +280,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           </label>
           <div className="flex flex-wrap gap-2">
             {typeOptions.map((value) => {
-              const href = buildHref({ ...filterState, type: value });
+              const href = buildHref(basePath, { ...filterState, type: value });
               return (
                 <Link
                   key={value}
@@ -211,7 +298,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           </div>
         </div>
 
-        <form id="tool-filters" method="get" action="/tools" className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <form id="tool-filters" method="get" action={basePath} className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <input type="hidden" name="type" value={typeFilter} />
           <div className="space-y-1">
             <label className="block text-[11px] font-medium text-slate-700">
@@ -258,11 +345,15 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
               inputMode="search"
               enterKeyHint="search"
               name="q"
-              defaultValue={query}
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
               placeholder={copy.filterSection.searchPlaceholder}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               aria-label={copy.filterSection.searchAria}
             />
+            {searchLoading && query.trim().length > 0 ? (
+              <p className="text-[11px] text-slate-500">{copy.filterSection.loading}</p>
+            ) : null}
           </div>
         </form>
       </section>
@@ -272,7 +363,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           <p className="text-sm font-semibold text-slate-700">{copy.emptyState.title}</p>
           <p className="mt-1 text-xs text-slate-500">{copy.emptyState.description}</p>
           <Link
-            href="/tools"
+            href={basePath}
             className="mt-4 inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
           >
             {copy.emptyState.reset}
@@ -292,8 +383,10 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                 key={tool.id}
                 toolId={tool.id}
                 title={title}
+                titleDisplay={highlightMatch(title, debouncedQuery)}
                 description={description}
-                href={tool.href}
+                descriptionDisplay={highlightMatch(description, debouncedQuery)}
+                href={withLocalePrefix(tool.href, locale)}
                 usageLabel={categoryLabel}
                 typeLabel={labels.type[tool.type]}
                 typeTone={tool.type}

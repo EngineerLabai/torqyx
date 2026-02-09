@@ -115,6 +115,31 @@ export const navConfig = {
           route: "home",
         },
         {
+          id: "about",
+          labelKey: "linkAbout",
+          route: "about",
+        },
+        {
+          id: "privacy",
+          labelKey: "linkPrivacy",
+          route: "privacy",
+        },
+        {
+          id: "cookies",
+          labelKey: "linkCookies",
+          route: "cookies",
+        },
+        {
+          id: "terms",
+          labelKey: "linkTerms",
+          route: "terms",
+        },
+        {
+          id: "contact",
+          labelKey: "linkContact",
+          route: "contact",
+        },
+        {
           id: "tool-library",
           labelKey: "linkToolLibrary",
           route: "tools",

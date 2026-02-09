@@ -6,6 +6,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import useToolFavorites from "@/components/tools/useToolFavorites";
 import useToolRecents from "@/components/tools/useToolRecents";
 import { getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 const formatShortDate = (value: string, locale: "tr" | "en") => {
@@ -86,7 +87,7 @@ export default function DashboardClient() {
                   key={tool.id}
                   title={toolCopy.title}
                   description={toolCopy.description}
-                  href={tool.href}
+                  href={withLocalePrefix(tool.href, locale)}
                   badge={tool.category}
                   toolId={tool.id}
                   ctaLabel={copy.open}
@@ -116,7 +117,7 @@ export default function DashboardClient() {
                   <ActionCard
                     title={toolCopy.title}
                     description={toolCopy.description}
-                    href={tool.href}
+                    href={withLocalePrefix(tool.href, locale)}
                     badge={tool.category}
                     toolId={tool.id}
                     ctaLabel={copy.open}
@@ -151,7 +152,7 @@ export default function DashboardClient() {
                   key={tool.id}
                   title={toolCopy.title}
                   description={toolCopy.description}
-                  href={tool.href}
+                  href={withLocalePrefix(tool.href, locale)}
                   badge={tool.category}
                   toolId={tool.id}
                   ctaLabel={copy.open}

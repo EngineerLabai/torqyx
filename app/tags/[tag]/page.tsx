@@ -8,7 +8,9 @@ import { formatMessage, getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 import { getTagIndex, matchesSlug, resolveLabelBySlug } from "@/utils/taxonomy";
 import { slugify } from "@/utils/slugify";
-import { toolCatalog } from "@/tools/_shared/catalog";
+import { buildLanguageAlternates } from "@/utils/seo";
+import { withLocalePrefix } from "@/utils/locale-path";
+import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
   new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
@@ -20,14 +22,16 @@ type TagPageProps = {
 };
 
 export async function generateStaticParams() {
-  const tags = await getTagIndex();
-  return tags.map((tag) => ({ tag: tag.slug }));
+  const [trTags, enTags] = await Promise.all([getTagIndex("tr"), getTagIndex("en")]);
+  const slugs = new Set([...trTags, ...enTags].map((tag) => tag.slug));
+  return Array.from(slugs.values()).map((tag) => ({ tag }));
 }
 
 export async function generateMetadata({ params }: TagPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const tags = await getTagIndex();
+  const [trTags, enTags] = await Promise.all([getTagIndex("tr"), getTagIndex("en")]);
+  const tags = locale === "tr" ? trTags : enTags;
   const tagSlug = decodeURIComponent(params.tag);
   const label = resolveLabelBySlug(tagSlug, tags) ?? tagSlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} etiketi` : `${label} tag`;
@@ -35,22 +39,26 @@ export async function generateMetadata({ params }: TagPageProps) {
     locale === "tr"
       ? `${label} etiketi ile iliskili blog, rehber ve hesaplayicilari kesfet.`
       : `Discover blog posts, guides, and calculators tagged with ${label}.`;
+  const hasTr = trTags.some((entry) => entry.slug === tagSlug);
+  const hasEn = enTags.some((entry) => entry.slug === tagSlug);
+  const alternatesLanguages = hasTr && hasEn ? buildLanguageAlternates(`/tags/${tagSlug}`) : null;
 
   return buildPageMetadata({
     title: `${titleBase} | ${brandContent.siteName}`,
     description,
     path: `/tags/${tagSlug}`,
     locale,
+    alternatesLanguages,
   });
 }
 
 export default async function TagPage({ params }: TagPageProps) {
+  const locale = await getLocaleFromCookies();
   const tagSlug = decodeURIComponent(params.tag);
-  const [blog, guides, tags, locale] = await Promise.all([
-    getContentList("blog"),
-    getContentList("guides"),
-    getTagIndex(),
-    getLocaleFromCookies(),
+  const [blog, guides, tags] = await Promise.all([
+    getContentList("blog", { locale }),
+    getContentList("guides", { locale }),
+    getTagIndex(locale),
   ]);
   const copy = getMessages(locale).pages.tags;
 
@@ -94,7 +102,7 @@ export default async function TagPage({ params }: TagPageProps) {
           description={copy.blogDesc}
           copy={copy}
           items={blogMatches.map((item) => ({
-            href: `/blog/${item.slug}`,
+            href: withLocalePrefix(`/blog/${item.slug}`, locale),
             title: item.title,
             description: item.description,
             category: item.category,
@@ -102,6 +110,7 @@ export default async function TagPage({ params }: TagPageProps) {
             readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
             tags: item.tags,
           }))}
+          locale={locale}
         />
 
         <ContentSection
@@ -109,7 +118,7 @@ export default async function TagPage({ params }: TagPageProps) {
           description={copy.guidesDesc}
           copy={copy}
           items={guideMatches.map((item) => ({
-            href: `/guides/${item.slug}`,
+            href: withLocalePrefix(`/guides/${item.slug}`, locale),
             title: item.title,
             description: item.description,
             category: item.category,
@@ -117,9 +126,10 @@ export default async function TagPage({ params }: TagPageProps) {
             readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
             tags: item.tags,
           }))}
+          locale={locale}
         />
 
-        <ToolSection tools={toolMatches} copy={copy} />
+        <ToolSection tools={toolMatches} copy={copy} locale={locale} />
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -132,7 +142,7 @@ export default async function TagPage({ params }: TagPageProps) {
               {relatedTags.map((tag) => (
                 <Link
                   key={tag.slug}
-                  href={`/tags/${tag.slug}`}
+                  href={withLocalePrefix(`/tags/${tag.slug}`, locale)}
                   className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 hover:border-slate-300"
                 >
                   #{tag.label}
@@ -161,11 +171,13 @@ function ContentSection({
   description,
   items,
   copy,
+  locale,
 }: {
   title: string;
   description: string;
   items: ContentItem[];
   copy: { contentEmpty: string; readCta: string };
+  locale: "tr" | "en";
 }) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -193,7 +205,7 @@ function ContentSection({
                   <p className="text-[15px] leading-relaxed text-slate-600 md:text-base">{item.description}</p>
                 </div>
                 <Link
-                  href={`/categories/${slugify(item.category)}`}
+                  href={withLocalePrefix(`/categories/${slugify(item.category)}`, locale)}
                   className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600"
                 >
                   {item.category}
@@ -206,7 +218,7 @@ function ContentSection({
                 {item.tags.slice(0, 3).map((tag) => (
                   <Link
                     key={tag}
-                    href={`/tags/${slugify(tag)}`}
+                    href={withLocalePrefix(`/tags/${slugify(tag)}`, locale)}
                     className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600"
                   >
                     #{tag}
@@ -226,7 +238,15 @@ function ContentSection({
   );
 }
 
-function ToolSection({ tools, copy }: { tools: typeof toolCatalog; copy: { toolsTitle: string; toolsDesc: string; toolsEmpty: string; openToolCta: string } }) {
+function ToolSection({
+  tools,
+  copy,
+  locale,
+}: {
+  tools: typeof toolCatalog;
+  copy: { toolsTitle: string; toolsDesc: string; toolsEmpty: string; openToolCta: string };
+  locale: "tr" | "en";
+}) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="space-y-2">
@@ -240,17 +260,20 @@ function ToolSection({ tools, copy }: { tools: typeof toolCatalog; copy: { tools
         </div>
       ) : (
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          {tools.map((tool) => (
-            <ActionCard
-              key={tool.id}
-              title={tool.title}
-              description={tool.description}
-              href={tool.href}
-              badge={tool.category}
-              toolId={tool.id}
-              ctaLabel={copy.openToolCta}
-            />
-          ))}
+          {tools.map((tool) => {
+            const toolCopy = getToolCopy(tool, locale);
+            return (
+              <ActionCard
+                key={tool.id}
+                title={toolCopy.title}
+                description={toolCopy.description}
+                href={withLocalePrefix(tool.href, locale)}
+                badge={tool.category}
+                toolId={tool.id}
+                ctaLabel={copy.openToolCta}
+              />
+            );
+          })}
         </div>
       )}
     </section>

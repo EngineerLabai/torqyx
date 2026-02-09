@@ -4,12 +4,12 @@ import PageShell from "@/components/layout/PageShell";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import JsonLd from "@/components/seo/JsonLd";
 import ActionCard from "@/components/ui/ActionCard";
-import { extractToc, getContentBySlug, getContentList } from "@/utils/content";
+import { extractToc, getContentBySlug, getContentList, getContentLocaleAvailability, getContentSlugs } from "@/utils/content";
 import { getRelatedForBlogPost } from "@/utils/related-items";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
-import { buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
+import { buildLanguageAlternates, buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -23,21 +23,30 @@ type BlogPostPageProps = {
 };
 
 export async function generateStaticParams() {
-  const posts = await getContentList("blog");
-  return posts.map((post) => ({ slug: post.slug }));
+  const slugs = await getContentSlugs("blog");
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = await getContentBySlug("blog", params.slug);
   const locale = await getLocaleFromCookies();
   const notFoundCopy = getMessages(locale).pages.notFound;
+  const fallbackCopy = getMessages(locale).pages.contentFallback;
+  const [post, availability] = await Promise.all([
+    getContentBySlug("blog", params.slug, { locale }),
+    getContentLocaleAvailability("blog", params.slug),
+  ]);
 
   if (!post) {
+    const hasAnyLocale = availability.tr || availability.en;
+    const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
+    const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
+    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/blog/${params.slug}`) : null;
     return buildPageMetadata({
-      title: notFoundCopy.title,
-      description: notFoundCopy.description,
+      title,
+      description,
       path: `/blog/${params.slug}`,
       locale,
+      alternatesLanguages,
     });
   }
 
@@ -48,6 +57,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     locale,
     type: "article",
     keywords: post.tags,
+    alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/blog/${post.slug}`) : null,
     openGraph: {
       type: "article",
       publishedTime: post.date,
@@ -57,13 +67,26 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const [post, locale] = await Promise.all([
-    getContentBySlug("blog", params.slug),
-    getLocaleFromCookies(),
+  const locale = await getLocaleFromCookies();
+  const fallbackCopy = getMessages(locale).pages.contentFallback;
+  const [post, availability] = await Promise.all([
+    getContentBySlug("blog", params.slug, { locale }),
+    getContentLocaleAvailability("blog", params.slug),
   ]);
 
   if (!post) {
-    notFound();
+    const hasAnyLocale = availability.tr || availability.en;
+    if (!hasAnyLocale) {
+      notFound();
+    }
+    return (
+      <PageShell>
+        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h1 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{fallbackCopy.title}</h1>
+          <p className="mt-3 text-sm text-slate-600">{fallbackCopy.description}</p>
+        </article>
+      </PageShell>
+    );
   }
 
   const brandContent = getBrandCopy(locale);
@@ -127,7 +150,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   const toc = extractToc(post.content);
-  const allPosts = await getContentList("blog");
+  const allPosts = await getContentList("blog", { locale });
   const { relatedPosts, relatedTools } = getRelatedForBlogPost(post, allPosts, { locale });
 
   return (

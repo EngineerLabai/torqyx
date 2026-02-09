@@ -31,7 +31,7 @@ export default async function GuidesIndexPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.guides;
   const heroImage = getHeroImageSrc("guides");
-  const guides = await getContentList("guides");
+  const guides = await getContentList("guides", { locale });
   const grouped = guides.reduce<Record<string, typeof guides>>((acc, guide) => {
     const key = guide.category || copy.fallbackCategory;
     if (!acc[key]) acc[key] = [];

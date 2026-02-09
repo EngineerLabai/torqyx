@@ -57,6 +57,7 @@ const buildCandidates = (slug: string, locale?: Locale, extension = "mdx") => {
   const candidates: string[] = [];
   if (locale) {
     candidates.push(`${safeSlug}.${locale}.${extension}`);
+    return candidates;
   }
   candidates.push(`${safeSlug}.${extension}`);
   return candidates;

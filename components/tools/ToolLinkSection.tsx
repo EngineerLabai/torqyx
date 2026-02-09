@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import ActionCard from "@/components/ui/ActionCard";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 const MAX_LINKS = 4;
@@ -27,7 +28,7 @@ export default function ToolLinkSection() {
   const copy = getMessages(locale).components.toolLinkSection;
 
   const { similarLinks, helpfulLinks } = useMemo(() => {
-    const normalized = pathname.replace(/\/$/, "");
+    const normalized = stripLocaleFromPath(pathname).replace(/\/$/, "");
     const current = toolCatalog.find(
       (tool) => normalized === tool.href || normalized.startsWith(`${tool.href}/`)
     );
@@ -81,7 +82,7 @@ export default function ToolLinkSection() {
                   key={tool.id}
                   title={toolCopy.title}
                   description={toolCopy.description}
-                  href={tool.href}
+                  href={withLocalePrefix(tool.href, locale)}
                   toolId={tool.id}
                   ctaLabel={copy.similar.cta}
                 />
@@ -113,7 +114,7 @@ export default function ToolLinkSection() {
                   key={tool.id}
                   title={toolCopy.title}
                   description={toolCopy.description}
-                  href={tool.href}
+                  href={withLocalePrefix(tool.href, locale)}
                   toolId={tool.id}
                   ctaLabel={copy.helpful.cta}
                 />

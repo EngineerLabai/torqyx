@@ -2,6 +2,7 @@ import "server-only";
 import { slugify } from "@/utils/slugify";
 import { getContentList } from "@/utils/content";
 import { toolCatalog } from "@/tools/_shared/catalog";
+import type { Locale } from "@/utils/locale";
 
 export type TaxonomyEntry = {
   slug: string;
@@ -20,10 +21,10 @@ const upsertEntry = (map: Map<string, TaxonomyEntry>, label: string) => {
   map.set(slug, { slug, label, count: 1 });
 };
 
-export const getTagIndex = async () => {
+export const getTagIndex = async (locale: Locale) => {
   const [blog, guides] = await Promise.all([
-    getContentList("blog"),
-    getContentList("guides"),
+    getContentList("blog", { locale }),
+    getContentList("guides", { locale }),
   ]);
 
   const map = new Map<string, TaxonomyEntry>();
@@ -31,13 +32,13 @@ export const getTagIndex = async () => {
   guides.forEach((item) => item.tags.forEach((tag) => upsertEntry(map, tag)));
   toolCatalog.forEach((tool) => (tool.tags ?? []).forEach((tag) => upsertEntry(map, tag)));
 
-  return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, "tr-TR"));
+  return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, locale === "en" ? "en-US" : "tr-TR"));
 };
 
-export const getCategoryIndex = async () => {
+export const getCategoryIndex = async (locale: Locale) => {
   const [blog, guides] = await Promise.all([
-    getContentList("blog"),
-    getContentList("guides"),
+    getContentList("blog", { locale }),
+    getContentList("guides", { locale }),
   ]);
 
   const map = new Map<string, TaxonomyEntry>();
@@ -47,7 +48,7 @@ export const getCategoryIndex = async () => {
     if (tool.category) upsertEntry(map, tool.category);
   });
 
-  return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, "tr-TR"));
+  return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, locale === "en" ? "en-US" : "tr-TR"));
 };
 
 export const resolveLabelBySlug = (slug: string, entries: TaxonomyEntry[]) => {

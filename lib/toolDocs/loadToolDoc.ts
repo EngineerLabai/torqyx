@@ -61,6 +61,7 @@ const buildFileCandidates = (slug: string, locale?: Locale) => {
     if (locale) {
       candidates.push(`${safeSlug}.${locale}${ext}`);
       candidates.push(`${safeSlug}/${locale}${ext}`);
+      continue;
     }
     candidates.push(`${safeSlug}${ext}`);
   }
@@ -75,10 +76,9 @@ const buildSectionCandidates = (slug: string, section: "explanation" | "examples
   for (const ext of CONTENT_EXTENSIONS) {
     if (locale) {
       candidates.push(`${safeSlug}/${section}.${locale}${ext}`);
-      candidates.push(`${safeSlug}/${section}${ext}`);
-    } else {
-      candidates.push(`${safeSlug}/${section}${ext}`);
+      continue;
     }
+    candidates.push(`${safeSlug}/${section}${ext}`);
   }
   return candidates;
 };

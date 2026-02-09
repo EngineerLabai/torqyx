@@ -1,10 +1,13 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 
 type ToolLibraryCardProps = {
   toolId: string;
   title: string;
+  titleDisplay?: ReactNode;
   description: string;
+  descriptionDisplay?: ReactNode;
   href: string;
   usageLabel: string;
   typeLabel?: string;
@@ -18,7 +21,9 @@ type ToolLibraryCardProps = {
 export default function ToolLibraryCard({
   toolId,
   title,
+  titleDisplay,
   description,
+  descriptionDisplay,
   href,
   usageLabel,
   typeLabel,
@@ -48,7 +53,7 @@ export default function ToolLibraryCard({
       </div>
       <div className="relative z-0 space-y-2">
         <div className="flex items-start justify-between gap-2 pr-12">
-          <h3 className="break-words text-base font-semibold leading-snug text-slate-900">{title}</h3>
+          <h3 className="break-words text-base font-semibold leading-snug text-slate-900">{titleDisplay ?? title}</h3>
           <div className="flex flex-col items-end gap-1">
             {typeLabel ? (
               <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${typeToneClass}`.trim()}>
@@ -65,7 +70,7 @@ export default function ToolLibraryCard({
             ) : null}
           </div>
         </div>
-        <p className="break-words text-sm leading-relaxed text-slate-600">{description}</p>
+        <p className="break-words text-sm leading-relaxed text-slate-600">{descriptionDisplay ?? description}</p>
         {tags && tags.length > 0 ? (
           <div className="flex flex-wrap gap-2 pt-1">
             {tags.map((tag) => (

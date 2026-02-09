@@ -6,6 +6,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 import useToolRecents from "@/components/tools/useToolRecents";
 import { formatMessage, getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 type RecentToolsStripProps = {
@@ -74,7 +75,7 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
                   <ToolFavoriteButton toolId={tool.id} toolTitle={toolCopy.title} size="sm" />
                 </div>
                 <Link
-                  href={tool.href}
+                  href={withLocalePrefix(tool.href, locale)}
                   aria-label={formatMessage(copy.open, { title: toolCopy.title })}
                   className="block space-y-2 pr-10"
                 >

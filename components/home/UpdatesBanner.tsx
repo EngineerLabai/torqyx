@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 const DISMISS_KEY = "aielab:changelog-dismissed";
 
@@ -61,7 +62,7 @@ export default function UpdatesBanner({ latestVersion, latestDate, summary }: Up
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Link
-            href="/changelog"
+            href={withLocalePrefix("/changelog", locale)}
             className="rounded-full border border-emerald-300 bg-white px-4 py-2 text-[11px] font-semibold text-emerald-700 transition hover:border-emerald-400"
             aria-label={copy.cta}
           >

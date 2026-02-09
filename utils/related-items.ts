@@ -142,8 +142,8 @@ export const getRelatedForTool = async (
 ) => {
   const locale = options.locale ?? "tr";
   const [guides, glossary] = await Promise.all([
-    getContentList("guides"),
-    getContentList("glossary"),
+    getContentList("guides", { locale }),
+    getContentList("glossary", { locale }),
   ]);
 
   const toolCopy = getToolCopy(tool, locale);

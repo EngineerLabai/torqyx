@@ -6,6 +6,8 @@ import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 type CalcCard = {
   name: string;
@@ -81,6 +83,7 @@ type GearCalculatorsClientProps = {
 };
 
 export default function GearCalculatorsPage({ initialDocs }: GearCalculatorsClientProps) {
+  const { locale } = useLocale();
   return (
     <PageShell>
       <ToolDocTabs slug="gear-design/calculators" initialDocs={initialDocs}>
@@ -134,7 +137,7 @@ export default function GearCalculatorsPage({ initialDocs }: GearCalculatorsClie
               <span>{calc.status === "Aktif" ? "" : "Hazırlanacak"}</span>
               {calc.status === "Aktif" ? (
                 <Link
-                  href={calc.href}
+                  href={withLocalePrefix(calc.href, locale)}
                   className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-semibold text-sky-700 transition hover:border-sky-300 hover:bg-sky-100"
                 >
                   Kullan
