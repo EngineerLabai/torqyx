@@ -3,7 +3,10 @@
 import { useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
+import ToolMethodNotes from "@/components/tools/ToolMethodNotes";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
+import { getToolMethodNotes } from "@/lib/tool-method-notes";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 type MaterialInfo = {
   name: string;
@@ -23,6 +26,8 @@ type SimpleStressClientProps = {
 };
 
 export default function SimpleStressPage({ initialDocs }: SimpleStressClientProps) {
+  const { locale } = useLocale();
+  const methodNotes = getToolMethodNotes("simple-stress", locale);
   const [force, setForce] = useState<number>(0);
   const [area, setArea] = useState<number>(0);
   const [material, setMaterial] = useState<string>(MATERIALS[0].name);
@@ -143,6 +148,7 @@ export default function SimpleStressPage({ initialDocs }: SimpleStressClientProp
         </p>
           </div>
         </main>
+        {methodNotes ? <ToolMethodNotes notes={methodNotes} /> : null}
       </ToolDocTabs>
     </PageShell>
   );

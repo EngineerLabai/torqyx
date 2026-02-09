@@ -19,12 +19,14 @@ import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import ToolActions from "@/components/tools/ToolActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
+import ToolMethodNotes from "@/components/tools/ToolMethodNotes";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
 import { getToolById, type ToolDefinition, type ToolInputDefinition, type ToolInputOption } from "@/tools/registry";
+import { getToolMethodNotes } from "@/lib/tool-method-notes";
 
 Chart.register(
   LineController,
@@ -166,6 +168,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   const formula = tool ? resolveLocalizedValue(tool.formula, locale) ?? tool.formulaDisplay : "";
   const assumptions = tool ? resolveLocalizedValue(tool.assumptions, locale) : undefined;
   const references = tool ? resolveLocalizedValue(tool.references, locale) : undefined;
+  const methodNotes = tool ? getToolMethodNotes(tool.id, locale) : null;
 
   const encodedState = useMemo(() => encodeToolState(values), [values]);
   const shareUrl = useMemo(() => {
@@ -329,6 +332,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
         </section>
 
         <ToolTrustPanel formula={formula} assumptions={assumptions} references={references} />
+        {methodNotes ? <ToolMethodNotes notes={methodNotes} /> : null}
 
         {chartConfig ? (
           <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">

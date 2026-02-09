@@ -9,6 +9,7 @@ import ComparePanel from "@/components/tools/ComparePanel";
 import ToolHistory from "@/components/tools/ToolHistory";
 import ToolActions from "@/components/tools/ToolActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
+import ToolMethodNotes from "@/components/tools/ToolMethodNotes";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
 import { trackEvent } from "@/utils/analytics";
@@ -16,6 +17,7 @@ import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
 import { formatMessage, getMessages } from "@/utils/messages";
+import { getToolMethodNotes } from "@/lib/tool-method-notes";
 
 type ToolPageProps<TInput, TResult> = {
   tool: ToolDefinition<TInput, TResult>;
@@ -149,6 +151,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
   const formula = resolveLocalizedValue(tool.formula, locale);
   const assumptions = resolveLocalizedValue(tool.assumptions, locale);
   const references = resolveLocalizedValue(tool.references, locale);
+  const methodNotes = getToolMethodNotes(tool.id, locale);
 
   const InputSection = tool.InputSection;
   const ResultSection = tool.ResultSection;
@@ -202,6 +205,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
         </section>
 
         <ToolTrustPanel formula={formula} assumptions={assumptions} references={references} />
+        {methodNotes ? <ToolMethodNotes notes={methodNotes} /> : null}
 
         <ComparePanel
           toolId={tool.id}
