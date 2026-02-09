@@ -1,11 +1,11 @@
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
 import type { ToolInputProps } from "@/tools/_shared/types";
 import type { HeatInput } from "./types";
+import { getBasicEngineeringCopy } from "./copy";
 
 export default function InputSection({ input, onChange }: ToolInputProps<HeatInput>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["basic-engineering"].input;
+  const copy = getBasicEngineeringCopy(locale).input;
   const handleFieldChange = <K extends keyof HeatInput>(key: K, value: HeatInput[K]) => {
     onChange({ ...input, [key]: value });
   };

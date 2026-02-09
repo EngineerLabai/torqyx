@@ -1,11 +1,11 @@
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
 import type { ToolInputProps } from "@/tools/_shared/types";
 import type { ShaftTorsionInput } from "./types";
+import { getShaftTorsionCopy } from "./copy";
 
 export default function InputSection({ input, onChange, errors }: ToolInputProps<ShaftTorsionInput>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["shaft-torsion"].input;
+  const copy = getShaftTorsionCopy(locale).input;
   const handleChange = <K extends keyof ShaftTorsionInput>(key: K, value: ShaftTorsionInput[K]) => {
     onChange({ ...input, [key]: value });
   };

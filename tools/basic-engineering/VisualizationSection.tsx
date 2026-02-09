@@ -7,11 +7,11 @@ import ExportPanel from "@/components/tools/ExportPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { exportSvg, exportSvgToPng, getSvgPreview } from "@/utils/export";
 import { formatNumberFixed } from "@/utils/number-format";
-import { getMessages } from "@/utils/messages";
+import { getBasicEngineeringCopy } from "./copy";
 
 export default function VisualizationSection({ input, result }: ToolVisualizationProps<HeatInput, HeatResult>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["basic-engineering"].visualization;
+  const copy = getBasicEngineeringCopy(locale).visualization;
   const formatNumber = (value: number | null, digits = 2) => formatNumberFixed(value, locale, digits);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");

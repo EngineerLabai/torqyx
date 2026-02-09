@@ -3,16 +3,16 @@
 import ExplanationPanel from "@/components/tools/ExplanationPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatNumberFixed } from "@/utils/number-format";
-import { getMessages } from "@/utils/messages";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { BearingLifeResult } from "./types";
+import { getBearingLifeCopy } from "./copy";
 
 const formatNumber = (value: number | null, digits = 2, locale: "tr" | "en") =>
   formatNumberFixed(value, locale, digits);
 
 export default function ResultSection({ result }: ToolResultProps<BearingLifeResult>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["bearing-life"].result;
+  const copy = getBearingLifeCopy(locale).result;
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">

@@ -18,7 +18,7 @@ export const unitConverterTool: ToolDefinition<UnitInput, UnitResult> = {
     {
       key: "error",
       label: "Hata",
-      getValue: (result) => result.error,
+      getValue: (result) => result.errorKey ?? null,
     },
     {
       key: "output",

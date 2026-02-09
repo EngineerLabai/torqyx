@@ -12,7 +12,7 @@ type PageMetadataOptions = {
   image?: typeof DEFAULT_OG_IMAGE_META;
   openGraph?: Metadata["openGraph"];
   twitter?: Metadata["twitter"];
-  alternatesLanguages?: Metadata["alternates"] extends { languages?: infer L } ? L | null : Metadata["alternates"]["languages"] | null;
+  alternatesLanguages?: NonNullable<Metadata["alternates"]> extends { languages?: infer L } ? L | null : null;
 };
 
 export const buildPageMetadata = ({

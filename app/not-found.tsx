@@ -24,6 +24,8 @@ export async function generateMetadata() {
 export default async function NotFound() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.notFound;
+  const toolsHref = withLocalePrefix("/tools", locale);
+  const homeHref = withLocalePrefix("/", locale);
 
   return (
     <PageShell>

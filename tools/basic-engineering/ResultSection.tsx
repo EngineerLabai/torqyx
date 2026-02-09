@@ -3,13 +3,13 @@
 import ExplanationPanel from "@/components/tools/ExplanationPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatNumberFixed } from "@/utils/number-format";
-import { getMessages } from "@/utils/messages";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { HeatResult } from "./types";
+import { getBasicEngineeringCopy } from "./copy";
 
 export default function ResultSection({ result }: ToolResultProps<HeatResult>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["basic-engineering"].result;
+  const copy = getBasicEngineeringCopy(locale).result;
   const formatNumber = (value: number | null, digits = 4) => formatNumberFixed(value, locale, digits);
   return (
     <div className="space-y-4 text-sm">

@@ -3,16 +3,16 @@
 import ExplanationPanel from "@/components/tools/ExplanationPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatNumberFixed } from "@/utils/number-format";
-import { getMessages } from "@/utils/messages";
 import type { ToolResultProps } from "@/tools/_shared/types";
 import type { ShaftTorsionResult } from "./types";
+import { getShaftTorsionCopy } from "./copy";
 
 const formatNumber = (value: number | null, digits = 2, locale: "tr" | "en") =>
   formatNumberFixed(value, locale, digits);
 
 export default function ResultSection({ result }: ToolResultProps<ShaftTorsionResult>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["shaft-torsion"].result;
+  const copy = getShaftTorsionCopy(locale).result;
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">

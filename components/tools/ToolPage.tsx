@@ -18,22 +18,24 @@ import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
+import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
-type ToolPageProps<TInput, TResult> = {
-  tool: ToolDefinition<TInput, TResult>;
+type ToolPageProps = {
+  tool: ToolDefinition<any, any>;
   initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
 };
 
-export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPageProps<TInput, TResult>) {
+export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const copy = messages.components.toolActions;
   const toolPageCopy = messages.components.toolPage;
   const validationCopy = messages.components.toolValidation;
-  const toolCopy = messages.tools?.[tool.id];
+  const catalogEntry = toolCatalog.find((item) => item.id === tool.id);
+  const toolCopy = catalogEntry ? getToolCopy(catalogEntry, locale) : null;
   const toolTitle = toolCopy?.title ?? tool.title;
   const toolDescription = toolCopy?.description ?? tool.description;
-  const [input, setInput] = useState<TInput>(tool.initialInput);
+  const [input, setInput] = useState<any>(tool.initialInput);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const [loadedHistoryId, setLoadedHistoryId] = useState<string | null>(null);
@@ -50,7 +52,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
         Object.entries(shared).forEach(([key, value]) => {
           merged[key] = value;
         });
-        Promise.resolve().then(() => setInput(merged as TInput));
+        Promise.resolve().then(() => setInput(merged as any));
         hasHydrated.current = true;
         return;
       }
@@ -62,7 +64,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
     try {
       const stored = localStorage.getItem(`tool-history:${tool.id}`);
       if (!stored) return;
-      const parsed = JSON.parse(stored) as Array<{ id: string; input: TInput }>;
+      const parsed = JSON.parse(stored) as Array<{ id: string; input: any }>;
       const match = parsed.find((entry) => entry.id === historyId);
       if (!match) return;
       Promise.resolve().then(() => {
@@ -74,14 +76,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
     }
   }, [searchParams, tool.id, loadedHistoryId]);
 
-  const resolvedInputMeta = useMemo(() => {
-    if (!tool.inputMeta) return null;
-    const inputCopy = toolCopy?.inputMeta;
-    return tool.inputMeta.map((meta) => ({
-      ...meta,
-      label: inputCopy?.[meta.key] ?? meta.label,
-    }));
-  }, [tool.inputMeta, toolCopy?.inputMeta]);
+  const resolvedInputMeta = useMemo(() => tool.inputMeta ?? null, [tool.inputMeta]);
 
   const schema = useMemo(() => {
     if (!resolvedInputMeta) return null;
@@ -110,12 +105,12 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
 
   const { result, calcError } = useMemo(() => {
     if (!validation.success) {
-      return { result: null as TResult | null, calcError: validationCopy.resultFix };
+      return { result: null as any, calcError: validationCopy.resultFix };
     }
     try {
-      return { result: tool.calculate(validation.data as TInput), calcError: "" };
+      return { result: tool.calculate(validation.data as any), calcError: "" };
     } catch {
-      return { result: null as TResult | null, calcError: validationCopy.calcFailed };
+      return { result: null as any, calcError: validationCopy.calcFailed };
     }
   }, [validation, tool, validationCopy.calcFailed, validationCopy.resultFix]);
 
@@ -157,14 +152,7 @@ export default function ToolPage<TInput, TResult>({ tool, initialDocs }: ToolPag
   const ResultSection = tool.ResultSection;
   const VisualizationSection = tool.VisualizationSection;
   const CompareVisualizationSection = tool.CompareVisualizationSection;
-  const resolvedCompareMetrics = useMemo(() => {
-    if (!tool.compareMetrics) return undefined;
-    const metricCopy = toolCopy?.compareMetrics;
-    return tool.compareMetrics.map((metric) => ({
-      ...metric,
-      label: metricCopy?.[metric.key] ?? metric.label,
-    }));
-  }, [tool.compareMetrics, toolCopy?.compareMetrics]);
+  const resolvedCompareMetrics = useMemo(() => tool.compareMetrics ?? undefined, [tool.compareMetrics]);
 
   return (
     <PageShell>

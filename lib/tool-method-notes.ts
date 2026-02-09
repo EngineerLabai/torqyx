@@ -45,7 +45,7 @@ export type ToolMethodNotesByLocale = {
   en?: ToolMethodNotes;
 };
 
-export const toolMethodNotes = {
+export const toolMethodNotes: Record<string, ToolMethodNotesByLocale> = {
   "bolt-calculator": {
     tr: {
       intro: [
@@ -493,7 +493,7 @@ export const toolMethodNotes = {
       ],
     },
   },
-} satisfies Record<string, ToolMethodNotesByLocale>;
+};
 
 export const getToolMethodNotes = (toolId: string, locale: Locale): ToolMethodNotes | null =>
   toolMethodNotes[toolId]?.[locale] ?? null;

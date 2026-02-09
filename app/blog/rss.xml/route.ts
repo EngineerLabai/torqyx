@@ -15,13 +15,13 @@ const escapeXml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&apos;");
 
-const resolveLocale = (): Locale => {
-  const headerLocale = headers().get("x-locale");
+const resolveLocale = async (): Promise<Locale> => {
+  const headerLocale = (await headers()).get("x-locale");
   return isLocale(headerLocale) ? headerLocale : "tr";
 };
 
 export async function GET() {
-  const locale = resolveLocale();
+  const locale = await resolveLocale();
   const posts = await getContentList("blog", { includeDrafts: false, locale });
   const siteUrl = SITE_URL.replace(/\/$/, "");
   const feedUrl = `${siteUrl}${withLocalePrefix("/blog/rss.xml", locale)}`;

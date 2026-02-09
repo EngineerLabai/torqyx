@@ -3,14 +3,14 @@
 import type { ToolVisualizationProps } from "@/tools/_shared/types";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatNumberFixed } from "@/utils/number-format";
-import { getMessages } from "@/utils/messages";
 import type { BearingLifeInput, BearingLifeResult } from "./types";
+import { getBearingLifeCopy } from "./copy";
 
 const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
 
 export default function VisualizationSection({ input }: ToolVisualizationProps<BearingLifeInput, BearingLifeResult>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["bearing-life"].visualization;
+  const copy = getBearingLifeCopy(locale).visualization;
   const C = toNumber(input.C);
   const P = toNumber(input.P);
   const ratio = Number.isFinite(C) && Number.isFinite(P) && P > 0 ? C / P : null;

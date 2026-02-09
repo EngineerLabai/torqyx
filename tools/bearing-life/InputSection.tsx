@@ -1,11 +1,11 @@
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
 import type { ToolInputProps } from "@/tools/_shared/types";
 import type { BearingLifeInput } from "./types";
+import { getBearingLifeCopy } from "./copy";
 
 export default function InputSection({ input, onChange, errors }: ToolInputProps<BearingLifeInput>) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).tools["bearing-life"].input;
+  const copy = getBearingLifeCopy(locale).input;
   const bearingOptions = copy.bearingTypeOptions;
   const handleChange = <K extends keyof BearingLifeInput>(key: K, value: BearingLifeInput[K]) => {
     onChange({ ...input, [key]: value });
