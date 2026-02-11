@@ -4,7 +4,6 @@ import SupportForm from "@/components/support/SupportForm";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
 const pageCopy = {
@@ -13,15 +12,20 @@ const pageCopy = {
   imageAlt: "İletişim sayfası görseli",
 };
 
+const pageCopyEn = {
+  title: "Contact",
+  description: "Reach out for questions, feedback, or collaboration requests.",
+  imageAlt: "Contact page visual",
+};
+
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const fallbackCopy = getMessages(locale).pages.contentFallback;
-  const isTurkish = locale === "tr";
+  const copy = locale === "en" ? pageCopyEn : pageCopy;
 
   return buildPageMetadata({
-    title: `${isTurkish ? pageCopy.title : fallbackCopy.title} | ${brandContent.siteName}`,
-    description: isTurkish ? pageCopy.description : fallbackCopy.description,
+    title: `${copy.title} | ${brandContent.siteName}`,
+    description: copy.description,
     path: "/iletisim",
     locale,
     alternatesLanguages: null,
@@ -30,15 +34,41 @@ export async function generateMetadata() {
 
 export default async function ContactPage() {
   const locale = await getLocaleFromCookies();
-  const fallbackCopy = getMessages(locale).pages.contentFallback;
 
-  if (locale !== "tr") {
+  if (locale === "en") {
     return (
       <PageShell>
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm">
-          <h1 className="text-2xl font-semibold text-slate-900">{fallbackCopy.title}</h1>
-          <p className="mt-3">{fallbackCopy.description}</p>
-        </article>
+        <PageHero
+          title={pageCopyEn.title}
+          description={pageCopyEn.description}
+          imageSrc={HERO_PLACEHOLDER}
+          imageAlt={pageCopyEn.imageAlt}
+        />
+
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <p className="text-sm text-slate-700 md:text-base">
+            Use the form below for technical questions, new tool requests, or collaboration ideas. If you can share inputs, units, and
+            expected results, we can review faster.
+          </p>
+          <SupportForm />
+        </section>
+
+        <section className="rounded-3xl border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-sm">
+          <h2 className="text-base font-semibold text-slate-900">Support guidance</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5">
+            <li>Include the calculator name or page URL.</li>
+            <li>Share input values, units, and the expected outcome.</li>
+            <li>If it is urgent, mention it at the top of your message.</li>
+          </ul>
+        </section>
+
+        <section className="rounded-3xl border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-sm">
+          <h2 className="text-base font-semibold text-slate-900">Response time</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5">
+            <li>We typically respond to weekday requests within 1-2 business days.</li>
+            <li>Providing context and attachments helps us resolve issues faster.</li>
+          </ul>
+        </section>
       </PageShell>
     );
   }

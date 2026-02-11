@@ -6,21 +6,28 @@ import Table from "./Table";
 import MdxImage from "./Image";
 import ToolLink from "./ToolLink";
 import Confidence from "./Confidence";
+import type { Locale } from "@/utils/locale";
+import { localePath } from "@/utils/locale-path";
 
 const mergeClassName = (base: string, extra?: string) => (extra ? `${base} ${extra}` : base);
 
-const Anchor = ({ className, href, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) => {
-  const isExternal = href?.startsWith("http://") || href?.startsWith("https://");
-  return (
-    <a
-      href={href}
-      className={mergeClassName("text-emerald-700 underline-offset-4 hover:underline", className)}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noreferrer" : undefined}
-      {...props}
-    />
-  );
-};
+const createAnchor =
+  (locale?: Locale) =>
+  ({ className, href, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    const isExternal = href?.startsWith("http://") || href?.startsWith("https://");
+    const isProtocolRelative = href?.startsWith("//");
+    const shouldLocalize = Boolean(locale && href && href.startsWith("/") && !isProtocolRelative);
+    const resolvedHref = shouldLocalize && locale ? localePath(locale, href ?? "") : href;
+    return (
+      <a
+        href={resolvedHref}
+        className={mergeClassName("text-emerald-700 underline-offset-4 hover:underline", className)}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noreferrer" : undefined}
+        {...props}
+      />
+    );
+  };
 
 const Paragraph = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => (
   <p className={mergeClassName("text-[15px] leading-relaxed text-slate-700 md:text-base", className)} {...props} />
@@ -75,7 +82,7 @@ const Pre = ({ className, ...props }: HTMLAttributes<HTMLPreElement>) => (
   />
 );
 
-export const mdxComponents = {
+export const getMdxComponents = (locale?: Locale) => ({
   Callout,
   Formula,
   StepList,
@@ -85,7 +92,7 @@ export const mdxComponents = {
   Image: MdxImage,
   img: MdxImage,
   table: Table,
-  a: Anchor,
+  a: createAnchor(locale),
   p: Paragraph,
   ul: UnorderedList,
   ol: OrderedList,
@@ -96,6 +103,8 @@ export const mdxComponents = {
   blockquote: Blockquote,
   code: InlineCode,
   pre: Pre,
-};
+});
+
+export const mdxComponents = getMdxComponents();
 
 export default mdxComponents;

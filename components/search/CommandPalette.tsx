@@ -8,6 +8,7 @@ import { COMMAND_PALETTE_OPEN_EVENT } from "@/components/search/commandPaletteEv
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { localePath } from "@/utils/locale-path";
 import type { SearchIndexItem } from "@/utils/search-index";
 
 const ICONS = {
@@ -76,7 +77,7 @@ export default function CommandPalette() {
 
   const handleNavigate = (item: SearchIndexItem) => {
     setOpen(false);
-    router.push(item.href);
+    router.push(localePath(locale, item.href));
   };
 
   const handleInputKey = (event: ReactKeyboardEvent<HTMLInputElement>) => {

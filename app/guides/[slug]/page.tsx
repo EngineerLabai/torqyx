@@ -197,7 +197,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </aside>
 
           <div className="order-2 space-y-6 mdx-content lg:order-1">
-            <MDXRenderer source={guide.content} />
+            <MDXRenderer source={guide.content} locale={locale} />
           </div>
         </div>
       </article>

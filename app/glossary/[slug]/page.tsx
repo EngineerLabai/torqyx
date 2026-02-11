@@ -208,7 +208,7 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
             <section className="space-y-4">
               <h2 className="text-xl font-semibold text-slate-900">{copy.definitionTitle}</h2>
               <div className="mdx-content space-y-6">
-                <MDXRenderer source={term.content} />
+                <MDXRenderer source={term.content} locale={locale} />
               </div>
             </section>
 

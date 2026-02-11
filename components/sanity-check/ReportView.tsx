@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { downloadReportPdf } from "@/utils/report-export";
 import { evaluateFormula, runMonteCarlo, runSweep } from "@/lib/sanityCheck/engine";
 import type { LabSession } from "@/lib/sanityCheck/types";
 import ChartCanvas from "@/components/sanity-check/ChartCanvas";
@@ -19,6 +20,7 @@ export default function ReportView({ session }: { session: LabSession }) {
   const result = useMemo(() => evaluateFormula(session), [session]);
   const sweep = useMemo(() => runSweep(session, session.sweep.variableId), [session]);
   const monteCarlo = useMemo(() => runMonteCarlo(session), [session]);
+  const pdfTitle = copy.report.title;
 
   const sweepConfig = useMemo(() => {
     if (!sweep.points.length) return null;
@@ -55,13 +57,22 @@ export default function ReportView({ session }: { session: LabSession }) {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold text-slate-900">{copy.report.title}</h1>
-        <button
-          type="button"
-          onClick={() => window.print()}
-          className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700"
-        >
-          {copy.report.print}
-        </button>
+        <div className="no-print flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700"
+          >
+            {copy.report.print}
+          </button>
+          <button
+            type="button"
+            onClick={() => downloadReportPdf("report-print-area", pdfTitle)}
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700"
+          >
+            {copy.report.downloadPdf}
+          </button>
+        </div>
       </div>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4">

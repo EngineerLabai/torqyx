@@ -3,7 +3,7 @@ import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { withLocalePrefix } from "@/utils/locale-path";
+import { localePath } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -154,7 +154,7 @@ export default async function QualityToolsPage() {
   const locale = await getLocaleFromCookies();
   const tools = QUALITY_TOOLS_BY_LOCALE[locale];
   const copy = getMessages(locale).pages.qualityTools;
-  const localizeHref = (href?: string) => (href ? withLocalePrefix(href, locale) : undefined);
+  const localizeHref = (href?: string) => (href ? localePath(locale, href) : undefined);
 
   return (
     <PageShell>

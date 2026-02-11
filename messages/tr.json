@@ -855,7 +855,8 @@
                                                                 },
                                             "report":  {
                                                            "title":  "Mühendislik Kontrol Raporu",
-                                                           "print":  "Yazdır / PDF",
+                                                           "print":  "Yazdır",
+                                                           "downloadPdf":  "PDF indir",
                                                            "missing":  "Oturum verisi bulunamadı.",
                                                            "variablesTitle":  "Değişkenler",
                                                            "formulaTitle":  "Formül",
@@ -967,7 +968,8 @@
                                           "formula":  "Formül",
                                           "assumptions":  "Varsayımlar",
                                           "references":  "Kaynaklar",
-                                          "print":  "Yazdır / PDF",
+                                          "print":  "Yazdır",
+                                          "downloadPdf":  "PDF indir",
                                           "back":  "Araca dön",
                                           "missing":  "Rapor verisi yok. Araca dönüp raporu oluşturun."
                                       },

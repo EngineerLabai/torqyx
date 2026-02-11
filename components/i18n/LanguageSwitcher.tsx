@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Locale } from "@/utils/locale";
-import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
+import { localePath, stripLocaleFromPath } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 
 type LanguageSwitcherProps = {
@@ -29,7 +29,7 @@ export default function LanguageSwitcher({ className = "", size = "sm", tone = "
   const handleSelect = (next: Locale) => {
     if (next === locale) return;
     const basePath = stripLocaleFromPath(pathname);
-    const nextPath = withLocalePrefix(basePath, next);
+    const nextPath = localePath(next, basePath);
     const query = searchParams?.toString();
     setLocale(next);
     router.push(query ? `${nextPath}?${query}` : nextPath);

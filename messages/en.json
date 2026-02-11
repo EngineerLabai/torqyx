@@ -855,7 +855,8 @@
                                                                 },
                                             "report":  {
                                                            "title":  "Sanity Check Report",
-                                                           "print":  "Print / Save PDF",
+                                                           "print":  "Print",
+                                                           "downloadPdf":  "Download PDF",
                                                            "missing":  "No session data provided.",
                                                            "variablesTitle":  "Variables",
                                                            "formulaTitle":  "Formula",
@@ -967,7 +968,8 @@
                                           "formula":  "Formula",
                                           "assumptions":  "Assumptions",
                                           "references":  "References",
-                                          "print":  "Print / Save PDF",
+                                          "print":  "Print",
+                                          "downloadPdf":  "Download PDF",
                                           "back":  "Back to tool",
                                           "missing":  "No report data. Return to the tool and generate a report."
                                       },

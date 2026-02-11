@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { localePath } from "@/utils/locale-path";
 
 type ToolLinkProps = {
   href: string;
@@ -8,9 +12,11 @@ type ToolLinkProps = {
 };
 
 export default function ToolLink({ href, title, description, badge }: ToolLinkProps) {
+  const { locale } = useLocale();
+  const resolvedHref = localePath(locale, href);
   return (
     <Link
-      href={href}
+      href={resolvedHref}
       className="group flex flex-col gap-2 rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 text-sm shadow-sm transition hover:border-emerald-200 hover:bg-emerald-50"
     >
       <div className="flex items-start justify-between gap-3">

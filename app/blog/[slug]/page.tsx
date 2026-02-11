@@ -202,7 +202,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <div className="order-2 space-y-10 lg:order-1">
             <div className="space-y-6 mdx-content">
-              <MDXRenderer source={post.content} />
+              <MDXRenderer source={post.content} locale={locale} />
             </div>
 
             {relatedPosts.length > 0 ? (

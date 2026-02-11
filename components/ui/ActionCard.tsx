@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { localePath } from "@/utils/locale-path";
 
 type ActionCardProps = {
   title: string;
@@ -20,6 +22,8 @@ export default function ActionCard({
   ctaLabel = "Detaylari Gor",
   toolId,
 }: ActionCardProps) {
+  const { locale } = useLocale();
+  const resolvedHref = localePath(locale, href);
   return (
     <article className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-sm shadow-sm transition hover:border-slate-300 hover:shadow-md">
       <div className="space-y-2">
@@ -37,7 +41,7 @@ export default function ActionCard({
         <p className="break-words text-sm leading-relaxed text-slate-600">{description}</p>
       </div>
       <div className="mt-4">
-        <Link href={href} className="btn-cta tap-target block w-full rounded-md text-center text-xs font-semibold">
+        <Link href={resolvedHref} className="btn-cta tap-target block w-full rounded-md text-center text-xs font-semibold">
           {ctaLabel}
         </Link>
       </div>

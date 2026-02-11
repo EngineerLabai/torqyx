@@ -6,7 +6,7 @@ import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
-import { withLocalePrefix } from "@/utils/locale-path";
+import { localePath } from "@/utils/locale-path";
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
@@ -44,7 +44,7 @@ export default async function StandardsLandingPage() {
           {standardsManifest.categories.map((category) => (
             <Link
               key={category.id}
-              href={withLocalePrefix(`/standards/${category.slug}`, locale)}
+              href={localePath(locale, `/standards/${category.slug}`)}
               className="group rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:border-emerald-300 hover:bg-white"
             >
               <div className="space-y-2">

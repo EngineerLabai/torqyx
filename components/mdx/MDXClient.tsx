@@ -1,12 +1,14 @@
 "use client";
 
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import mdxComponents from "@/components/mdx";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMdxComponents } from "@/components/mdx";
 
 type MDXClientProps = {
   source: MDXRemoteSerializeResult;
 };
 
 export default function MDXClient({ source }: MDXClientProps) {
-  return <MDXRemote {...source} components={mdxComponents} />;
+  const { locale } = useLocale();
+  return <MDXRemote {...source} components={getMdxComponents(locale)} />;
 }

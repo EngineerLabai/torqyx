@@ -93,7 +93,7 @@ export default async function ChangelogPage() {
               {entry.content.trim().length > 0 ? (
                 <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
                   <div className="mdx-content space-y-4 text-sm text-slate-700">
-                    <MDXRenderer source={entry.content} />
+                    <MDXRenderer source={entry.content} locale={locale} />
                   </div>
                 </div>
               ) : null}

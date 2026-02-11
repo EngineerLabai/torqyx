@@ -3,7 +3,6 @@ import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
 const pageCopy = {
@@ -12,15 +11,20 @@ const pageCopy = {
   imageAlt: "AI Engineers Lab hakkında görsel",
 };
 
+const pageCopyEn = {
+  title: "About",
+  description: "Methodology-first engineering calculations, notes, and practical tools.",
+  imageAlt: "About AI Engineers Lab",
+};
+
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const fallbackCopy = getMessages(locale).pages.contentFallback;
-  const isTurkish = locale === "tr";
+  const copy = locale === "en" ? pageCopyEn : pageCopy;
 
   return buildPageMetadata({
-    title: `${isTurkish ? pageCopy.title : fallbackCopy.title} | ${brandContent.siteName}`,
-    description: isTurkish ? pageCopy.description : fallbackCopy.description,
+    title: `${copy.title} | ${brandContent.siteName}`,
+    description: copy.description,
     path: "/hakkinda",
     locale,
     alternatesLanguages: null,
@@ -29,14 +33,31 @@ export async function generateMetadata() {
 
 export default async function AboutPage() {
   const locale = await getLocaleFromCookies();
-  const fallbackCopy = getMessages(locale).pages.contentFallback;
 
-  if (locale !== "tr") {
+  if (locale === "en") {
     return (
       <PageShell>
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm">
-          <h1 className="text-2xl font-semibold text-slate-900">{fallbackCopy.title}</h1>
-          <p className="mt-3">{fallbackCopy.description}</p>
+        <PageHero
+          title={pageCopyEn.title}
+          description={pageCopyEn.description}
+          imageSrc={HERO_PLACEHOLDER}
+          imageAlt={pageCopyEn.imageAlt}
+        />
+
+        <article className="space-y-5 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
+          <p>
+            AI Engineers Lab is an engineering workspace built for mechanical design and manufacturing decisions. We bring calculators,
+            reference tables, and guides together so quick checks are clear and repeatable.
+          </p>
+          <ul className="list-disc space-y-1 pl-5">
+            <li>Repeatable calculation flows with methodology notes</li>
+            <li>Clear input/output structure for fast verification</li>
+            <li>Practical templates for project, quality, and fixture workflows</li>
+          </ul>
+          <p>
+            Our goal is to support critical decisions with a reliable, concise reference. Share your feedback or requests from the
+            Contact page.
+          </p>
         </article>
       </PageShell>
     );

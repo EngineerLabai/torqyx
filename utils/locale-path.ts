@@ -6,6 +6,17 @@ const normalizePath = (value: string) => {
   return next === "" ? "/" : next;
 };
 
+const isExternalPath = (value: string) => {
+  const trimmed = value.trim();
+  return (
+    trimmed.startsWith("http://") ||
+    trimmed.startsWith("https://") ||
+    trimmed.startsWith("mailto:") ||
+    trimmed.startsWith("tel:") ||
+    trimmed.startsWith("#")
+  );
+};
+
 export const getLocaleFromPathname = (pathname: string): Locale | null => {
   const normalized = normalizePath(pathname);
   const segment = normalized.split("/")[1];
@@ -23,10 +34,18 @@ export const stripLocaleFromPath = (pathname: string) => {
   return normalized;
 };
 
+export const localePath = (locale: Locale, pathname: string) => {
+  if (!pathname) return `/${locale}`;
+  const trimmed = pathname.trim();
+  if (!trimmed) return `/${locale}`;
+  if (isExternalPath(trimmed)) return trimmed;
+  const normalized = normalizePath(trimmed);
+  if (getLocaleFromPathname(normalized)) return normalized;
+  if (normalized === "/") return `/${locale}`;
+  return `/${locale}${normalized}`;
+};
+
 export const withLocalePrefix = (pathname: string, locale: Locale = DEFAULT_LOCALE) => {
   const base = stripLocaleFromPath(pathname);
-  if (base === "/") {
-    return `/${locale}`;
-  }
-  return `/${locale}${base.startsWith("/") ? base : `/${base}`}`;
+  return localePath(locale, base);
 };

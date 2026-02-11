@@ -3,13 +3,18 @@
 
 import { useState } from "react";
 import PageShell from "@/components/layout/PageShell";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { assertNoTurkish } from "@/utils/i18n-assert";
+import { kaizenCopy } from "@/data/quality-tools/kaizen";
+
+type ActionStatus = "planned" | "inProgress" | "done";
 
 type ActionRow = {
   id: string;
   task: string;
   owner: string;
   due: string;
-  status: "planlandı" | "devam" | "tamam";
+  status: ActionStatus;
 };
 
 type KaizenForm = {
@@ -40,13 +45,17 @@ const INITIAL_FORM: KaizenForm = {
   risks: "",
 };
 
-const STATUS_OPTIONS: ActionRow["status"][] = ["planlandı", "devam", "tamam"];
+const STATUS_OPTIONS: ActionStatus[] = ["planned", "inProgress", "done"];
 
 function uuid() {
   return Math.random().toString(36).slice(2, 9);
 }
 
 export default function KaizenPage() {
+  const { locale } = useLocale();
+  const copy = kaizenCopy[locale];
+  assertNoTurkish(locale, copy, "quality-tools/kaizen");
+
   const [form, setForm] = useState<KaizenForm>(INITIAL_FORM);
   const [actions, setActions] = useState<ActionRow[]>([
     {
@@ -54,7 +63,7 @@ export default function KaizenPage() {
       task: "",
       owner: "",
       due: "",
-      status: "planlandı",
+      status: "planned",
     },
   ]);
 
@@ -71,7 +80,7 @@ export default function KaizenPage() {
   function addAction() {
     setActions((prev) => [
       ...prev,
-      { id: uuid(), task: "", owner: "", due: "", status: "planlandı" },
+      { id: uuid(), task: "", owner: "", due: "", status: "planned" },
     ]);
   }
 
@@ -81,7 +90,7 @@ export default function KaizenPage() {
 
   function handleReset() {
     setForm(INITIAL_FORM);
-    setActions([{ id: uuid(), task: "", owner: "", due: "", status: "planlandı" }]);
+    setActions([{ id: uuid(), task: "", owner: "", due: "", status: "planned" }]);
   }
 
   return (
@@ -89,107 +98,101 @@ export default function KaizenPage() {
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-            Kaizen
+            {copy.badges.title}
           </span>
           <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-medium text-emerald-700">
-            Beta
+            {copy.badges.beta}
           </span>
         </div>
-        <h1 className="text-lg font-semibold text-slate-900">
-          Kaizen / Sürekli İyileştirme Kartı
-        </h1>
-        <p className="mt-2 text-xs text-slate-600">
-          Küçük ama sürekli iyileştirmeleri hızlıca tanımla, aksiyonları
-          sahiplen, sonuç ve kazanımları kaydet. Bu taslak; problem, hedef,
-          aksiyon listesi ve “önce/sonra” metrikleri tek sayfada toplar.
-        </p>
+        <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
+        <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
-          <h2 className="text-sm font-semibold text-slate-900">Temel Bilgiler</h2>
+          <h2 className="text-sm font-semibold text-slate-900">{copy.basics.title}</h2>
           <button
             onClick={handleReset}
             className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 hover:bg-slate-200"
           >
-            Formu temizle
+            {copy.basics.reset}
           </button>
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           <Field
-            label="Başlık / Kaizen adı"
+            label={copy.basics.fields.title.label}
             value={form.title}
-            onChange={(v) => handleFormChange("title", v)}
-            placeholder="Örn: Operasyon 30 çevrim süresi iyileştirme"
+            onChange={(value) => handleFormChange("title", value)}
+            placeholder={copy.basics.fields.title.placeholder}
           />
           <Field
-            label="Alan / Hat / Hücre"
+            label={copy.basics.fields.area.label}
             value={form.area}
-            onChange={(v) => handleFormChange("area", v)}
-            placeholder="Örn: Hat B, Operasyon 30"
+            onChange={(value) => handleFormChange("area", value)}
+            placeholder={copy.basics.fields.area.placeholder}
           />
         </div>
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">Problem & Hedef</h3>
+          <h3 className="mb-3 text-sm font-semibold text-slate-900">{copy.problem.title}</h3>
           <div className="space-y-3">
             <TextArea
-              label="Problem / Mevcut durum"
+              label={copy.problem.fields.problem.label}
               value={form.problem}
-              onChange={(v) => handleFormChange("problem", v)}
-              placeholder="Örn: Çevrim süresi ort. 54 sn, hedef 45 sn; darboğaz Operasyon 30, bekleme ve malzeme besleme eksik."
+              onChange={(value) => handleFormChange("problem", value)}
+              placeholder={copy.problem.fields.problem.placeholder}
             />
             <TextArea
-              label="Kök neden (özet)"
+              label={copy.problem.fields.rootCause.label}
               value={form.rootCause}
-              onChange={(v) => handleFormChange("rootCause", v)}
-              placeholder="Örn: Besleme operatörü iki hatta bakıyor; malzeme arabası tasarımı çift yönlü değil; standart iş yok."
+              onChange={(value) => handleFormChange("rootCause", value)}
+              placeholder={copy.problem.fields.rootCause.placeholder}
             />
             <TextArea
-              label="Hedef durum"
+              label={copy.problem.fields.targetState.label}
               value={form.targetState}
-              onChange={(v) => handleFormChange("targetState", v)}
-              placeholder="Örn: Çevrim süresi ≤ 45 sn, malzeme besleme gecikmesi sıfır, WIP dengeli."
+              onChange={(value) => handleFormChange("targetState", value)}
+              placeholder={copy.problem.fields.targetState.placeholder}
             />
             <TextArea
-              label="Ölçülebilir metrikler (önce)"
+              label={copy.problem.fields.metricsBefore.label}
               value={form.metricsBefore}
-              onChange={(v) => handleFormChange("metricsBefore", v)}
-              placeholder="Örn: Çevrim ort 54 sn, OEE 68%, hurda %1.2, operatör adım sayısı 24."
+              onChange={(value) => handleFormChange("metricsBefore", value)}
+              placeholder={copy.problem.fields.metricsBefore.placeholder}
             />
             <TextArea
-              label="Ölçülebilir metrikler (sonra)"
+              label={copy.problem.fields.metricsAfter.label}
               value={form.metricsAfter}
-              onChange={(v) => handleFormChange("metricsAfter", v)}
-              placeholder="Hedef/gerçekleşen: çevrim ≤45 sn, OEE ≥75%, hurda <%1, adım sayısı ≤16."
+              onChange={(value) => handleFormChange("metricsAfter", value)}
+              placeholder={copy.problem.fields.metricsAfter.placeholder}
             />
           </div>
         </div>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">Kazanımlar</h3>
+          <h3 className="mb-3 text-sm font-semibold text-slate-900">{copy.gains.title}</h3>
           <div className="space-y-3">
             <TextArea
-              label="Beklenen / elde edilen kazanımlar"
+              label={copy.gains.fields.gains.label}
               value={form.gains}
-              onChange={(v) => handleFormChange("gains", v)}
-              placeholder="Örn: Çevrim -9 sn, hat kapasitesi +20%; ergonomi: eğilme hareketi %50 azaldı; stok alanı 3 paletten 1 palete indi; güvenlik: kesici uç koruyucu eklendi."
+              onChange={(value) => handleFormChange("gains", value)}
+              placeholder={copy.gains.fields.gains.placeholder}
               rows={6}
             />
             <TextArea
-              label="Riskler / engeller"
+              label={copy.gains.fields.risks.label}
               value={form.risks}
-              onChange={(v) => handleFormChange("risks", v)}
-              placeholder="Örn: Yeni arabaların tedarik süresi; operatör rotasyonu için eğitim süresi; bakım yükü artışı."
+              onChange={(value) => handleFormChange("risks", value)}
+              placeholder={copy.gains.fields.risks.placeholder}
               rows={4}
             />
             <TextArea
-              label="Öğrenilmiş dersler"
+              label={copy.gains.fields.lessons.label}
               value={form.lessons}
-              onChange={(v) => handleFormChange("lessons", v)}
-              placeholder="Örn: Malzeme akışının tek yönlü tasarımı çevrim süresini düşürdü; standart iş kartı şart."
+              onChange={(value) => handleFormChange("lessons", value)}
+              placeholder={copy.gains.fields.lessons.placeholder}
               rows={4}
             />
           </div>
@@ -199,16 +202,14 @@ export default function KaizenPage() {
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Aksiyon Listesi</h3>
-            <p className="text-[11px] text-slate-600">
-              Sahip, tarih ve durumla takip et. İstersen tamamlananları silmek için çöp kutusu.
-            </p>
+            <h3 className="text-sm font-semibold text-slate-900">{copy.actions.title}</h3>
+            <p className="text-[11px] text-slate-600">{copy.actions.description}</p>
           </div>
           <button
             onClick={addAction}
             className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white hover:bg-slate-800"
           >
-            Aksiyon ekle
+            {copy.actions.add}
           </button>
         </div>
 
@@ -221,39 +222,35 @@ export default function KaizenPage() {
               <input
                 type="text"
                 value={row.task}
-                onChange={(e) => handleActionChange(row.id, "task", e.target.value)}
-                placeholder="Aksiyon (Örn: Malzeme arabası tek yönlü düzenle)"
+                onChange={(event) => handleActionChange(row.id, "task", event.target.value)}
+                placeholder={copy.actions.placeholders.task}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               />
               <input
                 type="text"
                 value={row.owner}
-                onChange={(e) => handleActionChange(row.id, "owner", e.target.value)}
-                placeholder="Sorumlu"
+                onChange={(event) => handleActionChange(row.id, "owner", event.target.value)}
+                placeholder={copy.actions.placeholders.owner}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               />
               <input
                 type="text"
                 value={row.due}
-                onChange={(e) => handleActionChange(row.id, "due", e.target.value)}
-                placeholder="Hedef tarih"
+                onChange={(event) => handleActionChange(row.id, "due", event.target.value)}
+                placeholder={copy.actions.placeholders.due}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               />
               <div className="flex items-center gap-2">
                 <select
                   value={row.status}
-                  onChange={(e) =>
-                    handleActionChange(row.id, "status", e.target.value as ActionRow["status"])
+                  onChange={(event) =>
+                    handleActionChange(row.id, "status", event.target.value as ActionStatus)
                   }
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 >
-                  {STATUS_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt === "planlandı"
-                        ? "Planlandı"
-                        : opt === "devam"
-                        ? "Devam ediyor"
-                        : "Tamamlandı"}
+                  {STATUS_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {copy.status[option]}
                     </option>
                   ))}
                 </select>
@@ -261,9 +258,9 @@ export default function KaizenPage() {
                   type="button"
                   onClick={() => removeAction(row.id)}
                   className="rounded-full border border-slate-300 bg-white px-2 py-1 text-[11px] text-slate-600 hover:bg-slate-100"
-                  title="Satırı sil"
+                  title={copy.actions.removeTitle}
                 >
-                  ✕
+                  x
                 </button>
               </div>
             </div>
@@ -272,13 +269,11 @@ export default function KaizenPage() {
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-        <h3 className="mb-2 text-sm font-semibold text-slate-900">Hızlı Kontrol Listesi</h3>
+        <h3 className="mb-2 text-sm font-semibold text-slate-900">{copy.checklist.title}</h3>
         <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
-          <li>Problem, kök neden ve hedef durum tanımlı mı?</li>
-          <li>“Önce/sonra” metrikleri sayısal olarak yazıldı mı?</li>
-          <li>Aksiyonlarda sahip, tarih ve durum bilgisi eksiksiz mi?</li>
-          <li>Kazanımlar (SQDCM) ve öğrenilmiş dersler not edildi mi?</li>
-          <li>Riskler ve engeller için B planı var mı?</li>
+          {copy.checklist.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
         </ul>
       </section>
     </PageShell>
@@ -293,7 +288,7 @@ function Field({
 }: {
   label: string;
   value: string;
-  onChange: (v: string) => void;
+  onChange: (value: string) => void;
   placeholder?: string;
 }) {
   return (
@@ -302,7 +297,7 @@ function Field({
       <input
         type="text"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
         placeholder={placeholder}
       />
@@ -319,7 +314,7 @@ function TextArea({
 }: {
   label: string;
   value: string;
-  onChange: (v: string) => void;
+  onChange: (value: string) => void;
   placeholder?: string;
   rows?: number;
 }) {
@@ -328,7 +323,7 @@ function TextArea({
       <span className="block text-[11px] font-medium text-slate-700">{label}</span>
       <textarea
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         rows={rows}
         placeholder={placeholder}
         className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs outline-none transition focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"

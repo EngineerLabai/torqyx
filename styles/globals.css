@@ -406,3 +406,27 @@ header.site-header {
 .mdx-content a {
   text-decoration-thickness: 1px;
 }
+
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+
+  header.site-header,
+  footer,
+  aside {
+    display: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  #report-print-area {
+    box-shadow: none !important;
+  }
+
+  #report-print-area * {
+    box-shadow: none !important;
+  }
+}

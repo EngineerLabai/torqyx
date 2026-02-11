@@ -19,13 +19,15 @@ export default async function SanityCheckReportPage({ searchParams }: ReportPage
 
   return (
     <PageShell>
-      {session ? (
-        <ReportView session={session} />
-      ) : (
-        <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
-          {copy.missing}
-        </section>
-      )}
+      <section id="report-print-area">
+        {session ? (
+          <ReportView session={session} />
+        ) : (
+          <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
+            {copy.missing}
+          </section>
+        )}
+      </section>
     </PageShell>
   );
 }

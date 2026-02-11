@@ -3,8 +3,13 @@
 
 import { useState } from "react";
 import PageShell from "@/components/layout/PageShell";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { assertNoTurkish } from "@/utils/i18n-assert";
+import { pokaYokeCopy } from "@/data/quality-tools/poka-yoke";
 
-type StatusOption = "planlandı" | "devam" | "tamam";
+type StatusOption = "planned" | "inProgress" | "done";
+type IdeaType = "prevention" | "detection" | "warning";
+type Principle = "physicalGuide" | "interlock" | "sensor" | "counter" | "labelColor";
 
 type ActionRow = {
   id: string;
@@ -28,8 +33,8 @@ type PokaYokeForm = {
   occurrence: string;
   detection: string;
   idea: string;
-  ideaType: string;
-  principle: string;
+  ideaType: IdeaType;
+  principle: Principle;
   expectedEffect: string;
   feasibility: string;
   cost: string;
@@ -51,8 +56,8 @@ const INITIAL_FORM: PokaYokeForm = {
   occurrence: "",
   detection: "",
   idea: "",
-  ideaType: "önleyici",
-  principle: "fiziksel kılavuz",
+  ideaType: "prevention",
+  principle: "physicalGuide",
   expectedEffect: "",
   feasibility: "",
   cost: "",
@@ -60,16 +65,20 @@ const INITIAL_FORM: PokaYokeForm = {
   validation: "",
 };
 
-const STATUS_OPTIONS: StatusOption[] = ["planlandı", "devam", "tamam"];
+const STATUS_OPTIONS: StatusOption[] = ["planned", "inProgress", "done"];
 
 function uuid() {
   return Math.random().toString(36).slice(2, 9);
 }
 
 export default function PokaYokePage() {
+  const { locale } = useLocale();
+  const copy = pokaYokeCopy[locale];
+  assertNoTurkish(locale, copy, "quality-tools/poka-yoke");
+
   const [form, setForm] = useState<PokaYokeForm>(INITIAL_FORM);
   const [actions, setActions] = useState<ActionRow[]>([
-    { id: uuid(), task: "", owner: "", due: "", status: "planlandı" },
+    { id: uuid(), task: "", owner: "", due: "", status: "planned" },
   ]);
 
   function handleChange<K extends keyof PokaYokeForm>(key: K, value: PokaYokeForm[K]) {
@@ -85,7 +94,7 @@ export default function PokaYokePage() {
   function addAction() {
     setActions((prev) => [
       ...prev,
-      { id: uuid(), task: "", owner: "", due: "", status: "planlandı" },
+      { id: uuid(), task: "", owner: "", due: "", status: "planned" },
     ]);
   }
 
@@ -95,7 +104,7 @@ export default function PokaYokePage() {
 
   function handleReset() {
     setForm(INITIAL_FORM);
-    setActions([{ id: uuid(), task: "", owner: "", due: "", status: "planlandı" }]);
+    setActions([{ id: uuid(), task: "", owner: "", due: "", status: "planned" }]);
   }
 
   return (
@@ -103,183 +112,167 @@ export default function PokaYokePage() {
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-            Poka-Yoke
+            {copy.badges.title}
           </span>
           <span className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-medium text-indigo-700">
-            Hata Önleme
+            {copy.badges.subtitle}
           </span>
           <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-medium text-emerald-700">
-            Beta
+            {copy.badges.beta}
           </span>
         </div>
-        <h1 className="text-lg font-semibold text-slate-900">
-          Poka-Yoke Fikir Kartı
-        </h1>
-        <p className="mt-2 text-xs text-slate-600">
-          Hata önleyici fikirlerini tanımla, tipini belirle (önleyici/algılayıcı/uyarıcı),
-          uygulanabilirliğini ve beklenen etkiyi yaz, aksiyonlarla takip et. Basit bir
-          onay ve doğrulama planı için temel alanlar içerir.
-        </p>
+        <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
+        <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
-          <h2 className="text-sm font-semibold text-slate-900">Temel Bilgiler</h2>
+          <h2 className="text-sm font-semibold text-slate-900">{copy.basics.title}</h2>
           <button
             onClick={handleReset}
             className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 hover:bg-slate-200"
           >
-            Formu temizle
+            {copy.basics.reset}
           </button>
         </div>
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           <Field
-            label="Fikir / Proje adı"
+            label={copy.basics.fields.title.label}
             value={form.title}
-            onChange={(v) => handleChange("title", v)}
-            placeholder="Örn: Yanlış parça montajını fiziksel kılavuzla engelleme"
+            onChange={(value) => handleChange("title", value)}
+            placeholder={copy.basics.fields.title.placeholder}
           />
           <Field
-            label="Proses / Hat"
+            label={copy.basics.fields.process.label}
             value={form.process}
-            onChange={(v) => handleChange("process", v)}
-            placeholder="Örn: Montaj Hattı B"
+            onChange={(value) => handleChange("process", value)}
+            placeholder={copy.basics.fields.process.placeholder}
           />
           <Field
-            label="İstasyon"
+            label={copy.basics.fields.station.label}
             value={form.station}
-            onChange={(v) => handleChange("station", v)}
-            placeholder="Örn: İstasyon 12"
+            onChange={(value) => handleChange("station", value)}
+            placeholder={copy.basics.fields.station.placeholder}
           />
           <Field
-            label="Ürün / Parça kodu"
+            label={copy.basics.fields.part.label}
             value={form.part}
-            onChange={(v) => handleChange("part", v)}
-            placeholder="Örn: ABC123-04"
+            onChange={(value) => handleChange("part", value)}
+            placeholder={copy.basics.fields.part.placeholder}
           />
           <Field
-            label="Hazırlayan / Sorumlu"
+            label={copy.basics.fields.owner.label}
             value={form.owner}
-            onChange={(v) => handleChange("owner", v)}
-            placeholder="İsim / departman"
+            onChange={(value) => handleChange("owner", value)}
+            placeholder={copy.basics.fields.owner.placeholder}
           />
           <Field
-            label="Tarih"
+            label={copy.basics.fields.date.label}
             value={form.date}
-            onChange={(v) => handleChange("date", v)}
-            placeholder="GG.AA.YYYY"
+            onChange={(value) => handleChange("date", value)}
+            placeholder={copy.basics.fields.date.placeholder}
           />
         </div>
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">Problem ve Hata Modu</h3>
+          <h3 className="mb-3 text-sm font-semibold text-slate-900">{copy.problem.title}</h3>
           <div className="space-y-3">
             <TextArea
-              label="Problem / şikayet"
+              label={copy.problem.fields.problem.label}
               value={form.problem}
-              onChange={(v) => handleChange("problem", v)}
-              placeholder="Örn: Yanlış yönlü montaj, müşteri montajında takılma; hata PPM: 12.000."
+              onChange={(value) => handleChange("problem", value)}
+              placeholder={copy.problem.fields.problem.placeholder}
             />
             <TextArea
-              label="Hata modu (FMEA referansı)"
+              label={copy.problem.fields.failureMode.label}
               value={form.failureMode}
-              onChange={(v) => handleChange("failureMode", v)}
-              placeholder="Örn: Yanlış yön montaj (FM-12); etkisi: sahada montaj yapılamıyor."
+              onChange={(value) => handleChange("failureMode", value)}
+              placeholder={copy.problem.fields.failureMode.placeholder}
             />
             <TextArea
-              label="Mevcut kontrol / tespit noktası"
+              label={copy.problem.fields.currentControl.label}
               value={form.currentControl}
-              onChange={(v) => handleChange("currentControl", v)}
-              placeholder="Örn: Operatör görsel kontrol; hat sonu %10 örnekleme."
+              onChange={(value) => handleChange("currentControl", value)}
+              placeholder={copy.problem.fields.currentControl.placeholder}
             />
             <div className="grid gap-3 sm:grid-cols-3">
               <Field
-                label="Şiddet (S)"
+                label={copy.problem.fields.severity.label}
                 value={form.severity}
-                onChange={(v) => handleChange("severity", v)}
-                placeholder="Örn: 8"
+                onChange={(value) => handleChange("severity", value)}
+                placeholder={copy.problem.fields.severity.placeholder}
               />
               <Field
-                label="Olasılık (O)"
+                label={copy.problem.fields.occurrence.label}
                 value={form.occurrence}
-                onChange={(v) => handleChange("occurrence", v)}
-                placeholder="Örn: 6"
+                onChange={(value) => handleChange("occurrence", value)}
+                placeholder={copy.problem.fields.occurrence.placeholder}
               />
               <Field
-                label="Tespit (D)"
+                label={copy.problem.fields.detection.label}
                 value={form.detection}
-                onChange={(v) => handleChange("detection", v)}
-                placeholder="Örn: 6"
+                onChange={(value) => handleChange("detection", value)}
+                placeholder={copy.problem.fields.detection.placeholder}
               />
             </div>
           </div>
         </div>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">Poka-Yoke Fikri</h3>
+          <h3 className="mb-3 text-sm font-semibold text-slate-900">{copy.idea.title}</h3>
           <div className="space-y-3">
             <TextArea
-              label="Fikir / çözüm"
+              label={copy.idea.fields.idea.label}
               value={form.idea}
-              onChange={(v) => handleChange("idea", v)}
-              placeholder="Örn: Parça yönünü kılavuzlayan simetrik olmayan fixtür + pin; doğru yön dışında parça oturmuyor."
+              onChange={(value) => handleChange("idea", value)}
+              placeholder={copy.idea.fields.idea.placeholder}
               rows={5}
             />
             <div className="grid gap-3 sm:grid-cols-2">
               <SelectField
-                label="Tip"
+                label={copy.idea.ideaType.label}
                 value={form.ideaType}
-                onChange={(v) => handleChange("ideaType", v)}
-                options={[
-                  { value: "önleyici", label: "Önleyici (prevention)" },
-                  { value: "algılayıcı", label: "Algılayıcı (detection)" },
-                  { value: "uyarıcı", label: "Uyarı (warning)" },
-                ]}
+                onChange={(value) => handleChange("ideaType", value as IdeaType)}
+                options={copy.idea.ideaType.options}
               />
               <SelectField
-                label="Prensip / yöntem"
+                label={copy.idea.principle.label}
                 value={form.principle}
-                onChange={(v) => handleChange("principle", v)}
-                options={[
-                  { value: "fiziksel kılavuz", label: "Fiziksel kılavuz / geometri" },
-                  { value: "kilitleme", label: "Kilitleme / zorlama" },
-                  { value: "sensör", label: "Sensör (foto, proximity, switch)" },
-                  { value: "sayaç", label: "Sayaç / sekans kontrol" },
-                  { value: "etiket/renk", label: "Renk/etiketleme" },
-                ]}
+                onChange={(value) => handleChange("principle", value as Principle)}
+                options={copy.idea.principle.options}
               />
             </div>
             <TextArea
-              label="Beklenen etki"
+              label={copy.idea.fields.expectedEffect.label}
               value={form.expectedEffect}
-              onChange={(v) => handleChange("expectedEffect", v)}
-              placeholder="Örn: Yanlış yön montajını fiziksel olarak engelle; hedef O=2, D=3; PPM < 100."
+              onChange={(value) => handleChange("expectedEffect", value)}
+              placeholder={copy.idea.fields.expectedEffect.placeholder}
             />
             <TextArea
-              label="Uygulanabilirlik / kaynak"
+              label={copy.idea.fields.feasibility.label}
               value={form.feasibility}
-              onChange={(v) => handleChange("feasibility", v)}
-              placeholder="Örn: Mevcut fikstüre ek parça; CNC işleme 2 saat; montaj 30 dk; bakım desteği gerekiyor."
+              onChange={(value) => handleChange("feasibility", value)}
+              placeholder={copy.idea.fields.feasibility.placeholder}
             />
             <TextArea
-              label="Maliyet / süre"
+              label={copy.idea.fields.cost.label}
               value={form.cost}
-              onChange={(v) => handleChange("cost", v)}
-              placeholder="Örn: Parça maliyeti 120 USD, işçilik 2 saat; devreye alma hedefi 10.01.2026."
+              onChange={(value) => handleChange("cost", value)}
+              placeholder={copy.idea.fields.cost.placeholder}
             />
             <TextArea
-              label="Riskler / yan etkiler"
+              label={copy.idea.fields.risk.label}
               value={form.risk}
-              onChange={(v) => handleChange("risk", v)}
-              placeholder="Örn: Yanlış pozisyonda sıkışma riski; çevrim süresinde +2 sn artış olabilir."
+              onChange={(value) => handleChange("risk", value)}
+              placeholder={copy.idea.fields.risk.placeholder}
             />
             <TextArea
-              label="Doğrulama planı"
+              label={copy.idea.fields.validation.label}
               value={form.validation}
-              onChange={(v) => handleChange("validation", v)}
-              placeholder="Örn: 3 vardiya pilot; 0 hata ve doğru yönden başka montaj imkansız testi; bakım onayı."
+              onChange={(value) => handleChange("validation", value)}
+              placeholder={copy.idea.fields.validation.placeholder}
             />
           </div>
         </div>
@@ -288,16 +281,14 @@ export default function PokaYokePage() {
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Aksiyon Listesi</h3>
-            <p className="text-[11px] text-slate-600">
-              Sahip, tarih ve durum ile takip et. Satır ekle/sil ile listeyi daralt ya da genişlet.
-            </p>
+            <h3 className="text-sm font-semibold text-slate-900">{copy.actions.title}</h3>
+            <p className="text-[11px] text-slate-600">{copy.actions.description}</p>
           </div>
           <button
             onClick={addAction}
             className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white hover:bg-slate-800"
           >
-            Aksiyon ekle
+            {copy.actions.add}
           </button>
         </div>
 
@@ -310,39 +301,35 @@ export default function PokaYokePage() {
               <input
                 type="text"
                 value={row.task}
-                onChange={(e) => handleActionChange(row.id, "task", e.target.value)}
-                placeholder="Aksiyon (Örn: Kılavuz pimi tasarla ve üret)"
+                onChange={(event) => handleActionChange(row.id, "task", event.target.value)}
+                placeholder={copy.actions.placeholders.task}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               />
               <input
                 type="text"
                 value={row.owner}
-                onChange={(e) => handleActionChange(row.id, "owner", e.target.value)}
-                placeholder="Sorumlu"
+                onChange={(event) => handleActionChange(row.id, "owner", event.target.value)}
+                placeholder={copy.actions.placeholders.owner}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               />
               <input
                 type="text"
                 value={row.due}
-                onChange={(e) => handleActionChange(row.id, "due", e.target.value)}
-                placeholder="Hedef tarih"
+                onChange={(event) => handleActionChange(row.id, "due", event.target.value)}
+                placeholder={copy.actions.placeholders.due}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               />
               <div className="flex items-center gap-2">
                 <select
                   value={row.status}
-                  onChange={(e) =>
-                    handleActionChange(row.id, "status", e.target.value as StatusOption)
+                  onChange={(event) =>
+                    handleActionChange(row.id, "status", event.target.value as StatusOption)
                   }
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 >
-                  {STATUS_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt === "planlandı"
-                        ? "Planlandı"
-                        : opt === "devam"
-                        ? "Devam ediyor"
-                        : "Tamamlandı"}
+                  {STATUS_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {copy.status[option]}
                     </option>
                   ))}
                 </select>
@@ -350,9 +337,9 @@ export default function PokaYokePage() {
                   type="button"
                   onClick={() => removeAction(row.id)}
                   className="rounded-full border border-slate-300 bg-white px-2 py-1 text-[11px] text-slate-600 hover:bg-slate-100"
-                  title="Satırı sil"
+                  title={copy.actions.removeTitle}
                 >
-                  ✕
+                  x
                 </button>
               </div>
             </div>
@@ -361,13 +348,11 @@ export default function PokaYokePage() {
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-        <h3 className="mb-2 text-sm font-semibold text-slate-900">Hızlı Kontrol Listesi</h3>
+        <h3 className="mb-2 text-sm font-semibold text-slate-900">{copy.checklist.title}</h3>
         <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
-          <li>Hata modu, mevcut kontrol ve FMEA dereceleri (S/O/D) yazıldı mı?</li>
-          <li>Poka-yoke tipi ve prensibi net mi (önleyici/algılayıcı/uyarıcı)?</li>
-          <li>Beklenen etki (hedef S/O/D veya PPM) belirtildi mi?</li>
-          <li>Uygulanabilirlik, maliyet ve riskler kaydedildi mi?</li>
-          <li>Doğrulama planı ve aksiyon sorumluları atanmış mı?</li>
+          {copy.checklist.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
         </ul>
       </section>
     </PageShell>
@@ -382,7 +367,7 @@ function Field({
 }: {
   label: string;
   value: string;
-  onChange: (v: string) => void;
+  onChange: (value: string) => void;
   placeholder?: string;
 }) {
   return (
@@ -391,7 +376,7 @@ function Field({
       <input
         type="text"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
         placeholder={placeholder}
       />
@@ -408,7 +393,7 @@ function TextArea({
 }: {
   label: string;
   value: string;
-  onChange: (v: string) => void;
+  onChange: (value: string) => void;
   placeholder?: string;
   rows?: number;
 }) {
@@ -417,7 +402,7 @@ function TextArea({
       <span className="block text-[11px] font-medium text-slate-700">{label}</span>
       <textarea
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         rows={rows}
         placeholder={placeholder}
         className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs outline-none transition focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
@@ -434,7 +419,7 @@ function SelectField({
 }: {
   label: string;
   value: string;
-  onChange: (v: string) => void;
+  onChange: (value: string) => void;
   options: { value: string; label: string }[];
 }) {
   return (
@@ -442,12 +427,12 @@ function SelectField({
       <span className="block text-[11px] font-medium text-slate-700">{label}</span>
       <select
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
       >
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>
