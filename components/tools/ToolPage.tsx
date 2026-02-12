@@ -8,10 +8,14 @@ import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import ComparePanel from "@/components/tools/ComparePanel";
 import ToolHistory from "@/components/tools/ToolHistory";
 import ToolActions from "@/components/tools/ToolActions";
+import ToolDataActions from "@/components/tools/ToolDataActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import ToolMethodNotes from "@/components/tools/ToolMethodNotes";
+import AccessBadge from "@/components/tools/AccessBadge";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
+import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
+import { getAdvisorInsights } from "@/src/lib/advisor/engine";
 import { trackEvent } from "@/utils/analytics";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -30,9 +34,12 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
   const messages = getMessages(locale);
   const copy = messages.components.toolActions;
   const toolPageCopy = messages.components.toolPage;
+  const accessLabels = messages.common.access;
   const validationCopy = messages.components.toolValidation;
   const catalogEntry = toolCatalog.find((item) => item.id === tool.id);
   const toolCopy = catalogEntry ? getToolCopy(catalogEntry, locale) : null;
+  const access = catalogEntry?.access ?? "free";
+  const accessLabel = accessLabels?.[access] ?? accessLabels?.free ?? "";
   const toolTitle = toolCopy?.title ?? tool.title;
   const toolDescription = toolCopy?.description ?? tool.description;
   const [input, setInput] = useState<any>(tool.initialInput);
@@ -147,6 +154,14 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
   const assumptions = resolveLocalizedValue(tool.assumptions, locale);
   const references = resolveLocalizedValue(tool.references, locale);
   const methodNotes = getToolMethodNotes(tool.id, locale);
+  const showAdvisor = tool.id === "bolt-calculator" || tool.id === "pipe-pressure-loss";
+  const advisorInsights = useMemo(() => {
+    if (!showAdvisor) return [];
+    return getAdvisorInsights(tool.id, input as Record<string, unknown>, {
+      locale,
+      reportUrl: result ? reportUrl : undefined,
+    });
+  }, [showAdvisor, tool.id, input, locale, reportUrl, result]);
 
   const InputSection = tool.InputSection;
   const ResultSection = tool.ResultSection;
@@ -159,9 +174,12 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">
-            <p className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-              {toolPageCopy.badge}
-            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+                {toolPageCopy.badge}
+              </span>
+              {accessLabel ? <AccessBadge access={access} label={accessLabel} size="sm" /> : null}
+            </div>
             <h1 className="text-lg font-semibold text-slate-900">{toolTitle}</h1>
             <p className="text-sm text-slate-600">{toolDescription}</p>
           </div>
@@ -175,6 +193,18 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
             {result ? <ResultSection result={result} /> : <p className="text-xs text-red-600">{calcError}</p>}
           </div>
         </section>
+
+        {result ? (
+          <ToolDataActions
+            toolSlug={tool.id}
+            toolTitle={toolTitle}
+            inputs={input as Record<string, unknown>}
+            outputs={result as Record<string, unknown>}
+            reportUrl={reportUrl}
+          />
+        ) : null}
+
+        {showAdvisor ? <AdvisorPanel insights={advisorInsights} /> : null}
 
         {result ? (
           <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

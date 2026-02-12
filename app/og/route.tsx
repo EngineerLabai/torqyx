@@ -32,7 +32,7 @@ export function GET(req: Request) {
           {brandContent.siteName}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <div style={{ fontSize: 56, fontWeight: 700, lineHeight: 1.1 }}>{brandContent.description}</div>
+          <div style={{ fontSize: 56, fontWeight: 700, lineHeight: 1.1 }}>{brandContent.tagline}</div>
           <div style={{ fontSize: 24, opacity: 0.8 }}>{brandContent.siteName}</div>
         </div>
         <div style={{ fontSize: 18, opacity: 0.6 }}>aiengineerslab.com</div>

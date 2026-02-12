@@ -90,7 +90,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const brandContent = getBrandCopy(locale);
   const copy = getMessages(locale).pages.guides;
   const canonical = buildLocalizedCanonical(`/guides/${guide.slug}`, locale);
-  const logoUrl = new URL("/brand/logo.svg", SITE_URL).toString();
+  const logoUrl = new URL("/brand/logo.png", SITE_URL).toString();
   const listHref = withLocalePrefix("/guides", locale);
   const articleJsonLd = {
     "@type": "TechArticle",

@@ -155,9 +155,9 @@ export default function ProjectToolsPage() {
         <p className="mt-2 text-xs text-slate-600">
           Müşteri projeleri, proses iyileştirmeleri ve Kaizen çalışmalarını tek yerden takip etmek için hafif bir proje
           listesi. Kayıtlar şu an sadece bu tarayıcıda (localStorage) tutuluyor. PDF/Excel çıktı ve çoklu cihaz erişimi
-          premium paket planında; ödeme yok,{" "}
-          <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-            bekleme listesi açık
+          premium paketinin özel beta kapsamındadır. Erken erişim için{" "}
+          <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
+            ücretlendirmeye göz at
           </Link>.
         </p>
       </section>
@@ -371,9 +371,9 @@ export default function ProjectToolsPage() {
             <p>
               Bu alanı, hem üretim hattı küçük iyileştirmeleri (Kaizen) hem de müşteri projelerinin kritik maddelerini
               takip etmek için kullanabilirsin. İleride her kayıt; 8D, FMEA ve kalite araçlarıyla ilişkilendirilebilir ve
-              PDF/Excel çıktı premium paket planında yer alır. Ödeme yok,{" "}
-              <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-                bekleme listesi açık
+              PDF/Excel çıktı premium paketinin özel beta kapsamındadır. Erken erişim için{" "}
+              <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
+                ücretlendirmeye göz at
               </Link>.
             </p>
           </div>

@@ -9,8 +9,8 @@ export async function generateMetadata() {
   const brandContent = getBrandCopy(locale);
   const copy =
     locale === "tr"
-      ? { title: "Forum", description: "Topluluk forumuna yonlendirilir." }
-      : { title: "Forum", description: "Redirects to the community Q&A." };
+      ? { title: "Forum", description: "FAQ sayfasına yönlendirilir." }
+      : { title: "Forum", description: "Redirects to the FAQ page." };
 
   return buildPageMetadata({
     title: `${copy.title} | ${brandContent.siteName}`,
@@ -22,5 +22,5 @@ export async function generateMetadata() {
 
 export default async function ForumRedirect() {
   const locale = await getLocaleFromCookies();
-  redirect(withLocalePrefix("/qa", locale));
+  redirect(withLocalePrefix("/faq", locale));
 }

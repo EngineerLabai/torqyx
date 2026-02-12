@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import ExportPanel from "@/components/tools/ExportPanel";
+import EngineeringDiagram from "@/src/components/visuals/EngineeringDiagram";
+import { exportSvgToPng, getSvgPreview } from "@/utils/export";
 import { withLocalePrefix } from "@/utils/locale-path";
 
 const STANDARD_MODULES = [0.5, 0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20];
@@ -32,7 +35,10 @@ export default function ModuleCalculatorPage({ initialDocs }: ModuleCalculatorCl
 }
 
 function ModuleCalculator() {
+  const { locale } = useLocale();
   const [inputs, setInputs] = useState({ diameter: "200", teeth: "40" });
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const result = useMemo(() => {
     const d = Number(inputs.diameter);
@@ -61,6 +67,27 @@ function ModuleCalculator() {
       zMin20deg,
     };
   }, [inputs]);
+
+  const diameterValue = Number(inputs.diameter);
+  const teethValue = Number(inputs.teeth);
+  const moduleValue =
+    Number.isFinite(diameterValue) && Number.isFinite(teethValue) && teethValue > 0
+      ? diameterValue / teethValue
+      : null;
+
+  useEffect(() => {
+    setPreviewUrl(getSvgPreview(svgRef.current));
+  }, [diameterValue, teethValue, moduleValue, locale]);
+
+  const exportLabel = locale === "tr" ? "Görseli İndir" : "Download diagram";
+  const helperText =
+    locale === "tr" ? "PNG çıktısı rapor ekleri için uygundur." : "PNG export is report-ready.";
+  const previewAlt = locale === "tr" ? "Dişli diyagramı önizleme" : "Gear diagram preview";
+  const diagramTitle = locale === "tr" ? "Teknik Diyagram" : "Engineering Diagram";
+  const diagramDesc =
+    locale === "tr"
+      ? "Hatve çapı ve diş sayısına göre şematik görünüm."
+      : "Schematic view based on pitch diameter and tooth count.";
 
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -108,6 +135,42 @@ function ModuleCalculator() {
       ) : (
         <p className="mt-3 text-xs text-red-600">Pozitif sayılar giriniz.</p>
       )}
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+        <div className="space-y-3">
+          <div className="space-y-1">
+            <h3 className="text-sm font-semibold text-slate-900">{diagramTitle}</h3>
+            <p className="text-xs text-slate-500">{diagramDesc}</p>
+          </div>
+
+          <ExportPanel
+            label={exportLabel}
+            previewUrl={previewUrl}
+            previewAlt={previewAlt}
+            helperText={helperText}
+            onPng={() =>
+              exportSvgToPng(svgRef.current, {
+                filename: locale === "tr" ? "disli-diyagram.png" : "gear-diagram.png",
+              })
+            }
+          />
+        </div>
+
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <EngineeringDiagram
+            ref={svgRef}
+            type="gear"
+            params={{
+              pitchDiameter: Number.isFinite(diameterValue) ? diameterValue : undefined,
+              teeth: Number.isFinite(teethValue) ? teethValue : undefined,
+              module: Number.isFinite(moduleValue ?? NaN) ? moduleValue ?? undefined : undefined,
+              showGrid: true,
+            }}
+            locale={locale}
+            className="h-auto w-full"
+          />
+        </div>
+      </div>
 
       <p className="mt-3 text-[11px] text-slate-600">
         Standart modül serisi: {STANDARD_MODULES.join(", ")}. Çap/diş sayını değiştirdiğinde en yakın standart modül ve buna

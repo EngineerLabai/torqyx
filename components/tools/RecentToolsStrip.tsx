@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import AccessBadge from "@/components/tools/AccessBadge";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 import useToolRecents from "@/components/tools/useToolRecents";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -18,6 +19,7 @@ type RecentToolsStripProps = {
 export default function RecentToolsStrip({ tone = "light", className = "", maxItems = 6 }: RecentToolsStripProps) {
   const { locale } = useLocale();
   const copy = getMessages(locale).components.recentTools;
+  const accessLabels = getMessages(locale).common.access;
   const { recents } = useToolRecents();
 
   const items = useMemo(() => {
@@ -66,6 +68,7 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
         <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
           {items.map(({ tool }) => {
             const toolCopy = getToolCopy(tool, locale);
+            const accessLabel = accessLabels?.[tool.access] ?? accessLabels?.free ?? "";
             return (
               <div
                 key={tool.id}
@@ -82,9 +85,12 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
                   <p className={`text-sm font-semibold ${toneClasses.title}`}>{toolCopy.title}</p>
                   <p className={`text-xs leading-relaxed ${toneClasses.cardText}`}>{toolCopy.description}</p>
                 </Link>
-                <p className={`mt-3 text-[10px] uppercase tracking-[0.2em] ${toneClasses.cardMuted}`}>
-                  {tool.category ?? copy.generalCategory}
-                </p>
+                <div className={`mt-3 flex flex-wrap items-center gap-2 text-[10px] ${toneClasses.cardMuted}`}>
+                  {accessLabel ? <AccessBadge access={tool.access} label={accessLabel} /> : null}
+                  <span className="uppercase tracking-[0.2em]">
+                    {tool.category ?? copy.generalCategory}
+                  </span>
+                </div>
               </div>
             );
           })}

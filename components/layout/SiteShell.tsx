@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
+import AuthModal from "@/components/auth/AuthModal";
 import ConsentBanner from "@/components/consent/ConsentBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -76,16 +77,21 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
               <img
-                src="/brand/logo-mark-light.svg"
+                src="/brand/logo.png"
                 alt={`${brandContent.siteName} logo`}
                 width={24}
                 height={24}
-                className="h-6 w-6"
+                className="h-6 w-auto object-contain"
               />
             </div>
-            <span className="text-left text-base font-semibold tracking-tight text-slate-900">
-              {brandContent.siteName}
-            </span>
+            <div className="flex flex-col">
+              <span className="text-left text-base font-semibold tracking-tight text-slate-900">
+                {brandContent.siteName}
+              </span>
+              <span className="hidden text-[11px] font-medium text-slate-500 md:block">
+                {brandContent.tagline}
+              </span>
+            </div>
           </Link>
 
           <nav className="hidden items-center gap-2 lg:flex">
@@ -144,7 +150,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         <div className="site-container grid gap-6 py-8 md:grid-cols-[1.1fr_2fr]">
           <div className="space-y-3">
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">{brandContent.siteName}</div>
-            <p className="text-sm text-slate-700">{brandContent.description}</p>
+            <p className="text-sm text-slate-700">{brandContent.tagline}</p>
             <PremiumCTA variant="compact" />
           </div>
 
@@ -170,11 +176,12 @@ export default function SiteShell({ children }: { children: ReactNode }) {
 
         <div className="site-container flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 py-4 text-[11px] text-slate-500">
           <span>(c) {year} {brandContent.siteName}</span>
-          <span>{brandContent.description}</span>
+          <span>{brandContent.tagline}</span>
         </div>
       </footer>
 
       <ConsentBanner />
+      <AuthModal />
       <CommandPalette />
     </div>
   );

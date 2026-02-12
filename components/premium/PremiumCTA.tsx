@@ -16,7 +16,7 @@ export default function PremiumCTA({ variant = "compact", className = "" }: Prem
   const { locale } = useLocale();
   const copy = getMessages(locale).components.premiumCTA;
   const supportHref = withLocalePrefix("/support", locale);
-  const premiumHref = withLocalePrefix("/premium", locale);
+  const premiumHref = withLocalePrefix("/pricing", locale);
   const rootClassName = `${className} ${variant === "compact" ? "" : ""}`.trim();
 
   if (variant === "compact") {

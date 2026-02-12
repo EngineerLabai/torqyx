@@ -1,0 +1,3759 @@
+[
+  {
+    "id": "s235jr",
+    "name": "S235JR",
+    "standard": "EN 10025-2",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 235,
+    "UTS": 360,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "s275jr",
+    "name": "S275JR",
+    "standard": "EN 10025-2",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 275,
+    "UTS": 430,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "s355jr",
+    "name": "S355JR",
+    "standard": "EN 10025-2",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 355,
+    "UTS": 510,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "s420ml",
+    "name": "S420ML",
+    "standard": "EN 10025-4",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 420,
+    "UTS": 560,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "s460ml",
+    "name": "S460ML",
+    "standard": "EN 10025-4",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 460,
+    "UTS": 620,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "a36",
+    "name": "A36",
+    "standard": "ASTM A36",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 250,
+    "UTS": 400,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "a572-grade-50",
+    "name": "A572 Grade 50",
+    "standard": "ASTM A572",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 345,
+    "UTS": 450,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "a992",
+    "name": "A992",
+    "standard": "ASTM A992",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 345,
+    "UTS": 450,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "a516-grade-70",
+    "name": "A516 Grade 70",
+    "standard": "ASTM A516",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 260,
+    "UTS": 485,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "e355",
+    "name": "E355",
+    "standard": "EN 10305",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 355,
+    "UTS": 600,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1010",
+    "name": "AISI 1010",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 170,
+    "UTS": 300,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1015",
+    "name": "AISI 1015",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 190,
+    "UTS": 330,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1018",
+    "name": "AISI 1018",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 230,
+    "UTS": 370,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1020",
+    "name": "AISI 1020",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 240,
+    "UTS": 390,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1025",
+    "name": "AISI 1025",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 270,
+    "UTS": 420,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1030",
+    "name": "AISI 1030",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 300,
+    "UTS": 470,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1035",
+    "name": "AISI 1035",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 320,
+    "UTS": 520,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1040",
+    "name": "AISI 1040",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 350,
+    "UTS": 570,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1045",
+    "name": "AISI 1045",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 390,
+    "UTS": 620,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1050",
+    "name": "AISI 1050",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 420,
+    "UTS": 700,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1060",
+    "name": "AISI 1060",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 480,
+    "UTS": 770,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1070",
+    "name": "AISI 1070",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 520,
+    "UTS": 820,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1080",
+    "name": "AISI 1080",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 560,
+    "UTS": 880,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1090",
+    "name": "AISI 1090",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 600,
+    "UTS": 950,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-1095",
+    "name": "AISI 1095",
+    "standard": "AISI 10xx",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 650,
+    "UTS": 1050,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "4140",
+    "name": "4140",
+    "standard": "AISI 4140",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 655,
+    "UTS": 950,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "4145",
+    "name": "4145",
+    "standard": "AISI 4145",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 690,
+    "UTS": 980,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "4130",
+    "name": "4130",
+    "standard": "AISI 4130",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 560,
+    "UTS": 670,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "4330",
+    "name": "4330",
+    "standard": "AISI 4330",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 760,
+    "UTS": 930,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "4340",
+    "name": "4340",
+    "standard": "AISI 4340",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 850,
+    "UTS": 1080,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "4340m",
+    "name": "4340M",
+    "standard": "AISI 4340M",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 1000,
+    "UTS": 1200,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "8620",
+    "name": "8620",
+    "standard": "AISI 8620",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 415,
+    "UTS": 620,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "9310",
+    "name": "9310",
+    "standard": "AISI 9310",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 690,
+    "UTS": 860,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "5160",
+    "name": "5160",
+    "standard": "AISI 5160",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 800,
+    "UTS": 1050,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "52100",
+    "name": "52100",
+    "standard": "AISI 52100",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 1500,
+    "UTS": 2000,
+    "alpha": 12,
+    "notes": "Hardened bearing steel (very high strength).",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "6150",
+    "name": "6150",
+    "standard": "AISI 6150",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 900,
+    "UTS": 1100,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "17crnimo6",
+    "name": "17CrNiMo6",
+    "standard": "EN 10084",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 650,
+    "UTS": 900,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "18crnimo7-6",
+    "name": "18CrNiMo7-6",
+    "standard": "EN 10084",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 700,
+    "UTS": 1000,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "16mncr5",
+    "name": "16MnCr5",
+    "standard": "EN 10084",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 600,
+    "UTS": 900,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "20mncr5",
+    "name": "20MnCr5",
+    "standard": "EN 10084",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 650,
+    "UTS": 950,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "15crni6",
+    "name": "15CrNi6",
+    "standard": "EN 10084",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 600,
+    "UTS": 900,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "25crmo4",
+    "name": "25CrMo4",
+    "standard": "EN 10083",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 500,
+    "UTS": 700,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "30crnimo8",
+    "name": "30CrNiMo8",
+    "standard": "EN 10083",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 900,
+    "UTS": 1100,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "34crnimo6",
+    "name": "34CrNiMo6",
+    "standard": "EN 10083",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 950,
+    "UTS": 1150,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "42crmo4",
+    "name": "42CrMo4",
+    "standard": "EN 10083",
+    "category": "steel",
+    "density": 7850,
+    "E": 210,
+    "G": 81,
+    "yield": 850,
+    "UTS": 1000,
+    "alpha": 12,
+    "notes": "Typical room-temperature values; heat treatment dependent.",
+    "sources": [
+      "EN 10083",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "aisi-304",
+    "name": "AISI 304",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 215,
+    "UTS": 505,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-304l",
+    "name": "AISI 304L",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 485,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-316",
+    "name": "AISI 316",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 515,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-316l",
+    "name": "AISI 316L",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 170,
+    "UTS": 485,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-316ti",
+    "name": "AISI 316Ti",
+    "standard": "EN 10088",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 200,
+    "UTS": 520,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-321",
+    "name": "AISI 321",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 515,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-347",
+    "name": "AISI 347",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 515,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-310",
+    "name": "AISI 310",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 520,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-309",
+    "name": "AISI 309",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 520,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-430",
+    "name": "AISI 430",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 450,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-409",
+    "name": "AISI 409",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 170,
+    "UTS": 380,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-410",
+    "name": "AISI 410",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 275,
+    "UTS": 480,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-420",
+    "name": "AISI 420",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 450,
+    "UTS": 700,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-431",
+    "name": "AISI 431",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 620,
+    "UTS": 860,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-440a",
+    "name": "AISI 440A",
+    "standard": "ASTM A276",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 450,
+    "UTS": 760,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-440b",
+    "name": "AISI 440B",
+    "standard": "ASTM A276",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 470,
+    "UTS": 780,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "aisi-440c",
+    "name": "AISI 440C",
+    "standard": "ASTM A276",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 500,
+    "UTS": 800,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "17-4ph",
+    "name": "17-4PH",
+    "standard": "ASTM A564",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 1000,
+    "UTS": 1100,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "15-5ph",
+    "name": "15-5PH",
+    "standard": "ASTM A564",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 930,
+    "UTS": 1050,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "13-8mo",
+    "name": "13-8Mo",
+    "standard": "AMS 5629",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 1000,
+    "UTS": 1100,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "2205-duplex",
+    "name": "2205 Duplex",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 450,
+    "UTS": 620,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "2507-super-duplex",
+    "name": "2507 Super Duplex",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 550,
+    "UTS": 750,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "904l",
+    "name": "904L",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 220,
+    "UTS": 490,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "254smo",
+    "name": "254SMO",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 300,
+    "UTS": 650,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "410s",
+    "name": "410S",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 240,
+    "UTS": 430,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "420f",
+    "name": "420F",
+    "standard": "ASTM A276",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 520,
+    "UTS": 760,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "430f",
+    "name": "430F",
+    "standard": "ASTM A582",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 280,
+    "UTS": 450,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "446",
+    "name": "446",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 280,
+    "UTS": 500,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "301",
+    "name": "301",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 205,
+    "UTS": 515,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "201",
+    "name": "201",
+    "standard": "ASTM A240",
+    "category": "stainless",
+    "density": 8000,
+    "E": 193,
+    "G": 74,
+    "yield": 200,
+    "UTS": 500,
+    "alpha": 16.5,
+    "notes": "Typical room-temperature values; condition dependent.",
+    "sources": [
+      "ASTM A240",
+      "ASM Handbook Vol. 13"
+    ]
+  },
+  {
+    "id": "a2",
+    "name": "A2",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "d2",
+    "name": "D2",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "d3",
+    "name": "D3",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "o1",
+    "name": "O1",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "o2",
+    "name": "O2",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "s7",
+    "name": "S7",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "l6",
+    "name": "L6",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "h11",
+    "name": "H11",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "h13",
+    "name": "H13",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "p20",
+    "name": "P20",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "p20ni",
+    "name": "P20+Ni",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "m2",
+    "name": "M2",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "m42",
+    "name": "M42",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12379",
+    "name": "1.2379",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12344",
+    "name": "1.2344",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12343",
+    "name": "1.2343",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12311",
+    "name": "1.2311",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12312",
+    "name": "1.2312",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12714",
+    "name": "1.2714",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12767",
+    "name": "1.2767",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12083",
+    "name": "1.2083",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "12080",
+    "name": "1.2080",
+    "standard": "Tool steel",
+    "category": "tool",
+    "density": 7800,
+    "E": 210,
+    "G": 81,
+    "yield": null,
+    "UTS": null,
+    "alpha": 11.5,
+    "notes": "Tool steel properties vary with hardness and temper.",
+    "sources": [
+      "AISI Tool Steel Guide",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "en-gjl-200",
+    "name": "EN-GJL-200",
+    "standard": "EN 1561",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 200,
+    "UTS": 200,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "en-gjl-250",
+    "name": "EN-GJL-250",
+    "standard": "EN 1561",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 250,
+    "UTS": 250,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "en-gjl-300",
+    "name": "EN-GJL-300",
+    "standard": "EN 1561",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 300,
+    "UTS": 300,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "en-gjs-400-15",
+    "name": "EN-GJS-400-15",
+    "standard": "EN 1563",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 250,
+    "UTS": 400,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "en-gjs-500-7",
+    "name": "EN-GJS-500-7",
+    "standard": "EN 1563",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 320,
+    "UTS": 500,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "en-gjs-600-3",
+    "name": "EN-GJS-600-3",
+    "standard": "EN 1563",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 380,
+    "UTS": 600,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "astm-a48-class-30",
+    "name": "ASTM A48 Class 30",
+    "standard": "ASTM A48",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 200,
+    "UTS": 207,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "astm-a536-65-45-12",
+    "name": "ASTM A536 65-45-12",
+    "standard": "ASTM A536",
+    "category": "cast-iron",
+    "density": 7200,
+    "E": 110,
+    "G": 44,
+    "yield": 310,
+    "UTS": 448,
+    "alpha": 10.5,
+    "notes": "Cast iron values vary by grade and section size.",
+    "sources": [
+      "ISO 185",
+      "ASM Handbook Vol. 1"
+    ]
+  },
+  {
+    "id": "1050a",
+    "name": "1050A",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 20,
+    "UTS": 70,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "1100",
+    "name": "1100",
+    "standard": "AA 1100",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 30,
+    "UTS": 90,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "1200",
+    "name": "1200",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 30,
+    "UTS": 90,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "2011",
+    "name": "2011",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 240,
+    "UTS": 390,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "2014",
+    "name": "2014",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 290,
+    "UTS": 480,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "2024-t3",
+    "name": "2024-T3",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 325,
+    "UTS": 470,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "2219",
+    "name": "2219",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 260,
+    "UTS": 400,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "3003",
+    "name": "3003",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 40,
+    "UTS": 110,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "3004",
+    "name": "3004",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 95,
+    "UTS": 180,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "3105",
+    "name": "3105",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 110,
+    "UTS": 200,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5005",
+    "name": "5005",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 95,
+    "UTS": 150,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5052",
+    "name": "5052",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 193,
+    "UTS": 228,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5083",
+    "name": "5083",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 215,
+    "UTS": 305,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5086",
+    "name": "5086",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 200,
+    "UTS": 290,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5454",
+    "name": "5454",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 195,
+    "UTS": 275,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5754",
+    "name": "5754",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 190,
+    "UTS": 240,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6005a",
+    "name": "6005A",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 200,
+    "UTS": 260,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6060",
+    "name": "6060",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 160,
+    "UTS": 195,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6061-t6",
+    "name": "6061-T6",
+    "standard": "AA 6061",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 275,
+    "UTS": 310,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6063-t6",
+    "name": "6063-T6",
+    "standard": "AA 6063",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 240,
+    "UTS": 260,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6082-t6",
+    "name": "6082-T6",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 250,
+    "UTS": 300,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6013",
+    "name": "6013",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 320,
+    "UTS": 420,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6069",
+    "name": "6069",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 300,
+    "UTS": 350,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7020",
+    "name": "7020",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 300,
+    "UTS": 360,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7005",
+    "name": "7005",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 290,
+    "UTS": 350,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7050-t7451",
+    "name": "7050-T7451",
+    "standard": "AA 7050",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 455,
+    "UTS": 520,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7075-t6",
+    "name": "7075-T6",
+    "standard": "AA 7075",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 505,
+    "UTS": 570,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7075-t73",
+    "name": "7075-T73",
+    "standard": "AA 7075",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 435,
+    "UTS": 505,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7475-t761",
+    "name": "7475-T761",
+    "standard": "AA 7475",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 380,
+    "UTS": 470,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "356-t6",
+    "name": "356-T6",
+    "standard": "ASTM B26",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 200,
+    "UTS": 300,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "a356-t6",
+    "name": "A356-T6",
+    "standard": "ASTM B26",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 230,
+    "UTS": 310,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "a357-t6",
+    "name": "A357-T6",
+    "standard": "ASTM B26",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 240,
+    "UTS": 320,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5089",
+    "name": "5089",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 240,
+    "UTS": 340,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "5059",
+    "name": "5059",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 270,
+    "UTS": 350,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6111",
+    "name": "6111",
+    "standard": "AA 6111",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 260,
+    "UTS": 320,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "6081",
+    "name": "6081",
+    "standard": "EN 573",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 240,
+    "UTS": 290,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7079",
+    "name": "7079",
+    "standard": "AA 7079",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 460,
+    "UTS": 540,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7039",
+    "name": "7039",
+    "standard": "AA 7039",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 350,
+    "UTS": 420,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "7049",
+    "name": "7049",
+    "standard": "AA 7049",
+    "category": "aluminum",
+    "density": 2700,
+    "E": 69,
+    "G": 26,
+    "yield": 490,
+    "UTS": 560,
+    "alpha": 23.5,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 573",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c11000-etp",
+    "name": "C11000 (ETP)",
+    "standard": "ASTM B152",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 70,
+    "UTS": 220,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c10200-of",
+    "name": "C10200 (OF)",
+    "standard": "ASTM B152",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 70,
+    "UTS": 220,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c12200-dhp",
+    "name": "C12200 (DHP)",
+    "standard": "ASTM B152",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 70,
+    "UTS": 220,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c26000-cartridge-brass",
+    "name": "C26000 (Cartridge Brass)",
+    "standard": "ASTM B36",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 95,
+    "UTS": 315,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c27000",
+    "name": "C27000",
+    "standard": "ASTM B36",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 125,
+    "UTS": 350,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c27200",
+    "name": "C27200",
+    "standard": "ASTM B36",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 160,
+    "UTS": 365,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c28000",
+    "name": "C28000",
+    "standard": "ASTM B36",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 220,
+    "UTS": 440,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c36000-free-cutting-brass",
+    "name": "C36000 (Free-cutting Brass)",
+    "standard": "ASTM B16",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 160,
+    "UTS": 330,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c38500",
+    "name": "C38500",
+    "standard": "ASTM B16",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 200,
+    "UTS": 380,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c46400-naval-brass",
+    "name": "C46400 (Naval Brass)",
+    "standard": "ASTM B21",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 220,
+    "UTS": 410,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c70600-cuni-90-10",
+    "name": "C70600 (CuNi 90/10)",
+    "standard": "ASTM B466",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 170,
+    "UTS": 350,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c71500-cuni-70-30",
+    "name": "C71500 (CuNi 70/30)",
+    "standard": "ASTM B466",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 200,
+    "UTS": 380,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c93200-bearing-bronze",
+    "name": "C93200 (Bearing Bronze)",
+    "standard": "ASTM B505",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 200,
+    "UTS": 260,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c95400-al-bronze",
+    "name": "C95400 (Al Bronze)",
+    "standard": "ASTM B148",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 450,
+    "UTS": 620,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c95500",
+    "name": "C95500",
+    "standard": "ASTM B148",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 450,
+    "UTS": 650,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c86300-manganese-bronze",
+    "name": "C86300 (Manganese Bronze)",
+    "standard": "ASTM B505",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 350,
+    "UTS": 600,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "c17200-becu",
+    "name": "C17200 (BeCu)",
+    "standard": "ASTM B194",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 1000,
+    "UTS": 1200,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "cusn12",
+    "name": "CuSn12",
+    "standard": "EN 1982",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 240,
+    "UTS": 350,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "cusn8",
+    "name": "CuSn8",
+    "standard": "EN 12163",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 350,
+    "UTS": 550,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "cual10ni5fe4",
+    "name": "CuAl10Ni5Fe4",
+    "standard": "EN 1982",
+    "category": "copper",
+    "density": 8900,
+    "E": 110,
+    "G": 42,
+    "yield": 450,
+    "UTS": 700,
+    "alpha": 17,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "EN 1652",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-1",
+    "name": "Ti Grade 1",
+    "standard": "ASTM B348",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 170,
+    "UTS": 240,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-2",
+    "name": "Ti Grade 2",
+    "standard": "ASTM B348",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 275,
+    "UTS": 345,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-3",
+    "name": "Ti Grade 3",
+    "standard": "ASTM B348",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 380,
+    "UTS": 450,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-4",
+    "name": "Ti Grade 4",
+    "standard": "ASTM B348",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 480,
+    "UTS": 550,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-5-ti-6al-4v",
+    "name": "Ti Grade 5 (Ti-6Al-4V)",
+    "standard": "ASTM B348",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 880,
+    "UTS": 950,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-9-ti-3al-25v",
+    "name": "Ti Grade 9 (Ti-3Al-2.5V)",
+    "standard": "ASTM B348",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 620,
+    "UTS": 700,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-23-eli",
+    "name": "Ti Grade 23 (ELI)",
+    "standard": "ASTM F136",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 795,
+    "UTS": 860,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ti-grade-7",
+    "name": "Ti Grade 7",
+    "standard": "ASTM B348",
+    "category": "titanium",
+    "density": 4500,
+    "E": 110,
+    "G": 44,
+    "yield": 275,
+    "UTS": 345,
+    "alpha": 8.6,
+    "notes": "Typical values; grade dependent.",
+    "sources": [
+      "ASTM B348",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "inconel-600",
+    "name": "Inconel 600",
+    "standard": "ASTM B168",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 240,
+    "UTS": 550,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "inconel-625",
+    "name": "Inconel 625",
+    "standard": "ASTM B443",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 414,
+    "UTS": 827,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "inconel-718",
+    "name": "Inconel 718",
+    "standard": "ASTM B637",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 1030,
+    "UTS": 1240,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "inconel-725",
+    "name": "Inconel 725",
+    "standard": "ASTM B805",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 895,
+    "UTS": 1170,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "hastelloy-c276",
+    "name": "Hastelloy C276",
+    "standard": "ASTM B575",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 355,
+    "UTS": 790,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "hastelloy-x",
+    "name": "Hastelloy X",
+    "standard": "ASTM B435",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 275,
+    "UTS": 760,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "monel-400",
+    "name": "Monel 400",
+    "standard": "ASTM B127",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 240,
+    "UTS": 550,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "monel-k500",
+    "name": "Monel K500",
+    "standard": "ASTM B865",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 690,
+    "UTS": 1100,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "incoloy-800h",
+    "name": "Incoloy 800H",
+    "standard": "ASTM B409",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 240,
+    "UTS": 550,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "incoloy-825",
+    "name": "Incoloy 825",
+    "standard": "ASTM B424",
+    "category": "nickel",
+    "density": 8200,
+    "E": 200,
+    "G": 77,
+    "yield": 240,
+    "UTS": 550,
+    "alpha": 13,
+    "notes": "Typical values; condition dependent.",
+    "sources": [
+      "ASTM B446",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "az31b",
+    "name": "AZ31B",
+    "standard": "ASTM B90",
+    "category": "magnesium",
+    "density": 1800,
+    "E": 45,
+    "G": 17,
+    "yield": 200,
+    "UTS": 275,
+    "alpha": 26,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "ASTM B90",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "az91d",
+    "name": "AZ91D",
+    "standard": "ASTM B94",
+    "category": "magnesium",
+    "density": 1800,
+    "E": 45,
+    "G": 17,
+    "yield": 160,
+    "UTS": 230,
+    "alpha": 26,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "ASTM B90",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "am60b",
+    "name": "AM60B",
+    "standard": "ASTM B94",
+    "category": "magnesium",
+    "density": 1800,
+    "E": 45,
+    "G": 17,
+    "yield": 130,
+    "UTS": 230,
+    "alpha": 26,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "ASTM B90",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "zk60a",
+    "name": "ZK60A",
+    "standard": "ASTM B107",
+    "category": "magnesium",
+    "density": 1800,
+    "E": 45,
+    "G": 17,
+    "yield": 260,
+    "UTS": 330,
+    "alpha": 26,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "ASTM B90",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "we43",
+    "name": "WE43",
+    "standard": "ASTM B107",
+    "category": "magnesium",
+    "density": 1800,
+    "E": 45,
+    "G": 17,
+    "yield": 240,
+    "UTS": 300,
+    "alpha": 26,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "ASTM B90",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "ae42",
+    "name": "AE42",
+    "standard": "ASTM B94",
+    "category": "magnesium",
+    "density": 1800,
+    "E": 45,
+    "G": 17,
+    "yield": 130,
+    "UTS": 220,
+    "alpha": 26,
+    "notes": "Typical values; temper dependent.",
+    "sources": [
+      "ASTM B90",
+      "ASM Handbook Vol. 2"
+    ]
+  },
+  {
+    "id": "abs",
+    "name": "ABS",
+    "standard": "ISO 2580",
+    "category": "plastics",
+    "density": 1050,
+    "E": 2.3,
+    "G": 0.85,
+    "yield": 45,
+    "UTS": 60,
+    "alpha": 90,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pc",
+    "name": "PC",
+    "standard": "ISO 7391",
+    "category": "plastics",
+    "density": 1200,
+    "E": 2.4,
+    "G": 0.9,
+    "yield": 70,
+    "UTS": 75,
+    "alpha": 65,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pa6",
+    "name": "PA6",
+    "standard": "ISO 1874",
+    "category": "plastics",
+    "density": 1150,
+    "E": 2.5,
+    "G": 0.9,
+    "yield": 60,
+    "UTS": 80,
+    "alpha": 80,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pa66",
+    "name": "PA66",
+    "standard": "ISO 1874",
+    "category": "plastics",
+    "density": 1140,
+    "E": 2.7,
+    "G": 1,
+    "yield": 70,
+    "UTS": 90,
+    "alpha": 80,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pa66-gf30",
+    "name": "PA66 GF30",
+    "standard": "ISO 1874",
+    "category": "plastics",
+    "density": 1350,
+    "E": 7.5,
+    "G": 2.8,
+    "yield": 150,
+    "UTS": 200,
+    "alpha": 30,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pom-c",
+    "name": "POM-C",
+    "standard": "ISO 15851",
+    "category": "plastics",
+    "density": 1410,
+    "E": 3,
+    "G": 1.1,
+    "yield": 60,
+    "UTS": 70,
+    "alpha": 110,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pom-h",
+    "name": "POM-H",
+    "standard": "ISO 15851",
+    "category": "plastics",
+    "density": 1420,
+    "E": 3.1,
+    "G": 1.2,
+    "yield": 65,
+    "UTS": 75,
+    "alpha": 110,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "peek",
+    "name": "PEEK",
+    "standard": "ISO 1043",
+    "category": "plastics",
+    "density": 1320,
+    "E": 3.6,
+    "G": 1.3,
+    "yield": 100,
+    "UTS": 110,
+    "alpha": 45,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "ptfe",
+    "name": "PTFE",
+    "standard": "ISO 12086",
+    "category": "plastics",
+    "density": 2200,
+    "E": 0.5,
+    "G": 0.2,
+    "yield": 20,
+    "UTS": 30,
+    "alpha": 120,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "uhmwpe",
+    "name": "UHMWPE",
+    "standard": "ISO 11542",
+    "category": "plastics",
+    "density": 935,
+    "E": 0.8,
+    "G": 0.3,
+    "yield": 20,
+    "UTS": 40,
+    "alpha": 100,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "hdpe",
+    "name": "HDPE",
+    "standard": "ISO 1872",
+    "category": "plastics",
+    "density": 950,
+    "E": 1,
+    "G": 0.35,
+    "yield": 25,
+    "UTS": 30,
+    "alpha": 120,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "ldpe",
+    "name": "LDPE",
+    "standard": "ISO 1872",
+    "category": "plastics",
+    "density": 920,
+    "E": 0.2,
+    "G": 0.07,
+    "yield": 12,
+    "UTS": 20,
+    "alpha": 200,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pp",
+    "name": "PP",
+    "standard": "ISO 1873",
+    "category": "plastics",
+    "density": 900,
+    "E": 1.5,
+    "G": 0.55,
+    "yield": 35,
+    "UTS": 40,
+    "alpha": 100,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pvc-u",
+    "name": "PVC-U",
+    "standard": "ISO 1452",
+    "category": "plastics",
+    "density": 1400,
+    "E": 3,
+    "G": 1.1,
+    "yield": 50,
+    "UTS": 55,
+    "alpha": 70,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "PET",
+    "standard": "ISO 1043",
+    "category": "plastics",
+    "density": 1380,
+    "E": 2.8,
+    "G": 1,
+    "yield": 55,
+    "UTS": 65,
+    "alpha": 60,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pet-g",
+    "name": "PET-G",
+    "standard": "ISO 1043",
+    "category": "plastics",
+    "density": 1270,
+    "E": 2,
+    "G": 0.75,
+    "yield": 50,
+    "UTS": 55,
+    "alpha": 70,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pmma",
+    "name": "PMMA",
+    "standard": "ISO 7823",
+    "category": "plastics",
+    "density": 1180,
+    "E": 3.2,
+    "G": 1.2,
+    "yield": 70,
+    "UTS": 75,
+    "alpha": 70,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pps",
+    "name": "PPS",
+    "standard": "ISO 1043",
+    "category": "plastics",
+    "density": 1350,
+    "E": 3.5,
+    "G": 1.3,
+    "yield": 80,
+    "UTS": 90,
+    "alpha": 45,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pei",
+    "name": "PEI",
+    "standard": "ISO 1043",
+    "category": "plastics",
+    "density": 1270,
+    "E": 3.2,
+    "G": 1.2,
+    "yield": 100,
+    "UTS": 110,
+    "alpha": 50,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pvdf",
+    "name": "PVDF",
+    "standard": "ISO 10931",
+    "category": "plastics",
+    "density": 1780,
+    "E": 2,
+    "G": 0.8,
+    "yield": 50,
+    "UTS": 55,
+    "alpha": 120,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "pbt",
+    "name": "PBT",
+    "standard": "ISO 7792",
+    "category": "plastics",
+    "density": 1310,
+    "E": 2.4,
+    "G": 0.9,
+    "yield": 55,
+    "UTS": 65,
+    "alpha": 70,
+    "notes": "Typical values; grade and moisture dependent.",
+    "sources": [
+      "ISO 1043",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "nbr",
+    "name": "NBR",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1200,
+    "E": 0.01,
+    "G": 0.004,
+    "yield": null,
+    "UTS": 15,
+    "alpha": 160,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "hnbr",
+    "name": "HNBR",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1200,
+    "E": 0.02,
+    "G": 0.007,
+    "yield": null,
+    "UTS": 20,
+    "alpha": 150,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "fkm",
+    "name": "FKM",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1800,
+    "E": 0.01,
+    "G": 0.004,
+    "yield": null,
+    "UTS": 16,
+    "alpha": 160,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "ffkm",
+    "name": "FFKM",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1900,
+    "E": 0.01,
+    "G": 0.004,
+    "yield": null,
+    "UTS": 12,
+    "alpha": 160,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "epdm",
+    "name": "EPDM",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1100,
+    "E": 0.008,
+    "G": 0.003,
+    "yield": null,
+    "UTS": 10,
+    "alpha": 160,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "vmq",
+    "name": "VMQ",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1150,
+    "E": 0.005,
+    "G": 0.002,
+    "yield": null,
+    "UTS": 8,
+    "alpha": 200,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "cr",
+    "name": "CR",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1230,
+    "E": 0.01,
+    "G": 0.004,
+    "yield": null,
+    "UTS": 12,
+    "alpha": 160,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "tpu",
+    "name": "TPU",
+    "standard": "ISO 1629",
+    "category": "elastomer",
+    "density": 1200,
+    "E": 0.05,
+    "G": 0.02,
+    "yield": null,
+    "UTS": 30,
+    "alpha": 120,
+    "notes": "Elastomer properties depend strongly on compound.",
+    "sources": [
+      "ISO 1629",
+      "Material datasheets"
+    ]
+  },
+  {
+    "id": "cfrp-quasi-isotropic",
+    "name": "CFRP (quasi-isotropic)",
+    "standard": "ASTM D3039",
+    "category": "composites",
+    "density": 1600,
+    "E": 70,
+    "G": 5,
+    "yield": null,
+    "UTS": 600,
+    "alpha": 2,
+    "notes": "Laminate properties depend on fiber fraction and layup.",
+    "sources": [
+      "ASTM D3039",
+      "Composite datasheets"
+    ]
+  },
+  {
+    "id": "cfrp-ud",
+    "name": "CFRP (UD)",
+    "standard": "ASTM D3039",
+    "category": "composites",
+    "density": 1600,
+    "E": 130,
+    "G": 5,
+    "yield": null,
+    "UTS": 1200,
+    "alpha": 0.5,
+    "notes": "Laminate properties depend on fiber fraction and layup.",
+    "sources": [
+      "ASTM D3039",
+      "Composite datasheets"
+    ]
+  },
+  {
+    "id": "gfrp-quasi-isotropic",
+    "name": "GFRP (quasi-isotropic)",
+    "standard": "ASTM D3039",
+    "category": "composites",
+    "density": 1900,
+    "E": 25,
+    "G": 4,
+    "yield": null,
+    "UTS": 300,
+    "alpha": 8,
+    "notes": "Laminate properties depend on fiber fraction and layup.",
+    "sources": [
+      "ASTM D3039",
+      "Composite datasheets"
+    ]
+  },
+  {
+    "id": "gfrp-ud",
+    "name": "GFRP (UD)",
+    "standard": "ASTM D3039",
+    "category": "composites",
+    "density": 1900,
+    "E": 45,
+    "G": 4,
+    "yield": null,
+    "UTS": 600,
+    "alpha": 6,
+    "notes": "Laminate properties depend on fiber fraction and layup.",
+    "sources": [
+      "ASTM D3039",
+      "Composite datasheets"
+    ]
+  }
+]

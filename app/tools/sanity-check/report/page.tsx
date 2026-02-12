@@ -1,4 +1,5 @@
 import PageShell from "@/components/layout/PageShell";
+import ReportPageShell from "@/components/tools/ReportPageShell";
 import ReportView from "@/components/sanity-check/ReportView";
 import { decodeSession } from "@/lib/sanityCheck/share";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -18,16 +19,18 @@ export default async function SanityCheckReportPage({ searchParams }: ReportPage
   const session = sessionParam ? decodeSession(sessionParam) : null;
 
   return (
-    <PageShell>
-      <section id="report-print-area">
-        {session ? (
-          <ReportView session={session} />
-        ) : (
-          <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
-            {copy.missing}
-          </section>
-        )}
-      </section>
+    <PageShell className="report-page">
+      <ReportPageShell>
+        <section id="report-area">
+          {session ? (
+            <ReportView session={session} />
+          ) : (
+            <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
+              {copy.missing}
+            </section>
+          )}
+        </section>
+      </ReportPageShell>
     </PageShell>
   );
 }

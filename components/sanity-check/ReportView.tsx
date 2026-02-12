@@ -67,7 +67,7 @@ export default function ReportView({ session }: { session: LabSession }) {
           </button>
           <button
             type="button"
-            onClick={() => downloadReportPdf("report-print-area", pdfTitle)}
+            onClick={() => downloadReportPdf("report-area", pdfTitle)}
             className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700"
           >
             {copy.report.downloadPdf}

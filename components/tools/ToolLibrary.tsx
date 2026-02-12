@@ -117,6 +117,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   const messages = getMessages(locale);
   const copy = messages.components.toolLibrary;
   const labels = copy.labels;
+  const accessLabels = messages.common.access;
   const basePath = withLocalePrefix("/tools", locale);
 
   const typeFilter = resolveTypeFilter(getParam(searchParams?.type));
@@ -375,6 +376,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
             const { title, description } = getToolCopy(tool, locale);
             const categoryLabel = tool.category ? labels.category[tool.category] : labels.generalCategory;
             const tagLabels = (tool.tags ?? []).map((tagValue) => labels.tag[tagValue]);
+            const accessLabel = accessLabels?.[tool.access] ?? accessLabels?.free ?? "";
             const isNew = tool.lastUpdated
               ? NOW - new Date(tool.lastUpdated).getTime() <= NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000
               : false;
@@ -391,6 +393,8 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                 typeLabel={labels.type[tool.type]}
                 typeTone={tool.type}
                 tags={tagLabels}
+                accessLabel={accessLabel}
+                accessTone={tool.access}
                 ctaLabel={labels.cta[tool.type]}
                 ariaLabel={formatMessage(labels.openAria, { title })}
                 isNew={isNew}

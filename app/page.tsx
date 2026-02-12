@@ -1,20 +1,22 @@
 import WebPageJsonLd from "@/components/seo/WebPageJsonLd";
-import ChangelogSection from "@/sections/home/ChangelogSection";
 import HeroSection from "@/sections/home/HeroSection";
-import UseCasesSection from "@/sections/home/UseCasesSection";
 import PopularToolsSection from "@/sections/home/PopularToolsSection";
+import PricingTeaserSection from "@/sections/home/PricingTeaserSection";
+import TrustSection from "@/sections/home/TrustSection";
+import ValuePropsSection from "@/sections/home/ValuePropsSection";
 import { getBrandCopy } from "@/config/brand";
-import { getLatestChangelogEntry } from "@/utils/changelog";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
+  const copy = getMessages(locale).home.seo;
 
   return buildPageMetadata({
-    title: brandContent.siteName,
-    description: brandContent.description,
+    title: `${copy.title} | ${brandContent.siteName}`,
+    description: copy.description,
     path: "/",
     locale,
     openGraph: {
@@ -25,14 +27,14 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const locale = await getLocaleFromCookies();
-  const latestChangelog = await getLatestChangelogEntry(locale);
   return (
     <main className="relative min-h-screen">
       <WebPageJsonLd />
       <HeroSection locale={locale} />
+      <ValuePropsSection locale={locale} />
       <PopularToolsSection locale={locale} />
-      <UseCasesSection locale={locale} />
-      <ChangelogSection locale={locale} latest={latestChangelog} />
+      <PricingTeaserSection locale={locale} />
+      <TrustSection locale={locale} />
     </main>
   );
 }

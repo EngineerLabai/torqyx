@@ -18,7 +18,7 @@ export default function WebPageJsonLd({ title, description }: WebPageJsonLdProps
 
   const [meta, setMeta] = useState({
     title: title ?? brandContent.siteName,
-    description: description ?? brandContent.description,
+    description: description ?? brandContent.tagline,
   });
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function WebPageJsonLd({ title, description }: WebPageJsonLdProps
       const docTitle = document.title || brandContent.siteName;
       const metaDescription =
         document.querySelector('meta[name="description"]')?.getAttribute("content") ??
-        brandContent.description;
+        brandContent.tagline;
 
       Promise.resolve().then(() =>
         setMeta({

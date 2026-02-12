@@ -75,19 +75,14 @@ export const navConfig = {
       ],
     },
     {
-      id: "community",
-      labelKey: "sectionCommunity",
-      descriptionKey: "sectionCommunity",
+      id: "faq",
+      labelKey: "sectionFaq",
+      descriptionKey: "sectionFaq",
       links: [
         {
-          id: "community",
-          labelKey: "linkCommunity",
-          route: "community",
-        },
-        {
-          id: "qa",
-          labelKey: "linkQa",
-          route: "qa",
+          id: "faq",
+          labelKey: "linkFaq",
+          route: "faq",
         },
       ],
     },
@@ -178,18 +173,13 @@ export const navConfig = {
       ],
     },
     {
-      id: "community",
-      labelKey: "sectionCommunity",
+      id: "faq",
+      labelKey: "sectionFaq",
       links: [
         {
-          id: "community",
-          labelKey: "linkCommunity",
-          route: "community",
-        },
-        {
-          id: "qa",
-          labelKey: "linkQa",
-          route: "qa",
+          id: "faq",
+          labelKey: "linkFaq",
+          route: "faq",
         },
       ],
     },

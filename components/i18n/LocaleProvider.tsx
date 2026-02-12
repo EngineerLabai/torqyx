@@ -22,15 +22,25 @@ export function LocaleProvider({ children, initialLocale = DEFAULT_LOCALE }: Loc
   const [locale, setLocale] = useState<Locale>(initialLocale);
   const pathname = usePathname();
   const pathLocale = pathname ? getLocaleFromPathname(pathname) : null;
+  const readLocaleCookie = () => {
+    if (typeof document === "undefined") return null;
+    const match = document.cookie.match(new RegExp(`(?:^|; )${LOCALE_COOKIE}=([^;]*)`));
+    return match ? decodeURIComponent(match[1]) : null;
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (pathLocale) return;
+    const cookieLocale = readLocaleCookie();
+    if (isLocale(cookieLocale) && cookieLocale !== locale) {
+      Promise.resolve().then(() => setLocale(cookieLocale));
+      return;
+    }
     const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-    if (isLocale(stored)) {
+    if (isLocale(stored) && stored !== locale) {
       Promise.resolve().then(() => setLocale(stored));
     }
-  }, [pathLocale]);
+  }, [pathLocale, locale]);
 
   useEffect(() => {
     if (!pathLocale || pathLocale === locale) return;

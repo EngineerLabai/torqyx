@@ -40,7 +40,7 @@ export async function generateMetadata() {
 
   const base = buildPageMetadata({
     title: brandContent.siteName,
-    description: brandContent.description,
+    description: brandContent.tagline,
     path: "/",
     locale,
     openGraph: {
@@ -54,7 +54,7 @@ export async function generateMetadata() {
   };
 }
 
-const LOGO_URL = new URL("/brand/logo.svg", SITE_URL).toString();
+const LOGO_URL = new URL("/brand/logo.png", SITE_URL).toString();
 
 async function getWebsiteJsonLd() {
   const locale = await getLocaleFromCookies();
@@ -78,7 +78,7 @@ async function getWebsiteJsonLd() {
         "@id": `${SITE_URL}#website`,
         name: brandContent.siteName,
         url: SITE_URL,
-        description: brandContent.description,
+        description: brandContent.tagline,
         inLanguage: locale === "tr" ? "tr-TR" : "en-US",
         publisher: {
           "@id": `${SITE_URL}#organization`,

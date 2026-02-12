@@ -38,7 +38,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const tabParam = searchParams?.get("tab");
   const initialTab = isValidTab(tabParam) ? tabParam : "calculator";
   const [activeTab, setActiveTab] = useState<TabId>(initialTab);
-  const [isClient, setIsClient] = useState(false);
   const docs = useMemo<ToolDocsResponse>(() => {
     return (
       initialDocs ?? {
@@ -60,9 +59,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     }
   }, [tabParam]);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   useEffect(() => {
     if (!slug) return;
@@ -137,19 +133,9 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     </Callout>
   );
 
-  const loadingDocsCallout = (
-    <Callout type="info" title={copy.loadingTitle}>
-      {copy.loadingBody}
-    </Callout>
-  );
-
   const renderExplanation = () => {
     if (shouldShowMissingNote) {
       return missingDocsCallout;
-    }
-
-    if (!isClient) {
-      return loadingDocsCallout;
     }
 
     if (docs?.standard) {
@@ -174,10 +160,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const renderExamples = () => {
     if (shouldShowMissingNote) {
       return missingDocsCallout;
-    }
-
-    if (!isClient) {
-      return loadingDocsCallout;
     }
 
     if (!docs?.examples) {

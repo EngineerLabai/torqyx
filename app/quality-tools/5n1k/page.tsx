@@ -42,7 +42,7 @@ export default function FiveN1KPage() {
   const { locale } = useLocale();
   const copy = fiveN1kCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/5n1k");
-  const premiumHref = withLocalePrefix("/premium", locale);
+  const premiumHref = withLocalePrefix("/pricing", locale);
 
   const [form, setForm] = useState<FiveN1KForm>(INITIAL_FORM);
   const [savedSummaries, setSavedSummaries] = useState<SavedSummary[]>([]);

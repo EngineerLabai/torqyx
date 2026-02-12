@@ -134,9 +134,9 @@ export default function PartTrackingPage() {
         <p className="mt-2 text-xs text-slate-600">
           Kick-off&apos;tan SOP&apos;a kadar proje parçalarının durumunu takip etmek için hafif bir dashboard. Aşamalar:
           Kick-off, Tasarım, Numune, PPAP, SOP. Girdiğin satırlar bu sayfada tutulur. Dışa aktarma (PDF/Excel) premium
-          paket içeriğinde; ödeme yok,{" "}
-          <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-            bekleme listesi açık
+          paketinin özel beta kapsamındadır. Erken erişim için{" "}
+          <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
+            ücretlendirmeye göz at
           </Link>.
         </p>
       </section>

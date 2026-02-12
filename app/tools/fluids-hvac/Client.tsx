@@ -7,6 +7,7 @@ import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 import ToolActions from "@/components/tools/ToolActions";
+import ToolDataActions from "@/components/tools/ToolDataActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -190,6 +191,26 @@ export default function FluidsHvacPage({ initialDocs }: FluidsHvacClientProps) {
   const assumptions = resolveLocalizedValue(reportTool?.assumptions, locale);
   const references = resolveLocalizedValue(reportTool?.references, locale);
 
+  const combinedOutputs = useMemo(() => {
+    const output: Record<string, unknown> = {};
+    if (pipeResults) {
+      output.pipeRe = pipeResults.Re;
+      output.pipeF = pipeResults.f;
+      output.pipeVelocity = pipeResults.v;
+      output.pipeDp = pipeResults.dp;
+    }
+    if (ductResults) {
+      output.ductArea = ductResults.A;
+      output.ductDiameter = ductResults.D;
+      output.ductPressure = ductResults.q;
+    }
+    if (achResults) {
+      output.achFlowM3h = achResults.Q_m3h;
+      output.achFlowM3s = achResults.Q_m3s;
+    }
+    return Object.keys(output).length > 0 ? output : null;
+  }, [pipeResults, ductResults, achResults]);
+
   const formatNumber = (value: number, digits: number) =>
     value.toLocaleString(locale === "tr" ? "tr-TR" : "en-US", {
       minimumFractionDigits: digits,
@@ -311,6 +332,16 @@ export default function FluidsHvacPage({ initialDocs }: FluidsHvacClientProps) {
           )}
           <p className="mt-2 text-[11px] text-slate-600">{copy.ach.note}</p>
         </section>
+
+        {combinedOutputs ? (
+          <ToolDataActions
+            toolSlug={TOOL_ID}
+            toolTitle={copy.header.title}
+            inputs={inputs}
+            outputs={combinedOutputs}
+            reportUrl={reportUrl}
+          />
+        ) : null}
 
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">

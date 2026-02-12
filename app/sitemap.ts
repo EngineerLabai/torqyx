@@ -3,6 +3,7 @@ import { getContentList } from "@/utils/content";
 import { getCategoryIndex, getTagIndex } from "@/utils/taxonomy";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import { standardsManifest } from "@/data/standards";
+import { materials } from "@/src/data/materials";
 import { SITE_URL } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -25,8 +26,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/guides",
     "/glossary",
     "/premium",
+    "/pricing",
     "/login",
-    "/qa",
+    "/faq",
     "/community",
     "/support",
     "/iletisim",
@@ -35,7 +37,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/kullanim-sartlari",
     "/hakkinda",
     "/standards",
+    "/materials",
     "/project-hub",
+    "/projects",
     "/project-hub/devreye-alma",
     "/project-hub/part-tracking",
     "/project-hub/project-tools",
@@ -77,6 +81,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     toolCatalog.forEach((tool) => {
       addEntry(tool.href, locale);
+    });
+
+    materials.forEach((material) => {
+      addEntry(`/materials/${material.id}`, locale);
     });
 
     standardsManifest.categories.forEach((category) => {

@@ -19,9 +19,12 @@ export type ToolTag = (typeof toolTags)[number];
 export const toolTypes = ["calculator", "bundle", "guide"] as const;
 export type ToolType = (typeof toolTypes)[number];
 
+export type ToolAccess = "free" | "beta" | "premium";
+
 export type ToolCatalogItem = {
   id: string;
   type: ToolType;
+  access: ToolAccess;
   title: string;
   description: string;
   titleEn?: string;
@@ -32,7 +35,14 @@ export type ToolCatalogItem = {
   lastUpdated?: string;
 };
 
-export const toolCatalog: ToolCatalogItem[] = [
+type ToolCatalogBaseItem = Omit<ToolCatalogItem, "access">;
+
+const toolAccessById: Partial<Record<string, ToolAccess>> = {
+  "sanity-check": "beta",
+  "gear-simulations": "beta",
+};
+
+const toolCatalogBase: ToolCatalogBaseItem[] = [
   {
     id: "bolt-calculator",
     type: "calculator",
@@ -440,6 +450,11 @@ export const toolCatalog: ToolCatalogItem[] = [
     category: "General Engineering",
   },
 ];
+
+export const toolCatalog: ToolCatalogItem[] = toolCatalogBase.map((tool) => ({
+  ...tool,
+  access: toolAccessById[tool.id] ?? "free",
+}));
 
 export const getToolCopy = (tool: ToolCatalogItem, locale: Locale) => {
   if (locale === "en") {

@@ -26,11 +26,11 @@ export default function BrandLogo({
       <div className="flex items-center sm:hidden">
         {markVisible ? (
           <Image
-            src="/brand/logo-mark-dark.svg"
+            src="/brand/logo.png"
             alt={`${name} logo mark`}
-            width={40}
-            height={40}
-            className={`h-10 w-10 ${markClassName}`.trim()}
+            width={635}
+            height={702}
+            className={`h-10 w-auto ${markClassName}`.trim()}
             onError={() => setMarkVisible(false)}
             priority
           />
@@ -49,8 +49,8 @@ export default function BrandLogo({
           <Image
             src="/brand/logo.png"
             alt={`${name} logo`}
-            width={180}
-            height={36}
+            width={635}
+            height={702}
             className={`h-7 w-auto ${wordClassName}`.trim()}
             onError={() => setWordVisible(false)}
             priority

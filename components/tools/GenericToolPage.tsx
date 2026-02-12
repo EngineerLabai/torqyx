@@ -18,15 +18,20 @@ import {
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import ToolActions from "@/components/tools/ToolActions";
+import ToolDataActions from "@/components/tools/ToolDataActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import ToolMethodNotes from "@/components/tools/ToolMethodNotes";
+import AccessBadge from "@/components/tools/AccessBadge";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
+import { getAdvisorInsights } from "@/src/lib/advisor/engine";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
 import { getToolById, type ToolDefinition, type ToolInputDefinition, type ToolInputOption } from "@/tools/registry";
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
+import { toolCatalog } from "@/tools/_shared/catalog";
 
 Chart.register(
   LineController,
@@ -76,6 +81,9 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   const calcFailedCopy = copy.calcFailed;
   const common = messages.common;
   const tool = getToolById(toolId) as ToolDefinition<GenericToolInputs, Record<string, unknown>> | null;
+  const catalogEntry = tool ? toolCatalog.find((item) => item.id === tool.id) ?? null : null;
+  const access = catalogEntry?.access ?? "free";
+  const accessLabel = messages.common.access?.[access] ?? messages.common.access?.free ?? "";
   const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool?.inputs ?? []));
   const chartRef = useRef<Chart | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -178,6 +186,15 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   const reportBase = tool ? withLocalePrefix(`/tools/${tool.id}/report`, locale) : "";
   const reportUrl = encodedState ? `${reportBase}?input=${encodedState}` : reportBase;
 
+  const showAdvisor = tool?.id === "torque-power";
+  const advisorInsights = useMemo(() => {
+    if (!showAdvisor || !tool) return [];
+    return getAdvisorInsights(tool.id, normalizedInputs, {
+      locale,
+      reportUrl: results ? reportUrl : undefined,
+    });
+  }, [showAdvisor, tool, normalizedInputs, locale, reportUrl, results]);
+
   useEffect(() => {
     if (!chartConfig || !canvasRef.current) {
       if (chartRef.current) {
@@ -269,6 +286,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-3 flex flex-wrap items-center gap-2">
+            {accessLabel ? <AccessBadge access={access} label={accessLabel} /> : null}
             {tool.categories.map((category) => (
               <span
                 key={category}
@@ -320,6 +338,18 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
             )}
           </div>
         </section>
+
+        {parsed?.success && results ? (
+          <ToolDataActions
+            toolSlug={tool.id}
+            toolTitle={tool.title}
+            inputs={values}
+            outputs={results}
+            reportUrl={reportUrl}
+          />
+        ) : null}
+
+        {showAdvisor ? <AdvisorPanel insights={advisorInsights} /> : null}
 
         <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
           <div className="space-y-2">

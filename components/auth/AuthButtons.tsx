@@ -10,7 +10,7 @@ export default function AuthButtons() {
   const { user, loading, available, error, loginWithGoogle, logout } = useAuth();
   const { locale } = useLocale();
   const copy = getMessages(locale).authButtons;
-  const premiumHref = withLocalePrefix("/premium", locale);
+  const premiumHref = withLocalePrefix("/pricing", locale);
 
   if (loading) {
     return <div className="h-9 w-28 animate-pulse rounded-full bg-white/20" />;

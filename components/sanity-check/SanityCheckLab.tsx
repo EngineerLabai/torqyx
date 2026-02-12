@@ -22,6 +22,9 @@ import SweepPanel from "@/components/sanity-check/SweepPanel";
 import MonteCarloPanel from "@/components/sanity-check/MonteCarloPanel";
 import ClientErrorBoundary from "@/components/sanity-check/ClientErrorBoundary";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
+import ToolDataActions from "@/components/tools/ToolDataActions";
+import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
+import { getAdvisorInsights } from "@/src/lib/advisor/engine";
 import { addRecent } from "@/utils/tool-storage";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -102,6 +105,16 @@ export default function SanityCheckLab() {
   const initialLoadRef = useRef(false);
 
   const result = useMemo(() => evaluateFormula(session), [session]);
+  const reportUrl = useMemo(() => {
+    const encoded = encodeSession(session);
+    if (!encoded) return undefined;
+    const reportPath = withLocalePrefix("/tools/sanity-check/report", locale);
+    return `${reportPath}?session=${encoded}`;
+  }, [session, locale]);
+  const advisorInsights = useMemo(
+    () => getAdvisorInsights("sanity-check", { session, result }, { locale, reportUrl }),
+    [session, result, locale, reportUrl],
+  );
 
   useEffect(() => {
     addRecent("sanity-check");
@@ -320,6 +333,18 @@ export default function SanityCheckLab() {
             copy={copy.resultPanel}
             locale={locale}
           />
+          <ToolDataActions
+            toolSlug="sanity-check"
+            toolTitle={pageCopy.title}
+            inputs={{
+              formula: session.formula,
+              expectedUnit: session.expectedUnit ?? "",
+              ...Object.fromEntries(session.variables.map((variable) => [variable.symbol, variable.value])),
+            }}
+            outputs={result ? { value: result.value ?? null, unit: result.unit } : null}
+            reportUrl={reportUrl}
+          />
+          <AdvisorPanel insights={advisorInsights} />
 
           <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="sticky top-2 z-10 flex gap-2 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur">

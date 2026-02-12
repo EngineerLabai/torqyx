@@ -115,9 +115,9 @@ export default function RfqSummaryPage() {
         <p className="mt-2 text-xs text-slate-600">
           Müşteriden gelen RFQ ve teknik şartnameleri; müşteri, proje kodu, parça adı, hedef adet ve SOP bilgisi ile
           özetlemek için hafif bir takip ekranı. Girdiğin satırlar bu sayfada tutulur. PDF/Excel dışa aktarma premium
-          paket planında; ödeme yok,{" "}
-          <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-            bekleme listesi açık
+          paketinin özel beta kapsamındadır. Erken erişim için{" "}
+          <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
+            ücretlendirmeye göz at
           </Link>.
         </p>
       </section>
@@ -345,12 +345,12 @@ export default function RfqSummaryPage() {
 
           {/* Premium export kutusu */}
           <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
-            <h3 className="mb-1 text-sm font-semibold">PDF / Excel&apos;e Aktar - Premium (bekleme listesi)</h3>
+            <h3 className="mb-1 text-sm font-semibold">PDF / Excel&apos;e Aktar - Premium (özel beta)</h3>
             <p className="mb-2">
-              RFQ listenizi PDF veya Excel olarak dışa aktarma ve ekiplerle paylaşma özelliği premium paket planında.
-              Ödeme yok,{" "}
-              <Link href="/premium" className="font-semibold text-amber-700 hover:underline">
-                bekleme listesi açık
+              RFQ listenizi PDF veya Excel olarak dışa aktarma ve ekiplerle paylaşma özelliği premium paketinin özel beta
+              kapsamındadır. Erken erişim için{" "}
+              <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
+                ücretlendirmeye göz at
               </Link>.
             </p>
             <div className="flex gap-2">

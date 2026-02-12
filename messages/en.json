@@ -1,1289 +1,1770 @@
 {
-    "nav":  {
-                "labels":  {
-                               "sectionCalculators":  "Calculator",
-                               "sectionTools":  "Tools",
-                               "sectionCommunity":  "Community",
-                               "sectionContact":  "Contact",
-                               "sectionGeneral":  "General",
-                               "linkGearCalculators":  "Gear Calculators",
-                               "linkToolLibrary":  "Calculator Library",
-                               "linkTorquePower":  "Torque / Power",
-                               "linkProjectHub":  "Project Hub",
-                               "linkQualityTools":  "Quality Tools",
-                               "linkFixtureTools":  "Fixture Tools",
-                               "linkReference":  "Quick Reference",
-                               "linkStandards":  "Standards",
-                               "linkCommunity":  "Community",
-                               "linkQa":  "Q\u0026A",
-                               "linkSupport":  "Get in Touch",
-                               "linkPrivacy":  "Privacy Policy",
-                               "linkCookies":  "Cookie Policy",
-                               "linkTerms":  "Terms",
-                               "linkAbout":  "About",
-                               "linkContact":  "Contact",
-                               "linkHome":  "Home"
-                           },
-                "descriptions":  {
-                                     "sectionCalculators":  "Gear, torque, force, and mechanical calculators.",
-                                     "sectionTools":  "Templates, guides, and project tools.",
-                                     "sectionCommunity":  "Community discussions and knowledge sharing.",
-                                     "sectionContact":  "Feedback and support channels."
-                                 },
-                "badges":  {
-                               "new":  "New",
-                               "fresh":  "Updated"
-                           }
+  "nav": {
+    "labels": {
+      "sectionCalculators": "Calculator",
+      "sectionTools": "Tools",
+      "sectionCommunity": "Community",
+      "sectionContact": "Contact",
+      "sectionGeneral": "General",
+      "linkGearCalculators": "Gear Calculators",
+      "linkToolLibrary": "Calculator Library",
+      "linkTorquePower": "Torque / Power",
+      "linkProjectHub": "Project Hub",
+      "linkQualityTools": "Quality Tools",
+      "linkFixtureTools": "Fixture Tools",
+      "linkReference": "Quick Reference",
+      "linkStandards": "Standards",
+      "linkCommunity": "Community",
+      "linkQa": "Q&A",
+      "linkSupport": "Get in Touch",
+      "linkPrivacy": "Privacy Policy",
+      "linkCookies": "Cookie Policy",
+      "linkTerms": "Terms",
+      "linkAbout": "About",
+      "linkContact": "Contact",
+      "linkHome": "Home",
+      "sectionFaq": "FAQ",
+      "linkFaq": "FAQ"
+    },
+    "descriptions": {
+      "sectionCalculators": "Gear, torque, force, and mechanical calculators.",
+      "sectionTools": "Templates, guides, and project tools.",
+      "sectionCommunity": "Community discussions and knowledge sharing.",
+      "sectionContact": "Feedback and support channels.",
+      "sectionFaq": "Answers to common questions."
+    },
+    "badges": {
+      "new": "New",
+      "fresh": "Updated"
+    }
+  },
+  "languageSwitcher": {
+    "trLabel": "Turkish",
+    "enLabel": "English"
+  },
+  "authButtons": {
+    "login": "Sign in",
+    "premium": "Pricing",
+    "userFallback": "User",
+    "logout": "Sign out",
+    "unavailable": "Auth is unavailable right now.",
+    "checking": "Checking sign-in...",
+    "readOnlyFallback": "You're in anonymous mode - you can still read the content.",
+    "errorTitle": "Sign-in check failed",
+    "errorDescription": "Auth didn't respond. Please try again.",
+    "loginHint": "Sign in with Google to access favorites and saved calculations.",
+    "retry": "Retry"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Mechanical Engineering Calculators",
+      "headline": "Stop second-guessing mechanical calculations",
+      "subheadline": "For machine design, fastener selection, power transmission, and thermal checks — faster than Excel with ISO/DIN-verified formulas, units, and reports.",
+      "subtitle": "Built for mechanical engineers who need speed and traceability.",
+      "ctaPrimary": "Start Free",
+      "ctaSecondary": "See Calculators",
+      "socialProof": "Trusted by 500+ mechanical engineers",
+      "trustBadge": "Calculations verified against ISO/DIN standards",
+      "supportNote": "No credit card required. Start in under 60 seconds.",
+      "imageAlt": "Mechanical engineering calculator dashboard"
+    },
+    "popularTools": {
+      "kicker": "Popular tools",
+      "title": "Most used calculators",
+      "description": "Six quick-start tools to jump into sizing, checks, and conversions.",
+      "cta": "Open tool library",
+      "defaultCategory": "General"
+    },
+    "about": {
+      "kicker": "About",
+      "title": "A methodology-first engineering workspace",
+      "lead": "A methodology-first workspace for practical engineering decisions and repeatable calculations.",
+      "cardOneTitle": "Methodology / Flow",
+      "cardOneBody": "Break the problem into steps, define assumptions, and follow a consistent calculation path.",
+      "cardTwoTitle": "Manual + Visual",
+      "cardTwoBody": "Use formulas, tables, and visual cues so the reasoning stays clear and auditable."
+    },
+    "useCases": {
+      "kicker": "What is it for?",
+      "title": "Where the lab helps",
+      "lead": "Short, focused flows for the most common engineering decisions.",
+      "items": [
+        {
+          "title": "Validate calculations",
+          "description": "Check formulas, units, and assumptions in minutes."
+        },
+        {
+          "title": "Make decisions faster",
+          "description": "Use consistent inputs and visual cards to reduce back-and-forth."
+        },
+        {
+          "title": "Keep method notes",
+          "description": "Capture small checklists and references for repeatable work."
+        }
+      ]
+    },
+    "changelog": {
+      "kicker": "New",
+      "title": "Latest updates",
+      "description": "New tools and fixes, summarized for quick review.",
+      "latestLabel": "Latest release",
+      "ctaPrimary": "View changelog",
+      "ctaSecondary": "Read the blog",
+      "empty": "No updates yet. The first release note will land soon."
+    },
+    "seo": {
+      "title": "Mechanical Engineering Calculators",
+      "description": "ISO/DIN-verified mechanical calculators for machine design, fasteners, power transmission, and thermal checks."
+    },
+    "valueProps": {
+      "kicker": "Why teams switch",
+      "title": "Replace spreadsheet guesswork with verified calculations",
+      "description": "Finish checks faster, reduce errors, and keep every assumption visible.",
+      "excel": {
+        "badge": "Stop wasting time in Excel",
+        "title": "Stop wasting time in Excel",
+        "body": "Spreadsheets are slow to audit and easy to break. We lock formulas, units, and assumptions so you can finish in minutes.",
+        "metricLabel": "Average time saved",
+        "metricValue": "45+ min per calculation",
+        "metricNote": "Based on internal time trials vs. manual spreadsheets.",
+        "excelLabel": "Excel",
+        "toolLabel": "AI Engineers Lab",
+        "excelPoints": [
+          "Manual unit conversions",
+          "Hidden formula errors",
+          "No traceability across versions"
+        ],
+        "toolPoints": [
+          "Instant unit checks",
+          "Formula breakdowns",
+          "Export-ready outputs"
+        ]
+      },
+      "accuracy": {
+        "badge": "Never question your results",
+        "title": "Never question your calculations",
+        "body": "See every formula, assumption, and unit before you export.",
+        "bullets": [
+          "Formula breakdowns you can audit",
+          "Automatic unit conversion",
+          "Built-in error checks"
+        ],
+        "formulaLabel": "Formula breakdown",
+        "formulaExample": "σ = F / A  ·  τ = T·r / J  ·  ΔP = f·(L/D)·(ρ·v²/2)",
+        "formulaNotes": [
+          "Assumptions listed per tool",
+          "Units validated on every input",
+          "Standards referenced (ISO/DIN)"
+        ]
+      },
+      "library": {
+        "badge": "Build your library",
+        "title": "Build your engineering library",
+        "body": "Save, reuse, and share calculation sets across projects.",
+        "bullets": [
+          "Calculation history for every tool",
+          "Reusable templates for common parts",
+          "Team sharing and review-ready exports"
+        ],
+        "cards": [
+          "History keeps your last 50 runs ready",
+          "Save presets for common fasteners",
+          "Share a single link with your team"
+        ]
+      }
+    },
+    "showcase": {
+      "kicker": "Popular calculators",
+      "title": "Start with proven calculators",
+      "description": "Most used by mechanical teams this month.",
+      "tryNow": "Try Now →",
+      "usageLabel": "{count}+ uses",
+      "cta": "See all calculators"
+    },
+    "pricing": {
+      "kicker": "Pricing",
+      "title": "Simple pricing for mechanical teams",
+      "description": "Start free. Upgrade when you need unlimited calculations, history, and exports.",
+      "ctaPrimary": "Start Free Trial",
+      "note": "Cancel anytime. No credit card required to start.",
+      "free": {
+        "title": "Free",
+        "subtitle": "3 calculations/day"
+      },
+      "pro": {
+        "title": "Pro",
+        "subtitle": "Unlimited calculations",
+        "price": "$19/mo",
+        "badge": "Most Popular",
+        "features": [
+          "Unlimited calculations",
+          "Full history + exports",
+          "Priority support"
+        ]
+      },
+      "table": {
+        "feature": "Feature",
+        "rows": [
+          {
+            "label": "Daily calculations",
+            "free": "3 per day",
+            "pro": "Unlimited"
+          },
+          {
+            "label": "Calculation history",
+            "free": "No history",
+            "pro": "Full history"
+          },
+          {
+            "label": "PDF export",
+            "free": "Locked",
+            "pro": "Included"
+          },
+          {
+            "label": "API access",
+            "free": "—",
+            "pro": "Included"
+          }
+        ]
+      }
+    },
+    "trust": {
+      "kicker": "Trusted",
+      "title": "Built for compliance and speed",
+      "description": "Mechanical teams use AI Engineers Lab to cut errors and document decisions.",
+      "testimonials": [
+        {
+          "quote": "We replaced our torque spreadsheets in a week and immediately reduced review time.",
+          "name": "Aylin K.",
+          "role": "Mechanical Design Engineer"
+        },
+        {
+          "quote": "The formula breakdown and unit checks caught issues we used to miss.",
+          "name": "Tom R.",
+          "role": "Power Transmission Lead"
+        },
+        {
+          "quote": "Export-ready outputs make internal approvals much faster.",
+          "name": "Murat S.",
+          "role": "Manufacturing Engineer"
+        }
+      ],
+      "logosTitle": "As seen on",
+      "logos": [],
+      "guarantee": {
+        "title": "Calculation accuracy guarantee",
+        "body": "If a result looks off, we validate and correct it within 24 hours."
+      }
+    }
+  },
+  "pages": {
+    "tools": {
+      "badge": "Tool Library",
+      "title": "All tools in one place",
+      "description": "Filter calculators, packages, and guides, then open what you need.",
+      "imageAlt": "Tool library overview with filters and calculator cards"
+    },
+    "projects": {
+      "badge": "Projects",
+      "title": "Saved calculation projects",
+      "description": "Local-only projects for organizing calculation outputs and reports.",
+      "imageAlt": "Projects list with saved calculation cards",
+      "emptyTitle": "No projects saved yet.",
+      "emptyDescription": "Save a calculation from any tool to start a project.",
+      "projectLabel": "Project",
+      "itemCount": "{count} items",
+      "openReport": "Open report",
+      "createdLabel": "Saved on"
+    },
+    "contentFallback": {
+      "title": "This content is not available in English yet.",
+      "description": "Please check back soon for the English version."
+    },
+    "reference": {
+      "badge": "Quick Reference",
+      "title": "Quick Reference Center",
+      "description": "Materials, threads, friction, and core unit cheats in one place.",
+      "imageAlt": "Quick reference center with materials and thread tables",
+      "searchTitle": "One search, all tables",
+      "searchDescription": "Filter every reference table from a single search box.",
+      "searchLabel": "Search across tables",
+      "searchPlaceholder": "Material, M12, friction, MPa...",
+      "exportCta": "Download CSV",
+      "emptyState": "No matching rows found.",
+      "disclaimer": "For reference only; verify standards and documentation for critical design."
+    },
+    "materials": {
+      "badge": "Materials Library",
+      "title": "Materials Library",
+      "description": "Search metals and polymers by standard, category, yield strength, and modulus.",
+      "imageAlt": "Materials library search with filters and property cards",
+      "search": {
+        "title": "Search materials",
+        "description": "Type a grade, standard, or category to narrow the list.",
+        "label": "Search",
+        "placeholder": "S235, 6061-T6, AISI 1045, EN 10025..."
+      },
+      "filters": {
+        "categoryLabel": "Category",
+        "allCategories": "All categories",
+        "yieldLabel": "Yield strength (MPa)",
+        "yieldMin": "Min MPa",
+        "yieldMax": "Max MPa",
+        "modulusLabel": "Young's modulus (GPa)",
+        "modulusMin": "Min GPa",
+        "modulusMax": "Max GPa",
+        "clear": "Clear filters"
+      },
+      "results": {
+        "countLabel": "{count} materials",
+        "emptyTitle": "No materials match your filters.",
+        "emptyDescription": "Adjust the search or ranges to see results."
+      },
+      "card": {
+        "standard": "Standard",
+        "category": "Category",
+        "density": "Density",
+        "modulus": "E (GPa)",
+        "yield": "Yield (MPa)",
+        "cta": "View material"
+      },
+      "detail": {
+        "back": "Back to materials",
+        "badge": "Material profile",
+        "subtitle": "Typical properties and references",
+        "propertiesTitle": "Key properties",
+        "propertiesDescription": "Representative values at room temperature unless noted.",
+        "notesTitle": "Notes",
+        "notesEmpty": "No extra notes provided.",
+        "useTitle": "Use in tools",
+        "useDescription": "Prefill a calculator with this material's properties.",
+        "useBolt": "Use in Bolt",
+        "useBeam": "Use in Beam",
+        "useSanity": "Use in Sanity Check",
+        "sourcesTitle": "Sources",
+        "sourcesDescription": "Reference documents and handbooks used for typical values.",
+        "sourcesEmpty": "No sources listed."
+      },
+      "labels": {
+        "standard": "Standard",
+        "category": "Category",
+        "density": "Density (kg/m3)",
+        "E": "Young's modulus E (GPa)",
+        "G": "Shear modulus G (GPa)",
+        "yield": "Yield strength (MPa)",
+        "UTS": "Ultimate tensile strength (MPa)",
+        "alpha": "Thermal expansion α (um/m-K)"
+      },
+      "disclaimer": "Values are typical and for comparison only. Confirm supplier data and standards for final design.",
+      "categories": {
+        "steel": "Steel",
+        "stainless": "Stainless steel",
+        "tool": "Tool steel",
+        "cast-iron": "Cast iron",
+        "aluminum": "Aluminum",
+        "copper": "Copper",
+        "nickel": "Nickel alloys",
+        "titanium": "Titanium",
+        "magnesium": "Magnesium",
+        "plastics": "Plastics",
+        "elastomer": "Elastomers",
+        "composites": "Composites"
+      }
+    },
+    "standards": {
+      "badge": "Standards Hub",
+      "title": "Standards Hub",
+      "description": "Reference tables and quick standards by category.",
+      "imageAlt": "Standards tables for threads, materials, and fits",
+      "categoriesTitle": "Categories",
+      "categoriesDescription": "Explore standards and cheat sheets by topic.",
+      "categoryBadge": "Category",
+      "categoryCta": "Open category",
+      "categoryPage": {
+        "searchTitle": "Search within standards",
+        "searchDescription": "Filter every table in this category.",
+        "searchLabel": "Search tables",
+        "searchPlaceholder": "ISO 286, M12, roughness...",
+        "exportCta": "Download CSV",
+        "emptyState": "No matching rows found.",
+        "sourcesTitle": "Sources",
+        "sourcesLabel": "Source"
+      }
+    },
+    "sanityCheck": {
+      "badge": "Engineering Sanity Check Lab",
+      "title": "Engineering Sanity Check Lab",
+      "description": "Validate variables, units, and formulas on one screen.",
+      "howToTitle": "How it works",
+      "howToSteps": [
+        "Add variables with units and ranges.",
+        "Write the formula and set expected output unit.",
+        "Run sweep or Monte Carlo to inspect sensitivity."
+      ],
+      "tabs": {
+        "sweep": "Sensitivity Sweep",
+        "monteCarlo": "Monte Carlo"
+      }
+    },
+    "guides": {
+      "badge": "Guides",
+      "title": "Step-by-step calculation and application guides",
+      "description": "Practical notes for material selection, quality checks, and production flows.",
+      "imageAlt": "Guides library with categories and highlighted cards",
+      "empty": "No guides published yet.",
+      "countLabel": "{count} guides",
+      "readingTime": "{count} min read",
+      "fallbackCategory": "Other",
+      "back": "Back to guides",
+      "tocTitle": "Contents",
+      "tocEmpty": "This guide has no headings yet."
+    },
+    "glossary": {
+      "badge": "Glossary",
+      "title": "Technical terms and short definitions",
+      "description": "Key concepts from gear, torque, and manufacturing terminology in one place.",
+      "imageAlt": "Glossary list of technical terms with categories",
+      "empty": "No terms published yet.",
+      "readingTime": "{count} min read",
+      "back": "Back to glossary",
+      "definitionTitle": "Definition",
+      "formulaTitle": "Formulas",
+      "formulaEmpty": "No formulas added for this term.",
+      "relatedTitle": "Related resources",
+      "relatedDescription": "Sources with similar tags.",
+      "relatedEmpty": "No related content found.",
+      "relatedBlog": "Blog",
+      "relatedGuides": "Guides",
+      "relatedTools": "Calculators",
+      "readCta": "Read",
+      "openToolCta": "Open calculator"
+    },
+    "categories": {
+      "badge": "Category",
+      "description": "Blog posts, guides, and calculators under this category.",
+      "blogTitle": "Blog",
+      "blogDesc": "Blog posts in this category.",
+      "guidesTitle": "Guides",
+      "guidesDesc": "Guides in this category.",
+      "toolsTitle": "Calculators",
+      "toolsDesc": "Calculators in this category.",
+      "relatedTagsTitle": "Related tags",
+      "relatedTagsEmpty": "No related tags found.",
+      "contentEmpty": "No content found in this category.",
+      "toolsEmpty": "No calculators found in this category.",
+      "readCta": "Read",
+      "openToolCta": "Open calculator",
+      "readingTimeShort": "{count} min"
+    },
+    "tags": {
+      "badge": "Tag",
+      "description": "Blog posts, guides, and calculators related to this tag.",
+      "blogTitle": "Blog",
+      "blogDesc": "Blog posts for this tag.",
+      "guidesTitle": "Guides",
+      "guidesDesc": "Guides for this tag.",
+      "toolsTitle": "Calculators",
+      "toolsDesc": "Calculators for this tag.",
+      "relatedTagsTitle": "Related tags",
+      "relatedTagsEmpty": "No other tags found.",
+      "contentEmpty": "No content found for this tag.",
+      "toolsEmpty": "No calculators found for this tag.",
+      "readCta": "Read",
+      "openToolCta": "Open calculator",
+      "readingTimeShort": "{count} min"
+    },
+    "qualityTools": {
+      "badge": "Quality tools: 5W1H - 5 Why - 8D - Kaizen - Poka-Yoke",
+      "title": "Digital templates for problem definition and root cause actions",
+      "description": "Simple quality templates for definition, root cause, and action follow-up.",
+      "typical": "Typical use",
+      "free": "Free",
+      "active": "Active (Beta)",
+      "planned": "Planned",
+      "basic": "Basic level",
+      "advanced": "Advanced level",
+      "premiumBadge": "Premium (Private beta)",
+      "openTool": "Open tool",
+      "comingSoon": "Coming soon",
+      "footerActive": "Interactive form available (draft).",
+      "footerPlanned": "Template and form design in progress."
+    },
+    "fixtureTools": {
+      "badge": "Fixture tools",
+      "title": "Practical cards for locating, clamping, and base plates",
+      "description": "Quick calculators and checklists for fixture design.",
+      "focus": "Focus",
+      "active": "Active (Beta)",
+      "planned": "Planned",
+      "openTool": "Open tool",
+      "comingSoon": "Coming soon",
+      "footerActive": "Interactive card available.",
+      "footerPlanned": "Card in preparation."
+    },
+    "projectHub": {
+      "badgeTitle": "Project Hub",
+      "badgeSubtitle": "Project - RFQ - Part / Revision Tracking",
+      "title": "Manage projects, RFQs, and revisions in one place",
+      "description": "Track projects, RFQ processes, and part revisions from a single view.",
+      "cta": "Open module"
+    },
+    "savedCalculations": {
+      "kicker": "Saved Calculations",
+      "title": "My saved calculations",
+      "description": "Review, reopen, or clear the calculations you saved before."
+    },
+    "blog": {
+      "badge": "Blog",
+      "title": "Calculation and analysis focused posts",
+      "description": "Short pieces for manual calculation, visual analysis, and methodical notes.",
+      "imageAlt": "Blog feed with articles, filters, and tags",
+      "back": "Back to blog",
+      "tocTitle": "Contents",
+      "tocEmpty": "This post has no headings yet.",
+      "relatedPostsTitle": "Related posts",
+      "relatedToolsTitle": "Related calculators",
+      "relatedToolsCta": "Open calculator",
+      "searchLabel": "Search",
+      "searchPlaceholder": "Title, tag, or category...",
+      "searchButton": "Search",
+      "clearSearch": "Clear search",
+      "categoriesTitle": "Categories",
+      "allCategories": "All categories",
+      "tagsTitle": "Tags",
+      "allTags": "All tags",
+      "summary": "{start}-{end} / {total} posts",
+      "pageSummary": "Page {page} / {total}",
+      "clearFilters": "Clear all filters",
+      "empty": "No posts match your filters.",
+      "readingTime": "{count} min read",
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "community": {
+      "badge": "Community",
+      "title": "Community discussions and threads",
+      "description": "Start technical threads, share experience, and keep engineering knowledge flowing.",
+      "imageAlt": "Community discussion cards and thread highlights",
+      "sampleBadge": "Sample",
+      "authCta": {
+        "title": "Join the community",
+        "description": "Sign in to open threads and add comments.",
+        "login": "Sign in",
+        "guest": "View threads as guest"
+      },
+      "form": {
+        "title": "Start a new thread",
+        "description": "Open a topic, share context, and invite the community to help.",
+        "titleLabel": "Title",
+        "titlePlaceholder": "e.g., 3-2-1 locating for a 3-axis fixture",
+        "categoryLabel": "Category",
+        "categories": [
+          "Fixture / Tooling",
+          "Quality / Measurement",
+          "Material / Heat Treatment",
+          "Project / Process",
+          "General"
+        ],
+        "bodyLabel": "Description",
+        "bodyPlaceholder": "Add context, measurements, links, or quick sketches...",
+        "helper": "Avoid sharing sensitive data.",
+        "submit": "Open thread"
+      },
+      "stream": {
+        "kicker": "Live",
+        "title": "Community comment stream",
+        "description": "See recent comments in real time and add your own note."
+      },
+      "recent": {
+        "title": "Recent threads",
+        "countLabel": "{count} threads",
+        "replyCount": "{count} replies"
+      },
+      "thread": {
+        "backLabel": "<- Back to community",
+        "authorLabel": "Posted by {author}",
+        "repliesTitle": "Replies",
+        "replyLabel": "Your reply",
+        "replyPlaceholder": "Share your experience, calculation, or suggestion...",
+        "replyCta": "Post reply",
+        "missingTitle": "Thread not found",
+        "missingDescription": "This community thread could not be found."
+      }
+    },
+    "qa": {
+      "badge": "Q&A",
+      "title": "Q&A",
+      "description": "Get fast answers, share experience, and discuss technical topics."
+    },
+    "support": {
+      "badge": "Support",
+      "title": "Technical support and guidance",
+      "description": "Submit a short request and our team will follow up quickly.",
+      "imageAlt": "Support form with request details and attachment field",
+      "tipsTitle": "Tips for a better request",
+      "tips": [
+        "Add a short subject line (e.g., \"M12 10.9 bolt torque\").",
+        "Share materials, loads, limits, or standards if available."
+      ]
+    },
+    "premium": {
+      "badge": "Premium",
+      "title": "Premium private beta",
+      "description": "Premium is in private beta. We onboard teams in small batches.",
+      "imageAlt": "Premium roadmap cards with feature highlights"
+    },
+    "changelog": {
+      "badge": "Changelog",
+      "title": "Updates and changes",
+      "description": "New tools, fixes, and general changes are listed here.",
+      "emptyTitle": "No changelog entries yet.",
+      "emptyDescription": "The first update will be added soon.",
+      "addedTitle": "Added tools",
+      "addedEmpty": "No new tools in this release.",
+      "fixesTitle": "Fixes",
+      "fixesEmpty": "No fixes logged for this release."
+    },
+    "gearRatio": {
+      "header": {
+        "back": "← All calculators",
+        "badge": "Ratios",
+        "title": "Gear Ratio Calculator",
+        "description": "Enter tooth counts and input speed to estimate ratio, output speed, and torque (incl. efficiency)."
+      },
+      "card": {
+        "title": "Gear Ratio Calculator",
+        "description": "Enter tooth counts and input speed; the tool calculates ratio, output speed, and torque (incl. efficiency).",
+        "status": "Active"
+      },
+      "fields": {
+        "z1": "Input tooth count z1",
+        "z2": "Output tooth count z2",
+        "rpm1": "Input speed n1 [rpm]",
+        "torque1": "Input torque T1 [Nm]",
+        "efficiency": "Efficiency η (0-1)",
+        "sample": "Fill with sample values"
+      },
+      "results": {
+        "ratio": "Ratio i = z2 / z1",
+        "rpm2": "Output speed n2 [rpm]",
+        "torque2": "Output torque T2 [Nm]",
+        "efficiency": "Efficiency η"
+      },
+      "note": "Note: Output torque includes efficiency factor η."
+    },
+    "bendingStress": {
+      "badges": {
+        "primary": "Mechanical Calculator",
+        "secondary": "Bending Stress & Deflection"
+      },
+      "header": {
+        "title": "Simply Supported Beam — Bending Stress & Deflection",
+        "description": "Compute bending moment, section modulus, bending stress, and deflection for a simply supported beam with a central point load."
+      },
+      "inputs": {
+        "title": "Inputs",
+        "beamLength": "Beam length L [mm]",
+        "force": "Center load F [kN]",
+        "sectionType": "Section type",
+        "sectionRect": "Rectangular",
+        "sectionCircle": "Circular",
+        "width": "Width b [mm]",
+        "height": "Height h [mm]",
+        "diameter": "Diameter d [mm]",
+        "youngModulus": "Young's modulus E [MPa]",
+        "yieldStrength": "Yield strength Re [MPa]",
+        "calculate": "Calculate"
+      },
+      "results": {
+        "title": "Results",
+        "maxMoment": "Max bending moment Mmax",
+        "inertia": "Area moment of inertia I",
+        "sectionModulus": "Section modulus W",
+        "sigma": "Bending stress σ",
+        "deflection": "Max deflection δ",
+        "safety": "Safety factor S",
+        "note": "Formulas assume a simply supported beam with a mid-span point load. Verify against applicable standards for critical designs."
+      },
+      "notes": {
+        "title": "Design notes",
+        "empty": "Complete the inputs and the notes will update automatically.",
+        "safety": {
+          "unsafe": "Unsafe — yielding expected.",
+          "veryLow": "Very low safety. Risky with tolerances and load uncertainty.",
+          "low": "Low safety. Acceptable for prototype checks; review for production.",
+          "ok": "Typical safety for static steel structures.",
+          "comfortable": "Comfortable safety. Better for fatigue/impact.",
+          "veryHigh": "Very high safety. Consider weight optimization."
+        },
+        "deflectionMissing": "Deflection information is not available.",
+        "deflectionBase": "Deflection ratio is approximately L/δ ≈ {ratio}.",
+        "deflectionLow": "This is quite flexible (below L/150) and may cause alignment issues.",
+        "deflectionMid": "Borderline for many applications (around L/150–L/250).",
+        "deflectionOk": "Acceptable for most machine components (L/250–L/400).",
+        "deflectionHigh": "Very stiff in terms of deflection (L/400 and above).",
+        "stress": "Computed bending stress is about {sigma} MPa. Safety factor is based on yield strength.",
+        "fatigue": "If the design sees fatigue or dynamic loads, static safety alone is insufficient; check fatigue limits and stress concentrations.",
+        "local": "Connections, weld roots, and section changes can cause local stress peaks; this check uses nominal section values."
+      },
+      "diagram": {
+        "title": "Bending Moment Diagram (schematic)",
+        "empty": "This section shows the schematic moment diagram for a simply supported beam with a central point load. Fill the inputs to render it.",
+        "description": "The diagram shows moment rising to Mmax ≈ {value} kN·m at midspan and dropping to zero at the supports."
+      }
+    },
+    "fluidsHvac": {
+      "header": {
+        "badge": "Fluids & HVAC",
+        "subBadge": "Multi-check",
+        "title": "Fluids & HVAC Quick Pack",
+        "description": "Three fast checks: (1) Reynolds, friction factor, and pressure loss for water, (2) duct diameter from velocity method, (3) ACH to flow conversion. For concept sizing; use standards for detailed design."
+      },
+      "pipe": {
+        "title": "1) Water Reynolds, f, and Pressure Drop (Darcy-Weisbach)",
+        "flow": "Flow Q [m³/h]",
+        "diameter": "Diameter D [mm]",
+        "length": "Pipe length L [m]",
+        "roughness": "Roughness ε [mm]",
+        "roughnessHelp": "Typical steel ~0.05 mm",
+        "resultRe": "Re",
+        "resultF": "f (Darcy)",
+        "resultVelocity": "Velocity v",
+        "resultDp": "Δp (along L)",
+        "note": "Assumptions: water at 20°C (ρ=1000 kg/m³, μ=1 cP). Δp = f·(L/D)·ρv²/2. Minor losses, fittings, and temperature effects are excluded."
+      },
+      "duct": {
+        "title": "2) Duct Velocity Method (equivalent diameter)",
+        "flow": "Flow Q [m³/h]",
+        "velocity": "Target velocity v [m/s]",
+        "resultArea": "Area A",
+        "resultDiameter": "Equivalent D",
+        "resultPressure": "Dynamic pressure q",
+        "note": "Typical velocities: offices 4–6 m/s, industrial 6–10 m/s. Check manufacturer catalogs for noise and loss; elbows/dampers add extra losses."
+      },
+      "ach": {
+        "title": "3) Air Changes per Hour (ACH) ↔ Flow",
+        "volume": "Volume V [m³]",
+        "rate": "ACH [1/h]",
+        "resultFlow": "Flow",
+        "resultFlowPerSecond": "Flow (m³/s)",
+        "note": "Typical ACH: offices 4–8, classrooms 6–10, labs 8–15. Check building codes and indoor air quality standards."
+      }
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "This link may have been removed or moved. Use the Calculator Library to keep exploring.",
+      "primaryCta": "Calculator Library",
+      "secondaryCta": "Back to home"
+    },
+    "faq": {
+      "badge": "FAQ",
+      "title": "Frequently asked questions",
+      "description": "Quick answers about calculators, reporting, standards, and safety assumptions.",
+      "categories": [
+        {
+          "title": "Tools",
+          "items": [
+            {
+              "q": "How accurate are the calculators?",
+              "a": "They follow published formulas and checks, but inputs and assumptions are yours. Verify against your standards."
             },
-    "languageSwitcher":  {
-                             "trLabel":  "Turkish",
-                             "enLabel":  "English"
-                         },
-    "authButtons":  {
-                        "login":  "Sign in",
-                        "premium":  "Join the waitlist",
-                        "userFallback":  "User",
-                        "logout":  "Sign out",
-                        "unavailable":  "Auth is unavailable right now.",
-                        "checking":  "Checking sign-in...",
-                        "readOnlyFallback":  "You're in anonymous mode - you can still read the content.",
-                        "errorTitle":  "Sign-in check failed",
-                        "errorDescription":  "Auth didn't respond. Please try again.",
-                        "loginHint":  "Sign in with Google to access favorites and saved calculations.",
-                        "retry":  "Retry"
-                    },
-    "home":  {
-                 "hero":  {
-                              "title":  "Professional mechanical calculations, made clear.",
-                              "subtitle":  "Engineering Calculators \u0026 Visual Analysis Lab",
-                              "description":  "Premium-ready calculators, visual checks, and methodical notes for fast, reliable decisions.",
-                              "ctaPrimary":  "Go to Calculators",
-                              "ctaSecondary":  "Sanity Check Lab",
-                              "imageAlt":  "Engineering dashboard with charts, cards, and calculation tiles"
-                          },
-                 "popularTools":  {
-                                      "kicker":  "Popular tools",
-                                      "title":  "Most used calculators",
-                                      "description":  "Six quick-start tools to jump into sizing, checks, and conversions.",
-                                      "cta":  "Open tool library",
-                                      "defaultCategory":  "General"
-                                  },
-                 "about":  {
-                               "kicker":  "About",
-                               "title":  "A methodology-first engineering workspace",
-                               "lead":  "A methodology-first workspace for practical engineering decisions and repeatable calculations.",
-                               "cardOneTitle":  "Methodology / Flow",
-                               "cardOneBody":  "Break the problem into steps, define assumptions, and follow a consistent calculation path.",
-                               "cardTwoTitle":  "Manual + Visual",
-                               "cardTwoBody":  "Use formulas, tables, and visual cues so the reasoning stays clear and auditable."
-                           },
-                 "useCases":  {
-                                  "kicker":  "What is it for?",
-                                  "title":  "Where the lab helps",
-                                  "lead":  "Short, focused flows for the most common engineering decisions.",
-                                  "items":  [
-                                                {
-                                                    "title":  "Validate calculations",
-                                                    "description":  "Check formulas, units, and assumptions in minutes."
-                                                },
-                                                {
-                                                    "title":  "Make decisions faster",
-                                                    "description":  "Use consistent inputs and visual cards to reduce back-and-forth."
-                                                },
-                                                {
-                                                    "title":  "Keep method notes",
-                                                    "description":  "Capture small checklists and references for repeatable work."
-                                                }
-                                            ]
-                              },
-                 "changelog":  {
-                                    "kicker":  "New",
-                                    "title":  "Latest updates",
-                                    "description":  "New tools and fixes, summarized for quick review.",
-                                    "latestLabel":  "Latest release",
-                                    "ctaPrimary":  "View changelog",
-                                    "ctaSecondary":  "Read the blog",
-                                    "empty":  "No updates yet. The first release note will land soon."
-                                }
-             },
-    "pages":  {
-                  "tools":  {
-                                "badge":  "Tool Library",
-                                "title":  "All tools in one place",
-                                "description":  "Filter calculators, packages, and guides, then open what you need.",
-                                "imageAlt":  "Tool library overview with filters and calculator cards"
-                            },
-                  "contentFallback":  {
-                                          "title":  "This content is not available in English yet.",
-                                          "description":  "Please check back soon for the English version."
-                                      },
-                  "reference":  {
-                                    "badge":  "Quick Reference",
-                                    "title":  "Quick Reference Center",
-                                    "description":  "Materials, threads, friction, and core unit cheats in one place.",
-                                    "imageAlt":  "Quick reference center with materials and thread tables",
-                                    "searchTitle":  "One search, all tables",
-                                    "searchDescription":  "Filter every reference table from a single search box.",
-                                    "searchLabel":  "Search across tables",
-                                    "searchPlaceholder":  "Material, M12, friction, MPa...",
-                                    "exportCta":  "Download CSV",
-                                    "emptyState":  "No matching rows found.",
-                                    "disclaimer":  "For reference only; verify standards and documentation for critical design."
-                                },
-                  "standards":  {
-                                   "badge":  "Standards Hub",
-                                   "title":  "Standards Hub",
-                                   "description":  "Reference tables and quick standards by category.",
-                                   "imageAlt":  "Standards tables for threads, materials, and fits",
-                                   "categoriesTitle":  "Categories",
-                                   "categoriesDescription":  "Explore standards and cheat sheets by topic.",
-                                   "categoryBadge":  "Category",
-                                   "categoryCta":  "Open category",
-                                   "categoryPage":  {
-                                                        "searchTitle":  "Search within standards",
-                                                        "searchDescription":  "Filter every table in this category.",
-                                                        "searchLabel":  "Search tables",
-                                                        "searchPlaceholder":  "ISO 286, M12, roughness...",
-                                                        "exportCta":  "Download CSV",
-                                                        "emptyState":  "No matching rows found.",
-                                                        "sourcesTitle":  "Sources",
-                                                        "sourcesLabel":  "Source"
-                                                    }
-                               },
-                  "sanityCheck":  {
-                                      "badge":  "Engineering Sanity Check Lab",
-                                      "title":  "Engineering Sanity Check Lab",
-                                      "description":  "Validate variables, units, and formulas on one screen.",
-                                      "howToTitle":  "How it works",
-                                      "howToSteps":  [
-                                                         "Add variables with units and ranges.",
-                                                         "Write the formula and set expected output unit.",
-                                                         "Run sweep or Monte Carlo to inspect sensitivity."
-                                                     ],
-                                      "tabs":  {
-                                                    "sweep":  "Sensitivity Sweep",
-                                                    "monteCarlo":  "Monte Carlo"
-                                                }
-                                  },
-                  "guides":  {
-                                 "badge":  "Guides",
-                                 "title":  "Step-by-step calculation and application guides",
-                                 "description":  "Practical notes for material selection, quality checks, and production flows.",
-                                 "imageAlt":  "Guides library with categories and highlighted cards",
-                                 "empty":  "No guides published yet.",
-                                 "countLabel":  "{count} guides",
-                                 "readingTime":  "{count} min read",
-                                 "fallbackCategory":  "Other",
-                                 "back":  "Back to guides",
-                                 "tocTitle":  "Contents",
-                                 "tocEmpty":  "This guide has no headings yet."
-                             },
-                  "glossary":  {
-                                   "badge":  "Glossary",
-                                   "title":  "Technical terms and short definitions",
-                                   "description":  "Key concepts from gear, torque, and manufacturing terminology in one place.",
-                                   "imageAlt":  "Glossary list of technical terms with categories",
-                                   "empty":  "No terms published yet.",
-                                   "readingTime":  "{count} min read",
-                                   "back":  "Back to glossary",
-                                   "definitionTitle":  "Definition",
-                                   "formulaTitle":  "Formulas",
-                                   "formulaEmpty":  "No formulas added for this term.",
-                                   "relatedTitle":  "Related resources",
-                                   "relatedDescription":  "Sources with similar tags.",
-                                   "relatedEmpty":  "No related content found.",
-                                   "relatedBlog":  "Blog",
-                                   "relatedGuides":  "Guides",
-                                   "relatedTools":  "Calculators",
-                                   "readCta":  "Read",
-                                   "openToolCta":  "Open calculator"
-                               },
-                  "categories":  {
-                                     "badge":  "Category",
-                                     "description":  "Blog posts, guides, and calculators under this category.",
-                                     "blogTitle":  "Blog",
-                                     "blogDesc":  "Blog posts in this category.",
-                                     "guidesTitle":  "Guides",
-                                     "guidesDesc":  "Guides in this category.",
-                                     "toolsTitle":  "Calculators",
-                                     "toolsDesc":  "Calculators in this category.",
-                                     "relatedTagsTitle":  "Related tags",
-                                     "relatedTagsEmpty":  "No related tags found.",
-                                     "contentEmpty":  "No content found in this category.",
-                                     "toolsEmpty":  "No calculators found in this category.",
-                                     "readCta":  "Read",
-                                     "openToolCta":  "Open calculator",
-                                     "readingTimeShort":  "{count} min"
-                                 },
-                  "tags":  {
-                               "badge":  "Tag",
-                               "description":  "Blog posts, guides, and calculators related to this tag.",
-                               "blogTitle":  "Blog",
-                               "blogDesc":  "Blog posts for this tag.",
-                               "guidesTitle":  "Guides",
-                               "guidesDesc":  "Guides for this tag.",
-                               "toolsTitle":  "Calculators",
-                               "toolsDesc":  "Calculators for this tag.",
-                               "relatedTagsTitle":  "Related tags",
-                               "relatedTagsEmpty":  "No other tags found.",
-                               "contentEmpty":  "No content found for this tag.",
-                               "toolsEmpty":  "No calculators found for this tag.",
-                               "readCta":  "Read",
-                               "openToolCta":  "Open calculator",
-                               "readingTimeShort":  "{count} min"
-                           },
-                  "qualityTools":  {
-                                       "badge":  "Quality tools: 5W1H - 5 Why - 8D - Kaizen - Poka-Yoke",
-                                       "title":  "Digital templates for problem definition and root cause actions",
-                                       "description":  "Simple quality templates for definition, root cause, and action follow-up.",
-                                       "typical":  "Typical use",
-                                       "free":  "Free",
-                                       "active":  "Active (Beta)",
-                                       "planned":  "Planned",
-                                       "basic":  "Basic level",
-                                       "advanced":  "Advanced level",
-                                       "premiumBadge":  "Premium (waitlist)",
-                                       "openTool":  "Open tool",
-                                       "comingSoon":  "Coming soon",
-                                       "footerActive":  "Interactive form available (draft).",
-                                       "footerPlanned":  "Template and form design in progress."
-                                   },
-                  "fixtureTools":  {
-                                       "badge":  "Fixture tools",
-                                       "title":  "Practical cards for locating, clamping, and base plates",
-                                       "description":  "Quick calculators and checklists for fixture design.",
-                                       "focus":  "Focus",
-                                       "active":  "Active (Beta)",
-                                       "planned":  "Planned",
-                                       "openTool":  "Open tool",
-                                       "comingSoon":  "Coming soon",
-                                       "footerActive":  "Interactive card available.",
-                                       "footerPlanned":  "Card in preparation."
-                                   },
-                  "projectHub":  {
-                                     "badgeTitle":  "Project Hub",
-                                     "badgeSubtitle":  "Project - RFQ - Part / Revision Tracking",
-                                     "title":  "Manage projects, RFQs, and revisions in one place",
-                                     "description":  "Track projects, RFQ processes, and part revisions from a single view.",
-                                     "cta":  "Open module"
-                                 },
-                  "savedCalculations":  {
-                                            "kicker":  "Saved Calculations",
-                                            "title":  "My saved calculations",
-                                            "description":  "Review, reopen, or clear the calculations you saved before."
-                                        },
-                  "blog":  {
-                               "badge":  "Blog",
-                               "title":  "Calculation and analysis focused posts",
-                               "description":  "Short pieces for manual calculation, visual analysis, and methodical notes.",
-                               "imageAlt":  "Blog feed with articles, filters, and tags",
-                               "back":  "Back to blog",
-                               "tocTitle":  "Contents",
-                               "tocEmpty":  "This post has no headings yet.",
-                               "relatedPostsTitle":  "Related posts",
-                               "relatedToolsTitle":  "Related calculators",
-                               "relatedToolsCta":  "Open calculator",
-                               "searchLabel":  "Search",
-                               "searchPlaceholder":  "Title, tag, or category...",
-                               "searchButton":  "Search",
-                               "clearSearch":  "Clear search",
-                               "categoriesTitle":  "Categories",
-                               "allCategories":  "All categories",
-                               "tagsTitle":  "Tags",
-                               "allTags":  "All tags",
-                               "summary":  "{start}-{end} / {total} posts",
-                               "pageSummary":  "Page {page} / {total}",
-                               "clearFilters":  "Clear all filters",
-                               "empty":  "No posts match your filters.",
-                               "readingTime":  "{count} min read",
-                               "prev":  "Previous",
-                               "next":  "Next"
-                           },
-                  "community":  {
-                                    "badge":  "Community",
-                                    "title":  "Community discussions and threads",
-                                    "description":  "Start technical threads, share experience, and keep engineering knowledge flowing.",
-                                    "imageAlt":  "Community discussion cards and thread highlights",
-                                    "sampleBadge":  "Sample",
-                                    "authCta":  {
-                                                    "title":  "Join the community",
-                                                    "description":  "Sign in to open threads and add comments.",
-                                                    "login":  "Sign in",
-                                                    "guest":  "View threads as guest"
-                                                },
-                                    "form":  {
-                                                 "title":  "Start a new thread",
-                                                 "description":  "Open a topic, share context, and invite the community to help.",
-                                                 "titleLabel":  "Title",
-                                                 "titlePlaceholder":  "e.g., 3-2-1 locating for a 3-axis fixture",
-                                                 "categoryLabel":  "Category",
-                                                 "categories":  [
-                                                                    "Fixture / Tooling",
-                                                                    "Quality / Measurement",
-                                                                    "Material / Heat Treatment",
-                                                                    "Project / Process",
-                                                                    "General"
-                                                                ],
-                                                 "bodyLabel":  "Description",
-                                                 "bodyPlaceholder":  "Add context, measurements, links, or quick sketches...",
-                                                 "helper":  "Avoid sharing sensitive data.",
-                                                 "submit":  "Open thread"
-                                             },
-                                    "stream":  {
-                                                   "kicker":  "Live",
-                                                   "title":  "Community comment stream",
-                                                   "description":  "See recent comments in real time and add your own note."
-                                               },
-                                    "recent":  {
-                                                   "title":  "Recent threads",
-                                                   "countLabel":  "{count} threads",
-                                                   "replyCount":  "{count} replies"
-                                               },
-                                    "thread":  {
-                                                   "backLabel":  "<- Back to community",
-                                                   "authorLabel":  "Posted by {author}",
-                                                   "repliesTitle":  "Replies",
-                                                   "replyLabel":  "Your reply",
-                                                   "replyPlaceholder":  "Share your experience, calculation, or suggestion...",
-                                                   "replyCta":  "Post reply",
-                                                   "missingTitle":  "Thread not found",
-                                                   "missingDescription":  "This community thread could not be found."
-                                               }
-                                },
-                  "qa":  {
-                             "badge":  "Q&A",
-                             "title":  "Q&A",
-                             "description":  "Get fast answers, share experience, and discuss technical topics."
-                         },
-                  "support":  {
-                                  "badge":  "Support",
-                                  "title":  "Technical support and guidance",
-                                  "description":  "Submit a short request and our team will follow up quickly.",
-                                  "imageAlt":  "Support form with request details and attachment field",
-                                  "tipsTitle":  "Tips for a better request",
-                                  "tips":  [
-                                               "Add a short subject line (e.g., \"M12 10.9 bolt torque\").",
-                                               "Share materials, loads, limits, or standards if available."
-                                           ]
-                              },
-                  "premium":  {
-                                  "badge":  "Premium",
-                                  "title":  "Premium package preview",
-                                  "description":  "Payments are not open yet. Join the waitlist to follow upcoming features.",
-                                  "imageAlt":  "Premium roadmap cards with feature highlights"
-                              },
-                  "changelog":  {
-                                    "badge":  "Changelog",
-                                    "title":  "Updates and changes",
-                                    "description":  "New tools, fixes, and general changes are listed here.",
-                                    "emptyTitle":  "No changelog entries yet.",
-                                    "emptyDescription":  "The first update will be added soon.",
-                                    "addedTitle":  "Added tools",
-                                    "addedEmpty":  "No new tools in this release.",
-                                    "fixesTitle":  "Fixes",
-                                    "fixesEmpty":  "No fixes logged for this release."
-                                },
-                  "gearRatio":  {
-                                    "header":  {
-                                                   "back":  "← All calculators",
-                                                   "badge":  "Ratios",
-                                                   "title":  "Gear Ratio Calculator",
-                                                   "description":  "Enter tooth counts and input speed to estimate ratio, output speed, and torque (incl. efficiency)."
-                                               },
-                                    "card":  {
-                                                  "title":  "Gear Ratio Calculator",
-                                                  "description":  "Enter tooth counts and input speed; the tool calculates ratio, output speed, and torque (incl. efficiency).",
-                                                  "status":  "Active"
-                                              },
-                                    "fields":  {
-                                                   "z1":  "Input tooth count z1",
-                                                   "z2":  "Output tooth count z2",
-                                                   "rpm1":  "Input speed n1 [rpm]",
-                                                   "torque1":  "Input torque T1 [Nm]",
-                                                   "efficiency":  "Efficiency η (0-1)",
-                                                   "sample":  "Fill with sample values"
-                                               },
-                                    "results":  {
-                                                    "ratio":  "Ratio i = z2 / z1",
-                                                    "rpm2":  "Output speed n2 [rpm]",
-                                                    "torque2":  "Output torque T2 [Nm]",
-                                                    "efficiency":  "Efficiency η"
-                                                },
-                                    "note":  "Note: Output torque includes efficiency factor η."
-                                },
-                  "bendingStress":  {
-                                        "badges":  {
-                                                       "primary":  "Mechanical Calculator",
-                                                       "secondary":  "Bending Stress & Deflection"
-                                                   },
-                                        "header":  {
-                                                       "title":  "Simply Supported Beam — Bending Stress & Deflection",
-                                                       "description":  "Compute bending moment, section modulus, bending stress, and deflection for a simply supported beam with a central point load."
-                                                   },
-                                        "inputs":  {
-                                                       "title":  "Inputs",
-                                                       "beamLength":  "Beam length L [mm]",
-                                                       "force":  "Center load F [kN]",
-                                                       "sectionType":  "Section type",
-                                                       "sectionRect":  "Rectangular",
-                                                       "sectionCircle":  "Circular",
-                                                       "width":  "Width b [mm]",
-                                                       "height":  "Height h [mm]",
-                                                       "diameter":  "Diameter d [mm]",
-                                                       "youngModulus":  "Young's modulus E [MPa]",
-                                                       "yieldStrength":  "Yield strength Re [MPa]",
-                                                       "calculate":  "Calculate"
-                                                   },
-                                        "results":  {
-                                                        "title":  "Results",
-                                                        "maxMoment":  "Max bending moment Mmax",
-                                                        "inertia":  "Area moment of inertia I",
-                                                        "sectionModulus":  "Section modulus W",
-                                                        "sigma":  "Bending stress σ",
-                                                        "deflection":  "Max deflection δ",
-                                                        "safety":  "Safety factor S",
-                                                        "note":  "Formulas assume a simply supported beam with a mid-span point load. Verify against applicable standards for critical designs."
-                                                    },
-                                        "notes":  {
-                                                      "title":  "Design notes",
-                                                      "empty":  "Complete the inputs and the notes will update automatically.",
-                                                      "safety":  {
-                                                                     "unsafe":  "Unsafe — yielding expected.",
-                                                                     "veryLow":  "Very low safety. Risky with tolerances and load uncertainty.",
-                                                                     "low":  "Low safety. Acceptable for prototype checks; review for production.",
-                                                                     "ok":  "Typical safety for static steel structures.",
-                                                                     "comfortable":  "Comfortable safety. Better for fatigue/impact.",
-                                                                     "veryHigh":  "Very high safety. Consider weight optimization."
-                                                                 },
-                                                      "deflectionMissing":  "Deflection information is not available.",
-                                                      "deflectionBase":  "Deflection ratio is approximately L/δ ≈ {ratio}.",
-                                                      "deflectionLow":  "This is quite flexible (below L/150) and may cause alignment issues.",
-                                                      "deflectionMid":  "Borderline for many applications (around L/150–L/250).",
-                                                      "deflectionOk":  "Acceptable for most machine components (L/250–L/400).",
-                                                      "deflectionHigh":  "Very stiff in terms of deflection (L/400 and above).",
-                                                      "stress":  "Computed bending stress is about {sigma} MPa. Safety factor is based on yield strength.",
-                                                      "fatigue":  "If the design sees fatigue or dynamic loads, static safety alone is insufficient; check fatigue limits and stress concentrations.",
-                                                      "local":  "Connections, weld roots, and section changes can cause local stress peaks; this check uses nominal section values."
-                                                  },
-                                        "diagram":  {
-                                                        "title":  "Bending Moment Diagram (schematic)",
-                                                        "empty":  "This section shows the schematic moment diagram for a simply supported beam with a central point load. Fill the inputs to render it.",
-                                                        "description":  "The diagram shows moment rising to Mmax ≈ {value} kN·m at midspan and dropping to zero at the supports."
-                                                    }
-                                    },
-                  "fluidsHvac":  {
-                                     "header":  {
-                                                    "badge":  "Fluids & HVAC",
-                                                    "subBadge":  "Multi-check",
-                                                    "title":  "Fluids & HVAC Quick Pack",
-                                                    "description":  "Three fast checks: (1) Reynolds, friction factor, and pressure loss for water, (2) duct diameter from velocity method, (3) ACH to flow conversion. For concept sizing; use standards for detailed design."
-                                                },
-                                     "pipe":  {
-                                                  "title":  "1) Water Reynolds, f, and Pressure Drop (Darcy-Weisbach)",
-                                                  "flow":  "Flow Q [m³/h]",
-                                                  "diameter":  "Diameter D [mm]",
-                                                  "length":  "Pipe length L [m]",
-                                                  "roughness":  "Roughness ε [mm]",
-                                                  "roughnessHelp":  "Typical steel ~0.05 mm",
-                                                  "resultRe":  "Re",
-                                                  "resultF":  "f (Darcy)",
-                                                  "resultVelocity":  "Velocity v",
-                                                  "resultDp":  "Δp (along L)",
-                                                  "note":  "Assumptions: water at 20°C (ρ=1000 kg/m³, μ=1 cP). Δp = f·(L/D)·ρv²/2. Minor losses, fittings, and temperature effects are excluded."
-                                              },
-                                     "duct":  {
-                                                  "title":  "2) Duct Velocity Method (equivalent diameter)",
-                                                  "flow":  "Flow Q [m³/h]",
-                                                  "velocity":  "Target velocity v [m/s]",
-                                                  "resultArea":  "Area A",
-                                                  "resultDiameter":  "Equivalent D",
-                                                  "resultPressure":  "Dynamic pressure q",
-                                                  "note":  "Typical velocities: offices 4–6 m/s, industrial 6–10 m/s. Check manufacturer catalogs for noise and loss; elbows/dampers add extra losses."
-                                              },
-                                     "ach":  {
-                                                 "title":  "3) Air Changes per Hour (ACH) ↔ Flow",
-                                                 "volume":  "Volume V [m³]",
-                                                 "rate":  "ACH [1/h]",
-                                                 "resultFlow":  "Flow",
-                                                 "resultFlowPerSecond":  "Flow (m³/s)",
-                                                 "note":  "Typical ACH: offices 4–8, classrooms 6–10, labs 8–15. Check building codes and indoor air quality standards."
-                                             }
-                                 },
-                  "notFound":  {
-                                   "title":  "Page not found",
-                                   "description":  "This link may have been removed or moved. Use the Calculator Library to keep exploring.",
-                                   "primaryCta":  "Calculator Library",
-                                   "secondaryCta":  "Back to home"
-                               }
-              },
-    "components":  {
-                       "updatesBanner":  {
-                                             "title":  "New updates are live",
-                                             "cta":  "View changelog",
-                                             "dismiss":  "Dismiss"
-                                         },
-                       "premiumCTA":  {
-                                          "badge":  "Premium waitlist",
-                                          "title":  "Premium package",
-                                          "description":  "Payments are not open. We share the roadmap via the waitlist.",
-                                          "ctaPrimary":  "Join the waitlist",
-                                          "ctaSecondary":  "View details",
-                                          "supportNote":  "Opens the support form.",
-                                          "packageTitle":  "Package scope (planned)",
-                                          "packageItems":  [
-                                                               "Detailed torque and gear tables",
-                                                               "Advanced mechanical calculators",
-                                                               "PDF/Excel exports (RFQ, quality tools, project lists)",
-                                                               "Multi-device access and saved projects",
-                                                               "Material and coating suggestion cards"
-                                                           ],
-                                          "statusTitle":  "Status",
-                                          "statusBody":  "There is no payment flow yet. We collect interest and prioritize development based on waitlist demand.",
-                                          "stepsTitle":  "What happens next",
-                                          "steps":  [
-                                                        "Join the waitlist",
-                                                        "Short needs questionnaire",
-                                                       "Beta access opens in small batches"
-                                                   ]
-                                      },
-                       "supportForm":  {
-                                           "submit":  {
-                                                          "idle":  "Send request",
-                                                          "uploading":  "Uploading file...",
-                                                          "submitting":  "Submitting..."
-                                                      },
-                                           "fields":  {
-                                                          "name":  {
-                                                                       "label":  "Full name",
-                                                                       "placeholder":  "e.g., Alex Stone"
-                                                                   },
-                                                          "email":  {
-                                                                        "label":  "Email",
-                                                                        "placeholder":  "name@company.com"
-                                                                    },
-                                                          "message":  {
-                                                                          "label":  "Request details",
-                                                                          "placeholder":  "Context, inputs, standards, constraints..."
-                                                                      },
-                                                          "attachment":  {
-                                                                             "label":  "Attach file (optional)",
-                                                                             "helper":  "File uploads to Firebase Storage and links to the ticket.",
-                                                                             "unavailable":  "File upload is disabled. You can add a Drive link in your message."
-                                                                         }
-                                                       },
-                                           "errors":  {
-                                                          "fileTooLarge":  "File size exceeds 10 MB.",
-                                                          "uploadUnavailable":  "File upload is currently unavailable.",
-                                                          "required":  "Please fill all required fields.",
-                                                          "supportUnavailable":  "Support is not ready yet. Please try again later.",
-                                                          "submitFailed":  "Request could not be sent."
-                                                      },
-                                           "success":  "Request received. We will get back to you soon.",
-                                           "successToast":  "Request received - we'll follow up shortly."
-                                       },
-                       "commentStream":  {
-                                             "kicker":  "Live",
-                                             "title":  "Community stream",
-                                             "realtimeBadge":  "Realtime",
-                                             "demoBadge":  "Demo mode",
-                                             "authChecking":  "Checking auth...",
-                                             "authUnavailable":  "Auth unavailable",
-                                             "login":  "Sign in with Google",
-                                             "loginPending":  "Signing in...",
-                                             "logout":  "Sign out",
-                                             "logoutPending":  "Signing out...",
-                                             "placeholders":  {
-                                                                  "loading":  "Connecting...",
-                                                                  "demo":  "Leave a demo comment...",
-                                                                  "authUnavailable":  "Auth is unavailable right now.",
-                                                                  "signedIn":  "Write your note...",
-                                                                  "signedOut":  "Sign in to comment."
-                                                              },
-                                             "helpers":  {
-                                                             "loading":  "Comment system is loading.",
-                                                             "demo":  "Demo comments are not saved.",
-                                                             "authUnavailable":  "Authentication is currently disabled.",
-                                                             "signedIn":  "Comments will be saved to Firestore.",
-                                                             "signedOut":  "Please sign in first."
-                                                         },
-                                             "submit":  {
-                                                            "idle":  "Send comment",
-                                                            "saving":  "Sending..."
-                                                        },
-                                             "errors":  {
-                                                            "loadFailed":  "Comments could not be loaded. Please try again.",
-                                                            "loginFailed":  "Sign-in failed. Please try again.",
-                                                            "logoutFailed":  "Sign-out failed. Please try again.",
-                                                            "saveFailed":  "Comment could not be saved. Please try again."
-                                                        },
-                                             "demoUser":  "Demo User",
-                                             "userFallback":  "User",
-                                             "loading":  "Loading comments...",
-                                             "empty":  "Be the first to comment.",
-                                             "newLabel":  "New"
-                                         },
-                       "search":  {
-                                       "paletteTitle":  "Search",
-                                       "palettePlaceholder":  "Search tools, standards, guides...",
-                                       "paletteHint":  "Type to search",
-                                       "paletteEmpty":  "No results found.",
-                                       "paletteOpen":  "Open search",
-                                       "inlineTitle":  "Quick search",
-                                       "inlineDescription":  "Search tools, standards, and content from one field.",
-                                       "inlinePlaceholder":  "Tool, ISO 286, M12, friction...",
-                                       "inlineEmpty":  "No results found.",
-                                       "typeLabels":  {
-                                                            "tool":  "Tool",
-                                                            "standard":  "Standard",
-                                                            "reference":  "Reference",
-                                                            "blog":  "Blog",
-                                       "guide":  "Guide",
-                                       "glossary":  "Glossary"
-                                    }
-                                   },
-                       "consent":  {
-                                       "title":  "Cookie preferences",
-                                       "description":  "We use essential cookies to run the site. You can optionally allow analytics and advertising cookies.",
-                                       "accept":  "Accept",
-                                       "reject":  "Reject",
-                                       "preferences":  "Preferences",
-                                       "preferencesTitle":  "Cookie preferences",
-                                       "preferencesDescription":  "Choose which cookie categories you want to enable.",
-                                       "save":  "Save preferences",
-                                       "close":  "Close",
-                                       "necessaryLabel":  "Necessary",
-                                       "necessaryDescription":  "Required for core site functionality.",
-                                       "analyticsLabel":  "Analytics",
-                                       "analyticsDescription":  "Helps us understand usage and improve the experience.",
-                                       "advertisingLabel":  "Advertising",
-                                       "advertisingDescription":  "Used to show relevant ads and measure performance.",
-                                       "alwaysOn":  "Always on"
-                                   },
-                       "toolLibrary":  {
-                                           "scenarioSection":  {
-                                                                   "kicker":  "What do you want to do?",
-                                                                   "title":  "Scenario-based shortcuts",
-                                                                   "description":  "Reach the right calculators quickly based on common needs."
-                                                               },
-                                           "scenarios":  [
-                                                             {
-                                                                 "id":  "convert",
-                                                                 "title":  "I need to convert a value",
-                                                                 "description":  "Quick unit conversion and basic checks.",
-                                                                 "links":  [
-                                                                               {
-                                                                                   "label":  "Unit Converter",
-                                                                                   "href":  "/tools/unit-converter"
-                                                                               }
-                                                                           ]
-                                                             },
-                                                             {
-                                                                 "id":  "calculate",
-                                                                 "title":  "I need to run an engineering calculation",
-                                                                 "description":  "Fast access to core calculators with manual inputs.",
-                                                                 "links":  [
-                                                                               {
-                                                                                   "label":  "Bolt Torque",
-                                                                                   "href":  "/tools/bolt-calculator"
-                                                                               },
-                                                                               {
-                                                                                   "label":  "Tensile Stress",
-                                                                                   "href":  "/tools/simple-stress"
-                                                                               },
-                                                                               {
-                                                                                   "label":  "Heat Flow",
-                                                                                   "href":  "/tools/basic-engineering"
-                                                                               }
-                                                                           ]
-                                                             },
-                                                             {
-                                                                 "id":  "visualize",
-                                                                 "title":  "I want to visualize a chart",
-                                                                 "description":  "Generate charts or curves from input parameters.",
-                                                                 "links":  [
-                                                                               {
-                                                                                   "label":  "Spring Force Chart",
-                                                                                   "href":  "/tools/param-chart"
-                                                                               },
-                                                                               {
-                                                                                   "label":  "Gear Calculators",
-                                                                                   "href":  "/tools/gear-design/calculators"
-                                                                               }
-                                                                           ]
-                                                             }
-                                                         ],
-                                           "requestSection":  {
-                                                                  "title":  "Need a new calculator?",
-                                                                  "description":  "Tell us the inputs and outputs. We will prioritize the most requested tools.",
-                                                                  "cta":  "Request a tool",
-                                                                  "ctaAria":  "Request a tool"
-                                                              },
-                                           "filterSection":  {
-                                                                 "title":  "Filter",
-                                                                 "loading":  "Filtering...",
-                                                                 "description":  "Filter tools by type, category, and tag.",
-                                                                 "clear":  "Clear filters",
-                                                                 "apply":  "Apply filters",
-                                                                 "note":  "Apply filters to refresh the results.",
-                                                                 "typeLabel":  "Type",
-                                                                 "categoryLabel":  "Category",
-                                                                 "allCategories":  "All categories",
-                                                                 "tagLabel":  "Tag",
-                                                                 "allTags":  "All tags",
-                                                                 "searchLabel":  "Quick search",
-                                                                 "searchPlaceholder":  "e.g., torque, pressure, bolt",
-                                                                 "searchAria":  "Search tools"
-                                                             },
-                                           "emptyState":  {
-                                                              "title":  "No matching tools found.",
-                                                              "description":  "Try another category, tag, or search term.",
-                                                              "reset":  "Reset filters"
-                                                          },
-                                           "labels":  {
-                                                          "typeFilter":  {
-                                                                             "All":  "All types",
-                                                                             "calculator":  "Calculator",
-                                                                             "bundle":  "Package",
-                                                                             "guide":  "Guide"
-                                                                         },
-                                                          "type":  {
-                                                                       "calculator":  "Calculator",
-                                                                       "bundle":  "Package",
-                                                                       "guide":  "Guide"
-                                                                   },
-                                                          "category":  {
-                                                                           "Mechanical":  "Mechanical",
-                                                                           "Automotive":  "Automotive",
-                                                                           "General Engineering":  "General Engineering"
-                                                                       },
-                                                          "tag":  {
-                                                                      "pressure":  "pressure",
-                                                                      "torque":  "torque",
-                                                                      "flow":  "flow",
-                                                                      "thermal":  "thermal",
-                                                                      "units":  "units",
-                                                                      "validation":  "validation",
-                                                                      "sensitivity":  "sensitivity",
-                                                                      "montecarlo":  "monte carlo",
-                                                                      "engineering":  "engineering"
-                                                                  },
-                                                          "cta":  {
-                                                                      "calculator":  "Open calculator",
-                                                                      "bundle":  "Open package",
-                                                                      "guide":  "Open guide"
-                                                                  },
-                                                          "generalCategory":  "General",
-                                                          "openAria":  "Open {title}"
-                                                      }
-                                       },
-                       "sanityCheck":  {
-                                            "session":  {
-                                                            "titleLabel":  "Session title",
-                                                            "untitled":  "Untitled session",
-                                                            "save":  "Save",
-                                                            "saveAs":  "Save new",
-                                                            "savedTitle":  "Saved sessions",
-                                                            "load":  "Load",
-                                                            "delete":  "Delete",
-                                                            "share":  "Copy share link",
-                                                            "shareCopied":  "Link copied.",
-                                                            "shareFailed":  "Copy failed. You can copy manually.",
-                                                            "export":  "Open report",
-                                                            "lastSaved":  "Last saved",
-                                                            "restoreNotice":  "Session restored from shared link."
-                                                        },
-                                            "variableTable":  {
-                                                                  "title":  "Variables",
-                                                                  "add":  "Add variable",
-                                                                  "symbol":  "Symbol",
-                                                                  "name":  "Name",
-                                                                  "defaultName":  "Variable",
-                                                                  "description":  "Description",
-                                                                  "value":  "Value",
-                                                                  "unit":  "Unit",
-                                                                  "unitPlaceholder":  "e.g., N m",
-                                                                  "min":  "Min",
-                                                                  "max":  "Max",
-                                                                  "distribution":  "Distribution",
-                                                                  "distributionNone":  "Manual",
-                                                                  "distributionUniform":  "Uniform",
-                                                                  "distributionNormal":  "Normal",
-                                                                  "remove":  "Remove"
-                                                              },
-                                            "formulaEditor":  {
-                                                                 "title":  "Formula",
-                                                                 "description":  "Use symbols defined above. You can write P = T * w.",
-                                                                 "placeholder":  "e.g., P = T * w"
-                                                             },
-                                            "resultPanel":  {
-                                                                "title":  "Result",
-                                                                "outputLabel":  "Output",
-                                                                "computedUnit":  "Computed unit",
-                                                                "expectedUnit":  "Expected unit",
-                                                                "unitMismatch":  "Unit mismatch: expected {expected}, got {actual}",
-                                                                "unitMatch":  "Unit check OK",
-                                                                "dimensionless":  "dimensionless",
-                                                                "errorTitle":  "Formula error",
-                                                                "errorBody":  "Check symbols, units, and syntax."
-                                                            },
-                                            "sweepPanel":  {
-                                                              "title":  "Sensitivity sweep",
-                                                              "description":  "Sweep one variable from min to max and plot the result.",
-                                                              "variableLabel":  "Variable",
-                                                              "pointsLabel":  "Points",
-                                                              "run":  "Run sweep",
-                                                              "chartTitle":  "Sweep chart",
-                                                              "resultLabel":  "Result",
-                                                              "empty":  "Run sweep to see the chart.",
-                                                              "rangeMissing":  "Set min/max for the selected variable."
-                                                          },
-                                            "monteCarloPanel":  {
-                                                                    "title":  "Monte Carlo",
-                                                                    "description":  "Simulate with distributions and inspect output spread.",
-                                                                    "iterationsLabel":  "Iterations",
-                                                                    "run":  "Run simulation",
-                                                                    "running":  "Running...",
-                                                                    "chartTitle":  "Histogram",
-                                                                    "countLabel":  "Count",
-                                                                    "statsTitle":  "Summary statistics",
-                                                                    "mean":  "Mean",
-                                                                    "stdev":  "Std dev",
-                                                                    "p05":  "P05",
-                                                                    "p50":  "P50",
-                                                                    "p95":  "P95",
-                                                                    "empty":  "Run simulation to see results."
-                                                                },
-                                            "report":  {
-                                                           "title":  "Sanity Check Report",
-                                                           "print":  "Print",
-                                                           "downloadPdf":  "Download PDF",
-                                                           "missing":  "No session data provided.",
-                                                           "variablesTitle":  "Variables",
-                                                           "formulaTitle":  "Formula",
-                                                           "resultTitle":  "Result",
-                                                           "sweepTitle":  "Sensitivity sweep",
-                                                           "monteCarloTitle":  "Monte Carlo"
-                                                       },
-                                            "errorBoundary":  {
-                                                                  "title":  "Something went wrong.",
-                                                                  "description":  "Check the formula and inputs, then try again.",
-                                                                  "cta":  "Reload"
-                                                              }
-                                        },
-                       "toolLinkSection":  {
-                                               "similar":  {
-                                                               "eyebrow":  "Similar calculators",
-                                                               "title":  "Related calculators",
-                                                               "description":  "Explore calculators with similar categories or tags.",
-                                                               "cta":  "Open calculator"
-                                                           },
-                                               "helpful":  {
-                                                               "eyebrow":  "Other picks",
-                                                               "title":  "These might help too",
-                                                               "description":  "Review alternative calculators for adjacent needs.",
-                                                               "cta":  "Open calculator"
-                                                           }
-                                           },
-                       "toolDocTabs":  {
-                                           "tabsTitle":  "Calculator tabs",
-                                           "tabs":  {
-                                                        "calculator":  "Calculator",
-                                                        "explanation":  "Explanation",
-                                                        "examples":  "Examples"
-                                                    },
-                                           "explanationTitle":  "Calculation explanation",
-                                           "examplesTitle":  "Examples",
-                                           "loadingTitle":  "Loading documentation",
-                                           "loadingBody":  "If it stays here, this calculator may not have explanation/examples yet.",
-                                           "docsFailedTitle":  "Documentation unavailable",
-                                           "docsFailedBody":  "We could not load the explanation and examples right now.",
-                                           "docsMissingTitle":  "Documentation coming soon",
-                                           "docsMissingBody":  "Documentation for this tool is coming soon.",
-                                           "explanationEmptyTitle":  "Explanation (coming soon)",
-                                           "explanationEmptyBody":  "This calculator does not have an explanation card yet. You can still use it.",
-                                           "examplesEmptyTitle":  "Examples (coming soon)",
-                                           "examplesEmptyBody":  "No examples are available yet. We will add sample inputs soon.",
-                                           "examplesEmptyHint":  "Examples are being prepared.",
-                                           "inputs":  "Inputs",
-                                           "outputs":  "Outputs",
-                                           "note":  "Note",
-                                           "guidesTitle":  "Guides",
-                                           "guidesHeading":  "Related guides",
-                                           "guidesDesc":  "Browse guides with similar tags.",
-                                           "glossaryTitle":  "Glossary",
-                                           "glossaryHeading":  "Related terms",
-                                           "glossaryDesc":  "Terms that share the same concepts as this calculator.",
-                                           "read":  "Read"
-                                       },
-                       "toolDocStandard":  {
-                                               "howToTitle":  "How to use",
-                                               "formulaTitle":  "Formula",
-                                               "commonMistakesTitle":  "Common mistakes",
-                                               "referencesTitle":  "References"
-                                           },
-                       "comparePanel":  {
-                                            "title":  "Compare mode",
-                                            "description":  "Build 2-3 scenarios with the same input set and compare results side by side.",
-                                            "scenario":  "Scenario",
-                                            "label":  "Optional label",
-                                            "add":  "Add scenario",
-                                            "remove":  "Remove",
-                                            "reset":  "Reset",
-                                            "share":  "Share Link",
-                                            "tableTitle":  "Comparison table",
-                                            "metricLabel":  "Metric",
-                                            "emptyMetrics":  "No comparable metrics available.",
-                                            "shareSuccess":  "Link copied.",
-                                            "shareFail":  "Copy failed. You can copy the link manually.",
-                                            "separator":  " - "
-                                        },
-                       "toolActions":  {
-                                           "shareTitle":  "Share & Report",
-                                           "shareDescription":  "Create a shareable link or open a print-ready report.",
-                                           "share":  "Copy link",
-                                           "report":  "PDF / Print report",
-                                           "shareSuccess":  "Link copied.",
-                                           "shareFail":  "Copy failed. You can copy the link manually."
-                                       },
-                       "toolTrustPanel":  {
-                                               "formula":  "Formula",
-                                               "assumptions":  "Assumptions",
-                                               "references":  "References"
-                                           },
-                       "toolValidation":  {
-                                               "required":  "Invalid value: {field} is required.",
-                                               "invalidNumber":  "Invalid value: {field} must be a number.",
-                                               "invalidOption":  "Invalid value: {field} selection is not valid.",
-                                               "min":  "Invalid value: {field} must be \u2265 {min}.",
-                                               "max":  "Invalid value: {field} must be \u2264 {max}.",
-                                               "resultFix":  "Fix the highlighted inputs to see results.",
-                                               "calcFailed":  "Calculation failed. Check inputs."
-                                           },
-                       "toolReport":  {
-                                          "title":  "Tool report",
-                                          "subtitle":  "Print-friendly summary",
-                                          "dateLabel":  "Date",
-                                          "inputs":  "Inputs",
-                                          "results":  "Results",
-                                          "formula":  "Formula",
-                                          "assumptions":  "Assumptions",
-                                          "references":  "References",
-                                          "print":  "Print",
-                                          "downloadPdf":  "Download PDF",
-                                          "back":  "Back to tool",
-                                          "missing":  "No report data. Return to the tool and generate a report."
-                                      },
-                       "toolsError":  {
-                                          "title":  "Something went wrong",
-                                          "description":  "We couldn't load this tool right now. Try refreshing or return to the tools list.",
-                                          "refresh":  "Refresh page",
-                                          "back":  "Back to tools"
-                                      },
-                       "genericToolPage":  {
-                                               "inputs":  "Inputs",
-                                               "results":  "Results",
-                                               "formula":  "Formula",
-                                               "chart":  "Chart",
-                                               "chartEmpty":  "Provide valid values to render the chart.",
-                                               "resultEmpty":  "Fix the highlighted inputs to see results.",
-                                               "actionsTitle":  "Share & Report",
-                                               "actionsDescription":  "Create a shareable link or open a print-ready report.",
-                                               "calcFailed":  "Calculation failed. Check inputs.",
-                                               "required":  "Required field.",
-                                               "invalidNumber":  "Enter a valid number.",
-                                               "invalidOption":  "Select a valid option.",
-                                               "min":  "Min",
-                                               "max":  "Max"
-                                           },
-        "dashboard":  {
-                          "badge":  "Dashboard",
-                          "title":  "Your dashboard",
-                          "description":  "Favorites, recent work, and recommendations in one place.",
-                          "imageAlt":  "Dashboard overview with saved, recent, and recommended tools",
-                          "favorites":  "Favorites",
-                                         "favoritesDescription":  "Pinned calculators you want to keep close.",
-                                         "favoritesEmpty":  "You have no favorites yet.",
-                                         "recents":  "Recently used",
-                                         "recentsDescription":  "Pick up where you left off.",
-                                         "recentsEmpty":  "No calculators opened yet.",
-                                         "recommended":  "Recommended",
-                                         "recommendedDescription":  "Based on categories or tags from your recent activity.",
-                                         "recommendedEmpty":  "Add favorites to see recommendations.",
-                                         "open":  "Open calculator",
-                                         "lastUsed":  "Last used"
-                                     },
-                       "recentTools":  {
-                                           "title":  "Recently used",
-                                           "description":  "Jump back into the calculators you opened last.",
-                                           "empty":  "No recent calculators yet.",
-                                           "open":  "Open {title}",
-                                           "generalCategory":  "General"
-                                       },
-                       "savedCalculations":  {
-                                                 "title":  "Saved calculations",
-                                                 "description":  "Saved items live only on this device. Reopen or delete entries from the list below.",
-                                                 "loading":  "Loading saved items...",
-                                                 "emptyTitle":  "No saved calculations yet.",
-                                                 "emptyHint":  "Use the \"Save\" button inside a calculator to create one.",
-                                                 "toolLibrary":  "Go to Calculator Library",
-                                                 "reopen":  "Open again",
-                                                 "delete":  "Delete",
-                                                 "details":  "Input and result details",
-                                                 "inputs":  "Inputs",
-                                                 "outputs":  "Result"
-                                             },
-                       "requestToolForm":  {
-                                               "title":  "Request a tool",
-                                               "description":  "Describe the problem and the input/output structure to help us build the calculator.",
-                                               "issueTitle":  "Tool request",
-                                               "issueTitlePrefix":  "Tool request",
-                                               "back":  "Back to Tool Library",
-                                               "submit":  "Submit request",
-                                               "github":  "Create GitHub Issue",
-                                               "copy":  "Copy",
-                                               "copied":  "Copied to clipboard.",
-                                               "copyFail":  "Copy failed. You can copy the text manually.",
-                                               "history":  "Submitted requests",
-                                               "emptyHistory":  "No requests yet.",
-                                               "storageNote":  "Stored locally in your browser.",
-                                               "required":  "This field is required.",
-                                               "fields":  {
-                                                              "problem":  "Problem / Use case",
-                                                              "inputs":  "Inputs (input list)",
-                                                              "outputs":  "Expected output (result)",
-                                                              "standards":  "Units / standards",
-                                                              "examples":  "Example values"
-                                                          }
-                                           },
-                       "exportPanel":  {
-                                           "previewAlt":  "Preview",
-                                           "previewFallback":  "Preview",
-                                           "downloadStarted":  "Download started.",
-                                           "downloadFailed":  "Download failed. Please try again.",
-                                           "downloadError":  "An error occurred during download.",
-                                           "pngDownloading":  "Downloading PNG.",
-                                           "svgDownloading":  "Downloading SVG.",
-                                           "pdfDownloading":  "Downloading PDF."
-                                       },
-                       "explanationPanel":  {
-                                                 "title":  "Explanation Mode (advanced)",
-                                                 "formulasTitle":  "Formulas used",
-                                                 "variablesTitle":  "Variables",
-                                                 "notesTitle":  "Usage notes"
-                                             },
-                       "toolPage":  {
-                                        "badge":  "Calculator"
-                                    },
-                       "confidence":  {
-                                          "title":  "Confidence Snapshot",
-                                          "version":  "Version",
-                                          "updated":  "Last updated",
-                                          "assumptions":  "Assumptions",
-                                          "references":  "References"
-                                      },
-                       "qaBoard":  {
-                                       "badge":  "Q\u0026A",
-                                       "sampleBadge":  "Sample",
-                                       "title":  "Q\u0026A board",
-                                       "description":  "Ask a question, get short replies, and share experience.",
-                                       "answersTitle":  "Replies",
-                                       "replyLabel":  "Your reply",
-                                       "replyPlaceholder":  "Share your experience, calculation, or suggestion...",
-                                       "replyButton":  "Post reply",
-                                       "topicsTitle":  "Active topics",
-                                       "topicCountLabel":  "{count} topics",
-                                       "replyCountLabel":  "{count} replies",
-                                       "authorLabel":  "Author",
-                                       "topics":  [
-                                                      {
-                                                          "slug":  "m12-civata-torku",
-                                                          "title":  "M12 10.9 bolt torque and lubrication",
-                                                          "author":  "Ayşe Yılmaz",
-                                                          "category":  "Torque / Fastening",
-                                                          "details":  "There is a gap between table values and actual tightening. How do torque wrench calibration and lubrication choice affect torque?",
-                                                          "updated":  "2 hours ago",
-                                                          "tags":  [
-                                                                       "torque",
-                                                                       "bolt",
-                                                                       "lubrication"
-                                                                   ],
-                                                          "replies":  4
-                                                      },
-                                                      {
-                                                          "slug":  "kaynak-sonrasi-sehim",
-                                                          "title":  "Post-weld deflection on S235 plate",
-                                                          "author":  "Mehmet A.",
-                                                          "category":  "Welding / Structure",
-                                                          "details":  "After welding a 300x500x10 mm plate with a corner weld, deflection appeared; any fixture and preheat advice?",
-                                                          "updated":  "5 hours ago",
-                                                          "tags":  [
-                                                                       "welding",
-                                                                       "deflection",
-                                                                       "fixture"
-                                                                   ],
-                                                          "replies":  3
-                                                      },
-                                                      {
-                                                          "slug":  "h8d9-yuzey-puruzluluk",
-                                                          "title":  "Surface roughness for H8/d9 fit",
-                                                          "author":  "Selin K.",
-                                                          "category":  "Tolerances / GD\u0026T",
-                                                          "details":  "I picked H8/d9 for \u00d825 hole/shaft. What surface roughness should I target to avoid loosening in press fit?",
-                                                          "updated":  "1 day ago",
-                                                          "tags":  [
-                                                                       "tolerance",
-                                                                       "fit",
-                                                                       "surface"
-                                                                   ],
-                                                          "replies":  1
-                                                      }
-                                                  ],
-                                       "answers":  {
-                                                       "m12-civata-torku":  [
-                                                                                {
-                                                                                    "user":  "Kadir",
-                                                                                    "text":  "DIN table gives dry values; if you use lubrication, drop by 20-25%. Calibrate your torque wrench yearly.",
-                                                                                    "time":  "1s ago"
-                                                                                },
-                                                                                {
-                                                                                    "user":  "Elif",
-                                                                                    "text":  "Typical ~90 Nm for M12 10.9 (dry). With lubrication 65-70 Nm is enough. Keep surfaces clean.",
-                                                                                    "time":  "12s ago"
-                                                                                },
-                                                                                {
-                                                                                    "user":  "Selim",
-                                                                                    "text":  "If you use a slip washer, friction drops; reduce torque. You can verify preload with turn-of-nut.",
-                                                                                    "time":  "25s ago"
-                                                                                }
-                                                                            ],
-                                                       "kaynak-sonrasi-sehim":  [
-                                                                                   {
-                                                                                       "user":  "Hakan",
-                                                                                       "text":  "Tack symmetrically and weld alternately, then fill in. A 120-150\u00b0C preheat helps.",
-                                                                                       "time":  "10m ago"
-                                                                                   },
-                                                                                   {
-                                                                                       "user":  "Derya",
-                                                                                       "text":  "Try welding with a reverse camber. Clamping in a fixture can also help.",
-                                                                                       "time":  "35m ago"
-                                                                                   }
-                                                                               ],
-                                                       "h8d9-yuzey-puruzluluk":  [
-                                                                                    {
-                                                                                        "user":  "Elif",
-                                                                                        "text":  "Ra 1.6-3.2 \u00b5m usually works. Cleanliness and deburring are critical.",
-                                                                                        "time":  "2s ago"
-                                                                                    }
-                                                                                ]
-                                                   }
-                                   },
-                       "unitConverter":  {
-                                             "input":  {
-                                                           "title":  "What conversion do you need?",
-                                                           "description":  "Pick the category first, then select source and target units. Results update automatically.",
-                                                           "categoryLabel":  "Which category are you working on?",
-                                                           "fromLabel":  "Which unit are you starting from?",
-                                                           "toLabel":  "Which unit should it convert to?",
-                                                           "valueLabel":  "How many units?",
-                                                           "valuePlaceholder":  "e.g. 100",
-                                                           "swapLabel":  "Swap",
-                                                           "categories":  {
-                                                                              "length":  "Length",
-                                                                              "force":  "Force",
-                                                                              "pressure":  "Pressure",
-                                                                              "energy":  "Energy"
-                                                                          }
-                                                       },
-                                             "result":  {
-                                                            "title":  "Result Flow",
-                                                            "description":  "See what we did, how we calculated, and what it means.",
-                                                            "step1Title":  "1. What did we do?",
-                                                            "step1Body":  "We first converted the input to the base unit, then to the target unit.",
-                                                            "step2Title":  "2. How did we calculate?",
-                                                            "formulaLabel":  "Formula",
-                                                            "step3Title":  "3. What does the result mean?",
-                                                            "step3Body":  "This value is the equivalent in the target unit. Base unit: {baseValue} {baseUnit}"
-                                                        },
-                                             "visual":  {
-                                                            "title":  "Visual Flow",
-                                                            "description":  "Shows the conversion path at a glance.",
-                                                            "downloadLabel":  "Download visual",
-                                                            "previewAlt":  "Conversion preview",
-                                                            "helperText":  "PNG is crisp; SVG is ideal for vector output.",
-                                                            "downloadPng":  "conversion.png",
-                                                            "downloadSvg":  "conversion.svg",
-                                                            "inputLabel":  "Input",
-                                                            "baseLabel":  "Base",
-                                                            "outputLabel":  "Output",
-                                                            "diagramLabel":  "Conversion flow"
-                                                        },
-                                             "errors":  {
-                                                            "missingUnits":  "Selected units were not found.",
-                                                            "invalidNumber":  "Please enter a valid value."
-                                                        },
-                                             "steps":  {
-                                                           "input":  "Input: {value} {unit}",
-                                                           "toBase":  "Convert to base unit: {input} * {factor} = {value} {unit}",
-                                                           "toOutput":  "Convert to output unit: {base} / {factor} = {value} {unit}"
-                                                       },
-                                             "explanation":  {
-                                                                 "title":  "Formula and variables",
-                                                                 "variables":  [
-                                                                                   {
-                                                                                       "symbol":  "V_in",
-                                                                                       "description":  "The input value."
-                                                                                   },
-                                                                                   {
-                                                                                       "symbol":  "V_out",
-                                                                                       "description":  "The result in the target unit."
-                                                                                   },
-                                                                                   {
-                                                                                       "symbol":  "factor_from",
-                                                                                       "description":  "Conversion factor from the source unit to the base unit."
-                                                                                   },
-                                                                                   {
-                                                                                       "symbol":  "factor_to",
-                                                                                       "description":  "Conversion factor from the target unit to the base unit."
-                                                                                   }
-                                                                               ],
-                                                                 "notes":  [
-                                                                               "Conversions are based on the selected category's base unit.",
-                                                                               "Useful for reporting and quick checks.",
-                                                                               "Rounding is for display only; raw values are used in calculations."
-                                                                           ]
-                                                             }
-                                         },
-                       "toolFavoriteButton":  {
-                                                  "addLabel":  "Add to favorites",
-                                                  "removeLabel":  "Favorited",
-                                                  "addAria":  "Add {title} to favorites",
-                                                  "removeAria":  "Remove {title} from favorites",
-                                                  "fallbackTitle":  "tool"
-                                              },
-                       "toolHistory":  {
-                                           "title":  "Saved calculations",
-                                           "description":  "Saved calculations live on this device only. The last {count} entries are kept.",
-                                           "viewAll":  "View all saved",
-                                           "save":  "Save",
-                                           "clear":  "Clear saved",
-                                           "errorNoResult":  "You cannot save without a valid result.",
-                                           "hintSave":  "Save the current result with one click.",
-                                           "feedback":  {
-                                                            "storeError":  "Save failed. Browser storage may be full.",
-                                                            "saveSuccess":  "Saved successfully.",
-                                                            "saveError":  "Save failed.",
-                                                            "clearSuccess":  "Saved entries cleared.",
-                                                            "clearError":  "Failed to clear saved entries."
-                                                        },
-                                           "loading":  "Loading saved entries...",
-                                           "empty":  "No saved calculations yet. Use the button above to save the result.",
-                                           "inputs":  "Inputs",
-                                           "outputs":  "Result"
-                                       }
-                   },
-    "common":  {
-                   "yes":  "Yes",
-                   "no":  "No",
-                   "general":  "General"
-               }
+            {
+              "q": "Are the default values real?",
+              "a": "Defaults are example values to get you started. Replace them with your project data."
+            },
+            {
+              "q": "Why do I see validation warnings?",
+              "a": "Warnings flag out-of-range inputs, missing units, or inconsistent selections."
+            },
+            {
+              "q": "Can I share a calculation with my team?",
+              "a": "Use Share & Report to generate a link or download a PDF summary."
+            },
+            {
+              "q": "Do tools work offline?",
+              "a": "Most calculations run in the browser; reference content and updates need an internet connection."
+            }
+          ]
+        },
+        {
+          "title": "Reporting",
+          "items": [
+            {
+              "q": "What is included in the PDF report?",
+              "a": "Inputs, results, formula, assumptions, references, and any charts/diagrams generated by the tool."
+            },
+            {
+              "q": "Can I export diagrams as images?",
+              "a": "Yes. Use the diagram export buttons to download PNG or SVG for reports."
+            },
+            {
+              "q": "Is my report stored on your servers?",
+              "a": "No. Reports are generated locally in your browser unless explicitly shared."
+            },
+            {
+              "q": "Can I edit the report template?",
+              "a": "Not yet. We are working on customizable report layouts."
+            },
+            {
+              "q": "How do I include a report in a project?",
+              "a": "Save the calculation to a project and open the report from the project view."
+            }
+          ]
+        },
+        {
+          "title": "Standards",
+          "items": [
+            {
+              "q": "Which standards are referenced?",
+              "a": "We reference commonly used ISO/DIN/ASME tables; each tool lists sources in its notes."
+            },
+            {
+              "q": "Are standards always up to date?",
+              "a": "We update periodically, but you should verify the latest revision for critical work."
+            },
+            {
+              "q": "Do you provide full standards text?",
+              "a": "No. We only show derived tables and summaries; purchase the official standard for full detail."
+            },
+            {
+              "q": "What if a standard is missing?",
+              "a": "Send a request via Support or the tool request form."
+            },
+            {
+              "q": "How are material properties chosen?",
+              "a": "Typical room-temperature values from handbooks and standards; confirm with supplier data."
+            }
+          ]
+        },
+        {
+          "title": "Units",
+          "items": [
+            {
+              "q": "Which unit systems are supported?",
+              "a": "Metric is primary; some tools offer imperial options."
+            },
+            {
+              "q": "How does unit conversion work?",
+              "a": "Values are converted via base units with fixed factors; rounding is for display only."
+            },
+            {
+              "q": "Why do I see unit mismatch errors?",
+              "a": "The formula output unit does not match the expected unit. Check inputs and symbols."
+            },
+            {
+              "q": "Can I mix units?",
+              "a": "Use consistent units in a tool; convert first using the Unit Converter."
+            },
+            {
+              "q": "What about significant digits?",
+              "a": "We display rounded values, but calculations use full precision."
+            }
+          ]
+        },
+        {
+          "title": "Safety & Disclaimer",
+          "items": [
+            {
+              "q": "Is this a certified engineering tool?",
+              "a": "No. It is a decision aid; you remain responsible for final design."
+            },
+            {
+              "q": "Can I use results for safety-critical designs?",
+              "a": "Use as a preliminary check and validate with standards and a licensed engineer."
+            },
+            {
+              "q": "How should I cite the results?",
+              "a": "Include the tool name, version/date, inputs, assumptions, and references in your report."
+            },
+            {
+              "q": "Do you store my calculations?",
+              "a": "Saved calculations live in your browser only; use private mode for sensitive work."
+            },
+            {
+              "q": "Who is liable for design decisions?",
+              "a": "You are responsible for verifying outputs and compliance."
+            }
+          ]
+        }
+      ]
+    },
+    "communityComingSoon": {
+      "badge": "Community",
+      "title": "Community is coming soon",
+      "description": "We are preparing moderated discussions, shared notes, and Q&A. Join the waitlist to get early access.",
+      "statusTitle": "Private beta soon",
+      "statusBody": "We are validating content quality and moderation flows before opening publicly.",
+      "roadmapTitle": "Roadmap",
+      "roadmapIntro": "What we are building next:",
+      "roadmapItems": [
+        "Threaded discussions with tags and search",
+        "Verified answers with sources",
+        "Project-based private workspaces",
+        "Report sharing and snapshots",
+        "Moderator guidelines and safety checks"
+      ],
+      "waitlist": {
+        "title": "Join the waitlist",
+        "description": "Leave your email to be notified when community access opens.",
+        "emailLabel": "Email address",
+        "emailPlaceholder": "you@company.com",
+        "focusLabel": "Focus area (optional)",
+        "focusPlaceholder": "e.g., standards, reporting, tooling",
+        "cta": "Join waitlist",
+        "success": "You are on the list. We will email you at launch.",
+        "errorInvalid": "Please enter a valid email address.",
+        "disclaimer": "We only use your email to notify you about the community launch."
+      }
+    },
+    "pricing": {
+      "badge": "Pricing",
+      "title": "Plans & availability",
+      "description": "All tools show clear access labels. Premium is in private beta.",
+      "free": {
+        "title": "Free",
+        "subtitle": "Available now",
+        "description": "Core calculators, references, and reporting essentials.",
+        "features": [
+          "All standard calculators and references",
+          "Input validation + assumptions",
+          "CSV/JSON export for inputs and outputs",
+          "PDF reports for supported tools",
+          "Local saved calculations on this device"
+        ],
+        "cta": "Browse tools"
+      },
+      "premium": {
+        "title": "Premium",
+        "subtitle": "Private beta",
+        "description": "Advanced reporting, team workflows, and exports in private beta.",
+        "features": [
+          "Advanced report templates and branding",
+          "Team workspaces and shared projects",
+          "Premium exports for Project Hub and Quality Tools",
+          "Saved profiles, presets, and history",
+          "Priority support and early access"
+        ],
+        "cta": "Request access"
+      },
+      "note": "Premium access is limited while we validate workflows."
+    }
+  },
+  "components": {
+    "updatesBanner": {
+      "title": "New updates are live",
+      "cta": "View changelog",
+      "dismiss": "Dismiss"
+    },
+    "premiumCTA": {
+      "badge": "Premium beta",
+      "title": "Premium plan",
+      "description": "Premium is in private beta. Early access opens in small batches.",
+      "ctaPrimary": "Request access",
+      "ctaSecondary": "View pricing",
+      "supportNote": "Opens the support form.",
+      "packageTitle": "Premium scope (private beta)",
+      "packageItems": [
+        "Detailed torque and gear tables",
+        "Advanced mechanical calculators",
+        "PDF/Excel exports (RFQ, quality tools, project lists)",
+        "Multi-device access and saved projects",
+        "Material and coating suggestion cards"
+      ],
+      "statusTitle": "Availability",
+      "statusBody": "Private beta access is limited while we validate workflows.",
+      "stepsTitle": "How to get access",
+      "steps": [
+        "Request access",
+        "Share your use case",
+        "We onboard in small batches"
+      ]
+    },
+    "supportForm": {
+      "submit": {
+        "idle": "Send request",
+        "uploading": "Uploading file...",
+        "submitting": "Submitting..."
+      },
+      "fields": {
+        "name": {
+          "label": "Full name",
+          "placeholder": "e.g., Alex Stone"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "name@company.com"
+        },
+        "message": {
+          "label": "Request details",
+          "placeholder": "Context, inputs, standards, constraints..."
+        },
+        "attachment": {
+          "label": "Attach file (optional)",
+          "helper": "File uploads to Firebase Storage and links to the ticket.",
+          "unavailable": "File upload is disabled. You can add a Drive link in your message."
+        }
+      },
+      "errors": {
+        "fileTooLarge": "File size exceeds 10 MB.",
+        "uploadUnavailable": "File upload is currently unavailable.",
+        "required": "Please fill all required fields.",
+        "supportUnavailable": "Support is not ready yet. Please try again later.",
+        "submitFailed": "Request could not be sent."
+      },
+      "success": "Request received. We will get back to you soon.",
+      "successToast": "Request received - we'll follow up shortly."
+    },
+    "commentStream": {
+      "kicker": "Live",
+      "title": "Community stream",
+      "realtimeBadge": "Realtime",
+      "demoBadge": "Demo mode",
+      "authChecking": "Checking auth...",
+      "authUnavailable": "Auth unavailable",
+      "login": "Sign in with Google",
+      "loginPending": "Signing in...",
+      "logout": "Sign out",
+      "logoutPending": "Signing out...",
+      "placeholders": {
+        "loading": "Connecting...",
+        "demo": "Leave a demo comment...",
+        "authUnavailable": "Auth is unavailable right now.",
+        "signedIn": "Write your note...",
+        "signedOut": "Sign in to comment."
+      },
+      "helpers": {
+        "loading": "Comment system is loading.",
+        "demo": "Demo comments are not saved.",
+        "authUnavailable": "Authentication is currently disabled.",
+        "signedIn": "Comments will be saved to Firestore.",
+        "signedOut": "Please sign in first."
+      },
+      "submit": {
+        "idle": "Send comment",
+        "saving": "Sending..."
+      },
+      "errors": {
+        "loadFailed": "Comments could not be loaded. Please try again.",
+        "loginFailed": "Sign-in failed. Please try again.",
+        "logoutFailed": "Sign-out failed. Please try again.",
+        "saveFailed": "Comment could not be saved. Please try again."
+      },
+      "demoUser": "Demo User",
+      "userFallback": "User",
+      "loading": "Loading comments...",
+      "empty": "Be the first to comment.",
+      "newLabel": "New"
+    },
+    "search": {
+      "paletteTitle": "Search",
+      "palettePlaceholder": "Search tools, standards, guides...",
+      "paletteHint": "Type to search",
+      "paletteEmpty": "No results found.",
+      "paletteOpen": "Open search",
+      "inlineTitle": "Quick search",
+      "inlineDescription": "Search tools, standards, and content from one field.",
+      "inlinePlaceholder": "Tool, ISO 286, M12, friction...",
+      "inlineEmpty": "No results found.",
+      "typeLabels": {
+        "tool": "Tool",
+        "standard": "Standard",
+        "reference": "Reference",
+        "blog": "Blog",
+        "guide": "Guide",
+        "glossary": "Glossary"
+      }
+    },
+    "consent": {
+      "title": "Cookie preferences",
+      "description": "We use essential cookies to run the site. You can optionally allow analytics and advertising cookies.",
+      "accept": "Accept",
+      "reject": "Reject",
+      "preferences": "Preferences",
+      "preferencesTitle": "Cookie preferences",
+      "preferencesDescription": "Choose which cookie categories you want to enable.",
+      "save": "Save preferences",
+      "close": "Close",
+      "necessaryLabel": "Necessary",
+      "necessaryDescription": "Required for core site functionality.",
+      "analyticsLabel": "Analytics",
+      "analyticsDescription": "Helps us understand usage and improve the experience.",
+      "advertisingLabel": "Advertising",
+      "advertisingDescription": "Used to show relevant ads and measure performance.",
+      "alwaysOn": "Always on"
+    },
+    "toolLibrary": {
+      "scenarioSection": {
+        "kicker": "What do you want to do?",
+        "title": "Scenario-based shortcuts",
+        "description": "Reach the right calculators quickly based on common needs."
+      },
+      "scenarios": [
+        {
+          "id": "convert",
+          "title": "I need to convert a value",
+          "description": "Quick unit conversion and basic checks.",
+          "links": [
+            {
+              "label": "Unit Converter",
+              "href": "/tools/unit-converter"
+            }
+          ]
+        },
+        {
+          "id": "calculate",
+          "title": "I need to run an engineering calculation",
+          "description": "Fast access to core calculators with manual inputs.",
+          "links": [
+            {
+              "label": "Bolt Torque",
+              "href": "/tools/bolt-calculator"
+            },
+            {
+              "label": "Tensile Stress",
+              "href": "/tools/simple-stress"
+            },
+            {
+              "label": "Heat Flow",
+              "href": "/tools/basic-engineering"
+            }
+          ]
+        },
+        {
+          "id": "visualize",
+          "title": "I want to visualize a chart",
+          "description": "Generate charts or curves from input parameters.",
+          "links": [
+            {
+              "label": "Spring Force Chart",
+              "href": "/tools/param-chart"
+            },
+            {
+              "label": "Gear Calculators",
+              "href": "/tools/gear-design/calculators"
+            }
+          ]
+        }
+      ],
+      "requestSection": {
+        "title": "Need a new calculator?",
+        "description": "Tell us the inputs and outputs. We will prioritize the most requested tools.",
+        "cta": "Request a tool",
+        "ctaAria": "Request a tool"
+      },
+      "filterSection": {
+        "title": "Filter",
+        "loading": "Filtering...",
+        "description": "Filter tools by type, category, and tag.",
+        "clear": "Clear filters",
+        "apply": "Apply filters",
+        "note": "Apply filters to refresh the results.",
+        "typeLabel": "Type",
+        "categoryLabel": "Category",
+        "allCategories": "All categories",
+        "tagLabel": "Tag",
+        "allTags": "All tags",
+        "searchLabel": "Quick search",
+        "searchPlaceholder": "e.g., torque, pressure, bolt",
+        "searchAria": "Search tools"
+      },
+      "emptyState": {
+        "title": "No matching tools found.",
+        "description": "Try another category, tag, or search term.",
+        "reset": "Reset filters"
+      },
+      "labels": {
+        "typeFilter": {
+          "All": "All types",
+          "calculator": "Calculator",
+          "bundle": "Package",
+          "guide": "Guide"
+        },
+        "type": {
+          "calculator": "Calculator",
+          "bundle": "Package",
+          "guide": "Guide"
+        },
+        "category": {
+          "Mechanical": "Mechanical",
+          "Automotive": "Automotive",
+          "General Engineering": "General Engineering"
+        },
+        "tag": {
+          "pressure": "pressure",
+          "torque": "torque",
+          "flow": "flow",
+          "thermal": "thermal",
+          "units": "units",
+          "validation": "validation",
+          "sensitivity": "sensitivity",
+          "montecarlo": "monte carlo",
+          "engineering": "engineering"
+        },
+        "cta": {
+          "calculator": "Open calculator",
+          "bundle": "Open package",
+          "guide": "Open guide"
+        },
+        "generalCategory": "General",
+        "openAria": "Open {title}"
+      }
+    },
+    "sanityCheck": {
+      "session": {
+        "titleLabel": "Session title",
+        "untitled": "Untitled session",
+        "save": "Save",
+        "saveAs": "Save new",
+        "savedTitle": "Saved sessions",
+        "load": "Load",
+        "delete": "Delete",
+        "share": "Copy share link",
+        "shareCopied": "Link copied.",
+        "shareFailed": "Copy failed. You can copy manually.",
+        "export": "Open report",
+        "lastSaved": "Last saved",
+        "restoreNotice": "Session restored from shared link."
+      },
+      "variableTable": {
+        "title": "Variables",
+        "add": "Add variable",
+        "symbol": "Symbol",
+        "name": "Name",
+        "defaultName": "Variable",
+        "description": "Description",
+        "value": "Value",
+        "unit": "Unit",
+        "unitPlaceholder": "e.g., N m",
+        "min": "Min",
+        "max": "Max",
+        "distribution": "Distribution",
+        "distributionNone": "Manual",
+        "distributionUniform": "Uniform",
+        "distributionNormal": "Normal",
+        "remove": "Remove"
+      },
+      "formulaEditor": {
+        "title": "Formula",
+        "description": "Use symbols defined above. You can write P = T * w.",
+        "placeholder": "e.g., P = T * w"
+      },
+      "resultPanel": {
+        "title": "Result",
+        "outputLabel": "Output",
+        "computedUnit": "Computed unit",
+        "expectedUnit": "Expected unit",
+        "unitMismatch": "Unit mismatch: expected {expected}, got {actual}",
+        "unitMatch": "Unit check OK",
+        "dimensionless": "dimensionless",
+        "errorTitle": "Formula error",
+        "errorBody": "Check symbols, units, and syntax."
+      },
+      "sweepPanel": {
+        "title": "Sensitivity sweep",
+        "description": "Sweep one variable from min to max and plot the result.",
+        "variableLabel": "Variable",
+        "pointsLabel": "Points",
+        "run": "Run sweep",
+        "chartTitle": "Sweep chart",
+        "resultLabel": "Result",
+        "empty": "Run sweep to see the chart.",
+        "rangeMissing": "Set min/max for the selected variable."
+      },
+      "monteCarloPanel": {
+        "title": "Monte Carlo",
+        "description": "Simulate with distributions and inspect output spread.",
+        "iterationsLabel": "Iterations",
+        "run": "Run simulation",
+        "running": "Running...",
+        "chartTitle": "Histogram",
+        "countLabel": "Count",
+        "statsTitle": "Summary statistics",
+        "mean": "Mean",
+        "stdev": "Std dev",
+        "p05": "P05",
+        "p50": "P50",
+        "p95": "P95",
+        "empty": "Run simulation to see results."
+      },
+      "report": {
+        "title": "Sanity Check Report",
+        "print": "Print",
+        "downloadPdf": "Download PDF",
+        "missing": "No session data provided.",
+        "variablesTitle": "Variables",
+        "formulaTitle": "Formula",
+        "resultTitle": "Result",
+        "sweepTitle": "Sensitivity sweep",
+        "monteCarloTitle": "Monte Carlo"
+      },
+      "errorBoundary": {
+        "title": "Something went wrong.",
+        "description": "Check the formula and inputs, then try again.",
+        "cta": "Reload"
+      }
+    },
+    "toolLinkSection": {
+      "similar": {
+        "eyebrow": "Similar calculators",
+        "title": "Related calculators",
+        "description": "Explore calculators with similar categories or tags.",
+        "cta": "Open calculator"
+      },
+      "helpful": {
+        "eyebrow": "Other picks",
+        "title": "These might help too",
+        "description": "Review alternative calculators for adjacent needs.",
+        "cta": "Open calculator"
+      }
+    },
+    "toolDocTabs": {
+      "tabsTitle": "Calculator tabs",
+      "tabs": {
+        "calculator": "Calculator",
+        "explanation": "Explanation",
+        "examples": "Examples"
+      },
+      "explanationTitle": "Calculation explanation",
+      "examplesTitle": "Examples",
+      "loadingTitle": "Loading documentation",
+      "loadingBody": "If it stays here, this calculator may not have explanation/examples yet.",
+      "docsFailedTitle": "Documentation unavailable",
+      "docsFailedBody": "We could not load the explanation and examples right now.",
+      "docsMissingTitle": "Documentation coming soon",
+      "docsMissingBody": "Documentation for this tool is coming soon.",
+      "explanationEmptyTitle": "Explanation (coming soon)",
+      "explanationEmptyBody": "This calculator does not have an explanation card yet. You can still use it.",
+      "examplesEmptyTitle": "Examples (coming soon)",
+      "examplesEmptyBody": "No examples are available yet. We will add sample inputs soon.",
+      "examplesEmptyHint": "Examples are being prepared.",
+      "inputs": "Inputs",
+      "outputs": "Outputs",
+      "note": "Note",
+      "guidesTitle": "Guides",
+      "guidesHeading": "Related guides",
+      "guidesDesc": "Browse guides with similar tags.",
+      "glossaryTitle": "Glossary",
+      "glossaryHeading": "Related terms",
+      "glossaryDesc": "Terms that share the same concepts as this calculator.",
+      "read": "Read"
+    },
+    "toolDocStandard": {
+      "howToTitle": "How to use",
+      "formulaTitle": "Formula",
+      "commonMistakesTitle": "Common mistakes",
+      "referencesTitle": "References"
+    },
+    "comparePanel": {
+      "title": "Compare mode",
+      "description": "Build 2-3 scenarios with the same input set and compare results side by side.",
+      "scenario": "Scenario",
+      "label": "Optional label",
+      "add": "Add scenario",
+      "remove": "Remove",
+      "reset": "Reset",
+      "share": "Share Link",
+      "tableTitle": "Comparison table",
+      "metricLabel": "Metric",
+      "emptyMetrics": "No comparable metrics available.",
+      "shareSuccess": "Link copied.",
+      "shareFail": "Copy failed. You can copy the link manually.",
+      "separator": " - "
+    },
+    "toolActions": {
+      "shareTitle": "Share & Report",
+      "shareDescription": "Create a shareable link or open a print-ready report.",
+      "share": "Copy link",
+      "report": "PDF / Print report",
+      "shareSuccess": "Link copied.",
+      "shareFail": "Copy failed. You can copy the link manually."
+    },
+    "toolDataActions": {
+      "title": "Projects & Export",
+      "description": "Save this calculation to a local project or export inputs/outputs.",
+      "openProjects": "Open projects",
+      "projectLabel": "Save to project",
+      "newProject": "New project",
+      "newProjectPlaceholder": "Project title",
+      "defaultProject": "My Project",
+      "save": "Save to Project",
+      "savedMessage": "Saved to {project}.",
+      "exportLabel": "Export data",
+      "exportJson": "Export JSON",
+      "exportCsv": "Export CSV",
+      "exportHint": "Exports inputs and outputs only.",
+      "sections": {
+        "inputs": "Input",
+        "outputs": "Output"
+      },
+      "csvHeaders": {
+        "section": "Section",
+        "key": "Key",
+        "value": "Value"
+      }
+    },
+    "toolTrustPanel": {
+      "formula": "Formula",
+      "assumptions": "Assumptions",
+      "references": "References"
+    },
+    "toolValidation": {
+      "required": "Invalid value: {field} is required.",
+      "invalidNumber": "Invalid value: {field} must be a number.",
+      "invalidOption": "Invalid value: {field} selection is not valid.",
+      "min": "Invalid value: {field} must be ≥ {min}.",
+      "max": "Invalid value: {field} must be ≤ {max}.",
+      "resultFix": "Fix the highlighted inputs to see results.",
+      "calcFailed": "Calculation failed. Check inputs."
+    },
+    "toolReport": {
+      "title": "Tool report",
+      "subtitle": "Print-friendly summary",
+      "dateLabel": "Date",
+      "inputs": "Inputs",
+      "results": "Results",
+      "formula": "Formula",
+      "assumptions": "Assumptions",
+      "references": "References",
+      "print": "Print",
+      "downloadPdf": "Download PDF",
+      "back": "Back to tool",
+      "missing": "No report data. Return to the tool and generate a report."
+    },
+    "toolsError": {
+      "title": "Something went wrong",
+      "description": "We couldn't load this tool right now. Try refreshing or return to the tools list.",
+      "refresh": "Refresh page",
+      "back": "Back to tools"
+    },
+    "genericToolPage": {
+      "inputs": "Inputs",
+      "results": "Results",
+      "formula": "Formula",
+      "chart": "Chart",
+      "chartEmpty": "Provide valid values to render the chart.",
+      "resultEmpty": "Fix the highlighted inputs to see results.",
+      "actionsTitle": "Share & Report",
+      "actionsDescription": "Create a shareable link or open a print-ready report.",
+      "calcFailed": "Calculation failed. Check inputs.",
+      "required": "Required field.",
+      "invalidNumber": "Enter a valid number.",
+      "invalidOption": "Select a valid option.",
+      "min": "Min",
+      "max": "Max"
+    },
+    "dashboard": {
+      "badge": "Dashboard",
+      "title": "Your dashboard",
+      "description": "Favorites, recent work, and recommendations in one place.",
+      "imageAlt": "Dashboard overview with saved, recent, and recommended tools",
+      "favorites": "Favorites",
+      "favoritesDescription": "Pinned calculators you want to keep close.",
+      "favoritesEmpty": "You have no favorites yet.",
+      "recents": "Recently used",
+      "recentsDescription": "Pick up where you left off.",
+      "recentsEmpty": "No calculators opened yet.",
+      "recommended": "Recommended",
+      "recommendedDescription": "Based on categories or tags from your recent activity.",
+      "recommendedEmpty": "Add favorites to see recommendations.",
+      "open": "Open calculator",
+      "lastUsed": "Last used"
+    },
+    "recentTools": {
+      "title": "Recently used",
+      "description": "Jump back into the calculators you opened last.",
+      "empty": "No recent calculators yet.",
+      "open": "Open {title}",
+      "generalCategory": "General"
+    },
+    "savedCalculations": {
+      "title": "Saved calculations",
+      "description": "Saved items live only on this device. Reopen or delete entries from the list below.",
+      "loading": "Loading saved items...",
+      "emptyTitle": "No saved calculations yet.",
+      "emptyHint": "Use the \"Save\" button inside a calculator to create one.",
+      "toolLibrary": "Go to Calculator Library",
+      "reopen": "Open again",
+      "delete": "Delete",
+      "details": "Input and result details",
+      "inputs": "Inputs",
+      "outputs": "Result"
+    },
+    "requestToolForm": {
+      "title": "Request a tool",
+      "description": "Describe the problem and the input/output structure to help us build the calculator.",
+      "issueTitle": "Tool request",
+      "issueTitlePrefix": "Tool request",
+      "back": "Back to Tool Library",
+      "submit": "Submit request",
+      "github": "Create GitHub Issue",
+      "copy": "Copy",
+      "copied": "Copied to clipboard.",
+      "copyFail": "Copy failed. You can copy the text manually.",
+      "history": "Submitted requests",
+      "emptyHistory": "No requests yet.",
+      "storageNote": "Stored locally in your browser.",
+      "required": "This field is required.",
+      "fields": {
+        "problem": "Problem / Use case",
+        "inputs": "Inputs (input list)",
+        "outputs": "Expected output (result)",
+        "standards": "Units / standards",
+        "examples": "Example values"
+      }
+    },
+    "exportPanel": {
+      "previewAlt": "Preview",
+      "previewFallback": "Preview",
+      "downloadStarted": "Download started.",
+      "downloadFailed": "Download failed. Please try again.",
+      "downloadError": "An error occurred during download.",
+      "pngDownloading": "Downloading PNG.",
+      "svgDownloading": "Downloading SVG.",
+      "pdfDownloading": "Downloading PDF."
+    },
+    "explanationPanel": {
+      "title": "Explanation Mode (advanced)",
+      "formulasTitle": "Formulas used",
+      "variablesTitle": "Variables",
+      "notesTitle": "Usage notes"
+    },
+    "toolPage": {
+      "badge": "Calculator"
+    },
+    "confidence": {
+      "title": "Confidence Snapshot",
+      "version": "Version",
+      "updated": "Last updated",
+      "assumptions": "Assumptions",
+      "references": "References"
+    },
+    "qaBoard": {
+      "badge": "Q&A",
+      "sampleBadge": "Sample",
+      "title": "Q&A board",
+      "description": "Ask a question, get short replies, and share experience.",
+      "answersTitle": "Replies",
+      "replyLabel": "Your reply",
+      "replyPlaceholder": "Share your experience, calculation, or suggestion...",
+      "replyButton": "Post reply",
+      "topicsTitle": "Active topics",
+      "topicCountLabel": "{count} topics",
+      "replyCountLabel": "{count} replies",
+      "authorLabel": "Author",
+      "topics": [
+        {
+          "slug": "m12-civata-torku",
+          "title": "M12 10.9 bolt torque and lubrication",
+          "author": "Ayşe Yılmaz",
+          "category": "Torque / Fastening",
+          "details": "There is a gap between table values and actual tightening. How do torque wrench calibration and lubrication choice affect torque?",
+          "updated": "2 hours ago",
+          "tags": [
+            "torque",
+            "bolt",
+            "lubrication"
+          ],
+          "replies": 4
+        },
+        {
+          "slug": "kaynak-sonrasi-sehim",
+          "title": "Post-weld deflection on S235 plate",
+          "author": "Mehmet A.",
+          "category": "Welding / Structure",
+          "details": "After welding a 300x500x10 mm plate with a corner weld, deflection appeared; any fixture and preheat advice?",
+          "updated": "5 hours ago",
+          "tags": [
+            "welding",
+            "deflection",
+            "fixture"
+          ],
+          "replies": 3
+        },
+        {
+          "slug": "h8d9-yuzey-puruzluluk",
+          "title": "Surface roughness for H8/d9 fit",
+          "author": "Selin K.",
+          "category": "Tolerances / GD&T",
+          "details": "I picked H8/d9 for Ø25 hole/shaft. What surface roughness should I target to avoid loosening in press fit?",
+          "updated": "1 day ago",
+          "tags": [
+            "tolerance",
+            "fit",
+            "surface"
+          ],
+          "replies": 1
+        }
+      ],
+      "answers": {
+        "m12-civata-torku": [
+          {
+            "user": "Kadir",
+            "text": "DIN table gives dry values; if you use lubrication, drop by 20-25%. Calibrate your torque wrench yearly.",
+            "time": "1s ago"
+          },
+          {
+            "user": "Elif",
+            "text": "Typical ~90 Nm for M12 10.9 (dry). With lubrication 65-70 Nm is enough. Keep surfaces clean.",
+            "time": "12s ago"
+          },
+          {
+            "user": "Selim",
+            "text": "If you use a slip washer, friction drops; reduce torque. You can verify preload with turn-of-nut.",
+            "time": "25s ago"
+          }
+        ],
+        "kaynak-sonrasi-sehim": [
+          {
+            "user": "Hakan",
+            "text": "Tack symmetrically and weld alternately, then fill in. A 120-150°C preheat helps.",
+            "time": "10m ago"
+          },
+          {
+            "user": "Derya",
+            "text": "Try welding with a reverse camber. Clamping in a fixture can also help.",
+            "time": "35m ago"
+          }
+        ],
+        "h8d9-yuzey-puruzluluk": [
+          {
+            "user": "Elif",
+            "text": "Ra 1.6-3.2 µm usually works. Cleanliness and deburring are critical.",
+            "time": "2s ago"
+          }
+        ]
+      }
+    },
+    "unitConverter": {
+      "input": {
+        "title": "What conversion do you need?",
+        "description": "Pick the category first, then select source and target units. Results update automatically.",
+        "categoryLabel": "Which category are you working on?",
+        "fromLabel": "Which unit are you starting from?",
+        "toLabel": "Which unit should it convert to?",
+        "valueLabel": "How many units?",
+        "valuePlaceholder": "e.g. 100",
+        "swapLabel": "Swap",
+        "categories": {
+          "length": "Length",
+          "force": "Force",
+          "pressure": "Pressure",
+          "energy": "Energy"
+        }
+      },
+      "result": {
+        "title": "Result Flow",
+        "description": "See what we did, how we calculated, and what it means.",
+        "step1Title": "1. What did we do?",
+        "step1Body": "We first converted the input to the base unit, then to the target unit.",
+        "step2Title": "2. How did we calculate?",
+        "formulaLabel": "Formula",
+        "step3Title": "3. What does the result mean?",
+        "step3Body": "This value is the equivalent in the target unit. Base unit: {baseValue} {baseUnit}"
+      },
+      "visual": {
+        "title": "Visual Flow",
+        "description": "Shows the conversion path at a glance.",
+        "downloadLabel": "Download visual",
+        "previewAlt": "Conversion preview",
+        "helperText": "PNG is crisp; SVG is ideal for vector output.",
+        "downloadPng": "conversion.png",
+        "downloadSvg": "conversion.svg",
+        "inputLabel": "Input",
+        "baseLabel": "Base",
+        "outputLabel": "Output",
+        "diagramLabel": "Conversion flow"
+      },
+      "errors": {
+        "missingUnits": "Selected units were not found.",
+        "invalidNumber": "Please enter a valid value."
+      },
+      "steps": {
+        "input": "Input: {value} {unit}",
+        "toBase": "Convert to base unit: {input} * {factor} = {value} {unit}",
+        "toOutput": "Convert to output unit: {base} / {factor} = {value} {unit}"
+      },
+      "explanation": {
+        "title": "Formula and variables",
+        "variables": [
+          {
+            "symbol": "V_in",
+            "description": "The input value."
+          },
+          {
+            "symbol": "V_out",
+            "description": "The result in the target unit."
+          },
+          {
+            "symbol": "factor_from",
+            "description": "Conversion factor from the source unit to the base unit."
+          },
+          {
+            "symbol": "factor_to",
+            "description": "Conversion factor from the target unit to the base unit."
+          }
+        ],
+        "notes": [
+          "Conversions are based on the selected category's base unit.",
+          "Useful for reporting and quick checks.",
+          "Rounding is for display only; raw values are used in calculations."
+        ]
+      }
+    },
+    "toolFavoriteButton": {
+      "addLabel": "Add to favorites",
+      "removeLabel": "Favorited",
+      "addAria": "Add {title} to favorites",
+      "removeAria": "Remove {title} from favorites",
+      "fallbackTitle": "tool"
+    },
+    "toolHistory": {
+      "title": "Saved calculations",
+      "description": "Saved calculations live on this device only. The last {count} entries are kept.",
+      "viewAll": "View all saved",
+      "save": "Save",
+      "clear": "Clear saved",
+      "errorNoResult": "You cannot save without a valid result.",
+      "hintSave": "Save the current result with one click.",
+      "feedback": {
+        "storeError": "Save failed. Browser storage may be full.",
+        "saveSuccess": "Saved successfully.",
+        "saveError": "Save failed.",
+        "clearSuccess": "Saved entries cleared.",
+        "clearError": "Failed to clear saved entries."
+      },
+      "loading": "Loading saved entries...",
+      "empty": "No saved calculations yet. Use the button above to save the result.",
+      "inputs": "Inputs",
+      "outputs": "Result"
+    },
+    "advisorPanel": {
+      "title": "Engineering Advisor",
+      "subtitle": "Smart checks, ranges, and next-step suggestions based on your inputs.",
+      "empty": "No advisor notes yet. Adjust inputs to see checks and suggestions.",
+      "severity": {
+        "critical": "Critical",
+        "warn": "Warnings",
+        "info": "Notes"
+      },
+      "actionReference": "Open reference",
+      "actionReport": "Open report"
+    },
+    "authModal": {
+      "badge": "Start Free",
+      "title": "Create your free engineering workspace",
+      "description": "Save calculations, track results, and unlock exports.",
+      "note": "No credit card required. Cancel anytime.",
+      "close": "Close"
+    }
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "general": "General",
+    "access": {
+      "free": "Free",
+      "beta": "Beta",
+      "premium": "Premium"
+    }
+  }
 }

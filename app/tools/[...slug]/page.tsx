@@ -4,9 +4,15 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
+import ReportPageShell from "@/components/tools/ReportPageShell";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import ReportChart from "@/components/tools/report/ReportChart";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import EngineeringDiagram, {
+  type BoltDiagramParams,
+  type GearDiagramParams,
+  type PipeDiagramParams,
+} from "@/src/components/visuals/EngineeringDiagram";
 import { getMessages } from "@/utils/messages";
 import { decodeToolState } from "@/utils/tool-share";
 import { resolveLocalizedValue } from "@/utils/locale-values";
@@ -25,6 +31,10 @@ const DATE_FORMAT: Intl.DateTimeFormatOptions = {
 };
 
 type ReportRow = { label: string; value: string };
+type ReportDiagram =
+  | { type: "bolt"; params: BoltDiagramParams }
+  | { type: "pipe"; params: PipeDiagramParams }
+  | { type: "gear"; params: GearDiagramParams };
 
 type ReportData = {
   title: string;
@@ -36,6 +46,7 @@ type ReportData = {
   references?: ToolReference[];
   chartConfig?: ToolChartConfig | null;
   toolHref: string;
+  diagram?: ReportDiagram;
 };
 
 export default function ToolReportRoute() {
@@ -72,92 +83,107 @@ export default function ToolReportRoute() {
 
   const today = new Date().toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US", DATE_FORMAT);
   const pdfTitle = `${reportData.title} - ${copy.title}`;
+  const diagramTitle = locale === "tr" ? "Teknik Diyagram" : "Engineering Diagram";
 
   return (
-    <PageShell>
-      <section id="report-print-area" className="space-y-4">
-        <header className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div className="space-y-2">
-              <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-600">{copy.title}</p>
-              <h1 className="text-lg font-semibold text-slate-900">{reportData.title}</h1>
-              {reportData.description ? (
-                <p className="text-xs text-slate-600">{reportData.description}</p>
-              ) : null}
-            </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-right text-[11px] text-slate-500">
-              <span className="block font-semibold text-slate-700">{copy.dateLabel}</span>
-              <span className="block">{today}</span>
-            </div>
-          </div>
-        </header>
-
-        <section className="grid gap-4 lg:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-            <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.inputs}</h2>
-            <div className="space-y-2">
-              {reportData.inputs.map((row) => (
-                <div key={row.label} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2">
-                  <span className="text-[11px] text-slate-600">{row.label}</span>
-                  <span className="font-mono text-[11px] font-semibold text-slate-900">{row.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-            <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.results}</h2>
-            {reportData.results.length > 0 ? (
+    <PageShell className="report-page">
+      <ReportPageShell>
+        <section id="report-area" className="space-y-4">
+          <header className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="space-y-2">
-                {reportData.results.map((row) => (
+                <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-600">{copy.title}</p>
+                <h1 className="text-lg font-semibold text-slate-900">{reportData.title}</h1>
+                {reportData.description ? (
+                  <p className="text-xs text-slate-600">{reportData.description}</p>
+                ) : null}
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-right text-[11px] text-slate-500">
+                <span className="block font-semibold text-slate-700">{copy.dateLabel}</span>
+                <span className="block">{today}</span>
+              </div>
+            </div>
+          </header>
+
+          <section className="grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+              <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.inputs}</h2>
+              <div className="space-y-2">
+                {reportData.inputs.map((row) => (
                   <div key={row.label} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2">
                     <span className="text-[11px] text-slate-600">{row.label}</span>
                     <span className="font-mono text-[11px] font-semibold text-slate-900">{row.value}</span>
                   </div>
                 ))}
               </div>
-            ) : (
-              <p className="text-[11px] text-slate-500">{copy.missing}</p>
-            )}
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+              <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.results}</h2>
+              {reportData.results.length > 0 ? (
+                <div className="space-y-2">
+                  {reportData.results.map((row) => (
+                    <div key={row.label} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2">
+                      <span className="text-[11px] text-slate-600">{row.label}</span>
+                      <span className="font-mono text-[11px] font-semibold text-slate-900">{row.value}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-[11px] text-slate-500">{copy.missing}</p>
+              )}
+            </div>
+          </section>
+
+          {reportData.diagram ? (
+            <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+              <h2 className="mb-2 text-sm font-semibold text-slate-900">{diagramTitle}</h2>
+              <EngineeringDiagram
+                type={reportData.diagram.type}
+                params={reportData.diagram.params}
+                locale={locale}
+                className="h-auto w-full"
+              />
+            </section>
+          ) : null}
+
+          {reportData.chartConfig ? (
+            <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+              <h2 className="mb-2 text-sm font-semibold text-slate-900">{messages.components.genericToolPage.chart}</h2>
+              <ReportChart config={reportData.chartConfig} />
+            </section>
+          ) : null}
+
+          <ToolTrustPanel
+            formula={reportData.formula}
+            assumptions={reportData.assumptions}
+            references={reportData.references}
+          />
+
+          <div className="no-print flex flex-wrap items-center gap-3 print:hidden">
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-slate-800"
+            >
+              {copy.print}
+            </button>
+            <button
+              type="button"
+              onClick={() => downloadReportPdf("report-area", pdfTitle)}
+              className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400"
+            >
+              {copy.downloadPdf}
+            </button>
+            <Link
+              href={reportData.toolHref}
+              className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400"
+            >
+              {copy.back}
+            </Link>
           </div>
         </section>
-
-        {reportData.chartConfig ? (
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-            <h2 className="mb-2 text-sm font-semibold text-slate-900">{messages.components.genericToolPage.chart}</h2>
-            <ReportChart config={reportData.chartConfig} />
-          </section>
-        ) : null}
-
-        <ToolTrustPanel
-          formula={reportData.formula}
-          assumptions={reportData.assumptions}
-          references={reportData.references}
-        />
-
-        <div className="no-print flex flex-wrap items-center gap-3 print:hidden">
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-slate-800"
-          >
-            {copy.print}
-          </button>
-          <button
-            type="button"
-            onClick={() => downloadReportPdf("report-print-area", pdfTitle)}
-            className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400"
-          >
-            {copy.downloadPdf}
-          </button>
-          <Link
-            href={reportData.toolHref}
-            className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400"
-          >
-            {copy.back}
-          </Link>
-        </div>
-      </section>
+      </ReportPageShell>
     </PageShell>
   );
 }
@@ -239,6 +265,7 @@ function buildReportData(
 
     const results = safeCalculate(() => pageTool.calculate(merged as never));
     const resultRows = buildResultRows(results, locale, common);
+    const diagram = buildDiagramConfig(normalized, merged);
 
     return {
       title: catalogCopy?.title ?? pageTool.title,
@@ -248,6 +275,7 @@ function buildReportData(
       formula: resolveLocalizedValue(pageTool.formula, locale),
       assumptions: resolveLocalizedValue(pageTool.assumptions, locale),
       references: resolveLocalizedValue(pageTool.references, locale),
+      diagram,
       toolHref: localizedToolHref,
     };
   }
@@ -282,6 +310,42 @@ function buildReportData(
   }
 
   return null;
+}
+
+function buildDiagramConfig(toolId: string, inputs: Record<string, unknown>): ReportDiagram | undefined {
+  const toNumber = (value: unknown) => {
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    if (typeof value === "string") {
+      const parsed = Number(value);
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+    return null;
+  };
+
+  if (toolId === "bolt-calculator") {
+    return {
+      type: "bolt",
+      params: {
+        diameter: toNumber(inputs.d) ?? undefined,
+        pitch: toNumber(inputs.P) ?? undefined,
+        showGrid: true,
+      },
+    };
+  }
+
+  if (toolId === "pipe-pressure-loss") {
+    return {
+      type: "pipe",
+      params: {
+        diameter: toNumber(inputs.diameter) ?? undefined,
+        length: toNumber(inputs.length) ?? undefined,
+        flow: toNumber(inputs.flow) ?? undefined,
+        showGrid: true,
+      },
+    };
+  }
+
+  return undefined;
 }
 
 function mergeSharedValues<T extends Record<string, unknown>>(

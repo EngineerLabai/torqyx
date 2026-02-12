@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import AccessBadge from "@/components/tools/AccessBadge";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
+import type { ToolAccess } from "@/tools/_shared/catalog";
 
 type ToolLibraryCardProps = {
   toolId: string;
@@ -13,6 +15,8 @@ type ToolLibraryCardProps = {
   typeLabel?: string;
   typeTone?: "calculator" | "bundle" | "guide";
   tags?: string[];
+  accessLabel?: string;
+  accessTone?: ToolAccess;
   ctaLabel: string;
   ariaLabel: string;
   isNew?: boolean;
@@ -29,6 +33,8 @@ export default function ToolLibraryCard({
   typeLabel,
   typeTone = "calculator",
   tags,
+  accessLabel,
+  accessTone = "free",
   ctaLabel,
   ariaLabel,
   isNew = false,
@@ -60,6 +66,7 @@ export default function ToolLibraryCard({
                 {typeLabel}
               </span>
             ) : null}
+            {accessLabel ? <AccessBadge access={accessTone} label={accessLabel} /> : null}
             <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
               {usageLabel}
             </span>

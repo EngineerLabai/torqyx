@@ -5,14 +5,14 @@ import { stripLocaleFromPath } from "@/utils/locale-path";
 
 const PUBLIC_FILE = /\.(.*)$/;
 const ONE_YEAR = 60 * 60 * 24 * 365;
-const LOCALE_PREFIXED_PATHS = ["/tools", "/project-hub", "/quality-tools", "/standards"];
+const LOCALE_PREFIXED_PATHS = ["/tools", "/project-hub", "/quality-tools", "/standards", "/materials", "/projects"];
 const LOCALE_PRESERVE_PATHS = new Set([
   "/standards/threads",
   "/standards/materials",
   "/standards/fits",
   "/standards/fluids",
 ]);
-const LOCALE_PRESERVE_PREFIXES = ["/project-hub"];
+const LOCALE_PRESERVE_PREFIXES = ["/project-hub", "/materials", "/projects"];
 
 const getPreferredLocale = (request: NextRequest) => {
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;

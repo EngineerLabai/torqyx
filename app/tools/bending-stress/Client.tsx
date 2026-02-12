@@ -7,6 +7,7 @@ import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 import ToolActions from "@/components/tools/ToolActions";
+import ToolDataActions from "@/components/tools/ToolDataActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -340,6 +341,16 @@ export default function BendingStressPage({ initialDocs }: BendingStressClientPr
 
               <p className="mt-3 text-[11px] text-slate-500">{copy.results.note}</p>
             </div>
+
+            {results ? (
+              <ToolDataActions
+                toolSlug={TOOL_ID}
+                toolTitle={copy.header.title}
+                inputs={inputs}
+                outputs={results}
+                reportUrl={reportUrl}
+              />
+            ) : null}
 
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <div className="space-y-2">

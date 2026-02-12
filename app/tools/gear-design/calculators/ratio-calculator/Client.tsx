@@ -7,6 +7,7 @@ import { z } from "zod";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import ToolActions from "@/components/tools/ToolActions";
+import ToolDataActions from "@/components/tools/ToolDataActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -180,6 +181,16 @@ export default function RatioCalculatorPage({ initialDocs }: RatioCalculatorClie
 
           <p className="mt-3 text-[11px] text-slate-600">{copy.note}</p>
         </section>
+
+        {results ? (
+          <ToolDataActions
+            toolSlug={TOOL_ID}
+            toolTitle={copy.header.title}
+            inputs={inputs}
+            outputs={results}
+            reportUrl={reportUrl}
+          />
+        ) : null}
 
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">

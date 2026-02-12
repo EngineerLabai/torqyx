@@ -110,8 +110,8 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
     },
     sessionNote: {
       prefix:
-        "Not: Buraya girilen bilgiler yalnızca bu tarayıcı oturumunda saklanır. Gelecekte PDF/Excel çıktısı ve hesap açarak kayıt tutma özellikleri premium paket planında. Ödeme yok,",
-      link: "bekleme listesi açık",
+        "Not: Buraya girilen bilgiler yalnızca bu tarayıcı oturumunda saklanır. Gelecekte PDF/Excel çıktısı ve hesap açarak kayıt tutma özellikleri premium paket özel betasında. ",
+      link: "Erişim listesine katıl",
       suffix: ".",
     },
     summary: {
@@ -150,10 +150,10 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
       emptyValue: "-",
     },
     premium: {
-      title: "PDF / Excel'e Aktar - Premium (bekleme listesi)",
+      title: "PDF / Excel'e Aktar - Premium (özel beta)",
       prefix:
-        "5N1K problem tanımlama kayıtlarını PDF veya Excel olarak dışa aktarma ve ekiplerle paylaşma özelliği premium paket planında. Ödeme yok,",
-      link: "bekleme listesi açık",
+        "5N1K problem tanımlama kayıtlarını PDF veya Excel olarak dışa aktarma ve ekiplerle paylaşma özelliği premium paket özel betasında. ",
+      link: "Erişim listesine katıl",
       suffix: ".",
       pdf: "PDF'e Aktar (Premium)",
       excel: "Excel'e Aktar (Premium)",
@@ -199,8 +199,8 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
     },
     sessionNote: {
       prefix:
-        "Note: The information entered here is stored only in this browser session. PDF/Excel export and account-based saving are planned for the premium package. No payment required,",
-      link: "waitlist is open",
+        "Note: The information entered here is stored only in this browser session. PDF/Excel export and account-based saving are in the Premium private beta. ",
+      link: "Request early access",
       suffix: ".",
     },
     summary: {
@@ -239,10 +239,10 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
       emptyValue: "-",
     },
     premium: {
-      title: "Export to PDF / Excel - Premium (waitlist)",
+      title: "Export to PDF / Excel - Premium (private beta)",
       prefix:
-        "Export 5W1H problem definitions to PDF or Excel and share them with your team. No payment required,",
-      link: "waitlist is open",
+        "Export 5W1H problem definitions to PDF or Excel and share them with your team in the Premium private beta. ",
+      link: "Request early access",
       suffix: ".",
       pdf: "Export to PDF (Premium)",
       excel: "Export to Excel (Premium)",

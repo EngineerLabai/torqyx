@@ -412,21 +412,31 @@ header.site-header {
     background: #ffffff !important;
   }
 
-  header.site-header,
-  footer,
-  aside {
-    display: none !important;
+  body.report-mode * {
+    visibility: hidden !important;
   }
 
+  body.report-mode #report-area,
+  body.report-mode #report-area * {
+    visibility: visible !important;
+  }
+
+  body.report-mode #report-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  header.site-header,
+  footer,
+  aside,
   .no-print {
     display: none !important;
   }
 
-  #report-print-area {
-    box-shadow: none !important;
-  }
-
-  #report-print-area * {
+  #report-area,
+  #report-area * {
     box-shadow: none !important;
   }
 }

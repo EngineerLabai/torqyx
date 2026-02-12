@@ -1,9 +1,23 @@
-import ToolPageClient from "@/components/tools/ToolPageClient";
+﻿import ToolPageClient from "@/components/tools/ToolPageClient";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import ToolSeo from "@/components/tools/ToolSeo";
+import { buildToolMetadata } from "@/utils/tool-seo";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  return buildToolMetadata("param-chart", locale);
+}
 
 export default async function ParamChartPage() {
   const locale = await getLocaleFromCookies();
   const initialDocs = await getToolDocsResponse("param-chart", locale);
-  return <ToolPageClient toolId="param-chart" initialDocs={initialDocs} />;
+  return (
+    <>
+      <ToolSeo toolId="param-chart" locale={locale} />
+      <ToolPageClient toolId="param-chart" initialDocs={initialDocs} />
+    </>
+  );
 }
+
+
