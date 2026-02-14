@@ -1,6 +1,7 @@
 import "server-only";
 
 import { cert, getApps, initializeApp } from "firebase-admin/app";
+import { getAuth, type Auth } from "firebase-admin/auth";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
 type ServiceAccount = {
@@ -10,6 +11,7 @@ type ServiceAccount = {
 };
 
 let cachedDb: Firestore | null = null;
+let cachedAuth: Auth | null = null;
 let initError: Error | null = null;
 
 const normalizePrivateKey = (value: string) => value.replace(/\\n/g, "\n");
@@ -53,6 +55,19 @@ const getServiceAccountFromEnv = (): ServiceAccount | null => {
 
 export const getAdminFirestore = () => {
   if (cachedDb) return cachedDb;
+  const app = getAdminApp();
+  cachedDb = getFirestore(app);
+  return cachedDb;
+};
+
+export const getAdminAuth = () => {
+  if (cachedAuth) return cachedAuth;
+  const app = getAdminApp();
+  cachedAuth = getAuth(app);
+  return cachedAuth;
+};
+
+const getAdminApp = () => {
   if (initError) throw initError;
 
   const serviceAccount = getServiceAccountFromEnv();
@@ -64,7 +79,7 @@ export const getAdminFirestore = () => {
     throw initError;
   }
 
-  const app = getApps().length
+  return getApps().length
     ? getApps()[0]
     : initializeApp({
         credential: cert({
@@ -74,7 +89,4 @@ export const getAdminFirestore = () => {
         }),
         projectId: serviceAccount.projectId,
       });
-
-  cachedDb = getFirestore(app);
-  return cachedDb;
 };

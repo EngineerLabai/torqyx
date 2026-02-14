@@ -6,10 +6,12 @@
     "dev": "next dev",
     "predev": "tsx scripts/buildSearchIndex.ts",
     "postinstall": "prisma generate",
-    "prebuild": "prisma generate && node scripts/check-assets.mjs && node scripts/check-i18n.mjs && node scripts/check-content-locales.mjs && tsx scripts/buildSearchIndex.ts && node scripts/check-tool-docs.mjs",
+    "prebuild": "prisma generate && node scripts/check-assets.mjs && node scripts/check-i18n.mjs && node scripts/check-content-locales.mjs && node scripts/check-text-encoding.mjs && tsx scripts/buildSearchIndex.ts && node scripts/check-tool-docs.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "i18n:report": "node scripts/report-i18n-status.mjs",
+    "check:encoding": "node scripts/check-text-encoding.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test"
   },
@@ -42,6 +44,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@next/bundle-analyzer": "^16.1.6",
     "@playwright/test": "^1.51.1",
     "@tailwindcss/postcss": "^4",

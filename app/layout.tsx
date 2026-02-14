@@ -6,6 +6,8 @@ import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import SiteShell from "@/components/layout/SiteShell";
 import GlobalErrorMonitor from "@/components/monitoring/GlobalErrorMonitor";
+import WebVitalsReporter from "@/components/monitoring/WebVitalsReporter";
+import UserStateSync from "@/components/sync/UserStateSync";
 import JsonLd from "@/components/seo/JsonLd";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -108,6 +110,8 @@ export default async function RootLayout({
           <AuthProvider>
             <GlobalErrorMonitor />
             <AnalyticsTracker />
+            <WebVitalsReporter />
+            <UserStateSync />
             <SiteShell>{children}</SiteShell>
           </AuthProvider>
         </LocaleProvider>

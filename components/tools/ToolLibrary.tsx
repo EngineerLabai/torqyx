@@ -339,10 +339,11 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         <form id="tool-filters" method="get" action={basePath} className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <input type="hidden" name="type" value={typeFilter} />
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-slate-700">
+            <label htmlFor="tool-filter-category" className="block text-[11px] font-medium text-slate-700">
               {copy.filterSection.categoryLabel}
             </label>
             <select
+              id="tool-filter-category"
               name="category"
               defaultValue={category}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
@@ -357,10 +358,11 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           </div>
 
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-slate-700">
+            <label htmlFor="tool-filter-tag" className="block text-[11px] font-medium text-slate-700">
               {copy.filterSection.tagLabel}
             </label>
             <select
+              id="tool-filter-tag"
               name="tag"
               defaultValue={tag}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"

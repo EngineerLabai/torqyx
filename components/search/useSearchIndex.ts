@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { normalizeSearchText, type SearchIndexData, type SearchIndexItem } from "@/utils/search-index";
+import { buildSearchNeedles, normalizeSearchText, type SearchIndexData, type SearchIndexItem } from "@/utils/search-index";
 
 type SearchIndexState = {
   items: SearchIndexItem[];
@@ -85,23 +85,34 @@ const buildIndexField = (value?: string | string[] | null) => {
 };
 
 export const filterSearchResults = (items: SearchIndexItem[], query: string, limit = 20) => {
-  const needle = normalizeSearchText(query);
-  if (!needle) return [];
+  const { normalized, all: needles } = buildSearchNeedles(query);
+  if (!normalized) return [];
 
   const scored = items
     .map((item) => {
       const titleText = [item.title, ...(item.localeTitles ? Object.values(item.localeTitles) : [])]
         .filter(Boolean)
         .join(" ");
-      const titleIndex = buildIndexField(titleText).indexOf(needle);
-      const tagIndex = buildIndexField([...(item.tags ?? []), ...(item.keywords ?? [])]).indexOf(needle);
-      const descriptionIndex = buildIndexField(item.description).indexOf(needle);
-      const searchIndex = item.searchText.indexOf(needle);
+      const titleField = buildIndexField(titleText);
+      const tagsField = buildIndexField([...(item.tags ?? []), ...(item.keywords ?? [])]);
+      const descriptionField = buildIndexField(item.description);
+      const searchField = item.searchText;
 
-      if (titleIndex === -1 && tagIndex === -1 && descriptionIndex === -1 && searchIndex === -1) {
+      const everyTokenMatches = needles.every(
+        (needle) =>
+          titleField.includes(needle) ||
+          tagsField.includes(needle) ||
+          descriptionField.includes(needle) ||
+          searchField.includes(needle),
+      );
+      if (!everyTokenMatches) {
         return null;
       }
 
+      const titleIndex = titleField.indexOf(normalized);
+      const tagIndex = tagsField.indexOf(normalized);
+      const descriptionIndex = descriptionField.indexOf(normalized);
+      const searchIndex = searchField.indexOf(normalized);
       const tier = titleIndex !== -1 ? 0 : tagIndex !== -1 ? 1 : descriptionIndex !== -1 ? 2 : 3;
       const position =
         titleIndex !== -1 ? titleIndex : tagIndex !== -1 ? tagIndex : descriptionIndex !== -1 ? descriptionIndex : searchIndex;

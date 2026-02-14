@@ -17,6 +17,12 @@ export type ToolDocExampleItem = {
   notes?: string[];
 };
 
+export type ToolDocMetaInfo = {
+  version?: string | null;
+  lastUpdated?: string | null;
+  lastTranslatedAt?: string | null;
+};
+
 export type ToolDocStandard = {
   version: string;
   lastUpdated: string;
@@ -33,6 +39,7 @@ export type ToolDocsResponse = {
   hasDocs: boolean;
   requestedLocale?: Locale;
   docsLocale?: Locale | null;
+  metaInfo?: ToolDocMetaInfo | null;
   standard?: ToolDocStandard | null;
   explanation: MDXRemoteSerializeResult | null;
   examples:

@@ -29,12 +29,12 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   const pLabel = formatLabel(pValue, "mm", locale);
   const torqueLabel = result.torque !== null ? `${formatNumberFixed(result.torque, locale, 1)} Nm` : "-";
   const fvLabel = result.Fv !== null ? `${formatNumberFixed(result.Fv, locale, 2)} kN` : "-";
-  const exportLabel = locale === "tr" ? "GÃ¶rseli Ä°ndir" : "Download diagram";
+  const exportLabel = locale === "tr" ? "G\u00f6rseli \u0130ndir" : "Download diagram";
   const helperText =
     locale === "tr"
-      ? "PNG net gÃ¶rÃ¼nÃ¼m saÄŸlar, SVG ise vektÃ¶r Ã§Ä±ktÄ±sÄ± iÃ§indir."
+      ? "PNG net g\u00f6r\u00fcn\u00fcm sa\u011flar, SVG ise vekt\u00f6r \u00e7\u0131kt\u0131lar\u0131 i\u00e7indir."
       : "PNG provides a crisp preview, SVG is for vector output.";
-  const previewAlt = locale === "tr" ? "Civata Ã¶nizleme" : "Bolt preview";
+  const previewAlt = locale === "tr" ? "C\u0131vata \u00f6nizleme" : "Bolt preview";
 
   useEffect(() => {
     setPreviewUrl(getSvgPreview(svgRef.current));
@@ -43,10 +43,10 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">GÃ¶rsel Ã–zet</h2>
+        <h2 className="text-sm font-semibold text-slate-900">G\u00f6rsel \u00d6zet</h2>
         <p className="text-xs text-slate-500">
-          Boyut ve Ã¶n yÃ¼k hedefini gÃ¶rsel olarak gÃ¶sterir. DeÄŸerler manuel hesaplama
-          sonucunu yansÄ±tÄ±r.
+          Boyut ve \u00f6n y\u00fck hedefini g\u00f6rsel olarak g\u00f6sterir. De\u011ferler manuel hesaplama sonucunu
+          yans\u0131t\u0131r.
         </p>
       </div>
 
@@ -63,26 +63,26 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
         <div className="space-y-4 rounded-xl bg-slate-50 p-4">
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">Nominal Ã§ap d</span>
+              <span className="text-slate-500">Nominal \u00e7ap d</span>
               <span className="font-mono font-semibold text-slate-900">{dLabel}</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">DiÅŸ adÄ±mÄ± P</span>
+              <span className="text-slate-500">Di\u015f ad\u0131m\u0131 P</span>
               <span className="font-mono font-semibold text-slate-900">{pLabel}</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">Ã–nerilen tork</span>
+              <span className="text-slate-500">\u00d6nerilen tork</span>
               <span className="font-mono font-semibold text-slate-900">{torqueLabel}</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500">Ã–n yÃ¼k (Fv)</span>
+              <span className="text-slate-500">\u00d6n y\u00fck (Fv)</span>
               <span className="font-mono font-semibold text-slate-900">{fvLabel}</span>
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs text-slate-600">
-              <span>Ã–n yÃ¼k hedefi</span>
+              <span>\u00d6n y\u00fck hedefi</span>
               <span className="font-semibold">
                 {Number.isFinite(preloadValue) ? `${formatNumberFixed(preloadValue, locale, 0)}%` : "-"}
               </span>
@@ -93,7 +93,7 @@ export default function VisualizationSection({ input, result }: ToolVisualizatio
                 style={{ width: `${preloadPercent}%` }}
               />
             </div>
-            <p className="text-[11px] text-slate-500">%90 Ã¼stÃ¼ deÄŸerler hesaplamada kabul edilmez.</p>
+            <p className="text-[11px] text-slate-500">%90 \u00fcst\u00fc de\u011ferler hesaplamada kabul edilmez.</p>
           </div>
         </div>
 

@@ -26,11 +26,28 @@ Open http://localhost:3000 with your browser to see the result.
 ANALYZE=true npm run build
 ```
 
+- Generate i18n status report (artifacts):
+
+```bash
+npm run i18n:report
+```
+
+- Run text encoding guard (mojibake scan):
+
+```bash
+npm run check:encoding
+```
+
 - Hotfix notes (perf regression):
   - Command palette is loaded via client-only dynamic import from `components/layout/SiteShell.tsx`, so it is split out of the server-rendered shell path.
   - Search index loading is now demand-based in `components/search/useSearchIndex.ts`; it fetches only when search UI is actively used and reuses a shared in-memory cache.
+  - Search matching now normalizes Turkish/English tokens and lightweight stems in `utils/search-index.ts`.
   - Tools library (`components/tools/ToolLibrary.tsx`) now renders incrementally (24 + load more) and avoids eager prefetch storms on card links.
   - Dev indicators are disabled in `next.config.ts` to avoid floating dev HUD overlays during debugging.
+  - Client errors and web-vitals are collected via `/api/client-errors` and `/api/rum`.
+  - Runtime health checks:
+    - JSON: `/health`
+    - Budget dashboard: `/health/performance`
 
 ## Yeni icerik nasil eklenir?
 

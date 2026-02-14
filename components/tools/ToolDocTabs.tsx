@@ -101,6 +101,28 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const shouldShowLocaleFallbackNote = Boolean(
     docs?.hasDocs && docs.docsLocale && docs.docsLocale !== locale,
   );
+  const docsMetaLine = useMemo(() => {
+    if (!docs?.metaInfo) return null;
+    const segments: string[] = [];
+    if (docs.metaInfo.version) {
+      segments.push(
+        locale === "tr" ? `Dokuman surumu: ${docs.metaInfo.version}` : `Doc version: ${docs.metaInfo.version}`,
+      );
+    }
+    if (docs.metaInfo.lastUpdated) {
+      segments.push(
+        locale === "tr" ? `Guncelleme: ${docs.metaInfo.lastUpdated}` : `Updated: ${docs.metaInfo.lastUpdated}`,
+      );
+    }
+    if (docs.metaInfo.lastTranslatedAt && docs.docsLocale && docs.docsLocale !== "tr") {
+      segments.push(
+        locale === "tr"
+          ? `Ceviri tarihi: ${docs.metaInfo.lastTranslatedAt}`
+          : `Translated: ${docs.metaInfo.lastTranslatedAt}`,
+      );
+    }
+    return segments.length ? segments.join(" | ") : null;
+  }, [docs, locale]);
 
   const availableTabs = useMemo(() => {
     const calculatorTab = allTabs.find((tab) => tab.id === "calculator");
@@ -138,7 +160,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const localeFallbackCallout = shouldShowLocaleFallbackNote ? (
     <Callout type="info" title={locale === "tr" ? "Dil notu" : "Language note"}>
       {locale === "tr"
-        ? "Bu araç için İngilizce dokümantasyon henüz hazır değil. Şimdilik Türkçe içerik gösteriliyor."
+        ? "Bu arac i\u00e7in \u0130ngilizce dok\u00fcmantasyon hen\u00fcz haz\u0131r de\u011fil. \u015eimdilik T\u00fcrk\u00e7e i\u00e7erik g\u00f6steriliyor."
         : "English documentation for this tool is not ready yet. Showing Turkish content for now."}
     </Callout>
   ) : null;
@@ -252,6 +274,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
       {shouldShowMissingNote ? missingDocsCallout : null}
       {!shouldShowMissingNote ? localeFallbackCallout : null}
+      {docsMetaLine ? <p className="text-xs text-slate-500">{docsMetaLine}</p> : null}
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
         {children}

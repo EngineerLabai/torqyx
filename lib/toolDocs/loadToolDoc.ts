@@ -8,7 +8,7 @@ import rehypeSlug from "rehype-slug";
 import type { Locale } from "@/utils/locale";
 import { getRelatedForTool } from "@/utils/related-items";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
-import type { ToolDocsResponse, ToolDocExampleItem } from "@/lib/toolDocs/types";
+import type { ToolDocsResponse, ToolDocExampleItem, ToolDocMetaInfo } from "@/lib/toolDocs/types";
 
 type ToolDocMeta = Record<string, unknown>;
 
@@ -160,6 +160,19 @@ const normalizeExamples = (value: unknown): ToolDocExampleItem[] | null => {
   return items;
 };
 
+const asOptionalString = (value: unknown) => {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : null;
+};
+
+const getDocMetaInfo = (meta: ToolDocMeta): ToolDocMetaInfo => {
+  const version = asOptionalString(meta.version) ?? asOptionalString(meta.docVersion);
+  const lastUpdated = asOptionalString(meta.lastUpdated) ?? asOptionalString(meta.updatedAt);
+  const lastTranslatedAt = asOptionalString(meta.lastTranslatedAt) ?? asOptionalString(meta.translatedAt);
+  return { version, lastUpdated, lastTranslatedAt };
+};
+
 export const loadToolDoc = async ({
   slug,
   locale,
@@ -251,6 +264,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
       hasDocs: false,
       requestedLocale: locale,
       docsLocale: null,
+      metaInfo: null,
       standard: null,
       explanation: null,
       examples: null,
@@ -258,6 +272,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
     };
   }
 
+  const metaInfo = getDocMetaInfo(doc.meta);
   const explanation = doc.mdxSource ? await serializeMdx(doc.mdxSource) : null;
   let examples: ToolDocsResponse["examples"] = null;
 
@@ -274,6 +289,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
     hasDocs,
     requestedLocale: locale,
     docsLocale,
+    metaInfo,
     standard: null,
     explanation,
     examples,
