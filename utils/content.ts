@@ -157,18 +157,35 @@ export const extractToc = (content: string, minLevel = 2, maxLevel = 4): TocItem
   return items;
 };
 
-const GUIDE_REQUIRED_SECTIONS = [
-  "Problem / Amac",
-  "Varsayimlar",
-  "Adim adim yontem",
-  "Sik hatalar",
-  "Ilgili hesaplayicilar",
-];
+const GUIDE_REQUIRED_SECTION_GROUPS = [
+  {
+    label: "Problem / Amaç",
+    alternatives: ["Problem / Amaç", "Problem / Objective"],
+  },
+  {
+    label: "Varsayımlar",
+    alternatives: ["Varsayımlar", "Assumptions"],
+  },
+  {
+    label: "Adım adım yöntem",
+    alternatives: ["Adım adım yöntem", "Step by step method"],
+  },
+  {
+    label: "Sık hatalar",
+    alternatives: ["Sık hatalar", "Common mistakes"],
+  },
+  {
+    label: "İlgili hesaplayıcılar",
+    alternatives: ["İlgili hesaplayıcılar", "Related calculators"],
+  },
+] as const;
 
 const ensureGuideSections = (content: string, sourcePath: string) => {
   const toc = extractToc(content, 2, 4);
   const headings = new Set(toc.map((item) => normalizeText(item.text)));
-  const missing = GUIDE_REQUIRED_SECTIONS.filter((section) => !headings.has(normalizeText(section)));
+  const missing = GUIDE_REQUIRED_SECTION_GROUPS.filter(
+    (group) => !group.alternatives.some((section) => headings.has(normalizeText(section))),
+  ).map((group) => group.label);
 
   if (missing.length > 0) {
     throw new Error(

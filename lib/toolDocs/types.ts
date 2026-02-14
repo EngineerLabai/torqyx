@@ -1,4 +1,5 @@
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
+import type { Locale } from "@/utils/locale";
 
 export type ToolDocRelatedItem = {
   slug: string;
@@ -30,6 +31,8 @@ export type ToolDocStandard = {
 export type ToolDocsResponse = {
   tool: { id: string; title: string; tags: string[] } | null;
   hasDocs: boolean;
+  requestedLocale?: Locale;
+  docsLocale?: Locale | null;
   standard?: ToolDocStandard | null;
   explanation: MDXRemoteSerializeResult | null;
   examples:

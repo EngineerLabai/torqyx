@@ -98,6 +98,9 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0),
   );
   const shouldShowMissingNote = docs && !docs.hasDocs;
+  const shouldShowLocaleFallbackNote = Boolean(
+    docs?.hasDocs && docs.docsLocale && docs.docsLocale !== locale,
+  );
 
   const availableTabs = useMemo(() => {
     const calculatorTab = allTabs.find((tab) => tab.id === "calculator");
@@ -132,6 +135,13 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
       {copy.docsMissingBody}
     </Callout>
   );
+  const localeFallbackCallout = shouldShowLocaleFallbackNote ? (
+    <Callout type="info" title={locale === "tr" ? "Dil notu" : "Language note"}>
+      {locale === "tr"
+        ? "Bu araç için İngilizce dokümantasyon henüz hazır değil. Şimdilik Türkçe içerik gösteriliyor."
+        : "English documentation for this tool is not ready yet. Showing Turkish content for now."}
+    </Callout>
+  ) : null;
 
   const renderExplanation = () => {
     if (shouldShowMissingNote) {
@@ -241,6 +251,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
       </div>
 
       {shouldShowMissingNote ? missingDocsCallout : null}
+      {!shouldShowMissingNote ? localeFallbackCallout : null}
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
         {children}

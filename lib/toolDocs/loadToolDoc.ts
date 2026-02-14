@@ -234,14 +234,23 @@ const getToolBySlug = (slug: string) => {
 };
 
 export const getToolDocsResponse = async (slug: string, locale: Locale): Promise<ToolDocsResponse> => {
-  const doc = await loadToolDoc({ slug, locale });
+  let docsLocale: Locale | null = locale;
+  let doc = await loadToolDoc({ slug, locale });
+  if (!doc && locale !== "tr") {
+    doc = await loadToolDoc({ slug, locale: "tr" });
+    docsLocale = doc ? "tr" : null;
+  }
+
   const tool = getToolBySlug(slug);
-  const related = tool ? await getRelatedForTool(tool, { locale }) : { guides: [], glossary: [] };
+  const relatedLocale = docsLocale ?? locale;
+  const related = tool ? await getRelatedForTool(tool, { locale: relatedLocale }) : { guides: [], glossary: [] };
 
   if (!doc) {
     return {
       tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
       hasDocs: false,
+      requestedLocale: locale,
+      docsLocale: null,
       standard: null,
       explanation: null,
       examples: null,
@@ -263,6 +272,8 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
   return {
     tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
     hasDocs,
+    requestedLocale: locale,
+    docsLocale,
     standard: null,
     explanation,
     examples,

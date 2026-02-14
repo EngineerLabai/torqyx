@@ -1,0 +1,84 @@
+---
+title: "Quick guide for bearing selection"
+description: "A short checklist to evaluate load, speed, and service conditions."
+date: "2026-01-12"
+tags: ["bearing", "guide", "maintenance"]
+category: "Guide"
+draft: false
+---
+
+<Callout type="warning" title="Attention">
+This guide is for first-pass evaluation. For critical applications, always confirm with manufacturer catalogs.
+</Callout>
+
+## Problem / Objective
+
+In bearing selection, the goal is to identify a bearing type that balances load and speed requirements.
+
+## Assumptions
+
+- Load distribution is assumed to be balanced.
+- Lubrication and temperature conditions are within typical production ranges.
+- Assembly tolerances are inside catalog limits.
+
+## Step by step method
+
+<StepList
+  title="Fast selection flow"
+  steps={["Define load and speed range", "Note operating temperature", "Calculate service factors", "Select bearing type"]}
+/>
+
+## Common mistakes
+
+<Callout type="info" title="Checkpoint">
+Skipping service factors in quick selection can dramatically reduce bearing life.
+</Callout>
+
+- Mixing radial and axial loads.
+- Ignoring weak lubrication conditions.
+- Assuming service factor equals 1.
+
+## Related calculators
+
+<ToolLink
+  href="/tools/torque-power"
+  title="Torque / Power calculator"
+  description="Compute torque from speed and power."
+  badge="Calculator"
+/>
+
+<ToolLink
+  href="/quality-tools"
+  title="Quality tools"
+  description="Collect measurement and control flows in one place."
+  badge="Tool"
+/>
+
+## Related content
+
+- <a href="/blog/icerik-altyapisina-hizli-giris">Quick intro to the content pipeline</a>
+- <a href="/glossary/backlash">Backlash term</a>
+
+## Simple check table
+
+<Table>
+  <thead>
+    <tr>
+      <th>Condition</th>
+      <th>Priority</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>High speed</td>
+      <td>Low friction</td>
+      <td>Cage structure is critical</td>
+    </tr>
+    <tr>
+      <td>Heavy load</td>
+      <td>Durability</td>
+      <td>Contact angle increases</td>
+    </tr>
+  </tbody>
+</Table>

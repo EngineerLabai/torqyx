@@ -1,0 +1,65 @@
+---
+title: "Quick intro to the content pipeline"
+description: "Shared structure and calculation-focused examples for MDX-based content."
+date: "2026-01-10"
+tags: ["content", "mdx", "workflow"]
+category: "Blog"
+draft: false
+readingTime: 4
+canonical: "https://aiengineerslab.com/blog/icerik-altyapisina-hizli-giris"
+---
+
+<Callout type="info" title="Note">
+This page demonstrates how we use MDX for content focused on manual calculations and visual analysis.
+</Callout>
+
+## Why MDX?
+
+MDX is a good fit when you want reusable components next to plain-text engineering explanations.
+
+<Formula label="Core relation">
+T = 9550 * P / n
+</Formula>
+
+<StepList title="Quick check" steps={["Collect data", "Convert units", "Validate result"]} />
+
+<Table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Unit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>T</td>
+      <td>Torque</td>
+      <td>N*m</td>
+    </tr>
+    <tr>
+      <td>P</td>
+      <td>Power</td>
+      <td>kW</td>
+    </tr>
+    <tr>
+      <td>n</td>
+      <td>Speed</td>
+      <td>rpm</td>
+    </tr>
+  </tbody>
+</Table>
+
+<Image src="/icons/logo-mark.svg" alt="Logo mark" width={96} height={96} caption="Simple visual reference." />
+
+<ToolLink
+  href="/tools/torque-power"
+  title="Torque / Power calculator"
+  description="Calculate the relation between power, speed, and torque quickly."
+  badge="Calculator"
+/>
+
+## Related content
+
+- <a href="/guides/rulman-secimi-icin-hizli-rehber">Quick bearing selection guide</a>
+- <a href="/glossary/backlash">Backlash term</a>
