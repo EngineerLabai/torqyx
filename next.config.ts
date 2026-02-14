@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import bundleAnalyzer from "@next/bundle-analyzer";
 
 const localeRedirectRoots = [
   "tools",
@@ -11,8 +12,14 @@ const localeRedirectRoots = [
   "fixture-tools",
 ];
 const localeMissing: { type: "header"; key: string }[] = [{ type: "header", key: "x-locale" }];
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["next-mdx-remote"],
+  // Hide Next.js dev indicator overlays that can appear as floating "ms/fps" HUDs.
+  devIndicators: false,
   async redirects() {
     const localeRedirects = localeRedirectRoots.flatMap((root) => [
       {
@@ -41,4 +48,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

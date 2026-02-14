@@ -14,6 +14,7 @@ type AuthContextValue = {
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+const AUTH_INIT_TIMEOUT_MS = 8000;
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -22,21 +23,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let active = true;
+    let initialResolved = false;
+
+    const resolveInitial = () => {
+      if (initialResolved) return;
+      initialResolved = true;
+      setLoading(false);
+    };
+
+    const initTimeout = window.setTimeout(() => {
+      if (!active || initialResolved) return;
+      initialResolved = true;
+      console.error(`[auth] Initialization timed out after ${AUTH_INIT_TIMEOUT_MS}ms.`);
+      setUser(null);
+      setError("Auth initialization timed out.");
+      setAvailable(false);
+      setLoading(false);
+    }, AUTH_INIT_TIMEOUT_MS);
+
     const services = getFirebaseServices();
     if (!services) {
       const initError = getFirebaseInitError();
       Promise.resolve().then(() => {
+        if (!active) return;
         if (initError) {
           console.warn("[auth] Firebase init error:", initError.message);
           setError(initError.message);
         }
         setAvailable(false);
-        setLoading(false);
+        resolveInitial();
       });
-      return;
+      return () => {
+        active = false;
+        window.clearTimeout(initTimeout);
+      };
     }
 
     Promise.resolve().then(() => {
+      if (!active) return;
       setAvailable(true);
       setError(null);
     });
@@ -45,27 +70,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const unsub = onAuthStateChanged(
         services.auth,
         (nextUser) => {
+          if (!active) return;
           setUser(nextUser);
-          setLoading(false);
+          setAvailable(true);
+          setError(null);
+          resolveInitial();
         },
         (error) => {
+          if (!active) return;
           console.error("[auth] State listener error:", error);
           setUser(null);
           setError(error instanceof Error ? error.message : "Auth listener failed.");
           setAvailable(false);
-          setLoading(false);
+          resolveInitial();
         },
       );
-      return () => unsub();
+      return () => {
+        active = false;
+        window.clearTimeout(initTimeout);
+        unsub();
+      };
     } catch (error) {
       console.error("[auth] Failed to attach auth listener:", error);
       Promise.resolve().then(() => {
+        if (!active) return;
         setUser(null);
         setError(error instanceof Error ? error.message : "Auth listener failed.");
         setAvailable(false);
-        setLoading(false);
+        resolveInitial();
       });
-      return;
+      return () => {
+        active = false;
+        window.clearTimeout(initTimeout);
+      };
     }
   }, []);
 

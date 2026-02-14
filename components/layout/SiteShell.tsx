@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
@@ -9,7 +10,7 @@ import ConsentBanner from "@/components/consent/ConsentBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import PremiumCTA from "@/components/premium/PremiumCTA";
-import CommandPalette from "@/components/search/CommandPalette";
+import HardNavigationFallback from "@/components/navigation/HardNavigationFallback";
 import { openCommandPalette } from "@/components/search/commandPaletteEvents";
 import { getBrandCopy } from "@/config/brand";
 import { getRoute } from "@/config/routes";
@@ -27,6 +28,10 @@ type SidebarSection = {
   label: string;
   links: { label: string; href: string }[];
 };
+
+const CommandPalette = dynamic(() => import("@/components/search/CommandPalette"), {
+  ssr: false,
+});
 
 export default function SiteShell({ children }: { children: ReactNode }) {
   const { locale } = useLocale();
@@ -74,7 +79,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
 
       <header className="site-header relative z-50 border-b border-slate-200/80 bg-white/80">
         <div className="site-container flex items-center justify-between gap-6 py-4">
-          <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
+          <Link href={getRoute("home", locale)} prefetch={false} className="flex items-center gap-3" aria-label={brandContent.siteName}>
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
               <img
                 src="/brand/logo.png"
@@ -119,6 +124,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
               <Link
                 key={section.label}
                 href={section.links[0]?.href ?? "#"}
+                prefetch={false}
                 className="tap-target inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm"
               >
                 {section.label}
@@ -163,6 +169,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
                     <Link
                       key={link.href}
                       href={link.href}
+                      prefetch={false}
                       className="block text-[13px] font-semibold text-slate-700 hover:text-slate-900"
                     >
                       {link.label}
@@ -183,6 +190,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       <ConsentBanner />
       <AuthModal />
       <CommandPalette />
+      <HardNavigationFallback />
     </div>
   );
 }
@@ -206,6 +214,7 @@ function MegaMenuItem({ section }: { section: NavSection }) {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 className="group/card relative block overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 transition-colors duration-200 hover:border-emerald-300"
               >
                 <h3 className="mb-1 text-sm font-semibold text-slate-900 group-hover/card:text-slate-950">{link.label}</h3>
@@ -235,6 +244,7 @@ function SidebarSectionCard({ section }: { section: SidebarSection }) {
           <Link
             key={link.href}
             href={link.href}
+            prefetch={false}
             className="group relative block overflow-hidden rounded-xl border border-slate-200 bg-white p-3 text-[11px] font-semibold text-slate-700 transition-colors duration-200 hover:border-emerald-300 hover:text-slate-900"
           >
             <div className="text-sm">{link.label}</div>

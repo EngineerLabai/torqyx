@@ -49,6 +49,7 @@ export default function ToolLibraryCard({
     <article className="group relative flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-sm shadow-sm transition hover:border-slate-300 hover:shadow-md">
       <Link
         href={href}
+        prefetch={false}
         className="absolute inset-0 z-10 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
         aria-label={ariaLabel}
       >

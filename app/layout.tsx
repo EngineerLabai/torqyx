@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { Inter, JetBrains_Mono, Sora } from "next/font/google";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
-import CustomCursor from "@/components/effects/CustomCursor";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import SiteShell from "@/components/layout/SiteShell";
+import GlobalErrorMonitor from "@/components/monitoring/GlobalErrorMonitor";
 import JsonLd from "@/components/seo/JsonLd";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -106,8 +106,8 @@ export default async function RootLayout({
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
           <AuthProvider>
+            <GlobalErrorMonitor />
             <AnalyticsTracker />
-            <CustomCursor />
             <SiteShell>{children}</SiteShell>
           </AuthProvider>
         </LocaleProvider>

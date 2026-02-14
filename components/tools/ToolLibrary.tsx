@@ -28,6 +28,8 @@ const TAG_ALL = "All" as const;
 const NEW_WINDOW_DAYS = 14;
 const DEFAULT_TYPE: ToolType = "calculator";
 const NOW = Date.now();
+const INITIAL_VISIBLE_TOOLS = 24;
+const VISIBLE_TOOLS_STEP = 24;
 
 type TypeFilter = typeof TYPE_ALL | ToolType;
 type CategoryFilter = typeof CATEGORY_ALL | (typeof toolCategories)[number];
@@ -125,12 +127,18 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   const tag = resolveTagFilter(getParam(searchParams?.tag));
   const initialQuery = getParam(searchParams?.q).trim();
   const [query, setQuery] = useState(initialQuery);
+  const [visibleToolsCount, setVisibleToolsCount] = useState(INITIAL_VISIBLE_TOOLS);
   const debouncedQuery = useDebouncedValue(query, 100);
-  const { items: searchItems, loading: searchLoading } = useSearchIndex();
+  const searchEnabled = query.trim().length > 0;
+  const { items: searchItems, loading: searchLoading } = useSearchIndex(searchEnabled);
 
   useEffect(() => {
     setQuery(initialQuery);
   }, [initialQuery]);
+
+  useEffect(() => {
+    setVisibleToolsCount(INITIAL_VISIBLE_TOOLS);
+  }, [typeFilter, category, tag, debouncedQuery, locale]);
 
   const typeOptions: TypeFilter[] = [...toolTypes, TYPE_ALL];
   const filterState: FilterState = { type: typeFilter, category, tag, query: query.trim() };
@@ -195,6 +203,31 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   }, [debouncedQuery, toolSearchItems, baseToolIds, toolById]);
 
   const filtered = debouncedQuery.trim().length > 0 ? rankedTools : baseTools;
+  const visibleTools = useMemo(() => filtered.slice(0, visibleToolsCount), [filtered, visibleToolsCount]);
+  const hasMoreTools = filtered.length > visibleTools.length;
+  const toolCardModels = useMemo(
+    () =>
+      visibleTools.map((tool) => {
+        const { title, description } = getToolCopy(tool, locale);
+        const categoryLabel = tool.category ? labels.category[tool.category] : labels.generalCategory;
+        const tagLabels = (tool.tags ?? []).map((tagValue) => labels.tag[tagValue]);
+        const accessLabel = accessLabels?.[tool.access] ?? accessLabels?.free ?? "";
+        const isNew = tool.lastUpdated
+          ? NOW - new Date(tool.lastUpdated).getTime() <= NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000
+          : false;
+
+        return {
+          tool,
+          title,
+          description,
+          categoryLabel,
+          tagLabels,
+          accessLabel,
+          isNew,
+        };
+      }),
+    [visibleTools, locale, labels, accessLabels],
+  );
 
   return (
     <div className="space-y-6">
@@ -224,6 +257,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                   <Link
                     key={link.href}
                     href={withLocalePrefix(link.href, locale)}
+                    prefetch={false}
                     className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
                   >
                     {link.label}
@@ -243,6 +277,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           </div>
           <Link
             href={withLocalePrefix("/request-tool", locale)}
+            prefetch={false}
             className="inline-flex items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 px-5 py-2 text-[12px] font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
             aria-label={copy.requestSection.ctaAria}
           >
@@ -267,6 +302,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
             </button>
             <Link
               href={basePath}
+              prefetch={false}
               className="rounded-full border border-slate-200 px-4 py-2 text-[11px] font-semibold text-slate-600 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
             >
               {copy.filterSection.clear}
@@ -286,6 +322,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                 <Link
                   key={value}
                   href={href}
+                  prefetch={false}
                   className={`rounded-full border px-4 py-2 text-[11px] font-semibold transition ${
                     typeFilter === value
                       ? "border-emerald-200 bg-emerald-50 text-emerald-700"
@@ -365,22 +402,16 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           <p className="mt-1 text-xs text-slate-500">{copy.emptyState.description}</p>
           <Link
             href={basePath}
+            prefetch={false}
             className="mt-4 inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
           >
             {copy.emptyState.reset}
           </Link>
         </section>
       ) : (
-        <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filtered.map((tool) => {
-            const { title, description } = getToolCopy(tool, locale);
-            const categoryLabel = tool.category ? labels.category[tool.category] : labels.generalCategory;
-            const tagLabels = (tool.tags ?? []).map((tagValue) => labels.tag[tagValue]);
-            const accessLabel = accessLabels?.[tool.access] ?? accessLabels?.free ?? "";
-            const isNew = tool.lastUpdated
-              ? NOW - new Date(tool.lastUpdated).getTime() <= NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000
-              : false;
-            return (
+        <section className="space-y-5">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {toolCardModels.map(({ tool, title, description, categoryLabel, tagLabels, accessLabel, isNew }) => (
               <ToolLibraryCard
                 key={tool.id}
                 toolId={tool.id}
@@ -399,8 +430,21 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                 ariaLabel={formatMessage(labels.openAria, { title })}
                 isNew={isNew}
               />
-            );
-          })}
+            ))}
+          </div>
+          {hasMoreTools ? (
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() =>
+                  setVisibleToolsCount((prev) => Math.min(prev + VISIBLE_TOOLS_STEP, filtered.length))
+                }
+                className="rounded-full border border-slate-200 bg-white px-5 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+              >
+                {locale === "tr" ? "Daha fazla yükle" : "Load more"}
+              </button>
+            </div>
+          ) : null}
         </section>
       )}
     </div>

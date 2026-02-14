@@ -30,10 +30,14 @@ const BADGE_STYLES: Record<SearchIndexItem["type"], string> = {
 export default function InlineSearch() {
   const { locale } = useLocale();
   const copy = getMessages(locale).components.search;
-  const { items, loading } = useSearchIndex();
   const [query, setQuery] = useState("");
+  const searchEnabled = query.trim().length > 0;
+  const { items, loading } = useSearchIndex(searchEnabled);
   const debouncedQuery = useDebouncedValue(query, 100);
-  const results = useMemo(() => filterSearchResults(items, debouncedQuery, 8), [items, debouncedQuery]);
+  const results = useMemo(
+    () => (searchEnabled ? filterSearchResults(items, debouncedQuery, 8) : []),
+    [items, debouncedQuery, searchEnabled],
+  );
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" data-testid="inline-search">
@@ -68,6 +72,7 @@ export default function InlineSearch() {
                 <Link
                   key={item.id}
                   href={item.href}
+                  prefetch={false}
                   className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition hover:border-emerald-300 hover:bg-white"
                 >
                   <div className="flex items-center gap-3">

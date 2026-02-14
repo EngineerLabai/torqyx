@@ -16,8 +16,25 @@ export type FirebaseServices = {
 };
 
 const normalizeEnv = (value?: string) => {
-  if (!value) return value;
-  return value.replace(/^"+|"+$/g, "");
+  if (!value) return undefined;
+
+  let normalized = value.trim();
+  while (
+    normalized.length >= 2 &&
+    ((normalized.startsWith("\"") && normalized.endsWith("\"")) ||
+      (normalized.startsWith("'") && normalized.endsWith("'")))
+  ) {
+    normalized = normalized.slice(1, -1).trim();
+  }
+
+  if (!normalized) return undefined;
+
+  const lowered = normalized.toLowerCase();
+  if (lowered === "undefined" || lowered === "null") {
+    return undefined;
+  }
+
+  return normalized;
 };
 
 const firebaseEnv = {
@@ -53,6 +70,13 @@ const firebaseConfig = {
 let cached: FirebaseServices | null = null;
 let initError: Error | null = null;
 
+const reportInitError = (error: Error) => {
+  if (!initError) {
+    console.error("[firebase] Client init failed:", error.message);
+  }
+  initError = error;
+};
+
 const getMissingConfig = () =>
   Object.entries(firebaseEnv)
     .filter(([key, value]) => key !== "measurementId" && !value)
@@ -67,7 +91,7 @@ export const getFirebaseServices = (): FirebaseServices | null => {
 
   const missing = getMissingConfig();
   if (missing.length > 0) {
-    initError = new Error(`Missing Firebase config. Please set: ${missing.join(", ")}`);
+    reportInitError(new Error(`Missing Firebase config. Please set: ${missing.join(", ")}`));
     return null;
   }
 
@@ -82,7 +106,7 @@ export const getFirebaseServices = (): FirebaseServices | null => {
     };
     return cached;
   } catch (error) {
-    initError = error instanceof Error ? error : new Error("Firebase initialization failed.");
+    reportInitError(error instanceof Error ? error : new Error("Firebase initialization failed."));
     return null;
   }
 };

@@ -32,15 +32,18 @@ const BADGE_STYLES: Record<SearchIndexItem["type"], string> = {
 export default function CommandPalette() {
   const { locale } = useLocale();
   const copy = getMessages(locale).components.search;
-  const { items, loading } = useSearchIndex();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const debouncedQuery = useDebouncedValue(query, 100);
+  const { items, loading } = useSearchIndex(open);
 
-  const results = useMemo(() => filterSearchResults(items, debouncedQuery, 20), [items, debouncedQuery]);
+  const results = useMemo(() => {
+    if (!open) return [];
+    return filterSearchResults(items, debouncedQuery, 20);
+  }, [items, debouncedQuery, open]);
 
   useEffect(() => {
     if (!open) return;

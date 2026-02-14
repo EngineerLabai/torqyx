@@ -18,6 +18,20 @@ bun dev
 
 Open http://localhost:3000 with your browser to see the result.
 
+## Performance and bundle checks
+
+- Run bundle analyzer:
+
+```bash
+ANALYZE=true npm run build
+```
+
+- Hotfix notes (perf regression):
+  - Command palette is loaded via client-only dynamic import from `components/layout/SiteShell.tsx`, so it is split out of the server-rendered shell path.
+  - Search index loading is now demand-based in `components/search/useSearchIndex.ts`; it fetches only when search UI is actively used and reuses a shared in-memory cache.
+  - Tools library (`components/tools/ToolLibrary.tsx`) now renders incrementally (24 + load more) and avoids eager prefetch storms on card links.
+  - Dev indicators are disabled in `next.config.ts` to avoid floating dev HUD overlays during debugging.
+
 ## Yeni icerik nasil eklenir?
 
 1) `content/_templates` altindan uygun MDX sablonunu kopyala.

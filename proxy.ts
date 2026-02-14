@@ -19,7 +19,7 @@ const getPreferredLocale = (request: NextRequest) => {
   return isLocale(cookieLocale) ? cookieLocale : DEFAULT_LOCALE;
 };
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (
