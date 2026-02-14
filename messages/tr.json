@@ -31,7 +31,7 @@
       "sectionTools": "Şablon, rehber ve proje araçları.",
       "sectionCommunity": "Topluluk tartışmaları ve paylaşımlar.",
       "sectionContact": "Geri bildirim ve destek kanalları.",
-      "sectionFaq": "S�k sorulan sorulara h�zl� yan�tlar."
+      "sectionFaq": "Sik sorulan sorulara hizli yanitlar."
     },
     "badges": {
       "new": "Yeni",
@@ -44,7 +44,7 @@
   },
   "authButtons": {
     "login": "Giriş Yap",
-    "premium": "�cretlendirme",
+    "premium": "Premium bekleme listesi",
     "userFallback": "Kullanıcı",
     "logout": "Çıkış",
     "unavailable": "Auth şu an kullanılamıyor.",
@@ -483,7 +483,7 @@
       "planned": "Planlandı",
       "basic": "Temel seviye",
       "advanced": "İleri seviye",
-      "premiumBadge": "Premium (�zel beta)",
+      "premiumBadge": "Premium (bekleme listesi)",
       "openTool": "Araçı Aç",
       "comingSoon": "Yakında",
       "footerActive": "Etkileşimli form ile çalışılabilir (taslak).",
@@ -609,8 +609,8 @@
     },
     "premium": {
       "badge": "Premium",
-      "title": "Premium �zel beta",
-      "description": "Premium �zel beta a�amas�nda. Eri�im k���k gruplarla a��l�yor.",
+      "title": "Premium paket önizleme",
+      "description": "Ödeme altyapısı henüz açık değil. Bekleme listesi ile yeni özellikleri takip et.",
       "imageAlt": "Premium yol haritası kartları ve özellik listesi"
     },
     "changelog": {
@@ -758,31 +758,31 @@
     },
     "faq": {
       "badge": "SSS",
-      "title": "S�k Sorulan Sorular",
-      "description": "Hesaplay�c�lar, raporlama, standartlar ve g�venlik varsay�mlar� hakk�nda h�zl� yan�tlar.",
+      "title": "Sik Sorulan Sorular",
+      "description": "Hesaplayicilar, raporlama, standartlar ve guvenlik varsayimlari hakkinda hizli yanitlar.",
       "categories": [
         {
-          "title": "Ara�lar",
+          "title": "Araclar",
           "items": [
             {
-              "q": "Hesaplay�c�lar ne kadar do�ru?",
-              "a": "Yay�nlanm�� form�llere dayan�r; do�ruluk giri�ler ve varsay�mlara ba�l�d�r. Standartlar�n�zla do�rulay�n."
+              "q": "Hesaplayicilar ne kadar dogru?",
+              "a": "Yayinlanmis formullere dayanir; dogruluk girisler ve varsayimlara baglidir. Standartlarinizla dogrulayin."
             },
             {
-              "q": "Varsay�lan de�erler ger�ek mi?",
-              "a": "Varsay�lanlar �rnek de�erlerdir; kendi proje verilerinizle de�i�tirin."
+              "q": "Varsayilan degerler gercek mi?",
+              "a": "Varsayilanlar ornek degerlerdir; kendi proje verilerinizle degistirin."
             },
             {
-              "q": "Neden do�rulama uyar�lar� g�r�yorum?",
-              "a": "Uyar�lar aral�k d��� giri�leri, eksik birimleri veya tutars�z se�imleri i�aretler."
+              "q": "Neden dogrulama uyarilari goruyorum?",
+              "a": "Uyarilar aralik disi girisleri, eksik birimleri veya tutarsiz secimleri isaretler."
             },
             {
-              "q": "Hesab� ekibimle payla�abilir miyim?",
-              "a": "Payla� & Rapor ile ba�lant� olu�turabilir veya PDF �zetini indirebilirsiniz."
+              "q": "Hesabi ekibimle paylasabilir miyim?",
+              "a": "Paylas & Rapor ile baglanti olusturabilir veya PDF ozetini indirebilirsiniz."
             },
             {
-              "q": "Ara�lar �evrimd��� �al���r m�?",
-              "a": "�o�u hesap taray�c�da �al���r; referans i�erik ve g�ncellemeler internet gerektirir."
+              "q": "Araclar cevrimdisi calisir mi?",
+              "a": "Cogu hesap tarayicida calisir; referans icerik ve guncellemeler internet gerektirir."
             }
           ]
         },
@@ -791,23 +791,23 @@
           "items": [
             {
               "q": "PDF raporda neler var?",
-              "a": "Giri�ler, sonu�lar, form�l, varsay�mlar, kaynaklar ve �retilen grafik/diyagramlar."
+              "a": "Girisler, sonuclar, formul, varsayimlar, kaynaklar ve uretilen grafik/diyagramlar."
             },
             {
-              "q": "Diyagramlar� g�rsel olarak d��a aktarabilir miyim?",
-              "a": "Evet. Raporlar i�in PNG veya SVG indirebilirsiniz."
+              "q": "Diyagramlari gorsel olarak disa aktarabilir miyim?",
+              "a": "Evet. Raporlar icin PNG veya SVG indirebilirsiniz."
             },
             {
-              "q": "Raporlar sunucuda saklan�yor mu?",
-              "a": "Hay�r. Raporlar taray�c�da �retilir; a��k�a payla�mad�k�a sunucuya g�nderilmez."
+              "q": "Raporlar sunucuda saklaniyor mu?",
+              "a": "Hayir. Raporlar tarayicida uretilir; acikca paylasmadikca sunucuya gonderilmez."
             },
             {
-              "q": "Rapor �ablonunu d�zenleyebilir miyim?",
-              "a": "Hen�z de�il. �zelle�tirilebilir �ablonlar �zerinde �al���yoruz."
+              "q": "Rapor sablonunu duzenleyebilir miyim?",
+              "a": "Henuz degil. Ozellestirilebilir sablonlar uzerinde calisiyoruz."
             },
             {
-              "q": "Raporu projeye nas�l eklerim?",
-              "a": "Hesab� projeye kaydedin ve proje ekran�ndan raporu a��n."
+              "q": "Raporu projeye nasil eklerim?",
+              "a": "Hesabi projeye kaydedin ve proje ekranindan raporu acin."
             }
           ]
         },
@@ -815,24 +815,24 @@
           "title": "Standartlar",
           "items": [
             {
-              "q": "Hangi standartlar referans al�n�yor?",
-              "a": "ISO/DIN/ASME gibi yayg�n tablolar kullan�l�r; her ara�ta kaynaklar listelenir."
+              "q": "Hangi standartlar referans aliniyor?",
+              "a": "ISO/DIN/ASME gibi yaygin tablolar kullanilir; her aracta kaynaklar listelenir."
             },
             {
-              "q": "Standartlar her zaman g�ncel mi?",
-              "a": "Periyodik g�ncelleriz, kritik i�ler i�in en son revizyonu do�rulay�n."
+              "q": "Standartlar her zaman guncel mi?",
+              "a": "Periyodik guncelleriz, kritik isler icin en son revizyonu dogrulayin."
             },
             {
-              "q": "Standartlar�n tam metni var m�?",
-              "a": "Hay�r. Yaln�zca tablo ve �zetler payla��l�r; tam metin i�in resmi standard� edinin."
+              "q": "Standartlarin tam metni var mi?",
+              "a": "Hayir. Yalnizca tablo ve ozetler paylasilir; tam metin icin resmi standardi edinin."
             },
             {
-              "q": "Eksik standart varsa ne yapmal�y�m?",
-              "a": "Destek veya ara� talebi formu �zerinden bildirin."
+              "q": "Eksik standart varsa ne yapmaliyim?",
+              "a": "Destek veya arac talebi formu uzerinden bildirin."
             },
             {
-              "q": "Malzeme �zellikleri nas�l se�iliyor?",
-              "a": "Oda s�cakl���nda tipik de�erler kullan�l�r; tedarik�i verisiyle do�rulay�n."
+              "q": "Malzeme ozellikleri nasil seciliyor?",
+              "a": "Oda sicakliginda tipik degerler kullanilir; tedarikci verisiyle dogrulayin."
             }
           ]
         },
@@ -841,48 +841,48 @@
           "items": [
             {
               "q": "Hangi birim sistemleri destekleniyor?",
-              "a": "�ncelik metriktir; baz� ara�larda imperial se�enekler vard�r."
+              "a": "Oncelik metriktir; bazi araclarda imperial secenekler vardir."
             },
             {
-              "q": "Birim d�n���m� nas�l yap�l�yor?",
-              "a": "De�erler sabit katsay�larla baz birime �evrilir; yuvarlama sadece g�r�nt� i�indir."
+              "q": "Birim donusumu nasil yapiliyor?",
+              "a": "Degerler sabit katsayilarla baz birime cevrilir; yuvarlama sadece goruntu icindir."
             },
             {
-              "q": "Birim uyu�mazl��� hatas� neden olur?",
-              "a": "Form�l ��kt�s� beklenen birimle uyu�maz; giri�leri ve sembolleri kontrol edin."
+              "q": "Birim uyusmazligi hatasi neden olur?",
+              "a": "Formul ciktisi beklenen birimle uyusmaz; girisleri ve sembolleri kontrol edin."
             },
             {
-              "q": "Kar���k birim kullanabilir miyim?",
-              "a": "Bir ara� i�inde tutarl� birimler kullan�n; �nce Birim D�n��t�r�c� ile �evirin."
+              "q": "Karisik birim kullanabilir miyim?",
+              "a": "Bir arac icinde tutarli birimler kullanin; once Birim Donusturucu ile cevirin."
             },
             {
-              "q": "Anlaml� basamaklar nas�l ele al�n�yor?",
-              "a": "Ekranda yuvarlar�z; hesaplamada tam hassasiyet kullan�l�r."
+              "q": "Anlamli basamaklar nasil ele aliniyor?",
+              "a": "Ekranda yuvarlariz; hesaplamada tam hassasiyet kullanilir."
             }
           ]
         },
         {
-          "title": "G�venlik / Sorumluluk",
+          "title": "Guvenlik / Sorumluluk",
           "items": [
             {
-              "q": "Bu sertifikal� bir m�hendislik arac� m�?",
-              "a": "Hay�r. Karar deste�idir; nihai tasar�m sorumlulu�u sizdedir."
+              "q": "Bu sertifikali bir muhendislik araci mi?",
+              "a": "Hayir. Karar destegidir; nihai tasarim sorumlulugu sizdedir."
             },
             {
-              "q": "Emniyet kritik tasar�mda kullanabilir miyim?",
-              "a": "�n kontrol olarak kullan�n; standartlar ve yetkili m�hendis ile do�rulay�n."
+              "q": "Emniyet kritik tasarimda kullanabilir miyim?",
+              "a": "On kontrol olarak kullanin; standartlar ve yetkili muhendis ile dogrulayin."
             },
             {
-              "q": "Sonu�lar� nas�l referans g�stermeliyim?",
-              "a": "Ara� ad�, s�r�m/tarih, giri�ler, varsay�mlar ve kaynaklar� rapora ekleyin."
+              "q": "Sonuclari nasil referans gostermeliyim?",
+              "a": "Arac adi, surum/tarih, girisler, varsayimlar ve kaynaklari rapora ekleyin."
             },
             {
-              "q": "Hesaplar�m saklan�yor mu?",
-              "a": "Kaydedilenler yaln�zca taray�c�n�zda tutulur; hassas i�ler i�in gizli mod kullan�n."
+              "q": "Hesaplarim saklaniyor mu?",
+              "a": "Kaydedilenler yalnizca tarayicinizda tutulur; hassas isler icin gizli mod kullanin."
             },
             {
-              "q": "Tasar�m kararlar�n�n sorumlusu kim?",
-              "a": "��kt�lar� do�rulamak ve mevzuata uymak kullan�c� sorumlulu�undad�r."
+              "q": "Tasarim kararlarinin sorumlusu kim?",
+              "a": "Ciktilari dogrulamak ve mevzuata uymak kullanici sorumlulugundadir."
             }
           ]
         }
@@ -890,63 +890,63 @@
     },
     "communityComingSoon": {
       "badge": "Topluluk",
-      "title": "Topluluk yak�nda",
-      "description": "Modere edilmi� tart��malar, payla��lan notlar ve Soru & Cevap i�in haz�rl�k yap�yoruz. Erken eri�im i�in bekleme listesine kat�l�n.",
-      "statusTitle": "�zel beta yak�nda",
-      "statusBody": "Genel a��l��tan �nce i�erik kalitesini ve moderasyon ak��lar�n� do�ruluyoruz.",
-      "roadmapTitle": "Yol haritas�",
-      "roadmapIntro": "�zerinde �al��t�klar�m�z:",
+      "title": "Topluluk yakında",
+      "description": "Modere edilmiş tartışmalar, paylaşılan notlar ve Soru & Cevap için hazırlık yapıyoruz. Erken erişim için bekleme listesine katılın.",
+      "statusTitle": "Özel beta yakında",
+      "statusBody": "Genel açılıştan önce içerik kalitesini ve moderasyon akışlarını doğruluyoruz.",
+      "roadmapTitle": "Yol haritası",
+      "roadmapIntro": "Üzerinde çalıştıklarımız:",
       "roadmapItems": [
-        "Etiketli ve arama destekli tart��malar",
-        "Kaynakl�, do�rulanm�� yan�tlar",
-        "Proje bazl� �zel �al��ma alanlar�",
-        "Rapor payla��m� ve anl�k �zetler",
-        "Moderasyon kurallar� ve g�venlik kontrolleri"
+        "Etiketli ve arama destekli tartışmalar",
+        "Kaynaklı, doğrulanmış yanıtlar",
+        "Proje bazlı özel çalışma alanları",
+        "Rapor paylaşımı ve anlık özetler",
+        "Moderasyon kuralları ve güvenlik kontrolleri"
       ],
       "waitlist": {
-        "title": "Bekleme listesine kat�l",
-        "description": "Topluluk a��ld���nda haber vermemiz i�in e-postan� b�rak.",
+        "title": "Bekleme listesine katıl",
+        "description": "Topluluk açıldığında haber vermemiz için e-postanı bırak.",
         "emailLabel": "E-posta adresi",
         "emailPlaceholder": "sen@firma.com",
-        "focusLabel": "�lgi alan� (opsiyonel)",
-        "focusPlaceholder": "�r. standartlar, raporlama, fikst�r",
-        "cta": "Bekleme listesine kat�l",
-        "success": "Listeye eklendin. A��l��ta e-posta g�nderece�iz.",
-        "errorInvalid": "L�tfen ge�erli bir e-posta adresi girin.",
-        "disclaimer": "E-postan� sadece topluluk a��l��� i�in bilgilendirme amac�yla kullan�r�z."
+        "focusLabel": "İlgi alanı (opsiyonel)",
+        "focusPlaceholder": "Ör. standartlar, raporlama, fikstür",
+        "cta": "Bekleme listesine katıl",
+        "success": "Listeye eklendin. Açılışta e-posta göndereceğiz.",
+        "errorInvalid": "Lütfen geçerli bir e-posta adresi girin.",
+        "disclaimer": "E-postanı sadece topluluk açılışı için bilgilendirme amacıyla kullanırız."
       }
     },
     "pricing": {
-      "badge": "�cretlendirme",
-      "title": "Planlar ve eri�im",
-      "description": "Ara�lar�n eri�im durumu nettir. Premium �zel beta a�amas�nda.",
+      "badge": "Ücretlendirme",
+      "title": "Planlar ve erişim",
+      "description": "Araçların erişim durumu nettir. Premium özel beta aşamasında.",
       "free": {
-        "title": "�cretsiz",
-        "subtitle": "Hemen eri�im",
-        "description": "Temel hesaplay�c�lar, referanslar ve raporlama �zetleri.",
+        "title": "Ücretsiz",
+        "subtitle": "Hemen erişim",
+        "description": "Temel hesaplayıcılar, referanslar ve raporlama özetleri.",
         "features": [
-          "T�m standart hesaplay�c�lar ve referanslar",
-          "Girdi do�rulama + varsay�mlar",
-          "Girdi/��kt� i�in CSV/JSON d��a aktarma",
-          "Desteklenen ara�larda PDF rapor",
-          "Bu cihazda yerel kay�tl� hesaplar"
+          "Tüm standart hesaplayıcılar ve referanslar",
+          "Girdi doğrulama + varsayımlar",
+          "Girdi/çıktı için CSV/JSON dışa aktarma",
+          "Desteklenen araçlarda PDF rapor",
+          "Bu cihazda yerel kayıtlı hesaplar"
         ],
-        "cta": "Ara�lara git"
+        "cta": "Araçlara git"
       },
       "premium": {
         "title": "Premium",
-        "subtitle": "�zel beta",
-        "description": "Geli�mi� raporlama, ekip ak��lar� ve d��a aktarma �zel betada.",
+        "subtitle": "Özel beta",
+        "description": "Gelişmiş raporlama, ekip akışları ve dışa aktarma özel betada.",
         "features": [
-          "Geli�mi� rapor �ablonlar� ve marka alan�",
-          "Ekip �al��ma alanlar� ve payla��lan projeler",
-          "Project Hub ve kalite ara�lar� i�in premium ��kt�lar",
-          "Kay�tl� profiller, �ablonlar ve ge�mi�",
-          "�ncelikli destek ve erken eri�im"
+          "Gelişmiş rapor şablonları ve marka alanı",
+          "Ekip çalışma alanları ve paylaşılan projeler",
+          "Project Hub ve kalite araçları için premium çıktılar",
+          "Kayıtlı profiller, şablonlar ve geçmiş",
+          "Öncelikli destek ve erken erişim"
         ],
-        "cta": "Eri�im talep et"
+        "cta": "Erişim talep et"
       },
-      "note": "Premium eri�im s�n�rl�d�r; i� ak��lar� do�ruland�k�a geni�letilir."
+      "note": "Premium erişim sınırlıdır; iş akışları doğrulandıkça genişletilir."
     }
   },
   "components": {
@@ -958,25 +958,25 @@
     "premiumCTA": {
       "badge": "Premium beta",
       "title": "Premium plan",
-      "description": "Premium �zel beta a�amas�nda. Erken eri�im k���k gruplarla a��l�yor.",
-      "ctaPrimary": "Eri�im talep et",
-      "ctaSecondary": "�cretlendirme",
-      "supportNote": "Destek formu a��l�r.",
-      "packageTitle": "Premium kapsam� (�zel beta)",
+      "description": "Ödeme altyapısı açık değil. Bekleme listesiyle yol haritasını paylaşıyoruz.",
+      "ctaPrimary": "Bekleme listesine katıl",
+      "ctaSecondary": "Detayları gör",
+      "supportNote": "Destek formuna yönlendirir.",
+      "packageTitle": "Paket içeriği (plan)",
       "packageItems": [
-        "Detayl� tork ve di�li tablolar�",
-        "Geli�mi� mekanik hesaplay�c�lar",
-        "PDF/Excel ��kt�lar� (RFQ, kalite ara�lar�, proje listeleri)",
-        "�oklu cihaz eri�imi ve kay�tl� projeler",
-        "Malzeme ve kaplama �neri kartlar�"
+        "Detaylı tork ve dişli tablolar",
+        "Gelişmiş mekanik hesaplayıcılar",
+        "PDF/Excel dışa aktarma (RFQ, kalite araçları, proje listeleri)",
+        "Çoklu cihaz erişimi ve kayıtlı projeler",
+        "Malzeme ve kaplama öneri kartları"
       ],
-      "statusTitle": "Eri�im durumu",
-      "statusBody": "�zel beta eri�imi s�n�rl�d�r; i� ak��lar�n� do�rulad�k�a geni�letiyoruz.",
-      "stepsTitle": "Sonraki ad�mlar",
+      "statusTitle": "Durum",
+      "statusBody": "Ödeme akışı yok. İlgiyi topluyoruz ve bekleme listesine göre geliştirme önceliklerini belirliyoruz.",
+      "stepsTitle": "Sonraki adımlar",
       "steps": [
-        "Eri�im talep et",
-        "K�sa ihtiya� formu",
-        "K���k gruplarla beta eri�imi"
+        "Bekleme listesine kayıt",
+        "Kısa bir ihtiyaç formu",
+        "Küçük gruplarla beta davetleri"
       ]
     },
     "supportForm": {
@@ -1762,7 +1762,7 @@
     "no": "Hayır",
     "general": "Genel",
     "access": {
-      "free": "�cretsiz",
+      "free": "Ucretsiz",
       "beta": "Beta",
       "premium": "Premium"
     }

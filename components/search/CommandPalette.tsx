@@ -7,9 +7,9 @@ import { useSearchIndex, filterSearchResults } from "@/components/search/useSear
 import { COMMAND_PALETTE_OPEN_EVENT } from "@/components/search/commandPaletteEvents";
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
 import { localePath } from "@/utils/locale-path";
 import type { SearchIndexItem } from "@/utils/search-index";
+import type { Messages } from "@/utils/messages";
 
 const ICONS = {
   tool: Wrench,
@@ -29,9 +29,12 @@ const BADGE_STYLES: Record<SearchIndexItem["type"], string> = {
   glossary: "border-slate-200 bg-slate-50 text-slate-700",
 };
 
-export default function CommandPalette() {
+type CommandPaletteProps = {
+  copy: Messages["components"]["search"];
+};
+
+export default function CommandPalette({ copy }: CommandPaletteProps) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).components.search;
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");

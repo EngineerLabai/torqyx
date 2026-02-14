@@ -9,6 +9,7 @@ export default function ToolActions({ shareUrl, reportUrl }: { shareUrl?: string
   const { locale } = useLocale();
   const copy = getMessages(locale).components.toolActions;
   const [shareMessage, setShareMessage] = useState("");
+  const canShare = Boolean(shareUrl);
 
   const handleCopy = async () => {
     if (!shareUrl) return;
@@ -23,15 +24,6 @@ export default function ToolActions({ shareUrl, reportUrl }: { shareUrl?: string
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-      {shareUrl ? (
-        <button
-          type="button"
-          onClick={handleCopy}
-          className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-slate-800"
-        >
-          {copy.share}
-        </button>
-      ) : null}
       {reportUrl ? (
         <Link
           href={reportUrl}
@@ -40,6 +32,18 @@ export default function ToolActions({ shareUrl, reportUrl }: { shareUrl?: string
           {copy.report}
         </Link>
       ) : null}
+      <button
+        type="button"
+        onClick={handleCopy}
+        disabled={!canShare}
+        className={`rounded-full px-4 py-2 text-[11px] font-semibold transition ${
+          canShare
+            ? "bg-slate-900 text-white hover:bg-slate-800"
+            : "cursor-not-allowed bg-slate-200 text-slate-500"
+        }`}
+      >
+        {copy.share}
+      </button>
       {shareMessage ? <span className="text-[11px] text-slate-500">{shareMessage}</span> : null}
     </div>
   );

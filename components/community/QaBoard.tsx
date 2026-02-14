@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatMessage, getMessages } from "@/utils/messages";
 
@@ -26,10 +26,7 @@ export default function QaBoard() {
   const answersByTopic = copy.answers as Record<string, Answer[]>;
 
   const [selectedSlug, setSelectedSlug] = useState<Topic["slug"]>(() => topics[0]?.slug ?? "");
-  const selectedTopic = useMemo(
-    () => topics.find((t) => t.slug === selectedSlug) ?? topics[0],
-    [selectedSlug, topics],
-  );
+  const selectedTopic = topics.find((t) => t.slug === selectedSlug) ?? topics[0];
   const answers = selectedTopic ? answersByTopic[selectedTopic.slug] ?? [] : [];
 
   if (!selectedTopic) return null;

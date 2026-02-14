@@ -10,13 +10,12 @@ import ConsentBanner from "@/components/consent/ConsentBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import PremiumCTA from "@/components/premium/PremiumCTA";
-import HardNavigationFallback from "@/components/navigation/HardNavigationFallback";
 import { openCommandPalette } from "@/components/search/commandPaletteEvents";
 import { getBrandCopy } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
 import { stripLocaleFromPath } from "@/utils/locale-path";
-import { getMessages } from "@/utils/messages";
+import type { Messages } from "@/utils/messages";
 
 type NavSection = {
   label: string;
@@ -29,14 +28,20 @@ type SidebarSection = {
   links: { label: string; href: string }[];
 };
 
+export type SiteShellMessages = {
+  nav: Messages["nav"];
+  authButtons: Messages["authButtons"];
+  languageSwitcher: Messages["languageSwitcher"];
+  components: Pick<Messages["components"], "search" | "authModal" | "consent" | "premiumCTA">;
+};
+
 const CommandPalette = dynamic(() => import("@/components/search/CommandPalette"), {
   ssr: false,
 });
 
-export default function SiteShell({ children }: { children: ReactNode }) {
+export default function SiteShell({ children, messages }: { children: ReactNode; messages: SiteShellMessages }) {
   const { locale } = useLocale();
   const brandContent = getBrandCopy(locale);
-  const messages = getMessages(locale);
   const searchCopy = messages.components.search;
   const navCopy = messages.nav as {
     labels: Record<string, string>;
@@ -79,7 +84,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
 
       <header className="site-header relative z-50 border-b border-slate-200/80 bg-white/80">
         <div className="site-container flex items-center justify-between gap-6 py-4">
-          <Link href={getRoute("home", locale)} prefetch={false} className="flex items-center gap-3" aria-label={brandContent.siteName}>
+          <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
               <img
                 src="/brand/logo.png"
@@ -113,8 +118,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             >
               {searchCopy.paletteTitle}
             </button>
-            <LanguageSwitcher tone="light" />
-            <AuthButtons />
+            <LanguageSwitcher tone="light" copy={messages.languageSwitcher} />
+            <AuthButtons copy={messages.authButtons} />
           </div>
         </div>
 
@@ -157,7 +162,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           <div className="space-y-3">
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">{brandContent.siteName}</div>
             <p className="text-sm text-slate-700">{brandContent.tagline}</p>
-            <PremiumCTA variant="compact" />
+            <PremiumCTA variant="compact" copy={messages.components.premiumCTA} />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -187,10 +192,9 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         </div>
       </footer>
 
-      <ConsentBanner />
-      <AuthModal />
-      <CommandPalette />
-      <HardNavigationFallback />
+      <ConsentBanner copy={messages.components.consent} />
+      <AuthModal copy={messages.components.authModal} authCopy={messages.authButtons} />
+      <CommandPalette copy={messages.components.search} />
     </div>
   );
 }

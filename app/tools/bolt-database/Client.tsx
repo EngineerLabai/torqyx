@@ -1,6 +1,6 @@
-// app/tools/bolt-database/page.tsx
 "use client";
 
+// app/tools/bolt-database/page.tsx
 import { useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";

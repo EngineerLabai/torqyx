@@ -180,8 +180,8 @@ export default function FluidsHvacPage({ initialDocs }: FluidsHvacClientProps) {
 
   const encodedState = useMemo(() => encodeToolState(inputs), [inputs]);
   const shareUrl = useMemo(() => {
-    if (!pathname || typeof window === "undefined") return "";
-    return buildShareUrl(`${window.location.origin}${pathname}`, inputs);
+    if (!pathname) return "";
+    return buildShareUrl(pathname, inputs);
   }, [pathname, inputs]);
   const reportBase = withLocalePrefix(`/tools/${TOOL_ID}/report`, locale);
   const reportUrl = encodedState ? `${reportBase}?input=${encodedState}` : reportBase;

@@ -1,6 +1,6 @@
-// app/quality-tools/5why/page.tsx
 "use client";
 
+// app/quality-tools/5why/page.tsx
 import { useState, ChangeEvent } from "react";
 import PageShell from "@/components/layout/PageShell";
 import { useLocale } from "@/components/i18n/LocaleProvider";

@@ -1,7 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getFirebaseInitError, getFirebaseServices, type FirebaseServices } from "@/lib/firebase";
+import type { Firestore } from "firebase/firestore";
+import type { FirebaseStorage } from "firebase/storage";
+import {
+  getFirebaseCoreServices,
+  getFirebaseFirestoreService,
+  getFirebaseInitError,
+  getFirebaseStorageService,
+  type FirebaseCoreServices,
+} from "@/lib/firebase";
+
+type FirebaseServices = FirebaseCoreServices & {
+  firestore: Firestore | null;
+  storage: FirebaseStorage | null;
+};
 
 export default function useFirebaseServices() {
   const [services, setServices] = useState<FirebaseServices | null>(null);
@@ -9,8 +22,8 @@ export default function useFirebaseServices() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const next = getFirebaseServices();
-    if (!next) {
+    const core = getFirebaseCoreServices();
+    if (!core) {
       const initError = getFirebaseInitError();
       Promise.resolve().then(() => {
         if (initError) {
@@ -21,11 +34,33 @@ export default function useFirebaseServices() {
       return;
     }
 
-    Promise.resolve().then(() => {
-      setServices(next);
-      setError(null);
-      setReady(true);
-    });
+    let cancelled = false;
+
+    Promise.all([getFirebaseFirestoreService(), getFirebaseStorageService()])
+      .then(([firestore, storage]) => {
+        if (cancelled) return;
+        setServices({
+          ...core,
+          firestore,
+          storage,
+        });
+        setError(null);
+        setReady(true);
+      })
+      .catch((nextError) => {
+        if (cancelled) return;
+        setServices({
+          ...core,
+          firestore: null,
+          storage: null,
+        });
+        setError(nextError instanceof Error ? nextError.message : "Firebase services unavailable.");
+        setReady(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return { services, error, ready };

@@ -1,6 +1,6 @@
-// app/quality-tools/kaizen/page.tsx
 "use client";
 
+// app/quality-tools/kaizen/page.tsx
 import { useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import { useLocale } from "@/components/i18n/LocaleProvider";

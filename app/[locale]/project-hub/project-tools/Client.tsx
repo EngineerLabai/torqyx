@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
@@ -48,7 +48,8 @@ const readStorage = () => {
 
 export default function ProjectToolsClient({ locale, heroImage }: { locale: Locale; heroImage: string }) {
   const copy = PROJECT_COPY[locale];
-  const [items, setItems] = useState<ProjectItem[]>([]);
+  const [items, setItems] = useState<ProjectItem[]>(() => readStorage());
+  const hasPersistedRef = useRef(false);
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | ProjectStatus>("all");
   const [priorityFilter, setPriorityFilter] = useState<"all" | ProjectPriority>("all");
@@ -66,11 +67,11 @@ export default function ProjectToolsClient({ locale, heroImage }: { locale: Loca
   });
 
   useEffect(() => {
-    setItems(readStorage());
-  }, []);
-
-  useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!hasPersistedRef.current) {
+      hasPersistedRef.current = true;
+      return;
+    }
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 

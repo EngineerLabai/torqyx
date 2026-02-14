@@ -3,13 +3,16 @@
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useAuth } from "./AuthProvider";
-import { getMessages } from "@/utils/messages";
+import type { Messages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
 
-export default function AuthButtons() {
+type AuthButtonsProps = {
+  copy: Messages["authButtons"];
+};
+
+export default function AuthButtons({ copy }: AuthButtonsProps) {
   const { user, loading, available, error, loginWithGoogle, logout } = useAuth();
   const { locale } = useLocale();
-  const copy = getMessages(locale).authButtons;
   const premiumHref = withLocalePrefix("/pricing", locale);
 
   if (loading) {

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
-import { getFirebaseServices, getFirebaseInitError } from "@/lib/firebase";
+import { getFirebaseCoreServices, getFirebaseInitError } from "@/lib/firebase";
 
 type AuthContextValue = {
   user: User | null;
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     }, AUTH_INIT_TIMEOUT_MS);
 
-    const services = getFirebaseServices();
+    const services = getFirebaseCoreServices();
     if (!services) {
       const initError = getFirebaseInitError();
       Promise.resolve().then(() => {
@@ -107,7 +107,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const loginWithGoogle = async () => {
-    const services = getFirebaseServices();
+    const services = getFirebaseCoreServices();
     if (!services) {
       const initError = getFirebaseInitError();
       if (initError) {
@@ -126,7 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = async () => {
-    const services = getFirebaseServices();
+    const services = getFirebaseCoreServices();
     if (!services) {
       setAvailable(false);
       return;

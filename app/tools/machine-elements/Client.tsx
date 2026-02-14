@@ -1,6 +1,6 @@
-// app/tools/machine-elements/page.tsx
 "use client";
 
+// app/tools/machine-elements/page.tsx
 import { useMemo, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";

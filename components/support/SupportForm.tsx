@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import useFirebaseServices from "@/components/firebase/useFirebaseServices";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
@@ -76,6 +75,8 @@ export default function SupportForm() {
     if (!storage) {
       throw new Error(copy.errors.uploadUnavailable);
     }
+
+    const { getDownloadURL, ref, uploadBytes } = await import("firebase/storage");
     const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
     const path = `support/${Date.now()}-${safeName}`;
     const fileRef = ref(storage, path);

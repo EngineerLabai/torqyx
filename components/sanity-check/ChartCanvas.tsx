@@ -1,31 +1,35 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import {
-  Chart,
-  LineController,
-  LineElement,
-  PointElement,
-  LinearScale,
-  CategoryScale,
-  BarController,
-  BarElement,
-  Tooltip,
-  Legend,
-  type ChartConfiguration,
-} from "chart.js";
+import type { ChartConfiguration } from "chart.js";
 
-Chart.register(
-  LineController,
-  LineElement,
-  PointElement,
-  LinearScale,
-  CategoryScale,
-  BarController,
-  BarElement,
-  Tooltip,
-  Legend,
-);
+type ChartModule = typeof import("chart.js");
+type ChartInstance = import("chart.js").Chart;
+
+let chartModulePromise: Promise<ChartModule> | null = null;
+let chartRegistered = false;
+
+const loadChartModule = async () => {
+  chartModulePromise ??= import("chart.js");
+  const chartModule = await chartModulePromise;
+
+  if (!chartRegistered) {
+    chartModule.Chart.register(
+      chartModule.LineController,
+      chartModule.LineElement,
+      chartModule.PointElement,
+      chartModule.LinearScale,
+      chartModule.CategoryScale,
+      chartModule.BarController,
+      chartModule.BarElement,
+      chartModule.Tooltip,
+      chartModule.Legend,
+    );
+    chartRegistered = true;
+  }
+
+  return chartModule;
+};
 
 export type ChartDataset = {
   label: string;
@@ -45,7 +49,7 @@ export type ChartConfig = {
 
 export default function ChartCanvas({ config, className = "" }: { config: ChartConfig; className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef<ChartInstance | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -88,9 +92,16 @@ export default function ChartCanvas({ config, className = "" }: { config: ChartC
       },
     };
 
-    chartRef.current = new Chart(ctx, chartConfig);
+    let cancelled = false;
+
+    void (async () => {
+      const { Chart } = await loadChartModule();
+      if (cancelled) return;
+      chartRef.current = new Chart(ctx, chartConfig);
+    })();
 
     return () => {
+      cancelled = true;
       if (chartRef.current) {
         chartRef.current.destroy();
         chartRef.current = null;

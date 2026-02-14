@@ -4,18 +4,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Locale } from "@/utils/locale";
 import { localePath, stripLocaleFromPath } from "@/utils/locale-path";
-import { getMessages } from "@/utils/messages";
+import type { Messages } from "@/utils/messages";
 
 type LanguageSwitcherProps = {
+  copy: Messages["languageSwitcher"];
   className?: string;
   size?: "sm" | "md";
   tone?: "dark" | "light";
 };
 
-export default function LanguageSwitcher({ className = "", size = "sm", tone = "dark" }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ copy, className = "", size = "sm", tone = "dark" }: LanguageSwitcherProps) {
   const { locale, setLocale } = useLocale();
-  const messages = getMessages(locale);
-  const copy = messages.languageSwitcher;
   const router = useRouter();
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();

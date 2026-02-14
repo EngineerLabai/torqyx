@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
@@ -49,7 +49,8 @@ const readStorage = () => {
 
 export default function RevisionClient({ locale, heroImage }: { locale: Locale; heroImage: string }) {
   const copy = REVISION_COPY[locale];
-  const [items, setItems] = useState<RevisionItem[]>([]);
+  const [items, setItems] = useState<RevisionItem[]>(() => readStorage());
+  const hasPersistedRef = useRef(false);
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | RevisionStatus>("all");
   const [priorityFilter, setPriorityFilter] = useState<"all" | RevisionPriority>("all");
@@ -68,11 +69,11 @@ export default function RevisionClient({ locale, heroImage }: { locale: Locale; 
   });
 
   useEffect(() => {
-    setItems(readStorage());
-  }, []);
-
-  useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!hasPersistedRef.current) {
+      hasPersistedRef.current = true;
+      return;
+    }
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 

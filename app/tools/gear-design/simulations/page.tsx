@@ -2,49 +2,39 @@
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import ToolSeo from "@/components/tools/ToolSeo";
-import { buildToolMetadata } from "@/utils/tool-seo";
 
 const simulations = [
   {
     title: "MAAG Sistemi Hareket Animasyonu",
-    description: "Planya stroku ve kremayer bÄ±Ã§ak senkronu; Ã§ift yÃ¼zey iÅŸleme diyagramÄ±.",
-    status: "PlanlandÄ±",
+    description: "Planya stroku ve kremayer bıçak senkronu; çift yüzey işleme diyagramı.",
+    status: "Planlandı",
   },
   {
-    title: "FELLOW Sistemi DinamiÄŸi",
-    description: "DiÅŸli kesici yukarÄ± Ã§Ä±kÄ±ÅŸta dÃ¶ner, aÅŸaÄŸÄ± iniÅŸte keser; eÄŸik tabla ayarÄ± gÃ¶rselleÅŸtirmesi.",
-    status: "PlanlandÄ±",
+    title: "FELLOW Sistemi Dinamiği",
+    description: "Dişli kesici yukarı çıkışta döner, aşağı inişte keser; eğik tabla ayarı görselleştirmesi.",
+    status: "Planlandı",
   },
   {
-    title: "AzdÄ±rma (Hobbing) Kesim Animasyonu",
-    description: "Hob sarmal hareketi, radyal/eksenel besleme ve helis aÃ§Ä±sÄ± ayarÄ±; Ã§ok aÄŸÄ±zlÄ± hob aÅŸÄ±nma senaryosu.",
-    status: "PlanlandÄ±",
+    title: "Azdırma (Hobbing) Kesim Animasyonu",
+    description: "Hob sarmal hareketi, radyal/eksenel besleme ve helis açısı ayarı; çok ağızlı hob aşınma senaryosu.",
+    status: "Planlandı",
   },
   {
-    title: "TaÅŸlama SimÃ¼lasyonu",
-    description: "Profil vs form taÅŸlama, soÄŸutma akÄ±ÅŸÄ±, yanma riski ve honing/superfinish etkisi.",
-    status: "PlanlandÄ±",
+    title: "Taşlama Simülasyonu",
+    description: "Profil vs form taşlama, soğutma akışı, yanma riski ve honing/superfinish etkisi.",
+    status: "Planlandı",
   },
   {
-    title: "DÃ¶kÃ¼m SoÄŸuma Animasyonu",
-    description: "Besleyici/maÃ§a yerleÅŸimi, katÄ±laÅŸma sÄ±rasÄ± ve bÃ¼zÃ¼lme risk alanlarÄ±nÄ±n gÃ¶rselleÅŸtirilmesi.",
-    status: "PlanlandÄ±",
+    title: "Döküm Soğuma Animasyonu",
+    description: "Besleyici/maça yerleşimi, katılaşma sırası ve büzülme risk alanlarının görselleştirilmesi.",
+    status: "Planlandı",
   },
 ];
-
-export async function generateMetadata() {
-  const locale = await getLocaleFromCookies();
-  return buildToolMetadata("gear-design/simulations", locale);
-}
 
 export default async function GearSimulationsPage() {
   const locale = await getLocaleFromCookies();
   const initialDocs = await getToolDocsResponse("gear-design/simulations", locale);
   return (
-    <>
-      <ToolSeo toolId="gear-design/simulations" locale={locale} />
-
     <PageShell>
       <ToolDocTabs slug="gear-design/simulations" initialDocs={initialDocs}>
       <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -52,18 +42,18 @@ export default async function GearSimulationsPage() {
         <div className="relative space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-sky-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-sky-700">
-              DiÅŸli Ãœretim SimÃ¼lasyonlarÄ±
+              Dişli Üretim Simülasyonları
             </span>
             <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-              PlanlandÄ±
+              Planlandı
             </span>
           </div>
           <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">
-            MAAG, FELLOW, AzdÄ±rma ve taÅŸlama/dÃ¶kÃ¼m simÃ¼lasyonlarÄ±
+            MAAG, FELLOW, Azdırma ve taşlama/döküm simülasyonları
           </h1>
           <p className="text-sm leading-relaxed text-slate-700">
-            Hareket ve proses animasyonlarÄ± Ã¶ÄŸrenciler ve mÃ¼hendisler iÃ§in hÄ±zlÄ± gÃ¶rsel rehber olacak. Her kart,
-            eklenecek video/animasyon alanÄ± iÃ§in yer tutucu.
+            Hareket ve proses animasyonları öğrenciler ve mühendisler için hızlı görsel rehber olacak. Her kart,
+            eklenecek video/animasyon alanı için yer tutucu.
           </p>
         </div>
       </section>
@@ -84,12 +74,12 @@ export default async function GearSimulationsPage() {
               <p className="text-[12px] leading-relaxed text-slate-700 break-words">{sim.description}</p>
             </div>
             <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-              <span>Animasyon alanÄ± eklenecek</span>
+              <span>Animasyon alanı eklenecek</span>
               <button
                 disabled
                 className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-500"
               >
-                YakÄ±nda
+                Yakında
               </button>
             </div>
           </article>
@@ -97,11 +87,7 @@ export default async function GearSimulationsPage() {
       </section>
           </ToolDocTabs>
     </PageShell>
-  
-    </>
   );
 }
-
-
 
 

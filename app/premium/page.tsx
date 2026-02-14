@@ -22,7 +22,8 @@ export async function generateMetadata() {
 
 export default async function PremiumPage() {
   const locale = await getLocaleFromCookies();
-  const copy = getMessages(locale).pages.premium;
+  const messages = getMessages(locale);
+  const copy = messages.pages.premium;
   const heroImage = getHeroImageSrc("premium");
 
   return (
@@ -34,7 +35,7 @@ export default async function PremiumPage() {
         imageSrc={heroImage}
         imageAlt={copy.imageAlt}
       />
-      <PremiumCTA variant="full" />
+      <PremiumCTA variant="full" copy={messages.components.premiumCTA} />
     </PageShell>
   );
 }

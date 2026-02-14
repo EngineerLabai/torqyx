@@ -2,19 +2,19 @@
 
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
+import type { Messages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
 
 type PremiumVariant = "compact" | "full";
 
 type PremiumCTAProps = {
+  copy: Messages["components"]["premiumCTA"];
   variant?: PremiumVariant;
   className?: string;
 };
 
-export default function PremiumCTA({ variant = "compact", className = "" }: PremiumCTAProps) {
+export default function PremiumCTA({ copy, variant = "compact", className = "" }: PremiumCTAProps) {
   const { locale } = useLocale();
-  const copy = getMessages(locale).components.premiumCTA;
   const supportHref = withLocalePrefix("/support", locale);
   const premiumHref = withLocalePrefix("/pricing", locale);
   const rootClassName = `${className} ${variant === "compact" ? "" : ""}`.trim();

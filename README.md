@@ -26,6 +26,14 @@ Open http://localhost:3000 with your browser to see the result.
 ANALYZE=true npm run build
 ```
 
+- Turbopack note:
+  - `@next/bundle-analyzer` does not emit reports on Turbopack builds.
+  - For analyzer output, use webpack build mode:
+
+```bash
+ANALYZE=true npm run build -- --webpack
+```
+
 - Generate i18n status report (artifacts):
 
 ```bash
@@ -43,6 +51,10 @@ npm run check:encoding
   - Search index loading is now demand-based in `components/search/useSearchIndex.ts`; it fetches only when search UI is actively used and reuses a shared in-memory cache.
   - Search matching now normalizes Turkish/English tokens and lightweight stems in `utils/search-index.ts`.
   - Tools library (`components/tools/ToolLibrary.tsx`) now renders incrementally (24 + load more) and avoids eager prefetch storms on card links.
+  - Site shell navigation links in mega menu/sidebar/footer use `prefetch={false}` to prevent aggressive background prefetch bursts across dozens of routes.
+  - Firebase runtime was split into core vs lazy services in `lib/firebase.ts`; auth stays lightweight and firestore/storage load on demand.
+  - Chart.js is lazy-loaded in `components/tools/GenericToolPage.tsx`, `components/tools/report/ReportChart.tsx`, and `components/sanity-check/ChartCanvas.tsx`.
+  - `getMessages(locale)` calls were removed from always-mounted shell client components (`components/layout/SiteShell.tsx` path); shell now receives localized copy from `app/layout.tsx`.
   - Dev indicators are disabled in `next.config.ts` to avoid floating dev HUD overlays during debugging.
   - Client errors and web-vitals are collected via `/api/client-errors` and `/api/rum`.
   - Runtime health checks:

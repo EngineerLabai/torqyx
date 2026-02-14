@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -64,24 +64,16 @@ export default function ToolDataActions({ toolSlug, toolTitle, inputs, outputs, 
   const messages = getMessages(locale);
   const copy = messages.components.toolDataActions;
 
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedProjectId, setSelectedProjectId] = useState<string>("");
-  const [newProjectTitle, setNewProjectTitle] = useState<string>("");
+  const [projects, setProjects] = useState<Project[]>(() => readProjects());
+  const [selectedProjectId, setSelectedProjectId] = useState<string>(() => {
+    const stored = readProjects();
+    return stored.length > 0 ? stored[0].id : "new";
+  });
+  const [newProjectTitle, setNewProjectTitle] = useState<string>(() => getDefaultProjectTitle(copy.defaultProject));
   const [status, setStatus] = useState<string>("");
 
   const safeInputs = useMemo(() => sanitizeRecord(inputs), [inputs]);
   const safeOutputs = useMemo(() => (outputs ? sanitizeRecord(outputs) : null), [outputs]);
-
-  useEffect(() => {
-    const stored = readProjects();
-    setProjects(stored);
-    if (stored.length > 0) {
-      setSelectedProjectId(stored[0].id);
-    } else {
-      setSelectedProjectId("new");
-      setNewProjectTitle(getDefaultProjectTitle(copy.defaultProject));
-    }
-  }, [copy]);
 
   const handleSave = () => {
     if (!safeOutputs) return;

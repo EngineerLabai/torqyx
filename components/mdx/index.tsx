@@ -12,8 +12,8 @@ import { localePath } from "@/utils/locale-path";
 const mergeClassName = (base: string, extra?: string) => (extra ? `${base} ${extra}` : base);
 
 const createAnchor =
-  (locale?: Locale) =>
-  ({ className, href, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) => {
+  (locale?: Locale) => {
+  const LocalizedAnchor = ({ className, href, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) => {
     const isExternal = href?.startsWith("http://") || href?.startsWith("https://");
     const isProtocolRelative = href?.startsWith("//");
     const shouldLocalize = Boolean(locale && href && href.startsWith("/") && !isProtocolRelative);
@@ -28,6 +28,10 @@ const createAnchor =
       />
     );
   };
+
+  LocalizedAnchor.displayName = "LocalizedAnchor";
+  return LocalizedAnchor;
+};
 
 const Paragraph = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => (
   <p className={mergeClassName("text-[15px] leading-relaxed text-slate-700 md:text-base", className)} {...props} />

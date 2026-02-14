@@ -158,7 +158,7 @@ export default function RequestToolForm() {
 
   const issueUrl = useMemo(
     () => (lastEntry ? buildIssueUrl(lastEntry.data, copy) : ""),
-    [lastEntry, copy.issueTitle, copy.issueTitlePrefix],
+    [lastEntry, copy],
   );
 
   return (

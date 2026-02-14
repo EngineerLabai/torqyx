@@ -1,7 +1,6 @@
-// app/project-hub/rfq/page.tsx
 "use client";
 
-import Link from "next/link";
+// app/project-hub/rfq/page.tsximport Link from "next/link";
 import { useState, FormEvent } from "react";
 import PageShell from "@/components/layout/PageShell";
 

@@ -1,7 +1,6 @@
-// app/tools/sealing-guide/page.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+// app/tools/sealing-guide/page.tsximport { useMemo, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";

@@ -1,6 +1,6 @@
-// app/quality-tools/5n1k/page.tsx
 "use client";
 
+// app/quality-tools/5n1k/page.tsx
 import Link from "next/link";
 import { useState, ChangeEvent } from "react";
 import PageShell from "@/components/layout/PageShell";

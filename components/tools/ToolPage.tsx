@@ -24,12 +24,16 @@ import { formatMessage, getMessages } from "@/utils/messages";
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
-type ToolPageProps = {
-  tool: ToolDefinition<any, any>;
-  initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
-};
+type ToolInputRecord = Record<string, unknown>;
+type ToolResultRecord = Record<string, unknown>;
 
-export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
+export default function ToolPage<TInput extends ToolInputRecord, TResult extends ToolResultRecord>({
+  tool,
+  initialDocs,
+}: {
+  tool: ToolDefinition<TInput, TResult>;
+  initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
+}) {
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const copy = messages.components.toolActions;
@@ -42,7 +46,7 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
   const accessLabel = accessLabels?.[access] ?? accessLabels?.free ?? "";
   const toolTitle = toolCopy?.title ?? tool.title;
   const toolDescription = toolCopy?.description ?? tool.description;
-  const [input, setInput] = useState<any>(tool.initialInput);
+  const [input, setInput] = useState<TInput>(tool.initialInput);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const [loadedHistoryId, setLoadedHistoryId] = useState<string | null>(null);
@@ -55,11 +59,11 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
     if (!hasHydrated.current) {
       const shared = decodeToolState<Record<string, string | number>>(searchParams?.get("input") ?? null);
       if (shared) {
-        const merged = { ...(tool.initialInput as Record<string, unknown>) } as Record<string, unknown>;
+        const merged = { ...(tool.initialInput as ToolInputRecord) } as ToolInputRecord;
         Object.entries(shared).forEach(([key, value]) => {
           merged[key] = value;
         });
-        Promise.resolve().then(() => setInput(merged as any));
+        Promise.resolve().then(() => setInput(merged as TInput));
         hasHydrated.current = true;
         return;
       }
@@ -71,7 +75,7 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
     try {
       const stored = localStorage.getItem(`tool-history:${tool.id}`);
       if (!stored) return;
-      const parsed = JSON.parse(stored) as Array<{ id: string; input: any }>;
+      const parsed = JSON.parse(stored) as Array<{ id: string; input: TInput }>;
       const match = parsed.find((entry) => entry.id === historyId);
       if (!match) return;
       Promise.resolve().then(() => {
@@ -112,12 +116,12 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
 
   const { result, calcError } = useMemo(() => {
     if (!validation.success) {
-      return { result: null as any, calcError: validationCopy.resultFix };
+      return { result: null as TResult | null, calcError: validationCopy.resultFix };
     }
     try {
-      return { result: tool.calculate(validation.data as any), calcError: "" };
+      return { result: tool.calculate(validation.data as TInput), calcError: "" };
     } catch {
-      return { result: null as any, calcError: validationCopy.calcFailed };
+      return { result: null as TResult | null, calcError: validationCopy.calcFailed };
     }
   }, [validation, tool, validationCopy.calcFailed, validationCopy.resultFix]);
 
@@ -142,10 +146,10 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
     };
   }, [input, tool.id, toolTitle]);
 
-  const encodedState = useMemo(() => encodeToolState(input as Record<string, unknown>), [input]);
+  const encodedState = useMemo(() => encodeToolState(input), [input]);
   const shareUrl = useMemo(() => {
-    if (!pathname || typeof window === "undefined") return "";
-    return buildShareUrl(`${window.location.origin}${pathname}`, input as Record<string, unknown>);
+    if (!pathname) return "";
+    return buildShareUrl(pathname, input as ToolInputRecord);
   }, [pathname, input]);
   const reportBase = withLocalePrefix(`/tools/${tool.id}/report`, locale);
   const reportUrl = encodedState ? `${reportBase}?input=${encodedState}` : reportBase;
@@ -157,7 +161,7 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
   const showAdvisor = tool.id === "bolt-calculator" || tool.id === "pipe-pressure-loss";
   const advisorInsights = useMemo(() => {
     if (!showAdvisor) return [];
-    return getAdvisorInsights(tool.id, input as Record<string, unknown>, {
+    return getAdvisorInsights(tool.id, input as ToolInputRecord, {
       locale,
       reportUrl: result ? reportUrl : undefined,
     });
@@ -198,8 +202,8 @@ export default function ToolPage({ tool, initialDocs }: ToolPageProps) {
           <ToolDataActions
             toolSlug={tool.id}
             toolTitle={toolTitle}
-            inputs={input as Record<string, unknown>}
-            outputs={result as Record<string, unknown>}
+            inputs={input as ToolInputRecord}
+            outputs={result as ToolResultRecord}
             reportUrl={reportUrl}
           />
         ) : null}

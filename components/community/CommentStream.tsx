@@ -36,6 +36,7 @@ export default function CommentStream() {
     () => user?.displayName ?? user?.email ?? copy.userFallback,
     [user, copy.userFallback],
   );
+  const loadFailedMessage = copy.errors.loadFailed;
 
   useEffect(() => {
     if (!servicesReady) return;
@@ -45,12 +46,13 @@ export default function CommentStream() {
       return;
     }
 
-    if (!services) {
+    const firestore = services?.firestore;
+    if (!firestore) {
       setCommentsLoading(false);
       return;
     }
 
-    const q = query(collection(services.firestore, "comments"), orderBy("createdAt", "desc"), limit(6));
+    const q = query(collection(firestore, "comments"), orderBy("createdAt", "desc"), limit(6));
     const unsub = onSnapshot(
       q,
       (snapshot) => {
@@ -60,12 +62,12 @@ export default function CommentStream() {
       },
       (err) => {
         console.error("[comments] Firestore listen failed:", err);
-        setError(copy.errors.loadFailed);
+        setError(loadFailedMessage);
         setCommentsLoading(false);
       },
     );
     return () => unsub();
-  }, [isDemoMode, services, servicesReady]);
+  }, [isDemoMode, services, servicesReady, loadFailedMessage]);
 
   const handleLogin = async () => {
     if (!auth?.loginWithGoogle || !services || authUnavailable) return;
@@ -120,9 +122,10 @@ export default function CommentStream() {
     }
 
     try {
-      if (!services) return;
+      const firestore = services?.firestore;
+      if (!firestore) return;
 
-      await addDoc(collection(services.firestore, "comments"), {
+      await addDoc(collection(firestore, "comments"), {
         content: trimmed,
         displayName: user?.displayName ?? user?.email ?? copy.userFallback,
         uid: user?.uid,

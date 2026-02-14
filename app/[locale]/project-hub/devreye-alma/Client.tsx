@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
@@ -27,14 +27,15 @@ const readStorage = (): ChecklistState => {
 export default function CommissioningClient({ locale, heroImage }: { locale: Locale; heroImage: string }) {
   const copy = COMMISSIONING_COPY[locale];
   const steps = COMMISSIONING_STEPS[locale];
-  const [checked, setChecked] = useState<ChecklistState>({});
-
-  useEffect(() => {
-    setChecked(readStorage());
-  }, []);
+  const [checked, setChecked] = useState<ChecklistState>(() => readStorage());
+  const hasPersistedRef = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!hasPersistedRef.current) {
+      hasPersistedRef.current = true;
+      return;
+    }
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
   }, [checked]);
 

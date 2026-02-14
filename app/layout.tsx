@@ -4,13 +4,14 @@ import { Inter, JetBrains_Mono, Sora } from "next/font/google";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
-import SiteShell from "@/components/layout/SiteShell";
+import SiteShell, { type SiteShellMessages } from "@/components/layout/SiteShell";
 import GlobalErrorMonitor from "@/components/monitoring/GlobalErrorMonitor";
 import WebVitalsReporter from "@/components/monitoring/WebVitalsReporter";
 import UserStateSync from "@/components/sync/UserStateSync";
 import JsonLd from "@/components/seo/JsonLd";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
 import { SITE_URL } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
 import "../styles/globals.css";
@@ -102,6 +103,18 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocaleFromCookies();
   const websiteJsonLd = await getWebsiteJsonLd();
+  const messages = getMessages(locale);
+  const shellMessages: SiteShellMessages = {
+    nav: messages.nav,
+    authButtons: messages.authButtons,
+    languageSwitcher: messages.languageSwitcher,
+    components: {
+      search: messages.components.search,
+      authModal: messages.components.authModal,
+      consent: messages.components.consent,
+      premiumCTA: messages.components.premiumCTA,
+    },
+  };
   return (
     <html lang={locale}>
       <body className={`${sora.variable} ${inter.variable} ${jetBrainsMono.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
@@ -112,7 +125,7 @@ export default async function RootLayout({
             <AnalyticsTracker />
             <WebVitalsReporter />
             <UserStateSync />
-            <SiteShell>{children}</SiteShell>
+            <SiteShell messages={shellMessages}>{children}</SiteShell>
           </AuthProvider>
         </LocaleProvider>
       </body>

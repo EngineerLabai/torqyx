@@ -33,6 +33,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const { locale } = useLocale();
   const copy = getMessages(locale).components.toolDocTabs;
   const standardCopy = getMessages(locale).components.toolDocStandard;
+  const premiumCopy = getMessages(locale).components.premiumCTA;
   const allTabs = useMemo(() => TAB_IDS.map((id) => ({ id, label: copy.tabs[id] })), [copy]);
   const searchParams = useSearchParams();
   const tabParam = searchParams?.get("tab");
@@ -278,7 +279,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
         {children}
-        <PremiumCTA variant="compact" />
+        <PremiumCTA variant="compact" copy={premiumCopy} />
       </div>
 
       <section className={activeTab === "explanation" ? "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" : "hidden"}>

@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
 import {
   CONSENT_COOKIE,
   CONSENT_PREFS_KEY,
@@ -13,6 +11,7 @@ import {
   type ConsentPrefs,
   type ConsentStatus,
 } from "@/utils/consent";
+import type { Messages } from "@/utils/messages";
 
 const CONSENT_MAX_AGE = 60 * 60 * 24 * 365;
 
@@ -21,9 +20,11 @@ const DEFAULT_PREFS: ConsentPrefs = {
   advertising: false,
 };
 
-export default function ConsentBanner() {
-  const { locale } = useLocale();
-  const copy = getMessages(locale).components.consent;
+type ConsentBannerProps = {
+  copy: Messages["components"]["consent"];
+};
+
+export default function ConsentBanner({ copy }: ConsentBannerProps) {
   const [mounted, setMounted] = useState(false);
   const [bannerVisible, setBannerVisible] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
@@ -33,16 +34,22 @@ export default function ConsentBanner() {
   const lastFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-    const status = readConsentStatus();
-    const storedPrefs = readConsentPrefs();
-    if (!status) {
-      setBannerVisible(true);
-      setPrefs(storedPrefs ?? DEFAULT_PREFS);
-      return;
-    }
-    setBannerVisible(false);
-    setPrefs(resolveConsentPrefs(status, storedPrefs));
+    const frameId = window.requestAnimationFrame(() => {
+      setMounted(true);
+      const status = readConsentStatus();
+      const storedPrefs = readConsentPrefs();
+      if (!status) {
+        setBannerVisible(true);
+        setPrefs(storedPrefs ?? DEFAULT_PREFS);
+        return;
+      }
+      setBannerVisible(false);
+      setPrefs(resolveConsentPrefs(status, storedPrefs));
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => {

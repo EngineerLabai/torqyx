@@ -1,6 +1,6 @@
-// app/tools/belt-length/page.tsx
 "use client";
 
+// app/tools/belt-length/page.tsx
 import { useMemo, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";

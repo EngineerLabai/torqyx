@@ -1,31 +1,31 @@
-﻿# AÃ§Ä±klama
+# Açıklama
 
 {/* Tool: fluids-hvac */}
 <Callout type="info" title="Taslak">
-Bu aÃ§Ä±klama taslak olarak oluÅŸturuldu. FormÃ¼ller ve degiskenleri araca gÃ¶re gÃ¼ncelle.
+Bu açıklama taslak olarak oluşturuldu. Formüller ve degiskenleri araca göre güncelle.
 </Callout>
 
-## FormÃ¼ller
+## Formüller
 
-<Formula label="Temel iliÅŸki">
-FormÃ¼l burada.
+<Formula label="Temel ilişki">
+Formül burada.
 </Formula>
 
-## DeÄŸiÅŸken aÃ§Ä±klamalarÄ±
+## Değişken açıklamaları
 
 <Table>
   <thead>
     <tr>
-      <th>DeÄŸiÅŸken</th>
-      <th>AÃ§Ä±klama</th>
+      <th>Değişken</th>
+      <th>Açıklama</th>
       <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>X</td>
-      <td>DeÄŸiÅŸken aÃ§Ä±klamasÄ±</td>
-      <td>AralÄ±k/varsayÄ±m</td>
+      <td>Değişken açıklaması</td>
+      <td>Aralık/varsayım</td>
     </tr>
   </tbody>
 </Table>
@@ -35,55 +35,52 @@ FormÃ¼l burada.
 - X: birim burada
 - Y: birim burada
 
-## KullanÄ±m senaryolarÄ±
+## Kullanım senaryoları
 
-<StepList title="KullanÄ±m akÄ±ÅŸÄ±" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
 
-## Dogrulama ve uyarÄ± notlari
+## Dogrulama ve uyarı notlari
 
-<Callout type="warning" title="UyarÄ±">
-GeÃ§erli aralÄ±klarÄ± kontrol et. Kritik uygulamalarda standartlarÄ± ve Ã¼retici verilerini doÄŸrula.
+<Callout type="warning" title="Uyarı">
+Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
 </Callout>
 
+# Örnekler
 
-# Ã–rnekler
+## Örnek 1: Reynolds sayısı
 
-## Ã–rnek 1: Reynolds sayÄ±sÄ±
-
-Reynolds sayÄ±sÄ± ile akim rejimi.
+Reynolds sayısı ile akim rejimi.
 
 **Girdiler**
 - D=0.05 m
-- HÄ±z 2 m/s
+- Hız 2 m/s
 - Nu=1e-6 m2/s
 
 **Ciktilar**
-- Re ~100000 (turbulans siniri Ã¼stÃ¼)
+- Re ~100000 (turbulans siniri üstü)
 
 **Notlar**
-- Viskoziteye gÃ¶re deÄŸiÅŸir.
+- Viskoziteye göre değişir.
 
-## Ã–rnek 2: BasÄ±nÃ§ kaybÄ±
+## Örnek 2: Basınç kaybı
 
-Duct basÄ±nÃ§ kaybÄ±.
+Duct basınç kaybı.
 
 **Girdiler**
 - L=20 m
 - D=0.1 m
 - f=0.02
-- HÄ±z 3 m/s
+- Hız 3 m/s
 - Rho 1.2 kg/m3
 
 **Ciktilar**
-- BasÄ±nÃ§ kaybÄ± ~22 Pa
+- Basınç kaybı ~22 Pa
 
 **Notlar**
 - Kayip katsayilarini ekle.
 
 
 ## Ilgili icerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman seÃ§imi iÃ§in hÄ±zlÄ± rehber</a>
+- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
 - <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">Ä°Ã§erik altyapÄ±sÄ±na hÄ±zlÄ± giriÅŸ</a>
-
-
+- <a href="/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>

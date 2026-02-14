@@ -1,6 +1,6 @@
-// app/tools/material-cards/page.tsx
 "use client";
 
+// app/tools/material-cards/page.tsx
 import { useEffect, useMemo, useState } from "react";
 import type { MaterialCategory, MaterialInfo } from "./material-types";
 import PageShell from "@/components/layout/PageShell";

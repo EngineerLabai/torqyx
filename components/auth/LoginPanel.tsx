@@ -1,13 +1,14 @@
 "use client";
 
-import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useAuth } from "@/components/auth/AuthProvider";
-import { getMessages } from "@/utils/messages";
+import type { Messages } from "@/utils/messages";
 
-export default function LoginPanel() {
+type LoginPanelProps = {
+  copy: Messages["authButtons"];
+};
+
+export default function LoginPanel({ copy }: LoginPanelProps) {
   const { user, loading, available, error, loginWithGoogle, logout } = useAuth();
-  const { locale } = useLocale();
-  const copy = getMessages(locale).authButtons;
 
   if (loading) {
     return <div className="h-14 w-full animate-pulse rounded-2xl bg-slate-200/60" />;

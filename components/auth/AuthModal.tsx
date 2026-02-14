@@ -3,13 +3,15 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import LoginPanel from "@/components/auth/LoginPanel";
-import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
 import { AUTH_MODAL_OPEN_EVENT } from "@/components/auth/authModalEvents";
+import type { Messages } from "@/utils/messages";
 
-export default function AuthModal() {
-  const { locale } = useLocale();
-  const copy = getMessages(locale).components.authModal;
+type AuthModalProps = {
+  copy: Messages["components"]["authModal"];
+  authCopy: Messages["authButtons"];
+};
+
+export default function AuthModal({ copy, authCopy }: AuthModalProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function AuthModal() {
         </div>
 
         <div className="mt-5">
-          <LoginPanel />
+          <LoginPanel copy={authCopy} />
         </div>
 
         <p className="mt-4 text-[11px] text-slate-500">{copy.note}</p>

@@ -1,6 +1,6 @@
-// app/fixture-tools/base-plate/page.tsx
 "use client";
 
+// app/fixture-tools/base-plate/page.tsx
 import { useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import { trackEvent } from "@/utils/analytics";

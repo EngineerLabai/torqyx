@@ -2,19 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState, type ComponentProps } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { z } from "zod";
-import {
-  Chart,
-  LineController,
-  LineElement,
-  PointElement,
-  LinearScale,
-  CategoryScale,
-  Tooltip,
-  Legend,
-  BarController,
-  BarElement,
-} from "chart.js";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import ToolActions from "@/components/tools/ToolActions";
@@ -33,21 +20,37 @@ import { getToolById, type ToolDefinition, type ToolInputDefinition, type ToolIn
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
 import { toolCatalog } from "@/tools/_shared/catalog";
 
-Chart.register(
-  LineController,
-  LineElement,
-  PointElement,
-  LinearScale,
-  CategoryScale,
-  Tooltip,
-  Legend,
-  BarController,
-  BarElement,
-);
-
 type GenericToolPageProps = {
   toolId: string;
   initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
+};
+
+type ChartModule = typeof import("chart.js");
+type ChartInstance = import("chart.js").Chart;
+
+let chartModulePromise: Promise<ChartModule> | null = null;
+let chartRegistered = false;
+
+const loadChartModule = async () => {
+  chartModulePromise ??= import("chart.js");
+  const chartModule = await chartModulePromise;
+
+  if (!chartRegistered) {
+    chartModule.Chart.register(
+      chartModule.LineController,
+      chartModule.LineElement,
+      chartModule.PointElement,
+      chartModule.LinearScale,
+      chartModule.CategoryScale,
+      chartModule.Tooltip,
+      chartModule.Legend,
+      chartModule.BarController,
+      chartModule.BarElement,
+    );
+    chartRegistered = true;
+  }
+
+  return chartModule;
 };
 
 const getDefaultValues = (inputs: ToolInputDefinition[]) =>
@@ -85,7 +88,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   const access = catalogEntry?.access ?? "free";
   const accessLabel = messages.common.access?.[access] ?? messages.common.access?.free ?? "";
   const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool?.inputs ?? []));
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef<ChartInstance | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -111,42 +114,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
     hasHydrated.current = true;
   }, [searchParams, tool]);
 
-  const schema = (() => {
-    if (!tool) return null;
-    const shape: Record<string, z.ZodTypeAny> = {};
-    tool.inputs.forEach((input) => {
-      shape[input.key] = buildFieldSchema(input, validationCopy);
-    });
-    return z.object(shape);
-  })();
-
-  const parsed = schema ? schema.safeParse(values) : null;
-  const errors = (() => {
-    if (!parsed || parsed.success) return {};
-    const flattened = parsed.error.flatten().fieldErrors;
-    return Object.entries(flattened).reduce<Record<string, string>>((acc, [key, value]) => {
-      if (value && value.length > 0) {
-        acc[key] = value[0] ?? "";
-      }
-      return acc;
-    }, {});
-  })();
-
-  const normalizedInputs = (() => {
-    if (!parsed || !parsed.success || !tool) return null;
-    const data = parsed.data as Record<string, unknown>;
-    const normalized: Record<string, unknown> = {};
-    tool.inputs.forEach((input) => {
-      const raw = data[input.key];
-      if (input.type === "select") {
-        const match = findOption(input.options, raw);
-        normalized[input.key] = match ?? raw;
-      } else {
-        normalized[input.key] = raw;
-      }
-    });
-    return normalized as GenericToolInputs;
-  })();
+  const { errors, normalizedInputs } = validateInputs(tool?.inputs ?? [], values, validationCopy);
 
   let results: Record<string, unknown> | null = null;
   let calcError = "";
@@ -180,20 +148,20 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
 
   const encodedState = useMemo(() => encodeToolState(values), [values]);
   const shareUrl = useMemo(() => {
-    if (!pathname || typeof window === "undefined") return "";
-    return buildShareUrl(`${window.location.origin}${pathname}`, values);
+    if (!pathname) return "";
+    return buildShareUrl(pathname, values);
   }, [pathname, values]);
   const reportBase = tool ? withLocalePrefix(`/tools/${tool.id}/report`, locale) : "";
   const reportUrl = encodedState ? `${reportBase}?input=${encodedState}` : reportBase;
 
   const showAdvisor = tool?.id === "torque-power";
-  const advisorInsights = useMemo(() => {
-    if (!showAdvisor || !tool) return [];
-    return getAdvisorInsights(tool.id, normalizedInputs, {
-      locale,
-      reportUrl: results ? reportUrl : undefined,
-    });
-  }, [showAdvisor, tool, normalizedInputs, locale, reportUrl, results]);
+  const advisorInsights =
+    showAdvisor && tool
+      ? getAdvisorInsights(tool.id, normalizedInputs, {
+          locale,
+          reportUrl: results ? reportUrl : undefined,
+        })
+      : [];
 
   useEffect(() => {
     if (!chartConfig || !canvasRef.current) {
@@ -207,41 +175,49 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
     const ctx = canvasRef.current.getContext("2d");
     if (!ctx) return;
 
-    if (chartRef.current) {
-      chartRef.current.destroy();
-    }
+    let cancelled = false;
 
-    chartRef.current = new Chart(ctx, {
-      type: chartConfig.type ?? "line",
-      data: {
-        labels: chartConfig.labels,
-        datasets: chartConfig.datasets.map((dataset) => ({
-          ...dataset,
-          data: dataset.data.map((value) => (value === null ? NaN : value)),
-        })),
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: true, labels: { boxWidth: 10, boxHeight: 10 } },
+    void (async () => {
+      const { Chart } = await loadChartModule();
+      if (cancelled) return;
+
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+
+      chartRef.current = new Chart(ctx, {
+        type: chartConfig.type ?? "line",
+        data: {
+          labels: chartConfig.labels,
+          datasets: chartConfig.datasets.map((dataset) => ({
+            ...dataset,
+            data: dataset.data.map((value) => (value === null ? NaN : value)),
+          })),
         },
-        scales: {
-          x: {
-            title: chartConfig.xLabel ? { display: true, text: chartConfig.xLabel } : undefined,
-            ticks: { color: "#64748b", font: { size: 10 } },
-            grid: { color: "rgba(148, 163, 184, 0.2)" },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: true, labels: { boxWidth: 10, boxHeight: 10 } },
           },
-          y: {
-            title: chartConfig.yLabel ? { display: true, text: chartConfig.yLabel } : undefined,
-            ticks: { color: "#64748b", font: { size: 10 } },
-            grid: { color: "rgba(148, 163, 184, 0.2)" },
+          scales: {
+            x: {
+              title: chartConfig.xLabel ? { display: true, text: chartConfig.xLabel } : undefined,
+              ticks: { color: "#64748b", font: { size: 10 } },
+              grid: { color: "rgba(148, 163, 184, 0.2)" },
+            },
+            y: {
+              title: chartConfig.yLabel ? { display: true, text: chartConfig.yLabel } : undefined,
+              ticks: { color: "#64748b", font: { size: 10 } },
+              grid: { color: "rgba(148, 163, 184, 0.2)" },
+            },
           },
         },
-      },
-    });
+      });
+    })();
 
     return () => {
+      cancelled = true;
       if (chartRef.current) {
         chartRef.current.destroy();
         chartRef.current = null;
@@ -327,7 +303,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
 
           <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.results}</h2>
-            {parsed?.success && results ? (
+            {normalizedInputs && results ? (
               <div className="space-y-2">
                 {resultEntries.map(([key, value]) => (
                   <ResultRow key={key} label={formatKey(key)} value={formatValue(value, locale, common)} />
@@ -339,7 +315,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
           </div>
         </section>
 
-        {parsed?.success && results ? (
+        {normalizedInputs && results ? (
           <ToolDataActions
             toolSlug={tool.id}
             toolTitle={tool.title}
@@ -383,41 +359,68 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   );
 }
 
-function buildFieldSchema(input: ToolInputDefinition, copy: Record<string, string>) {
-  const label = input.unit ? `${input.label} (${input.unit})` : input.label;
-  if (input.type === "select") {
-    const options = (input.options ?? []).map((option) => String(option.value));
-    return z
-      .string()
-      .min(1, formatMessage(copy.required, { field: label }))
-      .refine((value) => options.includes(String(value)), formatMessage(copy.invalidOption, { field: label }));
+function validateInputs(
+  inputs: ToolInputDefinition[],
+  values: Record<string, string>,
+  copy: Record<string, string>,
+) {
+  const errors: Record<string, string> = {};
+  const normalized: Record<string, unknown> = {};
+
+  for (const input of inputs) {
+    const label = input.unit ? `${input.label} (${input.unit})` : input.label;
+    const rawValue = values[input.key] ?? "";
+
+    if (input.type === "select") {
+      if (!String(rawValue).trim()) {
+        errors[input.key] = formatMessage(copy.required, { field: label });
+        continue;
+      }
+
+      const option = findOption(input.options, rawValue);
+      if (option === null) {
+        errors[input.key] = formatMessage(copy.invalidOption, { field: label });
+        continue;
+      }
+
+      normalized[input.key] = option;
+      continue;
+    }
+
+    const parsed = Number(rawValue);
+    if (String(rawValue).trim().length === 0) {
+      errors[input.key] = formatMessage(copy.required, { field: label });
+      continue;
+    }
+
+    if (!Number.isFinite(parsed)) {
+      errors[input.key] = formatMessage(copy.invalidNumber, { field: label });
+      continue;
+    }
+
+    if (typeof input.min === "number" && parsed < input.min) {
+      errors[input.key] = formatMessage(copy.min, {
+        field: label,
+        min: input.unit ? `${input.min} ${input.unit}` : input.min,
+      });
+      continue;
+    }
+
+    if (typeof input.max === "number" && parsed > input.max) {
+      errors[input.key] = formatMessage(copy.max, {
+        field: label,
+        max: input.unit ? `${input.max} ${input.unit}` : input.max,
+      });
+      continue;
+    }
+
+    normalized[input.key] = parsed;
   }
 
-  let schema = z
-    .string()
-    .min(1, formatMessage(copy.required, { field: label }))
-    .refine((value) => Number.isFinite(Number(value)), formatMessage(copy.invalidNumber, { field: label }))
-    .transform((value) => Number(value));
-
-  const minValue = input.min;
-  if (typeof minValue === "number") {
-    const minLabel = formatMessage(copy.min, {
-      field: label,
-      min: input.unit ? `${minValue} ${input.unit}` : minValue,
-    });
-    schema = schema.refine((value) => value >= minValue, minLabel);
-  }
-
-  const maxValue = input.max;
-  if (typeof maxValue === "number") {
-    const maxLabel = formatMessage(copy.max, {
-      field: label,
-      max: input.unit ? `${maxValue} ${input.unit}` : maxValue,
-    });
-    schema = schema.refine((value) => value <= maxValue, maxLabel);
-  }
-
-  return schema;
+  return {
+    errors,
+    normalizedInputs: Object.keys(errors).length > 0 ? null : (normalized as GenericToolInputs),
+  };
 }
 
 function findOption(options: ToolInputOption[] | undefined, value: unknown) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -19,11 +19,7 @@ const getToolTitle = (item: ProjectItem) => {
 export default function ProjectsClient() {
   const { locale } = useLocale();
   const copy = getMessages(locale).pages.projects;
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    setProjects(readProjects());
-  }, []);
+  const [projects] = useState<Project[]>(() => readProjects());
 
   const content = useMemo(() => {
     if (!projects.length) return null;
