@@ -8,10 +8,11 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
-export async function generateMetadata({ params }: { params: { category: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.standards;
-  const category = getStandardsCategory(params.category);
+  const { category: categoryParam } = await params;
+  const category = getStandardsCategory(categoryParam);
 
   if (!category) {
     return buildPageMetadata({
@@ -30,10 +31,11 @@ export async function generateMetadata({ params }: { params: { category: string 
   });
 }
 
-export default async function StandardsCategoryPage({ params }: { params: { category: string } }) {
+export default async function StandardsCategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.standards;
-  const category = getStandardsCategory(params.category);
+  const { category: categoryParam } = await params;
+  const category = getStandardsCategory(categoryParam);
   if (!category) notFound();
 
   const heroImage = getHeroImageSrc("tools");

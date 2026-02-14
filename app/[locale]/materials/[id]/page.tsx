@@ -13,7 +13,7 @@ import { encodeSession } from "@/lib/sanityCheck/share";
 import type { LabSession } from "@/lib/sanityCheck/types";
 
 type PageProps = {
-  params: { locale: string; id: string };
+  params: Promise<{ locale: string; id: string }>;
 };
 
 const resolveLocale = (value?: string): Locale => (isLocale(value) ? value : DEFAULT_LOCALE);
@@ -103,17 +103,18 @@ const buildSanitySession = (material: MaterialEntry, locale: Locale): LabSession
 };
 
 export async function generateMetadata({ params }: PageProps) {
-  const locale = resolveLocale(params.locale);
+  const { locale: localeParam, id } = await params;
+  const locale = resolveLocale(localeParam);
   const copy = getMessages(locale).pages.materials;
   const brandContent = getBrandCopy(locale);
-  const material = materials.find((item) => item.id === params.id);
+  const material = materials.find((item) => item.id === id);
 
   if (!material) {
     const notFoundCopy = getMessages(locale).pages.notFound;
     return buildPageMetadata({
       title: `${notFoundCopy.title} | ${brandContent.siteName}`,
       description: notFoundCopy.description,
-      path: `/materials/${params.id}`,
+      path: `/materials/${id}`,
       locale,
     });
   }
@@ -131,10 +132,11 @@ export async function generateMetadata({ params }: PageProps) {
   });
 }
 
-export default function MaterialDetailPage({ params }: PageProps) {
-  const locale = resolveLocale(params.locale);
+export default async function MaterialDetailPage({ params }: PageProps) {
+  const { locale: localeParam, id } = await params;
+  const locale = resolveLocale(localeParam);
   const copy = getMessages(locale).pages.materials;
-  const material = materials.find((item) => item.id === params.id);
+  const material = materials.find((item) => item.id === id);
 
   if (!material) {
     notFound();

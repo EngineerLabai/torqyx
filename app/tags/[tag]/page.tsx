@@ -18,7 +18,7 @@ const formatDate = (value: string, locale: "tr" | "en") =>
   );
 
 type TagPageProps = {
-  params: { tag: string };
+  params: Promise<{ tag: string }>;
 };
 
 export async function generateStaticParams() {
@@ -30,9 +30,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: TagPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
+  const { tag: tagParam } = await params;
   const [trTags, enTags] = await Promise.all([getTagIndex("tr"), getTagIndex("en")]);
   const tags = locale === "tr" ? trTags : enTags;
-  const tagSlug = decodeURIComponent(params.tag);
+  const tagSlug = decodeURIComponent(tagParam);
   const label = resolveLabelBySlug(tagSlug, tags) ?? tagSlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} etiketi` : `${label} tag`;
   const description =
@@ -54,7 +55,8 @@ export async function generateMetadata({ params }: TagPageProps) {
 
 export default async function TagPage({ params }: TagPageProps) {
   const locale = await getLocaleFromCookies();
-  const tagSlug = decodeURIComponent(params.tag);
+  const { tag: tagParam } = await params;
+  const tagSlug = decodeURIComponent(tagParam);
   const [blog, guides, tags] = await Promise.all([
     getContentList("blog", { locale }),
     getContentList("guides", { locale }),

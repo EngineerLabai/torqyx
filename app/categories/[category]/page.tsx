@@ -18,7 +18,7 @@ const formatDate = (value: string, locale: "tr" | "en") =>
   );
 
 type CategoryPageProps = {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 };
 
 export async function generateStaticParams() {
@@ -33,12 +33,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: CategoryPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
+  const { category: categoryParam } = await params;
   const [trCategories, enCategories] = await Promise.all([
     getCategoryIndex("tr"),
     getCategoryIndex("en"),
   ]);
   const categories = locale === "tr" ? trCategories : enCategories;
-  const categorySlug = decodeURIComponent(params.category);
+  const categorySlug = decodeURIComponent(categoryParam);
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} kategorisi` : `${label} category`;
   const description =
@@ -60,7 +61,8 @@ export async function generateMetadata({ params }: CategoryPageProps) {
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const locale = await getLocaleFromCookies();
-  const categorySlug = decodeURIComponent(params.category);
+  const { category: categoryParam } = await params;
+  const categorySlug = decodeURIComponent(categoryParam);
   const [blog, guides, categories] = await Promise.all([
     getContentList("blog", { locale }),
     getContentList("guides", { locale }),

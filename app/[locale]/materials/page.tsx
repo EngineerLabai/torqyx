@@ -9,13 +9,14 @@ import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
 type PageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 const resolveLocale = (value?: string): Locale => (isLocale(value) ? value : DEFAULT_LOCALE);
 
 export async function generateMetadata({ params }: PageProps) {
-  const locale = resolveLocale(params.locale);
+  const { locale: localeParam } = await params;
+  const locale = resolveLocale(localeParam);
   const copy = getMessages(locale).pages.materials;
   const brandContent = getBrandCopy(locale);
 
@@ -27,8 +28,9 @@ export async function generateMetadata({ params }: PageProps) {
   });
 }
 
-export default function MaterialsLibraryPage({ params }: PageProps) {
-  const locale = resolveLocale(params.locale);
+export default async function MaterialsLibraryPage({ params }: PageProps) {
+  const { locale: localeParam } = await params;
+  const locale = resolveLocale(localeParam);
   const copy = getMessages(locale).pages.materials;
   const heroImage = getHeroImageSrc("tools");
 

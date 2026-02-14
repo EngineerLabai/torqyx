@@ -8,20 +8,21 @@ import { formatMessage, getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { getThreads } from "../data";
 
-type PageProps = { params: { slug: string } };
+type PageProps = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: PageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const brandContent = getBrandCopy(locale);
   const threads = getThreads(locale);
-  const thread = threads.find((t) => t.slug === params.slug);
+  const thread = threads.find((t) => t.slug === slug);
   const copy = getMessages(locale).pages.community.thread;
 
   if (!thread) {
     return buildPageMetadata({
       title: `${copy.missingTitle} | ${brandContent.siteName}`,
       description: copy.missingDescription,
-      path: `/community/${params.slug}`,
+      path: `/community/${slug}`,
       locale,
     });
   }
@@ -36,9 +37,10 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function CommunityDetailPage({ params }: PageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const copy = getMessages(locale).pages.community.thread;
   const threads = getThreads(locale);
-  const thread = threads.find((t) => t.slug === params.slug);
+  const thread = threads.find((t) => t.slug === slug);
   if (!thread) return notFound();
   const backHref = withLocalePrefix("/community", locale);
 

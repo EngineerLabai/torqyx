@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
 
 type PageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 type MaterialCard = {
@@ -255,7 +255,8 @@ const COPY: Record<Locale, {
 };
 
 export async function generateMetadata({ params }: PageProps) {
-  const locale = resolveLocale(params.locale);
+  const { locale: localeParam } = await params;
+  const locale = resolveLocale(localeParam);
   const seo = COPY[locale].seo;
   return buildPageMetadata({
     title: seo.title,
@@ -265,8 +266,9 @@ export async function generateMetadata({ params }: PageProps) {
   });
 }
 
-export default function MaterialsStandardsPage({ params }: PageProps) {
-  const locale = resolveLocale(params.locale);
+export default async function MaterialsStandardsPage({ params }: PageProps) {
+  const { locale: localeParam } = await params;
+  const locale = resolveLocale(localeParam);
   const copy = COPY[locale];
   const heroImage = getHeroImageSrc("tools");
 

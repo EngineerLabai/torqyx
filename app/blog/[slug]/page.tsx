@@ -19,7 +19,7 @@ const formatDate = (value: string, locale: "tr" | "en") =>
   );
 
 type BlogPostPageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -29,22 +29,23 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const notFoundCopy = getMessages(locale).pages.notFound;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
   const [post, availability] = await Promise.all([
-    getContentBySlug("blog", params.slug, { locale }),
-    getContentLocaleAvailability("blog", params.slug),
+    getContentBySlug("blog", slug, { locale }),
+    getContentLocaleAvailability("blog", slug),
   ]);
 
   if (!post) {
     const hasAnyLocale = availability.tr || availability.en;
     const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
     const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
-    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/blog/${params.slug}`) : null;
+    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/blog/${slug}`) : null;
     return buildPageMetadata({
       title,
       description,
-      path: `/blog/${params.slug}`,
+      path: `/blog/${slug}`,
       locale,
       alternatesLanguages,
     });
@@ -68,10 +69,11 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
   const [post, availability] = await Promise.all([
-    getContentBySlug("blog", params.slug, { locale }),
-    getContentLocaleAvailability("blog", params.slug),
+    getContentBySlug("blog", slug, { locale }),
+    getContentLocaleAvailability("blog", slug),
   ]);
 
   if (!post) {

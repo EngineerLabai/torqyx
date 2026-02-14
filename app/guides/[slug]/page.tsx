@@ -17,7 +17,7 @@ const formatDate = (value: string, locale: "tr" | "en") =>
   );
 
 type GuidePageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -27,22 +27,23 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: GuidePageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const notFoundCopy = getMessages(locale).pages.notFound;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
   const [guide, availability] = await Promise.all([
-    getContentBySlug("guides", params.slug, { locale }),
-    getContentLocaleAvailability("guides", params.slug),
+    getContentBySlug("guides", slug, { locale }),
+    getContentLocaleAvailability("guides", slug),
   ]);
 
   if (!guide) {
     const hasAnyLocale = availability.tr || availability.en;
     const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
     const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
-    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/guides/${params.slug}`) : null;
+    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/guides/${slug}`) : null;
     return buildPageMetadata({
       title,
       description,
-      path: `/guides/${params.slug}`,
+      path: `/guides/${slug}`,
       locale,
       alternatesLanguages,
     });
@@ -66,10 +67,11 @@ export async function generateMetadata({ params }: GuidePageProps) {
 
 export default async function GuidePage({ params }: GuidePageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
   const [guide, availability] = await Promise.all([
-    getContentBySlug("guides", params.slug, { locale }),
-    getContentLocaleAvailability("guides", params.slug),
+    getContentBySlug("guides", slug, { locale }),
+    getContentLocaleAvailability("guides", slug),
   ]);
 
   if (!guide) {

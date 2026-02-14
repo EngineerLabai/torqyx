@@ -36,7 +36,7 @@ const extractFormulas = (content: string) => {
 };
 
 type GlossaryPageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -46,22 +46,23 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: GlossaryPageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const notFoundCopy = getMessages(locale).pages.notFound;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
   const [term, availability] = await Promise.all([
-    getContentBySlug("glossary", params.slug, { locale }),
-    getContentLocaleAvailability("glossary", params.slug),
+    getContentBySlug("glossary", slug, { locale }),
+    getContentLocaleAvailability("glossary", slug),
   ]);
 
   if (!term) {
     const hasAnyLocale = availability.tr || availability.en;
     const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
     const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
-    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/glossary/${params.slug}`) : null;
+    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/glossary/${slug}`) : null;
     return buildPageMetadata({
       title,
       description,
-      path: `/glossary/${params.slug}`,
+      path: `/glossary/${slug}`,
       locale,
       alternatesLanguages,
     });
@@ -80,10 +81,11 @@ export async function generateMetadata({ params }: GlossaryPageProps) {
 
 export default async function GlossaryPage({ params }: GlossaryPageProps) {
   const locale = await getLocaleFromCookies();
+  const { slug } = await params;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
   const [term, availability] = await Promise.all([
-    getContentBySlug("glossary", params.slug, { locale }),
-    getContentLocaleAvailability("glossary", params.slug),
+    getContentBySlug("glossary", slug, { locale }),
+    getContentLocaleAvailability("glossary", slug),
   ]);
 
   if (!term) {
