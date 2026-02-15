@@ -123,7 +123,7 @@ export default async function RootLayout({
           <AuthProvider>
             <GlobalErrorMonitor />
             <AnalyticsTracker />
-            <WebVitalsReporter />
+            {process.env.NODE_ENV === "production" ? <WebVitalsReporter /> : null}
             <UserStateSync />
             <SiteShell messages={shellMessages}>{children}</SiteShell>
           </AuthProvider>

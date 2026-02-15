@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
@@ -86,7 +87,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
         <div className="site-container flex items-center justify-between gap-6 py-4">
           <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
-              <img
+              <Image
                 src="/brand/logo.png"
                 alt={`${brandContent.siteName} logo`}
                 width={24}

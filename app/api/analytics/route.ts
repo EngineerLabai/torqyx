@@ -8,6 +8,7 @@ const ALLOWED_EVENTS = new Set([
   "save_result",
   "export_pdf",
 ]);
+const DEBUG_ANALYTICS = process.env.DEBUG_ANALYTICS === "true";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,7 +19,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: true });
     }
 
-    if (process.env.NODE_ENV !== "production") {
+    if (DEBUG_ANALYTICS) {
       console.info("[analytics]", {
         type,
         path: payload?.path,

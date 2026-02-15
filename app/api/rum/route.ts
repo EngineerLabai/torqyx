@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { FieldValue } from "firebase-admin/firestore";
 import { z } from "zod";
-import { getAdminFirestore } from "@/utils/firebase-admin";
+import { getAdminFirestore, hasFirebaseAdminCredentials } from "@/utils/firebase-admin";
 
 export const runtime = "nodejs";
 
@@ -18,6 +18,9 @@ const payloadSchema = z.object({
   metrics: z.array(metricSchema).min(1).max(16),
   viewport: z.object({ width: z.number().int().min(1), height: z.number().int().min(1) }).optional(),
 });
+
+let missingRumCredentialsWarned = false;
+const DEBUG_RUM = process.env.DEBUG_RUM === "true";
 
 export async function POST(request: NextRequest) {
   let payload: unknown;
@@ -35,8 +38,16 @@ export async function POST(request: NextRequest) {
   const { metrics, viewport } = parsed.data;
   const userAgent = request.headers.get("user-agent") ?? null;
 
-  if (process.env.NODE_ENV !== "production") {
+  if (DEBUG_RUM) {
     console.info("[rum]", metrics);
+  }
+
+  if (!hasFirebaseAdminCredentials()) {
+    if (DEBUG_RUM && !missingRumCredentialsWarned) {
+      missingRumCredentialsWarned = true;
+      console.warn("[rum] skipped persistence: Firebase admin credentials are not configured.");
+    }
+    return NextResponse.json({ ok: true, skipped: "missing_firebase_admin_credentials" });
   }
 
   try {
@@ -53,7 +64,7 @@ export async function POST(request: NextRequest) {
     }
     await batch.commit();
   } catch (error) {
-    if (process.env.NODE_ENV !== "production") {
+    if (DEBUG_RUM) {
       console.warn("[rum] failed to persist metrics", error);
     }
   }

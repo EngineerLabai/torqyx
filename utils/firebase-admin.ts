@@ -53,6 +53,8 @@ const getServiceAccountFromEnv = (): ServiceAccount | null => {
   };
 };
 
+export const hasFirebaseAdminCredentials = () => Boolean(getServiceAccountFromEnv());
+
 export const getAdminFirestore = () => {
   if (cachedDb) return cachedDb;
   const app = getAdminApp();

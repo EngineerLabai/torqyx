@@ -1,0 +1,164 @@
+{
+  "generatedAt": "2026-02-14T15:56:54.999Z",
+  "contentMissing": [],
+  "toolDocs": {
+    "totalTools": 37,
+    "missingRequired": [],
+    "missingOptional": [
+      {
+        "slug": "bolt-calculator",
+        "locale": "en"
+      },
+      {
+        "slug": "unit-converter",
+        "locale": "en"
+      },
+      {
+        "slug": "sanity-check",
+        "locale": "en"
+      },
+      {
+        "slug": "basic-engineering",
+        "locale": "en"
+      },
+      {
+        "slug": "param-chart",
+        "locale": "en"
+      },
+      {
+        "slug": "simple-stress",
+        "locale": "en"
+      },
+      {
+        "slug": "bending-stress",
+        "locale": "en"
+      },
+      {
+        "slug": "bolt-database",
+        "locale": "en"
+      },
+      {
+        "slug": "compressor-cc",
+        "locale": "en"
+      },
+      {
+        "slug": "belt-length",
+        "locale": "en"
+      },
+      {
+        "slug": "torque-power",
+        "locale": "en"
+      },
+      {
+        "slug": "bearing-life",
+        "locale": "en"
+      },
+      {
+        "slug": "shaft-torsion",
+        "locale": "en"
+      },
+      {
+        "slug": "fillet-weld",
+        "locale": "en"
+      },
+      {
+        "slug": "pipe-pressure-loss",
+        "locale": "en"
+      },
+      {
+        "slug": "hydraulic-cylinder",
+        "locale": "en"
+      },
+      {
+        "slug": "strength-statics",
+        "locale": "en"
+      },
+      {
+        "slug": "machine-elements",
+        "locale": "en"
+      },
+      {
+        "slug": "fluids-hvac",
+        "locale": "en"
+      },
+      {
+        "slug": "heat-energy",
+        "locale": "en"
+      },
+      {
+        "slug": "materials-manufacturing",
+        "locale": "en"
+      },
+      {
+        "slug": "production-project",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/backlash-calculator",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/contact-ratio-calculator",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/force-torque-calculator",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/helix-axial-calculator",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/module-calculator",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/ratio-calculator",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/viscosity-selector",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/calculators/weight-optimization",
+        "locale": "en"
+      },
+      {
+        "slug": "gear-design/simulations",
+        "locale": "en"
+      },
+      {
+        "slug": "sealing-guide",
+        "locale": "en"
+      },
+      {
+        "slug": "coating-guide",
+        "locale": "en"
+      },
+      {
+        "slug": "material-cards",
+        "locale": "en"
+      },
+      {
+        "slug": "heat-treatment",
+        "locale": "en"
+      }
+    ]
+  },
+  "messages": {
+    "totalTr": 1235,
+    "totalEn": 1235,
+    "missingInTr": [],
+    "missingInEn": []
+  }
+}

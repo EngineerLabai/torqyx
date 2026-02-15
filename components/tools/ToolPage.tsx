@@ -85,7 +85,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
     } catch {
       // ignore invalid storage data
     }
-  }, [searchParams, tool.id, loadedHistoryId]);
+  }, [searchParams, tool.id, tool.initialInput, loadedHistoryId]);
 
   const resolvedInputMeta = useMemo(() => tool.inputMeta ?? null, [tool.inputMeta]);
 

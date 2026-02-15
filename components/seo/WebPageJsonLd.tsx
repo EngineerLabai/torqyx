@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getBrandCopy } from "@/config/brand";
@@ -9,41 +9,30 @@ import { SITE_URL } from "@/utils/seo";
 type WebPageJsonLdProps = {
   title?: string;
   description?: string;
+  path?: string;
 };
 
-export default function WebPageJsonLd({ title, description }: WebPageJsonLdProps) {
+const toAbsoluteUrl = (path: string) => {
+  try {
+    return new URL(path, SITE_URL).toString();
+  } catch {
+    return SITE_URL;
+  }
+};
+
+export default function WebPageJsonLd({ title, description, path }: WebPageJsonLdProps) {
   const { locale } = useLocale();
-  const brandContent = getBrandCopy(locale);
   const pathname = usePathname() ?? "/";
-
-  const [meta, setMeta] = useState({
-    title: title ?? brandContent.siteName,
-    description: description ?? brandContent.tagline,
-  });
-
-  useEffect(() => {
-    if (!title || !description) {
-      const docTitle = document.title || brandContent.siteName;
-      const metaDescription =
-        document.querySelector('meta[name="description"]')?.getAttribute("content") ??
-        brandContent.tagline;
-
-      Promise.resolve().then(() =>
-        setMeta({
-          title: title ?? docTitle,
-          description: description ?? metaDescription,
-        }),
-      );
-    }
-  }, [title, description, brandContent]);
+  const brandContent = useMemo(() => getBrandCopy(locale), [locale]);
+  const pagePath = path ?? pathname;
 
   const data = useMemo(
     () => ({
       "@context": "https://schema.org",
       "@type": "WebPage",
-      name: meta.title,
-      description: meta.description,
-      url: new URL(pathname, SITE_URL).toString(),
+      name: title ?? brandContent.siteName,
+      description: description ?? brandContent.tagline,
+      url: toAbsoluteUrl(pagePath),
       isPartOf: {
         "@type": "WebSite",
         name: brandContent.siteName,
@@ -51,13 +40,8 @@ export default function WebPageJsonLd({ title, description }: WebPageJsonLdProps
       },
       inLanguage: locale === "tr" ? "tr-TR" : "en-US",
     }),
-    [meta, pathname, brandContent, locale],
+    [title, description, brandContent.siteName, brandContent.tagline, pagePath, locale],
   );
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
