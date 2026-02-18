@@ -27,7 +27,7 @@ export const basicEngineeringTool: ToolDefinition<HeatInput, HeatResult> = {
     },
     {
       key: "resistance",
-      label: "Isil Direnc R (K/W)",
+      label: "Isıl Direnç R (K/W)",
       getValue: (result) => (result.resistance === null ? null : Number(result.resistance.toFixed(4))),
     },
   ] satisfies ToolCompareMetric<HeatInput, HeatResult>[],

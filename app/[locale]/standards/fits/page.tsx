@@ -19,36 +19,36 @@ const COPY: Record<Locale, {
 }> = {
   tr: {
     seo: {
-      title: "Gecmeler | Standartlar",
-      description: "ISO gecme sistemi icin hizli aciklama, H7/g6 gibi ornekler ve kisa tablo.",
+      title: "Geçmeler | Standartlar",
+      description: "ISO geçme sistemi için hızlı açıklama, H7/g6 gibi örnekler ve kısa tablo.",
     },
     hero: {
-      title: "ISO gecmeler: hizli yorumlama",
+      title: "ISO geçmeler: hızlı yorumlama",
       description:
-        "H7/g6, H7/h6, H7/p6 gibi yaygin gecmeleri kisa yorumlar ve uygulama notlariyla toparlar.",
+        "H7/g6, H7/h6, H7/p6 gibi yaygın geçmeleri kısa yorumlar ve uygulama notlarıyla toparlar.",
       eyebrow: "Standards",
       imageAlt: "ISO fits quick reference",
     },
     intro: {
-      title: "Temel mantik",
-      body: "Harf sapma konumunu, sayi ise tolerans sinifini (IT) gosterir.",
+      title: "Temel mantık",
+      body: "Harf sapma konumunu, sayı ise tolerans sınıfını (IT) gösterir.",
       bullets: [
-        "Buyuk harf delik, kucuk harf mil icindir.",
-        "H deligi alt sapmasi 0 kabul edilir; h milin ust sapmasi 0 kabul edilir.",
-        "Sayi kuculdukce tolerans daha siki olur (IT6, IT7 gibi).",
+        "Büyük harf delik, küçük harf mil içindir.",
+        "H deliği alt sapması 0 kabul edilir; h milin üst sapması 0 kabul edilir.",
+        "Sayı küçüldükçe tolerans daha sıkı olur (IT6, IT7 gibi).",
       ],
     },
     table: {
-      title: "Hizli gecme tablosu",
-      description: "Uygulama ornekleri: bosluklu, gecis ve sik gecmeler.",
-      columns: ["Gecme", "Tip", "Tipik kullanim"],
+      title: "Hızlı geçme tablosu",
+      description: "Uygulama örnekleri: boşluklu, geçiş ve sıkı geçmeler.",
+      columns: ["Geçme", "Tip", "Tipik kullanım"],
     },
     notes: {
-      title: "Yorumlama ipuclari",
+      title: "Yorumlama ipuçları",
       items: [
-        "H7/g6 genelde bosluklu gecmedir, kayar parcalar icin uygun.",
-        "H7/h6 hizli konumlandirma icin hafif bosluk verir.",
-        "H7/k6 gecis, H7/p6 sik gecme olarak kullanilir.",
+        "H7/g6 genelde boşluklu geçmedir, kayar parçalar için uygun.",
+        "H7/h6 hızlı konumlandırma için hafif boşluk verir.",
+        "H7/k6 geçiş, H7/p6 sıkı geçme olarak kullanılır.",
       ],
     },
   },
@@ -90,10 +90,10 @@ const COPY: Record<Locale, {
 };
 
 const FIT_ROWS = [
-  { fit: "H7/g6", type: { tr: "Bosluklu", en: "Clearance" }, use: { tr: "Kayar yuzeyler", en: "Sliding parts" } },
-  { fit: "H7/h6", type: { tr: "Bosluklu", en: "Clearance" }, use: { tr: "Konumlama", en: "Location" } },
-  { fit: "H7/k6", type: { tr: "Gecis", en: "Transition" }, use: { tr: "Hafif press", en: "Light press" } },
-  { fit: "H7/p6", type: { tr: "Sik", en: "Interference" }, use: { tr: "Sabit baglanti", en: "Permanent joint" } },
+  { fit: "H7/g6", type: { tr: "Boşluklu", en: "Clearance" }, use: { tr: "Kayar yüzeyler", en: "Sliding parts" } },
+  { fit: "H7/h6", type: { tr: "Boşluklu", en: "Clearance" }, use: { tr: "Konumlama", en: "Location" } },
+  { fit: "H7/k6", type: { tr: "Geçiş", en: "Transition" }, use: { tr: "Hafif press", en: "Light press" } },
+  { fit: "H7/p6", type: { tr: "Sıkı", en: "Interference" }, use: { tr: "Sabit bağlantı", en: "Permanent joint" } },
 ];
 
 export async function generateMetadata({ params }: PageProps) {

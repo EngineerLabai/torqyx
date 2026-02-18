@@ -1,9 +1,16 @@
 ﻿"use client";
 
 import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import type { StandardsCategory, StandardsTable as StandardsTableType, LocalizedText } from "@/data/standards";
-import StandardsTable from "@/components/standards/StandardsTable";
+const StandardsTable = dynamic(() => import("@/components/standards/StandardsTable"), {
+  loading: () => (
+    <section className="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-500">
+      Loading tables...
+    </section>
+  ),
+});
 
 const isLocalized = (value: unknown): value is LocalizedText =>
   Boolean(value && typeof value === "object" && "tr" in value && "en" in value);

@@ -58,19 +58,33 @@ export const navConfig = {
           route: "reference",
         },
         {
+          id: "fixture-tools",
+          labelKey: "linkFixtureTools",
+          route: "fixtureTools",
+        },
+      ],
+    },
+    {
+      id: "standards",
+      labelKey: "sectionStandards",
+      descriptionKey: "sectionStandards",
+      links: [
+        {
           id: "standards",
           labelKey: "linkStandards",
           route: "standards",
         },
+      ],
+    },
+    {
+      id: "quality",
+      labelKey: "sectionQuality",
+      descriptionKey: "sectionQuality",
+      links: [
         {
           id: "quality-tools",
           labelKey: "linkQualityTools",
           route: "qualityTools",
-        },
-        {
-          id: "fixture-tools",
-          labelKey: "linkFixtureTools",
-          route: "fixtureTools",
         },
       ],
     },

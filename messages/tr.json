@@ -3,6 +3,8 @@
     "labels": {
       "sectionCalculators": "Hesaplayıcılar",
       "sectionTools": "Araçlar",
+      "sectionStandards": "Standartlar",
+      "sectionQuality": "Kalite",
       "sectionCommunity": "Forum",
       "sectionContact": "İletişim",
       "sectionGeneral": "Genel",
@@ -31,7 +33,9 @@
       "sectionTools": "Şablon, rehber ve proje araçları.",
       "sectionCommunity": "Topluluk tartışmaları ve paylaşımlar.",
       "sectionContact": "Geri bildirim ve destek kanalları.",
-      "sectionFaq": "Sik sorulan sorulara hizli yanitlar."
+      "sectionStandards": "Mühendislik standartları ve hızlı başvuru kaynakları.",
+      "sectionQuality": "Kalite planlama ve problem çözme araçları.",
+      "sectionFaq": "Sık sorulan sorulara hızlı yanıtlar."
     },
     "badges": {
       "new": "Yeni",
@@ -758,31 +762,31 @@
     },
     "faq": {
       "badge": "SSS",
-      "title": "Sik Sorulan Sorular",
-      "description": "Hesaplayicilar, raporlama, standartlar ve guvenlik varsayimlari hakkinda hizli yanitlar.",
+      "title": "Sık Sorulan Sorular",
+      "description": "Hesaplayıcılar, raporlama, standartlar ve güvenlik varsayımları hakkında hızlı yanıtlar.",
       "categories": [
         {
-          "title": "Araclar",
+          "title": "Araçlar",
           "items": [
             {
-              "q": "Hesaplayicilar ne kadar dogru?",
-              "a": "Yayinlanmis formullere dayanir; dogruluk girisler ve varsayimlara baglidir. Standartlarinizla dogrulayin."
+              "q": "Hesaplayıcılar ne kadar doğru?",
+              "a": "Yayınlanmış formüllere dayanır; doğruluk girişler ve varsayımlara bağlıdır. Standartlarınızla doğrulayın."
             },
             {
-              "q": "Varsayilan degerler gercek mi?",
-              "a": "Varsayilanlar ornek degerlerdir; kendi proje verilerinizle degistirin."
+              "q": "Varsayılan değerler gerçek mi?",
+              "a": "Varsayılanlar örnek değerlerdir; kendi proje verilerinizle değiştirin."
             },
             {
-              "q": "Neden dogrulama uyarilari goruyorum?",
-              "a": "Uyarilar aralik disi girisleri, eksik birimleri veya tutarsiz secimleri isaretler."
+              "q": "Neden doğrulama uyarıları görüyorum?",
+              "a": "Uyarılar aralık dışı girişleri, eksik birimleri veya tutarsız seçimleri işaretler."
             },
             {
-              "q": "Hesabi ekibimle paylasabilir miyim?",
-              "a": "Paylas & Rapor ile baglanti olusturabilir veya PDF ozetini indirebilirsiniz."
+              "q": "Hesabı ekibimle paylaşabilir miyim?",
+              "a": "Paylaş & Rapor ile bağlantı oluşturabilir veya PDF özetini indirebilirsiniz."
             },
             {
-              "q": "Araclar cevrimdisi calisir mi?",
-              "a": "Cogu hesap tarayicida calisir; referans icerik ve guncellemeler internet gerektirir."
+              "q": "Araçlar çevrimdışı çalışır mı?",
+              "a": "Çoğu hesap tarayıcıda çalışır; referans içerik ve güncellemeler internet gerektirir."
             }
           ]
         },
@@ -791,23 +795,23 @@
           "items": [
             {
               "q": "PDF raporda neler var?",
-              "a": "Girisler, sonuclar, formul, varsayimlar, kaynaklar ve uretilen grafik/diyagramlar."
+              "a": "Girişler, sonuçlar, formül, varsayımlar, kaynaklar ve üretilen grafik/diyagramlar."
             },
             {
-              "q": "Diyagramlari gorsel olarak disa aktarabilir miyim?",
-              "a": "Evet. Raporlar icin PNG veya SVG indirebilirsiniz."
+              "q": "Diyagramları görsel olarak dışa aktarabilir miyim?",
+              "a": "Evet. Raporlar için PNG veya SVG indirebilirsiniz."
             },
             {
-              "q": "Raporlar sunucuda saklaniyor mu?",
-              "a": "Hayir. Raporlar tarayicida uretilir; acikca paylasmadikca sunucuya gonderilmez."
+              "q": "Raporlar sunucuda saklanıyor mu?",
+              "a": "Hayır. Raporlar tarayıcıda üretilir; açıkça paylaşmadıkça sunucuya gönderilmez."
             },
             {
-              "q": "Rapor sablonunu duzenleyebilir miyim?",
-              "a": "Henuz degil. Ozellestirilebilir sablonlar uzerinde calisiyoruz."
+              "q": "Rapor şablonunu düzenleyebilir miyim?",
+              "a": "Henüz değil. Özelleştirilebilir şablonlar üzerinde çalışıyoruz."
             },
             {
-              "q": "Raporu projeye nasil eklerim?",
-              "a": "Hesabi projeye kaydedin ve proje ekranindan raporu acin."
+              "q": "Raporu projeye nasıl eklerim?",
+              "a": "Hesabı projeye kaydedin ve proje ekranından raporu açın."
             }
           ]
         },
@@ -815,24 +819,24 @@
           "title": "Standartlar",
           "items": [
             {
-              "q": "Hangi standartlar referans aliniyor?",
-              "a": "ISO/DIN/ASME gibi yaygin tablolar kullanilir; her aracta kaynaklar listelenir."
+              "q": "Hangi standartlar referans alınıyor?",
+              "a": "ISO/DIN/ASME gibi yaygın tablolar kullanılır; her araçta kaynaklar listelenir."
             },
             {
-              "q": "Standartlar her zaman guncel mi?",
-              "a": "Periyodik guncelleriz, kritik isler icin en son revizyonu dogrulayin."
+              "q": "Standartlar her zaman güncel mi?",
+              "a": "Periyodik güncelleriz, kritik işler için en son revizyonu doğrulayın."
             },
             {
-              "q": "Standartlarin tam metni var mi?",
-              "a": "Hayir. Yalnizca tablo ve ozetler paylasilir; tam metin icin resmi standardi edinin."
+              "q": "Standartların tam metni var mı?",
+              "a": "Hayır. Yalnızca tablo ve özetler paylaşılır; tam metin için resmi standardı edinin."
             },
             {
-              "q": "Eksik standart varsa ne yapmaliyim?",
-              "a": "Destek veya arac talebi formu uzerinden bildirin."
+              "q": "Eksik standart varsa ne yapmalıyım?",
+              "a": "Destek veya araç talebi formu üzerinden bildirin."
             },
             {
-              "q": "Malzeme ozellikleri nasil seciliyor?",
-              "a": "Oda sicakliginda tipik degerler kullanilir; tedarikci verisiyle dogrulayin."
+              "q": "Malzeme özellikleri nasıl seçiliyor?",
+              "a": "Oda sıcaklığında tipik değerler kullanılır; tedarikçi verisiyle doğrulayın."
             }
           ]
         },
@@ -841,48 +845,48 @@
           "items": [
             {
               "q": "Hangi birim sistemleri destekleniyor?",
-              "a": "Oncelik metriktir; bazi araclarda imperial secenekler vardir."
+              "a": "Öncelik metriktir; bazı araçlarda imperial seçenekler vardır."
             },
             {
-              "q": "Birim donusumu nasil yapiliyor?",
-              "a": "Degerler sabit katsayilarla baz birime cevrilir; yuvarlama sadece goruntu icindir."
+              "q": "Birim dönüşümü nasıl yapılıyor?",
+              "a": "Değerler sabit katsayılarla baz birime çevrilir; yuvarlama sadece görüntü içindir."
             },
             {
-              "q": "Birim uyusmazligi hatasi neden olur?",
-              "a": "Formul ciktisi beklenen birimle uyusmaz; girisleri ve sembolleri kontrol edin."
+              "q": "Birim uyuşmazlığı hatası neden olur?",
+              "a": "Formül çıktısı beklenen birimle uyuşmaz; girişleri ve sembolleri kontrol edin."
             },
             {
-              "q": "Karisik birim kullanabilir miyim?",
-              "a": "Bir arac icinde tutarli birimler kullanin; once Birim Donusturucu ile cevirin."
+              "q": "Karışık birim kullanabilir miyim?",
+              "a": "Bir araç içinde tutarlı birimler kullanın; önce Birim Dönüştürücü ile çevirin."
             },
             {
-              "q": "Anlamli basamaklar nasil ele aliniyor?",
-              "a": "Ekranda yuvarlariz; hesaplamada tam hassasiyet kullanilir."
+              "q": "Anlamlı basamaklar nasıl ele alınıyor?",
+              "a": "Ekranda yuvarlarız; hesaplamada tam hassasiyet kullanılır."
             }
           ]
         },
         {
-          "title": "Guvenlik / Sorumluluk",
+          "title": "Güvenlik / Sorumluluk",
           "items": [
             {
-              "q": "Bu sertifikali bir muhendislik araci mi?",
-              "a": "Hayir. Karar destegidir; nihai tasarim sorumlulugu sizdedir."
+              "q": "Bu sertifikalı bir mühendislik aracı mı?",
+              "a": "Hayır. Karar desteğidir; nihai tasarım sorumluluğu sizdedir."
             },
             {
               "q": "Emniyet kritik tasarimda kullanabilir miyim?",
-              "a": "On kontrol olarak kullanin; standartlar ve yetkili muhendis ile dogrulayin."
+              "a": "Ön kontrol olarak kullanın; standartlar ve yetkili mühendis ile doğrulayın."
             },
             {
-              "q": "Sonuclari nasil referans gostermeliyim?",
-              "a": "Arac adi, surum/tarih, girisler, varsayimlar ve kaynaklari rapora ekleyin."
+              "q": "Sonuçları nasıl referans göstermeliyim?",
+              "a": "Araç adı, sürüm/tarih, girişler, varsayımlar ve kaynakları rapora ekleyin."
             },
             {
-              "q": "Hesaplarim saklaniyor mu?",
-              "a": "Kaydedilenler yalnizca tarayicinizda tutulur; hassas isler icin gizli mod kullanin."
+              "q": "Hesaplarım saklanıyor mu?",
+              "a": "Kaydedilenler yalnızca tarayıcınızda tutulur; hassas işler için gizli mod kullanın."
             },
             {
-              "q": "Tasarim kararlarinin sorumlusu kim?",
-              "a": "Ciktilari dogrulamak ve mevzuata uymak kullanici sorumlulugundadir."
+              "q": "Tasarım kararlarının sorumlusu kim?",
+              "a": "Çıktıları doğrulamak ve mevzuata uymak kullanıcı sorumluluğundadır."
             }
           ]
         }
@@ -992,7 +996,7 @@
         },
         "email": {
           "label": "E-posta",
-          "placeholder": "ornek@domain.com"
+          "placeholder": "örnek@domain.com"
         },
         "message": {
           "label": "Talep detayları",
@@ -1064,6 +1068,7 @@
       "inlineTitle": "Hızlı arama",
       "inlineDescription": "Araç, standart ve içerikleri tek kutudan ara.",
       "inlinePlaceholder": "Araç, ISO 286, M12, sürtünme...",
+      "inlineLoading": "Aranıyor...",
       "inlineEmpty": "Sonuç bulunamadı.",
       "typeLabels": {
         "tool": "Araç",
@@ -1237,9 +1242,9 @@
         "unitPlaceholder": "orn. N m",
         "min": "Min",
         "max": "Maks",
-        "distribution": "Dagilim",
+        "distribution": "Dağılım",
         "distributionNone": "Manuel",
-        "distributionUniform": "Tekduze",
+        "distributionUniform": "Tekdüze",
         "distributionNormal": "Normal",
         "remove": "Sil"
       },
@@ -1738,16 +1743,16 @@
       "outputs": "Sonuç"
     },
     "advisorPanel": {
-      "title": "M?hendislik Dan??man?",
-      "subtitle": "Girdilere g?re h?zl? kontroller, aral?klar ve sonraki ad?m ?nerileri.",
-      "empty": "?u anda bir dan??man notu yok. Girdileri de?i?tirerek ?nerileri g?rebilirsin.",
+      "title": "Mühendislik Danışmanı",
+      "subtitle": "Girdilere göre hızlı kontroller, aralıklar ve sonraki adım önerileri.",
+      "empty": "Şu anda bir danışman notu yok. Girdileri değiştirerek önerileri görebilirsin.",
       "severity": {
         "critical": "Kritik",
-        "warn": "Uyar?lar",
+        "warn": "Uyarılar",
         "info": "Notlar"
       },
-      "actionReference": "Referans? a?",
-      "actionReport": "Raporu a?"
+      "actionReference": "Referansı aç",
+      "actionReport": "Raporu aç"
     },
     "authModal": {
       "badge": "Ücretsiz Başla",

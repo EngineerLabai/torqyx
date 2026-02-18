@@ -32,20 +32,24 @@ export function LocaleProvider({ children, initialLocale = DEFAULT_LOCALE }: Loc
     if (typeof window === "undefined") return;
     if (pathLocale) return;
     const cookieLocale = readLocaleCookie();
-    if (isLocale(cookieLocale) && cookieLocale !== locale) {
-      Promise.resolve().then(() => setLocale(cookieLocale));
-      return;
-    }
-    const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-    if (isLocale(stored) && stored !== locale) {
-      Promise.resolve().then(() => setLocale(stored));
-    }
-  }, [pathLocale, locale]);
+    const preferredLocale = isLocale(cookieLocale)
+      ? cookieLocale
+      : (() => {
+          const storedLocale = window.localStorage.getItem(LOCALE_STORAGE_KEY);
+          return isLocale(storedLocale) ? storedLocale : null;
+        })();
+    if (!preferredLocale) return;
+    Promise.resolve().then(() => {
+      setLocale((prev) => (prev === preferredLocale ? prev : preferredLocale));
+    });
+  }, [pathLocale]);
 
   useEffect(() => {
-    if (!pathLocale || pathLocale === locale) return;
-    Promise.resolve().then(() => setLocale(pathLocale));
-  }, [pathLocale, locale]);
+    if (!pathLocale) return;
+    Promise.resolve().then(() => {
+      setLocale((prev) => (prev === pathLocale ? prev : pathLocale));
+    });
+  }, [pathLocale]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;

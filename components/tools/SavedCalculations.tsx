@@ -41,24 +41,31 @@ export default function SavedCalculations() {
   const toolMap = useMemo(() => new Map(toolCatalog.map((tool) => [tool.id, tool])), []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const collected: StoredCalculation<unknown, unknown>[] = [];
-    for (let i = 0; i < localStorage.length; i += 1) {
-      const key = localStorage.key(i);
-      if (!key || !key.startsWith(STORAGE_PREFIX)) continue;
-      const toolId = key.slice(STORAGE_PREFIX.length);
-      const list = safeParse(localStorage.getItem(key)).map((entry) => ({
-        ...entry,
-        toolId: entry.toolId || toolId,
-      }));
-      collected.push(...list);
+    if (typeof window === "undefined") {
+      setIsLoaded(true);
+      return;
     }
 
-    collected.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
-    Promise.resolve().then(() => {
+    const collected: StoredCalculation<unknown, unknown>[] = [];
+
+    try {
+      for (let i = 0; i < localStorage.length; i += 1) {
+        const key = localStorage.key(i);
+        if (!key || !key.startsWith(STORAGE_PREFIX)) continue;
+        const toolId = key.slice(STORAGE_PREFIX.length);
+        const list = safeParse(localStorage.getItem(key)).map((entry) => ({
+          ...entry,
+          toolId: entry.toolId || toolId,
+        }));
+        collected.push(...list);
+      }
+    } catch {
+      // localStorage access can fail in strict privacy modes.
+    } finally {
+      collected.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
       setEntries(collected);
       setIsLoaded(true);
-    });
+    }
   }, []);
 
   const handleDelete = (entry: StoredCalculation<unknown, unknown>) => {

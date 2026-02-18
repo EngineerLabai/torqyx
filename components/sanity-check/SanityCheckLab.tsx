@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
@@ -18,8 +19,6 @@ import {
 import VariableTable from "@/components/sanity-check/VariableTable";
 import FormulaEditor from "@/components/sanity-check/FormulaEditor";
 import ResultPanel from "@/components/sanity-check/ResultPanel";
-import SweepPanel from "@/components/sanity-check/SweepPanel";
-import MonteCarloPanel from "@/components/sanity-check/MonteCarloPanel";
 import ClientErrorBoundary from "@/components/sanity-check/ClientErrorBoundary";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 import ToolDataActions from "@/components/tools/ToolDataActions";
@@ -49,6 +48,14 @@ const UNIT_OPTIONS = [
   "J",
   "Hz",
 ];
+
+const SweepPanel = dynamic(() => import("@/components/sanity-check/SweepPanel"), {
+  loading: () => <PanelLoadingState />,
+});
+
+const MonteCarloPanel = dynamic(() => import("@/components/sanity-check/MonteCarloPanel"), {
+  loading: () => <PanelLoadingState />,
+});
 
 const buildDefaultSession = (locale: "tr" | "en"): LabSession => ({
   title: "",
@@ -399,4 +406,8 @@ export default function SanityCheckLab() {
       </div>
     </ClientErrorBoundary>
   );
+}
+
+function PanelLoadingState() {
+  return <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-6 text-xs text-slate-500">Loading...</div>;
 }

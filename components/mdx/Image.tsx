@@ -40,11 +40,14 @@ export default function Image({
           className={mergeClassName("rounded-xl border border-slate-200 bg-white", className)}
         />
       ) : (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}
           alt={alt}
           width={width}
           height={height}
+          loading="lazy"
+          decoding="async"
           className={mergeClassName("rounded-xl border border-slate-200 bg-white", className)}
           {...rest}
         />

@@ -6,23 +6,23 @@ export type RfqSort = "newest" | "due-date" | "priority" | "status";
 
 export const RFQ_STATUS_OPTIONS: Array<{ value: RfqStatus; label: Record<Locale, string> }> = [
   { value: "new", label: { tr: "Yeni", en: "New" } },
-  { value: "review", label: { tr: "Inceleme", en: "In review" } },
-  { value: "waiting", label: { tr: "Musteri bekleniyor", en: "Waiting on customer" } },
+  { value: "review", label: { tr: "İnceleme", en: "In review" } },
+  { value: "waiting", label: { tr: "Müşteri bekleniyor", en: "Waiting on customer" } },
   { value: "quoted", label: { tr: "Teklif verildi", en: "Quoted" } },
-  { value: "won", label: { tr: "Kazanildi", en: "Won" } },
+  { value: "won", label: { tr: "Kazanıldı", en: "Won" } },
   { value: "lost", label: { tr: "Kaybedildi", en: "Lost" } },
 ];
 
 export const RFQ_PRIORITY_OPTIONS: Array<{ value: RfqPriority; label: Record<Locale, string> }> = [
-  { value: "high", label: { tr: "Yuksek", en: "High" } },
+  { value: "high", label: { tr: "Yüksek", en: "High" } },
   { value: "medium", label: { tr: "Orta", en: "Medium" } },
-  { value: "low", label: { tr: "Dusuk", en: "Low" } },
+  { value: "low", label: { tr: "Düşük", en: "Low" } },
 ];
 
 export const RFQ_SORT_OPTIONS: Array<{ value: RfqSort; label: Record<Locale, string> }> = [
   { value: "newest", label: { tr: "En yeni", en: "Newest" } },
   { value: "due-date", label: { tr: "Teslim tarihi", en: "Due date" } },
-  { value: "priority", label: { tr: "Oncelik", en: "Priority" } },
+  { value: "priority", label: { tr: "Öncelik", en: "Priority" } },
   { value: "status", label: { tr: "Durum", en: "Status" } },
 ];
 
@@ -56,40 +56,40 @@ export const RFQ_COPY: Record<Locale, {
 }> = {
   tr: {
     seo: {
-      title: "RFQ ve Teknik Sartname Ozeti | Proje Merkezi",
-      description: "RFQ ve teknik sartname maddeleri icin lokal takip paneli.",
+      title: "RFQ ve Teknik Şartname Özeti | Proje Merkezi",
+      description: "RFQ ve teknik şartname maddeleri için lokal takip paneli.",
     },
     hero: {
-      title: "RFQ / Teknik Sartname Ozeti",
+      title: "RFQ / Teknik Şartname Özeti",
       description:
-        "Musteri RFQ ve teknik sartnameleri icin sahip, teslim tarihi ve oncelik odakli takip.",
+        "Müşteri RFQ ve teknik şartnameleri için sahip, teslim tarihi ve öncelik odaklı takip.",
       eyebrow: "Project Hub",
       imageAlt: "RFQ tracker",
     },
-    formTitle: "Yeni RFQ satiri",
-    formSubtitle: "Musteri, parca ve teklif detaylarini tek satirda topla.",
+    formTitle: "Yeni RFQ satırı",
+    formSubtitle: "Müşteri, parça ve teklif detaylarını tek satırda topla.",
     formCta: "RFQ ekle",
-    filtersTitle: "Filtreler ve siralama",
+    filtersTitle: "Filtreler ve sıralama",
     tableTitle: "RFQ listesi",
-    exportLabel: "Tabloyu disari aktar",
-    exportSoon: "Cok yakinda",
-    searchPlaceholder: "Musteri, parca, sahip veya not icinde ara",
+    exportLabel: "Tabloyu dışarı aktar",
+    exportSoon: "Çok yakında",
+    searchPlaceholder: "Müşteri, parça, sahip veya not içinde ara",
     fields: {
-      customer: "Musteri",
+      customer: "Müşteri",
       rfqId: "RFQ / Proje kodu",
-      part: "Parca / Sistem",
+      part: "Parça / Sistem",
       owner: "Sahip",
       dueDate: "Teklif teslim",
-      priority: "Oncelik",
+      priority: "Öncelik",
       status: "Durum",
       volume: "Hedef adet",
       sopDate: "Hedef SOP",
-      link: "Sartname linki",
+      link: "Şartname linki",
       notes: "Notlar",
     },
-    emptyState: "Henuz RFQ kaydi yok. Ustteki formdan yeni satir ekleyin.",
+    emptyState: "Henüz RFQ kaydı yok. Üstteki formdan yeni satır ekleyin.",
     actions: { delete: "Sil" },
-    storageNote: "Veriler cihazinizda saklanir (localStorage).",
+    storageNote: "Veriler cihazınızda saklanır (localStorage).",
   },
   en: {
     seo: {

@@ -19,8 +19,16 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "invalid slug" }, { status: 400 });
   }
 
+  const queryLocale = searchParams.get("locale");
+  const headerLocale = request.headers.get("x-locale");
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
-  const locale: Locale = isLocale(cookieLocale) ? cookieLocale : "tr";
+  const locale: Locale = isLocale(queryLocale)
+    ? queryLocale
+    : isLocale(headerLocale)
+      ? headerLocale
+      : isLocale(cookieLocale)
+        ? cookieLocale
+        : "tr";
   const docs = await getToolDocsResponse(slug, locale);
   return NextResponse.json(docs);
 }

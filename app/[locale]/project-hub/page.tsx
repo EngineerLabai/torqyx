@@ -4,6 +4,7 @@ import ActionCard from "@/components/ui/ActionCard";
 import { getHeroImageSrc } from "@/lib/assets";
 import { buildPageMetadata } from "@/utils/metadata";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -20,38 +21,38 @@ const COPY: Record<Locale, {
   tr: {
     seo: {
       title: "Proje Merkezi | AI Engineers Lab",
-      description: "Devreye alma, proje takip, RFQ ve revizyon yonetimi icin lokal calisan muhendis panelleri.",
+      description: "Devreye alma, proje takip, RFQ ve revizyon yönetimi için lokal çalışan mühendis panelleri.",
     },
     hero: {
       title: "Proje Merkezi",
       description:
-        "Muhendislik ekipleri icin hizli, hafif ve tarayici-icinde calisan takip modulleri. Kayitlar cihazinizda tutulur.",
+        "Mühendislik ekipleri için hızlı, hafif ve tarayıcı-içinde çalışan takip modülleri. Kayıtlar cihazınızda tutulur.",
       eyebrow: "Project Hub",
       imageAlt: "Project hub overview",
     },
-    cta: "Modulu Ac",
+    cta: "Modülü Aç",
     modules: [
       {
         title: "Devreye Alma Paneli",
-        description: "Komisyoning akisini adim adim kontrol et, checklist kaydet ve el teslim paketi olustur.",
+        description: "Komisyoning akışını adım adım kontrol et, checklist kaydet ve el teslim paketi oluştur.",
         href: "/project-hub/devreye-alma",
         badge: "Workflow",
       },
       {
-        title: "Proje & Iyilestirme Takip Paneli",
-        description: "Proje ve Kaizen calismalarini sahip, tarih, oncelik ve durum bazli yonet.",
+        title: "Proje & İyileştirme Takip Paneli",
+        description: "Proje ve Kaizen çalışmalarını sahip, tarih, öncelik ve durum bazlı yönet.",
         href: "/project-hub/project-tools",
         badge: "Tracker",
       },
       {
-        title: "RFQ / Teknik Sartname Ozeti",
-        description: "Teknik sartname ve teklif isteklerini ekiplerle takip et, teslim tarihlerini gor.",
+        title: "RFQ / Teknik Şartname Özeti",
+        description: "Teknik şartname ve teklif isteklerini ekiplerle takip et, teslim tarihlerini gör.",
         href: "/project-hub/rfq",
         badge: "RFQ",
       },
       {
-        title: "Parca / Revizyon Takip Panosu",
-        description: "Parca revizyonlarini, sorumlulari ve onay durumlarini tek tabloda gor.",
+        title: "Parça / Revizyon Takip Panosu",
+        description: "Parça revizyonlarını, sorumluları ve onay durumlarını tek tabloda gör.",
         href: "/project-hub/part-tracking",
         badge: "Revision",
       },
@@ -116,6 +117,10 @@ export default async function ProjectHubPage({ params }: PageProps) {
   const locale = resolveLocale(localeParam);
   const copy = COPY[locale];
   const heroImage = getHeroImageSrc("projectHub") || getHeroImageSrc("tools");
+  const localizedModules = copy.modules.map((module) => ({
+    ...module,
+    href: withLocalePrefix(module.href, locale),
+  }));
 
   return (
     <PageShell>
@@ -128,7 +133,7 @@ export default async function ProjectHubPage({ params }: PageProps) {
       />
 
       <section className="grid gap-4 md:grid-cols-2">
-        {copy.modules.map((module) => (
+        {localizedModules.map((module) => (
           <ActionCard
             key={module.title}
             title={module.title}

@@ -28,23 +28,23 @@ export const COMMISSIONING_COPY: Record<Locale, {
   tr: {
     seo: {
       title: "Devreye Alma Paneli | Proje Merkezi",
-      description: "Komisyoning adimlari, checklist, loglar ve teslim paketi icin lokal calisan panel.",
+      description: "Komisyoning adımları, checklist, loglar ve teslim paketi için lokal çalışan panel.",
     },
     hero: {
       title: "Devreye Alma Paneli",
       description:
-        "Adim adim komisyoning akisini yonet. Her maddeyi tamamla, notlari gor ve teslim paketini hazirla.",
+        "Adım adım komisyoning akışını yönet. Her maddeyi tamamla, notları gör ve teslim paketini hazırla.",
       eyebrow: "Project Hub",
       imageAlt: "Commissioning workflow",
     },
     progressLabel: "Genel ilerleme",
-    resetLabel: "Checklist sifirla",
-    exportLabel: "Checklist disa aktar",
-    exportSoon: "Cok yakinda",
-    completedLabel: "Tamamlandi",
+    resetLabel: "Checklist sıfırla",
+    exportLabel: "Checklist dışa aktar",
+    exportSoon: "Çok yakında",
+    completedLabel: "Tamamlandı",
     markDoneLabel: "Tamamla",
     checklistTitle: "Komisyoning checklisti",
-    storageNote: "Isaretler bu cihazda saklanir (localStorage).",
+    storageNote: "İşaretler bu cihazda saklanır (localStorage).",
   },
   en: {
     seo: {
@@ -73,23 +73,23 @@ export const COMMISSIONING_STEPS: Record<Locale, ChecklistStep[]> = {
   tr: [
     {
       id: "prechecks",
-      title: "On Hazirlik / Pre-Checks",
-      description: "Dokumanlar, izinler ve sahaya cikmadan onceki kontroller.",
+      title: "Ön Hazırlık / Pre-Checks",
+      description: "Dokümanlar, izinler ve sahaya çıkmadan önceki kontroller.",
       items: [
         {
           id: "docs",
-          title: "Dokuman setini dogrula",
-          detail: "Guncel P&ID, layout, elek/schematics, ekipman datasheet ve revizyon listesi.",
+          title: "Doküman setini doğrula",
+          detail: "Güncel P&ID, layout, elek/schematics, ekipman datasheet ve revizyon listesi.",
         },
         {
           id: "safety",
           title: "Emniyet izinleri ve risk listesi",
-          detail: "Saha izinleri, LOTO, risk analizi ve acil durum planlarini onayla.",
+          detail: "Saha izinleri, LOTO, risk analizi ve acil durum planlarını onayla.",
         },
         {
           id: "tools",
-          title: "Kalibrasyonlu ekipman kontrolu",
-          detail: "Tork anahtari, basinc sensoru, multimetre ve test ekipmani kalibrasyon tarihi.",
+          title: "Kalibrasyonlu ekipman kontrolü",
+          detail: "Tork anahtarı, basınç sensörü, multimetre ve test ekipmanı kalibrasyon tarihi.",
         },
         {
           id: "spares",
@@ -101,56 +101,56 @@ export const COMMISSIONING_STEPS: Record<Locale, ChecklistStep[]> = {
     {
       id: "mechanical",
       title: "Mekanik Montaj Kontrolleri",
-      description: "Tork, montaj, hizalama ve isaretleme adimlari.",
+      description: "Tork, montaj, hizalama ve işaretleme adımları.",
       items: [
         {
           id: "torque",
-          title: "Tork loglarini tamamla",
-          detail: "Kritik baglantilar icin hedef tork, cihaz ve operator bilgisi kaydi.",
+          title: "Tork loglarını tamamla",
+          detail: "Kritik bağlantılar için hedef tork, cihaz ve operatör bilgisi kaydı.",
         },
         {
           id: "marking",
-          title: "Isaretleme ve witness",
-          detail: "Torklanan baglantilari boya veya witness mark ile isaretle.",
+          title: "İşaretleme ve witness",
+          detail: "Torklanan bağlantıları boya veya witness mark ile işaretle.",
         },
         {
           id: "alignment",
-          title: "Hizalama ve hizalama toleransi",
-          detail: "Kaplinler, rulman yataklari ve hareketli parcalar icin hizalama kontrolu.",
+          title: "Hizalama ve hizalama toleransı",
+          detail: "Kaplinler, rulman yatakları ve hareketli parçalar için hizalama kontrolü.",
         },
       ],
     },
     {
       id: "pneumatic",
-      title: "Pnomatik / Hidrolik Kontroller",
-      description: "Sizdirmazlik, basinc tutma ve temizlik.",
+      title: "Pnömatik / Hidrolik Kontroller",
+      description: "Sızdırmazlık, basınç tutma ve temizlik.",
       items: [
         {
           id: "leak",
-          title: "Kacak testi",
-          detail: "Dusus basinc testini uygula ve sizinti noktalarini kaydet.",
+          title: "Kaçak testi",
+          detail: "Düşüş basınç testini uygula ve sızıntı noktalarını kaydet.",
         },
         {
           id: "pressure",
-          title: "Basinc tutma",
-          detail: "Belirlenen sure boyunca basinc dususunu gozle ve kaydet.",
+          title: "Basınç tutma",
+          detail: "Belirlenen süre boyunca basınç düşüşünü gözle ve kaydet.",
         },
         {
           id: "cleanliness",
-          title: "Filtre / yag temizligi",
-          detail: "Filtre elemanlarini ve yag temizligini standartlara gore kontrol et.",
+          title: "Filtre / yağ temizliği",
+          detail: "Filtre elemanlarını ve yağ temizliğini standartlara göre kontrol et.",
         },
       ],
     },
     {
       id: "electrical",
-      title: "Elektrik / Enstrumantasyon",
-      description: "Sensor, kablolama ve I/O dogrulamalari.",
+      title: "Elektrik / Enstrümantasyon",
+      description: "Sensör, kablolama ve I/O doğrulamaları.",
       items: [
         {
           id: "io",
-          title: "I/O noktalarini dogrula",
-          detail: "PLC sinyalleri, sensor okumalari ve ters polarite kontrolleri.",
+          title: "I/O noktalarını doğrula",
+          detail: "PLC sinyalleri, sensör okumaları ve ters polarite kontrolleri.",
         },
         {
           id: "ground",
@@ -159,52 +159,52 @@ export const COMMISSIONING_STEPS: Record<Locale, ChecklistStep[]> = {
         },
         {
           id: "calibration",
-          title: "Sensor kalibrasyonu",
-          detail: "Basinc, sicaklik ve debi sensorlerinin kalibrasyon sertifikalari.",
+          title: "Sensör kalibrasyonu",
+          detail: "Basınç, sıcaklık ve debi sensörlerinin kalibrasyon sertifikaları.",
         },
       ],
     },
     {
       id: "functional",
       title: "Fonksiyonel Testler",
-      description: "Soguk/sicak test ve kabul kriterleri.",
+      description: "Soğuk/sıcak test ve kabul kriterleri.",
       items: [
         {
           id: "dryrun",
-          title: "Soguk calistirma",
-          detail: "Yuk olmadan hiz ve titresim kontrolu yap.",
+          title: "Soğuk çalıştırma",
+          detail: "Yük olmadan hız ve titreşim kontrolü yap.",
         },
         {
           id: "hotrun",
-          title: "Sicak dongu",
-          detail: "Isi yuklenmesi, genlesme ve stabilite kontrolu.",
+          title: "Sıcak döngü",
+          detail: "Isı yüklenmesi, genleşme ve stabilite kontrolü.",
         },
         {
           id: "acceptance",
           title: "Kabul kriterleri",
-          detail: "Performans, enerji ve kalite hedeflerini dogrula.",
+          detail: "Performans, enerji ve kalite hedeflerini doğrula.",
         },
       ],
     },
     {
       id: "handover",
       title: "Teslim Paketi",
-      description: "Loglar, checklist ve kapanis dokumanlari.",
+      description: "Loglar, checklist ve kapanış dokümanları.",
       items: [
         {
           id: "logs",
-          title: "Test ve tork loglari",
-          detail: "Tum test raporlarini ve tork loglarini dosyala.",
+          title: "Test ve tork logları",
+          detail: "Tüm test raporlarını ve tork loglarını dosyala.",
         },
         {
           id: "checklist",
           title: "Checklist paketini tamamla",
-          detail: "Onayli checklist ve imza sayfalarini ekle.",
+          detail: "Onaylı checklist ve imza sayfalarını ekle.",
         },
         {
           id: "handoff",
-          title: "Egitim ve teslim",
-          detail: "Operator egitimi, bakim plani ve yedek parca listesi.",
+          title: "Eğitim ve teslim",
+          detail: "Operatör eğitimi, bakım planı ve yedek parça listesi.",
         },
       ],
     },

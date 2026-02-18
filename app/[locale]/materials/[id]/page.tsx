@@ -52,8 +52,8 @@ const buildSanitySession = (material: MaterialEntry, locale: Locale): LabSession
     {
       id: "var-e",
       symbol: "E",
-      name: locale === "tr" ? "Elastisite modulu" : "Young's modulus",
-      description: locale === "tr" ? "Malzeme elastisite modulü" : "Material elastic modulus",
+      name: locale === "tr" ? "Elastisite modülü" : "Young's modulus",
+      description: locale === "tr" ? "Malzeme elastisite modülü" : "Material elastic modulus",
       value: E,
       unit: "MPa",
       min: Math.round(E * 0.9),
@@ -63,8 +63,8 @@ const buildSanitySession = (material: MaterialEntry, locale: Locale): LabSession
     {
       id: "var-rho",
       symbol: "rho",
-      name: locale === "tr" ? "Yogunluk" : "Density",
-      description: locale === "tr" ? "Malzeme yogunlugu" : "Material density",
+      name: locale === "tr" ? "Yoğunluk" : "Density",
+      description: locale === "tr" ? "Malzeme yoğunluğu" : "Material density",
       value: density,
       unit: "kg/m3",
       min: Math.round(density * 0.95),
@@ -77,8 +77,8 @@ const buildSanitySession = (material: MaterialEntry, locale: Locale): LabSession
     variables.splice(1, 0, {
       id: "var-re",
       symbol: "Re",
-      name: locale === "tr" ? "Akma dayanimi" : "Yield strength",
-      description: locale === "tr" ? "Malzeme akma dayanimi" : "Material yield strength",
+      name: locale === "tr" ? "Akma dayanımı" : "Yield strength",
+      description: locale === "tr" ? "Malzeme akma dayanımı" : "Material yield strength",
       value: Number(yieldValue),
       unit: "MPa",
       min: Math.round(Number(yieldValue) * 0.9),
@@ -88,7 +88,7 @@ const buildSanitySession = (material: MaterialEntry, locale: Locale): LabSession
   }
 
   return {
-    title: locale === "tr" ? `${material.name} malzeme kontrolu` : `${material.name} material check`,
+    title: locale === "tr" ? `${material.name} malzeme kontrolü` : `${material.name} material check`,
     variables,
     formula: hasYield ? "sigma_allow = Re / 1.5" : "E",
     expectedUnit: "MPa",
@@ -121,7 +121,7 @@ export async function generateMetadata({ params }: PageProps) {
 
   const description =
     locale === "tr"
-      ? `${material.name} icin tipik malzeme ozellikleri, yogunluk, elastisite modulü ve dayanım degerleri.`
+      ? `${material.name} için tipik malzeme özellikleri, yoğunluk, elastisite modülü ve dayanım değerleri.`
       : `Typical properties for ${material.name}, including density, modulus, and strength values.`;
 
   return buildPageMetadata({

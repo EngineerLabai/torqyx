@@ -18,29 +18,29 @@ const COPY: Record<Locale, {
 }> = {
   tr: {
     seo: {
-      title: "Akiskanlar | Standartlar",
-      description: "Akiskan ozellikleri icin hizli referans tablosu ve Darcy-Weisbach ozet.",
+      title: "Akışkanlar | Standartlar",
+      description: "Akışkan özellikleri için hızlı referans tablosu ve Darcy-Weisbach özet.",
     },
     hero: {
-      title: "Akiskanlar: hizli ozellik tablosu",
+      title: "Akışkanlar: hızlı özellik tablosu",
       description:
-        "Hizli debi ve basinc dusumu hesaplari icin tipik yogunluk ve viskozite araliklari.",
+        "Hızlı debi ve basınç düşümü hesapları için tipik yoğunluk ve viskozite aralıkları.",
       eyebrow: "Standards",
       imageAlt: "Fluids quick reference",
     },
     props: {
-      title: "Tipik ozellikler (20C civari)",
-      description: "Degerler referans araligidir; proses sartlari ile degisir.",
-      columns: ["Akiskan", "Yogunluk (kg/m3)", "Dinamik viskozite (mPa.s)", "Not"],
+      title: "Tipik özellikler (20C civarı)",
+      description: "Değerler referans aralığıdır; proses şartları ile değişir.",
+      columns: ["Akışkan", "Yoğunluk (kg/m3)", "Dinamik viskozite (mPa.s)", "Not"],
     },
     darcy: {
-      title: "Darcy-Weisbach hizli ozet",
+      title: "Darcy-Weisbach hızlı özet",
       formula: "DeltaP = f * (L/D) * (rho * v^2 / 2)",
       notes: [
         "Re < 2300: f = 64 / Re (laminer).",
-        "2300-4000: gecis bolgesi, dikkatli yorumla.",
+        "2300-4000: geçiş bölgesi, dikkatli yorumla.",
         "Re > 4000: Moody / Swamee-Jain ile f hesapla.",
-        "Bagil puruzluluk (epsilon/D) f degerini etkiler.",
+        "Bağıl pürüzlülük (epsilon/D) f değerini etkiler.",
       ],
     },
   },
@@ -88,13 +88,13 @@ const FLUID_ROWS = [
     note: { tr: "1 atm", en: "1 atm" },
   },
   {
-    name: { tr: "Hidrolik yag", en: "Hydraulic oil" },
+    name: { tr: "Hidrolik yağ", en: "Hydraulic oil" },
     density: "860-900",
     viscosity: "40-80",
-    note: { tr: "ISO VG 46 civari", en: "Around ISO VG 46" },
+    note: { tr: "ISO VG 46 civarı", en: "Around ISO VG 46" },
   },
   {
-    name: { tr: "Hafif mineral yag", en: "Light mineral oil" },
+    name: { tr: "Hafif mineral yağ", en: "Light mineral oil" },
     density: "830-870",
     viscosity: "10-30",
     note: { tr: "Genel referans", en: "General reference" },

@@ -1,15 +1,15 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
-import AuthModal from "@/components/auth/AuthModal";
-import ConsentBanner from "@/components/consent/ConsentBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import useDevRenderLogger from "@/components/monitoring/useDevRenderLogger";
 import PremiumCTA from "@/components/premium/PremiumCTA";
 import { openCommandPalette } from "@/components/search/commandPaletteEvents";
 import { getBrandCopy } from "@/config/brand";
@@ -40,8 +40,17 @@ const CommandPalette = dynamic(() => import("@/components/search/CommandPalette"
   ssr: false,
 });
 
+const AuthModal = dynamic(() => import("@/components/auth/AuthModal"), {
+  ssr: false,
+});
+
+const ConsentBanner = dynamic(() => import("@/components/consent/ConsentBanner"), {
+  ssr: false,
+});
+
 export default function SiteShell({ children, messages }: { children: ReactNode; messages: SiteShellMessages }) {
   const { locale } = useLocale();
+  useDevRenderLogger("Layout");
   const brandContent = getBrandCopy(locale);
   const searchCopy = messages.components.search;
   const navCopy = messages.nav as {
@@ -49,28 +58,35 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
     descriptions?: Record<string, string>;
     badges?: Record<string, string>;
   };
-  const resolveLabel = (key: string) => navCopy.labels?.[key] ?? key;
-  const resolveDescription = (key?: string) => (key ? navCopy.descriptions?.[key] ?? "" : "");
-  const resolveBadge = (key?: string) => (key ? navCopy.badges?.[key] : undefined);
-  const resolveHref = (route: NavLinkConfig["route"]) => getRoute(route, locale);
+  const { navSections, sidebarSections } = useMemo(() => {
+    const resolveLabel = (key: string) => navCopy.labels?.[key] ?? key;
+    const resolveDescription = (key?: string) => (key ? navCopy.descriptions?.[key] ?? "" : "");
+    const resolveBadge = (key?: string) => (key ? navCopy.badges?.[key] : undefined);
+    const resolveHref = (route: NavLinkConfig["route"]) => getRoute(route, locale);
 
-  const navSections: NavSection[] = (navConfig.megaMenu as unknown as NavSectionConfig[]).map((section) => ({
-    label: resolveLabel(section.labelKey),
-    description: resolveDescription(section.descriptionKey ?? section.labelKey),
-    links: (section.links as NavLinkConfig[]).map((link) => ({
-      label: resolveLabel(link.labelKey),
-      href: resolveHref(link.route),
-      badge: resolveBadge(link.badgeKey),
-    })),
-  }));
+    const nextNavSections: NavSection[] = (navConfig.megaMenu as unknown as NavSectionConfig[]).map((section) => ({
+      label: resolveLabel(section.labelKey),
+      description: resolveDescription(section.descriptionKey ?? section.labelKey),
+      links: (section.links as NavLinkConfig[]).map((link) => ({
+        label: resolveLabel(link.labelKey),
+        href: resolveHref(link.route),
+        badge: resolveBadge(link.badgeKey),
+      })),
+    }));
 
-  const sidebarSections: SidebarSection[] = (navConfig.sidebar as unknown as NavSectionConfig[]).map((section) => ({
-    label: resolveLabel(section.labelKey),
-    links: (section.links as NavLinkConfig[]).map((link) => ({
-      label: resolveLabel(link.labelKey),
-      href: resolveHref(link.route),
-    })),
-  }));
+    const nextSidebarSections: SidebarSection[] = (navConfig.sidebar as unknown as NavSectionConfig[]).map((section) => ({
+      label: resolveLabel(section.labelKey),
+      links: (section.links as NavLinkConfig[]).map((link) => ({
+        label: resolveLabel(link.labelKey),
+        href: resolveHref(link.route),
+      })),
+    }));
+
+    return {
+      navSections: nextNavSections,
+      sidebarSections: nextSidebarSections,
+    };
+  }, [locale, navCopy]);
   const pathname = usePathname() ?? "/";
   const isHome = stripLocaleFromPath(pathname) === "/";
   const year = new Date().getFullYear();
@@ -84,6 +100,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
       </div>
 
       <header className="site-header relative z-50 border-b border-slate-200/80 bg-white/80">
+        <NavbarRenderProbe />
         <div className="site-container flex items-center justify-between gap-6 py-4">
           <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
@@ -126,7 +143,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
         <div className="border-t border-slate-100 bg-white/85 px-4 py-2 lg:hidden">
           <div className="mx-auto flex max-w-8xl flex-wrap gap-2">
-            {navSections.slice(0, 3).map((section) => (
+            {navSections.map((section) => (
               <Link
                 key={section.label}
                 href={section.links[0]?.href ?? "#"}
@@ -259,4 +276,9 @@ function SidebarSectionCard({ section }: { section: SidebarSection }) {
       </div>
     </div>
   );
+}
+
+function NavbarRenderProbe() {
+  useDevRenderLogger("Navbar");
+  return null;
 }

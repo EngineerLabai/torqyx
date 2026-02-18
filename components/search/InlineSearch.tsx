@@ -7,6 +7,9 @@ import { useSearchIndex, filterSearchResults } from "@/components/search/useSear
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { buildSearchText } from "@/utils/search-index";
+import { withLocalePrefix } from "@/utils/locale-path";
+import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import type { SearchIndexItem } from "@/utils/search-index";
 
 const ICONS = {
@@ -30,13 +33,63 @@ const BADGE_STYLES: Record<SearchIndexItem["type"], string> = {
 export default function InlineSearch() {
   const { locale } = useLocale();
   const copy = getMessages(locale).components.search;
+  const toolLibraryLabels = getMessages(locale).components.toolLibrary.labels;
+  const toolLibraryLabelsEn = getMessages("en").components.toolLibrary.labels;
+  const toolLibraryLabelsTr = getMessages("tr").components.toolLibrary.labels;
   const [query, setQuery] = useState("");
   const searchEnabled = query.trim().length > 0;
   const { items, loading } = useSearchIndex(searchEnabled);
   const debouncedQuery = useDebouncedValue(query, 100);
+  const fallbackItems = useMemo<SearchIndexItem[]>(
+    () =>
+      toolCatalog.map((tool) => {
+        const localized = getToolCopy(tool, locale);
+        const english = getToolCopy(tool, "en");
+        const turkish = getToolCopy(tool, "tr");
+        const localizedCategory = tool.category ? toolLibraryLabels.category[tool.category] : "";
+        const englishCategory = tool.category ? toolLibraryLabelsEn.category[tool.category] : "";
+        const turkishCategory = tool.category ? toolLibraryLabelsTr.category[tool.category] : "";
+        const localizedTagLabels = (tool.tags ?? []).map((tag) => toolLibraryLabels.tag[tag]);
+        const englishTagLabels = (tool.tags ?? []).map((tag) => toolLibraryLabelsEn.tag[tag]);
+        const turkishTagLabels = (tool.tags ?? []).map((tag) => toolLibraryLabelsTr.tag[tag]);
+
+        return {
+          id: `tool:${tool.id}`,
+          type: "tool",
+          title: localized.title,
+          description: localized.description,
+          href: withLocalePrefix(tool.href, locale),
+          tags: [...(tool.tags ?? []), ...localizedTagLabels, ...englishTagLabels, ...turkishTagLabels],
+          localeTitles: {
+            tr: turkish.title,
+            en: english.title,
+          },
+          searchText: buildSearchText(
+            localized.title,
+            localized.description,
+            english.title,
+            english.description,
+            turkish.title,
+            turkish.description,
+            localizedCategory,
+            englishCategory,
+            turkishCategory,
+            ...localizedTagLabels,
+            ...englishTagLabels,
+            ...turkishTagLabels,
+            ...(tool.tags ?? []),
+            tool.id,
+            tool.type,
+          ),
+        };
+      }),
+    [locale, toolLibraryLabels, toolLibraryLabelsEn, toolLibraryLabelsTr],
+  );
+  const searchableItems = items.length > 0 ? items : fallbackItems;
+  const showLoading = loading && items.length === 0 && fallbackItems.length === 0 && query.trim().length > 0;
   const results = useMemo(
-    () => (searchEnabled ? filterSearchResults(items, debouncedQuery, 8) : []),
-    [items, debouncedQuery, searchEnabled],
+    () => (searchEnabled ? filterSearchResults(searchableItems, debouncedQuery, 8) : []),
+    [searchableItems, debouncedQuery, searchEnabled],
   );
 
   return (
@@ -60,8 +113,8 @@ export default function InlineSearch() {
       </div>
 
       <div className="mt-4">
-        {loading ? (
-          <p className="text-sm text-slate-500">...</p>
+        {showLoading ? (
+          <p className="text-sm text-slate-500">{copy.inlineLoading}</p>
         ) : query.trim().length === 0 ? null : results.length === 0 ? (
           <p className="text-sm text-slate-500">{copy.inlineEmpty}</p>
         ) : (
