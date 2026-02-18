@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { DEFAULT_LOCALE, LOCALE_COOKIE, isLocale } from "@/utils/locale";
-import { stripLocaleFromPath } from "@/utils/locale-path";
+import { resolveInternalPath, resolveLocalePublicPath, stripLocaleFromPath } from "@/utils/locale-path";
 
 const PUBLIC_FILE = /\.(.*)$/;
 const ONE_YEAR = 60 * 60 * 24 * 365;
@@ -13,6 +13,8 @@ const LOCALE_PRESERVE_PATHS = new Set([
   "/standards/fluids",
 ]);
 const LOCALE_PRESERVE_PREFIXES = ["/project-hub", "/materials", "/projects"];
+
+const toLocalePath = (locale: "tr" | "en", pathname: string) => (pathname === "/" ? `/${locale}` : `/${locale}${pathname}`);
 
 const getPreferredLocale = (request: NextRequest) => {
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
@@ -40,9 +42,21 @@ export default function proxy(request: NextRequest) {
 
   if (isLocale(segment)) {
     const basePath = stripLocaleFromPath(pathname);
+    const internalPath = resolveInternalPath(basePath);
+    const canonicalPublicPath = resolveLocalePublicPath(segment, internalPath);
+
+    if (canonicalPublicPath !== basePath) {
+      const canonicalUrl = request.nextUrl.clone();
+      canonicalUrl.pathname = toLocalePath(segment, canonicalPublicPath);
+      canonicalUrl.search = request.nextUrl.search;
+      const response = NextResponse.redirect(canonicalUrl);
+      response.cookies.set(LOCALE_COOKIE, segment, { path: "/", maxAge: ONE_YEAR });
+      return response;
+    }
+
     const shouldPreserve =
-      LOCALE_PRESERVE_PATHS.has(basePath) ||
-      LOCALE_PRESERVE_PREFIXES.some((prefix) => basePath === prefix || basePath.startsWith(`${prefix}/`));
+      LOCALE_PRESERVE_PATHS.has(internalPath) ||
+      LOCALE_PRESERVE_PREFIXES.some((prefix) => internalPath === prefix || internalPath.startsWith(`${prefix}/`));
     if (shouldPreserve) {
       const requestHeaders = new Headers(request.headers);
       requestHeaders.set("x-locale", segment);
@@ -51,7 +65,7 @@ export default function proxy(request: NextRequest) {
       return response;
     }
     const rewritten = request.nextUrl.clone();
-    rewritten.pathname = basePath;
+    rewritten.pathname = internalPath;
     rewritten.search = request.nextUrl.search;
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-locale", segment);
@@ -65,8 +79,10 @@ export default function proxy(request: NextRequest) {
   );
 
   const redirectLocale = shouldLocaleRedirect ? getPreferredLocale(request) : DEFAULT_LOCALE;
+  const internalPath = resolveInternalPath(pathname);
+  const localizedPath = resolveLocalePublicPath(redirectLocale, internalPath);
   const redirected = request.nextUrl.clone();
-  redirected.pathname = `/${redirectLocale}${pathname === "/" ? "" : pathname}`;
+  redirected.pathname = toLocalePath(redirectLocale, localizedPath);
   redirected.search = request.nextUrl.search;
   return NextResponse.redirect(redirected);
 }

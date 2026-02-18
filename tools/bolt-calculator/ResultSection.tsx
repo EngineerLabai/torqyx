@@ -20,9 +20,9 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Hesap Sonuclari</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Hesap Sonuçları</h2>
         <p className="text-xs text-slate-500">
-          Sonuclar yaklasik formullerle hesaplanir. Kritik uygulamalarda standard tablolarla
+          Sonuçlar yaklaşık formüllerle hesaplanır. Kritik uygulamalarda standart tablolarla
           kontrol edilmelidir.
         </p>
       </div>
@@ -43,7 +43,7 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
 
       <p className="text-[11px] text-slate-500">
         Metrik dişler için gerilme alanı yaklaşık olarak hesaplanır. ISO 898-1 gibi
-        standartlar ve OEM tablolar ile dogrulama onerilir.
+        standartlar ve OEM tablolar ile doğrulama önerilir.
       </p>
 
       <ExplanationPanel

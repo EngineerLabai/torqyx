@@ -21,54 +21,54 @@ const COPY: Record<Locale, {
 }> = {
   tr: {
     seo: {
-      title: "Metrik Disler | Standartlar",
+      title: "Metrik Dişler | Standartlar",
       description:
-        "Metrik disler icin coarse/fine ozet, hatve tablosu, kilavuz delik rehberi ve ISO notlari.",
+        "Metrik dişler için coarse/fine özet, hatve tablosu, kılavuz delik rehberi ve ISO notları.",
     },
     hero: {
-      title: "Metrik Disler: hizli muhendis ozeti",
+      title: "Metrik Dişler: hızlı mühendis özeti",
       description:
-        "Atolye ve tasarim kararlarina destek veren kisa tablo ve hatirlatmalar. Degerler tipik, kritik tasarimlar icin standartlari kontrol et.",
+        "Atölye ve tasarım kararlarına destek veren kısa tablo ve hatırlatmalar. Değerler tipik, kritik tasarımlar için standartları kontrol et.",
       eyebrow: "Standards",
       imageAlt: "Metric thread quick reference",
     },
     coarse: {
       title: "Coarse (standart hatve)",
-      body: "Genel amacli, dayanimi ve toleransi daha genistir. Cogu civata bu seriyi kullanir.",
+      body: "Genel amaçlı, dayanımı ve toleransı daha geniştir. Çoğu cıvata bu seriyi kullanır.",
       bullets: [
-        "Varsayilan secenektir; M10 gibi yazilirsa coarse kabul edilir.",
-        "Uretim ve montaj toleranslari daha rahattir.",
-        "Titresimli ortamlarda lock-nut / yapistirici onerilir.",
+        "Varsayılan seçenektir; M10 gibi yazılırsa coarse kabul edilir.",
+        "Üretim ve montaj toleransları daha rahattır.",
+        "Titreşimli ortamlarda lock-nut / yapıştırıcı önerilir.",
       ],
     },
     fine: {
       title: "Fine (ince hatve)",
-      body: "Ince ayar ve daha fazla dis sayisi gereken durumlar icin tercih edilir.",
+      body: "İnce ayar ve daha fazla diş sayısı gereken durumlar için tercih edilir.",
       bullets: [
-        "Ayni boyda daha yuksek sikma hassasiyeti saglar.",
-        "Ince et kalinlikli parcalarda daha uygundur.",
-        "Kirlenmeye daha hassastir; temiz montaj ister.",
+        "Aynı boyda daha yüksek sıkma hassasiyeti sağlar.",
+        "İnce et kalınlıklı parçalarda daha uygundur.",
+        "Kirlenmeye daha hassastır; temiz montaj ister.",
       ],
     },
     pitch: {
-      title: "Hatve kisa tablosu",
-      description: "Yaygin olculer icin coarse/fine hatveler ve tipik kilavuz delik (coarse).",
-      columns: ["Olcu", "Coarse P (mm)", "Fine P (mm)", "Kilavuz delik (mm)"],
+      title: "Hatve kısa tablosu",
+      description: "Yaygın ölçüler için coarse/fine hatveler ve tipik kılavuz delik (coarse).",
+      columns: ["Ölçü", "Coarse P (mm)", "Fine P (mm)", "Kılavuz delik (mm)"],
     },
     drill: {
-      title: "Kilavuz delik rehberi",
+      title: "Kılavuz delik rehberi",
       formula: "D_tap approx D_nominal - P",
       notes: [
-        "Yaklasik formulu 60-75% dis dolulugu icin iyi baslangic verir.",
-        "Sert malzemede 0.1-0.2 mm buyutmek kilavuz omrunu artirir.",
-        "Kesici veri sayfasi ve tolerans sinifina gore teyit et.",
+        "Yaklaşık formülü 60-75% diş doluluğu için iyi başlangıç verir.",
+        "Sert malzemede 0.1-0.2 mm büyütmek kılavuz ömrünü artırır.",
+        "Kesici veri sayfası ve tolerans sınıfına göre teyit et.",
       ],
     },
     iso: {
-      title: "ISO metrik dis notlari",
+      title: "ISO metrik diş notları",
       notes: [
-        "M ifadesi 60 deg profil anlamina gelir.",
-        "Ic dis toleransi sikca 6H / 6g kombinasyonudur.",
+        "M ifadesi 60 deg profil anlamına gelir.",
+        "İç diş toleransı sıkça 6H / 6g kombinasyonudur.",
         "Hatve belirtilmezse coarse kabul edilir.",
       ],
     },

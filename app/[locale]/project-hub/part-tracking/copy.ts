@@ -5,23 +5,23 @@ export type RevisionPriority = "low" | "medium" | "high";
 export type RevisionSort = "newest" | "due-date" | "priority" | "status";
 
 export const REVISION_STATUS_OPTIONS: Array<{ value: RevisionStatus; label: Record<Locale, string> }> = [
-  { value: "open", label: { tr: "Acik", en: "Open" } },
-  { value: "review", label: { tr: "Inceleme", en: "Review" } },
-  { value: "approved", label: { tr: "Onaylandi", en: "Approved" } },
-  { value: "released", label: { tr: "Yayinlandi", en: "Released" } },
-  { value: "closed", label: { tr: "Kapandi", en: "Closed" } },
+  { value: "open", label: { tr: "Açık", en: "Open" } },
+  { value: "review", label: { tr: "İnceleme", en: "Review" } },
+  { value: "approved", label: { tr: "Onaylandı", en: "Approved" } },
+  { value: "released", label: { tr: "Yayınlandı", en: "Released" } },
+  { value: "closed", label: { tr: "Kapandı", en: "Closed" } },
 ];
 
 export const REVISION_PRIORITY_OPTIONS: Array<{ value: RevisionPriority; label: Record<Locale, string> }> = [
-  { value: "high", label: { tr: "Yuksek", en: "High" } },
+  { value: "high", label: { tr: "Yüksek", en: "High" } },
   { value: "medium", label: { tr: "Orta", en: "Medium" } },
-  { value: "low", label: { tr: "Dusuk", en: "Low" } },
+  { value: "low", label: { tr: "Düşük", en: "Low" } },
 ];
 
 export const REVISION_SORT_OPTIONS: Array<{ value: RevisionSort; label: Record<Locale, string> }> = [
   { value: "newest", label: { tr: "En yeni", en: "Newest" } },
   { value: "due-date", label: { tr: "Teslim tarihi", en: "Due date" } },
-  { value: "priority", label: { tr: "Oncelik", en: "Priority" } },
+  { value: "priority", label: { tr: "Öncelik", en: "Priority" } },
   { value: "status", label: { tr: "Durum", en: "Status" } },
 ];
 
@@ -53,38 +53,38 @@ export const REVISION_COPY: Record<Locale, {
 }> = {
   tr: {
     seo: {
-      title: "Parca ve Revizyon Takip | Proje Merkezi",
-      description: "Parca revizyonlari icin lokal takip paneli.",
+      title: "Parça ve Revizyon Takip | Proje Merkezi",
+      description: "Parça revizyonları için lokal takip paneli.",
     },
     hero: {
-      title: "Parca / Revizyon Takip Panosu",
+      title: "Parça / Revizyon Takip Panosu",
       description:
-        "Revizyon ve degisiklikleri sahip, oncelik ve teslim tarihine gore yonetin.",
+        "Revizyon ve değişiklikleri sahip, öncelik ve teslim tarihine göre yönetin.",
       eyebrow: "Project Hub",
       imageAlt: "Revision tracker",
     },
-    formTitle: "Yeni revizyon kaydi",
-    formSubtitle: "Parca kodu, revizyon ve degisiklik bilgisini tek satirda tutun.",
-    formCta: "Kaydi ekle",
-    filtersTitle: "Filtreler ve siralama",
+    formTitle: "Yeni revizyon kaydı",
+    formSubtitle: "Parça kodu, revizyon ve değişiklik bilgisini tek satırda tutun.",
+    formCta: "Kaydı ekle",
+    filtersTitle: "Filtreler ve sıralama",
     tableTitle: "Revizyon listesi",
-    exportLabel: "Tabloyu disari aktar",
-    exportSoon: "Cok yakinda",
-    searchPlaceholder: "Parca, sahip veya not icinde ara",
+    exportLabel: "Tabloyu dışarı aktar",
+    exportSoon: "Çok yakında",
+    searchPlaceholder: "Parça, sahip veya not içinde ara",
     fields: {
-      partCode: "Parca kodu",
+      partCode: "Parça kodu",
       revision: "Revizyon",
-      change: "Degisiklik nedeni",
+      change: "Değişiklik nedeni",
       owner: "Sahip",
       dueDate: "Hedef tarih",
-      priority: "Oncelik",
+      priority: "Öncelik",
       status: "Durum",
-      link: "Dokuman linki",
+      link: "Doküman linki",
       notes: "Notlar",
     },
-    emptyState: "Henuz revizyon kaydi yok. Ustteki formdan yeni kayit ekleyin.",
+    emptyState: "Henüz revizyon kaydı yok. Üstteki formdan yeni kayıt ekleyin.",
     actions: { delete: "Sil" },
-    storageNote: "Veriler cihazinizda saklanir (localStorage).",
+    storageNote: "Veriler cihazınızda saklanır (localStorage).",
   },
   en: {
     seo: {

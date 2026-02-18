@@ -40,6 +40,30 @@ const SCENARIO_COLORS: Record<ScenarioState<unknown>["id"], string> = {
   b: "#0ea5e9",
   c: "#f59e0b",
 };
+const METRIC_LABEL_TRANSLATIONS_EN: Record<string, string> = {
+  hata: "Error",
+  sonuc: "Result",
+  "temel birim": "Base unit",
+  "gerilme alani as (mm^2)": "Stress area As (mm^2)",
+  "on yuk fv (kn)": "Preload Fv (kN)",
+  "onerilen tork t (nm)": "Recommended torque T (Nm)",
+  "cekme gerilmesi sigma (mpa)": "Tensile stress sigma (MPa)",
+  "guvenlik katsayisi s": "Safety factor S",
+  "kayma gerilmesi (mpa)": "Shear stress (MPa)",
+  "donme acisi (deg)": "Twist angle (deg)",
+  guvenlik: "Safety",
+  "l10 (milyon devir)": "L10 (million rev)",
+  "isi akisi q (w)": "Heat flow Q (W)",
+  "isil direnc r (k/w)": "Thermal resistance R (K/W)",
+  "maksimum kuvvet (n)": "Maximum force (N)",
+  "adim boyu (mm)": "Step size (mm)",
+  "nokta sayisi": "Point count",
+  "ileri kuvvet (kn)": "Extend force (kN)",
+  "geri kuvvet (kn)": "Retract force (kN)",
+  "ileri hiz (mm/s)": "Extend speed (mm/s)",
+  "gereken a (mm)": "Required a (mm)",
+  "gerilme (mpa)": "Stress (MPa)",
+};
 
 const safeDecode = <TInput,>(value: string | null): TInput | null => {
   if (!value) return null;
@@ -72,6 +96,21 @@ const isPrimitive = (value: unknown) =>
   typeof value === "string" ||
   typeof value === "number" ||
   typeof value === "boolean";
+
+const normalizeMetricLabel = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/ı/g, "i")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const translateMetricLabel = (label: string, locale: "tr" | "en") => {
+  if (locale !== "en") return label;
+  const normalized = normalizeMetricLabel(label);
+  return METRIC_LABEL_TRANSLATIONS_EN[normalized] ?? label;
+};
 
 export default function ComparePanel<TInput, TResult>({
   toolId,
@@ -159,7 +198,12 @@ export default function ComparePanel<TInput, TResult>({
     });
 
     if (!hasError) {
-      return metrics.filter((metric) => metric.key !== "error");
+      return metrics
+        .filter((metric) => metric.key !== "error")
+        .map((metric) => ({
+          ...metric,
+          label: translateMetricLabel(metric.label, locale),
+        }));
     }
 
     return metrics.map((metric) =>
@@ -168,7 +212,10 @@ export default function ComparePanel<TInput, TResult>({
             ...metric,
             label: errorLabel,
           }
-        : metric,
+        : {
+            ...metric,
+            label: translateMetricLabel(metric.label, locale),
+          },
     );
   }, [metrics, scenarioResults, locale]);
 

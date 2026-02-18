@@ -99,9 +99,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0),
   );
   const shouldShowMissingNote = docs && !docs.hasDocs;
-  const shouldShowLocaleFallbackNote = Boolean(
-    docs?.hasDocs && docs.docsLocale && docs.docsLocale !== locale,
-  );
   const docsMetaLine = useMemo(() => {
     if (!docs?.metaInfo) return null;
     const segments: string[] = [];
@@ -158,13 +155,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
       {copy.docsMissingBody}
     </Callout>
   );
-  const localeFallbackCallout = shouldShowLocaleFallbackNote ? (
-    <Callout type="info" title={locale === "tr" ? "Dil notu" : "Language note"}>
-      {locale === "tr"
-        ? "Bu arac i\u00e7in \u0130ngilizce dok\u00fcmantasyon hen\u00fcz haz\u0131r de\u011fil. \u015eimdilik T\u00fcrk\u00e7e i\u00e7erik g\u00f6steriliyor."
-        : "English documentation for this tool is not ready yet. Showing Turkish content for now."}
-    </Callout>
-  ) : null;
 
   const renderExplanation = () => {
     if (shouldShowMissingNote) {
@@ -274,7 +264,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
       </div>
 
       {shouldShowMissingNote ? missingDocsCallout : null}
-      {!shouldShowMissingNote ? localeFallbackCallout : null}
       {docsMetaLine ? <p className="text-xs text-slate-500">{docsMetaLine}</p> : null}
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>

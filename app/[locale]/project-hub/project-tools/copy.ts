@@ -5,22 +5,22 @@ export type ProjectPriority = "low" | "medium" | "high";
 export type SortOption = "newest" | "due-date" | "priority" | "status";
 
 export const STATUS_OPTIONS: Array<{ value: ProjectStatus; label: Record<Locale, string> }> = [
-  { value: "open", label: { tr: "Acik", en: "Open" } },
+  { value: "open", label: { tr: "Açık", en: "Open" } },
   { value: "in-progress", label: { tr: "Devam ediyor", en: "In progress" } },
   { value: "blocked", label: { tr: "Blokaj", en: "Blocked" } },
-  { value: "done", label: { tr: "Tamamlandi", en: "Done" } },
+  { value: "done", label: { tr: "Tamamlandı", en: "Done" } },
 ];
 
 export const PRIORITY_OPTIONS: Array<{ value: ProjectPriority; label: Record<Locale, string> }> = [
-  { value: "high", label: { tr: "Yuksek", en: "High" } },
+  { value: "high", label: { tr: "Yüksek", en: "High" } },
   { value: "medium", label: { tr: "Orta", en: "Medium" } },
-  { value: "low", label: { tr: "Dusuk", en: "Low" } },
+  { value: "low", label: { tr: "Düşük", en: "Low" } },
 ];
 
 export const SORT_OPTIONS: Array<{ value: SortOption; label: Record<Locale, string> }> = [
   { value: "newest", label: { tr: "En yeni", en: "Newest" } },
-  { value: "due-date", label: { tr: "Tarihe gore", en: "Due date" } },
-  { value: "priority", label: { tr: "Oncelik", en: "Priority" } },
+  { value: "due-date", label: { tr: "Tarihe göre", en: "Due date" } },
+  { value: "priority", label: { tr: "Öncelik", en: "Priority" } },
   { value: "status", label: { tr: "Durum", en: "Status" } },
 ];
 
@@ -51,37 +51,37 @@ export const PROJECT_COPY: Record<Locale, {
 }> = {
   tr: {
     seo: {
-      title: "Proje ve Iyilestirme Takip | Proje Merkezi",
-      description: "Proje ve iyilestirme kayitlari icin lokal takip paneli.",
+      title: "Proje ve İyileştirme Takip | Proje Merkezi",
+      description: "Proje ve iyileştirme kayıtları için lokal takip paneli.",
     },
     hero: {
-      title: "Proje ve Iyilestirme Takip",
+      title: "Proje ve İyileştirme Takip",
       description:
-        "Proje ve Kaizen calismalarini sahip, tarih, oncelik ve durum bazli takip edin. Kayitlar cihazinizda tutulur.",
+        "Proje ve Kaizen çalışmalarını sahip, tarih, öncelik ve durum bazlı takip edin. Kayıtlar cihazınızda tutulur.",
       eyebrow: "Project Hub",
       imageAlt: "Project tracker",
     },
-    formTitle: "Yeni kayit olustur",
-    formSubtitle: "Musteri projeleri, hat iyilestirme ve Kaizen calismalari icin tek satir.",
-    formCta: "Kaydi ekle",
-    filtersTitle: "Filtreler ve siralama",
-    tableTitle: "Kayit listesi",
-    exportLabel: "Tabloyu disari aktar",
-    exportSoon: "Cok yakinda",
-    searchPlaceholder: "Baslik, sahip, alan veya not icinde ara",
+    formTitle: "Yeni kayıt oluştur",
+    formSubtitle: "Müşteri projeleri, hat iyileştirme ve Kaizen çalışmaları için tek satır.",
+    formCta: "Kaydı ekle",
+    filtersTitle: "Filtreler ve sıralama",
+    tableTitle: "Kayıt listesi",
+    exportLabel: "Tabloyu dışarı aktar",
+    exportSoon: "Çok yakında",
+    searchPlaceholder: "Başlık, sahip, alan veya not içinde ara",
     fields: {
-      title: "Baslik",
+      title: "Başlık",
       owner: "Sahip",
       area: "Hat / Alan",
       status: "Durum",
-      priority: "Oncelik",
+      priority: "Öncelik",
       dueDate: "Hedef tarih",
-      link: "Baglanti",
+      link: "Bağlantı",
       notes: "Notlar",
     },
-    emptyState: "Henuz kayit yok. Ustteki formdan yeni kayit ekleyebilirsiniz.",
-    actions: { delete: "Sil", status: "Durum degistir" },
-    storageNote: "Veriler cihazinizda saklanir (localStorage).",
+    emptyState: "Henüz kayıt yok. Üstteki formdan yeni kayıt ekleyebilirsiniz.",
+    actions: { delete: "Sil", status: "Durum değiştir" },
+    storageNote: "Veriler cihazınızda saklanır (localStorage).",
   },
   en: {
     seo: {

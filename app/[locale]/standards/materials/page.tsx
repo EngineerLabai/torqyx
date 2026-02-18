@@ -25,79 +25,79 @@ const COPY: Record<Locale, {
   tr: {
     seo: {
       title: "Malzemeler | Standartlar",
-      description: "Celik, aluminyum ve paslanmaz icin hizli karsilastirma kartlari ve tipik ozellikler.",
+      description: "Çelik, alüminyum ve paslanmaz için hızlı karşılaştırma kartları ve tipik özellikler.",
     },
     hero: {
-      title: "Malzeme karsilastirma: hizli notlar",
+      title: "Malzeme karşılaştırma: hızlı notlar",
       description:
-        "Taslak secim icin tipik malzeme araliklari. Nihai tasarimda tedarikci veri sayfasini kontrol et.",
+        "Taslak seçim için tipik malzeme aralıkları. Nihai tasarımda tedarikçi veri sayfasını kontrol et.",
       eyebrow: "Standards",
       imageAlt: "Materials quick comparison",
     },
-    note: "Degerler oda sicakliginda tipiktir. Isil islem, kesit ve standartlara gore degisebilir.",
+    note: "Değerler oda sıcaklığında tipiktir. Isıl işlem, kesit ve standartlara göre değişebilir.",
     groups: [
       {
         id: "steel",
-        title: "Celik (yapisal ve genel)",
+        title: "Çelik (yapısal ve genel)",
         cards: [
           {
             name: "S235JR",
-            details: "Genel yapi celigi, kaynaklanabilir.",
+            details: "Genel yapı çeliği, kaynaklanabilir.",
             properties: [
               { label: "Akma (MPa)", value: "235" },
-              { label: "Cekme (MPa)", value: "360-510" },
-              { label: "Yogunluk (g/cm3)", value: "7.85" },
+              { label: "Çekme (MPa)", value: "360-510" },
+              { label: "Yoğunluk (g/cm3)", value: "7.85" },
             ],
           },
           {
             name: "S355JR",
-            details: "Daha yuksek dayanimli yapisal celik.",
+            details: "Daha yüksek dayanımlı yapısal çelik.",
             properties: [
               { label: "Akma (MPa)", value: "355" },
-              { label: "Cekme (MPa)", value: "470-630" },
-              { label: "Yogunluk (g/cm3)", value: "7.85" },
+              { label: "Çekme (MPa)", value: "470-630" },
+              { label: "Yoğunluk (g/cm3)", value: "7.85" },
             ],
           },
           {
             name: "C45 (1045)",
-            details: "Islemeye uygun orta karbon.",
+            details: "İşlemeye uygun orta karbon.",
             properties: [
               { label: "Akma (MPa)", value: "310-450" },
-              { label: "Cekme (MPa)", value: "570-700" },
-              { label: "Yogunluk (g/cm3)", value: "7.85" },
+              { label: "Çekme (MPa)", value: "570-700" },
+              { label: "Yoğunluk (g/cm3)", value: "7.85" },
             ],
           },
         ],
       },
       {
         id: "aluminum",
-        title: "Aluminyum",
+        title: "Alüminyum",
         cards: [
           {
             name: "6061-T6",
-            details: "Genel amac, iyi islenebilirlik.",
+            details: "Genel amaç, iyi işlenebilirlik.",
             properties: [
               { label: "Akma (MPa)", value: "240-275" },
-              { label: "Cekme (MPa)", value: "290-310" },
-              { label: "Yogunluk (g/cm3)", value: "2.70" },
+              { label: "Çekme (MPa)", value: "290-310" },
+              { label: "Yoğunluk (g/cm3)", value: "2.70" },
             ],
           },
           {
             name: "6082-T6",
-            details: "Avrupa yaygin, yapisal profil.",
+            details: "Avrupa yaygın, yapısal profil.",
             properties: [
               { label: "Akma (MPa)", value: "250-260" },
-              { label: "Cekme (MPa)", value: "300-320" },
-              { label: "Yogunluk (g/cm3)", value: "2.70" },
+              { label: "Çekme (MPa)", value: "300-320" },
+              { label: "Yoğunluk (g/cm3)", value: "2.70" },
             ],
           },
           {
             name: "7075-T6",
-            details: "Yuksek dayanim, havacilik.",
+            details: "Yüksek dayanım, havacılık.",
             properties: [
               { label: "Akma (MPa)", value: "500-540" },
-              { label: "Cekme (MPa)", value: "560-610" },
-              { label: "Yogunluk (g/cm3)", value: "2.81" },
+              { label: "Çekme (MPa)", value: "560-610" },
+              { label: "Yoğunluk (g/cm3)", value: "2.81" },
             ],
           },
         ],
@@ -108,29 +108,29 @@ const COPY: Record<Locale, {
         cards: [
           {
             name: "304",
-            details: "Genel amac, iyi korozyon direnci.",
+            details: "Genel amaç, iyi korozyon direnci.",
             properties: [
               { label: "Akma (MPa)", value: "200-215" },
-              { label: "Cekme (MPa)", value: "500-700" },
-              { label: "Yogunluk (g/cm3)", value: "7.9" },
+              { label: "Çekme (MPa)", value: "500-700" },
+              { label: "Yoğunluk (g/cm3)", value: "7.9" },
             ],
           },
           {
             name: "316",
-            details: "Klorlu ortamlar icin daha iyi.",
+            details: "Klorlu ortamlar için daha iyi.",
             properties: [
               { label: "Akma (MPa)", value: "200-205" },
-              { label: "Cekme (MPa)", value: "500-700" },
-              { label: "Yogunluk (g/cm3)", value: "8.0" },
+              { label: "Çekme (MPa)", value: "500-700" },
+              { label: "Yoğunluk (g/cm3)", value: "8.0" },
             ],
           },
           {
             name: "430",
-            details: "Ferritik, dusuk maliyetli.",
+            details: "Ferritik, düşük maliyetli.",
             properties: [
               { label: "Akma (MPa)", value: "170-230" },
-              { label: "Cekme (MPa)", value: "450-600" },
-              { label: "Yogunluk (g/cm3)", value: "7.7" },
+              { label: "Çekme (MPa)", value: "450-600" },
+              { label: "Yoğunluk (g/cm3)", value: "7.7" },
             ],
           },
         ],

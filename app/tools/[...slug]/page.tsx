@@ -1,18 +1,14 @@
-﻿"use client";
-
-import Link from "next/link";
-import { useMemo } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import dynamic from "next/dynamic";
 import PageShell from "@/components/layout/PageShell";
 import ReportPageShell from "@/components/tools/ReportPageShell";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
-import ReportChart from "@/components/tools/report/ReportChart";
-import { useLocale } from "@/components/i18n/LocaleProvider";
+import ReportActions from "@/components/tools/report/ReportActions";
 import EngineeringDiagram, {
   type BoltDiagramParams,
   type GearDiagramParams,
   type PipeDiagramParams,
 } from "@/src/components/visuals/EngineeringDiagram";
+import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { decodeToolState } from "@/utils/tool-share";
 import { resolveLocalizedValue } from "@/utils/locale-values";
@@ -21,7 +17,6 @@ import { toolRegistry, type ToolChartConfig } from "@/tools/registry";
 import { toolCatalog, getToolCopy } from "@/tools/_shared/catalog";
 import { getToolPageTool } from "@/tools/tool-page-tools";
 import { getReportTool } from "@/tools/report-tools";
-import { downloadReportPdf } from "@/utils/report-export";
 import type { ToolReference } from "@/tools/_shared/types";
 
 const DATE_FORMAT: Intl.DateTimeFormatOptions = {
@@ -49,27 +44,29 @@ type ReportData = {
   diagram?: ReportDiagram;
 };
 
-export default function ToolReportRoute() {
-  const { locale } = useLocale();
+type PageProps = {
+  params: Promise<{ slug: string[] }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+const ReportChart = dynamic(() => import("@/components/tools/report/ReportChart"), {
+  loading: () => <div className="h-64 w-full rounded-lg border border-slate-200 bg-slate-50" />,
+});
+
+const getParam = (value?: string | string[]) => (Array.isArray(value) ? value[0] : value ?? "");
+
+export default async function ToolReportRoute({ params, searchParams }: PageProps) {
+  const locale = await getLocaleFromCookies();
   const messages = getMessages(locale);
   const copy = messages.components.toolReport;
   const common = messages.common;
-  const params = useParams();
-  const searchParams = useSearchParams();
-
-  const slugParts = Array.isArray(params?.slug) ? params.slug : params?.slug ? [params.slug] : [];
+  const { slug } = await params;
+  const resolvedSearchParams = (await searchParams) ?? {};
+  const slugParts = Array.isArray(slug) ? slug : slug ? [slug] : [];
   const isReportRoute = slugParts.at(-1) === "report";
   const toolSlug = isReportRoute ? slugParts.slice(0, -1).join("/") : "";
-
-  const shared = useMemo(
-    () => decodeToolState<Record<string, string | number>>(searchParams?.get("input") ?? null),
-    [searchParams],
-  );
-
-  const reportData = useMemo(() => {
-    if (!isReportRoute || !toolSlug) return null;
-    return buildReportData(toolSlug, shared ?? {}, locale, common);
-  }, [isReportRoute, toolSlug, shared, locale, common]);
+  const shared = decodeToolState<Record<string, string | number>>(getParam(resolvedSearchParams.input) || null);
+  const reportData = isReportRoute && toolSlug ? buildReportData(toolSlug, shared ?? {}, locale, common) : null;
 
   if (!reportData) {
     return (
@@ -160,28 +157,13 @@ export default function ToolReportRoute() {
             references={reportData.references}
           />
 
-          <div className="no-print flex flex-wrap items-center gap-3 print:hidden">
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-slate-800"
-            >
-              {copy.print}
-            </button>
-            <button
-              type="button"
-              onClick={() => downloadReportPdf("report-area", pdfTitle)}
-              className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400"
-            >
-              {copy.downloadPdf}
-            </button>
-            <Link
-              href={reportData.toolHref}
-              className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400"
-            >
-              {copy.back}
-            </Link>
-          </div>
+          <ReportActions
+            printLabel={copy.print}
+            downloadPdfLabel={copy.downloadPdf}
+            backLabel={copy.back}
+            toolHref={reportData.toolHref}
+            pdfTitle={pdfTitle}
+          />
         </section>
       </ReportPageShell>
     </PageShell>

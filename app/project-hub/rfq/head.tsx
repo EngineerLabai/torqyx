@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "RFQ / Teknik Sartname Ozeti",
-    description: "RFQ ve teknik sartname maddelerini net bir ozetle takip et.",
+    title: "RFQ / Teknik Şartname Özeti",
+    description: "RFQ ve teknik şartname maddelerini net bir özetle takip et.",
   },
   en: {
     title: "RFQ / Technical Specification",

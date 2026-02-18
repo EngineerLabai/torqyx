@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { trackEvent } from "@/utils/analytics";
 import { getMessages } from "@/utils/messages";
@@ -53,7 +54,15 @@ export default function ExportPanel({
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex h-16 w-24 items-center justify-center rounded-lg border border-slate-200 bg-white">
           {previewUrl ? (
-            <img src={previewUrl} alt={resolvedPreviewAlt} className="h-full w-full object-contain" />
+            <Image
+              src={previewUrl}
+              alt={resolvedPreviewAlt}
+              width={96}
+              height={64}
+              unoptimized
+              loading="lazy"
+              className="h-full w-full object-contain"
+            />
           ) : (
             <span className="text-[10px] text-slate-400">{copy.previewFallback}</span>
           )}

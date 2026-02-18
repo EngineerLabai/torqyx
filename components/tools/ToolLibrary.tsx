@@ -5,7 +5,7 @@ import Link from "next/link";
 import ToolLibraryCard from "@/components/tools/ToolLibraryCard";
 import RecentToolsStrip from "@/components/tools/RecentToolsStripLazy";
 import InlineSearch from "@/components/search/InlineSearch";
-import { filterSearchResults, useSearchIndex } from "@/components/search/useSearchIndex";
+import { filterSearchResults } from "@/components/search/useSearchIndex";
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -119,6 +119,8 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   const messages = getMessages(locale);
   const copy = messages.components.toolLibrary;
   const labels = copy.labels;
+  const labelsEn = getMessages("en").components.toolLibrary.labels;
+  const labelsTr = getMessages("tr").components.toolLibrary.labels;
   const accessLabels = messages.common.access;
   const basePath = withLocalePrefix("/tools", locale);
 
@@ -129,8 +131,6 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   const [query, setQuery] = useState(initialQuery);
   const [visibleToolsCount, setVisibleToolsCount] = useState(INITIAL_VISIBLE_TOOLS);
   const debouncedQuery = useDebouncedValue(query, 100);
-  const searchEnabled = query.trim().length > 0;
-  const { items: searchItems, loading: searchLoading } = useSearchIndex(searchEnabled);
 
   useEffect(() => {
     setQuery(initialQuery);
@@ -164,32 +164,40 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         const copy = getToolCopy(tool, locale);
         const tags = tool.tags ?? [];
         const localeTitles = { tr: tool.title, en: tool.titleEn ?? tool.title };
+        const categoryLabel = tool.category ? labels.category[tool.category] : "";
+        const categoryLabelEn = tool.category ? labelsEn.category[tool.category] : "";
+        const categoryLabelTr = tool.category ? labelsTr.category[tool.category] : "";
+        const localizedTags = tags.map((tag) => labels.tag[tag]);
+        const englishTags = tags.map((tag) => labelsEn.tag[tag]);
+        const turkishTags = tags.map((tag) => labelsTr.tag[tag]);
         return {
           id: `tool:${tool.id}`,
           type: "tool",
           title: copy.title,
           description: copy.description,
           href: tool.href,
-          tags,
+          tags: [...tags, ...localizedTags, ...englishTags, ...turkishTags],
           localeTitles,
           searchText: buildSearchText(
             copy.title,
             copy.description,
             tool.id,
             tags.join(" "),
-            tool.category ?? "",
+            categoryLabel,
+            categoryLabelEn,
+            categoryLabelTr,
             tool.type,
+            ...localizedTags,
+            ...englishTags,
+            ...turkishTags,
             ...Object.values(localeTitles),
           ),
         };
       }),
-    [locale],
+    [locale, labels, labelsEn, labelsTr],
   );
 
-  const toolSearchItems = useMemo(() => {
-    const source = !searchLoading && searchItems.length > 0 ? searchItems : localSearchItems;
-    return source.filter((item) => item.id.startsWith("tool:"));
-  }, [searchItems, localSearchItems, searchLoading]);
+  const toolSearchItems = localSearchItems;
 
   const rankedTools = useMemo(() => {
     if (!debouncedQuery.trim()) return [];
@@ -391,9 +399,6 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               aria-label={copy.filterSection.searchAria}
             />
-            {searchLoading && query.trim().length > 0 ? (
-              <p className="text-[11px] text-slate-500">{copy.filterSection.loading}</p>
-            ) : null}
           </div>
         </form>
       </section>

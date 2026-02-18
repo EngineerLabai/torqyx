@@ -1,8 +1,10 @@
 {
   "nav": {
     "labels": {
-      "sectionCalculators": "Calculator",
+      "sectionCalculators": "Calculators",
       "sectionTools": "Tools",
+      "sectionStandards": "Standards",
+      "sectionQuality": "Quality",
       "sectionCommunity": "Community",
       "sectionContact": "Contact",
       "sectionGeneral": "General",
@@ -29,6 +31,8 @@
     "descriptions": {
       "sectionCalculators": "Gear, torque, force, and mechanical calculators.",
       "sectionTools": "Templates, guides, and project tools.",
+      "sectionStandards": "Engineering standards and quick lookup references.",
+      "sectionQuality": "Quality planning and problem-solving tools.",
       "sectionCommunity": "Community discussions and knowledge sharing.",
       "sectionContact": "Feedback and support channels.",
       "sectionFaq": "Answers to common questions."
@@ -1064,6 +1068,7 @@
       "inlineTitle": "Quick search",
       "inlineDescription": "Search tools, standards, and content from one field.",
       "inlinePlaceholder": "Tool, ISO 286, M12, friction...",
+      "inlineLoading": "Searching...",
       "inlineEmpty": "No results found.",
       "typeLabels": {
         "tool": "Tool",
@@ -1712,7 +1717,7 @@
     },
     "toolFavoriteButton": {
       "addLabel": "Add to favorites",
-      "removeLabel": "Favorited",
+      "removeLabel": "In favorites",
       "addAria": "Add {title} to favorites",
       "removeAria": "Remove {title} from favorites",
       "fallbackTitle": "tool"

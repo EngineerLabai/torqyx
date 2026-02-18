@@ -22,7 +22,7 @@ export const unitConverterTool: ToolDefinition<UnitInput, UnitResult> = {
     },
     {
       key: "output",
-      label: "Sonuc",
+      label: "Sonuç",
       getValue: (result) =>
         result.output === null || Number.isNaN(result.output) ? null : `${result.output} ${result.toLabel}`,
     },

@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useOptionalAuth } from "@/components/auth/AuthProvider";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LOCALE_STORAGE_KEY, isLocale, type Locale } from "@/utils/locale";
+import { getLocaleFromPathname } from "@/utils/locale-path";
 import { RECENTS_EVENT, RECENTS_STORAGE_KEY, readRecents, writeRecents, type RecentToolEntry } from "@/utils/tool-storage";
 
 type SyncState = {
@@ -54,6 +56,9 @@ const getAuthHeaders = async (user: { getIdToken: () => Promise<string> }) => {
 export default function UserStateSync() {
   const auth = useOptionalAuth();
   const { locale, setLocale } = useLocale();
+  const pathname = usePathname();
+  const pathLocale = pathname ? getLocaleFromPathname(pathname) : null;
+  const syncLocale = pathLocale ?? locale;
   const syncedHashRef = useRef<string>("");
   const debounceRef = useRef<number | null>(null);
 
@@ -73,8 +78,8 @@ export default function UserStateSync() {
         const payload = (await response.json()) as UserStateResponse;
         if (!active || !payload?.ok || !payload.state) return;
 
-        const remoteLocale = payload.state.locale;
-        if (remoteLocale && remoteLocale !== locale) {
+        const remoteLocale = isLocale(payload.state.locale) ? payload.state.locale : null;
+        if (!pathLocale && remoteLocale && remoteLocale !== locale) {
           setLocale(remoteLocale);
         }
 
@@ -86,7 +91,7 @@ export default function UserStateSync() {
         }
 
         syncedHashRef.current = hashState({
-          locale: isLocale(remoteLocale) ? remoteLocale : locale,
+          locale: pathLocale ?? remoteLocale ?? locale,
           recents: mergedRecents,
         });
       } catch (error) {
@@ -100,7 +105,7 @@ export default function UserStateSync() {
     return () => {
       active = false;
     };
-  }, [canSync, user, setLocale, locale]);
+  }, [canSync, user, setLocale, locale, pathLocale]);
 
   useEffect(() => {
     if (!canSync || !user || typeof window === "undefined") return;
@@ -108,7 +113,7 @@ export default function UserStateSync() {
     const pushState = async () => {
       try {
         const recents = normalizeRecents(readRecents());
-        const nextState: SyncState = { locale, recents };
+        const nextState: SyncState = { locale: syncLocale, recents };
         const nextHash = hashState(nextState);
         if (syncedHashRef.current === nextHash) return;
 
@@ -159,7 +164,7 @@ export default function UserStateSync() {
         debounceRef.current = null;
       }
     };
-  }, [canSync, user, locale]);
+  }, [canSync, user, syncLocale]);
 
   return null;
 }

@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "Sikma / Baglama Planlama",
-    description: "Sikma noktalarini, reaksiyonlari ve kuvvet yolunu planla.",
+    title: "Sıkma / Bağlama Planlama",
+    description: "Sıkma noktalarını, reaksiyonları ve kuvvet yolunu planla.",
   },
   en: {
     title: "Clamping Plan",

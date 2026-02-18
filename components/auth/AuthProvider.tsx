@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import { getFirebaseCoreServices, getFirebaseInitError } from "@/lib/firebase";
 
@@ -106,7 +106,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = useCallback(async () => {
     const services = getFirebaseCoreServices();
     if (!services) {
       const initError = getFirebaseInitError();
@@ -123,9 +123,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error("[auth] Google sign-in failed:", error);
       setError(error instanceof Error ? error.message : "Google sign-in failed.");
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     const services = getFirebaseCoreServices();
     if (!services) {
       setAvailable(false);
@@ -137,10 +137,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error("[auth] Sign out failed:", error);
       setError(error instanceof Error ? error.message : "Sign out failed.");
     }
-  };
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      user,
+      loading,
+      available,
+      error,
+      loginWithGoogle,
+      logout,
+    }),
+    [user, loading, available, error, loginWithGoogle, logout],
+  );
 
   return (
-    <AuthContext.Provider value={{ user, loading, available, error, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
