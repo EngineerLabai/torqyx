@@ -1,0 +1,77 @@
+{
+  "id": "surface-finish",
+  "title": {
+    "tr": "Yüzey Pürüzlülüğü (Ra ↔ ISO N)",
+    "en": "Surface Finish (Ra ↔ ISO N)"
+  },
+  "description": {
+    "tr": "Ra değerlerinin ISO N sınıfı karşılıkları ve tipik proses örnekleri.",
+    "en": "Ra values mapped to ISO N classes with typical process examples."
+  },
+  "columns": [
+    { "key": "nClass", "label": { "tr": "ISO N sınıfı", "en": "ISO N class" } },
+    { "key": "raUm", "label": { "tr": "Ra (µm)", "en": "Ra (µm)" } },
+    { "key": "raMicroInch", "label": { "tr": "Ra (µin)", "en": "Ra (µin)" } },
+    { "key": "process", "label": { "tr": "Tipik proses", "en": "Typical process" } }
+  ],
+  "rows": [
+    {
+      "nClass": "N12",
+      "raUm": "50",
+      "raMicroInch": "2000",
+      "process": { "tr": "Kaba döküm / kaba talaş", "en": "Rough casting / rough machining" }
+    },
+    {
+      "nClass": "N11",
+      "raUm": "25",
+      "raMicroInch": "1000",
+      "process": { "tr": "Kaba frezeleme", "en": "Rough milling" }
+    },
+    {
+      "nClass": "N10",
+      "raUm": "12.5",
+      "raMicroInch": "500",
+      "process": { "tr": "Genel tornalama", "en": "General turning" }
+    },
+    {
+      "nClass": "N9",
+      "raUm": "6.3",
+      "raMicroInch": "250",
+      "process": { "tr": "İnce tornalama", "en": "Fine turning" }
+    },
+    {
+      "nClass": "N8",
+      "raUm": "3.2",
+      "raMicroInch": "125",
+      "process": { "tr": "Raybalama / hassas freze", "en": "Reaming / precision milling" }
+    },
+    {
+      "nClass": "N7",
+      "raUm": "1.6",
+      "raMicroInch": "63",
+      "process": { "tr": "İnce taşlama", "en": "Fine grinding" }
+    },
+    {
+      "nClass": "N6",
+      "raUm": "0.8",
+      "raMicroInch": "32",
+      "process": { "tr": "Taşlama / honlama", "en": "Grinding / honing" }
+    },
+    {
+      "nClass": "N5",
+      "raUm": "0.4",
+      "raMicroInch": "16",
+      "process": { "tr": "Süperfinisaj", "en": "Superfinishing" }
+    },
+    {
+      "nClass": "N4",
+      "raUm": "0.2",
+      "raMicroInch": "8",
+      "process": { "tr": "Ayna polisajı", "en": "Mirror polishing" }
+    }
+  ],
+  "note": {
+    "tr": "Değerler üretim yöntemi ve ölçüm uzunluğuna göre değişebilir; çizim toleransı her zaman önceliklidir.",
+    "en": "Values vary by process route and measurement length; drawing requirements always take precedence."
+  }
+}

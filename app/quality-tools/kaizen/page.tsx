@@ -1,11 +1,14 @@
 "use client";
 
 // app/quality-tools/kaizen/page.tsx
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import PageShell from "@/components/layout/PageShell";
+import ReportActions from "@/components/report/ReportActions";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { assertNoTurkish } from "@/utils/i18n-assert";
 import { kaizenCopy } from "@/data/quality-tools/kaizen";
+import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
+import { useAutosaveDraft } from "@/hooks/useAutosaveDraft";
 
 type ActionStatus = "planned" | "inProgress" | "done";
 
@@ -31,6 +34,11 @@ type KaizenForm = {
   risks: string;
 };
 
+type KaizenSnapshot = {
+  form: KaizenForm;
+  actions: ActionRow[];
+};
+
 const INITIAL_FORM: KaizenForm = {
   title: "",
   area: "",
@@ -45,27 +53,59 @@ const INITIAL_FORM: KaizenForm = {
   risks: "",
 };
 
+const DEMO_FORM: KaizenForm = {
+  title: "Operation 30 Feeding Flow Improvement",
+  area: "Line B / Assembly Cell 2",
+  problem:
+    "Average cycle time is 54s and line stops occur due to delayed material replenishment.",
+  currentState: "",
+  targetState: "Reduce average cycle time to <=45s and remove feed-delay stoppages.",
+  rootCause:
+    "Material cart layout forces unnecessary walking and no clear replenishment trigger exists.",
+  metricsBefore: "Cycle: 54s avg, OEE: 68%, Feed delay stops: 9/day",
+  metricsAfter: "Target: Cycle <=45s, OEE >=75%, Feed delay stops <=1/day",
+  gains: "Expected +18% output, reduced waiting, improved ergonomics for feeder operator.",
+  lessons: "Visual trigger board and one-way cart lane improved reaction time significantly.",
+  risks: "Cart redesign lead time and temporary operator adaptation period.",
+};
+
 const STATUS_OPTIONS: ActionStatus[] = ["planned", "inProgress", "done"];
+const DRAFT_KEY = "aielab:quality:kaizen:draft";
 
 function uuid() {
   return Math.random().toString(36).slice(2, 9);
 }
 
+function createActionRow(): ActionRow {
+  return {
+    id: uuid(),
+    task: "",
+    owner: "",
+    due: "",
+    status: "planned",
+  };
+}
+
 export default function KaizenPage() {
   const { locale } = useLocale();
   const copy = kaizenCopy[locale];
+  const actionsCopy = qualityReportActionsCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/kaizen");
 
   const [form, setForm] = useState<KaizenForm>(INITIAL_FORM);
-  const [actions, setActions] = useState<ActionRow[]>([
-    {
-      id: uuid(),
-      task: "",
-      owner: "",
-      due: "",
-      status: "planned",
-    },
-  ]);
+  const [actions, setActions] = useState<ActionRow[]>([createActionRow()]);
+  const reportRootRef = useRef<HTMLElement | null>(null);
+
+  const restoreDraft = useCallback((draft: KaizenSnapshot) => {
+    setForm(normalizeKaizenForm(draft?.form));
+    setActions(normalizeActions(draft?.actions));
+  }, []);
+
+  const { clearDraft } = useAutosaveDraft<KaizenSnapshot>({
+    storageKey: DRAFT_KEY,
+    value: { form, actions },
+    onRestore: restoreDraft,
+  });
 
   function handleFormChange(key: keyof KaizenForm, value: string) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -78,10 +118,7 @@ export default function KaizenPage() {
   }
 
   function addAction() {
-    setActions((prev) => [
-      ...prev,
-      { id: uuid(), task: "", owner: "", due: "", status: "planned" },
-    ]);
+    setActions((prev) => [...prev, createActionRow()]);
   }
 
   function removeAction(id: string) {
@@ -90,12 +127,56 @@ export default function KaizenPage() {
 
   function handleReset() {
     setForm(INITIAL_FORM);
-    setActions([{ id: uuid(), task: "", owner: "", due: "", status: "planned" }]);
+    setActions([createActionRow()]);
+    clearDraft();
+  }
+
+  function handleDemoFill() {
+    setForm(DEMO_FORM);
+    setActions([
+      {
+        id: uuid(),
+        task: "Redesign material cart lane for one-way flow",
+        owner: "A. Demir",
+        due: "2026-02-24",
+        status: "inProgress",
+      },
+      {
+        id: uuid(),
+        task: "Define visual replenishment trigger board",
+        owner: "M. Kaya",
+        due: "2026-02-25",
+        status: "planned",
+      },
+      {
+        id: uuid(),
+        task: "Run 3-day pilot and capture cycle/OEE trend",
+        owner: "E. Sahin",
+        due: "2026-02-28",
+        status: "planned",
+      },
+    ]);
+  }
+
+  function handleLoadData(snapshot: KaizenSnapshot) {
+    setForm(normalizeKaizenForm(snapshot?.form));
+    setActions(normalizeActions(snapshot?.actions));
   }
 
   return (
     <PageShell>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <ReportActions
+        toolKey="kaizen"
+        currentData={{ form, actions }}
+        onLoadData={handleLoadData}
+        onDemoFill={handleDemoFill}
+        onReset={handleReset}
+        reportRootRef={reportRootRef}
+        copy={actionsCopy}
+      />
+
+      <section id="report-root" ref={reportRootRef} className="space-y-4">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             {copy.badges.title}
@@ -106,9 +187,9 @@ export default function KaizenPage() {
         </div>
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
         <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
           <h2 className="text-sm font-semibold text-slate-900">{copy.basics.title}</h2>
           <button
@@ -132,9 +213,9 @@ export default function KaizenPage() {
             placeholder={copy.basics.fields.area.placeholder}
           />
         </div>
-      </section>
+        </section>
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
           <h3 className="mb-3 text-sm font-semibold text-slate-900">{copy.problem.title}</h3>
           <div className="space-y-3">
@@ -197,9 +278,9 @@ export default function KaizenPage() {
             />
           </div>
         </div>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
           <div>
             <h3 className="text-sm font-semibold text-slate-900">{copy.actions.title}</h3>
@@ -266,15 +347,16 @@ export default function KaizenPage() {
             </div>
           ))}
         </div>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <h3 className="mb-2 text-sm font-semibold text-slate-900">{copy.checklist.title}</h3>
         <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
           {copy.checklist.items.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
+        </section>
       </section>
     </PageShell>
   );
@@ -330,4 +412,46 @@ function TextArea({
       />
     </label>
   );
+}
+
+function normalizeKaizenForm(source: unknown): KaizenForm {
+  if (!source || typeof source !== "object") {
+    return INITIAL_FORM;
+  }
+
+  const candidate = source as Partial<KaizenForm>;
+  const next: KaizenForm = { ...INITIAL_FORM };
+
+  (Object.keys(INITIAL_FORM) as (keyof KaizenForm)[]).forEach((key) => {
+    const value = candidate[key];
+    next[key] = typeof value === "string" ? value : INITIAL_FORM[key];
+  });
+
+  return next;
+}
+
+function normalizeActions(source: unknown): ActionRow[] {
+  if (!Array.isArray(source) || source.length === 0) {
+    return [createActionRow()];
+  }
+
+  const normalized = source
+    .map((item): ActionRow | null => {
+      if (!item || typeof item !== "object") return null;
+      const row = item as Partial<ActionRow>;
+      const status: ActionStatus =
+        row.status === "done" || row.status === "inProgress" || row.status === "planned"
+          ? row.status
+          : "planned";
+      return {
+        id: typeof row.id === "string" && row.id.trim() ? row.id : uuid(),
+        task: typeof row.task === "string" ? row.task : "",
+        owner: typeof row.owner === "string" ? row.owner : "",
+        due: typeof row.due === "string" ? row.due : "",
+        status,
+      };
+    })
+    .filter((row): row is ActionRow => row !== null);
+
+  return normalized.length > 0 ? normalized : [createActionRow()];
 }

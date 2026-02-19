@@ -15,18 +15,18 @@ export type HeroAssetKey =
   | "qualityTools"
   | "fixtureTools";
 
-export const HERO_PLACEHOLDER = "/illustrations/placeholder.webp";
+export const HERO_PLACEHOLDER = "/images/placeholder.webp";
 
 export const HERO_ASSETS: Record<HeroAssetKey, string> = {
-  home: "/illustrations/home-hero.jpg",
-  tools: "/illustrations/tools-hero.jpg",
-  blog: "/illustrations/blog-hero.jpg",
-  guides: "/illustrations/guides-hero.jpg",
-  glossary: "/illustrations/glossary-hero.jpg",
-  community: "/illustrations/community-hero.jpg",
-  support: "/illustrations/support-hero.jpg",
-  premium: "/illustrations/premium-hero.jpg",
-  toolDetail: "/illustrations/tool-detail.jpg",
+  home: "/images/home-hero.jpg",
+  tools: "/images/tool-library.jpg",
+  blog: "/images/blog-hero.jpg",
+  guides: "/images/guides-hero.jpg",
+  glossary: "/images/glossary-hero.jpg",
+  community: "/images/community-hero.jpg",
+  support: "/images/support-hero.jpg",
+  premium: "/images/premium-hero.jpg",
+  toolDetail: "/images/tool-detail.jpg",
   projectHub: HERO_PLACEHOLDER,
   qualityTools: HERO_PLACEHOLDER,
   fixtureTools: HERO_PLACEHOLDER,
