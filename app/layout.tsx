@@ -57,7 +57,7 @@ export async function generateMetadata() {
   };
 }
 
-const LOGO_URL = new URL("/brand/logo.png", SITE_URL).toString();
+const LOGO_URL = new URL("/images/logo.png", SITE_URL).toString();
 
 async function getWebsiteJsonLd() {
   const locale = await getLocaleFromCookies();

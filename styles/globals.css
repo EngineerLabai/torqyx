@@ -439,4 +439,25 @@ header.site-header {
   #report-area * {
     box-shadow: none !important;
   }
+
+  body:has(#report-root) * {
+    visibility: hidden !important;
+  }
+
+  body:has(#report-root) #report-root,
+  body:has(#report-root) #report-root * {
+    visibility: visible !important;
+  }
+
+  body:has(#report-root) #report-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  body:has(#report-root) #report-root,
+  body:has(#report-root) #report-root * {
+    box-shadow: none !important;
+  }
 }

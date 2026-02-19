@@ -103,15 +103,14 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
         <NavbarRenderProbe />
         <div className="site-container flex items-center justify-between gap-6 py-4">
           <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-1">
-              <Image
-                src="/brand/logo.png"
-                alt={`${brandContent.siteName} logo`}
-                width={24}
-                height={24}
-                className="h-6 w-auto object-contain"
-              />
-            </div>
+            <Image
+              src="/images/logo.png"
+              alt={`${brandContent.siteName} logo`}
+              width={635}
+              height={702}
+              className="h-8 w-auto shrink-0 object-contain"
+              priority
+            />
             <div className="flex flex-col">
               <span className="text-left text-base font-semibold tracking-tight text-slate-900">
                 {brandContent.siteName}

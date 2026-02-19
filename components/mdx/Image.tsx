@@ -13,7 +13,17 @@ type MdxImageProps = {
 
 const mergeClassName = (base: string, extra?: string) => (extra ? `${base} ${extra}` : base);
 
-const isExternal = (src: string) => src.startsWith("http://") || src.startsWith("https://");
+const isExternal = (src: string) => /^(https?:)?\/\//.test(src);
+const isDataUrl = (src: string) => src.startsWith("data:");
+const isRootRelative = (src: string) => src.startsWith("/");
+
+function normalizeLocalSrc(src: string) {
+  if (isExternal(src) || isDataUrl(src) || isRootRelative(src)) {
+    return src;
+  }
+
+  return `/${src.replace(/^[./]+/, "")}`;
+}
 
 export default function Image({
   src,
@@ -25,14 +35,15 @@ export default function Image({
   className,
   ...rest
 }: MdxImageProps) {
+  const normalizedSrc = normalizeLocalSrc(src);
   const hasDimensions = typeof width === "number" && typeof height === "number";
-  const useNextImage = hasDimensions && !isExternal(src);
+  const useNextImage = hasDimensions && !isExternal(normalizedSrc) && !isDataUrl(normalizedSrc);
 
   return (
     <figure className="my-6 flex flex-col items-center gap-2">
       {useNextImage ? (
         <NextImage
-          src={src}
+          src={normalizedSrc}
           alt={alt}
           width={width}
           height={height}
@@ -42,7 +53,7 @@ export default function Image({
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={src}
+          src={normalizedSrc}
           alt={alt}
           width={width}
           height={height}

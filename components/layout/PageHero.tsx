@@ -29,6 +29,11 @@ export default function PageHero({
     return null;
   }
 
+  const normalizedImageSrc =
+    imageSrc.startsWith("/") || /^(https?:)?\/\//.test(imageSrc)
+      ? imageSrc
+      : `/${imageSrc.replace(/^[./]+/, "")}`;
+
   return (
     <section className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-sm md:p-8">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
@@ -52,14 +57,14 @@ export default function PageHero({
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-slate-100 via-slate-50 to-slate-200" />
           <div className="relative aspect-[4/3] w-full lg:aspect-[16/10]">
             <Image
-              src={imageSrc}
+              src={normalizedImageSrc}
               alt={imageAlt}
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
               className="object-cover"
               placeholder="blur"
               blurDataURL={BLUR_DATA_URL}
-              unoptimized={imageSrc.toLowerCase().endsWith(".svg")}
+              unoptimized={normalizedImageSrc.toLowerCase().endsWith(".svg")}
               priority={priority}
             />
           </div>

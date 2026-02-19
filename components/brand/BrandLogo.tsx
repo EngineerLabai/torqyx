@@ -26,17 +26,17 @@ export default function BrandLogo({
       <div className="flex items-center sm:hidden">
         {markVisible ? (
           <Image
-            src="/brand/logo.png"
+            src="/images/logo.png"
             alt={`${name} logo mark`}
             width={635}
             height={702}
-            className={`h-10 w-auto ${markClassName}`.trim()}
+            className={`h-8 w-auto ${markClassName}`.trim()}
             onError={() => setMarkVisible(false)}
             priority
           />
         ) : (
           <div
-            className={`flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-[11px] font-semibold uppercase tracking-[0.2em] text-white ${markClassName}`.trim()}
+            className={`flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-[11px] font-semibold uppercase tracking-[0.2em] text-white ${markClassName}`.trim()}
             aria-hidden="true"
           >
             AI
@@ -47,11 +47,11 @@ export default function BrandLogo({
       <div className="hidden items-center gap-3 sm:flex">
         {wordVisible ? (
           <Image
-            src="/brand/logo.png"
+            src="/images/logo.png"
             alt={`${name} logo`}
             width={635}
             height={702}
-            className={`h-7 w-auto ${wordClassName}`.trim()}
+            className={`h-8 w-auto ${wordClassName}`.trim()}
             onError={() => setWordVisible(false)}
             priority
           />

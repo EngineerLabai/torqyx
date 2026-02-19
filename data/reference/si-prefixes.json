@@ -1,0 +1,95 @@
+{
+  "id": "si-prefixes",
+  "title": {
+    "tr": "SI Prefix + Birim Kısayolları",
+    "en": "SI Prefixes + Unit Shortcuts"
+  },
+  "description": {
+    "tr": "Sık kullanılan ön ekler ve mühendislikte pratik eşdeğerler.",
+    "en": "Most-used SI prefixes with practical engineering equivalences."
+  },
+  "columns": [
+    { "key": "item", "label": { "tr": "Öğe", "en": "Item" } },
+    { "key": "symbol", "label": { "tr": "Sembol", "en": "Symbol" } },
+    { "key": "factor", "label": { "tr": "Çarpan", "en": "Factor" } },
+    { "key": "shortcut", "label": { "tr": "Kısayol / Örnek", "en": "Shortcut / Example" } }
+  ],
+  "rows": [
+    {
+      "item": { "tr": "tera", "en": "tera" },
+      "symbol": "T",
+      "factor": "10^12",
+      "shortcut": "1 TW = 10^12 W"
+    },
+    {
+      "item": { "tr": "giga", "en": "giga" },
+      "symbol": "G",
+      "factor": "10^9",
+      "shortcut": "1 GPa = 10^9 Pa"
+    },
+    {
+      "item": { "tr": "mega", "en": "mega" },
+      "symbol": "M",
+      "factor": "10^6",
+      "shortcut": "1 MPa = 10^6 Pa"
+    },
+    {
+      "item": { "tr": "kilo", "en": "kilo" },
+      "symbol": "k",
+      "factor": "10^3",
+      "shortcut": "1 kN = 1000 N"
+    },
+    {
+      "item": { "tr": "milli", "en": "milli" },
+      "symbol": "m",
+      "factor": "10^-3",
+      "shortcut": "1 mm = 0.001 m"
+    },
+    {
+      "item": { "tr": "mikro", "en": "micro" },
+      "symbol": "µ",
+      "factor": "10^-6",
+      "shortcut": "1 µm = 0.001 mm"
+    },
+    {
+      "item": { "tr": "nano", "en": "nano" },
+      "symbol": "n",
+      "factor": "10^-9",
+      "shortcut": "1 ns = 10^-9 s"
+    },
+    {
+      "item": "MPa ↔ N/mm²",
+      "symbol": "-",
+      "factor": "1:1",
+      "shortcut": "1 MPa = 1 N/mm²"
+    },
+    {
+      "item": "bar ↔ kPa",
+      "symbol": "-",
+      "factor": "1:100",
+      "shortcut": "1 bar = 100 kPa = 0.1 MPa"
+    },
+    {
+      "item": "L/min ↔ m³/s",
+      "symbol": "-",
+      "factor": "1:60000",
+      "shortcut": "1 L/min = 1.6667e-5 m³/s"
+    },
+    {
+      "item": "kWh ↔ MJ",
+      "symbol": "-",
+      "factor": "1:3.6",
+      "shortcut": "1 kWh = 3.6 MJ"
+    },
+    {
+      "item": "N·m ↔ J",
+      "symbol": "-",
+      "factor": "1:1",
+      "shortcut": "1 N·m = 1 J"
+    }
+  ],
+  "note": {
+    "tr": "Hızlı kontrol içindir. Raporlama ve sözleşme dokümanlarında birim sistemi tutarlı olmalıdır.",
+    "en": "Use for quick checks. Keep unit systems consistent in formal reports and contracts."
+  }
+}

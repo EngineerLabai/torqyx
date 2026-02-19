@@ -1,0 +1,66 @@
+{
+  "id": "friction-quick",
+  "title": {
+    "tr": "Yaygın Sürtünme Katsayıları (hızlı)",
+    "en": "Common Friction Coefficients (quick)"
+  },
+  "description": {
+    "tr": "Sık kullanılan yüzey çiftleri için tipik statik/kinetik µ aralıkları.",
+    "en": "Typical static/kinetic µ ranges for frequently used surface pairs."
+  },
+  "columns": [
+    { "key": "pair", "label": { "tr": "Yüzey çifti", "en": "Surface pair" } },
+    { "key": "condition", "label": { "tr": "Durum", "en": "Condition" } },
+    { "key": "muStatic", "label": { "tr": "µ statik", "en": "µ static" } },
+    { "key": "muKinetic", "label": { "tr": "µ kinetik", "en": "µ kinetic" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    {
+      "pair": { "tr": "Çelik - Çelik", "en": "Steel - Steel" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "muStatic": "0.50-0.80",
+      "muKinetic": "0.35-0.60",
+      "note": { "tr": "Yüzey oksidi ve pürüzlülük etkilidir.", "en": "Oxide layer and roughness are dominant." }
+    },
+    {
+      "pair": { "tr": "Çelik - Çelik", "en": "Steel - Steel" },
+      "condition": { "tr": "Yağlı", "en": "Oiled" },
+      "muStatic": "0.08-0.18",
+      "muKinetic": "0.05-0.12",
+      "note": { "tr": "Yağ filmi kalınlığına bağlıdır.", "en": "Strongly dependent on lubricant film." }
+    },
+    {
+      "pair": { "tr": "Alüminyum - Çelik", "en": "Aluminum - Steel" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "muStatic": "0.45-0.65",
+      "muKinetic": "0.30-0.50",
+      "note": { "tr": "Yapışma eğilimi görülebilir.", "en": "Adhesive wear tendency may appear." }
+    },
+    {
+      "pair": { "tr": "Alüminyum - Çelik", "en": "Aluminum - Steel" },
+      "condition": { "tr": "Yağlı", "en": "Oiled" },
+      "muStatic": "0.10-0.22",
+      "muKinetic": "0.08-0.18",
+      "note": { "tr": "Yüzey kaplaması sonucu iyileştirir.", "en": "Surface coating improves consistency." }
+    },
+    {
+      "pair": { "tr": "Çelik - Dökme Demir", "en": "Steel - Cast Iron" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "muStatic": "0.35-0.50",
+      "muKinetic": "0.25-0.40",
+      "note": { "tr": "Kızak temaslarında tipik aralık.", "en": "Typical range for slide-way contacts." }
+    },
+    {
+      "pair": { "tr": "PTFE - Çelik", "en": "PTFE - Steel" },
+      "condition": { "tr": "Kuru", "en": "Dry" },
+      "muStatic": "0.04-0.10",
+      "muKinetic": "0.04-0.09",
+      "note": { "tr": "Düşük sürtünme, düşük yükte avantajlı.", "en": "Very low friction, especially at low load." }
+    }
+  ],
+  "note": {
+    "tr": "Katsayılar yönlendirme amaçlıdır. Emniyet kritik tasarımlarda test verisi veya üretici datası kullanılmalıdır.",
+    "en": "Coefficients are guidance values. Use test data or supplier specs for safety-critical design."
+  }
+}

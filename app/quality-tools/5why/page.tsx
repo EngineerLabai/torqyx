@@ -1,12 +1,15 @@
 "use client";
 
 // app/quality-tools/5why/page.tsx
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useCallback, useRef } from "react";
 import PageShell from "@/components/layout/PageShell";
+import ReportActions from "@/components/report/ReportActions";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
 import { formatMessage } from "@/utils/messages";
 import { assertNoTurkish } from "@/utils/i18n-assert";
 import { fiveWhyCopy } from "@/data/quality-tools/5why";
+import { useAutosaveDraft } from "@/hooks/useAutosaveDraft";
 
 type WhyStep = {
   why: string;
@@ -16,6 +19,10 @@ type WhyStep = {
 type FiveWhyForm = {
   problem: string;
   steps: WhyStep[];
+};
+
+type FiveWhySnapshot = {
+  form: FiveWhyForm;
 };
 
 const INITIAL_FORM: FiveWhyForm = {
@@ -29,12 +36,53 @@ const INITIAL_FORM: FiveWhyForm = {
   ],
 };
 
+const DEMO_FORM: FiveWhyForm = {
+  problem:
+    "Assembly line reports frequent loose bracket complaints after first vibration test.",
+  steps: [
+    {
+      why: "Because bracket bolts are below the required tightening torque.",
+      actionHint: "Add final torque verification record for each unit.",
+    },
+    {
+      why: "Because torque gun calibration drifted outside tolerance.",
+      actionHint: "Increase calibration frequency from monthly to weekly.",
+    },
+    {
+      why: "Because calibration schedule is tracked manually and often missed.",
+      actionHint: "Automate calibration reminders in maintenance board.",
+    },
+    {
+      why: "Because maintenance plan does not include digital due-date alerts.",
+      actionHint: "Update preventive maintenance checklist with alert ownership.",
+    },
+    {
+      why: "Because no process owner was assigned for torque tool governance.",
+      actionHint: "Assign production quality engineer as process owner.",
+    },
+  ],
+};
+
+const DRAFT_KEY = "aielab:quality:5why:draft";
+
 export default function FiveWhyPage() {
   const { locale } = useLocale();
   const copy = fiveWhyCopy[locale];
+  const actionsCopy = qualityReportActionsCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/5why");
 
   const [form, setForm] = useState<FiveWhyForm>(INITIAL_FORM);
+  const reportRootRef = useRef<HTMLElement | null>(null);
+
+  const restoreDraft = useCallback((draft: FiveWhySnapshot) => {
+    setForm(normalizeFiveWhyForm(draft?.form));
+  }, []);
+
+  const { clearDraft } = useAutosaveDraft<FiveWhySnapshot>({
+    storageKey: DRAFT_KEY,
+    value: { form },
+    onRestore: restoreDraft,
+  });
 
   function handleProblemChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, problem: e.target.value }));
@@ -55,6 +103,15 @@ export default function FiveWhyPage() {
 
   function handleReset() {
     setForm(INITIAL_FORM);
+    clearDraft();
+  }
+
+  function handleDemoFill() {
+    setForm(DEMO_FORM);
+  }
+
+  function handleLoadData(snapshot: FiveWhySnapshot) {
+    setForm(normalizeFiveWhyForm(snapshot?.form));
   }
 
   const rootCause = getRootCause(form);
@@ -65,7 +122,18 @@ export default function FiveWhyPage() {
 
   return (
     <PageShell>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <ReportActions
+        toolKey="5why"
+        currentData={{ form }}
+        onLoadData={handleLoadData}
+        onDemoFill={handleDemoFill}
+        onReset={handleReset}
+        reportRootRef={reportRootRef}
+        copy={actionsCopy}
+      />
+
+      <section id="report-root" ref={reportRootRef} className="space-y-4">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             {copy.badge}
@@ -77,9 +145,9 @@ export default function FiveWhyPage() {
 
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
         <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
-      </section>
+        </section>
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <section className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
           <div className="mb-3 flex items-center justify-between gap-2">
             <h2 className="text-sm font-semibold text-slate-900">{copy.formTitle}</h2>
@@ -150,6 +218,7 @@ export default function FiveWhyPage() {
           classification={classification}
           copy={copy}
         />
+        </section>
       </section>
     </PageShell>
   );
@@ -242,6 +311,31 @@ function getRootCause(form: FiveWhyForm): string | null {
     if (value.length > 0) return value;
   }
   return null;
+}
+
+function normalizeFiveWhyForm(source: unknown): FiveWhyForm {
+  if (!source || typeof source !== "object") {
+    return INITIAL_FORM;
+  }
+
+  const candidate = source as Partial<FiveWhyForm>;
+  const stepsSource = Array.isArray(candidate.steps) ? candidate.steps : [];
+  const steps: WhyStep[] = Array.from({ length: 5 }, (_, index) => {
+    const step = stepsSource[index];
+    if (!step || typeof step !== "object") {
+      return { why: "", actionHint: "" };
+    }
+    const current = step as Partial<WhyStep>;
+    return {
+      why: typeof current.why === "string" ? current.why : "",
+      actionHint: typeof current.actionHint === "string" ? current.actionHint : "",
+    };
+  });
+
+  return {
+    problem: typeof candidate.problem === "string" ? candidate.problem : "",
+    steps,
+  };
 }
 
 function classifyRootCause(text: string | null): Classification {

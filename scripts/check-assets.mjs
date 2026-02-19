@@ -10,11 +10,11 @@ if (!fs.existsSync(ASSETS_FILE)) {
 }
 
 const source = fs.readFileSync(ASSETS_FILE, "utf8");
-const matches = Array.from(source.matchAll(/["'](\/illustrations\/[^"']+)["']/g)).map((m) => m[1]);
+const matches = Array.from(source.matchAll(/["'](\/images\/[^"']+)["']/g)).map((m) => m[1]);
 const unique = Array.from(new Set(matches));
 
 if (unique.length === 0) {
-  console.warn("[check-assets] No illustration assets found in assets map.");
+  console.warn("[check-assets] No image assets found in assets map.");
   process.exit(0);
 }
 

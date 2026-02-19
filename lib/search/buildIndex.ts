@@ -6,9 +6,11 @@ import { toolCatalog, getToolCopy } from "../../tools/_shared/catalog";
 import { standardsManifest, standardsTables, type StandardsCategory } from "../../data/standards";
 import materialsData from "../../data/reference/materials.json";
 import threadsData from "../../data/reference/threads.json";
-import frictionData from "../../data/reference/friction.json";
 import fitsData from "../../data/reference/fits.json";
-import unitsData from "../../data/reference/units.json";
+import hardnessData from "../../data/reference/hardness.json";
+import surfaceFinishData from "../../data/reference/surface-finish.json";
+import frictionQuickData from "../../data/reference/friction-quick.json";
+import siPrefixesData from "../../data/reference/si-prefixes.json";
 import { withLocalePrefix } from "../../utils/locale-path";
 import { buildSearchText, type SearchIndexData, type SearchIndexItem } from "../../utils/search-index";
 import { ACTIVE_TOOL_DOCS } from "../tool-docs/registry";
@@ -41,11 +43,13 @@ const CONTENT_DIRS = {
 const CONTENT_EXTENSIONS = new Set([".mdx", ".md"]);
 
 const referenceSections: ReferenceSection[] = [
-  materialsData,
   threadsData,
-  frictionData,
   fitsData,
-  unitsData,
+  hardnessData,
+  surfaceFinishData,
+  frictionQuickData,
+  siPrefixesData,
+  materialsData,
 ];
 
 const STANDARD_TERMS: Record<Locale, string[]> = {

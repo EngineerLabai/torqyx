@@ -1,668 +1,591 @@
-"use client";
+﻿"use client";
 
-// app/fixture-tools/base-plate/page.tsx
-import { useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
-import { trackEvent } from "@/utils/analytics";
+import ReportActions from "@/components/report/ReportActions";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
+import { useAutosaveDraft } from "@/hooks/useAutosaveDraft";
+import { assertNoTurkish } from "@/utils/i18n-assert";
 
-type Inputs = {
-  length: string; // mm
-  width: string; // mm
-  partWeight: string; // kg
-  density: string; // kg/m3
+type MaterialId = "steel" | "aluminum";
+type ChecklistId = "tslotSpacing" | "boltPattern" | "liftingPoints" | "dowelHoles";
+
+type BasePlateForm = {
+  spanLmm: string;
+  widthBmm: string;
+  equivalentLoadN: string;
+  allowableDeflectionMm: string;
+  material: MaterialId;
 };
 
-type Results = {
-  thickness: number | null; // mm
-  plateWeight: number | null; // kg
-  note: string | null;
-};
-
-type StandardInputs = {
-  reqLength: string; // mm
-  reqWidth: string; // mm
-  reqThickness: string; // mm
-  allowanceXY: string; // mm per side
-  allowanceZ: string; // mm total
-  materialId: string;
-};
-
-type StandardPlate = {
-  code: string;
-  length: number;
-  width: number;
-  thickness: number;
-  note?: string;
-};
-
-type MaterialOption = {
+type NoteRow = {
   id: string;
-  label: string;
-  density: number; // kg/m3
-  defaultAllowanceXY: number; // mm per side
-  defaultAllowanceZ: number; // mm total
+  area: string;
+  detail: string;
+  owner: string;
 };
 
-type StandardResult = {
-  plate: StandardPlate | null;
-  orientedLength: number | null;
-  orientedWidth: number | null;
-  oversizeL: number | null;
-  oversizeW: number | null;
-  oversizeT: number | null;
-  plateWeight: number | null; // kg
-  note: string | null;
+type ChecklistState = Record<ChecklistId, boolean>;
+
+type BasePlateSnapshot = {
+  form: BasePlateForm;
+  noteRows: NoteRow[];
+  checklist: ChecklistState;
 };
 
-const DEFAULT_INPUTS: Inputs = {
-  length: "500",
-  width: "400",
-  partWeight: "40",
-  density: "7850",
+type BasePlateCopy = {
+  badge: string;
+  beta: string;
+  title: string;
+  description: string;
+  sections: {
+    inputs: string;
+    results: string;
+    compatibility: string;
+    notes: string;
+    references: string;
+    disclaimerTitle: string;
+  };
+  fields: {
+    spanLmm: string;
+    widthBmm: string;
+    equivalentLoadN: string;
+    allowableDeflectionMm: string;
+    material: string;
+  };
+  materialLabels: Record<MaterialId, string>;
+  placeholders: {
+    area: string;
+    detail: string;
+    owner: string;
+  };
+  results: {
+    estimatedThickness: string;
+    roundedThickness: string;
+    estimatedWeight: string;
+    roundedWeight: string;
+    deflectionAtRounded: string;
+    formula: string;
+    invalid: string;
+  };
+  checklistLabels: Record<ChecklistId, string>;
+  checklistProgress: string;
+  addNoteRow: string;
+  remove: string;
+  references: string[];
+  disclaimer: string;
 };
 
-const DEFAULT_STD_INPUTS: StandardInputs = {
-  reqLength: "450",
-  reqWidth: "320",
-  reqThickness: "25",
-  allowanceXY: "3",
-  allowanceZ: "2",
-  materialId: "s235",
+type MaterialPreset = {
+  eNPerMm2: number;
+  densityKgM3: number;
 };
 
-const STANDARD_PLATES: StandardPlate[] = [
-  { code: "300x250x20", length: 300, width: 250, thickness: 20, note: "Küçük jig / aparat" },
-  { code: "400x300x25", length: 400, width: 300, thickness: 25 },
-  { code: "500x400x25", length: 500, width: 400, thickness: 25 },
-  { code: "500x400x30", length: 500, width: 400, thickness: 30 },
-  { code: "600x400x30", length: 600, width: 400, thickness: 30 },
-  { code: "600x500x32", length: 600, width: 500, thickness: 32 },
-  { code: "700x500x36", length: 700, width: 500, thickness: 36 },
-  { code: "800x500x40", length: 800, width: 500, thickness: 40 },
-  { code: "800x600x45", length: 800, width: 600, thickness: 45 },
-  { code: "900x600x50", length: 900, width: 600, thickness: 50 },
-  { code: "1000x600x50", length: 1000, width: 600, thickness: 50, note: "Büyük tabla" },
-];
+const DRAFT_KEY = "aielab:fixture:base-plate:draft";
+const STANDARD_THICKNESSES = [20, 25, 30, 40, 50];
+const CHECKLIST_IDS: ChecklistId[] = ["tslotSpacing", "boltPattern", "liftingPoints", "dowelHoles"];
 
-const MATERIALS: MaterialOption[] = [
-  { id: "s235", label: "S235 / S355 (yapısal)", density: 7850, defaultAllowanceXY: 3, defaultAllowanceZ: 2 },
-  { id: "p20", label: "1.2311 / P20 (ön tavlı)", density: 7800, defaultAllowanceXY: 4, defaultAllowanceZ: 3 },
-  { id: "c45", label: "1.1730 / C45U", density: 7850, defaultAllowanceXY: 3, defaultAllowanceZ: 2 },
-  { id: "h13", label: "1.2344 / H13", density: 7800, defaultAllowanceXY: 4, defaultAllowanceZ: 3 },
-  { id: "al", label: "Al 5083 / 6061", density: 2700, defaultAllowanceXY: 2, defaultAllowanceZ: 2 },
-];
+const MATERIALS: Record<MaterialId, MaterialPreset> = {
+  steel: { eNPerMm2: 210_000, densityKgM3: 7_850 },
+  aluminum: { eNPerMm2: 70_000, densityKgM3: 2_700 },
+};
+
+const INITIAL_FORM: BasePlateForm = {
+  spanLmm: "450",
+  widthBmm: "300",
+  equivalentLoadN: "3000",
+  allowableDeflectionMm: "0.10",
+  material: "steel",
+};
+
+const basePlateCopy: Record<"tr" | "en", BasePlateCopy> = {
+  tr: {
+    badge: "Taban Plaka",
+    beta: "Beta",
+    title: "Taban Plaka Boyutlandırma Kartı",
+    description:
+      "Basit rijitlik yaklaşımıyla kalınlık tahmini, standart kalınlığa yuvarlama ve tabla uyumluluğu kontrolü.",
+    sections: {
+      inputs: "Girdiler",
+      results: "Sonuçlar",
+      compatibility: "Makine Tablası Uyumluluğu",
+      notes: "Notlar Tablosu",
+      references: "Referanslar",
+      disclaimerTitle: "Sorumluluk Notu",
+    },
+    fields: {
+      spanLmm: "Plaka açıklığı L [mm]",
+      widthBmm: "Plaka genişliği b [mm]",
+      equivalentLoadN: "Eşdeğer yük F [N]",
+      allowableDeflectionMm: "İzin verilebilir sehim δ [mm]",
+      material: "Malzeme (E ve yoğunluk)",
+    },
+    materialLabels: {
+      steel: "Çelik (E = 210 GPa)",
+      aluminum: "Alüminyum (E = 70 GPa)",
+    },
+    placeholders: {
+      area: "Bölge / delik haritası",
+      detail: "Detay (insert, burç, talaş cebi vb.)",
+      owner: "Sorumlu",
+    },
+    results: {
+      estimatedThickness: "Hesaplanan t (teorik)",
+      roundedThickness: "Önerilen standart kalınlık",
+      estimatedWeight: "Hesaplanan kalınlıkta tahmini ağırlık",
+      roundedWeight: "Önerilen kalınlıkta tahmini ağırlık",
+      deflectionAtRounded: "Önerilen kalınlıkta tahmini sehim",
+      formula: "Formül",
+      invalid: "Sonuç için L, b, F ve δ değerlerini pozitif girin.",
+    },
+    checklistLabels: {
+      tslotSpacing: "T-slot aralığı ve yönü çizimde belirtildi",
+      boltPattern: "Bağlama cıvata paterni tabloya uyumlu",
+      liftingPoints: "Kaldırma noktaları/halka detayları tanımlı",
+      dowelHoles: "Konumlama pim/dowel delikleri net ölçülendirilmiş",
+    },
+    checklistProgress: "Tamamlanan madde",
+    addNoteRow: "Not satırı ekle",
+    remove: "Sil",
+    references: [
+      "Yaklaşım: δ = F*L^3 / (4*E*b*t^3), t için çözülür.",
+      "E birimi N/mm² (Çelik 210000, Alüminyum 70000).",
+      "Standart kalınlık seçimi üretim ve tedarik kolaylığı sağlar.",
+      "Nihai tasarımda FEA ve makina tabla verisiyle doğrulama yapın.",
+    ],
+    disclaimer: "Tipik rehberdir, standartlar ve sorumlu mühendis doğrulaması gerekir.",
+  },
+  en: {
+    badge: "Base Plate",
+    beta: "Beta",
+    title: "Base Plate Sizing Card",
+    description:
+      "Estimate thickness with a simple stiffness model, round to standard thickness, and check machine-table compatibility.",
+    sections: {
+      inputs: "Inputs",
+      results: "Results",
+      compatibility: "Machine Table Compatibility",
+      notes: "Notes Table",
+      references: "References",
+      disclaimerTitle: "Disclaimer",
+    },
+    fields: {
+      spanLmm: "Plate span L [mm]",
+      widthBmm: "Plate width b [mm]",
+      equivalentLoadN: "Equivalent load F [N]",
+      allowableDeflectionMm: "Allowable deflection δ [mm]",
+      material: "Material (E and density)",
+    },
+    materialLabels: {
+      steel: "Steel (E = 210 GPa)",
+      aluminum: "Aluminum (E = 70 GPa)",
+    },
+    placeholders: {
+      area: "Area / hole map",
+      detail: "Detail (inserts, bushings, chip pockets, etc.)",
+      owner: "Owner",
+    },
+    results: {
+      estimatedThickness: "Calculated t (theoretical)",
+      roundedThickness: "Recommended standard thickness",
+      estimatedWeight: "Estimated weight at calculated thickness",
+      roundedWeight: "Estimated weight at recommended thickness",
+      deflectionAtRounded: "Estimated deflection at recommended thickness",
+      formula: "Formula",
+      invalid: "Enter positive L, b, F, and δ values for results.",
+    },
+    checklistLabels: {
+      tslotSpacing: "T-slot spacing and orientation are defined",
+      boltPattern: "Bolt pattern fits machine table layout",
+      liftingPoints: "Lifting points/rings are defined",
+      dowelHoles: "Dowel/location holes are dimensioned clearly",
+    },
+    checklistProgress: "Completed items",
+    addNoteRow: "Add Note Row",
+    remove: "Remove",
+    references: [
+      "Model: δ = F*L^3 / (4*E*b*t^3), solved for t.",
+      "Use E in N/mm² (Steel 210000, Aluminum 70000).",
+      "Standard thickness selection improves sourcing and manufacturing consistency.",
+      "Validate final design with FEA and machine-table constraints.",
+    ],
+    disclaimer: "Typical guidance, verify with standards and responsible engineer.",
+  },
+};
+
+const createId = () => Math.random().toString(36).slice(2, 10);
+
+function createInitialChecklist(): ChecklistState {
+  return {
+    tslotSpacing: false,
+    boltPattern: false,
+    liftingPoints: false,
+    dowelHoles: false,
+  };
+}
+
+function createNoteRow(): NoteRow {
+  return {
+    id: createId(),
+    area: "",
+    detail: "",
+    owner: "",
+  };
+}
+
+function createInitialNotes(): NoteRow[] {
+  return [createNoteRow()];
+}
+
+function parsePositive(value: string): number | null {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) return null;
+  return parsed;
+}
+
+function normalizeForm(source: unknown): BasePlateForm {
+  if (!source || typeof source !== "object") return INITIAL_FORM;
+  const row = source as Partial<BasePlateForm>;
+  const material: MaterialId = row.material === "aluminum" ? "aluminum" : "steel";
+
+  return {
+    spanLmm: typeof row.spanLmm === "string" ? row.spanLmm : INITIAL_FORM.spanLmm,
+    widthBmm: typeof row.widthBmm === "string" ? row.widthBmm : INITIAL_FORM.widthBmm,
+    equivalentLoadN: typeof row.equivalentLoadN === "string" ? row.equivalentLoadN : INITIAL_FORM.equivalentLoadN,
+    allowableDeflectionMm:
+      typeof row.allowableDeflectionMm === "string"
+        ? row.allowableDeflectionMm
+        : INITIAL_FORM.allowableDeflectionMm,
+    material,
+  };
+}
+
+function normalizeNotes(source: unknown): NoteRow[] {
+  if (!Array.isArray(source) || source.length === 0) return createInitialNotes();
+  const normalized = source
+    .map((item): NoteRow | null => {
+      if (!item || typeof item !== "object") return null;
+      const row = item as Partial<NoteRow>;
+      return {
+        id: typeof row.id === "string" && row.id.trim() ? row.id : createId(),
+        area: typeof row.area === "string" ? row.area : "",
+        detail: typeof row.detail === "string" ? row.detail : "",
+        owner: typeof row.owner === "string" ? row.owner : "",
+      };
+    })
+    .filter((row): row is NoteRow => row !== null);
+
+  return normalized.length > 0 ? normalized : createInitialNotes();
+}
+
+function normalizeChecklist(source: unknown): ChecklistState {
+  const initial = createInitialChecklist();
+  if (!source || typeof source !== "object") return initial;
+  const candidate = source as Partial<ChecklistState>;
+  const next = { ...initial };
+  CHECKLIST_IDS.forEach((id) => {
+    next[id] = Boolean(candidate[id]);
+  });
+  return next;
+}
+
+function pickStandardThickness(value: number): number {
+  const found = STANDARD_THICKNESSES.find((item) => item >= value);
+  if (found) return found;
+  return Math.ceil(value / 10) * 10;
+}
 
 export default function BasePlatePage() {
-  const [inputs, setInputs] = useState<Inputs>(DEFAULT_INPUTS);
-  const [results, setResults] = useState<Results>({
-    thickness: null,
-    plateWeight: null,
-    note: null,
-  });
-  const [error, setError] = useState<string | null>(null);
+  const { locale } = useLocale();
+  const copy = basePlateCopy[locale];
+  const actionsCopy = qualityReportActionsCopy[locale];
+  assertNoTurkish(locale, copy, "fixture-tools/base-plate");
 
-  const [stdInputs, setStdInputs] = useState<StandardInputs>(DEFAULT_STD_INPUTS);
-  const [stdResult, setStdResult] = useState<StandardResult>({
-    plate: null,
-    orientedLength: null,
-    orientedWidth: null,
-    oversizeL: null,
-    oversizeW: null,
-    oversizeT: null,
-    plateWeight: null,
-    note: null,
-  });
-  const [stdError, setStdError] = useState<string | null>(null);
+  const [form, setForm] = useState<BasePlateForm>(INITIAL_FORM);
+  const [noteRows, setNoteRows] = useState<NoteRow[]>(() => createInitialNotes());
+  const [checklist, setChecklist] = useState<ChecklistState>(() => createInitialChecklist());
+  const reportRootRef = useRef<HTMLElement | null>(null);
 
-  function clamp(val: number, min: number, max: number) {
-    return Math.max(min, Math.min(max, val));
+  const restoreDraft = useCallback((draft: BasePlateSnapshot) => {
+    setForm(normalizeForm(draft?.form));
+    setNoteRows(normalizeNotes(draft?.noteRows));
+    setChecklist(normalizeChecklist(draft?.checklist));
+  }, []);
+
+  const { clearDraft } = useAutosaveDraft<BasePlateSnapshot>({
+    storageKey: DRAFT_KEY,
+    value: { form, noteRows, checklist },
+    onRestore: restoreDraft,
+  });
+
+  function handleFormChange<K extends keyof BasePlateForm>(key: K, value: BasePlateForm[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  function handleChange<K extends keyof Inputs>(key: K, value: Inputs[K]) {
-    setInputs((prev) => ({ ...prev, [key]: value }));
+  function handleNoteChange<K extends keyof NoteRow>(id: string, key: K, value: NoteRow[K]) {
+    setNoteRows((prev) => prev.map((row) => (row.id === id ? { ...row, [key]: value } : row)));
   }
 
-  function handleStdChange<K extends keyof StandardInputs>(
-    key: K,
-    value: StandardInputs[K],
-  ) {
-    setStdInputs((prev) => {
-      // Malzeme seçildiğinde tipik işleme payını otomatik öner
-      if (key === "materialId") {
-        const mat = MATERIALS.find((m) => m.id === value);
-        if (mat) {
-          return {
-            ...prev,
-            materialId: value,
-            allowanceXY: mat.defaultAllowanceXY.toString(),
-            allowanceZ: mat.defaultAllowanceZ.toString(),
-          };
-        }
-      }
-      return { ...prev, [key]: value };
+  function addNoteRow() {
+    setNoteRows((prev) => [...prev, createNoteRow()]);
+  }
+
+  function removeNoteRow(id: string) {
+    setNoteRows((prev) => (prev.length > 1 ? prev.filter((row) => row.id !== id) : prev));
+  }
+
+  function toggleChecklist(id: ChecklistId) {
+    setChecklist((prev) => ({ ...prev, [id]: !prev[id] }));
+  }
+
+  function handleReset() {
+    setForm(INITIAL_FORM);
+    setNoteRows(createInitialNotes());
+    setChecklist(createInitialChecklist());
+    clearDraft();
+  }
+
+  function handleDemoFill() {
+    setForm({
+      spanLmm: "620",
+      widthBmm: "380",
+      equivalentLoadN: "5200",
+      allowableDeflectionMm: "0.08",
+      material: "steel",
+    });
+
+    setNoteRows([
+      {
+        id: createId(),
+        area: locale === "tr" ? "Hole map - üst yüzey" : "Hole map - top face",
+        detail:
+          locale === "tr"
+            ? "2x dowel H7, 8x M12 bağlama deliği, talaş cepleri sağ alt bölgede."
+            : "2x H7 dowel holes, 8x M12 clamp holes, chip pockets on lower-right region.",
+        owner: locale === "tr" ? "Tasarım" : "Design",
+      },
+      {
+        id: createId(),
+        area: locale === "tr" ? "Burç/insert" : "Bushings/inserts",
+        detail:
+          locale === "tr"
+            ? "Sık sök-tak bölgelerine sertleştirilmiş çelik insert uygulanacak."
+            : "Use hardened steel inserts in frequently serviced zones.",
+        owner: locale === "tr" ? "Üretim" : "Manufacturing",
+      },
+    ]);
+
+    setChecklist({
+      tslotSpacing: true,
+      boltPattern: true,
+      liftingPoints: true,
+      dowelHoles: false,
     });
   }
 
-  function handleCalculate() {
-    const L = Number(inputs.length);
-    const W = Number(inputs.width);
-    const partW = Number(inputs.partWeight);
-    const density = Number(inputs.density);
+  function handleLoadData(snapshot: BasePlateSnapshot) {
+    setForm(normalizeForm(snapshot?.form));
+    setNoteRows(normalizeNotes(snapshot?.noteRows));
+    setChecklist(normalizeChecklist(snapshot?.checklist));
+  }
 
-    if (!L || !W || L <= 0 || W <= 0) {
-      setError("Uzunluk ve genişlik pozitif olmalı.");
-      setResults({ thickness: null, plateWeight: null, note: null });
-      return;
-    }
-    if (!partW || partW <= 0) {
-      setError("Parça ağırlığı pozitif olmalı.");
-      setResults({ thickness: null, plateWeight: null, note: null });
-      return;
-    }
-    if (!density || density <= 0) {
-      setError("Yoğunluk pozitif olmalı.");
-      setResults({ thickness: null, plateWeight: null, note: null });
-      return;
-    }
+  const calculated = useMemo(() => {
+    const span = parsePositive(form.spanLmm);
+    const width = parsePositive(form.widthBmm);
+    const load = parsePositive(form.equivalentLoadN);
+    const deflection = parsePositive(form.allowableDeflectionMm);
+    if (!span || !width || !load || !deflection) return null;
 
-      setError(null);
-      trackEvent("calculate_click", { tool_id: "fixture-base-plate", tool_title: "Base Plate" });
+    const material = MATERIALS[form.material];
+    const numerator = load * span ** 3;
+    const denominator = 4 * material.eNPerMm2 * width * deflection;
+    const thickness = Math.cbrt(numerator / denominator);
+    const roundedThickness = pickStandardThickness(thickness);
 
-    const span = Math.min(L, W);
-    const tBase = 0.03 * span; // mm, kaba kural
-    const loadFactor = clamp(0.6 + partW / 50, 0.8, 1.6); // ağır parça için kalınlaştırma
-    const thickness = tBase * loadFactor;
+    const thicknessVolumeM3 = (span * width * thickness) / 1_000_000_000;
+    const roundedVolumeM3 = (span * width * roundedThickness) / 1_000_000_000;
 
-    const volume_m3 = (L * W * thickness) / 1_000_000_000; // mm3 -> m3
-    const plateWeight = volume_m3 * density; // kg
+    const estimatedWeight = thicknessVolumeM3 * material.densityKgM3;
+    const roundedWeight = roundedVolumeM3 * material.densityKgM3;
 
-    let note = "Orta yüklü fikstür için yeterli kalınlıkta.";
-    if (loadFactor > 1.4) {
-      note = "Ağır parça: Kalınlığı artırın, kaburga veya alt takviye düşün.";
-    } else if (thickness < 12) {
-      note = "İnce plaka: Rijitlik için kaburga veya kenar kalınlaştırma ekle.";
-    }
+    const deflectionAtRounded =
+      numerator / (4 * material.eNPerMm2 * width * roundedThickness ** 3);
 
-    setResults({
+    return {
       thickness,
-      plateWeight,
-      note,
-    });
-  }
+      roundedThickness,
+      estimatedWeight,
+      roundedWeight,
+      deflectionAtRounded,
+      eValue: material.eNPerMm2,
+    };
+  }, [form]);
 
-  function handleRecommendPlate() {
-    const reqL = Number(stdInputs.reqLength);
-    const reqW = Number(stdInputs.reqWidth);
-    const reqT = Number(stdInputs.reqThickness);
-    const allowXY = Number(stdInputs.allowanceXY);
-    const allowZ = Number(stdInputs.allowanceZ);
-    const material = MATERIALS.find((m) => m.id === stdInputs.materialId);
-
-    if (!material) {
-      setStdError("Malzeme seç.");
-      setStdResult({
-        plate: null,
-        orientedLength: null,
-        orientedWidth: null,
-        oversizeL: null,
-        oversizeW: null,
-        oversizeT: null,
-        plateWeight: null,
-        note: null,
-      });
-      return;
-    }
-
-    if (!reqL || !reqW || !reqT || reqL <= 0 || reqW <= 0 || reqT <= 0) {
-      setStdError("İstenen ölçüler pozitif olmalı.");
-      setStdResult({
-        plate: null,
-        orientedLength: null,
-        orientedWidth: null,
-        oversizeL: null,
-        oversizeW: null,
-        oversizeT: null,
-        plateWeight: null,
-        note: null,
-      });
-      return;
-    }
-    if (allowXY < 0 || allowZ < 0) {
-      setStdError("İşleme payları negatif olamaz.");
-      setStdResult({
-        plate: null,
-        orientedLength: null,
-        orientedWidth: null,
-        oversizeL: null,
-        oversizeW: null,
-        oversizeT: null,
-        plateWeight: null,
-        note: null,
-      });
-      return;
-    }
-
-    setStdError(null);
-
-    const needL = reqL + 2 * allowXY;
-    const needW = reqW + 2 * allowXY;
-    const needT = reqT + allowZ;
-
-    const requiredVolume = needL * needW * needT;
-
-    let best: {
-      plate: StandardPlate;
-      orientedL: number;
-      orientedW: number;
-      volDiff: number;
-    } | null = null;
-
-    for (const p of STANDARD_PLATES) {
-      const fitsNormal = p.length >= needL && p.width >= needW;
-      const fitsRot = p.length >= needW && p.width >= needL;
-
-      if (!fitsNormal && !fitsRot) continue;
-
-      const orientedL = fitsNormal ? p.length : p.width;
-      const orientedW = fitsNormal ? p.width : p.length;
-      const volDiff = orientedL * orientedW * p.thickness - requiredVolume;
-
-      if (volDiff < 0) continue;
-
-      if (!best || volDiff < best.volDiff) {
-        best = { plate: p, orientedL, orientedW, volDiff };
-      }
-    }
-
-    if (!best) {
-      setStdResult({
-        plate: null,
-        orientedLength: null,
-        orientedWidth: null,
-        oversizeL: null,
-        oversizeW: null,
-        oversizeT: null,
-        plateWeight: null,
-        note: "Liste dışı: Daha büyük/özel plaka seç veya işleme payını düşür.",
-      });
-      return;
-    }
-
-    const oversizeL = best.orientedL - needL;
-    const oversizeW = best.orientedW - needW;
-    const oversizeT = best.plate.thickness - needT;
-
-    const note = `Seçilen plaka ${best.plate.code}. Fazlalık: +${oversizeL.toFixed(
-      1,
-    )}mm / +${oversizeW.toFixed(1)}mm / +${oversizeT.toFixed(
-      1,
-    )}mm (L/W/T). İşleme payı için yeterli görünüyor.`;
-
-    const volume_m3 =
-      (best.plate.length * best.plate.width * best.plate.thickness) / 1_000_000_000;
-    const plateWeight = volume_m3 * material.density;
-
-    setStdResult({
-      plate: best.plate,
-      orientedLength: best.orientedL,
-      orientedWidth: best.orientedW,
-      oversizeL,
-      oversizeW,
-      oversizeT,
-      plateWeight,
-      note,
-    });
-  }
+  const completedChecklist = CHECKLIST_IDS.filter((id) => checklist[id]).length;
 
   return (
     <PageShell>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-3 flex items-center gap-2">
-          <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-            Taban Plaka
-          </span>
-          <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-medium text-emerald-700">
-            Beta
-          </span>
-        </div>
-        <h1 className="text-lg font-semibold text-slate-900">
-          Taban Plakası Boyutlandırma ve Not Kartı
-        </h1>
-        <p className="mt-2 text-xs text-slate-600">
-          Fikstür taban plakasının kalınlığı, cıvata yerleşimi ve makine tablası
-          uyumluluğu için hızlı bir hatırlatma kartı. Amaç: gereğinden ağır
-          olmayan, rijitliği yeterli bir plaka ve güvenli bağlama noktaları.
-        </p>
-      </section>
+      <ReportActions
+        toolKey="fixture-base-plate"
+        currentData={{ form, noteRows, checklist }}
+        onLoadData={handleLoadData}
+        onDemoFill={handleDemoFill}
+        onReset={handleReset}
+        reportRootRef={reportRootRef}
+        copy={actionsCopy}
+      />
 
-      {/* Standart plaka seçimi (bitmiş ölçü + işleme payı) */}
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h2 className="mb-3 text-sm font-semibold text-slate-900">
-            Standart plaka seçici (işleme paylı)
-          </h2>
-          <p className="mb-3 text-[11px] text-slate-600">
-            Bitmiş parça ölçülerini ve işleme payını gir; tipik tedarik boylarından en küçük
-            uyumlu plakayı ve malzemeye göre tahmini ağırlığı önerir.
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                İstenen boy L [mm]
-              </label>
-              <input
-                type="number"
-                value={stdInputs.reqLength}
-                onChange={(e) => handleStdChange("reqLength", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={1}
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                İstenen en W [mm]
-              </label>
-              <input
-                type="number"
-                value={stdInputs.reqWidth}
-                onChange={(e) => handleStdChange("reqWidth", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={1}
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                İstenen kalınlık T [mm]
-              </label>
-              <input
-                type="number"
-                value={stdInputs.reqThickness}
-                onChange={(e) => handleStdChange("reqThickness", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={1}
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                Malzeme
-              </label>
-              <select
-                value={stdInputs.materialId}
-                onChange={(e) => handleStdChange("materialId", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              >
-                {MATERIALS.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.label}
-                  </option>
-                ))}
-              </select>
-              <p className="text-[11px] text-slate-500">
-                Malzemeye göre işleme payı otomatik önerilir, dilersen değiştir.
-              </p>
-            </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                İşleme payı (X/Y) [mm/yan]
-              </label>
-              <input
-                type="number"
-                value={stdInputs.allowanceXY}
-                onChange={(e) => handleStdChange("allowanceXY", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={0}
-                step="0.5"
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                İşleme payı (Z) [mm toplam]
-              </label>
-              <input
-                type="number"
-                value={stdInputs.allowanceZ}
-                onChange={(e) => handleStdChange("allowanceZ", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={0}
-                step="0.5"
-              />
-            </div>
+      <section id="report-root" ref={reportRootRef} className="space-y-4">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+              {copy.badge}
+            </span>
+            <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-medium text-emerald-700">
+              {copy.beta}
+            </span>
           </div>
-          {stdError && <p className="mt-2 text-[11px] text-red-600">{stdError}</p>}
-          <button
-            onClick={handleRecommendPlate}
-            className="mt-3 inline-flex items-center rounded-full bg-slate-900 px-4 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800"
-          >
-            Standart plaka öner
-          </button>
-        </div>
+          <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
+          <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
+        </section>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">
-            Önerilen standart plaka
-          </h3>
-          <div className="space-y-2">
-            <ResultRow
-              label="Plaka kodu"
-              value={stdResult.plate ? stdResult.plate.code : "—"}
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+          <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.sections.inputs}</h2>
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+            <NumberField label={copy.fields.spanLmm} value={form.spanLmm} onChange={(value) => handleFormChange("spanLmm", value)} />
+            <NumberField label={copy.fields.widthBmm} value={form.widthBmm} onChange={(value) => handleFormChange("widthBmm", value)} />
+            <NumberField label={copy.fields.equivalentLoadN} value={form.equivalentLoadN} onChange={(value) => handleFormChange("equivalentLoadN", value)} />
+            <NumberField label={copy.fields.allowableDeflectionMm} value={form.allowableDeflectionMm} onChange={(value) => handleFormChange("allowableDeflectionMm", value)} />
+            <SelectField
+              label={copy.fields.material}
+              value={form.material}
+              onChange={(value) => handleFormChange("material", value as MaterialId)}
+              options={([
+                "steel",
+                "aluminum",
+              ] as MaterialId[]).map((id) => ({ value: id, label: copy.materialLabels[id] }))}
             />
-            <ResultRow
-              label="Kaplayacağı boyut (L - W)"
-              value={
-                stdResult.orientedLength && stdResult.orientedWidth
-                  ? `${stdResult.orientedLength} - ${stdResult.orientedWidth} mm`
-                  : "—"
-              }
-            />
-            <ResultRow
-              label="Kalınlık"
-              value={stdResult.plate ? `${stdResult.plate.thickness} mm` : "—"}
-            />
-            <ResultRow
-              label="Fazlalık (L/W/T)"
-              value={
-                stdResult.oversizeL !== null &&
-                stdResult.oversizeW !== null &&
-                stdResult.oversizeT !== null
-                  ? `+${stdResult.oversizeL.toFixed(1)} / +${stdResult.oversizeW.toFixed(
-                      1,
-                    )} / +${stdResult.oversizeT.toFixed(1)} mm`
-                  : "—"
-              }
-            />
-            <ResultRow
-              label="Tahmini plaka ağırlığı"
-              value={
-                stdResult.plateWeight !== null
-                  ? `${stdResult.plateWeight.toFixed(1)} kg`
-                  : "—"
-              }
-            />
-            <div className="rounded-lg bg-slate-50 px-3 py-2 text-[11px] text-slate-700">
-              {stdResult.note ?? "Standart plaka önerisi burada görünecek."}
-            </div>
-            <p className="text-[11px] text-slate-500">
-              Mantık: İstenen ölçü + işleme payı için en küçük uyumlu plakayı seçer.
-              Gerekirse listeyi genişlet veya payları azalt.
-            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Kalınlık ve ağırlık tahmini (kaba) */}
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h2 className="mb-3 text-sm font-semibold text-slate-900">
-            Hızlı taban plakası hesaplayıcı
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                Uzunluk L [mm]
-              </label>
-              <input
-                type="number"
-                value={inputs.length}
-                onChange={(e) => handleChange("length", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={1}
-              />
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+          <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.sections.results}</h2>
+          {calculated ? (
+            <div className="space-y-3">
+              <ResultRow label={copy.results.estimatedThickness} value={`${calculated.thickness.toFixed(2)} mm`} />
+              <ResultRow label={copy.results.roundedThickness} value={`${calculated.roundedThickness.toFixed(0)} mm`} />
+              <ResultRow label={copy.results.estimatedWeight} value={`${calculated.estimatedWeight.toFixed(2)} kg`} />
+              <ResultRow label={copy.results.roundedWeight} value={`${calculated.roundedWeight.toFixed(2)} kg`} />
+              <ResultRow label={copy.results.deflectionAtRounded} value={`${calculated.deflectionAtRounded.toFixed(4)} mm`} />
+              <div className="rounded-lg bg-slate-50 p-3 text-[11px] text-slate-700">
+                <p className="font-semibold text-slate-900">{copy.results.formula}</p>
+                <p className="mt-1">δ = F*L^3 / (4*E*b*t^3)</p>
+                <p className="mt-1">{`E = ${calculated.eValue.toFixed(0)} N/mm²`}</p>
+              </div>
             </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                Genişlik W [mm]
-              </label>
-              <input
-                type="number"
-                value={inputs.width}
-                onChange={(e) => handleChange("width", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={1}
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                Parça ağırlığı [kg]
-              </label>
-              <input
-                type="number"
-                value={inputs.partWeight}
-                onChange={(e) => handleChange("partWeight", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={1}
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
-                Malzeme yoğunluğu [kg/m3]
-              </label>
-              <input
-                type="number"
-                value={inputs.density}
-                onChange={(e) => handleChange("density", e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                min={1000}
-              />
-              <p className="text-[11px] text-slate-500">
-                S235/S355 ~7850; alüminyum 6061 ~2700.
-              </p>
-            </div>
-          </div>
-          {error && <p className="mt-2 text-[11px] text-red-600">{error}</p>}
-          <button
-            onClick={handleCalculate}
-            className="mt-3 inline-flex items-center rounded-full bg-slate-900 px-4 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800"
-          >
-            Hesapla
-          </button>
-        </div>
+          ) : (
+            <p className="text-[11px] text-slate-600">{copy.results.invalid}</p>
+          )}
+        </section>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">Sonuçlar</h3>
-          <div className="space-y-2">
-            <ResultRow
-              label="Önerilen kalınlık"
-              value={
-                results.thickness !== null
-                  ? `${results.thickness.toFixed(1)} mm`
-                  : "—"
-              }
-            />
-            <ResultRow
-              label="Plaka tahmini ağırlığı"
-              value={
-                results.plateWeight !== null
-                  ? `${results.plateWeight.toFixed(1)} kg`
-                  : "—"
-              }
-            />
-            <div className="rounded-lg bg-slate-50 px-3 py-2 text-[11px] text-slate-700">
-              {results.note ?? "Hesap sonrası kısa yorum burada görünecek."}
+        <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+            <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.sections.compatibility}</h2>
+            <div className="space-y-2">
+              {CHECKLIST_IDS.map((id) => (
+                <label key={id} className="flex items-start gap-2 rounded-lg border border-slate-200 px-3 py-2">
+                  <input type="checkbox" checked={checklist[id]} onChange={() => toggleChecklist(id)} className="mt-0.5 h-4 w-4" />
+                  <span className="text-[11px] text-slate-700">{copy.checklistLabels[id]}</span>
+                </label>
+              ))}
             </div>
-            <p className="text-[11px] text-slate-500">
-              Kural: t ~ 0.03 x min(L, W), ağır parça için 0.8-1.6 katsayısı.
-              Sonuçlar hızlı tahmindir; FEA veya sapma hesabıyla doğrulayın.
-            </p>
-          </div>
-        </div>
-      </section>
+            <p className="mt-3 text-[11px] text-slate-600">{copy.checklistProgress}: {completedChecklist}/{CHECKLIST_IDS.length}</p>
+          </section>
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h2 className="mb-3 text-sm font-semibold text-slate-900">
-            Hızlı kalınlık ve malzeme kılavuzu
-          </h2>
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+            <div className="mb-3 flex items-center justify-between gap-2">
+              <h2 className="text-sm font-semibold text-slate-900">{copy.sections.notes}</h2>
+              <button type="button" onClick={addNoteRow} className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white hover:bg-slate-800">{copy.addNoteRow}</button>
+            </div>
+            <div className="space-y-2">
+              {noteRows.map((row) => (
+                <div key={row.id} className="grid gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[200px_minmax(0,1fr)_160px_80px]">
+                  <input type="text" value={row.area} onChange={(event) => handleNoteChange(row.id, "area", event.target.value)} placeholder={copy.placeholders.area} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
+                  <input type="text" value={row.detail} onChange={(event) => handleNoteChange(row.id, "detail", event.target.value)} placeholder={copy.placeholders.detail} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
+                  <input type="text" value={row.owner} onChange={(event) => handleNoteChange(row.id, "owner", event.target.value)} placeholder={copy.placeholders.owner} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
+                  <button type="button" onClick={() => removeNoteRow(row.id)} className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100">{copy.remove}</button>
+                </div>
+              ))}
+            </div>
+          </section>
+        </section>
+
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+          <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.sections.references}</h2>
           <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
-            <li>Malzeme: S235/S355 sac; yüksek rijitlik için 4140/42CrMo4 istenebilir.</li>
-            <li>
-              Kalınlık (kaba): <span className="font-semibold">t ~ 0.03 x en kısa kenar</span>
-              (ör. 400 mm taban için ~12 mm). Ağır parçalar için 0.04x alın.
-            </li>
-            <li>Rijitlik iyileştirme: kaburgalı alt yapı veya lokal kalınlaştırma bölgeleri.</li>
-            <li>Düzgünlük: mastar yüzey taşlama (örn. 0.05 mm/500 mm) + çapaksız kenarlar.</li>
-            <li>Kaplama: Fosfat / siyah oksit veya hafif yağ koruması, tablaya temas yüzeyi temiz.</li>
+            {copy.references.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">
-            Makine tablası uyumluluğu
-          </h3>
-          <div className="space-y-2 text-[11px] text-slate-700">
-            <p>
-              T-slot ölçülerini çizimde belirt: ör. <span className="font-mono">18H7</span> kanal,
-              <span className="font-mono">M16</span> T cıvatası, kanal merkezi aralığı <span className="font-mono">100 mm</span>.
-            </p>
-            <p>
-              T kanal eksenlerini taban plaka sıfırına göre konumlandır; mümkünse simetri eksenine hizala.
-            </p>
-            <p>
-              Rayba delik/pim yerlerini T-kanal dışına taşı; montaj sırasında pim ile tekrar konumlandır.
-            </p>
+          <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-[11px] text-amber-900">
+            <p className="font-semibold">{copy.sections.disclaimerTitle}</p>
+            <p className="mt-1">{copy.disclaimer}</p>
           </div>
-        </div>
-      </section>
-
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">
-            Cıvata yerleşimi için hızlı notlar
-          </h3>
-          <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
-            <li>Çevre kenardan pay: min. 2.0x d; slot kenarına yaklaşma 1.5x d.</li>
-            <li>Düzen: 3-4 noktada eşit dağılım; eksenel simetri sağla.</li>
-            <li>Pimle: Konum için 2 pim (1 sabit, 1 kayan). Cıvata yalnızca sıkma için.</li>
-            <li>Uzun delik: Isıl genleşme veya montaj toleransı için bir noktayı uzun delik yap.</li>
-            <li>
-              Sıkma torku: M16 (8.8) tipik 120-150 Nm; tabloya veya OEM değerine göre doğrula.
-            </li>
-          </ul>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">
-            Kontrol listesi
-          </h3>
-          <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
-            <li>Taban plakası, iş mili/işleme yüksekliği için çok mu kalın/ağır?</li>
-            <li>Alt yüzey ve üst yüzey paralelliği toleransı verildi mi?</li>
-            <li>T-slot koordinatları ve referans pimi ölçüleri çizimde net mi?</li>
-            <li>Taşıma: Kaldırma deliği/halka veya forklift cebi var mı?</li>
-            <li>Yüzey koruma ve kimlik (etiket/gravür) belirtildi mi?</li>
-          </ul>
-        </div>
+        </section>
       </section>
     </PageShell>
   );
 }
 
+function NumberField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
+  return (
+    <label className="space-y-1">
+      <span className="block text-[11px] font-medium text-slate-700">{label}</span>
+      <input
+        type="number"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
+      />
+    </label>
+  );
+}
+
+function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+}) {
+  return (
+    <label className="space-y-1">
+      <span className="block text-[11px] font-medium text-slate-700">{label}</span>
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
 function ResultRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-1.5">
+    <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2">
       <span className="text-[11px] text-slate-600">{label}</span>
-      <span className="font-mono text-[11px] font-semibold text-slate-900">
-        {value}
-      </span>
+      <span className="font-mono text-[11px] font-semibold text-slate-900">{value}</span>
     </div>
   );
 }

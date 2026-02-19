@@ -1,0 +1,59 @@
+{
+  "id": "hardness",
+  "title": {
+    "tr": "Sertlik Dönüşümleri (yaklaşık)",
+    "en": "Hardness Conversions (approx.)"
+  },
+  "description": {
+    "tr": "HB, HRC ve HV arasında pratik karşılaştırma aralıkları.",
+    "en": "Practical comparison ranges between HB, HRC, and HV."
+  },
+  "columns": [
+    { "key": "hb", "label": { "tr": "HB (Brinell)", "en": "HB (Brinell)" } },
+    { "key": "hrc", "label": { "tr": "HRC (Rockwell C)", "en": "HRC (Rockwell C)" } },
+    { "key": "hv", "label": { "tr": "HV (Vickers)", "en": "HV (Vickers)" } },
+    { "key": "note", "label": { "tr": "Not", "en": "Note" } }
+  ],
+  "rows": [
+    {
+      "hb": "120-170",
+      "hrc": "5-12",
+      "hv": "130-180",
+      "note": { "tr": "Yumuşak çelik / tavlı aralık", "en": "Soft steel / annealed range" }
+    },
+    {
+      "hb": "170-220",
+      "hrc": "12-20",
+      "hv": "180-235",
+      "note": { "tr": "Genel yapı çelikleri", "en": "General structural steels" }
+    },
+    {
+      "hb": "220-270",
+      "hrc": "20-28",
+      "hv": "235-285",
+      "note": { "tr": "Orta karbon ısıl işlemli", "en": "Heat-treated medium-carbon steels" }
+    },
+    {
+      "hb": "270-330",
+      "hrc": "28-37",
+      "hv": "285-345",
+      "note": { "tr": "Daha yüksek dayanım bölgeleri", "en": "Higher strength regions" }
+    },
+    {
+      "hb": "330-400",
+      "hrc": "37-45",
+      "hv": "345-425",
+      "note": { "tr": "Sertleştirilmiş çelikler", "en": "Hardened steels" }
+    },
+    {
+      "hb": "400-500",
+      "hrc": "45-52",
+      "hv": "425-540",
+      "note": { "tr": "Yüksek sertlik, takım çeliği aralığı", "en": "High hardness, tool-steel range" }
+    }
+  ],
+  "note": {
+    "tr": "Dönüşümler yaklaşık karşılıklardır. Nihai kabul için ilgili malzeme standardı veya test yöntemi kullanılmalıdır.",
+    "en": "Conversions are approximate equivalences. Use relevant material standards or direct testing for final acceptance."
+  }
+}

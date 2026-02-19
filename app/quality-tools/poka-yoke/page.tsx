@@ -1,11 +1,14 @@
 "use client";
 
 // app/quality-tools/poka-yoke/page.tsx
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import PageShell from "@/components/layout/PageShell";
+import ReportActions from "@/components/report/ReportActions";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { assertNoTurkish } from "@/utils/i18n-assert";
 import { pokaYokeCopy } from "@/data/quality-tools/poka-yoke";
+import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
+import { useAutosaveDraft } from "@/hooks/useAutosaveDraft";
 
 type StatusOption = "planned" | "inProgress" | "done";
 type IdeaType = "prevention" | "detection" | "warning";
@@ -42,6 +45,11 @@ type PokaYokeForm = {
   validation: string;
 };
 
+type PokaYokeSnapshot = {
+  form: PokaYokeForm;
+  actions: ActionRow[];
+};
+
 const INITIAL_FORM: PokaYokeForm = {
   title: "",
   process: "",
@@ -66,20 +74,61 @@ const INITIAL_FORM: PokaYokeForm = {
 };
 
 const STATUS_OPTIONS: StatusOption[] = ["planned", "inProgress", "done"];
+const DRAFT_KEY = "aielab:quality:poka-yoke:draft";
+
+const DEMO_FORM: PokaYokeForm = {
+  title: "Wrong Orientation Assembly Prevention",
+  process: "Assembly Line B",
+  station: "Station 12",
+  part: "ABC123-04",
+  owner: "M. Kaya / Process",
+  date: "02/19/2026",
+  problem:
+    "Parts are occasionally assembled in reverse orientation, causing downstream fit failures.",
+  failureMode: "FM-12 Wrong orientation assembly",
+  currentControl: "Operator visual check and 10% end-of-line sampling",
+  severity: "8",
+  occurrence: "6",
+  detection: "6",
+  idea:
+    "Add asymmetric mechanical guide pin so incorrect orientation physically cannot seat in fixture.",
+  ideaType: "prevention",
+  principle: "physicalGuide",
+  expectedEffect: "Target O=2, D=3, defect PPM below 100 within 2 weeks.",
+  feasibility: "Requires one CNC machined insert and maintenance install during planned stop.",
+  cost: "Estimated 180 USD and 3 labor hours; go-live target 02/25/2026.",
+  risk: "Potential cycle-time increase of 1-2 seconds if guide clearance is too tight.",
+  validation: "Run 3-shift pilot with 0 wrong-orientation events and maintenance sign-off.",
+};
 
 function uuid() {
   return Math.random().toString(36).slice(2, 9);
 }
 
+function createActionRow(): ActionRow {
+  return { id: uuid(), task: "", owner: "", due: "", status: "planned" };
+}
+
 export default function PokaYokePage() {
   const { locale } = useLocale();
   const copy = pokaYokeCopy[locale];
+  const actionsCopy = qualityReportActionsCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/poka-yoke");
 
   const [form, setForm] = useState<PokaYokeForm>(INITIAL_FORM);
-  const [actions, setActions] = useState<ActionRow[]>([
-    { id: uuid(), task: "", owner: "", due: "", status: "planned" },
-  ]);
+  const [actions, setActions] = useState<ActionRow[]>([createActionRow()]);
+  const reportRootRef = useRef<HTMLElement | null>(null);
+
+  const restoreDraft = useCallback((draft: PokaYokeSnapshot) => {
+    setForm(normalizePokaYokeForm(draft?.form));
+    setActions(normalizeActions(draft?.actions));
+  }, []);
+
+  const { clearDraft } = useAutosaveDraft<PokaYokeSnapshot>({
+    storageKey: DRAFT_KEY,
+    value: { form, actions },
+    onRestore: restoreDraft,
+  });
 
   function handleChange<K extends keyof PokaYokeForm>(key: K, value: PokaYokeForm[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -92,10 +141,7 @@ export default function PokaYokePage() {
   }
 
   function addAction() {
-    setActions((prev) => [
-      ...prev,
-      { id: uuid(), task: "", owner: "", due: "", status: "planned" },
-    ]);
+    setActions((prev) => [...prev, createActionRow()]);
   }
 
   function removeAction(id: string) {
@@ -104,12 +150,56 @@ export default function PokaYokePage() {
 
   function handleReset() {
     setForm(INITIAL_FORM);
-    setActions([{ id: uuid(), task: "", owner: "", due: "", status: "planned" }]);
+    setActions([createActionRow()]);
+    clearDraft();
+  }
+
+  function handleDemoFill() {
+    setForm(DEMO_FORM);
+    setActions([
+      {
+        id: uuid(),
+        task: "Design asymmetric guide pin insert",
+        owner: "A. Demir",
+        due: "2026-02-22",
+        status: "inProgress",
+      },
+      {
+        id: uuid(),
+        task: "Install insert and update setup instruction",
+        owner: "D. Oz",
+        due: "2026-02-24",
+        status: "planned",
+      },
+      {
+        id: uuid(),
+        task: "Run 3-shift pilot and capture orientation defects",
+        owner: "E. Sahin",
+        due: "2026-02-26",
+        status: "planned",
+      },
+    ]);
+  }
+
+  function handleLoadData(snapshot: PokaYokeSnapshot) {
+    setForm(normalizePokaYokeForm(snapshot?.form));
+    setActions(normalizeActions(snapshot?.actions));
   }
 
   return (
     <PageShell>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <ReportActions
+        toolKey="poka-yoke"
+        currentData={{ form, actions }}
+        onLoadData={handleLoadData}
+        onDemoFill={handleDemoFill}
+        onReset={handleReset}
+        reportRootRef={reportRootRef}
+        copy={actionsCopy}
+      />
+
+      <section id="report-root" ref={reportRootRef} className="space-y-4">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             {copy.badges.title}
@@ -123,9 +213,9 @@ export default function PokaYokePage() {
         </div>
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
         <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
           <h2 className="text-sm font-semibold text-slate-900">{copy.basics.title}</h2>
           <button
@@ -173,9 +263,9 @@ export default function PokaYokePage() {
             placeholder={copy.basics.fields.date.placeholder}
           />
         </div>
-      </section>
+        </section>
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
           <h3 className="mb-3 text-sm font-semibold text-slate-900">{copy.problem.title}</h3>
           <div className="space-y-3">
@@ -276,9 +366,9 @@ export default function PokaYokePage() {
             />
           </div>
         </div>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
           <div>
             <h3 className="text-sm font-semibold text-slate-900">{copy.actions.title}</h3>
@@ -345,15 +435,16 @@ export default function PokaYokePage() {
             </div>
           ))}
         </div>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <h3 className="mb-2 text-sm font-semibold text-slate-900">{copy.checklist.title}</h3>
         <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
           {copy.checklist.items.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
+        </section>
       </section>
     </PageShell>
   );
@@ -438,4 +529,64 @@ function SelectField({
       </select>
     </label>
   );
+}
+
+function normalizePokaYokeForm(source: unknown): PokaYokeForm {
+  if (!source || typeof source !== "object") {
+    return INITIAL_FORM;
+  }
+
+  const candidate = source as Partial<PokaYokeForm>;
+  const next: PokaYokeForm = { ...INITIAL_FORM };
+
+  (Object.keys(INITIAL_FORM) as (keyof PokaYokeForm)[]).forEach((key) => {
+    const value = candidate[key];
+    if (key === "ideaType") {
+      next.ideaType =
+        value === "prevention" || value === "detection" || value === "warning"
+          ? value
+          : INITIAL_FORM.ideaType;
+      return;
+    }
+    if (key === "principle") {
+      next.principle =
+        value === "physicalGuide" ||
+        value === "interlock" ||
+        value === "sensor" ||
+        value === "counter" ||
+        value === "labelColor"
+          ? value
+          : INITIAL_FORM.principle;
+      return;
+    }
+    next[key] = typeof value === "string" ? value : INITIAL_FORM[key];
+  });
+
+  return next;
+}
+
+function normalizeActions(source: unknown): ActionRow[] {
+  if (!Array.isArray(source) || source.length === 0) {
+    return [createActionRow()];
+  }
+
+  const normalized = source
+    .map((item): ActionRow | null => {
+      if (!item || typeof item !== "object") return null;
+      const row = item as Partial<ActionRow>;
+      const status: StatusOption =
+        row.status === "done" || row.status === "inProgress" || row.status === "planned"
+          ? row.status
+          : "planned";
+      return {
+        id: typeof row.id === "string" && row.id.trim() ? row.id : uuid(),
+        task: typeof row.task === "string" ? row.task : "",
+        owner: typeof row.owner === "string" ? row.owner : "",
+        due: typeof row.due === "string" ? row.due : "",
+        status,
+      };
+    })
+    .filter((row): row is ActionRow => row !== null);
+
+  return normalized.length > 0 ? normalized : [createActionRow()];
 }

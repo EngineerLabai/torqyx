@@ -1,11 +1,14 @@
 "use client";
 
 // app/quality-tools/8d/page.tsx
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import PageShell from "@/components/layout/PageShell";
+import ReportActions from "@/components/report/ReportActions";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { assertNoTurkish } from "@/utils/i18n-assert";
 import { eightDCopy } from "@/data/quality-tools/8d";
+import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
+import { useAutosaveDraft } from "@/hooks/useAutosaveDraft";
 
 type StepId =
   | "d0"
@@ -63,13 +66,54 @@ const INITIAL_FORM: FormState = {
   signoff: "",
 };
 
+type EightDSnapshot = {
+  form: FormState;
+};
+
+const DRAFT_KEY = "aielab:quality:8d:draft";
+
+const DEMO_FORM: FormState = {
+  caseId: "Q-2026-024",
+  customer: "OEM North Plant",
+  product: "ABC123 Bracket Rev.07",
+  lot: "26A-04",
+  owner: "E. Sahin / Quality",
+  team: "Quality, Production, Process, Maintenance, Supplier Quality",
+  startDate: "02/16/2026",
+  targetDate: "02/28/2026",
+  d0: "Shipment hold applied for lot 26A-04, 100% sort started in warehouse and customer site.",
+  d1: "Cross-functional team formed with daily 20-minute stand-up and one decision owner.",
+  d2: "Customer detected oversized hole issue at incoming inspection; 420 parts affected.",
+  d3: "Containment: inline gauge added, outgoing final check tightened to 100% for 5 days.",
+  d4: "Root cause: drill wear threshold too high and PFMEA not updated after tolerance revision.",
+  d5: "Permanent action: lower tool life limit, add automatic counter stop, update control plan.",
+  d6: "Verification: 3 pilot lots passed, Cpk improved to 1.41, customer confirmed zero repeat.",
+  d7: "Spread action deployed to similar operations OP35 and OP42 with updated PFMEA revisions.",
+  d8: "Closure approved by quality manager and customer SQE; lessons shared in weekly review.",
+  risks: "Possible supplier delay on spare counter modules; interim stock secured for 3 weeks.",
+  metrics: "PPM from 34,000 to < 500 target, response SLA within 48h for containment.",
+  signoff: "Customer SQE sign-off on 02/27/2026, internal QA and Production signatures completed.",
+};
+
 export default function EightDPage() {
   const { locale } = useLocale();
   const copy = eightDCopy[locale];
+  const actionsCopy = qualityReportActionsCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/8d");
 
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
+  const reportRootRef = useRef<HTMLElement | null>(null);
   const steps = copy.steps as Step[];
+
+  const restoreDraft = useCallback((draft: EightDSnapshot) => {
+    setForm(normalizeEightDForm(draft?.form));
+  }, []);
+
+  const { clearDraft } = useAutosaveDraft<EightDSnapshot>({
+    storageKey: DRAFT_KEY,
+    value: { form },
+    onRestore: restoreDraft,
+  });
 
   function handleFieldChange(key: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -77,11 +121,31 @@ export default function EightDPage() {
 
   function handleReset() {
     setForm(INITIAL_FORM);
+    clearDraft();
+  }
+
+  function handleDemoFill() {
+    setForm(DEMO_FORM);
+  }
+
+  function handleLoadData(snapshot: EightDSnapshot) {
+    setForm(normalizeEightDForm(snapshot?.form));
   }
 
   return (
     <PageShell>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <ReportActions
+        toolKey="8d"
+        currentData={{ form }}
+        onLoadData={handleLoadData}
+        onDemoFill={handleDemoFill}
+        onReset={handleReset}
+        reportRootRef={reportRootRef}
+        copy={actionsCopy}
+      />
+
+      <section id="report-root" ref={reportRootRef} className="space-y-4">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             {copy.badges.report}
@@ -95,9 +159,9 @@ export default function EightDPage() {
         </div>
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
         <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.caseTitle}</h2>
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           <Field
@@ -149,9 +213,9 @@ export default function EightDPage() {
             placeholder={copy.fields.targetDate.placeholder}
           />
         </div>
-      </section>
+        </section>
 
-      <section className="space-y-4">
+        <section className="space-y-4">
         {steps.map((step) => (
           <StepCard
             key={step.id}
@@ -161,9 +225,9 @@ export default function EightDPage() {
             guidanceTitle={copy.guidanceTitle}
           />
         ))}
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="mb-3 flex items-center justify-between gap-2">
           <div>
             <h3 className="text-sm font-semibold text-slate-900">{copy.checklist.title}</h3>
@@ -181,6 +245,7 @@ export default function EightDPage() {
             <li key={item}>{item}</li>
           ))}
         </ul>
+        </section>
       </section>
     </PageShell>
   );
@@ -260,4 +325,20 @@ function StepCard({
       </div>
     </section>
   );
+}
+
+function normalizeEightDForm(source: unknown): FormState {
+  if (!source || typeof source !== "object") {
+    return INITIAL_FORM;
+  }
+
+  const candidate = source as Partial<FormState>;
+  const next: FormState = { ...INITIAL_FORM };
+
+  (Object.keys(INITIAL_FORM) as (keyof FormState)[]).forEach((key) => {
+    const value = candidate[key];
+    next[key] = typeof value === "string" ? value : INITIAL_FORM[key];
+  });
+
+  return next;
 }
