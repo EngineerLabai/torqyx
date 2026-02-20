@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
@@ -90,78 +90,118 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
   const pathname = usePathname() ?? "/";
   const isHome = stripLocaleFromPath(pathname) === "/";
   const year = new Date().getFullYear();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuToggleCopy = locale === "tr" ? { open: "Menu", close: "Kapat" } : { open: "Menu", close: "Close" };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[radial-gradient(circle_at_15%_10%,rgba(16,185,129,0.08),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.08),transparent_35%)]">
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-[radial-gradient(circle_at_15%_10%,rgba(16,185,129,0.08),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.08),transparent_35%)]">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute -left-[8%] -top-[12%] h-[420px] w-[420px] rounded-full bg-emerald-300/40 blur-[120px]" />
         <div className="absolute -bottom-[18%] -right-[12%] h-[520px] w-[520px] rounded-full bg-sky-300/35 blur-[140px]" />
         <div className="absolute left-1/2 top-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/60 blur-[160px]" />
       </div>
 
-      <header className="site-header relative z-50 border-b border-slate-200/80 bg-white/80">
+      <header
+        key={pathname}
+        className="site-header relative z-50 overflow-x-hidden border-b border-slate-200/80 bg-white/80"
+      >
         <NavbarRenderProbe />
-        <div className="site-container flex items-center justify-between gap-6 py-4">
-          <Link href={getRoute("home", locale)} className="flex items-center gap-3" aria-label={brandContent.siteName}>
-            <Image
-              src="/images/logo.png"
-              alt={`${brandContent.siteName} logo`}
-              width={635}
-              height={702}
-              className="h-8 w-auto shrink-0 object-contain"
-              priority
-            />
-            <div className="flex flex-col">
-              <span className="text-left text-base font-semibold tracking-tight text-slate-900">
-                {brandContent.siteName}
-              </span>
-              <span className="hidden text-[11px] font-medium text-slate-500 md:block">
-                {brandContent.tagline}
-              </span>
-            </div>
-          </Link>
+        <div className="site-container overflow-x-hidden py-3 sm:py-4">
+          <div className="flex items-start justify-between gap-3 sm:items-center lg:gap-6">
+            <Link
+              href={getRoute("home", locale)}
+              className="flex min-w-0 flex-1 items-center gap-3 overflow-hidden pr-2"
+              aria-label={brandContent.siteName}
+            >
+              <Image
+                src="/images/logo.png"
+                alt={`${brandContent.siteName} logo`}
+                width={635}
+                height={702}
+                className="h-8 w-auto shrink-0 object-contain"
+                priority
+              />
+              <div className="min-w-0 flex flex-col">
+                <span className="break-words text-left text-[15px] font-semibold leading-tight tracking-tight text-slate-900 sm:text-base">
+                  {brandContent.siteName}
+                </span>
+                <span className="hidden text-xs leading-snug text-slate-500 sm:block">
+                  {brandContent.tagline}
+                </span>
+              </div>
+            </Link>
 
-          <nav className="hidden items-center gap-2 lg:flex">
-            {navSections.map((section) => (
-              <MegaMenuItem key={section.label} section={section} />
-            ))}
-          </nav>
-          <div className="flex items-center gap-3">
+            <nav className="hidden items-center gap-2 lg:flex">
+              {navSections.map((section) => (
+                <MegaMenuItem key={section.label} section={section} />
+              ))}
+            </nav>
+
+            <div className="hidden items-center gap-3 lg:flex">
+              <LanguageSwitcher
+                tone="light"
+                copy={messages.languageSwitcher}
+                onLocaleChange={() => setMobileMenuOpen(false)}
+              />
+              <AuthButtons copy={messages.authButtons} />
+            </div>
+
             <button
               type="button"
-              onClick={openCommandPalette}
-              className="tap-target inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm lg:hidden"
-              aria-label={searchCopy.paletteOpen}
+              onClick={() => setMobileMenuOpen((current) => !current)}
+              className="tap-target inline-flex shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm lg:hidden"
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? mobileMenuToggleCopy.close : mobileMenuToggleCopy.open}
             >
-              {searchCopy.paletteTitle}
+              {mobileMenuOpen ? mobileMenuToggleCopy.close : mobileMenuToggleCopy.open}
             </button>
-            <LanguageSwitcher tone="light" copy={messages.languageSwitcher} />
-            <AuthButtons copy={messages.authButtons} />
           </div>
-        </div>
 
-        <div className="border-t border-slate-100 bg-white/85 px-4 py-2 lg:hidden">
-          <div className="mx-auto flex max-w-8xl flex-wrap gap-2">
-            {navSections.map((section) => (
-              <Link
-                key={section.label}
-                href={section.links[0]?.href ?? "#"}
-                prefetch={false}
-                className="tap-target inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm"
-              >
-                {section.label}
-              </Link>
-            ))}
-          </div>
+          {mobileMenuOpen ? (
+            <div className="border-t border-slate-100 pt-4 lg:hidden">
+              <div className="flex flex-col gap-3">
+                <button
+                  type="button"
+                  onClick={openCommandPalette}
+                  className="tap-target inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm"
+                  aria-label={searchCopy.paletteOpen}
+                >
+                  {searchCopy.paletteTitle}
+                </button>
+                <div className="flex items-center justify-between gap-3">
+                  <LanguageSwitcher
+                    tone="light"
+                    copy={messages.languageSwitcher}
+                    onLocaleChange={() => setMobileMenuOpen(false)}
+                  />
+                  <div className="min-w-0 flex-1">
+                    <AuthButtons copy={messages.authButtons} />
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {navSections.map((section) => (
+                    <Link
+                      key={section.label}
+                      href={section.links[0]?.href ?? "#"}
+                      prefetch={false}
+                      className="tap-target inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm"
+                    >
+                      {section.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
       </header>
 
       {isHome ? (
         children
       ) : (
-        <main className="flex-1">
-          <div className="mx-auto flex max-w-8xl flex-col gap-6 px-4 py-6 lg:flex-row">
-            <aside className="lg:w-64 lg:shrink-0">
+        <main className="w-full flex-1">
+          <div className="site-container flex w-full min-w-0 flex-col gap-6 py-6 lg:flex-row">
+            <aside className="min-w-0 lg:w-64 lg:shrink-0">
               <div className="sticky top-4 space-y-3 text-xs">
                 {sidebarSections.map((section) => (
                   <SidebarSectionCard key={section.label} section={section} />
@@ -169,7 +209,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               </div>
             </aside>
 
-            <section className="flex-1">{children}</section>
+            <section className="min-w-0 flex-1">{children}</section>
           </div>
         </main>
       )}

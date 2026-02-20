@@ -229,7 +229,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
     const notFoundCopy = messages.pages.notFound;
     return (
       <PageShell>
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section className="min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-rose-100 bg-rose-50 px-3 py-1 text-[11px] text-rose-700 md:text-xs">
               <span className="font-semibold">404</span>
@@ -260,7 +260,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   return (
     <PageShell>
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {accessLabel ? <AccessBadge access={access} label={accessLabel} /> : null}
             {tool.categories.map((category) => (
@@ -284,8 +284,8 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
           <p className="mt-2 text-xs text-slate-600">{tool.description}</p>
         </section>
 
-        <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.inputs}</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {tool.inputs.map((input) => (
@@ -301,7 +301,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+          <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.results}</h2>
             {normalizedInputs && results ? (
               <div className="space-y-2">
@@ -327,7 +327,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
 
         {showAdvisor ? <AdvisorPanel insights={advisorInsights} /> : null}
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
           <div className="space-y-2">
             <h2 className="text-sm font-semibold text-slate-900">{copy.actionsTitle}</h2>
             <p className="text-[11px] text-slate-500">{copy.actionsDescription}</p>
@@ -341,7 +341,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
         {methodNotes ? <ToolMethodNotes notes={methodNotes} /> : null}
 
         {chartConfig ? (
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+          <section className="min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.chart}</h2>
             <div className="h-64 w-full">
               <canvas ref={canvasRef} className="h-full w-full" />
@@ -349,7 +349,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
           </section>
         ) : (
           tool.chartConfig && (
-            <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-5 text-xs text-slate-500">
+            <section className="min-w-0 rounded-2xl border border-dashed border-slate-200 bg-white p-5 text-xs text-slate-500">
               {copy.chartEmpty}
             </section>
           )
@@ -447,7 +447,7 @@ function InputField({
 
   if (input.type === "select") {
     return (
-      <label className="space-y-1">
+      <label className="min-w-0 space-y-1">
         <span className="block text-[11px] font-medium text-slate-700">{label}</span>
         <select
           value={value}
@@ -470,7 +470,7 @@ function InputField({
   if (input.type === "slider") {
     const displayValue = value || String(input.min ?? 0);
     return (
-      <label className="space-y-1">
+      <label className="min-w-0 space-y-1">
         <span className="block text-[11px] font-medium text-slate-700">{label}</span>
         <div className="flex items-center gap-3">
           <input
@@ -495,7 +495,7 @@ function InputField({
   }
 
   return (
-    <label className="space-y-1">
+    <label className="min-w-0 space-y-1">
       <span className="block text-[11px] font-medium text-slate-700">{label}</span>
       <input
         type="number"
@@ -516,9 +516,9 @@ function InputField({
 
 function ResultRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-1.5">
-      <span className="text-[11px] text-slate-600">{label}</span>
-      <span className="font-mono text-[11px] font-semibold text-slate-900">{value}</span>
+    <div className="flex min-w-0 items-center justify-between gap-3 rounded-lg bg-slate-50 px-3 py-1.5">
+      <span className="min-w-0 text-[11px] text-slate-600">{label}</span>
+      <span className="min-w-0 break-all text-right font-mono text-[11px] font-semibold text-slate-900">{value}</span>
     </div>
   );
 }

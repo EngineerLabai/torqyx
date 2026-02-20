@@ -28,7 +28,7 @@ export async function generateMetadata() {
 export default async function Home() {
   const locale = await getLocaleFromCookies();
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen w-full overflow-x-hidden">
       <WebPageJsonLd />
       <HeroSection locale={locale} />
       <ValuePropsSection locale={locale} />

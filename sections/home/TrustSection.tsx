@@ -9,8 +9,8 @@ export default function TrustSection({ locale }: TrustSectionProps) {
   const copy = getMessages(locale).home.trust;
 
   return (
-    <section id="trust" className="px-4 pb-16 pt-10 md:px-10 lg:px-16">
-      <div className="mx-auto w-full max-w-6xl space-y-6">
+    <section id="trust" className="w-full pb-16 pt-10">
+      <div className="site-container space-y-6">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-600">{copy.kicker}</p>
           <h2 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{copy.title}</h2>

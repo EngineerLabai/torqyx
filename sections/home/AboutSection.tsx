@@ -9,8 +9,8 @@ export default function AboutSection({ locale }: AboutSectionProps) {
   const copy = getMessages(locale).home.about;
 
   return (
-    <section id="about" className="relative z-10 px-4 pb-16 md:px-10 lg:px-16">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-4">
+    <section id="about" className="relative z-10 w-full pb-16">
+      <div className="site-container flex w-full flex-col gap-4">
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">{copy.kicker}</p>
           <h2 className="text-2xl font-bold text-white md:text-3xl">{copy.title}</h2>

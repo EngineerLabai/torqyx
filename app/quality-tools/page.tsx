@@ -1,7 +1,9 @@
 // app/quality-tools/page.tsx
 import Link from "next/link";
+import Hero from "@/components/Hero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { localePath } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
@@ -154,19 +156,16 @@ export default async function QualityToolsPage() {
   const locale = await getLocaleFromCookies();
   const tools = QUALITY_TOOLS_BY_LOCALE[locale];
   const copy = getMessages(locale).pages.qualityTools;
+  const heroImage = getHeroImageSrc("qualityTools");
   const localizeHref = (href?: string) => (href ? localePath(locale, href) : undefined);
 
   return (
     <PageShell>
+      <Hero title={copy.title} subtitle={copy.description} imageSrc={heroImage} imageAlt={copy.imageAlt} />
+
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
-            <span className="font-semibold">{copy.badge}</span>
-          </div>
-          <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">
-            {copy.title}
-          </h1>
-          <p className="text-sm leading-relaxed text-slate-700">{copy.description}</p>
+        <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
+          <span className="font-semibold">{copy.badge}</span>
         </div>
       </section>
 

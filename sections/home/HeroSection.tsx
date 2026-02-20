@@ -15,8 +15,8 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const copy = getMessages(locale).home.hero;
   const heroImage = getHeroImageSrc("home");
   return (
-    <section id="home" className="px-4 pb-10 pt-14 md:px-10 md:pt-20 lg:px-16">
-      <div className="mx-auto w-full max-w-6xl">
+    <section id="home" className="w-full pb-10 pt-14 md:pt-20">
+      <div className="site-container">
         <PageHero
           title={copy.headline}
           description={copy.subheadline}

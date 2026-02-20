@@ -9,8 +9,8 @@ export default function UseCasesSection({ locale }: UseCasesSectionProps) {
   const copy = getMessages(locale).home.useCases;
 
   return (
-    <section id="use-cases" className="px-4 py-12 md:px-10 lg:px-16">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+    <section id="use-cases" className="w-full py-12">
+      <div className="site-container flex w-full flex-col gap-6">
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-600">{copy.kicker}</p>
           <h2 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{copy.title}</h2>

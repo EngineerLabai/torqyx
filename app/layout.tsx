@@ -6,10 +6,12 @@ import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import SiteShell, { type SiteShellMessages } from "@/components/layout/SiteShell";
 import GlobalErrorMonitor from "@/components/monitoring/GlobalErrorMonitor";
+import ImagePathWarnings from "@/components/monitoring/ImagePathWarnings";
 import WebVitalsReporter from "@/components/monitoring/WebVitalsReporter";
 import UserStateSync from "@/components/sync/UserStateSync";
 import JsonLd from "@/components/seo/JsonLd";
 import { getBrandCopy } from "@/config/brand";
+import { listPublicImagePaths } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { SITE_URL } from "@/utils/seo";
@@ -102,6 +104,7 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   const locale = await getLocaleFromCookies();
+  const knownImageAssets = listPublicImagePaths();
   const websiteJsonLd = await getWebsiteJsonLd();
   const messages = getMessages(locale);
   const shellMessages: SiteShellMessages = {
@@ -117,13 +120,14 @@ export default async function RootLayout({
   };
   return (
     <html lang={locale}>
-      <body className={`${sora.variable} ${inter.variable} ${jetBrainsMono.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
+      <body className={`${sora.variable} ${inter.variable} ${jetBrainsMono.variable} w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased`}>
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
           <AuthProvider>
             <GlobalErrorMonitor />
             <AnalyticsTracker />
             {process.env.NODE_ENV === "production" ? <WebVitalsReporter /> : null}
+            {process.env.NODE_ENV === "development" ? <ImagePathWarnings knownAssets={knownImageAssets} /> : null}
             <UserStateSync />
             <SiteShell messages={shellMessages}>{children}</SiteShell>
           </AuthProvider>

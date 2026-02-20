@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 export type HeroAssetKey =
@@ -28,11 +28,12 @@ export const HERO_ASSETS: Record<HeroAssetKey, string> = {
   premium: "/images/premium-hero.jpg",
   toolDetail: "/images/tool-detail.jpg",
   projectHub: HERO_PLACEHOLDER,
-  qualityTools: HERO_PLACEHOLDER,
-  fixtureTools: HERO_PLACEHOLDER,
+  qualityTools: "/images/quality-tools-hero.jpg",
+  fixtureTools: "/images/fixture-tools-hero.jpg",
 };
 
 const PUBLIC_DIR = path.join(process.cwd(), "public");
+let knownImageAssetsCache: string[] | null = null;
 
 export function getHeroImageSrc(key: HeroAssetKey): string {
   const candidate = HERO_ASSETS[key];
@@ -56,4 +57,29 @@ export function getHeroImageSrc(key: HeroAssetKey): string {
 
 export function listHeroImagePaths(): string[] {
   return Array.from(new Set([...Object.values(HERO_ASSETS), HERO_PLACEHOLDER]));
+}
+
+export function listPublicImagePaths(): string[] {
+  if (knownImageAssetsCache) {
+    return knownImageAssetsCache;
+  }
+
+  const fallbackPaths = Array.from(new Set([...listHeroImagePaths(), "/images/logo.png"]));
+
+  if (typeof window !== "undefined") {
+    return fallbackPaths;
+  }
+
+  try {
+    const imagesDir = path.join(PUBLIC_DIR, "images");
+    const files = readdirSync(imagesDir, { withFileTypes: true })
+      .filter((entry) => entry.isFile())
+      .map((entry) => `/images/${entry.name}`);
+
+    knownImageAssetsCache = Array.from(new Set([...fallbackPaths, ...files])).sort();
+    return knownImageAssetsCache;
+  } catch {
+    knownImageAssetsCache = fallbackPaths;
+    return knownImageAssetsCache;
+  }
 }

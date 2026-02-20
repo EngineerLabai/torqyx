@@ -36,7 +36,9 @@ export function LocaleProvider({ children, initialLocale = DEFAULT_LOCALE }: Loc
       ? cookieLocale
       : (() => {
           const storedLocale = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-          return isLocale(storedLocale) ? storedLocale : null;
+          if (isLocale(storedLocale)) return storedLocale;
+          const fallbackPreferredLocale = window.localStorage.getItem("preferredLocale");
+          return isLocale(fallbackPreferredLocale) ? fallbackPreferredLocale : null;
         })();
     if (!preferredLocale) return;
     Promise.resolve().then(() => {
@@ -54,9 +56,11 @@ export function LocaleProvider({ children, initialLocale = DEFAULT_LOCALE }: Loc
   useEffect(() => {
     if (typeof document === "undefined") return;
     window.localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+    window.localStorage.setItem("preferredLocale", locale);
     document.documentElement.lang = locale;
     const maxAge = 60 * 60 * 24 * 365;
     document.cookie = `${LOCALE_COOKIE}=${locale}; Path=/; Max-Age=${maxAge}; SameSite=Lax`;
+    document.cookie = `NEXT_LOCALE=${locale}; Path=/; Max-Age=${maxAge}; SameSite=Lax`;
   }, [locale]);
 
   const value = useMemo(() => ({ locale, setLocale }), [locale]);
