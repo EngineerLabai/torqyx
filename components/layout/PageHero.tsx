@@ -35,9 +35,9 @@ export default function PageHero({
       : `/${imageSrc.replace(/^[./]+/, "")}`;
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-sm md:p-8">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
-        <div className="space-y-4">
+    <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-sm md:p-8">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
+        <div className="min-w-0 space-y-4">
           {eyebrow ? (
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-600">{eyebrow}</p>
           ) : null}
@@ -53,7 +53,7 @@ export default function PageHero({
           {children ? <div className="flex flex-wrap gap-3">{children}</div> : null}
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
+        <div className="relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-slate-100 via-slate-50 to-slate-200" />
           <div className="relative aspect-[4/3] w-full lg:aspect-[16/10]">
             <Image

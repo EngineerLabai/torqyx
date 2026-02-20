@@ -176,7 +176,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   return (
     <PageShell>
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -189,11 +189,11 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
           </div>
         </section>
 
-        <section className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <section className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+          <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <InputSection input={input} onChange={setInput} errors={errors} />
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             {result ? <ResultSection result={result} /> : <p className="text-xs text-red-600">{calcError}</p>}
           </div>
         </section>
@@ -211,12 +211,12 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
         {showAdvisor ? <AdvisorPanel insights={advisorInsights} /> : null}
 
         {result ? (
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <section className="min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <VisualizationSection input={input} result={result} />
           </section>
         ) : null}
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">
             <h2 className="text-sm font-semibold text-slate-900">{copy.shareTitle}</h2>
             <p className="text-xs text-slate-500">{copy.shareDescription}</p>
@@ -240,7 +240,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
         />
 
         {result ? (
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <ToolHistory toolId={tool.id} toolTitle={toolTitle} input={input} result={result} />
           </section>
         ) : null}

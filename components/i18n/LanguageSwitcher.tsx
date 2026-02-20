@@ -2,8 +2,8 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import type { Locale } from "@/utils/locale";
-import { localePath, stripLocaleFromPath } from "@/utils/locale-path";
+import { LOCALE_COOKIE, LOCALE_STORAGE_KEY, type Locale } from "@/utils/locale";
+import { localePath } from "@/utils/locale-path";
 import type { Messages } from "@/utils/messages";
 
 type LanguageSwitcherProps = {
@@ -11,9 +11,25 @@ type LanguageSwitcherProps = {
   className?: string;
   size?: "sm" | "md";
   tone?: "dark" | "light";
+  onLocaleChange?: (locale: Locale) => void;
 };
 
-export default function LanguageSwitcher({ copy, className = "", size = "sm", tone = "dark" }: LanguageSwitcherProps) {
+const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+
+const stripLocale = (pathname: string) => {
+  if (!pathname) return "/";
+  const normalized = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const withoutLocale = normalized.replace(/^\/(tr|en)(?=\/|$)/, "");
+  return withoutLocale || "/";
+};
+
+export default function LanguageSwitcher({
+  copy,
+  className = "",
+  size = "sm",
+  tone = "dark",
+  onLocaleChange,
+}: LanguageSwitcherProps) {
   const { locale, setLocale } = useLocale();
   const router = useRouter();
   const pathname = usePathname() ?? "/";
@@ -25,13 +41,32 @@ export default function LanguageSwitcher({ copy, className = "", size = "sm", to
   const activeClass =
     tone === "light" ? "border-emerald-400 bg-emerald-50 text-emerald-700" : "border-emerald-300 bg-emerald-500/15";
 
+  const buildNewPath = (nextLocale: Locale) => {
+    const strippedPath = stripLocale(pathname);
+    const rawPath = strippedPath === "/" ? `/${nextLocale}` : `/${nextLocale}${strippedPath}`;
+    return localePath(nextLocale, rawPath);
+  };
+
   const handleSelect = (next: Locale) => {
     if (next === locale) return;
-    const basePath = stripLocaleFromPath(pathname);
-    const nextPath = localePath(next, basePath);
-    const query = searchParams?.toString();
+
+    const newPath = buildNewPath(next);
+    const qs = searchParams?.toString() ?? "";
+    const nextUrl = qs ? `${newPath}?${qs}` : newPath;
+
+    if (typeof document !== "undefined") {
+      document.cookie = `${LOCALE_COOKIE}=${next}; Path=/; Max-Age=${ONE_YEAR_SECONDS}; SameSite=Lax`;
+      document.cookie = `NEXT_LOCALE=${next}; Path=/; Max-Age=${ONE_YEAR_SECONDS}; SameSite=Lax`;
+    }
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(LOCALE_STORAGE_KEY, next);
+      window.localStorage.setItem("preferredLocale", next);
+    }
+
     setLocale(next);
-    router.push(query ? `${nextPath}?${query}` : nextPath);
+    onLocaleChange?.(next);
+    router.replace(nextUrl);
+    router.refresh();
   };
 
   return (

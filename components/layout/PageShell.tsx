@@ -8,7 +8,7 @@ type PageShellProps = {
 
 export default function PageShell({ children, className = "" }: PageShellProps) {
   return (
-    <div className={`space-y-6 md:space-y-8 ${className}`.trim()}>
+    <div className={`w-full min-w-0 space-y-6 md:space-y-8 ${className}`.trim()}>
       <WebPageJsonLd />
       {children}
     </div>

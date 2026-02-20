@@ -20,8 +20,8 @@ export default function ChangelogSection({ locale, latest }: ChangelogSectionPro
   const blogHref = withLocalePrefix("/blog", locale);
 
   return (
-    <section id="changelog" className="px-4 py-12 md:px-10 lg:px-16">
-      <div className="mx-auto w-full max-w-6xl space-y-6">
+    <section id="changelog" className="w-full py-12">
+      <div className="site-container space-y-6">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-600">{copy.kicker}</p>
           <h2 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{copy.title}</h2>

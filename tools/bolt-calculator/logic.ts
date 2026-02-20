@@ -21,6 +21,10 @@ const FRICTION_K: Record<FrictionKey, { K: number }> = {
   coated: { K: 0.18 },
 };
 
+export function getYieldStrength(grade: GradeKey): number {
+  return GRADE_DATA[grade].Re;
+}
+
 export const DEFAULT_INPUT: BoltInput = {
   presetId: "M8",
   d: "8",
@@ -57,7 +61,7 @@ export function calculateBolt(input: BoltInput): BoltResult {
     };
   }
 
-  const Re = GRADE_DATA[input.grade].Re;
+  const Re = getYieldStrength(input.grade);
   const K = FRICTION_K[input.friction].K;
 
   const As = (Math.PI / 4) * Math.pow(d - 0.9382 * P, 2);
