@@ -238,8 +238,8 @@ export default function ReferenceCenter() {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[250px_minmax(0,1fr)]">
-      <aside className="hidden lg:block">
+    <div className="grid w-full min-w-0 gap-6 lg:grid-cols-[250px_minmax(0,1fr)]">
+      <aside className="hidden min-w-0 lg:block">
         <div className="sticky top-24 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-600">{copy.sidebarTitle}</p>
           <p className="mt-1 text-xs text-slate-600">{copy.sidebarDescription}</p>
@@ -260,8 +260,8 @@ export default function ReferenceCenter() {
         </div>
       </aside>
 
-      <div className="space-y-6">
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="min-w-0 space-y-6">
+        <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-4">
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">{copy.badge}</p>
@@ -304,8 +304,8 @@ export default function ReferenceCenter() {
         </section>
 
         {filteredSections.map((section) => (
-          <section key={section.id} id={section.id} className="scroll-mt-24 space-y-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+          <section key={section.id} id={section.id} className="min-w-0 scroll-mt-24 space-y-4">
+            <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
               <div className="space-y-1">
                 <h2 className="text-lg font-semibold text-slate-900">{section.title[locale]}</h2>
                 {section.description ? <p className="text-sm text-slate-600">{section.description[locale]}</p> : null}
@@ -353,7 +353,7 @@ export default function ReferenceCenter() {
                 {copy.emptyState}
               </div>
             ) : section.layout === "cards" ? (
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {section.filteredRows.map((row, index) => (
                   <div
                     key={`${section.id}-card-${index}`}

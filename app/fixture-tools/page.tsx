@@ -112,20 +112,20 @@ export default async function FixtureToolsPage() {
     <PageShell>
       <Hero title={copy.title} subtitle={copy.description} imageSrc={heroImage} imageAlt={copy.imageAlt} />
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] text-slate-600 md:text-xs">
           <span className="font-semibold">{copy.badge}</span>
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2">
+      <section className="grid w-full min-w-0 gap-4 md:grid-cols-2">
         {tools.map((tool) => (
           <article
             key={tool.id}
-            className="flex h-full flex-col justify-between rounded-3xl border border-slate-200 bg-white p-4 text-xs shadow-sm hover:border-slate-300 hover:shadow-md"
+            className="flex h-full min-w-0 flex-col justify-between rounded-3xl border border-slate-200 bg-white p-4 text-xs shadow-sm hover:border-slate-300 hover:shadow-md"
           >
             <div className="space-y-2">
-              <header className="flex items-start justify-between gap-2">
+              <header className="flex min-w-0 items-start justify-between gap-2">
                 <div className="flex min-w-0 flex-col gap-1">
                   <div className="inline-flex flex-wrap items-center gap-2">
                     <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -153,7 +153,7 @@ export default async function FixtureToolsPage() {
               </div>
             </div>
 
-            <footer className="mt-3 flex items-center justify-between gap-2 text-[11px] text-slate-500">
+            <footer className="mt-3 flex min-w-0 items-center justify-between gap-2 text-[11px] text-slate-500">
               <span className="min-w-0 break-words">
                 {tool.href ? copy.footerActive : copy.footerPlanned}
               </span>
@@ -161,7 +161,7 @@ export default async function FixtureToolsPage() {
               {tool.href ? (
                 <Link
                   href={localizeHref(tool.href) ?? tool.href}
-                  className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold text-white hover:bg-slate-800"
+                  className="shrink-0 rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold text-white hover:bg-slate-800"
                 >
                   {copy.openTool}
                 </Link>
@@ -169,7 +169,7 @@ export default async function FixtureToolsPage() {
                 <button
                   type="button"
                   disabled
-                  className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[10px] font-medium text-slate-500"
+                  className="shrink-0 rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[10px] font-medium text-slate-500"
                 >
                   {copy.comingSoon}
                 </button>

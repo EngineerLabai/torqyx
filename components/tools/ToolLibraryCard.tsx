@@ -46,7 +46,7 @@ export default function ToolLibraryCard({
   }[typeTone];
 
   return (
-    <article className="group relative flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-sm shadow-sm transition hover:border-slate-300 hover:shadow-md">
+    <article className="group relative flex h-full min-w-0 flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-sm shadow-sm transition hover:border-slate-300 hover:shadow-md">
       <Link
         href={href}
         prefetch={false}
@@ -58,10 +58,10 @@ export default function ToolLibraryCard({
       <div className="absolute right-4 top-4 z-20">
         <ToolFavoriteButton toolId={toolId} toolTitle={title} size="sm" />
       </div>
-      <div className="relative z-0 space-y-2">
-        <div className="flex items-start justify-between gap-2 pr-12">
-          <h3 className="break-words text-base font-semibold leading-snug text-slate-900">{titleDisplay ?? title}</h3>
-          <div className="flex flex-col items-end gap-1">
+      <div className="relative z-0 min-w-0 space-y-2">
+        <div className="flex min-w-0 items-start justify-between gap-2 pr-12">
+          <h3 className="min-w-0 flex-1 break-words text-base font-semibold leading-snug text-slate-900">{titleDisplay ?? title}</h3>
+          <div className="flex shrink-0 flex-col items-end gap-1">
             {typeLabel ? (
               <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${typeToneClass}`.trim()}>
                 {typeLabel}

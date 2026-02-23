@@ -1,4 +1,5 @@
 import type { Locale } from "@/utils/locale";
+import { getUiLabel } from "@/utils/ui-labels";
 
 export type RevisionStatus = "open" | "review" | "approved" | "released" | "closed";
 export type RevisionPriority = "low" | "medium" | "high";
@@ -60,7 +61,7 @@ export const REVISION_COPY: Record<Locale, {
       title: "Parça / Revizyon Takip Panosu",
       description:
         "Revizyon ve değişiklikleri sahip, öncelik ve teslim tarihine göre yönetin.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("tr", "projectHub"),
       imageAlt: "Revision tracker",
     },
     formTitle: "Yeni revizyon kaydı",
@@ -95,7 +96,7 @@ export const REVISION_COPY: Record<Locale, {
       title: "Part / Revision Tracker",
       description:
         "Manage revisions and change control with owners, priorities, and due dates.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("en", "projectHub"),
       imageAlt: "Revision tracker",
     },
     formTitle: "New revision entry",

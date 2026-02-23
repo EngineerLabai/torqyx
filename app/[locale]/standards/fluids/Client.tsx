@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
+import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 
 type RoughnessRow = {
   id: string;
@@ -78,6 +79,11 @@ const ROUGHNESS_ROWS: RoughnessRow[] = [
   },
 ];
 
+const STANDARDS_EYEBROW: Record<Locale, string> = {
+  tr: getUiLabel("tr", "standards"),
+  en: getUiLabel("en", "standards"),
+};
+
 const COPY: Record<Locale, {
   hero: { title: string; description: string; eyebrow: string; imageAlt: string };
   props: { title: string; description: string; columns: string[] };
@@ -126,7 +132,7 @@ const COPY: Record<Locale, {
       title: "Akışkanlar: mini hesap araçları",
       description:
         "Reynolds sayısı, sürtünme katsayısı, Darcy basınç düşümü ve pompa gücü için hafif ve deterministik hesap blokları.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.tr,
       imageAlt: "Fluids calculations reference",
     },
     props: {
@@ -199,7 +205,7 @@ const COPY: Record<Locale, {
       title: "Fluids: practical mini calculators",
       description:
         "Deterministic tools for Reynolds number, friction factor, Darcy pressure drop, and pump power.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.en,
       imageAlt: "Fluids calculations reference",
     },
     props: {
@@ -382,6 +388,13 @@ export default function FluidsStandardsClient({ locale, heroImage }: { locale: L
       isTransition: regime === "transition",
     };
   }, [density, viscosityMpas, diameterMm, lengthM, roughnessMm, flowMode, flowRate, velocity, efficiencyPct]);
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("FluidsStandardsClient", locale, {
+      eyebrow: copy.hero.eyebrow,
+      title: copy.hero.title,
+    });
+  }, [copy.hero.eyebrow, copy.hero.title, locale]);
 
   const handleHelperMpasChange = (value: string) => {
     setHelperMpas(value);

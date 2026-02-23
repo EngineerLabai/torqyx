@@ -1,4 +1,5 @@
 import type { Locale } from "@/utils/locale";
+import { getUiLabel } from "@/utils/ui-labels";
 
 export type ProjectStatus = "open" | "in-progress" | "blocked" | "done";
 export type ProjectPriority = "low" | "medium" | "high";
@@ -58,7 +59,7 @@ export const PROJECT_COPY: Record<Locale, {
       title: "Proje ve İyileştirme Takip",
       description:
         "Proje ve Kaizen çalışmalarını sahip, tarih, öncelik ve durum bazlı takip edin. Kayıtlar cihazınızda tutulur.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("tr", "projectHub"),
       imageAlt: "Project tracker",
     },
     formTitle: "Yeni kayıt oluştur",
@@ -92,7 +93,7 @@ export const PROJECT_COPY: Record<Locale, {
       title: "Project & Improvement Tracker",
       description:
         "Track projects and Kaizen work with owners, due dates, priorities, and status. Data stays on this device.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("en", "projectHub"),
       imageAlt: "Project tracker",
     },
     formTitle: "Create a new entry",

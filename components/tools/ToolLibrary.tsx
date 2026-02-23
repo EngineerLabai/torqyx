@@ -238,10 +238,10 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   );
 
   return (
-    <div className="space-y-6">
+    <div className="w-full min-w-0 space-y-6">
       <RecentToolsStrip tone="light" />
       <InlineSearch />
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             {copy.scenarioSection.kicker}
@@ -250,11 +250,11 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           <p className="text-sm text-slate-600">{copy.scenarioSection.description}</p>
         </div>
 
-        <div className="mt-5 grid gap-4 md:grid-cols-3">
+        <div className="mt-5 grid min-w-0 gap-4 md:grid-cols-3">
           {copy.scenarios.map((scenario) => (
             <div
               key={scenario.id}
-              className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-slate-300 hover:bg-white"
+              className="flex h-full min-w-0 flex-col justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-slate-300 hover:bg-white"
             >
               <div className="space-y-2">
                 <h3 className="text-base font-semibold text-slate-900">{scenario.title}</h3>
@@ -277,8 +277,8 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
             <h2 className="text-lg font-semibold text-slate-900">{copy.requestSection.title}</h2>
             <p className="text-sm text-slate-600">{copy.requestSection.description}</p>
@@ -294,8 +294,8 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         </div>
       </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <section className="w-full min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-sm font-semibold text-slate-900">{copy.filterSection.title}</h2>
             <p className="text-xs text-slate-500">{copy.filterSection.description}</p>
@@ -344,7 +344,12 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           </div>
         </div>
 
-        <form id="tool-filters" method="get" action={basePath} className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <form
+          id="tool-filters"
+          method="get"
+          action={basePath}
+          className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+        >
           <input type="hidden" name="type" value={typeFilter} />
           <div className="space-y-1">
             <label htmlFor="tool-filter-category" className="block text-[11px] font-medium text-slate-700">
@@ -404,7 +409,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
       </section>
 
       {filtered.length === 0 ? (
-        <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center">
+        <section className="w-full min-w-0 rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center">
           <p className="text-sm font-semibold text-slate-700">{copy.emptyState.title}</p>
           <p className="mt-1 text-xs text-slate-500">{copy.emptyState.description}</p>
           <Link
@@ -416,8 +421,8 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           </Link>
         </section>
       ) : (
-        <section className="space-y-5">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <section className="w-full min-w-0 space-y-5">
+          <div className="grid min-w-0 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {toolCardModels.map(({ tool, title, description, categoryLabel, tagLabels, accessLabel, isNew }) => (
               <ToolLibraryCard
                 key={tool.id}

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
+import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 
 type LocalizedText = Record<Locale, string>;
 
@@ -198,6 +199,11 @@ const MATERIALS: MaterialRow[] = [
   },
 ];
 
+const STANDARDS_EYEBROW: Record<Locale, string> = {
+  tr: getUiLabel("tr", "standards"),
+  en: getUiLabel("en", "standards"),
+};
+
 const COPY: Record<Locale, {
   hero: { title: string; description: string; eyebrow: string; imageAlt: string };
   intro: string;
@@ -239,7 +245,7 @@ const COPY: Record<Locale, {
       title: "Malzemeler: hızlı mühendislik karşılaştırma",
       description:
         "Pratik özellik tablosu ile malzeme adaylarını filtrele, sonra en fazla 3 aday için yan yana karşılaştır.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.tr,
       imageAlt: "Materials engineering comparison",
     },
     intro:
@@ -301,7 +307,7 @@ const COPY: Record<Locale, {
       title: "Materials: practical engineering comparison",
       description:
         "Filter candidates with one practical property table, then compare up to 3 materials side by side.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.en,
       imageAlt: "Materials engineering comparison",
     },
     intro:
@@ -371,6 +377,13 @@ export default function MaterialsStandardsClient({ locale, heroImage }: { locale
     const timeoutId = window.setTimeout(() => setShowLimitWarning(false), 2000);
     return () => window.clearTimeout(timeoutId);
   }, [showLimitWarning]);
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("MaterialsStandardsClient", locale, {
+      eyebrow: copy.hero.eyebrow,
+      title: copy.hero.title,
+    });
+  }, [copy.hero.eyebrow, copy.hero.title, locale]);
 
   const normalizedQuery = query.trim().toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US");
 
