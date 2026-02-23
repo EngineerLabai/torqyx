@@ -19,13 +19,6 @@ export async function generateMetadata() {
   });
 }
 
-type HubCardProps = {
-  title: string;
-  description: string;
-  href: string;
-  badge?: string;
-};
-
 const hubsByLocale = {
   tr: [
     {

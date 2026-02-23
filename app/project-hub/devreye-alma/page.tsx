@@ -48,7 +48,7 @@ export default function DevreyeAlmaPage() {
 
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
         <div className="space-y-2">
-          {STEPS.map((s, idx) => (
+          {STEPS.map((s) => (
             <details key={s.title} className="group rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
               <summary className="flex cursor-pointer items-center justify-between text-[11px] font-semibold text-slate-900">
                 {s.title}
