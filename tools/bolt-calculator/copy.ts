@@ -40,4 +40,4 @@ const BOLT_CALCULATOR_COPY = {
 export const getBoltCalculatorCopy = (locale: Locale) =>
   BOLT_CALCULATOR_COPY[locale] ?? BOLT_CALCULATOR_COPY.tr;
 
-export type BoltVisualizationCopy = (typeof BOLT_CALCULATOR_COPY)["tr"]["visualization"];
+export type BoltVisualizationCopy = (typeof BOLT_CALCULATOR_COPY)[Locale]["visualization"];

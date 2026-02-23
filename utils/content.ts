@@ -338,12 +338,35 @@ export const getContentItems = async (type: ContentType, options: ContentQueryOp
 
   return filtered
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(({ sourcePath, ...item }) => item);
+    .map((item) => ({
+      slug: item.slug,
+      type: item.type,
+      title: item.title,
+      description: item.description,
+      date: item.date,
+      tags: item.tags,
+      category: item.category,
+      draft: item.draft,
+      readingTimeMinutes: item.readingTimeMinutes,
+      canonical: item.canonical,
+      content: item.content,
+    }));
 };
 
 export const getContentList = async (type: ContentType, options: ContentQueryOptions = {}) => {
   const items = await getContentItems(type, options);
-  return items.map(({ content, ...item }) => item);
+  return items.map((item) => ({
+    slug: item.slug,
+    type: item.type,
+    title: item.title,
+    description: item.description,
+    date: item.date,
+    tags: item.tags,
+    category: item.category,
+    draft: item.draft,
+    readingTimeMinutes: item.readingTimeMinutes,
+    canonical: item.canonical,
+  }));
 };
 
 export const getContentBySlug = async (type: ContentType, slug: string, options: ContentQueryOptions = {}) => {

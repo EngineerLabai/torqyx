@@ -9,8 +9,6 @@ import { withLocalePrefix } from "@/utils/locale-path";
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.notFound;
-  const toolsHref = withLocalePrefix("/tools", locale);
-  const homeHref = withLocalePrefix("/", locale);
   const brandContent = getBrandCopy(locale);
 
   return buildPageMetadata({

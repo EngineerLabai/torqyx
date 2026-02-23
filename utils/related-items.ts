@@ -91,7 +91,11 @@ export const rankRelatedItems = <T extends RelatedCandidate>(
 };
 
 const takeTop = <T extends RelatedCandidate>(items: ScoredItem<T>[], limit: number) =>
-  items.slice(0, limit).map(({ score, ...rest }) => rest);
+  items.slice(0, limit).map((item) => {
+    const ranked = { ...item };
+    delete (ranked as { score?: number }).score;
+    return ranked;
+  });
 
 export const getRelatedForBlogPost = (
   post: ContentListItem,
