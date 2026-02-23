@@ -1,4 +1,5 @@
 import type { Locale } from "@/utils/locale";
+import { getUiLabel } from "@/utils/ui-labels";
 
 export type ChecklistItem = {
   id: string;
@@ -34,7 +35,7 @@ export const COMMISSIONING_COPY: Record<Locale, {
       title: "Devreye Alma Paneli",
       description:
         "Adım adım komisyoning akışını yönet. Her maddeyi tamamla, notları gör ve teslim paketini hazırla.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("tr", "projectHub"),
       imageAlt: "Commissioning workflow",
     },
     progressLabel: "Genel ilerleme",
@@ -55,7 +56,7 @@ export const COMMISSIONING_COPY: Record<Locale, {
       title: "Commissioning Panel",
       description:
         "Run the commissioning workflow step by step. Mark tasks, review details, and prepare the handover package.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("en", "projectHub"),
       imageAlt: "Commissioning workflow",
     },
     progressLabel: "Overall progress",

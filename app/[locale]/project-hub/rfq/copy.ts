@@ -1,4 +1,5 @@
 import type { Locale } from "@/utils/locale";
+import { getUiLabel } from "@/utils/ui-labels";
 
 export type RfqStatus = "new" | "review" | "waiting" | "quoted" | "won" | "lost";
 export type RfqPriority = "low" | "medium" | "high";
@@ -63,7 +64,7 @@ export const RFQ_COPY: Record<Locale, {
       title: "RFQ / Teknik Şartname Özeti",
       description:
         "Müşteri RFQ ve teknik şartnameleri için sahip, teslim tarihi ve öncelik odaklı takip.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("tr", "projectHub"),
       imageAlt: "RFQ tracker",
     },
     formTitle: "Yeni RFQ satırı",
@@ -100,7 +101,7 @@ export const RFQ_COPY: Record<Locale, {
       title: "RFQ / Technical Spec Summary",
       description:
         "Track RFQs with owners, due dates, priorities, and quick links to spec documents.",
-      eyebrow: "Project Hub",
+      eyebrow: getUiLabel("en", "projectHub"),
       imageAlt: "RFQ tracker",
     },
     formTitle: "New RFQ entry",

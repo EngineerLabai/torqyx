@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
+import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 
 type ThreadSeries = "coarse" | "fine";
 
@@ -81,6 +82,11 @@ const ENGAGEMENT_GUIDE: EngagementGuideRow[] = [
   },
 ];
 
+const STANDARDS_EYEBROW: Record<Locale, string> = {
+  tr: getUiLabel("tr", "standards"),
+  en: getUiLabel("en", "standards"),
+};
+
 const COPY: Record<Locale, {
   hero: { title: string; description: string; eyebrow: string; imageAlt: string };
   overview: {
@@ -123,7 +129,7 @@ const COPY: Record<Locale, {
       title: "Metrik dişler: pratik standart özeti",
       description:
         "Coarse/fine seçim notları, hızlı tap drill hesabı ve montajda işe yarayan kısa tablolar.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.tr,
       imageAlt: "Metric threads engineering reference",
     },
     overview: {
@@ -202,7 +208,7 @@ const COPY: Record<Locale, {
       title: "Metric threads: practical standards notes",
       description:
         "Coarse/fine selection guidance, quick tap drill calculator, and compact workshop tables.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.en,
       imageAlt: "Metric threads engineering reference",
     },
     overview: {
@@ -338,6 +344,13 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
     const timeoutId = window.setTimeout(() => setCopyState("idle"), 1400);
     return () => window.clearTimeout(timeoutId);
   }, [copyState]);
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("ThreadsStandardsClient", locale, {
+      eyebrow: copy.hero.eyebrow,
+      title: copy.hero.title,
+    });
+  }, [copy.hero.eyebrow, copy.hero.title, locale]);
 
   const handleSizeChange = (nextSize: string) => {
     const nextSpec = THREAD_SPECS.find((row) => row.label === nextSize) ?? fallbackSpec;

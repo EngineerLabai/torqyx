@@ -5,12 +5,39 @@ import { getHeroImageSrc } from "@/lib/assets";
 import { buildPageMetadata } from "@/utils/metadata";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
 
 const resolveLocale = (value?: string): Locale => (isLocale(value) ? value : DEFAULT_LOCALE);
+
+const LABELS_BY_LOCALE: Record<
+  Locale,
+  {
+    projectHub: string;
+    workflow: string;
+    tracker: string;
+    rfq: string;
+    revision: string;
+  }
+> = {
+  tr: {
+    projectHub: getUiLabel("tr", "projectHub"),
+    workflow: getUiLabel("tr", "workflow"),
+    tracker: getUiLabel("tr", "tracker"),
+    rfq: getUiLabel("tr", "rfq"),
+    revision: getUiLabel("tr", "revision"),
+  },
+  en: {
+    projectHub: getUiLabel("en", "projectHub"),
+    workflow: getUiLabel("en", "workflow"),
+    tracker: getUiLabel("en", "tracker"),
+    rfq: getUiLabel("en", "rfq"),
+    revision: getUiLabel("en", "revision"),
+  },
+};
 
 const COPY: Record<Locale, {
   seo: { title: string; description: string };
@@ -27,7 +54,7 @@ const COPY: Record<Locale, {
       title: "Proje Merkezi",
       description:
         "Mühendislik ekipleri için hızlı, hafif ve tarayıcı-içinde çalışan takip modülleri. Kayıtlar cihazınızda tutulur.",
-      eyebrow: "Project Hub",
+      eyebrow: LABELS_BY_LOCALE.tr.projectHub,
       imageAlt: "Project hub overview",
     },
     cta: "Modülü Aç",
@@ -36,25 +63,25 @@ const COPY: Record<Locale, {
         title: "Devreye Alma Paneli",
         description: "Komisyoning akışını adım adım kontrol et, checklist kaydet ve el teslim paketi oluştur.",
         href: "/project-hub/devreye-alma",
-        badge: "Workflow",
+        badge: LABELS_BY_LOCALE.tr.workflow,
       },
       {
         title: "Proje & İyileştirme Takip Paneli",
         description: "Proje ve Kaizen çalışmalarını sahip, tarih, öncelik ve durum bazlı yönet.",
         href: "/project-hub/project-tools",
-        badge: "Tracker",
+        badge: LABELS_BY_LOCALE.tr.tracker,
       },
       {
-        title: "RFQ / Teknik Şartname Özeti",
+        title: "Teklif İsteği / Teknik Şartname Özeti",
         description: "Teknik şartname ve teklif isteklerini ekiplerle takip et, teslim tarihlerini gör.",
         href: "/project-hub/rfq",
-        badge: "RFQ",
+        badge: LABELS_BY_LOCALE.tr.rfq,
       },
       {
         title: "Parça / Revizyon Takip Panosu",
         description: "Parça revizyonlarını, sorumluları ve onay durumlarını tek tabloda gör.",
         href: "/project-hub/part-tracking",
-        badge: "Revision",
+        badge: LABELS_BY_LOCALE.tr.revision,
       },
     ],
   },
@@ -67,7 +94,7 @@ const COPY: Record<Locale, {
       title: "Project Hub",
       description:
         "Lightweight, local-first modules for engineering teams. Data stays in your browser unless exported.",
-      eyebrow: "Project Hub",
+      eyebrow: LABELS_BY_LOCALE.en.projectHub,
       imageAlt: "Project hub overview",
     },
     cta: "Open Module",
@@ -76,25 +103,25 @@ const COPY: Record<Locale, {
         title: "Commissioning Panel",
         description: "Run the full commissioning workflow with checklists, logs, and handover package.",
         href: "/project-hub/devreye-alma",
-        badge: "Workflow",
+        badge: LABELS_BY_LOCALE.en.workflow,
       },
       {
         title: "Project & Improvement Tracker",
         description: "Track projects and Kaizen work with owner, due dates, priority, and status.",
         href: "/project-hub/project-tools",
-        badge: "Tracker",
+        badge: LABELS_BY_LOCALE.en.tracker,
       },
       {
         title: "RFQ / Technical Spec Summary",
         description: "Capture RFQs and spec summaries with owners, deadlines, and quick links.",
         href: "/project-hub/rfq",
-        badge: "RFQ",
+        badge: LABELS_BY_LOCALE.en.rfq,
       },
       {
         title: "Part / Revision Tracker",
         description: "Monitor part revisions, owners, approvals, and impacts in a single view.",
         href: "/project-hub/part-tracking",
-        badge: "Revision",
+        badge: LABELS_BY_LOCALE.en.revision,
       },
     ],
   },
@@ -121,6 +148,17 @@ export default async function ProjectHubPage({ params }: PageProps) {
     ...module,
     href: withLocalePrefix(module.href, locale),
   }));
+
+  warnIfEnglishLabelsInTurkish("ProjectHubPage", locale, {
+    hero: {
+      title: copy.hero.title,
+      eyebrow: copy.hero.eyebrow,
+    },
+    modules: localizedModules.map((module) => ({
+      title: module.title,
+      badge: module.badge,
+    })),
+  });
 
   return (
     <PageShell>

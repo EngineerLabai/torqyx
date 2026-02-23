@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
+import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 
 type FitGuideCard = {
   id: string;
@@ -60,6 +61,11 @@ const EXAMPLE_DEVIATION_ROWS: ExampleDeviationRow[] = [
   { nominal: "30", holeH7: "0 / +25 µm", shaftG6: "-25 / -9 µm", shaftK6: "+4 / +20 µm", shaftP6: "+28 / +44 µm" },
 ];
 
+const STANDARDS_EYEBROW: Record<Locale, string> = {
+  tr: getUiLabel("tr", "standards"),
+  en: getUiLabel("en", "standards"),
+};
+
 const COPY: Record<Locale, {
   hero: { title: string; description: string; eyebrow: string; imageAlt: string };
   intro: { title: string; body: string; bullets: string[] };
@@ -92,7 +98,7 @@ const COPY: Record<Locale, {
       title: "Geçmeler: seçim rehberi ve mini hesaplayıcı",
       description:
         "Boşluklu-geçiş-sıkı geçme tiplerini hızlı karşılaştırın, ardından gerçek tolerans aralığı için clearance/interference hesabı yapın.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.tr,
       imageAlt: "ISO fits engineering guide",
     },
     intro: {
@@ -150,7 +156,7 @@ const COPY: Record<Locale, {
       title: "Fits: selection guide and mini calculator",
       description:
         "Compare clearance, transition, and interference fit types, then evaluate your actual tolerance ranges.",
-      eyebrow: "Standards",
+      eyebrow: STANDARDS_EYEBROW.en,
       imageAlt: "ISO fits engineering guide",
     },
     intro: {
@@ -250,6 +256,13 @@ export default function FitsStandardsClient({ locale, heroImage }: { locale: Loc
       hasInterference: minClearance < 0 || maxClearance < 0,
     };
   }, [holeMin, holeMax, shaftMin, shaftMax]);
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("FitsStandardsClient", locale, {
+      eyebrow: copy.hero.eyebrow,
+      title: copy.hero.title,
+    });
+  }, [copy.hero.eyebrow, copy.hero.title, locale]);
 
   return (
     <PageShell>

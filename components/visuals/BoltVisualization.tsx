@@ -1,7 +1,9 @@
 "use client";
 
 import { useDeferredValue, useEffect, useMemo, useRef } from "react";
+import { useDebouncedValue } from "@/components/search/useDebouncedValue";
 import type { BoltInput, BoltResult } from "@/tools/bolt-calculator/types";
+import type { BoltVisualizationCopy } from "@/tools/bolt-calculator/copy";
 import { getYieldStrength } from "@/tools/bolt-calculator/logic";
 import { formatNumberFixed } from "@/utils/number-format";
 
@@ -12,6 +14,7 @@ type BoltVisualizationProps = {
   input: BoltInput;
   result: BoltResult;
   locale: "tr" | "en";
+  copy: BoltVisualizationCopy;
 };
 
 let chartModulePromise: Promise<ChartModule> | null = null;
@@ -53,18 +56,20 @@ function buildThreadPath(startX: number, endX: number, topY: number, bottomY: nu
   return path;
 }
 
-export default function BoltVisualization({ input, result, locale }: BoltVisualizationProps) {
+export default function BoltVisualization({ input, result, locale, copy }: BoltVisualizationProps) {
   const deferredInput = useDeferredValue(input);
   const deferredResult = useDeferredValue(result);
+  const debouncedInput = useDebouncedValue(deferredInput, 150);
+  const debouncedResult = useDebouncedValue(deferredResult, 150);
   const chartRef = useRef<ChartInstance | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const parsed = useMemo(() => {
-    const d = Number(deferredInput.d);
-    const P = Number(deferredInput.P);
-    const preload = Number(deferredInput.preloadPercent);
-    const sigma = deferredResult.sigma ?? null;
-    const re = getYieldStrength(deferredInput.grade);
+    const d = Number(debouncedInput.d);
+    const P = Number(debouncedInput.P);
+    const preload = Number(debouncedInput.preloadPercent);
+    const sigma = debouncedResult.sigma ?? null;
+    const re = getYieldStrength(debouncedInput.grade);
 
     return {
       d: Number.isFinite(d) ? d : 0,
@@ -73,14 +78,14 @@ export default function BoltVisualization({ input, result, locale }: BoltVisuali
       sigma: sigma !== null && Number.isFinite(sigma) ? sigma : 0,
       re,
     };
-  }, [deferredInput, deferredResult]);
+  }, [debouncedInput, debouncedResult]);
 
   const chartData = useMemo(
     () => ({
-      labels: ["sigma", "Re"],
+      labels: [copy.chartSigmaLabel, copy.chartYieldLabel],
       values: [parsed.sigma, parsed.re],
     }),
-    [parsed.re, parsed.sigma],
+    [copy.chartSigmaLabel, copy.chartYieldLabel, parsed.re, parsed.sigma],
   );
 
   const schematic = useMemo(() => {
@@ -139,7 +144,7 @@ export default function BoltVisualization({ input, result, locale }: BoltVisuali
           labels: chartData.labels,
           datasets: [
             {
-              label: locale === "tr" ? "Gerilme karsilastirmasi" : "Stress comparison",
+              label: copy.chartSeriesLabel,
               data: chartData.values,
               borderRadius: 8,
               borderSkipped: false,
@@ -185,34 +190,37 @@ export default function BoltVisualization({ input, result, locale }: BoltVisuali
         chartRef.current = null;
       }
     };
-  }, [chartData, locale]);
+  }, [chartData, copy.chartSeriesLabel, locale]);
 
   return (
-    <div className="space-y-4">
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-        <article className="rounded-xl border border-slate-200 bg-white p-4">
+    <div className="min-w-0 space-y-4">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+        <article className="min-w-0 rounded-xl border border-slate-200 bg-white p-4">
           <h3 className="mb-2 text-xs font-semibold text-slate-700">
-            {locale === "tr" ? "sigma - Re karsilastirmasi" : "sigma vs Re comparison"}
+            {copy.chartTitle}
           </h3>
           <div className="h-52 w-full">
             <canvas ref={canvasRef} className="h-full w-full" />
           </div>
         </article>
 
-        <article className="rounded-xl border border-slate-200 bg-white p-4">
-          <h3 className="text-xs font-semibold text-slate-700">{locale === "tr" ? "On yuk seviyesi" : "Preload level"}</h3>
+        <article className="min-w-0 rounded-xl border border-slate-200 bg-white p-4">
+          <h3 className="text-xs font-semibold text-slate-700">{copy.preloadTitle}</h3>
           <div className="mt-4 flex items-center gap-4">
             <div className="grid h-20 w-20 place-items-center rounded-full p-1" style={gaugeStyle}>
               <div className="grid h-full w-full place-items-center rounded-full bg-white text-[11px] font-semibold text-slate-700">
-                {formatNumberFixed(parsed.preloadPercent, locale, 0)}%Re
+                {formatNumberFixed(parsed.preloadPercent, locale, 0)}
+                {copy.preloadGaugeUnit}
               </div>
             </div>
             <div className="space-y-1 text-[11px] text-slate-600">
               <p>
-                sigma: <span className="font-semibold text-slate-900">{formatNumberFixed(parsed.sigma, locale, 1)} MPa</span>
+                {copy.sigmaLabel}:{" "}
+                <span className="font-semibold text-slate-900">{formatNumberFixed(parsed.sigma, locale, 1)} MPa</span>
               </p>
               <p>
-                Re: <span className="font-semibold text-slate-900">{formatNumberFixed(parsed.re, locale, 0)} MPa</span>
+                {copy.yieldLabel}:{" "}
+                <span className="font-semibold text-slate-900">{formatNumberFixed(parsed.re, locale, 0)} MPa</span>
               </p>
             </div>
           </div>
@@ -222,10 +230,10 @@ export default function BoltVisualization({ input, result, locale }: BoltVisuali
         </article>
       </div>
 
-      <article className="rounded-xl border border-slate-200 bg-white p-4">
-        <h3 className="mb-2 text-xs font-semibold text-slate-700">{locale === "tr" ? "Civata semasi" : "Bolt schematic"}</h3>
+      <article className="min-w-0 rounded-xl border border-slate-200 bg-white p-4">
+        <h3 className="mb-2 text-xs font-semibold text-slate-700">{copy.schematicTitle}</h3>
         <div className="overflow-x-auto">
-          <svg viewBox="0 0 320 140" className="h-auto min-w-[280px] w-full" role="img" aria-hidden="true">
+          <svg viewBox="0 0 320 140" className="h-auto min-w-[280px] w-full" role="img" aria-label={copy.schematicAria}>
             <rect x="20" y={schematic.headTop} width={schematic.headWidth} height={schematic.headHeight} rx="8" fill="#0f172a" />
             <rect
               x={schematic.bodyStart}

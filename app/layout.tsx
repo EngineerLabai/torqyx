@@ -119,7 +119,7 @@ export default async function RootLayout({
     },
   };
   return (
-    <html lang={locale}>
+    <html lang={locale} className="w-full overflow-x-hidden">
       <body className={`${sora.variable} ${inter.variable} ${jetBrainsMono.variable} w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased`}>
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
