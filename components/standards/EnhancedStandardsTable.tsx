@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState, useEffect } from "react";
-import type { StandardsTable as StandardsTableType } from "@/data/standards";
+import type { StandardsTable as StandardsTableType, LocalizedText } from "@/data/standards";
 import StandardsTable from "@/components/standards/StandardsTable";
 import StandardsTableWrapper from "@/components/standards/StandardsTableWrapper";
 
@@ -11,6 +11,20 @@ type EnhancedStandardsTableProps = {
   locale: "tr" | "en";
   exportLabel: string;
   emptyLabel: string;
+};
+
+const isLocalized = (value: unknown): value is LocalizedText =>
+  Boolean(value && typeof value === "object" && "tr" in value && "en" in value);
+
+const formatValue = (value: unknown, locale: "tr" | "en") => {
+  if (value === null || value === undefined || value === "") return "-";
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value.toLocaleString(locale === "tr" ? "tr-TR" : "en-US", {
+      maximumFractionDigits: 4,
+    });
+  }
+  if (isLocalized(value)) return value[locale];
+  return String(value);
 };
 
 export default function EnhancedStandardsTable({
@@ -115,14 +129,39 @@ export default function EnhancedStandardsTable({
       </div>
 
       <StandardsTableWrapper hintLabel={locale === "tr" ? "← kaydır →" : "← scroll →"}>
-        <StandardsTable
-          table={filteredTable}
-          rows={rows}
-          locale={locale}
-          exportLabel={exportLabel}
-          emptyLabel={emptyLabel}
-        />
+        <div className="[&_[data-standards-table-scroll]]:hidden md:[&_[data-standards-table-scroll]]:block">
+          <StandardsTable
+            table={filteredTable}
+            rows={rows}
+            locale={locale}
+            exportLabel={exportLabel}
+            emptyLabel={emptyLabel}
+          />
+        </div>
       </StandardsTableWrapper>
+
+      {rows.length > 0 ? (
+        <div className="space-y-3 md:hidden">
+          {rows.map((row, rowIndex) => (
+            <article
+              key={`${table.id}-card-${rowIndex}`}
+              className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+            >
+              <div className="space-y-2">
+                {visibleColumns.map((column) => (
+                  <div
+                    key={`${table.id}-card-${rowIndex}-${column.key}`}
+                    className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-start gap-3 border-b border-slate-100 pb-2 text-sm last:border-b-0 last:pb-0"
+                  >
+                    <p className="font-semibold text-slate-800">{column.label[locale]}</p>
+                    <p className="text-right text-slate-700 break-words">{formatValue(row[column.key], locale)}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
