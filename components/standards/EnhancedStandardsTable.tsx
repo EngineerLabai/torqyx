@@ -129,7 +129,7 @@ export default function EnhancedStandardsTable({
       </div>
 
       <StandardsTableWrapper hintLabel={locale === "tr" ? "← kaydır →" : "← scroll →"}>
-        <div className="[&_[data-standards-table-scroll]]:hidden md:[&_[data-standards-table-scroll]]:block">
+        <div className="[&_[data-standards-table-scroll]]:hidden md:[&_[data-standards-table-scroll]]:block md:[&_[data-standards-table-scroll]]:max-h-[70vh] md:[&_[data-standards-table-scroll]]:overflow-y-auto md:[&_[data-standards-table-scroll]_thead_th]:sticky md:[&_[data-standards-table-scroll]_thead_th]:top-0 md:[&_[data-standards-table-scroll]_thead_th]:z-10 md:[&_[data-standards-table-scroll]_thead_th]:bg-slate-50">
           <StandardsTable
             table={filteredTable}
             rows={rows}
