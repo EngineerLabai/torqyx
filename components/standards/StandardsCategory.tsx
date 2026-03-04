@@ -70,18 +70,20 @@ export default function StandardsCategoryView({ category, tables, locale, copy }
             <h2 className="text-xl font-semibold text-slate-900">{copy.searchTitle}</h2>
             <p className="text-sm text-slate-600">{copy.searchDescription}</p>
           </div>
-          <div className="flex flex-col gap-3">
-            <label className="text-xs font-semibold text-slate-700" htmlFor="standards-search">
-              {copy.searchLabel}
-            </label>
-            <input
-              id="standards-search"
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder={copy.searchPlaceholder}
-              className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
-            />
+          <div className="sticky top-3 z-20 -mx-2 rounded-2xl bg-white/95 px-2 py-2 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+            <div className="flex flex-col gap-3">
+              <label className="text-xs font-semibold text-slate-700" htmlFor="standards-search">
+                {copy.searchLabel}
+              </label>
+              <input
+                id="standards-search"
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder={copy.searchPlaceholder}
+                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
+              />
+            </div>
           </div>
           <div className="flex flex-wrap gap-2">
             {filteredTables.map(({ table, rows }) => (
