@@ -4,8 +4,7 @@ import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import type { StandardsCategory, StandardsTable as StandardsTableType, LocalizedText } from "@/data/standards";
-import StandardsTableWrapper from "@/components/standards/StandardsTableWrapper";
-const StandardsTable = dynamic(() => import("@/components/standards/StandardsTable"), {
+const EnhancedStandardsTable = dynamic(() => import("@/components/standards/EnhancedStandardsTable"), {
   loading: () => (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-500">
       Loading tables...
@@ -101,18 +100,14 @@ export default function StandardsCategoryView({ category, tables, locale, copy }
       </section>
 
       {filteredTables.map(({ table, rows }) => (
-        <StandardsTableWrapper
-          key={`${table.id}-${rows.length}`}
-          hintLabel={locale === "tr" ? "← kaydır →" : "← scroll →"}
-        >
-          <StandardsTable
-            table={table}
-            rows={rows}
-            locale={locale}
-            exportLabel={copy.exportCta}
-            emptyLabel={copy.emptyState}
-          />
-        </StandardsTableWrapper>
+        <EnhancedStandardsTable
+          key={table.id}
+          table={table}
+          rows={rows}
+          locale={locale}
+          exportLabel={copy.exportCta}
+          emptyLabel={copy.emptyState}
+        />
       ))}
 
       <section className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-700">
