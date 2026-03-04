@@ -70,7 +70,7 @@ export default function StandardsTable({ table, rows, locale, exportLabel, empty
           {emptyLabel}
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+        <div data-standards-table-scroll className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
           <table className="min-w-full border-collapse text-left text-xs">
             <thead className="bg-slate-50 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
               <tr>
