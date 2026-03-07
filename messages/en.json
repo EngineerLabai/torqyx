@@ -154,7 +154,7 @@
           "Built-in error checks"
         ],
         "formulaLabel": "Formula breakdown",
-        "formulaExample": "Ïƒ = F / A  Â·  Ï„ = TÂ·r / J  Â·  Î”P = fÂ·(L/D)Â·(ÏÂ·vÂ²/2)",
+        "formulaExample": "σ = F / A  ·  τ = T·r / J  ·  ΔP = f·(L/D)·(ρ·v²/2)",
         "formulaNotes": [
           "Assumptions listed per tool",
           "Units validated on every input",
@@ -181,7 +181,7 @@
       "kicker": "Popular calculators",
       "title": "Start with proven calculators",
       "description": "Most used by mechanical teams this month.",
-      "tryNow": "Try Now â†’",
+      "tryNow": "Try Now →",
       "usageLabel": "{count}+ uses",
       "cta": "See all calculators"
     },
@@ -226,7 +226,7 @@
           },
           {
             "label": "API access",
-            "free": "â€”",
+            "free": "—",
             "pro": "Included"
           }
         ]
@@ -292,7 +292,7 @@
       "searchTitle": "One search across all engineering tables",
       "searchDescription": "Your query filters all modules at once and matched terms are highlighted in results.",
       "searchLabel": "Search tables",
-      "searchPlaceholder": "M12, HRC, N7, MPa, Âµ, friction...",
+      "searchPlaceholder": "M12, HRC, N7, MPa, µ, friction...",
       "sidebarTitle": "Categories",
       "sidebarDescription": "Sticky navigation on desktop",
       "exportCta": "Download CSV",
@@ -365,7 +365,7 @@
         "G": "Shear modulus G (GPa)",
         "yield": "Yield strength (MPa)",
         "UTS": "Ultimate tensile strength (MPa)",
-        "alpha": "Thermal expansion Î± (um/m-K)"
+        "alpha": "Thermal expansion α (um/m-K)"
       },
       "disclaimer": "Values are typical and for comparison only. Confirm supplier data and standards for final design.",
       "categories": {
@@ -647,7 +647,7 @@
     },
     "gearRatio": {
       "header": {
-        "back": "â† All calculators",
+        "back": "← All calculators",
         "badge": "Ratios",
         "title": "Gear Ratio Calculator",
         "description": "Enter tooth counts and input speed to estimate ratio, output speed, and torque (incl. efficiency)."
@@ -662,16 +662,16 @@
         "z2": "Output tooth count z2",
         "rpm1": "Input speed n1 [rpm]",
         "torque1": "Input torque T1 [Nm]",
-        "efficiency": "Efficiency Î· (0-1)",
+        "efficiency": "Efficiency η (0-1)",
         "sample": "Fill with sample values"
       },
       "results": {
         "ratio": "Ratio i = z2 / z1",
         "rpm2": "Output speed n2 [rpm]",
         "torque2": "Output torque T2 [Nm]",
-        "efficiency": "Efficiency Î·"
+        "efficiency": "Efficiency η"
       },
-      "note": "Note: Output torque includes efficiency factor Î·."
+      "note": "Note: Output torque includes efficiency factor η."
     },
     "bendingStress": {
       "badges": {
@@ -679,7 +679,7 @@
         "secondary": "Bending Stress & Deflection"
       },
       "header": {
-        "title": "Simply Supported Beam â€” Bending Stress & Deflection",
+        "title": "Simply Supported Beam — Bending Stress & Deflection",
         "description": "Compute bending moment, section modulus, bending stress, and deflection for a simply supported beam with a central point load."
       },
       "inputs": {
@@ -701,8 +701,8 @@
         "maxMoment": "Max bending moment Mmax",
         "inertia": "Area moment of inertia I",
         "sectionModulus": "Section modulus W",
-        "sigma": "Bending stress Ïƒ",
-        "deflection": "Max deflection Î´",
+        "sigma": "Bending stress σ",
+        "deflection": "Max deflection δ",
         "safety": "Safety factor S",
         "note": "Formulas assume a simply supported beam with a mid-span point load. Verify against applicable standards for critical designs."
       },
@@ -710,7 +710,7 @@
         "title": "Design notes",
         "empty": "Complete the inputs and the notes will update automatically.",
         "safety": {
-          "unsafe": "Unsafe â€” yielding expected.",
+          "unsafe": "Unsafe — yielding expected.",
           "veryLow": "Very low safety. Risky with tolerances and load uncertainty.",
           "low": "Low safety. Acceptable for prototype checks; review for production.",
           "ok": "Typical safety for static steel structures.",
@@ -718,10 +718,10 @@
           "veryHigh": "Very high safety. Consider weight optimization."
         },
         "deflectionMissing": "Deflection information is not available.",
-        "deflectionBase": "Deflection ratio is approximately L/Î´ â‰ˆ {ratio}.",
+        "deflectionBase": "Deflection ratio is approximately L/δ ≈ {ratio}.",
         "deflectionLow": "This is quite flexible (below L/150) and may cause alignment issues.",
-        "deflectionMid": "Borderline for many applications (around L/150â€“L/250).",
-        "deflectionOk": "Acceptable for most machine components (L/250â€“L/400).",
+        "deflectionMid": "Borderline for many applications (around L/150–L/250).",
+        "deflectionOk": "Acceptable for most machine components (L/250–L/400).",
         "deflectionHigh": "Very stiff in terms of deflection (L/400 and above).",
         "stress": "Computed bending stress is about {sigma} MPa. Safety factor is based on yield strength.",
         "fatigue": "If the design sees fatigue or dynamic loads, static safety alone is insufficient; check fatigue limits and stress concentrations.",
@@ -730,7 +730,7 @@
       "diagram": {
         "title": "Bending Moment Diagram (schematic)",
         "empty": "This section shows the schematic moment diagram for a simply supported beam with a central point load. Fill the inputs to render it.",
-        "description": "The diagram shows moment rising to Mmax â‰ˆ {value} kNÂ·m at midspan and dropping to zero at the supports."
+        "description": "The diagram shows moment rising to Mmax ≈ {value} kN·m at midspan and dropping to zero at the supports."
       }
     },
     "fluidsHvac": {
@@ -742,33 +742,33 @@
       },
       "pipe": {
         "title": "1) Water Reynolds, f, and Pressure Drop (Darcy-Weisbach)",
-        "flow": "Flow Q [mÂ³/h]",
+        "flow": "Flow Q [m³/h]",
         "diameter": "Diameter D [mm]",
         "length": "Pipe length L [m]",
-        "roughness": "Roughness Îµ [mm]",
+        "roughness": "Roughness ε [mm]",
         "roughnessHelp": "Typical steel ~0.05 mm",
         "resultRe": "Re",
         "resultF": "f (Darcy)",
         "resultVelocity": "Velocity v",
-        "resultDp": "Î”p (along L)",
-        "note": "Assumptions: water at 20Â°C (Ï=1000 kg/mÂ³, Î¼=1 cP). Î”p = fÂ·(L/D)Â·ÏvÂ²/2. Minor losses, fittings, and temperature effects are excluded."
+        "resultDp": "Δp (along L)",
+        "note": "Assumptions: water at 20°C (ρ=1000 kg/m³, μ=1 cP). Δp = f·(L/D)·ρv²/2. Minor losses, fittings, and temperature effects are excluded."
       },
       "duct": {
         "title": "2) Duct Velocity Method (equivalent diameter)",
-        "flow": "Flow Q [mÂ³/h]",
+        "flow": "Flow Q [m³/h]",
         "velocity": "Target velocity v [m/s]",
         "resultArea": "Area A",
         "resultDiameter": "Equivalent D",
         "resultPressure": "Dynamic pressure q",
-        "note": "Typical velocities: offices 4â€“6 m/s, industrial 6â€“10 m/s. Check manufacturer catalogs for noise and loss; elbows/dampers add extra losses."
+        "note": "Typical velocities: offices 4–6 m/s, industrial 6–10 m/s. Check manufacturer catalogs for noise and loss; elbows/dampers add extra losses."
       },
       "ach": {
-        "title": "3) Air Changes per Hour (ACH) â†” Flow",
-        "volume": "Volume V [mÂ³]",
+        "title": "3) Air Changes per Hour (ACH) ↔ Flow",
+        "volume": "Volume V [m³]",
         "rate": "ACH [1/h]",
         "resultFlow": "Flow",
-        "resultFlowPerSecond": "Flow (mÂ³/s)",
-        "note": "Typical ACH: offices 4â€“8, classrooms 6â€“10, labs 8â€“15. Check building codes and indoor air quality standards."
+        "resultFlowPerSecond": "Flow (m³/s)",
+        "note": "Typical ACH: offices 4–8, classrooms 6–10, labs 8–15. Check building codes and indoor air quality standards."
       }
     },
     "notFound": {
@@ -1463,8 +1463,8 @@
       "required": "Invalid value: {field} is required.",
       "invalidNumber": "Invalid value: {field} must be a number.",
       "invalidOption": "Invalid value: {field} selection is not valid.",
-      "min": "Invalid value: {field} must be â‰¥ {min}.",
-      "max": "Invalid value: {field} must be â‰¤ {max}.",
+      "min": "Invalid value: {field} must be ≥ {min}.",
+      "max": "Invalid value: {field} must be ≤ {max}.",
       "resultFix": "Fix the highlighted inputs to see results.",
       "calcFailed": "Calculation failed. Check inputs."
     },
@@ -1609,7 +1609,7 @@
         {
           "slug": "m12-civata-torku",
           "title": "M12 10.9 bolt torque and lubrication",
-          "author": "AyÅŸe YÄ±lmaz",
+          "author": "Ayşe Yılmaz",
           "category": "Torque / Fastening",
           "details": "There is a gap between table values and actual tightening. How do torque wrench calibration and lubrication choice affect torque?",
           "updated": "2 hours ago",
@@ -1639,7 +1639,7 @@
           "title": "Surface roughness for H8/d9 fit",
           "author": "Selin K.",
           "category": "Tolerances / GD&T",
-          "details": "I picked H8/d9 for Ã˜25 hole/shaft. What surface roughness should I target to avoid loosening in press fit?",
+          "details": "I picked H8/d9 for Ø25 hole/shaft. What surface roughness should I target to avoid loosening in press fit?",
           "updated": "1 day ago",
           "tags": [
             "tolerance",
@@ -1670,7 +1670,7 @@
         "kaynak-sonrasi-sehim": [
           {
             "user": "Hakan",
-            "text": "Tack symmetrically and weld alternately, then fill in. A 120-150Â°C preheat helps.",
+            "text": "Tack symmetrically and weld alternately, then fill in. A 120-150°C preheat helps.",
             "time": "10m ago"
           },
           {
@@ -1682,7 +1682,7 @@
         "h8d9-yuzey-puruzluluk": [
           {
             "user": "Elif",
-            "text": "Ra 1.6-3.2 Âµm usually works. Cleanliness and deburring are critical.",
+            "text": "Ra 1.6-3.2 µm usually works. Cleanliness and deburring are critical.",
             "time": "2s ago"
           }
         ]
@@ -1822,5 +1822,3 @@
     }
   }
 }
-
-
