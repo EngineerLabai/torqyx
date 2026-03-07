@@ -57,9 +57,24 @@ npm run check:encoding
   - `getMessages(locale)` calls were removed from always-mounted shell client components (`components/layout/SiteShell.tsx` path); shell now receives localized copy from `app/layout.tsx`.
   - Dev indicators are disabled in `next.config.ts` to avoid floating dev HUD overlays during debugging.
   - Client errors and web-vitals are collected via `/api/client-errors` and `/api/rum`.
-  - Runtime health checks:
-    - JSON: `/health`
-    - Budget dashboard: `/health/performance`
+- Runtime health checks:
+  - JSON: `/health`
+  - Budget dashboard: `/health/performance`
+
+## AI Tool Summary env vars
+
+Server-side AI summary endpoint (`POST /api/ai/tool-summary`) needs:
+
+```bash
+AI_PROVIDER=gemini # or groq
+GEMINI_API_KEY=...
+GROQ_API_KEY=...
+```
+
+Notes:
+- Keep keys only in server env files (for local: `.env.local`).
+- Do not use `NEXT_PUBLIC_` prefix for these keys.
+- The summary endpoint is policy-limited to deterministic result summarization (no calculations).
 
 ## Yeni icerik nasil eklenir?
 

@@ -47,7 +47,7 @@ export default function AuthModal({ copy, authCopy }: AuthModalProps) {
         </div>
 
         <div className="mt-5">
-          <LoginPanel copy={authCopy} />
+          <LoginPanel copy={authCopy} source="modal" />
         </div>
 
         <p className="mt-4 text-[11px] text-slate-500">{copy.note}</p>

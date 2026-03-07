@@ -1,14 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import AccessBadge from "@/components/tools/AccessBadge";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 import useToolRecents from "@/components/tools/useToolRecents";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
+import { categoryLabels } from "@/src/lib/i18n/categoryLabels";
 
 type RecentToolsStripProps = {
   tone?: "light" | "dark";
@@ -21,6 +23,7 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
   const copy = getMessages(locale).components.recentTools;
   const accessLabels = getMessages(locale).common.access;
   const { recents } = useToolRecents();
+  const categoryLabelMap = categoryLabels(locale);
 
   const items = useMemo(() => {
     const mapped = recents
@@ -31,6 +34,19 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
       .filter((item): item is { entry: typeof recents[number]; tool: (typeof toolCatalog)[number] } => Boolean(item.tool));
     return mapped.slice(0, maxItems);
   }, [recents, maxItems]);
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish(
+      "RecentToolsStrip",
+      locale,
+      items
+        .map(({ tool }) => tool.category)
+        .filter(
+          (category): category is NonNullable<(typeof toolCatalog)[number]["category"]> => Boolean(category),
+        )
+        .map((category) => categoryLabelMap[category] ?? category),
+    );
+  }, [categoryLabelMap, items, locale]);
 
   const toneClasses =
     tone === "dark"
@@ -88,7 +104,7 @@ export default function RecentToolsStrip({ tone = "light", className = "", maxIt
                 <div className={`mt-3 flex flex-wrap items-center gap-2 text-[10px] ${toneClasses.cardMuted}`}>
                   {accessLabel ? <AccessBadge access={tool.access} label={accessLabel} /> : null}
                   <span className="uppercase tracking-[0.2em]">
-                    {tool.category ?? copy.generalCategory}
+                    {tool.category ? categoryLabelMap[tool.category] ?? tool.category : copy.generalCategory}
                   </span>
                 </div>
               </div>

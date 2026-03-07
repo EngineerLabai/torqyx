@@ -71,8 +71,16 @@ const emptyValues = (entries) =>
 
 const emptyInTr = emptyValues(trEntries);
 const emptyInEn = emptyValues(enEntries);
+const typeMismatches = [...enEntries.entries()]
+  .filter(([key]) => trEntries.has(key))
+  .filter(([key, enValue]) => typeof enValue !== typeof trEntries.get(key))
+  .map(([key, enValue]) => ({
+    key,
+    enType: typeof enValue,
+    trType: typeof trEntries.get(key),
+  }));
 
-if (missingInTr.length || missingInEn.length || emptyInTr.length || emptyInEn.length) {
+if (missingInTr.length || missingInEn.length || emptyInTr.length || emptyInEn.length || typeMismatches.length) {
   if (missingInTr.length) {
     console.error("Missing keys in tr.json:");
     missingInTr.forEach((key) => console.error(`  - ${key}`));
@@ -88,6 +96,10 @@ if (missingInTr.length || missingInEn.length || emptyInTr.length || emptyInEn.le
   if (emptyInEn.length) {
     console.error("Empty values in en.json:");
     emptyInEn.forEach(([key]) => console.error(`  - ${key}`));
+  }
+  if (typeMismatches.length) {
+    console.error("Type mismatches between en.json and tr.json:");
+    typeMismatches.forEach((item) => console.error(`  - ${item.key} (en: ${item.enType}, tr: ${item.trType})`));
   }
   process.exit(1);
 }

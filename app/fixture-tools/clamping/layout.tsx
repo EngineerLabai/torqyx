@@ -1,0 +1,24 @@
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocaleFromCookies();
+  const title = locale === "tr" ? "Sikistirma Planlama Araci" : "Clamping Planning Tool";
+  const description =
+    locale === "tr"
+      ? "Sikistirma kuvveti, reaksiyon noktasi ve proses sirasi planlamasi icin muhendislik hesaplayicilari odakli teknik clamping sayfasidir."
+      : "Technical clamping planning page for engineering calculators, covering clamp force, reaction points, and process sequence design.";
+
+  return buildPageMetadata({
+    title,
+    description,
+    path: "/fixture-tools/clamping",
+    locale,
+  });
+}
+
+export default function ClampingLayout({ children }: { children: ReactNode }) {
+  return children;
+}

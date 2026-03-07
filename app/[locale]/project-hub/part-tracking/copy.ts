@@ -62,7 +62,7 @@ export const REVISION_COPY: Record<Locale, {
       description:
         "Revizyon ve değişiklikleri sahip, öncelik ve teslim tarihine göre yönetin.",
       eyebrow: getUiLabel("tr", "projectHub"),
-      imageAlt: "Revision tracker",
+      imageAlt: "Revizyon takip paneli",
     },
     formTitle: "Yeni revizyon kaydı",
     formSubtitle: "Parça kodu, revizyon ve değişiklik bilgisini tek satırda tutun.",

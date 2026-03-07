@@ -13,7 +13,7 @@ const SEO_COPY: Record<Locale, { title: string; description: string }> = {
   tr: {
     title: "Metrik Dişler | Standartlar",
     description:
-      "Coarse/fine özet, tap drill mini aracı, clearance tablosu ve thread engagement rehberi.",
+      "Kaba/ince hatve özeti, tap drill mini aracı, boşluk tablosu ve diş kavrama rehberi.",
   },
   en: {
     title: "Metric Threads | Standards",

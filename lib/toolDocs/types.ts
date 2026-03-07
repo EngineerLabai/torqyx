@@ -37,6 +37,7 @@ export type ToolDocStandard = {
 export type ToolDocsResponse = {
   tool: { id: string; title: string; tags: string[] } | null;
   hasDocs: boolean;
+  isDraft?: boolean;
   requestedLocale?: Locale;
   docsLocale?: Locale | null;
   metaInfo?: ToolDocMetaInfo | null;

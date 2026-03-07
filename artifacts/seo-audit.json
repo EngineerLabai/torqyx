@@ -1,0 +1,876 @@
+{
+  "generatedAt": "2026-03-04T18:33:28.008Z",
+  "summary": {
+    "scannedPages": 101,
+    "pagesWithIssues": 78,
+    "issueCounts": {
+      "h1_missing_in_file": 75,
+      "h1_multiple_in_file": 3
+    }
+  },
+  "pages": [
+    {
+      "file": "app/[locale]/materials/[id]/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/[locale]/materials/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/project-hub/devreye-alma/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/project-hub/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/project-hub/part-tracking/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/project-hub/project-tools/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/project-hub/rfq/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/projects/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/standards/fits/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/standards/fluids/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/standards/materials/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/standards/threads/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/blog/[slug]/page.tsx",
+      "h1CountInFile": 2,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_multiple_in_file"
+      ]
+    },
+    {
+      "file": "app/blog/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/categories/[category]/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/cerez-politikasi/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/changelog/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/community/[slug]/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/community/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/dashboard/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/faq/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/fixture-tools/base-plate/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/fixture-tools/base-plate/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/fixture-tools/clamping/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/fixture-tools/clamping/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/fixture-tools/locating/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/fixture-tools/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/forum/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/gizlilik/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/glossary/[slug]/page.tsx",
+      "h1CountInFile": 2,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_multiple_in_file"
+      ]
+    },
+    {
+      "file": "app/glossary/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/guides/[slug]/page.tsx",
+      "h1CountInFile": 2,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_multiple_in_file"
+      ]
+    },
+    {
+      "file": "app/guides/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/hakkinda/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/health/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/health/performance/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/iletisim/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/kullanim-sartlari/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/login/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/premium/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/pricing/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/project-hub/devreye-alma/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/project-hub/devreye-alma/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/project-hub/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/project-hub/part-tracking/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/project-hub/part-tracking/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/project-hub/project-tools/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/project-hub/project-tools/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/project-hub/rfq/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/project-hub/rfq/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/qa/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/quality-tools/5n1k/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/quality-tools/5n1k/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/quality-tools/5why/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/quality-tools/5why/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/quality-tools/8d/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/quality-tools/8d/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/quality-tools/kaizen/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/quality-tools/kaizen/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/quality-tools/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/quality-tools/poka-yoke/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/quality-tools/poka-yoke/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/reference/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/request-tool/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/saved-calculations/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/standards/[category]/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/standards/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/support/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tables/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tags/[tag]/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/tools/[...slug]/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/tools/basic-engineering/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/bearing-life/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/belt-length/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/bending-stress/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/bolt-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/bolt-database/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/bolt-size-torque/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/coating-guide/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/compressor-cc/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/fillet-weld/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/fluids-hvac/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/backlash-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/contact-ratio-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/force-torque-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/helix-axial-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/module-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/ratio-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/viscosity-selector/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/calculators/weight-optimization/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/gear-design/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/tools/gear-design/simulations/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/tools/heat-energy/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/heat-treatment/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/hydraulic-cylinder/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/machine-elements/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/material-cards/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/materials-manufacturing/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/param-chart/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/pipe-pressure-loss/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/production-project/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/sanity-check/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/sanity-check/report/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/sealing-guide/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/shaft-torsion/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/simple-stress/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/strength-statics/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/torque-power/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/tools/unit-converter/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    }
+  ]
+}

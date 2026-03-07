@@ -200,7 +200,7 @@ export default function BoltVisualization({ input, result, locale, copy }: BoltV
             {copy.chartTitle}
           </h3>
           <div className="h-52 w-full">
-            <canvas ref={canvasRef} className="h-full w-full" />
+            <canvas ref={canvasRef} role="img" aria-label={copy.chartTitle} className="h-full w-full" />
           </div>
         </article>
 

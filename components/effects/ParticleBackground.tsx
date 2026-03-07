@@ -112,5 +112,11 @@ export default function ParticleBackground() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed left-0 top-0 -z-10 h-full w-full bg-neutral-950 pointer-events-none" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="fixed left-0 top-0 -z-10 h-full w-full bg-neutral-950 pointer-events-none"
+    />
+  );
 }

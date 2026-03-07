@@ -12,7 +12,7 @@ const resolveLocale = (value?: string): Locale => (isLocale(value) ? value : DEF
 const SEO_COPY: Record<Locale, { title: string; description: string }> = {
   tr: {
     title: "Geçmeler | Standartlar",
-    description: "Fit seçim rehberi, clearance/interference hesaplayıcı ve pratik örnek sapma tablosu.",
+    description: "Geçme seçim rehberi, boşluk/sıkılık hesaplayıcı ve pratik örnek sapma tablosu.",
   },
   en: {
     title: "Fits | Standards",

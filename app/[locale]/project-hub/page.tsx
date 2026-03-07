@@ -55,7 +55,7 @@ const COPY: Record<Locale, {
       description:
         "Mühendislik ekipleri için hızlı, hafif ve tarayıcı-içinde çalışan takip modülleri. Kayıtlar cihazınızda tutulur.",
       eyebrow: LABELS_BY_LOCALE.tr.projectHub,
-      imageAlt: "Project hub overview",
+      imageAlt: "Proje merkezi genel görünümü",
     },
     cta: "Modülü Aç",
     modules: [

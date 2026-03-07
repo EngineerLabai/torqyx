@@ -2,6 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { DEFAULT_LOCALE, LOCALE_COOKIE, isLocale } from "@/utils/locale";
 import { resolveInternalPath, resolveLocalePublicPath, stripLocaleFromPath } from "@/utils/locale-path";
+import { consumeFixedWindowRateLimit } from "@/utils/rate-limit";
 
 const PUBLIC_FILE = /\.(.*)$/;
 const ONE_YEAR = 60 * 60 * 24 * 365;
@@ -13,6 +14,11 @@ const LOCALE_PRESERVE_PATHS = new Set([
   "/standards/fluids",
 ]);
 const LOCALE_PRESERVE_PREFIXES = ["/project-hub", "/materials", "/projects"];
+const API_RATE_LIMIT_RULES = [
+  { name: "compute", limit: 30, basePaths: ["/api/calculate", "/api/tools"] },
+  { name: "export", limit: 10, basePaths: ["/api/export"] },
+  { name: "auth", limit: 5, basePaths: ["/api/auth"] },
+] as const;
 
 const toLocalePath = (locale: "tr" | "en", pathname: string) => (pathname === "/" ? `/${locale}` : `/${locale}${pathname}`);
 
@@ -21,8 +27,49 @@ const getPreferredLocale = (request: NextRequest) => {
   return isLocale(cookieLocale) ? cookieLocale : DEFAULT_LOCALE;
 };
 
+const pathMatchesBase = (pathname: string, basePath: string) =>
+  pathname === basePath || pathname.startsWith(`${basePath}/`);
+
+const resolveApiRateLimitRule = (pathname: string) =>
+  API_RATE_LIMIT_RULES.find((rule) => rule.basePaths.some((basePath) => pathMatchesBase(pathname, basePath)));
+
+const getClientIp = (request: NextRequest) => {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    const firstForwardedIp = forwardedFor.split(",")[0]?.trim();
+    if (firstForwardedIp) {
+      return firstForwardedIp;
+    }
+  }
+
+  return (
+    request.headers.get("x-real-ip") ??
+    request.headers.get("cf-connecting-ip") ??
+    request.headers.get("true-client-ip") ??
+    "unknown"
+  );
+};
+
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const rateLimitRule = resolveApiRateLimitRule(pathname);
+
+  if (rateLimitRule) {
+    const clientIp = getClientIp(request);
+    const result = consumeFixedWindowRateLimit(`${rateLimitRule.name}:${clientIp}`, rateLimitRule.limit);
+
+    if (!result.allowed) {
+      return NextResponse.json(
+        { error: "too_many_requests" },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(result.retryAfterSeconds),
+          },
+        },
+      );
+    }
+  }
 
   if (
     pathname.startsWith("/api") ||

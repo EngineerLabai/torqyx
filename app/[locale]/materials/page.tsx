@@ -1,6 +1,6 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
-import MaterialsLibraryClient from "@/components/materials/MaterialsLibraryClient";
+import MaterialsLibraryClientLazy from "@/components/materials/MaterialsLibraryClientLazy";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { materials } from "@/src/data/materials";
@@ -44,7 +44,8 @@ export default async function MaterialsLibraryPage({ params }: PageProps) {
         imageAlt={copy.imageAlt}
       />
 
-      <MaterialsLibraryClient materials={materials} locale={locale} />
+      <MaterialsLibraryClientLazy materials={materials} locale={locale} />
     </PageShell>
   );
 }
+

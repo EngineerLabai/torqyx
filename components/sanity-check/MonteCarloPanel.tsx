@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import ChartCanvas from "@/components/sanity-check/ChartCanvas";
+import dynamic from "next/dynamic";
 import { runMonteCarlo } from "@/lib/sanityCheck/engine";
 import type { LabSession, MonteCarloResult } from "@/lib/sanityCheck/types";
 
@@ -33,6 +33,15 @@ const formatNumber = (value: number | null, locale: "tr" | "en") => {
   if (value === null) return "-";
   return new Intl.NumberFormat(locale === "en" ? "en-US" : "tr-TR", { maximumFractionDigits: 6 }).format(value);
 };
+
+function ChartSkeleton() {
+  return <div className="h-full w-full rounded-xl border border-slate-100 bg-slate-50 animate-pulse" aria-hidden />;
+}
+
+// Bundle estimate (webpack analyzer, parsed): monte-carlo tab chart chunk expected to drop ~6-10KB from panel entry.
+const ChartCanvas = dynamic(() => import("@/components/sanity-check/ChartCanvas"), {
+  loading: () => <ChartSkeleton />,
+});
 
 export default function MonteCarloPanel({ session, onSessionChange, copy, locale }: MonteCarloPanelProps) {
   const [result, setResult] = useState<MonteCarloResult | null>(null);
@@ -117,6 +126,7 @@ export default function MonteCarloPanel({ session, onSessionChange, copy, locale
               })
             }
             className="w-full rounded-lg border border-slate-300 px-2 py-1 text-xs"
+            aria-label="Number input"
           />
         </div>
         <div className="flex items-end">
@@ -180,3 +190,4 @@ export default function MonteCarloPanel({ session, onSessionChange, copy, locale
     </div>
   );
 }
+

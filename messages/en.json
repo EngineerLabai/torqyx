@@ -62,8 +62,8 @@
   "home": {
     "hero": {
       "eyebrow": "Mechanical Engineering Calculators",
-      "headline": "Stop second-guessing mechanical calculations",
-      "subheadline": "For machine design, fastener selection, power transmission, and thermal checks — faster than Excel with ISO/DIN-verified formulas, units, and reports.",
+      "headline": "AI-guided engineering calculations with standards-based, deterministic results",
+      "subheadline": "Here, AI means a deterministic calculation engine grounded in ISO/DIN/VDI references plus guided assistant support. It is not magical prediction; the same input set produces the same result.",
       "subtitle": "Built for mechanical engineers who need speed and traceability.",
       "ctaPrimary": "Start Free",
       "ctaSecondary": "See Calculators",
@@ -154,7 +154,7 @@
           "Built-in error checks"
         ],
         "formulaLabel": "Formula breakdown",
-        "formulaExample": "σ = F / A  ·  τ = T·r / J  ·  ΔP = f·(L/D)·(ρ·v²/2)",
+        "formulaExample": "Ïƒ = F / A  Â·  Ï„ = TÂ·r / J  Â·  Î”P = fÂ·(L/D)Â·(ÏÂ·vÂ²/2)",
         "formulaNotes": [
           "Assumptions listed per tool",
           "Units validated on every input",
@@ -181,7 +181,7 @@
       "kicker": "Popular calculators",
       "title": "Start with proven calculators",
       "description": "Most used by mechanical teams this month.",
-      "tryNow": "Try Now →",
+      "tryNow": "Try Now â†’",
       "usageLabel": "{count}+ uses",
       "cta": "See all calculators"
     },
@@ -226,7 +226,7 @@
           },
           {
             "label": "API access",
-            "free": "—",
+            "free": "â€”",
             "pro": "Included"
           }
         ]
@@ -292,7 +292,7 @@
       "searchTitle": "One search across all engineering tables",
       "searchDescription": "Your query filters all modules at once and matched terms are highlighted in results.",
       "searchLabel": "Search tables",
-      "searchPlaceholder": "M12, HRC, N7, MPa, µ, friction...",
+      "searchPlaceholder": "M12, HRC, N7, MPa, Âµ, friction...",
       "sidebarTitle": "Categories",
       "sidebarDescription": "Sticky navigation on desktop",
       "exportCta": "Download CSV",
@@ -365,7 +365,7 @@
         "G": "Shear modulus G (GPa)",
         "yield": "Yield strength (MPa)",
         "UTS": "Ultimate tensile strength (MPa)",
-        "alpha": "Thermal expansion α (um/m-K)"
+        "alpha": "Thermal expansion Î± (um/m-K)"
       },
       "disclaimer": "Values are typical and for comparison only. Confirm supplier data and standards for final design.",
       "categories": {
@@ -633,6 +633,13 @@
       "description": "New tools, fixes, and general changes are listed here.",
       "emptyTitle": "No changelog entries yet.",
       "emptyDescription": "The first update will be added soon.",
+      "filterLabel": "Tool filter",
+      "filterAll": "All tools",
+      "resultsLabel": "Showing {count} entries",
+      "feedLabel": "RSS feed",
+      "badgeNew": "New",
+      "badgeFixed": "Fixed",
+      "badgeRemoved": "Removed",
       "addedTitle": "Added tools",
       "addedEmpty": "No new tools in this release.",
       "fixesTitle": "Fixes",
@@ -640,7 +647,7 @@
     },
     "gearRatio": {
       "header": {
-        "back": "← All calculators",
+        "back": "â† All calculators",
         "badge": "Ratios",
         "title": "Gear Ratio Calculator",
         "description": "Enter tooth counts and input speed to estimate ratio, output speed, and torque (incl. efficiency)."
@@ -655,16 +662,16 @@
         "z2": "Output tooth count z2",
         "rpm1": "Input speed n1 [rpm]",
         "torque1": "Input torque T1 [Nm]",
-        "efficiency": "Efficiency η (0-1)",
+        "efficiency": "Efficiency Î· (0-1)",
         "sample": "Fill with sample values"
       },
       "results": {
         "ratio": "Ratio i = z2 / z1",
         "rpm2": "Output speed n2 [rpm]",
         "torque2": "Output torque T2 [Nm]",
-        "efficiency": "Efficiency η"
+        "efficiency": "Efficiency Î·"
       },
-      "note": "Note: Output torque includes efficiency factor η."
+      "note": "Note: Output torque includes efficiency factor Î·."
     },
     "bendingStress": {
       "badges": {
@@ -672,7 +679,7 @@
         "secondary": "Bending Stress & Deflection"
       },
       "header": {
-        "title": "Simply Supported Beam — Bending Stress & Deflection",
+        "title": "Simply Supported Beam â€” Bending Stress & Deflection",
         "description": "Compute bending moment, section modulus, bending stress, and deflection for a simply supported beam with a central point load."
       },
       "inputs": {
@@ -694,8 +701,8 @@
         "maxMoment": "Max bending moment Mmax",
         "inertia": "Area moment of inertia I",
         "sectionModulus": "Section modulus W",
-        "sigma": "Bending stress σ",
-        "deflection": "Max deflection δ",
+        "sigma": "Bending stress Ïƒ",
+        "deflection": "Max deflection Î´",
         "safety": "Safety factor S",
         "note": "Formulas assume a simply supported beam with a mid-span point load. Verify against applicable standards for critical designs."
       },
@@ -703,7 +710,7 @@
         "title": "Design notes",
         "empty": "Complete the inputs and the notes will update automatically.",
         "safety": {
-          "unsafe": "Unsafe — yielding expected.",
+          "unsafe": "Unsafe â€” yielding expected.",
           "veryLow": "Very low safety. Risky with tolerances and load uncertainty.",
           "low": "Low safety. Acceptable for prototype checks; review for production.",
           "ok": "Typical safety for static steel structures.",
@@ -711,10 +718,10 @@
           "veryHigh": "Very high safety. Consider weight optimization."
         },
         "deflectionMissing": "Deflection information is not available.",
-        "deflectionBase": "Deflection ratio is approximately L/δ ≈ {ratio}.",
+        "deflectionBase": "Deflection ratio is approximately L/Î´ â‰ˆ {ratio}.",
         "deflectionLow": "This is quite flexible (below L/150) and may cause alignment issues.",
-        "deflectionMid": "Borderline for many applications (around L/150–L/250).",
-        "deflectionOk": "Acceptable for most machine components (L/250–L/400).",
+        "deflectionMid": "Borderline for many applications (around L/150â€“L/250).",
+        "deflectionOk": "Acceptable for most machine components (L/250â€“L/400).",
         "deflectionHigh": "Very stiff in terms of deflection (L/400 and above).",
         "stress": "Computed bending stress is about {sigma} MPa. Safety factor is based on yield strength.",
         "fatigue": "If the design sees fatigue or dynamic loads, static safety alone is insufficient; check fatigue limits and stress concentrations.",
@@ -723,7 +730,7 @@
       "diagram": {
         "title": "Bending Moment Diagram (schematic)",
         "empty": "This section shows the schematic moment diagram for a simply supported beam with a central point load. Fill the inputs to render it.",
-        "description": "The diagram shows moment rising to Mmax ≈ {value} kN·m at midspan and dropping to zero at the supports."
+        "description": "The diagram shows moment rising to Mmax â‰ˆ {value} kNÂ·m at midspan and dropping to zero at the supports."
       }
     },
     "fluidsHvac": {
@@ -735,33 +742,33 @@
       },
       "pipe": {
         "title": "1) Water Reynolds, f, and Pressure Drop (Darcy-Weisbach)",
-        "flow": "Flow Q [m³/h]",
+        "flow": "Flow Q [mÂ³/h]",
         "diameter": "Diameter D [mm]",
         "length": "Pipe length L [m]",
-        "roughness": "Roughness ε [mm]",
+        "roughness": "Roughness Îµ [mm]",
         "roughnessHelp": "Typical steel ~0.05 mm",
         "resultRe": "Re",
         "resultF": "f (Darcy)",
         "resultVelocity": "Velocity v",
-        "resultDp": "Δp (along L)",
-        "note": "Assumptions: water at 20°C (ρ=1000 kg/m³, μ=1 cP). Δp = f·(L/D)·ρv²/2. Minor losses, fittings, and temperature effects are excluded."
+        "resultDp": "Î”p (along L)",
+        "note": "Assumptions: water at 20Â°C (Ï=1000 kg/mÂ³, Î¼=1 cP). Î”p = fÂ·(L/D)Â·ÏvÂ²/2. Minor losses, fittings, and temperature effects are excluded."
       },
       "duct": {
         "title": "2) Duct Velocity Method (equivalent diameter)",
-        "flow": "Flow Q [m³/h]",
+        "flow": "Flow Q [mÂ³/h]",
         "velocity": "Target velocity v [m/s]",
         "resultArea": "Area A",
         "resultDiameter": "Equivalent D",
         "resultPressure": "Dynamic pressure q",
-        "note": "Typical velocities: offices 4–6 m/s, industrial 6–10 m/s. Check manufacturer catalogs for noise and loss; elbows/dampers add extra losses."
+        "note": "Typical velocities: offices 4â€“6 m/s, industrial 6â€“10 m/s. Check manufacturer catalogs for noise and loss; elbows/dampers add extra losses."
       },
       "ach": {
-        "title": "3) Air Changes per Hour (ACH) ↔ Flow",
-        "volume": "Volume V [m³]",
+        "title": "3) Air Changes per Hour (ACH) â†” Flow",
+        "volume": "Volume V [mÂ³]",
         "rate": "ACH [1/h]",
         "resultFlow": "Flow",
-        "resultFlowPerSecond": "Flow (m³/s)",
-        "note": "Typical ACH: offices 4–8, classrooms 6–10, labs 8–15. Check building codes and indoor air quality standards."
+        "resultFlowPerSecond": "Flow (mÂ³/s)",
+        "note": "Typical ACH: offices 4â€“8, classrooms 6â€“10, labs 8â€“15. Check building codes and indoor air quality standards."
       }
     },
     "notFound": {
@@ -781,6 +788,10 @@
             {
               "q": "How accurate are the calculators?",
               "a": "They follow published formulas and checks, but inputs and assumptions are yours. Verify against your standards."
+            },
+            {
+              "q": "How reliable is this AI?",
+              "a": "The AI layer does not make free-form guesses; the calculation engine runs deterministic formula and table logic derived from standards such as ISO, DIN, and VDI. The assistant layer only helps with input checks, step-by-step explanation, and source guidance, while final validation remains your engineering responsibility."
             },
             {
               "q": "Are the default values real?",
@@ -1180,7 +1191,9 @@
         "allTags": "All tags",
         "searchLabel": "Quick search",
         "searchPlaceholder": "e.g., torque, pressure, bolt",
-        "searchAria": "Search tools"
+        "searchAria": "Search tools",
+        "statusLabel": "Status",
+        "allStatuses": "All statuses"
       },
       "emptyState": {
         "title": "No matching tools found.",
@@ -1221,7 +1234,13 @@
           "guide": "Open guide"
         },
         "generalCategory": "General",
-        "openAria": "Open {title}"
+        "loadMore": "Load more",
+        "openAria": "Open {title}",
+        "status": {
+          "verified": "Verified",
+          "beta": "Beta",
+          "experimental": "Experimental"
+        }
       }
     },
     "sanityCheck": {
@@ -1347,6 +1366,9 @@
       "docsFailedBody": "We could not load the explanation and examples right now.",
       "docsMissingTitle": "Documentation coming soon",
       "docsMissingBody": "Documentation for this tool is coming soon.",
+      "metaDocVersion": "Doc version: {value}",
+      "metaUpdated": "Updated: {value}",
+      "metaTranslated": "Translated: {value}",
       "explanationEmptyTitle": "Explanation (coming soon)",
       "explanationEmptyBody": "This calculator does not have an explanation card yet. You can still use it.",
       "examplesEmptyTitle": "Examples (coming soon)",
@@ -1367,6 +1389,21 @@
       "howToTitle": "How to use",
       "formulaTitle": "Formula",
       "commonMistakesTitle": "Common mistakes",
+      "referencesTitle": "References"
+    },
+    "toolMethodNotes": {
+      "purposeTitle": "What it does",
+      "inputsTitle": "Inputs",
+      "inputCol": "Input",
+      "unitCol": "Unit",
+      "rangeCol": "Typical range",
+      "impactCol": "Impact",
+      "formulaTitle": "Formula / approach",
+      "assumptionsTitle": "Assumptions & Limits",
+      "exampleTitle": "Example",
+      "inputSet": "Input set",
+      "output": "Output",
+      "faqTitle": "Frequently asked questions (FAQ)",
       "referencesTitle": "References"
     },
     "comparePanel": {
@@ -1426,8 +1463,8 @@
       "required": "Invalid value: {field} is required.",
       "invalidNumber": "Invalid value: {field} must be a number.",
       "invalidOption": "Invalid value: {field} selection is not valid.",
-      "min": "Invalid value: {field} must be ≥ {min}.",
-      "max": "Invalid value: {field} must be ≤ {max}.",
+      "min": "Invalid value: {field} must be â‰¥ {min}.",
+      "max": "Invalid value: {field} must be â‰¤ {max}.",
       "resultFix": "Fix the highlighted inputs to see results.",
       "calcFailed": "Calculation failed. Check inputs."
     },
@@ -1544,7 +1581,9 @@
       "notesTitle": "Usage notes"
     },
     "toolPage": {
-      "badge": "Calculator"
+      "badge": "Calculator",
+      "howItWorksLabel": "How does it work?",
+      "howItWorksDescription": "In these tools, AI means a standards-based deterministic calculation engine plus guided assistant support. With ISO, DIN, and VDI references, the same inputs produce the same result."
     },
     "confidence": {
       "title": "Confidence Snapshot",
@@ -1570,7 +1609,7 @@
         {
           "slug": "m12-civata-torku",
           "title": "M12 10.9 bolt torque and lubrication",
-          "author": "Ayşe Yılmaz",
+          "author": "AyÅŸe YÄ±lmaz",
           "category": "Torque / Fastening",
           "details": "There is a gap between table values and actual tightening. How do torque wrench calibration and lubrication choice affect torque?",
           "updated": "2 hours ago",
@@ -1600,7 +1639,7 @@
           "title": "Surface roughness for H8/d9 fit",
           "author": "Selin K.",
           "category": "Tolerances / GD&T",
-          "details": "I picked H8/d9 for Ø25 hole/shaft. What surface roughness should I target to avoid loosening in press fit?",
+          "details": "I picked H8/d9 for Ã˜25 hole/shaft. What surface roughness should I target to avoid loosening in press fit?",
           "updated": "1 day ago",
           "tags": [
             "tolerance",
@@ -1631,7 +1670,7 @@
         "kaynak-sonrasi-sehim": [
           {
             "user": "Hakan",
-            "text": "Tack symmetrically and weld alternately, then fill in. A 120-150°C preheat helps.",
+            "text": "Tack symmetrically and weld alternately, then fill in. A 120-150Â°C preheat helps.",
             "time": "10m ago"
           },
           {
@@ -1643,7 +1682,7 @@
         "h8d9-yuzey-puruzluluk": [
           {
             "user": "Elif",
-            "text": "Ra 1.6-3.2 µm usually works. Cleanliness and deburring are critical.",
+            "text": "Ra 1.6-3.2 Âµm usually works. Cleanliness and deburring are critical.",
             "time": "2s ago"
           }
         ]
@@ -1783,3 +1822,5 @@
     }
   }
 }
+
+

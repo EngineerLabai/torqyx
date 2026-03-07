@@ -1,6 +1,25 @@
 import { headers } from "next/headers";
+import type { Metadata } from "next";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { buildPageMetadata } from "@/utils/metadata";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocaleFromCookies();
+  const title = locale === "tr" ? "Sistem Saglik Durumu" : "System Health Status";
+  const description =
+    locale === "tr"
+      ? "Sistem saglik durumu, locale header bilgisi ve render zamani gibi operasyonel metrikleri izlemek icin teknik kontrol ekrani."
+      : "Technical health page to monitor system status, locale header context, and render timestamp for operational reliability.";
+
+  return buildPageMetadata({
+    title,
+    description,
+    path: "/health",
+    locale,
+  });
+}
 
 export default async function HealthPage() {
   const requestHeaders = await headers();

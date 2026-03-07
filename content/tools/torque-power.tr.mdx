@@ -1,84 +1,52 @@
-﻿# Açıklama
+﻿## Hesaplama Açıklaması
 
-{/* Tool: torque-power */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
-</Callout>
+**Amaç**
+Güç, devir ve mekanik verim ilişkisini kullanarak mil torkunu hızlıca tahmin etmek.
 
-## Formüller
-
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Temel ilişkiler">
+T = 9550 * P / n
+P = T * n / 9550
+hp = kW * 1.34102
+T_eff = T * (η / 100)
 </Formula>
 
-## Değişken açıklamaları
+**Varsayımlar**
+- Hesap sürekli rejimde ve sabit devirde yapılır.
+- Mekanik kayıplar tek bir verim katsayısı (η) ile temsil edilir.
+- Geçici rejim, kalkış ve darbeli yük etkileri dahil edilmez.
 
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
+**Birimler**
+- P: kW
+- n: rpm
+- T, T_eff: N·m
+- η: %
 
-## Birimler
+**Kaynak**
+- DIN 70020
+- ISO 3046
 
-- X: birim burada
-- Y: birim burada
+## Örnekler
 
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
-
-
-# Örnekler
-
-## Örnek 1: Güçten tork
-
-Verilen güç ve devirden tork.
+### Örnek 1: 5,5 kW motorda tork
 
 **Girdiler**
-- Güç 7.5 kW
-- Devir 1450 rpm
+- Güç: 5,5 kW
+- Devir: 1500 rpm
+- Mekanik verim: %95
 
-**Çıktılar**
-- Tork ~49.4 Nm
+**Beklenen çıktılar**
+- Tork (ideal): 35,02 N·m
+- Tork (verim): 33,27 N·m
+- Güç: 7,38 hp
 
-**Notlar**
-- 9550 katsayısı kullanıldı.
-
-## Örnek 2: Torktan güç
-
-Verilen tork ve devirden güç.
+### Örnek 2: 12 kW sürücü
 
 **Girdiler**
-- Tork 120 Nm
-- Devir 960 rpm
+- Güç: 12 kW
+- Devir: 1200 rpm
+- Mekanik verim: %90
 
-**Çıktılar**
-- Güç ~12.1 kW
-
-**Notlar**
-- Motor verimini ayrıca düşün.
-
-
-## İlgili içerikler
-- <a href="/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/glossary/backlash">Backlash terimi</a>
-- <a href="/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
-
+**Beklenen çıktılar**
+- Tork (ideal): 95,50 N·m
+- Tork (verim): 85,95 N·m
+- Güç: 16,09 hp

@@ -1,0 +1,193 @@
+{
+  "topAfter": [
+    {
+      "label": "static/chunks/3505-b82f2fa637807b17.js",
+      "parsedKB": 631.2,
+      "gzipKB": 175.6
+    },
+    {
+      "label": "static/chunks/164f4fb6.5bc1c3461a9c8462.js",
+      "parsedKB": 328,
+      "gzipKB": 103.9
+    },
+    {
+      "label": "static/chunks/7508b87c.b3e2f945aab8872c.js",
+      "parsedKB": 281.4,
+      "gzipKB": 82.4
+    },
+    {
+      "label": "static/chunks/4bd1b696-43ba64781d20dbb7.js",
+      "parsedKB": 194,
+      "gzipKB": 60.9
+    },
+    {
+      "label": "static/chunks/ad2866b8.5c05f000a6bc3858.js",
+      "parsedKB": 193.5,
+      "gzipKB": 44.2
+    },
+    {
+      "label": "static/chunks/3794-2cafc58712bff8a3.js",
+      "parsedKB": 191,
+      "gzipKB": 51.3
+    },
+    {
+      "label": "static/chunks/framework-bd61ec64032c2de7.js",
+      "parsedKB": 185.3,
+      "gzipKB": 58.4
+    },
+    {
+      "label": "static/chunks/ca377847-8cdf2c47b03fb8e4.js",
+      "parsedKB": 161.8,
+      "gzipKB": 52.8
+    },
+    {
+      "label": "static/chunks/6295-59adc996d6f51939.js",
+      "parsedKB": 127.5,
+      "gzipKB": 37.5
+    },
+    {
+      "label": "static/chunks/main-475ad9f32f836a5a.js",
+      "parsedKB": 121,
+      "gzipKB": 35.7
+    }
+  ],
+  "sharedDeltas": [
+    {
+      "label": "static/chunks/3505-b82f2fa637807b17.js",
+      "beforeParsedKB": 631.2,
+      "afterParsedKB": 631.2,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 175.6,
+      "afterGzipKB": 175.6,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/164f4fb6.5bc1c3461a9c8462.js",
+      "beforeParsedKB": 328,
+      "afterParsedKB": 328,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 103.9,
+      "afterGzipKB": 103.9,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/7508b87c.b3e2f945aab8872c.js",
+      "beforeParsedKB": 281.4,
+      "afterParsedKB": 281.4,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 82.4,
+      "afterGzipKB": 82.4,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/4bd1b696-43ba64781d20dbb7.js",
+      "beforeParsedKB": 194,
+      "afterParsedKB": 194,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 60.9,
+      "afterGzipKB": 60.9,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/ad2866b8.5c05f000a6bc3858.js",
+      "beforeParsedKB": 193.5,
+      "afterParsedKB": 193.5,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 44.2,
+      "afterGzipKB": 44.2,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/3794-2cafc58712bff8a3.js",
+      "beforeParsedKB": 191,
+      "afterParsedKB": 191,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 51.3,
+      "afterGzipKB": 51.3,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/framework-bd61ec64032c2de7.js",
+      "beforeParsedKB": 185.3,
+      "afterParsedKB": 185.3,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 58.4,
+      "afterGzipKB": 58.4,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/ca377847-8cdf2c47b03fb8e4.js",
+      "beforeParsedKB": 161.8,
+      "afterParsedKB": 161.8,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 52.8,
+      "afterGzipKB": 52.8,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/main-475ad9f32f836a5a.js",
+      "beforeParsedKB": 121,
+      "afterParsedKB": 121,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 35.7,
+      "afterGzipKB": 35.7,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/3151-e0bf30e6aa9f2e1c.js",
+      "beforeParsedKB": 108.4,
+      "afterParsedKB": 108.4,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 28.7,
+      "afterGzipKB": 28.7,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/5b86099a-b42816cb20ce9e53.js",
+      "beforeParsedKB": 83.7,
+      "afterParsedKB": 83.7,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 24.3,
+      "afterGzipKB": 24.3,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/bc98253f.217e80b363438397.js",
+      "beforeParsedKB": 79.6,
+      "afterParsedKB": 79.6,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 22.9,
+      "afterGzipKB": 22.9,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/3521.015027239fceaf2f.js",
+      "beforeParsedKB": 72.7,
+      "afterParsedKB": 72.7,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 26.2,
+      "afterGzipKB": 26.2,
+      "deltaGzipKB": 0
+    },
+    {
+      "label": "static/chunks/5100-81b167575ec18833.js",
+      "beforeParsedKB": 60.6,
+      "afterParsedKB": 60.6,
+      "deltaParsedKB": 0,
+      "beforeGzipKB": 12.6,
+      "afterGzipKB": 12.6,
+      "deltaGzipKB": 0
+    }
+  ],
+  "added": [
+    "static/chunks/6295-59adc996d6f51939.js",
+    "static/chunks/9945-c77d22f69e93a2ec.js",
+    "static/chunks/939.d9363a79d2078fd0.js",
+    "static/chunks/2240.1da00aa64d936603.js",
+    "static/chunks/2716-c4e46f87c774853f.js",
+    "static/chunks/9058.a17ce8aad7bf413d.js"
+  ],
+  "removed": [
+    "static/chunks/6703-4c5385afdaef6235.js"
+  ]
+}

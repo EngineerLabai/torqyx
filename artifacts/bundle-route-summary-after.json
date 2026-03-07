@@ -1,0 +1,114 @@
+{
+  "removedParsedKB": 130,
+  "summary": [
+    {
+      "route": "app/tools/page",
+      "parsedKB": 23.9,
+      "gzipKB": 9.3,
+      "top": [
+        {
+          "label": "static/chunks/7645-3c67385101c61730.js",
+          "parsedKB": 14.2
+        },
+        {
+          "label": "static/chunks/app/tools/page-67f5e8a59d817282.js",
+          "parsedKB": 9.6
+        }
+      ],
+      "estimatedBeforeParsedKB": 153.9,
+      "estimatedDeltaParsedKB": -130
+    },
+    {
+      "route": "app/reference/page",
+      "parsedKB": 24.7,
+      "gzipKB": 9.5,
+      "top": [
+        {
+          "label": "static/chunks/7645-3c67385101c61730.js",
+          "parsedKB": 14.2
+        },
+        {
+          "label": "static/chunks/app/reference/page-17f4ae9ac1b52c42.js",
+          "parsedKB": 10.5
+        }
+      ],
+      "estimatedBeforeParsedKB": 154.7,
+      "estimatedDeltaParsedKB": -130
+    },
+    {
+      "route": "app/[locale]/materials/page",
+      "parsedKB": 24.3,
+      "gzipKB": 9.4,
+      "top": [
+        {
+          "label": "static/chunks/7645-3c67385101c61730.js",
+          "parsedKB": 14.2
+        },
+        {
+          "label": "static/chunks/app/[locale]/materials/page-fcfeb8f56f199316.js",
+          "parsedKB": 10.1
+        }
+      ],
+      "estimatedBeforeParsedKB": 154.3,
+      "estimatedDeltaParsedKB": -130
+    },
+    {
+      "route": "app/tools/sanity-check/page",
+      "parsedKB": 1004.5,
+      "gzipKB": 286.9,
+      "top": [
+        {
+          "label": "static/chunks/3505-b82f2fa637807b17.js",
+          "parsedKB": 631.2
+        },
+        {
+          "label": "static/chunks/6295-59adc996d6f51939.js",
+          "parsedKB": 127.5
+        },
+        {
+          "label": "static/chunks/3151-e0bf30e6aa9f2e1c.js",
+          "parsedKB": 108.4
+        },
+        {
+          "label": "static/chunks/8969-f7aa3b9d231347e0.js",
+          "parsedKB": 31.5
+        },
+        {
+          "label": "static/chunks/app/tools/sanity-check/page-650da0b47f2f3a9a.js",
+          "parsedKB": 27.8
+        }
+      ],
+      "estimatedBeforeParsedKB": null,
+      "estimatedDeltaParsedKB": null
+    },
+    {
+      "route": "app/tools/sanity-check/report/page",
+      "parsedKB": 889.6,
+      "gzipKB": 249.8,
+      "top": [
+        {
+          "label": "static/chunks/3505-b82f2fa637807b17.js",
+          "parsedKB": 631.2
+        },
+        {
+          "label": "static/chunks/6295-59adc996d6f51939.js",
+          "parsedKB": 127.5
+        },
+        {
+          "label": "static/chunks/3151-e0bf30e6aa9f2e1c.js",
+          "parsedKB": 108.4
+        },
+        {
+          "label": "static/chunks/app/tools/sanity-check/report/page-28fbf648eb7fe44d.js",
+          "parsedKB": 14
+        },
+        {
+          "label": "static/chunks/7817-56c1bf28dd656249.js",
+          "parsedKB": 8.6
+        }
+      ],
+      "estimatedBeforeParsedKB": null,
+      "estimatedDeltaParsedKB": null
+    }
+  ]
+}

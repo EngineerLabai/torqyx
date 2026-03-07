@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { getMessages } from "@/utils/messages";
 
 type CommunityAuthCtaProps = {
@@ -12,7 +13,13 @@ type CommunityAuthCtaProps = {
 export default function CommunityAuthCta({ guestHref = "#community-topics" }: CommunityAuthCtaProps) {
   const { user, loading, available, loginWithGoogle } = useAuth();
   const { locale } = useLocale();
+  const { track } = useAnalytics();
   const copy = getMessages(locale).pages.community.authCta;
+
+  const handleLogin = () => {
+    track("signup_start", { source: "cta" });
+    void loginWithGoogle();
+  };
 
   if (loading || !available || user) {
     return null;
@@ -27,7 +34,7 @@ export default function CommunityAuthCta({ guestHref = "#community-topics" }: Co
       <div className="mt-3 flex flex-wrap items-center gap-2">
         <button
           type="button"
-          onClick={loginWithGoogle}
+          onClick={handleLogin}
           className="tap-target inline-flex items-center justify-center rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-emerald-500"
         >
           {copy.login}

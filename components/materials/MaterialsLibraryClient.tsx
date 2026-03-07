@@ -125,7 +125,7 @@ export default function MaterialsLibraryClient({ materials, locale }: MaterialsL
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={copy.search.placeholder}
                 className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-              />
+               aria-label={copy.search.placeholder}/>
             </div>
 
             <div className="space-y-1">
@@ -134,7 +134,7 @@ export default function MaterialsLibraryClient({ materials, locale }: MaterialsL
                 value={category}
                 onChange={(event) => setCategory(event.target.value as typeof CATEGORY_ALL | MaterialCategory)}
                 className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-              >
+               aria-label="Select field">
                 <option value={CATEGORY_ALL}>{copy.filters.allCategories}</option>
                 {CATEGORY_ORDER.map((value) => (
                   <option key={value} value={value}>
@@ -156,7 +156,7 @@ export default function MaterialsLibraryClient({ materials, locale }: MaterialsL
                   placeholder={copy.filters.yieldMin}
                   className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
                   min={0}
-                />
+                 aria-label={copy.filters.yieldMin}/>
                 <input
                   type="number"
                   value={yieldMax}
@@ -164,7 +164,7 @@ export default function MaterialsLibraryClient({ materials, locale }: MaterialsL
                   placeholder={copy.filters.yieldMax}
                   className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
                   min={0}
-                />
+                 aria-label={copy.filters.yieldMax}/>
               </div>
             </div>
 
@@ -179,7 +179,7 @@ export default function MaterialsLibraryClient({ materials, locale }: MaterialsL
                   className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
                   min={0}
                   step="any"
-                />
+                 aria-label={copy.filters.modulusMin}/>
                 <input
                   type="number"
                   value={modulusMax}
@@ -188,7 +188,7 @@ export default function MaterialsLibraryClient({ materials, locale }: MaterialsL
                   className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
                   min={0}
                   step="any"
-                />
+                 aria-label={copy.filters.modulusMax}/>
               </div>
             </div>
           </div>

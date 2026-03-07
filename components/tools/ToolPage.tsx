@@ -12,11 +12,16 @@ import ToolDataActions from "@/components/tools/ToolDataActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import ToolMethodNotes from "@/components/tools/ToolMethodNotes";
 import AccessBadge from "@/components/tools/AccessBadge";
+import ToolBadge from "@/components/tools/ToolBadge";
+import InfoTooltip from "@/components/ui/InfoTooltip";
+import UpgradePrompt from "@/components/billing/UpgradePrompt";
+import AISummaryPanel from "@/src/components/ai/AISummaryPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
 import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
 import { getAdvisorInsights } from "@/src/lib/advisor/engine";
-import { trackEvent } from "@/utils/analytics";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { useFeatureGate } from "@/hooks/useFeatureGate";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
@@ -26,6 +31,7 @@ import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
 type ToolInputRecord = Record<string, unknown>;
 type ToolResultRecord = Record<string, unknown>;
+const AI_SUMMARY_TOOL_IDS = new Set(["bolt-calculator", "unit-converter", "pipe-pressure-loss"]);
 
 export default function ToolPage<TInput extends ToolInputRecord, TResult extends ToolResultRecord>({
   tool,
@@ -44,6 +50,8 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   const toolCopy = catalogEntry ? getToolCopy(catalogEntry, locale) : null;
   const access = catalogEntry?.access ?? "free";
   const accessLabel = accessLabels?.[access] ?? accessLabels?.free ?? "";
+  const status = catalogEntry?.status ?? "verified";
+  const validationStandard = catalogEntry?.validationStandard;
   const toolTitle = toolCopy?.title ?? tool.title;
   const toolDescription = toolCopy?.description ?? tool.description;
   const [input, setInput] = useState<TInput>(tool.initialInput);
@@ -53,6 +61,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   const calculateTimeout = useRef<number | null>(null);
   const hasTrackedInitial = useRef(false);
   const hasHydrated = useRef(false);
+  const { track } = useAnalytics();
 
   useEffect(() => {
     const historyId = searchParams?.get("historyId");
@@ -125,6 +134,15 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
     }
   }, [validation, tool, validationCopy.calcFailed, validationCopy.resultFix]);
 
+  const encodedState = useMemo(() => encodeToolState(input), [input]);
+  const toolAccessGate = useFeatureGate("tool_access", { toolId: tool.id });
+  const dailyCalculationGate = useFeatureGate("daily_calculations", {
+    autoConsume: Boolean(result),
+    consumeKey: result ? `${tool.id}:${encodedState}` : null,
+  });
+  const dailyLimitReached = !dailyCalculationGate.isLoading && !dailyCalculationGate.hasAccess;
+  const gatedResult = dailyLimitReached ? null : result;
+
   useEffect(() => {
     if (!hasTrackedInitial.current) {
       hasTrackedInitial.current = true;
@@ -136,7 +154,11 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
     }
 
     calculateTimeout.current = window.setTimeout(() => {
-      trackEvent("calculate_click", { tool_id: tool.id, tool_title: toolTitle });
+      track("tool_run", {
+        tool_id: tool.id,
+        tool_name: toolTitle,
+        input_count: Object.keys(input as ToolInputRecord).length,
+      });
     }, 600);
 
     return () => {
@@ -144,9 +166,8 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
         window.clearTimeout(calculateTimeout.current);
       }
     };
-  }, [input, tool.id, toolTitle]);
+  }, [input, tool.id, toolTitle, track]);
 
-  const encodedState = useMemo(() => encodeToolState(input), [input]);
   const shareUrl = useMemo(() => {
     if (!pathname) return "";
     return buildShareUrl(pathname, input as ToolInputRecord);
@@ -159,19 +180,36 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   const references = resolveLocalizedValue(tool.references, locale);
   const methodNotes = getToolMethodNotes(tool.id, locale);
   const showAdvisor = tool.id === "bolt-calculator" || tool.id === "pipe-pressure-loss";
+  const showAiSummary = AI_SUMMARY_TOOL_IDS.has(tool.id);
   const advisorInsights = useMemo(() => {
     if (!showAdvisor) return [];
     return getAdvisorInsights(tool.id, input as ToolInputRecord, {
       locale,
-      reportUrl: result ? reportUrl : undefined,
+      reportUrl: gatedResult ? reportUrl : undefined,
     });
-  }, [showAdvisor, tool.id, input, locale, reportUrl, result]);
+  }, [showAdvisor, tool.id, input, locale, reportUrl, gatedResult]);
 
   const InputSection = tool.InputSection;
   const ResultSection = tool.ResultSection;
   const VisualizationSection = tool.VisualizationSection;
   const CompareVisualizationSection = tool.CompareVisualizationSection;
   const resolvedCompareMetrics = useMemo(() => tool.compareMetrics ?? undefined, [tool.compareMetrics]);
+
+  if (!toolAccessGate.isLoading && !toolAccessGate.hasAccess) {
+    return (
+      <PageShell>
+        <UpgradePrompt
+          source="tool_access_limit"
+          title={locale === "tr" ? "Bu araca Pro plan ile erisebilirsiniz." : "This tool requires Pro access."}
+          description={
+            locale === "tr"
+              ? "Free plan arac limitini doldurdunuz. Pro'ya gecerek tum araclari acabilirsiniz."
+              : "You reached the Free plan tool limit. Upgrade to Pro to unlock all tools."
+          }
+        />
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell>
@@ -182,9 +220,16 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
               <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
                 {toolPageCopy.badge}
               </span>
+              <ToolBadge status={status} standard={validationStandard} locale={locale} />
               {accessLabel ? <AccessBadge access={access} label={accessLabel} size="sm" /> : null}
             </div>
-            <h1 className="text-lg font-semibold text-slate-900">{toolTitle}</h1>
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-lg font-semibold text-slate-900">{toolTitle}</h1>
+              <InfoTooltip
+                label={toolPageCopy.howItWorksLabel}
+                content={toolPageCopy.howItWorksDescription}
+              />
+            </div>
             <p className="text-sm text-slate-600">{toolDescription}</p>
           </div>
         </section>
@@ -194,25 +239,50 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
             <InputSection input={input} onChange={setInput} errors={errors} />
           </div>
           <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            {result ? <ResultSection result={result} /> : <p className="text-xs text-red-600">{calcError}</p>}
+            {gatedResult ? (
+              <ResultSection result={gatedResult} />
+            ) : dailyLimitReached ? (
+              <UpgradePrompt
+                compact
+                source="daily_calculation_limit"
+                title={locale === "tr" ? "Gunluk hesap limiti doldu." : "Daily calculation limit reached."}
+                description={
+                  locale === "tr"
+                    ? "Pro'ya gec, sinirsiz hesap yap."
+                    : "Upgrade to Pro for unlimited calculations."
+                }
+              />
+            ) : (
+              <p className="text-xs text-red-600">{calcError}</p>
+            )}
           </div>
         </section>
 
-        {result ? (
+        {gatedResult ? (
           <ToolDataActions
             toolSlug={tool.id}
             toolTitle={toolTitle}
             inputs={input as ToolInputRecord}
-            outputs={result as ToolResultRecord}
+            outputs={gatedResult as ToolResultRecord}
             reportUrl={reportUrl}
+          />
+        ) : null}
+
+        {gatedResult && showAiSummary ? (
+          <AISummaryPanel
+            locale={locale}
+            toolId={tool.id}
+            toolName={toolTitle}
+            inputs={validation.success ? (validation.data as ToolInputRecord) : (input as ToolInputRecord)}
+            outputs={gatedResult as ToolResultRecord}
           />
         ) : null}
 
         {showAdvisor ? <AdvisorPanel insights={advisorInsights} /> : null}
 
-        {result ? (
+        {gatedResult ? (
           <section className="min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <VisualizationSection input={input} result={result} />
+            <VisualizationSection input={input} result={gatedResult} />
           </section>
         ) : null}
 
@@ -229,19 +299,21 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
         <ToolTrustPanel formula={formula} assumptions={assumptions} references={references} />
         {methodNotes ? <ToolMethodNotes notes={methodNotes} /> : null}
 
-        <ComparePanel
-          toolId={tool.id}
-          initialInput={tool.initialInput}
-          baseInput={input}
-          calculate={tool.calculate}
-          InputSection={InputSection}
-          compareMetrics={resolvedCompareMetrics}
-          CompareVisualizationSection={CompareVisualizationSection}
-        />
+        {!dailyLimitReached ? (
+          <ComparePanel
+            toolId={tool.id}
+            initialInput={tool.initialInput}
+            baseInput={input}
+            calculate={tool.calculate}
+            InputSection={InputSection}
+            compareMetrics={resolvedCompareMetrics}
+            CompareVisualizationSection={CompareVisualizationSection}
+          />
+        ) : null}
 
-        {result ? (
+        {gatedResult ? (
           <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <ToolHistory toolId={tool.id} toolTitle={toolTitle} input={input} result={result} />
+            <ToolHistory toolId={tool.id} toolTitle={toolTitle} input={input} result={gatedResult} />
           </section>
         ) : null}
       </ToolDocTabs>

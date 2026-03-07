@@ -1,0 +1,23 @@
+[
+  {
+    "version": "2026.02.15",
+    "date": "2026-02-15",
+    "tool": "Bolt Calculator",
+    "badge": "new",
+    "description": "- Metrik civata secimi icin hizli presetler eklendi."
+  },
+  {
+    "version": "2026.02.15",
+    "date": "2026-02-15",
+    "tool": "Pipe Pressure Loss",
+    "badge": "fixed",
+    "description": "- Debi girdilerinde birim donusumu kaynakli yuvarlama hatasi duzeltildi."
+  },
+  {
+    "version": "2026.02.15",
+    "date": "2026-02-15",
+    "tool": "Legacy Gear Notes",
+    "badge": "removed",
+    "description": "- Eski not karti kaldirildi ve yeni dokumantasyon akisina tasindi."
+  }
+]

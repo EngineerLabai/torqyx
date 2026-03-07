@@ -111,13 +111,13 @@ const COPY: Record<Locale, {
       ],
     },
     guide: {
-      title: "Fit selection guide",
+      title: getUiLabel("tr", "fitSelectionGuide"),
       description: "Tip seçimini işlev ihtiyacına göre yapın: montaj kolaylığı, merkezleme, tork aktarımı.",
       useLabel: "Tipik kullanım",
     },
     mini: {
-      label: "Mini Tool",
-      title: "Clearance / Interference hesaplayıcı",
+      label: getUiLabel("tr", "miniTool"),
+      title: "Boşluk / sıkılık hesaplayıcı",
       description: "Delik ve mil min/max değerlerini girin; araç min-max boşluk ve geçme tipini belirler.",
       holeMin: "Delik min (mm)",
       holeMax: "Delik max (mm)",
@@ -142,7 +142,7 @@ const COPY: Record<Locale, {
       columns: ["Nominal (mm)", "H7 delik", "g6 mil", "k6 mil", "p6 mil"],
     },
     references: {
-      title: "References",
+      title: getUiLabel("tr", "references"),
       items: [
         "ISO 286-1: ISO code system for tolerances on linear sizes",
         "ISO 286-2: Standard tolerance grades and limit deviations",
@@ -169,12 +169,12 @@ const COPY: Record<Locale, {
       ],
     },
     guide: {
-      title: "Fit selection guide",
+      title: getUiLabel("en", "fitSelectionGuide"),
       description: "Select by function need: assembly ease, centering precision, or torque transfer.",
       useLabel: "Typical use",
     },
     mini: {
-      label: "Mini Tool",
+      label: getUiLabel("en", "miniTool"),
       title: "Clearance / interference calculator",
       description: "Enter hole and shaft min/max values to classify fit behavior.",
       holeMin: "Hole min (mm)",
@@ -200,7 +200,7 @@ const COPY: Record<Locale, {
       columns: ["Nominal (mm)", "H7 hole", "g6 shaft", "k6 shaft", "p6 shaft"],
     },
     references: {
-      title: "References",
+      title: getUiLabel("en", "references"),
       items: [
         "ISO 286-1: ISO code system for tolerances on linear sizes",
         "ISO 286-2: Standard tolerance grades and limit deviations",
@@ -259,10 +259,17 @@ export default function FitsStandardsClient({ locale, heroImage }: { locale: Loc
 
   useEffect(() => {
     warnIfEnglishLabelsInTurkish("FitsStandardsClient", locale, {
-      eyebrow: copy.hero.eyebrow,
-      title: copy.hero.title,
+      hero: {
+        eyebrow: copy.hero.eyebrow,
+        title: copy.hero.title,
+      },
+      labels: {
+        guideTitle: copy.guide.title,
+        miniLabel: copy.mini.label,
+        referencesTitle: copy.references.title,
+      },
     });
-  }, [copy.hero.eyebrow, copy.hero.title, locale]);
+  }, [copy.guide.title, copy.hero.eyebrow, copy.hero.title, copy.mini.label, copy.references.title, locale]);
 
   return (
     <PageShell>
@@ -414,7 +421,7 @@ function Input({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-      />
+       aria-label="Input field"/>
     </label>
   );
 }

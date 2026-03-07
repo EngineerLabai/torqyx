@@ -60,7 +60,7 @@ export const PROJECT_COPY: Record<Locale, {
       description:
         "Proje ve Kaizen çalışmalarını sahip, tarih, öncelik ve durum bazlı takip edin. Kayıtlar cihazınızda tutulur.",
       eyebrow: getUiLabel("tr", "projectHub"),
-      imageAlt: "Project tracker",
+      imageAlt: "Proje takip paneli",
     },
     formTitle: "Yeni kayıt oluştur",
     formSubtitle: "Müşteri projeleri, hat iyileştirme ve Kaizen çalışmaları için tek satır.",

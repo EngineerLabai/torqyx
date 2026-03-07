@@ -16,6 +16,7 @@ export type ToolDocSource = {
   mdxSource: string | null;
   meta: ToolDocMeta;
   examples: string | ToolDocExampleItem[] | null;
+  isDraft: boolean;
 };
 
 const CONTENT_ROOT = path.join(process.cwd(), "content", "tools");
@@ -102,6 +103,14 @@ const EXPLANATION_TITLES = new Set([
 
 const EXAMPLES_TITLES = new Set(["ornekler", "ornek", "examples", "example"]);
 
+const DRAFT_HINTS = [
+  "taslak",
+  "placeholder",
+  "formul burada",
+  "docs not ready",
+  "documentation not ready",
+];
+
 const parseSections = (content: string) => {
   const lines = content.split(/\r?\n/);
   let inCodeBlock = false;
@@ -166,6 +175,33 @@ const asOptionalString = (value: unknown) => {
   return trimmed.length > 0 ? trimmed : null;
 };
 
+const asOptionalBoolean = (value: unknown) => {
+  if (typeof value === "boolean") return value;
+  if (typeof value === "string") {
+    const normalized = normalizeText(value);
+    if (["true", "1", "yes"].includes(normalized)) return true;
+    if (["false", "0", "no"].includes(normalized)) return false;
+  }
+  return null;
+};
+
+const hasDraftHint = (value: string | null | undefined) => {
+  if (!value) return false;
+  const normalized = normalizeText(value);
+  return DRAFT_HINTS.some((hint) => normalized.includes(hint));
+};
+
+const isDraftFromMeta = (meta: ToolDocMeta) => {
+  const explicit = asOptionalBoolean(meta.draft) ?? asOptionalBoolean(meta.isDraft);
+  if (explicit === true) return true;
+
+  const status = asOptionalString(meta.status) ?? asOptionalString(meta.docStatus);
+  if (!status) return false;
+
+  const normalizedStatus = normalizeText(status);
+  return normalizedStatus.includes("draft") || normalizedStatus.includes("taslak");
+};
+
 const getDocMetaInfo = (meta: ToolDocMeta): ToolDocMetaInfo => {
   const version = asOptionalString(meta.version) ?? asOptionalString(meta.docVersion);
   const lastUpdated = asOptionalString(meta.lastUpdated) ?? asOptionalString(meta.updatedAt);
@@ -184,12 +220,14 @@ export const loadToolDoc = async ({
   if (!safeSlug || safeSlug.includes("..")) return null;
 
   const mainFile = await pickFirstFile(buildFileCandidates(safeSlug, locale));
+  const rawSources: string[] = [];
   let meta: ToolDocMeta = {};
   let explanation: string | null = null;
   let examples: string | null = null;
   let examplesFromMeta: ToolDocExampleItem[] | null = null;
 
   if (mainFile) {
+    rawSources.push(mainFile.content);
     const parsed = matter(mainFile.content);
     meta = parsed.data ?? {};
     examplesFromMeta = normalizeExamples(parsed.data?.examples);
@@ -204,6 +242,7 @@ export const loadToolDoc = async ({
 
   const explanationFile = await pickFirstFile(buildSectionCandidates(safeSlug, "explanation", locale));
   if (explanationFile) {
+    rawSources.push(explanationFile.content);
     const parsed = matter(explanationFile.content);
     if (!Object.keys(meta).length) {
       meta = parsed.data ?? {};
@@ -214,6 +253,7 @@ export const loadToolDoc = async ({
 
   const examplesFile = await pickFirstFile(buildSectionCandidates(safeSlug, "examples", locale));
   if (examplesFile) {
+    rawSources.push(examplesFile.content);
     const parsed = matter(examplesFile.content);
     if (!Object.keys(meta).length) {
       meta = parsed.data ?? {};
@@ -226,10 +266,14 @@ export const loadToolDoc = async ({
   const hasExplanation = Boolean(explanation);
   if (!hasExplanation && !hasExamples) return null;
 
+  const examplesMetaText = examplesFromMeta ? JSON.stringify(examplesFromMeta) : null;
+  const isDraft = isDraftFromMeta(meta) || [explanation, examples, examplesMetaText, rawSources.join("\n")].some(hasDraftHint);
+
   return {
     mdxSource: explanation,
     meta,
     examples: examples ?? examplesFromMeta ?? null,
+    isDraft,
   };
 };
 
@@ -258,6 +302,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
     return {
       tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
       hasDocs: false,
+      isDraft: false,
       requestedLocale: locale,
       docsLocale: null,
       metaInfo: null,
@@ -269,6 +314,21 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
   }
 
   const metaInfo = getDocMetaInfo(doc.meta);
+  if (doc.isDraft) {
+    return {
+      tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
+      hasDocs: false,
+      isDraft: true,
+      requestedLocale: locale,
+      docsLocale,
+      metaInfo,
+      standard: null,
+      explanation: null,
+      examples: null,
+      related,
+    };
+  }
+
   const explanation = doc.mdxSource ? await serializeMdx(doc.mdxSource) : null;
   let examples: ToolDocsResponse["examples"] = null;
 
@@ -283,6 +343,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
   return {
     tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
     hasDocs,
+    isDraft: false,
     requestedLocale: locale,
     docsLocale,
     metaInfo,

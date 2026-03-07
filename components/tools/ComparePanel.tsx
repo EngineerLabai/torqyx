@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { getMessages } from "@/utils/messages";
 import type {
   ToolCompareMetric,
@@ -127,6 +128,7 @@ export default function ComparePanel<TInput, TResult>({
   const common = messages.common;
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const { track } = useAnalytics();
   const [shareMessage, setShareMessage] = useState("");
   const didInit = useRef(false);
   const defaultInput = baseInput ?? initialInput;
@@ -292,6 +294,10 @@ export default function ComparePanel<TInput, TResult>({
 
     try {
       await navigator.clipboard.writeText(url);
+      track("copy_link", {
+        page: pathname ?? "/",
+        element: "compare-panel-share-button",
+      });
       setShareMessage(copy.shareSuccess);
     } catch {
       setShareMessage(copy.shareFail);

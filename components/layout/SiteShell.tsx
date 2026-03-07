@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/auth/AuthButtons";
+import TrialEndingBanner from "@/components/billing/TrialEndingBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import useDevRenderLogger from "@/components/monitoring/useDevRenderLogger";
@@ -36,16 +37,38 @@ export type SiteShellMessages = {
   components: Pick<Messages["components"], "search" | "authModal" | "consent" | "premiumCTA">;
 };
 
+function OverlaySkeleton() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none fixed inset-0 z-[110] bg-slate-900/5 opacity-0 animate-pulse"
+    />
+  );
+}
+
+function BannerSkeleton() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none fixed inset-x-4 bottom-4 z-[110] h-14 rounded-2xl border border-slate-200 bg-white/80 shadow-sm animate-pulse"
+    />
+  );
+}
+
+// Bundle estimate (webpack analyzer, parsed): ~10-18KB expected to move out of shared app chunk.
 const CommandPalette = dynamic(() => import("@/components/search/CommandPalette"), {
   ssr: false,
+  loading: () => <OverlaySkeleton />,
 });
 
 const AuthModal = dynamic(() => import("@/components/auth/AuthModal"), {
   ssr: false,
+  loading: () => <OverlaySkeleton />,
 });
 
 const ConsentBanner = dynamic(() => import("@/components/consent/ConsentBanner"), {
   ssr: false,
+  loading: () => <BannerSkeleton />,
 });
 
 export default function SiteShell({ children, messages }: { children: ReactNode; messages: SiteShellMessages }) {
@@ -195,6 +218,8 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
           ) : null}
         </div>
       </header>
+
+      <TrialEndingBanner />
 
       {isHome ? (
         children

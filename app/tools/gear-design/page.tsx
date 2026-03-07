@@ -1,10 +1,11 @@
-﻿import Link from "next/link";
+import Link from "next/link";
+import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { withLocalePrefix } from "@/utils/locale-path";
-
+import { buildPageMetadata } from "@/utils/metadata";
 type Bullet = { title: string; points: string[] };
 
 type Section = {
@@ -606,6 +607,22 @@ const sections: Section[] = [
     ],
   },
 ];
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocaleFromCookies();
+  const title = locale === "tr" ? "Disli Tasarim Rehberi" : "Gear Design Guide";
+  const description =
+    locale === "tr"
+      ? "Disli tasarimi, disli tipleri, mukavemet ve imalat notlarini bir araya getiren muhendislik hesaplayicilari odakli kapsamli teknik rehber."
+      : "Comprehensive gear design guide for engineering calculators covering gear types, strength checks, and manufacturing notes in one technical page.";
+
+  return buildPageMetadata({
+    title,
+    description,
+    path: "/tools/gear-design",
+    locale,
+  });
+}
 
 export default async function GearDesignPage() {
   const locale = await getLocaleFromCookies();

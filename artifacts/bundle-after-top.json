@@ -1,0 +1,275 @@
+[
+  {
+    "label": "static/chunks/3505-b82f2fa637807b17.js",
+    "parsedKB": 631.2,
+    "gzipKB": 175.6,
+    "statKB": 2113.2,
+    "initial": [
+      "app/tools/sanity-check/report/page",
+      "app/tools/sanity-check/page"
+    ]
+  },
+  {
+    "label": "static/chunks/164f4fb6.5bc1c3461a9c8462.js",
+    "parsedKB": 328,
+    "gzipKB": 103.9,
+    "statKB": 343.8,
+    "initial": []
+  },
+  {
+    "label": "static/chunks/7508b87c.b3e2f945aab8872c.js",
+    "parsedKB": 281.4,
+    "gzipKB": 82.4,
+    "statKB": 971.8,
+    "initial": []
+  },
+  {
+    "label": "static/chunks/4bd1b696-43ba64781d20dbb7.js",
+    "parsedKB": 194,
+    "gzipKB": 60.9,
+    "statKB": 594,
+    "initial": [
+      "main-app"
+    ]
+  },
+  {
+    "label": "static/chunks/ad2866b8.5c05f000a6bc3858.js",
+    "parsedKB": 193.5,
+    "gzipKB": 44.2,
+    "statKB": 431.2,
+    "initial": []
+  },
+  {
+    "label": "static/chunks/3794-2cafc58712bff8a3.js",
+    "parsedKB": 191,
+    "gzipKB": 51.3,
+    "statKB": 713.1,
+    "initial": [
+      "main-app"
+    ]
+  },
+  {
+    "label": "static/chunks/framework-bd61ec64032c2de7.js",
+    "parsedKB": 185.3,
+    "gzipKB": 58.4,
+    "statKB": 560.9,
+    "initial": [
+      "main"
+    ]
+  },
+  {
+    "label": "static/chunks/ca377847-8cdf2c47b03fb8e4.js",
+    "parsedKB": 161.8,
+    "gzipKB": 52.8,
+    "statKB": 398.7,
+    "initial": [
+      "app/tools/basic-engineering/page",
+      "app/tools/bearing-life/page",
+      "app/tools/[...slug]/page",
+      "app/tools/bolt-calculator/page",
+      "app/tools/fillet-weld/page",
+      "app/tools/hydraulic-cylinder/page",
+      "app/tools/param-chart/page",
+      "app/tools/unit-converter/page",
+      "app/tools/pipe-pressure-loss/page",
+      "app/tools/shaft-torsion/page"
+    ]
+  },
+  {
+    "label": "static/chunks/6295-59adc996d6f51939.js",
+    "parsedKB": 127.5,
+    "gzipKB": 37.5,
+    "statKB": 113.1,
+    "initial": [
+      "app/[locale]/project-hub/page",
+      "app/[locale]/projects/page",
+      "app/dashboard/page",
+      "app/iletisim/page",
+      "app/login/page",
+      "app/project-hub/page",
+      "app/saved-calculations/page",
+      "app/support/page",
+      "app/request-tool/page",
+      "app/blog/[slug]/page",
+      "app/categories/[category]/page",
+      "app/glossary/[slug]/page",
+      "app/tags/[tag]/page",
+      "app/quality-tools/5n1k/page",
+      "app/quality-tools/5why/page",
+      "app/tools/layout",
+      "app/tools/error",
+      "app/tools/basic-engineering/page",
+      "app/tools/bearing-life/page",
+      "app/tools/coating-guide/page",
+      "app/tools/bending-stress/page",
+      "app/tools/belt-length/page",
+      "app/tools/[...slug]/page",
+      "app/tools/compressor-cc/page",
+      "app/tools/bolt-calculator/page",
+      "app/tools/bolt-database/page",
+      "app/tools/fluids-hvac/page",
+      "app/tools/fillet-weld/page",
+      "app/tools/gear-design/calculators/contact-ratio-calculator/page",
+      "app/tools/gear-design/calculators/backlash-calculator/page",
+      "app/tools/gear-design/calculators/viscosity-selector/page",
+      "app/tools/gear-design/calculators/module-calculator/page",
+      "app/tools/gear-design/calculators/ratio-calculator/page",
+      "app/tools/gear-design/calculators/force-torque-calculator/page",
+      "app/tools/gear-design/calculators/helix-axial-calculator/page",
+      "app/tools/gear-design/calculators/page",
+      "app/tools/gear-design/simulations/page",
+      "app/tools/gear-design/calculators/weight-optimization/page",
+      "app/tools/heat-energy/page",
+      "app/tools/material-cards/page",
+      "app/tools/gear-design/page",
+      "app/tools/heat-treatment/page",
+      "app/tools/machine-elements/page",
+      "app/tools/hydraulic-cylinder/page",
+      "app/tools/param-chart/page",
+      "app/tools/production-project/page",
+      "app/tools/materials-manufacturing/page",
+      "app/tools/sanity-check/error",
+      "app/tools/sanity-check/report/page",
+      "app/tools/sanity-check/page",
+      "app/tools/simple-stress/page",
+      "app/tools/unit-converter/page",
+      "app/tools/pipe-pressure-loss/page",
+      "app/tools/sealing-guide/page",
+      "app/tools/strength-statics/page",
+      "app/tools/torque-power/page",
+      "app/tools/shaft-torsion/page"
+    ]
+  },
+  {
+    "label": "static/chunks/main-475ad9f32f836a5a.js",
+    "parsedKB": 121,
+    "gzipKB": 35.7,
+    "statKB": 351.4,
+    "initial": [
+      "main"
+    ]
+  },
+  {
+    "label": "static/chunks/3151-e0bf30e6aa9f2e1c.js",
+    "parsedKB": 108.4,
+    "gzipKB": 28.7,
+    "statKB": 521.9,
+    "initial": [
+      "app/tools/basic-engineering/page",
+      "app/tools/bearing-life/page",
+      "app/tools/bending-stress/page",
+      "app/tools/bolt-calculator/page",
+      "app/tools/fluids-hvac/page",
+      "app/tools/fillet-weld/page",
+      "app/tools/gear-design/calculators/ratio-calculator/page",
+      "app/tools/hydraulic-cylinder/page",
+      "app/tools/param-chart/page",
+      "app/tools/sanity-check/report/page",
+      "app/tools/sanity-check/page",
+      "app/tools/unit-converter/page",
+      "app/tools/pipe-pressure-loss/page",
+      "app/tools/shaft-torsion/page"
+    ]
+  },
+  {
+    "label": "static/chunks/5b86099a-b42816cb20ce9e53.js",
+    "parsedKB": 83.7,
+    "gzipKB": 24.3,
+    "statKB": 446,
+    "initial": [
+      "app/layout",
+      "app/dashboard/page",
+      "app/iletisim/page",
+      "app/login/page",
+      "app/support/page"
+    ]
+  },
+  {
+    "label": "static/chunks/bc98253f.217e80b363438397.js",
+    "parsedKB": 79.6,
+    "gzipKB": 22.9,
+    "statKB": 176.1,
+    "initial": []
+  },
+  {
+    "label": "static/chunks/3521.015027239fceaf2f.js",
+    "parsedKB": 72.7,
+    "gzipKB": 26.2,
+    "statKB": 189.6,
+    "initial": []
+  },
+  {
+    "label": "static/chunks/5100-81b167575ec18833.js",
+    "parsedKB": 60.6,
+    "gzipKB": 12.6,
+    "statKB": 155.4,
+    "initial": [
+      "app/tools/basic-engineering/page",
+      "app/tools/bearing-life/page",
+      "app/tools/[...slug]/page",
+      "app/tools/bolt-calculator/page",
+      "app/tools/fillet-weld/page",
+      "app/tools/hydraulic-cylinder/page",
+      "app/tools/param-chart/page",
+      "app/tools/unit-converter/page",
+      "app/tools/pipe-pressure-loss/page",
+      "app/tools/shaft-torsion/page"
+    ]
+  },
+  {
+    "label": "static/chunks/9945-c77d22f69e93a2ec.js",
+    "parsedKB": 56,
+    "gzipKB": 13.3,
+    "statKB": 129.4,
+    "initial": [
+      "app/tools/basic-engineering/page",
+      "app/tools/bearing-life/page",
+      "app/tools/bolt-calculator/page",
+      "app/tools/fillet-weld/page",
+      "app/tools/hydraulic-cylinder/page",
+      "app/tools/param-chart/page",
+      "app/tools/unit-converter/page",
+      "app/tools/pipe-pressure-loss/page",
+      "app/tools/shaft-torsion/page"
+    ]
+  },
+  {
+    "label": "static/chunks/939.d9363a79d2078fd0.js",
+    "parsedKB": 51.3,
+    "gzipKB": 19,
+    "statKB": 52,
+    "initial": []
+  },
+  {
+    "label": "static/chunks/2240.9dd303e5e14ed48d.js",
+    "parsedKB": 39.7,
+    "gzipKB": 11.9,
+    "statKB": 84.4,
+    "initial": []
+  },
+  {
+    "label": "static/chunks/2716-c4e46f87c774853f.js",
+    "parsedKB": 38.2,
+    "gzipKB": 15.7,
+    "statKB": 106.6,
+    "initial": [
+      "app/tools/basic-engineering/page",
+      "app/tools/bearing-life/page",
+      "app/tools/[...slug]/page",
+      "app/tools/bolt-calculator/page",
+      "app/tools/fillet-weld/page",
+      "app/tools/hydraulic-cylinder/page",
+      "app/tools/param-chart/page",
+      "app/tools/unit-converter/page",
+      "app/tools/pipe-pressure-loss/page",
+      "app/tools/shaft-torsion/page"
+    ]
+  },
+  {
+    "label": "static/chunks/9058.a17ce8aad7bf413d.js",
+    "parsedKB": 32.6,
+    "gzipKB": 10.7,
+    "statKB": 127.4,
+    "initial": []
+  }
+]

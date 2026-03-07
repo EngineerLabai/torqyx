@@ -1,6 +1,8 @@
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import UpgradePlanViewTracker from "@/components/analytics/UpgradePlanViewTracker";
+import TrackedUpgradeLink from "@/components/analytics/TrackedUpgradeLink";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -18,6 +20,7 @@ type PlanCardProps = {
   ctaLabel: string;
   ctaHref: string;
   tone?: PlanTone;
+  upgradeSource?: string;
 };
 
 export async function generateMetadata() {
@@ -42,6 +45,7 @@ export default async function PricingPage() {
 
   return (
     <PageShell>
+      <UpgradePlanViewTracker plan="pro" source="pricing_page" />
       <PageHero
         title={copy.title}
         description={copy.description}
@@ -55,12 +59,14 @@ export default async function PricingPage() {
         >
           {copy.free.cta}
         </Link>
-        <Link
+        <TrackedUpgradeLink
+          plan="pro"
+          source="pricing_hero"
           href={supportHref}
           className="rounded-full border border-amber-200 bg-amber-50 px-5 py-2 text-sm font-semibold text-amber-800 transition hover:border-amber-300 hover:bg-amber-100"
         >
           {copy.premium.cta}
-        </Link>
+        </TrackedUpgradeLink>
       </PageHero>
 
       <section className="grid gap-4 lg:grid-cols-2">
@@ -81,6 +87,7 @@ export default async function PricingPage() {
           ctaLabel={copy.premium.cta}
           ctaHref={supportHref}
           tone="premium"
+          upgradeSource="pricing_plan_card"
         />
       </section>
 
@@ -99,6 +106,7 @@ function PlanCard({
   ctaLabel,
   ctaHref,
   tone = "free",
+  upgradeSource,
 }: PlanCardProps) {
   const badgeClass =
     tone === "premium"
@@ -125,12 +133,23 @@ function PlanCard({
         ))}
       </ul>
 
-      <Link
-        href={ctaHref}
-        className={`mt-5 inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold transition ${ctaClass}`}
-      >
-        {ctaLabel}
-      </Link>
+      {upgradeSource ? (
+        <TrackedUpgradeLink
+          href={ctaHref}
+          plan="pro"
+          source={upgradeSource}
+          className={`mt-5 inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold transition ${ctaClass}`}
+        >
+          {ctaLabel}
+        </TrackedUpgradeLink>
+      ) : (
+        <Link
+          href={ctaHref}
+          className={`mt-5 inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold transition ${ctaClass}`}
+        >
+          {ctaLabel}
+        </Link>
+      )}
     </article>
   );
 }

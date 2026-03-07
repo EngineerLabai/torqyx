@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import useFirebaseServices from "@/components/firebase/useFirebaseServices";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { getMessages } from "@/utils/messages";
 
 type AttachmentPayload = {
@@ -13,13 +14,18 @@ type AttachmentPayload = {
 };
 
 const MAX_ATTACHMENT_SIZE = 10 * 1024 * 1024;
+const UPGRADE_PLAN = "pro";
+const CHECKOUT_SOURCE = "support_form";
 
 export default function SupportForm() {
   const { locale } = useLocale();
+  const { track } = useAnalytics();
   const copy = getMessages(locale).components.supportForm;
   const { services } = useFirebaseServices();
   const storage = services?.storage ?? null;
   const canUploadFile = Boolean(storage);
+  const hasTrackedCheckoutStart = useRef(false);
+  const hasTrackedPaymentInfoEntered = useRef(false);
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [attachment, setAttachment] = useState<File | null>(null);
@@ -46,14 +52,34 @@ export default function SupportForm() {
     return () => clearTimeout(timer);
   }, [toastMessage]);
 
+  const trackCheckoutStart = () => {
+    if (hasTrackedCheckoutStart.current) return;
+    hasTrackedCheckoutStart.current = true;
+    track("checkout_start", {
+      plan: UPGRADE_PLAN,
+      source: CHECKOUT_SOURCE,
+    });
+  };
+
+  const trackPaymentInfoEntered = () => {
+    if (hasTrackedPaymentInfoEntered.current) return;
+    hasTrackedPaymentInfoEntered.current = true;
+    track("payment_info_entered", {
+      plan: UPGRADE_PLAN,
+      source: CHECKOUT_SOURCE,
+    });
+  };
+
   const handleChange = (field: "name" | "email" | "message") =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      trackCheckoutStart();
       if (status !== "idle") setStatus("idle");
       if (errorMessage) setErrorMessage("");
       setForm((prev) => ({ ...prev, [field]: event.target.value }));
     };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    trackCheckoutStart();
     if (status !== "idle") setStatus("idle");
     const file = event.target.files?.[0] ?? null;
     if (!file) {
@@ -87,6 +113,7 @@ export default function SupportForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    trackCheckoutStart();
     setErrorMessage("");
 
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
@@ -94,6 +121,8 @@ export default function SupportForm() {
       setStatus("error");
       return;
     }
+
+    trackPaymentInfoEntered();
 
     let attachmentPayload: AttachmentPayload | undefined;
 
@@ -161,7 +190,7 @@ export default function SupportForm() {
             className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
             placeholder={copy.fields.name.placeholder}
             disabled={isBusy}
-          />
+           aria-label={copy.fields.name.placeholder} />
         </div>
         <div className="space-y-1">
           <label className="text-xs font-semibold text-slate-700" htmlFor="email">
@@ -177,7 +206,7 @@ export default function SupportForm() {
             className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
             placeholder={copy.fields.email.placeholder}
             disabled={isBusy}
-          />
+           aria-label={copy.fields.email.placeholder} />
         </div>
       </div>
 
@@ -195,7 +224,7 @@ export default function SupportForm() {
           className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
           placeholder={copy.fields.message.placeholder}
           disabled={isBusy}
-        />
+         aria-label={copy.fields.message.placeholder} />
       </div>
 
       <div className="space-y-1">
@@ -209,7 +238,7 @@ export default function SupportForm() {
           onChange={handleFileChange}
           disabled={!canUploadFile || isBusy}
           className="block w-full text-sm text-slate-700 file:mr-3 file:rounded-lg file:border-0 file:bg-emerald-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-emerald-500 disabled:opacity-60"
-        />
+         aria-label="attachment" />
         <p className="text-[11px] text-slate-600">
           {canUploadFile ? copy.fields.attachment.helper : copy.fields.attachment.unavailable}
         </p>

@@ -2,6 +2,8 @@
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/utils/metadata";
 
 const simulations = [
   {
@@ -30,6 +32,22 @@ const simulations = [
     status: "Planlandı",
   },
 ];
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocaleFromCookies();
+  const title = locale === "tr" ? "Disli Simulasyonlari" : "Gear Simulations";
+  const description =
+    locale === "tr"
+      ? "MAAG, FELLOW, azdirma ve taslama sureclerini anlatan disli simulasyonlari ile muhendislik hesaplayicilari icerigini gorsel olarak destekler."
+      : "Gear simulations that visually support engineering calculators content with MAAG, FELLOW, hobbing, grinding, and casting process flows.";
+
+  return buildPageMetadata({
+    title,
+    description,
+    path: "/tools/gear-design/simulations",
+    locale,
+  });
+}
 
 export default async function GearSimulationsPage() {
   const locale = await getLocaleFromCookies();

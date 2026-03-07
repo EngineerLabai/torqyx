@@ -36,7 +36,7 @@ export const COMMISSIONING_COPY: Record<Locale, {
       description:
         "Adım adım komisyoning akışını yönet. Her maddeyi tamamla, notları gör ve teslim paketini hazırla.",
       eyebrow: getUiLabel("tr", "projectHub"),
-      imageAlt: "Commissioning workflow",
+      imageAlt: "Devreye alma iş akışı",
     },
     progressLabel: "Genel ilerleme",
     resetLabel: "Checklist sıfırla",

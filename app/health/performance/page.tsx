@@ -1,8 +1,23 @@
+import type { Metadata } from "next";
 import { PERFORMANCE_BUDGETS } from "@/config/performance-budgets";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { buildPageMetadata } from "@/utils/metadata";
 
-export const metadata = {
-  title: "Performance Health",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocaleFromCookies();
+  const title = locale === "tr" ? "Performans Saglik Kontrolu" : "Performance Health Check";
+  const description =
+    locale === "tr"
+      ? "RUM hedefleri, TTFB, FCP, LCP, INP ve CLS metriklerini rota bazinda izleyerek performans butcelerini dogrulayan teknik panel."
+      : "Technical panel that validates route-level performance budgets using RUM targets and key metrics such as TTFB, FCP, LCP, INP, and CLS.";
+
+  return buildPageMetadata({
+    title,
+    description,
+    path: "/health/performance",
+    locale,
+  });
+}
 
 export default function PerformanceHealthPage() {
   return (

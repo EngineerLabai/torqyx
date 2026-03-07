@@ -1,17 +1,22 @@
 "use client";
 
 import type { ToolMethodNotes } from "@/lib/tool-method-notes";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getMessages } from "@/utils/messages";
 
 type ToolMethodNotesProps = {
   notes: ToolMethodNotes;
 };
 
 export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
+  const { locale } = useLocale();
+  const copy = getMessages(locale).components.toolMethodNotes;
+
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
       <div className="space-y-8">
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Ne işe yarar?</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.purposeTitle}</h2>
           {notes.intro.map((paragraph) => (
             <p key={paragraph} className="text-sm text-slate-700 md:text-base">
               {paragraph}
@@ -20,15 +25,15 @@ export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Girdiler</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.inputsTitle}</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-xs text-slate-600">
               <thead className="border-b border-slate-200 text-[11px] uppercase tracking-[0.18em] text-slate-400">
                 <tr>
-                  <th className="py-2 pr-4 font-semibold">Girdi</th>
-                  <th className="py-2 pr-4 font-semibold">Birim</th>
-                  <th className="py-2 pr-4 font-semibold">Tipik aralık</th>
-                  <th className="py-2 font-semibold">Etkisi</th>
+                  <th className="py-2 pr-4 font-semibold">{copy.inputCol}</th>
+                  <th className="py-2 pr-4 font-semibold">{copy.unitCol}</th>
+                  <th className="py-2 pr-4 font-semibold">{copy.rangeCol}</th>
+                  <th className="py-2 font-semibold">{copy.impactCol}</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,7 +51,7 @@ export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Formül / yaklaşım</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.formulaTitle}</h2>
           <p className="text-sm text-slate-700 md:text-base">{notes.formula.summary}</p>
           {notes.formula.expressions.length > 0 ? (
             <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-mono text-xs text-slate-700">
@@ -65,7 +70,7 @@ export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Varsayımlar &amp; Sınırlar</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.assumptionsTitle}</h2>
           <ul className="list-disc space-y-1 pl-5 text-sm text-slate-700">
             {notes.assumptions.map((assumption) => (
               <li key={assumption}>{assumption}</li>
@@ -74,10 +79,10 @@ export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Örnek</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.exampleTitle}</h2>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Girdi seti</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.inputSet}</p>
               <dl className="mt-3 space-y-2 text-xs text-slate-700">
                 {Object.entries(notes.example.inputs).map(([key, value]) => (
                   <div key={key} className="flex items-center justify-between gap-4">
@@ -88,7 +93,7 @@ export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
               </dl>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Çıktı</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.output}</p>
               <dl className="mt-3 space-y-2 text-xs text-slate-700">
                 {Object.entries(notes.example.outputs).map(([key, value]) => (
                   <div key={key} className="flex items-center justify-between gap-4">
@@ -103,7 +108,7 @@ export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Sık sorulanlar (FAQ)</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {notes.faqs.map((faq) => (
               <div key={faq.question} className="rounded-2xl border border-slate-200 bg-white p-4">
@@ -116,7 +121,7 @@ export default function ToolMethodNotes({ notes }: ToolMethodNotesProps) {
 
         {notes.references && notes.references.length > 0 ? (
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold text-slate-900">Referanslar</h2>
+            <h2 className="text-lg font-semibold text-slate-900">{copy.referencesTitle}</h2>
             <ul className="list-disc space-y-1 pl-5 text-sm text-slate-700">
               {notes.references.map((ref) => (
                 <li key={ref.title}>

@@ -1,6 +1,20 @@
 import type { Locale } from "@/utils/locale";
 
-const ENGLISH_LABEL_TOKENS = ["Standards", "Project Hub", "Workflow", "Tracker", "Revision", "RFQ"] as const;
+const ENGLISH_LABEL_TOKENS = [
+  "Standards",
+  "Project Hub",
+  "Workflow",
+  "Tracker",
+  "References",
+  "Fit selection guide",
+  "Materials",
+  "Threads",
+  "Fluids",
+  "Mechanical",
+  "General Engineering",
+  "Revision",
+  "RFQ",
+] as const;
 
 export const UI_LABELS = {
   standards: { tr: "Standartlar", en: "Standards" },
@@ -9,6 +23,19 @@ export const UI_LABELS = {
   tracker: { tr: "Takip Paneli", en: "Tracker" },
   revision: { tr: "Revizyon", en: "Revision" },
   rfq: { tr: "Teklif İsteği", en: "RFQ" },
+  references: { tr: "Kaynaklar", en: "References" },
+  fitSelectionGuide: { tr: "Geçme seçim rehberi", en: "Fit selection guide" },
+  materials: { tr: "Malzemeler", en: "Materials" },
+  threads: { tr: "Dişler", en: "Threads" },
+  fluids: { tr: "Akışkanlar", en: "Fluids" },
+  mechanical: { tr: "Mekanik", en: "Mechanical" },
+  generalEngineering: { tr: "Genel Mühendislik", en: "General Engineering" },
+  miniTool: { tr: "Mini Araç", en: "Mini Tool" },
+  all: { tr: "Tümü", en: "All" },
+  search: { tr: "Ara", en: "Search" },
+  sort: { tr: "Sırala", en: "Sort" },
+  actions: { tr: "Aksiyon", en: "Actions" },
+  open: { tr: "Aç", en: "Open" },
 } as const satisfies Record<string, Record<Locale, string>>;
 
 export type UiLabelKey = keyof typeof UI_LABELS;

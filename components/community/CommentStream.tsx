@@ -216,10 +216,10 @@ export default function CommentStream() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder={placeholder}
-            className="w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-400 focus:outline-none"
+            className="w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
             rows={3}
             disabled={saving || (!isDemoMode && !user) || !servicesReady || authUnavailable}
-          />
+           aria-label={placeholder}/>
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
             <span>{helperText}</span>
             <button

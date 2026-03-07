@@ -5,6 +5,8 @@ import type { Provider } from "next-auth/providers";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import { z } from "zod";
+import { TRIAL_DURATION_DAYS } from "@/constants/plans";
+import { addDays } from "@/lib/billing";
 import { prisma } from "@/lib/prisma";
 
 const credentialsSchema = z.object({
@@ -36,6 +38,8 @@ const providers: Provider[] = [
         email: user.email,
         name: user.name ?? undefined,
         tier: user.tier,
+        trialStart: user.trialStart ? user.trialStart.toISOString() : null,
+        trialEnd: user.trialEnd ? user.trialEnd.toISOString() : null,
       };
     },
   }),
@@ -50,24 +54,69 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
   );
 }
 
+const loadUserBillingById = async (userId: string) => {
+  return prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      id: true,
+      tier: true,
+      trialStart: true,
+      trialEnd: true,
+    },
+  });
+};
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
   },
   providers,
+  events: {
+    createUser: async ({ user }) => {
+      if (!user.id) return;
+      const trialStart = new Date();
+      const trialEnd = addDays(trialStart, TRIAL_DURATION_DAYS);
+
+      try {
+        await prisma.user.update({
+          where: { id: user.id },
+          data: {
+            trialStart,
+            trialEnd,
+          },
+        });
+      } catch (error) {
+        console.error("[auth] failed to initialize trial window:", error);
+      }
+    },
+  },
   callbacks: {
     jwt: async ({ token, user }) => {
-      if (user) {
-        token.id = user.id;
-        token.tier = (user as { tier?: string }).tier ?? "FREE";
+      const userId = (typeof user?.id === "string" ? user.id : token.id) as string | undefined;
+      if (!userId) return token;
+
+      token.id = userId;
+
+      const billing = await loadUserBillingById(userId);
+      if (!billing) {
+        token.tier = "FREE";
+        token.trialStart = null;
+        token.trialEnd = null;
+        return token;
       }
+
+      token.tier = billing.tier;
+      token.trialStart = billing.trialStart ? billing.trialStart.toISOString() : null;
+      token.trialEnd = billing.trialEnd ? billing.trialEnd.toISOString() : null;
       return token;
     },
     session: async ({ session, token }) => {
       if (session.user) {
         session.user.id = token.id as string;
-        (session.user as { tier?: string }).tier = token.tier as string;
+        session.user.tier = (token.tier as "FREE" | "PRO" | "TEAM" | undefined) ?? "FREE";
+        session.user.trialStart = typeof token.trialStart === "string" ? token.trialStart : null;
+        session.user.trialEnd = typeof token.trialEnd === "string" ? token.trialEnd : null;
       }
       return session;
     },

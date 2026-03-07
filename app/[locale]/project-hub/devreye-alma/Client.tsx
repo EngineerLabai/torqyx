@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
+import { warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import { COMMISSIONING_COPY, COMMISSIONING_STEPS, type ChecklistItem } from "./copy";
 
 type ChecklistState = Record<string, boolean>;
@@ -38,6 +39,29 @@ export default function CommissioningClient({ locale, heroImage }: { locale: Loc
     }
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
   }, [checked]);
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("CommissioningClient", locale, {
+      hero: {
+        title: copy.hero.title,
+        eyebrow: copy.hero.eyebrow,
+      },
+      labels: {
+        progressLabel: copy.progressLabel,
+        resetLabel: copy.resetLabel,
+        exportLabel: copy.exportLabel,
+        checklistTitle: copy.checklistTitle,
+      },
+    });
+  }, [
+    copy.checklistTitle,
+    copy.exportLabel,
+    copy.hero.eyebrow,
+    copy.hero.title,
+    copy.progressLabel,
+    copy.resetLabel,
+    locale,
+  ]);
 
   const allItems = useMemo(
     () =>

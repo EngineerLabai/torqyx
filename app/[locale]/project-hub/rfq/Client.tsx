@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import type { Locale } from "@/utils/locale";
+import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import {
   RFQ_COPY,
   RFQ_PRIORITY_OPTIONS,
@@ -51,6 +52,11 @@ const readStorage = () => {
 
 export default function RfqClient({ locale, heroImage }: { locale: Locale; heroImage: string }) {
   const copy = RFQ_COPY[locale];
+  const allLabel = getUiLabel(locale, "all");
+  const searchLabel = getUiLabel(locale, "search");
+  const sortLabel = getUiLabel(locale, "sort");
+  const actionsLabel = getUiLabel(locale, "actions");
+  const openLabel = getUiLabel(locale, "open");
   const [items, setItems] = useState<RfqItem[]>(() => readStorage());
   const hasPersistedRef = useRef(false);
   const [query, setQuery] = useState("");
@@ -80,6 +86,22 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
     }
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("RfqClient", locale, {
+      hero: {
+        title: copy.hero.title,
+        eyebrow: copy.hero.eyebrow,
+      },
+      labels: {
+        allLabel,
+        searchLabel,
+        sortLabel,
+        actionsLabel,
+        openLabel,
+      },
+    });
+  }, [actionsLabel, allLabel, copy.hero.eyebrow, copy.hero.title, locale, openLabel, searchLabel, sortLabel]);
 
   const statusOrder = useMemo(
     () => new Map(RFQ_STATUS_OPTIONS.map((opt, index) => [opt.value, index])),
@@ -193,7 +215,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 onChange={(event) => setForm((prev) => ({ ...prev, customer: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 required
-              />
+               aria-label="Input field"/>
             </Field>
 
             <Field label={copy.fields.rfqId}>
@@ -203,7 +225,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 onChange={(event) => setForm((prev) => ({ ...prev, rfqId: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 required
-              />
+               aria-label="Input field"/>
             </Field>
 
             <Field label={copy.fields.part} className="md:col-span-2">
@@ -213,7 +235,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 onChange={(event) => setForm((prev) => ({ ...prev, part: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 required
-              />
+               aria-label="Input field"/>
             </Field>
 
             <Field label={copy.fields.owner}>
@@ -222,7 +244,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 value={form.owner}
                 onChange={(event) => setForm((prev) => ({ ...prev, owner: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label="Input field"/>
             </Field>
 
             <Field label={copy.fields.dueDate}>
@@ -231,7 +253,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 value={form.dueDate}
                 onChange={(event) => setForm((prev) => ({ ...prev, dueDate: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label="Date input"/>
             </Field>
 
             <Field label={copy.fields.priority}>
@@ -239,7 +261,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 value={form.priority}
                 onChange={(event) => setForm((prev) => ({ ...prev, priority: event.target.value as RfqPriority }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              >
+               aria-label="Select field">
                 {RFQ_PRIORITY_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label[locale]}
@@ -253,7 +275,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 value={form.status}
                 onChange={(event) => setForm((prev) => ({ ...prev, status: event.target.value as RfqStatus }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              >
+               aria-label="Select field">
                 {RFQ_STATUS_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label[locale]}
@@ -268,7 +290,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 value={form.volume}
                 onChange={(event) => setForm((prev) => ({ ...prev, volume: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label="Input field"/>
             </Field>
 
             <Field label={copy.fields.sopDate}>
@@ -277,7 +299,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 value={form.sopDate}
                 onChange={(event) => setForm((prev) => ({ ...prev, sopDate: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label="Date input"/>
             </Field>
 
             <Field label={copy.fields.link} className="md:col-span-2">
@@ -287,7 +309,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 onChange={(event) => setForm((prev) => ({ ...prev, link: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder="https://"
-              />
+               aria-label="https://"/>
             </Field>
 
             <Field label={copy.fields.notes} className="md:col-span-2">
@@ -296,7 +318,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                 value={form.notes}
                 onChange={(event) => setForm((prev) => ({ ...prev, notes: event.target.value }))}
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label="Text area"/>
             </Field>
           </div>
         </form>
@@ -308,7 +330,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
             <div className="flex flex-wrap gap-2">
               <FilterChip
                 active={statusFilter === "all"}
-                label={locale === "tr" ? "Tumu" : "All"}
+                label={allLabel}
                 onClick={() => setStatusFilter("all")}
               />
               {RFQ_STATUS_OPTIONS.map((option) => (
@@ -325,7 +347,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
             <div className="flex flex-wrap gap-2">
               <FilterChip
                 active={priorityFilter === "all"}
-                label={locale === "tr" ? "Tumu" : "All"}
+                label={allLabel}
                 onClick={() => setPriorityFilter("all")}
               />
               {RFQ_PRIORITY_OPTIONS.map((option) => (
@@ -338,21 +360,21 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
               ))}
             </div>
 
-            <label className="block text-[11px] font-medium text-slate-700">{locale === "tr" ? "Ara" : "Search"}</label>
+            <label className="block text-[11px] font-medium text-slate-700">{searchLabel}</label>
             <input
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               placeholder={copy.searchPlaceholder}
-            />
+             aria-label={copy.searchPlaceholder}/>
 
-            <label className="block text-[11px] font-medium text-slate-700">{locale === "tr" ? "Sirala" : "Sort"}</label>
+            <label className="block text-[11px] font-medium text-slate-700">{sortLabel}</label>
             <select
               value={sort}
               onChange={(event) => setSort(event.target.value as RfqSort)}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-            >
+             aria-label="Select field">
               {RFQ_SORT_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label[locale]}
@@ -401,7 +423,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                   <Th>{copy.fields.sopDate}</Th>
                   <Th>{copy.fields.link}</Th>
                   <Th>{copy.fields.notes}</Th>
-                  <Th>{locale === "tr" ? "Aksiyon" : "Actions"}</Th>
+                  <Th>{actionsLabel}</Th>
                 </tr>
               </thead>
               <tbody>
@@ -416,7 +438,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                         value={item.status}
                         onChange={(event) => updateItem(item.id, { status: event.target.value as RfqStatus })}
                         className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-[10px] text-slate-700"
-                      >
+                       aria-label="Select field">
                         {RFQ_STATUS_OPTIONS.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label[locale]}
@@ -429,7 +451,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                         value={item.priority}
                         onChange={(event) => updateItem(item.id, { priority: event.target.value as RfqPriority })}
                         className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-[10px] text-slate-700"
-                      >
+                       aria-label="Select field">
                         {RFQ_PRIORITY_OPTIONS.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label[locale]}
@@ -448,7 +470,7 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
                           rel={item.link.startsWith("http") ? "noreferrer" : undefined}
                           className="text-emerald-700 hover:underline"
                         >
-                          {locale === "tr" ? "Ac" : "Open"}
+                          {openLabel}
                         </a>
                       ) : (
                         "-"

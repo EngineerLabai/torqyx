@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import ReportPageShell from "@/components/tools/ReportPageShell";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
@@ -13,6 +14,7 @@ import { getMessages } from "@/utils/messages";
 import { decodeToolState } from "@/utils/tool-share";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { buildPageMetadata } from "@/utils/metadata";
 import { toolRegistry, type ToolChartConfig } from "@/tools/registry";
 import { toolCatalog, getToolCopy } from "@/tools/_shared/catalog";
 import { getToolPageTool } from "@/tools/tool-page-tools";
@@ -54,6 +56,49 @@ const ReportChart = dynamic(() => import("@/components/tools/report/ReportChart"
 });
 
 const getParam = (value?: string | string[]) => (Array.isArray(value) ? value[0] : value ?? "");
+const normalizePathToken = (value: string) => value.replace(/[-_/]+/g, " ").trim();
+const toTitleCase = (value: string) =>
+  value
+    .split(" ")
+    .filter(Boolean)
+    .map((token) => token.charAt(0).toUpperCase() + token.slice(1))
+    .join(" ");
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const locale = await getLocaleFromCookies();
+  const { slug } = await params;
+  const slugParts = Array.isArray(slug) ? slug : slug ? [slug] : [];
+  const normalizedSlug = slugParts.filter(Boolean).join("/");
+  const path = normalizedSlug ? `/tools/${normalizedSlug}` : "/tools";
+  const isReportRoute = slugParts.at(-1) === "report";
+  const toolSlug = isReportRoute ? slugParts.slice(0, -1).join("/") : normalizedSlug;
+  const toolPath = toolSlug ? `/tools/${toolSlug}` : "/tools";
+  const tool =
+    toolCatalog.find((item) => item.id === toolSlug) ??
+    toolCatalog.find((item) => item.href === toolPath) ??
+    toolCatalog.find((item) => item.href.replace(/^\/+|\/+$/g, "") === toolSlug) ??
+    null;
+  const toolTitle = tool ? getToolCopy(tool, locale).title : toTitleCase(normalizePathToken(toolSlug || "tool report"));
+  const title = isReportRoute
+    ? locale === "tr"
+      ? `${toolTitle} Raporu`
+      : `${toolTitle} Report`
+    : toolTitle;
+  const description = isReportRoute
+    ? locale === "tr"
+      ? `${toolTitle} sonucunu teknik olarak incelemek, paylasmak ve dogrulamak icin hazirlanan muhendislik hesaplayicilari rapor sayfasi.`
+      : `${toolTitle} report page for engineering calculators output, designed for technical validation, collaboration, and structured result sharing.`
+    : locale === "tr"
+      ? `${toolTitle} icin muhendislik hesaplayicilari icerigini, girdileri ve sonuc yorumlarini teknik aciklamalarla sunan arac sayfasi.`
+      : `${toolTitle} tool page for engineering calculators, presenting inputs, outputs, and technical interpretation guidance in one workflow.`;
+
+  return buildPageMetadata({
+    title,
+    description,
+    path,
+    locale,
+  });
+}
 
 export default async function ToolReportRoute({ params, searchParams }: PageProps) {
   const locale = await getLocaleFromCookies();

@@ -1,13 +1,35 @@
-// app/quality-tools/page.tsx
-import Link from "next/link";
+﻿import Link from "next/link";
 import Hero from "@/components/Hero";
+import { QualityToolStatusBadge } from "@/components/quality-tools/QualityToolStatusBadge";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
+import {
+  getQualityToolsRegistry,
+  getQualityToolStatusLabel,
+  isQualityToolStatusActive,
+  type QualityToolLevel,
+} from "@/data/quality-tools/registry";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { localePath } from "@/utils/locale-path";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
+
+type QualityToolsPageProps = {
+  searchParams?: Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
+};
+
+type QualityToolsTab = "active" | "planned";
+
+const getParam = (value?: string | string[]) => (Array.isArray(value) ? value[0] : value);
+
+const resolveTab = (value?: string): QualityToolsTab => {
+  if (value === "planned") return "planned";
+  return "active";
+};
+
+const buildTabHref = (basePath: string, tab: QualityToolsTab) =>
+  tab === "active" ? basePath : `${basePath}?tab=planned`;
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
@@ -22,252 +44,130 @@ export async function generateMetadata() {
   });
 }
 
-type QualityToolStatus = "planned" | "beta";
-type QualityToolLevel = "basic" | "advanced";
-
-type QualityTool = {
-  id: string;
-  name: string;
-  label: string;
-  description: string;
-  useCases: string[];
-  status: QualityToolStatus;
-  level: QualityToolLevel;
-  href?: string;
-  premium?: boolean;
-};
-
-const QUALITY_TOOLS_BY_LOCALE: Record<"tr" | "en", QualityTool[]> = {
-  tr: [
-    {
-      id: "5n1k",
-      name: "5N1K Problem Tanımı",
-      label: "5N1K",
-      description:
-        "Problemi netleştirmek için Ne, Nerede, Ne zaman, Nasıl, Neden ve Kim sorularını sistematik şekilde doldurmayı sağlar.",
-      useCases: ["Kalite problemi ilk tanımlama", "Müşteri şikayeti analizi öncesi", "8D ve kök neden analizine giriş"],
-      status: "beta",
-      level: "basic",
-      href: "/quality-tools/5n1k",
-    },
-    {
-      id: "5why",
-      name: "5 Why (5 Neden) Analizi",
-      label: "5 Why",
-      description:
-        "Bir problemin kök nedenine ulaşmak için ardışık \"Neden?\" sorularının yapılandırılmış şekilde sorulmasını sağlar.",
-      useCases: ["Tekrarlayan arıza analizi", "Müşteri şikayetinde kök neden arayışı", "İç kalite uygunsuzlukları"],
-      status: "planned",
-      level: "basic",
-      href: "/quality-tools/5why",
-    },
-    {
-      id: "8d",
-      name: "8D Rapor İskeleti",
-      label: "8D",
-      description:
-        "8D metodolojisine göre ekip, problem tanımı, kök neden ve kalıcı aksiyonları içeren rapor iskeleti sunar.",
-      useCases: ["Otomotiv müşteri şikayetleri", "Ciddi iç uygunsuzluklar", "Kalıcı aksiyon gerektiren problemler"],
-      status: "beta",
-      level: "advanced",
-      href: "/quality-tools/8d",
-    },
-    {
-      id: "kaizen",
-      name: "Kaizen / Sürekli İyileştirme Kartı",
-      label: "Kaizen",
-      description:
-        "Küçük ama sürekli iyileştirmeleri takip etmek için problem-hedef-aksiyon-sonuç yapısında kayıt tutmanı sağlar.",
-      useCases: ["Atölye/hat iyileştirmeleri", "Verimlilik ve ergonomi iyileştirmeleri", "Kayıp azaltma çalışmaları"],
-      status: "beta",
-      level: "basic",
-      href: "/quality-tools/kaizen",
-    },
-    {
-      id: "poka-yoke",
-      name: "Poka-Yoke Fikir Kartı",
-      label: "Poka-Yoke",
-      description: "Hata önleyici (poka-yoke) fikirleri tanımlayıp uygulanabilirlik ve etki derecesini değerlendirir.",
-      useCases: ["Montaj hatalarında hata önleme", "Yanlış parça montajının engellenmesi", "Operatör hatalarını sistemle önleme"],
-      status: "beta",
-      level: "advanced",
-      href: "/quality-tools/poka-yoke",
-    },
-  ],
-  en: [
-    {
-      id: "5n1k",
-      name: "5W1H Problem Definition",
-      label: "5W1H",
-      description:
-        "Structure the problem by filling What, Where, When, How, Why, and Who questions systematically.",
-      useCases: ["Initial quality issue definition", "Before customer complaint analysis", "Entry to 8D and root cause work"],
-      status: "beta",
-      level: "basic",
-      href: "/quality-tools/5n1k",
-    },
-    {
-      id: "5why",
-      name: "5 Why Analysis",
-      label: "5 Why",
-      description:
-        "Reach root cause by asking structured 'Why?' questions in sequence.",
-      useCases: ["Recurring failure analysis", "Root cause in customer complaints", "Internal quality nonconformities"],
-      status: "planned",
-      level: "basic",
-      href: "/quality-tools/5why",
-    },
-    {
-      id: "8d",
-      name: "8D Report Template",
-      label: "8D",
-      description:
-        "Provides a report skeleton for team, problem definition, root cause, and permanent actions.",
-      useCases: ["Automotive customer complaints", "Critical internal nonconformities", "Issues requiring permanent action"],
-      status: "beta",
-      level: "advanced",
-      href: "/quality-tools/8d",
-    },
-    {
-      id: "kaizen",
-      name: "Kaizen / Continuous Improvement Card",
-      label: "Kaizen",
-      description:
-        "Track small, continuous improvements in a problem-goal-action-result format.",
-      useCases: ["Shopfloor improvements", "Productivity and ergonomics gains", "Loss reduction initiatives"],
-      status: "beta",
-      level: "basic",
-      href: "/quality-tools/kaizen",
-    },
-    {
-      id: "poka-yoke",
-      name: "Poka-Yoke Idea Card",
-      label: "Poka-Yoke",
-      description: "Define error-proofing ideas and evaluate feasibility and impact.",
-      useCases: ["Preventing assembly errors", "Avoiding wrong part installation", "Reducing operator mistakes"],
-      status: "beta",
-      level: "advanced",
-      href: "/quality-tools/poka-yoke",
-    },
-  ],
-};
-
-export default async function QualityToolsPage() {
+export default async function QualityToolsPage({ searchParams }: QualityToolsPageProps) {
   const locale = await getLocaleFromCookies();
-  const tools = QUALITY_TOOLS_BY_LOCALE[locale];
+  const tools = getQualityToolsRegistry(locale);
   const copy = getMessages(locale).pages.qualityTools;
   const heroImage = getHeroImageSrc("qualityTools");
-  const localizeHref = (href?: string) => (href ? localePath(locale, href) : undefined);
+  const basePath = withLocalePrefix("/quality-tools", locale);
+  const resolvedSearchParams = (await searchParams) ?? {};
+  const tab = resolveTab(getParam(resolvedSearchParams.tab));
+  const activeTools = tools.filter((tool) => isQualityToolStatusActive(tool.status));
+  const plannedTools = tools.filter((tool) => tool.status === "planned");
+  const visibleTools = tab === "planned" ? plannedTools : activeTools;
+
+  const tabBase = "rounded-full border px-3 py-1 text-[11px] font-semibold transition md:text-xs";
+  const tabActive = "border-slate-900 bg-slate-900 text-white";
+  const tabInactive = "border-slate-200 bg-white text-slate-600 hover:border-slate-300";
+  const activeTabLabel = locale === "tr" ? "Kullanıma Açık" : "Available Now";
+  const plannedTabLabel = getQualityToolStatusLabel(locale, "planned");
+  const footerActiveLabel = locale === "tr" ? "Araç kullanıma açık." : "Tool is available now.";
+  const footerPlannedLabel = locale === "tr" ? "Bu araç yakında yayınlanacak." : "This tool will be released soon.";
+  const emptyLabel =
+    locale === "tr"
+      ? "Bu görünümde listelenecek araç bulunmuyor."
+      : "There are no tools to list in this view.";
 
   return (
     <PageShell>
       <Hero title={copy.title} subtitle={copy.description} imageSrc={heroImage} imageAlt={copy.imageAlt} />
 
       <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
-          <span className="font-semibold">{copy.badge}</span>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
+            <span className="font-semibold">{copy.badge}</span>
+          </div>
+
+          <div className="inline-flex items-center gap-2">
+            <Link
+              href={buildTabHref(basePath, "active")}
+              className={`${tabBase} ${tab === "active" ? tabActive : tabInactive}`}
+            >
+              {activeTabLabel} ({activeTools.length})
+            </Link>
+            <Link
+              href={buildTabHref(basePath, "planned")}
+              className={`${tabBase} ${tab === "planned" ? tabActive : tabInactive}`}
+            >
+              {plannedTabLabel} ({plannedTools.length})
+            </Link>
+          </div>
         </div>
       </section>
 
       <section className="grid w-full min-w-0 gap-4 md:grid-cols-2">
-        {tools.map((tool) => (
-          <article
-            key={tool.id}
-            className="flex h-full min-w-0 flex-col justify-between rounded-3xl border border-slate-200 bg-white p-4 text-xs shadow-sm hover:border-slate-300 hover:shadow-md"
-          >
-            <div className="space-y-2">
-              <header className="flex min-w-0 items-start justify-between gap-2">
-                <div className="flex min-w-0 flex-col gap-1">
-                  <div className="inline-flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-700">
-                      {tool.label}
-                    </span>
-                    <h3 className="text-sm font-semibold leading-snug text-slate-900 break-words">{tool.name}</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <StatusBadge status={tool.status} activeLabel={copy.active} plannedLabel={copy.planned} />
-                    {tool.premium && (
-                      <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-                        {copy.premiumBadge}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </header>
-
-              <p className="text-[11px] leading-relaxed text-slate-700 break-words">{tool.description}</p>
-
-              <div>
-                <p className="mb-1 text-[11px] font-semibold text-slate-800">{copy.typical}</p>
-                <ul className="list-inside list-disc space-y-1 text-[11px] text-slate-700">
-                  {tool.useCases.slice(0, 2).map((u) => (
-                    <li key={u} className="break-words">
-                      {u}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                <LevelBadge level={tool.level} basicLabel={copy.basic} advancedLabel={copy.advanced} />
-                {!tool.premium && (
-                  <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
-                    {copy.free}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <footer className="mt-3 flex min-w-0 items-center justify-between gap-2 text-[11px] text-slate-500">
-              <span className="min-w-0 break-words">
-                {tool.href ? copy.footerActive : copy.footerPlanned}
-              </span>
-
-              {tool.href ? (
-                <Link
-                  href={localizeHref(tool.href) ?? tool.href}
-                  className="shrink-0 rounded-full bg-sky-600 px-3 py-1 text-[10px] font-semibold text-white hover:bg-sky-500"
-                >
-                  {copy.openTool}
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  disabled
-                  className="shrink-0 rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[10px] font-medium text-slate-500"
-                >
-                  {copy.comingSoon}
-                </button>
-              )}
-            </footer>
+        {visibleTools.length === 0 && (
+          <article className="rounded-3xl border border-slate-200 bg-white p-4 text-xs text-slate-600 shadow-sm md:col-span-2">
+            {emptyLabel}
           </article>
-        ))}
+        )}
+
+        {visibleTools.map((tool) => {
+          const canOpenTool = Boolean(tool.href && isQualityToolStatusActive(tool.status));
+          const buttonLabel = canOpenTool ? copy.openTool : getQualityToolStatusLabel(locale, tool.status);
+          const href = tool.href ? withLocalePrefix(tool.href, locale) : undefined;
+
+          return (
+            <article
+              key={tool.id}
+              className="flex h-full min-w-0 flex-col justify-between rounded-3xl border border-slate-200 bg-white p-4 text-xs shadow-sm hover:border-slate-300 hover:shadow-md"
+            >
+              <div className="space-y-2">
+                <header className="flex min-w-0 items-start justify-between gap-2">
+                  <div className="flex min-w-0 flex-col gap-1">
+                    <div className="inline-flex flex-wrap items-center gap-2">
+                      <span className="rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-700">
+                        {tool.label}
+                      </span>
+                      <h3 className="text-sm font-semibold leading-snug text-slate-900 break-words">{tool.title}</h3>
+                    </div>
+                    <QualityToolStatusBadge locale={locale} status={tool.status} />
+                  </div>
+                </header>
+
+                <p className="text-[11px] leading-relaxed text-slate-700 break-words">{tool.description}</p>
+
+                <div>
+                  <p className="mb-1 text-[11px] font-semibold text-slate-800">{copy.typical}</p>
+                  <ul className="list-inside list-disc space-y-1 text-[11px] text-slate-700">
+                    {tool.useCases.slice(0, 2).map((u) => (
+                      <li key={u} className="break-words">
+                        {u}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  <LevelBadge level={tool.level} basicLabel={copy.basic} advancedLabel={copy.advanced} />
+                </div>
+              </div>
+
+              <footer className="mt-3 flex min-w-0 items-center justify-between gap-2 text-[11px] text-slate-500">
+                <span className="min-w-0 break-words">{canOpenTool ? footerActiveLabel : footerPlannedLabel}</span>
+
+                {canOpenTool && href ? (
+                  <Link
+                    href={href}
+                    className="shrink-0 rounded-full bg-sky-600 px-3 py-1 text-[10px] font-semibold text-white hover:bg-sky-500"
+                  >
+                    {buttonLabel}
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    className="shrink-0 rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[10px] font-medium text-slate-500"
+                  >
+                    {buttonLabel}
+                  </button>
+                )}
+              </footer>
+            </article>
+          );
+        })}
       </section>
     </PageShell>
-  );
-}
-
-function StatusBadge({
-  status,
-  activeLabel,
-  plannedLabel,
-}: {
-  status: QualityToolStatus;
-  activeLabel: string;
-  plannedLabel: string;
-}) {
-  if (status === "beta") {
-    return (
-      <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-        {activeLabel}
-      </span>
-    );
-  }
-
-  return (
-    <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-600">
-      {plannedLabel}
-    </span>
   );
 }
 

@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState, type RefObject } from "react";
+import { usePathname } from "next/navigation";
+import UpgradePrompt from "@/components/billing/UpgradePrompt";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useFeatureGate } from "@/hooks/useFeatureGate";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { buildQualityPdfFilename, exportElementToPdf } from "@/lib/pdf/exportElementToPdf";
 import { getJSON, setJSON } from "@/lib/storage";
 import type { QualityReportActionsCopy } from "@/data/quality-tools/report-actions";
@@ -67,6 +72,10 @@ export default function ReportActions<T>({
   copy,
 }: ReportActionsProps<T>) {
   const storageKey = useMemo(() => `aielab:quality:${toolKey}:saved`, [toolKey]);
+  const { locale } = useLocale();
+  const pathname = usePathname() ?? "/";
+  const pdfGate = useFeatureGate("pdf_export");
+  const { track } = useAnalytics();
   const [savedReports, setSavedReports] = useState<SavedReport<T>[]>([]);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
@@ -113,11 +122,22 @@ export default function ReportActions<T>({
   }
 
   async function exportCurrentPdf() {
+    if (!pdfGate.hasAccess) {
+      setStatusText(
+        locale === "tr" ? "PDF disa aktarma Pro planinda acilir." : "PDF export is available on Pro.",
+      );
+      return;
+    }
+
     const element = reportRootRef.current;
     if (!element) return;
     try {
       const filename = buildQualityPdfFilename(toolKey);
       await exportElementToPdf(element, filename);
+      track("export_pdf", {
+        tool_id: toolKey,
+        page: pathname,
+      });
     } catch {
       setStatusText(copy.exportPdfError);
     }
@@ -130,6 +150,13 @@ export default function ReportActions<T>({
   }
 
   async function exportSavedPdf(entry: SavedReport<T>) {
+    if (!pdfGate.hasAccess) {
+      setStatusText(
+        locale === "tr" ? "PDF disa aktarma Pro planinda acilir." : "PDF export is available on Pro.",
+      );
+      return;
+    }
+
     const element = reportRootRef.current;
     if (!element) return;
 
@@ -138,6 +165,10 @@ export default function ReportActions<T>({
       await wait(120);
       const filename = buildQualityPdfFilename(`${toolKey}-${safePart(entry.title) || "report"}`);
       await exportElementToPdf(element, filename);
+      track("export_pdf", {
+        tool_id: toolKey,
+        page: pathname,
+      });
     } catch {
       setStatusText(copy.exportPdfError);
     }
@@ -198,7 +229,12 @@ export default function ReportActions<T>({
             type="button"
             onClick={exportCurrentPdf}
             data-testid="report-actions-export-pdf"
-            className="rounded-full bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800"
+            disabled={!pdfGate.hasAccess}
+            className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition ${
+              pdfGate.hasAccess
+                ? "bg-slate-900 text-white hover:bg-slate-800"
+                : "cursor-not-allowed bg-amber-100 text-amber-800"
+            }`}
           >
             {copy.exportPdf}
           </button>
@@ -211,6 +247,7 @@ export default function ReportActions<T>({
             {copy.reset}
           </button>
         </div>
+        {!pdfGate.hasAccess ? <UpgradePrompt compact source="quality_report_pdf_gate" className="mt-3" /> : null}
         {statusText ? <p className="mt-2 text-[11px] text-slate-600">{statusText}</p> : null}
       </section>
 
@@ -230,7 +267,7 @@ export default function ReportActions<T>({
                 placeholder={copy.saveTitlePlaceholder}
                 data-testid="report-actions-title-input"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label={copy.saveTitlePlaceholder}/>
             </label>
             <div className="mt-4 flex flex-wrap justify-end gap-2">
               <button
@@ -314,7 +351,12 @@ export default function ReportActions<T>({
                           type="button"
                           onClick={() => exportSavedPdf(entry)}
                           data-testid="report-actions-export-pdf-saved"
-                          className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700 hover:bg-slate-50"
+                          disabled={!pdfGate.hasAccess}
+                          className={`rounded-full border px-3 py-1 text-[11px] font-semibold transition ${
+                            pdfGate.hasAccess
+                              ? "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+                              : "cursor-not-allowed border-amber-200 bg-amber-50 text-amber-700"
+                          }`}
                         >
                           {copy.exportPdf}
                         </button>

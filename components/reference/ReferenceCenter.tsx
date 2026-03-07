@@ -279,7 +279,7 @@ export default function ReferenceCenter() {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={copy.searchPlaceholder}
                 className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
-              />
+               aria-label={copy.searchPlaceholder}/>
             </div>
             <div className="flex flex-wrap gap-2 lg:hidden">
               {filteredSections.map((section) => (

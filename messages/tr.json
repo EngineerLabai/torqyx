@@ -1,315 +1,315 @@
 {
   "nav": {
     "labels": {
-      "sectionCalculators": "Hesaplayıcılar",
-      "sectionTools": "Araçlar",
+      "sectionCalculators": "HesaplayÄ±cÄ±lar",
+      "sectionTools": "AraÃ§lar",
       "sectionStandards": "Standartlar",
       "sectionQuality": "Kalite",
       "sectionCommunity": "Forum",
-      "sectionContact": "İletişim",
+      "sectionContact": "Ä°letiÅŸim",
       "sectionGeneral": "Genel",
-      "linkGearCalculators": "Dişli Hesaplayıcılar",
-      "linkToolLibrary": "Hesaplayıcı Kütüphanesi",
-      "linkTorquePower": "Tork / Güç",
+      "linkGearCalculators": "DiÅŸli HesaplayÄ±cÄ±lar",
+      "linkToolLibrary": "HesaplayÄ±cÄ± KÃ¼tÃ¼phanesi",
+      "linkTorquePower": "Tork / GÃ¼Ã§",
       "linkProjectHub": "Proje Merkezi",
-      "linkQualityTools": "Kalite Araçları",
-      "linkFixtureTools": "Fikstür Araçları",
-      "linkReference": "Hızlı Referans",
+      "linkQualityTools": "Kalite AraÃ§larÄ±",
+      "linkFixtureTools": "FikstÃ¼r AraÃ§larÄ±",
+      "linkReference": "HÄ±zlÄ± Referans",
       "linkStandards": "Standartlar",
       "linkCommunity": "Topluluk",
       "linkQa": "Soru-Cevap",
-      "linkSupport": "Bize Ulaşın",
+      "linkSupport": "Bize UlaÅŸÄ±n",
       "linkPrivacy": "Gizlilik",
-      "linkCookies": "Çerez Politikası",
-      "linkTerms": "Kullanım Şartları",
-      "linkAbout": "Hakkında",
-      "linkContact": "İletişim",
+      "linkCookies": "Ã‡erez PolitikasÄ±",
+      "linkTerms": "KullanÄ±m ÅartlarÄ±",
+      "linkAbout": "HakkÄ±nda",
+      "linkContact": "Ä°letiÅŸim",
       "linkHome": "Ana Sayfa",
       "sectionFaq": "FAQ",
       "linkFaq": "FAQ"
     },
     "descriptions": {
-      "sectionCalculators": "Dişli, tork, kuvvet ve mekanik hesaplayıcılar.",
-      "sectionTools": "Şablon, rehber ve proje araçları.",
-      "sectionCommunity": "Topluluk tartışmaları ve paylaşımlar.",
-      "sectionContact": "Geri bildirim ve destek kanalları.",
-      "sectionStandards": "Mühendislik standartları ve hızlı başvuru kaynakları.",
-      "sectionQuality": "Kalite planlama ve problem çözme araçları.",
-      "sectionFaq": "Sık sorulan sorulara hızlı yanıtlar."
+      "sectionCalculators": "DiÅŸli, tork, kuvvet ve mekanik hesaplayÄ±cÄ±lar.",
+      "sectionTools": "Åablon, rehber ve proje araÃ§larÄ±.",
+      "sectionCommunity": "Topluluk tartÄ±ÅŸmalarÄ± ve paylaÅŸÄ±mlar.",
+      "sectionContact": "Geri bildirim ve destek kanallarÄ±.",
+      "sectionStandards": "MÃ¼hendislik standartlarÄ± ve hÄ±zlÄ± baÅŸvuru kaynaklarÄ±.",
+      "sectionQuality": "Kalite planlama ve problem Ã§Ã¶zme araÃ§larÄ±.",
+      "sectionFaq": "SÄ±k sorulan sorulara hÄ±zlÄ± yanÄ±tlar."
     },
     "badges": {
       "new": "Yeni",
-      "fresh": "Güncel"
+      "fresh": "GÃ¼ncel"
     }
   },
   "languageSwitcher": {
-    "trLabel": "Türkçe",
-    "enLabel": "İngilizce"
+    "trLabel": "TÃ¼rkÃ§e",
+    "enLabel": "Ä°ngilizce"
   },
   "authButtons": {
-    "login": "Giriş Yap",
+    "login": "GiriÅŸ Yap",
     "premium": "Premium bekleme listesi",
-    "userFallback": "Kullanıcı",
-    "logout": "Çıkış",
-    "unavailable": "Auth şu an kullanılamıyor.",
-    "checking": "Giriş kontrol ediliyor...",
-    "readOnlyFallback": "Şu an anonim moddasın - içerikleri okuyabilirsin.",
-    "errorTitle": "Giriş kontrolünde hata",
-    "errorDescription": "Kimlik doğrulama yanıt vermedi. Lütfen tekrar dene.",
-    "loginHint": "Google ile güvenli giriş yaparak favori ve kayıtlı hesaplara ulaşın.",
+    "userFallback": "KullanÄ±cÄ±",
+    "logout": "Ã‡Ä±kÄ±ÅŸ",
+    "unavailable": "Auth ÅŸu an kullanÄ±lamÄ±yor.",
+    "checking": "GiriÅŸ kontrol ediliyor...",
+    "readOnlyFallback": "Åu an anonim moddasÄ±n - iÃ§erikleri okuyabilirsin.",
+    "errorTitle": "GiriÅŸ kontrolÃ¼nde hata",
+    "errorDescription": "Kimlik doÄŸrulama yanÄ±t vermedi. LÃ¼tfen tekrar dene.",
+    "loginHint": "Google ile gÃ¼venli giriÅŸ yaparak favori ve kayÄ±tlÄ± hesaplara ulaÅŸÄ±n.",
     "retry": "Tekrar dene"
   },
   "home": {
     "hero": {
-      "eyebrow": "Mekanik Mühendislik Hesaplayıcıları",
-      "headline": "Mekanik hesaplarda artık şüpheye yer yok",
-      "subheadline": "Makine tasarımı, civata seçimi, güç aktarımı ve termal kontroller için — Excel’den hızlı, ISO/DIN doğrulamalı formüller, birimler ve raporlar.",
-      "subtitle": "Hız ve izlenebilirlik isteyen mekanik mühendisler için.",
-      "ctaPrimary": "Ücretsiz Başla",
-      "ctaSecondary": "Hesaplayıcıları Gör",
-      "socialProof": "500+ mekanik mühendis tarafından tercih edildi",
-      "trustBadge": "Hesaplar ISO/DIN standartlarına göre doğrulanır",
-      "supportNote": "Kredi kartı gerekmez. 60 saniyede başlayın.",
-      "imageAlt": "Mekanik mühendislik hesaplayıcı paneli"
+      "eyebrow": "Mekanik MÃ¼hendislik HesaplayÄ±cÄ±larÄ±",
+      "headline": "AI destekli muhendislik hesaplamalari, tahmin degil standart temelli sonuc",
+      "subheadline": "Buradaki AI, ISO/DIN/VDI referansli deterministik hesap motoru ile adim adim asistan rehberligini birlestirir. Sihirli tahmin yapmaz; ayni girdide ayni sonucu verir.",
+      "subtitle": "HÄ±z ve izlenebilirlik isteyen mekanik mÃ¼hendisler iÃ§in.",
+      "ctaPrimary": "Ãœcretsiz BaÅŸla",
+      "ctaSecondary": "HesaplayÄ±cÄ±larÄ± GÃ¶r",
+      "socialProof": "500+ mekanik mÃ¼hendis tarafÄ±ndan tercih edildi",
+      "trustBadge": "Hesaplar ISO/DIN standartlarÄ±na gÃ¶re doÄŸrulanÄ±r",
+      "supportNote": "Kredi kartÄ± gerekmez. 60 saniyede baÅŸlayÄ±n.",
+      "imageAlt": "Mekanik mÃ¼hendislik hesaplayÄ±cÄ± paneli"
     },
     "popularTools": {
-      "kicker": "Popüler araçlar",
-      "title": "En çok kullanılan hesaplayıcılar",
-      "description": "Boyutlama, kontrol ve dönüşüm için hızlı başlangıç sağlayan 6 araç.",
-      "cta": "Araç kütüphanesine git",
+      "kicker": "PopÃ¼ler araÃ§lar",
+      "title": "En Ã§ok kullanÄ±lan hesaplayÄ±cÄ±lar",
+      "description": "Boyutlama, kontrol ve dÃ¶nÃ¼ÅŸÃ¼m iÃ§in hÄ±zlÄ± baÅŸlangÄ±Ã§ saÄŸlayan 6 araÃ§.",
+      "cta": "AraÃ§ kÃ¼tÃ¼phanesine git",
       "defaultCategory": "Genel"
     },
     "about": {
-      "kicker": "Hakkında",
-      "title": "Metodoloji odaklı mühendislik çalışma alanı",
-      "lead": "Pratik mühendislik kararlarını ve tekrarlanabilir hesapları metodoloji odaklı bir akışta topla.",
-      "cardOneTitle": "Metodoloji / Akış",
-      "cardOneBody": "Problemi adımlara böl, varsayımları netleştir ve tutarlı hesap akışını izle.",
-      "cardTwoTitle": "Manuel + Görsel",
-      "cardTwoBody": "Formüller, tablolar ve görsel ipuçlarıyla süreci okunur ve izlenebilir tut."
+      "kicker": "HakkÄ±nda",
+      "title": "Metodoloji odaklÄ± mÃ¼hendislik Ã§alÄ±ÅŸma alanÄ±",
+      "lead": "Pratik mÃ¼hendislik kararlarÄ±nÄ± ve tekrarlanabilir hesaplarÄ± metodoloji odaklÄ± bir akÄ±ÅŸta topla.",
+      "cardOneTitle": "Metodoloji / AkÄ±ÅŸ",
+      "cardOneBody": "Problemi adÄ±mlara bÃ¶l, varsayÄ±mlarÄ± netleÅŸtir ve tutarlÄ± hesap akÄ±ÅŸÄ±nÄ± izle.",
+      "cardTwoTitle": "Manuel + GÃ¶rsel",
+      "cardTwoBody": "FormÃ¼ller, tablolar ve gÃ¶rsel ipuÃ§larÄ±yla sÃ¼reci okunur ve izlenebilir tut."
     },
     "useCases": {
-      "kicker": "Ne için kullanılır?",
-      "title": "Lab hangi işlerde yardımcı olur?",
-      "lead": "En sık mühendislik kararlarına kısa ve net akışlarıyla destek olur.",
+      "kicker": "Ne iÃ§in kullanÄ±lÄ±r?",
+      "title": "Lab hangi iÅŸlerde yardÄ±mcÄ± olur?",
+      "lead": "En sÄ±k mÃ¼hendislik kararlarÄ±na kÄ±sa ve net akÄ±ÅŸlarÄ±yla destek olur.",
       "items": [
         {
-          "title": "Hesapları doğrula",
-          "description": "Formülleri, birimleri ve varsayımları dakikalar içinde kontrol et."
+          "title": "HesaplarÄ± doÄŸrula",
+          "description": "FormÃ¼lleri, birimleri ve varsayÄ±mlarÄ± dakikalar iÃ§inde kontrol et."
         },
         {
-          "title": "Kararları hızlandır",
-          "description": "Tutarlı girdiler ve kartlarla geri dönüşü azalt."
+          "title": "KararlarÄ± hÄ±zlandÄ±r",
+          "description": "TutarlÄ± girdiler ve kartlarla geri dÃ¶nÃ¼ÅŸÃ¼ azalt."
         },
         {
-          "title": "Metod notlarını topla",
-          "description": "Tekrarlanabilir işler için kısa kontrol listeleri biriktir."
+          "title": "Metod notlarÄ±nÄ± topla",
+          "description": "Tekrarlanabilir iÅŸler iÃ§in kÄ±sa kontrol listeleri biriktir."
         }
       ]
     },
     "changelog": {
       "kicker": "Yeni",
-      "title": "Son güncellemeler",
-      "description": "Yeni araçlar ve düzeltmeler kısa bir özetle burada.",
-      "latestLabel": "Son sürüm",
-      "ctaPrimary": "Güncelleme günlüğünü gör",
+      "title": "Son gÃ¼ncellemeler",
+      "description": "Yeni araÃ§lar ve dÃ¼zeltmeler kÄ±sa bir Ã¶zetle burada.",
+      "latestLabel": "Son sÃ¼rÃ¼m",
+      "ctaPrimary": "GÃ¼ncelleme gÃ¼nlÃ¼ÄŸÃ¼nÃ¼ gÃ¶r",
       "ctaSecondary": "Blog'u oku",
-      "empty": "Henüz güncelleme yok. İlk not yakında."
+      "empty": "HenÃ¼z gÃ¼ncelleme yok. Ä°lk not yakÄ±nda."
     },
     "seo": {
-      "title": "Mekanik Mühendislik Hesaplayıcıları",
-      "description": "Makine tasarımı, civata seçimi, güç aktarımı ve termal kontroller için ISO/DIN doğrulamalı hesaplayıcılar."
+      "title": "Mekanik MÃ¼hendislik HesaplayÄ±cÄ±larÄ±",
+      "description": "Makine tasarÄ±mÄ±, civata seÃ§imi, gÃ¼Ã§ aktarÄ±mÄ± ve termal kontroller iÃ§in ISO/DIN doÄŸrulamalÄ± hesaplayÄ±cÄ±lar."
     },
     "valueProps": {
-      "kicker": "Neden geçiş yapılıyor?",
-      "title": "Excel belirsizliğini doğrulanmış hesaplara dönüştürün",
-      "description": "Daha hızlı sonuç alın, hataları azaltın, varsayımları görünür kılın.",
+      "kicker": "Neden geÃ§iÅŸ yapÄ±lÄ±yor?",
+      "title": "Excel belirsizliÄŸini doÄŸrulanmÄ±ÅŸ hesaplara dÃ¶nÃ¼ÅŸtÃ¼rÃ¼n",
+      "description": "Daha hÄ±zlÄ± sonuÃ§ alÄ±n, hatalarÄ± azaltÄ±n, varsayÄ±mlarÄ± gÃ¶rÃ¼nÃ¼r kÄ±lÄ±n.",
       "excel": {
-        "badge": "Excel’de zaman kaybetmeyin",
-        "title": "Excel’de zaman kaybetmeyin",
-        "body": "Elektronik tabloları denetlemek zor ve hataya açık. Formülleri, birimleri ve varsayımları kilitliyoruz; sonuçlar dakikalar içinde hazır.",
-        "metricLabel": "Ortalama zaman kazancı",
-        "metricValue": "Hesap başına 45+ dk",
-        "metricNote": "Manuel Excel akışlarına göre dahili zaman testleri.",
+        "badge": "Excelâ€™de zaman kaybetmeyin",
+        "title": "Excelâ€™de zaman kaybetmeyin",
+        "body": "Elektronik tablolarÄ± denetlemek zor ve hataya aÃ§Ä±k. FormÃ¼lleri, birimleri ve varsayÄ±mlarÄ± kilitliyoruz; sonuÃ§lar dakikalar iÃ§inde hazÄ±r.",
+        "metricLabel": "Ortalama zaman kazancÄ±",
+        "metricValue": "Hesap baÅŸÄ±na 45+ dk",
+        "metricNote": "Manuel Excel akÄ±ÅŸlarÄ±na gÃ¶re dahili zaman testleri.",
         "excelLabel": "Excel",
         "toolLabel": "AI Engineers Lab",
         "excelPoints": [
-          "Manuel birim dönüşümü",
-          "Gizli formül hataları",
-          "Sürüm karmaşası / iz yok"
+          "Manuel birim dÃ¶nÃ¼ÅŸÃ¼mÃ¼",
+          "Gizli formÃ¼l hatalarÄ±",
+          "SÃ¼rÃ¼m karmaÅŸasÄ± / iz yok"
         ],
         "toolPoints": [
-          "Anında birim kontrolü",
-          "Formül kırılımı",
-          "Raporlanabilir çıktı"
+          "AnÄ±nda birim kontrolÃ¼",
+          "FormÃ¼l kÄ±rÄ±lÄ±mÄ±",
+          "Raporlanabilir Ã§Ä±ktÄ±"
         ]
       },
       "accuracy": {
-        "badge": "Sonuçlardan emin olun",
-        "title": "Hesaplarınızı bir daha sorgulamayın",
-        "body": "Her formülü, varsayımı ve birimi dışa aktarmadan önce görün.",
+        "badge": "SonuÃ§lardan emin olun",
+        "title": "HesaplarÄ±nÄ±zÄ± bir daha sorgulamayÄ±n",
+        "body": "Her formÃ¼lÃ¼, varsayÄ±mÄ± ve birimi dÄ±ÅŸa aktarmadan Ã¶nce gÃ¶rÃ¼n.",
         "bullets": [
-          "Denetlenebilir formül kırılımı",
-          "Otomatik birim dönüşümü",
-          "Yerleşik hata kontrolleri"
+          "Denetlenebilir formÃ¼l kÄ±rÄ±lÄ±mÄ±",
+          "Otomatik birim dÃ¶nÃ¼ÅŸÃ¼mÃ¼",
+          "YerleÅŸik hata kontrolleri"
         ],
-        "formulaLabel": "Formül kırılımı",
-        "formulaExample": "σ = F / A  ·  τ = T·r / J  ·  ΔP = f·(L/D)·(ρ·v²/2)",
+        "formulaLabel": "FormÃ¼l kÄ±rÄ±lÄ±mÄ±",
+        "formulaExample": "Ïƒ = F / A  Â·  Ï„ = TÂ·r / J  Â·  Î”P = fÂ·(L/D)Â·(ÏÂ·vÂ²/2)",
         "formulaNotes": [
-          "Her araçta varsayımlar listelenir",
-          "Birimler her girişte doğrulanır",
-          "ISO/DIN referansları belirtilir"
+          "Her araÃ§ta varsayÄ±mlar listelenir",
+          "Birimler her giriÅŸte doÄŸrulanÄ±r",
+          "ISO/DIN referanslarÄ± belirtilir"
         ]
       },
       "library": {
-        "badge": "Mühendislik kütüphaneni kur",
-        "title": "Mühendislik kütüphaneni oluştur",
-        "body": "Hesap setlerini kaydet, yeniden kullan, ekiplerinle paylaş.",
+        "badge": "MÃ¼hendislik kÃ¼tÃ¼phaneni kur",
+        "title": "MÃ¼hendislik kÃ¼tÃ¼phaneni oluÅŸtur",
+        "body": "Hesap setlerini kaydet, yeniden kullan, ekiplerinle paylaÅŸ.",
         "bullets": [
-          "Her araç için hesap geçmişi",
-          "Sık kullanılan parçalar için şablonlar",
-          "Ekip paylaşımı ve onay-ready çıktı"
+          "Her araÃ§ iÃ§in hesap geÃ§miÅŸi",
+          "SÄ±k kullanÄ±lan parÃ§alar iÃ§in ÅŸablonlar",
+          "Ekip paylaÅŸÄ±mÄ± ve onay-ready Ã§Ä±ktÄ±"
         ],
         "cards": [
-          "Son 50 çalışmayı hazır tutar",
-          "Standart civatalar için preset kaydet",
-          "Tek link ile ekip paylaşımı"
+          "Son 50 Ã§alÄ±ÅŸmayÄ± hazÄ±r tutar",
+          "Standart civatalar iÃ§in preset kaydet",
+          "Tek link ile ekip paylaÅŸÄ±mÄ±"
         ]
       }
     },
     "showcase": {
-      "kicker": "Popüler hesaplayıcılar",
-      "title": "Kanıtlanmış hesaplayıcılarla başla",
-      "description": "Bu ay mekanik ekiplerin en çok kullandığı araçlar.",
-      "tryNow": "Şimdi Dene →",
-      "usageLabel": "{count}+ kullanım",
-      "cta": "Tüm hesaplayıcılar"
+      "kicker": "PopÃ¼ler hesaplayÄ±cÄ±lar",
+      "title": "KanÄ±tlanmÄ±ÅŸ hesaplayÄ±cÄ±larla baÅŸla",
+      "description": "Bu ay mekanik ekiplerin en Ã§ok kullandÄ±ÄŸÄ± araÃ§lar.",
+      "tryNow": "Åimdi Dene â†’",
+      "usageLabel": "{count}+ kullanÄ±m",
+      "cta": "TÃ¼m hesaplayÄ±cÄ±lar"
     },
     "pricing": {
-      "kicker": "Ücretlendirme",
-      "title": "Mekanik ekipler için sade fiyatlama",
-      "description": "Ücretsiz başlayın. Sınırsız hesap, geçmiş ve dışa aktarma gerektiğinde yükseltin.",
-      "ctaPrimary": "Ücretsiz Deneme Başlat",
-      "note": "İstediğiniz an iptal edin. Başlamak için kredi kartı gerekmez.",
+      "kicker": "Ãœcretlendirme",
+      "title": "Mekanik ekipler iÃ§in sade fiyatlama",
+      "description": "Ãœcretsiz baÅŸlayÄ±n. SÄ±nÄ±rsÄ±z hesap, geÃ§miÅŸ ve dÄ±ÅŸa aktarma gerektiÄŸinde yÃ¼kseltin.",
+      "ctaPrimary": "Ãœcretsiz Deneme BaÅŸlat",
+      "note": "Ä°stediÄŸiniz an iptal edin. BaÅŸlamak iÃ§in kredi kartÄ± gerekmez.",
       "free": {
-        "title": "Ücretsiz",
-        "subtitle": "Günde 3 hesap"
+        "title": "Ãœcretsiz",
+        "subtitle": "GÃ¼nde 3 hesap"
       },
       "pro": {
         "title": "Pro",
-        "subtitle": "Sınırsız hesap",
+        "subtitle": "SÄ±nÄ±rsÄ±z hesap",
         "price": "$19/ay",
-        "badge": "En Popüler",
+        "badge": "En PopÃ¼ler",
         "features": [
-          "Sınırsız hesaplama",
-          "Tam geçmiş + dışa aktarma",
-          "Öncelikli destek"
+          "SÄ±nÄ±rsÄ±z hesaplama",
+          "Tam geÃ§miÅŸ + dÄ±ÅŸa aktarma",
+          "Ã–ncelikli destek"
         ]
       },
       "table": {
-        "feature": "Özellik",
+        "feature": "Ã–zellik",
         "rows": [
           {
-            "label": "Günlük hesap",
-            "free": "Günde 3",
-            "pro": "Sınırsız"
+            "label": "GÃ¼nlÃ¼k hesap",
+            "free": "GÃ¼nde 3",
+            "pro": "SÄ±nÄ±rsÄ±z"
           },
           {
-            "label": "Hesap geçmişi",
+            "label": "Hesap geÃ§miÅŸi",
             "free": "Yok",
-            "pro": "Tam geçmiş"
+            "pro": "Tam geÃ§miÅŸ"
           },
           {
-            "label": "PDF dışa aktarma",
+            "label": "PDF dÄ±ÅŸa aktarma",
             "free": "Kilitli",
             "pro": "Dahil"
           },
           {
-            "label": "API erişimi",
-            "free": "—",
+            "label": "API eriÅŸimi",
+            "free": "â€”",
             "pro": "Dahil"
           }
         ]
       }
     },
     "trust": {
-      "kicker": "Güven",
-      "title": "Uyumluluk ve hız için tasarlandı",
-      "description": "Mekanik ekipler hataları azaltmak ve kararları belgelemek için AI Engineers Lab kullanıyor.",
+      "kicker": "GÃ¼ven",
+      "title": "Uyumluluk ve hÄ±z iÃ§in tasarlandÄ±",
+      "description": "Mekanik ekipler hatalarÄ± azaltmak ve kararlarÄ± belgelemek iÃ§in AI Engineers Lab kullanÄ±yor.",
       "testimonials": [
         {
-          "quote": "Tork tablolarımızı bir haftada değiştirdik; onay süresi ciddi kısaldı.",
+          "quote": "Tork tablolarÄ±mÄ±zÄ± bir haftada deÄŸiÅŸtirdik; onay sÃ¼resi ciddi kÄ±saldÄ±.",
           "name": "Aylin K.",
-          "role": "Mekanik Tasarım Mühendisi"
+          "role": "Mekanik TasarÄ±m MÃ¼hendisi"
         },
         {
-          "quote": "Formül kırılımı ve birim kontrolleri daha önce kaçırdığımız hataları yakaladı.",
+          "quote": "FormÃ¼l kÄ±rÄ±lÄ±mÄ± ve birim kontrolleri daha Ã¶nce kaÃ§Ä±rdÄ±ÄŸÄ±mÄ±z hatalarÄ± yakaladÄ±.",
           "name": "Tom R.",
-          "role": "Güç Aktarım Lideri"
+          "role": "GÃ¼Ã§ AktarÄ±m Lideri"
         },
         {
-          "quote": "Rapor çıktıları iç onaylarda büyük hız kazandırıyor.",
+          "quote": "Rapor Ã§Ä±ktÄ±larÄ± iÃ§ onaylarda bÃ¼yÃ¼k hÄ±z kazandÄ±rÄ±yor.",
           "name": "Murat S.",
-          "role": "Üretim Mühendisi"
+          "role": "Ãœretim MÃ¼hendisi"
         }
       ],
-      "logosTitle": "Görüldüğü yerler",
+      "logosTitle": "GÃ¶rÃ¼ldÃ¼ÄŸÃ¼ yerler",
       "logos": [],
       "guarantee": {
-        "title": "Hesap doğruluğu garantisi",
-        "body": "Bir sonuç şüpheli görünürse 24 saat içinde doğrular ve düzeltiriz."
+        "title": "Hesap doÄŸruluÄŸu garantisi",
+        "body": "Bir sonuÃ§ ÅŸÃ¼pheli gÃ¶rÃ¼nÃ¼rse 24 saat iÃ§inde doÄŸrular ve dÃ¼zeltiriz."
       }
     }
   },
   "pages": {
     "tools": {
-      "badge": "Araç Kütüphanesi",
-      "title": "Tüm araçlar tek sayfada",
-      "description": "Hesaplayıcı, paket ve rehberleri filtrele, ihtiyacın olanı tek tıkla aç.",
-      "imageAlt": "Hesaplayıcı kütüphanesi filtreleri ve araç kartları"
+      "badge": "AraÃ§ KÃ¼tÃ¼phanesi",
+      "title": "TÃ¼m araÃ§lar tek sayfada",
+      "description": "HesaplayÄ±cÄ±, paket ve rehberleri filtrele, ihtiyacÄ±n olanÄ± tek tÄ±kla aÃ§.",
+      "imageAlt": "HesaplayÄ±cÄ± kÃ¼tÃ¼phanesi filtreleri ve araÃ§ kartlarÄ±"
     },
     "projects": {
       "badge": "Projeler",
-      "title": "Kaydedilmiş hesap projeleri",
-      "description": "Hesap sonuçlarını ve raporları düzenlemek için yerel projeler.",
-      "imageAlt": "Kaydedilmiş hesap kartlarını listeleyen proje görünümü",
-      "emptyTitle": "Henüz proje yok.",
-      "emptyDescription": "Herhangi bir araçtan hesap kaydederek proje oluşturabilirsin.",
+      "title": "KaydedilmiÅŸ hesap projeleri",
+      "description": "Hesap sonuÃ§larÄ±nÄ± ve raporlarÄ± dÃ¼zenlemek iÃ§in yerel projeler.",
+      "imageAlt": "KaydedilmiÅŸ hesap kartlarÄ±nÄ± listeleyen proje gÃ¶rÃ¼nÃ¼mÃ¼",
+      "emptyTitle": "HenÃ¼z proje yok.",
+      "emptyDescription": "Herhangi bir araÃ§tan hesap kaydederek proje oluÅŸturabilirsin.",
       "projectLabel": "Proje",
-      "itemCount": "{count} kayıt",
-      "openReport": "Raporu aç",
+      "itemCount": "{count} kayÄ±t",
+      "openReport": "Raporu aÃ§",
       "createdLabel": "Kaydedildi"
     },
     "contentFallback": {
-      "title": "Bu içerik henüz Türkçe mevcut değil.",
-      "description": "Türkçe sürüm yakında eklenecek. Lütfen daha sonra tekrar kontrol edin."
+      "title": "Bu iÃ§erik henÃ¼z TÃ¼rkÃ§e mevcut deÄŸil.",
+      "description": "TÃ¼rkÃ§e sÃ¼rÃ¼m yakÄ±nda eklenecek. LÃ¼tfen daha sonra tekrar kontrol edin."
     },
     "reference": {
-      "badge": "Mühendislik Tabloları",
-      "title": "Mühendislik Tablo Merkezi",
-      "description": "Diş, geçme, sertlik, yüzey, sürtünme ve SI birim tablolarını tek merkezde yönet.",
-      "imageAlt": "Mühendislik tablo modülleri ve hızlı arama merkezi",
-      "searchTitle": "Tek arama, tüm mühendislik tabloları",
-      "searchDescription": "Arama terimi tüm tablo modüllerinde eşzamanlı filtrelenir ve eşleşmeler vurgulanır.",
+      "badge": "MÃ¼hendislik TablolarÄ±",
+      "title": "MÃ¼hendislik Tablo Merkezi",
+      "description": "DiÅŸ, geÃ§me, sertlik, yÃ¼zey, sÃ¼rtÃ¼nme ve SI birim tablolarÄ±nÄ± tek merkezde yÃ¶net.",
+      "imageAlt": "MÃ¼hendislik tablo modÃ¼lleri ve hÄ±zlÄ± arama merkezi",
+      "searchTitle": "Tek arama, tÃ¼m mÃ¼hendislik tablolarÄ±",
+      "searchDescription": "Arama terimi tÃ¼m tablo modÃ¼llerinde eÅŸzamanlÄ± filtrelenir ve eÅŸleÅŸmeler vurgulanÄ±r.",
       "searchLabel": "Tablolarda ara",
-      "searchPlaceholder": "M12, HRC, N7, MPa, µ, sürtünme...",
+      "searchPlaceholder": "M12, HRC, N7, MPa, Âµ, sÃ¼rtÃ¼nme...",
       "sidebarTitle": "Kategoriler",
-      "sidebarDescription": "Masaüstünde sabit gezinme paneli",
+      "sidebarDescription": "MasaÃ¼stÃ¼nde sabit gezinme paneli",
       "exportCta": "CSV indir",
       "copyTableCta": "Tabloyu kopyala",
-      "copyRowCta": "Satırı kopyala",
+      "copyRowCta": "SatÄ±rÄ± kopyala",
       "actionsColumn": "Aksiyon",
-      "copyRowSuccess": "Satır panoya kopyalandı.",
-      "copyTableSuccess": "Tablo panoya kopyalandı.",
-      "copyError": "Kopyalama başarısız oldu.",
-      "emptyState": "Eşleşen kayıt bulunamadı.",
-      "disclaimer": "Tablolar hızlı mühendislik kontrolü içindir. Nihai karar için ilgili standartlar, teknik şartname ve sorumlu mühendis onayı gereklidir."
+      "copyRowSuccess": "SatÄ±r panoya kopyalandÄ±.",
+      "copyTableSuccess": "Tablo panoya kopyalandÄ±.",
+      "copyError": "Kopyalama baÅŸarÄ±sÄ±z oldu.",
+      "emptyState": "EÅŸleÅŸen kayÄ±t bulunamadÄ±.",
+      "disclaimer": "Tablolar hÄ±zlÄ± mÃ¼hendislik kontrolÃ¼ iÃ§indir. Nihai karar iÃ§in ilgili standartlar, teknik ÅŸartname ve sorumlu mÃ¼hendis onayÄ± gereklidir."
     },
     "materials": {
-      "badge": "Malzeme Kütüphanesi",
-      "title": "Malzeme Kütüphanesi",
-      "description": "Standart, kategori, akma dayanımı ve elastisite modülüne göre malzeme ara.",
-      "imageAlt": "Filtreli malzeme kütüphanesi araması",
+      "badge": "Malzeme KÃ¼tÃ¼phanesi",
+      "title": "Malzeme KÃ¼tÃ¼phanesi",
+      "description": "Standart, kategori, akma dayanÄ±mÄ± ve elastisite modÃ¼lÃ¼ne gÃ¶re malzeme ara.",
+      "imageAlt": "Filtreli malzeme kÃ¼tÃ¼phanesi aramasÄ±",
       "search": {
         "title": "Malzeme ara",
         "description": "Kalite, standart veya kategori yazarak listeyi daralt.",
@@ -318,64 +318,64 @@
       },
       "filters": {
         "categoryLabel": "Kategori",
-        "allCategories": "Tüm kategoriler",
-        "yieldLabel": "Akma dayanımı (MPa)",
+        "allCategories": "TÃ¼m kategoriler",
+        "yieldLabel": "Akma dayanÄ±mÄ± (MPa)",
         "yieldMin": "Min MPa",
         "yieldMax": "Maks MPa",
-        "modulusLabel": "Elastisite modülü (GPa)",
+        "modulusLabel": "Elastisite modÃ¼lÃ¼ (GPa)",
         "modulusMin": "Min GPa",
         "modulusMax": "Maks GPa",
         "clear": "Filtreleri temizle"
       },
       "results": {
         "countLabel": "{count} malzeme",
-        "emptyTitle": "Filtrelere uygun malzeme bulunamadı.",
-        "emptyDescription": "Arama veya aralıkları güncelleyin."
+        "emptyTitle": "Filtrelere uygun malzeme bulunamadÄ±.",
+        "emptyDescription": "Arama veya aralÄ±klarÄ± gÃ¼ncelleyin."
       },
       "card": {
         "standard": "Standart",
         "category": "Kategori",
-        "density": "Yoğunluk",
+        "density": "YoÄŸunluk",
         "modulus": "E (GPa)",
         "yield": "Akma (MPa)",
-        "cta": "Malzemeyi aç"
+        "cta": "Malzemeyi aÃ§"
       },
       "detail": {
-        "back": "Kütüphaneye dön",
+        "back": "KÃ¼tÃ¼phaneye dÃ¶n",
         "badge": "Malzeme profili",
-        "subtitle": "Tipik özellikler ve referanslar",
-        "propertiesTitle": "Temel özellikler",
-        "propertiesDescription": "Aksi belirtilmedikçe oda sıcaklığında tipik değerler.",
+        "subtitle": "Tipik Ã¶zellikler ve referanslar",
+        "propertiesTitle": "Temel Ã¶zellikler",
+        "propertiesDescription": "Aksi belirtilmedikÃ§e oda sÄ±caklÄ±ÄŸÄ±nda tipik deÄŸerler.",
         "notesTitle": "Notlar",
         "notesEmpty": "Ek not yok.",
-        "useTitle": "Araçlarda kullan",
-        "useDescription": "Seçilen malzeme değerleriyle hesaplayıcıyı doldur.",
-        "useBolt": "Cıvatada kullan",
-        "useBeam": "Kirişte kullan",
+        "useTitle": "AraÃ§larda kullan",
+        "useDescription": "SeÃ§ilen malzeme deÄŸerleriyle hesaplayÄ±cÄ±yÄ± doldur.",
+        "useBolt": "CÄ±vatada kullan",
+        "useBeam": "KiriÅŸte kullan",
         "useSanity": "Sanity Check'te kullan",
         "sourcesTitle": "Kaynaklar",
-        "sourcesDescription": "Tipik değerler için kullanılan kaynaklar.",
+        "sourcesDescription": "Tipik deÄŸerler iÃ§in kullanÄ±lan kaynaklar.",
         "sourcesEmpty": "Kaynak listesi yok."
       },
       "labels": {
         "standard": "Standart",
         "category": "Kategori",
-        "density": "Yoğunluk (kg/m3)",
-        "E": "Elastisite modülü E (GPa)",
-        "G": "Kayma modülü G (GPa)",
-        "yield": "Akma dayanımı (MPa)",
-        "UTS": "Çekme dayanımı (MPa)",
-        "alpha": "Genleşme katsayısı α (um/m-K)"
+        "density": "YoÄŸunluk (kg/m3)",
+        "E": "Elastisite modÃ¼lÃ¼ E (GPa)",
+        "G": "Kayma modÃ¼lÃ¼ G (GPa)",
+        "yield": "Akma dayanÄ±mÄ± (MPa)",
+        "UTS": "Ã‡ekme dayanÄ±mÄ± (MPa)",
+        "alpha": "GenleÅŸme katsayÄ±sÄ± Î± (um/m-K)"
       },
-      "disclaimer": "Değerler tipik ve karşılaştırma amaçlıdır. Nihai tasarım için tedarikçi verisini ve standartları doğrulayın.",
+      "disclaimer": "DeÄŸerler tipik ve karÅŸÄ±laÅŸtÄ±rma amaÃ§lÄ±dÄ±r. Nihai tasarÄ±m iÃ§in tedarikÃ§i verisini ve standartlarÄ± doÄŸrulayÄ±n.",
       "categories": {
-        "steel": "Çelik",
-        "stainless": "Paslanmaz çelik",
-        "tool": "Takım çeliği",
-        "cast-iron": "Dökme demir",
-        "aluminum": "Alüminyum",
-        "copper": "Bakır",
-        "nickel": "Nikel alaşımları",
+        "steel": "Ã‡elik",
+        "stainless": "Paslanmaz Ã§elik",
+        "tool": "TakÄ±m Ã§eliÄŸi",
+        "cast-iron": "DÃ¶kme demir",
+        "aluminum": "AlÃ¼minyum",
+        "copper": "BakÄ±r",
+        "nickel": "Nikel alaÅŸÄ±mlarÄ±",
         "titanium": "Titanyum",
         "magnesium": "Magnezyum",
         "plastics": "Plastikler",
@@ -386,417 +386,428 @@
     "standards": {
       "badge": "Standartlar",
       "title": "Standartlar Merkezi",
-      "description": "Diş, malzeme, geçme ve akışkan özetlerini tek merkezde topla.",
-      "imageAlt": "Diş ve geçme tablolarını içeren standartlar merkezi",
+      "description": "DiÅŸ, malzeme, geÃ§me ve akÄ±ÅŸkan Ã¶zetlerini tek merkezde topla.",
+      "imageAlt": "DiÅŸ ve geÃ§me tablolarÄ±nÄ± iÃ§eren standartlar merkezi",
       "categoriesTitle": "Kategoriler",
-      "categoriesDescription": "Standart ve özet tabloları konuya göre keşfet.",
+      "categoriesDescription": "Standart ve Ã¶zet tablolarÄ± konuya gÃ¶re keÅŸfet.",
       "categoryBadge": "Kategori",
-      "categoryCta": "Kategoriyi aç",
+      "categoryCta": "Kategoriyi aÃ§",
       "categoryPage": {
         "searchTitle": "Standartlarda arama",
-        "searchDescription": "Bu kategorideki tüm tabloları filtrele.",
+        "searchDescription": "Bu kategorideki tÃ¼m tablolarÄ± filtrele.",
         "searchLabel": "Tablolarda ara",
-        "searchPlaceholder": "ISO 286, M12, pürüzlülük...",
+        "searchPlaceholder": "ISO 286, M12, pÃ¼rÃ¼zlÃ¼lÃ¼k...",
         "exportCta": "CSV indir",
-        "emptyState": "Eşleşen kayıt bulunamadı.",
+        "emptyState": "EÅŸleÅŸen kayÄ±t bulunamadÄ±.",
         "sourcesTitle": "Kaynaklar",
         "sourcesLabel": "Kaynak"
       }
     },
     "sanityCheck": {
-      "badge": "Mühendislik Kontrol Laboratuvarı",
-      "title": "Mühendislik Kontrol Laboratuvarı",
-      "description": "Değişkenleri, birimleri ve formül sonucunu tek ekranda doğrula.",
-      "howToTitle": "Nasıl kullanılır?",
+      "badge": "MÃ¼hendislik Kontrol LaboratuvarÄ±",
+      "title": "MÃ¼hendislik Kontrol LaboratuvarÄ±",
+      "description": "DeÄŸiÅŸkenleri, birimleri ve formÃ¼l sonucunu tek ekranda doÄŸrula.",
+      "howToTitle": "NasÄ±l kullanÄ±lÄ±r?",
       "howToSteps": [
-        "Değişkenleri birimleri ve aralıklarıyla gir.",
-        "Formülü yaz ve beklenen çıktı birimini seç.",
-        "Tarama veya Monte Carlo ile duyarlılığı incele."
+        "DeÄŸiÅŸkenleri birimleri ve aralÄ±klarÄ±yla gir.",
+        "FormÃ¼lÃ¼ yaz ve beklenen Ã§Ä±ktÄ± birimini seÃ§.",
+        "Tarama veya Monte Carlo ile duyarlÄ±lÄ±ÄŸÄ± incele."
       ],
       "tabs": {
-        "sweep": "Duyarlılık Tarama",
+        "sweep": "DuyarlÄ±lÄ±k Tarama",
         "monteCarlo": "Monte Carlo"
       }
     },
     "guides": {
       "badge": "Rehberler",
-      "title": "Adım adım hesaplama ve uygulama rehberleri",
-      "description": "Malzeme seçimi, kalite kontrolü ve üretim akışları için pratik notlar.",
+      "title": "AdÄ±m adÄ±m hesaplama ve uygulama rehberleri",
+      "description": "Malzeme seÃ§imi, kalite kontrolÃ¼ ve Ã¼retim akÄ±ÅŸlarÄ± iÃ§in pratik notlar.",
       "imageAlt": "Rehber listesi, kategori rozetleri ve kartlar",
-      "empty": "Henüz yayınlanmış rehber yok.",
+      "empty": "HenÃ¼z yayÄ±nlanmÄ±ÅŸ rehber yok.",
       "countLabel": "{count} rehber",
       "readingTime": "{count} dk okuma",
-      "fallbackCategory": "Diğer",
-      "back": "Rehberler listesine dön",
-      "tocTitle": "İçerik",
-      "tocEmpty": "Bu rehberde başlık bulunmuyor."
+      "fallbackCategory": "DiÄŸer",
+      "back": "Rehberler listesine dÃ¶n",
+      "tocTitle": "Ä°Ã§erik",
+      "tocEmpty": "Bu rehberde baÅŸlÄ±k bulunmuyor."
     },
     "glossary": {
-      "badge": "Sözlük",
-      "title": "Teknik terimler ve kısa tanımlar",
-      "description": "Dişli, tork ve üretim terminolojisindeki kritik kavramlar tek yerde.",
-      "imageAlt": "Sözlük terim listesi ve kategori etiketleri",
-      "empty": "Henüz yayınlanmış terim yok.",
+      "badge": "SÃ¶zlÃ¼k",
+      "title": "Teknik terimler ve kÄ±sa tanÄ±mlar",
+      "description": "DiÅŸli, tork ve Ã¼retim terminolojisindeki kritik kavramlar tek yerde.",
+      "imageAlt": "SÃ¶zlÃ¼k terim listesi ve kategori etiketleri",
+      "empty": "HenÃ¼z yayÄ±nlanmÄ±ÅŸ terim yok.",
       "readingTime": "{count} dk okuma",
-      "back": "Sözlük listesine dön",
-      "definitionTitle": "Tanım",
-      "formulaTitle": "Formüller",
-      "formulaEmpty": "Bu terim için formüller eklenmedi.",
-      "relatedTitle": "İlgili içerikler",
+      "back": "SÃ¶zlÃ¼k listesine dÃ¶n",
+      "definitionTitle": "TanÄ±m",
+      "formulaTitle": "FormÃ¼ller",
+      "formulaEmpty": "Bu terim iÃ§in formÃ¼ller eklenmedi.",
+      "relatedTitle": "Ä°lgili iÃ§erikler",
       "relatedDescription": "Benzer etiketli kaynaklar.",
-      "relatedEmpty": "İlgili içerik bulunamadı.",
+      "relatedEmpty": "Ä°lgili iÃ§erik bulunamadÄ±.",
       "relatedBlog": "Blog",
       "relatedGuides": "Rehberler",
-      "relatedTools": "Hesaplayıcılar",
+      "relatedTools": "HesaplayÄ±cÄ±lar",
       "readCta": "Oku",
-      "openToolCta": "Hesaplayıcıyı Aç"
+      "openToolCta": "HesaplayÄ±cÄ±yÄ± AÃ§"
     },
     "categories": {
       "badge": "Kategori",
-      "description": "Bu kategori altındaki blog yazıları, rehberler ve hesaplayıcılar.",
+      "description": "Bu kategori altÄ±ndaki blog yazÄ±larÄ±, rehberler ve hesaplayÄ±cÄ±lar.",
       "blogTitle": "Blog",
-      "blogDesc": "Kategoriye ait blog yazıları.",
+      "blogDesc": "Kategoriye ait blog yazÄ±larÄ±.",
       "guidesTitle": "Rehberler",
       "guidesDesc": "Kategoriye ait rehberler.",
-      "toolsTitle": "Hesaplayıcılar",
-      "toolsDesc": "Kategoriye ait hesaplayıcılar.",
-      "relatedTagsTitle": "İlgili etiketler",
-      "relatedTagsEmpty": "İlgili etiket bulunamadı.",
-      "contentEmpty": "Bu kategoride içerik bulunamadı.",
-      "toolsEmpty": "Bu kategoride hesaplayıcı bulunamadı.",
+      "toolsTitle": "HesaplayÄ±cÄ±lar",
+      "toolsDesc": "Kategoriye ait hesaplayÄ±cÄ±lar.",
+      "relatedTagsTitle": "Ä°lgili etiketler",
+      "relatedTagsEmpty": "Ä°lgili etiket bulunamadÄ±.",
+      "contentEmpty": "Bu kategoride iÃ§erik bulunamadÄ±.",
+      "toolsEmpty": "Bu kategoride hesaplayÄ±cÄ± bulunamadÄ±.",
       "readCta": "Oku",
-      "openToolCta": "Hesaplayıcıyı Aç",
+      "openToolCta": "HesaplayÄ±cÄ±yÄ± AÃ§",
       "readingTimeShort": "{count} dk"
     },
     "tags": {
       "badge": "Etiket",
-      "description": "Bu etiketle ilişkili blog yazıları, rehberler ve hesaplayıcılar.",
+      "description": "Bu etiketle iliÅŸkili blog yazÄ±larÄ±, rehberler ve hesaplayÄ±cÄ±lar.",
       "blogTitle": "Blog",
-      "blogDesc": "Etikete ait blog yazıları.",
+      "blogDesc": "Etikete ait blog yazÄ±larÄ±.",
       "guidesTitle": "Rehberler",
       "guidesDesc": "Etikete uygun rehberler.",
-      "toolsTitle": "Hesaplayıcılar",
-      "toolsDesc": "Etikete uygun hesaplayıcılar.",
-      "relatedTagsTitle": "İlgili etiketler",
-      "relatedTagsEmpty": "Başka etiket bulunamadı.",
-      "contentEmpty": "Bu etikette içerik bulunamadı.",
-      "toolsEmpty": "Bu etikette hesaplayıcı bulunamadı.",
+      "toolsTitle": "HesaplayÄ±cÄ±lar",
+      "toolsDesc": "Etikete uygun hesaplayÄ±cÄ±lar.",
+      "relatedTagsTitle": "Ä°lgili etiketler",
+      "relatedTagsEmpty": "BaÅŸka etiket bulunamadÄ±.",
+      "contentEmpty": "Bu etikette iÃ§erik bulunamadÄ±.",
+      "toolsEmpty": "Bu etikette hesaplayÄ±cÄ± bulunamadÄ±.",
       "readCta": "Oku",
-      "openToolCta": "Hesaplayıcıyı Aç",
+      "openToolCta": "HesaplayÄ±cÄ±yÄ± AÃ§",
       "readingTimeShort": "{count} dk"
     },
     "qualityTools": {
-      "badge": "Kalite araçları: 5N1K - 5 Why - 8D - Kaizen - Poka-Yoke",
-      "title": "Problem tanımı, kök neden analizi ve kalıcı aksiyonlar için dijital şablonlar",
-      "description": "Problem tanımı, kök neden ve aksiyon takibi için sade kalite şablonları.",
-      "imageAlt": "Kalite araçları için dijital şablon kartları ve kontrol panosu",
-      "typical": "Tipik kullanım:",
-      "free": "Ücretsiz",
+      "badge": "Kalite araÃ§larÄ±: 5N1K - 5 Why - 8D - Kaizen - Poka-Yoke",
+      "title": "Problem tanÄ±mÄ±, kÃ¶k neden analizi ve kalÄ±cÄ± aksiyonlar iÃ§in dijital ÅŸablonlar",
+      "description": "Problem tanÄ±mÄ±, kÃ¶k neden ve aksiyon takibi iÃ§in sade kalite ÅŸablonlarÄ±.",
+      "imageAlt": "Kalite araÃ§larÄ± iÃ§in dijital ÅŸablon kartlarÄ± ve kontrol panosu",
+      "typical": "Tipik kullanÄ±m:",
+      "free": "Ãœcretsiz",
       "active": "Aktif (Beta)",
-      "planned": "Planlandı",
+      "planned": "PlanlandÄ±",
       "basic": "Temel seviye",
-      "advanced": "İleri seviye",
+      "advanced": "Ä°leri seviye",
       "premiumBadge": "Premium (bekleme listesi)",
-      "openTool": "Araçı Aç",
-      "comingSoon": "Yakında",
-      "footerActive": "Etkileşimli form ile çalışılabilir (taslak).",
-      "footerPlanned": "Şablon ve form tasarımı üzerinde çalışılıyor."
+      "openTool": "AracÄ± AÃ§",
+      "comingSoon": "YakÄ±nda",
+      "footerActive": "EtkileÅŸimli form ile Ã§alÄ±ÅŸÄ±labilir (taslak).",
+      "footerPlanned": "Åablon ve form tasarÄ±mÄ± Ã¼zerinde Ã§alÄ±ÅŸÄ±lÄ±yor."
     },
     "fixtureTools": {
-      "badge": "Fikstür araçları",
-      "title": "Konumlama, sıkıştırma ve taban plaka için pratik kartlar",
-      "description": "Fikstür tasarımı için hızlı hesaplar ve kontrol listeleri.",
-      "imageAlt": "Fikstür tasarımı için konumlama ve sıkıştırma araç kartları",
+      "badge": "FikstÃ¼r araÃ§larÄ±",
+      "title": "Konumlama, sÄ±kÄ±ÅŸtÄ±rma ve taban plaka iÃ§in pratik kartlar",
+      "description": "FikstÃ¼r tasarÄ±mÄ± iÃ§in hÄ±zlÄ± hesaplar ve kontrol listeleri.",
+      "imageAlt": "FikstÃ¼r tasarÄ±mÄ± iÃ§in konumlama ve sÄ±kÄ±ÅŸtÄ±rma araÃ§ kartlarÄ±",
       "focus": "Odak",
       "active": "Aktif (Beta)",
-      "planned": "Planlandı",
-      "openTool": "Araçı aç",
-      "comingSoon": "Yakında",
-      "footerActive": "Etkileşimli kart hazır.",
-      "footerPlanned": "Kart hazırlanıyor."
+      "planned": "PlanlandÄ±",
+      "openTool": "AracÄ± aÃ§",
+      "comingSoon": "YakÄ±nda",
+      "footerActive": "EtkileÅŸimli kart hazÄ±r.",
+      "footerPlanned": "Kart hazÄ±rlanÄ±yor."
     },
     "projectHub": {
       "badgeTitle": "Proje Merkezi",
-      "badgeSubtitle": "Proje - RFQ - Parça / Revizyon Takibi",
-      "title": "Proje, RFQ ve revizyonları tek panelden yönet",
-      "description": "Projeleri, RFQ teklif süreçlerini ve parça revizyonlarını tek ekranda takip et.",
-      "cta": "Modülü Aç"
+      "badgeSubtitle": "Proje - RFQ - ParÃ§a / Revizyon Takibi",
+      "title": "Proje, RFQ ve revizyonlarÄ± tek panelden yÃ¶net",
+      "description": "Projeleri, RFQ teklif sÃ¼reÃ§lerini ve parÃ§a revizyonlarÄ±nÄ± tek ekranda takip et.",
+      "cta": "ModÃ¼lÃ¼ AÃ§"
     },
     "savedCalculations": {
-      "kicker": "Kayıtlı Hesaplar",
-      "title": "Kayıtlı Hesaplarım",
-      "description": "Daha önce kaydettiğin hesapları gör, tekrar aç veya temizle."
+      "kicker": "KayÄ±tlÄ± Hesaplar",
+      "title": "KayÄ±tlÄ± HesaplarÄ±m",
+      "description": "Daha Ã¶nce kaydettiÄŸin hesaplarÄ± gÃ¶r, tekrar aÃ§ veya temizle."
     },
     "blog": {
       "badge": "Blog",
-      "title": "Hesaplama ve analiz odaklı paylaşımlar",
-      "description": "Manual hesaplama, görsel analiz ve metodik notlar için kısa içerikler.",
-      "imageAlt": "Blog yazıları, filtreler ve etiketler ile liste görünümü",
-      "back": "Blog listesine dön",
-      "tocTitle": "İçerik",
-      "tocEmpty": "Bu yazida başlık bulunmuyor.",
-      "relatedPostsTitle": "Benzer yazılar",
-      "relatedToolsTitle": "İlgili araçlar",
-      "relatedToolsCta": "Hesaplayıcıyı Aç",
+      "title": "Hesaplama ve analiz odaklÄ± paylaÅŸÄ±mlar",
+      "description": "Manual hesaplama, gÃ¶rsel analiz ve metodik notlar iÃ§in kÄ±sa iÃ§erikler.",
+      "imageAlt": "Blog yazÄ±larÄ±, filtreler ve etiketler ile liste gÃ¶rÃ¼nÃ¼mÃ¼",
+      "back": "Blog listesine dÃ¶n",
+      "tocTitle": "Ä°Ã§erik",
+      "tocEmpty": "Bu yazida baÅŸlÄ±k bulunmuyor.",
+      "relatedPostsTitle": "Benzer yazÄ±lar",
+      "relatedToolsTitle": "Ä°lgili araÃ§lar",
+      "relatedToolsCta": "HesaplayÄ±cÄ±yÄ± AÃ§",
       "searchLabel": "Arama",
-      "searchPlaceholder": "Başlık, etiket veya kategori...",
+      "searchPlaceholder": "BaÅŸlÄ±k, etiket veya kategori...",
       "searchButton": "Ara",
-      "clearSearch": "Aramayı temizle",
+      "clearSearch": "AramayÄ± temizle",
       "categoriesTitle": "Kategoriler",
-      "allCategories": "Tüm kategoriler",
+      "allCategories": "TÃ¼m kategoriler",
       "tagsTitle": "Etiketler",
-      "allTags": "Tüm etiketler",
-      "summary": "{start}-{end} / {total} yazı",
+      "allTags": "TÃ¼m etiketler",
+      "summary": "{start}-{end} / {total} yazÄ±",
       "pageSummary": "Sayfa {page} / {total}",
-      "clearFilters": "Tüm filtreleri temizle",
-      "empty": "Aradığın kriterlere uygun yazı bulunamadı.",
+      "clearFilters": "TÃ¼m filtreleri temizle",
+      "empty": "AradÄ±ÄŸÄ±n kriterlere uygun yazÄ± bulunamadÄ±.",
       "readingTime": "{count} dk okuma",
-      "prev": "Önceki",
+      "prev": "Ã–nceki",
       "next": "Sonraki"
     },
     "community": {
       "badge": "Topluluk",
-      "title": "Topluluk tartışmaları ve başlıkları",
-      "description": "Teknik başlık aç, deneyim paylaş ve mühendislik bilgisini akışta tut.",
-      "imageAlt": "Topluluk başlıkları ve tartışma kartları",
-      "sampleBadge": "Örnek",
+      "title": "Topluluk tartÄ±ÅŸmalarÄ± ve baÅŸlÄ±klarÄ±",
+      "description": "Teknik baÅŸlÄ±k aÃ§, deneyim paylaÅŸ ve mÃ¼hendislik bilgisini akÄ±ÅŸta tut.",
+      "imageAlt": "Topluluk baÅŸlÄ±klarÄ± ve tartÄ±ÅŸma kartlarÄ±",
+      "sampleBadge": "Ã–rnek",
       "authCta": {
-        "title": "Topluluğa katıl",
-        "description": "Başlık açmak ve yorum yazmak için giriş yap.",
-        "login": "Giriş yap",
-        "guest": "Misafir olarak başlıkları görüntüle"
+        "title": "TopluluÄŸa katÄ±l",
+        "description": "BaÅŸlÄ±k aÃ§mak ve yorum yazmak iÃ§in giriÅŸ yap.",
+        "login": "GiriÅŸ yap",
+        "guest": "Misafir olarak baÅŸlÄ±klarÄ± gÃ¶rÃ¼ntÃ¼le"
       },
       "form": {
-        "title": "Yeni başlık aç",
-        "description": "Konuyu aç, bağlam ekle ve topluluktan destek iste.",
-        "titleLabel": "Başlık",
-        "titlePlaceholder": "Örn: 3 eksenli fikstür için 3-2-1 referans seçimi",
+        "title": "Yeni baÅŸlÄ±k aÃ§",
+        "description": "Konuyu aÃ§, baÄŸlam ekle ve topluluktan destek iste.",
+        "titleLabel": "BaÅŸlÄ±k",
+        "titlePlaceholder": "Ã–rn: 3 eksenli fikstÃ¼r iÃ§in 3-2-1 referans seÃ§imi",
         "categoryLabel": "Kategori",
         "categories": [
-          "Fikstür / Aparat",
-          "Kalite / Ölçüm",
-          "Malzeme / Isıl İşlem",
-          "Proje / Süreç",
+          "FikstÃ¼r / Aparat",
+          "Kalite / Ã–lÃ§Ã¼m",
+          "Malzeme / IsÄ±l Ä°ÅŸlem",
+          "Proje / SÃ¼reÃ§",
           "Genel"
         ],
-        "bodyLabel": "Açıklama",
-        "bodyPlaceholder": "Detay, ölçü, link veya kısa çizim notları...",
-        "helper": "Hassas verileri paylaşma.",
-        "submit": "Başlık aç"
+        "bodyLabel": "AÃ§Ä±klama",
+        "bodyPlaceholder": "Detay, Ã¶lÃ§Ã¼, link veya kÄ±sa Ã§izim notlarÄ±...",
+        "helper": "Hassas verileri paylaÅŸma.",
+        "submit": "BaÅŸlÄ±k aÃ§"
       },
       "stream": {
-        "kicker": "Canlı",
-        "title": "Topluluk yorum akışı",
-        "description": "Son yorumları gerçek zamanlı gör ve not ekle."
+        "kicker": "CanlÄ±",
+        "title": "Topluluk yorum akÄ±ÅŸÄ±",
+        "description": "Son yorumlarÄ± gerÃ§ek zamanlÄ± gÃ¶r ve not ekle."
       },
       "recent": {
-        "title": "Son başlıklar",
-        "countLabel": "{count} başlık",
-        "replyCount": "{count} yanıt"
+        "title": "Son baÅŸlÄ±klar",
+        "countLabel": "{count} baÅŸlÄ±k",
+        "replyCount": "{count} yanÄ±t"
       },
       "thread": {
-        "backLabel": "<- Topluluğa dön",
+        "backLabel": "<- TopluluÄŸa dÃ¶n",
         "authorLabel": "Yazan: {author}",
-        "repliesTitle": "Yanıtlar",
-        "replyLabel": "Senin yanıtın",
-        "replyPlaceholder": "Tecrübeni, hesabını veya önerini yaz...",
-        "replyCta": "Yanıtı paylaş",
-        "missingTitle": "Başlık bulunamadı",
-        "missingDescription": "Bu topluluk başlığı bulunamadı."
+        "repliesTitle": "YanÄ±tlar",
+        "replyLabel": "Senin yanÄ±tÄ±n",
+        "replyPlaceholder": "TecrÃ¼beni, hesabÄ±nÄ± veya Ã¶nerini yaz...",
+        "replyCta": "YanÄ±tÄ± paylaÅŸ",
+        "missingTitle": "BaÅŸlÄ±k bulunamadÄ±",
+        "missingDescription": "Bu topluluk baÅŸlÄ±ÄŸÄ± bulunamadÄ±."
       }
     },
     "qa": {
       "badge": "Soru-Cevap",
       "title": "Soru-cevap",
-      "description": "Soru-cevap alanında hızlı yanıtlar al, deneyim paylaş ve teknik konuları tartış."
+      "description": "Soru-cevap alanÄ±nda hÄ±zlÄ± yanÄ±tlar al, deneyim paylaÅŸ ve teknik konularÄ± tartÄ±ÅŸ."
     },
     "support": {
       "badge": "Destek",
-      "title": "Teknik destek ve yönlendirme",
-      "description": "Kısa bir talep bırak, ekip hızlıca geri dönsün.",
-      "imageAlt": "Talep detayları ve dosya yükleme alanı olan destek formu",
-      "tipsTitle": "Talep oluştururken öneriler",
+      "title": "Teknik destek ve yÃ¶nlendirme",
+      "description": "KÄ±sa bir talep bÄ±rak, ekip hÄ±zlÄ±ca geri dÃ¶nsÃ¼n.",
+      "imageAlt": "Talep detaylarÄ± ve dosya yÃ¼kleme alanÄ± olan destek formu",
+      "tipsTitle": "Talep oluÅŸtururken Ã¶neriler",
       "tips": [
-        "Kısa bir konu başlığı ekle (örn. \"M12 10.9 civata torku\").",
-        "Varsa malzeme, yük, limit veya standartları belirt."
+        "KÄ±sa bir konu baÅŸlÄ±ÄŸÄ± ekle (Ã¶rn. \"M12 10.9 civata torku\").",
+        "Varsa malzeme, yÃ¼k, limit veya standartlarÄ± belirt."
       ]
     },
     "premium": {
       "badge": "Premium",
-      "title": "Premium paket önizleme",
-      "description": "Ödeme altyapısı henüz açık değil. Bekleme listesi ile yeni özellikleri takip et.",
-      "imageAlt": "Premium yol haritası kartları ve özellik listesi"
+      "title": "Premium paket Ã¶nizleme",
+      "description": "Ã–deme altyapÄ±sÄ± henÃ¼z aÃ§Ä±k deÄŸil. Bekleme listesi ile yeni Ã¶zellikleri takip et.",
+      "imageAlt": "Premium yol haritasÄ± kartlarÄ± ve Ã¶zellik listesi"
     },
     "changelog": {
-      "badge": "Güncelleme Günlüğü",
-      "title": "Yenilikler ve güncellemeler",
-      "description": "Yeni eklenen araçlar, düzeltmeler ve genel değişiklikler burada listelenir.",
-      "emptyTitle": "Henüz güncelleme günlüğü yok.",
-      "emptyDescription": "İlk güncelleme yakında eklenecek.",
-      "addedTitle": "Eklenen araçlar",
-      "addedEmpty": "Bu sürümde yeni araç eklenmedi.",
-      "fixesTitle": "Düzeltmeler",
-      "fixesEmpty": "Bu sürümde düzeltme kaydı yok."
+      "badge": "GÃ¼ncelleme GÃ¼nlÃ¼ÄŸÃ¼",
+      "title": "Yenilikler ve gÃ¼ncellemeler",
+      "description": "Yeni eklenen araÃ§lar, dÃ¼zeltmeler ve genel deÄŸiÅŸiklikler burada listelenir.",
+      "emptyTitle": "HenÃ¼z gÃ¼ncelleme gÃ¼nlÃ¼ÄŸÃ¼ yok.",
+      "emptyDescription": "Ä°lk gÃ¼ncelleme yakÄ±nda eklenecek.",
+      "filterLabel": "Arac filtresi",
+      "filterAll": "Tum araclar",
+      "resultsLabel": "{count} kayit gosteriliyor",
+      "feedLabel": "RSS feed",
+      "badgeNew": "Yeni",
+      "badgeFixed": "Duzeltildi",
+      "badgeRemoved": "Kaldirildi",
+      "addedTitle": "Eklenen araÃ§lar",
+      "addedEmpty": "Bu sÃ¼rÃ¼mde yeni araÃ§ eklenmedi.",
+      "fixesTitle": "DÃ¼zeltmeler",
+      "fixesEmpty": "Bu sÃ¼rÃ¼mde dÃ¼zeltme kaydÄ± yok."
     },
     "gearRatio": {
       "header": {
-        "back": "← Tüm hesaplayıcılar",
+        "back": "â† TÃ¼m hesaplayÄ±cÄ±lar",
         "badge": "Oranlar",
-        "title": "Dişli Oranı Hesaplayıcı",
-        "description": "Diş sayıları ve giriş devrine göre oran, çıkış devri ve torku (verim dahil) hesaplar."
+        "title": "DiÅŸli OranÄ± HesaplayÄ±cÄ±",
+        "description": "DiÅŸ sayÄ±larÄ± ve giriÅŸ devrine gÃ¶re oran, Ã§Ä±kÄ±ÅŸ devri ve torku (verim dahil) hesaplar."
       },
       "card": {
-        "title": "Dişli Oranı Hesaplayıcı",
-        "description": "Diş sayıları ve giriş devrini gir; oran, çıkış devri ve torku (verim dahil) hesapla.",
+        "title": "DiÅŸli OranÄ± HesaplayÄ±cÄ±",
+        "description": "DiÅŸ sayÄ±larÄ± ve giriÅŸ devrini gir; oran, Ã§Ä±kÄ±ÅŸ devri ve torku (verim dahil) hesapla.",
         "status": "Aktif"
       },
       "fields": {
-        "z1": "Giriş diş sayısı z1",
-        "z2": "Çıkış diş sayısı z2",
-        "rpm1": "Giriş devri n1 [rpm]",
-        "torque1": "Giriş torku T1 [Nm]",
-        "efficiency": "Verim η (0-1)",
-        "sample": "Örnek değerlerle doldur"
+        "z1": "GiriÅŸ diÅŸ sayÄ±sÄ± z1",
+        "z2": "Ã‡Ä±kÄ±ÅŸ diÅŸ sayÄ±sÄ± z2",
+        "rpm1": "GiriÅŸ devri n1 [rpm]",
+        "torque1": "GiriÅŸ torku T1 [Nm]",
+        "efficiency": "Verim Î· (0-1)",
+        "sample": "Ã–rnek deÄŸerlerle doldur"
       },
       "results": {
         "ratio": "Oran i = z2 / z1",
-        "rpm2": "Çıkış devri n2 [rpm]",
-        "torque2": "Çıkış torku T2 [Nm]",
-        "efficiency": "Verim η"
+        "rpm2": "Ã‡Ä±kÄ±ÅŸ devri n2 [rpm]",
+        "torque2": "Ã‡Ä±kÄ±ÅŸ torku T2 [Nm]",
+        "efficiency": "Verim Î·"
       },
-      "note": "Not: T2 hesabında verim katsayısı η çarpılır."
+      "note": "Not: T2 hesabÄ±nda verim katsayÄ±sÄ± Î· Ã§arpÄ±lÄ±r."
     },
     "bendingStress": {
       "badges": {
-        "primary": "Mekanik Hesaplayıcı",
-        "secondary": "Eğilme Gerilmesi & Sehim"
+        "primary": "Mekanik HesaplayÄ±cÄ±",
+        "secondary": "EÄŸilme Gerilmesi & Sehim"
       },
       "header": {
-        "title": "Basit Mesnetli Kiriş — Eğilme Gerilmesi ve Sehim",
-        "description": "Basit mesnetli, ortasında tekil yük bulunan kiriş için eğilme momenti, kesit modülü, eğilme gerilmesi ve sehim hesabı."
+        "title": "Basit Mesnetli KiriÅŸ â€” EÄŸilme Gerilmesi ve Sehim",
+        "description": "Basit mesnetli, ortasÄ±nda tekil yÃ¼k bulunan kiriÅŸ iÃ§in eÄŸilme momenti, kesit modÃ¼lÃ¼, eÄŸilme gerilmesi ve sehim hesabÄ±."
       },
       "inputs": {
-        "title": "Giriş Parametreleri",
-        "beamLength": "Kiriş boyu L [mm]",
-        "force": "Ortadaki yük F [kN]",
+        "title": "GiriÅŸ Parametreleri",
+        "beamLength": "KiriÅŸ boyu L [mm]",
+        "force": "Ortadaki yÃ¼k F [kN]",
         "sectionType": "Kesit tipi",
-        "sectionRect": "Dikdörtgen",
+        "sectionRect": "DikdÃ¶rtgen",
         "sectionCircle": "Dairesel",
-        "width": "Genişlik b [mm]",
-        "height": "Yükseklik h [mm]",
-        "diameter": "Çap d [mm]",
-        "youngModulus": "Elastisite modülü E [MPa]",
-        "yieldStrength": "Akma dayanımı Re [MPa]",
+        "width": "GeniÅŸlik b [mm]",
+        "height": "YÃ¼kseklik h [mm]",
+        "diameter": "Ã‡ap d [mm]",
+        "youngModulus": "Elastisite modÃ¼lÃ¼ E [MPa]",
+        "yieldStrength": "Akma dayanÄ±mÄ± Re [MPa]",
         "calculate": "Hesapla"
       },
       "results": {
-        "title": "Hesap Sonuçları",
-        "maxMoment": "Maksimum eğilme momenti Mmax",
+        "title": "Hesap SonuÃ§larÄ±",
+        "maxMoment": "Maksimum eÄŸilme momenti Mmax",
         "inertia": "Atalet momenti I",
-        "sectionModulus": "Kesit modülü W",
-        "sigma": "Maksimum eğilme gerilmesi σ",
-        "deflection": "Maksimum sehim δ",
-        "safety": "Emniyet katsayısı S",
-        "note": "Formüller basit mesnetli, ortada tekil yük uygulanan kiriş için geçerlidir. Kritik tasarımlarda ilgili standartlar kontrol edilmelidir."
+        "sectionModulus": "Kesit modÃ¼lÃ¼ W",
+        "sigma": "Maksimum eÄŸilme gerilmesi Ïƒ",
+        "deflection": "Maksimum sehim Î´",
+        "safety": "Emniyet katsayÄ±sÄ± S",
+        "note": "FormÃ¼ller basit mesnetli, ortada tekil yÃ¼k uygulanan kiriÅŸ iÃ§in geÃ§erlidir. Kritik tasarÄ±mlarda ilgili standartlar kontrol edilmelidir."
       },
       "notes": {
-        "title": "Emniyetli Tasarım Notları",
-        "empty": "Önce formu doldurun; notlar sonuçlara göre güncellenir.",
+        "title": "Emniyetli TasarÄ±m NotlarÄ±",
+        "empty": "Ã–nce formu doldurun; notlar sonuÃ§lara gÃ¶re gÃ¼ncellenir.",
         "safety": {
-          "unsafe": "Güvensiz — akma beklenir.",
-          "veryLow": "Çok düşük emniyet. Tolerans ve yük belirsizliğiyle riskli.",
-          "low": "Düşük emniyet. Prototip/test için tolere edilebilir, seri üretimde dikkat.",
-          "ok": "Statik çelik konstrüksiyon için tipik emniyet seviyesi.",
-          "comfortable": "Konforlu emniyet seviyesi. Yorulma ve darbe etkileri için daha rahat.",
-          "veryHigh": "Çok yüksek emniyet. Ağırlık optimizasyonu için kesit azaltılabilir."
+          "unsafe": "GÃ¼vensiz â€” akma beklenir.",
+          "veryLow": "Ã‡ok dÃ¼ÅŸÃ¼k emniyet. Tolerans ve yÃ¼k belirsizliÄŸiyle riskli.",
+          "low": "DÃ¼ÅŸÃ¼k emniyet. Prototip/test iÃ§in tolere edilebilir, seri Ã¼retimde dikkat.",
+          "ok": "Statik Ã§elik konstrÃ¼ksiyon iÃ§in tipik emniyet seviyesi.",
+          "comfortable": "Konforlu emniyet seviyesi. Yorulma ve darbe etkileri iÃ§in daha rahat.",
+          "veryHigh": "Ã‡ok yÃ¼ksek emniyet. AÄŸÄ±rlÄ±k optimizasyonu iÃ§in kesit azaltÄ±labilir."
         },
-        "deflectionMissing": "Sehim bilgisi mevcut değil.",
-        "deflectionBase": "Sehim oranı yaklaşık L/δ ≈ {ratio}.",
-        "deflectionLow": "Bu değer oldukça esnek bir yapı gösterir (L/150’den küçük).",
-        "deflectionMid": "Birçok uygulama için sınırda kabul edilir (yaklaşık L/150–L/250).",
-        "deflectionOk": "Çoğu makine parçası için kabul edilebilir (L/250–L/400).",
-        "deflectionHigh": "Sehim açısından oldukça rijit (L/400 ve üzeri).",
-        "stress": "Hesaplanan maksimum eğilme gerilmesi yaklaşık {sigma} MPa seviyesindedir. Emniyet katsayısı akma dayanımına göre hesaplanır.",
-        "fatigue": "Tasarım yorulma/dinamik yük içeriyorsa yalnızca statik emniyet yeterli değildir; yorulma limitleri ve gerilme konsantrasyonları ayrıca değerlendirilmelidir.",
-        "local": "Bağlantı bölgeleri, kaynak kökleri ve kesit değişimleri lokal gerilme artışları oluşturabilir; bu hesap nominal kesit değerlerini kullanır."
+        "deflectionMissing": "Sehim bilgisi mevcut deÄŸil.",
+        "deflectionBase": "Sehim oranÄ± yaklaÅŸÄ±k L/Î´ â‰ˆ {ratio}.",
+        "deflectionLow": "Bu deÄŸer oldukÃ§a esnek bir yapÄ± gÃ¶sterir (L/150â€™den kÃ¼Ã§Ã¼k).",
+        "deflectionMid": "BirÃ§ok uygulama iÃ§in sÄ±nÄ±rda kabul edilir (yaklaÅŸÄ±k L/150â€“L/250).",
+        "deflectionOk": "Ã‡oÄŸu makine parÃ§asÄ± iÃ§in kabul edilebilir (L/250â€“L/400).",
+        "deflectionHigh": "Sehim aÃ§Ä±sÄ±ndan oldukÃ§a rijit (L/400 ve Ã¼zeri).",
+        "stress": "Hesaplanan maksimum eÄŸilme gerilmesi yaklaÅŸÄ±k {sigma} MPa seviyesindedir. Emniyet katsayÄ±sÄ± akma dayanÄ±mÄ±na gÃ¶re hesaplanÄ±r.",
+        "fatigue": "TasarÄ±m yorulma/dinamik yÃ¼k iÃ§eriyorsa yalnÄ±zca statik emniyet yeterli deÄŸildir; yorulma limitleri ve gerilme konsantrasyonlarÄ± ayrÄ±ca deÄŸerlendirilmelidir.",
+        "local": "BaÄŸlantÄ± bÃ¶lgeleri, kaynak kÃ¶kleri ve kesit deÄŸiÅŸimleri lokal gerilme artÄ±ÅŸlarÄ± oluÅŸturabilir; bu hesap nominal kesit deÄŸerlerini kullanÄ±r."
       },
       "diagram": {
-        "title": "Eğilme Moment Diyagramı (Şematik)",
-        "empty": "Bu bölüm, ortada tekil yük altındaki basit mesnetli kiriş için moment diyagramının şematik gösterimidir. Formu doldurunca görünür.",
-        "description": "Diyagram, momentin orta noktada Mmax ≈ {value} kN·m değerine çıkıp mesnetlerde sıfıra düştüğünü gösterir."
+        "title": "EÄŸilme Moment DiyagramÄ± (Åematik)",
+        "empty": "Bu bÃ¶lÃ¼m, ortada tekil yÃ¼k altÄ±ndaki basit mesnetli kiriÅŸ iÃ§in moment diyagramÄ±nÄ±n ÅŸematik gÃ¶sterimidir. Formu doldurunca gÃ¶rÃ¼nÃ¼r.",
+        "description": "Diyagram, momentin orta noktada Mmax â‰ˆ {value} kNÂ·m deÄŸerine Ã§Ä±kÄ±p mesnetlerde sÄ±fÄ±ra dÃ¼ÅŸtÃ¼ÄŸÃ¼nÃ¼ gÃ¶sterir."
       }
     },
     "fluidsHvac": {
       "header": {
-        "badge": "Akışkanlar & HVAC",
-        "subBadge": "Çoklu Hesap",
-        "title": "Akışkanlar & HVAC Hızlı Paket",
-        "description": "Üç hızlı kontrol: (1) su için Reynolds, sürtünme faktörü ve basınç kaybı, (2) hız yöntemiyle kanal çapı, (3) ACH ↔ debi dönüşümü. Ön boyutlama içindir; detayda standartlara bakın."
+        "badge": "AkÄ±ÅŸkanlar & HVAC",
+        "subBadge": "Ã‡oklu Hesap",
+        "title": "AkÄ±ÅŸkanlar & HVAC HÄ±zlÄ± Paket",
+        "description": "ÃœÃ§ hÄ±zlÄ± kontrol: (1) su iÃ§in Reynolds, sÃ¼rtÃ¼nme faktÃ¶rÃ¼ ve basÄ±nÃ§ kaybÄ±, (2) hÄ±z yÃ¶ntemiyle kanal Ã§apÄ±, (3) ACH â†” debi dÃ¶nÃ¼ÅŸÃ¼mÃ¼. Ã–n boyutlama iÃ§indir; detayda standartlara bakÄ±n."
       },
       "pipe": {
-        "title": "1) Su için Reynolds, f ve Basınç Kaybı (Darcy-Weisbach)",
-        "flow": "Debi Q [m³/h]",
-        "diameter": "Çap D [mm]",
+        "title": "1) Su iÃ§in Reynolds, f ve BasÄ±nÃ§ KaybÄ± (Darcy-Weisbach)",
+        "flow": "Debi Q [mÂ³/h]",
+        "diameter": "Ã‡ap D [mm]",
         "length": "Boru boyu L [m]",
-        "roughness": "Pürüzlülük ε [mm]",
-        "roughnessHelp": "Çelik için ~0.05 mm tipik",
+        "roughness": "PÃ¼rÃ¼zlÃ¼lÃ¼k Îµ [mm]",
+        "roughnessHelp": "Ã‡elik iÃ§in ~0.05 mm tipik",
         "resultRe": "Re",
         "resultF": "f (Darcy)",
-        "resultVelocity": "Hız v",
-        "resultDp": "Δp (L boyunca)",
-        "note": "Varsayımlar: Su 20°C (ρ=1000 kg/m³, μ=1 cP). Δp = f·(L/D)·ρv²/2. Yerel kayıplar, armatür etkileri ve sıcaklık değişimi dahil değildir."
+        "resultVelocity": "HÄ±z v",
+        "resultDp": "Î”p (L boyunca)",
+        "note": "VarsayÄ±mlar: Su 20Â°C (Ï=1000 kg/mÂ³, Î¼=1 cP). Î”p = fÂ·(L/D)Â·ÏvÂ²/2. Yerel kayÄ±plar, armatÃ¼r etkileri ve sÄ±caklÄ±k deÄŸiÅŸimi dahil deÄŸildir."
       },
       "duct": {
-        "title": "2) Hava Kanalı Hız Yöntemi (eşdeğer çap)",
-        "flow": "Debi Q [m³/h]",
-        "velocity": "Hedef hız v [m/s]",
+        "title": "2) Hava KanalÄ± HÄ±z YÃ¶ntemi (eÅŸdeÄŸer Ã§ap)",
+        "flow": "Debi Q [mÂ³/h]",
+        "velocity": "Hedef hÄ±z v [m/s]",
         "resultArea": "Kesit A",
-        "resultDiameter": "Eşdeğer D",
-        "resultPressure": "Dinamik basınç q",
-        "note": "Tipik hızlar: ofis 4–6 m/s, endüstri 6–10 m/s. Gürültü ve kayıp için üretici verilerine bakın; dirsek/damper kayıpları ayrıca hesaplanmalıdır."
+        "resultDiameter": "EÅŸdeÄŸer D",
+        "resultPressure": "Dinamik basÄ±nÃ§ q",
+        "note": "Tipik hÄ±zlar: ofis 4â€“6 m/s, endÃ¼stri 6â€“10 m/s. GÃ¼rÃ¼ltÃ¼ ve kayÄ±p iÃ§in Ã¼retici verilerine bakÄ±n; dirsek/damper kayÄ±plarÄ± ayrÄ±ca hesaplanmalÄ±dÄ±r."
       },
       "ach": {
-        "title": "3) Hava Değişim Sayısı (ACH) ↔ Debi",
-        "volume": "Hacim V [m³]",
+        "title": "3) Hava DeÄŸiÅŸim SayÄ±sÄ± (ACH) â†” Debi",
+        "volume": "Hacim V [mÂ³]",
         "rate": "ACH [1/h]",
         "resultFlow": "Debi",
-        "resultFlowPerSecond": "Debi (m³/s)",
-        "note": "Tipik ACH: ofis 4–8, sınıf 6–10, laboratuvar 8–15. Bina yönetmelikleri ve iç hava kalitesi standartlarını kontrol edin."
+        "resultFlowPerSecond": "Debi (mÂ³/s)",
+        "note": "Tipik ACH: ofis 4â€“8, sÄ±nÄ±f 6â€“10, laboratuvar 8â€“15. Bina yÃ¶netmelikleri ve iÃ§ hava kalitesi standartlarÄ±nÄ± kontrol edin."
       }
     },
     "notFound": {
-      "title": "Sayfa bulunamadı",
-      "description": "Bu bağlantı kaldırılmış veya taşınmış olabilir. Hesaplayıcı Kütüphanesi ile hesaplayıcılara hızlı ulaşabilirsin.",
-      "primaryCta": "Hesaplayıcı Kütüphanesi",
-      "secondaryCta": "Ana sayfaya dön"
+      "title": "Sayfa bulunamadÄ±",
+      "description": "Bu baÄŸlantÄ± kaldÄ±rÄ±lmÄ±ÅŸ veya taÅŸÄ±nmÄ±ÅŸ olabilir. HesaplayÄ±cÄ± KÃ¼tÃ¼phanesi ile hesaplayÄ±cÄ±lara hÄ±zlÄ± ulaÅŸabilirsin.",
+      "primaryCta": "HesaplayÄ±cÄ± KÃ¼tÃ¼phanesi",
+      "secondaryCta": "Ana sayfaya dÃ¶n"
     },
     "faq": {
       "badge": "SSS",
-      "title": "Sık Sorulan Sorular",
-      "description": "Hesaplayıcılar, raporlama, standartlar ve güvenlik varsayımları hakkında hızlı yanıtlar.",
+      "title": "SÄ±k Sorulan Sorular",
+      "description": "HesaplayÄ±cÄ±lar, raporlama, standartlar ve gÃ¼venlik varsayÄ±mlarÄ± hakkÄ±nda hÄ±zlÄ± yanÄ±tlar.",
       "categories": [
         {
-          "title": "Araçlar",
+          "title": "AraÃ§lar",
           "items": [
             {
-              "q": "Hesaplayıcılar ne kadar doğru?",
-              "a": "Yayınlanmış formüllere dayanır; doğruluk girişler ve varsayımlara bağlıdır. Standartlarınızla doğrulayın."
+              "q": "HesaplayÄ±cÄ±lar ne kadar doÄŸru?",
+              "a": "YayÄ±nlanmÄ±ÅŸ formÃ¼llere dayanÄ±r; doÄŸruluk giriÅŸler ve varsayÄ±mlara baÄŸlÄ±dÄ±r. StandartlarÄ±nÄ±zla doÄŸrulayÄ±n."
             },
             {
-              "q": "Varsayılan değerler gerçek mi?",
-              "a": "Varsayılanlar örnek değerlerdir; kendi proje verilerinizle değiştirin."
+              "q": "Bu AI ne kadar guvenilir?",
+              "a": "AI katmani serbest tahmin vermez; hesaplama motoru ISO, DIN ve VDI gibi standartlardan gelen deterministik formul ve tablo akisini calistirir. Asistan bolumu sadece girdi kontrolu, adim aciklama ve referans yonlendirme yapar; nihai dogrulama yine proje gereksinimleriniz ve sorumlu muhendis kararidir."
             },
             {
-              "q": "Neden doğrulama uyarıları görüyorum?",
-              "a": "Uyarılar aralık dışı girişleri, eksik birimleri veya tutarsız seçimleri işaretler."
+              "q": "VarsayÄ±lan deÄŸerler gerÃ§ek mi?",
+              "a": "VarsayÄ±lanlar Ã¶rnek deÄŸerlerdir; kendi proje verilerinizle deÄŸiÅŸtirin."
             },
             {
-              "q": "Hesabı ekibimle paylaşabilir miyim?",
-              "a": "Paylaş & Rapor ile bağlantı oluşturabilir veya PDF özetini indirebilirsiniz."
+              "q": "Neden doÄŸrulama uyarÄ±larÄ± gÃ¶rÃ¼yorum?",
+              "a": "UyarÄ±lar aralÄ±k dÄ±ÅŸÄ± giriÅŸleri, eksik birimleri veya tutarsÄ±z seÃ§imleri iÅŸaretler."
             },
             {
-              "q": "Araçlar çevrimdışı çalışır mı?",
-              "a": "Çoğu hesap tarayıcıda çalışır; referans içerik ve güncellemeler internet gerektirir."
+              "q": "HesabÄ± ekibimle paylaÅŸabilir miyim?",
+              "a": "PaylaÅŸ & Rapor ile baÄŸlantÄ± oluÅŸturabilir veya PDF Ã¶zetini indirebilirsiniz."
+            },
+            {
+              "q": "AraÃ§lar Ã§evrimdÄ±ÅŸÄ± Ã§alÄ±ÅŸÄ±r mÄ±?",
+              "a": "Ã‡oÄŸu hesap tarayÄ±cÄ±da Ã§alÄ±ÅŸÄ±r; referans iÃ§erik ve gÃ¼ncellemeler internet gerektirir."
             }
           ]
         },
@@ -805,23 +816,23 @@
           "items": [
             {
               "q": "PDF raporda neler var?",
-              "a": "Girişler, sonuçlar, formül, varsayımlar, kaynaklar ve üretilen grafik/diyagramlar."
+              "a": "GiriÅŸler, sonuÃ§lar, formÃ¼l, varsayÄ±mlar, kaynaklar ve Ã¼retilen grafik/diyagramlar."
             },
             {
-              "q": "Diyagramları görsel olarak dışa aktarabilir miyim?",
-              "a": "Evet. Raporlar için PNG veya SVG indirebilirsiniz."
+              "q": "DiyagramlarÄ± gÃ¶rsel olarak dÄ±ÅŸa aktarabilir miyim?",
+              "a": "Evet. Raporlar iÃ§in PNG veya SVG indirebilirsiniz."
             },
             {
-              "q": "Raporlar sunucuda saklanıyor mu?",
-              "a": "Hayır. Raporlar tarayıcıda üretilir; açıkça paylaşmadıkça sunucuya gönderilmez."
+              "q": "Raporlar sunucuda saklanÄ±yor mu?",
+              "a": "HayÄ±r. Raporlar tarayÄ±cÄ±da Ã¼retilir; aÃ§Ä±kÃ§a paylaÅŸmadÄ±kÃ§a sunucuya gÃ¶nderilmez."
             },
             {
-              "q": "Rapor şablonunu düzenleyebilir miyim?",
-              "a": "Henüz değil. Özelleştirilebilir şablonlar üzerinde çalışıyoruz."
+              "q": "Rapor ÅŸablonunu dÃ¼zenleyebilir miyim?",
+              "a": "HenÃ¼z deÄŸil. Ã–zelleÅŸtirilebilir ÅŸablonlar Ã¼zerinde Ã§alÄ±ÅŸÄ±yoruz."
             },
             {
-              "q": "Raporu projeye nasıl eklerim?",
-              "a": "Hesabı projeye kaydedin ve proje ekranından raporu açın."
+              "q": "Raporu projeye nasÄ±l eklerim?",
+              "a": "HesabÄ± projeye kaydedin ve proje ekranÄ±ndan raporu aÃ§Ä±n."
             }
           ]
         },
@@ -829,24 +840,24 @@
           "title": "Standartlar",
           "items": [
             {
-              "q": "Hangi standartlar referans alınıyor?",
-              "a": "ISO/DIN/ASME gibi yaygın tablolar kullanılır; her araçta kaynaklar listelenir."
+              "q": "Hangi standartlar referans alÄ±nÄ±yor?",
+              "a": "ISO/DIN/ASME gibi yaygÄ±n tablolar kullanÄ±lÄ±r; her araÃ§ta kaynaklar listelenir."
             },
             {
-              "q": "Standartlar her zaman güncel mi?",
-              "a": "Periyodik güncelleriz, kritik işler için en son revizyonu doğrulayın."
+              "q": "Standartlar her zaman gÃ¼ncel mi?",
+              "a": "Periyodik gÃ¼ncelleriz, kritik iÅŸler iÃ§in en son revizyonu doÄŸrulayÄ±n."
             },
             {
-              "q": "Standartların tam metni var mı?",
-              "a": "Hayır. Yalnızca tablo ve özetler paylaşılır; tam metin için resmi standardı edinin."
+              "q": "StandartlarÄ±n tam metni var mÄ±?",
+              "a": "HayÄ±r. YalnÄ±zca tablo ve Ã¶zetler paylaÅŸÄ±lÄ±r; tam metin iÃ§in resmi standardÄ± edinin."
             },
             {
-              "q": "Eksik standart varsa ne yapmalıyım?",
-              "a": "Destek veya araç talebi formu üzerinden bildirin."
+              "q": "Eksik standart varsa ne yapmalÄ±yÄ±m?",
+              "a": "Destek veya araÃ§ talebi formu Ã¼zerinden bildirin."
             },
             {
-              "q": "Malzeme özellikleri nasıl seçiliyor?",
-              "a": "Oda sıcaklığında tipik değerler kullanılır; tedarikçi verisiyle doğrulayın."
+              "q": "Malzeme Ã¶zellikleri nasÄ±l seÃ§iliyor?",
+              "a": "Oda sÄ±caklÄ±ÄŸÄ±nda tipik deÄŸerler kullanÄ±lÄ±r; tedarikÃ§i verisiyle doÄŸrulayÄ±n."
             }
           ]
         },
@@ -855,48 +866,48 @@
           "items": [
             {
               "q": "Hangi birim sistemleri destekleniyor?",
-              "a": "Öncelik metriktir; bazı araçlarda imperial seçenekler vardır."
+              "a": "Ã–ncelik metriktir; bazÄ± araÃ§larda imperial seÃ§enekler vardÄ±r."
             },
             {
-              "q": "Birim dönüşümü nasıl yapılıyor?",
-              "a": "Değerler sabit katsayılarla baz birime çevrilir; yuvarlama sadece görüntü içindir."
+              "q": "Birim dÃ¶nÃ¼ÅŸÃ¼mÃ¼ nasÄ±l yapÄ±lÄ±yor?",
+              "a": "DeÄŸerler sabit katsayÄ±larla baz birime Ã§evrilir; yuvarlama sadece gÃ¶rÃ¼ntÃ¼ iÃ§indir."
             },
             {
-              "q": "Birim uyuşmazlığı hatası neden olur?",
-              "a": "Formül çıktısı beklenen birimle uyuşmaz; girişleri ve sembolleri kontrol edin."
+              "q": "Birim uyuÅŸmazlÄ±ÄŸÄ± hatasÄ± neden olur?",
+              "a": "FormÃ¼l Ã§Ä±ktÄ±sÄ± beklenen birimle uyuÅŸmaz; giriÅŸleri ve sembolleri kontrol edin."
             },
             {
-              "q": "Karışık birim kullanabilir miyim?",
-              "a": "Bir araç içinde tutarlı birimler kullanın; önce Birim Dönüştürücü ile çevirin."
+              "q": "KarÄ±ÅŸÄ±k birim kullanabilir miyim?",
+              "a": "Bir araÃ§ iÃ§inde tutarlÄ± birimler kullanÄ±n; Ã¶nce Birim DÃ¶nÃ¼ÅŸtÃ¼rÃ¼cÃ¼ ile Ã§evirin."
             },
             {
-              "q": "Anlamlı basamaklar nasıl ele alınıyor?",
-              "a": "Ekranda yuvarlarız; hesaplamada tam hassasiyet kullanılır."
+              "q": "AnlamlÄ± basamaklar nasÄ±l ele alÄ±nÄ±yor?",
+              "a": "Ekranda yuvarlarÄ±z; hesaplamada tam hassasiyet kullanÄ±lÄ±r."
             }
           ]
         },
         {
-          "title": "Güvenlik / Sorumluluk",
+          "title": "GÃ¼venlik / Sorumluluk",
           "items": [
             {
-              "q": "Bu sertifikalı bir mühendislik aracı mı?",
-              "a": "Hayır. Karar desteğidir; nihai tasarım sorumluluğu sizdedir."
+              "q": "Bu sertifikalÄ± bir mÃ¼hendislik aracÄ± mÄ±?",
+              "a": "HayÄ±r. Karar desteÄŸidir; nihai tasarÄ±m sorumluluÄŸu sizdedir."
             },
             {
               "q": "Emniyet kritik tasarimda kullanabilir miyim?",
-              "a": "Ön kontrol olarak kullanın; standartlar ve yetkili mühendis ile doğrulayın."
+              "a": "Ã–n kontrol olarak kullanÄ±n; standartlar ve yetkili mÃ¼hendis ile doÄŸrulayÄ±n."
             },
             {
-              "q": "Sonuçları nasıl referans göstermeliyim?",
-              "a": "Araç adı, sürüm/tarih, girişler, varsayımlar ve kaynakları rapora ekleyin."
+              "q": "SonuÃ§larÄ± nasÄ±l referans gÃ¶stermeliyim?",
+              "a": "AraÃ§ adÄ±, sÃ¼rÃ¼m/tarih, giriÅŸler, varsayÄ±mlar ve kaynaklarÄ± rapora ekleyin."
             },
             {
-              "q": "Hesaplarım saklanıyor mu?",
-              "a": "Kaydedilenler yalnızca tarayıcınızda tutulur; hassas işler için gizli mod kullanın."
+              "q": "HesaplarÄ±m saklanÄ±yor mu?",
+              "a": "Kaydedilenler yalnÄ±zca tarayÄ±cÄ±nÄ±zda tutulur; hassas iÅŸler iÃ§in gizli mod kullanÄ±n."
             },
             {
-              "q": "Tasarım kararlarının sorumlusu kim?",
-              "a": "Çıktıları doğrulamak ve mevzuata uymak kullanıcı sorumluluğundadır."
+              "q": "TasarÄ±m kararlarÄ±nÄ±n sorumlusu kim?",
+              "a": "Ã‡Ä±ktÄ±larÄ± doÄŸrulamak ve mevzuata uymak kullanÄ±cÄ± sorumluluÄŸundadÄ±r."
             }
           ]
         }
@@ -904,708 +915,736 @@
     },
     "communityComingSoon": {
       "badge": "Topluluk",
-      "title": "Topluluk yakında",
-      "description": "Modere edilmiş tartışmalar, paylaşılan notlar ve Soru & Cevap için hazırlık yapıyoruz. Erken erişim için bekleme listesine katılın.",
-      "statusTitle": "Özel beta yakında",
-      "statusBody": "Genel açılıştan önce içerik kalitesini ve moderasyon akışlarını doğruluyoruz.",
-      "roadmapTitle": "Yol haritası",
-      "roadmapIntro": "Üzerinde çalıştıklarımız:",
+      "title": "Topluluk yakÄ±nda",
+      "description": "Modere edilmiÅŸ tartÄ±ÅŸmalar, paylaÅŸÄ±lan notlar ve Soru & Cevap iÃ§in hazÄ±rlÄ±k yapÄ±yoruz. Erken eriÅŸim iÃ§in bekleme listesine katÄ±lÄ±n.",
+      "statusTitle": "Ã–zel beta yakÄ±nda",
+      "statusBody": "Genel aÃ§Ä±lÄ±ÅŸtan Ã¶nce iÃ§erik kalitesini ve moderasyon akÄ±ÅŸlarÄ±nÄ± doÄŸruluyoruz.",
+      "roadmapTitle": "Yol haritasÄ±",
+      "roadmapIntro": "Ãœzerinde Ã§alÄ±ÅŸtÄ±klarÄ±mÄ±z:",
       "roadmapItems": [
-        "Etiketli ve arama destekli tartışmalar",
-        "Kaynaklı, doğrulanmış yanıtlar",
-        "Proje bazlı özel çalışma alanları",
-        "Rapor paylaşımı ve anlık özetler",
-        "Moderasyon kuralları ve güvenlik kontrolleri"
+        "Etiketli ve arama destekli tartÄ±ÅŸmalar",
+        "KaynaklÄ±, doÄŸrulanmÄ±ÅŸ yanÄ±tlar",
+        "Proje bazlÄ± Ã¶zel Ã§alÄ±ÅŸma alanlarÄ±",
+        "Rapor paylaÅŸÄ±mÄ± ve anlÄ±k Ã¶zetler",
+        "Moderasyon kurallarÄ± ve gÃ¼venlik kontrolleri"
       ],
       "waitlist": {
-        "title": "Bekleme listesine katıl",
-        "description": "Topluluk açıldığında haber vermemiz için e-postanı bırak.",
+        "title": "Bekleme listesine katÄ±l",
+        "description": "Topluluk aÃ§Ä±ldÄ±ÄŸÄ±nda haber vermemiz iÃ§in e-postanÄ± bÄ±rak.",
         "emailLabel": "E-posta adresi",
         "emailPlaceholder": "sen@firma.com",
-        "focusLabel": "İlgi alanı (opsiyonel)",
-        "focusPlaceholder": "Ör. standartlar, raporlama, fikstür",
-        "cta": "Bekleme listesine katıl",
-        "success": "Listeye eklendin. Açılışta e-posta göndereceğiz.",
-        "errorInvalid": "Lütfen geçerli bir e-posta adresi girin.",
-        "disclaimer": "E-postanı sadece topluluk açılışı için bilgilendirme amacıyla kullanırız."
+        "focusLabel": "Ä°lgi alanÄ± (opsiyonel)",
+        "focusPlaceholder": "Ã–r. standartlar, raporlama, fikstÃ¼r",
+        "cta": "Bekleme listesine katÄ±l",
+        "success": "Listeye eklendin. AÃ§Ä±lÄ±ÅŸta e-posta gÃ¶ndereceÄŸiz.",
+        "errorInvalid": "LÃ¼tfen geÃ§erli bir e-posta adresi girin.",
+        "disclaimer": "E-postanÄ± sadece topluluk aÃ§Ä±lÄ±ÅŸÄ± iÃ§in bilgilendirme amacÄ±yla kullanÄ±rÄ±z."
       }
     },
     "pricing": {
-      "badge": "Ücretlendirme",
-      "title": "Planlar ve erişim",
-      "description": "Araçların erişim durumu nettir. Premium özel beta aşamasında.",
+      "badge": "Ãœcretlendirme",
+      "title": "Planlar ve eriÅŸim",
+      "description": "AraÃ§larÄ±n eriÅŸim durumu nettir. Premium Ã¶zel beta aÅŸamasÄ±nda.",
       "free": {
-        "title": "Ücretsiz",
-        "subtitle": "Hemen erişim",
-        "description": "Temel hesaplayıcılar, referanslar ve raporlama özetleri.",
+        "title": "Ãœcretsiz",
+        "subtitle": "Hemen eriÅŸim",
+        "description": "Temel hesaplayÄ±cÄ±lar, referanslar ve raporlama Ã¶zetleri.",
         "features": [
-          "Tüm standart hesaplayıcılar ve referanslar",
-          "Girdi doğrulama + varsayımlar",
-          "Girdi/çıktı için CSV/JSON dışa aktarma",
-          "Desteklenen araçlarda PDF rapor",
-          "Bu cihazda yerel kayıtlı hesaplar"
+          "TÃ¼m standart hesaplayÄ±cÄ±lar ve referanslar",
+          "Girdi doÄŸrulama + varsayÄ±mlar",
+          "Girdi/Ã§Ä±ktÄ± iÃ§in CSV/JSON dÄ±ÅŸa aktarma",
+          "Desteklenen araÃ§larda PDF rapor",
+          "Bu cihazda yerel kayÄ±tlÄ± hesaplar"
         ],
-        "cta": "Araçlara git"
+        "cta": "AraÃ§lara git"
       },
       "premium": {
         "title": "Premium",
-        "subtitle": "Özel beta",
-        "description": "Gelişmiş raporlama, ekip akışları ve dışa aktarma özel betada.",
+        "subtitle": "Ã–zel beta",
+        "description": "GeliÅŸmiÅŸ raporlama, ekip akÄ±ÅŸlarÄ± ve dÄ±ÅŸa aktarma Ã¶zel betada.",
         "features": [
-          "Gelişmiş rapor şablonları ve marka alanı",
-          "Ekip çalışma alanları ve paylaşılan projeler",
-          "Project Hub ve kalite araçları için premium çıktılar",
-          "Kayıtlı profiller, şablonlar ve geçmiş",
-          "Öncelikli destek ve erken erişim"
+          "GeliÅŸmiÅŸ rapor ÅŸablonlarÄ± ve marka alanÄ±",
+          "Ekip Ã§alÄ±ÅŸma alanlarÄ± ve paylaÅŸÄ±lan projeler",
+          "Project Hub ve kalite araÃ§larÄ± iÃ§in premium Ã§Ä±ktÄ±lar",
+          "KayÄ±tlÄ± profiller, ÅŸablonlar ve geÃ§miÅŸ",
+          "Ã–ncelikli destek ve erken eriÅŸim"
         ],
-        "cta": "Erişim talep et"
+        "cta": "EriÅŸim talep et"
       },
-      "note": "Premium erişim sınırlıdır; iş akışları doğrulandıkça genişletilir."
+      "note": "Premium eriÅŸim sÄ±nÄ±rlÄ±dÄ±r; iÅŸ akÄ±ÅŸlarÄ± doÄŸrulandÄ±kÃ§a geniÅŸletilir."
     }
   },
   "components": {
     "updatesBanner": {
-      "title": "Yeni güncellemeler var",
-      "cta": "Güncelleme günlüğünü gör",
+      "title": "Yeni gÃ¼ncellemeler var",
+      "cta": "GÃ¼ncelleme gÃ¼nlÃ¼ÄŸÃ¼nÃ¼ gÃ¶r",
       "dismiss": "Kapat"
     },
     "premiumCTA": {
       "badge": "Premium beta",
       "title": "Premium plan",
-      "description": "Ödeme altyapısı açık değil. Bekleme listesiyle yol haritasını paylaşıyoruz.",
-      "ctaPrimary": "Bekleme listesine katıl",
-      "ctaSecondary": "Detayları gör",
-      "supportNote": "Destek formuna yönlendirir.",
-      "packageTitle": "Paket içeriği (plan)",
+      "description": "Ã–deme altyapÄ±sÄ± aÃ§Ä±k deÄŸil. Bekleme listesiyle yol haritasÄ±nÄ± paylaÅŸÄ±yoruz.",
+      "ctaPrimary": "Bekleme listesine katÄ±l",
+      "ctaSecondary": "DetaylarÄ± gÃ¶r",
+      "supportNote": "Destek formuna yÃ¶nlendirir.",
+      "packageTitle": "Paket iÃ§eriÄŸi (plan)",
       "packageItems": [
-        "Detaylı tork ve dişli tablolar",
-        "Gelişmiş mekanik hesaplayıcılar",
-        "PDF/Excel dışa aktarma (RFQ, kalite araçları, proje listeleri)",
-        "Çoklu cihaz erişimi ve kayıtlı projeler",
-        "Malzeme ve kaplama öneri kartları"
+        "DetaylÄ± tork ve diÅŸli tablolar",
+        "GeliÅŸmiÅŸ mekanik hesaplayÄ±cÄ±lar",
+        "PDF/Excel dÄ±ÅŸa aktarma (RFQ, kalite araÃ§larÄ±, proje listeleri)",
+        "Ã‡oklu cihaz eriÅŸimi ve kayÄ±tlÄ± projeler",
+        "Malzeme ve kaplama Ã¶neri kartlarÄ±"
       ],
       "statusTitle": "Durum",
-      "statusBody": "Ödeme akışı yok. İlgiyi topluyoruz ve bekleme listesine göre geliştirme önceliklerini belirliyoruz.",
-      "stepsTitle": "Sonraki adımlar",
+      "statusBody": "Ã–deme akÄ±ÅŸÄ± yok. Ä°lgiyi topluyoruz ve bekleme listesine gÃ¶re geliÅŸtirme Ã¶nceliklerini belirliyoruz.",
+      "stepsTitle": "Sonraki adÄ±mlar",
       "steps": [
-        "Bekleme listesine kayıt",
-        "Kısa bir ihtiyaç formu",
-        "Küçük gruplarla beta davetleri"
+        "Bekleme listesine kayÄ±t",
+        "KÄ±sa bir ihtiyaÃ§ formu",
+        "KÃ¼Ã§Ã¼k gruplarla beta davetleri"
       ]
     },
     "supportForm": {
       "submit": {
-        "idle": "Talebi Gönder",
-        "uploading": "Dosya yükleniyor...",
-        "submitting": "Gönderiliyor..."
+        "idle": "Talebi GÃ¶nder",
+        "uploading": "Dosya yÃ¼kleniyor...",
+        "submitting": "GÃ¶nderiliyor..."
       },
       "fields": {
         "name": {
           "label": "Ad Soyad",
-          "placeholder": "Örn: Burak Yılmaz"
+          "placeholder": "Ã–rn: Burak YÄ±lmaz"
         },
         "email": {
           "label": "E-posta",
-          "placeholder": "örnek@domain.com"
+          "placeholder": "Ã¶rnek@domain.com"
         },
         "message": {
-          "label": "Talep detayları",
-          "placeholder": "Konu, varsa hesap değerleri, standartlar, sınırlar..."
+          "label": "Talep detaylarÄ±",
+          "placeholder": "Konu, varsa hesap deÄŸerleri, standartlar, sÄ±nÄ±rlar..."
         },
         "attachment": {
-          "label": "Dosya yükle (isteğe bağlı)",
-          "helper": "Dosya Firebase Storage'a yüklenir, destek kaydına link eklenir.",
-          "unavailable": "Dosya yükleme şu an kapalı. Dosyanı Drive linki olarak mesajına ekleyebilirsin."
+          "label": "Dosya yÃ¼kle (isteÄŸe baÄŸlÄ±)",
+          "helper": "Dosya Firebase Storage'a yÃ¼klenir, destek kaydÄ±na link eklenir.",
+          "unavailable": "Dosya yÃ¼kleme ÅŸu an kapalÄ±. DosyanÄ± Drive linki olarak mesajÄ±na ekleyebilirsin."
         }
       },
       "errors": {
-        "fileTooLarge": "Dosya boyutu 10 MB sınırını aşıyor.",
-        "uploadUnavailable": "Dosya yükleme şu anda kullanılamıyor.",
-        "required": "Lütfen tüm zorunlu alanları doldurun.",
-        "supportUnavailable": "Destek altyapısı hazır değil. Lütfen daha sonra deneyin.",
-        "submitFailed": "Talep gönderilemedi."
+        "fileTooLarge": "Dosya boyutu 10 MB sÄ±nÄ±rÄ±nÄ± aÅŸÄ±yor.",
+        "uploadUnavailable": "Dosya yÃ¼kleme ÅŸu anda kullanÄ±lamÄ±yor.",
+        "required": "LÃ¼tfen tÃ¼m zorunlu alanlarÄ± doldurun.",
+        "supportUnavailable": "Destek altyapÄ±sÄ± hazÄ±r deÄŸil. LÃ¼tfen daha sonra deneyin.",
+        "submitFailed": "Talep gÃ¶nderilemedi."
       },
-      "success": "Talebin alındı. En kısa sürede geri döneceğiz.",
-      "successToast": "Talebin alındı - ekibimiz en kısa sürede sana dönüş yapacak."
+      "success": "Talebin alÄ±ndÄ±. En kÄ±sa sÃ¼rede geri dÃ¶neceÄŸiz.",
+      "successToast": "Talebin alÄ±ndÄ± - ekibimiz en kÄ±sa sÃ¼rede sana dÃ¶nÃ¼ÅŸ yapacak."
     },
     "commentStream": {
-      "kicker": "Canlı",
-      "title": "Topluluk akışı",
-      "realtimeBadge": "Gerçek zamanlı",
+      "kicker": "CanlÄ±",
+      "title": "Topluluk akÄ±ÅŸÄ±",
+      "realtimeBadge": "GerÃ§ek zamanlÄ±",
       "demoBadge": "Demo modu",
-      "authChecking": "Giriş kontrol ediliyor...",
-      "authUnavailable": "Auth şu an kullanılamıyor",
-      "login": "Google ile giriş yap",
-      "loginPending": "Giriş yapılıyor...",
-      "logout": "Çıkış yap",
-      "logoutPending": "Çıkış yapılıyor...",
+      "authChecking": "GiriÅŸ kontrol ediliyor...",
+      "authUnavailable": "Auth ÅŸu an kullanÄ±lamÄ±yor",
+      "login": "Google ile giriÅŸ yap",
+      "loginPending": "GiriÅŸ yapÄ±lÄ±yor...",
+      "logout": "Ã‡Ä±kÄ±ÅŸ yap",
+      "logoutPending": "Ã‡Ä±kÄ±ÅŸ yapÄ±lÄ±yor...",
       "placeholders": {
-        "loading": "Bağlantı hazırlanıyor...",
-        "demo": "Demo modunda yorum bırak...",
-        "authUnavailable": "Auth şu an kullanılamıyor.",
+        "loading": "BaÄŸlantÄ± hazÄ±rlanÄ±yor...",
+        "demo": "Demo modunda yorum bÄ±rak...",
+        "authUnavailable": "Auth ÅŸu an kullanÄ±lamÄ±yor.",
         "signedIn": "Fikrini yaz...",
-        "signedOut": "Yorum göndermek için giriş yap."
+        "signedOut": "Yorum gÃ¶ndermek iÃ§in giriÅŸ yap."
       },
       "helpers": {
-        "loading": "Yorum sistemi yükleniyor.",
-        "demo": "Demo modunda yorumlar kayıt edilmez.",
-        "authUnavailable": "Kimlik doğrulama şu anda devre dışı.",
+        "loading": "Yorum sistemi yÃ¼kleniyor.",
+        "demo": "Demo modunda yorumlar kayÄ±t edilmez.",
+        "authUnavailable": "Kimlik doÄŸrulama ÅŸu anda devre dÄ±ÅŸÄ±.",
         "signedIn": "Yorumlar Firestore'a kaydedilecek.",
-        "signedOut": "Önce giriş yapmalısın."
+        "signedOut": "Ã–nce giriÅŸ yapmalÄ±sÄ±n."
       },
       "submit": {
-        "idle": "Yorumu Gönder",
-        "saving": "Gönderiliyor..."
+        "idle": "Yorumu GÃ¶nder",
+        "saving": "GÃ¶nderiliyor..."
       },
       "errors": {
-        "loadFailed": "Yorumlar yüklenemedi. Lütfen tekrar deneyin.",
-        "loginFailed": "Giriş başarısız. Lütfen tekrar deneyin.",
-        "logoutFailed": "Çıkış başarısız. Lütfen tekrar deneyin.",
-        "saveFailed": "Yorum kaydedilemedi. Lütfen tekrar deneyin."
+        "loadFailed": "Yorumlar yÃ¼klenemedi. LÃ¼tfen tekrar deneyin.",
+        "loginFailed": "GiriÅŸ baÅŸarÄ±sÄ±z. LÃ¼tfen tekrar deneyin.",
+        "logoutFailed": "Ã‡Ä±kÄ±ÅŸ baÅŸarÄ±sÄ±z. LÃ¼tfen tekrar deneyin.",
+        "saveFailed": "Yorum kaydedilemedi. LÃ¼tfen tekrar deneyin."
       },
-      "demoUser": "Demo Kullanıcı",
-      "userFallback": "Kullanıcı",
-      "loading": "Yorumlar yükleniyor...",
-      "empty": "İlk yorumu sen bırak.",
+      "demoUser": "Demo KullanÄ±cÄ±",
+      "userFallback": "KullanÄ±cÄ±",
+      "loading": "Yorumlar yÃ¼kleniyor...",
+      "empty": "Ä°lk yorumu sen bÄ±rak.",
       "newLabel": "Yeni"
     },
     "search": {
-      "paletteTitle": "Hızlı Arama",
-      "palettePlaceholder": "Araç, standart, rehber...",
-      "paletteHint": "Aramak için yazmaya başla",
-      "paletteEmpty": "Sonuç bulunamadı.",
-      "paletteOpen": "Hızlı arama",
-      "inlineTitle": "Hızlı arama",
-      "inlineDescription": "Araç, standart ve içerikleri tek kutudan ara.",
-      "inlinePlaceholder": "Araç, ISO 286, M12, sürtünme...",
-      "inlineLoading": "Aranıyor...",
-      "inlineEmpty": "Sonuç bulunamadı.",
+      "paletteTitle": "HÄ±zlÄ± Arama",
+      "palettePlaceholder": "AraÃ§, standart, rehber...",
+      "paletteHint": "Aramak iÃ§in yazmaya baÅŸla",
+      "paletteEmpty": "SonuÃ§ bulunamadÄ±.",
+      "paletteOpen": "HÄ±zlÄ± arama",
+      "inlineTitle": "HÄ±zlÄ± arama",
+      "inlineDescription": "AraÃ§, standart ve iÃ§erikleri tek kutudan ara.",
+      "inlinePlaceholder": "AraÃ§, ISO 286, M12, sÃ¼rtÃ¼nme...",
+      "inlineLoading": "AranÄ±yor...",
+      "inlineEmpty": "SonuÃ§ bulunamadÄ±.",
       "typeLabels": {
-        "tool": "Araç",
+        "tool": "AraÃ§",
         "standard": "Standart",
         "reference": "Referans",
         "blog": "Blog",
         "guide": "Rehber",
-        "glossary": "Sözlük"
+        "glossary": "SÃ¶zlÃ¼k"
       }
     },
     "consent": {
-      "title": "Çerez tercihleri",
-      "description": "Sitenin çalışması için gerekli çerezleri kullanıyoruz. İstersen analitik ve reklam çerezlerine izin verebilirsin.",
+      "title": "Ã‡erez tercihleri",
+      "description": "Sitenin Ã§alÄ±ÅŸmasÄ± iÃ§in gerekli Ã§erezleri kullanÄ±yoruz. Ä°stersen analitik ve reklam Ã§erezlerine izin verebilirsin.",
       "accept": "Kabul et",
       "reject": "Reddet",
       "preferences": "Tercihler",
-      "preferencesTitle": "Çerez tercihleri",
-      "preferencesDescription": "Hangi çerez kategorilerini etkinleştirmek istediğini seç.",
+      "preferencesTitle": "Ã‡erez tercihleri",
+      "preferencesDescription": "Hangi Ã§erez kategorilerini etkinleÅŸtirmek istediÄŸini seÃ§.",
       "save": "Tercihleri kaydet",
       "close": "Kapat",
       "necessaryLabel": "Gerekli",
-      "necessaryDescription": "Temel işlevler için zorunlu.",
+      "necessaryDescription": "Temel iÅŸlevler iÃ§in zorunlu.",
       "analyticsLabel": "Analitik",
-      "analyticsDescription": "Kullanımı anlamamıza ve deneyimi iyileştirmemize yardımcı olur.",
+      "analyticsDescription": "KullanÄ±mÄ± anlamamÄ±za ve deneyimi iyileÅŸtirmemize yardÄ±mcÄ± olur.",
       "advertisingLabel": "Reklam",
-      "advertisingDescription": "İlgili reklamlar ve performans ölçümü için kullanılır.",
-      "alwaysOn": "Her zaman açık"
+      "advertisingDescription": "Ä°lgili reklamlar ve performans Ã¶lÃ§Ã¼mÃ¼ iÃ§in kullanÄ±lÄ±r.",
+      "alwaysOn": "Her zaman aÃ§Ä±k"
     },
     "toolLibrary": {
       "scenarioSection": {
         "kicker": "Ne yapmak istiyorsun?",
-        "title": "Senaryoya göre hızlı yönlendirme",
-        "description": "En yaygın ihtiyaca göre ilgili hesaplayıcılara hızlı ulaş."
+        "title": "Senaryoya gÃ¶re hÄ±zlÄ± yÃ¶nlendirme",
+        "description": "En yaygÄ±n ihtiyaca gÃ¶re ilgili hesaplayÄ±cÄ±lara hÄ±zlÄ± ulaÅŸ."
       },
       "scenarios": [
         {
           "id": "convert",
-          "title": "Bir değeri dönüştürmek istiyorum",
-          "description": "Hızlı birim çevirisi ve temel kontrol için.",
+          "title": "Bir deÄŸeri dÃ¶nÃ¼ÅŸtÃ¼rmek istiyorum",
+          "description": "HÄ±zlÄ± birim Ã§evirisi ve temel kontrol iÃ§in.",
           "links": [
             {
-              "label": "Birim Dönüştürücü",
+              "label": "Birim DÃ¶nÃ¼ÅŸtÃ¼rÃ¼cÃ¼",
               "href": "/tools/unit-converter"
             }
           ]
         },
         {
           "id": "calculate",
-          "title": "Bir mühendislik hesabı yapacağım",
-          "description": "Manuel girdilerle temel hesaplamalara hızlı eriş.",
+          "title": "Bir mÃ¼hendislik hesabÄ± yapacaÄŸÄ±m",
+          "description": "Manuel girdilerle temel hesaplamalara hÄ±zlÄ± eriÅŸ.",
           "links": [
             {
-              "label": "Cıvata Tork",
+              "label": "CÄ±vata Tork",
               "href": "/tools/bolt-calculator"
             },
             {
-              "label": "Çekme Gerilmesi",
+              "label": "Ã‡ekme Gerilmesi",
               "href": "/tools/simple-stress"
             },
             {
-              "label": "Isı Akışı",
+              "label": "IsÄ± AkÄ±ÅŸÄ±",
               "href": "/tools/basic-engineering"
             }
           ]
         },
         {
           "id": "visualize",
-          "title": "Grafik görmek istiyorum",
-          "description": "Parametrelerden grafik veya eğriler oluştur.",
+          "title": "Grafik gÃ¶rmek istiyorum",
+          "description": "Parametrelerden grafik veya eÄŸriler oluÅŸtur.",
           "links": [
             {
-              "label": "Yay Kuvvet Grafiği",
+              "label": "Yay Kuvvet GrafiÄŸi",
               "href": "/tools/param-chart"
             },
             {
-              "label": "Dişli Hesaplayıcılar",
+              "label": "DiÅŸli HesaplayÄ±cÄ±lar",
               "href": "/tools/gear-design/calculators"
             }
           ]
         }
       ],
       "requestSection": {
-        "title": "Yeni bir araca mı ihtiyacın var?",
-        "description": "Input ve çıktı ihtiyacını yaz. En çok talep edilen araçları önceleyeceğiz.",
-        "cta": "Bir araç iste",
-        "ctaAria": "Bir araç iste"
+        "title": "Yeni bir araca mÄ± ihtiyacÄ±n var?",
+        "description": "Input ve Ã§Ä±ktÄ± ihtiyacÄ±nÄ± yaz. En Ã§ok talep edilen araÃ§larÄ± Ã¶nceleyeceÄŸiz.",
+        "cta": "Bir araÃ§ iste",
+        "ctaAria": "Bir araÃ§ iste"
       },
       "filterSection": {
         "title": "Filtrele",
         "loading": "Filtreleniyor...",
-        "description": "Tür, kategori ve etiket seçerek araçları daraltabilirsin.",
+        "description": "TÃ¼r, kategori ve etiket seÃ§erek araÃ§larÄ± daraltabilirsin.",
         "clear": "Filtreleri Temizle",
         "apply": "Filtreleri Uygula",
-        "note": "Seçimleri yaptıktan sonra filtreleri uygula.",
-        "typeLabel": "Tür",
+        "note": "SeÃ§imleri yaptÄ±ktan sonra filtreleri uygula.",
+        "typeLabel": "TÃ¼r",
         "categoryLabel": "Kategori",
-        "allCategories": "Tüm kategoriler",
+        "allCategories": "TÃ¼m kategoriler",
         "tagLabel": "Etiket",
-        "allTags": "Tüm etiketler",
-        "searchLabel": "Hızlı arama",
-        "searchPlaceholder": "Örn. tork, basınç, cıvata",
-        "searchAria": "Araç ara"
+        "allTags": "TÃ¼m etiketler",
+        "searchLabel": "HÄ±zlÄ± arama",
+        "searchPlaceholder": "Ã–rn. tork, basÄ±nÃ§, cÄ±vata",
+        "searchAria": "AraÃ§ ara",
+        "statusLabel": "Durum",
+        "allStatuses": "T?m durumlar"
       },
       "emptyState": {
-        "title": "Eşleşen araç bulunamadı.",
-        "description": "Başka bir kategori, etiket veya arama terimi deneyebilirsin.",
-        "reset": "Tüm filtreleri sıfırla"
+        "title": "EÅŸleÅŸen araÃ§ bulunamadÄ±.",
+        "description": "BaÅŸka bir kategori, etiket veya arama terimi deneyebilirsin.",
+        "reset": "TÃ¼m filtreleri sÄ±fÄ±rla"
       },
       "labels": {
         "typeFilter": {
-          "All": "Tüm türler",
-          "calculator": "Hesaplayıcı",
+          "All": "TÃ¼m tÃ¼rler",
+          "calculator": "HesaplayÄ±cÄ±",
           "bundle": "Paket",
           "guide": "Rehber"
         },
         "type": {
-          "calculator": "Hesaplayıcı",
+          "calculator": "HesaplayÄ±cÄ±",
           "bundle": "Paket",
           "guide": "Rehber"
         },
         "category": {
           "Mechanical": "Mekanik",
           "Automotive": "Otomotiv",
-          "General Engineering": "Genel Mühendislik"
+          "General Engineering": "Genel MÃ¼hendislik"
         },
         "tag": {
-          "pressure": "basınç",
+          "pressure": "basÄ±nÃ§",
           "torque": "tork",
-          "flow": "akış",
+          "flow": "akÄ±ÅŸ",
           "thermal": "termal",
           "units": "birimler",
-          "validation": "doğrulama",
-          "sensitivity": "duyarlılık",
+          "validation": "doÄŸrulama",
+          "sensitivity": "duyarlÄ±lÄ±k",
           "montecarlo": "monte carlo",
-          "engineering": "mühendislik"
+          "engineering": "mÃ¼hendislik"
         },
         "cta": {
-          "calculator": "Hesaplayıcıyı Aç",
-          "bundle": "Paketi Aç",
-          "guide": "Rehberi Aç"
+          "calculator": "HesaplayÄ±cÄ±yÄ± AÃ§",
+          "bundle": "Paketi AÃ§",
+          "guide": "Rehberi AÃ§"
         },
+        "loadMore": "Daha fazla yÃ¼kle",
         "generalCategory": "Genel",
-        "openAria": "{title} sayfasını aç"
+        "openAria": "{title} sayfasÄ±nÄ± aÃ§",
+        "status": {
+          "verified": "Do?rulanm??",
+          "beta": "Beta",
+          "experimental": "Deneysel"
+        }
       }
     },
     "sanityCheck": {
       "session": {
-        "titleLabel": "Oturum basligi",
-        "untitled": "Adsiz oturum",
+        "titleLabel": "Oturum baÅŸlÄ±ÄŸÄ±",
+        "untitled": "AdsÄ±z oturum",
         "save": "Kaydet",
         "saveAs": "Yeni kaydet",
-        "savedTitle": "Kayıtlı oturumlar",
-        "load": "Yukle",
+        "savedTitle": "KayÄ±tlÄ± oturumlar",
+        "load": "YÃ¼kle",
         "delete": "Sil",
-        "share": "Paylasim linki kopyala",
-        "shareCopied": "Link kopyalandi.",
-        "shareFailed": "Kopyalama basarisiz. Linki manuel kopyalayabilirsin.",
-        "export": "Raporu aç",
-        "lastSaved": "Son kayıt",
-        "restoreNotice": "Paylasim linkinden oturum geri yuklendi."
+        "share": "PaylaÅŸÄ±m linki kopyala",
+        "shareCopied": "Link kopyalandÄ±.",
+        "shareFailed": "Kopyalama baÅŸarÄ±sÄ±z. Linki manuel kopyalayabilirsin.",
+        "export": "Raporu aÃ§",
+        "lastSaved": "Son kayÄ±t",
+        "restoreNotice": "PaylaÅŸÄ±m linkinden oturum geri yÃ¼klendi."
       },
       "variableTable": {
-        "title": "Değişkenler",
-        "add": "Değişken ekle",
+        "title": "DeÄŸiÅŸkenler",
+        "add": "DeÄŸiÅŸken ekle",
         "symbol": "Sembol",
-        "name": "İsim",
-        "defaultName": "Değişken",
-        "description": "Açıklama",
-        "value": "Değer",
+        "name": "Ä°sim",
+        "defaultName": "DeÄŸiÅŸken",
+        "description": "AÃ§Ä±klama",
+        "value": "DeÄŸer",
         "unit": "Birim",
         "unitPlaceholder": "orn. N m",
         "min": "Min",
         "max": "Maks",
-        "distribution": "Dağılım",
+        "distribution": "DaÄŸÄ±lÄ±m",
         "distributionNone": "Manuel",
-        "distributionUniform": "Tekdüze",
+        "distributionUniform": "TekdÃ¼ze",
         "distributionNormal": "Normal",
         "remove": "Sil"
       },
       "formulaEditor": {
-        "title": "Formül",
-        "description": "Yukarıdaki sembolleri kullan. örnek: P = T * w",
-        "placeholder": "örn. P = T * w"
+        "title": "FormÃ¼l",
+        "description": "YukarÄ±daki sembolleri kullan. Ã¶rnek: P = T * w",
+        "placeholder": "Ã¶rn. P = T * w"
       },
       "resultPanel": {
-        "title": "Sonuç",
-        "outputLabel": "Çıktı",
+        "title": "SonuÃ§",
+        "outputLabel": "Ã‡Ä±ktÄ±",
         "computedUnit": "Hesaplanan birim",
         "expectedUnit": "Beklenen birim",
-        "unitMismatch": "Birim uyuşmazlığı: beklenen {expected}, gelen {actual}",
-        "unitMatch": "Birim kontrolü uygun",
+        "unitMismatch": "Birim uyuÅŸmazlÄ±ÄŸÄ±: beklenen {expected}, gelen {actual}",
+        "unitMatch": "Birim kontrolÃ¼ uygun",
         "dimensionless": "birimsiz",
-        "errorTitle": "Formül hatası",
-        "errorBody": "Sembolleri, birimleri ve formülü kontrol et."
+        "errorTitle": "FormÃ¼l hatasÄ±",
+        "errorBody": "Sembolleri, birimleri ve formÃ¼lÃ¼ kontrol et."
       },
       "sweepPanel": {
-        "title": "Duyarlılık tarama",
-        "description": "Tek bir değişkeni min-maks aralığında tarayıp sonucu çiz.",
-        "variableLabel": "Değişken",
+        "title": "DuyarlÄ±lÄ±k tarama",
+        "description": "Tek bir deÄŸiÅŸkeni min-maks aralÄ±ÄŸÄ±nda tarayÄ±p sonucu Ã§iz.",
+        "variableLabel": "DeÄŸiÅŸken",
         "pointsLabel": "Nokta",
-        "run": "Tarama çalıştır",
-        "chartTitle": "Tarama grafiği",
-        "resultLabel": "Sonuç",
-        "empty": "Tarama çalıştırınca grafik görünür.",
-        "rangeMissing": "Seçilen değişken için min/maks gir."
+        "run": "Tarama Ã§alÄ±ÅŸtÄ±r",
+        "chartTitle": "Tarama grafiÄŸi",
+        "resultLabel": "SonuÃ§",
+        "empty": "Tarama Ã§alÄ±ÅŸtÄ±rÄ±nca grafik gÃ¶rÃ¼nÃ¼r.",
+        "rangeMissing": "SeÃ§ilen deÄŸiÅŸken iÃ§in min/maks gir."
       },
       "monteCarloPanel": {
         "title": "Monte Carlo",
-        "description": "Dağılımları kullanarak çıktı dağılımını gör.",
+        "description": "DaÄŸÄ±lÄ±mlarÄ± kullanarak Ã§Ä±ktÄ± daÄŸÄ±lÄ±mÄ±nÄ± gÃ¶r.",
         "iterationsLabel": "Iterasyon",
-        "run": "Monte Carlo çalıştır",
-        "running": "Çalışıyor...",
+        "run": "Monte Carlo Ã§alÄ±ÅŸtÄ±r",
+        "running": "Ã‡alÄ±ÅŸÄ±yor...",
         "chartTitle": "Histogram",
         "countLabel": "Adet",
-        "statsTitle": "Özet istatistik",
+        "statsTitle": "Ã–zet istatistik",
         "mean": "Ortalama",
         "stdev": "Std sapma",
         "p05": "P05",
         "p50": "P50",
         "p95": "P95",
-        "empty": "Simülasyon çalıştırınca sonuç görünür."
+        "empty": "SimÃ¼lasyon Ã§alÄ±ÅŸtÄ±rÄ±nca sonuÃ§ gÃ¶rÃ¼nÃ¼r."
       },
       "report": {
-        "title": "Mühendislik Kontrol Raporu",
-        "print": "Yazdır",
+        "title": "MÃ¼hendislik Kontrol Raporu",
+        "print": "YazdÄ±r",
         "downloadPdf": "PDF indir",
-        "missing": "Oturum verisi bulunamadı.",
-        "variablesTitle": "Değişkenler",
-        "formulaTitle": "Formül",
-        "resultTitle": "Sonuç",
-        "sweepTitle": "Duyarlılık tarama",
+        "missing": "Oturum verisi bulunamadÄ±.",
+        "variablesTitle": "DeÄŸiÅŸkenler",
+        "formulaTitle": "FormÃ¼l",
+        "resultTitle": "SonuÃ§",
+        "sweepTitle": "DuyarlÄ±lÄ±k tarama",
         "monteCarloTitle": "Monte Carlo"
       },
       "errorBoundary": {
         "title": "Bir hata oldu.",
-        "description": "Formülü ve girdileri kontrol edip tekrar dene.",
+        "description": "FormÃ¼lÃ¼ ve girdileri kontrol edip tekrar dene.",
         "cta": "Yenile"
       }
     },
     "toolLinkSection": {
       "similar": {
-        "eyebrow": "Benzer hesaplayıcılar",
-        "title": "İlgili hesaplayıcılar",
-        "description": "Aynı kategori veya benzer etiketlere sahip hesaplayıcıları burada bulabilirsin.",
-        "cta": "Hesaplayıcıyı Aç"
+        "eyebrow": "Benzer hesaplayÄ±cÄ±lar",
+        "title": "Ä°lgili hesaplayÄ±cÄ±lar",
+        "description": "AynÄ± kategori veya benzer etiketlere sahip hesaplayÄ±cÄ±larÄ± burada bulabilirsin.",
+        "cta": "HesaplayÄ±cÄ±yÄ± AÃ§"
       },
       "helpful": {
-        "eyebrow": "Diğer öneriler",
-        "title": "Şunlar da işine yarayabilir",
-        "description": "Yaklaşık ihtiyaçlar için farklı hesaplayıcıları gözden geçirebilirsin.",
-        "cta": "Hesaplayıcıyı Aç"
+        "eyebrow": "DiÄŸer Ã¶neriler",
+        "title": "Åunlar da iÅŸine yarayabilir",
+        "description": "YaklaÅŸÄ±k ihtiyaÃ§lar iÃ§in farklÄ± hesaplayÄ±cÄ±larÄ± gÃ¶zden geÃ§irebilirsin.",
+        "cta": "HesaplayÄ±cÄ±yÄ± AÃ§"
       }
     },
     "toolDocTabs": {
-      "tabsTitle": "Hesaplayıcı Sekmeleri",
+      "tabsTitle": "HesaplayÄ±cÄ± Sekmeleri",
       "tabs": {
-        "calculator": "Hesaplayıcı",
-        "explanation": "Açıklama",
-        "examples": "Örnekler"
+        "calculator": "HesaplayÄ±cÄ±",
+        "explanation": "AÃ§Ä±klama",
+        "examples": "Ã–rnekler"
       },
-      "explanationTitle": "Hesaplama Açıklaması",
-      "examplesTitle": "Örnekler",
-      "loadingTitle": "İçerik yükleniyor",
-      "loadingBody": "Kısa sürede gelmezse bu hesaplayıcı için açıklama/örnekler henüz yayınlanmamış olabilir.",
-      "docsFailedTitle": "Dokümantasyon erişilemedi",
-      "docsFailedBody": "Şu anda açıklama ve örnekler getirilemiyor.",
-      "docsMissingTitle": "Dokümantasyon yakında",
-      "docsMissingBody": "Bu araç için dokümantasyon yakında.",
-      "explanationEmptyTitle": "Açıklama (yakında)",
-      "explanationEmptyBody": "Bu hesaplayıcı için açıklama henüz eklenmedi. Şimdilik kullanabilirsin.",
-      "examplesEmptyTitle": "Örnekler (yakında)",
-      "examplesEmptyBody": "Bu hesaplayıcı için örnekler henüz eklenmedi. Yakında örnek girdiler eklenecek.",
-      "examplesEmptyHint": "Örnekler hazırlanıyor.",
+      "explanationTitle": "Hesaplama AÃ§Ä±klamasÄ±",
+      "examplesTitle": "Ã–rnekler",
+      "loadingTitle": "Ä°Ã§erik yÃ¼kleniyor",
+      "loadingBody": "KÄ±sa sÃ¼rede gelmezse bu hesaplayÄ±cÄ± iÃ§in aÃ§Ä±klama/Ã¶rnekler henÃ¼z yayÄ±nlanmamÄ±ÅŸ olabilir.",
+      "docsFailedTitle": "DokÃ¼mantasyon eriÅŸilemedi",
+      "docsFailedBody": "Åu anda aÃ§Ä±klama ve Ã¶rnekler getirilemiyor.",
+      "docsMissingTitle": "DokÃ¼mantasyon yakÄ±nda",
+      "docsMissingBody": "Bu araÃ§ iÃ§in dokÃ¼mantasyon yakÄ±nda.",
+      "metaDocVersion": "DokÃ¼man sÃ¼rÃ¼mÃ¼: {value}",
+      "metaUpdated": "GÃ¼ncelleme: {value}",
+      "metaTranslated": "Ã‡eviri tarihi: {value}",
+      "explanationEmptyTitle": "AÃ§Ä±klama (yakÄ±nda)",
+      "explanationEmptyBody": "Bu hesaplayÄ±cÄ± iÃ§in aÃ§Ä±klama henÃ¼z eklenmedi. Åimdilik kullanabilirsin.",
+      "examplesEmptyTitle": "Ã–rnekler (yakÄ±nda)",
+      "examplesEmptyBody": "Bu hesaplayÄ±cÄ± iÃ§in Ã¶rnekler henÃ¼z eklenmedi. YakÄ±nda Ã¶rnek girdiler eklenecek.",
+      "examplesEmptyHint": "Ã–rnekler hazÄ±rlanÄ±yor.",
       "inputs": "Girdiler",
-      "outputs": "Çıktılar",
+      "outputs": "Ã‡Ä±ktÄ±lar",
       "note": "Not",
       "guidesTitle": "Rehberler",
-      "guidesHeading": "İlgili rehberler",
-      "guidesDesc": "Benzer etiketli rehberlere göz at.",
-      "glossaryTitle": "Sözlük",
-      "glossaryHeading": "İlgili terimler",
-      "glossaryDesc": "Hesaplayıcıyla aynı kavramlara bakan terimler.",
+      "guidesHeading": "Ä°lgili rehberler",
+      "guidesDesc": "Benzer etiketli rehberlere gÃ¶z at.",
+      "glossaryTitle": "SÃ¶zlÃ¼k",
+      "glossaryHeading": "Ä°lgili terimler",
+      "glossaryDesc": "HesaplayÄ±cÄ±yla aynÄ± kavramlara bakan terimler.",
       "read": "Oku"
     },
     "toolDocStandard": {
-      "howToTitle": "Nasıl kullanılır?",
-      "formulaTitle": "Formül",
-      "commonMistakesTitle": "Sık hatalar",
+      "howToTitle": "NasÄ±l kullanÄ±lÄ±r?",
+      "formulaTitle": "FormÃ¼l",
+      "commonMistakesTitle": "SÄ±k hatalar",
+      "referencesTitle": "Referanslar"
+    },
+    "toolMethodNotes": {
+      "purposeTitle": "Ne iÅŸe yarar?",
+      "inputsTitle": "Girdiler",
+      "inputCol": "Girdi",
+      "unitCol": "Birim",
+      "rangeCol": "Tipik aralÄ±k",
+      "impactCol": "Etkisi",
+      "formulaTitle": "FormÃ¼l / yaklaÅŸÄ±m",
+      "assumptionsTitle": "VarsayÄ±mlar & SÄ±nÄ±rlar",
+      "exampleTitle": "Ã–rnek",
+      "inputSet": "Girdi seti",
+      "output": "Ã‡Ä±ktÄ±",
+      "faqTitle": "SÄ±k sorulanlar (FAQ)",
       "referencesTitle": "Referanslar"
     },
     "comparePanel": {
-      "title": "Karşılaştırma Modu",
-      "description": "Aynı girdi setiyle 2-3 senaryo oluştur, sonuçları yan yana karşılaştır.",
+      "title": "KarÅŸÄ±laÅŸtÄ±rma Modu",
+      "description": "AynÄ± girdi setiyle 2-3 senaryo oluÅŸtur, sonuÃ§larÄ± yan yana karÅŸÄ±laÅŸtÄ±r.",
       "scenario": "Senaryo",
       "label": "Opsiyonel etiket",
       "add": "Senaryo Ekle",
-      "remove": "Kaldır",
-      "reset": "Sıfırla",
-      "share": "Linki Paylaş",
-      "tableTitle": "Karşılaştırma Tablosu",
+      "remove": "KaldÄ±r",
+      "reset": "SÄ±fÄ±rla",
+      "share": "Linki PaylaÅŸ",
+      "tableTitle": "KarÅŸÄ±laÅŸtÄ±rma Tablosu",
       "metricLabel": "Metrik",
-      "emptyMetrics": "Karşılaştırılabilir metrik bulunamadı.",
-      "shareSuccess": "Link kopyalandı.",
-      "shareFail": "Kopyalama başarısız. Linki manuel kopyalayabilirsin.",
+      "emptyMetrics": "KarÅŸÄ±laÅŸtÄ±rÄ±labilir metrik bulunamadÄ±.",
+      "shareSuccess": "Link kopyalandÄ±.",
+      "shareFail": "Kopyalama baÅŸarÄ±sÄ±z. Linki manuel kopyalayabilirsin.",
       "separator": " - "
     },
     "toolActions": {
-      "shareTitle": "Paylaş & Rapor",
-      "shareDescription": "Paylaşılabilir link oluştur veya yazdırılabilir raporu aç.",
+      "shareTitle": "PaylaÅŸ & Rapor",
+      "shareDescription": "PaylaÅŸÄ±labilir link oluÅŸtur veya yazdÄ±rÄ±labilir raporu aÃ§.",
       "share": "Linki Kopyala",
-      "report": "PDF / Yazdır",
-      "shareSuccess": "Link kopyalandı.",
-      "shareFail": "Kopyalama başarısız. Linki manuel kopyalayabilirsin."
+      "report": "PDF / YazdÄ±r",
+      "shareSuccess": "Link kopyalandÄ±.",
+      "shareFail": "Kopyalama baÅŸarÄ±sÄ±z. Linki manuel kopyalayabilirsin."
     },
     "toolDataActions": {
-      "title": "Proje ve Dışa Aktarım",
-      "description": "Hesabı yerel projeye kaydet veya giriş/çıktıları dışa aktar.",
-      "openProjects": "Projeleri aç",
+      "title": "Proje ve DÄ±ÅŸa AktarÄ±m",
+      "description": "HesabÄ± yerel projeye kaydet veya giriÅŸ/Ã§Ä±ktÄ±larÄ± dÄ±ÅŸa aktar.",
+      "openProjects": "Projeleri aÃ§",
       "projectLabel": "Projeye kaydet",
       "newProject": "Yeni proje",
-      "newProjectPlaceholder": "Proje adı",
+      "newProjectPlaceholder": "Proje adÄ±",
       "defaultProject": "Projem",
       "save": "Projeye Kaydet",
       "savedMessage": "{project} projesine kaydedildi.",
-      "exportLabel": "Veri dışa aktar",
-      "exportJson": "JSON dışa aktar",
-      "exportCsv": "CSV dışa aktar",
-      "exportHint": "Sadece giriş ve çıktı değerleri aktarılır.",
+      "exportLabel": "Veri dÄ±ÅŸa aktar",
+      "exportJson": "JSON dÄ±ÅŸa aktar",
+      "exportCsv": "CSV dÄ±ÅŸa aktar",
+      "exportHint": "Sadece giriÅŸ ve Ã§Ä±ktÄ± deÄŸerleri aktarÄ±lÄ±r.",
       "sections": {
-        "inputs": "Giriş",
-        "outputs": "Çıktı"
+        "inputs": "GiriÅŸ",
+        "outputs": "Ã‡Ä±ktÄ±"
       },
       "csvHeaders": {
-        "section": "Bölüm",
+        "section": "BÃ¶lÃ¼m",
         "key": "Alan",
-        "value": "Değer"
+        "value": "DeÄŸer"
       }
     },
     "toolTrustPanel": {
-      "formula": "Formül",
-      "assumptions": "Varsayımlar",
+      "formula": "FormÃ¼l",
+      "assumptions": "VarsayÄ±mlar",
       "references": "Kaynaklar"
     },
     "toolValidation": {
-      "required": "Geçersiz değer: {field} zorunlu.",
-      "invalidNumber": "Geçersiz değer: {field} sayısal olmalı.",
-      "invalidOption": "Geçersiz değer: {field} seçimi geçersiz.",
-      "min": "Geçersiz değer: {field} ≥ {min} olmalı.",
-      "max": "Geçersiz değer: {field} ≤ {max} olmalı.",
-      "resultFix": "Sonuçları görmek için hatalı alanları düzeltin.",
-      "calcFailed": "Hesaplama başarısız. Girdileri kontrol edin."
+      "required": "GeÃ§ersiz deÄŸer: {field} zorunlu.",
+      "invalidNumber": "GeÃ§ersiz deÄŸer: {field} sayÄ±sal olmalÄ±.",
+      "invalidOption": "GeÃ§ersiz deÄŸer: {field} seÃ§imi geÃ§ersiz.",
+      "min": "GeÃ§ersiz deÄŸer: {field} â‰¥ {min} olmalÄ±.",
+      "max": "GeÃ§ersiz deÄŸer: {field} â‰¤ {max} olmalÄ±.",
+      "resultFix": "SonuÃ§larÄ± gÃ¶rmek iÃ§in hatalÄ± alanlarÄ± dÃ¼zeltin.",
+      "calcFailed": "Hesaplama baÅŸarÄ±sÄ±z. Girdileri kontrol edin."
     },
     "toolReport": {
-      "title": "Araç raporu",
-      "subtitle": "Yazdırılabilir özet",
+      "title": "AraÃ§ raporu",
+      "subtitle": "YazdÄ±rÄ±labilir Ã¶zet",
       "dateLabel": "Tarih",
       "inputs": "Girdiler",
-      "results": "Sonuçlar",
-      "formula": "Formül",
-      "assumptions": "Varsayımlar",
+      "results": "SonuÃ§lar",
+      "formula": "FormÃ¼l",
+      "assumptions": "VarsayÄ±mlar",
       "references": "Kaynaklar",
-      "print": "Yazdır",
+      "print": "YazdÄ±r",
       "downloadPdf": "PDF indir",
-      "back": "Araca dön",
-      "missing": "Rapor verisi yok. Araca dönüp raporu oluşturun."
+      "back": "Araca dÃ¶n",
+      "missing": "Rapor verisi yok. Araca dÃ¶nÃ¼p raporu oluÅŸturun."
     },
     "toolsError": {
-      "title": "Beklenmeyen bir hata oluştu",
-      "description": "Bu araçı şu anda yükleyemedik. Sayfayı yenileyin veya araç listesine dönün.",
-      "refresh": "Sayfayı yenile",
-      "back": "Araçlara dön"
+      "title": "Beklenmeyen bir hata oluÅŸtu",
+      "description": "Bu aracÄ± ÅŸu anda yÃ¼kleyemedik. SayfayÄ± yenileyin veya araÃ§ listesine dÃ¶nÃ¼n.",
+      "refresh": "SayfayÄ± yenile",
+      "back": "AraÃ§lara dÃ¶n"
     },
     "genericToolPage": {
       "inputs": "Girdiler",
-      "results": "Sonuçlar",
-      "formula": "Formül",
+      "results": "SonuÃ§lar",
+      "formula": "FormÃ¼l",
       "chart": "Grafik",
-      "chartEmpty": "Grafik için geçerli değerler girin.",
-      "resultEmpty": "Sonuçları görmek için hatalı alanları düzeltin.",
-      "actionsTitle": "Paylaş & Rapor",
-      "actionsDescription": "Paylaşılabilir link oluştur veya yazdırılabilir raporu aç.",
-      "calcFailed": "Hesaplama başarısız. Girdileri kontrol edin.",
+      "chartEmpty": "Grafik iÃ§in geÃ§erli deÄŸerler girin.",
+      "resultEmpty": "SonuÃ§larÄ± gÃ¶rmek iÃ§in hatalÄ± alanlarÄ± dÃ¼zeltin.",
+      "actionsTitle": "PaylaÅŸ & Rapor",
+      "actionsDescription": "PaylaÅŸÄ±labilir link oluÅŸtur veya yazdÄ±rÄ±labilir raporu aÃ§.",
+      "calcFailed": "Hesaplama baÅŸarÄ±sÄ±z. Girdileri kontrol edin.",
       "required": "Zorunlu alan.",
-      "invalidNumber": "Geçerli sayı girin.",
-      "invalidOption": "Geçerli bir seçim yapın.",
+      "invalidNumber": "GeÃ§erli sayÄ± girin.",
+      "invalidOption": "GeÃ§erli bir seÃ§im yapÄ±n.",
       "min": "Min",
       "max": "Max"
     },
     "dashboard": {
       "badge": "Panel",
       "title": "Kontrol paneli",
-      "description": "Favoriler, son kullanılanlar ve özel öneriler tek yerde.",
-      "imageAlt": "Kayıtlı, son kullanılan ve önerilen araçları gösteren panel",
+      "description": "Favoriler, son kullanÄ±lanlar ve Ã¶zel Ã¶neriler tek yerde.",
+      "imageAlt": "KayÄ±tlÄ±, son kullanÄ±lan ve Ã¶nerilen araÃ§larÄ± gÃ¶steren panel",
       "favorites": "Favoriler",
-      "favoritesDescription": "Sık kullandığın hesaplayıcıların listesi.",
-      "favoritesEmpty": "Henüz favori eklemedin.",
-      "recents": "Son kullanılanlar",
-      "recentsDescription": "Kaldığın yerden devam et.",
-      "recentsEmpty": "Henüz bir hesaplayıcı açılmadı.",
-      "recommended": "Önerilen",
-      "recommendedDescription": "Son kullanılanlarınla benzer kategori veya etiketlerden seçildi.",
-      "recommendedEmpty": "Favori ekledikçe öneriler burada görünür.",
-      "open": "Hesaplayıcıyı Aç",
-      "lastUsed": "Son kullanım"
+      "favoritesDescription": "SÄ±k kullandÄ±ÄŸÄ±n hesaplayÄ±cÄ±larÄ±n listesi.",
+      "favoritesEmpty": "HenÃ¼z favori eklemedin.",
+      "recents": "Son kullanÄ±lanlar",
+      "recentsDescription": "KaldÄ±ÄŸÄ±n yerden devam et.",
+      "recentsEmpty": "HenÃ¼z bir hesaplayÄ±cÄ± aÃ§Ä±lmadÄ±.",
+      "recommended": "Ã–nerilen",
+      "recommendedDescription": "Son kullanÄ±lanlarÄ±nla benzer kategori veya etiketlerden seÃ§ildi.",
+      "recommendedEmpty": "Favori ekledikÃ§e Ã¶neriler burada gÃ¶rÃ¼nÃ¼r.",
+      "open": "HesaplayÄ±cÄ±yÄ± AÃ§",
+      "lastUsed": "Son kullanÄ±m"
     },
     "recentTools": {
-      "title": "Son kullanılanlar",
-      "description": "En son açtığın hesaplayıcılara buradan hızlıca dön.",
-      "empty": "Henüz son kullanılan hesaplayıcı yok.",
-      "open": "{title} hesaplayıcısını aç",
+      "title": "Son kullanÄ±lanlar",
+      "description": "En son aÃ§tÄ±ÄŸÄ±n hesaplayÄ±cÄ±lara buradan hÄ±zlÄ±ca dÃ¶n.",
+      "empty": "HenÃ¼z son kullanÄ±lan hesaplayÄ±cÄ± yok.",
+      "open": "{title} hesaplayÄ±cÄ±sÄ±nÄ± aÃ§",
       "generalCategory": "Genel"
     },
     "savedCalculations": {
-      "title": "Kayıtlı Hesaplarım",
-      "description": "Kayıtlar sadece bu cihazda saklanır. Tekrar açmak veya silmek için listeden istediğin kaydı kullanabilirsin.",
-      "loading": "Kayıtlar yükleniyor...",
-      "emptyTitle": "Kayıtlı hesap bulunamadı.",
-      "emptyHint": "Bir hesaplayıcıda \"Kaydet\" butonunu kullanarak kayıt oluşturabilirsin.",
-      "toolLibrary": "Hesaplayıcı Kütüphanesi'ne git",
-      "reopen": "Tekrar Aç",
+      "title": "KayÄ±tlÄ± HesaplarÄ±m",
+      "description": "KayÄ±tlar sadece bu cihazda saklanÄ±r. Tekrar aÃ§mak veya silmek iÃ§in listeden istediÄŸin kaydÄ± kullanabilirsin.",
+      "loading": "KayÄ±tlar yÃ¼kleniyor...",
+      "emptyTitle": "KayÄ±tlÄ± hesap bulunamadÄ±.",
+      "emptyHint": "Bir hesaplayÄ±cÄ±da \"Kaydet\" butonunu kullanarak kayÄ±t oluÅŸturabilirsin.",
+      "toolLibrary": "HesaplayÄ±cÄ± KÃ¼tÃ¼phanesi'ne git",
+      "reopen": "Tekrar AÃ§",
       "delete": "Sil",
-      "details": "Parametre ve sonuç detayları",
+      "details": "Parametre ve sonuÃ§ detaylarÄ±",
       "inputs": "Parametreler",
-      "outputs": "Sonuç"
+      "outputs": "SonuÃ§"
     },
     "requestToolForm": {
-      "title": "Araç iste",
-      "description": "Problemi ve input/output yapısını yazarak yeni araçı hızla tarif edebilirsin.",
-      "issueTitle": "Araç isteği",
-      "issueTitlePrefix": "Araç isteği",
-      "back": "Hesaplayıcı Kütüphanesi",
-      "submit": "İstek Gönder",
-      "github": "GitHub Issue Oluştur",
+      "title": "AraÃ§ iste",
+      "description": "Problemi ve girdi/Ã§Ä±ktÄ± yapÄ±sÄ±nÄ± yazarak yeni aracÄ± hÄ±zla tarif edebilirsin.",
+      "issueTitle": "AraÃ§ isteÄŸi",
+      "issueTitlePrefix": "AraÃ§ isteÄŸi",
+      "back": "HesaplayÄ±cÄ± KÃ¼tÃ¼phanesi",
+      "submit": "Ä°stek GÃ¶nder",
+      "github": "GitHub Issue OluÅŸtur",
       "copy": "Kopyala",
-      "copied": "Kopyalandı.",
-      "copyFail": "Kopyalama başarısız. Metni manuel kopyalayabilirsin.",
-      "history": "Gönderilen istekler",
-      "emptyHistory": "Henüz istek yok.",
-      "storageNote": "Tarayıcınızda yerel olarak saklanır.",
+      "copied": "KopyalandÄ±.",
+      "copyFail": "Kopyalama baÅŸarÄ±sÄ±z. Metni manuel kopyalayabilirsin.",
+      "history": "GÃ¶nderilen istekler",
+      "emptyHistory": "HenÃ¼z istek yok.",
+      "storageNote": "TarayÄ±cÄ±nÄ±zda yerel olarak saklanÄ±r.",
       "required": "Bu alan zorunlu.",
       "fields": {
-        "problem": "Problem / Kullanım alanı",
+        "problem": "Problem / KullanÄ±m alanÄ±",
         "inputs": "Girdiler (input listesi)",
-        "outputs": "Beklenen çıktı (result)",
+        "outputs": "Beklenen Ã§Ä±ktÄ± (result)",
         "standards": "Birimler / standartlar",
-        "examples": "Örnek değerler"
+        "examples": "Ã–rnek deÄŸerler"
       }
     },
     "exportPanel": {
-      "previewAlt": "Önizleme",
-      "previewFallback": "Önizleme",
-      "downloadStarted": "İndirme başladı.",
-      "downloadFailed": "İndirme başarısız. Tekrar deneyin.",
-      "downloadError": "İndirme sırasında hata oluştu.",
+      "previewAlt": "Ã–nizleme",
+      "previewFallback": "Ã–nizleme",
+      "downloadStarted": "Ä°ndirme baÅŸladÄ±.",
+      "downloadFailed": "Ä°ndirme baÅŸarÄ±sÄ±z. Tekrar deneyin.",
+      "downloadError": "Ä°ndirme sÄ±rasÄ±nda hata oluÅŸtu.",
       "pngDownloading": "PNG indiriliyor.",
       "svgDownloading": "SVG indiriliyor.",
       "pdfDownloading": "PDF indiriliyor."
     },
     "explanationPanel": {
-      "title": "Açıklama Modu (ileri seviye)",
-      "formulasTitle": "Kullanılan Formüller",
-      "variablesTitle": "Değişkenler",
-      "notesTitle": "Kullanım Notları"
+      "title": "AÃ§Ä±klama Modu (ileri seviye)",
+      "formulasTitle": "KullanÄ±lan FormÃ¼ller",
+      "variablesTitle": "DeÄŸiÅŸkenler",
+      "notesTitle": "KullanÄ±m NotlarÄ±"
     },
     "toolPage": {
-      "badge": "Hesaplayıcı"
+      "badge": "HesaplayÄ±cÄ±",
+      "howItWorksLabel": "Nasil calisir?",
+      "howItWorksDescription": "Bu araclarda AI, standartlara dayali deterministik hesaplama motoru ve akilli asistan rehberligi anlamina gelir. ISO, DIN ve VDI referanslariyla ayni girdide ayni sonucu uretir."
     },
     "confidence": {
-      "title": "Güven Özeti",
-      "version": "Sürüm",
-      "updated": "Son güncelleme",
-      "assumptions": "Varsayımlar",
+      "title": "GÃ¼ven Ã–zeti",
+      "version": "SÃ¼rÃ¼m",
+      "updated": "Son gÃ¼ncelleme",
+      "assumptions": "VarsayÄ±mlar",
       "references": "Referanslar"
     },
     "qaBoard": {
       "badge": "Soru-cevap",
-      "sampleBadge": "Örnek",
-      "title": "Soru-cevap alanı",
-      "description": "Soru sor, kısa yanıtlar al ve deneyim paylaş.",
-      "answersTitle": "Yanıtlar",
-      "replyLabel": "Senin yanıtın",
-      "replyPlaceholder": "Tecrübeni, hesabını veya önerini yaz...",
-      "replyButton": "Yanıt paylaş",
-      "topicsTitle": "Aktif başlıklar",
-      "topicCountLabel": "{count} başlık",
-      "replyCountLabel": "{count} yanıt",
+      "sampleBadge": "Ã–rnek",
+      "title": "Soru-cevap alanÄ±",
+      "description": "Soru sor, kÄ±sa yanÄ±tlar al ve deneyim paylaÅŸ.",
+      "answersTitle": "YanÄ±tlar",
+      "replyLabel": "Senin yanÄ±tÄ±n",
+      "replyPlaceholder": "TecrÃ¼beni, hesabÄ±nÄ± veya Ã¶nerini yaz...",
+      "replyButton": "YanÄ±t paylaÅŸ",
+      "topicsTitle": "Aktif baÅŸlÄ±klar",
+      "topicCountLabel": "{count} baÅŸlÄ±k",
+      "replyCountLabel": "{count} yanÄ±t",
       "authorLabel": "Yazan",
       "topics": [
         {
           "slug": "m12-civata-torku",
-          "title": "M12 10.9 cıvata torku ve yağlama",
-          "author": "Ayşe Yılmaz",
-          "category": "Tork / Bağlantı",
-          "details": "Tablo değerleriyle gerçek sıkma arasında fark var. Moment anahtarı kalibrasyonu ve yağlama seçimi torku nasıl etkiler?",
-          "updated": "2 saat önce",
+          "title": "M12 10.9 cÄ±vata torku ve yaÄŸlama",
+          "author": "AyÅŸe YÄ±lmaz",
+          "category": "Tork / BaÄŸlantÄ±",
+          "details": "Tablo deÄŸerleriyle gerÃ§ek sÄ±kma arasÄ±nda fark var. Moment anahtarÄ± kalibrasyonu ve yaÄŸlama seÃ§imi torku nasÄ±l etkiler?",
+          "updated": "2 saat Ã¶nce",
           "tags": [
             "tork",
-            "cıvata",
-            "yağlama"
+            "cÄ±vata",
+            "yaÄŸlama"
           ],
           "replies": 4
         },
         {
           "slug": "kaynak-sonrasi-sehim",
-          "title": "S235 plakada kaynak sonrası sehim",
+          "title": "S235 plakada kaynak sonrasÄ± sehim",
           "author": "Mehmet A.",
-          "category": "Kaynak / Yapı",
-          "details": "300x500x10 mm plakayı köşe kaynak ile birleştirdikten sonra sehim oluştu; fikstürleme ve ön ısıtma önerisi?",
-          "updated": "5 saat önce",
+          "category": "Kaynak / YapÄ±",
+          "details": "300x500x10 mm plakayÄ± kÃ¶ÅŸe kaynak ile birleÅŸtirdikten sonra sehim oluÅŸtu; fikstÃ¼rleme ve Ã¶n Ä±sÄ±tma Ã¶nerisi?",
+          "updated": "5 saat Ã¶nce",
           "tags": [
             "kaynak",
             "sehim",
-            "fikstür"
+            "fikstÃ¼r"
           ],
           "replies": 3
         },
         {
           "slug": "h8d9-yuzey-puruzluluk",
-          "title": "H8/d9 geçme için yüzey pürüzlülüğü",
+          "title": "H8/d9 geÃ§me iÃ§in yÃ¼zey pÃ¼rÃ¼zlÃ¼lÃ¼ÄŸÃ¼",
           "author": "Selin K.",
           "category": "Tolerans / GD&T",
-          "details": "Ø25 delik ve mil için H8/d9 seçtim. Preslemede gevşeme olmaması için yüzey pürüzlülüğü ne olmalı?",
-          "updated": "1 gün önce",
+          "details": "Ã˜25 delik ve mil iÃ§in H8/d9 seÃ§tim. Preslemede gevÅŸeme olmamasÄ± iÃ§in yÃ¼zey pÃ¼rÃ¼zlÃ¼lÃ¼ÄŸÃ¼ ne olmalÄ±?",
+          "updated": "1 gÃ¼n Ã¶nce",
           "tags": [
             "tolerans",
-            "geçme",
-            "yüzey"
+            "geÃ§me",
+            "yÃ¼zey"
           ],
           "replies": 1
         }
@@ -1614,114 +1653,114 @@
         "m12-civata-torku": [
           {
             "user": "Kadir",
-            "text": "DIN tablosu yağsız değer verir, yağlı kullanıyorsan %20-25 düş. Moment anahtarını yılda bir kalibre ettir.",
-            "time": "1s önce"
+            "text": "DIN tablosu yaÄŸsÄ±z deÄŸer verir, yaÄŸlÄ± kullanÄ±yorsan %20-25 dÃ¼ÅŸ. Moment anahtarÄ±nÄ± yÄ±lda bir kalibre ettir.",
+            "time": "1s Ã¶nce"
           },
           {
             "user": "Elif",
-            "text": "M12 10.9 için tipik ~90 Nm (kuru). Yağlıysa 65-70 Nm aralığı yeterli. Yüzeyleri temiz tut.",
-            "time": "12s önce"
+            "text": "M12 10.9 iÃ§in tipik ~90 Nm (kuru). YaÄŸlÄ±ysa 65-70 Nm aralÄ±ÄŸÄ± yeterli. YÃ¼zeyleri temiz tut.",
+            "time": "12s Ã¶nce"
           },
           {
             "user": "Selim",
-            "text": "Kaymalı rondela kullanıyorsan sürtünme düşer; torku biraz azalt. Turn-of-nut ile ön yükü kontrol edebilirsin.",
-            "time": "25s önce"
+            "text": "KaymalÄ± rondela kullanÄ±yorsan sÃ¼rtÃ¼nme dÃ¼ÅŸer; torku biraz azalt. Turn-of-nut ile Ã¶n yÃ¼kÃ¼ kontrol edebilirsin.",
+            "time": "25s Ã¶nce"
           }
         ],
         "kaynak-sonrasi-sehim": [
           {
             "user": "Hakan",
-            "text": "Simetrik puntolar ve karşılıklı kaynat, sonra tamamını doldur. Ön ısı 120-150°C ise yarar.",
-            "time": "10dk önce"
+            "text": "Simetrik puntolar ve karÅŸÄ±lÄ±klÄ± kaynat, sonra tamamÄ±nÄ± doldur. Ã–n Ä±sÄ± 120-150Â°C ise yarar.",
+            "time": "10dk Ã¶nce"
           },
           {
             "user": "Derya",
-            "text": "Sehim için ters kamber verip kaynatmayı dene. Fikstürle baskı altına almak da işe yarar.",
-            "time": "35dk önce"
+            "text": "Sehim iÃ§in ters kamber verip kaynatmayÄ± dene. FikstÃ¼rle baskÄ± altÄ±na almak da iÅŸe yarar.",
+            "time": "35dk Ã¶nce"
           }
         ],
         "h8d9-yuzey-puruzluluk": [
           {
             "user": "Elif",
-            "text": "Ra 1.6-3.2 µm aralığı genelde yeterli. Temizlik ve çapaksızlık kritik.",
-            "time": "2s önce"
+            "text": "Ra 1.6-3.2 Âµm aralÄ±ÄŸÄ± genelde yeterli. Temizlik ve Ã§apaksÄ±zlÄ±k kritik.",
+            "time": "2s Ã¶nce"
           }
         ]
       }
     },
     "unitConverter": {
       "input": {
-        "title": "Hangi dönüşümü yapmak istiyorsun?",
-        "description": "Önce kategoriyi seç, sonra kaynak ve hedef birimi belirle. Değeri girdiğinde sonuç otomatik güncellenir.",
-        "categoryLabel": "Hangi kategori üzerinde çalışıyorsun?",
-        "fromLabel": "Hangi birimden başlıyorsun?",
-        "toLabel": "Hangi birime dönüşecek?",
-        "valueLabel": "Kaç birim?",
-        "valuePlaceholder": "Örn. 100",
-        "swapLabel": "Değiştir",
+        "title": "Hangi dÃ¶nÃ¼ÅŸÃ¼mÃ¼ yapmak istiyorsun?",
+        "description": "Ã–nce kategoriyi seÃ§, sonra kaynak ve hedef birimi belirle. DeÄŸeri girdiÄŸinde sonuÃ§ otomatik gÃ¼ncellenir.",
+        "categoryLabel": "Hangi kategori Ã¼zerinde Ã§alÄ±ÅŸÄ±yorsun?",
+        "fromLabel": "Hangi birimden baÅŸlÄ±yorsun?",
+        "toLabel": "Hangi birime dÃ¶nÃ¼ÅŸecek?",
+        "valueLabel": "KaÃ§ birim?",
+        "valuePlaceholder": "Ã–rn. 100",
+        "swapLabel": "DeÄŸiÅŸtir",
         "categories": {
           "length": "Uzunluk",
           "force": "Kuvvet",
-          "pressure": "Basınç",
+          "pressure": "BasÄ±nÃ§",
           "energy": "Enerji"
         }
       },
       "result": {
-        "title": "Sonuç Akışı",
-        "description": "Sonucu, ne yaptık / nasıl hesapladık / ne anlama geliyor şeklinde aşama aşama görürsün.",
-        "step1Title": "1. Ne yaptık?",
-        "step1Body": "Girdiğin değeri önce temel birime çevirdik, sonra hedef birime dönüştürdük.",
-        "step2Title": "2. Nasıl hesapladık?",
-        "formulaLabel": "Formül",
-        "step3Title": "3. Sonuç ne anlama geliyor?",
-        "step3Body": "Bu değer, girdiğin miktarın hedef birimdeki karşılığıdır. Temel birim: {baseValue} {baseUnit}"
+        "title": "SonuÃ§ AkÄ±ÅŸÄ±",
+        "description": "Sonucu, ne yaptÄ±k / nasÄ±l hesapladÄ±k / ne anlama geliyor ÅŸeklinde aÅŸama aÅŸama gÃ¶rÃ¼rsÃ¼n.",
+        "step1Title": "1. Ne yaptÄ±k?",
+        "step1Body": "GirdiÄŸin deÄŸeri Ã¶nce temel birime Ã§evirdik, sonra hedef birime dÃ¶nÃ¼ÅŸtÃ¼rdÃ¼k.",
+        "step2Title": "2. NasÄ±l hesapladÄ±k?",
+        "formulaLabel": "FormÃ¼l",
+        "step3Title": "3. SonuÃ§ ne anlama geliyor?",
+        "step3Body": "Bu deÄŸer, girdiÄŸin miktarÄ±n hedef birimdeki karÅŸÄ±lÄ±ÄŸÄ±dÄ±r. Temel birim: {baseValue} {baseUnit}"
       },
       "visual": {
-        "title": "Görsel Akış",
-        "description": "Dönüşüm akışı tek bakışta görünsün diye değerleri yan yana listeler.",
-        "downloadLabel": "Görseli İndir",
-        "previewAlt": "Dönüşüm önizleme",
-        "helperText": "PNG net, SVG ise vektör çıktı için uygundur.",
+        "title": "GÃ¶rsel AkÄ±ÅŸ",
+        "description": "DÃ¶nÃ¼ÅŸÃ¼m akÄ±ÅŸÄ± tek bakÄ±ÅŸta gÃ¶rÃ¼nsÃ¼n diye deÄŸerleri yan yana listeler.",
+        "downloadLabel": "GÃ¶rseli Ä°ndir",
+        "previewAlt": "DÃ¶nÃ¼ÅŸÃ¼m Ã¶nizleme",
+        "helperText": "PNG net, SVG ise vektÃ¶r Ã§Ä±ktÄ± iÃ§in uygundur.",
         "downloadPng": "donusum.png",
         "downloadSvg": "donusum.svg",
-        "inputLabel": "Giriş",
+        "inputLabel": "GiriÅŸ",
         "baseLabel": "Temel",
-        "outputLabel": "Çıkış",
-        "diagramLabel": "Dönüşüm akışı"
+        "outputLabel": "Ã‡Ä±kÄ±ÅŸ",
+        "diagramLabel": "DÃ¶nÃ¼ÅŸÃ¼m akÄ±ÅŸÄ±"
       },
       "errors": {
-        "missingUnits": "Seçili birimler bulunamadı.",
-        "invalidNumber": "Lütfen geçerli bir değer girin."
+        "missingUnits": "SeÃ§ili birimler bulunamadÄ±.",
+        "invalidNumber": "LÃ¼tfen geÃ§erli bir deÄŸer girin."
       },
       "steps": {
-        "input": "Giriş: {value} {unit}",
-        "toBase": "Temel birime çevir: {input} * {factor} = {value} {unit}",
-        "toOutput": "Çıkış birimine çevir: {base} / {factor} = {value} {unit}"
+        "input": "GiriÅŸ: {value} {unit}",
+        "toBase": "Temel birime Ã§evir: {input} * {factor} = {value} {unit}",
+        "toOutput": "Ã‡Ä±kÄ±ÅŸ birimine Ã§evir: {base} / {factor} = {value} {unit}"
       },
       "explanation": {
-        "title": "Formül ve değişkenler",
+        "title": "FormÃ¼l ve deÄŸiÅŸkenler",
         "variables": [
           {
             "symbol": "V_in",
-            "description": "Girdiğin değer."
+            "description": "GirdiÄŸin deÄŸer."
           },
           {
             "symbol": "V_out",
-            "description": "Hedef birimdeki sonuç."
+            "description": "Hedef birimdeki sonuÃ§."
           },
           {
             "symbol": "factor_from",
-            "description": "Kaynak birimin temel birime çevrim katsayısı."
+            "description": "Kaynak birimin temel birime Ã§evrim katsayÄ±sÄ±."
           },
           {
             "symbol": "factor_to",
-            "description": "Hedef birimin temel birime çevrim katsayısı."
+            "description": "Hedef birimin temel birime Ã§evrim katsayÄ±sÄ±."
           }
         ],
         "notes": [
-          "Dönüşümler seçilen kategoriye ait temel birim üzerinden yapılır.",
-          "Raporlama ve hızlı kontrol için kullanılabilir.",
-          "Yuvarlama görünüm içindir; ham değerler hesaplamada kullanılır."
+          "DÃ¶nÃ¼ÅŸÃ¼mler seÃ§ilen kategoriye ait temel birim Ã¼zerinden yapÄ±lÄ±r.",
+          "Raporlama ve hÄ±zlÄ± kontrol iÃ§in kullanÄ±labilir.",
+          "Yuvarlama gÃ¶rÃ¼nÃ¼m iÃ§indir; ham deÄŸerler hesaplamada kullanÄ±lÄ±r."
         ]
       }
     },
@@ -1729,57 +1768,59 @@
       "addLabel": "Favoriye Ekle",
       "removeLabel": "Favorilerde",
       "addAria": "{title} favorilere ekle",
-      "removeAria": "{title} favorilerden çıkar",
-      "fallbackTitle": "Araç"
+      "removeAria": "{title} favorilerden Ã§Ä±kar",
+      "fallbackTitle": "AraÃ§"
     },
     "toolHistory": {
-      "title": "Kayıtlı Hesaplar",
-      "description": "Kaydettiğin hesaplar sadece bu cihazda saklanır. En son {count} kayıt tutulur.",
-      "viewAll": "Tüm kayıtları gör",
+      "title": "KayÄ±tlÄ± Hesaplar",
+      "description": "KaydettiÄŸin hesaplar sadece bu cihazda saklanÄ±r. En son {count} kayÄ±t tutulur.",
+      "viewAll": "TÃ¼m kayÄ±tlarÄ± gÃ¶r",
       "save": "Kaydet",
-      "clear": "Kayıtları Temizle",
-      "errorNoResult": "Geçerli sonuç olmadan kayıt alamazsın.",
-      "hintSave": "Mevcut sonucu tek tıkla sakla.",
+      "clear": "KayÄ±tlarÄ± Temizle",
+      "errorNoResult": "GeÃ§erli sonuÃ§ olmadan kayÄ±t alamazsÄ±n.",
+      "hintSave": "Mevcut sonucu tek tÄ±kla sakla.",
       "feedback": {
-        "storeError": "Kayıt işlemi başarısız. Tarayıcı alanı dolu olabilir.",
-        "saveSuccess": "Kayıt başarıyla oluşturuldu.",
-        "saveError": "Kayıt işlemi başarısız oldu.",
-        "clearSuccess": "Kayıtlar temizlendi.",
-        "clearError": "Kayıtları temizlerken hata oldu."
+        "storeError": "KayÄ±t iÅŸlemi baÅŸarÄ±sÄ±z. TarayÄ±cÄ± alanÄ± dolu olabilir.",
+        "saveSuccess": "KayÄ±t baÅŸarÄ±yla oluÅŸturuldu.",
+        "saveError": "KayÄ±t iÅŸlemi baÅŸarÄ±sÄ±z oldu.",
+        "clearSuccess": "KayÄ±tlar temizlendi.",
+        "clearError": "KayÄ±tlarÄ± temizlerken hata oldu."
       },
-      "loading": "Kayıtlar yükleniyor...",
-      "empty": "Henüz kayıtlı hesap yok. Sonucu kaydetmek için yukarıdaki butonu kullan.",
+      "loading": "KayÄ±tlar yÃ¼kleniyor...",
+      "empty": "HenÃ¼z kayÄ±tlÄ± hesap yok. Sonucu kaydetmek iÃ§in yukarÄ±daki butonu kullan.",
       "inputs": "Parametreler",
-      "outputs": "Sonuç"
+      "outputs": "SonuÃ§"
     },
     "advisorPanel": {
-      "title": "Mühendislik Danışmanı",
-      "subtitle": "Girdilere göre hızlı kontroller, aralıklar ve sonraki adım önerileri.",
-      "empty": "Şu anda bir danışman notu yok. Girdileri değiştirerek önerileri görebilirsin.",
+      "title": "MÃ¼hendislik DanÄ±ÅŸmanÄ±",
+      "subtitle": "Girdilere gÃ¶re hÄ±zlÄ± kontroller, aralÄ±klar ve sonraki adÄ±m Ã¶nerileri.",
+      "empty": "Åu anda bir danÄ±ÅŸman notu yok. Girdileri deÄŸiÅŸtirerek Ã¶nerileri gÃ¶rebilirsin.",
       "severity": {
         "critical": "Kritik",
-        "warn": "Uyarılar",
+        "warn": "UyarÄ±lar",
         "info": "Notlar"
       },
-      "actionReference": "Referansı aç",
-      "actionReport": "Raporu aç"
+      "actionReference": "ReferansÄ± aÃ§",
+      "actionReport": "Raporu aÃ§"
     },
     "authModal": {
-      "badge": "Ücretsiz Başla",
-      "title": "Ücretsiz mühendislik çalışma alanını oluştur",
-      "description": "Hesaplarını kaydet, sonuçlarını takip et, dışa aktarma aç.",
-      "note": "Kredi kartı gerekmez. İstediğin zaman iptal edebilirsin.",
+      "badge": "Ãœcretsiz BaÅŸla",
+      "title": "Ãœcretsiz mÃ¼hendislik Ã§alÄ±ÅŸma alanÄ±nÄ± oluÅŸtur",
+      "description": "HesaplarÄ±nÄ± kaydet, sonuÃ§larÄ±nÄ± takip et, dÄ±ÅŸa aktarma aÃ§.",
+      "note": "Kredi kartÄ± gerekmez. Ä°stediÄŸin zaman iptal edebilirsin.",
       "close": "Kapat"
     }
   },
   "common": {
     "yes": "Evet",
-    "no": "Hayır",
+    "no": "HayÄ±r",
     "general": "Genel",
     "access": {
-      "free": "Ucretsiz",
+      "free": "Ãœcretsiz",
       "beta": "Beta",
       "premium": "Premium"
     }
   }
 }
+
+

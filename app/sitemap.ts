@@ -80,6 +80,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     toolCatalog.forEach((tool) => {
       addEntry(tool.href, locale);
+      if (tool.href.startsWith("/tools/")) {
+        addEntry(`${tool.href.replace(/\/+$/g, "")}/guide`, locale);
+      }
     });
 
     materials.forEach((material) => {

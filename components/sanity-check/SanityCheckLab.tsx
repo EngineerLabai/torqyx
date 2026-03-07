@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
 import { evaluateFormula } from "@/lib/sanityCheck/engine";
@@ -20,10 +20,12 @@ import VariableTable from "@/components/sanity-check/VariableTable";
 import FormulaEditor from "@/components/sanity-check/FormulaEditor";
 import ResultPanel from "@/components/sanity-check/ResultPanel";
 import ClientErrorBoundary from "@/components/sanity-check/ClientErrorBoundary";
+import AISummaryPanel from "@/src/components/ai/AISummaryPanel";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 import ToolDataActions from "@/components/tools/ToolDataActions";
 import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
 import { getAdvisorInsights } from "@/src/lib/advisor/engine";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { addRecent } from "@/utils/tool-storage";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -102,6 +104,8 @@ export default function SanityCheckLab() {
   const pageCopy = messages.pages.sanityCheck;
   const copy = messages.components.sanityCheck;
   const searchParams = useSearchParams();
+  const pathname = usePathname() ?? "/";
+  const { track } = useAnalytics();
 
   const defaultSession = useMemo(() => buildDefaultSession(locale), [locale]);
   const [session, setSession] = useState<LabSession>(() => defaultSession);
@@ -187,6 +191,10 @@ export default function SanityCheckLab() {
     const url = `${window.location.origin}${sharePath}?session=${encoded}`;
     try {
       await navigator.clipboard.writeText(url);
+      track("copy_link", {
+        page: pathname,
+        element: "sanity-check-share-button",
+      });
       setStatusMessage(copy.session.shareCopied);
     } catch {
       setStatusMessage(copy.session.shareFailed);
@@ -276,7 +284,7 @@ export default function SanityCheckLab() {
             value={selectedSessionId}
             onChange={(event) => setSelectedSessionId(event.target.value)}
             className="rounded-full border border-slate-200 px-3 py-1 text-[11px]"
-          >
+           aria-label="Select field">
             <option value="">{copy.session.savedTitle}</option>
             {savedSessions.map((item) => (
               <option key={item.id} value={item.id}>
@@ -351,6 +359,28 @@ export default function SanityCheckLab() {
             outputs={result ? { value: result.value ?? null, unit: result.unit } : null}
             reportUrl={reportUrl}
           />
+
+          {!result.error ? (
+            <AISummaryPanel
+              locale={locale}
+              toolId="sanity-check"
+              toolName={pageCopy.title}
+              inputs={{
+                formula: session.formula,
+                expectedUnit: session.expectedUnit ?? "",
+                variables: session.variables.map((variable) => ({
+                  symbol: variable.symbol,
+                  value: variable.value,
+                  unit: variable.unit ?? "",
+                })),
+              }}
+              outputs={{
+                value: result.value,
+                unit: result.unit,
+                warnings: result.warnings.map((warning) => warning.type),
+              }}
+            />
+          ) : null}
           <AdvisorPanel insights={advisorInsights} />
 
           <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -400,7 +430,9 @@ export default function SanityCheckLab() {
 
         <datalist id="sanity-units">
           {UNIT_OPTIONS.filter(Boolean).map((unit) => (
-            <option key={unit} value={unit} />
+            <option key={unit} value={unit}>
+              {unit}
+            </option>
           ))}
         </datalist>
       </div>

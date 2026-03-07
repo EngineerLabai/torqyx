@@ -1,14 +1,26 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useAuth } from "@/components/auth/AuthProvider";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import type { SignupStartSource } from "@/utils/analytics-taxonomy";
 import type { Messages } from "@/utils/messages";
 
 type LoginPanelProps = {
   copy: Messages["authButtons"];
+  source?: SignupStartSource;
 };
 
-export default function LoginPanel({ copy }: LoginPanelProps) {
+export default function LoginPanel({ copy, source = "cta" }: LoginPanelProps) {
   const { user, loading, available, error, loginWithGoogle, logout } = useAuth();
+  const { track } = useAnalytics();
+  const hasTrackedOpen = useRef(false);
+
+  useEffect(() => {
+    if (loading || !available || user || hasTrackedOpen.current) return;
+    hasTrackedOpen.current = true;
+    track("signup_start", { source });
+  }, [available, loading, source, track, user]);
 
   if (loading) {
     return <div className="h-14 w-full animate-pulse rounded-2xl bg-slate-200/60" />;

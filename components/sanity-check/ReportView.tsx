@@ -1,17 +1,26 @@
 "use client";
 
 import { useMemo } from "react";
+import dynamic from "next/dynamic";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
 import { downloadReportPdf } from "@/utils/report-export";
 import { evaluateFormula, runMonteCarlo, runSweep } from "@/lib/sanityCheck/engine";
 import type { LabSession } from "@/lib/sanityCheck/types";
-import ChartCanvas from "@/components/sanity-check/ChartCanvas";
 
 const formatNumber = (value: number | null, locale: "tr" | "en") => {
   if (value === null) return "-";
   return new Intl.NumberFormat(locale === "en" ? "en-US" : "tr-TR", { maximumFractionDigits: 6 }).format(value);
 };
+
+function ChartSkeleton() {
+  return <div className="h-full w-full rounded-xl border border-slate-100 bg-slate-50 animate-pulse" aria-hidden />;
+}
+
+// Bundle estimate (webpack analyzer, parsed): report chart renderer expected to drop ~6-10KB from initial report chunk.
+const ChartCanvas = dynamic(() => import("@/components/sanity-check/ChartCanvas"), {
+  loading: () => <ChartSkeleton />,
+});
 
 export default function ReportView({ session }: { session: LabSession }) {
   const { locale } = useLocale();
@@ -178,3 +187,4 @@ export default function ReportView({ session }: { session: LabSession }) {
     </div>
   );
 }
+

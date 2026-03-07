@@ -2,9 +2,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = process.cwd();
-const SCAN_DIRS = ["app", "components", "content", "lib", "messages", "utils", "tools"];
+const SCAN_DIRS = ["app", "components", "content", "data", "lib", "messages", "scripts", "src", "tools", "utils"];
 const FILE_EXTENSIONS = new Set([".ts", ".tsx", ".js", ".jsx", ".md", ".mdx", ".json", ".mjs"]);
-const MOJIBAKE_PATTERN = /[\uFFFD]|Ã.|Å.|Ä.|â[\u0080-\u00BF]/u;
+const MOJIBAKE_PATTERN = /[\uFFFD]|\u00C3.|\u00C5.|\u00C4.|\u00E2[\u0080-\u00BF]/u;
 
 const walk = async (dirPath, output) => {
   let entries = [];

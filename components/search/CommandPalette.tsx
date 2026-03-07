@@ -132,7 +132,7 @@ export default function CommandPalette({ copy }: CommandPaletteProps) {
             placeholder={copy.palettePlaceholder}
             className="mt-3 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
             data-testid="command-palette-input"
-          />
+           aria-label={copy.palettePlaceholder}/>
         </div>
 
         <div className="max-h-[420px] overflow-y-auto p-4">
