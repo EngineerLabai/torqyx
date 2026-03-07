@@ -35,7 +35,9 @@ export default function LanguageSwitcher({
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();
   const buttonClass =
-    size === "md" ? "rounded-full border px-2 py-1.5" : "rounded-full border px-1.5 py-1";
+    size === "md"
+      ? "inline-flex h-10 w-10 items-center justify-center rounded-lg border"
+      : "inline-flex h-9 w-9 items-center justify-center rounded-lg border";
   const inactiveClass =
     tone === "light" ? "border-slate-200 bg-white text-slate-800" : "border-white/15 bg-white/5 text-white";
   const activeClass =
@@ -70,7 +72,7 @@ export default function LanguageSwitcher({
   };
 
   return (
-    <div className={`flex items-center gap-2 ${className}`.trim()}>
+    <div className={`flex items-center gap-1.5 ${className}`.trim()}>
       <button
         type="button"
         onClick={() => handleSelect("tr")}
@@ -92,8 +94,8 @@ export default function LanguageSwitcher({
 }
 
 function FlagTR({ size }: { size: "sm" | "md" }) {
-  const width = size === "md" ? 26 : 22;
-  const height = size === "md" ? 16 : 14;
+  const width = size === "md" ? 20 : 20;
+  const height = size === "md" ? 20 : 20;
   return (
     <svg width={width} height={height} viewBox="0 0 22 14" role="img" aria-hidden="true">
       <rect width="22" height="14" fill="#E30A17" rx="2" />
@@ -108,8 +110,8 @@ function FlagTR({ size }: { size: "sm" | "md" }) {
 }
 
 function FlagEN({ size }: { size: "sm" | "md" }) {
-  const width = size === "md" ? 26 : 22;
-  const height = size === "md" ? 16 : 14;
+  const width = size === "md" ? 20 : 20;
+  const height = size === "md" ? 20 : 20;
   return (
     <svg width={width} height={height} viewBox="0 0 22 14" role="img" aria-hidden="true">
       <rect width="22" height="14" fill="#fff" rx="2" />
