@@ -66,8 +66,13 @@ const loadUserBillingById = async (userId: string) => {
   });
 };
 
+const authSecret =
+  process.env.AUTH_SECRET ??
+  (process.env.NODE_ENV === "production" ? undefined : "dev-only-auth-secret-change-me");
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
+  secret: authSecret,
   session: {
     strategy: "jwt",
   },

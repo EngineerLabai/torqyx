@@ -126,11 +126,11 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
       <header
         key={pathname}
-        className="site-header sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm"
+        className="site-header sticky top-0 z-50 border-b border-gray-200 bg-white"
       >
         <NavbarRenderProbe />
         <div className="site-container px-6">
-          <div className="flex h-16 items-center justify-between gap-4 md:h-[72px]">
+          <div className="flex h-16 items-center justify-between gap-3 overflow-hidden">
             <Link
               href={getRoute("home", locale)}
               className="flex min-w-0 items-center gap-3"
@@ -141,20 +141,20 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                 alt={`${brandContent.siteName} logo`}
                 width={635}
                 height={702}
-                className="h-9 w-auto shrink-0 object-contain md:h-10"
+                className="h-10 max-h-10 w-auto shrink-0 object-contain"
                 priority
               />
               <div className="flex min-w-0 flex-col justify-center gap-0.5">
-                <span className="overflow-visible whitespace-nowrap text-left text-base font-semibold leading-tight tracking-tight text-slate-900 md:text-[18px]">
+                <span className="whitespace-nowrap text-left text-[15px] font-semibold leading-tight text-slate-900">
                   {brandContent.siteName}
                 </span>
-                <span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[11px] leading-snug text-slate-900/60 md:text-xs">
-                  {brandContent.tagline}
+                <span className="whitespace-nowrap text-[11px] leading-snug text-gray-500">
+                  Deterministik mühendislik hesaplayıcıları
                 </span>
               </div>
             </Link>
 
-            <nav className="hidden items-center gap-6 lg:flex">
+            <nav className="hidden items-center gap-4 lg:flex">
               {navSections.map((section) => (
                 <MegaMenuItem key={section.label} section={section} />
               ))}
@@ -287,7 +287,7 @@ function MegaMenuItem({ section }: { section: NavSection }) {
     <div className="group relative">
       <button
         type="button"
-        className="flex cursor-pointer items-center gap-1 text-sm font-medium text-slate-700 transition-opacity hover:opacity-70 focus:outline-none"
+        className="flex cursor-pointer items-center gap-1 text-[13px] font-medium text-slate-700 transition-opacity hover:opacity-70 focus:outline-none"
         aria-expanded="false"
       >
         {section.label}
