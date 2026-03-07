@@ -126,14 +126,14 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
       <header
         key={pathname}
-        className="site-header relative z-50 overflow-x-hidden border-b border-slate-200/80 bg-white/80"
+        className="site-header sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm"
       >
         <NavbarRenderProbe />
-        <div className="site-container overflow-x-hidden py-3 sm:py-4">
-          <div className="flex items-center justify-between gap-2 sm:gap-3 lg:gap-6">
+        <div className="site-container px-6">
+          <div className="flex h-16 items-center justify-between gap-4 md:h-[72px]">
             <Link
               href={getRoute("home", locale)}
-              className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden pr-2"
+              className="flex min-w-0 items-center gap-3"
               aria-label={brandContent.siteName}
             >
               <Image
@@ -141,20 +141,20 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                 alt={`${brandContent.siteName} logo`}
                 width={635}
                 height={702}
-                className="h-8 w-auto shrink-0 object-contain"
+                className="h-9 w-auto shrink-0 object-contain md:h-10"
                 priority
               />
-              <div className="min-w-0 flex flex-col">
-                <span className="truncate text-left text-[15px] font-semibold leading-tight tracking-tight text-slate-900 sm:text-base">
+              <div className="flex min-w-0 flex-col justify-center gap-0.5">
+                <span className="overflow-visible whitespace-nowrap text-left text-base font-semibold leading-tight tracking-tight text-slate-900 md:text-[18px]">
                   {brandContent.siteName}
                 </span>
-                <span className="hidden truncate text-xs leading-snug text-slate-500 sm:block">
+                <span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[11px] leading-snug text-slate-900/60 md:text-xs">
                   {brandContent.tagline}
                 </span>
               </div>
             </Link>
 
-            <nav className="hidden items-center gap-2 lg:flex">
+            <nav className="hidden items-center gap-6 lg:flex">
               {navSections.map((section) => (
                 <MegaMenuItem key={section.label} section={section} />
               ))}
@@ -163,6 +163,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
             <div className="hidden items-center gap-3 lg:flex">
               <LanguageSwitcher
                 tone="light"
+                size="sm"
                 copy={messages.languageSwitcher}
                 onLocaleChange={() => setMobileMenuOpen(false)}
               />
@@ -172,7 +173,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
             <button
               type="button"
               onClick={() => setMobileMenuOpen((current) => !current)}
-              className="tap-target inline-flex shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm lg:hidden"
+              className="tap-target inline-flex h-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-700 shadow-sm lg:hidden"
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? mobileMenuToggleCopy.close : mobileMenuToggleCopy.open}
             >
@@ -181,12 +182,12 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
           </div>
 
           {mobileMenuOpen ? (
-            <div className="mt-3 border-t border-slate-100 pb-2 pt-4 lg:hidden">
+            <div className="border-t border-slate-100 pb-3 pt-3 lg:hidden">
               <div className="flex flex-col gap-3">
                 <button
                   type="button"
                   onClick={openCommandPalette}
-                  className="tap-target inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm"
+                  className="tap-target inline-flex h-10 w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 shadow-sm"
                   aria-label={searchCopy.paletteOpen}
                 >
                   {searchCopy.paletteTitle}
@@ -207,7 +208,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                       key={section.label}
                       href={section.links[0]?.href ?? "#"}
                       prefetch={false}
-                      className="tap-target inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm"
+                      className="tap-target inline-flex h-10 items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 shadow-sm"
                     >
                       {section.label}
                     </Link>
@@ -286,14 +287,14 @@ function MegaMenuItem({ section }: { section: NavSection }) {
     <div className="group relative">
       <button
         type="button"
-        className="flex cursor-pointer items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 transition hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
+        className="flex cursor-pointer items-center gap-1 text-sm font-medium text-slate-700 transition-opacity hover:opacity-70 focus:outline-none"
         aria-expanded="false"
       >
         {section.label}
         <span className="text-[10px] text-slate-400">v</span>
       </button>
-      <div className="pointer-events-none absolute left-0 top-full z-30 w-[360px] opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
-        <div className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-[10px_10px_0px_0px_rgba(15,23,42,0.06)] ring-1 ring-emerald-200/40 backdrop-blur">
+      <div className="pointer-events-none absolute left-0 top-full z-30 w-[360px] pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+        <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-lg ring-1 ring-slate-100">
           <p className="mb-3 text-[11px] leading-relaxed text-slate-500">{section.description}</p>
           <div className="grid gap-2">
             {section.links.map((link) => (
@@ -301,15 +302,15 @@ function MegaMenuItem({ section }: { section: NavSection }) {
                 key={link.href}
                 href={link.href}
                 prefetch={false}
-                className="group/card relative block overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 transition-colors duration-200 hover:border-emerald-300"
+                className="group/card relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-3 transition-colors duration-150 hover:border-slate-300"
               >
                 <h3 className="mb-1 text-sm font-semibold text-slate-900 group-hover/card:text-slate-950">{link.label}</h3>
                 {link.badge ? (
-                  <span className="mt-2 inline-flex items-center gap-1 rounded border border-emerald-200 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+                  <span className="mt-2 inline-flex items-center gap-1 rounded border border-sky-200 px-2 py-0.5 text-[10px] font-semibold text-sky-700">
                     {link.badge}
                   </span>
                 ) : null}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-emerald-500 transition-all duration-300 group-hover/card:w-full" />
+                <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-slate-900 transition-all duration-200 group-hover/card:w-full" />
               </Link>
             ))}
           </div>
