@@ -3,8 +3,10 @@
 // app/quality-tools/5n1k/page.tsx
 import Link from "next/link";
 import { useState, ChangeEvent } from "react";
+import { QualityToolStatusBadge } from "@/components/quality-tools/QualityToolStatusBadge";
 import PageShell from "@/components/layout/PageShell";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getQualityToolById } from "@/data/quality-tools/registry";
 import { formatMessage } from "@/utils/messages";
 import { assertNoTurkish } from "@/utils/i18n-assert";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -41,6 +43,7 @@ const INITIAL_FORM: FiveN1KForm = {
 export default function FiveN1KPage() {
   const { locale } = useLocale();
   const copy = fiveN1kCopy[locale];
+  const toolStatus = getQualityToolById("5n1k", locale)?.status ?? "beta";
   assertNoTurkish(locale, copy, "quality-tools/5n1k");
   const premiumHref = withLocalePrefix("/pricing", locale);
 
@@ -78,9 +81,7 @@ export default function FiveN1KPage() {
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             {copy.badge}
           </span>
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-[10px] font-medium text-slate-600">
-            {copy.badgeSub}
-          </span>
+          <QualityToolStatusBadge locale={locale} status={toolStatus} className="px-3 py-1 text-[10px] font-medium" />
         </div>
 
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
@@ -120,7 +121,7 @@ export default function FiveN1KPage() {
                 onChange={(e) => handleChange("what", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder={copy.fields.what.placeholder}
-              />
+               aria-label={copy.fields.what.placeholder}/>
             </div>
 
             <div className="space-y-1">
@@ -131,7 +132,7 @@ export default function FiveN1KPage() {
                 onChange={(e) => handleChange("where", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder={copy.fields.where.placeholder}
-              />
+               aria-label={copy.fields.where.placeholder}/>
             </div>
 
             <div className="space-y-1">
@@ -142,7 +143,7 @@ export default function FiveN1KPage() {
                 onChange={(e) => handleChange("when", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder={copy.fields.when.placeholder}
-              />
+               aria-label={copy.fields.when.placeholder}/>
             </div>
 
             <div className="space-y-1">
@@ -153,7 +154,7 @@ export default function FiveN1KPage() {
                 onChange={(e) => handleChange("who", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder={copy.fields.who.placeholder}
-              />
+               aria-label={copy.fields.who.placeholder}/>
             </div>
 
             <div className="space-y-1 md:col-span-2">
@@ -164,7 +165,7 @@ export default function FiveN1KPage() {
                 onChange={(e) => handleChange("why", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder={copy.fields.why.placeholder}
-              />
+               aria-label={copy.fields.why.placeholder}/>
             </div>
 
             <div className="space-y-1 md:col-span-2">
@@ -175,7 +176,7 @@ export default function FiveN1KPage() {
                 onChange={(e) => handleChange("how", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder={copy.fields.how.placeholder}
-              />
+               aria-label={copy.fields.how.placeholder}/>
             </div>
           </div>
 
@@ -307,7 +308,7 @@ function SavedSummariesList({ items, filterText, onFilterTextChange, copy }: Sav
           onChange={(e) => onFilterTextChange(e.target.value)}
           placeholder={copy.searchPlaceholder}
           className="w-40 rounded-lg border border-slate-300 px-2 py-1 text-[11px] text-slate-700 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-        />
+         aria-label={copy.searchPlaceholder}/>
       </div>
 
       {filtered.length === 0 ? (

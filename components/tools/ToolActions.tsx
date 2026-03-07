@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { getMessages } from "@/utils/messages";
 
 export default function ToolActions({ shareUrl, reportUrl }: { shareUrl?: string; reportUrl?: string }) {
   const { locale } = useLocale();
+  const pathname = usePathname() ?? "/";
+  const { track } = useAnalytics();
   const copy = getMessages(locale).components.toolActions;
   const [shareMessage, setShareMessage] = useState("");
   const canShare = Boolean(shareUrl);
@@ -15,6 +19,10 @@ export default function ToolActions({ shareUrl, reportUrl }: { shareUrl?: string
     if (!shareUrl) return;
     try {
       await navigator.clipboard.writeText(shareUrl);
+      track("copy_link", {
+        page: pathname,
+        element: "tool-actions-share-button",
+      });
       setShareMessage(copy.shareSuccess);
     } catch {
       setShareMessage(copy.shareFail);

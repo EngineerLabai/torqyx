@@ -9,16 +9,23 @@ import ToolDataActions from "@/components/tools/ToolDataActions";
 import ToolTrustPanel from "@/components/tools/ToolTrustPanel";
 import ToolMethodNotes from "@/components/tools/ToolMethodNotes";
 import AccessBadge from "@/components/tools/AccessBadge";
+import ToolBadge from "@/components/tools/ToolBadge";
+import InfoTooltip from "@/components/ui/InfoTooltip";
+import UpgradePrompt from "@/components/billing/UpgradePrompt";
+import AISummaryPanel from "@/src/components/ai/AISummaryPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
 import { getAdvisorInsights } from "@/src/lib/advisor/engine";
+import { useFeatureGate } from "@/hooks/useFeatureGate";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
+import { warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import { getToolById, type ToolDefinition, type ToolInputDefinition, type ToolInputOption } from "@/tools/registry";
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
 import { toolCatalog } from "@/tools/_shared/catalog";
+import { categoryLabels } from "@/src/lib/i18n/categoryLabels";
 
 type GenericToolPageProps = {
   toolId: string;
@@ -80,12 +87,15 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const copy = messages.components.genericToolPage;
+  const toolPageCopy = messages.components.toolPage;
   const validationCopy = messages.components.toolValidation;
   const calcFailedCopy = copy.calcFailed;
   const common = messages.common;
   const tool = getToolById(toolId) as ToolDefinition<GenericToolInputs, Record<string, unknown>> | null;
   const catalogEntry = tool ? toolCatalog.find((item) => item.id === tool.id) ?? null : null;
   const access = catalogEntry?.access ?? "free";
+  const status = catalogEntry?.status ?? "verified";
+  const validationStandard = catalogEntry?.validationStandard;
   const accessLabel = messages.common.access?.[access] ?? messages.common.access?.free ?? "";
   const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool?.inputs ?? []));
   const chartRef = useRef<ChartInstance | null>(null);
@@ -127,11 +137,6 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
     }
   }
 
-  const resultEntries =
-    results && typeof results === "object"
-      ? Object.entries(results).filter(([, value]) => isPrimitive(value))
-      : [];
-
   const chartConfig = (() => {
     if (!results || !normalizedInputs || !tool?.chartConfig) return null;
     try {
@@ -145,8 +150,20 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
   const assumptions = tool ? resolveLocalizedValue(tool.assumptions, locale) : undefined;
   const references = tool ? resolveLocalizedValue(tool.references, locale) : undefined;
   const methodNotes = tool ? getToolMethodNotes(tool.id, locale) : null;
+  const categoryLabelMap = categoryLabels(locale);
+  const localizedCategories = useMemo(
+    () => (tool ? tool.categories.map((category) => categoryLabelMap[category] ?? category) : []),
+    [categoryLabelMap, tool],
+  );
 
   const encodedState = useMemo(() => encodeToolState(values), [values]);
+  const toolAccessGate = useFeatureGate("tool_access", { toolId: tool?.id });
+  const dailyCalculationGate = useFeatureGate("daily_calculations", {
+    autoConsume: Boolean(tool && normalizedInputs && results),
+    consumeKey: tool && normalizedInputs && results ? `${tool.id}:${encodedState}` : null,
+  });
+  const dailyLimitReached = !dailyCalculationGate.isLoading && !dailyCalculationGate.hasAccess;
+  const gatedResults = dailyLimitReached ? null : results;
   const shareUrl = useMemo(() => {
     if (!pathname) return "";
     return buildShareUrl(pathname, values);
@@ -159,7 +176,7 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
     showAdvisor && tool
       ? getAdvisorInsights(tool.id, normalizedInputs, {
           locale,
-          reportUrl: results ? reportUrl : undefined,
+          reportUrl: gatedResults ? reportUrl : undefined,
         })
       : [];
 
@@ -225,6 +242,14 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
     };
   }, [chartConfig]);
 
+  useEffect(() => {
+    if (!tool) return;
+    warnIfEnglishLabelsInTurkish("GenericToolPage", locale, {
+      title: tool.title,
+      categories: localizedCategories,
+    });
+  }, [localizedCategories, locale, tool]);
+
   if (!tool) {
     const notFoundCopy = messages.pages.notFound;
     return (
@@ -257,13 +282,30 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
     );
   }
 
+  if (!toolAccessGate.isLoading && !toolAccessGate.hasAccess) {
+    return (
+      <PageShell>
+        <UpgradePrompt
+          source="tool_access_limit_generic"
+          title={locale === "tr" ? "Bu araca Pro plan ile erisebilirsiniz." : "This tool requires Pro access."}
+          description={
+            locale === "tr"
+              ? "Free plan arac limitini doldurdunuz. Pro'ya gecerek tum araclari acabilirsiniz."
+              : "You reached the Free plan tool limit. Upgrade to Pro to unlock all tools."
+          }
+        />
+      </PageShell>
+    );
+  }
+
   return (
     <PageShell>
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
         <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {accessLabel ? <AccessBadge access={access} label={accessLabel} /> : null}
-            {tool.categories.map((category) => (
+            <ToolBadge status={status} standard={validationStandard} locale={locale} />
+            {localizedCategories.map((category) => (
               <span
                 key={category}
                 className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white"
@@ -280,7 +322,13 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
               </span>
             ))}
           </div>
-          <h1 className="text-lg font-semibold text-slate-900">{tool.title}</h1>
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-lg font-semibold text-slate-900">{tool.title}</h1>
+            <InfoTooltip
+              label={toolPageCopy.howItWorksLabel}
+              content={toolPageCopy.howItWorksDescription}
+            />
+          </div>
           <p className="mt-2 text-xs text-slate-600">{tool.description}</p>
         </section>
 
@@ -303,25 +351,48 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
 
           <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.results}</h2>
-            {normalizedInputs && results ? (
+            {normalizedInputs && gatedResults ? (
               <div className="space-y-2">
-                {resultEntries.map(([key, value]) => (
+                {Object.entries(gatedResults)
+                  .filter(([, value]) => isPrimitive(value))
+                  .map(([key, value]) => (
                   <ResultRow key={key} label={formatKey(key)} value={formatValue(value, locale, common)} />
                 ))}
               </div>
+            ) : dailyLimitReached ? (
+              <UpgradePrompt
+                compact
+                source="daily_calculation_limit_generic"
+                title={locale === "tr" ? "Gunluk hesap limiti doldu." : "Daily calculation limit reached."}
+                description={
+                  locale === "tr"
+                    ? "Pro'ya gec, sinirsiz hesap yap."
+                    : "Upgrade to Pro for unlimited calculations."
+                }
+              />
             ) : (
               <p className="text-[11px] text-red-600">{calcError || copy.resultEmpty}</p>
             )}
           </div>
         </section>
 
-        {normalizedInputs && results ? (
+        {normalizedInputs && gatedResults ? (
           <ToolDataActions
             toolSlug={tool.id}
             toolTitle={tool.title}
             inputs={values}
-            outputs={results}
+            outputs={gatedResults}
             reportUrl={reportUrl}
+          />
+        ) : null}
+
+        {normalizedInputs && gatedResults && tool.id === "torque-power" ? (
+          <AISummaryPanel
+            locale={locale}
+            toolId={tool.id}
+            toolName={tool.title}
+            inputs={normalizedInputs as Record<string, unknown>}
+            outputs={gatedResults}
           />
         ) : null}
 
@@ -340,14 +411,15 @@ export default function GenericToolPage({ toolId, initialDocs }: GenericToolPage
         <ToolTrustPanel formula={formula} assumptions={assumptions} references={references} />
         {methodNotes ? <ToolMethodNotes notes={methodNotes} /> : null}
 
-        {chartConfig ? (
+        {!dailyLimitReached && chartConfig ? (
           <section className="min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.chart}</h2>
             <div className="h-64 w-full">
-              <canvas ref={canvasRef} className="h-full w-full" />
+              <canvas ref={canvasRef} role="img" aria-label={copy.chart} className="h-full w-full" />
             </div>
           </section>
         ) : (
+          !dailyLimitReached &&
           tool.chartConfig && (
             <section className="min-w-0 rounded-2xl border border-dashed border-slate-200 bg-white p-5 text-xs text-slate-500">
               {copy.chartEmpty}

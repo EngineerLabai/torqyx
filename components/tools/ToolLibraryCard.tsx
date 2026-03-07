@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import AccessBadge from "@/components/tools/AccessBadge";
+import ToolBadge from "@/components/tools/ToolBadge";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
-import type { ToolAccess } from "@/tools/_shared/catalog";
+import type { Locale } from "@/utils/locale";
+import type { ToolAccess, ToolStatus } from "@/tools/_shared/catalog";
 
 type ToolLibraryCardProps = {
   toolId: string;
@@ -11,12 +13,17 @@ type ToolLibraryCardProps = {
   description: string;
   descriptionDisplay?: ReactNode;
   href: string;
+  guideHref?: string;
+  guideLabel?: string;
   usageLabel: string;
   typeLabel?: string;
   typeTone?: "calculator" | "bundle" | "guide";
   tags?: string[];
   accessLabel?: string;
   accessTone?: ToolAccess;
+  status: ToolStatus;
+  validationStandard?: string;
+  locale: Locale;
   ctaLabel: string;
   ariaLabel: string;
   isNew?: boolean;
@@ -29,12 +36,17 @@ export default function ToolLibraryCard({
   description,
   descriptionDisplay,
   href,
+  guideHref,
+  guideLabel,
   usageLabel,
   typeLabel,
   typeTone = "calculator",
   tags,
   accessLabel,
   accessTone = "free",
+  status,
+  validationStandard,
+  locale,
   ctaLabel,
   ariaLabel,
   isNew = false,
@@ -61,12 +73,13 @@ export default function ToolLibraryCard({
       <div className="relative z-0 min-w-0 space-y-2">
         <div className="flex min-w-0 items-start justify-between gap-2 pr-12">
           <h3 className="min-w-0 flex-1 break-words text-base font-semibold leading-snug text-slate-900">{titleDisplay ?? title}</h3>
-          <div className="flex shrink-0 flex-col items-end gap-1">
+          <div className="relative z-20 flex shrink-0 flex-col items-end gap-1">
             {typeLabel ? (
               <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${typeToneClass}`.trim()}>
                 {typeLabel}
               </span>
             ) : null}
+            <ToolBadge status={status} standard={validationStandard} locale={locale} />
             {accessLabel ? <AccessBadge access={accessTone} label={accessLabel} /> : null}
             <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
               {usageLabel}
@@ -92,10 +105,22 @@ export default function ToolLibraryCard({
           </div>
         ) : null}
       </div>
-      <div className="relative z-0 mt-4">
+      <div className="relative z-0 mt-4 space-y-2">
         <span className="btn-cta tap-target block w-full rounded-md text-center text-xs font-semibold">
           {ctaLabel}
         </span>
+        {guideHref && guideLabel ? (
+          <div className="relative z-20">
+            <Link
+              href={guideHref}
+              prefetch={false}
+              className="inline-flex rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-semibold text-sky-700 hover:border-sky-300 hover:bg-sky-100"
+              aria-label={`${title} - ${guideLabel}`}
+            >
+              {guideLabel}
+            </Link>
+          </div>
+        ) : null}
       </div>
     </article>
   );

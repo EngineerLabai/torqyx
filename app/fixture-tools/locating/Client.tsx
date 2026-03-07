@@ -763,7 +763,7 @@ export default function LocatingCardClient() {
                   checked={form.thermalEnabled}
                   onChange={(event) => handleFormChange("thermalEnabled", event.target.checked)}
                   className="h-4 w-4"
-                />
+                 aria-label="Checkbox"/>
               </div>
             </label>
 
@@ -860,12 +860,12 @@ export default function LocatingCardClient() {
                   onChange={(event) => handlePinPlanChange(row.id, "feature", event.target.value)}
                   placeholder={copy.placeholders.pinFeature}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                />
+                 aria-label={copy.placeholders.pinFeature}/>
                 <select
                   value={row.pinRole}
                   onChange={(event) => handlePinPlanChange(row.id, "pinRole", event.target.value as PinRole)}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                >
+                 aria-label="Select field">
                   {(["fixed", "floating"] as PinRole[]).map((role) => (
                     <option key={role} value={role}>
                       {copy.pinRoleOptions[role]}
@@ -876,7 +876,7 @@ export default function LocatingCardClient() {
                   value={row.holeType}
                   onChange={(event) => handlePinPlanChange(row.id, "holeType", event.target.value as HoleType)}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                >
+                 aria-label="Select field">
                   {(["round", "slot"] as HoleType[]).map((type) => (
                     <option key={type} value={type}>
                       {copy.holeTypeOptions[type]}
@@ -889,7 +889,7 @@ export default function LocatingCardClient() {
                   onChange={(event) => handlePinPlanChange(row.id, "notes", event.target.value)}
                   placeholder={copy.placeholders.pinNotes}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                />
+                 aria-label={copy.placeholders.pinNotes}/>
                 <button
                   type="button"
                   onClick={() => removePinPlanRow(row.id)}
@@ -936,7 +936,7 @@ export default function LocatingCardClient() {
                     checked={checklist[id]}
                     onChange={() => toggleChecklist(id)}
                     className="mt-0.5 h-4 w-4"
-                  />
+                   aria-label="Checkbox"/>
                   <span className="text-[11px] text-slate-700">{copy.checklistLabels[id]}</span>
                 </label>
               ))}
@@ -970,21 +970,21 @@ export default function LocatingCardClient() {
                     onChange={(event) => handleNoteChange(row.id, "topic", event.target.value)}
                     placeholder={copy.placeholders.noteTopic}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                  />
+                   aria-label={copy.placeholders.noteTopic}/>
                   <input
                     type="text"
                     value={row.owner}
                     onChange={(event) => handleNoteChange(row.id, "owner", event.target.value)}
                     placeholder={copy.placeholders.noteOwner}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                  />
+                   aria-label={copy.placeholders.noteOwner}/>
                   <input
                     type="text"
                     value={row.note}
                     onChange={(event) => handleNoteChange(row.id, "note", event.target.value)}
                     placeholder={copy.placeholders.noteBody}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                  />
+                   aria-label={copy.placeholders.noteBody}/>
                   <button
                     type="button"
                     onClick={() => removeNoteRow(row.id)}
@@ -1036,7 +1036,7 @@ function Field({
         disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40 disabled:bg-slate-100"
-      />
+       aria-label="Number input"/>
     </label>
   );
 }
@@ -1059,7 +1059,7 @@ function SelectField({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      >
+       aria-label="Select field">
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

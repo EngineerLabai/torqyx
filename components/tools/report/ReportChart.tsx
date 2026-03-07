@@ -93,7 +93,12 @@ export default function ReportChart({ config }: { config: ToolChartConfig }) {
 
   return (
     <div className="h-64 w-full">
-      <canvas ref={canvasRef} className="h-full w-full" />
+      <canvas
+        ref={canvasRef}
+        role="img"
+        aria-label={config.yLabel ? `${config.yLabel} report chart` : "Report chart"}
+        className="h-full w-full"
+      />
     </div>
   );
 }

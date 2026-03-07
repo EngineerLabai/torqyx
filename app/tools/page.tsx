@@ -1,6 +1,6 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
-import ToolLibrary from "@/components/tools/ToolLibrary";
+import ToolLibraryLazy from "@/components/tools/ToolLibraryLazy";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -40,7 +40,8 @@ export default async function ToolsIndexPage({ searchParams }: ToolsIndexPagePro
         imageAlt={copy.imageAlt}
       />
 
-      <ToolLibrary locale={locale} searchParams={resolvedSearchParams} />
+      <ToolLibraryLazy locale={locale} searchParams={resolvedSearchParams} />
     </PageShell>
   );
 }
+

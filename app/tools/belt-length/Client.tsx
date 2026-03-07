@@ -144,7 +144,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      />
+       aria-label="Number input"/>
     </label>
   );
 }

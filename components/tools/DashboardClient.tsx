@@ -1,13 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import ActionCard from "@/components/ui/ActionCard";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import useToolFavorites from "@/components/tools/useToolFavorites";
 import useToolRecents from "@/components/tools/useToolRecents";
 import { getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
+import { categoryLabels } from "@/src/lib/i18n/categoryLabels";
 
 const formatShortDate = (value: string, locale: "tr" | "en") => {
   const date = new Date(value);
@@ -20,6 +22,7 @@ export default function DashboardClient() {
   const copy = getMessages(locale).components.dashboard;
   const { favorites, favoritesSet } = useToolFavorites();
   const { recents } = useToolRecents();
+  const categoryLabelMap = categoryLabels(locale);
 
   const favoriteTools = useMemo(
     () =>
@@ -60,6 +63,23 @@ export default function DashboardClient() {
       .slice(0, 8);
   }, [favoriteTools, recentTools, favoritesSet]);
 
+  const getCategoryBadge = (category?: string) =>
+    category ? categoryLabelMap[category] ?? category : undefined;
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("DashboardClient", locale, {
+      favorites: favoriteTools.map((tool) =>
+        tool.category ? categoryLabelMap[tool.category] ?? tool.category : undefined,
+      ),
+      recents: recentTools.map(({ tool }) =>
+        tool.category ? categoryLabelMap[tool.category] ?? tool.category : undefined,
+      ),
+      recommended: recommendedTools.map((tool) =>
+        tool.category ? categoryLabelMap[tool.category] ?? tool.category : undefined,
+      ),
+    });
+  }, [categoryLabelMap, favoriteTools, locale, recentTools, recommendedTools]);
+
   return (
     <div className="space-y-6">
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -88,7 +108,7 @@ export default function DashboardClient() {
                   title={toolCopy.title}
                   description={toolCopy.description}
                   href={withLocalePrefix(tool.href, locale)}
-                  badge={tool.category}
+                  badge={getCategoryBadge(tool.category)}
                   toolId={tool.id}
                   ctaLabel={copy.open}
                 />
@@ -118,7 +138,7 @@ export default function DashboardClient() {
                     title={toolCopy.title}
                     description={toolCopy.description}
                     href={withLocalePrefix(tool.href, locale)}
-                    badge={tool.category}
+                    badge={getCategoryBadge(tool.category)}
                     toolId={tool.id}
                     ctaLabel={copy.open}
                   />
@@ -153,7 +173,7 @@ export default function DashboardClient() {
                   title={toolCopy.title}
                   description={toolCopy.description}
                   href={withLocalePrefix(tool.href, locale)}
-                  badge={tool.category}
+                  badge={getCategoryBadge(tool.category)}
                   toolId={tool.id}
                   ctaLabel={copy.open}
                 />

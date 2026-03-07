@@ -2,7 +2,34 @@ import { DEFAULT_LOCALE, getBrandCopy } from "@/config/brand";
 import type { Locale } from "@/utils/locale";
 import { withLocalePrefix } from "@/utils/locale-path";
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aiengineerslab.com";
+const ensureProtocol = (value: string) => (/^https?:\/\//i.test(value) ? value : `https://${value}`);
+
+const normalizeSiteUrl = (value: string) => {
+  const parsed = new URL(ensureProtocol(value.trim()));
+  parsed.protocol = "https:";
+  parsed.hostname = parsed.hostname.replace(/^www\./i, "");
+  parsed.pathname = "";
+  parsed.search = "";
+  parsed.hash = "";
+  return parsed.toString().replace(/\/$/, "");
+};
+
+const resolveSiteUrl = () => {
+  const envSiteUrl =
+    process.env.SITE_URL ??
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+    process.env.VERCEL_URL ??
+    "localhost:3000";
+
+  try {
+    return normalizeSiteUrl(envSiteUrl);
+  } catch {
+    return "https://localhost:3000";
+  }
+};
+
+export const SITE_URL = resolveSiteUrl();
 
 export const buildCanonical = (path: string) => {
   try {

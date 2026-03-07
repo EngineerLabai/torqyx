@@ -2,6 +2,7 @@
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
+import AIDeterministicDisclaimer from "@/src/components/ai/AIDeterministicDisclaimer";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -12,14 +13,14 @@ const pageCopy = {
   sections: {
     storyTitle: "Hikaye ve yaklaşım",
     storyBody: [
-      "AI Engineers Lab, mekanik tasarım ve üretim kararları için mühendisler tarafından geliştirilen deterministik bir araç setidir. Buradaki “AI”, Applied Intelligence / Analysis & Insights anlamına gelir; sohbet botu değil, metodik hesaplama yaklaşımıdır.",
+      'AI Engineers Lab, mekanik tasarım ve üretim kararları için mühendisler tarafından geliştirilen deterministik bir araç setidir. Buradaki "AI", Applied Intelligence / Analysis & Insights anlamına gelir; sohbet botu değil, metodik hesaplama yaklaşımıdır.',
       "Amacımız; aynı girdilerle her zaman aynı sonucu veren, izlenebilir ve raporlanabilir hesaplar sunmak ve mühendislik kararlarını güvenle hızlandırmaktır.",
     ],
     methodologyTitle: "Metodoloji & Doğrulama",
     methodologyItems: [
       "ISO/DIN/ASME standartları, mühendislik el kitapları ve üretici veri sayfaları temel alınır.",
       "Birim tutarlılığı, sınır kontrolleri ve varsayımlar açık biçimde belirtilir.",
-      "Örnek senaryolar ve çapraz kontrollerle çıktılar gözden geçirilir; değişiklikler changelog’da izlenir.",
+      "Örnek senaryolar ve çapraz kontrollerle çıktılar gözden geçirilir; değişiklikler changelog'da izlenir.",
     ],
     limitationsTitle: "Sınırlamalar & Sorumluluk Reddi",
     limitationsItems: [
@@ -37,7 +38,7 @@ const pageCopyEn = {
   sections: {
     storyTitle: "Story and approach",
     storyBody: [
-      "AI Engineers Lab is a deterministic toolkit built by mechanical and manufacturing engineers. Here “AI” means Applied Intelligence / Analysis & Insights; it is not a chatbot.",
+      'AI Engineers Lab is a deterministic toolkit built by mechanical and manufacturing engineers. Here "AI" means Applied Intelligence / Analysis & Insights; it is not a chatbot.',
       "Our goal is to deliver repeatable, traceable calculations and report-ready outputs that accelerate real engineering decisions.",
     ],
     methodologyTitle: "Methodology & Validation",
@@ -82,6 +83,8 @@ export default async function AboutPage() {
           imageAlt={pageCopyEn.imageAlt}
         />
 
+        <AIDeterministicDisclaimer locale="en" />
+
         <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
           <section className="space-y-3">
             <h2 className="text-lg font-semibold text-slate-900">{pageCopyEn.sections.storyTitle}</h2>
@@ -120,6 +123,8 @@ export default async function AboutPage() {
         imageSrc={HERO_PLACEHOLDER}
         imageAlt={pageCopy.imageAlt}
       />
+
+      <AIDeterministicDisclaimer locale="tr" />
 
       <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
         <section className="space-y-3">

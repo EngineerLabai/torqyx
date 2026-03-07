@@ -132,51 +132,55 @@ export default function RfqSummaryPage() {
           <form className="space-y-3" onSubmit={handleAdd}>
             <div className="grid gap-2 sm:grid-cols-2">
               <div className="space-y-1">
-                <label className="block text-[11px] font-medium text-slate-700">
+                <label htmlFor="rfq-customer" className="block text-[11px] font-medium text-slate-700">
                   Müşteri
                 </label>
                 <input
+                  id="rfq-customer"
                   type="text"
                   value={form.customer}
                   onChange={(e) => handleChange("customer", e.target.value)}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                   placeholder="Örn. OEM X, Tier1 Y"
-                />
+                 aria-label="Örn. OEM X, Tier1 Y"/>
               </div>
 
               <div className="space-y-1">
-                <label className="block text-[11px] font-medium text-slate-700">
+                <label htmlFor="rfq-project-code" className="block text-[11px] font-medium text-slate-700">
                   Proje Kodu
                 </label>
                 <input
+                  id="rfq-project-code"
                   type="text"
                   value={form.projectCode}
                   onChange={(e) => handleChange("projectCode", e.target.value)}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                   placeholder="Örn. P-2025-01"
-                />
+                 aria-label="Örn. P-2025-01"/>
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="rfq-part-name" className="block text-[11px] font-medium text-slate-700">
                 Parça Adı / Kodu
               </label>
               <input
+                id="rfq-part-name"
                 type="text"
                 value={form.partName}
                 onChange={(e) => handleChange("partName", e.target.value)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder="Örn. Ön amortisör üst bağlantı braketi"
-              />
+               aria-label="Örn. Ön amortisör üst bağlantı braketi"/>
             </div>
 
             <div className="grid gap-2 sm:grid-cols-3">
               <div className="space-y-1">
-                <label className="block text-[11px] font-medium text-slate-700">
+                <label htmlFor="rfq-annual-volume" className="block text-[11px] font-medium text-slate-700">
                   Hedef adet / yıl
                 </label>
                 <input
+                  id="rfq-annual-volume"
                   type="text"
                   value={form.annualVolume}
                   onChange={(e) =>
@@ -184,32 +188,34 @@ export default function RfqSummaryPage() {
                   }
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                   placeholder="Örn. 50.000"
-                />
+                 aria-label="Örn. 50.000"/>
               </div>
 
               <div className="space-y-1">
-                <label className="block text-[11px] font-medium text-slate-700">
+                <label htmlFor="rfq-sop-date" className="block text-[11px] font-medium text-slate-700">
                   Hedef SOP tarihi
                 </label>
                 <input
+                  id="rfq-sop-date"
                   type="date"
                   value={form.sopDate}
                   onChange={(e) => handleChange("sopDate", e.target.value)}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                />
+                 aria-label="Date input"/>
               </div>
 
               <div className="space-y-1">
-                <label className="block text-[11px] font-medium text-slate-700">
+                <label htmlFor="rfq-status" className="block text-[11px] font-medium text-slate-700">
                   Durum
                 </label>
                 <select
+                  id="rfq-status"
                   value={form.status}
                   onChange={(e) =>
                     handleChange("status", e.target.value as RfqItem["status"])
                   }
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                >
+                 aria-label="Select field">
                   {STATUS_OPTIONS.map((status) => (
                     <option key={status} value={status}>
                       {status}
@@ -220,10 +226,11 @@ export default function RfqSummaryPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="rfq-quality-notes" className="block text-[11px] font-medium text-slate-700">
                 Özel kalite / test notları
               </label>
               <textarea
+                id="rfq-quality-notes"
                 value={form.qualityNotes}
                 onChange={(e) =>
                   handleChange("qualityNotes", e.target.value)
@@ -231,7 +238,7 @@ export default function RfqSummaryPage() {
                 rows={3}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder="Örn. Özel tuz testi, ek sızdırmazlık testi, müşteri şartnamesi XYZ-123'e referans..."
-              />
+               aria-label="Örn. Özel tuz testi, ek sızdırmazlık testi, müşteri şartnamesi XYZ-123'e referans..."/>
             </div>
 
             {error && (
@@ -320,7 +327,7 @@ export default function RfqSummaryPage() {
                             )
                           }
                           className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-[10px] text-slate-700 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                        >
+                         aria-label="Select field">
                           {STATUS_OPTIONS.map((status) => (
                             <option key={status} value={status}>
                               {status}

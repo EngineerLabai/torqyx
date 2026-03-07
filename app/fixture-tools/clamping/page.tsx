@@ -702,7 +702,7 @@ export default function ClampingPage() {
               onChange={(event) => handleFormChange("machiningDirectionNotes", event.target.value)}
               placeholder={copy.placeholders.machiningDirectionNotes}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-            />
+             aria-label={copy.placeholders.machiningDirectionNotes}/>
           </label>
         </section>
 
@@ -753,11 +753,11 @@ export default function ClampingPage() {
           <div className="space-y-2">
             {points.map((row) => (
               <div key={row.id} className="grid gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)_minmax(0,0.9fr)_minmax(0,0.9fr)_minmax(0,0.8fr)_80px]">
-                <input type="text" value={row.location} onChange={(event) => handlePointChange(row.id, "location", event.target.value)} placeholder={copy.placeholders.location} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                <input type="text" value={row.contactArea} onChange={(event) => handlePointChange(row.id, "contactArea", event.target.value)} placeholder={copy.placeholders.contactArea} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                <input type="text" value={row.reactionPoint} onChange={(event) => handlePointChange(row.id, "reactionPoint", event.target.value)} placeholder={copy.placeholders.reactionPoint} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                <input type="text" value={row.risk} onChange={(event) => handlePointChange(row.id, "risk", event.target.value)} placeholder={copy.placeholders.risk} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                <input type="text" value={row.torqueMethod} onChange={(event) => handlePointChange(row.id, "torqueMethod", event.target.value)} placeholder={copy.placeholders.torqueMethod} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
+                <input type="text" value={row.location} onChange={(event) => handlePointChange(row.id, "location", event.target.value)} placeholder={copy.placeholders.location} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.location}/>
+                <input type="text" value={row.contactArea} onChange={(event) => handlePointChange(row.id, "contactArea", event.target.value)} placeholder={copy.placeholders.contactArea} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.contactArea}/>
+                <input type="text" value={row.reactionPoint} onChange={(event) => handlePointChange(row.id, "reactionPoint", event.target.value)} placeholder={copy.placeholders.reactionPoint} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.reactionPoint}/>
+                <input type="text" value={row.risk} onChange={(event) => handlePointChange(row.id, "risk", event.target.value)} placeholder={copy.placeholders.risk} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.risk}/>
+                <input type="text" value={row.torqueMethod} onChange={(event) => handlePointChange(row.id, "torqueMethod", event.target.value)} placeholder={copy.placeholders.torqueMethod} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.torqueMethod}/>
                 <button type="button" onClick={() => removePointRow(row.id)} className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100">{copy.remove}</button>
               </div>
             ))}
@@ -773,9 +773,9 @@ export default function ClampingPage() {
             <div className="space-y-2">
               {sequence.map((row) => (
                 <div key={row.id} className="grid gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[90px_minmax(0,1fr)_minmax(0,1fr)_80px]">
-                  <input type="text" value={row.order} onChange={(event) => handleSequenceChange(row.id, "order", event.target.value)} placeholder={copy.placeholders.sequenceOrder} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                  <input type="text" value={row.step} onChange={(event) => handleSequenceChange(row.id, "step", event.target.value)} placeholder={copy.placeholders.sequenceStep} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                  <input type="text" value={row.notes} onChange={(event) => handleSequenceChange(row.id, "notes", event.target.value)} placeholder={copy.placeholders.sequenceNotes} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
+                  <input type="text" value={row.order} onChange={(event) => handleSequenceChange(row.id, "order", event.target.value)} placeholder={copy.placeholders.sequenceOrder} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.sequenceOrder}/>
+                  <input type="text" value={row.step} onChange={(event) => handleSequenceChange(row.id, "step", event.target.value)} placeholder={copy.placeholders.sequenceStep} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.sequenceStep}/>
+                  <input type="text" value={row.notes} onChange={(event) => handleSequenceChange(row.id, "notes", event.target.value)} placeholder={copy.placeholders.sequenceNotes} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.sequenceNotes}/>
                   <button type="button" onClick={() => removeSequenceRow(row.id)} className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100">{copy.remove}</button>
                 </div>
               ))}
@@ -787,7 +787,7 @@ export default function ClampingPage() {
             <div className="space-y-2">
               {CHECKLIST_IDS.map((id) => (
                 <label key={id} className="flex items-start gap-2 rounded-lg border border-slate-200 px-3 py-2">
-                  <input type="checkbox" checked={checklist[id]} onChange={() => toggleChecklist(id)} className="mt-0.5 h-4 w-4" />
+                  <input type="checkbox" checked={checklist[id]} onChange={() => toggleChecklist(id)} className="mt-0.5 h-4 w-4"  aria-label="Checkbox"/>
                   <span className="text-[11px] text-slate-700">{copy.checklistLabels[id]}</span>
                 </label>
               ))}
@@ -804,8 +804,8 @@ export default function ClampingPage() {
           <div className="space-y-2">
             {noteRows.map((row) => (
               <div key={row.id} className="grid gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[220px_minmax(0,1fr)_80px]">
-                <input type="text" value={row.topic} onChange={(event) => handleNoteChange(row.id, "topic", event.target.value)} placeholder={copy.placeholders.noteTopic} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                <input type="text" value={row.note} onChange={(event) => handleNoteChange(row.id, "note", event.target.value)} placeholder={copy.placeholders.noteBody} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
+                <input type="text" value={row.topic} onChange={(event) => handleNoteChange(row.id, "topic", event.target.value)} placeholder={copy.placeholders.noteTopic} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.noteTopic}/>
+                <input type="text" value={row.note} onChange={(event) => handleNoteChange(row.id, "note", event.target.value)} placeholder={copy.placeholders.noteBody} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.noteBody}/>
                 <button type="button" onClick={() => removeNoteRow(row.id)} className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100">{copy.remove}</button>
               </div>
             ))}
@@ -838,7 +838,7 @@ function NumberField({ label, value, onChange }: { label: string; value: string;
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      />
+       aria-label="Number input"/>
     </label>
   );
 }

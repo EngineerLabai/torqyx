@@ -1,29 +1,29 @@
-﻿# Yazım Standarti
+﻿# Yazım Standardı
 
 ## Birim kullanımı (SI / Imperial)
-- Varsayılan birim SI. örnek: mm, N, kN, MPa, kg, s, C.
-- Imperial deger gerekiyorsa parantez icinde ver: 25.4 mm (1 in).
-- Her tabloda ve formulde birim yaz.
+- Varsayılan birim SI. Örnek: mm, N, kN, MPa, kg, s, C.
+- Imperial değer gerekiyorsa parantez içinde ver: 25.4 mm (1 in).
+- Her tabloda ve formülde birim yaz.
 - Birim kısaltmalarını noktasız kullan (mm, N, MPa).
 
 ## Varsayım yazma kuralı
 - Varsayımlar başlıklı bölümde madde madde yaz.
-- Her varsayım su yapida olsun: koşul + aralık + etki.
-  örnek: "Yük sabit kabul edilir (0-2% dalgalanma). Sonucu dogrudan etkiler."
+- Her varsayım şu yapıda olsun: koşul + aralık + etki.
+  Örnek: "Yük sabit kabul edilir (0-2% dalgalanma). Sonucu doğrudan etkiler."
 - Belirsiz ifadelerden kaçının ("genelde", "yaklaşık").
 
 ## Metodoloji vurgusu
 - Standart not:
-  "Hesaplamalar manuel adimlar, varsayımlar ve analitik kontrollerle desteklenir."
-- üst kısımda bir Callout icinde verin.
+  "Hesaplamalar manuel adımlar, varsayımlar ve analitik kontrollerle desteklenir."
+- Üst kısımda bir Callout içinde verin.
 
-## Kaynak / uyarı notlari formati
-- Kaynaklar veya kritik uyarilar için Callout kullanin.
+## Kaynak / uyarı notları formatı
+- Kaynaklar veya kritik uyarılar için Callout kullanın.
 - Format:
-  - Kaynak: [doküman adi], [sürüm], [tarih]
+  - Kaynak: [doküman adı], [sürüm], [tarih]
   - Uyarı: [etki] + [ne zaman kontrol edilmeli]
-- örnek:
+- Örnek:
   <Callout type="warning" title="Uyarı">
   - Kaynak: ISO 6336, v2019, 2020-03-01
-  - Uyarı: Yük ve hız sinirlari degisirse sonucu tekrar hesaplayin.
+  - Uyarı: Yük ve hız sınırları değişirse sonucu tekrar hesaplayın.
   </Callout>

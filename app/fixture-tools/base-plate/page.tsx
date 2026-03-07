@@ -495,7 +495,7 @@ export default function BasePlatePage() {
             <div className="space-y-2">
               {CHECKLIST_IDS.map((id) => (
                 <label key={id} className="flex items-start gap-2 rounded-lg border border-slate-200 px-3 py-2">
-                  <input type="checkbox" checked={checklist[id]} onChange={() => toggleChecklist(id)} className="mt-0.5 h-4 w-4" />
+                  <input type="checkbox" checked={checklist[id]} onChange={() => toggleChecklist(id)} className="mt-0.5 h-4 w-4"  aria-label="Checkbox"/>
                   <span className="text-[11px] text-slate-700">{copy.checklistLabels[id]}</span>
                 </label>
               ))}
@@ -511,9 +511,9 @@ export default function BasePlatePage() {
             <div className="space-y-2">
               {noteRows.map((row) => (
                 <div key={row.id} className="grid gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[200px_minmax(0,1fr)_160px_80px]">
-                  <input type="text" value={row.area} onChange={(event) => handleNoteChange(row.id, "area", event.target.value)} placeholder={copy.placeholders.area} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                  <input type="text" value={row.detail} onChange={(event) => handleNoteChange(row.id, "detail", event.target.value)} placeholder={copy.placeholders.detail} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
-                  <input type="text" value={row.owner} onChange={(event) => handleNoteChange(row.id, "owner", event.target.value)} placeholder={copy.placeholders.owner} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40" />
+                  <input type="text" value={row.area} onChange={(event) => handleNoteChange(row.id, "area", event.target.value)} placeholder={copy.placeholders.area} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.area}/>
+                  <input type="text" value={row.detail} onChange={(event) => handleNoteChange(row.id, "detail", event.target.value)} placeholder={copy.placeholders.detail} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.detail}/>
+                  <input type="text" value={row.owner} onChange={(event) => handleNoteChange(row.id, "owner", event.target.value)} placeholder={copy.placeholders.owner} className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"  aria-label={copy.placeholders.owner}/>
                   <button type="button" onClick={() => removeNoteRow(row.id)} className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100">{copy.remove}</button>
                 </div>
               ))}
@@ -547,7 +547,7 @@ function NumberField({ label, value, onChange }: { label: string; value: string;
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      />
+       aria-label="Number input"/>
     </label>
   );
 }
@@ -570,7 +570,7 @@ function SelectField({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      >
+       aria-label="Select field">
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

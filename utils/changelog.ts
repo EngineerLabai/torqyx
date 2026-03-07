@@ -6,93 +6,218 @@ import { slugify } from "@/utils/slugify";
 import type { Locale } from "@/utils/locale";
 
 const CHANGELOG_DIR = path.join(process.cwd(), "content", "changelog");
-const CONTENT_EXTENSIONS = new Set([".mdx", ".md"]);
+const CONTENT_EXTENSIONS = new Set([".mdx", ".md", ".json"]);
+
+export type ChangelogBadge = "new" | "fixed" | "removed";
 
 export type ChangelogEntry = {
   slug: string;
   version: string;
-  title: string;
-  description: string;
   date: string;
-  addedTools: string[];
-  fixes: string[];
+  tool: string;
+  toolSlug: string;
+  badge: ChangelogBadge;
+  description: string;
   draft: boolean;
-  content: string;
 };
 
-const parseChangelogFile = async (filePath: string): Promise<ChangelogEntry> => {
+type ChangelogEntryInput = {
+  version?: unknown;
+  date?: unknown;
+  tool?: unknown;
+  title?: unknown;
+  badge?: unknown;
+  description?: unknown;
+  draft?: unknown;
+  addedTools?: unknown;
+  fixes?: unknown;
+  content?: string;
+};
+
+const parseChangelogFilename = (name: string) => {
+  const match = /^(.*)\.(tr|en)\.(mdx|md|json)$/i.exec(name);
+  if (!match) return null;
+  return {
+    locale: match[2] as Locale,
+    extension: `.${match[3].toLowerCase()}`,
+  };
+};
+
+const normalizeString = (value: unknown) => {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : null;
+};
+
+const normalizeBadge = (value: unknown): ChangelogBadge | null => {
+  const normalized = normalizeString(value)?.toLowerCase();
+  if (!normalized) return null;
+  if (normalized === "new" || normalized === "added" || normalized === "yeni") return "new";
+  if (normalized === "fixed" || normalized === "fix" || normalized === "fixed-up" || normalized === "duzeltildi") {
+    return "fixed";
+  }
+  if (normalized === "removed" || normalized === "kaldirildi") return "removed";
+  return null;
+};
+
+const normalizeStringArray = (value: unknown) =>
+  Array.isArray(value)
+    ? value
+        .filter((item) => typeof item === "string")
+        .map((item) => item.trim())
+        .filter(Boolean)
+    : [];
+
+const ensureValidDate = (value: string, filePath: string) => {
+  if (Number.isNaN(Date.parse(value))) {
+    throw new Error(`[changelog] date must be a valid ISO-like string in ${filePath}`);
+  }
+};
+
+const normalizeDescription = (input: ChangelogEntryInput) => {
+  const content = input.content?.trim() ?? "";
+  if (content.length > 0) return content;
+
+  const description = normalizeString(input.description);
+  if (description) return description;
+
+  const addedTools = normalizeStringArray(input.addedTools);
+  const fixes = normalizeStringArray(input.fixes);
+  const lines = [
+    ...addedTools.map((item) => `- Added: ${item}`),
+    ...fixes.map((item) => `- Fixed: ${item}`),
+  ];
+  return lines.join("\n");
+};
+
+const normalizeEntry = (
+  input: ChangelogEntryInput,
+  filePath: string,
+  index: number,
+  fileKey: string,
+): ChangelogEntry => {
+  const version = normalizeString(input.version);
+  if (!version) {
+    throw new Error(`[changelog] version is required in ${filePath} (entry ${index + 1})`);
+  }
+
+  const date = normalizeString(input.date);
+  if (!date) {
+    throw new Error(`[changelog] date is required in ${filePath} (entry ${index + 1})`);
+  }
+  ensureValidDate(date, filePath);
+
+  const tool = normalizeString(input.tool) ?? normalizeString(input.title);
+  if (!tool) {
+    throw new Error(`[changelog] tool is required in ${filePath} (entry ${index + 1})`);
+  }
+
+  const description = normalizeDescription(input);
+  if (!description) {
+    throw new Error(`[changelog] description/content is required in ${filePath} (entry ${index + 1})`);
+  }
+
+  const fallbackBadge = (() => {
+    const addedTools = normalizeStringArray(input.addedTools);
+    const fixes = normalizeStringArray(input.fixes);
+    if (addedTools.length > 0) return "new" as const;
+    if (fixes.length > 0) return "fixed" as const;
+    return "fixed" as const;
+  })();
+  const badge = normalizeBadge(input.badge) ?? fallbackBadge;
+  const draft = typeof input.draft === "boolean" ? input.draft : false;
+  const slug = slugify(`${date}-${version}-${tool}-${fileKey}-${index + 1}`);
+
+  return {
+    slug,
+    version,
+    date,
+    tool,
+    toolSlug: slugify(tool),
+    badge,
+    description,
+    draft,
+  };
+};
+
+const parseMarkdownEntries = async (filePath: string, fileKey: string): Promise<ChangelogEntry[]> => {
   const raw = await fs.readFile(filePath, "utf8");
   const { data, content } = matter(raw);
   const frontmatter = data as Record<string, unknown>;
 
-  const required = ["version", "title", "description", "date"];
-  const missing = required.filter((field) => frontmatter[field] === undefined);
-  if (missing.length > 0) {
-    throw new Error(`[changelog] Missing fields (${missing.join(", ")}) in ${filePath}`);
-  }
-
-  if (typeof frontmatter.version !== "string" || frontmatter.version.trim().length === 0) {
-    throw new Error(`[changelog] version must be a string in ${filePath}`);
-  }
-  if (typeof frontmatter.title !== "string" || frontmatter.title.trim().length === 0) {
-    throw new Error(`[changelog] title must be a string in ${filePath}`);
-  }
-  if (typeof frontmatter.description !== "string" || frontmatter.description.trim().length === 0) {
-    throw new Error(`[changelog] description must be a string in ${filePath}`);
-  }
-  if (typeof frontmatter.date !== "string" || Number.isNaN(Date.parse(frontmatter.date))) {
-    throw new Error(`[changelog] date must be a valid string in ${filePath}`);
-  }
-
-  const addedTools = Array.isArray(frontmatter.addedTools)
-    ? frontmatter.addedTools.filter((item) => typeof item === "string").map((item) => item.trim()).filter(Boolean)
-    : [];
-  const fixes = Array.isArray(frontmatter.fixes)
-    ? frontmatter.fixes.filter((item) => typeof item === "string").map((item) => item.trim()).filter(Boolean)
-    : [];
-  const draft = typeof frontmatter.draft === "boolean" ? frontmatter.draft : false;
-
-  return {
-    slug: slugify(frontmatter.version.trim()),
-    version: frontmatter.version.trim(),
-    title: frontmatter.title.trim(),
-    description: frontmatter.description.trim(),
-    date: frontmatter.date,
-    addedTools,
-    fixes,
-    draft,
-    content,
-  };
+  return [
+    normalizeEntry(
+      {
+        ...frontmatter,
+        content,
+      },
+      filePath,
+      0,
+      fileKey,
+    ),
+  ];
 };
 
-const parseChangelogFilename = (name: string) => {
-  const match = /^(.*)\.(tr|en)(\.(?:mdx|md))$/i.exec(name);
-  if (!match) return null;
-  return { locale: match[2] as Locale, pathSuffix: match[0] };
+const parseJsonEntries = async (filePath: string, fileKey: string): Promise<ChangelogEntry[]> => {
+  const raw = await fs.readFile(filePath, "utf8");
+  const parsed = JSON.parse(raw) as unknown;
+
+  const items = Array.isArray(parsed)
+    ? parsed
+    : typeof parsed === "object" && parsed !== null && Array.isArray((parsed as { entries?: unknown }).entries)
+      ? (parsed as { entries: unknown[] }).entries
+      : [parsed];
+
+  return items.map((item, index) => {
+    if (typeof item !== "object" || item === null) {
+      throw new Error(`[changelog] each JSON item must be an object in ${filePath} (entry ${index + 1})`);
+    }
+
+    return normalizeEntry(item as ChangelogEntryInput, filePath, index, fileKey);
+  });
+};
+
+const parseChangelogFile = async (filePath: string, extension: string, fileKey: string): Promise<ChangelogEntry[]> => {
+  if (extension === ".json") {
+    return parseJsonEntries(filePath, fileKey);
+  }
+
+  return parseMarkdownEntries(filePath, fileKey);
 };
 
 export const getChangelogEntries = async (
   locale: Locale,
   options: { includeDrafts?: boolean } = {},
 ) => {
-  let files: string[] = [];
+  let files: Array<{ fullPath: string; extension: string; fileKey: string }> = [];
+
   try {
     const entries = await fs.readdir(CHANGELOG_DIR, { withFileTypes: true });
     files = entries
-      .filter((entry) => entry.isFile() && CONTENT_EXTENSIONS.has(path.extname(entry.name)))
+      .filter((entry) => entry.isFile() && CONTENT_EXTENSIONS.has(path.extname(entry.name).toLowerCase()))
       .map((entry) => ({ entry, parsed: parseChangelogFilename(entry.name) }))
-      .filter((item) => item.parsed && item.parsed.locale === locale)
-      .map((item) => path.join(CHANGELOG_DIR, item.entry.name));
+      .filter((item): item is { entry: (typeof entries)[number]; parsed: { locale: Locale; extension: string } } =>
+        Boolean(item.parsed && item.parsed.locale === locale),
+      )
+      .map((item) => ({
+        fullPath: path.join(CHANGELOG_DIR, item.entry.name),
+        extension: item.parsed.extension,
+        fileKey: item.entry.name,
+      }));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
-      return [];
+      return [] as ChangelogEntry[];
     }
     throw error;
   }
 
-  const items = await Promise.all(files.map((file) => parseChangelogFile(file)));
+  const nested = await Promise.all(
+    files.map((file) => parseChangelogFile(file.fullPath, file.extension, file.fileKey)),
+  );
+  const allEntries = nested.flat();
+
   const includeDrafts = options.includeDrafts ?? process.env.NODE_ENV !== "production";
-  const filtered = includeDrafts ? items : items.filter((item) => !item.draft);
+  const filtered = includeDrafts ? allEntries : allEntries.filter((item) => !item.draft);
 
   return filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };

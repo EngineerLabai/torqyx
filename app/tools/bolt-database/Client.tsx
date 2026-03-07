@@ -141,8 +141,11 @@ export default function BoltDatabasePage({ initialDocs }: BoltDatabaseClientProp
 
         {/* Cıvata ölçüsü seçimi */}
         <div className="mb-6">
-          <label className="text-sm font-medium text-gray-700">Cıvata Ölçüsü</label>
+          <label htmlFor="bolt-thread-size" className="text-sm font-medium text-gray-700">
+            Cıvata Ölçüsü
+          </label>
           <select
+            id="bolt-thread-size"
             className="mt-1 w-full rounded border p-2 text-sm"
             value={selectedThread}
             onChange={(e) => setSelectedThread(e.target.value)}
@@ -187,8 +190,11 @@ export default function BoltDatabasePage({ initialDocs }: BoltDatabaseClientProp
 
         {/* Cıvata kalitesi seçimi */}
         <div className="mb-6">
-          <label className="text-sm font-medium text-gray-700">Cıvata Kalitesi</label>
+          <label htmlFor="bolt-grade" className="text-sm font-medium text-gray-700">
+            Cıvata Kalitesi
+          </label>
           <select
+            id="bolt-grade"
             className="mt-1 w-full rounded border p-2 text-sm"
             value={selectedGrade}
             onChange={(e) => setSelectedGrade(e.target.value)}

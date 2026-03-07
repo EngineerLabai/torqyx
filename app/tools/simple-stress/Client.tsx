@@ -65,42 +65,45 @@ export default function SimpleStressPage({ initialDocs }: SimpleStressClientProp
         <div className="space-y-4">
           {/* Kuvvet */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="simple-stress-force" className="block text-sm font-medium text-gray-700 mb-1">
               Kuvvet (N)
             </label>
             <input
+              id="simple-stress-force"
               type="number"
               className="w-full border p-2 rounded"
               value={force}
               onChange={(e) => setForce(Number(e.target.value))}
               placeholder="ör. 5000"
-            />
+             aria-label="ör. 5000"/>
           </div>
 
           {/* Alan */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="simple-stress-area" className="block text-sm font-medium text-gray-700 mb-1">
               Kesit Alanı (mm²)
             </label>
             <input
+              id="simple-stress-area"
               type="number"
               className="w-full border p-2 rounded"
               value={area}
               onChange={(e) => setArea(Number(e.target.value))}
               placeholder="ör. 100"
-            />
+             aria-label="ör. 100"/>
           </div>
 
           {/* Malzeme */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="simple-stress-material" className="block text-sm font-medium text-gray-700 mb-1">
               Malzeme
             </label>
             <select
+              id="simple-stress-material"
               className="w-full border p-2 rounded"
               value={material}
               onChange={(e) => setMaterial(e.target.value)}
-            >
+             aria-label="Select field">
               {MATERIALS.map((m) => (
                 <option key={m.name} value={m.name}>
                   {m.name}

@@ -89,7 +89,7 @@ export default function CommunityWaitlistForm({ copy }: CommunityWaitlistFormPro
           className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
           aria-invalid={Boolean(error)}
           required
-        />
+         aria-label={copy.emailPlaceholder}/>
         {error ? <span className="text-[10px] text-red-600">{error}</span> : null}
       </label>
 
@@ -101,7 +101,7 @@ export default function CommunityWaitlistForm({ copy }: CommunityWaitlistFormPro
           onChange={(event) => handleFocusChange(event.target.value)}
           placeholder={copy.focusPlaceholder}
           className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
-        />
+         aria-label={copy.focusPlaceholder}/>
       </label>
 
       <div className="flex flex-wrap items-center gap-3">

@@ -44,7 +44,7 @@ export default async function LoginPage() {
           </div>
 
           <div className="mt-4 max-w-md">
-            <LoginPanel copy={authCopy} />
+            <LoginPanel copy={authCopy} source="hero" />
           </div>
         </section>
       </AuthGate>

@@ -1,32 +1,63 @@
-﻿# Açıklama
+﻿## Hesaplama Açıklaması
 
-<Callout type="info" title="Nasıl kullanılır?">
-<StepList title="Hızlı adımlar" steps={["Akışkan yoğunluğu ve viskozitesini gir", "Debi ve boru çapını ekle", "Hat uzunluğu ve pürüzlülüğü belirle", "Re, f ve ΔP sonuçlarını kontrol et"]} />
-</Callout>
+**Amaç**
+Darcy-Weisbach yaklaşımıyla boru hattındaki hız, Reynolds sayısı, sürtünme katsayısı ve basınç kaybını hızlıca tahmin etmek.
 
-<Formula label="Temel ilişki">
-ΔP = f * (L/D) * (ρ v^2 / 2)
+<Formula label="Darcy-Weisbach ve sürtünme katsayısı">
+v = 4Q / (π D^2)
+Re = ρ v D / μ
+f = 0.25 / [log10(ε/(3.7D) + 5.74/Re^0.9)]^2
+ΔP = f (L/D) (ρ v^2 / 2)
 </Formula>
 
-Birim dönüşümleri için <a href="/reference#units">Hızlı Referans Merkezi</a> sayfasını kullanabilirsin.
+**Varsayımlar**
+- Akış tek fazlı, tam gelişmiş ve boru dairesel kesitlidir.
+- Türbülanslı bölgede Swamee-Jain yaklaşımı kullanılır.
+- Yerel kayıplar (dirsek, vana, giriş/çıkış) bu hesapta yoktur.
 
-# Örnekler
+**Birimler**
+- ρ: kg/m³
+- μ: Pa·s
+- Q: m³/s
+- D, ε: mm (araç içinde metreye çevrilir)
+- L: m
+- ΔP: Pa ve bar
 
-## Örnek: 50 mm boruda su akışı
+**Kaynak**
+- Crane TP-410
+
+## Örnekler
+
+### Örnek 1: DN50 su hattı
 
 **Girdiler**
-- ρ: 998 kg/m3
-- μ: 0.001 Pa·s
-- Q: 0.01 m3/s
+- ρ: 998 kg/m³
+- μ: 0,001 Pa·s
+- Q: 0,01 m³/s
 - D: 50 mm
 - L: 30 m
-- ε: 0.045 mm
+- ε: 0,045 mm
 
-**Çıktılar**
-- Re: ~254000
-- f: ~0.0205
-- ΔP: ~159 kPa (~1.592 bar)
-- Pompa gücü: ~2.27 kW
+**Beklenen çıktılar**
+- Hız: 5,09 m/s
+- Re: 254138
+- f: 0,0205
+- ΔP: 159159 Pa (1,592 bar)
+- Pompa gücü: 2,27 kW
 
-**Notlar**
-- Re < 2000 ise laminer kabul edilir.
+### Örnek 2: DN40 kısa hat
+
+**Girdiler**
+- ρ: 1000 kg/m³
+- μ: 0,0012 Pa·s
+- Q: 0,005 m³/s
+- D: 40 mm
+- L: 20 m
+- ε: 0,02 mm
+
+**Beklenen çıktılar**
+- Hız: 3,98 m/s
+- Re: 132629
+- f: 0,0197
+- ΔP: 78107 Pa (0,781 bar)
+- Pompa gücü: 0,56 kW

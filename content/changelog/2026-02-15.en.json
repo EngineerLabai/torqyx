@@ -1,0 +1,23 @@
+[
+  {
+    "version": "2026.02.15",
+    "date": "2026-02-15",
+    "tool": "Bolt Calculator",
+    "badge": "new",
+    "description": "- Added quick presets for metric bolt selection."
+  },
+  {
+    "version": "2026.02.15",
+    "date": "2026-02-15",
+    "tool": "Pipe Pressure Loss",
+    "badge": "fixed",
+    "description": "- Fixed rounding drift caused by flow-rate unit conversion."
+  },
+  {
+    "version": "2026.02.15",
+    "date": "2026-02-15",
+    "tool": "Legacy Gear Notes",
+    "badge": "removed",
+    "description": "- Removed the legacy note card and moved content to the new documentation flow."
+  }
+]

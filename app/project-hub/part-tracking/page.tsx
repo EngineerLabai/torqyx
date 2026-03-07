@@ -162,23 +162,25 @@ export default function PartTrackingPage() {
             <form className="space-y-3" onSubmit={handleAdd}>
               <div className="grid gap-2 sm:grid-cols-2">
                 <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                  <label htmlFor="part-tracking-customer" className="block text-[11px] font-medium text-slate-700">
                     Müşteri
                   </label>
                   <input
+                    id="part-tracking-customer"
                     type="text"
                     value={form.customer}
                     onChange={(e) => handleChange("customer", e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder="Örn. OEM X"
-                  />
+                   aria-label="Örn. OEM X"/>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                  <label htmlFor="part-tracking-project-code" className="block text-[11px] font-medium text-slate-700">
                     Proje Kodu
                   </label>
                   <input
+                    id="part-tracking-project-code"
                     type="text"
                     value={form.projectCode}
                     onChange={(e) =>
@@ -186,50 +188,53 @@ export default function PartTrackingPage() {
                     }
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder="Örn. P-2025-01"
-                  />
+                   aria-label="Örn. P-2025-01"/>
                 </div>
               </div>
 
               <div className="grid gap-2 sm:grid-cols-2">
                 <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                  <label htmlFor="part-tracking-part-code" className="block text-[11px] font-medium text-slate-700">
                     Parça Kodu
                   </label>
                   <input
+                    id="part-tracking-part-code"
                     type="text"
                     value={form.partCode}
                     onChange={(e) => handleChange("partCode", e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder="Örn. 1234-567-890"
-                  />
+                   aria-label="Örn. 1234-567-890"/>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                  <label htmlFor="part-tracking-part-name" className="block text-[11px] font-medium text-slate-700">
                     Parça Adı
                   </label>
                   <input
+                    id="part-tracking-part-name"
                     type="text"
                     value={form.partName}
                     onChange={(e) => handleChange("partName", e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder="Örn. Ön amortisör üst braketi"
-                  />
+                   aria-label="Örn. Ön amortisör üst braketi"/>
                 </div>
               </div>
 
               <div className="grid gap-2 sm:grid-cols-3">
                 <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                  <label htmlFor="part-tracking-stage" className="block text-[11px] font-medium text-slate-700">
                     Aşama
                   </label>
                   <select
+                    id="part-tracking-stage"
                     value={form.stage}
                     onChange={(e) =>
                       handleChange("stage", e.target.value as Stage)
                     }
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                  >
+                   aria-label="Select field">
                     <option>Kick-off</option>
                     <option>Tasarım</option>
                     <option>Numune</option>
@@ -239,10 +244,11 @@ export default function PartTrackingPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                  <label htmlFor="part-tracking-ppap-status" className="block text-[11px] font-medium text-slate-700">
                     PPAP Durumu
                   </label>
                   <input
+                    id="part-tracking-ppap-status"
                     type="text"
                     value={form.ppapStatus}
                     onChange={(e) =>
@@ -250,33 +256,35 @@ export default function PartTrackingPage() {
                     }
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder="Örn. PPAP level 3, beklemede"
-                  />
+                   aria-label="Örn. PPAP level 3, beklemede"/>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                  <label htmlFor="part-tracking-sop-date" className="block text-[11px] font-medium text-slate-700">
                     Hedef SOP tarihi
                   </label>
                   <input
+                    id="part-tracking-sop-date"
                     type="date"
                     value={form.sopDate}
                     onChange={(e) => handleChange("sopDate", e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                  />
+                   aria-label="Date input"/>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="block text-[11px] font-medium text-slate-700">
+                <label htmlFor="part-tracking-risk" className="block text-[11px] font-medium text-slate-700">
                   Risk seviyesi
                 </label>
                 <select
+                  id="part-tracking-risk"
                   value={form.risk}
                   onChange={(e) =>
                     handleChange("risk", e.target.value as RiskFlag)
                   }
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                >
+                 aria-label="Select field">
                   <option>Yok</option>
                   <option>Orta</option>
                   <option>Yüksek</option>
@@ -284,16 +292,17 @@ export default function PartTrackingPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="block text-[11px] font-medium text-slate-700">
+                <label htmlFor="part-tracking-notes" className="block text-[11px] font-medium text-slate-700">
                   Notlar
                 </label>
                 <textarea
+                  id="part-tracking-notes"
                   value={form.notes}
                   onChange={(e) => handleChange("notes", e.target.value)}
                   rows={3}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                   placeholder="Örn. Tedarikçi riski, kalite açık aksiyonları, müşteri özel isteği..."
-                />
+                 aria-label="Örn. Tedarikçi riski, kalite açık aksiyonları, müşteri özel isteği..."/>
               </div>
 
               {error && (

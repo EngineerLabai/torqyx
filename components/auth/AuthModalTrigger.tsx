@@ -1,5 +1,6 @@
 "use client";
 
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { openAuthModal } from "@/components/auth/authModalEvents";
 
 type AuthModalTriggerProps = {
@@ -8,10 +9,17 @@ type AuthModalTriggerProps = {
 };
 
 export default function AuthModalTrigger({ label, className }: AuthModalTriggerProps) {
+  const { track } = useAnalytics();
+
+  const handleClick = () => {
+    track("signup_start", { source: "cta" });
+    openAuthModal();
+  };
+
   return (
     <button
       type="button"
-      onClick={openAuthModal}
+      onClick={handleClick}
       className={className}
     >
       {label}

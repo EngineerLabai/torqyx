@@ -1,6 +1,6 @@
-﻿import PageHero from "@/components/layout/PageHero";
+import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
-import ReferenceCenter from "@/components/reference/ReferenceCenter";
+import ReferenceCenterLazy from "@/components/reference/ReferenceCenterLazy";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -35,7 +35,8 @@ export default async function ReferencePage() {
         imageAlt={copy.imageAlt}
       />
 
-      <ReferenceCenter />
+      <ReferenceCenterLazy />
     </PageShell>
   );
 }
+

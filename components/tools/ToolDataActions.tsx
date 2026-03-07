@@ -157,7 +157,7 @@ export default function ToolDataActions({ toolSlug, toolTitle, inputs, outputs, 
               value={selectedProjectId}
               onChange={(event) => setSelectedProjectId(event.target.value)}
               className="min-w-[180px] rounded-lg border border-slate-300 px-2 py-1.5 text-[11px] text-slate-700"
-            >
+             aria-label="Select field">
               {projects.map((project) => (
                 <option key={project.id} value={project.id}>
                   {project.title}
@@ -172,7 +172,7 @@ export default function ToolDataActions({ toolSlug, toolTitle, inputs, outputs, 
                 onChange={(event) => setNewProjectTitle(event.target.value)}
                 placeholder={copy.newProjectPlaceholder}
                 className="min-w-[180px] rounded-lg border border-slate-300 px-2 py-1.5 text-[11px] text-slate-700"
-              />
+               aria-label={copy.newProjectPlaceholder}/>
             ) : null}
             <button
               type="button"

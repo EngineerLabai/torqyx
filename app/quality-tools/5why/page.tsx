@@ -4,7 +4,9 @@
 import { useState, ChangeEvent, useCallback, useRef } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ReportActions from "@/components/report/ReportActions";
+import { QualityToolStatusBadge } from "@/components/quality-tools/QualityToolStatusBadge";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getQualityToolById } from "@/data/quality-tools/registry";
 import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
 import { formatMessage } from "@/utils/messages";
 import { assertNoTurkish } from "@/utils/i18n-assert";
@@ -68,6 +70,7 @@ const DRAFT_KEY = "aielab:quality:5why:draft";
 export default function FiveWhyPage() {
   const { locale } = useLocale();
   const copy = fiveWhyCopy[locale];
+  const toolStatus = getQualityToolById("5why", locale)?.status ?? "beta";
   const actionsCopy = qualityReportActionsCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/5why");
 
@@ -138,9 +141,7 @@ export default function FiveWhyPage() {
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             {copy.badge}
           </span>
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-[10px] font-medium text-slate-600">
-            {copy.badgeSub}
-          </span>
+          <QualityToolStatusBadge locale={locale} status={toolStatus} className="px-3 py-1 text-[10px] font-medium" />
         </div>
 
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
@@ -168,7 +169,7 @@ export default function FiveWhyPage() {
               onChange={handleProblemChange}
               className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               placeholder={copy.problemPlaceholder}
-            />
+             aria-label={copy.problemPlaceholder} />
           </div>
 
           <div className="space-y-3">
@@ -191,7 +192,7 @@ export default function FiveWhyPage() {
                     onChange={(e) => handleWhyChange(index, "why", e)}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder={index === 0 ? copy.stepPlaceholderFirst : copy.stepPlaceholderNext}
-                  />
+                   aria-label={index === 0 ? copy.stepPlaceholderFirst : copy.stepPlaceholderNext}/>
                 </div>
 
                 <div className="mt-2 space-y-1">
@@ -202,7 +203,7 @@ export default function FiveWhyPage() {
                     onChange={(e) => handleWhyChange(index, "actionHint", e)}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder={copy.actionPlaceholder}
-                  />
+                   aria-label={copy.actionPlaceholder}/>
                 </div>
               </div>
             ))}

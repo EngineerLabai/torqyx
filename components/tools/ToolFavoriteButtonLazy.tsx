@@ -11,7 +11,7 @@ type ToolFavoriteButtonProps = {
 
 const ToolFavoriteButton = dynamic(() => import("@/components/tools/ToolFavoriteButton"), {
   ssr: false,
-  loading: () => null,
+  loading: () => <span className="inline-block h-8 w-8 animate-pulse rounded-full border border-slate-200 bg-slate-100" />,
 });
 
 export default function ToolFavoriteButtonLazy(props: ToolFavoriteButtonProps) {

@@ -1,5 +1,6 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import UpgradePlanViewTracker from "@/components/analytics/UpgradePlanViewTracker";
 import PremiumCTA from "@/components/premium/PremiumCTA";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
@@ -28,6 +29,7 @@ export default async function PremiumPage() {
 
   return (
     <PageShell>
+      <UpgradePlanViewTracker plan="pro" source="premium_page" />
       <PageHero
         title={copy.title}
         description={copy.description}

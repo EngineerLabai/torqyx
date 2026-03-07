@@ -20,11 +20,18 @@ export const toolTypes = ["calculator", "bundle", "guide"] as const;
 export type ToolType = (typeof toolTypes)[number];
 
 export type ToolAccess = "free" | "beta" | "premium";
+export const toolStatuses = ["verified", "beta", "experimental"] as const;
+export type ToolStatus = (typeof toolStatuses)[number];
+
+const DEFAULT_VALIDATION_STANDARD = "ISO / DIN / VDI";
 
 export type ToolCatalogItem = {
   id: string;
   type: ToolType;
   access: ToolAccess;
+  status: ToolStatus;
+  validationStandard: string;
+  featured?: boolean;
   title: string;
   description: string;
   titleEn?: string;
@@ -35,17 +42,34 @@ export type ToolCatalogItem = {
   lastUpdated?: string;
 };
 
-type ToolCatalogBaseItem = Omit<ToolCatalogItem, "access">;
+type ToolCatalogBaseItem = Omit<ToolCatalogItem, "access" | "status" | "validationStandard">;
 
 const toolAccessById: Partial<Record<string, ToolAccess>> = {
   "sanity-check": "beta",
   "gear-simulations": "beta",
 };
 
+const toolStatusById: Partial<Record<string, ToolStatus>> = {
+  "sanity-check": "beta",
+  "gear-simulations": "experimental",
+  "gear-weight": "experimental",
+  "production-project": "beta",
+  "coating-guide": "beta",
+};
+
+const toolValidationStandardById: Partial<Record<string, string>> = {
+  "sanity-check": "ISO / DIN / VDI",
+  "gear-simulations": "DIN / AGMA",
+  "gear-weight": "DIN 3990",
+  "production-project": "VDI 3423",
+  "coating-guide": "ISO 12944",
+};
+
 const toolCatalogBase: ToolCatalogBaseItem[] = [
   {
     id: "bolt-calculator",
     type: "calculator",
+    featured: true,
     title: "Cıvata Boyut ve Ön Yük Hesabı",
     description: "Nominal çap, diş adımı ve malzeme sınıfına göre gerilme alanı, ön yük ve torku hesaplar.",
     titleEn: "Bolt Size & Torque",
@@ -57,6 +81,7 @@ const toolCatalogBase: ToolCatalogBaseItem[] = [
   {
     id: "unit-converter",
     type: "calculator",
+    featured: true,
     title: "Birim Dönüştürücü",
     description: "Uzunluk, kuvvet, basınç ve enerji için hızlı birim dönüşümleri.",
     titleEn: "Unit Converter",
@@ -67,6 +92,7 @@ const toolCatalogBase: ToolCatalogBaseItem[] = [
   {
     id: "sanity-check",
     type: "calculator",
+    featured: true,
     title: "Mühendislik Kontrol Laboratuvarı",
     description: "Değişkenleri, birimleri ve formül sonucunu tek ekranda doğrula.",
     titleEn: "Engineering Sanity Check Lab",
@@ -153,6 +179,7 @@ const toolCatalogBase: ToolCatalogBaseItem[] = [
   {
     id: "torque-power",
     type: "calculator",
+    featured: true,
     title: "Güç - Tork - Devir",
     description: "kW, hp ve rpm ilişkisine göre tork veya güç hesabını yap.",
     titleEn: "Power - Torque - RPM",
@@ -201,6 +228,7 @@ const toolCatalogBase: ToolCatalogBaseItem[] = [
   {
     id: "pipe-pressure-loss",
     type: "calculator",
+    featured: true,
     title: "Boru Basınç Kaybı",
     description: "Darcy–Weisbach ile Re, sürtünme katsayısı ve basınç kaybını hesapla.",
     titleEn: "Pipe Pressure Loss",
@@ -454,6 +482,8 @@ const toolCatalogBase: ToolCatalogBaseItem[] = [
 export const toolCatalog: ToolCatalogItem[] = toolCatalogBase.map((tool) => ({
   ...tool,
   access: toolAccessById[tool.id] ?? "free",
+  status: toolStatusById[tool.id] ?? "verified",
+  validationStandard: toolValidationStandardById[tool.id] ?? DEFAULT_VALIDATION_STANDARD,
 }));
 
 export const getToolCopy = (tool: ToolCatalogItem, locale: Locale) => {

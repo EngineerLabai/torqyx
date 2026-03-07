@@ -19,6 +19,8 @@ model User {
   name             String?
   password         String?
   tier             UserTier      @default(FREE)
+  trialStart       DateTime?     @map("trial_start")
+  trialEnd         DateTime?     @map("trial_end")
   stripeCustomerId String?       @unique
   createdAt        DateTime      @default(now())
   calculations     Calculation[]

@@ -66,6 +66,8 @@ export default function PageHero({
               blurDataURL={BLUR_DATA_URL}
               unoptimized={normalizedImageSrc.toLowerCase().endsWith(".svg")}
               priority={priority}
+              fetchPriority={priority ? "high" : undefined}
+              loading={priority ? undefined : "lazy"}
             />
           </div>
         </div>

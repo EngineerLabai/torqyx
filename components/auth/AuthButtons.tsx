@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { useAuth } from "./AuthProvider";
 import type { Messages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -13,7 +14,20 @@ type AuthButtonsProps = {
 export default function AuthButtons({ copy }: AuthButtonsProps) {
   const { user, loading, available, error, loginWithGoogle, logout } = useAuth();
   const { locale } = useLocale();
+  const { track } = useAnalytics();
   const premiumHref = withLocalePrefix("/pricing", locale);
+
+  const handleLogin = () => {
+    track("signup_start", { source: "cta" });
+    void loginWithGoogle();
+  };
+
+  const handleUpgradeClick = () => {
+    track("upgrade_click", {
+      plan: "pro",
+      source: "header",
+    });
+  };
 
   if (loading) {
     return <div className="h-9 w-28 animate-pulse rounded-full bg-white/20" />;
@@ -34,12 +48,13 @@ export default function AuthButtons({ copy }: AuthButtonsProps) {
       <div className="flex items-center gap-2 text-xs">
         <button
           type="button"
-          onClick={loginWithGoogle}
+          onClick={handleLogin}
           className="tap-target inline-flex items-center justify-center rounded-full border border-slate-300 px-4 py-2 text-xs font-semibold text-slate-800 transition hover:border-slate-400 hover:bg-slate-100"
         >
           {copy.login}
         </button>
         <Link
+          onClick={handleUpgradeClick}
           className="tap-target inline-flex items-center justify-center rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-500"
           href={premiumHref}
         >

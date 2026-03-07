@@ -1,4 +1,4 @@
-import JsonLd from "@/components/seo/JsonLd";
+import ToolApplicationJsonLd from "@/components/seo/ToolApplicationJsonLd";
 import type { Locale } from "@/utils/locale";
 import { buildToolJsonLd } from "@/utils/tool-seo";
 
@@ -9,5 +9,6 @@ type ToolSeoProps = {
 
 export default function ToolSeo({ toolId, locale }: ToolSeoProps) {
   const data = buildToolJsonLd(toolId, locale);
-  return <JsonLd data={data} />;
+  return <ToolApplicationJsonLd data={data} schemaType="WebApplication" />;
 }
+

@@ -11,6 +11,7 @@ type EnhancedStandardsTableProps = {
   locale: "tr" | "en";
   exportLabel: string;
   emptyLabel: string;
+  virtualized?: boolean;
 };
 
 const isLocalized = (value: unknown): value is LocalizedText =>
@@ -33,6 +34,7 @@ export default function EnhancedStandardsTable({
   locale,
   exportLabel,
   emptyLabel,
+  virtualized = true,
 }: EnhancedStandardsTableProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleColumnKeys, setVisibleColumnKeys] = useState<string[]>(() => table.columns.map((column) => column.key));
@@ -117,7 +119,7 @@ export default function EnhancedStandardsTable({
                         onChange={() => toggleColumn(column.key)}
                         disabled={disableUncheck}
                         className="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      />
+                       aria-label="Checkbox"/>
                       <span>{column.label[locale]}</span>
                     </label>
                   );
@@ -136,6 +138,7 @@ export default function EnhancedStandardsTable({
             locale={locale}
             exportLabel={exportLabel}
             emptyLabel={emptyLabel}
+            virtualized={virtualized}
           />
         </div>
       </StandardsTableWrapper>

@@ -2,29 +2,36 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
+import UpgradePrompt from "@/components/billing/UpgradePrompt";
 import ToolLibraryCard from "@/components/tools/ToolLibraryCard";
 import RecentToolsStrip from "@/components/tools/RecentToolsStripLazy";
 import InlineSearch from "@/components/search/InlineSearch";
 import { filterSearchResults } from "@/components/search/useSearchIndex";
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
+import { useBillingStatus } from "@/hooks/useBillingStatus";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildSearchText } from "@/utils/search-index";
+import { warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import {
   getToolCopy,
   toolCatalog,
   toolCategories,
+  toolStatuses,
   toolTags,
   toolTypes,
   type ToolType,
+  type ToolStatus,
   type ToolCatalogItem,
 } from "@/tools/_shared/catalog";
 import type { SearchIndexItem } from "@/utils/search-index";
+import { categoryLabels } from "@/src/lib/i18n/categoryLabels";
 
 const TYPE_ALL = "All" as const;
 const CATEGORY_ALL = "All" as const;
 const TAG_ALL = "All" as const;
+const STATUS_ALL = "All" as const;
 const NEW_WINDOW_DAYS = 14;
 const DEFAULT_TYPE: ToolType = "calculator";
 const NOW = Date.now();
@@ -34,6 +41,7 @@ const VISIBLE_TOOLS_STEP = 24;
 type TypeFilter = typeof TYPE_ALL | ToolType;
 type CategoryFilter = typeof CATEGORY_ALL | (typeof toolCategories)[number];
 type TagFilter = typeof TAG_ALL | (typeof toolTags)[number];
+type StatusFilter = typeof STATUS_ALL | ToolStatus;
 
 type ToolLibraryProps = {
   locale: Locale;
@@ -44,6 +52,7 @@ type FilterState = {
   type: TypeFilter;
   category: CategoryFilter;
   tag: TagFilter;
+  status: StatusFilter;
   query: string;
 };
 
@@ -71,7 +80,13 @@ const resolveTagFilter = (value: string): TagFilter => {
   return TAG_ALL;
 };
 
-const buildHref = (basePath: string, { type, category, tag, query }: FilterState) => {
+const resolveStatusFilter = (value: string): StatusFilter => {
+  if (value === STATUS_ALL) return STATUS_ALL;
+  if (toolStatuses.includes(value as ToolStatus)) return value as ToolStatus;
+  return STATUS_ALL;
+};
+
+const buildHref = (basePath: string, { type, category, tag, status, query }: FilterState) => {
   const params = new URLSearchParams();
 
   if (type === TYPE_ALL) {
@@ -86,6 +101,10 @@ const buildHref = (basePath: string, { type, category, tag, query }: FilterState
 
   if (tag !== TAG_ALL) {
     params.set("tag", tag);
+  }
+
+  if (status !== STATUS_ALL) {
+    params.set("status", status);
   }
 
   if (query) {
@@ -117,16 +136,20 @@ const highlightMatch = (text: string, query: string): ReactNode => {
 
 export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) {
   const messages = getMessages(locale);
+  const { status: billingStatus } = useBillingStatus();
   const copy = messages.components.toolLibrary;
+  const guideLinkLabel = locale === "tr" ? "Nasil Kullanilir?" : "How to Use?";
   const labels = copy.labels;
   const labelsEn = getMessages("en").components.toolLibrary.labels;
   const labelsTr = getMessages("tr").components.toolLibrary.labels;
   const accessLabels = messages.common.access;
+  const categoryLabelMap = categoryLabels(locale);
   const basePath = withLocalePrefix("/tools", locale);
 
   const typeFilter = resolveTypeFilter(getParam(searchParams?.type));
   const category = resolveCategoryFilter(getParam(searchParams?.category));
   const tag = resolveTagFilter(getParam(searchParams?.tag));
+  const status = resolveStatusFilter(getParam(searchParams?.status));
   const initialQuery = getParam(searchParams?.q).trim();
   const [query, setQuery] = useState(initialQuery);
   const [visibleToolsCount, setVisibleToolsCount] = useState(INITIAL_VISIBLE_TOOLS);
@@ -138,10 +161,10 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
 
   useEffect(() => {
     setVisibleToolsCount(INITIAL_VISIBLE_TOOLS);
-  }, [typeFilter, category, tag, debouncedQuery, locale]);
+  }, [typeFilter, category, tag, status, debouncedQuery, locale]);
 
   const typeOptions: TypeFilter[] = [...toolTypes, TYPE_ALL];
-  const filterState: FilterState = { type: typeFilter, category, tag, query: query.trim() };
+  const filterState: FilterState = { type: typeFilter, category, tag, status, query: query.trim() };
 
   const toolById = useMemo(() => new Map(toolCatalog.map((tool) => [tool.id, tool])), []);
 
@@ -151,9 +174,10 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         const typeMatch = typeFilter === TYPE_ALL || tool.type === typeFilter;
         const categoryMatch = category === CATEGORY_ALL || tool.category === category;
         const tagMatch = tag === TAG_ALL || (tool.tags ?? []).includes(tag);
-        return typeMatch && categoryMatch && tagMatch;
+        const statusMatch = status === STATUS_ALL || tool.status === status;
+        return typeMatch && categoryMatch && tagMatch && statusMatch;
       }),
-    [typeFilter, category, tag],
+    [typeFilter, category, tag, status],
   );
 
   const baseToolIds = useMemo(() => new Set(baseTools.map((tool) => tool.id)), [baseTools]);
@@ -164,7 +188,9 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         const copy = getToolCopy(tool, locale);
         const tags = tool.tags ?? [];
         const localeTitles = { tr: tool.title, en: tool.titleEn ?? tool.title };
-        const categoryLabel = tool.category ? labels.category[tool.category] : "";
+        const categoryLabel = tool.category
+          ? labels.category[tool.category] ?? categoryLabelMap[tool.category] ?? tool.category
+          : "";
         const categoryLabelEn = tool.category ? labelsEn.category[tool.category] : "";
         const categoryLabelTr = tool.category ? labelsTr.category[tool.category] : "";
         const localizedTags = tags.map((tag) => labels.tag[tag]);
@@ -194,7 +220,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           ),
         };
       }),
-    [locale, labels, labelsEn, labelsTr],
+    [locale, labels, labelsEn, labelsTr, categoryLabelMap],
   );
 
   const toolSearchItems = localSearchItems;
@@ -211,13 +237,24 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   }, [debouncedQuery, toolSearchItems, baseToolIds, toolById]);
 
   const filtered = debouncedQuery.trim().length > 0 ? rankedTools : baseTools;
+  const maxTools = billingStatus.plan.limits.maxTools;
+  const hasLockedToolsInResult = useMemo(() => {
+    if (maxTools === null) return false;
+    return filtered.some((tool) => {
+      const index = toolCatalog.findIndex((catalogTool) => catalogTool.id === tool.id);
+      if (index < 0) return false;
+      return index >= maxTools;
+    });
+  }, [filtered, maxTools]);
   const visibleTools = useMemo(() => filtered.slice(0, visibleToolsCount), [filtered, visibleToolsCount]);
   const hasMoreTools = filtered.length > visibleTools.length;
   const toolCardModels = useMemo(
     () =>
       visibleTools.map((tool) => {
         const { title, description } = getToolCopy(tool, locale);
-        const categoryLabel = tool.category ? labels.category[tool.category] : labels.generalCategory;
+        const categoryLabel = tool.category
+          ? labels.category[tool.category] ?? categoryLabelMap[tool.category] ?? tool.category
+          : labels.generalCategory;
         const tagLabels = (tool.tags ?? []).map((tagValue) => labels.tag[tagValue]);
         const accessLabel = accessLabels?.[tool.access] ?? accessLabels?.free ?? "";
         const isNew = tool.lastUpdated
@@ -228,14 +265,29 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           tool,
           title,
           description,
+          guideHref:
+            tool.href.startsWith("/tools/")
+              ? withLocalePrefix(`${tool.href.replace(/\/+$/g, "")}/guide`, locale)
+              : undefined,
           categoryLabel,
           tagLabels,
           accessLabel,
+          status: tool.status,
+          validationStandard: tool.validationStandard,
           isNew,
         };
       }),
-    [visibleTools, locale, labels, accessLabels],
+    [visibleTools, locale, labels, categoryLabelMap, accessLabels],
   );
+
+  useEffect(() => {
+    warnIfEnglishLabelsInTurkish("ToolLibrary", locale, {
+      categoryOptions: toolCategories.map(
+        (value) => labels.category[value] ?? categoryLabelMap[value] ?? value,
+      ),
+      cards: toolCardModels.map((item) => item.categoryLabel),
+    });
+  }, [categoryLabelMap, labels.category, locale, toolCardModels]);
 
   return (
     <div className="w-full min-w-0 space-y-6">
@@ -364,7 +416,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
               <option value={CATEGORY_ALL}>{copy.filterSection.allCategories}</option>
               {toolCategories.map((value) => (
                 <option key={value} value={value}>
-                  {labels.category[value]}
+                  {labels.category[value] ?? categoryLabelMap[value] ?? value}
                 </option>
               ))}
             </select>
@@ -384,6 +436,25 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
               {toolTags.map((value) => (
                 <option key={value} value={value}>
                   {labels.tag[value]}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-1">
+            <label htmlFor="tool-filter-status" className="block text-[11px] font-medium text-slate-700">
+              {copy.filterSection.statusLabel}
+            </label>
+            <select
+              id="tool-filter-status"
+              name="status"
+              defaultValue={status}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
+            >
+              <option value={STATUS_ALL}>{copy.filterSection.allStatuses}</option>
+              {toolStatuses.map((value) => (
+                <option key={value} value={value}>
+                  {labels.status[value]}
                 </option>
               ))}
             </select>
@@ -422,8 +493,20 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         </section>
       ) : (
         <section className="w-full min-w-0 space-y-5">
+          {hasLockedToolsInResult ? (
+            <UpgradePrompt
+              compact
+              source="tool_limit_library"
+              title={locale === "tr" ? "Free plan arac limiti aktif." : "Free plan tool limit is active."}
+              description={
+                locale === "tr"
+                  ? "Daha fazla araca erismek icin Pro'ya gecebilirsiniz."
+                  : "Upgrade to Pro to unlock more tools."
+              }
+            />
+          ) : null}
           <div className="grid min-w-0 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {toolCardModels.map(({ tool, title, description, categoryLabel, tagLabels, accessLabel, isNew }) => (
+            {toolCardModels.map(({ tool, title, description, guideHref, categoryLabel, tagLabels, accessLabel, status, validationStandard, isNew }) => (
               <ToolLibraryCard
                 key={tool.id}
                 toolId={tool.id}
@@ -432,12 +515,17 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                 description={description}
                 descriptionDisplay={highlightMatch(description, debouncedQuery)}
                 href={withLocalePrefix(tool.href, locale)}
+                guideHref={guideHref}
+                guideLabel={guideHref ? guideLinkLabel : undefined}
                 usageLabel={categoryLabel}
                 typeLabel={labels.type[tool.type]}
                 typeTone={tool.type}
                 tags={tagLabels}
                 accessLabel={accessLabel}
                 accessTone={tool.access}
+                status={status}
+                validationStandard={validationStandard}
+                locale={locale}
                 ctaLabel={labels.cta[tool.type]}
                 ariaLabel={formatMessage(labels.openAria, { title })}
                 isNew={isNew}
@@ -453,7 +541,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
                 }
                 className="rounded-full border border-slate-200 bg-white px-5 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
               >
-                {locale === "tr" ? "Daha fazla yükle" : "Load more"}
+                {labels.loadMore}
               </button>
             </div>
           ) : null}

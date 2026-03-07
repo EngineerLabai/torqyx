@@ -109,5 +109,12 @@ export default function ChartCanvas({ config, className = "" }: { config: ChartC
     };
   }, [config]);
 
-  return <canvas ref={canvasRef} className={className} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      role="img"
+      aria-label={config.yLabel ? `${config.yLabel} chart` : "Data chart"}
+      className={className}
+    />
+  );
 }

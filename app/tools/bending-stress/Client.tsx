@@ -14,7 +14,7 @@ import { formatMessage, getMessages } from "@/utils/messages";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
-import { trackEvent } from "@/utils/analytics";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { getReportTool } from "@/tools/report-tools";
 
 const TOOL_ID = "bending-stress";
@@ -63,6 +63,7 @@ export default function BendingStressPage({ initialDocs }: BendingStressClientPr
   const actionsCopy = messages.components.toolActions;
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const { track } = useAnalytics();
   const [inputs, setInputs] = useState<Inputs>(() => buildInitialInputs(searchParams?.get("input") ?? null));
 
   const schema = useMemo(() => {
@@ -163,7 +164,11 @@ export default function BendingStressPage({ initialDocs }: BendingStressClientPr
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    trackEvent("calculate_click", { tool_id: TOOL_ID, tool_title: copy.header.title });
+    track("tool_run", {
+      tool_id: TOOL_ID,
+      tool_name: copy.header.title,
+      input_count: Object.keys(inputs).length,
+    });
   };
 
   return (
@@ -399,7 +404,7 @@ function Field({
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
         min={min}
         step={step ?? "any"}
-      />
+       aria-label="Number input"/>
       {error ? <p className="text-[10px] text-red-600">{error}</p> : null}
     </div>
   );

@@ -2,15 +2,19 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import ActionCard from "@/components/ui/ActionCard";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
 import ToolDocStandard from "@/components/tools/ToolDocStandard";
+import ToolDocumentation from "@/components/tools/ToolDocumentation";
 import Callout from "@/components/mdx/Callout";
 import MDXClient from "@/components/mdx/MDXClient";
 import PremiumCTA from "@/components/premium/PremiumCTA";
+import { getToolDocumentation } from "@/data/tool-documentation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { getMessages } from "@/utils/messages";
+import { formatMessage, getMessages } from "@/utils/messages";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { trackEvent } from "@/utils/analytics";
 import { addRecent } from "@/utils/tool-storage";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
@@ -38,6 +42,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const searchParams = useSearchParams();
   const tabParam = searchParams?.get("tab");
   const initialTab = isValidTab(tabParam) ? tabParam : "calculator";
+  const changelogHref = withLocalePrefix("/changelog", locale);
   const [activeTab, setActiveTab] = useState<TabId>(initialTab);
   const docs = useMemo<ToolDocsResponse>(() => {
     return (
@@ -76,6 +81,15 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     const copy = getToolCopy(match, locale);
     return { id: match.id, title: copy.title, tags: match.tags ?? [] };
   })();
+  const documentation = useMemo(
+    () =>
+      getToolDocumentation({
+        toolId: resolvedTool?.id ?? slug,
+        locale,
+        toolTitle: resolvedTool?.title ?? slug,
+      }),
+    [locale, resolvedTool?.id, resolvedTool?.title, slug],
+  );
 
   useEffect(() => {
     if (!resolvedTool?.id) return;
@@ -94,33 +108,26 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     };
   }, [docs]);
 
-  const hasExplanation = Boolean(docs?.standard || docs?.explanation);
-  const hasExamples = Boolean(
-    docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0),
-  );
-  const shouldShowMissingNote = docs && !docs.hasDocs;
+  const shouldSuppressDocs = !docs.hasDocs || docs.isDraft === true;
+  const hasExplanation = !shouldSuppressDocs && Boolean(docs?.standard || docs?.explanation);
+  const hasExamples =
+    !shouldSuppressDocs &&
+    Boolean(docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0));
+  const shouldShowMissingNote = shouldSuppressDocs;
   const docsMetaLine = useMemo(() => {
-    if (!docs?.metaInfo) return null;
+    if (!docs?.metaInfo || shouldSuppressDocs) return null;
     const segments: string[] = [];
     if (docs.metaInfo.version) {
-      segments.push(
-        locale === "tr" ? `Dokuman surumu: ${docs.metaInfo.version}` : `Doc version: ${docs.metaInfo.version}`,
-      );
+      segments.push(formatMessage(copy.metaDocVersion, { value: docs.metaInfo.version }));
     }
     if (docs.metaInfo.lastUpdated) {
-      segments.push(
-        locale === "tr" ? `Guncelleme: ${docs.metaInfo.lastUpdated}` : `Updated: ${docs.metaInfo.lastUpdated}`,
-      );
+      segments.push(formatMessage(copy.metaUpdated, { value: docs.metaInfo.lastUpdated }));
     }
     if (docs.metaInfo.lastTranslatedAt && docs.docsLocale && docs.docsLocale !== "tr") {
-      segments.push(
-        locale === "tr"
-          ? `Ceviri tarihi: ${docs.metaInfo.lastTranslatedAt}`
-          : `Translated: ${docs.metaInfo.lastTranslatedAt}`,
-      );
+      segments.push(formatMessage(copy.metaTranslated, { value: docs.metaInfo.lastTranslatedAt }));
     }
     return segments.length ? segments.join(" | ") : null;
-  }, [docs, locale]);
+  }, [copy.metaDocVersion, copy.metaTranslated, copy.metaUpdated, docs, shouldSuppressDocs]);
 
   const availableTabs = useMemo(() => {
     const calculatorTab = allTabs.find((tab) => tab.id === "calculator");
@@ -129,7 +136,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
     const next = calculatorTab ? [calculatorTab] : [];
 
-    if (!docs || !docs.hasDocs) {
+    if (shouldSuppressDocs) {
       return next;
     }
 
@@ -142,7 +149,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     }
 
     return next;
-  }, [docs, hasExplanation, hasExamples, allTabs]);
+  }, [shouldSuppressDocs, hasExplanation, hasExamples, allTabs]);
 
   useEffect(() => {
     if (!availableTabs.some((tab) => tab.id === activeTab)) {
@@ -150,15 +157,9 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
     }
   }, [availableTabs, activeTab]);
 
-  const missingDocsCallout = (
-    <Callout type="info" title={copy.docsMissingTitle}>
-      {copy.docsMissingBody}
-    </Callout>
-  );
-
   const renderExplanation = () => {
     if (shouldShowMissingNote) {
-      return missingDocsCallout;
+      return null;
     }
 
     if (docs?.standard) {
@@ -182,7 +183,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
   const renderExamples = () => {
     if (shouldShowMissingNote) {
-      return missingDocsCallout;
+      return null;
     }
 
     if (!docs?.examples) {
@@ -263,27 +264,52 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
         ) : null}
       </div>
 
-      {shouldShowMissingNote ? missingDocsCallout : null}
-      {docsMetaLine ? <p className="text-xs text-slate-500">{docsMetaLine}</p> : null}
+      {shouldShowMissingNote ? (
+        <p className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+          {copy.docsMissingTitle}
+        </p>
+      ) : null}
+      {docsMetaLine ? (
+        <p className="text-xs text-slate-500">
+          <Link href={changelogHref} className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700">
+            {docsMetaLine}
+          </Link>
+        </p>
+      ) : null}
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
         {children}
+        <ToolDocumentation
+          toolTitle={resolvedTool?.title ?? slug}
+          locale={locale}
+          scope={documentation.scope}
+          assumptionsAndUnits={documentation.assumptionsAndUnits}
+          limits={documentation.limits}
+          referenceStandards={documentation.referenceStandards}
+          validationExamples={documentation.validationExamples}
+          version={documentation.version}
+          lastUpdated={documentation.lastUpdated}
+        />
         <PremiumCTA variant="compact" copy={premiumCopy} />
       </div>
 
-      <section className={activeTab === "explanation" ? "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" : "hidden"}>
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">{copy.explanationTitle}</h2>
-          {renderExplanation()}
-        </div>
-      </section>
+      {hasExplanation ? (
+        <section className={activeTab === "explanation" ? "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" : "hidden"}>
+          <div className="space-y-4">
+            <h2 className="text-lg font-semibold text-slate-900">{copy.explanationTitle}</h2>
+            {renderExplanation()}
+          </div>
+        </section>
+      ) : null}
 
-      <section className={activeTab === "examples" ? "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" : "hidden"}>
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">{copy.examplesTitle}</h2>
-          {renderExamples()}
-        </div>
-      </section>
+      {hasExamples ? (
+        <section className={activeTab === "examples" ? "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" : "hidden"}>
+          <div className="space-y-4">
+            <h2 className="text-lg font-semibold text-slate-900">{copy.examplesTitle}</h2>
+            {renderExamples()}
+          </div>
+        </section>
+      ) : null}
 
       {hasRelated ? (
         <section className="space-y-4">

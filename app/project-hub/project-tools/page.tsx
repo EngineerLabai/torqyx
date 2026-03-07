@@ -182,50 +182,54 @@ export default function ProjectToolsPage() {
 
           <div className="grid gap-3 md:grid-cols-2">
             <div className="space-y-1 md:col-span-2">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="project-tools-title" className="block text-[11px] font-medium text-slate-700">
                 Proje / Çalışma Başlığı
               </label>
               <input
+                id="project-tools-title"
                 type="text"
                 value={form.title}
                 onChange={(e) => handleFormChange("title", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder="Örn. Ön süspansiyon civata tork dokümanının revizyonu, Hat 2 verimlilik iyileştirmesi..."
                 required
-              />
+               aria-label="Örn. Ön süspansiyon civata tork dokümanının revizyonu, Hat 2 verimlilik iyileştirmesi..."/>
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="project-tools-customer" className="block text-[11px] font-medium text-slate-700">
                 Müşteri / İç Birim
               </label>
               <input
+                id="project-tools-customer"
                 type="text"
                 value={form.customer}
                 onChange={(e) => handleFormChange("customer", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder="Örn. OEM A, İç Kalite, Üretim Hat 2..."
-              />
+               aria-label="Örn. OEM A, İç Kalite, Üretim Hat 2..."/>
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="project-tools-line-area" className="block text-[11px] font-medium text-slate-700">
                 Hat / Proses Alanı
               </label>
               <input
+                id="project-tools-line-area"
                 type="text"
                 value={form.lineOrArea}
                 onChange={(e) => handleFormChange("lineOrArea", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder="Örn. Montaj Hattı 2 - İstasyon 4, CNC işleme..."
-              />
+               aria-label="Örn. Montaj Hattı 2 - İstasyon 4, CNC işleme..."/>
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="project-tools-status" className="block text-[11px] font-medium text-slate-700">
                 Durum
               </label>
               <select
+                id="project-tools-status"
                 value={form.status}
                 onChange={(e) =>
                   handleFormChange(
@@ -234,7 +238,7 @@ export default function ProjectToolsPage() {
                   )
                 }
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              >
+               aria-label="Select field">
                 <option value="open">Açık</option>
                 <option value="in-progress">Devam ediyor</option>
                 <option value="blocked">Blokaj var</option>
@@ -243,10 +247,11 @@ export default function ProjectToolsPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="project-tools-priority" className="block text-[11px] font-medium text-slate-700">
                 Öncelik
               </label>
               <select
+                id="project-tools-priority"
                 value={form.priority}
                 onChange={(e) =>
                   handleFormChange(
@@ -255,7 +260,7 @@ export default function ProjectToolsPage() {
                   )
                 }
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              >
+               aria-label="Select field">
                 <option value="low">Düşük</option>
                 <option value="medium">Orta</option>
                 <option value="high">Yüksek</option>
@@ -263,28 +268,30 @@ export default function ProjectToolsPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="project-tools-due-date" className="block text-[11px] font-medium text-slate-700">
                 Hedef Tamamlanma Tarihi
               </label>
               <input
+                id="project-tools-due-date"
                 type="date"
                 value={form.dueDate}
                 onChange={(e) => handleFormChange("dueDate", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label="Date input"/>
             </div>
 
             <div className="space-y-1 md:col-span-2">
-              <label className="block text-[11px] font-medium text-slate-700">
+              <label htmlFor="project-tools-notes" className="block text-[11px] font-medium text-slate-700">
                 Teknik Notlar / Kapsam
               </label>
               <textarea
+                id="project-tools-notes"
                 rows={3}
                 value={form.notes}
                 onChange={(e) => handleFormChange("notes", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                 placeholder="Örn. Kapsam, kritik parçalar, ilgili doküman kodları, tahmini iş yükü..."
-              />
+               aria-label="Örn. Kapsam, kritik parçalar, ilgili doküman kodları, tahmini iş yükü..."/>
             </div>
           </div>
         </form>

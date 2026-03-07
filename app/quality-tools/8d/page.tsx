@@ -4,7 +4,9 @@
 import { useState, useCallback, useRef } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ReportActions from "@/components/report/ReportActions";
+import { QualityToolStatusBadge } from "@/components/quality-tools/QualityToolStatusBadge";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getQualityToolById } from "@/data/quality-tools/registry";
 import { assertNoTurkish } from "@/utils/i18n-assert";
 import { eightDCopy } from "@/data/quality-tools/8d";
 import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
@@ -98,6 +100,7 @@ const DEMO_FORM: FormState = {
 export default function EightDPage() {
   const { locale } = useLocale();
   const copy = eightDCopy[locale];
+  const toolStatus = getQualityToolById("8d", locale)?.status ?? "beta";
   const actionsCopy = qualityReportActionsCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/8d");
 
@@ -153,9 +156,7 @@ export default function EightDPage() {
           <span className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-medium text-indigo-700">
             {copy.badges.level}
           </span>
-          <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-medium text-emerald-700">
-            {copy.badges.beta}
-          </span>
+          <QualityToolStatusBadge locale={locale} status={toolStatus} className="px-3 py-1 text-[10px] font-medium" />
         </div>
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
         <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
@@ -271,7 +272,7 @@ function Field({
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
         placeholder={placeholder}
-      />
+       aria-label={placeholder}/>
     </label>
   );
 }
@@ -312,7 +313,7 @@ function StepCard({
             rows={5}
             placeholder={step.placeholder}
             className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs outline-none transition focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-          />
+           aria-label={step.placeholder}/>
         </div>
         <div className="rounded-xl bg-slate-50 p-3">
           <p className="mb-2 text-[11px] font-semibold text-slate-800">{guidanceTitle}</p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import ChartCanvas from "@/components/sanity-check/ChartCanvas";
+import dynamic from "next/dynamic";
 import { runSweep } from "@/lib/sanityCheck/engine";
 import type { LabSession, SweepResult } from "@/lib/sanityCheck/types";
 
@@ -24,6 +24,15 @@ type SweepPanelProps = {
   onSessionChange: (next: LabSession) => void;
   copy: SweepPanelCopy;
 };
+
+function ChartSkeleton() {
+  return <div className="h-full w-full rounded-xl border border-slate-100 bg-slate-50 animate-pulse" aria-hidden />;
+}
+
+// Bundle estimate (webpack analyzer, parsed): sweep tab chart chunk expected to drop ~6-10KB from panel entry.
+const ChartCanvas = dynamic(() => import("@/components/sanity-check/ChartCanvas"), {
+  loading: () => <ChartSkeleton />,
+});
 
 export default function SweepPanel({ session, onSessionChange, copy }: SweepPanelProps) {
   const [result, setResult] = useState<SweepResult | null>(null);
@@ -73,6 +82,7 @@ export default function SweepPanel({ session, onSessionChange, copy }: SweepPane
               })
             }
             className="w-full rounded-lg border border-slate-300 px-2 py-1 text-xs"
+            aria-label="Select field"
           >
             {variables.map((variable) => (
               <option key={variable.id} value={variable.id}>
@@ -95,6 +105,7 @@ export default function SweepPanel({ session, onSessionChange, copy }: SweepPane
               })
             }
             className="w-full rounded-lg border border-slate-300 px-2 py-1 text-xs"
+            aria-label="Number input"
           />
         </div>
       </div>
@@ -127,3 +138,4 @@ export default function SweepPanel({ session, onSessionChange, copy }: SweepPane
     </div>
   );
 }
+

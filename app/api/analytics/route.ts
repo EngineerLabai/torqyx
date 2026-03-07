@@ -1,12 +1,13 @@
-﻿import type { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { ANALYTICS_TAXONOMY_EVENTS } from "@/utils/analytics-taxonomy";
 
 const ALLOWED_EVENTS = new Set([
+  ...ANALYTICS_TAXONOMY_EVENTS,
   "page_view",
   "tool_open",
   "calculate_click",
   "save_result",
-  "export_pdf",
 ]);
 const DEBUG_ANALYTICS = process.env.DEBUG_ANALYTICS === "true";
 

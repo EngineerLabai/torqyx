@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   CONSENT_COOKIE,
   CONSENT_PREFS_KEY,
@@ -133,11 +133,6 @@ export default function ConsentBanner({ copy }: ConsentBannerProps) {
     setPrefsOpen(false);
   };
 
-  const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.target !== event.currentTarget) return;
-    setPrefsOpen(false);
-  };
-
   if (!mounted) return null;
 
   return (
@@ -149,12 +144,17 @@ export default function ConsentBanner({ copy }: ConsentBannerProps) {
           aria-modal="true"
           aria-labelledby="consent-title"
           aria-describedby="consent-description"
-          onClick={handleOverlayClick}
         >
+          <button
+            type="button"
+            className="absolute inset-0"
+            aria-label={copy.close}
+            onClick={() => setPrefsOpen(false)}
+          />
           <div
             ref={modalRef}
             tabIndex={-1}
-            className="w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-xl outline-none"
+            className="relative z-10 w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-xl outline-none"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -292,7 +292,7 @@ function ConsentToggle({ label, description, checked, onChange, locked = false, 
           disabled={locked}
           onChange={(event) => onChange?.(event.target.checked)}
           aria-checked={checked}
-        />
+         aria-label={id}/>
         <span className="absolute h-6 w-11 rounded-full bg-slate-200 transition peer-checked:bg-emerald-500 peer-disabled:bg-slate-300" />
         <span className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition peer-checked:translate-x-5 peer-disabled:bg-slate-100" />
       </span>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import type { Messages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -15,9 +16,17 @@ type PremiumCTAProps = {
 
 export default function PremiumCTA({ copy, variant = "compact", className = "" }: PremiumCTAProps) {
   const { locale } = useLocale();
+  const { track } = useAnalytics();
   const supportHref = withLocalePrefix("/support", locale);
   const premiumHref = withLocalePrefix("/pricing", locale);
   const rootClassName = `${className} ${variant === "compact" ? "" : ""}`.trim();
+
+  const handleUpgradeClick = () => {
+    track("upgrade_click", {
+      plan: "pro",
+      source: variant === "compact" ? "compact_cta" : "full_cta",
+    });
+  };
 
   if (variant === "compact") {
     return (
@@ -36,6 +45,7 @@ export default function PremiumCTA({ copy, variant = "compact", className = "" }
               {copy.ctaPrimary}
             </Link>
             <Link
+              onClick={handleUpgradeClick}
               href={premiumHref}
               className="rounded-full border border-amber-200 px-4 py-2 font-semibold text-amber-700 hover:border-amber-300 hover:bg-amber-100"
             >
@@ -67,6 +77,7 @@ export default function PremiumCTA({ copy, variant = "compact", className = "" }
               {copy.ctaPrimary}
             </Link>
             <Link
+              onClick={handleUpgradeClick}
               href={premiumHref}
               className="rounded-full border border-slate-200 px-4 py-2 font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50"
             >

@@ -1,10 +1,10 @@
 import NextImage from "next/image";
-import type { ImgHTMLAttributes } from "react";
 
 type MdxImageProps = {
   caption?: string;
   priority?: boolean;
-} & Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt" | "width" | "height"> & {
+  className?: string;
+  title?: string;
   src: string;
   alt?: string;
   width?: number;
@@ -16,6 +16,9 @@ const mergeClassName = (base: string, extra?: string) => (extra ? `${base} ${ext
 const isExternal = (src: string) => /^(https?:)?\/\//.test(src);
 const isDataUrl = (src: string) => src.startsWith("data:");
 const isRootRelative = (src: string) => src.startsWith("/");
+const DEFAULT_IMAGE_WIDTH = 1200;
+const DEFAULT_IMAGE_HEIGHT = 675;
+const DEFAULT_IMAGE_ALT = "Content image";
 
 function normalizeLocalSrc(src: string) {
   if (isExternal(src) || isDataUrl(src) || isRootRelative(src)) {
@@ -33,36 +36,29 @@ export default function Image({
   caption,
   priority,
   className,
-  ...rest
+  title,
 }: MdxImageProps) {
   const normalizedSrc = normalizeLocalSrc(src);
-  const hasDimensions = typeof width === "number" && typeof height === "number";
-  const useNextImage = hasDimensions && !isExternal(normalizedSrc) && !isDataUrl(normalizedSrc);
+  const resolvedWidth = typeof width === "number" && width > 0 ? width : DEFAULT_IMAGE_WIDTH;
+  const resolvedHeight = typeof height === "number" && height > 0 ? height : DEFAULT_IMAGE_HEIGHT;
+  const resolvedAlt = alt.trim() ? alt : DEFAULT_IMAGE_ALT;
+  const shouldPrioritize = Boolean(priority);
+  const shouldBypassOptimization = isExternal(normalizedSrc) || isDataUrl(normalizedSrc);
 
   return (
     <figure className="my-6 flex flex-col items-center gap-2">
-      {useNextImage ? (
-        <NextImage
-          src={normalizedSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          priority={priority}
-          className={mergeClassName("rounded-xl border border-slate-200 bg-white", className)}
-        />
-      ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={normalizedSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          loading="lazy"
-          decoding="async"
-          className={mergeClassName("rounded-xl border border-slate-200 bg-white", className)}
-          {...rest}
-        />
-      )}
+      <NextImage
+        src={normalizedSrc}
+        alt={resolvedAlt}
+        width={resolvedWidth}
+        height={resolvedHeight}
+        title={title}
+        priority={shouldPrioritize}
+        fetchPriority={shouldPrioritize ? "high" : undefined}
+        loading={shouldPrioritize ? undefined : "lazy"}
+        unoptimized={shouldBypassOptimization}
+        className={mergeClassName("rounded-xl border border-slate-200 bg-white", className)}
+      />
       {caption ? <figcaption className="text-xs text-slate-500">{caption}</figcaption> : null}
     </figure>
   );

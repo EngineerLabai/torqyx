@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { WebApplicationSchemaInput } from "@/types/structured-data";
 import type { Locale } from "@/utils/locale";
 import { getBrandCopy } from "@/config/brand";
 import { buildPageMetadata } from "@/utils/metadata";
@@ -13,6 +14,7 @@ type ToolSeoPayload = {
   description: string;
   path: string;
   canonical: string | undefined;
+  featureList: string[];
 };
 
 const resolveTool = (toolKey: string): { tool: ToolCatalogItem | null; path: string } => {
@@ -33,6 +35,25 @@ const resolveTool = (toolKey: string): { tool: ToolCatalogItem | null; path: str
   return { tool, path };
 };
 
+const buildFeatureList = (tool: ToolCatalogItem | null) => {
+  const features = new Set<string>();
+  features.add("Deterministic engineering calculations");
+
+  if (tool?.category) {
+    features.add(`${tool.category} workflows`);
+  }
+
+  if (tool?.tags?.length) {
+    tool.tags.forEach((tag) => features.add(`Supports ${tag} analysis`));
+  }
+
+  if (tool?.validationStandard) {
+    features.add(`Validation baseline: ${tool.validationStandard}`);
+  }
+
+  return Array.from(features);
+};
+
 export const buildToolSeo = (toolKey: string, locale: Locale): ToolSeoPayload => {
   const { tool, path } = resolveTool(toolKey);
   const brand = getBrandCopy(locale);
@@ -48,6 +69,7 @@ export const buildToolSeo = (toolKey: string, locale: Locale): ToolSeoPayload =>
     description,
     path,
     canonical,
+    featureList: buildFeatureList(tool),
   };
 };
 
@@ -61,18 +83,18 @@ export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => 
   });
 };
 
-export const buildToolJsonLd = (toolKey: string, locale: Locale) => {
+export const buildToolJsonLd = (toolKey: string, locale: Locale): WebApplicationSchemaInput => {
   const seo = buildToolSeo(toolKey, locale);
   const toolCopy = seo.tool ? getToolCopy(seo.tool, locale) : null;
 
   return {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
     name: toolCopy?.title ?? seo.title,
     description: seo.description,
     url: seo.canonical ?? new URL(seo.path, SITE_URL).toString(),
     applicationCategory: "EngineeringApplication",
     operatingSystem: "Web",
     inLanguage: locale === "tr" ? "tr-TR" : "en-US",
+    featureList: seo.featureList,
   };
 };
+

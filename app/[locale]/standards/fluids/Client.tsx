@@ -133,7 +133,7 @@ const COPY: Record<Locale, {
       description:
         "Reynolds sayısı, sürtünme katsayısı, Darcy basınç düşümü ve pompa gücü için hafif ve deterministik hesap blokları.",
       eyebrow: STANDARDS_EYEBROW.tr,
-      imageAlt: "Fluids calculations reference",
+      imageAlt: "Akışkan hesaplama referansı",
     },
     props: {
       title: "Tipik akışkan özellikleri (20°C civarı)",
@@ -141,7 +141,7 @@ const COPY: Record<Locale, {
       columns: ["Akışkan", "Yoğunluk (kg/m³)", "Dinamik viskozite (mPa·s)", "Not"],
     },
     mini: {
-      label: "Mini Tool",
+      label: getUiLabel("tr", "miniTool"),
       title: "Reynolds + Darcy + pompa gücü",
       description:
         "Girdi olarak ρ, μ, D, L, ε ve Q veya v kullanılır. Türbülans rejiminde Swamee-Jain yaklaşımı uygulanır.",
@@ -191,12 +191,12 @@ const COPY: Record<Locale, {
       pasLabel: "Pa·s",
     },
     references: {
-      title: "References",
+      title: getUiLabel("tr", "references"),
       items: [
-        "ISO 5167: Flow measurement standards",
-        "Crane TP-410: Flow of Fluids Through Valves, Fittings, and Pipe",
-        "White, Fluid Mechanics (Darcy-Weisbach and friction factor chapters)",
-        "Fox & McDonald, Introduction to Fluid Mechanics",
+        "ISO 5167: Akış ölçümü standartları",
+        "Crane TP-410: Vana, bağlantı ve borularda akışkan akışı",
+        "White, Akışkanlar Mekaniği (Darcy-Weisbach ve sürtünme katsayısı bölümleri)",
+        "Fox & McDonald, Akışkanlar Mekaniğine Giriş",
       ],
     },
   },
@@ -214,7 +214,7 @@ const COPY: Record<Locale, {
       columns: ["Fluid", "Density (kg/m³)", "Dynamic viscosity (mPa·s)", "Note"],
     },
     mini: {
-      label: "Mini Tool",
+      label: getUiLabel("en", "miniTool"),
       title: "Reynolds + Darcy + pump power",
       description:
         "Inputs include ρ, μ, D, L, ε and either Q or v. Swamee-Jain is used in turbulent flow.",
@@ -264,7 +264,7 @@ const COPY: Record<Locale, {
       pasLabel: "Pa·s",
     },
     references: {
-      title: "References",
+      title: getUiLabel("en", "references"),
       items: [
         "ISO 5167: Flow measurement standards",
         "Crane TP-410: Flow of Fluids Through Valves, Fittings, and Pipe",
@@ -391,10 +391,17 @@ export default function FluidsStandardsClient({ locale, heroImage }: { locale: L
 
   useEffect(() => {
     warnIfEnglishLabelsInTurkish("FluidsStandardsClient", locale, {
-      eyebrow: copy.hero.eyebrow,
-      title: copy.hero.title,
+      hero: {
+        eyebrow: copy.hero.eyebrow,
+        title: copy.hero.title,
+      },
+      labels: {
+        miniLabel: copy.mini.label,
+        roughnessTitle: copy.roughness.title,
+        referencesTitle: copy.references.title,
+      },
     });
-  }, [copy.hero.eyebrow, copy.hero.title, locale]);
+  }, [copy.hero.eyebrow, copy.hero.title, copy.mini.label, copy.references.title, copy.roughness.title, locale]);
 
   const handleHelperMpasChange = (value: string) => {
     setHelperMpas(value);
@@ -476,7 +483,7 @@ export default function FluidsStandardsClient({ locale, heroImage }: { locale: L
               value={flowMode}
               onChange={(event) => setFlowMode(event.target.value as FlowMode)}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-            >
+             aria-label="Select field">
               <option value="q">{copy.mini.modeQ}</option>
               <option value="v">{copy.mini.modeV}</option>
             </select>
@@ -626,7 +633,7 @@ function Input({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-      />
+       aria-label="Input field"/>
     </label>
   );
 }

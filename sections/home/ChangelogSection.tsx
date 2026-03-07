@@ -14,6 +14,16 @@ const formatDate = (value: string, locale: Locale) =>
     new Date(value),
   );
 
+const getMarkdownPreview = (markdown: string) =>
+  markdown
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[*_>#-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
 export default function ChangelogSection({ locale, latest }: ChangelogSectionProps) {
   const copy = getMessages(locale).home.changelog;
   const changelogHref = withLocalePrefix("/changelog", locale);
@@ -35,20 +45,8 @@ export default function ChangelogSection({ locale, latest }: ChangelogSectionPro
               <span className="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">v{latest.version}</span>
               <span className="text-slate-400">{formatDate(latest.date, locale)}</span>
             </div>
-            <h3 className="mt-3 text-lg font-semibold text-slate-900">{latest.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">{latest.description}</p>
-            {latest.addedTools.length > 0 ? (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {latest.addedTools.slice(0, 4).map((tool) => (
-                  <span
-                    key={tool}
-                    className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            ) : null}
+            <h3 className="mt-3 text-lg font-semibold text-slate-900">{latest.tool}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">{getMarkdownPreview(latest.description)}</p>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link
                 href={changelogHref}

@@ -33,6 +33,8 @@ export default function Hero({ title, subtitle, imageSrc, imageAlt, priority = t
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 92vw, 50vw"
                 className="object-cover"
                 priority={priority}
+                fetchPriority={priority ? "high" : undefined}
+                loading={priority ? undefined : "lazy"}
                 unoptimized={normalizedImageSrc.toLowerCase().endsWith(".svg")}
               />
             </div>

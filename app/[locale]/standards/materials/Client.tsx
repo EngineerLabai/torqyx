@@ -246,12 +246,12 @@ const COPY: Record<Locale, {
       description:
         "Pratik özellik tablosu ile malzeme adaylarını filtrele, sonra en fazla 3 aday için yan yana karşılaştır.",
       eyebrow: STANDARDS_EYEBROW.tr,
-      imageAlt: "Materials engineering comparison",
+      imageAlt: "Malzeme mühendisliği karşılaştırması",
     },
     intro:
       "Değerler tipik aralıktır (oda sıcaklığı). Isıl işlem, üretici standardı ve ürün formuna göre değişebilir.",
     mini: {
-      label: "Mini Tool",
+      label: getUiLabel("tr", "miniTool"),
       title: "Arama + karşılaştırma",
       description: "Tablodan en fazla 3 malzeme seçerek ana özellikleri satır bazında kıyaslayın.",
       searchLabel: "Malzeme ara",
@@ -292,7 +292,7 @@ const COPY: Record<Locale, {
       empty: "Karşılaştırma için en az 1 malzeme seçin.",
     },
     references: {
-      title: "References",
+      title: getUiLabel("tr", "references"),
       items: [
         "EN 10025: Structural steels",
         "EN 1561 / EN 1563: Cast iron grades (EN-GJL / EN-GJS)",
@@ -313,7 +313,7 @@ const COPY: Record<Locale, {
     intro:
       "Values are typical ranges at room temperature. Heat treatment, supplier standard, and product form can shift results.",
     mini: {
-      label: "Mini Tool",
+      label: getUiLabel("en", "miniTool"),
       title: "Search + compare",
       description: "Select up to 3 materials from the table and compare key properties row by row.",
       searchLabel: "Search materials",
@@ -354,7 +354,7 @@ const COPY: Record<Locale, {
       empty: "Select at least 1 material for comparison.",
     },
     references: {
-      title: "References",
+      title: getUiLabel("en", "references"),
       items: [
         "EN 10025: Structural steels",
         "EN 1561 / EN 1563: Cast iron grades (EN-GJL / EN-GJS)",
@@ -380,10 +380,17 @@ export default function MaterialsStandardsClient({ locale, heroImage }: { locale
 
   useEffect(() => {
     warnIfEnglishLabelsInTurkish("MaterialsStandardsClient", locale, {
-      eyebrow: copy.hero.eyebrow,
-      title: copy.hero.title,
+      hero: {
+        eyebrow: copy.hero.eyebrow,
+        title: copy.hero.title,
+      },
+      labels: {
+        miniLabel: copy.mini.label,
+        tableTitle: copy.table.title,
+        referencesTitle: copy.references.title,
+      },
     });
-  }, [copy.hero.eyebrow, copy.hero.title, locale]);
+  }, [copy.hero.eyebrow, copy.hero.title, copy.mini.label, copy.references.title, copy.table.title, locale]);
 
   const normalizedQuery = query.trim().toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US");
 
@@ -463,7 +470,7 @@ export default function MaterialsStandardsClient({ locale, heroImage }: { locale
               onChange={(event) => setQuery(event.target.value)}
               placeholder={copy.mini.searchPlaceholder}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-            />
+             aria-label={copy.mini.searchPlaceholder}/>
           </label>
           <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-700">
             <p>

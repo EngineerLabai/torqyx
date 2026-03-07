@@ -4,7 +4,9 @@
 import { useState, useCallback, useRef } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ReportActions from "@/components/report/ReportActions";
+import { QualityToolStatusBadge } from "@/components/quality-tools/QualityToolStatusBadge";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { getQualityToolById } from "@/data/quality-tools/registry";
 import { assertNoTurkish } from "@/utils/i18n-assert";
 import { pokaYokeCopy } from "@/data/quality-tools/poka-yoke";
 import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
@@ -112,6 +114,7 @@ function createActionRow(): ActionRow {
 export default function PokaYokePage() {
   const { locale } = useLocale();
   const copy = pokaYokeCopy[locale];
+  const toolStatus = getQualityToolById("poka-yoke", locale)?.status ?? "beta";
   const actionsCopy = qualityReportActionsCopy[locale];
   assertNoTurkish(locale, copy, "quality-tools/poka-yoke");
 
@@ -207,9 +210,7 @@ export default function PokaYokePage() {
           <span className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-medium text-indigo-700">
             {copy.badges.subtitle}
           </span>
-          <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-medium text-emerald-700">
-            {copy.badges.beta}
-          </span>
+          <QualityToolStatusBadge locale={locale} status={toolStatus} className="px-3 py-1 text-[10px] font-medium" />
         </div>
         <h1 className="text-lg font-semibold text-slate-900">{copy.title}</h1>
         <p className="mt-2 text-xs text-slate-600">{copy.description}</p>
@@ -394,21 +395,21 @@ export default function PokaYokePage() {
                 onChange={(event) => handleActionChange(row.id, "task", event.target.value)}
                 placeholder={copy.actions.placeholders.task}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label={copy.actions.placeholders.task}/>
               <input
                 type="text"
                 value={row.owner}
                 onChange={(event) => handleActionChange(row.id, "owner", event.target.value)}
                 placeholder={copy.actions.placeholders.owner}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label={copy.actions.placeholders.owner}/>
               <input
                 type="text"
                 value={row.due}
                 onChange={(event) => handleActionChange(row.id, "due", event.target.value)}
                 placeholder={copy.actions.placeholders.due}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-              />
+               aria-label={copy.actions.placeholders.due}/>
               <div className="flex items-center gap-2">
                 <select
                   value={row.status}
@@ -416,7 +417,7 @@ export default function PokaYokePage() {
                     handleActionChange(row.id, "status", event.target.value as StatusOption)
                   }
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                >
+                 aria-label="Select field">
                   {STATUS_OPTIONS.map((option) => (
                     <option key={option} value={option}>
                       {copy.status[option]}
@@ -470,7 +471,7 @@ function Field({
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
         placeholder={placeholder}
-      />
+       aria-label={placeholder}/>
     </label>
   );
 }
@@ -497,7 +498,7 @@ function TextArea({
         rows={rows}
         placeholder={placeholder}
         className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs outline-none transition focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      />
+       aria-label={placeholder}/>
     </label>
   );
 }
@@ -520,7 +521,7 @@ function SelectField({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      >
+       aria-label="Select field">
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

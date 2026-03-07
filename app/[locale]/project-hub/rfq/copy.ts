@@ -65,7 +65,7 @@ export const RFQ_COPY: Record<Locale, {
       description:
         "Müşteri RFQ ve teknik şartnameleri için sahip, teslim tarihi ve öncelik odaklı takip.",
       eyebrow: getUiLabel("tr", "projectHub"),
-      imageAlt: "RFQ tracker",
+      imageAlt: "RFQ takip paneli",
     },
     formTitle: "Yeni RFQ satırı",
     formSubtitle: "Müşteri, parça ve teklif detaylarını tek satırda topla.",

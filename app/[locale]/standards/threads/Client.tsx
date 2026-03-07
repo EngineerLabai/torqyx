@@ -128,19 +128,19 @@ const COPY: Record<Locale, {
     hero: {
       title: "Metrik dişler: pratik standart özeti",
       description:
-        "Coarse/fine seçim notları, hızlı tap drill hesabı ve montajda işe yarayan kısa tablolar.",
+        "Kaba/ince hatve seçim notları, hızlı kılavuz delik hesabı ve montajda işe yarayan kısa tablolar.",
       eyebrow: STANDARDS_EYEBROW.tr,
-      imageAlt: "Metric threads engineering reference",
+      imageAlt: "Metrik diş mühendislik referansı",
     },
     overview: {
-      coarseTitle: "Coarse (standart hatve)",
+      coarseTitle: "Kaba (standart hatve)",
       coarseBody: "Genel montaj için varsayılan seçenektir, üretimde daha toleranslıdır.",
       coarseBullets: [
         "Hatve yazılmamışsa (ör. M10) coarse kabul edilir.",
         "Saha montajında kir ve hasara karşı daha dayanıklıdır.",
         "Titreşimli uygulamalarda kilitleme elemanı ile kullanılmalıdır.",
       ],
-      fineTitle: "Fine (ince hatve)",
+      fineTitle: "İnce (küçük hatve)",
       fineBody: "Aynı çapta daha fazla diş adımı sağlar ve hassas ayara uygundur.",
       fineBullets: [
         "İnce cidarlı parçalarda daha kontrollü sıkma sağlar.",
@@ -151,17 +151,17 @@ const COPY: Record<Locale, {
     pitch: {
       title: "Yaygın hatve tablosu",
       description: "M3-M24 arası pratik coarse/fine hatve görünümü.",
-      columns: ["Ölçü", "Coarse P (mm)", "Fine P (mm)"],
+      columns: ["Ölçü", "Kaba P (mm)", "İnce P (mm)"],
     },
     mini: {
-      label: "Mini Tool",
+      label: getUiLabel("tr", "miniTool"),
       title: "Tap drill hesaplayıcı",
       description:
         "Yaklaşık delik çapı: D - P x factor. Factor değeri, seçilen diş doluluk yüzdesine göre ayarlanır.",
       sizeLabel: "Nominal metrik ölçü",
       seriesLabel: "Hatve serisi",
-      coarse: "Coarse",
-      fine: "Fine",
+      coarse: "Kaba",
+      fine: "İnce",
       pitchLabel: "Hatve P (mm)",
       engagementLabel: "Diş doluluğu (%)",
       drillLabel: "Önerilen delik çapı",
@@ -176,12 +176,12 @@ const COPY: Record<Locale, {
       formulaNote: "Sert malzemede genellikle +0.10 / +0.20 mm ile başlamak takım yükünü azaltır.",
     },
     clearance: {
-      title: "Clearance hole hızlı tablosu",
+      title: "Boşluk deliği hızlı tablosu",
       description: "Yakın / normal / gevşek delik çapları (tipik değerler).",
       columns: ["Ölçü", "Close", "Normal", "Loose"],
     },
     engagement: {
-      title: "Thread engagement uzunluğu (kural tabanlı)",
+      title: "Diş kavrama uzunluğu (kural tabanlı)",
       description: "İlk tasarım turu için tipik yaklaşım. Kritik yükte standart ve test doğrulaması gerekir.",
       columns: ["Malzeme", "Öneri", "Not"],
     },
@@ -194,12 +194,12 @@ const COPY: Record<Locale, {
       ],
     },
     references: {
-      title: "References",
+      title: getUiLabel("tr", "references"),
       items: [
-        "ISO 68-1: Basic profile for ISO metric screw threads",
-        "ISO 261: ISO general purpose metric screw threads - General plan",
-        "ISO 965-1: Tolerances for metric screw threads",
-        "Machinery's Handbook, latest edition (threading chapters)",
+        "ISO 68-1: ISO metrik vida dişleri için temel profil",
+        "ISO 261: ISO genel amaçlı metrik vida dişleri - genel plan",
+        "ISO 965-1: Metrik vida dişleri için toleranslar",
+        "Machinery's Handbook, güncel baskı (diş açma bölümleri)",
       ],
     },
   },
@@ -233,7 +233,7 @@ const COPY: Record<Locale, {
       columns: ["Size", "Coarse P (mm)", "Fine P (mm)"],
     },
     mini: {
-      label: "Mini Tool",
+      label: getUiLabel("en", "miniTool"),
       title: "Tap drill calculator",
       description:
         "Approximate drill diameter: D - P x factor. The factor is adjusted by selected thread engagement.",
@@ -273,7 +273,7 @@ const COPY: Record<Locale, {
       ],
     },
     references: {
-      title: "References",
+      title: getUiLabel("en", "references"),
       items: [
         "ISO 68-1: Basic profile for ISO metric screw threads",
         "ISO 261: ISO general purpose metric screw threads - General plan",
@@ -347,10 +347,30 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
 
   useEffect(() => {
     warnIfEnglishLabelsInTurkish("ThreadsStandardsClient", locale, {
-      eyebrow: copy.hero.eyebrow,
-      title: copy.hero.title,
+      hero: {
+        eyebrow: copy.hero.eyebrow,
+        title: copy.hero.title,
+      },
+      labels: {
+        miniLabel: copy.mini.label,
+        coarseLabel: copy.mini.coarse,
+        fineLabel: copy.mini.fine,
+        clearanceTitle: copy.clearance.title,
+        engagementTitle: copy.engagement.title,
+        referencesTitle: copy.references.title,
+      },
     });
-  }, [copy.hero.eyebrow, copy.hero.title, locale]);
+  }, [
+    copy.clearance.title,
+    copy.engagement.title,
+    copy.hero.eyebrow,
+    copy.hero.title,
+    copy.mini.coarse,
+    copy.mini.fine,
+    copy.mini.label,
+    copy.references.title,
+    locale,
+  ]);
 
   const handleSizeChange = (nextSize: string) => {
     const nextSpec = THREAD_SPECS.find((row) => row.label === nextSize) ?? fallbackSpec;
@@ -461,7 +481,7 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
               value={size}
               onChange={(event) => handleSizeChange(event.target.value)}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-            >
+             aria-label="Select field">
               {THREAD_SPECS.map((row) => (
                 <option key={row.label} value={row.label}>
                   {row.label}
@@ -476,7 +496,7 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
               value={series}
               onChange={(event) => handleSeriesChange(event.target.value as ThreadSeries)}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-            >
+             aria-label="Select field">
               <option value="coarse">{copy.mini.coarse}</option>
               <option value="fine">{copy.mini.fine}</option>
             </select>
@@ -488,7 +508,7 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
               value={pitch}
               onChange={(event) => setPitch(Number(event.target.value))}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-            >
+             aria-label="Select field">
               {availablePitches.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -511,7 +531,7 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
                 setEngagementPercent(Math.min(80, Math.max(50, next)));
               }}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-            />
+             aria-label="Number input"/>
           </label>
         </div>
 

@@ -1,8 +1,13 @@
 ﻿// app/layout.tsx
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 import type { ReactNode } from "react";
 import { Inter, JetBrains_Mono, Sora } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
+import UpgradeFunnelAbandonmentTracker from "@/components/analytics/UpgradeFunnelAbandonmentTracker";
+import UpgradeSuccessTracker from "@/components/analytics/UpgradeSuccessTracker";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import SiteShell, { type SiteShellMessages } from "@/components/layout/SiteShell";
 import GlobalErrorMonitor from "@/components/monitoring/GlobalErrorMonitor";
@@ -39,9 +44,18 @@ const jetBrainsMono = JetBrains_Mono({
   weight: ["400", "600", "700"],
 });
 
-export async function generateMetadata() {
+const isVercelAppHost = (host: string) => {
+  const normalized = host.toLowerCase().trim().replace(/:\d+$/, "");
+  return normalized === "vercel.app" || normalized.endsWith(".vercel.app");
+};
+
+export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
+  const requestHeaders = await headers();
+  const requestHost = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "";
+  const hasVercelEnvUrl = isVercelAppHost(process.env.VERCEL_URL ?? "");
+  const shouldNoIndex = isVercelAppHost(requestHost) || (!requestHost && hasVercelEnvUrl);
 
   const base = buildPageMetadata({
     title: brandContent.siteName,
@@ -56,6 +70,14 @@ export async function generateMetadata() {
   return {
     metadataBase: new URL(SITE_URL),
     ...base,
+    ...(shouldNoIndex
+      ? {
+          robots: {
+            index: false,
+            follow: false,
+          },
+        }
+      : {}),
   };
 }
 
@@ -126,7 +148,10 @@ export default async function RootLayout({
           <AuthProvider>
             <GlobalErrorMonitor />
             <AnalyticsTracker />
+            <UpgradeFunnelAbandonmentTracker />
+            <UpgradeSuccessTracker />
             {process.env.NODE_ENV === "production" ? <WebVitalsReporter /> : null}
+            {process.env.NODE_ENV === "production" ? <SpeedInsights /> : null}
             {process.env.NODE_ENV === "development" ? <ImagePathWarnings knownAssets={knownImageAssets} /> : null}
             <UserStateSync />
             <SiteShell messages={shellMessages}>{children}</SiteShell>

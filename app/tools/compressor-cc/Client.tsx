@@ -242,7 +242,7 @@ export default function CompressorCcPage({ initialDocs }: CompressorCcClientProp
                   value={inputs.acting}
                   onChange={(e) => handleChange("acting", e.target.value as Inputs["acting"])}
                   className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                >
+                 aria-label="Select field">
                   <option value="single">{copy.fields.actingOptions.single}</option>
                   <option value="double">{copy.fields.actingOptions.double}</option>
                 </select>
@@ -317,7 +317,7 @@ function Field({
         step={step}
         inputMode={inputMode}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-      />
+       aria-label="Number input"/>
       {helper && <span className="text-[10px] text-slate-500">{helper}</span>}
     </label>
   );

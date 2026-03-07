@@ -1,0 +1,52 @@
+﻿## Calculation Explanation
+
+**Purpose**
+Quickly estimate shaft torque from the relationship between power, speed, and mechanical efficiency.
+
+<Formula label="Core relations">
+T = 9550 * P / n
+P = T * n / 9550
+hp = kW * 1.34102
+T_eff = T * (η / 100)
+</Formula>
+
+**Assumptions**
+- The calculation assumes steady-state operation at constant speed.
+- Mechanical losses are represented by a single efficiency factor (η).
+- Transients, startup behavior, and shock loading are excluded.
+
+**Units**
+- P: kW
+- n: rpm
+- T, T_eff: N·m
+- η: %
+
+**Reference**
+- DIN 70020
+- ISO 3046
+
+## Examples
+
+### Example 1: Torque for a 5.5 kW motor
+
+**Inputs**
+- Power: 5.5 kW
+- Speed: 1500 rpm
+- Mechanical efficiency: 95%
+
+**Expected outputs**
+- Torque (ideal): 35.02 N·m
+- Torque (efficiency): 33.27 N·m
+- Power: 7.38 hp
+
+### Example 2: 12 kW drive
+
+**Inputs**
+- Power: 12 kW
+- Speed: 1200 rpm
+- Mechanical efficiency: 90%
+
+**Expected outputs**
+- Torque (ideal): 95.50 N·m
+- Torque (efficiency): 85.95 N·m
+- Power: 16.09 hp

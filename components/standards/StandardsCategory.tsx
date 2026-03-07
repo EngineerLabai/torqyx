@@ -25,6 +25,7 @@ type StandardsCategoryProps = {
   category: StandardsCategory;
   tables: StandardsTableType[];
   locale: "tr" | "en";
+  virtualized?: boolean;
   copy: {
     searchTitle: string;
     searchDescription: string;
@@ -37,7 +38,13 @@ type StandardsCategoryProps = {
   };
 };
 
-export default function StandardsCategoryView({ category, tables, locale, copy }: StandardsCategoryProps) {
+export default function StandardsCategoryView({
+  category,
+  tables,
+  locale,
+  copy,
+  virtualized = true,
+}: StandardsCategoryProps) {
   const [query, setQuery] = useState("");
   const localeLower = locale === "tr" ? "tr-TR" : "en-US";
   const normalizedQuery = query.trim().toLocaleLowerCase(localeLower);
@@ -81,7 +88,7 @@ export default function StandardsCategoryView({ category, tables, locale, copy }
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={copy.searchPlaceholder}
                 className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
-              />
+               aria-label={copy.searchPlaceholder}/>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -107,6 +114,7 @@ export default function StandardsCategoryView({ category, tables, locale, copy }
           locale={locale}
           exportLabel={copy.exportCta}
           emptyLabel={copy.emptyState}
+          virtualized={virtualized}
         />
       ))}
 
