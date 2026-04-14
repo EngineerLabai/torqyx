@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: copy.description,
     path: "/projects",
     locale,
+    useLocalizedCanonical: true,
   });
 }
 
@@ -47,3 +48,4 @@ export default async function ProjectsPage({ params }: PageProps) {
     </PageShell>
   );
 }
+

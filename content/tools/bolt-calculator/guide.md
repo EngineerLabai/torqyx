@@ -22,17 +22,17 @@ Bu hesap, baglanti guvenligini hizli ve tekrarlanabilir sekilde kontrol etmek ic
 
 ## Formul Aciklamasi
 
-Adim 1: Dis adimi ve nominal cap ile gerilme alani `As` hesaplanir.
+Adım 1: Diş adımı ve nominal çap ile gerilme alanı `As` hesaplanır.
 
-Adim 2: Hedef on yuk `F_preload` secilir.
-Pratikte tasarim amacina gore akma dayaniminin belirli bir yuzdesi kullanilir.
+Adım 2: Hedef ön yük `F_preload` seçilir.
+Pratikte tasarım amacına göre akma dayanımının belirli bir yüzdesi kullanılır.
 
-Adim 3: Sikma torku yaklasik olarak bulunur:
+Adım 3: Sıkma torku yaklaşık olarak bulunur:
 
 `T = K * F_preload * d`
 
-- `T`: sikma torku (N.m)
-- `K`: surtunme/oturma etkisini kapsayan katsayi
+- `T`: sıkma torku (N.m)
+- `K`: sürtünme/oturma etkisini kapsayan katsayı
 - `F_preload`: on yuk (N)
 - `d`: nominal cap (m)
 
@@ -71,7 +71,7 @@ Bu deger saha kosullarinda anahtar hassasiyeti ve yaglama durumuna gore dogrulan
 
 ## Ilgili Standart Referansi (ISO/DIN/VDI)
 
-- ISO 898-1: Carbon/alloy steel fastener mekanik ozellikleri
+- ISO 898-1: Carbon/alloy steel fastener mekanik özellikleri
 - ISO 68-1: Metrik dis temel geometrisi
 - VDI 2230: Civata baglantilarinin sistematik hesap yontemi
 

@@ -46,6 +46,10 @@ export default async function PrivacyPolicyPage() {
 
         <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
           <section className="space-y-2">
+      <h1 className="text-3xl font-bold tracking-tight">
+        Privacy Policy
+      </h1>
+
             <h2 className="text-lg font-semibold text-slate-900">1. Information we collect</h2>
             <ul className="list-disc space-y-1 pl-5">
               <li>Name, email, and message content shared through the contact form.</li>

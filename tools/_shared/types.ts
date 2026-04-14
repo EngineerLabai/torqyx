@@ -7,6 +7,26 @@ export type ToolReference = {
   note?: string;
 };
 
+export type CalculationStepVariable = {
+  key: string;
+  label: string;
+  value: string | number;
+  unit?: string;
+};
+
+export type CalculationStepStatus = "pass" | "warning" | "fail" | "info";
+
+export type CalculationStep = {
+  id: string;
+  name: string;
+  formula: string;
+  variables: CalculationStepVariable[];
+  result: string | number;
+  unit: string;
+  standard?: string;
+  status: CalculationStepStatus;
+};
+
 export type ToolInputMeta = {
   key: string;
   label: string;

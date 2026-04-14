@@ -11,6 +11,22 @@ export type ToolSummaryRequest = {
   notes?: string[];
 };
 
+export type ExplainConversationMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+export type ExplainResultRequest = {
+  locale: Locale;
+  toolId: string;
+  toolName: string;
+  inputs: Record<string, unknown>;
+  outputs: Record<string, unknown>;
+  auditTrail?: unknown;
+  question?: string;
+  history?: ExplainConversationMessage[];
+};
+
 export type ToolSummaryResponse = {
   summaryMd: string;
   assumptions: string[];
@@ -38,6 +54,24 @@ export const toolSummaryRequestSchema = z.object({
   outputs: z.record(z.string(), z.unknown()),
   units: z.record(z.string(), z.string().max(32)).optional(),
   notes: z.array(z.string().min(1).max(500)).max(24).optional(),
+});
+
+export const explainResultRequestSchema = z.object({
+  locale: z.enum(["tr", "en"]),
+  toolId: z.string().min(1).max(128),
+  toolName: z.string().min(1).max(256),
+  inputs: z.record(z.string(), z.unknown()),
+  outputs: z.record(z.string(), z.unknown()),
+  auditTrail: z.unknown().optional(),
+  question: z.string().min(1).max(1000).optional(),
+  history: z
+    .array(
+      z.object({
+        role: z.enum(["user", "assistant"]),
+        content: z.string().min(1).max(2000),
+      }),
+    )
+    .optional(),
 });
 
 export const toolSummaryResponseSchema = z.object({

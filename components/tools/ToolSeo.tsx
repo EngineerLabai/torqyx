@@ -9,6 +9,6 @@ type ToolSeoProps = {
 
 export default function ToolSeo({ toolId, locale }: ToolSeoProps) {
   const data = buildToolJsonLd(toolId, locale);
-  return <ToolApplicationJsonLd data={data} schemaType="WebApplication" />;
+  return <ToolApplicationJsonLd data={data} schemaType="SoftwareApplication" />;
 }
 

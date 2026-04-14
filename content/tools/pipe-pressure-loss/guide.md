@@ -14,13 +14,13 @@ relatedTools:
   - "torque-power"
 ---
 
-## Problem Tanimi
+## Problem Tanımı
 
-Akiskan tasiyan hatlarda basinc kaybi pompaya, enerji tuketimine ve sistem kapasitesine dogrudan etki eder.
-Hat uzunlugu veya cap secimi yanlis yapilirsa isletme maliyeti artar ve hedef debi saglanamaz.
-Bu hesap, boru tasarimini ilk asamada teknik olarak dogrulamak icin yapilir.
+Akışkan taşıyan hatlarda basınç kaybı pompaya, enerji tüketimine ve sistem kapasitesine doğrudan etki eder.
+Hat uzunluğu veya çap seçimi yanlış yapılırsa işletme maliyeti artar ve hedef debi sağlanamaz.
+Bu hesap, boru tasarımını ilk aşamada teknik olarak doğrulamak için yapılır.
 
-## Formul Aciklamasi
+## Formül Açıklaması
 
 Temel denklem Darcy-Weisbach:
 

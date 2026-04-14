@@ -44,6 +44,10 @@ export default async function GlossaryIndexPage() {
       />
 
       <section className="grid gap-4">
+      <h1 className="text-3xl font-bold tracking-tight">
+        [Manual] Glossary
+      </h1>
+
         {terms.length === 0 ? (
           <div className="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600 shadow-sm">
             {copy.empty}

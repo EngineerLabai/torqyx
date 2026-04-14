@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
@@ -158,7 +158,7 @@ const clampingCopy: Record<"tr" | "en", ClampingCopy> = {
     sections: {
       inputs: "Girdiler",
       results: "Sonuçlar",
-      points: "Clamping Points Tablosu",
+      points: "Sıkıştırma Noktaları Tablosu",
       sequence: "Sıkma Sırası",
       checklist: "Kontrol Listesi",
       notes: "Notlar Tablosu",
@@ -184,7 +184,7 @@ const clampingCopy: Record<"tr" | "en", ClampingCopy> = {
       sequenceStep: "Adım",
       sequenceNotes: "Not",
       noteTopic: "Konu",
-      noteBody: "Not detayı",
+      noteBody: "Not detay",
     },
     table: {
       location: "Kıskaç konumu",
@@ -214,7 +214,7 @@ const clampingCopy: Record<"tr" | "en", ClampingCopy> = {
     checklistLabels: {
       forcePath: "Kıskaç kuvvet yolu (kıskaç -> parça -> dayama) net",
       stopperPin: "Yanal yük için stopper/pim tanımlı",
-      deformation: "İnce kesit deformasyon riski değerlendirildi",
+      deformation: "Önce kesit deformasyon riski değerlendirilildi",
       accessibility: "Operatör erişimi ve sıkma ergonomisi uygun",
       torqueControl: "Tork yöntemi (Nm / turn-count) tanımlı",
       safetyDirection: "İşleme yönüne ters güvenli kilitleme mevcut",
@@ -228,7 +228,7 @@ const clampingCopy: Record<"tr" | "en", ClampingCopy> = {
       "Temel sürtünme denklemi: Freq = (F_lat x SF) / μ.",
       "Düşük μ durumlarında mekanik dayama, sürtünmeye göre daha güvenlidir.",
       "Kuvvet yolunu kısa ve rijit tutmak tekrarlanabilirliği artırır.",
-      "İnce duvar bölgelerinde yayılı baskı pabuçları kullanın.",
+      "Önce duvar bölgelerinde yayılı baskı pabuçları kullanın.",
     ],
     disclaimer: "Tipik rehberdir, standartlar ve sorumlu mühendis doğrulaması gerekir.",
   },
@@ -579,18 +579,18 @@ export default function ClampingPage() {
         id: createId(),
         order: "1",
         step: locale === "tr" ? "Birincil datum dayamaya oturt" : "Seat part against primary datum",
-        notes: locale === "tr" ? "Pim teması görsel doğrulansın" : "Visually confirm pin contact",
+        notes: locale === "tr" ? "Pim temasını görsel olarak doğrula" : "Visually confirm pin contact",
       },
       {
         id: createId(),
         order: "2",
-        step: locale === "tr" ? "Ön sağ kıskaçı sık" : "Tighten front-right clamp",
+        step: locale === "tr" ? "Ön sağ kıskaç sık" : "Tighten front-right clamp",
         notes: locale === "tr" ? "Ön yükleme 25 Nm" : "Preload 25 Nm",
       },
       {
         id: createId(),
         order: "3",
-        step: locale === "tr" ? "Arka sol kıskaçı sık" : "Tighten rear-left clamp",
+        step: locale === "tr" ? "Arka sol kıskaç sık" : "Tighten rear-left clamp",
         notes: locale === "tr" ? "Nihai tork 40 Nm" : "Final torque 40 Nm",
       },
     ]);

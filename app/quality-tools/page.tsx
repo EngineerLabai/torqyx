@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Hero from "@/components/Hero";
 import { QualityToolStatusBadge } from "@/components/quality-tools/QualityToolStatusBadge";
 import PageShell from "@/components/layout/PageShell";
@@ -35,12 +35,20 @@ export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.qualityTools;
   const brandContent = getBrandCopy(locale);
+  const title = locale === "tr" ? "Kalite ve Doğrulama Süreci" : copy.badge;
+  const description =
+    locale === "tr"
+      ? "Hesaplayıcılarımız nasıl doğrulanır? Standart referanslar, test süreçleri ve kalite güvencesi hakkında bilgi al."
+      : copy.description;
 
   return buildPageMetadata({
-    title: `${copy.badge} | ${brandContent.siteName}`,
-    description: copy.description,
+    title,
+    description,
     path: "/quality-tools",
     locale,
+    openGraph: {
+      siteName: brandContent.siteName,
+    },
   });
 }
 
@@ -73,6 +81,10 @@ export default async function QualityToolsPage({ searchParams }: QualityToolsPag
       <Hero title={copy.title} subtitle={copy.description} imageSrc={heroImage} imageAlt={copy.imageAlt} />
 
       <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h1 className="text-3xl font-bold tracking-tight">
+        Quality Tools
+      </h1>
+
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
             <span className="font-semibold">{copy.badge}</span>

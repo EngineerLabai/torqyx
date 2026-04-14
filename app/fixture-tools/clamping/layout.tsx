@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = locale === "tr" ? "Sikistirma Planlama Araci" : "Clamping Planning Tool";
   const description =
     locale === "tr"
-      ? "Sikistirma kuvveti, reaksiyon noktasi ve proses sirasi planlamasi icin muhendislik hesaplayicilari odakli teknik clamping sayfasidir."
+      ? "Sıkıştırma kuvveti, reaksiyon noktası ve proses sırası planlaması için mühendislik hesaplayıcıları odaklı teknik clamping sayfasıdır."
       : "Technical clamping planning page for engineering calculators, covering clamp force, reaction points, and process sequence design.";
 
   return buildPageMetadata({

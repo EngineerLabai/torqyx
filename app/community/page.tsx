@@ -22,3 +22,5 @@ export default async function CommunityRedirect() {
   const locale = await getLocaleFromCookies();
   redirect(withLocalePrefix("/faq", locale));
 }
+
+

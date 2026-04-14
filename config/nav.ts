@@ -58,6 +58,11 @@ export const navConfig = {
           route: "reference",
         },
         {
+          id: "blog",
+          labelKey: "linkBlog",
+          route: "blog",
+        },
+        {
           id: "fixture-tools",
           labelKey: "linkFixtureTools",
           route: "fixtureTools",
@@ -122,6 +127,11 @@ export const navConfig = {
           id: "home",
           labelKey: "linkHome",
           route: "home",
+        },
+        {
+          id: "blog",
+          labelKey: "linkBlog",
+          route: "blog",
         },
         {
           id: "about",

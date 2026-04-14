@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Arama motoru botlarına özel izinler
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot  
+Allow: /
+
+# Engellenmesi gerekenler (varsa)
+Disallow: /api/
+Disallow: /_next/
+
+Sitemap: https://aiengineerslab.vercel.app/sitemap.xml

@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = locale === "tr" ? "Parca Revizyon Takip Paneli" : "Part Revision Tracking Panel";
   const description =
     locale === "tr"
-      ? "Parca revizyonlari, PPAP durumu ve SOP asamalarini izlemek icin proje muhendisleri tarafindan kullanilan teknik takip panelidir."
+      ? "Parca revizyonlari, PPAP durumu ve SOP asamalarini izlemek icin proje mühendisleri tarafindan kullanilan teknik takip panelidir."
       : "Part tracking panel for project engineers to monitor revision status, PPAP progress, and SOP stage transitions with clear visibility.";
 
   return buildPageMetadata({

@@ -76,18 +76,18 @@ Notes:
 - Do not use `NEXT_PUBLIC_` prefix for these keys.
 - The summary endpoint is policy-limited to deterministic result summarization (no calculations).
 
-## Yeni icerik nasil eklenir?
+## Yeni içerik nasıl eklenir?
 
-1) `content/_templates` altindan uygun MDX sablonunu kopyala.
-2) Dosyayi ilgili klasore koy:
+1) `content/_templates` altından uygun MDX şablonunu kopyala.
+2) Dosyayı ilgili klasöre koy:
    - Blog: `content/blog/`
    - Guide: `content/guides/`
    - Glossary: `content/glossary/`
-3) Frontmatter alanlarini doldur (zorunlu: title, description, date, tags, category, draft).
-4) `draft: true` ile basla; hazir olunca `draft: false` yap.
-5) Guides icin zorunlu bolumleri koru: Problem / Amac, Varsayimlar, Adim adim yontem, Sik hatalar, Ilgili hesaplayicilar.
-6) Birimler ve varsayimlar icin `content/_templates/writing-standard.md` dokumanini uygula.
-7) Slug otomatik uretilir (title alanindan). Canonical opsiyoneldir.
+3) Frontmatter alanlarını doldur (zorunlu: title, description, date, tags, category, draft).
+4) `draft: true` ile başla; hazır olunca `draft: false` yap.
+5) Guides için zorunlu bölümleri koru: Problem / Amaç, Varsayımlar, Adım adım yöntem, Sık hatalar, İlgili hesaplayıcılar.
+6) Birimler ve varsayımlar için `content/_templates/writing-standard.md` dokümanını uygula.
+7) Slug otomatik üretilir (title alanından). Canonical opsiyonel.
 
 ## Learn More
 

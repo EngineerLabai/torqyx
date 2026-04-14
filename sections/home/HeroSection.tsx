@@ -1,4 +1,4 @@
-import { ShieldCheck, Users } from "lucide-react";
+import { ShieldCheck, Star, Users } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import AuthModalTrigger from "@/components/auth/AuthModalTrigger";
 import { getBrandCopy } from "@/config/brand";
@@ -12,8 +12,10 @@ type HeroSectionProps = {
 
 export default function HeroSection({ locale }: HeroSectionProps) {
   const brandContent = getBrandCopy(locale);
-  const copy = getMessages(locale).home.hero;
+  const messages = getMessages(locale);
+  const copy = messages.home.hero;
   const heroImage = getHeroImageSrc("home");
+
   return (
     <section id="home" className="w-full pb-10 pt-14 md:pt-20">
       <div className="site-container">
@@ -40,18 +42,28 @@ export default function HeroSection({ locale }: HeroSectionProps) {
               </a>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 text-xs">
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 font-semibold text-emerald-700">
-                <Users size={14} />
-                {copy.socialProof}
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 font-semibold text-slate-700">
-                <ShieldCheck size={14} className="text-emerald-600" />
-                {copy.trustBadge}
-              </span>
-            </div>
+            <div className="mt-4 flex flex-wrap items-center gap-4 md:gap-6">
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Users size={16} className="text-gray-500" />
+                <span>
+                  <strong className="text-gray-900">{copy.stats.engineersCount}</strong> {copy.stats.engineersLabel}
+                </span>
+              </div>
 
-            {copy.supportNote ? <p className="text-xs text-slate-500">{copy.supportNote}</p> : null}
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <ShieldCheck size={16} className="text-gray-500" />
+                <span>
+                  {copy.stats.verifiedPrefix} <strong className="text-gray-900">{copy.stats.verifiedStrong}</strong>
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Star size={16} className="text-gray-500" />
+                <span>
+                  {copy.stats.cardPrefix} <strong className="text-gray-900">{copy.stats.cardStrong}</strong>
+                </span>
+              </div>
+            </div>
           </div>
         </PageHero>
       </div>

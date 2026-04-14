@@ -34,6 +34,79 @@ export const DEFAULT_INPUT: BoltInput = {
   friction: "dry",
 };
 
+function getStepStatusForSafety(safety: number | null): "pass" | "warning" | "fail" | "info" {
+  if (safety === null) return "info";
+  if (safety >= 1.2) return "pass";
+  if (safety >= 1.0) return "warning";
+  return "fail";
+}
+
+function buildBoltAuditTrail(
+  input: BoltInput,
+  As: number,
+  Fv_N: number,
+  T_Nm: number,
+  sigma: number,
+  safety: number,
+  Re: number,
+) {
+  return [
+    {
+      id: "as",
+      name: "Etkin Kesit Alanı As",
+      formula: "A_s = \frac{\pi}{4} \times (d - 0.9382 \times P)^2",
+      variables: [
+        { key: "d", label: "Nominal çap d", value: input.d, unit: "mm" },
+        { key: "P", label: "Diş adımı P", value: input.P, unit: "mm" },
+      ],
+      result: As.toFixed(2),
+      unit: "mm²",
+      standard: "ISO 898-1",
+      status: "pass",
+    },
+    {
+      id: "fv",
+      name: "Ön Yük Kuvveti F_v",
+      formula: "F_v = \frac{\mathrm{preload}}{100} \times R_e \times A_s",
+      variables: [
+        { key: "preloadPercent", label: "Ön yük %Re", value: input.preloadPercent, unit: "%" },
+        { key: "Re", label: "Akma dayanımı R_e", value: Re, unit: "MPa" },
+        { key: "A_s", label: "Kesit alanı A_s", value: As.toFixed(2), unit: "mm²" },
+      ],
+      result: (Fv_N / 1000).toFixed(2),
+      unit: "kN",
+      standard: "ISO 898-1",
+      status: "pass",
+    },
+    {
+      id: "sigma",
+      name: "Gerilme σ",
+      formula: "\sigma = \frac{F_v}{A_s}",
+      variables: [
+        { key: "Fv", label: "Ön yük F_v", value: (Fv_N / 1000).toFixed(2), unit: "kN" },
+        { key: "As", label: "Kesit alanı A_s", value: As.toFixed(2), unit: "mm²" },
+      ],
+      result: sigma.toFixed(1),
+      unit: "MPa",
+      standard: "ISO 898-1",
+      status: getStepStatusForSafety(safety),
+    },
+    {
+      id: "safety",
+      name: "Güvenlik Katsayısı S",
+      formula: "S = \frac{R_e}{\sigma}",
+      variables: [
+        { key: "Re", label: "Akma dayanımı R_e", value: Re, unit: "MPa" },
+        { key: "sigma", label: "Gerilme σ", value: sigma.toFixed(1), unit: "MPa" },
+      ],
+      result: safety.toFixed(2),
+      unit: "-",
+      standard: "VDI 2230",
+      status: getStepStatusForSafety(safety),
+    },
+  ];
+}
+
 export function calculateBolt(input: BoltInput): BoltResult {
   const d = Number(input.d);
   const P = Number(input.P);
@@ -77,5 +150,6 @@ export function calculateBolt(input: BoltInput): BoltResult {
     torque: T_Nm,
     sigma,
     safety,
+    auditTrail: () => buildBoltAuditTrail(input, As, Fv_N, T_Nm, sigma, safety, Re),
   };
 }

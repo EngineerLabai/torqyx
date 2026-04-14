@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = locale === "tr" ? "5 Neden Kok Neden Analizi" : "5 Why Root Cause Analysis";
   const description =
     locale === "tr"
-      ? "5 Neden metoduyla kok neden analizi yaparak duzeltici aksiyonlari sistematik sekilde planlayan kalite ve muhendislik hesaplayicilari araci."
+      ? "5 Neden metoduyla kök neden analizi yaparak düzeltici aksiyonları sistematik şekilde planlayan kalite ve mühendislik hesaplayıcıları aracı."
       : "Root cause analysis page using the 5 Why method to structure corrective actions in quality and engineering calculators processes.";
 
   return buildPageMetadata({

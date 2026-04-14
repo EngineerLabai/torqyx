@@ -1,5 +1,5 @@
 import type { Locale } from "@/utils/locale";
-import { DEFAULT_OG_IMAGE_META, buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
+import { DEFAULT_OG_IMAGE_META, buildCanonical, buildLanguageAlternates } from "@/utils/seo";
 
 type StaticHeadProps = {
   title: string;
@@ -9,7 +9,7 @@ type StaticHeadProps = {
 };
 
 export default function StaticHead({ title, description, path, locale }: StaticHeadProps) {
-  const canonical = buildLocalizedCanonical(path, locale);
+  const canonical = buildCanonical(path) ?? path;
   const alternates = buildLanguageAlternates(path);
 
   return (

@@ -116,6 +116,7 @@ export async function generateMetadata({ params }: PageProps) {
       description: notFoundCopy.description,
       path: `/materials/${id}`,
       locale,
+      useLocalizedCanonical: true,
     });
   }
 
@@ -129,6 +130,7 @@ export async function generateMetadata({ params }: PageProps) {
     description,
     path: `/materials/${material.id}`,
     locale,
+    useLocalizedCanonical: true,
   });
 }
 

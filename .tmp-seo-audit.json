@@ -1,0 +1,676 @@
+﻿{
+    "summary":  {
+                    "total":  81,
+                    "duplicates":  2,
+                    "badDesc":  0,
+                    "badTitle":  0
+                },
+    "duplicates":  [
+                       {
+                           "title":  "Mühendislik Tablo Merkezi | AI Engineers Lab",
+                           "count":  2,
+                           "routes":  "/reference, /tables"
+                       },
+                       {
+                           "title":  "Cıvata Boyut ve Ön Yük Hesabı | AI Engineers Lab",
+                           "count":  2,
+                           "routes":  "/tools/bolt-calculator, /tools/bolt-size-torque"
+                       }
+                   ],
+    "badDesc":  {
+
+                },
+    "badTitle":  {
+
+                 },
+    "all":  [
+                {
+                    "route":  "/",
+                    "status":  200,
+                    "title":  "Mekanik Mühendislik Hesaplayıcıları",
+                    "titleLen":  35,
+                    "description":  "ISO/DIN/VDI standartlarına dayalı deterministik mühendislik hesaplayıcıları. Tahmin değil standart temelli sonuç. 500+ mühendis kullanıyor. mühendislik",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/blog",
+                    "status":  200,
+                    "title":  "Hesaplama ve analiz odaklı paylaşımlar | AI Engineers Lab",
+                    "titleLen":  57,
+                    "description":  "Manual hesaplama, görsel analiz ve metodik notlar için kısa içerikler. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/cerez-politikasi",
+                    "status":  200,
+                    "title":  "Çerez Politikası | AI Engineers Lab",
+                    "titleLen":  35,
+                    "description":  "Çerez türleri, kullanım amaçları ve tercih yönetimi. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/changelog",
+                    "status":  200,
+                    "title":  "Güncelleme Günlüğü | AI Engineers Lab",
+                    "titleLen":  37,
+                    "description":  "Yeni eklenen araçlar, düzeltmeler ve genel değişiklikler burada listelenir. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/community",
+                    "status":  0,
+                    "title":  "",
+                    "titleLen":  0,
+                    "description":  "",
+                    "descLen":  0
+                },
+                {
+                    "route":  "/dashboard",
+                    "status":  200,
+                    "title":  "Kontrol paneli | AI Engineers Lab",
+                    "titleLen":  33,
+                    "description":  "Favoriler, son kullanılanlar ve özel öneriler tek yerde. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/faq",
+                    "status":  200,
+                    "title":  "Sık Sorulan Sorular | AI Engineers Lab",
+                    "titleLen":  38,
+                    "description":  "AI Engineers Lab hesaplayıcıları hakkında merak edilenler. Hesap motoru nasıl çalışır, sonuçlar güvenilir mi, premium ne sunar? mühendislik",
+                    "descLen":  139
+                },
+                {
+                    "route":  "/fixture-tools",
+                    "status":  200,
+                    "title":  "Konumlama, sıkıştırma ve taban plaka için | AI Engineers Lab",
+                    "titleLen":  60,
+                    "description":  "Fikstür tasarımı için hızlı hesaplar ve kontrol listeleri. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  148
+                },
+                {
+                    "route":  "/fixture-tools/base-plate",
+                    "status":  200,
+                    "title":  "Taban Plaka Boyutlandirma Araci | AI Engineers Lab",
+                    "titleLen":  50,
+                    "description":  "Taban plaka kalinligi, sehim ve agirlik kestirimi icin mühendislik hesaplayicilari ile uyumlu hizli boyutlandirma ve kontrol sayfasi.",
+                    "descLen":  133
+                },
+                {
+                    "route":  "/fixture-tools/clamping",
+                    "status":  200,
+                    "title":  "Sikistirma Planlama Araci | AI Engineers Lab",
+                    "titleLen":  44,
+                    "description":  "Sikistirma kuvveti, reaksiyon noktasi ve proses sirasi planlamasi icin mühendislik hesaplayicilari odakli teknik clamping sayfasidir.",
+                    "descLen":  133
+                },
+                {
+                    "route":  "/fixture-tools/locating",
+                    "status":  200,
+                    "title":  "Referanslama | AI Engineers Lab",
+                    "titleLen":  31,
+                    "description":  "3-2-1 referanslama, pim yerleşimi ve pin planı için detaylı mühendislik kartı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  145
+                },
+                {
+                    "route":  "/forum",
+                    "status":  0,
+                    "title":  "",
+                    "titleLen":  0,
+                    "description":  "",
+                    "descLen":  0
+                },
+                {
+                    "route":  "/gizlilik",
+                    "status":  200,
+                    "title":  "Gizlilik Politikası | AI Engineers Lab",
+                    "titleLen":  38,
+                    "description":  "AI Engineers Lab’in veri işleme, çerez ve reklam teknolojileri yaklaşımı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/glossary",
+                    "status":  200,
+                    "title":  "Sözlük | AI Engineers Lab",
+                    "titleLen":  25,
+                    "description":  "Dişli, tork ve üretim terminolojisindeki kritik kavramlar tek yerde. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  152
+                },
+                {
+                    "route":  "/guides",
+                    "status":  200,
+                    "title":  "Rehberler | AI Engineers Lab",
+                    "titleLen":  28,
+                    "description":  "Malzeme seçimi, kalite kontrolü ve üretim akışları için pratik notlar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/hakkinda",
+                    "status":  200,
+                    "title":  "Hakkında | AI Engineers Lab",
+                    "titleLen":  27,
+                    "description":  "Deterministik mühendislik hesaplayıcıları, standartlar ve raporlama altyapısı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  145
+                },
+                {
+                    "route":  "/health",
+                    "status":  200,
+                    "title":  "Sistem Saglik Durumu | AI Engineers Lab",
+                    "titleLen":  39,
+                    "description":  "Sistem saglik durumu, locale header bilgisi ve render zamani gibi operasyonel metrikleri izlemek icin teknik kontrol ekrani. mühendislik hesaplayicilari.",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/health/performance",
+                    "status":  200,
+                    "title":  "Performans Saglik Kontrolu | AI Engineers Lab",
+                    "titleLen":  45,
+                    "description":  "RUM hedefleri, TTFB, FCP, LCP, INP ve CLS metriklerini rota bazinda izleyerek performans butcelerini dogrulayan teknik panel. mühendislik hesaplayicilari.",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/iletisim",
+                    "status":  200,
+                    "title":  "İletişim | AI Engineers Lab",
+                    "titleLen":  27,
+                    "description":  "AI Engineers Lab ekibiyle iletişime geçin. Teknik destek, öneri ve iş birliği talepleriniz için hızlı geri dönüş alın. mühendislik hesaplayicilari.",
+                    "descLen":  147
+                },
+                {
+                    "route":  "/kullanim-sartlari",
+                    "status":  200,
+                    "title":  "Kullanım Şartları | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "AI Engineers Lab hizmetlerinin kullanımına ilişkin koşullar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/login",
+                    "status":  200,
+                    "title":  "Giriş | AI Engineers Lab",
+                    "titleLen":  24,
+                    "description":  "Google ile giriş yap ve kayıtlı alanları aç. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  149
+                },
+                {
+                    "route":  "/premium",
+                    "status":  200,
+                    "title":  "Premium paket önizleme | AI Engineers Lab",
+                    "titleLen":  41,
+                    "description":  "Ödeme altyapısı henüz açık değil. Bekleme listesi ile yeni özellikleri takip et. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  147
+                },
+                {
+                    "route":  "/pricing",
+                    "status":  200,
+                    "title":  "Planlar ve erişim | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "Araçların erişim durumu nettir. Premium özel beta aşamasında. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/project-hub",
+                    "status":  200,
+                    "title":  "Proje Merkezi | AI Engineers Lab",
+                    "titleLen":  32,
+                    "description":  "Devreye alma, proje takip, RFQ ve revizyon yönetimi için lokal çalışan mühendis panelleri. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/project-hub/devreye-alma",
+                    "status":  200,
+                    "title":  "Devreye Alma Paneli | Proje Merkezi | AI Engineers Lab",
+                    "titleLen":  54,
+                    "description":  "Komisyoning adımları, checklist, loglar ve teslim paketi için lokal çalışan panel. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  149
+                },
+                {
+                    "route":  "/project-hub/part-tracking",
+                    "status":  200,
+                    "title":  "Parça ve Revizyon Takip | Proje Merkezi | AI Engineers Lab",
+                    "titleLen":  58,
+                    "description":  "Parça revizyonları için lokal takip paneli. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  148
+                },
+                {
+                    "route":  "/project-hub/project-tools",
+                    "status":  200,
+                    "title":  "Proje ve İyileştirme Takip | Proje | AI Engineers Lab",
+                    "titleLen":  53,
+                    "description":  "Proje ve iyileştirme kayıtları için lokal takip paneli. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/project-hub/rfq",
+                    "status":  200,
+                    "title":  "RFQ ve Teknik Şartname Özeti | Proje | AI Engineers Lab",
+                    "titleLen":  55,
+                    "description":  "RFQ ve teknik şartname maddeleri için lokal takip paneli. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/qa",
+                    "status":  0,
+                    "title":  "",
+                    "titleLen":  0,
+                    "description":  "",
+                    "descLen":  0
+                },
+                {
+                    "route":  "/quality-tools",
+                    "status":  200,
+                    "title":  "Kalite ve Doğrulama Süreci | AI Engineers Lab",
+                    "titleLen":  45,
+                    "description":  "Hesaplayıcılarımız nasıl doğrulanır? Standart referanslar, test süreçleri ve kalite güvencesi hakkında bilgi alın. mühendislik hesaplayicilari.",
+                    "descLen":  143
+                },
+                {
+                    "route":  "/quality-tools/5n1k",
+                    "status":  200,
+                    "title":  "5N1K Analiz Araci | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "5N1K soru seti ile problemi netlestirip aksiyon planini hizlandiran kalite odakli mühendislik hesaplayicilari destek aracidir.",
+                    "descLen":  126
+                },
+                {
+                    "route":  "/quality-tools/5why",
+                    "status":  200,
+                    "title":  "5 Neden Kok Neden Analizi | AI Engineers Lab",
+                    "titleLen":  44,
+                    "description":  "5 Neden metoduyla kok neden analizi yaparak duzeltici aksiyonlari sistematik sekilde planlayan kalite ve mühendislik hesaplayicilari araci.",
+                    "descLen":  139
+                },
+                {
+                    "route":  "/quality-tools/8d",
+                    "status":  200,
+                    "title":  "8D Problem Cozme Raporu | AI Engineers Lab",
+                    "titleLen":  42,
+                    "description":  "8D adimlarini kullanarak disiplinli problem cozum raporu olusturan, ekip koordinasyonunu ve takip surecini kolaylastiran teknik aractir. mühendislik",
+                    "descLen":  148
+                },
+                {
+                    "route":  "/quality-tools/kaizen",
+                    "status":  200,
+                    "title":  "Kaizen Iyilestirme Takip Araci | AI Engineers Lab",
+                    "titleLen":  49,
+                    "description":  "Kaizen iyilestirme fikirlerini, aksiyon planlarini ve sonuc metriklerini izleyerek surekli gelisimi destekleyen mühendislik hesaplayicilari araci.",
+                    "descLen":  146
+                },
+                {
+                    "route":  "/quality-tools/poka-yoke",
+                    "status":  200,
+                    "title":  "Poka Yoke Hata Onleme Araci | AI Engineers Lab",
+                    "titleLen":  46,
+                    "description":  "Poka yoke prensipleriyle hata onleme fikirlerini degerlendiren, risk ve dogrulama adimlarini kaydeden kalite odakli teknik sayfa. mühendislik",
+                    "descLen":  141
+                },
+                {
+                    "route":  "/reference",
+                    "status":  200,
+                    "title":  "Mühendislik Tablo Merkezi | AI Engineers Lab",
+                    "titleLen":  44,
+                    "description":  "Diş, geçme, sertlik, yüzey, sürtünme ve SI birim tablolarını tek merkezde yönet. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  147
+                },
+                {
+                    "route":  "/request-tool",
+                    "status":  200,
+                    "title":  "Araç iste | AI Engineers Lab",
+                    "titleLen":  28,
+                    "description":  "Problemi ve girdi/çıktı yapısını yazarak yeni aracı hızla tarif edebilirsin. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/saved-calculations",
+                    "status":  200,
+                    "title":  "Kayıtlı Hesaplarım | AI Engineers Lab",
+                    "titleLen":  37,
+                    "description":  "Daha önce kaydettiğin hesapları gör, tekrar aç veya temizle. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/standards",
+                    "status":  200,
+                    "title":  "Mühendislik Standartları Rehberi — | AI Engineers Lab",
+                    "titleLen":  53,
+                    "description":  "Mekanik tasarımda kullanılan ISO, DIN ve VDI standartlarının özeti. Hangi standardı ne zaman kullanacağınızı öğrenin. mühendislik hesaplayicilari.",
+                    "descLen":  146
+                },
+                {
+                    "route":  "/support",
+                    "status":  200,
+                    "title":  "Teknik destek ve yönlendirme | AI Engineers Lab",
+                    "titleLen":  47,
+                    "description":  "Kısa bir talep bırak, ekip hızlıca geri dönsün. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  152
+                },
+                {
+                    "route":  "/tables",
+                    "status":  200,
+                    "title":  "Mühendislik Tablo Merkezi | AI Engineers Lab",
+                    "titleLen":  44,
+                    "description":  "Diş, geçme, sertlik, yüzey, sürtünme ve SI birim tablolarını tek merkezde yönet. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  147
+                },
+                {
+                    "route":  "/tools",
+                    "status":  200,
+                    "title":  "Mühendislik Hesaplayıcıları | AI Engineers Lab",
+                    "titleLen":  46,
+                    "description":  "Cıvata, kuvvet, tork, malzeme ve daha fazlası. Tüm hesaplayıcılar ISO/DIN referanslı, adım adım doğrulanmış sonuçlarla. mühendislik hesaplayicilari.",
+                    "descLen":  148
+                },
+                {
+                    "route":  "/tools/basic-engineering",
+                    "status":  200,
+                    "title":  "Basit Isı Akışı | AI Engineers Lab",
+                    "titleLen":  34,
+                    "description":  "Tek katmanlı iletim için ısı akışını manuel parametrelerle hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/tools/bearing-life",
+                    "status":  200,
+                    "title":  "Rulman Ömrü (L10) | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "C, P, rulman tipi ve devir ile L10 ve L10h hesabı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/tools/belt-length",
+                    "status":  200,
+                    "title":  "Kasnak Kayış Uzunluğu | AI Engineers Lab",
+                    "titleLen":  40,
+                    "description":  "İki kasnak çapı ve merkez mesafesine göre kayış uzunluğunu hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/tools/bending-stress",
+                    "status":  200,
+                    "title":  "Eğilme ve Sehim | AI Engineers Lab",
+                    "titleLen":  34,
+                    "description":  "Basit mesnetli kiriş için eğilme gerilmesi ve maksimum sehim hesabı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  152
+                },
+                {
+                    "route":  "/tools/bolt-calculator",
+                    "status":  200,
+                    "title":  "Cıvata Boyut ve Ön Yük Hesabı | AI Engineers Lab",
+                    "titleLen":  48,
+                    "description":  "Nominal çap, diş adımı ve malzeme sınıfına göre gerilme alanı, ön yük ve torku hesaplar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/tools/bolt-database",
+                    "status":  200,
+                    "title":  "Cıvata Veri Merkezi | AI Engineers Lab",
+                    "titleLen":  38,
+                    "description":  "Metrik ve imperial cıvata ölçülerine hızlı erişim sağla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/tools/bolt-size-torque",
+                    "status":  200,
+                    "title":  "Cıvata Boyut ve Ön Yük Hesabı | AI Engineers Lab",
+                    "titleLen":  48,
+                    "description":  "Nominal çap, diş adımı ve malzeme sınıfına göre gerilme alanı, ön yük ve torku hesaplar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/tools/coating-guide",
+                    "status":  200,
+                    "title":  "Kaplama Rehberi | AI Engineers Lab",
+                    "titleLen":  34,
+                    "description":  "Kaplama türleri ve korozyon koruması için özet bilgi. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/tools/compressor-cc",
+                    "status":  200,
+                    "title":  "Kompresör CC | AI Engineers Lab",
+                    "titleLen":  31,
+                    "description":  "Piston çapı, strok ve rpm ile hacimsel kapasiteyi tahmin et. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/tools/fillet-weld",
+                    "status":  200,
+                    "title":  "Köşe Kaynak Boyutlandırma | AI Engineers Lab",
+                    "titleLen":  44,
+                    "description":  "Yük, kaynak boyu ve izin verilen gerilme ile gerekli a boyunu bul. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/tools/fluids-hvac",
+                    "status":  200,
+                    "title":  "Akışkanlar ve HVAC | AI Engineers Lab",
+                    "titleLen":  37,
+                    "description":  "Reynolds, basınç kaybı ve kanal hızı için hızlı hesaplar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/tools/gear-design",
+                    "status":  200,
+                    "title":  "Disli Tasarim Rehberi | AI Engineers Lab",
+                    "titleLen":  40,
+                    "description":  "Disli tasarimi, disli tipleri, mukavemet ve imalat notlarini bir araya getiren mühendislik hesaplayicilari odakli kapsamli teknik rehber.",
+                    "descLen":  137
+                },
+                {
+                    "route":  "/tools/gear-design/calculators",
+                    "status":  200,
+                    "title":  "Dişli Hesaplayıcılar | AI Engineers Lab",
+                    "titleLen":  39,
+                    "description":  "Dişli oranı, modülü ve temas değerleri için hesaplayıcılar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  149
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/backlash-calculator",
+                    "status":  200,
+                    "title":  "Dişli Backlash | AI Engineers Lab",
+                    "titleLen":  33,
+                    "description":  "Backlash değişimini ve uygun ayar aralığını hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/contact-ratio-calculator",
+                    "status":  200,
+                    "title":  "Dişli Temas Oranı | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "Dişli temas oranını ve güvenli temas sınırını hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  152
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/force-torque-calculator",
+                    "status":  200,
+                    "title":  "Dişli Kuvvet ve Tork | AI Engineers Lab",
+                    "titleLen":  39,
+                    "description":  "Dişli torku ve taşıyıcı kuvvetleri hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  148
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/helix-axial-calculator",
+                    "status":  200,
+                    "title":  "Helis Dişli Aksiyel | AI Engineers Lab",
+                    "titleLen":  38,
+                    "description":  "Helis dişlilerde aksiyel kuvvet ve helis etkisini hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  148
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/module-calculator",
+                    "status":  200,
+                    "title":  "Dişli Modül | AI Engineers Lab",
+                    "titleLen":  30,
+                    "description":  "Dişli modülünü ve temel boyutları hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  147
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/ratio-calculator",
+                    "status":  200,
+                    "title":  "Dişli Oranı | AI Engineers Lab",
+                    "titleLen":  30,
+                    "description":  "Dişli oranını ve çıkış hızını hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  143
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/viscosity-selector",
+                    "status":  200,
+                    "title":  "Dişli Yağ Viskozitesi | AI Engineers Lab",
+                    "titleLen":  40,
+                    "description":  "Dişli yağlama viskozitesi için hızlı seçim aracı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/tools/gear-design/calculators/weight-optimization",
+                    "status":  200,
+                    "title":  "Dişli Ağırlık Optimizasyonu | AI Engineers Lab",
+                    "titleLen":  46,
+                    "description":  "Dişli ağırlığını azaltmak için basit optimizasyon aracı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  154
+                },
+                {
+                    "route":  "/tools/gear-design/simulations",
+                    "status":  200,
+                    "title":  "Disli Simulasyonlari | AI Engineers Lab",
+                    "titleLen":  39,
+                    "description":  "MAAG, FELLOW, azdirma ve taslama sureclerini anlatan disli simulasyonlari ile mühendislik hesaplayicilari icerigini gorsel olarak destekler.",
+                    "descLen":  140
+                },
+                {
+                    "route":  "/tools/heat-energy",
+                    "status":  200,
+                    "title":  "Isı Transferi ve Enerji | AI Engineers Lab",
+                    "titleLen":  42,
+                    "description":  "LMTD, iletim ve enerji tahminleri için temel hesaplar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  152
+                },
+                {
+                    "route":  "/tools/heat-treatment",
+                    "status":  200,
+                    "title":  "Isıl İşlem | AI Engineers Lab",
+                    "titleLen":  29,
+                    "description":  "Isıl işlem adımları ve pratik kalite kontrol notları. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/tools/hydraulic-cylinder",
+                    "status":  200,
+                    "title":  "Hidrolik Silindir Kuvvet \u0026amp; Hız | AI Engineers Lab",
+                    "titleLen":  53,
+                    "description":  "Basınç ve debiden ileri/geri kuvvet ve hızları hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/tools/machine-elements",
+                    "status":  200,
+                    "title":  "Makine Elemanları | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "Rulman ömrü, kamalı mil ve dişli yükleri için hesaplar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/tools/material-cards",
+                    "status":  200,
+                    "title":  "Malzeme Kartları | AI Engineers Lab",
+                    "titleLen":  35,
+                    "description":  "Malzeme özelliklerine hızlı ulaşım için kartlar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/tools/materials-manufacturing",
+                    "status":  200,
+                    "title":  "Malzeme ve İmalat | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "Kesme parametreleri ve toleransları için hızlı karar yardımı. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/tools/param-chart",
+                    "status":  200,
+                    "title":  "Yay Kuvvet Grafiği | AI Engineers Lab",
+                    "titleLen":  37,
+                    "description":  "Yay sabiti ve yer değiştirme ile F-x grafiği üret. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/tools/pipe-pressure-loss",
+                    "status":  200,
+                    "title":  "Boru Basınç Kaybı | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "Darcy–Weisbach ile Re, sürtünme katsayısı ve basınç kaybını hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  152
+                },
+                {
+                    "route":  "/tools/production-project",
+                    "status":  200,
+                    "title":  "Üretim ve Proje | AI Engineers Lab",
+                    "titleLen":  34,
+                    "description":  "Takt, OEE ve proje süreleri için pratik hesaplamalar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  151
+                },
+                {
+                    "route":  "/tools/sanity-check",
+                    "status":  200,
+                    "title":  "Mühendislik Kontrol Laboratuvarı | AI Engineers Lab",
+                    "titleLen":  51,
+                    "description":  "Değişkenleri, birimleri ve formül sonucunu tek ekranda doğrula. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/tools/sanity-check/report",
+                    "status":  200,
+                    "title":  "Sanity Check Raporu | AI Engineers Lab",
+                    "titleLen":  38,
+                    "description":  "Sanity check mühendislik hesaplayicilari raporunu paylasim, dogrulama ve teknik gozden gecirme icin duzenli formatta sunan rapor sayfasi.",
+                    "descLen":  137
+                },
+                {
+                    "route":  "/tools/sealing-guide",
+                    "status":  200,
+                    "title":  "Sızdırmazlık Rehberi | AI Engineers Lab",
+                    "titleLen":  39,
+                    "description":  "Conta ve sızdırmazlık elemanları için pratik referanslar. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/tools/shaft-torsion",
+                    "status":  200,
+                    "title":  "Mil Burulma | AI Engineers Lab",
+                    "titleLen":  30,
+                    "description":  "Tork, çap ve uzunlukla burulma gerilmesi ve dönme açısını hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli",
+                    "descLen":  150
+                },
+                {
+                    "route":  "/tools/simple-stress",
+                    "status":  200,
+                    "title":  "Çekme Gerilmesi | AI Engineers Lab",
+                    "titleLen":  34,
+                    "description":  "Kuvvet ve kesit alanına göre çekme gerilmesini hesapla. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  153
+                },
+                {
+                    "route":  "/tools/strength-statics",
+                    "status":  200,
+                    "title":  "Mukavemet ve Statik | AI Engineers Lab",
+                    "titleLen":  38,
+                    "description":  "Eksenel, kesme ve burkulma için hızlı mukavemet hesapları. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  148
+                },
+                {
+                    "route":  "/tools/torque-power",
+                    "status":  200,
+                    "title":  "Güç - Tork - Devir | AI Engineers Lab",
+                    "titleLen":  37,
+                    "description":  "kW, hp ve rpm ilişkisine göre tork veya güç hesabını yap. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi",
+                    "descLen":  155
+                },
+                {
+                    "route":  "/tools/unit-converter",
+                    "status":  200,
+                    "title":  "Birim Dönüştürücü | AI Engineers Lab",
+                    "titleLen":  36,
+                    "description":  "Uzunluk, kuvvet, basınç ve enerji için hızlı birim dönüşümleri. mühendislik hesaplayicilari. Standartlar, hesap adimlari ve pratik raporlarla hizli karar",
+                    "descLen":  153
+                }
+            ]
+}

@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: seo.description,
     path: "/standards/threads",
     locale,
+    useLocalizedCanonical: true,
   });
 }
 
@@ -40,3 +41,4 @@ export default async function ThreadsStandardsPage({ params }: PageProps) {
   const heroImage = getHeroImageSrc("tools");
   return <Client locale={locale} heroImage={heroImage} />;
 }
+

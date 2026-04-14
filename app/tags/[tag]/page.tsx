@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: TagPageProps) {
   const titleBase = locale === "tr" ? `${label} etiketi` : `${label} tag`;
   const description =
     locale === "tr"
-      ? `${label} etiketi ile iliskili blog, rehber ve hesaplayicilari kesfet.`
+      ? `${label} etiketi ile ilgili blog, rehber ve hesaplayıcıları keşfet.`
       : `Discover blog posts, guides, and calculators tagged with ${label}.`;
   const hasTr = trTags.some((entry) => entry.slug === tagSlug);
   const hasEn = enTags.some((entry) => entry.slug === tagSlug);

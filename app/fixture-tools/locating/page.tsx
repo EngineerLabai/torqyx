@@ -1,4 +1,4 @@
-﻿import { getBrandCopy } from "@/config/brand";
+import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 import LocatingCardClient from "./Client";
@@ -11,7 +11,7 @@ export async function generateMetadata() {
       ? {
           title: "Referanslama",
           description:
-            "3-2-1 referanslama, pim yerleşimi ve pin planı için detaylı mühendislik kartı.",
+            "3-2-1 referanslama, pim yerleştirilmesi ve pin planı için detaylı mühendislik kartı.",
         }
       : {
           title: "Locating",
@@ -30,3 +30,5 @@ export async function generateMetadata() {
 export default function LocatingPage() {
   return <LocatingCardClient />;
 }
+
+

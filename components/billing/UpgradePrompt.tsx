@@ -29,7 +29,7 @@ export default function UpgradePrompt({
   const defaults =
     locale === "tr"
       ? {
-          title: "Bu ozellik Pro planinda.",
+          title: "Bu özellik Pro planinda.",
           description: "Pro'ya gec, sinirsiz kullan.",
           ctaLabel: "Pro'ya gec",
         }

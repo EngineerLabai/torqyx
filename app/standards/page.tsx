@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { standardsManifest } from "@/data/standards";
@@ -11,10 +11,15 @@ import { localePath } from "@/utils/locale-path";
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.standards;
+  const title = locale === "tr" ? "ISO/DIN/VDI Standartlar Rehberi" : copy.title;
+  const description =
+    locale === "tr"
+      ? "Mekanik tasarımda kullanılan ISO, DIN ve VDI standartlarının özeti. Hangi standardı ne zaman kullanacağınızı öğrenin."
+      : copy.description;
 
   return buildPageMetadata({
-    title: copy.title,
-    description: copy.description,
+    title,
+    description,
     path: "/standards",
     locale,
   });
@@ -36,6 +41,10 @@ export default async function StandardsLandingPage() {
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h1 className="text-3xl font-bold tracking-tight">
+        Standards Reference
+      </h1>
+
         <div className="space-y-2">
           <h2 className="text-lg font-semibold text-slate-900">{copy.categoriesTitle}</h2>
           <p className="text-sm text-slate-600">{copy.categoriesDescription}</p>

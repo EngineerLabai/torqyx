@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
@@ -118,7 +118,7 @@ const basePlateCopy: Record<"tr" | "en", BasePlateCopy> = {
       spanLmm: "Plaka açıklığı L [mm]",
       widthBmm: "Plaka genişliği b [mm]",
       equivalentLoadN: "Eşdeğer yük F [N]",
-      allowableDeflectionMm: "İzin verilebilir sehim δ [mm]",
+      allowableDeflectionMm: "İzin verilebilir sehim ? [mm]",
       material: "Malzeme (E ve yoğunluk)",
     },
     materialLabels: {
@@ -137,7 +137,7 @@ const basePlateCopy: Record<"tr" | "en", BasePlateCopy> = {
       roundedWeight: "Önerilen kalınlıkta tahmini ağırlık",
       deflectionAtRounded: "Önerilen kalınlıkta tahmini sehim",
       formula: "Formül",
-      invalid: "Sonuç için L, b, F ve δ değerlerini pozitif girin.",
+      invalid: "Sonuç için L, b, F ve ? değerlerini pozitif girin.",
     },
     checklistLabels: {
       tslotSpacing: "T-slot aralığı ve yönü çizimde belirtildi",
@@ -149,7 +149,7 @@ const basePlateCopy: Record<"tr" | "en", BasePlateCopy> = {
     addNoteRow: "Not satırı ekle",
     remove: "Sil",
     references: [
-      "Yaklaşım: δ = F*L^3 / (4*E*b*t^3), t için çözülür.",
+      "Yaklaşım: ? = F*L^3 / (4*E*b*t^3), t için çözülür.",
       "E birimi N/mm² (Çelik 210000, Alüminyum 70000).",
       "Standart kalınlık seçimi üretim ve tedarik kolaylığı sağlar.",
       "Nihai tasarımda FEA ve makina tabla verisiyle doğrulama yapın.",
@@ -174,7 +174,7 @@ const basePlateCopy: Record<"tr" | "en", BasePlateCopy> = {
       spanLmm: "Plate span L [mm]",
       widthBmm: "Plate width b [mm]",
       equivalentLoadN: "Equivalent load F [N]",
-      allowableDeflectionMm: "Allowable deflection δ [mm]",
+      allowableDeflectionMm: "Allowable deflection ? [mm]",
       material: "Material (E and density)",
     },
     materialLabels: {
@@ -193,7 +193,7 @@ const basePlateCopy: Record<"tr" | "en", BasePlateCopy> = {
       roundedWeight: "Estimated weight at recommended thickness",
       deflectionAtRounded: "Estimated deflection at recommended thickness",
       formula: "Formula",
-      invalid: "Enter positive L, b, F, and δ values for results.",
+      invalid: "Enter positive L, b, F, and ? values for results.",
     },
     checklistLabels: {
       tslotSpacing: "T-slot spacing and orientation are defined",
@@ -205,7 +205,7 @@ const basePlateCopy: Record<"tr" | "en", BasePlateCopy> = {
     addNoteRow: "Add Note Row",
     remove: "Remove",
     references: [
-      "Model: δ = F*L^3 / (4*E*b*t^3), solved for t.",
+      "Model: ? = F*L^3 / (4*E*b*t^3), solved for t.",
       "Use E in N/mm² (Steel 210000, Aluminum 70000).",
       "Standard thickness selection improves sourcing and manufacturing consistency.",
       "Validate final design with FEA and machine-table constraints.",
@@ -370,7 +370,7 @@ export default function BasePlatePage() {
         area: locale === "tr" ? "Burç/insert" : "Bushings/inserts",
         detail:
           locale === "tr"
-            ? "Sık sök-tak bölgelerine sertleştirilmiş çelik insert uygulanacak."
+            ? "Sık sık-tak bölgelere sertleştirilmiş çelik insert uygulanacak."
             : "Use hardened steel inserts in frequently serviced zones.",
         owner: locale === "tr" ? "Üretim" : "Manufacturing",
       },
@@ -480,7 +480,7 @@ export default function BasePlatePage() {
               <ResultRow label={copy.results.deflectionAtRounded} value={`${calculated.deflectionAtRounded.toFixed(4)} mm`} />
               <div className="rounded-lg bg-slate-50 p-3 text-[11px] text-slate-700">
                 <p className="font-semibold text-slate-900">{copy.results.formula}</p>
-                <p className="mt-1">δ = F*L^3 / (4*E*b*t^3)</p>
+                <p className="mt-1">? = F*L^3 / (4*E*b*t^3)</p>
                 <p className="mt-1">{`E = ${calculated.eValue.toFixed(0)} N/mm²`}</p>
               </div>
             </div>

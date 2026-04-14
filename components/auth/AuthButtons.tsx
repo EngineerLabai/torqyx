@@ -45,17 +45,19 @@ export default function AuthButtons({ copy }: AuthButtonsProps) {
 
   if (!user) {
     return (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 md:gap-3">
         <button
           type="button"
           onClick={handleLogin}
-          className="tap-target inline-flex items-center justify-center rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+          className="tap-target inline-flex items-center justify-center whitespace-nowrap text-[13px] font-medium text-gray-700 transition-colors hover:text-gray-900"
         >
           {copy.login}
         </button>
         <Link
           onClick={handleUpgradeClick}
-          className="tap-target inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-[14px] py-2 text-[13px] font-medium text-white shadow-sm transition hover:bg-blue-500"
+          title={copy.premiumTooltip}
+          aria-label={`${copy.premium}. ${copy.premiumTooltip}`}
+          className="tap-target inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3 py-1.5 text-[12px] font-medium text-white transition-colors hover:bg-blue-700 md:px-4 md:py-2 md:text-[13px]"
           href={premiumHref}
         >
           {copy.premium}

@@ -10,6 +10,8 @@ export type BoltInput = {
   friction: FrictionKey;
 };
 
+import type { CalculationStep } from "@/tools/_shared/types";
+
 export type BoltResult = {
   As: number | null;
   Fv: number | null;
@@ -17,6 +19,7 @@ export type BoltResult = {
   sigma: number | null;
   safety: number | null;
   error?: string;
+  auditTrail?: CalculationStep[] | (() => CalculationStep[] | null);
 };
 
 export type BoltPresetId = "custom" | "M3" | "M4" | "M5" | "M6" | "M8" | "M10";

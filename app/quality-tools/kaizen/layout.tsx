@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = locale === "tr" ? "Kaizen Iyilestirme Takip Araci" : "Kaizen Improvement Tracker";
   const description =
     locale === "tr"
-      ? "Kaizen iyilestirme fikirlerini, aksiyon planlarini ve sonuc metriklerini izleyerek surekli gelisimi destekleyen muhendislik hesaplayicilari araci."
+      ? "Kaizen iyileştirme fikirlerini, aksiyon planlarını ve sonuç metriklerini izleyerek sürekli gelişimi destekleyen mühendislik hesaplayıcıları aracı."
       : "Kaizen tracker for engineering calculators teams to monitor improvement ideas, action plans, and measurable outcomes in one view.";
 
   return buildPageMetadata({
