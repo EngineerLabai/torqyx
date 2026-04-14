@@ -15,16 +15,23 @@ import AccessBadge from "@/components/tools/AccessBadge";
 import ToolBadge from "@/components/tools/ToolBadge";
 import InfoTooltip from "@/components/ui/InfoTooltip";
 import UpgradePrompt from "@/components/billing/UpgradePrompt";
+import PdfExportButton from "@/components/pdf/PdfExportButton";
+import PdfPreviewModal from "@/components/pdf/PdfPreviewModal";
+import { ShareButton } from "@/components/share/ShareButton";
 import AISummaryPanel from "@/src/components/ai/AISummaryPanel";
+import ExplainResultPanel from "@/src/components/ai/ExplainResultPanel";
+import CalculationAuditPanel from "@/components/tools/CalculationAuditPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
+import type { ReportData } from "@/lib/pdf/types";
+import { getToolPdfConverter } from "@/lib/pdf/reportConverters";
 import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
 import { getAdvisorInsights } from "@/src/lib/advisor/engine";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useFeatureGate } from "@/hooks/useFeatureGate";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
-import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-share";
+import { buildShareUrl, decodeToolState, encodeToolState, decodeToolStateShort } from "@/utils/tool-share";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
@@ -66,17 +73,40 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   useEffect(() => {
     const historyId = searchParams?.get("historyId");
     if (!hasHydrated.current) {
+      // Eski format: input parametresi
       const shared = decodeToolState<Record<string, string | number>>(searchParams?.get("input") ?? null);
+      // Yeni format: s parametresi (kısa)
+      const sharedShort = decodeToolStateShort<Record<string, string | number>>(tool.id, searchParams?.get("s") ?? null);
+      // Kısa linkten gelen paylaşım
+      const sharedFromLink = searchParams?.get("shared");
+
+      let mergedInput: ToolInputRecord | null = null;
+
       if (shared) {
-        const merged = { ...(tool.initialInput as ToolInputRecord) } as ToolInputRecord;
+        mergedInput = { ...(tool.initialInput as ToolInputRecord) };
         Object.entries(shared).forEach(([key, value]) => {
-          merged[key] = value;
+          mergedInput[key] = value;
         });
-        Promise.resolve().then(() => setInput(merged as TInput));
-        hasHydrated.current = true;
-        return;
+      } else if (sharedShort) {
+        mergedInput = { ...(tool.initialInput as ToolInputRecord) };
+        Object.entries(sharedShort).forEach(([key, value]) => {
+          mergedInput[key] = value;
+        });
+      } else if (sharedFromLink) {
+        try {
+          const parsed = JSON.parse(decodeURIComponent(sharedFromLink));
+          mergedInput = { ...(tool.initialInput as ToolInputRecord), ...parsed };
+        } catch {
+          // ignore invalid shared data
+        }
       }
+
+      if (mergedInput) {
+        Promise.resolve().then(() => setInput(mergedInput as TInput));
+      }
+
       hasHydrated.current = true;
+      return;
     }
 
     if (!historyId || historyId === loadedHistoryId) return;
@@ -142,6 +172,20 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   });
   const dailyLimitReached = !dailyCalculationGate.isLoading && !dailyCalculationGate.hasAccess;
   const gatedResult = dailyLimitReached ? null : result;
+
+  // PDF rapor verisini oluştur
+  const reportData = useMemo((): ReportData | null => {
+    if (!gatedResult || !validation.success) return null;
+
+    try {
+      // Tool-specific converter kullan
+      const converter = getToolPdfConverter(tool.id);
+      return converter(validation.data as TInput, gatedResult, tool.id, toolTitle, system);
+    } catch (error) {
+      console.error("PDF report data generation error:", error);
+      return null;
+    }
+  }, [gatedResult, validation.success, validation.data, tool.id, toolTitle, system]);
 
   useEffect(() => {
     if (!hasTrackedInitial.current) {
@@ -240,7 +284,53 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
           </div>
           <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             {gatedResult ? (
-              <ResultSection result={gatedResult} />
+              <>
+                <ResultSection result={gatedResult} />
+                <CalculationAuditPanel
+                  locale={locale}
+                  toolId={tool.id}
+                  toolName={toolTitle}
+                  inputs={validation.success ? (validation.data as ToolInputRecord) : (input as ToolInputRecord)}
+                  outputs={gatedResult as ToolResultRecord}
+                  traceSource={gatedResult as { auditTrail?: unknown }}
+                />
+                <div className="mt-4">
+                  <ExplainResultPanel
+                    locale={locale}
+                    toolId={tool.id}
+                    toolName={toolTitle}
+                    inputs={validation.success ? (validation.data as ToolInputRecord) : (input as ToolInputRecord)}
+                    outputs={gatedResult as ToolResultRecord}
+                    auditTrail={(gatedResult as { auditTrail?: unknown }).auditTrail}
+                  />
+                </div>
+                {reportData && (
+                  <div className="mt-4 flex gap-2 border-t pt-4">
+                    <PdfPreviewModal
+                      toolId={tool.id}
+                      reportData={reportData}
+                      trigger={
+                        <button className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+                          Önizleme
+                        </button>
+                      }
+                    />
+                    <PdfExportButton
+                      toolId={tool.id}
+                      reportData={reportData}
+                      variant="default"
+                      size="sm"
+                    />
+                    <ShareButton
+                      toolId={tool.id}
+                      currentInput={input}
+                      currentResult={gatedResult}
+                      variant="outline"
+                      size="sm"
+                    />
+                  </div>
+                )}
+              </>
             ) : dailyLimitReached ? (
               <UpgradePrompt
                 compact

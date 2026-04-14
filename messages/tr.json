@@ -25,6 +25,7 @@
       "linkAbout": "Hakkında",
       "linkContact": "İletişim",
       "linkHome": "Ana Sayfa",
+      "linkBlog": "Blog",
       "sectionFaq": "FAQ",
       "linkFaq": "FAQ"
     },
@@ -48,7 +49,8 @@
   },
   "authButtons": {
     "login": "Giriş Yap",
-    "premium": "Premium bekleme listesi",
+    "premium": "Erken Erişim Listesine Katıl",
+    "premiumTooltip": "Premium araçlar yakında — şimdi kaydol, ilk sen haberdar ol",
     "userFallback": "Kullanıcı",
     "logout": "Çıkış",
     "unavailable": "Auth şu an kullanılamıyor.",
@@ -62,14 +64,22 @@
   "home": {
     "hero": {
       "eyebrow": "Mekanik Mühendislik Hesaplayıcıları",
-      "headline": "AI destekli muhendislik hesaplamalari, tahmin degil standart temelli sonuc",
-      "subheadline": "Buradaki AI, ISO/DIN/VDI referansli deterministik hesap motoru ile adim adim asistan rehberligini birlestirir. Sihirli tahmin yapmaz; ayni girdide ayni sonucu verir.",
+      "headline": "AI destekli mühendislik hesaplamalari, tahmin değil standart temelli sonuc",
+      "subheadline": "Buradaki AI, ISO/DIN/VDI referansli deterministik hesap motoru ile adim adim asistan rehberligini birleştirir. Sihirli tahmin yapmaz; ayni girdide ayni sonucu verir.",
       "subtitle": "Hız ve izlenebilirlik isteyen mekanik mühendisler için.",
       "ctaPrimary": "Ücretsiz Başla",
       "ctaSecondary": "Hesaplayıcıları Gör",
       "socialProof": "500+ mekanik mühendis tarafından tercih edildi",
       "trustBadge": "Hesaplar ISO/DIN standartlarına göre doğrulanır",
       "supportNote": "Kredi kartı gerekmez. 60 saniyede başlayın.",
+      "stats": {
+        "engineersCount": "500+",
+        "engineersLabel": "mühendis kullanıyor",
+        "verifiedPrefix": "ISO/DIN standartlarıyla",
+        "verifiedStrong": "doğrulanmış",
+        "cardPrefix": "Kredi kartı",
+        "cardStrong": "gerekmez"
+      },
       "imageAlt": "Mekanik mühendislik hesaplayıcı paneli"
     },
     "popularTools": {
@@ -791,7 +801,7 @@
             },
             {
               "q": "Bu AI ne kadar guvenilir?",
-              "a": "AI katmani serbest tahmin vermez; hesaplama motoru ISO, DIN ve VDI gibi standartlardan gelen deterministik formul ve tablo akisini calistirir. Asistan bolumu sadece girdi kontrolu, adim aciklama ve referans yonlendirme yapar; nihai dogrulama yine proje gereksinimleriniz ve sorumlu muhendis kararidir."
+              "a": "AI katmani serbest tahmin vermez; hesaplama motoru ISO, DIN ve VDI gibi standartlardan gelen deterministik formul ve tablo akisini calistirir. Asistan bolumu sadece girdi kontrolu, adim aciklama ve referans yonlendirme yapar; nihai dogrulama yine proje gereksinimleriniz ve sorumlu mühendis kararidir."
             },
             {
               "q": "Varsayılan değerler gerçek mi?",

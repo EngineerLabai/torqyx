@@ -13,6 +13,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import useDevRenderLogger from "@/components/monitoring/useDevRenderLogger";
 import PremiumCTA from "@/components/premium/PremiumCTA";
 import { openCommandPalette } from "@/components/search/commandPaletteEvents";
+import { UnitSystemSwitcher } from "@/components/units/UnitSystemSwitcher";
 import { getBrandCopy } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
@@ -114,6 +115,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
   const isHome = stripLocaleFromPath(pathname) === "/";
   const year = new Date().getFullYear();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [headerSearchQuery, setHeaderSearchQuery] = useState("");
   const mobileMenuToggleCopy = locale === "tr" ? { open: "Menu", close: "Kapat" } : { open: "Menu", close: "Close" };
 
   return (
@@ -126,49 +128,74 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
       <header
         key={pathname}
-        className="site-header sticky top-0 z-50 border-b border-gray-200 bg-white"
+        className="site-header sticky top-0 z-50 h-16 overflow-visible border-b border-gray-100 bg-white shadow-sm"
       >
         <NavbarRenderProbe />
-        <div className="site-container px-6">
-          <div className="flex h-16 items-center justify-between gap-3 overflow-hidden">
+        <div className="site-container h-full px-0">
+          <div className="flex h-full items-center justify-between overflow-visible px-4 md:px-6">
             <Link
               href={getRoute("home", locale)}
-              className="flex min-w-0 items-center gap-3"
+              className="flex flex-shrink-0 items-center gap-2 md:gap-3"
               aria-label={brandContent.siteName}
             >
               <Image
                 src="/images/logo.png"
                 alt={`${brandContent.siteName} logo`}
-                width={635}
-                height={702}
-                className="h-10 max-h-10 w-auto shrink-0 object-contain"
+                width={36}
+                height={36}
+                className="h-8 max-h-9 w-auto flex-shrink-0 object-contain md:h-9"
                 priority
               />
-              <div className="flex min-w-0 flex-col justify-center gap-0.5">
-                <span className="whitespace-nowrap text-left text-[15px] font-semibold leading-tight text-slate-900">
+              <div className="flex flex-col justify-center gap-0.5">
+                <span className="whitespace-nowrap text-sm font-semibold text-gray-900 md:text-base">
                   {brandContent.siteName}
                 </span>
-                <span className="whitespace-nowrap text-[11px] leading-snug text-gray-500">
+                <span className="hidden whitespace-nowrap text-[11px] text-gray-500 sm:block">
                   Deterministik mühendislik hesaplayıcıları
                 </span>
               </div>
             </Link>
 
-            <nav className="hidden items-center gap-4 lg:flex">
+            <nav className="hidden items-center gap-4 text-[13px] font-medium text-gray-600 lg:flex lg:gap-5">
               {navSections.map((section) => (
                 <MegaMenuItem key={section.label} section={section} />
               ))}
             </nav>
 
-            <div className="hidden items-center gap-3 lg:flex">
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                openCommandPalette(headerSearchQuery.trim());
+              }}
+              className="hidden items-center gap-2 md:flex lg:flex"
+            >
+              <label htmlFor="site-global-search" className="sr-only">
+                {searchCopy.palettePlaceholder}
+              </label>
+              <input
+                id="site-global-search"
+                type="search"
+                value={headerSearchQuery}
+                onChange={(event) => setHeaderSearchQuery(event.target.value)}
+                placeholder={searchCopy.palettePlaceholder}
+                className="h-10 w-56 min-w-[14rem] rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-700 shadow-sm outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                aria-label={searchCopy.palettePlaceholder}
+              />
+              <button
+                type="submit"
+                className="inline-flex h-10 items-center justify-center rounded-2xl bg-emerald-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+              >
+                {locale === "tr" ? "Ara" : "Search"}
+              </button>
               <LanguageSwitcher
                 tone="light"
                 size="sm"
                 copy={messages.languageSwitcher}
                 onLocaleChange={() => setMobileMenuOpen(false)}
               />
+              <UnitSystemSwitcher />
               <AuthButtons copy={messages.authButtons} />
-            </div>
+            </form>
 
             <button
               type="button"
@@ -198,6 +225,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                     copy={messages.languageSwitcher}
                     onLocaleChange={() => setMobileMenuOpen(false)}
                   />
+                  <UnitSystemSwitcher />
                   <div className="min-w-0 flex-1">
                     <AuthButtons copy={messages.authButtons} />
                   </div>
@@ -287,13 +315,13 @@ function MegaMenuItem({ section }: { section: NavSection }) {
     <div className="group relative">
       <button
         type="button"
-        className="flex cursor-pointer items-center gap-1 text-[13px] font-medium text-slate-700 transition-opacity hover:opacity-70 focus:outline-none"
+        className="flex cursor-pointer items-center gap-1 text-[13px] font-medium text-gray-600 transition-colors hover:text-gray-900 focus:outline-none"
         aria-expanded="false"
       >
         {section.label}
         <span className="text-[10px] text-slate-400">v</span>
       </button>
-      <div className="pointer-events-none absolute left-0 top-full z-30 w-[360px] pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+      <div className="pointer-events-none absolute left-0 top-full z-[60] w-[360px] pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
         <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-lg ring-1 ring-slate-100">
           <p className="mb-3 text-[11px] leading-relaxed text-slate-500">{section.description}</p>
           <div className="grid gap-2">

@@ -1,4 +1,3 @@
-import { DEFAULT_LOCALE, getBrandCopy } from "@/config/brand";
 import type { Locale } from "@/utils/locale";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -30,10 +29,11 @@ const resolveSiteUrl = () => {
 };
 
 export const SITE_URL = resolveSiteUrl();
+export const CANONICAL_SITE_URL = "https://aiengineerslab.vercel.app";
 
 export const buildCanonical = (path: string) => {
   try {
-    return new URL(path, SITE_URL).toString();
+    return new URL(path, CANONICAL_SITE_URL).toString();
   } catch {
     return undefined;
   }
@@ -49,10 +49,10 @@ export const buildLanguageAlternates = (path: string) => ({
   en: buildLocalizedCanonical(path, "en"),
 });
 
-export const DEFAULT_OG_IMAGE = new URL("/og-default.png", SITE_URL).toString();
+export const DEFAULT_OG_IMAGE = new URL("/og-image.png", CANONICAL_SITE_URL).toString();
 export const DEFAULT_OG_IMAGE_META = {
   url: DEFAULT_OG_IMAGE,
   width: 1200,
   height: 630,
-  alt: getBrandCopy(DEFAULT_LOCALE).siteName,
+  alt: "AI Engineers Lab — Mühendislik Hesaplayıcıları",
 };

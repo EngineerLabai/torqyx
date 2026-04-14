@@ -3,6 +3,9 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
+  openAnalyzer: false,
+  generateStatsFile: true,
+  analyzerMode: "static",
 });
 
 const normalizePrimarySiteUrl = (value: string) => {
@@ -112,6 +115,10 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: mergedHeaders,
+      },
+      {
+        source: "/sitemap.xml",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
       },
     ];
   },

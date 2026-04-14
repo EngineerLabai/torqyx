@@ -24,9 +24,11 @@ model User {
   stripeCustomerId String?       @unique
   createdAt        DateTime      @default(now())
   calculations     Calculation[]
+  sharedCalculations SharedCalculation[]
   favorites        Favorite[]
   accounts         Account[]
   sessions         Session[]
+  aiExplainFeedbacks AiExplainFeedback[] @relation("AiExplainFeedbacks")
 }
 
 model Calculation {
@@ -38,6 +40,22 @@ model Calculation {
   outputs    Json
   createdAt  DateTime @default(now())
   isFavorite Boolean  @default(false)
+}
+
+model SharedCalculation {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  toolSlug  String
+  inputs    Json
+  outputs   Json?
+  isPublic  Boolean  @default(false)
+  expiresAt DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([code])
+  @@index([expiresAt])
 }
 
 model Favorite {
@@ -84,3 +102,19 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model AiExplainFeedback {
+  id           String   @id @default(cuid())
+  userId       String?
+  user         User?    @relation("AiExplainFeedbacks", fields: [userId], references: [id], onDelete: SetNull)
+  toolId       String
+  feedbackType String   // "up" or "down"
+  question     String?
+  response     String?
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([toolId])
+  @@index([createdAt])
+}
+

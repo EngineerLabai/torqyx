@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: copy.description,
     path: "/materials",
     locale,
+    useLocalizedCanonical: true,
   });
 }
 

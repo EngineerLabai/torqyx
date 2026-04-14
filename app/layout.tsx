@@ -19,9 +19,11 @@ import { getBrandCopy } from "@/config/brand";
 import { listPublicImagePaths } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
-import { SITE_URL } from "@/utils/seo";
-import { buildPageMetadata } from "@/utils/metadata";
+import { CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
+import { Toaster } from "@/components/ui/toaster";
+import { UnitSystemProvider } from "@/contexts/UnitSystemContext";
 import "../styles/globals.css";
+import "katex/dist/katex.min.css";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -49,6 +51,12 @@ const isVercelAppHost = (host: string) => {
   return normalized === "vercel.app" || normalized.endsWith(".vercel.app");
 };
 
+const DEFAULT_SITE_TITLE = "AI Engineers Lab";
+const DEFAULT_SITE_DESCRIPTION =
+  "ISO/DIN/VDI referanslı, standart temelli mekanik mühendislik hesaplayıcıları. Tahmin değil, deterministik sonuç.";
+const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar. 500+ mühendis kullanıyor.";
+const DEFAULT_OG_IMAGE = "/og-image.png";
+
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
@@ -68,8 +76,48 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 
   return {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(CANONICAL_SITE_URL),
     ...base,
+    title: {
+      default: DEFAULT_SITE_TITLE,
+      template: "%s | AI Engineers Lab",
+    },
+    description: DEFAULT_SITE_DESCRIPTION,
+    openGraph: {
+      ...(base.openGraph ?? {}),
+      type: "website",
+      locale: "tr_TR",
+      url: CANONICAL_SITE_URL,
+      siteName: "AI Engineers Lab",
+      title: DEFAULT_SITE_TITLE,
+      description: DEFAULT_OG_DESCRIPTION,
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: "AI Engineers Lab — Mühendislik Hesaplayıcıları",
+        },
+      ],
+    },
+    twitter: {
+      ...(base.twitter ?? {}),
+      card: "summary_large_image",
+      title: DEFAULT_SITE_TITLE,
+      description: "ISO/DIN/VDI referanslı mekanik hesaplayıcılar.",
+      images: [DEFAULT_OG_IMAGE],
+    },
+    icons: {
+      icon: [
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      ],
+      other: [{ rel: "mask-icon", url: "/favicon.ico" }],
+    },
+    manifest: "/site.webmanifest",
     ...(shouldNoIndex
       ? {
           robots: {
@@ -146,15 +194,18 @@ export default async function RootLayout({
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
           <AuthProvider>
-            <GlobalErrorMonitor />
-            <AnalyticsTracker />
-            <UpgradeFunnelAbandonmentTracker />
-            <UpgradeSuccessTracker />
-            {process.env.NODE_ENV === "production" ? <WebVitalsReporter /> : null}
-            {process.env.NODE_ENV === "production" ? <SpeedInsights /> : null}
-            {process.env.NODE_ENV === "development" ? <ImagePathWarnings knownAssets={knownImageAssets} /> : null}
-            <UserStateSync />
-            <SiteShell messages={shellMessages}>{children}</SiteShell>
+            <UnitSystemProvider>
+              <GlobalErrorMonitor />
+              <AnalyticsTracker />
+              <UpgradeFunnelAbandonmentTracker />
+              <UpgradeSuccessTracker />
+              {process.env.NODE_ENV === "production" ? <WebVitalsReporter /> : null}
+              {process.env.NODE_ENV === "production" ? <SpeedInsights /> : null}
+              {process.env.NODE_ENV === "development" ? <ImagePathWarnings knownAssets={knownImageAssets} /> : null}
+              <UserStateSync />
+              <SiteShell messages={shellMessages}>{children}</SiteShell>
+              <Toaster />
+            </UnitSystemProvider>
           </AuthProvider>
         </LocaleProvider>
       </body>

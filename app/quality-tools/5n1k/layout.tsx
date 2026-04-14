@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = locale === "tr" ? "5N1K Analiz Araci" : "5W1H Analysis Tool";
   const description =
     locale === "tr"
-      ? "5N1K soru seti ile problemi netlestirip aksiyon planini hizlandiran kalite odakli muhendislik hesaplayicilari destek aracidir."
+      ? "5N1K soru seti ile problemi netleştirip aksiyon planını hızlandıran kalite odaklı mühendislik hesaplayıcıları destek aracıdır."
       : "Quality-focused 5W1H page that clarifies problem scope and accelerates action planning within engineering calculators workflows.";
 
   return buildPageMetadata({

@@ -150,7 +150,7 @@ export function buildToolHowToSchema(toolPath: string, locale: Locale = DEFAULT_
   if (meta.howToSteps.length === 0) return null;
 
   return {
-    name: locale === "tr" ? `${meta.name} kullanim adimlari` : `${meta.name} usage steps`,
+    name: locale === "tr" ? `${meta.name} kullanım adımları` : `${meta.name} usage steps`,
     description: meta.description,
     url: meta.canonical,
     inLanguage: locale === "tr" ? "tr-TR" : "en-US",

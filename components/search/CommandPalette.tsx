@@ -58,26 +58,27 @@ export default function CommandPalette({ copy }: CommandPaletteProps) {
   }, [open]);
 
   useEffect(() => {
-    const openPalette = () => {
+    const openPalette = (event: Event) => {
+      const customEvent = event as CustomEvent<{ query?: string }>;
       setOpen(true);
-      setQuery("");
+      setQuery(customEvent?.detail?.query ?? "");
       setActiveIndex(0);
     };
 
     const handler = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
-        openPalette();
+        openPalette(new CustomEvent(COMMAND_PALETTE_OPEN_EVENT));
       } else if (event.key === "Escape") {
         setOpen(false);
       }
     };
 
     window.addEventListener("keydown", handler);
-    window.addEventListener(COMMAND_PALETTE_OPEN_EVENT, openPalette);
+    window.addEventListener(COMMAND_PALETTE_OPEN_EVENT, openPalette as EventListener);
     return () => {
       window.removeEventListener("keydown", handler);
-      window.removeEventListener(COMMAND_PALETTE_OPEN_EVENT, openPalette);
+      window.removeEventListener(COMMAND_PALETTE_OPEN_EVENT, openPalette as EventListener);
     };
   }, []);
 

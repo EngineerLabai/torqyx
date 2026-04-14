@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = locale === "tr" ? "Taban Plaka Boyutlandirma Araci" : "Base Plate Sizing Tool";
   const description =
     locale === "tr"
-      ? "Taban plaka kalinligi, sehim ve agirlik kestirimi icin muhendislik hesaplayicilari ile uyumlu hizli boyutlandirma ve kontrol sayfasi."
+      ? "Taban plaka kalınlığı, seçim ve ağırlık kestirimi için mühendislik hesaplayıcıları ile uyumlu hızlı boyutlandırma ve kontrol sayfası."
       : "Base plate sizing page for engineering calculators, estimating thickness, deflection, and weight with practical design checks.";
 
   return buildPageMetadata({

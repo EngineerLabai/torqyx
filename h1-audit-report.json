@@ -1,0 +1,718 @@
+{
+  "generatedAt": "2026-04-12T11:22:46.235Z",
+  "summary": {
+    "total": 101,
+    "hasH1": 101,
+    "missingH1": 0
+  },
+  "missingH1": [],
+  "hasH1": [
+    {
+      "file": "app/blog/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/blog/[slug]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/categories/[category]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${titleBase} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/cerez-politikasi/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Çerez Politikası",
+      "hasH1": true
+    },
+    {
+      "file": "app/changelog/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.badge} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/community/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/community/[slug]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/dashboard/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/faq/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/fixture-tools/base-plate/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Taban Plaka Boyutland�rma Kart�",
+      "hasH1": true
+    },
+    {
+      "file": "app/fixture-tools/clamping/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "S�k��t�rma Planlama Kart�",
+      "hasH1": true
+    },
+    {
+      "file": "app/fixture-tools/locating/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Referanslama",
+      "hasH1": true
+    },
+    {
+      "file": "app/fixture-tools/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/forum/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Forum",
+      "hasH1": true
+    },
+    {
+      "file": "app/gizlilik/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Gizlilik Politikası",
+      "hasH1": true
+    },
+    {
+      "file": "app/glossary/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.badge} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/glossary/[slug]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/guides/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.badge} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/guides/[slug]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/hakkinda/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Hakk�nda",
+      "hasH1": true
+    },
+    {
+      "file": "app/health/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/health/performance/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/iletisim/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "İletişim",
+      "hasH1": true
+    },
+    {
+      "file": "app/kullanim-sartlari/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Kullanım Şartları",
+      "hasH1": true
+    },
+    {
+      "file": "app/login/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Giriş",
+      "hasH1": true
+    },
+    {
+      "file": "app/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "AI Engineers Lab — Mekanik Mühendislik Hesaplayıcıları",
+      "hasH1": true
+    },
+    {
+      "file": "app/premium/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/pricing/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/project-hub/devreye-alma/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "1) Ön hazırlık",
+      "hasH1": true
+    },
+    {
+      "file": "app/project-hub/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.badgeTitle} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/project-hub/part-tracking/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/project-hub/project-tools/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/project-hub/rfq/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/qa/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/quality-tools/5n1k/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/quality-tools/5why/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/quality-tools/8d/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/quality-tools/kaizen/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Operation 30 Feeding Flow Improvement",
+      "hasH1": true
+    },
+    {
+      "file": "app/quality-tools/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/quality-tools/poka-yoke/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Wrong Orientation Assembly Prevention",
+      "hasH1": true
+    },
+    {
+      "file": "app/reference/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/request-tool/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/saved-calculations/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/standards/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/standards/[category]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${category.title[locale]} | ${copy.title}",
+      "hasH1": true
+    },
+    {
+      "file": "app/support/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/tables/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tags/[tag]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${titleBase} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/basic-engineering/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/bearing-life/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/belt-length/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/bending-stress/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/bolt-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/bolt-database/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/bolt-size-torque/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/coating-guide/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/compressor-cc/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/fillet-weld/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/fluids-hvac/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/backlash-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/contact-ratio-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/force-torque-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/helix-axial-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/module-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/ratio-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/viscosity-selector/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/calculators/weight-optimization/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "1. Dişli Temelleri",
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/gear-design/simulations/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "MAAG Sistemi Hareket Animasyonu",
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/heat-energy/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/heat-treatment/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/hydraulic-cylinder/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/machine-elements/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/material-cards/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/materials-manufacturing/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/param-chart/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/pipe-pressure-loss/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/production-project/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/sanity-check/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/sanity-check/report/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/sealing-guide/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/shaft-torsion/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/simple-stress/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/strength-statics/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/torque-power/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/unit-converter/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/tools/[...slug]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${toolTitle} | AI Engineers Lab",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/materials/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/materials/[id]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${notFoundCopy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/project-hub/devreye-alma/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/project-hub/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Proje Merkezi | AI Engineers Lab",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/project-hub/part-tracking/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/project-hub/project-tools/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/project-hub/rfq/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/projects/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${copy.title} | ${brandContent.siteName}",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/standards/fits/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Geçmeler | Standartlar",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/standards/fluids/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Akışkanlar | Standartlar",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/standards/materials/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Malzemeler | Standartlar",
+      "hasH1": true
+    },
+    {
+      "file": "app/[locale]/standards/threads/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Metrik Dişler | Standartlar",
+      "hasH1": true
+    }
+  ]
+}

@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: seo.description,
     path: "/project-hub/part-tracking",
     locale,
+    useLocalizedCanonical: true,
   });
 }
 
@@ -28,3 +29,4 @@ export default async function PartTrackingPage({ params }: PageProps) {
   const heroImage = getHeroImageSrc("projectHub") || getHeroImageSrc("tools");
   return <Client locale={locale} heroImage={heroImage} />;
 }
+

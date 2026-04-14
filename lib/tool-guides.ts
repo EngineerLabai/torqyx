@@ -196,7 +196,7 @@ Use the related tool links below to continue with upstream or downstream checks.
 
   return `## Problem Tanimi
 
-${toolName} tekrarlayan muhendislik hesaplarinda hiz ve tutarlilik saglamak icin kullanilir.
+${toolName} tekrarlayan mühendislik hesaplarinda hiz ve tutarlilik saglamak icin kullanilir.
 
 ## Formul Aciklamasi
 
@@ -215,7 +215,7 @@ Girdi -> Birim Kontrol -> Formul -> Dogrulama -> Karar
 
 ## Ornek Cozum
 
-Gercekci bir deger seti ile ara adimlari gostererek nihai sonucu hesapla.
+Gerçekci bir deger seti ile ara adimlari gostererek nihai sonucu hesapla.
 
 ## Sik Yapilan Hatalar
 

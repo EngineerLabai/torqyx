@@ -1,4 +1,4 @@
-﻿import PageHero from "@/components/layout/PageHero";
+import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 const pageCopy = {
   title: "Hakkında",
-  description: "Deterministik mühendislik hesaplayıcıları, standartlar ve raporlama altyapısı.",
+  description: "Deterministik mühendislik hesaplayıcılar, standartlar ve raporlama altyapısı.",
   imageAlt: "AI Engineers Lab hakkında görsel",
   sections: {
     storyTitle: "Hikaye ve yaklaşım",
@@ -87,6 +87,10 @@ export default async function AboutPage() {
 
         <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
           <section className="space-y-3">
+      <h1 className="text-3xl font-bold tracking-tight">
+        About
+      </h1>
+
             <h2 className="text-lg font-semibold text-slate-900">{pageCopyEn.sections.storyTitle}</h2>
             {pageCopyEn.sections.storyBody.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>

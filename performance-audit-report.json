@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-04-13T12:00:00.000Z",
+  "summary": {
+    "lighthouseCi": {
+      "status": "updated",
+      "issues": ["Switched to mobile preset with throttling", "Added route-specific budgets", "Integrated with GitHub Actions"]
+    },
+    "lcpOptimization": {
+      "status": "optimized",
+      "issues": ["Hero Image already has priority and sizes", "Added optimizeFonts to next.config.ts"]
+    },
+    "inpOptimization": {
+      "status": "optimized",
+      "issues": ["Added useTransition to chart rendering", "Debounce already implemented for inputs"]
+    },
+    "clsOptimization": {
+      "status": "optimized",
+      "issues": ["Added aspect-ratio to chart containers", "Framer Motion not actively used, no layout shifts detected"]
+    }
+  },
+  "details": {
+    "lighthouseCi": {
+      "configFile": ".lighthouserc.js",
+      "preset": "mobile",
+      "throttling": "4G mobile (150ms RTT, 1638.4 Kbps)",
+      "viewport": "375x812",
+      "routes": ["/", "/tr", "/en", "/tr/tools", "/en/tools"],
+      "budgets": {
+        "ttfb": 800,
+        "fcp": 1800,
+        "lcp": 2500,
+        "inp": 200,
+        "cls": 0.1
+      },
+      "githubActions": "Added lighthouse-ci job to quality-gates.yml"
+    },
+    "lcpOptimization": {
+      "heroImage": {
+        "priority": true,
+        "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 92vw, 50vw",
+        "fetchPriority": "high"
+      },
+      "fonts": {
+        "optimizeFonts": true,
+        "display": "swap",
+        "preload": "automatic via optimizeFonts"
+      }
+    },
+    "inpOptimization": {
+      "debounce": {
+        "inputDelay": 150,
+        "implementation": "useDebouncedValue hook"
+      },
+      "transitions": {
+        "chartRendering": "Wrapped in startTransition",
+        "deferredValues": "Already using useDeferredValue"
+      }
+    },
+    "clsOptimization": {
+      "chartContainers": {
+        "aspectRatio": "16/9",
+        "maintainAspectRatio": false
+      },
+      "framerMotion": {
+        "usage": "Not actively used in components",
+        "layoutShifts": "None detected"
+      }
+    }
+  }
+}</content>
+<parameter name="filePath">c:\Users\Erdem\Desktop\PROJE\aiengineerslab\performance-audit-report.json

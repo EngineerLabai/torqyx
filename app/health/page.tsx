@@ -7,10 +7,10 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Sistem Saglik Durumu" : "System Health Status";
+  const title = locale === "tr" ? "Sistem Sağlık Durumu" : "System Health Status";
   const description =
     locale === "tr"
-      ? "Sistem saglik durumu, locale header bilgisi ve render zamani gibi operasyonel metrikleri izlemek icin teknik kontrol ekrani."
+      ? "Sistem sağlık durumu, locale header bilgisi ve render zamanı gibi operasyonel metrikleri izlemek için teknik kontrol ekranı."
       : "Technical health page to monitor system status, locale header context, and render timestamp for operational reliability.";
 
   return buildPageMetadata({

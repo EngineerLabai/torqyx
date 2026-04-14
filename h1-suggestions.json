@@ -1,0 +1,174 @@
+{
+  "suggestions": [
+    {
+      "file": "app/tools/belt-length/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Belt Length Hesaplayıcı",
+      "suggestedH1_en": "Belt Length Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/coating-guide/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Coating Guide Hesaplayıcı",
+      "suggestedH1_en": "Coating Guide Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/compressor-cc/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Compressor Cc Hesaplayıcı",
+      "suggestedH1_en": "Compressor Cc Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/hydraulic-cylinder/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Hydraulic Cylinder Hesaplayıcı",
+      "suggestedH1_en": "Hydraulic Cylinder Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/machine-elements/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Machine Elements Hesaplayıcı",
+      "suggestedH1_en": "Machine Elements Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/param-chart/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Param Chart Hesaplayıcı",
+      "suggestedH1_en": "Param Chart Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/pipe-pressure-loss/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Pipe Pressure Loss Hesaplayıcı",
+      "suggestedH1_en": "Pipe Pressure Loss Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/production-project/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Production Project Hesaplayıcı",
+      "suggestedH1_en": "Production Project Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/sanity-check/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Sanity Check Hesaplayıcı",
+      "suggestedH1_en": "Sanity Check Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/sanity-check/report/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Report Hesaplayıcı",
+      "suggestedH1_en": "Report Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/sealing-guide/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Sealing Guide Hesaplayıcı",
+      "suggestedH1_en": "Sealing Guide Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/strength-statics/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Strength Statics Hesaplayıcı",
+      "suggestedH1_en": "Strength Statics Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/torque-power/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Torque Power Hesaplayıcı",
+      "suggestedH1_en": "Torque Power Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    },
+    {
+      "file": "app/tools/unit-converter/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": false,
+      "suggestedH1_tr": "Unit Converter Hesaplayıcı",
+      "suggestedH1_en": "Unit Converter Calculator",
+      "generationSource": "slug_fallback",
+      "needsManualReview": true
+    }
+  ],
+  "manualReview": [
+    "app/tools/belt-length/page.tsx",
+    "app/tools/coating-guide/page.tsx",
+    "app/tools/compressor-cc/page.tsx",
+    "app/tools/hydraulic-cylinder/page.tsx",
+    "app/tools/machine-elements/page.tsx",
+    "app/tools/param-chart/page.tsx",
+    "app/tools/pipe-pressure-loss/page.tsx",
+    "app/tools/production-project/page.tsx",
+    "app/tools/sanity-check/page.tsx",
+    "app/tools/sanity-check/report/page.tsx",
+    "app/tools/sealing-guide/page.tsx",
+    "app/tools/strength-statics/page.tsx",
+    "app/tools/torque-power/page.tsx",
+    "app/tools/unit-converter/page.tsx"
+  ]
+}

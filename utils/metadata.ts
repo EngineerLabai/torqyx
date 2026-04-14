@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getBrandCopy } from "@/config/brand";
 import type { Locale } from "@/utils/locale";
-import { DEFAULT_OG_IMAGE_META, buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
+import { DEFAULT_OG_IMAGE_META, buildCanonical, buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
 
 type PageMetadataOptions = {
   title: string;
@@ -14,19 +14,21 @@ type PageMetadataOptions = {
   openGraph?: Metadata["openGraph"];
   twitter?: Metadata["twitter"];
   alternatesLanguages?: NonNullable<Metadata["alternates"]> extends { languages?: infer L } ? L | null : null;
+  useLocalizedCanonical?: boolean;
 };
 
 const TITLE_MAX_LENGTH = 60;
+const TITLE_TEMPLATE_SUFFIX = " | AI Engineers Lab";
 const DESCRIPTION_MIN_LENGTH = 120;
 const DESCRIPTION_MAX_LENGTH = 155;
 
 const SEO_KEYWORD_BY_LOCALE: Record<Locale, string> = {
-  tr: "muhendislik hesaplayicilari",
+  tr: "mühendislik hesaplayıcıları",
   en: "engineering calculators",
 };
 
 const DESCRIPTION_SUFFIX_BY_LOCALE: Record<Locale, string> = {
-  tr: " Standartlar, hesap adimlari ve pratik raporlarla hizli karar destegi sunar.",
+  tr: " Standartlar, hesap adımları ve pratik raporlarla hızlı karar desteği sunar.",
   en: " It includes standards, calculation steps, and practical reports for faster decisions.",
 };
 
@@ -40,29 +42,30 @@ const trimToWordBoundary = (value: string, maxLength: number) => {
   return value.slice(0, maxLength).trimEnd();
 };
 
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 const normalizeTitle = (title: string, locale: Locale) => {
   const siteName = getBrandCopy(locale).siteName;
   const cleanTitle = title.trim();
   const baseTitle = cleanTitle.length > 0 && !/^untitled$/i.test(cleanTitle) ? cleanTitle : siteName;
-  const hasTemplate = baseTitle.includes("|");
-  const suffix = ` | ${siteName}`;
-  let normalized = hasTemplate ? baseTitle : `${baseTitle}${suffix}`;
+  const suffixPattern = new RegExp(`\\s*(?:\\||-|—)\\s*${escapeRegExp(siteName)}$`, "i");
+  const normalized = baseTitle.replace(suffixPattern, "").trim() || siteName;
+  const maxLength = normalized.toLowerCase() === siteName.toLowerCase()
+    ? TITLE_MAX_LENGTH
+    : Math.max(20, TITLE_MAX_LENGTH - TITLE_TEMPLATE_SUFFIX.length);
 
-  if (normalized.length <= TITLE_MAX_LENGTH) {
+  if (normalized.length <= maxLength) {
     return normalized;
   }
 
-  const maxPageNameLength = Math.max(8, TITLE_MAX_LENGTH - suffix.length);
-  const pageName = baseTitle.split("|")[0]?.trim() ?? baseTitle;
-  const clippedPageName = trimToWordBoundary(pageName, maxPageNameLength);
-  normalized = `${clippedPageName}${suffix}`;
-  return normalized.length > TITLE_MAX_LENGTH ? normalized.slice(0, TITLE_MAX_LENGTH).trimEnd() : normalized;
+  const clippedTitle = trimToWordBoundary(normalized, maxLength);
+  return clippedTitle.length > maxLength ? clippedTitle.slice(0, maxLength).trimEnd() : clippedTitle;
 };
 
 const normalizeDescription = (description: string | undefined, locale: Locale) => {
   const keyword = SEO_KEYWORD_BY_LOCALE[locale];
   const fallbackByLocale: Record<Locale, string> = {
-    tr: `AI Engineers Lab, ${keyword} ve muhendislik standartlari ile teknik analiz, dogrulama ve raporlama surecini tek yerde toplar.`,
+    tr: `AI Engineers Lab, ${keyword} ve mühendislik standartlari ile teknik analiz, dogrulama ve raporlama surecini tek yerde toplar.`,
     en: `AI Engineers Lab combines ${keyword}, engineering standards, technical analysis, validation, and reporting in one place.`,
   };
 
@@ -101,10 +104,13 @@ export const buildPageMetadata = ({
   openGraph,
   twitter,
   alternatesLanguages: alternatesLanguagesArg,
+  useLocalizedCanonical = false,
 }: PageMetadataOptions): Metadata => {
   const normalizedTitle = normalizeTitle(title, locale);
   const normalizedDescription = normalizeDescription(description, locale);
-  const canonical = buildLocalizedCanonical(path, locale);
+  const canonical = useLocalizedCanonical
+    ? buildLocalizedCanonical(path, locale)
+    : buildCanonical(path) ?? path;
   const alternatesLanguages = alternatesLanguagesArg === undefined ? buildLanguageAlternates(path) : alternatesLanguagesArg;
   const alternates = {
     canonical,

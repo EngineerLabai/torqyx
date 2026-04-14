@@ -50,12 +50,18 @@ export type HowToStepSchema = {
   url?: string;
 };
 
+export type HowToToolSchema = {
+  "@type"?: "HowToTool";
+  name: string;
+};
+
 export type HowToSchemaInput = {
   name: string;
   description?: string;
   url?: string;
   inLanguage?: string;
   step: HowToStepSchema[];
+  tool?: HowToToolSchema[];
 };
 
 export type StructuredDataByType = {

@@ -1,0 +1,56 @@
+import PageHero from "@/components/layout/PageHero";
+import PageShell from "@/components/layout/PageShell";
+import ToolLibraryLazy from "@/components/tools/ToolLibraryLazy";
+import { getBrandCopy } from "@/config/brand";
+import { getHeroImageSrc } from "@/lib/assets";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const copy = getMessages(locale).pages.tools;
+  const brandContent = getBrandCopy(locale);
+  const title = locale === "tr" ? "Mühendislik Hesaplayıcıları" : "Engineering Calculators";
+  const description =
+    locale === "tr"
+      ? "Cıvata, kuvvet, tork, malzeme ve daha fazlası. Tüm hesaplayıcılar ISO/DIN referanslı, adım adım doğrulanmış sonuçlarla."
+      : copy.description;
+
+  return buildPageMetadata({
+    title,
+    description,
+    path: "/tools",
+    locale,
+    openGraph: {
+      siteName: brandContent.siteName,
+    },
+  });
+}
+
+type ToolsIndexPageProps = {
+  searchParams?: Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function ToolsIndexPage({ searchParams }: ToolsIndexPageProps) {
+  const locale = await getLocaleFromCookies();
+  const copy = getMessages(locale).pages.tools;
+  const heroImage = getHeroImageSrc("tools");
+  const resolvedSearchParams = (await searchParams) ?? undefined;
+
+  return (
+    <PageShell>
+      <PageHero
+        title={copy.title}
+        description={copy.description}
+        eyebrow={copy.badge}
+        imageSrc={heroImage}
+        imageAlt={copy.imageAlt}
+      />
+
+      <h1 className="sr-only">Engineering Calculators</h1>
+
+      <ToolLibraryLazy locale={locale} searchParams={resolvedSearchParams} />
+    </PageShell>
+  );
+}

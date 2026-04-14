@@ -35,7 +35,7 @@ export type ResolvedToolDocumentation = {
 
 export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
   scope: {
-    tr: "Bu arac belirli bir muhendislik problemi icin girdileri alir ve standart tabanli hesap sonucu uretir.",
+    tr: "Bu arac belirli bir mühendislik problemi icin girdileri alir ve standart tabanli hesap sonucu uretir.",
     en: "This tool accepts engineering inputs for a defined problem and returns a standards-based calculation result.",
   },
   assumptionsAndUnits: {
@@ -52,7 +52,7 @@ export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
   },
   limits: {
     tr: [
-      "Arac on boyutlandirma ve teknik kontrol amaclidir; final tasarim onayi yerine gecmez.",
+      "Araç ön boyutlandırma ve teknik kontrol amaçlıdır; final tasarım onayı yerine geçmez.",
       "Deger araligi disina cikan girdilerde sonuc yorumundan once girdi kalitesi kontrol edilmelidir.",
     ],
     en: [
@@ -61,7 +61,7 @@ export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
     ],
   },
   referenceStandards: {
-    tr: ["ISO / DIN / VDI kaynaklari ve yaygin muhendislik el kitaplari"],
+    tr: ["ISO / DIN / VDI kaynaklari ve yaygin mühendislik el kitaplari"],
     en: ["ISO / DIN / VDI references and common engineering handbooks"],
   },
   validationExamples: {
@@ -74,7 +74,7 @@ export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
             expectedOutput: "Beklenen cikti: Arac sonucu standart tablolar ile ayni mertebede",
           },
         ],
-        note: "Gercek projede en az bir manuel kontrol veya referans tablo karsilastirmasi yapin.",
+        note: "Gerçek projede en az bir manuel kontrol veya referans tablo karsilastirmasi yapin.",
       },
     ],
     en: [
@@ -104,7 +104,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
       tr: [
         "SI birimleri kullanilir (N, mm, MPa, Nm).",
         "Dis geometrisi ve surtunme katsayisi icin tipik degerler kullanilir; uygulamaya gore guncellenmelidir.",
-        "Malzeme sinifi mekanik ozellikleri ISO 898-1 referansina gore yorumlanir.",
+        "Malzeme sinifi mekanik özellikleri ISO 898-1 referansina gore yorumlanir.",
       ],
       en: [
         "SI units are used (N, mm, MPa, Nm).",
@@ -114,7 +114,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     },
     limits: {
       tr: [
-        "Tork-preload iliskisi surtunmeye yuksek hassastir; gercek montajda kalibrasyon gerekir.",
+        "Tork-preload iliskisi surtunmeye yuksek hassastir; gerçek montajda kalibrasyon gerekir.",
         "Dinamik yorulma, gevseme ve servis sicakligi etkileri bu hizli modelde sinirlidir.",
       ],
       en: [
@@ -175,7 +175,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     limits: {
       tr: [
         "Sicaklik gibi ofsetli donusumlerde secilen formata gore sonuc degisimi kontrol edilmelidir.",
-        "Standart disi birimler veya proje icin ozel katsayilar bu arac kapsaminda degildir.",
+        "Standart disi birimler veya proje icin ozel katsayilar bu arac kapsaminda değildir.",
       ],
       en: [
         "Offset-based conversions (such as temperature) must be checked against the selected formula.",
@@ -217,7 +217,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     assumptionsAndUnits: {
       tr: [
         "Model Darcy-Weisbach yaklasimina dayanir; SI birimleri kullanilir (m, kg/s, Pa).",
-        "Akiskan ozellikleri secilen sicaklikta sabit kabul edilir (hizli hesap varsayimi).",
+        "Akiskan özellikleri secilen sicaklikta sabit kabul edilir (hizli hesap varsayimi).",
         "Pruzululuk, cap ve uzunluk girdileri duz boru segmenti mantigiyla yorumlanir.",
       ],
       en: [
@@ -250,7 +250,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
               expectedOutput: "Re > 4000, basinc kaybi yaklasik 8-15 kPa araligi",
             },
           ],
-          note: "Gercek sistemde lokal kayip katsayilari (dirsek, vana) eklenmelidir.",
+          note: "Gerçek sistemde lokal kayip katsayilari (dirsek, vana) eklenmelidir.",
         },
       ],
       en: [
@@ -274,7 +274,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
 const buildFallbackDocumentation = (toolTitle: string): ToolDocumentationEntry => ({
   ...TOOL_DOCUMENTATION_TEMPLATE,
   scope: {
-    tr: `${toolTitle} araci bu arac tipine ait temel muhendislik hesabini yapar ve sonucu izlenebilir formatta sunar.`,
+    tr: `${toolTitle} araci bu arac tipine ait temel mühendislik hesabini yapar ve sonucu izlenebilir formatta sunar.`,
     en: `${toolTitle} performs the core engineering calculation for this tool type and presents results in a traceable format.`,
   },
 });

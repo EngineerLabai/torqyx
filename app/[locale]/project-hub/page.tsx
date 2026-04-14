@@ -136,6 +136,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: seo.description,
     path: "/project-hub",
     locale,
+    useLocalizedCanonical: true,
   });
 }
 
@@ -171,6 +172,10 @@ export default async function ProjectHubPage({ params }: PageProps) {
       />
 
       <section className="grid gap-4 md:grid-cols-2">
+      <h1 className="text-3xl font-bold tracking-tight">
+        Project Hub
+      </h1>
+
         {localizedModules.map((module) => (
           <ActionCard
             key={module.title}

@@ -113,6 +113,10 @@ export default async function FixtureToolsPage() {
       <Hero title={copy.title} subtitle={copy.description} imageSrc={heroImage} imageAlt={copy.imageAlt} />
 
       <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h1 className="text-3xl font-bold tracking-tight">
+        [Manual] Fixture Tools
+      </h1>
+
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] text-slate-600 md:text-xs">
           <span className="font-semibold">{copy.badge}</span>
         </div>

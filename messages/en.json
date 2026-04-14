@@ -25,6 +25,7 @@
       "linkAbout": "About",
       "linkContact": "Contact",
       "linkHome": "Home",
+      "linkBlog": "Blog",
       "sectionFaq": "FAQ",
       "linkFaq": "FAQ"
     },
@@ -48,7 +49,8 @@
   },
   "authButtons": {
     "login": "Sign in",
-    "premium": "Pricing",
+    "premium": "Join Early Access List",
+    "premiumTooltip": "Premium tools are coming soon - sign up now and be the first to know.",
     "userFallback": "User",
     "logout": "Sign out",
     "unavailable": "Auth is unavailable right now.",
@@ -70,6 +72,14 @@
       "socialProof": "Trusted by 500+ mechanical engineers",
       "trustBadge": "Calculations verified against ISO/DIN standards",
       "supportNote": "No credit card required. Start in under 60 seconds.",
+      "stats": {
+        "engineersCount": "500+",
+        "engineersLabel": "engineers are using it",
+        "verifiedPrefix": "Verified with ISO/DIN standards",
+        "verifiedStrong": "validated",
+        "cardPrefix": "No credit card",
+        "cardStrong": "required"
+      },
       "imageAlt": "Mechanical engineering calculator dashboard"
     },
     "popularTools": {

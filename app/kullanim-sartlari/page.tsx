@@ -236,6 +236,10 @@ export default async function TermsPage() {
       <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
         {sections.map((section, index) => (
           <section key={section.title} className="space-y-2">
+      <h1 className="text-3xl font-bold tracking-tight">
+        Terms of Use
+      </h1>
+
             <h2 className="text-lg font-semibold text-slate-900">
               {index + 1}. {section.title}
             </h2>

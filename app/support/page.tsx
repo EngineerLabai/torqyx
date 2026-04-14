@@ -36,6 +36,10 @@ export default async function SupportPage() {
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h1 className="text-3xl font-bold tracking-tight">
+        [Manual] Support
+      </h1>
+
         <SupportForm />
       </section>
 

@@ -2,7 +2,11 @@
 
 export const COMMAND_PALETTE_OPEN_EVENT = "command-palette:open";
 
-export const openCommandPalette = () => {
+export const openCommandPalette = (query?: string) => {
   if (typeof window === "undefined") return;
-  window.dispatchEvent(new Event(COMMAND_PALETTE_OPEN_EVENT));
+  window.dispatchEvent(
+    new CustomEvent(COMMAND_PALETTE_OPEN_EVENT, {
+      detail: { query },
+    }),
+  );
 };

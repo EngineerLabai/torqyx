@@ -33,17 +33,17 @@ const LABELS: Record<
   }
 > = {
   tr: {
-    sectionTitle: "Standart Dokumantasyon",
-    scope: "Kapsam: Bu arac ne hesaplar?",
-    assumptionsAndUnits: "Varsayimlar ve Birimler",
-    limits: "Limitler / Sinirlar",
+    sectionTitle: "Standart Dokümantasyon",
+    scope: "Kapsam: Bu araç ne hesaplar?",
+    assumptionsAndUnits: "Varsayımlar ve Birimler",
+    limits: "Limitler / Sınırlar",
     references: "Referans Standart",
-    validation: "Dogrulama Ornegi",
-    release: "Surum ve Guncelleme",
+    validation: "Doğrulama Örneği",
+    release: "Sürüm ve Güncelleme",
     input: "Girdi",
-    expectedOutput: "Beklenen Cikti",
-    version: "Surum",
-    lastUpdated: "Son guncelleme",
+    expectedOutput: "Beklenen Çıktı",
+    version: "Sürüm",
+    lastUpdated: "Son güncelleme",
     note: "Not",
   },
   en: {

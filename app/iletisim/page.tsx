@@ -1,7 +1,6 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import SupportForm from "@/components/support/SupportForm";
-import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
@@ -20,12 +19,16 @@ const pageCopyEn = {
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
-  const brandContent = getBrandCopy(locale);
   const copy = locale === "en" ? pageCopyEn : pageCopy;
+  const title = locale === "tr" ? "İletişim" : copy.title;
+  const description =
+    locale === "tr"
+      ? "AI Engineers Lab ekibiyle iletişime geçin. Teknik destek, öneri ve iş birliği talepleriniz için hızlı geri dönüş alın."
+      : copy.description;
 
   return buildPageMetadata({
-    title: `${copy.title} | ${brandContent.siteName}`,
-    description: copy.description,
+    title,
+    description,
     path: "/iletisim",
     locale,
     alternatesLanguages: null,
@@ -46,6 +49,10 @@ export default async function ContactPage() {
         />
 
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h1 className="text-3xl font-bold tracking-tight">
+        Contact
+      </h1>
+
           <p className="text-sm text-slate-700 md:text-base">
             Use the form below for technical questions, new tool requests, or collaboration ideas. If you can share inputs, units, and
             expected results, we can review faster.

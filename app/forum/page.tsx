@@ -24,3 +24,5 @@ export default async function ForumRedirect() {
   const locale = await getLocaleFromCookies();
   redirect(withLocalePrefix("/faq", locale));
 }
+
+
