@@ -276,10 +276,19 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
       // silently fail; feedback is best-effort
     }
   };
+
+  const resetConversation = () => {
     setHistory([]);
     setResponseText("");
     setError(null);
     setFeedback(null);
+  };
+
+  const handleFollowUp = () => {
+    if (question.trim()) {
+      void streamExplanation(question);
+      setQuestion("");
+    }
   };
 
   const explanationContent = responseText || (history.find((item) => item.role === "assistant")?.content ?? "");
