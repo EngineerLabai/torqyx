@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(
@@ -8,6 +7,7 @@ export async function GET(
   { params }: { params: { code: string } }
 ) {
   try {
+    const session = await auth();
     const { code } = params;
 
     const sharedCalculation = await prisma.sharedCalculation.findUnique({
