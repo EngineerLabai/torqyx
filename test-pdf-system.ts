@@ -4,14 +4,18 @@ import { ReportHelpers } from "@/lib/pdf/reportConverters";
 // Test verisi
 const testInput = {
   d: 10, // Nominal diameter
-  pitch: 1.5, // Pitch
-  length: 50, // Length
+  P: 1.5, // Pitch
+  grade: "8.8",
+  friction: "dry",
+  preloadPercent: 70,
 };
 
 const testResult = {
   stressArea: 58.0, // Stress area
-  tensileStrength: 800, // MPa
   yieldStrength: 640, // MPa
+  ultimateStrength: 800, // MPa
+  preloadForce: 15000,
+  torque: 80,
   safetyFactor: 1.5,
 };
 
@@ -20,7 +24,8 @@ const reportData = createBoltCalculatorReport(
   testInput,
   testResult,
   "bolt-calculator",
-  "Bolt Calculator"
+  "Bolt Calculator",
+  "SI"
 );
 
 console.log("Test Report Data:", JSON.stringify(reportData, null, 2));

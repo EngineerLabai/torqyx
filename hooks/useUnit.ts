@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo } from "react";
-import { useCurrentUnitSystem, type UnitSystem } from "@/contexts/UnitSystemContext";
+import { useCurrentUnitSystem } from "@/contexts/UnitSystemContext";
 import {
   formatValueWithUnit,
   getUnitDefinition,
   convertValue,
-  type UnitCategory
+  type UnitCategory,
+  type UnitSystem,
 } from "@/utils/units";
 
 interface UseUnitOptions {

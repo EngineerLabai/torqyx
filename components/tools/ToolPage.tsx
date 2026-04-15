@@ -35,6 +35,8 @@ import { buildShareUrl, decodeToolState, encodeToolState, decodeToolStateShort }
 import { formatMessage, getMessages } from "@/utils/messages";
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
+import { useUnitSystem } from "@/contexts/UnitSystemContext";
+import type { TraceSource } from "@/hooks/useCalculationTrace";
 
 type ToolInputRecord = Record<string, unknown>;
 type ToolResultRecord = Record<string, unknown>;
@@ -48,6 +50,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
 }) {
   const { locale } = useLocale();
+  const { system } = useUnitSystem();
   const messages = getMessages(locale);
   const copy = messages.components.toolActions;
   const toolPageCopy = messages.components.toolPage;
@@ -85,12 +88,12 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
       if (shared) {
         mergedInput = { ...(tool.initialInput as ToolInputRecord) };
         Object.entries(shared).forEach(([key, value]) => {
-          mergedInput[key] = value;
+          (mergedInput as ToolInputRecord)[key] = value;
         });
       } else if (sharedShort) {
         mergedInput = { ...(tool.initialInput as ToolInputRecord) };
         Object.entries(sharedShort).forEach(([key, value]) => {
-          mergedInput[key] = value;
+          (mergedInput as ToolInputRecord)[key] = value;
         });
       } else if (sharedFromLink) {
         try {
@@ -292,7 +295,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
                   toolName={toolTitle}
                   inputs={validation.success ? (validation.data as ToolInputRecord) : (input as ToolInputRecord)}
                   outputs={gatedResult as ToolResultRecord}
-                  traceSource={gatedResult as { auditTrail?: unknown }}
+                  traceSource={gatedResult as TraceSource}
                 />
                 <div className="mt-4">
                   <ExplainResultPanel

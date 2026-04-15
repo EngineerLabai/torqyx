@@ -1,4 +1,4 @@
-import type { ReportData } from "@/lib/pdf/types";
+import type { ReportCalculationStep, ReportData } from "@/lib/pdf/types";
 
 /**
  * Hesaplama sonuçlarını PDF rapor formatına dönüştüren interface
@@ -44,8 +44,8 @@ export const ReportHelpers = {
     label: string,
     value: string | number,
     unit?: string,
-    status: ReportData["results"][0]["status"] = "info"
-  ): ReportData["results"][0] => ({
+    status: ReportData["results"][number]["status"] = "info"
+  ): ReportData["results"][number] => ({
     label,
     value,
     unit,
@@ -73,8 +73,8 @@ export const ReportHelpers = {
     result: string | number,
     unit: string,
     standard?: string,
-    status: ReportData["results"][0]["status"] = "info"
-  ): ReportData["calculationSteps"][0] => ({
+    status: ReportData["results"][number]["status"] = "info"
+  ): ReportCalculationStep => ({
     id,
     name,
     formula,
@@ -193,12 +193,14 @@ export const createGenericReport: ToReportDataConverter<Record<string, unknown>,
   input,
   result,
   toolId,
-  toolName
+  toolName,
+  unitSystem
 ) => {
   return {
     toolId,
     toolName,
     calculationDate: new Date().toISOString(),
+    unitSystem,
     parameters: Object.entries(input).map(([key, value]) => ({
       label: key,
       value: String(value),

@@ -1,4 +1,5 @@
 import type { BoltInput, BoltResult, BoltPreset, GradeKey, FrictionKey } from "./types";
+import type { CalculationStep, CalculationStepStatus } from "@/tools/_shared/types";
 
 export const BOLT_PRESETS: BoltPreset[] = [
   { id: "M3", label: "M3 x 0.50", d: 3, P: 0.5 },
@@ -49,7 +50,7 @@ function buildBoltAuditTrail(
   sigma: number,
   safety: number,
   Re: number,
-) {
+): CalculationStep[] {
   return [
     {
       id: "as",
@@ -62,7 +63,7 @@ function buildBoltAuditTrail(
       result: As.toFixed(2),
       unit: "mm²",
       standard: "ISO 898-1",
-      status: "pass",
+      status: "pass" as CalculationStepStatus,
     },
     {
       id: "fv",
@@ -76,7 +77,7 @@ function buildBoltAuditTrail(
       result: (Fv_N / 1000).toFixed(2),
       unit: "kN",
       standard: "ISO 898-1",
-      status: "pass",
+      status: "pass" as CalculationStepStatus,
     },
     {
       id: "sigma",
@@ -89,7 +90,7 @@ function buildBoltAuditTrail(
       result: sigma.toFixed(1),
       unit: "MPa",
       standard: "ISO 898-1",
-      status: getStepStatusForSafety(safety),
+      status: getStepStatusForSafety(safety) as CalculationStepStatus,
     },
     {
       id: "safety",
@@ -102,7 +103,7 @@ function buildBoltAuditTrail(
       result: safety.toFixed(2),
       unit: "-",
       standard: "VDI 2230",
-      status: getStepStatusForSafety(safety),
+      status: getStepStatusForSafety(safety) as CalculationStepStatus,
     },
   ];
 }

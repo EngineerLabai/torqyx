@@ -45,9 +45,10 @@ export async function POST(request: NextRequest) {
 
     // PDF oluştur
     const pdfBuffer = await generatePdfReport(toolId, reportData, session.user);
+    const pdfBytes = new Uint8Array(pdfBuffer);
 
     // Response olarak PDF buffer dön
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(pdfBytes, {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",

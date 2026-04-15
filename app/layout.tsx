@@ -20,6 +20,7 @@ import { listPublicImagePaths } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
+import { buildPageMetadata } from "@/utils/metadata";
 import { Toaster } from "@/components/ui/toaster";
 import { UnitSystemProvider } from "@/contexts/UnitSystemContext";
 import "../styles/globals.css";
