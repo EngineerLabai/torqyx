@@ -18,14 +18,26 @@ interface ShareResult {
   expiresAt?: string;
 }
 
+type ShareResponse = {
+  success: true;
+  url: string;
+  code?: string;
+  expiresAt?: string;
+} | {
+  success: false;
+  error: string;
+};
+
 export function useShareableUrl({ toolId, currentInput, currentResult }: UseShareableUrlOptions) {
   const pathname = usePathname();
-  const { isPremium } = useFeatureGate();
+  const { hasAccess: isPremium } = useFeatureGate("tool_access", {
+    toolId,
+  });
   const [isSharing, setIsSharing] = useState(false);
   const [lastShare, setLastShare] = useState<ShareResult | null>(null);
 
   // MOD 1: URL paylaşımı (anonim, basit)
-  const shareViaUrl = useCallback(async () => {
+  const shareViaUrl = useCallback(async (): Promise<ShareResponse> => {
     try {
       const url = buildShareUrlShort(toolId, pathname, currentInput);
 
@@ -51,7 +63,7 @@ export function useShareableUrl({ toolId, currentInput, currentResult }: UseShar
   }, [toolId, pathname, currentInput]);
 
   // MOD 2: Kısa link paylaşımı (premium, veritabanı)
-  const shareViaShortLink = useCallback(async (isPublic: boolean = false) => {
+  const shareViaShortLink = useCallback(async (isPublic: boolean = false): Promise<ShareResponse> => {
     if (!isPremium) {
       return { success: false, error: "Bu özellik premium üyelere özeldir" };
     }

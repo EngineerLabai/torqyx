@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { CalculationStep } from "@/tools/_shared/types";
 
-type TraceSource = {
+export type TraceSource = {
   auditTrail?: CalculationStep[] | (() => CalculationStep[] | null) | null;
 };
 

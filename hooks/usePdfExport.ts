@@ -23,7 +23,7 @@ export function usePdfExport({
   onError,
 }: UsePdfExportOptions): UsePdfExportResult {
   const [isExporting, setIsExporting] = useState(false);
-  const { hasAccess: isPremium, isLoading: isCheckingPremium } = useFeatureGate({
+  const { hasAccess: isPremium, isLoading: isCheckingPremium } = useFeatureGate("pdf_export", {
     toolId,
   });
 

@@ -213,7 +213,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               <div className="flex flex-col gap-3">
                 <button
                   type="button"
-                  onClick={openCommandPalette}
+                  onClick={() => openCommandPalette()}
                   className="tap-target inline-flex h-10 w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 shadow-sm"
                   aria-label={searchCopy.paletteOpen}
                 >

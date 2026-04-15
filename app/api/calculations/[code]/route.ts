@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { code: string } }
+  context: { params: Promise<{ code: string }> }
 ) {
   try {
     const session = await auth();
-    const { code } = params;
+    const { code } = await context.params;
 
     const sharedCalculation = await prisma.sharedCalculation.findUnique({
       where: { code },
@@ -32,7 +32,6 @@ export async function GET(
     }
 
     // Sadece public paylaşımlar veya sahibi erişebilir
-    const session = await getServerSession(authOptions);
     const isOwner = session?.user?.id === sharedCalculation.userId;
 
     if (!sharedCalculation.isPublic && !isOwner) {

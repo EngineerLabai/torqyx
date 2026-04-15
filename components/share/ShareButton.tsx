@@ -41,7 +41,7 @@ export function ShareButton({
   const handleUrlShare = async () => {
     const result = await shareViaUrl();
     if (result.success) {
-      setCopiedUrl(result.url);
+      setCopiedUrl(result.url ?? null);
       toast({
         title: "Bağlantı kopyalandı",
         description: "Hesaplama bağlantısı panoya kopyalandı",
@@ -59,7 +59,7 @@ export function ShareButton({
   const handleShortLinkShare = async (isPublic: boolean = false) => {
     const result = await shareViaShortLink(isPublic);
     if (result.success) {
-      setCopiedUrl(result.url);
+      setCopiedUrl(result.url ?? null);
       toast({
         title: "Kısa bağlantı oluşturuldu",
         description: isPremium

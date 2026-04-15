@@ -78,8 +78,8 @@ export const authOptions = {
   },
   providers,
   events: {
-    createUser: async ({ user }) => {
-      if (!user.id) return;
+    createUser: async ({ user }: { user: { id?: string | null } }) => {
+      if (!user?.id) return;
       const trialStart = new Date();
       const trialEnd = addDays(trialStart, TRIAL_DURATION_DAYS);
 
@@ -97,7 +97,7 @@ export const authOptions = {
     },
   },
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user }: { token: any; user?: any }) => {
       if (user) {
         token.tier = user.tier;
         token.trialStart = user.trialStart;
@@ -105,7 +105,7 @@ export const authOptions = {
       }
       return token;
     },
-    session: async ({ session, token }) => {
+    session: async ({ session, token }: { session: any; token: any }) => {
       if (token) {
         session.user.id = token.sub!;
         session.user.tier = token.tier as any;

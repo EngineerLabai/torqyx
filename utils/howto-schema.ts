@@ -92,7 +92,7 @@ function extractHowToTools(tool: ToolConfig, locale: Locale): Array<{ "@type": "
   if (tool.references) {
     const references = resolveLocalizedValue(tool.references, locale);
     if (references && references.length > 0) {
-      references.slice(0, 3).forEach(ref => {
+      references.slice(0, 3).forEach((ref: { title: string }) => {
         tools.push({
           "@type": "HowToTool",
           name: ref.title,

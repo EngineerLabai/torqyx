@@ -215,7 +215,7 @@ export const buildExplainResultSystemPrompt = (locale: Locale, toolId: string) =
 
 export const buildExplainResultUserPrompt = (payload: { locale: Locale; toolId: string; toolName: string; inputs: Record<string, unknown>; outputs: Record<string, unknown>; auditTrail?: unknown; question?: string; history?: { role: "user" | "assistant"; content: string }[] }) => {
   const lines: string[] = [
-    locale === "tr"
+    payload.locale === "tr"
       ? "Aşağıdaki bilgileri kullanarak yanıt ver. Yalnızca sağlanan verileri kullan, yeni hesaplama yapma."
       : "Answer using the information below. Use only the provided values and do not compute new results.",
     `Tool: ${payload.toolName} (${payload.toolId})`,
@@ -237,10 +237,10 @@ export const buildExplainResultUserPrompt = (payload: { locale: Locale; toolId: 
   }
 
   if (payload.question) {
-    lines.push(locale === "tr" ? `Takip sorusu: ${payload.question}` : `Follow-up question: ${payload.question}`);
+    lines.push(payload.locale === "tr" ? `Takip sorusu: ${payload.question}` : `Follow-up question: ${payload.question}`);
   } else {
     lines.push(
-      locale === "tr"
+      payload.locale === "tr"
         ? "Açıklamayı aşağıdaki başlıklara göre ver: Genel Bakış, Kritik Faktörler, Güvenlik Marjı, Hassasiyet, Pratik Anlam."
         : "Provide the explanation with these headings: Overview, Critical factors, Safety margin, Sensitivity, Practical takeaway.",
     );

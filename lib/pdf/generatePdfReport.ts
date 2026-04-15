@@ -193,6 +193,7 @@ function addFormulasSection(
 function addResultsSection(
   doc: jsPDF,
   results: ReportData["results"],
+  unitSystem: ReportData["unitSystem"],
   yPosition: number,
   pageWidth: number,
   margin: number
