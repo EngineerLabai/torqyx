@@ -37,7 +37,7 @@ export async function generateMetadata() {
     description,
     alternates: {
       ...(base.alternates ?? {}),
-      canonical: CANONICAL_SITE_URL,
+      canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://torqyx.vercel.app',
     },
     openGraph: {
       ...(base.openGraph ?? {}),
