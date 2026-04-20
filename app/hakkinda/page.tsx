@@ -2,9 +2,9 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
-import DeterministicDisclaimer from "@/components/shared/DeterministicDisclaimer";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
+import DeterministicDisclaimer from "@/components/shared/DeterministicDisclaimer";
 
 const pageCopy = {
   title: "Hakkında",
@@ -83,7 +83,9 @@ export default async function AboutPage() {
         imageAlt={copy.imageAlt}
       />
 
-      <DeterministicDisclaimer locale={locale} />
+      <div className="my-6">
+        <DeterministicDisclaimer locale={locale} />
+      </div>
 
       <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
         <section className="space-y-3">
