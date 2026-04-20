@@ -1,23 +1,23 @@
 import type { Locale } from "@/utils/locale";
 
-type AIDeterministicDisclaimerProps = {
+type DeterministicDisclaimerProps = {
   locale: Locale;
   compact?: boolean;
   className?: string;
 };
 
 const DISCLAIMER_TEXT: Record<Locale, string> = {
-  tr: "AI yalnızca sonucu özetler ve olası riskleri işaretler. Hesaplamalar deterministiktir.",
-  en: "AI only summarizes results and highlights risks. Calculations are deterministic.",
+  tr: "Hesaplamalar ISO/DIN/VDI standartlarına dayalı deterministik formüllerle yürütülür. Sistem girişleri kontrol eder ve olası riskleri işaretler.",
+  en: "Calculations use deterministic formulas based on ISO/DIN/VDI standards. The system validates inputs and highlights potential engineering risks.",
 };
 
 const joinClassNames = (...values: Array<string | undefined>) => values.filter(Boolean).join(" ");
 
-export default function AIDeterministicDisclaimer({
+export default function DeterministicDisclaimer({
   locale,
   compact = false,
   className,
-}: AIDeterministicDisclaimerProps) {
+}: DeterministicDisclaimerProps) {
   const text = DISCLAIMER_TEXT[locale];
 
   if (compact) {

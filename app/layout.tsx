@@ -1,4 +1,4 @@
-﻿// app/layout.tsx
+﻿﻿﻿﻿// app/layout.tsx
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import type { ReactNode } from "react";
@@ -52,11 +52,11 @@ const isVercelAppHost = (host: string) => {
   return normalized === "vercel.app" || normalized.endsWith(".vercel.app");
 };
 
-const DEFAULT_SITE_TITLE = "AI Engineers Lab";
+const DEFAULT_SITE_TITLE = "TORQYX";
 const DEFAULT_SITE_DESCRIPTION =
   "ISO/DIN/VDI referanslı, standart temelli mekanik mühendislik hesaplayıcıları. Tahmin değil, deterministik sonuç.";
 const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar. 500+ mühendis kullanıyor.";
-const DEFAULT_OG_IMAGE = "/og-image.png";
+const DEFAULT_OG_IMAGE = "/images/og-torqyx.png";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
@@ -81,23 +81,23 @@ export async function generateMetadata(): Promise<Metadata> {
     ...base,
     title: {
       default: DEFAULT_SITE_TITLE,
-      template: "%s | AI Engineers Lab",
+      template: "%s | TORQYX",
     },
     description: DEFAULT_SITE_DESCRIPTION,
     openGraph: {
       ...(base.openGraph ?? {}),
       type: "website",
-      locale: "tr_TR",
+      locale: locale === "tr" ? "tr_TR" : "en_US",
       url: CANONICAL_SITE_URL,
-      siteName: "AI Engineers Lab",
+      siteName: "TORQYX",
       title: DEFAULT_SITE_TITLE,
-      description: DEFAULT_OG_DESCRIPTION,
+      description: brandContent.tagline || DEFAULT_OG_DESCRIPTION,
       images: [
         {
           url: DEFAULT_OG_IMAGE,
           width: 1200,
           height: 630,
-          alt: "AI Engineers Lab — Mühendislik Hesaplayıcıları",
+          alt: "TORQYX — Mühendislik Hesaplayıcıları",
         },
       ],
     },

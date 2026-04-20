@@ -2,18 +2,18 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
-import AIDeterministicDisclaimer from "@/src/components/ai/AIDeterministicDisclaimer";
+import DeterministicDisclaimer from "@/src/components/shared/DeterministicDisclaimer";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 
 const pageCopy = {
   title: "Hakkında",
   description: "Deterministik mühendislik hesaplayıcılar, standartlar ve raporlama altyapısı.",
-  imageAlt: "AI Engineers Lab hakkında görsel",
+  imageAlt: "TORQYX hakkında görsel",
   sections: {
     storyTitle: "Hikaye ve yaklaşım",
     storyBody: [
-      'AI Engineers Lab, mekanik tasarım ve üretim kararları için mühendisler tarafından geliştirilen deterministik bir araç setidir. Buradaki "AI", Applied Intelligence / Analysis & Insights anlamına gelir; sohbet botu değil, metodik hesaplama yaklaşımıdır.',
+      "TORQYX, mekanik tasarım ve üretim kararları için mühendisler tarafından geliştirilen deterministik bir araç setidir.",
       "Amacımız; aynı girdilerle her zaman aynı sonucu veren, izlenebilir ve raporlanabilir hesaplar sunmak ve mühendislik kararlarını güvenle hızlandırmaktır.",
     ],
     methodologyTitle: "Metodoloji & Doğrulama",
@@ -34,11 +34,11 @@ const pageCopy = {
 const pageCopyEn = {
   title: "About",
   description: "Deterministic engineering calculators, standards, and reporting infrastructure.",
-  imageAlt: "About AI Engineers Lab",
+  imageAlt: "About TORQYX",
   sections: {
     storyTitle: "Story and approach",
     storyBody: [
-      'AI Engineers Lab is a deterministic toolkit built by mechanical and manufacturing engineers. Here "AI" means Applied Intelligence / Analysis & Insights; it is not a chatbot.',
+      "TORQYX is a deterministic toolkit built by mechanical and manufacturing engineers.",
       "Our goal is to deliver repeatable, traceable calculations and report-ready outputs that accelerate real engineering decisions.",
     ],
     methodologyTitle: "Methodology & Validation",
@@ -72,85 +72,43 @@ export async function generateMetadata() {
 
 export default async function AboutPage() {
   const locale = await getLocaleFromCookies();
-
-  if (locale === "en") {
-    return (
-      <PageShell>
-        <PageHero
-          title={pageCopyEn.title}
-          description={pageCopyEn.description}
-          imageSrc={HERO_PLACEHOLDER}
-          imageAlt={pageCopyEn.imageAlt}
-        />
-
-        <AIDeterministicDisclaimer locale="en" />
-
-        <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
-          <section className="space-y-3">
-      <h1 className="text-3xl font-bold tracking-tight">
-        About
-      </h1>
-
-            <h2 className="text-lg font-semibold text-slate-900">{pageCopyEn.sections.storyTitle}</h2>
-            {pageCopyEn.sections.storyBody.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold text-slate-900">{pageCopyEn.sections.methodologyTitle}</h2>
-            <ul className="list-disc space-y-1 pl-5">
-              {pageCopyEn.sections.methodologyItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold text-slate-900">{pageCopyEn.sections.limitationsTitle}</h2>
-            <ul className="list-disc space-y-1 pl-5">
-              {pageCopyEn.sections.limitationsItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        </article>
-      </PageShell>
-    );
-  }
+  const copy = locale === "en" ? pageCopyEn : pageCopy;
 
   return (
     <PageShell>
       <PageHero
-        title={pageCopy.title}
-        description={pageCopy.description}
+        title={copy.title}
+        description={copy.description}
         imageSrc={HERO_PLACEHOLDER}
-        imageAlt={pageCopy.imageAlt}
+        imageAlt={copy.imageAlt}
       />
 
-      <AIDeterministicDisclaimer locale="tr" />
+      <DeterministicDisclaimer locale={locale} />
 
       <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">{pageCopy.sections.storyTitle}</h2>
-          {pageCopy.sections.storyBody.map((paragraph) => (
+          <h1 className="text-3xl font-bold tracking-tight">
+            {copy.title}
+          </h1>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.storyTitle}</h2>
+          {copy.sections.storyBody.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">{pageCopy.sections.methodologyTitle}</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.methodologyTitle}</h2>
           <ul className="list-disc space-y-1 pl-5">
-            {pageCopy.sections.methodologyItems.map((item) => (
+            {copy.sections.methodologyItems.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">{pageCopy.sections.limitationsTitle}</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.limitationsTitle}</h2>
           <ul className="list-disc space-y-1 pl-5">
-            {pageCopy.sections.limitationsItems.map((item) => (
+            {copy.sections.limitationsItems.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>

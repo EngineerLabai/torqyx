@@ -14,7 +14,7 @@ export default async function BacklashCalculatorPage() {
   const initialDocs = await getToolDocsResponse("gear-design/calculators/backlash-calculator", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
+      <h1 className="text-3xl font-bold tracking-tight no-underline border-0">
         Gear Design Calculator – ISO 6336
       </h1>
 
@@ -23,5 +23,6 @@ export default async function BacklashCalculatorPage() {
     </>
   );
 }
+
 
 

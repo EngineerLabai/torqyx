@@ -1,6 +1,7 @@
-"use client";
-// app/project-hub/devreye-alma/page.tsx
 import PageShell from "@/components/layout/PageShell";
+import { getBrandCopy } from "@/config/brand";
+import { getLocaleFromCookies } from "@/utils/locale-server";
+import { buildPageMetadata } from "@/utils/metadata";
 
 const STEPS = [
   {
@@ -29,7 +30,18 @@ const STEPS = [
   },
 ];
 
-export default function DevreyeAlmaPage() {
+export async function generateMetadata() {
+  const locale = await getLocaleFromCookies();
+  const brandContent = getBrandCopy(locale);
+  return buildPageMetadata({
+    title: `Devreye Alma Paneli | ${brandContent.siteName}`,
+    description: "Proje devreye alma aşamaları, checklist ve sızdırmazlık testleri.",
+    path: "/project-hub/devreye-alma",
+    locale,
+  });
+}
+
+export default async function DevreyeAlmaPage() {
   return (
     <PageShell>
       <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">

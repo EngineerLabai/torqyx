@@ -33,20 +33,20 @@ export async function generateMetadata() {
 
   return {
     ...base,
-    title: "AI Engineers Lab — Mekanik Mühendislik Hesaplayıcıları",
+    title: "TORQYX — Mekanik Mühendislik Hesaplayıcıları",
     description,
     alternates: {
       ...(base.alternates ?? {}),
-      canonical: "https://aiengineerslab.vercel.app/",
+      canonical: CANONICAL_SITE_URL,
     },
     openGraph: {
       ...(base.openGraph ?? {}),
-      title: "AI Engineers Lab — Mekanik Mühendislik Hesaplayıcıları",
+      title: "TORQYX — Mekanik Mühendislik Hesaplayıcıları",
       description,
     },
     twitter: {
       ...(base.twitter ?? {}),
-      title: "AI Engineers Lab — Mekanik Mühendislik Hesaplayıcıları",
+      title: "TORQYX — Mekanik Mühendislik Hesaplayıcıları",
       description,
     },
   };
@@ -56,8 +56,10 @@ export default async function Home() {
   const locale = await getLocaleFromCookies();
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Gear Design Calculator — ISO 6336
+      <h1 className="sr-only">
+        {locale === "tr"
+          ? "TORQYX — Mekanik Mühendislik Hesaplayıcıları"
+          : "TORQYX — Mechanical Engineering Calculators"}
       </h1>
 
       <WebPageJsonLd />

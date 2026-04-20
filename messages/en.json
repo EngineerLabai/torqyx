@@ -64,9 +64,9 @@
   "home": {
     "hero": {
       "eyebrow": "Mechanical Engineering Calculators",
-      "headline": "AI-guided engineering calculations with standards-based, deterministic results",
-      "subheadline": "Here, AI means a deterministic calculation engine grounded in ISO/DIN/VDI references plus guided assistant support. It is not magical prediction; the same input set produces the same result.",
-      "subtitle": "Built for mechanical engineers who need speed and traceability.",
+      "headline": "Engineering calculations with standards-based, deterministic results",
+      "subheadline": "A deterministic calculation engine grounded in ISO/DIN/VDI references plus guided assistant support. The same input set produces the same result.",
+      "subtitle": "Engineering & Calculation Tools for Professionals",
       "ctaPrimary": "Start Free",
       "ctaSecondary": "See Calculators",
       "socialProof": "Trusted by 500+ mechanical engineers",
@@ -127,7 +127,7 @@
       "empty": "No updates yet. The first release note will land soon."
     },
     "seo": {
-      "title": "Mechanical Engineering Calculators",
+      "title": "TORQYX | Engineering & Calculation Tools",
       "description": "ISO/DIN-verified mechanical calculators for machine design, fasteners, power transmission, and thermal checks."
     },
     "valueProps": {
@@ -142,7 +142,7 @@
         "metricValue": "45+ min per calculation",
         "metricNote": "Based on internal time trials vs. manual spreadsheets.",
         "excelLabel": "Excel",
-        "toolLabel": "AI Engineers Lab",
+        "toolLabel": "TORQYX",
         "excelPoints": [
           "Manual unit conversions",
           "Hidden formula errors",
@@ -245,7 +245,7 @@
     "trust": {
       "kicker": "Trusted",
       "title": "Built for compliance and speed",
-      "description": "Mechanical teams use AI Engineers Lab to cut errors and document decisions.",
+      "description": "Mechanical teams use TORQYX to cut errors and document decisions.",
       "testimonials": [
         {
           "quote": "We replaced our torque spreadsheets in a week and immediately reduced review time.",
@@ -1036,7 +1036,7 @@
         "attachment": {
           "label": "Attach file (optional)",
           "helper": "File uploads to Firebase Storage and links to the ticket.",
-          "unavailable": "File upload is disabled. You can add a Drive link in your message."
+          "unavailable": "Direct file upload is currently disabled. Please paste a cloud drive link (Google Drive, Dropbox, etc.) in the message field."
         }
       },
       "errors": {
@@ -1593,7 +1593,7 @@
     "toolPage": {
       "badge": "Calculator",
       "howItWorksLabel": "How does it work?",
-      "howItWorksDescription": "In these tools, AI means a standards-based deterministic calculation engine plus guided assistant support. With ISO, DIN, and VDI references, the same inputs produce the same result."
+      "howItWorksDescription": "These tools use a standards-based deterministic calculation engine plus guided assistant support. With ISO, DIN, and VDI references, the same inputs produce the same result."
     },
     "confidence": {
       "title": "Confidence Snapshot",

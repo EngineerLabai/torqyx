@@ -64,8 +64,8 @@
   "home": {
     "hero": {
       "eyebrow": "Mekanik Mühendislik Hesaplayıcıları",
-      "headline": "AI destekli mühendislik hesaplamalari, tahmin değil standart temelli sonuc",
-      "subheadline": "Buradaki AI, ISO/DIN/VDI referansli deterministik hesap motoru ile adim adim asistan rehberligini birleştirir. Sihirli tahmin yapmaz; ayni girdide ayni sonucu verir.",
+      "headline": "Standartlara dayalı, deterministik mühendislik hesaplamaları",
+      "subheadline": "Deterministik hesap motoru, ISO/DIN/VDI referansları ile adım adım asistan rehberliğini birleştirir. Sihirli tahmin yapmaz; aynı girdide aynı sonucu verir.",
       "subtitle": "Hız ve izlenebilirlik isteyen mekanik mühendisler için.",
       "ctaPrimary": "Ücretsiz Başla",
       "ctaSecondary": "Hesaplayıcıları Gör",
@@ -142,7 +142,7 @@
         "metricValue": "Hesap başına 45+ dk",
         "metricNote": "Manuel Excel akışlarına göre dahili zaman testleri.",
         "excelLabel": "Excel",
-        "toolLabel": "AI Engineers Lab",
+        "toolLabel": "TORQYX",
         "excelPoints": [
           "Manuel birim dönüşümü",
           "Gizli formül hataları",
@@ -245,7 +245,7 @@
     "trust": {
       "kicker": "Güven",
       "title": "Uyumluluk ve hız için tasarlandı",
-      "description": "Mekanik ekipler hataları azaltmak ve kararları belgelemek için AI Engineers Lab kullanıyor.",
+      "description": "Mekanik ekipler hataları azaltmak ve kararları belgelemek için TORQYX kullanıyor.",
       "testimonials": [
         {
           "quote": "Tork tablolarımızı bir haftada değiştirdik; onay süresi ciddi kısaldı.",
@@ -1036,7 +1036,7 @@
         "attachment": {
           "label": "Dosya yükle (isteğe bağlı)",
           "helper": "Dosya Firebase Storage'a yüklenir, destek kaydına link eklenir.",
-          "unavailable": "Dosya yükleme şu an kapalı. Dosyanı Drive linki olarak mesajına ekleyebilirsin."
+          "unavailable": "Doğrudan dosya yükleme şu an kapalı. Lütfen dosyanızı bulut sürücünüze (Google Drive, Dropbox vb.) yükleyip bağlantısını mesaja ekleyin."
         }
       },
       "errors": {
@@ -1593,7 +1593,7 @@
     "toolPage": {
       "badge": "Hesaplayıcı",
       "howItWorksLabel": "Nasil calisir?",
-      "howItWorksDescription": "Bu araclarda AI, standartlara dayali deterministik hesaplama motoru ve akilli asistan rehberligi anlamina gelir. ISO, DIN ve VDI referanslariyla ayni girdide ayni sonucu uretir."
+      "howItWorksDescription": "Bu araçlar, standartlara dayalı deterministik hesaplama motoru ve akıllı asistan rehberliği kullanır. ISO, DIN ve VDI referanslarıyla aynı girdide aynı sonucu üretir."
     },
     "confidence": {
       "title": "Güven Özeti",

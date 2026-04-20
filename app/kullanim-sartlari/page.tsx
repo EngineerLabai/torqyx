@@ -13,13 +13,13 @@ type TermsSection = {
 
 const pageCopy = {
   title: "Kullanım Şartları",
-  description: "AI Engineers Lab hizmetlerinin kullanımına ilişkin koşullar.",
+  description: "TORQYX hizmetlerinin kullanımına ilişkin koşullar.",
   imageAlt: "Kullanım şartları görseli",
 };
 
 const pageCopyEn = {
   title: "Terms of Use",
-  description: "Terms and conditions for using AI Engineers Lab services.",
+  description: "Terms and conditions for using TORQYX services.",
   imageAlt: "Terms of use visual",
 };
 
@@ -27,7 +27,7 @@ const termsSectionsTr: TermsSection[] = [
   {
     title: "Tanımlar",
     bullets: [
-      "\"Platform\" veya \"Hizmet\": AI Engineers Lab internet sitesi, hesaplama araçları, içerikler, raporlama ekranları ve bağlantılı dijital bileşenlerin tamamı.",
+      "\"Platform\" veya \"Hizmet\": TORQYX internet sitesi, hesaplama araçları, içerikler, raporlama ekranları ve bağlantılı dijital bileşenlerin tamamı.",
       "\"Kullanıcı\": Platforma erişen, kullanan veya Platform üzerinden veri giren gerçek ya da tüzel kişi.",
       "\"İçerik\": Metin, tablo, görsel, hesaplama notu, teknik açıklama, kontrol listesi, örnek veri ve benzeri tüm materyaller.",
       "\"Araç Çıktısı\": Kullanıcı girdilerine bağlı olarak hesaplayıcılar tarafından üretilen tüm sonuç, öneri, özet ve raporlar.",
@@ -61,10 +61,10 @@ const termsSectionsTr: TermsSection[] = [
   {
     title: "Sorumluluk Sınırlandırması",
     paragraphs: [
-      "AI Engineers Lab, sunulan hesaplama araçlarının doğruluğunu ve güncelliğini sağlamak için makul çabayı göstermektedir. Bununla birlikte, araç çıktılarının ve içeriklerin doğruluğu, eksiksizliği, güncelliği veya belirli bir amaca uygunluğu garanti edilmemektedir.",
+      "TORQYX, sunulan hesaplama araçlarının doğruluğunu ve güncelliğini sağlamak için makul çabayı göstermektedir. Bununla birlikte, araç çıktılarının ve içeriklerin doğruluğu, eksiksizliği, güncelliği veya belirli bir amaca uygunluğu garanti edilmemektedir.",
       "Kullanıcı, Platformu kendi riskiyle kullandığını; hesaplama sonuçlarının, tasarım kararlarının ve uygulama çıktılarının yetkili bir profesyonel tarafından teyit edilmesinin kendi sorumluluğunda olduğunu kabul eder.",
-      "Yürürlükteki hukukun izin verdiği azami ölçüde AI Engineers Lab; doğrudan, dolaylı, arızi, özel, cezai veya sonuç olarak doğan zararlardan; veri kaybı, kâr kaybı, iş kaybı, üretim duruşu, ürün geri çağırma maliyeti, tasarım hatası, kalite sorunu, sözleşmesel ceza veya üçüncü taraf taleplerinden sorumlu tutulamaz.",
-      "Yasal olarak sorumluluğun tamamen bertaraf edilemediği hallerde AI Engineers Lab'in toplam sorumluluğu, yalnızca doğrudan zararlarla sınırlı olup, ilgili zarara konu talep tarihinden önceki son on iki (12) ay içinde Kullanıcının Platform için fiilen ödediği toplam bedeli aşamaz. Kullanıcı tarafından herhangi bir bedel ödenmemişse, azami sorumluluk tutarı sıfır (0) kabul edilir.",
+      "Yürürlükteki hukukun izin verdiği azami ölçüde TORQYX; doğrudan, dolaylı, arızi, özel, cezai veya sonuç olarak doğan zararlardan; veri kaybı, kâr kaybı, iş kaybı, üretim duruşu, ürün geri çağırma maliyeti, tasarım hatası, kalite sorunu, sözleşmesel ceza veya üçüncü taraf taleplerinden sorumlu tutulamaz.",
+      "Yasal olarak sorumluluğun tamamen bertaraf edilemediği hallerde TORQYX'in toplam sorumluluğu, yalnızca doğrudan zararlarla sınırlı olup, ilgili zarara konu talep tarihinden önceki son on iki (12) ay içinde Kullanıcının Platform için fiilen ödediği toplam bedeli aşamaz. Kullanıcı tarafından herhangi bir bedel ödenmemişse, azami sorumluluk tutarı sıfır (0) kabul edilir.",
     ],
   },
   {
@@ -77,7 +77,7 @@ const termsSectionsTr: TermsSection[] = [
   {
     title: "Fikri Mülkiyet",
     paragraphs: [
-      "Platformdaki yazılım, tasarım, metin, görsel, veri düzeni, marka unsurları ve diğer tüm içerikler üzerindeki fikri ve sınai mülkiyet hakları AI Engineers Lab'e veya hak sahiplerine aittir.",
+      "Platformdaki yazılım, tasarım, metin, görsel, veri düzeni, marka unsurları ve diğer tüm içerikler üzerindeki fikri ve sınai mülkiyet hakları TORQYX'e veya hak sahiplerine aittir.",
     ],
     bullets: [
       "İçeriklerin izinsiz kopyalanması, çoğaltılması, dağıtılması, yeniden yayımlanması veya ticari amaçla kullanılması yasaktır.",
@@ -88,13 +88,13 @@ const termsSectionsTr: TermsSection[] = [
     title: "Üçüncü Taraf Bağlantılar",
     paragraphs: [
       "Platform, üçüncü taraf sitelere, dokümantasyonlara veya servis sağlayıcılara bağlantılar içerebilir. Bu bağlantılar yalnızca kolaylık sağlamak amacıyla sunulur.",
-      "Üçüncü taraf içeriklerin doğruluğu, güvenliği, güncelliği veya hukuka uygunluğu AI Engineers Lab'in kontrolünde değildir ve bu içeriklerden doğan sonuçlardan AI Engineers Lab sorumlu değildir.",
+      "Üçüncü taraf içeriklerin doğruluğu, güvenliği, güncelliği veya hukuka uygunluğu TORQYX'in kontrolünde değildir ve bu içeriklerden doğan sonuçlardan TORQYX sorumlu değildir.",
     ],
   },
   {
     title: "Hizmet Değişiklikleri",
     paragraphs: [
-      "AI Engineers Lab, Platformun tamamında veya bir bölümünde, önceden bildirimde bulunmaksızın değişiklik yapma, geçici olarak askıya alma veya sonlandırma hakkını saklı tutar.",
+      "TORQYX, Platformun tamamında veya bir bölümünde, önceden bildirimde bulunmaksızın değişiklik yapma, geçici olarak askıya alma veya sonlandırma hakkını saklı tutar.",
       "Kullanım Şartları'ndaki güncellemeler bu sayfada yayımlandığı tarihte yürürlüğe girer. Kullanıcının Platformu kullanmaya devam etmesi, güncel şartların kabulü anlamına gelir.",
     ],
   },
@@ -118,7 +118,7 @@ const termsSectionsEn: TermsSection[] = [
   {
     title: "Definitions",
     bullets: [
-      "\"Platform\" or \"Service\" means the AI Engineers Lab website, calculators, content modules, reporting interfaces, and all related digital components.",
+      "\"Platform\" or \"Service\" means the TORQYX website, calculators, content modules, reporting interfaces, and all related digital components.",
       "\"User\" means any natural person or legal entity accessing, using, or submitting data through the Platform.",
       "\"Content\" means all text, tables, visuals, technical notes, checklists, sample data, and related materials available on the Platform.",
       "\"Tool Output\" means any result, recommendation, summary, or report generated by calculators based on User inputs.",
@@ -145,17 +145,17 @@ const termsSectionsEn: TermsSection[] = [
     title: "Accuracy / Warranty Disclaimer",
     paragraphs: [
       "The Platform and all Tool Outputs are provided on an \"as is\" and \"as available\" basis, without warranties of any kind, whether express or implied.",
-      "While AI Engineers Lab uses reasonable efforts to maintain accuracy and currency, no guarantee is given that outputs are accurate, complete, current, or suitable for a particular purpose in all cases. Results may vary due to input quality, model assumptions, standards updates, implementation conditions, and environmental factors.",
-      "AI Engineers Lab disclaims all implied warranties, including merchantability, fitness for a particular purpose, non-infringement, uninterrupted availability, and error-free operation.",
+      "While TORQYX uses reasonable efforts to maintain accuracy and currency, no guarantee is given that outputs are accurate, complete, current, or suitable for a particular purpose in all cases. Results may vary due to input quality, model assumptions, standards updates, implementation conditions, and environmental factors.",
+      "TORQYX disclaims all implied warranties, including merchantability, fitness for a particular purpose, non-infringement, uninterrupted availability, and error-free operation.",
     ],
   },
   {
     title: "Limitation of Liability",
     paragraphs: [
-      "AI Engineers Lab makes reasonable efforts to maintain the accuracy and timeliness of its calculators and content. However, no guarantee is made regarding the accuracy, completeness, currency, or fitness of any Tool Output or content for a specific use case.",
+      "TORQYX makes reasonable efforts to maintain the accuracy and timeliness of its calculators and content. However, no guarantee is made regarding the accuracy, completeness, currency, or fitness of any Tool Output or content for a specific use case.",
       "The User acknowledges and agrees that use of the Platform is at the User's own risk, and that all engineering outcomes and implementation decisions must be independently verified by a competent professional.",
-      "To the maximum extent permitted by law, AI Engineers Lab shall not be liable for any direct, indirect, incidental, special, punitive, or consequential damages, including but not limited to data loss, loss of profit, business interruption, production downtime, product recall costs, design defects, quality failures, contractual penalties, or third-party claims.",
-      "Where liability cannot be fully excluded by law, AI Engineers Lab's aggregate liability shall be limited to direct damages only and shall not exceed the total amount actually paid by the User for the Platform in the twelve (12) months preceding the claim. If no fees were paid, the maximum aggregate liability shall be zero (0).",
+      "To the maximum extent permitted by law, TORQYX shall not be liable for any direct, indirect, incidental, special, punitive, or consequential damages, including but not limited to data loss, loss of profit, business interruption, production downtime, product recall costs, design defects, quality failures, contractual penalties, or third-party claims.",
+      "Where liability cannot be fully excluded by law, TORQYX's aggregate liability shall be limited to direct damages only and shall not exceed the total amount actually paid by the User for the Platform in the twelve (12) months preceding the claim. If no fees were paid, the maximum aggregate liability shall be zero (0).",
     ],
   },
   {
@@ -168,7 +168,7 @@ const termsSectionsEn: TermsSection[] = [
   {
     title: "Intellectual Property",
     paragraphs: [
-      "All intellectual and industrial property rights in the Platform, including software, design, text, graphics, data structures, and branding elements, belong to AI Engineers Lab or the relevant rights holders.",
+      "All intellectual and industrial property rights in the Platform, including software, design, text, graphics, data structures, and branding elements, belong to TORQYX or the relevant rights holders.",
     ],
     bullets: [
       "Unauthorized copying, reproduction, redistribution, republication, or commercial exploitation of Platform content is prohibited.",
@@ -179,13 +179,13 @@ const termsSectionsEn: TermsSection[] = [
     title: "Third-Party Links",
     paragraphs: [
       "The Platform may contain links to third-party websites, documentation, or service providers for convenience purposes only.",
-      "AI Engineers Lab does not control and is not responsible for the accuracy, security, timeliness, legality, or performance of third-party content or services.",
+      "TORQYX does not control and is not responsible for the accuracy, security, timeliness, legality, or performance of third-party content or services.",
     ],
   },
   {
     title: "Service Modifications",
     paragraphs: [
-      "AI Engineers Lab reserves the right to modify, suspend, or discontinue any part of the Platform at any time, with or without prior notice.",
+      "TORQYX reserves the right to modify, suspend, or discontinue any part of the Platform at any time, with or without prior notice.",
       "Updates to these Terms become effective upon publication on this page. Continued use of the Platform constitutes acceptance of the updated Terms.",
     ],
   },

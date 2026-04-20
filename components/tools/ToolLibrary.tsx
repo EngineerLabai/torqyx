@@ -505,7 +505,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
               }
             />
           ) : null}
-          <div className="grid min-w-0 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid min-w-0 auto-rows-fr items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {toolCardModels.map(({ tool, title, description, guideHref, categoryLabel, tagLabels, accessLabel, status, validationStandard, isNew }) => (
               <ToolLibraryCard
                 key={tool.id}
