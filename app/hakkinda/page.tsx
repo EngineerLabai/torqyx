@@ -2,7 +2,7 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
-import DeterministicDisclaimer from "@/src/components/shared/DeterministicDisclaimer";
+import DeterministicDisclaimer from "@/components/shared/DeterministicDisclaimer";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 
