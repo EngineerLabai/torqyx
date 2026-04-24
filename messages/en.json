@@ -781,6 +781,30 @@
         "note": "Typical ACH: offices 4–8, classrooms 6–10, labs 8–15. Check building codes and indoor air quality standards."
       }
     },
+    "bearingLife": {
+      "badges": { "primary": "Mechanical Calculator", "secondary": "Bearing Life (ISO 281)" },
+      "header": { "title": "Bearing Life Calculator", "description": "Calculate L10 and L10h life for ball and roller bearings according to ISO 281." },
+      "inputs": { "title": "Inputs", "bearingType": "Bearing Type", "typeBall": "Ball Bearing", "typeRoller": "Roller Bearing", "dynamicLoadC": "Dynamic Load C [kN]", "equivalentLoadP": "Equivalent Load P [kN]", "speedN": "Speed n [rpm]" },
+      "results": { "title": "Results", "l10": "Nominal Life L10 [10⁶ Revs]", "l10h": "Nominal Life L10h [Hours]", "note": "Formulas based on ISO 281 (L10 = (C/P)^p). This is the basic rating life with 90% reliability." }
+    },
+    "keywayDesign": {
+      "badges": { "primary": "Mechanical Calculator", "secondary": "Keyway (DIN 6885)" },
+      "header": { "title": "Shaft-Hub Keyway Strength", "description": "Calculate shear and crushing stresses for keyway connections according to DIN 6885." },
+      "inputs": { "title": "Inputs", "torque": "Transmitted Torque T [Nm]", "shaftDia": "Shaft Diameter d [mm]", "keyWidth": "Key Width b [mm]", "keyHeight": "Key Height h [mm]", "keyLength": "Key Length L [mm]" },
+      "results": { "title": "Results", "force": "Tangential Force F [kN]", "shearStress": "Shear Stress τ [MPa]", "crushStress": "Crushing Stress σc [MPa]", "note": "Compare these stresses against the key material's yield and shear strength limits." }
+    },
+    "toleranceStackup": {
+      "badges": { "primary": "Quality & Mfg", "secondary": "Tolerance Stack-up (RSS)" },
+      "header": { "title": "1D Tolerance Stack-up Analysis", "description": "Calculate Worst-Case and Statistical (RSS) tolerance stack-up for assemblies." },
+      "inputs": { "title": "Part List", "addPart": "Add Part", "partName": "Part Name", "nominal": "Nominal", "tolerance": "Tolerance (±)", "remove": "Remove" },
+      "results": { "title": "Analysis Results", "nominalSum": "Total Nominal Dimension", "worstCase": "Worst-Case Tolerance", "rss": "RSS Tolerance", "note": "RSS assumes part dimensions are normally distributed and tolerances represent ±3σ limits." }
+    },
+    "weldStrength": {
+      "badges": { "primary": "Structural Analysis", "secondary": "Fillet Weld" },
+      "header": { "title": "Fillet Weld Strength", "description": "Calculate shear stress for a simple fillet weld under direct load." },
+      "inputs": { "title": "Inputs", "force": "Applied Load F [kN]", "weldLength": "Total Weld Length L [mm]", "legSize": "Weld Leg Size z [mm]" },
+      "results": { "title": "Results", "throatSize": "Throat Thickness a [mm]", "weldArea": "Effective Weld Area A [mm²]", "shearStress": "Shear Stress τ [MPa]", "note": "Compare this stress to the allowable shear stress of the weld electrode (typically 30-40% of yield)." }
+    },
     "notFound": {
       "title": "Page not found",
       "description": "This link may have been removed or moved. Use the Calculator Library to keep exploring.",

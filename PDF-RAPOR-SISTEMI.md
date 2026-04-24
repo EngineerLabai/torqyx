@@ -1,6 +1,6 @@
 # Evrensel PDF Rapor Sistemi
 
-Bu sistem, aiengineerslab.com'da kullanılan tüm mühendislik hesaplayıcıları için profesyonel PDF raporları oluşturur. Sistem sadece premium üyelere açıktır.
+Bu sistem, torqyx.com'da kullanılan tüm mühendislik hesaplayıcıları için profesyonel PDF raporları oluşturur. Sistem sadece premium üyelere açıktır.
 
 ## 🚀 Özellikler
 

@@ -2,8 +2,11 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
-import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
+
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
 
 type TermsSection = {
   title: string;
@@ -205,8 +208,8 @@ const termsSectionsEn: TermsSection[] = [
   },
 ];
 
-export async function generateMetadata() {
-  const locale = await getLocaleFromCookies();
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params;
   const brandContent = getBrandCopy(locale);
   const copy = locale === "en" ? pageCopyEn : pageCopy;
 
@@ -219,8 +222,8 @@ export async function generateMetadata() {
   });
 }
 
-export default async function TermsPage() {
-  const locale = await getLocaleFromCookies();
+export default async function TermsPage({ params }: PageProps) {
+  const { locale } = await params;
   const copy = locale === "en" ? pageCopyEn : pageCopy;
   const sections = locale === "en" ? termsSectionsEn : termsSectionsTr;
 
@@ -236,9 +239,6 @@ export default async function TermsPage() {
       <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
         {sections.map((section, index) => (
           <section key={section.title} className="space-y-2">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Terms of Use
-      </h1>
 
             <h2 className="text-lg font-semibold text-slate-900">
               {index + 1}. {section.title}

@@ -47,7 +47,7 @@ const COPY: Record<Locale, {
 }> = {
   tr: {
     seo: {
-      title: "Proje Merkezi | AI Engineers Lab",
+      title: "Proje Merkezi | TORQYX",
       description: "Devreye alma, proje takip, RFQ ve revizyon yönetimi için lokal çalışan mühendis panelleri.",
     },
     hero: {
@@ -87,7 +87,7 @@ const COPY: Record<Locale, {
   },
   en: {
     seo: {
-      title: "Project Hub | AI Engineers Lab",
+      title: "Project Hub | TORQYX",
       description: "Local-first engineering trackers for commissioning, projects, RFQs, and revisions.",
     },
     hero: {
@@ -172,9 +172,6 @@ export default async function ProjectHubPage({ params }: PageProps) {
       />
 
       <section className="grid gap-4 md:grid-cols-2">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Project Hub
-      </h1>
 
         {localizedModules.map((module) => (
           <ActionCard

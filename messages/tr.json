@@ -26,8 +26,8 @@
       "linkContact": "İletişim",
       "linkHome": "Ana Sayfa",
       "linkBlog": "Blog",
-      "sectionFaq": "FAQ",
-      "linkFaq": "FAQ"
+      "sectionFaq": "SSS",
+      "linkFaq": "SSS"
     },
     "descriptions": {
       "sectionCalculators": "Dişli, tork, kuvvet ve mekanik hesaplayıcılar.",
@@ -544,7 +544,7 @@
       "imageAlt": "Blog yazıları, filtreler ve etiketler ile liste görünümü",
       "back": "Blog listesine dön",
       "tocTitle": "İçerik",
-      "tocEmpty": "Bu yazida başlık bulunmuyor.",
+      "tocEmpty": "Bu yazıda başlık bulunmuyor.",
       "relatedPostsTitle": "Benzer yazılar",
       "relatedToolsTitle": "İlgili araçlar",
       "relatedToolsCta": "Hesaplayıcıyı Aç",
@@ -643,13 +643,13 @@
       "description": "Yeni eklenen araçlar, düzeltmeler ve genel değişiklikler burada listelenir.",
       "emptyTitle": "Henüz güncelleme günlüğü yok.",
       "emptyDescription": "İlk güncelleme yakında eklenecek.",
-      "filterLabel": "Arac filtresi",
-      "filterAll": "Tum araclar",
-      "resultsLabel": "{count} kayit gosteriliyor",
+      "filterLabel": "Araç filtresi",
+      "filterAll": "Tüm araçlar",
+      "resultsLabel": "{count} kayıt gösteriliyor",
       "feedLabel": "RSS feed",
       "badgeNew": "Yeni",
-      "badgeFixed": "Duzeltildi",
-      "badgeRemoved": "Kaldirildi",
+      "badgeFixed": "Düzeltildi",
+      "badgeRemoved": "Kaldırıldı",
       "addedTitle": "Eklenen araçlar",
       "addedEmpty": "Bu sürümde yeni araç eklenmedi.",
       "fixesTitle": "Düzeltmeler",
@@ -781,6 +781,77 @@
         "note": "Tipik ACH: ofis 4–8, sınıf 6–10, laboratuvar 8–15. Bina yönetmelikleri ve iç hava kalitesi standartlarını kontrol edin."
       }
     },
+    "bearingLife": {
+      "badges": {
+        "primary": "Mekanik Hesaplayıcı",
+        "secondary": "Rulman Ömrü (ISO 281)"
+      },
+      "header": {
+        "title": "Rulman Ömür Hesaplayıcı",
+        "description": "ISO 281 standardına göre bilyalı ve makaralı rulmanlar için L10 ve L10h ömür hesabı."
+      },
+      "inputs": {
+        "title": "Giriş Parametreleri",
+        "bearingType": "Rulman Tipi",
+        "typeBall": "Bilyalı Rulman",
+        "typeRoller": "Makaralı Rulman",
+        "dynamicLoadC": "Dinamik Yük C [kN]",
+        "equivalentLoadP": "Eşdeğer Yük P [kN]",
+        "speedN": "Çalışma Devri n [rpm]"
+      },
+      "results": {
+        "title": "Hesap Sonuçları",
+        "l10": "Nominal Ömür L10 [10⁶ Devir]",
+        "l10h": "Nominal Ömür L10h [Saat]",
+        "note": "Formüller ISO 281'e dayanır (L10 = (C/P)^p). %90 güvenilirlikteki temel ömürdür. Modifiye ömür (Lnm) için axyz katsayısı eklenmelidir."
+      }
+    },
+    "keywayDesign": {
+      "badges": {
+        "primary": "Mekanik Hesaplayıcı",
+        "secondary": "Kama Bağlantısı (DIN 6885)"
+      },
+      "header": {
+        "title": "Mil-Göbek Kama Bağlantı Dayanımı",
+        "description": "DIN 6885 standardına göre kama kesilme (shear) ve ezilme (crushing) gerilmesi hesabı."
+      },
+      "inputs": {
+        "title": "Giriş Parametreleri",
+        "torque": "İletilecek Tork T [Nm]",
+        "shaftDia": "Mil Çapı d [mm]",
+        "keyWidth": "Kama Genişliği b [mm]",
+        "keyHeight": "Kama Yüksekliği h [mm]",
+        "keyLength": "Kama Boyu L [mm]",
+        "yieldKey": "Kama Akma Dayanımı Re [MPa]",
+        "yieldHub": "Göbek Akma Dayanımı Re [MPa]"
+      },
+      "results": {
+        "title": "Hesap Sonuçları",
+        "force": "Teğetsel Kuvvet F [kN]",
+        "shearStress": "Kesilme Gerilmesi τ [MPa]",
+        "crushStress": "Ezilme Gerilmesi σc [MPa]",
+        "safetyShear": "Kesilme Emniyeti S_tau",
+        "safetyCrush": "Ezilme Emniyeti S_c",
+        "diagramTitle": "Bağlantı Şeması ve Analiz",
+        "diagramEmpty": "Girdiler eklendiğinde şema oluşur.",
+        "reportTitle": "Detaylı DIN 6885 Raporu",
+        "reportDesc": "Hesaplama adımları, emniyet sınırları ve şemalarla birlikte PDF raporu oluştur.",
+        "downloadPdf": "PDF Rapor İndir",
+        "note": "Kama malzemesinin akma ve kesme emniyet sınırlarını bu değerlerle karşılaştırın."
+      }
+    },
+    "toleranceStackup": {
+      "badges": { "primary": "Kalite ve Üretim", "secondary": "Tolerans Yığılma (RSS)" },
+      "header": { "title": "1D Tolerans Yığılma Analizi", "description": "Parçaların nominal ölçüleri ve toleransları ile En Kötü Senaryo (Worst-Case) ve İstatistiksel (RSS) tolerans yığılmasını hesaplayın." },
+      "inputs": { "title": "Parça Listesi", "addPart": "Parça Ekle", "partName": "Parça Adı", "nominal": "Nominal", "tolerance": "Tolerans (±)", "remove": "Sil" },
+      "results": { "title": "Analiz Sonuçları", "nominalSum": "Toplam Nominal Ölçü", "worstCase": "Worst-Case Toleransı (En Kötü Senaryo)", "rss": "RSS Toleransı (İstatistiksel)", "note": "RSS yöntemi parçaların normal dağılıma sahip olduğunu ve tolerans sınırlarının ±3σ'ya denk geldiğini varsayar." }
+    },
+    "weldStrength": {
+      "badges": { "primary": "Yapısal Analiz", "secondary": "Köşe Kaynağı (Fillet Weld)" },
+      "header": { "title": "Kaynaklı Bağlantı Dayanımı", "description": "Basit köşe kaynağı (fillet weld) için doğrudan kesme kuvveti altındaki gerilme hesabı." },
+      "inputs": { "title": "Giriş Parametreleri", "force": "Uygulanan Yük F [kN]", "weldLength": "Toplam Kaynak Boyu L [mm]", "legSize": "Kaynak Kalınlığı (Leg Size) z [mm]" },
+      "results": { "title": "Hesap Sonuçları", "throatSize": "Boğaz Kalınlığı a [mm]", "weldArea": "Efektif Kaynak Alanı A [mm²]", "shearStress": "Kesme Gerilmesi τ [MPa]", "note": "Gerilme değerini kaynak elektrodunun emniyetli kesme dayanımı ile (genellikle akma dayanımının %30-40'ı) karşılaştırın." }
+    },
     "notFound": {
       "title": "Sayfa bulunamadı",
       "description": "Bu bağlantı kaldırılmış veya taşınmış olabilir. Hesaplayıcı Kütüphanesi ile hesaplayıcılara hızlı ulaşabilirsin.",
@@ -800,8 +871,8 @@
               "a": "Yayınlanmış formüllere dayanır; doğruluk girişler ve varsayımlara bağlıdır. Standartlarınızla doğrulayın."
             },
             {
-              "q": "Bu AI ne kadar guvenilir?",
-              "a": "AI katmani serbest tahmin vermez; hesaplama motoru ISO, DIN ve VDI gibi standartlardan gelen deterministik formul ve tablo akisini calistirir. Asistan bolumu sadece girdi kontrolu, adim aciklama ve referans yonlendirme yapar; nihai dogrulama yine proje gereksinimleriniz ve sorumlu mühendis kararidir."
+              "q": "Bu AI ne kadar güvenilir?",
+              "a": "AI katmanı serbest tahmin vermez; hesaplama motoru ISO, DIN ve VDI gibi standartlardan gelen deterministik formül ve tablo akışını çalıştırır. Asistan bölümü sadece girdi kontrolü, adım açıklama ve referans yönlendirme yapar; nihai doğrulama yine proje gereksinimleriniz ve sorumlu mühendis kararıdır."
             },
             {
               "q": "Varsayılan değerler gerçek mi?",
@@ -904,7 +975,7 @@
               "a": "Hayır. Karar desteğidir; nihai tasarım sorumluluğu sizdedir."
             },
             {
-              "q": "Emniyet kritik tasarimda kullanabilir miyim?",
+              "q": "Emniyet kritik tasarımda kullanabilir miyim?",
               "a": "Ön kontrol olarak kullanın; standartlar ve yetkili mühendis ile doğrulayın."
             },
             {
@@ -1203,7 +1274,7 @@
         "searchPlaceholder": "Örn. tork, basınç, cıvata",
         "searchAria": "Araç ara",
         "statusLabel": "Durum",
-        "allStatuses": "T?m durumlar"
+        "allStatuses": "Tüm durumlar"
       },
       "emptyState": {
         "title": "Eşleşen araç bulunamadı.",
@@ -1247,7 +1318,7 @@
         "generalCategory": "Genel",
         "openAria": "{title} sayfasını aç",
         "status": {
-          "verified": "Do?rulanm??",
+          "verified": "Doğrulanmış",
           "beta": "Beta",
           "experimental": "Deneysel"
         }
@@ -1592,7 +1663,7 @@
     },
     "toolPage": {
       "badge": "Hesaplayıcı",
-      "howItWorksLabel": "Nasil calisir?",
+      "howItWorksLabel": "Nasıl çalışır?",
       "howItWorksDescription": "Bu araçlar, standartlara dayalı deterministik hesaplama motoru ve akıllı asistan rehberliği kullanır. ISO, DIN ve VDI referanslarıyla aynı girdide aynı sonucu üretir."
     },
     "confidence": {
