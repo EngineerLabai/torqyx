@@ -132,8 +132,8 @@ export default function BoltTorqueCalculator() {
               1. Fastener Specifications
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Bolt Size (Coarse)</label>
+              <label className="block">
+                <span className="block text-xs font-semibold text-slate-700 mb-1">Bolt Size (Coarse)</span>
                 <select
                   name="size"
                   value={inputs.size}
@@ -144,9 +144,9 @@ export default function BoltTorqueCalculator() {
                     <option key={size} value={size}>{size}</option>
                   ))}
                 </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Property Class</label>
+              </label>
+              <label className="block">
+                <span className="block text-xs font-semibold text-slate-700 mb-1">Property Class</span>
                 <select
                   name="grade"
                   value={inputs.grade}
@@ -157,7 +157,7 @@ export default function BoltTorqueCalculator() {
                     <option key={grade} value={grade}>{grade}</option>
                   ))}
                 </select>
-              </div>
+              </label>
             </div>
           </div>
 
@@ -166,8 +166,8 @@ export default function BoltTorqueCalculator() {
               2. Assembly Conditions
             </h3>
             <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Lubrication / Friction</label>
+              <label className="block">
+                <span className="block text-xs font-semibold text-slate-700 mb-1">Lubrication / Friction</span>
                 <select
                   name="lube"
                   value={inputs.lube}
@@ -178,11 +178,11 @@ export default function BoltTorqueCalculator() {
                     <option key={key} value={key}>{data.label}</option>
                   ))}
                 </select>
-              </div>
+              </label>
 
               {inputs.lube === "custom" && (
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Custom Friction (μ)</label>
+                <label className="block">
+                  <span className="block text-xs font-semibold text-slate-700 mb-1">Custom Friction (μ)</span>
                   <input
                     type="number"
                     name="customMu"
@@ -193,11 +193,11 @@ export default function BoltTorqueCalculator() {
                     onChange={handleInputChange}
                     className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   />
-                </div>
+                </label>
               )}
 
-              <div>
-                <label className="flex items-center gap-1 text-xs font-semibold text-slate-700 mb-1">
+              <label className="block">
+                <span className="flex items-center gap-1 text-xs font-semibold text-slate-700 mb-1">
                   Target Preload (% of Yield)
                   <span 
                     className="inline-flex items-center justify-center w-3 h-3 rounded-full bg-slate-200 text-[9px] text-slate-600 cursor-help"
@@ -205,7 +205,7 @@ export default function BoltTorqueCalculator() {
                   >
                     ?
                   </span>
-                </label>
+                </span>
                 <div className="flex items-center gap-3">
                   <input
                     type="range"
@@ -219,7 +219,7 @@ export default function BoltTorqueCalculator() {
                   />
                   <span className="min-w-[48px] text-sm font-semibold text-slate-700">{inputs.preloadPercent}%</span>
                 </div>
-              </div>
+              </label>
             </div>
           </div>
         </div>

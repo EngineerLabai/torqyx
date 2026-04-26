@@ -100,6 +100,23 @@ export default function PartTrackingPage() {
     );
   }
 
+  function exportToCSV() {
+    if (rows.length === 0) return;
+    const headers = ["Musteri", "Proje_Kodu", "Parca_Kodu", "Parca_Adi", "Asama", "PPAP_Durumu", "SOP_Tarihi", "Risk", "Notlar"];
+    const csvRows = rows.map(r => [
+      r.customer, r.projectCode, r.partCode, r.partName, r.stage, r.ppapStatus, r.sopDate, r.risk, r.notes
+    ].map(v => `"${(v || '').replace(/"/g, '""')}"`).join(","));
+    
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...csvRows].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "parca_takip_listesi.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   const filteredRows =
     stageFilter === "all"
       ? rows
@@ -408,6 +425,33 @@ export default function PartTrackingPage() {
                 ))}
               </div>
             )}
+
+    {/* Premium export kutusu */}
+    <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
+      <h3 className="mb-1 text-sm font-semibold">PDF / Excel'e Aktar - Premium (özel beta)</h3>
+      <p className="mb-2">
+        Parça listenizi PDF veya Excel olarak dışa aktarma özelliği premium paketinin özel beta kapsamındadır. Erken erişim için{" "}
+        <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
+          ücretlendirmeye göz at
+        </Link>.
+      </p>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          disabled
+          className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60 cursor-not-allowed"
+        >
+          PDF'e Aktar (Premium)
+        </button>
+        <button
+          type="button"
+          onClick={exportToCSV}
+          className="flex-1 rounded-full border border-amber-500 bg-amber-100 px-3 py-1.5 font-semibold text-amber-900 hover:bg-amber-200 transition"
+        >
+          Excel (CSV) Aktar
+        </button>
+      </div>
+    </div>
           </div>
         </div>
       </section>

@@ -161,8 +161,8 @@ export default function FiveWhyPage() {
             </button>
           </div>
 
-          <div className="mb-4 space-y-1">
-            <label className="block text-[11px] font-medium text-slate-700">{copy.problemLabel}</label>
+          <label className="mb-4 block space-y-1">
+            <span className="block text-[11px] font-medium text-slate-700">{copy.problemLabel}</span>
             <textarea
               rows={3}
               value={form.problem}
@@ -170,7 +170,7 @@ export default function FiveWhyPage() {
               className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
               placeholder={copy.problemPlaceholder}
              aria-label={copy.problemPlaceholder} />
-          </div>
+          </label>
 
           <div className="space-y-3">
             {form.steps.map((step, index) => (
@@ -182,10 +182,10 @@ export default function FiveWhyPage() {
                   {formatMessage(copy.stepTitle, { index: index + 1 })}
                 </p>
 
-                <div className="space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">
+                <label className="block space-y-1">
+                  <span className="block text-[11px] font-medium text-slate-700">
                     {formatMessage(copy.stepLabel, { index: index + 1 })}
-                  </label>
+                  </span>
                   <textarea
                     rows={2}
                     value={step.why}
@@ -193,10 +193,10 @@ export default function FiveWhyPage() {
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder={index === 0 ? copy.stepPlaceholderFirst : copy.stepPlaceholderNext}
                    aria-label={index === 0 ? copy.stepPlaceholderFirst : copy.stepPlaceholderNext}/>
-                </div>
+                </label>
 
-                <div className="mt-2 space-y-1">
-                  <label className="block text-[11px] font-medium text-slate-700">{copy.actionLabel}</label>
+                <label className="mt-2 block space-y-1">
+                  <span className="block text-[11px] font-medium text-slate-700">{copy.actionLabel}</span>
                   <textarea
                     rows={2}
                     value={step.actionHint}
@@ -204,7 +204,7 @@ export default function FiveWhyPage() {
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
                     placeholder={copy.actionPlaceholder}
                    aria-label={copy.actionPlaceholder}/>
-                </div>
+                </label>
               </div>
             ))}
           </div>

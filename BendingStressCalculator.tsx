@@ -148,8 +148,8 @@ export default function BendingStressCalculator() {
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800 mb-3 border-b border-slate-100 pb-2">
               2. Cross Section
             </h3>
-            <div className="mb-4">
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Profile Type</label>
+            <label className="block mb-4">
+              <span className="block text-xs font-semibold text-slate-700 mb-1">Profile Type</span>
               <select
                 name="profile"
                 value={inputs.profile}
@@ -159,7 +159,7 @@ export default function BendingStressCalculator() {
                 <option value="rectangular">Solid Rectangular</option>
                 <option value="circular">Solid Circular</option>
               </select>
-            </div>
+            </label>
 
             <div className="grid grid-cols-2 gap-4">
               {inputs.profile === "rectangular" ? (

@@ -417,7 +417,7 @@ export default function SanityCheckLab() {
                     : "border border-slate-200 text-slate-600"
                 }`}
               >
-                Hedef Arama
+        {pageCopy.tabs.goalSeek || "Goal Seek"}
               </button>
             </div>
             <div className="p-4">

@@ -425,7 +425,8 @@
       ],
       "tabs": {
         "sweep": "Sensitivity Sweep",
-        "monteCarlo": "Monte Carlo"
+        "monteCarlo": "Monte Carlo",
+        "goalSeek": "Goal Seek"
       }
     },
     "guides": {
