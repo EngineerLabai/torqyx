@@ -19,6 +19,7 @@ import {
 import VariableTable from "@/components/sanity-check/VariableTable";
 import FormulaEditor from "@/components/sanity-check/FormulaEditor";
 import ResultPanel from "@/components/sanity-check/ResultPanel";
+import SanityCheckPanel from "@/components/sanity-check/SanityCheckPanel";
 import ClientErrorBoundary from "@/components/sanity-check/ClientErrorBoundary";
 import AISummaryPanel from "@/src/components/ai/AISummaryPanel";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
@@ -96,7 +97,7 @@ const buildDefaultSession = (locale: "tr" | "en"): LabSession => ({
   },
 });
 
-type TabKey = "sweep" | "monteCarlo";
+type TabKey = "sweep" | "monteCarlo" | "goalSeek";
 
 export default function SanityCheckLab() {
   const { locale } = useLocale();
@@ -407,6 +408,17 @@ export default function SanityCheckLab() {
               >
                 {pageCopy.tabs.monteCarlo}
               </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("goalSeek")}
+                className={`rounded-full px-3 py-1 text-[11px] font-semibold ${
+                  activeTab === "goalSeek"
+                    ? "bg-slate-900 text-white"
+                    : "border border-slate-200 text-slate-600"
+                }`}
+              >
+                Hedef Arama
+              </button>
             </div>
             <div className="p-4">
               {activeTab === "sweep" ? (
@@ -415,13 +427,15 @@ export default function SanityCheckLab() {
                   onSessionChange={setSession}
                   copy={copy.sweepPanel}
                 />
-              ) : (
+              ) : activeTab === "monteCarlo" ? (
                 <MonteCarloPanel
                   session={session}
                   onSessionChange={setSession}
                   copy={copy.monteCarloPanel}
                   locale={locale}
                 />
+              ) : (
+                <SanityCheckPanel session={session} onSessionChange={setSession} />
               )}
             </div>
           </section>

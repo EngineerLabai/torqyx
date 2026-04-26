@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import UnitInput from "@/components/units/UnitInput";
+import UnitDisplay from "@/components/units/UnitDisplay";
 
 type SectionProfile = "rectangular" | "circular";
 
@@ -77,11 +79,14 @@ export default function BendingStressCalculator() {
     diameter: 50,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInputs((prev) => ({ ...prev, profile: e.target.value as SectionProfile }));
+  };
+
+  const handleValueChange = (name: string, value: number) => {
     setInputs((prev) => ({
       ...prev,
-      [name]: name === "profile" ? value : Math.max(0, Number(value) || 0), // Prevent negative inputs
+      [name]: Math.max(0, value || 0),
     }));
   };
 
@@ -110,7 +115,7 @@ export default function BendingStressCalculator() {
                 value={inputs.length}
                 unit="mm"
                 tooltip="Total span between the two supports."
-                onChange={handleInputChange}
+                onChange={handleValueChange}
               />
               <InputField
                 label="Center Force (F)"
@@ -118,7 +123,7 @@ export default function BendingStressCalculator() {
                 value={inputs.force}
                 unit="kN"
                 tooltip="Point load applied exactly at the center."
-                onChange={handleInputChange}
+                onChange={handleValueChange}
               />
               <InputField
                 label="Young's Modulus (E)"
@@ -126,7 +131,7 @@ export default function BendingStressCalculator() {
                 value={inputs.youngModulus}
                 unit="GPa"
                 tooltip="Elastic modulus of the material (e.g., 210 GPa for Steel, 70 GPa for Aluminum)."
-                onChange={handleInputChange}
+                onChange={handleValueChange}
               />
               <InputField
                 label="Yield Strength (Re)"
@@ -134,7 +139,7 @@ export default function BendingStressCalculator() {
                 value={inputs.yieldStrength}
                 unit="MPa"
                 tooltip="Material yield point for safety factor calculation."
-                onChange={handleInputChange}
+                onChange={handleValueChange}
               />
             </div>
           </div>
@@ -148,7 +153,7 @@ export default function BendingStressCalculator() {
               <select
                 name="profile"
                 value={inputs.profile}
-                onChange={handleInputChange}
+                onChange={handleSelectChange}
                 className="w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
               >
                 <option value="rectangular">Solid Rectangular</option>
@@ -164,14 +169,14 @@ export default function BendingStressCalculator() {
                     name="width"
                     value={inputs.width}
                     unit="mm"
-                    onChange={handleInputChange}
+                    onChange={handleValueChange}
                   />
                   <InputField
                     label="Height (h)"
                     name="height"
                     value={inputs.height}
                     unit="mm"
-                    onChange={handleInputChange}
+                    onChange={handleValueChange}
                   />
                 </>
               ) : (
@@ -180,7 +185,7 @@ export default function BendingStressCalculator() {
                   name="diameter"
                   value={inputs.diameter}
                   unit="mm"
-                  onChange={handleInputChange}
+                  onChange={handleValueChange}
                 />
               )}
             </div>
@@ -198,12 +203,12 @@ export default function BendingStressCalculator() {
           ) : (
             <div className="flex-1 space-y-5">
               <div className="grid grid-cols-2 gap-4">
-                <ResultRow label="Max Bending Moment" value={results.momentKNm.toFixed(2)} unit="kN·m" />
-                <ResultRow label="Area Moment of Inertia" value={results.inertiaCm4.toFixed(2)} unit="cm⁴" />
-                <ResultRow label="Section Modulus (W)" value={results.sectionModulusCm3.toFixed(2)} unit="cm³" />
-                <ResultRow label="Max Deflection (δ)" value={results.deflectionMm.toFixed(2)} unit="mm" highlight />
-                <ResultRow label="Max Bending Stress (σ)" value={results.stressMPa.toFixed(2)} unit="MPa" highlight />
-                <ResultRow label="Safety Factor (S)" value={results.safetyFactor.toFixed(2)} unit="" />
+                <ResultRow label="Max Bending Moment" value={results.momentKNm} unit="kN·m" />
+                <ResultRow label="Area Moment of Inertia" value={results.inertiaCm4} unit="cm⁴" />
+                <ResultRow label="Section Modulus (W)" value={results.sectionModulusCm3} unit="cm³" />
+                <ResultRow label="Max Deflection (δ)" value={results.deflectionMm} unit="mm" highlight />
+                <ResultRow label="Max Bending Stress (σ)" value={results.stressMPa} unit="MPa" highlight />
+                <ResultRow label="Safety Factor (S)" value={results.safetyFactor} unit="" />
               </div>
 
               {/* WARNINGS & ALERTS */}
@@ -291,10 +296,10 @@ function InputField({
 }: {
   label: string;
   name: string;
-  value: number | string;
+  value: number;
   unit: string;
   tooltip?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (name: string, value: number) => void;
 }) {
   return (
     <div>
@@ -307,14 +312,11 @@ function InputField({
         )}
       </label>
       <div className="relative">
-        <input
-          type="number"
-          name={name}
-          value={value}
-          onChange={onChange}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 pr-12"
-        />
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 font-medium">{unit}</span>
+            <UnitInput
+              value={value}
+              onChange={(val) => onChange(name, val)}
+              unit={unit}
+            />
       </div>
     </div>
   );
@@ -327,7 +329,7 @@ function ResultRow({
   highlight = false,
 }: {
   label: string;
-  value: string | number;
+  value: number;
   unit: string;
   highlight?: boolean;
 }) {
@@ -335,7 +337,7 @@ function ResultRow({
     <div className={`p-3 rounded-lg border ${highlight ? "bg-white border-emerald-200 shadow-sm" : "border-slate-200"}`}>
       <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">{label}</div>
       <div className={`text-lg font-bold ${highlight ? "text-emerald-700" : "text-slate-900"}`}>
-        {value} <span className="text-xs text-slate-500 font-medium">{unit}</span>
+        {unit ? <UnitDisplay value={value} unit={unit} /> : value.toFixed(2)}
       </div>
     </div>
   );

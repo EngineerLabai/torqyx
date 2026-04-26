@@ -130,6 +130,23 @@ export default function ProjectToolsPage() {
     setProjects((prev) => prev.filter((p) => p.id !== id));
   }
 
+  function exportToCSV() {
+    if (projects.length === 0) return;
+    const headers = ["Baslik", "Musteri", "Hat_Alan", "Durum", "Oncelik", "Hedef_Tarih", "Notlar"];
+    const rows = projects.map(p => [
+      p.title, p.customer, p.lineOrArea, p.status, p.priority, p.dueDate, p.notes
+    ].map(v => `"${(v || '').replace(/"/g, '""')}"`).join(","));
+    
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "proje_listesi.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   const filteredProjects = projects.filter((p) => {
     if (filter.status !== "all" && p.status !== filter.status) return false;
     if (filter.priority !== "all" && p.priority !== filter.priority) return false;

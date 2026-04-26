@@ -7,15 +7,17 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
 import { useAutosaveDraft } from "@/hooks/useAutosaveDraft";
 import { assertNoTurkish } from "@/utils/i18n-assert";
+import UnitInput from "@/components/units/UnitInput";
+import UnitDisplay from "@/components/units/UnitDisplay";
 
 type MaterialId = "steel" | "aluminum";
 type ChecklistId = "tslotSpacing" | "boltPattern" | "liftingPoints" | "dowelHoles";
 
 type BasePlateForm = {
-  spanLmm: string;
-  widthBmm: string;
-  equivalentLoadN: string;
-  allowableDeflectionMm: string;
+  spanL: number;
+  widthB: number;
+  equivalentLoad: number;
+  allowableDeflection: number;
   material: MaterialId;
 };
 
@@ -92,10 +94,10 @@ const MATERIALS: Record<MaterialId, MaterialPreset> = {
 };
 
 const INITIAL_FORM: BasePlateForm = {
-  spanLmm: "450",
-  widthBmm: "300",
-  equivalentLoadN: "3000",
-  allowableDeflectionMm: "0.10",
+  spanL: 450,
+  widthB: 300,
+  equivalentLoad: 3000,
+  allowableDeflection: 0.1,
   material: "steel",
 };
 
@@ -238,25 +240,16 @@ function createInitialNotes(): NoteRow[] {
   return [createNoteRow()];
 }
 
-function parsePositive(value: string): number | null {
-  const parsed = Number(value);
-  if (!Number.isFinite(parsed) || parsed <= 0) return null;
-  return parsed;
-}
-
 function normalizeForm(source: unknown): BasePlateForm {
   if (!source || typeof source !== "object") return INITIAL_FORM;
   const row = source as Partial<BasePlateForm>;
   const material: MaterialId = row.material === "aluminum" ? "aluminum" : "steel";
 
   return {
-    spanLmm: typeof row.spanLmm === "string" ? row.spanLmm : INITIAL_FORM.spanLmm,
-    widthBmm: typeof row.widthBmm === "string" ? row.widthBmm : INITIAL_FORM.widthBmm,
-    equivalentLoadN: typeof row.equivalentLoadN === "string" ? row.equivalentLoadN : INITIAL_FORM.equivalentLoadN,
-    allowableDeflectionMm:
-      typeof row.allowableDeflectionMm === "string"
-        ? row.allowableDeflectionMm
-        : INITIAL_FORM.allowableDeflectionMm,
+    spanL: typeof row.spanL === "number" ? row.spanL : INITIAL_FORM.spanL,
+    widthB: typeof row.widthB === "number" ? row.widthB : INITIAL_FORM.widthB,
+    equivalentLoad: typeof row.equivalentLoad === "number" ? row.equivalentLoad : INITIAL_FORM.equivalentLoad,
+    allowableDeflection: typeof row.allowableDeflection === "number" ? row.allowableDeflection : INITIAL_FORM.allowableDeflection,
     material,
   };
 }
@@ -348,10 +341,10 @@ export default function BasePlatePage() {
 
   function handleDemoFill() {
     setForm({
-      spanLmm: "620",
-      widthBmm: "380",
-      equivalentLoadN: "5200",
-      allowableDeflectionMm: "0.08",
+      spanL: 620,
+      widthB: 380,
+      equivalentLoad: 5200,
+      allowableDeflection: 0.08,
       material: "steel",
     });
 
@@ -391,10 +384,10 @@ export default function BasePlatePage() {
   }
 
   const calculated = useMemo(() => {
-    const span = parsePositive(form.spanLmm);
-    const width = parsePositive(form.widthBmm);
-    const load = parsePositive(form.equivalentLoadN);
-    const deflection = parsePositive(form.allowableDeflectionMm);
+    const span = form.spanL > 0 ? form.spanL : null;
+    const width = form.widthB > 0 ? form.widthB : null;
+    const load = form.equivalentLoad > 0 ? form.equivalentLoad : null;
+    const deflection = form.allowableDeflection > 0 ? form.allowableDeflection : null;
     if (!span || !width || !load || !deflection) return null;
 
     const material = MATERIALS[form.material];
@@ -453,10 +446,22 @@ export default function BasePlatePage() {
         <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
           <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.sections.inputs}</h2>
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
-            <NumberField label={copy.fields.spanLmm} value={form.spanLmm} onChange={(value) => handleFormChange("spanLmm", value)} />
-            <NumberField label={copy.fields.widthBmm} value={form.widthBmm} onChange={(value) => handleFormChange("widthBmm", value)} />
-            <NumberField label={copy.fields.equivalentLoadN} value={form.equivalentLoadN} onChange={(value) => handleFormChange("equivalentLoadN", value)} />
-            <NumberField label={copy.fields.allowableDeflectionMm} value={form.allowableDeflectionMm} onChange={(value) => handleFormChange("allowableDeflectionMm", value)} />
+            <label className="space-y-1">
+              <span className="block text-[11px] font-medium text-slate-700">{copy.fields.spanLmm}</span>
+              <UnitInput value={form.spanL} onChange={(value) => handleFormChange("spanL", value)} unit="mm" />
+            </label>
+            <label className="space-y-1">
+              <span className="block text-[11px] font-medium text-slate-700">{copy.fields.widthBmm}</span>
+              <UnitInput value={form.widthB} onChange={(value) => handleFormChange("widthB", value)} unit="mm" />
+            </label>
+            <label className="space-y-1">
+              <span className="block text-[11px] font-medium text-slate-700">{copy.fields.equivalentLoadN}</span>
+              <UnitInput value={form.equivalentLoad} onChange={(value) => handleFormChange("equivalentLoad", value)} unit="N" />
+            </label>
+            <label className="space-y-1">
+              <span className="block text-[11px] font-medium text-slate-700">{copy.fields.allowableDeflectionMm}</span>
+              <UnitInput value={form.allowableDeflection} onChange={(value) => handleFormChange("allowableDeflection", value)} unit="mm" />
+            </label>
             <SelectField
               label={copy.fields.material}
               value={form.material}
@@ -473,11 +478,11 @@ export default function BasePlatePage() {
           <h2 className="mb-3 text-sm font-semibold text-slate-900">{copy.sections.results}</h2>
           {calculated ? (
             <div className="space-y-3">
-              <ResultRow label={copy.results.estimatedThickness} value={`${calculated.thickness.toFixed(2)} mm`} />
-              <ResultRow label={copy.results.roundedThickness} value={`${calculated.roundedThickness.toFixed(0)} mm`} />
-              <ResultRow label={copy.results.estimatedWeight} value={`${calculated.estimatedWeight.toFixed(2)} kg`} />
-              <ResultRow label={copy.results.roundedWeight} value={`${calculated.roundedWeight.toFixed(2)} kg`} />
-              <ResultRow label={copy.results.deflectionAtRounded} value={`${calculated.deflectionAtRounded.toFixed(4)} mm`} />
+              <ResultRow label={copy.results.estimatedThickness} value={<UnitDisplay value={calculated.thickness} unit="mm" />} />
+              <ResultRow label={copy.results.roundedThickness} value={<UnitDisplay value={calculated.roundedThickness} unit="mm" />} />
+              <ResultRow label={copy.results.estimatedWeight} value={<UnitDisplay value={calculated.estimatedWeight} unit="kg" />} />
+              <ResultRow label={copy.results.roundedWeight} value={<UnitDisplay value={calculated.roundedWeight} unit="kg" />} />
+              <ResultRow label={copy.results.deflectionAtRounded} value={<UnitDisplay value={calculated.deflectionAtRounded} unit="mm" />} />
               <div className="rounded-lg bg-slate-50 p-3 text-[11px] text-slate-700">
                 <p className="font-semibold text-slate-900">{copy.results.formula}</p>
                 <p className="mt-1">? = F*L^3 / (4*E*b*t^3)</p>
@@ -538,20 +543,6 @@ export default function BasePlatePage() {
   );
 }
 
-function NumberField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
-  return (
-    <label className="space-y-1">
-      <span className="block text-[11px] font-medium text-slate-700">{label}</span>
-      <input
-        type="number"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-       aria-label="Number input"/>
-    </label>
-  );
-}
-
 function SelectField({
   label,
   value,
@@ -581,7 +572,7 @@ function SelectField({
   );
 }
 
-function ResultRow({ label, value }: { label: string; value: string }) {
+function ResultRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2">
       <span className="text-[11px] text-slate-600">{label}</span>

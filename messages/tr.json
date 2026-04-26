@@ -1901,5 +1901,22 @@
       "beta": "Beta",
       "premium": "Premium"
     }
+  },
+  "workspace": {
+    "variables": {
+      "title": "Çalışma Alanı Değişkenleri",
+      "import": "Değeri Aktar",
+      "export": "Çalışma Alanına Kaydet",
+      "empty": "Henüz çalışma alanında değişken yok.",
+      "savedFrom": "{tool} aracından",
+      "successSaved": "Çalışma alanına eklendi.",
+      "successImported": "Değişken başarıyla aktarıldı.",
+      "clearAll": "Tümünü Temizle"
+    },
+    "material": {
+      "active": "Aktif Malzeme",
+      "clear": "Malzemeyi Temizle",
+      "applyToForm": "Forma Uygula"
+    }
   }
 }

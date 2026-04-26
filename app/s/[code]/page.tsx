@@ -2,13 +2,13 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 interface SharePageProps {
-  params: {
+  params: Promise<{
     code: string;
-  };
+  }>;
 }
 
 export default async function SharePage({ params }: SharePageProps) {
-  const { code } = params;
+  const { code } = await params;
 
   try {
     const sharedCalculation = await prisma.sharedCalculation.findUnique({
@@ -64,7 +64,7 @@ export default async function SharePage({ params }: SharePageProps) {
 
 // SEO için metadata
 export async function generateMetadata({ params }: SharePageProps) {
-  const { code } = params;
+  const { code } = await params;
 
   try {
     const sharedCalculation = await prisma.sharedCalculation.findUnique({

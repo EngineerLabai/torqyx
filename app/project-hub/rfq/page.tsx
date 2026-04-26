@@ -91,6 +91,23 @@ export default function RfqSummaryPage() {
     );
   }
 
+  function exportToCSV() {
+    if (items.length === 0) return;
+    const headers = ["Musteri", "Proje_Kodu", "Parca_Adi", "Yillik_Hacim", "SOP_Tarihi", "Durum", "Notlar"];
+    const rows = items.map(p => [
+      p.customer, p.projectCode, p.partName, p.annualVolume, p.sopDate, p.status, p.qualityNotes
+    ].map(v => `"${(v || '').replace(/"/g, '""')}"`).join(","));
+    
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "rfq_listesi.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   const filteredItems =
     statusFilter === "all"
       ? items
@@ -364,16 +381,16 @@ export default function RfqSummaryPage() {
               <button
                 type="button"
                 disabled
-                className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60"
+                className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60 cursor-not-allowed"
               >
                 PDF&apos;e Aktar (Premium)
               </button>
               <button
                 type="button"
-                disabled
-                className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60"
+                onClick={exportToCSV}
+                className="flex-1 rounded-full border border-amber-500 bg-amber-100 px-3 py-1.5 font-semibold text-amber-900 hover:bg-amber-200 transition"
               >
-                Excel&apos;e Aktar (Premium)
+                Excel (CSV) Aktar
               </button>
             </div>
           </div>

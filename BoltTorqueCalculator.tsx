@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import UnitDisplay from "@/components/units/UnitDisplay";
 
 // --- STANDARD ENGINEERING DATA ---
 
@@ -236,10 +237,10 @@ export default function BoltTorqueCalculator() {
               
               {/* Primary Metrics */}
               <div className="grid grid-cols-2 gap-4">
-                <ResultRow label="Required Torque" value={results.torqueNm.toFixed(1)} unit="N·m" highlight />
-                <ResultRow label="Target Preload" value={results.preloadForceKN.toFixed(1)} unit="kN" highlight />
-                <ResultRow label="Bolt Yield Force" value={results.yieldForceKN.toFixed(1)} unit="kN" />
-                <ResultRow label="Est. K-Factor" value={results.kFactor.toFixed(3)} unit="" />
+                <ResultRow label="Required Torque" value={results.torqueNm} unit="N·m" highlight />
+                <ResultRow label="Target Preload" value={results.preloadForceKN} unit="kN" highlight />
+                <ResultRow label="Bolt Yield Force" value={results.yieldForceKN} unit="kN" />
+                <ResultRow label="Est. K-Factor" value={results.kFactor} unit="" />
               </div>
 
               {/* Stress Breakdown */}
@@ -248,15 +249,15 @@ export default function BoltTorqueCalculator() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-500">Tension Stress (σt)</span>
-                    <span className="font-semibold text-slate-800">{results.tensionStress.toFixed(0)} MPa</span>
+                    <span className="font-semibold text-slate-800"><UnitDisplay value={results.tensionStress} unit="MPa" /></span>
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-500">Torsion Stress (τ)</span>
-                    <span className="font-semibold text-slate-800">{results.torsionStress.toFixed(0)} MPa</span>
+                    <span className="font-semibold text-slate-800"><UnitDisplay value={results.torsionStress} unit="MPa" /></span>
                   </div>
                   <div className="flex justify-between text-sm border-t border-slate-100 pt-2 mt-1">
                     <span className="font-semibold text-slate-700">Equivalent Stress (σv)</span>
-                    <span className="font-bold text-slate-900">{results.vonMises.toFixed(0)} MPa</span>
+                    <span className="font-bold text-slate-900"><UnitDisplay value={results.vonMises} unit="MPa" /></span>
                   </div>
                 </div>
               </div>
@@ -332,7 +333,7 @@ function ResultRow({
   highlight = false,
 }: {
   label: string;
-  value: string | number;
+  value: number;
   unit: string;
   highlight?: boolean;
 }) {
@@ -340,7 +341,7 @@ function ResultRow({
     <div className={`p-3 rounded-lg border flex flex-col ${highlight ? "bg-white border-emerald-200 shadow-sm" : "border-slate-200 bg-white"}`}>
       <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">{label}</span>
       <div className={`text-lg font-bold ${highlight ? "text-emerald-700" : "text-slate-900"}`}>
-        {value} <span className="text-xs text-slate-500 font-medium">{unit}</span>
+        {unit ? <UnitDisplay value={value} unit={unit} /> : value.toFixed(3)}
       </div>
     </div>
   );
