@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import UnitDisplay from "@/components/units/UnitDisplay";
+import { UnitDisplay } from "@/components/units/UnitDisplay";
 
 // --- STANDARD ENGINEERING DATA ---
 
