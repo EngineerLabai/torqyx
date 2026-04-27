@@ -7,8 +7,8 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { qualityReportActionsCopy } from "@/data/quality-tools/report-actions";
 import { useAutosaveDraft } from "@/hooks/useAutosaveDraft";
 import { assertNoTurkish } from "@/utils/i18n-assert";
-import UnitInput from "@/components/units/UnitInput";
-import UnitDisplay from "@/components/units/UnitDisplay";
+import { UnitInput } from "@/components/units/UnitInput";
+import { UnitDisplay } from "@/components/units/UnitDisplay";
 
 type MaterialId = "steel" | "aluminum";
 type ChecklistId = "tslotSpacing" | "boltPattern" | "liftingPoints" | "dowelHoles";
