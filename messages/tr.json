@@ -425,7 +425,8 @@
       ],
       "tabs": {
         "sweep": "Duyarlılık Tarama",
-        "monteCarlo": "Monte Carlo"
+        "monteCarlo": "Monte Carlo",
+        "goalSeek": "Hedef Arama"
       }
     },
     "guides": {
