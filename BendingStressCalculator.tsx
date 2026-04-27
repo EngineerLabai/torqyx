@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import UnitInput from "@/components/units/UnitInput";
-import UnitDisplay from "@/components/units/UnitDisplay";
+import { UnitInput } from "@/components/units/UnitInput";
+import { UnitDisplay } from "@/components/units/UnitDisplay";
 
 type SectionProfile = "rectangular" | "circular";
 
