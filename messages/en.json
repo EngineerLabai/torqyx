@@ -791,8 +791,30 @@
     "keywayDesign": {
       "badges": { "primary": "Mechanical Calculator", "secondary": "Keyway (DIN 6885)" },
       "header": { "title": "Shaft-Hub Keyway Strength", "description": "Calculate shear and crushing stresses for keyway connections according to DIN 6885." },
-      "inputs": { "title": "Inputs", "torque": "Transmitted Torque T [Nm]", "shaftDia": "Shaft Diameter d [mm]", "keyWidth": "Key Width b [mm]", "keyHeight": "Key Height h [mm]", "keyLength": "Key Length L [mm]" },
-      "results": { "title": "Results", "force": "Tangential Force F [kN]", "shearStress": "Shear Stress τ [MPa]", "crushStress": "Crushing Stress σc [MPa]", "note": "Compare these stresses against the key material's yield and shear strength limits." }
+      "inputs": {
+        "title": "Inputs",
+        "torque": "Transmitted Torque T [Nm]",
+        "shaftDia": "Shaft Diameter d [mm]",
+        "keyWidth": "Key Width b [mm]",
+        "keyHeight": "Key Height h [mm]",
+        "keyLength": "Key Length L [mm]",
+        "yieldKey": "Key Yield Strength [MPa]",
+        "yieldHub": "Hub Yield Strength [MPa]"
+      },
+      "results": {
+        "title": "Results",
+        "force": "Tangential Force F [kN]",
+        "shearStress": "Shear Stress τ [MPa]",
+        "crushStress": "Crushing Stress σc [MPa]",
+        "note": "Compare these stresses against the key material's yield and shear strength limits.",
+        "safetyShear": "Safety Factor (Shear)",
+        "safetyCrush": "Safety Factor (Crush)",
+        "diagramTitle": "Stress Diagram",
+        "diagramEmpty": "Fill the inputs to see the diagram.",
+        "reportTitle": "Keyway Calculation Report",
+        "reportDesc": "Detailed calculation report.",
+        "downloadPdf": "Download PDF"
+      }
     },
     "toleranceStackup": {
       "badges": { "primary": "Quality & Mfg", "secondary": "Tolerance Stack-up (RSS)" },
@@ -1854,6 +1876,23 @@
       "free": "Free",
       "beta": "Beta",
       "premium": "Premium"
+    }
+  },
+  "workspace": {
+    "variables": {
+      "title": "Workspace Variables",
+      "import": "Import Variables",
+      "export": "Export Variables",
+      "empty": "No variables found.",
+      "savedFrom": "Saved from",
+      "successSaved": "Successfully saved.",
+      "successImported": "Successfully imported.",
+      "clearAll": "Clear All"
+    },
+    "material": {
+      "active": "Active Material",
+      "clear": "Clear Material",
+      "applyToForm": "Apply to Form"
     }
   }
 }
