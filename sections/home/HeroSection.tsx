@@ -25,7 +25,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
           subtitle={copy.subtitle}
           eyebrow={copy.eyebrow ?? brandContent.siteName}
           imageSrc={heroImage}
-          imageAlt={copy.imageAlt}
+          imageAlt="Torqyx Engineering - Home Hero"
           priority
         >
           <div className="space-y-4">

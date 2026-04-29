@@ -1,7 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import SupportForm from "@/components/support/SupportForm";
-import { HERO_PLACEHOLDER } from "@/lib/assets";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -37,6 +37,7 @@ export async function generateMetadata() {
 
 export default async function ContactPage() {
   const locale = await getLocaleFromCookies();
+  const heroImage = getHeroImageSrc("support");
 
   if (locale === "en") {
     return (
@@ -44,8 +45,8 @@ export default async function ContactPage() {
         <PageHero
           title={pageCopyEn.title}
           description={pageCopyEn.description}
-          imageSrc={HERO_PLACEHOLDER}
-          imageAlt={pageCopyEn.imageAlt}
+          imageSrc={heroImage}
+          imageAlt="Torqyx Engineering - Support Hero"
         />
 
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -85,8 +86,8 @@ export default async function ContactPage() {
       <PageHero
         title={pageCopy.title}
         description={pageCopy.description}
-        imageSrc={HERO_PLACEHOLDER}
-        imageAlt={pageCopy.imageAlt}
+        imageSrc={heroImage}
+        imageAlt="Torqyx Engineering - Support Hero"
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

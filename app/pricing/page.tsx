@@ -51,7 +51,7 @@ export default async function PricingPage() {
         description={copy.description}
         eyebrow={copy.badge}
         imageSrc={heroImage}
-        imageAlt={copy.title}
+        imageAlt="Torqyx Engineering - Premium Hero"
       >
         <Link
           href={toolsHref}

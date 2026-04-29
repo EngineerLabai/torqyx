@@ -190,7 +190,8 @@ export default function SupportForm() {
             className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
             placeholder={copy.fields.name.placeholder}
             disabled={isBusy}
-           aria-label={copy.fields.name.placeholder} />
+            aria-label={copy.fields.name.placeholder}
+          />
         </div>
         <div className="space-y-1">
           <label className="text-xs font-semibold text-slate-700" htmlFor="email">
@@ -206,7 +207,8 @@ export default function SupportForm() {
             className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
             placeholder={copy.fields.email.placeholder}
             disabled={isBusy}
-           aria-label={copy.fields.email.placeholder} />
+            aria-label={copy.fields.email.placeholder}
+          />
         </div>
       </div>
 
@@ -224,7 +226,8 @@ export default function SupportForm() {
           className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
           placeholder={copy.fields.message.placeholder}
           disabled={isBusy}
-         aria-label={copy.fields.message.placeholder} />
+          aria-label={copy.fields.message.placeholder}
+        />
       </div>
 
       <div className="space-y-1">
@@ -238,7 +241,8 @@ export default function SupportForm() {
           onChange={handleFileChange}
           disabled={!canUploadFile || isBusy}
           className="block w-full text-sm text-slate-700 file:mr-3 file:rounded-lg file:border-0 file:bg-emerald-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-emerald-500 disabled:opacity-60"
-         aria-label="attachment" />
+          aria-label="attachment"
+        />
         <p className="text-[11px] text-slate-600">
           {canUploadFile ? copy.fields.attachment.helper : copy.fields.attachment.unavailable}
         </p>

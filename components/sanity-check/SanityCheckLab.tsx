@@ -435,7 +435,7 @@ export default function SanityCheckLab() {
                   locale={locale}
                 />
               ) : (
-                <SanityCheckPanel session={session} onSessionChange={setSession} />
+                <SanityCheckPanel />
               )}
             </div>
           </section>

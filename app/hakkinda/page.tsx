@@ -1,7 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
-import { HERO_PLACEHOLDER } from "@/lib/assets";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -89,14 +89,15 @@ function DeterministicDisclaimer({ locale }: { locale: string }) {
 export default async function AboutPage() {
   const locale = await getLocaleFromCookies();
   const copy = locale === "en" ? pageCopyEn : pageCopy;
+  const heroImage = getHeroImageSrc("about");
 
   return (
     <PageShell>
       <PageHero
         title={copy.title}
         description={copy.description}
-        imageSrc={HERO_PLACEHOLDER}
-        imageAlt={copy.imageAlt}
+        imageSrc={heroImage}
+        imageAlt="Torqyx Engineering - Workspace"
       />
 
       <div className="my-6">

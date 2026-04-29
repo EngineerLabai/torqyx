@@ -1,5 +1,6 @@
 "use client";
 
+import OptimizedImage from "@/components/media/OptimizedImage";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
 
@@ -26,47 +27,90 @@ export default function ToolTrustPanel({
 
   if (!hasFormula && !hasAssumptions && !hasReferences) return null;
 
+  const technicalImages = [
+    ...(hasFormula || hasAssumptions
+      ? [
+          {
+            src: "/images/fea.webp",
+            alt: "Torqyx Engineering - FEA",
+          },
+        ]
+      : []),
+    ...(hasReferences
+      ? [
+          {
+            src: "/images/exploded-view.webp",
+            alt: "Torqyx Engineering - Exploded View",
+          },
+        ]
+      : []),
+  ];
+
   return (
-    <section className="grid gap-4 lg:grid-cols-3">
-      {hasFormula ? (
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.formula}</h2>
-          <p className="rounded-lg bg-slate-50 px-3 py-2 font-mono text-[11px] text-slate-700">{formula}</p>
-        </div>
-      ) : null}
+    <>
+      <section className="grid gap-4 lg:grid-cols-3">
+        {hasFormula ? (
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+            <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.formula}</h2>
+            <p className="rounded-lg bg-slate-50 px-3 py-2 font-mono text-[11px] text-slate-700">{formula}</p>
+          </div>
+        ) : null}
 
-      {hasAssumptions ? (
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.assumptions}</h2>
-          <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
-            {assumptions?.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+        {hasAssumptions ? (
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+            <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.assumptions}</h2>
+            <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
+              {assumptions?.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
 
-      {hasReferences ? (
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.references}</h2>
-          <ul className="space-y-2 text-[11px] text-slate-700">
-            {references?.map((ref) => (
-              <li key={ref.title} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <div className="font-semibold text-slate-800">
-                  {ref.url ? (
-                    <a href={ref.url} target="_blank" rel="noreferrer" className="underline">
-                      {ref.title}
-                    </a>
-                  ) : (
-                    ref.title
-                  )}
-                </div>
-                {ref.note ? <p className="mt-1 text-[10px] text-slate-500">{ref.note}</p> : null}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {hasReferences ? (
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+            <h2 className="mb-2 text-sm font-semibold text-slate-900">{copy.references}</h2>
+            <ul className="space-y-2 text-[11px] text-slate-700">
+              {references?.map((ref) => (
+                <li key={ref.title} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+                  <div className="font-semibold text-slate-800">
+                    {ref.url ? (
+                      <a href={ref.url} target="_blank" rel="noreferrer" className="underline">
+                        {ref.title}
+                      </a>
+                    ) : (
+                      ref.title
+                    )}
+                  </div>
+                  {ref.note ? <p className="mt-1 text-[10px] text-slate-500">{ref.note}</p> : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </section>
+
+      {technicalImages.length ? (
+        <section className="grid gap-4 md:grid-cols-2">
+          {technicalImages.map((image) => (
+            <div
+              key={image.src}
+              className="relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm"
+            >
+              <div className="relative aspect-[16/8] w-full">
+                <OptimizedImage
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 36vw"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          ))}
+        </section>
       ) : null}
-    </section>
+    </>
   );
 }

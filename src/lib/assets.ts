@@ -2,6 +2,7 @@ import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 export type HeroAssetKey =
+  | "about"
   | "home"
   | "tools"
   | "blog"
@@ -18,18 +19,19 @@ export type HeroAssetKey =
 export const HERO_PLACEHOLDER = "/images/placeholder.webp";
 
 export const HERO_ASSETS: Record<HeroAssetKey, string> = {
-  home: "/images/home-hero.jpg",
-  tools: "/images/tool-library.jpg",
-  blog: "/images/blog-hero.jpg",
-  guides: "/images/guides-hero.jpg",
-  glossary: "/images/glossary-hero.jpg",
-  community: "/images/community-hero.jpg",
-  support: "/images/support-hero.jpg",
-  premium: "/images/premium-hero.jpg",
-  toolDetail: "/images/tool-detail.jpg",
-  projectHub: HERO_PLACEHOLDER,
-  qualityTools: "/images/quality-tools-hero.jpg",
-  fixtureTools: "/images/fixture-tools-hero.jpg",
+  about: "/images/workspace.webp",
+  home: "/images/home-hero.webp",
+  tools: "/images/tool-library.webp",
+  blog: "/images/blog-hero.webp",
+  guides: "/images/guides-hero.webp",
+  glossary: "/images/glossary-hero.webp",
+  community: "/images/community-hero.webp",
+  support: "/images/support-hero.webp",
+  premium: "/images/premium-hero.webp",
+  toolDetail: "/images/tool-detail.webp",
+  projectHub: "/images/project-page.webp",
+  qualityTools: "/images/quality-tools-hero.webp",
+  fixtureTools: "/images/fixture-tools-hero.webp",
 };
 
 const PUBLIC_DIR = path.join(process.cwd(), "public");
@@ -49,9 +51,9 @@ export function getHeroImageSrc(key: HeroAssetKey): string {
   try {
     const normalized = candidate.startsWith("/") ? candidate.slice(1) : candidate;
     const fullPath = path.join(PUBLIC_DIR, normalized);
-    return existsSync(fullPath) ? candidate : "";
+    return existsSync(fullPath) ? candidate : HERO_PLACEHOLDER;
   } catch {
-    return "";
+    return HERO_PLACEHOLDER;
   }
 }
 

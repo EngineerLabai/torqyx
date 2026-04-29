@@ -1,16 +1,14 @@
 "use client";
 
-import { useWorkspaceStore, WorkspaceMaterial } from "@/lib/store/useWorkspaceStore";
+import { useWorkspaceStore, WorkspaceMaterial, WorkspaceState } from "@/useWorkspaceStore";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
 
 interface MaterialExportButtonProps {
   material: WorkspaceMaterial;
 }
 
 export default function MaterialExportButton({ material }: MaterialExportButtonProps) {
-  const setActiveMaterial = useWorkspaceStore((state) => state.setActiveMaterial);
-  const t = useTranslations("workspace.material");
+  const setActiveMaterial = useWorkspaceStore((state: WorkspaceState) => state.setActiveMaterial);
   const [saved, setSaved] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 

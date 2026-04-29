@@ -151,16 +151,8 @@ const nextConfig: NextConfig = {
       { source: "/tr/cookies", destination: "/tr/cerez-politikasi", permanent: true },
       { source: "/tr/terms", destination: "/tr/kullanim-sartlari", permanent: true },
       { source: "/tr/contact", destination: "/tr/iletisim", permanent: true },
-      {
-        source: "/forum",
-        destination: "/tr/faq",
-        permanent: true,
-      },
-      { source: "/en/forum", destination: "/en/faq", permanent: true },
       { source: "/qa", destination: "/tr/faq", permanent: true },
       { source: "/en/qa", destination: "/en/faq", permanent: true },
-      { source: "/community", destination: "/tr/faq", permanent: true },
-      { source: "/en/community", destination: "/en/faq", permanent: true },
     ];
   },
 };

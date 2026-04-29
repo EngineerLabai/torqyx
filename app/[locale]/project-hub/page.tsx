@@ -168,7 +168,7 @@ export default async function ProjectHubPage({ params }: PageProps) {
         description={copy.hero.description}
         eyebrow={copy.hero.eyebrow}
         imageSrc={heroImage}
-        imageAlt={copy.hero.imageAlt}
+        imageAlt="Torqyx Engineering - Project Page"
       />
 
       <section className="grid gap-4 md:grid-cols-2">

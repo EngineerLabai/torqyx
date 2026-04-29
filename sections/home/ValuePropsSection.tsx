@@ -1,4 +1,5 @@
 import { CheckCircle2, Clock, ShieldCheck, XCircle } from "lucide-react";
+import OptimizedImage from "@/components/media/OptimizedImage";
 import type { Locale } from "@/utils/locale";
 import { getMessages } from "@/utils/messages";
 
@@ -12,10 +13,24 @@ export default function ValuePropsSection({ locale }: ValuePropsSectionProps) {
   return (
     <section id="value-props" className="w-full py-12">
       <div className="site-container space-y-8">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-600">{copy.kicker}</p>
-          <h2 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{copy.title}</h2>
-          <p className="max-w-[70ch] text-sm leading-relaxed text-slate-600 md:text-base">{copy.description}</p>
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-600">{copy.kicker}</p>
+            <h2 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">{copy.title}</h2>
+            <p className="max-w-[70ch] text-sm leading-relaxed text-slate-600 md:text-base">{copy.description}</p>
+          </div>
+          <div className="relative min-w-0 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="relative aspect-[16/9] w-full">
+              <OptimizedImage
+                src="/images/home-hero.jpg"
+                alt="Torqyx Engineering - Dashboard"
+                fill
+                sizes="(max-width: 1024px) 100vw, 48vw"
+                className="object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-6">

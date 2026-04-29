@@ -49,7 +49,7 @@ export default async function GuidesIndexPage() {
         description={copy.description}
         eyebrow={copy.badge}
         imageSrc={heroImage}
-        imageAlt={copy.imageAlt}
+        imageAlt="Torqyx Engineering - Guides Hero"
       />
 
       <section className="space-y-8">

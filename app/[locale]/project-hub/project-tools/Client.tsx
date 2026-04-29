@@ -181,7 +181,7 @@ export default function ProjectToolsClient({ locale, heroImage }: { locale: Loca
         description={copy.hero.description}
         eyebrow={copy.hero.eyebrow}
         imageSrc={heroImage}
-        imageAlt={copy.hero.imageAlt}
+        imageAlt="Torqyx Engineering - Project Page"
       />
 
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">

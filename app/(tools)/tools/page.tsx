@@ -45,7 +45,7 @@ export default async function ToolsIndexPage({ searchParams }: ToolsIndexPagePro
         description={copy.description}
         eyebrow={copy.badge}
         imageSrc={heroImage}
-        imageAlt={copy.imageAlt}
+        imageAlt="Torqyx Engineering - Tool Library"
       />
 
       <h1 className="sr-only">Engineering Calculators</h1>

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "@/components/media/OptimizedImage";
 
 type HeroProps = {
   title: string;
@@ -26,7 +26,7 @@ export default function Hero({ title, subtitle, imageSrc, imageAlt, priority = t
 
           <div className="relative w-full overflow-hidden rounded-2xl border border-slate-200 bg-white">
             <div className="relative aspect-[16/10] w-full sm:aspect-[16/9]">
-              <Image
+              <OptimizedImage
                 src={normalizedImageSrc}
                 alt={imageAlt}
                 fill
@@ -35,7 +35,6 @@ export default function Hero({ title, subtitle, imageSrc, imageAlt, priority = t
                 priority={priority}
                 fetchPriority={priority ? "high" : undefined}
                 loading={priority ? undefined : "lazy"}
-                unoptimized={normalizedImageSrc.toLowerCase().endsWith(".svg")}
               />
             </div>
           </div>

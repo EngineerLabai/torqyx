@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import OptimizedImage from "@/components/media/OptimizedImage";
 import ActionCard from "@/components/ui/ActionCard";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
 import ToolDocStandard from "@/components/tools/ToolDocStandard";
@@ -278,6 +279,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
       ) : null}
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
+        <ToolDetailImageBanner />
         {children}
         <ToolDocumentation
           toolTitle={resolvedTool?.title ?? slug}
@@ -359,6 +361,23 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
         </section>
       ) : null}
     </div>
+  );
+}
+
+function ToolDetailImageBanner() {
+  return (
+    <section className="relative min-w-0 overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
+      <div className="relative aspect-[16/7] w-full sm:aspect-[16/6] lg:aspect-[16/5]">
+        <OptimizedImage
+          src="/images/tool-detail.webp"
+          alt="Torqyx Engineering - Tool Detail"
+          fill
+          sizes="(max-width: 768px) 100vw, 72vw"
+          className="object-cover"
+          loading="lazy"
+        />
+      </div>
+    </section>
   );
 }
 

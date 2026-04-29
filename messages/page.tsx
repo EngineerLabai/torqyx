@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 
 type Part = { id: number; name: string; nominal: number | ""; tol: number | "" };
 
 export default function ToleranceStackupPage() {
-  const t = useTranslations("pages.toleranceStackup");
 
   const [parts, setParts] = useState<Part[]>([
     { id: 1, name: "Parça 1", nominal: "", tol: "" },

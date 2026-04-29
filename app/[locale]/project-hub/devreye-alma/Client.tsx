@@ -93,7 +93,7 @@ export default function CommissioningClient({ locale, heroImage }: { locale: Loc
         description={copy.hero.description}
         eyebrow={copy.hero.eyebrow}
         imageSrc={heroImage}
-        imageAlt={copy.hero.imageAlt}
+        imageAlt="Torqyx Engineering - Project Page"
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

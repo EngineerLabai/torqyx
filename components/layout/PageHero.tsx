@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
+import OptimizedImage from "@/components/media/OptimizedImage";
 
 const BLUR_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjZjlmYWZiIi8+PHBhdGggZD0iTTAgMjBDMTAgMTQuNSAyNSAxMSA0MCA4IiBzdHJva2U9IiNlMmU4ZjAiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==";
@@ -56,7 +56,7 @@ export default function PageHero({
         <div className="relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-slate-100 via-slate-50 to-slate-200" />
           <div className="relative aspect-[4/3] w-full lg:aspect-[16/10]">
-            <Image
+            <OptimizedImage
               src={normalizedImageSrc}
               alt={imageAlt}
               fill
@@ -64,7 +64,6 @@ export default function PageHero({
               className="object-cover"
               placeholder="blur"
               blurDataURL={BLUR_DATA_URL}
-              unoptimized={normalizedImageSrc.toLowerCase().endsWith(".svg")}
               priority={priority}
               fetchPriority={priority ? "high" : undefined}
               loading={priority ? undefined : "lazy"}

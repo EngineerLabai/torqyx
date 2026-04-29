@@ -1,28 +1,42 @@
-import { redirect } from "next/navigation";
+import PageHero from "@/components/layout/PageHero";
+import PageShell from "@/components/layout/PageShell";
+import QaBoard from "@/components/community/QaBoard";
 import { getBrandCopy } from "@/config/brand";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { withLocalePrefix } from "@/utils/locale-path";
+import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const copy =
-    locale === "tr"
-      ? { title: "Forum", description: "FAQ sayfasına yönlendirilir." }
-      : { title: "Forum", description: "Redirects to the FAQ page." };
+  const copy = getMessages(locale).components.qaBoard;
+  const title = locale === "tr" ? "Forum" : "Forum";
 
   return buildPageMetadata({
-    title: `${copy.title} | ${brandContent.siteName}`,
+    title: `${title} | ${brandContent.siteName}`,
     description: copy.description,
     path: "/forum",
     locale,
   });
 }
 
-export default async function ForumRedirect() {
+export default async function ForumPage() {
   const locale = await getLocaleFromCookies();
-  redirect(withLocalePrefix("/faq", locale));
+  const copy = getMessages(locale).components.qaBoard;
+  const heroImage = getHeroImageSrc("community");
+  const title = locale === "tr" ? "Forum" : "Forum";
+
+  return (
+    <PageShell>
+      <PageHero
+        title={title}
+        description={copy.description}
+        eyebrow={copy.badge}
+        imageSrc={heroImage}
+        imageAlt="Torqyx Engineering - Community Hero"
+      />
+      <QaBoard />
+    </PageShell>
+  );
 }
-
-

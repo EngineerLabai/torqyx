@@ -40,7 +40,7 @@ export default async function GlossaryIndexPage() {
         description={copy.description}
         eyebrow={copy.badge}
         imageSrc={heroImage}
-        imageAlt={copy.imageAlt}
+        imageAlt="Torqyx Engineering - Glossary Hero"
       />
 
       <section className="grid gap-4">

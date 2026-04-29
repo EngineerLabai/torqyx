@@ -35,11 +35,10 @@ export default async function PremiumPage() {
         description={copy.description}
         eyebrow={copy.badge}
         imageSrc={heroImage}
-        imageAlt={copy.imageAlt}
+        imageAlt="Torqyx Engineering - Premium Hero"
       />
       <PremiumCTA variant="full" copy={messages.components.premiumCTA} />
     </PageShell>
   );
 }
-
 

@@ -32,7 +32,7 @@ export default async function SupportPage() {
         description={copy.description}
         eyebrow={copy.badge}
         imageSrc={heroImage}
-        imageAlt={copy.imageAlt}
+        imageAlt="Torqyx Engineering - Support Hero"
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

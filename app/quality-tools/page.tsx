@@ -78,7 +78,12 @@ export default async function QualityToolsPage({ searchParams }: QualityToolsPag
 
   return (
     <PageShell>
-      <Hero title={copy.title} subtitle={copy.description} imageSrc={heroImage} imageAlt={copy.imageAlt} />
+      <Hero
+        title={copy.title}
+        subtitle={copy.description}
+        imageSrc={heroImage}
+        imageAlt="Torqyx Engineering - Quality Tools Hero"
+      />
 
       <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <h1 className="text-3xl font-bold tracking-tight">

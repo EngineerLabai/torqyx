@@ -210,14 +210,14 @@ const termsSectionsEn: TermsSection[] = [
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params;
-  const brandContent = getBrandCopy(locale);
+  const brandContent = getBrandCopy(locale as "tr" | "en");
   const copy = locale === "en" ? pageCopyEn : pageCopy;
 
   return buildPageMetadata({
     title: `${copy.title} | ${brandContent.siteName}`,
     description: copy.description,
     path: "/kullanim-sartlari",
-    locale,
+    locale: locale as "tr" | "en",
     alternatesLanguages: null,
   });
 }

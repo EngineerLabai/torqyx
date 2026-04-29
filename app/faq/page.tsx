@@ -26,7 +26,7 @@ export default async function FaqPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.faq;
   const heroImage = getHeroImageSrc("support");
-  const imageAlt = locale === "tr" ? "Sık sorulan sorular görseli" : "FAQ illustration";
+  const imageAlt = "Torqyx Engineering - Support Hero";
 
   return (
     <PageShell>

@@ -1,4 +1,4 @@
-import NextImage from "next/image";
+import OptimizedImage from "@/components/media/OptimizedImage";
 
 type MdxImageProps = {
   caption?: string;
@@ -47,7 +47,7 @@ export default function Image({
 
   return (
     <figure className="my-6 flex flex-col items-center gap-2">
-      <NextImage
+      <OptimizedImage
         src={normalizedSrc}
         alt={resolvedAlt}
         width={resolvedWidth}

@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: SharePageProps) {
     const toolName = getToolDisplayName(sharedCalculation.toolSlug);
 
     // Parametre özetini oluştur
-    const summary = createCalculationSummary(sharedCalculation.toolSlug, sharedCalculation.inputs);
+    const summary = createCalculationSummary(sharedCalculation.toolSlug, sharedCalculation.inputs as Record<string, any>);
 
     return {
       title: `${toolName} - Paylaşılan Hesaplama`,
@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: SharePageProps) {
         type: "website",
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Paylaşılan Hesaplama",
     };
@@ -117,7 +117,8 @@ function getToolDisplayName(toolSlug: string): string {
   return toolNames[toolSlug] || "Mühendislik Hesaplayıcı";
 }
 
-function createCalculationSummary(toolSlug: string, inputs: any): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function createCalculationSummary(toolSlug: string, inputs: Record<string, any>): string {
   try {
     switch (toolSlug) {
       case "bolt-calculator":

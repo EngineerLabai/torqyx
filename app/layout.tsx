@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import type { ReactNode } from "react";
-import { Inter, JetBrains_Mono, Sora } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
@@ -25,27 +24,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { UnitSystemProvider } from "@/contexts/UnitSystemContext";
 import "../styles/globals.css";
 import "katex/dist/katex.min.css";
-
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-  weight: ["400", "600", "700"],
-});
 
 const isVercelAppHost = (host: string) => {
   const normalized = host.toLowerCase().trim().replace(/:\d+$/, "");
@@ -191,7 +169,7 @@ export default async function RootLayout({
   };
   return (
     <html lang={locale} className="w-full overflow-x-hidden">
-      <body className={`${sora.variable} ${inter.variable} ${jetBrainsMono.variable} w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased`}>
+      <body className="w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased">
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
           <AuthProvider>

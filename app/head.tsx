@@ -5,7 +5,7 @@ import { SITE_URL } from "@/utils/seo";
 
 const brandCopy = getBrandCopy("en");
 const pricingUrl = new URL("/pricing", SITE_URL).toString();
-const HOME_LCP_IMAGE = "/images/home-hero.jpg";
+const HOME_LCP_IMAGE = "/images/home-hero.webp";
 
 const offers: OfferSchema[] = [
   {

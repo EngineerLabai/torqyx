@@ -100,7 +100,8 @@ export default function QaBoard() {
             rows={3}
             className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-100"
             placeholder={copy.replyPlaceholder}
-           aria-label={copy.replyPlaceholder} />
+            aria-label={copy.replyPlaceholder}
+          />
           <div className="flex justify-end">
             <button
               type="submit"

@@ -89,7 +89,7 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
         description={copy.description}
         eyebrow={copy.badge}
         imageSrc={heroImage}
-        imageAlt={copy.imageAlt}
+        imageAlt="Torqyx Engineering - Blog Hero"
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
