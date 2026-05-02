@@ -1,7 +1,6 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
-import { HERO_PLACEHOLDER } from "@/lib/assets";
 import { buildPageMetadata } from "@/utils/metadata";
 
 type PageProps = {
@@ -232,7 +231,7 @@ export default async function TermsPage({ params }: PageProps) {
       <PageHero
         title={copy.title}
         description={copy.description}
-        imageSrc={HERO_PLACEHOLDER}
+        imageSrc="/images/industrial-facility.jpg"
         imageAlt={copy.imageAlt}
       />
 

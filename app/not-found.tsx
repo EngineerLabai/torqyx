@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -27,8 +28,18 @@ export default async function NotFound() {
 
   return (
     <PageShell>
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="space-y-4">
+      <section className="flex flex-col items-center text-center rounded-3xl border border-slate-200 bg-white p-10 shadow-sm">
+        <div className="mb-6 flex justify-center">
+          <Image
+            src="/images/Kırık Dişli (404).webp"
+            alt="404 Broken Gear"
+            width={240}
+            height={240}
+            className="opacity-90"
+            priority
+          />
+        </div>
+        <div className="space-y-4 max-w-md">
           <div className="inline-flex items-center gap-2 rounded-full border border-rose-100 bg-rose-50 px-3 py-1 text-[11px] text-rose-700 md:text-xs">
             <span className="font-semibold">404</span>
           </div>
@@ -38,7 +49,7 @@ export default async function NotFound() {
           <p className="text-[15px] leading-relaxed text-slate-700 md:text-base">
             {copy.description}
           </p>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href={toolsHref}
               className="rounded-full bg-emerald-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700"

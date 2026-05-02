@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Bolt, Cog, Droplets, Gauge, Sigma, Wrench } from "lucide-react";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -14,12 +15,12 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
   const copy = messages.home.showcase;
   const categoryLabels = messages.components.toolLibrary.labels;
   const tools = [
-    { id: "bolt-calculator", icon: Bolt, usage: 12400 },
-    { id: "gear-module", icon: Cog, usage: 9800 },
-    { id: "pipe-pressure-loss", icon: Droplets, usage: 8600 },
-    { id: "shaft-torsion", icon: Gauge, usage: 7400 },
-    { id: "bearing-life", icon: Sigma, usage: 6900 },
-    { id: "hydraulic-cylinder", icon: Wrench, usage: 6100 },
+    { id: "bolt-calculator", icon: Bolt, image: "/images/thumbnail-bolt.jpg", usage: 12400 },
+    { id: "gear-module", icon: Cog, image: "/images/thumbnail-gear.jpg", usage: 9800 },
+    { id: "pipe-pressure-loss", icon: Droplets, image: "/images/blueprint-hydraulic.jpg", usage: 8600 },
+    { id: "shaft-torsion", icon: Gauge, image: "/images/thumbnail-shaft.jpg", usage: 7400 },
+    { id: "bearing-life", icon: Sigma, image: "/images/thumbnail-bearing.jpg", usage: 6900 },
+    { id: "hydraulic-cylinder", icon: Wrench, image: "/images/thumbnail-pin-spring.jpg", usage: 6100 },
   ]
     .map((item) => ({
       ...item,
@@ -40,22 +41,32 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map(({ tool, icon: Icon, usage }) => {
+          {tools.map(({ tool, icon: Icon, usage, image }) => {
             const toolCopy = getToolCopy(tool, locale);
             const categoryLabel = tool.category ? categoryLabels.category[tool.category] : categoryLabels.generalCategory;
             return (
               <Link
                 key={tool.id}
                 href={withLocalePrefix(tool.href, locale)}
-                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-slate-300 hover:shadow-md"
+            className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md"
               >
+            <div className="relative h-36 w-full bg-slate-100">
+              <Image
+                src={image}
+                alt={toolCopy.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="flex flex-col flex-grow p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
-                      <Icon size={20} />
+                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+                    <Icon size={16} />
                     </span>
                     <div>
-                      <h3 className="text-base font-semibold text-slate-900 group-hover:text-slate-950">
+                    <h3 className="text-sm font-semibold text-slate-900 group-hover:text-slate-950">
                         {toolCopy.title}
                       </h3>
                       <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -70,6 +81,7 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">{toolCopy.description}</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-emerald-700">
                   {copy.tryNow}
+              </div>
                 </div>
               </Link>
             );

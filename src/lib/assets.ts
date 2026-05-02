@@ -19,9 +19,9 @@ export type HeroAssetKey =
 export const HERO_PLACEHOLDER = "/images/placeholder.webp";
 
 export const HERO_ASSETS: Record<HeroAssetKey, string> = {
-  about: "/images/workspace.webp",
-  home: "/images/home-hero.webp",
-  tools: "/images/tool-library.webp",
+  about: "/images/Ofis Atmosfer.webp",
+  home: "/images/hero banner.webp",
+  tools: "/images/Genel Makine Şeması.webp",
   blog: "/images/blog-hero.webp",
   guides: "/images/guides-hero.webp",
   glossary: "/images/glossary-hero.webp",
@@ -29,8 +29,8 @@ export const HERO_ASSETS: Record<HeroAssetKey, string> = {
   support: "/images/support-hero.webp",
   premium: "/images/premium-hero.webp",
   toolDetail: "/images/tool-detail.webp",
-  projectHub: "/images/project-page.webp",
-  qualityTools: "/images/quality-tools-hero.webp",
+  projectHub: "/images/Endüstriyel Tesis.webp",
+  qualityTools: "/images/Kalite Kontrol.webp",
   fixtureTools: "/images/fixture-tools-hero.webp",
 };
 

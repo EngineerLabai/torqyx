@@ -41,11 +41,9 @@ Adim 3: Akis rejimine gore surtunme katsayisi secilir.
 
 Adim 4: Toplam basinc kaybi hesaplanir ve hedef sinirlarla karsilastirilir.
 
-Gorsel akis (placeholder):
+Gorsel akis:
 
-```text
-Debi -> Hiz -> Reynolds -> Surtunme Katsayisi -> DeltaP
-```
+![Hydraulic Blueprint](/images/blueprint-hydraulic.jpg)
 
 ## Ornek Cozum
 

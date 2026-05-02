@@ -86,6 +86,7 @@ export default function MachineElementsPage({ initialDocs }: MachineElementsClie
       <BearingBlock />
       <KeyBlock />
       <GearBlock />
+      <ComponentGallery />
           </ToolDocTabs>
     </PageShell>
   );
@@ -233,6 +234,78 @@ function GearBlock() {
         faktörleri gereklidir. Helis açısı, dinamik faktör ve yüz yüklenme dağılımı burada
         yoktur.
       </p>
+    </section>
+  );
+}
+
+function ComponentGallery() {
+  const components = [
+    {
+      name: "Cıvata & Somun",
+      image: "/images/Cıvata & Somun.webp",
+      description: "Vida ve somun bileşenleri",
+    },
+    {
+      name: "Dişli (Gear)",
+      image: "/images/Dişli (Gear).webp",
+      description: "Dişli aktarım elemanları",
+    },
+    {
+      name: "Rulman (Bearing)",
+      image: "/images/Rulman (Bearing).webp",
+      description: "Dönen makine elemanları",
+    },
+    {
+      name: "Kayış & Kasnak",
+      image: "/images/Kayış & Kasnak (Belt-Pulley).webp",
+      description: "Kayış-kasnak sistemi",
+    },
+    {
+      name: "Pim & Yay",
+      image: "/images/Pim & Yay (Pin & Spring).webp",
+      description: "Bağlantı ve elastik elemanlar",
+    },
+    {
+      name: "Vida & Diş Açma",
+      image: "/images/Vida & Diş Açma (Screw Thread).webp",
+      description: "Vida ve dişli bağlantılar",
+    },
+    {
+      name: "Mil & Yatak",
+      image: "/images/Mil & Yatak (Shaft).webp",
+      description: "Mil ve yatak sistemleri",
+    },
+  ];
+
+  return (
+    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="mb-4">
+        <h2 className="text-sm font-semibold text-slate-900">Makine Elemanları Galeri</h2>
+        <p className="mt-1 text-xs text-slate-600">
+          Ortak makine bileşenlerinin görsel referansları
+        </p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {components.map((component) => (
+          <div
+            key={component.name}
+            className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-sm transition hover:shadow-md"
+          >
+            <div className="relative h-32 w-full bg-slate-100">
+              <img
+                src={component.image}
+                alt={component.name}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="p-3">
+              <h3 className="text-sm font-semibold text-slate-900">{component.name}</h3>
+              <p className="mt-1 text-xs text-slate-600">{component.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

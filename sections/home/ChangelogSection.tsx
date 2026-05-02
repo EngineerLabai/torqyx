@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Locale } from "@/utils/locale";
 import type { ChangelogEntry } from "@/utils/changelog";
 import { getMessages } from "@/utils/messages";
@@ -63,8 +64,15 @@ export default function ChangelogSection({ locale, latest }: ChangelogSectionPro
             </div>
           </div>
         ) : (
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">
-            {copy.empty}
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+            <Image
+              src="/images/empty-state-toolbox.jpg"
+              alt="Empty toolbox"
+              width={120}
+              height={120}
+              className="mb-4 opacity-80"
+            />
+            <p className="text-sm font-medium text-slate-600">{copy.empty}</p>
           </div>
         )}
       </div>

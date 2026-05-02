@@ -96,7 +96,14 @@ export default function SavedCalculations() {
           {copy.loading}
         </section>
       ) : entries.length === 0 ? (
-        <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center">
+        <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center">
+          <div className="mb-4 flex justify-center">
+            <img
+              src="/images/Boş Durum (Empty State).webp"
+              alt="Empty State"
+              className="h-40 w-40 object-cover opacity-90"
+            />
+          </div>
           <p className="text-sm font-semibold text-slate-700">{copy.emptyTitle}</p>
           <p className="mt-1 text-xs text-slate-500">{copy.emptyHint}</p>
           <Link

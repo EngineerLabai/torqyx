@@ -132,6 +132,20 @@ export default async function AboutPage() {
             ))}
           </ul>
         </section>
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold text-slate-900">Mühendislik Metodolojisi</h2>
+          <div className="relative h-64 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
+            <img
+              src="/images/Workspace Flat Lay.webp"
+              alt="Engineering Workspace"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <p className="text-sm text-slate-600 italic">
+            Mühendislik hesaplamaları ISO/DIN/VDI standartlarına dayalı profesyonel metodoloji ile gerçekleştirilir.
+          </p>
+        </section>
       </article>
     </PageShell>
   );

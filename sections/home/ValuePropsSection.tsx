@@ -22,7 +22,7 @@ export default function ValuePropsSection({ locale }: ValuePropsSectionProps) {
           <div className="relative min-w-0 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className="relative aspect-[16/9] w-full">
               <OptimizedImage
-                src="/images/home-hero.jpg"
+                src="/images/project-dashboard.jpg"
                 alt="Torqyx Engineering - Dashboard"
                 fill
                 sizes="(max-width: 1024px) 100vw, 48vw"

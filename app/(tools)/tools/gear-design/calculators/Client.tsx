@@ -1,6 +1,7 @@
-﻿"use client";
+﻿﻿"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
@@ -92,6 +93,15 @@ export default function GearCalculatorsPage({ initialDocs }: GearCalculatorsClie
     <PageShell>
       <ToolDocTabs slug="gear-design/calculators" initialDocs={initialDocs}>
         <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="absolute right-0 top-0 hidden h-full w-1/3 md:block opacity-20 pointer-events-none mix-blend-multiply">
+            <Image
+              src="/images/blueprint-assembly.jpg"
+              alt="Makine Montaj Blueprint"
+              fill
+              className="object-cover object-right"
+              priority
+            />
+          </div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_24%)]" />
           <div className="relative space-y-3">
             <div className="flex flex-wrap items-center gap-2">

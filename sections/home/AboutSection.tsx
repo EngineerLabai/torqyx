@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Locale } from "@/utils/locale";
 import { getMessages } from "@/utils/messages";
 
@@ -19,10 +20,26 @@ export default function AboutSection({ locale }: AboutSectionProps) {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-black/50 p-5 text-sm text-slate-200 backdrop-blur">
+            <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl">
+              <Image
+                src="/images/workspace-flatlay.jpg"
+                alt="Workspace flatlay"
+                fill
+                className="object-cover opacity-80 transition-opacity hover:opacity-100"
+              />
+            </div>
             <h3 className="mb-2 text-base font-semibold text-white">{copy.cardOneTitle}</h3>
             <p className="text-sm text-slate-300">{copy.cardOneBody}</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-black/50 p-5 text-sm text-slate-200 backdrop-blur">
+            <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl">
+              <Image
+                src="/images/office-atmosphere.jpg"
+                alt="Office atmosphere"
+                fill
+                className="object-cover opacity-80 transition-opacity hover:opacity-100"
+              />
+            </div>
             <h3 className="mb-2 text-base font-semibold text-white">{copy.cardTwoTitle}</h3>
             <p className="text-sm text-slate-300">{copy.cardTwoBody}</p>
           </div>
