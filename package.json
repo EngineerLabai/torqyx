@@ -37,7 +37,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^12.7.0",
-    "firebase-admin": "^12.7.0",
+    "firebase-admin": "^13.9.0",
     "framer-motion": "^12.23.25",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
@@ -82,8 +82,7 @@
     "tsx": "^4.20.5",
     "typescript": "^5",
     "vitest": "^4.0.18"
-  }
-  ,
+  },
   "overrides": {
     "postcss": "^8.5.11",
     "tmp": "^0.2.4"
