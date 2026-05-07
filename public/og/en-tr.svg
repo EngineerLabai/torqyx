@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#0a0a0a" />
+  <defs>
+    <style>
+      .title{font-family: Arial, sans-serif; fill:#fff; font-size:56px; font-weight:700}
+      .tag{font-family: Arial, sans-serif; fill:#ccc; font-size:24px}
+    </style>
+  </defs>
+  <g>
+    <text x="72" y="120" class="title">/en</text>
+    <text x="72" y="200" class="tag">aiengineerslab — Engineering with AI</text>
+    <text x="72" y="580" class="tag">aiengineerslab.com</text>
+  </g>
+</svg>
