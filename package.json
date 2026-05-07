@@ -20,6 +20,7 @@
     "bundle:diff": "node scripts/bundle-stats.mjs",
     "test": "vitest run",
     "test:pdf": "tsx test-pdf-system.ts"
+    ,"generate:og": "node scripts/generate-og-images.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "2.11.0",

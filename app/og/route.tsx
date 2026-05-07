@@ -11,7 +11,7 @@ export function GET(req: Request) {
   const locale = (searchParams.get("locale") as Locale | null) || "tr";
   const brandContent = getBrandCopy(locale);
 
-  return new ImageResponse(
+  const image = new ImageResponse(
     (
       <div
         style={{
@@ -40,4 +40,15 @@ export function GET(req: Request) {
     ),
     size,
   );
+
+  // Add caching to reduce repeated runtime generation
+  try {
+    image.headers.set("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+  } catch (err) {
+    // Some runtimes may not allow mutating headers; ignore if not supported
+    // eslint-disable-next-line no-console
+    console.warn("Could not set Cache-Control header on ImageResponse:", err);
+  }
+
+  return image;
 }
