@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import OptimizedImage from "@/components/media/OptimizedImage";
+import { getHeroImageSrc, getToolHeroImage } from "@/lib/assets";
 import ActionCard from "@/components/ui/ActionCard";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
 import ToolDocStandard from "@/components/tools/ToolDocStandard";
@@ -279,7 +280,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
       ) : null}
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
-        <ToolDetailImageBanner />
+        <ToolDetailImageBanner toolId={resolvedTool?.id} />
         {children}
         <ToolDocumentation
           toolTitle={resolvedTool?.title ?? slug}
@@ -364,12 +365,13 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   );
 }
 
-function ToolDetailImageBanner() {
+function ToolDetailImageBanner({ toolId }: { toolId?: string | null }) {
+  const src = getToolHeroImage(toolId);
   return (
     <section className="relative min-w-0 overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-      <div className="relative aspect-[16/7] w-full sm:aspect-[16/6] lg:aspect-[16/5]">
+        <div className="relative aspect-[16/7] w-full sm:aspect-[16/6] lg:aspect-[16/5]">
         <OptimizedImage
-          src="/images/tool-detail.webp"
+          src={src}
           alt="Torqyx Engineering - Tool Detail"
           fill
           sizes="(max-width: 768px) 100vw, 72vw"

@@ -15,12 +15,12 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
   const copy = messages.home.showcase;
   const categoryLabels = messages.components.toolLibrary.labels;
   const tools = [
-    { id: "bolt-calculator", icon: Bolt, image: "/images/thumbnail-bolt.jpg", usage: 12400 },
-    { id: "gear-module", icon: Cog, image: "/images/thumbnail-gear.jpg", usage: 9800 },
-    { id: "pipe-pressure-loss", icon: Droplets, image: "/images/blueprint-hydraulic.jpg", usage: 8600 },
-    { id: "shaft-torsion", icon: Gauge, image: "/images/thumbnail-shaft.jpg", usage: 7400 },
-    { id: "bearing-life", icon: Sigma, image: "/images/thumbnail-bearing.jpg", usage: 6900 },
-    { id: "hydraulic-cylinder", icon: Wrench, image: "/images/thumbnail-pin-spring.jpg", usage: 6100 },
+    { id: "bolt-calculator", icon: Bolt, image: "/images/bolt-assembly.webp", usage: 12400 },
+    { id: "gear-module", icon: Cog, image: "/images/Gear.webp", usage: 9800 },
+    { id: "pipe-pressure-loss", icon: Droplets, image: "/images/hydraulic-circuit.webp", usage: 8600 },
+    { id: "shaft-torsion", icon: Gauge, image: "/images/shaft.webp", usage: 7400 },
+    { id: "bearing-life", icon: Sigma, image: "/images/bearing-section.webp", usage: 6900 },
+    { id: "hydraulic-cylinder", icon: Wrench, image: "/images/pin-spring.webp", usage: 6100 },
   ]
     .map((item) => ({
       ...item,

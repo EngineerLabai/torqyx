@@ -10,7 +10,7 @@ type OptimizedImageProps = Omit<ImageProps, "src" | "alt" | "onError"> & {
   onError?: (event: SyntheticEvent<HTMLImageElement, Event>) => void;
 };
 
-const DEFAULT_FALLBACK_SRC = "/images/placeholder.webp";
+const DEFAULT_FALLBACK_SRC = "/images/hero-background.webp";
 
 const isExternal = (src: string) => /^(https?:)?\/\//.test(src);
 const isDataUrl = (src: string) => src.startsWith("data:");

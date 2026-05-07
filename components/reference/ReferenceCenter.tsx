@@ -426,8 +426,8 @@ export default function ReferenceCenter() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { title: "Rulman Blueprint", image: "/images/Rulman Blueprint.webp" },
-              { title: "Hidrolik Silindir Blueprint", image: "/images/Hidrolik Silindir Blueprint.webp" },
+              { title: "Rulman Blueprint", image: "/images/rulman-blueprint.webp" },
+              { title: "Hidrolik Silindir Blueprint", image: "/images/hydraulic-circuit.webp" },
             ].map((blueprint) => (
               <div
                 key={blueprint.title}

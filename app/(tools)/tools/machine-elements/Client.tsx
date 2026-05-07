@@ -242,37 +242,37 @@ function ComponentGallery() {
   const components = [
     {
       name: "Cıvata & Somun",
-      image: "/images/Cıvata & Somun.webp",
+      image: "/images/bolt-assembly.webp",
       description: "Vida ve somun bileşenleri",
     },
     {
       name: "Dişli (Gear)",
-      image: "/images/Dişli (Gear).webp",
+      image: "/images/Gear.webp",
       description: "Dişli aktarım elemanları",
     },
     {
       name: "Rulman (Bearing)",
-      image: "/images/Rulman (Bearing).webp",
+      image: "/images/bearing-section.webp",
       description: "Dönen makine elemanları",
     },
     {
       name: "Kayış & Kasnak",
-      image: "/images/Kayış & Kasnak (Belt-Pulley).webp",
+      image: "/images/belt-pulley.webp",
       description: "Kayış-kasnak sistemi",
     },
     {
       name: "Pim & Yay",
-      image: "/images/Pim & Yay (Pin & Spring).webp",
+      image: "/images/pin-spring.webp",
       description: "Bağlantı ve elastik elemanlar",
     },
     {
       name: "Vida & Diş Açma",
-      image: "/images/Vida & Diş Açma (Screw Thread).webp",
+      image: "/images/screw-thread.webp",
       description: "Vida ve dişli bağlantılar",
     },
     {
       name: "Mil & Yatak",
-      image: "/images/Mil & Yatak (Shaft).webp",
+      image: "/images/shaft.webp",
       description: "Mil ve yatak sistemleri",
     },
   ];

@@ -91,7 +91,7 @@
     },
     "about": {
       "kicker": "Hakkında",
-      "title": "Metodoloji odaklı mühendislik çalışma alanı",
+      "title": "TORQYX: Metodoloji odaklı mühendislik çalışma alanı",
       "lead": "Pratik mühendislik kararlarını ve tekrarlanabilir hesapları metodoloji odaklı bir akışta topla.",
       "cardOneTitle": "Metodoloji / Akış",
       "cardOneBody": "Problemi adımlara böl, varsayımları netleştir ve tutarlı hesap akışını izle.",
@@ -100,7 +100,7 @@
     },
     "useCases": {
       "kicker": "Ne için kullanılır?",
-      "title": "Lab hangi işlerde yardımcı olur?",
+      "title": "TORQYX hangi işlerde yardımcı olur?",
       "lead": "En sık mühendislik kararlarına kısa ve net akışlarıyla destek olur.",
       "items": [
         {

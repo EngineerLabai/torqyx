@@ -23,7 +23,7 @@ export async function generateMetadata() {
   const title = locale === "tr" ? "İletişim" : copy.title;
   const description =
     locale === "tr"
-      ? "AI Engineers Lab ekibiyle iletişime geçin. Teknik destek, öneri ve iş birliği talepleriniz için hızlı geri dönüş alın."
+      ? "TORQYX ekibiyle iletişime geçin. Teknik destek, öneri ve iş birliği talepleriniz için hızlı geri dönüş alın."
       : copy.description;
 
   return buildPageMetadata({
@@ -37,7 +37,7 @@ export async function generateMetadata() {
 
 export default async function ContactPage() {
   const locale = await getLocaleFromCookies();
-  const heroImage = getHeroImageSrc("support");
+  const heroImage = getHeroImageSrc("contact");
 
   if (locale === "en") {
     return (
@@ -46,7 +46,7 @@ export default async function ContactPage() {
           title={pageCopyEn.title}
           description={pageCopyEn.description}
           imageSrc={heroImage}
-          imageAlt="Torqyx Engineering - Support Hero"
+          imageAlt="Torqyx Engineering - Contact Hero"
         />
 
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -87,7 +87,7 @@ export default async function ContactPage() {
         title={pageCopy.title}
         description={pageCopy.description}
         imageSrc={heroImage}
-        imageAlt="Torqyx Engineering - Support Hero"
+        imageAlt="Torqyx Engineering - Contact Hero"
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

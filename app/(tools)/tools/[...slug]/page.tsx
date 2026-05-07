@@ -189,12 +189,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path,
     locale,
     openGraph: {
-      title: `${toolTitle} | AI Engineers Lab`,
+      title: `${toolTitle} | TORQYX`,
       description,
       url: canonicalUrl,
     },
     twitter: {
-      title: `${toolTitle} | AI Engineers Lab`,
+      title: `${toolTitle} | TORQYX`,
       description,
     },
   });

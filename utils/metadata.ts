@@ -18,7 +18,7 @@ type PageMetadataOptions = {
 };
 
 const TITLE_MAX_LENGTH = 60;
-const TITLE_TEMPLATE_SUFFIX = " | AI Engineers Lab";
+const TITLE_TEMPLATE_SUFFIX = " | TORQYX";
 const DESCRIPTION_MIN_LENGTH = 120;
 const DESCRIPTION_MAX_LENGTH = 155;
 
@@ -65,8 +65,8 @@ const normalizeTitle = (title: string, locale: Locale) => {
 const normalizeDescription = (description: string | undefined, locale: Locale) => {
   const keyword = SEO_KEYWORD_BY_LOCALE[locale];
   const fallbackByLocale: Record<Locale, string> = {
-    tr: `AI Engineers Lab, ${keyword} ve mühendislik standartlari ile teknik analiz, dogrulama ve raporlama surecini tek yerde toplar.`,
-    en: `AI Engineers Lab combines ${keyword}, engineering standards, technical analysis, validation, and reporting in one place.`,
+    tr: `TORQYX, ${keyword} ve mühendislik standartlari ile teknik analiz, dogrulama ve raporlama surecini tek yerde toplar.`,
+    en: `TORQYX combines ${keyword}, engineering standards, technical analysis, validation, and reporting in one place.`,
   };
 
   let normalized = (description ?? "").trim();

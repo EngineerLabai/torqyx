@@ -3,6 +3,7 @@
 import OptimizedImage from "@/components/media/OptimizedImage";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
+import { getBlueprintImageSrc } from "@/lib/assets";
 
 export type ToolReference = {
   title: string;
@@ -31,7 +32,7 @@ export default function ToolTrustPanel({
     ...(hasFormula || hasAssumptions
       ? [
           {
-            src: "/images/fea.webp",
+            src: getBlueprintImageSrc("fea"),
             alt: "Torqyx Engineering - FEA",
           },
         ]
@@ -39,7 +40,7 @@ export default function ToolTrustPanel({
     ...(hasReferences
       ? [
           {
-            src: "/images/exploded-view.webp",
+            src: getBlueprintImageSrc("exploded"),
             alt: "Torqyx Engineering - Exploded View",
           },
         ]

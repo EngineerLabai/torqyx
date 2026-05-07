@@ -9,6 +9,8 @@ readingTime: 4
 canonical: "https://aiengineerslab.com/blog/icerik-altyapisina-hizli-giris"
 ---
 
+import { getHeroImageSrc } from 'src/lib/assets';
+
 <Callout type="info" title="Not">
 Bu sayfa, manuel hesaplama ve görsel analiz odaklı içerikler için MDX kullanımını örnekler.
 </Callout>
@@ -50,7 +52,7 @@ T = 9550 * P / n
   </tbody>
 </Table>
 
-<Image src="/images/tool-detail.jpg" alt="Araç detay görseli" width={1200} height={900} caption="Basit görsel referans." />
+<Image src={getHeroImageSrc("toolDetail")} alt="Araç detay görseli" width={1200} height={900} caption="Basit görsel referans." />
 
 <ToolLink
   href="/tools/torque-power"

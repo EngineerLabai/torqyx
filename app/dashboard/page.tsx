@@ -31,7 +31,7 @@ export default async function DashboardPage() {
         title={copy.title}
         description={copy.description}
         eyebrow={copy.badge}
-        imageSrc="/images/Dashboard  Planlama Görseli.webp"
+        imageSrc="/images/dashboard-planning-visualization.webp"
         imageAlt={copy.imageAlt}
       />
       <AuthGate>

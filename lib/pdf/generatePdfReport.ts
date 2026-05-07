@@ -5,9 +5,9 @@ import type { ReportData, User } from "./types";
 import { formatValueWithUnit } from "@/utils/units";
 
 const SITE_CONFIG = {
-  name: "AI Engineers Lab",
+  name: "TORQYX",
   url: "aiengineerslab.com",
-  logo: "AI Engineers Lab", // Text-based logo for now
+  logo: "TORQYX", // Text-based logo for now
 };
 
 export async function generatePdfReport(

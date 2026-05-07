@@ -55,7 +55,7 @@ After choosing your database, update the DATABASE_URL:
 ```env
 DATABASE_URL="your-database-url-here"
 OPENAI_API_KEY="sk-your-api-key-here"
-NEXTAUTH_SECRET="2452408d9968525d3af7c1b9b48b420ca1aa141a6d7c9da1ce2629afcde7c28f"
+NEXTAUTH_SECRET="your-secret-here"
 NEXTAUTH_URL="http://localhost:3000"
 ```
 

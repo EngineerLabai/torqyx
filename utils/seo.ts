@@ -54,5 +54,5 @@ export const DEFAULT_OG_IMAGE_META = {
   url: DEFAULT_OG_IMAGE,
   width: 1200,
   height: 630,
-  alt: "AI Engineers Lab — Mühendislik Hesaplayıcıları",
+  alt: "TORQYX — Mühendislik Hesaplayıcıları",
 };

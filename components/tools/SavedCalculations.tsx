@@ -99,7 +99,7 @@ export default function SavedCalculations() {
         <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center">
           <div className="mb-4 flex justify-center">
             <img
-              src="/images/Boş Durum (Empty State).webp"
+              src="/images/empty-state.webp"
               alt="Empty State"
               className="h-40 w-40 object-cover opacity-90"
             />

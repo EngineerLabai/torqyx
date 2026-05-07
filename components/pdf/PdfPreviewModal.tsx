@@ -87,7 +87,7 @@ export default function PdfPreviewModal({
             {/* Başlık */}
             <div className="border-b pb-4">
               <h1 className="text-2xl font-bold text-gray-900">
-                AI Engineers Lab
+                TORQYX
               </h1>
               <h2 className="text-xl font-semibold text-gray-700 mt-2">
                 {reportData.toolName}

@@ -14,7 +14,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const brandContent = getBrandCopy(locale);
   const messages = getMessages(locale);
   const copy = messages.home.hero;
-  const heroImage = "/images/hero banner.webp";
+  const heroImage = "/images/home-hero.webp";
 
   return (
     <section id="home" className="w-full pb-10 pt-14 md:pt-20">

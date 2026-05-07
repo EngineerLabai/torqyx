@@ -116,7 +116,7 @@ export default function ToleranceStackupPage() {
           Tasarım Optimizasyon Aracı
         </div>
         <h1 className="text-2xl font-bold text-slate-800">1D Tolerans Yığılma (Stack-up) Analizi</h1>
-        <p className="text-sm text-slate-600 mt-1">Worst-Case ve RSS (İstatistiksel) yöntemleriyle montaj toleranslarını hesaplayın ve hedefinize ulaşmak için "Goal Seek" algoritmasını kullanın.</p>
+        <p className="text-sm text-slate-600 mt-1">Worst-Case ve RSS (İstatistiksel) yöntemleriyle montaj toleranslarını hesaplayın ve hedefinize ulaşmak için &quot;Goal Seek&quot; algoritmasını kullanın.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

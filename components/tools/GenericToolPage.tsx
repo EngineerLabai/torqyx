@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ComponentProps } from "react";
+import { useEffect, useMemo, useRef, useState, Suspense, type ComponentProps } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
@@ -83,7 +83,15 @@ const isPrimitive = (value: unknown) =>
   typeof value === "number" ||
   typeof value === "boolean";
 
-export default function GenericToolPage({ toolId, initialDocs }: GenericToolPageProps) {
+export default function GenericToolPage(props: GenericToolPageProps) {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-sm text-slate-500">Yükleniyor...</div>}>
+      <GenericToolPageContent {...props} />
+    </Suspense>
+  );
+}
+
+function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const copy = messages.components.genericToolPage;

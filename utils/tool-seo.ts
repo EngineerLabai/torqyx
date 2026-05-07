@@ -87,12 +87,12 @@ export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => 
     path: seo.path,
     locale,
     openGraph: {
-      title: `${toolName} | AI Engineers Lab`,
+      title: `${toolName} | TORQYX`,
       description: seo.description,
       url: canonicalUrl,
     },
     twitter: {
-      title: `${toolName} | AI Engineers Lab`,
+      title: `${toolName} | TORQYX`,
       description: seo.description,
     },
   });

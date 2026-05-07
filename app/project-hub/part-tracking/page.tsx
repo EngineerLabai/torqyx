@@ -428,7 +428,7 @@ export default function PartTrackingPage() {
 
     {/* Premium export kutusu */}
     <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
-      <h3 className="mb-1 text-sm font-semibold">PDF / Excel'e Aktar - Premium (özel beta)</h3>
+      <h3 className="mb-1 text-sm font-semibold">PDF / Excel&apos;e Aktar - Premium (özel beta)</h3>
       <p className="mb-2">
         Parça listenizi PDF veya Excel olarak dışa aktarma özelliği premium paketinin özel beta kapsamındadır. Erken erişim için{" "}
         <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
@@ -441,7 +441,7 @@ export default function PartTrackingPage() {
           disabled
           className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60 cursor-not-allowed"
         >
-          PDF'e Aktar (Premium)
+          PDF&apos;e Aktar (Premium)
         </button>
         <button
           type="button"

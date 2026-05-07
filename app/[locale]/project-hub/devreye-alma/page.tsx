@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function CommissioningPage({ params }: PageProps) {
   const { locale: localeParam } = await params;
   const locale = resolveLocale(localeParam);
-  const heroImage = getHeroImageSrc("projectHub") || getHeroImageSrc("tools");
+  const heroImage = getHeroImageSrc("commissioning") || getHeroImageSrc("tools");
   return <Client locale={locale} heroImage={heroImage} />;
 }
 

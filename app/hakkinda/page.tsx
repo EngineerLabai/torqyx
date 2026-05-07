@@ -137,7 +137,7 @@ export default async function AboutPage() {
           <h2 className="text-lg font-semibold text-slate-900">Mühendislik Metodolojisi</h2>
           <div className="relative h-64 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
             <img
-              src="/images/Workspace Flat Lay.webp"
+              src="/images/workspace-flat-lay.webp"
               alt="Engineering Workspace"
               className="h-full w-full object-cover"
             />

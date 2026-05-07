@@ -1,7 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
-import { HERO_PLACEHOLDER } from "@/lib/assets";
+import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -186,7 +186,7 @@ export default async function PrivacyPolicyPage() {
       <PageHero
         title={copy.title}
         description={copy.description}
-        imageSrc={HERO_PLACEHOLDER}
+        imageSrc={getHeroImageSrc("privacy")}
         imageAlt={copy.imageAlt}
       />
 

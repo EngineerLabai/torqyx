@@ -1,3 +1,4 @@
+import AdSense from "@/components/ads/AdSense";
 ﻿﻿﻿﻿// app/layout.tsx
 import type { Metadata } from "next";
 import { headers } from "next/headers";
@@ -169,7 +170,8 @@ export default async function RootLayout({
   };
   return (
     <html lang={locale} className="w-full overflow-x-hidden">
-      <body className="w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased">
+      <body className="w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased"> 
+        <AdSense publisherId="pub-0000000000000000" />
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
           <AuthProvider>

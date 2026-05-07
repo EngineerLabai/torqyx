@@ -9,6 +9,7 @@ import { toolCatalog } from "@/tools/_shared/catalog";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { getBlueprintImageSrc } from "@/lib/assets";
 
 type CalcCard = {
   name: string;
@@ -95,7 +96,7 @@ export default function GearCalculatorsPage({ initialDocs }: GearCalculatorsClie
         <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="absolute right-0 top-0 hidden h-full w-1/3 md:block opacity-20 pointer-events-none mix-blend-multiply">
             <Image
-              src="/images/blueprint-assembly.jpg"
+              src={getBlueprintImageSrc("gear")}
               alt="Makine Montaj Blueprint"
               fill
               className="object-cover object-right"

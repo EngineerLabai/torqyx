@@ -31,7 +31,7 @@ export default async function NotFound() {
       <section className="flex flex-col items-center text-center rounded-3xl border border-slate-200 bg-white p-10 shadow-sm">
         <div className="mb-6 flex justify-center">
           <Image
-            src="/images/Kırık Dişli (404).webp"
+            src="/images/broken-gear.webp"
             alt="404 Broken Gear"
             width={240}
             height={240}

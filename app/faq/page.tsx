@@ -11,7 +11,7 @@ export async function generateMetadata() {
   const title = locale === "tr" ? "Sık Sorulan Sorular" : copy.title;
   const description =
     locale === "tr"
-      ? "AI Engineers Lab hesaplayıcıları hakkında merak edilenler. Hesap motoru nasıl çalışır, sonuçlar güvenilir mi, premium ne sunar?"
+      ? "TORQYX hesaplayıcıları hakkında merak edilenler. Hesap motoru nasıl çalışır, sonuçlar güvenilir mi, premium ne sunar?"
       : copy.description;
 
   return buildPageMetadata({
@@ -25,8 +25,8 @@ export async function generateMetadata() {
 export default async function FaqPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.faq;
-  const heroImage = getHeroImageSrc("support");
-  const imageAlt = "Torqyx Engineering - Support Hero";
+  const heroImage = getHeroImageSrc("faq");
+  const imageAlt = "Torqyx Engineering - FAQ Hero";
 
   return (
     <PageShell>

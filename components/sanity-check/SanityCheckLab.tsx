@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -100,6 +100,14 @@ const buildDefaultSession = (locale: "tr" | "en"): LabSession => ({
 type TabKey = "sweep" | "monteCarlo" | "goalSeek";
 
 export default function SanityCheckLab() {
+  return (
+    <Suspense fallback={<PanelLoadingState />}>
+      <SanityCheckLabContent />
+    </Suspense>
+  );
+}
+
+function SanityCheckLabContent() {
   const { locale } = useLocale();
   const messages = getMessages(locale);
   const pageCopy = messages.pages.sanityCheck;
