@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-12T11:22:46.235Z",
+  "generatedAt": "2026-05-07T16:49:38.703Z",
   "summary": {
     "total": 101,
     "hasH1": 101,
@@ -8,17 +8,304 @@
   "missingH1": [],
   "hasH1": [
     {
-      "file": "app/blog/page.tsx",
+      "file": "app/(auth)/login/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Giriş",
+      "hasH1": true
+    },
+    {
+      "file": "app/(blog)/blog/page.tsx",
       "type": "tsx",
       "locale": "unknown",
       "title": "${copy.title} | ${brandContent.siteName}",
       "hasH1": true
     },
     {
-      "file": "app/blog/[slug]/page.tsx",
+      "file": "app/(blog)/blog/[slug]/page.tsx",
       "type": "tsx",
       "locale": "unknown",
       "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/basic-engineering/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/bearing-life/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/belt-length/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/bending-stress/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/bolt-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/bolt-database/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/bolt-size-torque/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/coating-guide/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/compressor-cc/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/fillet-weld/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/fluids-hvac/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/backlash-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/contact-ratio-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/force-torque-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/helix-axial-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/module-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/ratio-calculator/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/viscosity-selector/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/weight-optimization/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/simulations/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "MAAG Sistemi Hareket Animasyonu",
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/heat-energy/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/heat-treatment/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/hydraulic-cylinder/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/machine-elements/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/material-cards/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/materials-manufacturing/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/param-chart/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/pipe-pressure-loss/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/production-project/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/sanity-check/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/sanity-check/report/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/sealing-guide/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/shaft-torsion/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/simple-stress/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/strength-statics/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/torque-power/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/unit-converter/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": null,
+      "hasH1": true
+    },
+    {
+      "file": "app/(tools)/tools/[...slug]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "${toolTitle} | TORQYX",
       "hasH1": true
     },
     {
@@ -74,14 +361,14 @@
       "file": "app/fixture-tools/base-plate/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "Taban Plaka Boyutland�rma Kart�",
+      "title": "Taban Plaka Boyutlandırma Kartı",
       "hasH1": true
     },
     {
       "file": "app/fixture-tools/clamping/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "S�k��t�rma Planlama Kart�",
+      "title": "Sıkıştırma Planlama Kartı",
       "hasH1": true
     },
     {
@@ -102,7 +389,7 @@
       "file": "app/forum/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "Forum",
+      "title": "${title} | ${brandContent.siteName}",
       "hasH1": true
     },
     {
@@ -144,7 +431,7 @@
       "file": "app/hakkinda/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "Hakk�nda",
+      "title": "Hakkında",
       "hasH1": true
     },
     {
@@ -169,24 +456,10 @@
       "hasH1": true
     },
     {
-      "file": "app/kullanim-sartlari/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": "Kullanım Şartları",
-      "hasH1": true
-    },
-    {
-      "file": "app/login/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": "Giriş",
-      "hasH1": true
-    },
-    {
       "file": "app/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "AI Engineers Lab — Mekanik Mühendislik Hesaplayıcıları",
+      "title": "TORQYX — Mekanik Mühendislik Hesaplayıcıları",
       "hasH1": true
     },
     {
@@ -208,13 +481,6 @@
       "type": "tsx",
       "locale": "unknown",
       "title": "1) Ön hazırlık",
-      "hasH1": true
-    },
-    {
-      "file": "app/project-hub/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": "${copy.badgeTitle} | ${brandContent.siteName}",
       "hasH1": true
     },
     {
@@ -302,6 +568,13 @@
       "hasH1": true
     },
     {
+      "file": "app/s/[code]/page.tsx",
+      "type": "tsx",
+      "locale": "unknown",
+      "title": "Paylaşım Bulunamadı",
+      "hasH1": true
+    },
+    {
       "file": "app/saved-calculations/page.tsx",
       "type": "tsx",
       "locale": "unknown",
@@ -344,290 +617,17 @@
       "hasH1": true
     },
     {
-      "file": "app/tools/basic-engineering/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/bearing-life/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/belt-length/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/bending-stress/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/bolt-calculator/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/bolt-database/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/bolt-size-torque/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/coating-guide/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/compressor-cc/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/fillet-weld/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/fluids-hvac/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/backlash-calculator/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/contact-ratio-calculator/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/force-torque-calculator/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/helix-axial-calculator/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/module-calculator/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/ratio-calculator/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/viscosity-selector/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/calculators/weight-optimization/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/gear-design/page.tsx",
+      "file": "app/[locale]/(tools)/tools/gear-design/page.tsx",
       "type": "tsx",
       "locale": "unknown",
       "title": "1. Dişli Temelleri",
       "hasH1": true
     },
     {
-      "file": "app/tools/gear-design/simulations/page.tsx",
+      "file": "app/[locale]/kullanim-sartlari/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "MAAG Sistemi Hareket Animasyonu",
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/heat-energy/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/heat-treatment/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/hydraulic-cylinder/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/machine-elements/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/material-cards/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/materials-manufacturing/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/param-chart/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/pipe-pressure-loss/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/production-project/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/sanity-check/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/sanity-check/report/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/sealing-guide/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/shaft-torsion/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/simple-stress/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/strength-statics/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/torque-power/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/unit-converter/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": null,
-      "hasH1": true
-    },
-    {
-      "file": "app/tools/[...slug]/page.tsx",
-      "type": "tsx",
-      "locale": "unknown",
-      "title": "${toolTitle} | AI Engineers Lab",
+      "title": "Kullanım Şartları",
       "hasH1": true
     },
     {
@@ -655,7 +655,7 @@
       "file": "app/[locale]/project-hub/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "Proje Merkezi | AI Engineers Lab",
+      "title": "Proje Merkezi | TORQYX",
       "hasH1": true
     },
     {

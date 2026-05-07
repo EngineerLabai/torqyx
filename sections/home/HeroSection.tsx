@@ -2,7 +2,6 @@ import { ShieldCheck, Star, Users } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import AuthModalTrigger from "@/components/auth/AuthModalTrigger";
 import { getBrandCopy } from "@/config/brand";
-import { getHeroImageSrc } from "@/lib/assets";
 import type { Locale } from "@/utils/locale";
 import { getMessages } from "@/utils/messages";
 

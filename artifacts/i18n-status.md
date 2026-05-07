@@ -1,18 +1,15 @@
 # i18n status
 
-Generated: 2026-02-14T15:56:54.999Z
+Generated: 2026-05-07T16:50:54.044Z
 
 - Content missing locale variants: 0
 - Tool docs missing required TR: 0
-- Tool docs missing optional EN: 37
+- Tool docs missing optional EN: 32
 - Message key mismatch (TR missing): 0
 - Message key mismatch (EN missing): 0
 
 ## Tool docs coverage
 - Missing optional EN docs:
-  - bolt-calculator
-  - unit-converter
-  - sanity-check
   - basic-engineering
   - param-chart
   - simple-stress
@@ -20,11 +17,9 @@ Generated: 2026-02-14T15:56:54.999Z
   - bolt-database
   - compressor-cc
   - belt-length
-  - torque-power
   - bearing-life
   - shaft-torsion
   - fillet-weld
-  - pipe-pressure-loss
   - hydraulic-cylinder
   - strength-statics
   - machine-elements

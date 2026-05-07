@@ -410,9 +410,19 @@ export default function ProjectToolsPage() {
           <h2 className="text-sm font-semibold text-slate-900">
             Kayıtlı Projeler / Çalışmalar
           </h2>
-          <span className="text-[11px] text-slate-500">
-            Toplam: {projects.length} kayıt · Filtrelenen: {filteredProjects.length}
-          </span>
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <span className="text-[11px] text-slate-500">
+              Toplam: {projects.length} kayıt · Filtrelenen: {filteredProjects.length}
+            </span>
+            <button
+              type="button"
+              onClick={exportToCSV}
+              disabled={projects.length === 0}
+              className="rounded-full border border-slate-200 px-3 py-1 text-[10px] font-semibold text-slate-600 hover:border-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              CSV indir
+            </button>
+          </div>
         </div>
 
         {filteredProjects.length === 0 ? (

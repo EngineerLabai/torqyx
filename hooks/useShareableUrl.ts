@@ -89,7 +89,10 @@ export function useShareableUrl({ toolId, currentInput, currentResult }: UseShar
       }
 
       const data = await response.json();
-      const url = buildShortShareUrl(data.code);
+      const url =
+        typeof data.url === "string"
+          ? data.url
+          : buildShortShareUrl(data.code, window.location.origin);
 
       // Clipboard'a kopyala
       if (navigator.clipboard) {

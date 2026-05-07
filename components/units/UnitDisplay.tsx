@@ -1,7 +1,7 @@
 "use client";
 
-import { useUnit } from "@/hooks/useUnit";
-import type { UnitSystem } from "@/utils/units";
+import { useUnit, useUnitConversion } from "@/hooks/useUnit";
+import { formatValueWithUnit, type UnitSystem } from "@/utils/units";
 
 interface UnitDisplayProps {
   value: number;
@@ -81,11 +81,12 @@ export function UnitFormula({
   system?: UnitSystem;
   className?: string;
 }) {
-  // Replace variables in formula with converted values
+  const { system: currentSystem } = useUnitConversion();
+  const targetSystem = system || currentSystem;
   let displayFormula = formula;
 
   Object.entries(variables).forEach(([key, { value, unit }]) => {
-    const unitResult = useUnit(value, unit, { system });
+    const unitResult = formatValueWithUnit(value, unit, targetSystem);
     displayFormula = displayFormula.replace(
       new RegExp(`\\b${key}\\b`, 'g'),
       unitResult.display

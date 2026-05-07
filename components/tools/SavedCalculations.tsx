@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -98,9 +99,11 @@ export default function SavedCalculations() {
       ) : entries.length === 0 ? (
         <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center">
           <div className="mb-4 flex justify-center">
-            <img
+            <Image
               src="/images/empty-state.webp"
               alt="Empty State"
+              width={160}
+              height={160}
               className="h-40 w-40 object-cover opacity-90"
             />
           </div>

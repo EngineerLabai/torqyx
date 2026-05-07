@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import OptimizedImage from "@/components/media/OptimizedImage";
-import { getHeroImageSrc, getToolHeroImage } from "@/lib/assets";
+import { getToolHeroImage } from "@/lib/assets";
 import ActionCard from "@/components/ui/ActionCard";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButton";
 import ToolDocStandard from "@/components/tools/ToolDocStandard";

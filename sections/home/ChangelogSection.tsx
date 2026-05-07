@@ -66,7 +66,7 @@ export default function ChangelogSection({ locale, latest }: ChangelogSectionPro
         ) : (
           <div className="flex flex-col items-center justify-center rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
             <Image
-              src="/images/empty-state-toolbox.jpg"
+              src="/images/empty-state.webp"
               alt="Empty toolbox"
               width={120}
               height={120}

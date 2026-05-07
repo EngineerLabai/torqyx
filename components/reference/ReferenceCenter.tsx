@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
@@ -434,11 +435,12 @@ export default function ReferenceCenter() {
                 className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50 shadow-sm transition hover:shadow-md"
               >
                 <div className="relative h-48 w-full bg-slate-100">
-                  <img
+                  <Image
                     src={blueprint.image}
                     alt={blueprint.title}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover"
                   />
                 </div>
                 <div className="p-3">

@@ -18,7 +18,7 @@ async function convert(name) {
   const outPath = path.join(imagesDir, `${name}.webp`);
   try {
     await fs.access(inPath);
-  } catch (err) {
+  } catch {
     console.error(`Missing source SVG: ${inPath}`);
     return { name, ok: false, reason: 'missing' };
   }

@@ -271,7 +271,7 @@ export default function BendingStressCalculator() {
               <h4 className="font-bold text-slate-800 mb-2">Standards & Assumptions</h4>
               <ul className="space-y-1 list-disc pl-4">
                 <li>Based on Euler-Bernoulli Beam Theory.</li>
-                <li>Reference: Roark's Formulas for Stress and Strain, Table 8.1.</li>
+                <li>Reference: Roark&apos;s Formulas for Stress and Strain, Table 8.1.</li>
                 <li>Assumes material is homogeneous, isotropic, and within linear elastic region.</li>
                 <li>Shear deflection is neglected (valid for L/h &gt; 10).</li>
                 <li>Does not account for self-weight of the beam.</li>

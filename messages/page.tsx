@@ -5,6 +5,8 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 
 type Part = { id: number; name: string; nominal: number | ""; tol: number | "" };
+type EditablePartField = Exclude<keyof Part, "id">;
+type EditablePartValue = Part[EditablePartField];
 
 export default function ToleranceStackupPage() {
 
@@ -15,7 +17,7 @@ export default function ToleranceStackupPage() {
 
   const addPart = () => setParts([...parts, { id: Date.now(), name: `Parça ${parts.length + 1}`, nominal: "", tol: "" }]);
   const removePart = (id: number) => setParts(parts.filter((p) => p.id !== id));
-  const updatePart = (id: number, field: keyof Part, value: any) => {
+  const updatePart = (id: number, field: EditablePartField, value: EditablePartValue) => {
     setParts(parts.map((p) => (p.id === id ? { ...p, [field]: value } : p)));
   };
 

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { isTrialActive } from "@/lib/billing";
@@ -8,7 +7,7 @@ import {
   buildExplainResultSystemPrompt,
   buildExplainResultUserPrompt,
 } from "@/src/lib/ai/policy";
-import { explainResultRequestSchema, type ExplainResultRequest } from "@/src/lib/ai/types";
+import { explainResultRequestSchema } from "@/src/lib/ai/types";
 import { validateOpenAIApiKey } from "@/src/lib/ai/openai-validation";
 
 export const runtime = "nodejs";

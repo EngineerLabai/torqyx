@@ -258,6 +258,10 @@ export function formatValueWithUnit(
     return { value, unit, display: `${value} ${unit}` };
   }
 
+  if (category && unitDef.category !== category) {
+    return { value, unit, display: `${value} ${unit}` };
+  }
+
   let displayUnit = unit;
   let displayValue = value;
 

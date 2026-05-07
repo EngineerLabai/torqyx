@@ -1,7 +1,7 @@
 "use client";
 
 import { useWorkspaceStore, WorkspaceMaterial, WorkspaceState } from "@/useWorkspaceStore";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface MaterialExportButtonProps {
   material: WorkspaceMaterial;
@@ -10,13 +10,6 @@ interface MaterialExportButtonProps {
 export default function MaterialExportButton({ material }: MaterialExportButtonProps) {
   const setActiveMaterial = useWorkspaceStore((state: WorkspaceState) => state.setActiveMaterial);
   const [saved, setSaved] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
 
   const handleSave = () => {
     setActiveMaterial(material);

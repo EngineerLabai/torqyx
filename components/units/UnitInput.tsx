@@ -1,8 +1,8 @@
 "use client";
 
-import { forwardRef, useEffect, useState, type ComponentProps } from "react";
+import { forwardRef, useState, type ComponentProps } from "react";
 import { Input } from "@/components/ui/input";
-import { useUnit, useUnitConversion } from "@/hooks/useUnit";
+import { useUnitConversion } from "@/hooks/useUnit";
 import { getUnitDefinition } from "@/utils/units";
 import type { UnitSystem } from "@/utils/units";
 
@@ -40,16 +40,17 @@ export const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
       ? unitDef.toImperial(value)
       : value;
 
-    const [inputValue, setInputValue] = useState(displayValue.toString());
-
-    // Update input when value or system changes
-    useEffect(() => {
-      setInputValue(displayValue.toFixed(unitDef?.precision || 2));
-    }, [displayValue, unitDef?.precision]);
+    const precision = unitDef?.precision || 2;
+    const formattedDisplayValue = displayValue.toFixed(precision);
+    const [draft, setDraft] = useState(() => ({
+      base: formattedDisplayValue,
+      text: formattedDisplayValue,
+    }));
+    const inputValue = draft.base === formattedDisplayValue ? draft.text : formattedDisplayValue;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
-      setInputValue(newValue);
+      setDraft({ base: formattedDisplayValue, text: newValue });
 
       // Convert display value back to SI
       const numericValue = parseFloat(newValue);
@@ -68,7 +69,7 @@ export const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
       // Format on blur
       const numericValue = parseFloat(inputValue);
       if (!isNaN(numericValue)) {
-        setInputValue(numericValue.toFixed(unitDef?.precision || 2));
+        setDraft({ base: formattedDisplayValue, text: numericValue.toFixed(precision) });
       }
     };
 

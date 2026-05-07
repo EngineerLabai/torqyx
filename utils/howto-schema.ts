@@ -1,24 +1,16 @@
-import type { ToolDefinition } from "@/tools/_shared/types";
+import type { ToolInputMeta, ToolReference } from "@/tools/_shared/types";
 import type { HowToSchemaInput, HowToStepSchema, SoftwareApplicationSchemaInput } from "@/types/structured-data";
 import type { Locale } from "@/utils/locale";
-import { resolveLocalizedValue } from "@/utils/locale-values";
+import { resolveLocalizedValue, type LocalizedValue } from "@/utils/locale-values";
 
-export type ToolConfig = ToolDefinition<any, any> & {
+export type ToolConfig = {
   id: string;
   title: string;
   description: string;
-  inputMeta?: Array<{
-    key: string;
-    label: string;
-    unit?: string;
-    type?: "number" | "select";
-    min?: number;
-    max?: number;
-    options?: Array<string | number>;
-  }>;
-  formula?: any;
-  assumptions?: any;
-  references?: any;
+  inputMeta?: ToolInputMeta[];
+  formula?: LocalizedValue<string>;
+  assumptions?: LocalizedValue<string[]>;
+  references?: LocalizedValue<ToolReference[]>;
 };
 
 /**

@@ -11,7 +11,6 @@ interface SharedCalculationWidgetProps {
 
 export default function SharedCalculationWidget({
   toolName,
-  toolSlug,
   sharedCode,
   summary,
   authorName = "Bir Mühendis",

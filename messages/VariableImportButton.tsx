@@ -1,7 +1,6 @@
 "use client";
 
 import { useWorkspaceStore } from "@/lib/store/useWorkspaceStore";
-import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 interface VariableImportButtonProps {
@@ -12,14 +11,6 @@ interface VariableImportButtonProps {
 export default function VariableImportButton({ variableId, onImport }: VariableImportButtonProps) {
   const getVariable = useWorkspaceStore((state) => state.getVariable);
   const t = useTranslations("workspace.variables");
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
-
   const variable = getVariable(variableId);
 
   if (!variable) return null; // Çalışma alanında ilgili değişken yoksa butonu gizle

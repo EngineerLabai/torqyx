@@ -8,6 +8,7 @@ const PUBLIC_FILE = /\.(.*)$/;
 const ONE_YEAR = 60 * 60 * 24 * 365;
 const LOCALE_PREFIXED_PATHS = ["/tools", "/project-hub", "/quality-tools", "/standards", "/materials", "/projects"];
 const LOCALE_PRESERVE_PATHS = new Set([
+  "/tools/gear-design",
   "/standards/threads",
   "/standards/materials",
   "/standards/fits",

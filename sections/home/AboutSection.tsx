@@ -22,7 +22,7 @@ export default function AboutSection({ locale }: AboutSectionProps) {
           <div className="rounded-2xl border border-white/10 bg-black/50 p-5 text-sm text-slate-200 backdrop-blur">
             <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl">
               <Image
-                src="/images/workspace-flatlay.jpg"
+                src="/images/workspace-flat-lay.webp"
                 alt="Workspace flatlay"
                 fill
                 className="object-cover opacity-80 transition-opacity hover:opacity-100"
@@ -34,7 +34,7 @@ export default function AboutSection({ locale }: AboutSectionProps) {
           <div className="rounded-2xl border border-white/10 bg-black/50 p-5 text-sm text-slate-200 backdrop-blur">
             <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl">
               <Image
-                src="/images/office-atmosphere.jpg"
+                src="/images/office-atmosphere.webp"
                 alt="Office atmosphere"
                 fill
                 className="object-cover opacity-80 transition-opacity hover:opacity-100"

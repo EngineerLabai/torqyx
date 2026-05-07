@@ -29,7 +29,7 @@ export async function generatePdfReport(
   yPosition = 60;
 
   // Unit system bilgisi
-  yPosition = addUnitSystemInfo(doc, reportData.unitSystem, yPosition, pageWidth, margin);
+  yPosition = addUnitSystemInfo(doc, reportData.unitSystem, yPosition, margin);
 
   // Giriş parametreleri
   if (reportData.parameters.length > 0) {
@@ -38,7 +38,7 @@ export async function generatePdfReport(
 
   // Hesaplama formülleri
   if (reportData.formulas.length > 0) {
-    yPosition = addFormulasSection(doc, reportData.formulas, yPosition, pageWidth, margin);
+    yPosition = addFormulasSection(doc, reportData.formulas, yPosition, margin);
   }
 
   // Sonuçlar
@@ -48,16 +48,16 @@ export async function generatePdfReport(
 
   // Hesaplama adımları
   if (reportData.calculationSteps && reportData.calculationSteps.length > 0) {
-    yPosition = addCalculationStepsSection(doc, reportData.calculationSteps, yPosition, pageWidth, margin);
+    yPosition = addCalculationStepsSection(doc, reportData.calculationSteps, yPosition, margin);
   }
 
   // Referans standartları
   if (reportData.standards.length > 0) {
-    yPosition = addStandardsSection(doc, reportData.standards, yPosition, pageWidth, margin);
+    addStandardsSection(doc, reportData.standards, yPosition, margin);
   }
 
   // Footer
-  addFooter(doc, pageWidth, pageHeight, margin);
+  addFooter(doc, pageWidth, pageHeight);
 
   return Buffer.from(doc.output("arraybuffer"));
 }
@@ -90,7 +90,6 @@ function addUnitSystemInfo(
   doc: jsPDF,
   unitSystem: ReportData["unitSystem"],
   yPosition: number,
-  pageWidth: number,
   margin: number
 ): number {
   doc.setFontSize(10);
@@ -151,7 +150,6 @@ function addFormulasSection(
   doc: jsPDF,
   formulas: ReportData["formulas"],
   yPosition: number,
-  pageWidth: number,
   margin: number
 ): number {
   // Başlık
@@ -252,7 +250,6 @@ function addCalculationStepsSection(
   doc: jsPDF,
   steps: ReportData["calculationSteps"],
   yPosition: number,
-  pageWidth: number,
   margin: number
 ): number {
   doc.setFontSize(14);
@@ -310,7 +307,6 @@ function addStandardsSection(
   doc: jsPDF,
   standards: ReportData["standards"],
   yPosition: number,
-  pageWidth: number,
   margin: number
 ): number {
   // Başlık
@@ -348,7 +344,7 @@ function addStandardsSection(
   return yPosition + 10;
 }
 
-function addFooter(doc: jsPDF, pageWidth: number, pageHeight: number, margin: number) {
+function addFooter(doc: jsPDF, pageWidth: number, pageHeight: number) {
   const footerY = pageHeight - 20;
 
   doc.setFontSize(8);

@@ -31,6 +31,7 @@ export default function BrandLogo({
             width={635}
             height={702}
             className={`h-8 w-auto ${markClassName}`.trim()}
+            style={{ width: "auto" }}
             onError={() => setMarkVisible(false)}
             priority
           />
@@ -52,6 +53,7 @@ export default function BrandLogo({
             width={635}
             height={702}
             className={`h-8 w-auto ${wordClassName}`.trim()}
+            style={{ width: "auto" }}
             onError={() => setWordVisible(false)}
             priority
           />

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
@@ -136,10 +137,12 @@ export default async function AboutPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-semibold text-slate-900">Mühendislik Metodolojisi</h2>
           <div className="relative h-64 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
-            <img
+            <Image
               src="/images/workspace-flat-lay.webp"
               alt="Engineering Workspace"
-              className="h-full w-full object-cover"
+              fill
+              sizes="(min-width: 768px) 720px, 100vw"
+              className="object-cover"
             />
           </div>
           <p className="text-sm text-slate-600 italic">

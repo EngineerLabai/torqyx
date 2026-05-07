@@ -1,22 +1,10 @@
 {
-  "generatedAt": "2026-02-14T15:56:54.999Z",
+  "generatedAt": "2026-05-07T16:50:54.044Z",
   "contentMissing": [],
   "toolDocs": {
     "totalTools": 37,
     "missingRequired": [],
     "missingOptional": [
-      {
-        "slug": "bolt-calculator",
-        "locale": "en"
-      },
-      {
-        "slug": "unit-converter",
-        "locale": "en"
-      },
-      {
-        "slug": "sanity-check",
-        "locale": "en"
-      },
       {
         "slug": "basic-engineering",
         "locale": "en"
@@ -46,10 +34,6 @@
         "locale": "en"
       },
       {
-        "slug": "torque-power",
-        "locale": "en"
-      },
-      {
         "slug": "bearing-life",
         "locale": "en"
       },
@@ -59,10 +43,6 @@
       },
       {
         "slug": "fillet-weld",
-        "locale": "en"
-      },
-      {
-        "slug": "pipe-pressure-loss",
         "locale": "en"
       },
       {
@@ -156,8 +136,8 @@
     ]
   },
   "messages": {
-    "totalTr": 1235,
-    "totalEn": 1235,
+    "totalTr": 1370,
+    "totalEn": 1370,
     "missingInTr": [],
     "missingInEn": []
   }

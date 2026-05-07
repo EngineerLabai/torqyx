@@ -30,7 +30,7 @@ export default function SanityCheckPanel() {
         const engineResult = evaluateFormula(tempSession);
         if (engineResult.error || engineResult.value === null) return NaN;
         return engineResult.value;
-      } catch (err) {
+      } catch {
         return NaN;
       }
     };
@@ -53,7 +53,7 @@ export default function SanityCheckPanel() {
         <h2 className="text-lg font-bold text-slate-800">Hedef Arama (Goal Seek)</h2>
       </div>
       <p className="text-sm text-slate-500 mb-6">
-        Formül çıktısının belirlediğiniz değere ulaşması için gerekli 'x' değişkenini otomatik optimize edin.
+        Formül çıktısının belirlediğiniz değere ulaşması için gerekli &apos;x&apos; değişkenini otomatik optimize edin.
       </p>
 
       <div className="space-y-5 bg-slate-50 p-4 rounded-lg border border-slate-100">

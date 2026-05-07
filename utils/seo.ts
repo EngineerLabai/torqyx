@@ -1,6 +1,8 @@
 import type { Locale } from "@/utils/locale";
 import { withLocalePrefix } from "@/utils/locale-path";
 
+const PRIMARY_SITE_URL = "https://aiengineerslab.com";
+
 const ensureProtocol = (value: string) => (/^https?:\/\//i.test(value) ? value : `https://${value}`);
 
 const normalizeSiteUrl = (value: string) => {
@@ -19,17 +21,17 @@ const resolveSiteUrl = () => {
     process.env.NEXT_PUBLIC_SITE_URL ??
     process.env.VERCEL_PROJECT_PRODUCTION_URL ??
     process.env.VERCEL_URL ??
-    "localhost:3000";
+    PRIMARY_SITE_URL;
 
   try {
     return normalizeSiteUrl(envSiteUrl);
   } catch {
-    return "https://localhost:3000";
+    return PRIMARY_SITE_URL;
   }
 };
 
 export const SITE_URL = resolveSiteUrl();
-export const CANONICAL_SITE_URL = "https://aiengineerslab.vercel.app";
+export const CANONICAL_SITE_URL = PRIMARY_SITE_URL;
 
 export const buildCanonical = (path: string) => {
   try {

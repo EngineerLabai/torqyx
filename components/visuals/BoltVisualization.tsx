@@ -57,7 +57,7 @@ function buildThreadPath(startX: number, endX: number, topY: number, bottomY: nu
 }
 
 export default function BoltVisualization({ input, result, locale, copy }: BoltVisualizationProps) {
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const deferredInput = useDeferredValue(input);
   const deferredResult = useDeferredValue(result);
   const debouncedInput = useDebouncedValue(deferredInput, 150);
@@ -202,9 +202,6 @@ export default function BoltVisualization({ input, result, locale, copy }: BoltV
           <h3 className="mb-2 text-xs font-semibold text-slate-700">
             {copy.chartTitle}
           </h3>
-          <div className="relative aspect-[16/9] w-full">
-            <canvas ref={canvasRef} className="h-full w-full" />
-          </div>
           <div className="h-52 w-full">
             <canvas ref={canvasRef} role="img" aria-label={copy.chartTitle} className="h-full w-full" />
           </div>

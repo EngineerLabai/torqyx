@@ -48,7 +48,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       Promise.resolve().then(() => {
         if (!active) return;
         if (initError) {
-          console.warn("[auth] Firebase init error:", initError.message);
           setError(initError.message);
         }
         setAvailable(false);
@@ -111,7 +110,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!services) {
       const initError = getFirebaseInitError();
       if (initError) {
-        console.warn("[auth] Firebase init error:", initError.message);
         setError(initError.message);
       }
       setAvailable(false);

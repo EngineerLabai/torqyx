@@ -1,26 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Script from "next/script";
+import { CONSENT_CHANGE_EVENT, isAdvertisingAllowed } from "@/utils/consent";
 
 type AdSenseProps = {
   publisherId: string;
 };
 
 export default function AdSense({ publisherId }: AdSenseProps) {
-  const [consentGiven, setConsentGiven] = useState(false);
+  const consentGiven = useSyncExternalStore(subscribeToConsent, getAdvertisingSnapshot, getServerSnapshot);
+  const shouldLoadAds = process.env.NODE_ENV === "production" && publisherId !== "pub-0000000000000000";
 
-  useEffect(() => {
-    // Çerez sisteminizin "advertising" (Reklam) iznini kontrol ediyoruz
-    // Eğer cookie/localStorage içerisinde reklam izni varsa scripti renderla
-    const hasAdConsent = localStorage.getItem("cookie-consent-advertising") === "true";
-    
-    if (hasAdConsent) {
-      setConsentGiven(true);
-    }
-  }, []);
-
-  if (!consentGiven) return null;
+  if (!shouldLoadAds || !consentGiven) return null;
 
   return (
     <Script
@@ -31,3 +23,18 @@ export default function AdSense({ publisherId }: AdSenseProps) {
     />
   );
 }
+
+const getAdvertisingSnapshot = () => (typeof window === "undefined" ? false : isAdvertisingAllowed());
+const getServerSnapshot = () => false;
+
+const subscribeToConsent = (onStoreChange: () => void) => {
+  if (typeof window === "undefined") return () => undefined;
+
+  window.addEventListener("storage", onStoreChange);
+  window.addEventListener(CONSENT_CHANGE_EVENT, onStoreChange);
+
+  return () => {
+    window.removeEventListener("storage", onStoreChange);
+    window.removeEventListener(CONSENT_CHANGE_EVENT, onStoreChange);
+  };
+};

@@ -1,6 +1,7 @@
 "use client";
 
 // app/tools/machine-elements/page.tsx
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
@@ -292,11 +293,12 @@ function ComponentGallery() {
             className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-sm transition hover:shadow-md"
           >
             <div className="relative h-32 w-full bg-slate-100">
-              <img
+              <Image
                 src={component.image}
                 alt={component.name}
-                className="h-full w-full object-cover"
-                loading="lazy"
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover"
               />
             </div>
             <div className="p-3">
@@ -343,5 +345,4 @@ function ResultRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-
 

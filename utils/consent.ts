@@ -8,6 +8,7 @@ export type ConsentPrefs = {
 export const CONSENT_STORAGE_KEY = "ael_consent";
 export const CONSENT_PREFS_KEY = "ael_consent_prefs";
 export const CONSENT_COOKIE = "ael_consent";
+export const CONSENT_CHANGE_EVENT = "ael_consent_changed";
 
 const isConsentStatus = (value: string | null | undefined): value is ConsentStatus =>
   value === "accept" || value === "reject" || value === "custom";

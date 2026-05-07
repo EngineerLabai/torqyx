@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
 interface SharePageProps {
@@ -7,62 +8,58 @@ interface SharePageProps {
   }>;
 }
 
-export default async function SharePage({ params }: SharePageProps) {
-  const { code } = await params;
+type ShareStatusProps = {
+  title: string;
+  description: string;
+  tone?: "red" | "orange";
+};
 
-  try {
-    const sharedCalculation = await prisma.sharedCalculation.findUnique({
-      where: { code },
-      select: {
-        toolSlug: true,
-        inputs: true,
-        expiresAt: true,
-        isPublic: true,
-      },
-    });
+function ShareStatus({ title, description, tone = "red" }: ShareStatusProps) {
+  const titleColor = tone === "orange" ? "text-orange-600" : "text-red-600";
 
-    if (!sharedCalculation) {
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-red-600 mb-2">Paylaşım Bulunamadı</h1>
-            <p className="text-gray-600">Bu paylaşım linki geçersiz veya silinmiş.</p>
-          </div>
-        </div>
-      );
-    }
-
-    // Süre kontrolü
-    if (sharedCalculation.expiresAt && sharedCalculation.expiresAt < new Date()) {
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-orange-600 mb-2">Paylaşım Süresi Doldu</h1>
-            <p className="text-gray-600">Bu paylaşım linkinin süresi dolmuş.</p>
-          </div>
-        </div>
-      );
-    }
-
-    // Araç sayfasına yönlendir (parametrelerle birlikte)
-    const toolPath = `/tr/araclar/${sharedCalculation.toolSlug}`;
-    const inputs = encodeURIComponent(JSON.stringify(sharedCalculation.inputs));
-
-    redirect(`${toolPath}?shared=${inputs}`);
-  } catch (error) {
-    console.error("Share page error:", error);
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-2">Hata</h1>
-          <p className="text-gray-600">Bir hata oluştu. Lütfen tekrar deneyin.</p>
-        </div>
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-center">
+        <h1 className={`mb-2 text-2xl font-bold ${titleColor}`}>{title}</h1>
+        <p className="text-gray-600">{description}</p>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-// SEO için metadata
+export default async function SharePage({ params }: SharePageProps) {
+  const { code } = await params;
+  const session = await auth();
+
+  let sharedCalculation: Awaited<ReturnType<typeof getSharedCalculation>>;
+  try {
+    sharedCalculation = await getSharedCalculation(code);
+  } catch (error) {
+    console.error("Share page error:", error);
+    return <ShareStatus title="Hata" description="Bir hata oluştu. Lütfen tekrar deneyin." />;
+  }
+
+  if (!sharedCalculation) {
+    return <ShareStatus title="Paylaşım Bulunamadı" description="Bu paylaşım linki geçersiz veya silinmiş." />;
+  }
+
+  if (sharedCalculation.expiresAt && sharedCalculation.expiresAt < new Date()) {
+    return (
+      <ShareStatus title="Paylaşım Süresi Doldu" description="Bu paylaşım linkinin süresi dolmuş." tone="orange" />
+    );
+  }
+
+  const isOwner = session?.user?.id === sharedCalculation.userId;
+  if (!sharedCalculation.isPublic && !isOwner) {
+    return <ShareStatus title="Erişim Reddedildi" description="Bu paylaşım herkese açık değil." />;
+  }
+
+  const toolPath = `/tr/tools/${sharedCalculation.toolSlug}`;
+  const inputs = encodeURIComponent(JSON.stringify(sharedCalculation.inputs));
+
+  redirect(`${toolPath}?shared=${inputs}`);
+}
+
 export async function generateMetadata({ params }: SharePageProps) {
   const { code } = await params;
 
@@ -88,7 +85,7 @@ export async function generateMetadata({ params }: SharePageProps) {
     const toolName = getToolDisplayName(sharedCalculation.toolSlug);
 
     // Parametre özetini oluştur
-    const summary = createCalculationSummary(sharedCalculation.toolSlug, sharedCalculation.inputs as Record<string, any>);
+    const summary = createCalculationSummary(sharedCalculation.toolSlug, sharedCalculation.inputs as Record<string, unknown>);
 
     return {
       title: `${toolName} - Paylaşılan Hesaplama`,
@@ -106,7 +103,19 @@ export async function generateMetadata({ params }: SharePageProps) {
   }
 }
 
-// Yardımcı fonksiyonlar
+function getSharedCalculation(code: string) {
+  return prisma.sharedCalculation.findUnique({
+    where: { code },
+    select: {
+      toolSlug: true,
+      inputs: true,
+      expiresAt: true,
+      isPublic: true,
+      userId: true,
+    },
+  });
+}
+
 function getToolDisplayName(toolSlug: string): string {
   const toolNames: Record<string, string> = {
     "bolt-calculator": "Cıvata Hesaplayıcı",
@@ -117,8 +126,7 @@ function getToolDisplayName(toolSlug: string): string {
   return toolNames[toolSlug] || "Mühendislik Hesaplayıcı";
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function createCalculationSummary(toolSlug: string, inputs: Record<string, any>): string {
+function createCalculationSummary(toolSlug: string, inputs: Record<string, unknown>): string {
   try {
     switch (toolSlug) {
       case "bolt-calculator":

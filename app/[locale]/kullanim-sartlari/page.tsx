@@ -231,7 +231,7 @@ export default async function TermsPage({ params }: PageProps) {
       <PageHero
         title={copy.title}
         description={copy.description}
-        imageSrc="/images/industrial-facility.jpg"
+        imageSrc="/images/industrial-facility.webp"
         imageAlt={copy.imageAlt}
       />
 

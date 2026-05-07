@@ -141,9 +141,10 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               <Image
                 src="/images/logo.png"
                 alt={`${brandContent.siteName} logo`}
-                width={36}
-                height={36}
+                width={635}
+                height={702}
                 className="h-8 max-h-9 w-auto flex-shrink-0 object-contain md:h-9"
+                style={{ width: "auto" }}
                 priority
               />
               <div className="flex flex-col justify-center gap-0.5">

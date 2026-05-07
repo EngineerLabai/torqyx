@@ -1,7 +1,6 @@
 import "server-only";
 
 const FREE_DAILY_LIMIT = 3;
-const DAY_MS = 24 * 60 * 60 * 1000;
 
 type ExplainUsage = {
   count: number;
@@ -47,8 +46,6 @@ export const checkExplainResultRateLimit = (
 
   const resetAt = new Date(now);
   resetAt.setUTCHours(24, 0, 0, 0);
-  const remaining = Math.max(0, FREE_DAILY_LIMIT - existing.count);
-
   if (existing.count >= FREE_DAILY_LIMIT) {
     return {
       allowed: false,

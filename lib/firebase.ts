@@ -91,7 +91,7 @@ export const getFirebaseCoreServices = (): FirebaseCoreServices | null => {
 
   const missing = getMissingConfig();
   if (missing.length > 0) {
-    reportInitError(new Error(`Missing Firebase config. Please set: ${missing.join(", ")}`));
+    initError = new Error(`Missing Firebase config. Please set: ${missing.join(", ")}`);
     return null;
   }
 

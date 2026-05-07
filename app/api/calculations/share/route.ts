@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { generateShareCode, calculateExpiration } from "@/utils/share-code";
+import { generateShareCode, calculateExpiration, buildShortShareUrl } from "@/utils/share-code";
 import { z } from "zod";
 
 const createShareSchema = z.object({
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
     );
 
     // Veritabanına kaydet
-    const sharedCalculation = await prisma.sharedCalculation.create({
+    await prisma.sharedCalculation.create({
       data: {
         code,
         userId: session.user.id,
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       code,
-      url: `https://aelabs.co/s/${code}`,
+      url: buildShortShareUrl(code, request.nextUrl.origin),
       expiresAt: expiresAt?.toISOString(),
     });
   } catch (error) {

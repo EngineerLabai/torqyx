@@ -34,7 +34,7 @@ type ToolsIndexPageProps = {
 export default async function ToolsIndexPage({ searchParams }: ToolsIndexPageProps) {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.tools;
-  const heroImage = "/images/hero-background-alt.jpg";
+  const heroImage = "/images/hero-background.webp";
   const resolvedSearchParams = (await searchParams) ?? undefined;
 
   return (

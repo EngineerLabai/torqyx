@@ -35,7 +35,7 @@ const DEFAULT_SITE_TITLE = "TORQYX";
 const DEFAULT_SITE_DESCRIPTION =
   "ISO/DIN/VDI referanslı, standart temelli mekanik mühendislik hesaplayıcıları. Tahmin değil, deterministik sonuç.";
 const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar. 500+ mühendis kullanıyor.";
-const DEFAULT_OG_IMAGE = "/images/og-torqyx.png";
+const DEFAULT_OG_IMAGE = "/og-image.png";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();

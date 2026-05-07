@@ -35,10 +35,6 @@ export async function generateMetadata() {
     ...base,
     title: "TORQYX — Mekanik Mühendislik Hesaplayıcıları",
     description,
-    alternates: {
-      ...(base.alternates ?? {}),
-      canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://torqyx.vercel.app',
-    },
     openGraph: {
       ...(base.openGraph ?? {}),
       title: "TORQYX — Mekanik Mühendislik Hesaplayıcıları",

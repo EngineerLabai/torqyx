@@ -43,5 +43,11 @@ export default function WebPageJsonLd({ title, description, path }: WebPageJsonL
     [title, description, brandContent.siteName, brandContent.tagline, pagePath, locale],
   );
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  return (
+    <script
+      suppressHydrationWarning
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
 }

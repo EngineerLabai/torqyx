@@ -38,7 +38,7 @@ Bu sistem, aiengineerslab.com'da hesaplayıcı araçları için iki farklı payl
 
 ### Özellikler
 - POST `/api/calculations/share` ile veritabanına kayıt
-- Kısa kod üretimi (ör: `aelabs.co/s/x4k2m`)
+- Kısa kod üretimi (ör: `aiengineerslab.com/s/x4k2m`)
 - Premium kullanıcılara özel
 - Kayıtlı hesaplama listesinde görünür
 - TTL: ücretsiz 7 gün, premium sınırsız

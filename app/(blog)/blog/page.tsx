@@ -5,7 +5,7 @@ import { getHeroImageSrc } from "@/lib/assets";
 import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { formatMessage, getMessages } from "@/utils/messages";
+import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -25,11 +25,6 @@ export async function generateMetadata() {
     locale,
   });
 }
-
-const formatDate = (value: string, locale: "tr" | "en") =>
-  new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
-    new Date(value),
-  );
 
 const getParam = (value?: string | string[]) => (Array.isArray(value) ? value[0] : value);
 

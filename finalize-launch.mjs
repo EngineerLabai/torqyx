@@ -72,7 +72,7 @@ console.log('✅ Marka isimleri (SEO Başlıkları dahil) başarıyla güncellen
 console.log('📈 SEO H1 Düzeltme asistanı tetikleniyor...');
 try {
     execSync('node h1-fix.mjs', { stdio: 'inherit' });
-} catch (e) {
+} catch {
     console.log('⚠️ h1-fix.mjs çalıştırılırken bir uyarı verdi veya bulunamadı, manuel kontrol edebilirsiniz.');
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useWorkspaceStore, WorkspaceVariable } from "@/lib/store/useWorkspaceStore";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 interface VariableExportButtonProps {
@@ -12,13 +12,6 @@ export default function VariableExportButton({ variable }: VariableExportButtonP
   const setVariable = useWorkspaceStore((state) => state.setVariable);
   const t = useTranslations("workspace.variables");
   const [saved, setSaved] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
 
   const handleSave = () => {
     setVariable(variable);

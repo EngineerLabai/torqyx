@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Eye, X, FileText } from "lucide-react";
+import { useState } from "react";
+import { Eye, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

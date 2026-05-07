@@ -7,6 +7,15 @@ export interface ToReportDataConverter<TInput, TResult> {
   (input: TInput, result: TResult, toolId: string, toolName: string, unitSystem: 'SI' | 'Imperial' | 'Mixed'): ReportData;
 }
 
+type ResultWithAuditTrail = {
+  auditTrail?: ReportCalculationStep[] | (() => ReportCalculationStep[]);
+};
+
+const getCalculationSteps = (result: unknown) => {
+  const auditTrail = (result as ResultWithAuditTrail | null)?.auditTrail;
+  return typeof auditTrail === "function" ? auditTrail() : auditTrail;
+};
+
 /**
  * Yaygın kullanılan yardımcı fonksiyonlar
  */
@@ -157,10 +166,7 @@ export const createBoltCalculatorReport: ToReportDataConverter<
         ReportHelpers.getSafetyStatus(result.safetyFactor, 1.2)
       ),
     ],
-    calculationSteps:
-      typeof (result as any).auditTrail === "function"
-        ? (result as any).auditTrail()
-        : (result as any).auditTrail,
+    calculationSteps: getCalculationSteps(result),
     standards: [
       ReportHelpers.createStandard(
         "ISO 898-1",
@@ -182,8 +188,10 @@ export const createBoltCalculatorReport: ToReportDataConverter<
 /**
  * Tool-specific PDF converters
  */
-export const toolPdfConverters: Record<string, ToReportDataConverter<any, any>> = {
-  "bolt-calculator": createBoltCalculatorReport,
+type AnyReportConverter = ToReportDataConverter<unknown, unknown>;
+
+export const toolPdfConverters: Record<string, AnyReportConverter> = {
+  "bolt-calculator": createBoltCalculatorReport as AnyReportConverter,
 };
 
 /**
@@ -211,10 +219,7 @@ export const createGenericReport: ToReportDataConverter<Record<string, unknown>,
       value: String(value),
       status: "info" as const,
     })),
-    calculationSteps:
-      typeof (result as any).auditTrail === "function"
-        ? (result as any).auditTrail()
-        : (result as any).auditTrail,
+    calculationSteps: getCalculationSteps(result),
     standards: [],
   };
 };
@@ -222,6 +227,6 @@ export const createGenericReport: ToReportDataConverter<Record<string, unknown>,
 /**
  * Tool ID'ye göre uygun converter'ı döndürür
  */
-export function getToolPdfConverter(toolId: string): ToReportDataConverter<any, any> {
-  return toolPdfConverters[toolId] || createGenericReport;
+export function getToolPdfConverter<TInput, TResult>(toolId: string): ToReportDataConverter<TInput, TResult> {
+  return (toolPdfConverters[toolId] || createGenericReport) as ToReportDataConverter<TInput, TResult>;
 }

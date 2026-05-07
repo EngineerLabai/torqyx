@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   CONSENT_COOKIE,
+  CONSENT_CHANGE_EVENT,
   CONSENT_PREFS_KEY,
   CONSENT_STORAGE_KEY,
   readConsentPrefs,
@@ -110,6 +111,7 @@ export default function ConsentBanner({ copy }: ConsentBannerProps) {
 
     document.cookie = `${CONSENT_COOKIE}=${encodeURIComponent(status)}; Path=/; Max-Age=${CONSENT_MAX_AGE}; SameSite=Lax`;
     document.documentElement.dataset.consent = status;
+    window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
   };
 
   const handleAccept = () => {

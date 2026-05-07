@@ -5,9 +5,9 @@ import { toolCatalog } from "@/tools/_shared/catalog";
 import { standardsManifest } from "@/data/standards";
 import { materials } from "@/src/data/materials";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { CANONICAL_SITE_URL } from "@/utils/seo";
 
-const BASE_URL = "https://aiengineerslab.vercel.app";
-const resolveUrl = (path: string) => new URL(path, BASE_URL).toString();
+const resolveUrl = (path: string) => new URL(path, CANONICAL_SITE_URL).toString();
 const locales = ["tr", "en"] as const;
 const staticPaths = [
   "/dashboard",
