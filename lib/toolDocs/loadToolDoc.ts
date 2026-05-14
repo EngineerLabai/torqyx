@@ -9,6 +9,7 @@ import type { Locale } from "@/utils/locale";
 import { getRelatedForTool } from "@/utils/related-items";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import type { ToolDocsResponse, ToolDocExampleItem, ToolDocMetaInfo } from "@/lib/toolDocs/types";
+import { toolDocStandardSchema, type ToolDocStandard } from "@/lib/tool-docs/schema";
 
 type ToolDocMeta = Record<string, unknown>;
 
@@ -169,6 +170,38 @@ const normalizeExamples = (value: unknown): ToolDocExampleItem[] | null => {
   return items;
 };
 
+const buildStandardCandidates = (slug: string, locale: Locale) => {
+  const safeSlug = normalizeSlug(slug);
+  if (!safeSlug || safeSlug.includes("..")) return [] as string[];
+
+  return [
+    `${safeSlug}.${locale}.json`,
+    `${safeSlug}.json`,
+    `${safeSlug}/standard.${locale}.json`,
+    `${safeSlug}/standard.json`,
+  ];
+};
+
+const readToolDocStandard = async (slug: string, locale: Locale): Promise<ToolDocStandard | null> => {
+  const standardFile = await pickFirstFile(buildStandardCandidates(slug, locale));
+  if (!standardFile) return null;
+
+  let data: unknown;
+  try {
+    data = JSON.parse(standardFile.content);
+  } catch {
+    throw new Error(`[tool-docs] Invalid JSON standard doc for ${slug} (${locale}).`);
+  }
+
+  const parsed = toolDocStandardSchema.safeParse(data);
+  if (!parsed.success) {
+    const issues = parsed.error.issues.map((issue) => issue.message).join("; ");
+    throw new Error(`[tool-docs] Invalid standard doc for ${slug} (${locale}): ${issues}`);
+  }
+
+  return parsed.data;
+};
+
 const asOptionalString = (value: unknown) => {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
@@ -291,12 +324,32 @@ const getToolBySlug = (slug: string) => {
 };
 
 export const getToolDocsResponse = async (slug: string, locale: Locale): Promise<ToolDocsResponse> => {
-  const doc = await loadToolDoc({ slug, locale });
-  const docsLocale: Locale | null = doc ? locale : null;
-
   const tool = getToolBySlug(slug);
   const relatedLocale = locale;
   const related = tool ? await getRelatedForTool(tool, { locale: relatedLocale }) : { guides: [], glossary: [] };
+  const standard = await readToolDocStandard(slug, locale);
+
+  if (standard) {
+    return {
+      tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
+      hasDocs: true,
+      isDraft: false,
+      requestedLocale: locale,
+      docsLocale: locale,
+      metaInfo: {
+        version: standard.version,
+        lastUpdated: standard.lastUpdated,
+        lastTranslatedAt: null,
+      },
+      standard,
+      explanation: null,
+      examples: null,
+      related,
+    };
+  }
+
+  const doc = await loadToolDoc({ slug, locale });
+  const docsLocale: Locale | null = doc ? locale : null;
 
   if (!doc) {
     return {

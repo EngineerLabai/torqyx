@@ -6,21 +6,25 @@
     "dev": "next dev",
     "predev": "tsx scripts/buildSearchIndex.ts",
     "postinstall": "prisma generate",
-    "prebuild": "prisma generate && node scripts/check-assets.mjs && node scripts/check-i18n.mjs && node scripts/check-content-locales.mjs && node scripts/check-text-encoding.mjs && tsx scripts/buildSearchIndex.ts && node scripts/check-tool-docs.mjs && node scripts/check-featured-docs.mjs",
+    "prebuild": "prisma generate && node scripts/check-assets.mjs && node scripts/check-i18n.mjs && node scripts/check-content-locales.mjs && node scripts/check-text-encoding.mjs && node scripts/check-secrets.mjs && tsx scripts/buildSearchIndex.ts && node scripts/check-tool-docs.mjs && node scripts/check-featured-docs.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "lint:a11y": "eslint --ext .tsx,.jsx src/ --rule \"jsx-a11y/control-has-associated-label:error\" --rule \"jsx-a11y/label-has-associated-control:error\" --rule \"jsx-a11y/no-static-element-interactions:error\" --rule \"jsx-a11y/click-events-have-key-events:error\" --rule \"jsx-a11y/interactive-supports-focus:error\" --rule \"jsx-a11y/no-noninteractive-element-interactions:error\" --rule \"jsx-a11y/no-noninteractive-tabindex:error\"",
     "i18n:report": "node scripts/report-i18n-status.mjs",
     "check:encoding": "node scripts/check-text-encoding.mjs",
-    "lhci": "lhci autorun --config=.lighthouserc.js",
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "seo:h1": "node h1-audit.mjs",
+    "seo:links": "node scripts/link-analysis.mjs",
+    "lhci": "node scripts/run-lhci.mjs",
     "perf:ci": "npm run build && npm run lhci",
     "analyze": "cross-env ANALYZE=true npm run build",
     "bundle:stats": "node scripts/bundle-stats.mjs",
     "bundle:diff": "node scripts/bundle-stats.mjs",
+    "smoke:runtime": "node scripts/smoke-runtime.mjs",
     "test": "vitest run",
-    "test:pdf": "tsx test-pdf-system.ts"
-    ,"generate:og": "node scripts/generate-og-images.mjs"
+    "test:pdf": "tsx test-pdf-system.ts",
+    "generate:og": "node scripts/generate-og-images.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "2.11.0",
@@ -86,6 +90,8 @@
   },
   "overrides": {
     "postcss": "^8.5.11",
-    "tmp": "^0.2.4"
+    "tmp": "^0.2.4",
+    "retry-request": "^8.0.2",
+    "teeny-request": "^10.1.2"
   }
 }

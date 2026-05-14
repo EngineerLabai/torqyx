@@ -84,7 +84,7 @@ type MaterialPreset = {
   densityKgM3: number;
 };
 
-const DRAFT_KEY = "aielab:fixture:base-plate:draft";
+const DRAFT_KEY = "torqyx:fixture:base-plate:draft";
 const STANDARD_THICKNESSES = [20, 25, 30, 40, 50];
 const CHECKLIST_IDS: ChecklistId[] = ["tslotSpacing", "boltPattern", "liftingPoints", "dowelHoles"];
 

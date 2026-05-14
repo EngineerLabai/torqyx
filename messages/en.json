@@ -847,8 +847,8 @@
               "a": "They follow published formulas and checks, but inputs and assumptions are yours. Verify against your standards."
             },
             {
-              "q": "How reliable is this AI?",
-              "a": "The AI layer does not make free-form guesses; the calculation engine runs deterministic formula and table logic derived from standards such as ISO, DIN, and VDI. The assistant layer only helps with input checks, step-by-step explanation, and source guidance, while final validation remains your engineering responsibility."
+              "q": "How does the calculation engine work?",
+              "a": "The calculation engine does not make free-form guesses; it runs deterministic formulas and table logic derived from sources such as ISO, DIN, and VDI. Input checks, step explanations, and reference notes support review, while final validation remains your engineering responsibility."
             },
             {
               "q": "Are the default values real?",
@@ -1159,20 +1159,20 @@
     },
     "consent": {
       "title": "Cookie preferences",
-      "description": "We use essential cookies to run the site. You can optionally allow analytics and advertising cookies.",
+    "description": "We use essential cookies to run the site. Analytics and advertising cookies are enabled only with your consent.",
       "accept": "Accept",
       "reject": "Reject",
       "preferences": "Preferences",
       "preferencesTitle": "Cookie preferences",
-      "preferencesDescription": "Choose which cookie categories you want to enable.",
+    "preferencesDescription": "Necessary cookies stay on for the service to work; analytics and advertising depend on your consent.",
       "save": "Save preferences",
       "close": "Close",
       "necessaryLabel": "Necessary",
-      "necessaryDescription": "Required for core site functionality.",
+    "necessaryDescription": "Required for language, security, session, and preference management.",
       "analyticsLabel": "Analytics",
-      "analyticsDescription": "Helps us understand usage and improve the experience.",
+    "analyticsDescription": "Helps us measure usage and improve the experience; enabled only if you allow it.",
       "advertisingLabel": "Advertising",
-      "advertisingDescription": "Used to show relevant ads and measure performance.",
+    "advertisingDescription": "Used for ad delivery, personalization, and performance measurement; enabled only if you allow it.",
       "alwaysOn": "Always on"
     },
     "toolLibrary": {

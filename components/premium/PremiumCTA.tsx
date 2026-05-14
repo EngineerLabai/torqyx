@@ -65,9 +65,9 @@ export default function PremiumCTA({ copy, variant = "compact", className = "" }
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-100 bg-amber-50 px-3 py-1 text-[11px] text-amber-700 md:text-xs">
             <span className="font-semibold">{copy.badge}</span>
           </div>
-          <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">
+          <h2 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">
             {copy.title}
-          </h1>
+          </h2>
           <p className="text-sm leading-relaxed text-slate-700">{copy.description}</p>
           <div className="flex flex-wrap items-center gap-3 text-xs">
             <Link

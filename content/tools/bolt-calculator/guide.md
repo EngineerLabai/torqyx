@@ -38,7 +38,7 @@ Adım 3: Sıkma torku yaklaşık olarak bulunur:
 
 Adim 4: Elde edilen gerilme, malzeme siniri ile karsilastirilir ve emniyet katsayisi yorumlanir.
 
-Gorsel akis (placeholder):
+Karar akisi:
 
 ```text
 Malzeme + Geometri -> As -> Hedef On Yuk -> Tork -> Gerilme Kontrolu

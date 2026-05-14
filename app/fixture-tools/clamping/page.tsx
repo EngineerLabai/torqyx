@@ -128,7 +128,7 @@ type ClampingCopy = {
   disclaimer: string;
 };
 
-const DRAFT_KEY = "aielab:fixture:clamping:draft";
+const DRAFT_KEY = "torqyx:fixture:clamping:draft";
 
 const INITIAL_FORM: ClampingForm = {
   weightKg: "25",

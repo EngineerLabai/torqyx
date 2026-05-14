@@ -86,10 +86,6 @@ export default async function QualityToolsPage({ searchParams }: QualityToolsPag
       />
 
       <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Quality Tools
-      </h1>
-
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[11px] text-sky-700 md:text-xs">
             <span className="font-semibold">{copy.badge}</span>

@@ -66,7 +66,6 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/hakkinda",
     locale,
-    alternatesLanguages: null,
   });
 }
 
@@ -107,9 +106,9 @@ export default async function AboutPage() {
 
       <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
         <section className="space-y-3">
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             {copy.title}
-          </h1>
+          </h2>
           <h2 className="text-lg font-semibold text-slate-900">{copy.sections.storyTitle}</h2>
           {copy.sections.storyBody.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>

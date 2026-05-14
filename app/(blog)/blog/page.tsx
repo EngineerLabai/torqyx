@@ -88,10 +88,6 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-3xl font-bold tracking-tight">
-        [Manual] Blog
-      </h1>
-
         <div className="space-y-5">
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <div className="space-y-3">

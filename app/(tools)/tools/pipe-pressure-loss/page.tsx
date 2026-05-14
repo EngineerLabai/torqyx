@@ -1,4 +1,4 @@
-import ToolPageClient from "@/components/tools/ToolPageClient";
+﻿import ToolPageClient from "@/components/tools/ToolPageClient";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function PipePressureLossPage() {
   const initialDocs = await getToolDocsResponse("pipe-pressure-loss", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Pipe Pressure Loss — ISO 5167
-      </h1>
-
       <ToolSeo toolId="pipe-pressure-loss" locale={locale} />
       <ToolPageClient toolId="pipe-pressure-loss" initialDocs={initialDocs} />
     </>

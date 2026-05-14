@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
@@ -125,7 +125,7 @@ type LocatingCopy = {
   disclaimer: string;
 };
 
-const DRAFT_KEY = "aielab:fixture:locating:draft";
+const DRAFT_KEY = "torqyx:fixture:locating:draft";
 
 const DATUM_IDS: DatumId[] = ["bottom", "left", "front", "right", "top", "back"];
 const PIN_DIAMETERS = ["6", "8", "10", "12", "16"];

@@ -12,7 +12,6 @@ import AccessBadge from "@/components/tools/AccessBadge";
 import ToolBadge from "@/components/tools/ToolBadge";
 import InfoTooltip from "@/components/ui/InfoTooltip";
 import UpgradePrompt from "@/components/billing/UpgradePrompt";
-import AISummaryPanel from "@/src/components/ai/AISummaryPanel";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
 import { getAdvisorInsights } from "@/src/lib/advisor/engine";
@@ -391,16 +390,6 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
             inputs={values}
             outputs={gatedResults}
             reportUrl={reportUrl}
-          />
-        ) : null}
-
-        {normalizedInputs && gatedResults && tool.id === "torque-power" ? (
-          <AISummaryPanel
-            locale={locale}
-            toolId={tool.id}
-            toolName={tool.title}
-            inputs={normalizedInputs as Record<string, unknown>}
-            outputs={gatedResults}
           />
         ) : null}
 

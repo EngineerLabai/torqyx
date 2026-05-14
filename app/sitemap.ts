@@ -5,12 +5,11 @@ import { toolCatalog } from "@/tools/_shared/catalog";
 import { standardsManifest } from "@/data/standards";
 import { materials } from "@/src/data/materials";
 import { withLocalePrefix } from "@/utils/locale-path";
-import { CANONICAL_SITE_URL } from "@/utils/seo";
+import { SITE_URL, buildLanguageAlternates } from "@/utils/seo";
 
-const resolveUrl = (path: string) => new URL(path, CANONICAL_SITE_URL).toString();
+const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
 const locales = ["tr", "en"] as const;
 const staticPaths = [
-  "/dashboard",
   "/request-tool",
   "/changelog",
   "/tools",
@@ -19,7 +18,6 @@ const staticPaths = [
   "/glossary",
   "/premium",
   "/pricing",
-  "/login",
   "/faq",
   "/support",
   "/iletisim",
@@ -78,6 +76,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: options?.lastModified ?? new Date(),
       changeFrequency: options?.changeFrequency ?? "weekly",
       priority: options?.priority ?? 0.8,
+      alternates: {
+        languages: buildLanguageAlternates(path),
+      },
     });
   };
 

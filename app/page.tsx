@@ -52,12 +52,6 @@ export default async function Home() {
   const locale = await getLocaleFromCookies();
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden">
-      <h1 className="sr-only">
-        {locale === "tr"
-          ? "TORQYX — Mekanik Mühendislik Hesaplayıcıları"
-          : "TORQYX — Mechanical Engineering Calculators"}
-      </h1>
-
       <WebPageJsonLd />
       <HeroSection locale={locale} />
       <ValuePropsSection locale={locale} />

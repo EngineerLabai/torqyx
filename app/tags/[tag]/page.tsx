@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: TagPageProps) {
   const titleBase = locale === "tr" ? `${label} etiketi` : `${label} tag`;
   const description =
     locale === "tr"
-      ? `${label} etiketi ile ilgili blog, rehber ve hesaplayıcıları keşfet.`
-      : `Discover blog posts, guides, and calculators tagged with ${label}.`;
+      ? `${label} etiketi ile ilgili blog, rehber, sözlük terimi ve hesaplayıcıları keşfet.`
+      : `Discover blog posts, guides, glossary terms, and calculators tagged with ${label}.`;
   const hasTr = trTags.some((entry) => entry.slug === tagSlug);
   const hasEn = enTags.some((entry) => entry.slug === tagSlug);
   const alternatesLanguages = hasTr && hasEn ? buildLanguageAlternates(`/tags/${tagSlug}`) : null;
@@ -57,9 +57,10 @@ export default async function TagPage({ params }: TagPageProps) {
   const locale = await getLocaleFromCookies();
   const { tag: tagParam } = await params;
   const tagSlug = decodeURIComponent(tagParam);
-  const [blog, guides, tags] = await Promise.all([
+  const [blog, guides, glossary, tags] = await Promise.all([
     getContentList("blog", { locale }),
     getContentList("guides", { locale }),
+    getContentList("glossary", { locale }),
     getTagIndex(locale),
   ]);
   const copy = getMessages(locale).pages.tags;
@@ -68,11 +69,12 @@ export default async function TagPage({ params }: TagPageProps) {
 
   const blogMatches = blog.filter((item) => item.tags.some((tag) => matchesSlug(tag, tagSlug)));
   const guideMatches = guides.filter((item) => item.tags.some((tag) => matchesSlug(tag, tagSlug)));
+  const glossaryMatches = glossary.filter((item) => item.tags.some((tag) => matchesSlug(tag, tagSlug)));
   const toolMatches = toolCatalog.filter((tool) => (tool.tags ?? []).some((tag) => matchesSlug(tag, tagSlug)));
 
   const relatedTags = Array.from(
     new Set(
-      [...blogMatches, ...guideMatches]
+      [...blogMatches, ...guideMatches, ...glossaryMatches]
         .flatMap((item) => item.tags)
         .concat(toolMatches.flatMap((tool) => tool.tags ?? []))
         .map((tag) => slugify(tag))
@@ -121,6 +123,26 @@ export default async function TagPage({ params }: TagPageProps) {
           copy={copy}
           items={guideMatches.map((item) => ({
             href: withLocalePrefix(`/guides/${item.slug}`, locale),
+            title: item.title,
+            description: item.description,
+            category: item.category,
+            date: formatDate(item.date, locale),
+            readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
+            tags: item.tags,
+          }))}
+          locale={locale}
+        />
+
+        <ContentSection
+          title={locale === "tr" ? "Sözlük" : "Glossary"}
+          description={
+            locale === "tr"
+              ? "Bu etiketle eşleşen teknik terimler ve kısa tanımlar."
+              : "Technical terms and short definitions matching this tag."
+          }
+          copy={copy}
+          items={glossaryMatches.map((item) => ({
+            href: withLocalePrefix(`/glossary/${item.slug}`, locale),
             title: item.title,
             description: item.description,
             category: item.category,

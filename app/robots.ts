@@ -1,18 +1,8 @@
 import type { MetadataRoute } from "next";
-import { headers } from "next/headers";
-import { SITE_URL, buildCanonical } from "@/utils/seo";
-
-const isVercelAppHost = (host: string) => {
-  const normalized = host.toLowerCase().trim().replace(/:\d+$/, "");
-  return normalized === "vercel.app" || normalized.endsWith(".vercel.app");
-};
+import { IS_INDEXING_ENABLED, SITE_URL, buildCanonical } from "@/utils/seo";
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-  const requestHeaders = await headers();
-  const requestHost = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "";
-  const isVercelHost = isVercelAppHost(requestHost) || (!requestHost && isVercelAppHost(process.env.VERCEL_URL ?? ""));
-
-  if (isVercelHost) {
+  if (!IS_INDEXING_ENABLED) {
     return {
       rules: {
         userAgent: "*",
@@ -34,7 +24,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api", "/saved-calculations"],
+      disallow: ["/api", "/dashboard", "/login", "/saved-calculations"],
     },
     ...(host ? { host } : {}),
     sitemap: buildCanonical("/sitemap.xml") ?? "/sitemap.xml",

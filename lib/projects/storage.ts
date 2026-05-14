@@ -13,7 +13,7 @@ export type Project = {
   items: ProjectItem[];
 };
 
-const STORAGE_KEY = "aielab:projects";
+const STORAGE_KEY = "torqyx:projects";
 
 const hasWindow = typeof window !== "undefined";
 

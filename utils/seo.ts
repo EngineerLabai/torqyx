@@ -1,7 +1,7 @@
 import type { Locale } from "@/utils/locale";
-import { withLocalePrefix } from "@/utils/locale-path";
+import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
 
-const PRIMARY_SITE_URL = "https://aiengineerslab.com";
+const FALLBACK_SITE_URL = "https://aiengineerslab.com";
 
 const ensureProtocol = (value: string) => (/^https?:\/\//i.test(value) ? value : `https://${value}`);
 
@@ -17,21 +17,27 @@ const normalizeSiteUrl = (value: string) => {
 
 const resolveSiteUrl = () => {
   const envSiteUrl =
-    process.env.SITE_URL ??
     process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.SITE_URL ??
     process.env.VERCEL_PROJECT_PRODUCTION_URL ??
     process.env.VERCEL_URL ??
-    PRIMARY_SITE_URL;
+    FALLBACK_SITE_URL;
 
   try {
     return normalizeSiteUrl(envSiteUrl);
   } catch {
-    return PRIMARY_SITE_URL;
+    return FALLBACK_SITE_URL;
   }
 };
 
+const isExplicitlyFalseEnv = (value?: string) => {
+  if (!value) return false;
+  return ["0", "false", "no", "off"].includes(value.trim().toLowerCase());
+};
+
 export const SITE_URL = resolveSiteUrl();
-export const CANONICAL_SITE_URL = PRIMARY_SITE_URL;
+export const CANONICAL_SITE_URL = SITE_URL;
+export const IS_INDEXING_ENABLED = !isExplicitlyFalseEnv(process.env.INDEX_SITE ?? process.env.NEXT_PUBLIC_INDEX_SITE);
 
 export const buildCanonical = (path: string) => {
   try {
@@ -46,9 +52,12 @@ export const buildLocalizedPath = (path: string, locale: Locale) => withLocalePr
 export const buildLocalizedCanonical = (path: string, locale: Locale) =>
   buildCanonical(buildLocalizedPath(path, locale)) ?? buildLocalizedPath(path, locale);
 
+export const buildXDefaultCanonical = (path: string) => buildCanonical(stripLocaleFromPath(path)) ?? SITE_URL;
+
 export const buildLanguageAlternates = (path: string) => ({
   tr: buildLocalizedCanonical(path, "tr"),
   en: buildLocalizedCanonical(path, "en"),
+  "x-default": buildXDefaultCanonical(path),
 });
 
 export const DEFAULT_OG_IMAGE = new URL("/og-image.png", CANONICAL_SITE_URL).toString();
@@ -56,5 +65,40 @@ export const DEFAULT_OG_IMAGE_META = {
   url: DEFAULT_OG_IMAGE,
   width: 1200,
   height: 630,
-  alt: "TORQYX — Mühendislik Hesaplayıcıları",
+  alt: "TORQYX engineering calculators",
 };
+
+type OgImageOptions = {
+  title: string;
+  description?: string;
+  locale: Locale;
+  path?: string;
+};
+
+const trimOgParam = (value: string, maxLength: number) => {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  return normalized.length > maxLength ? `${normalized.slice(0, maxLength - 1).trimEnd()}...` : normalized;
+};
+
+export const buildOgImageUrl = ({ title, description, locale, path }: OgImageOptions) => {
+  const url = new URL("/og", CANONICAL_SITE_URL);
+  url.searchParams.set("locale", locale);
+  url.searchParams.set("title", trimOgParam(title, 96));
+
+  if (description) {
+    url.searchParams.set("subtitle", trimOgParam(description, 132));
+  }
+
+  if (path) {
+    url.searchParams.set("path", path);
+  }
+
+  return url.toString();
+};
+
+export const buildOgImageMeta = (options: OgImageOptions) => ({
+  url: buildOgImageUrl(options),
+  width: 1200,
+  height: 630,
+  alt: `${options.title} - TORQYX`,
+});

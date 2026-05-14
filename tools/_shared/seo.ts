@@ -16,6 +16,7 @@ export type ToolSeo = {
   alternates: {
     tr: string;
     en: string;
+    "x-default": string;
   };
   featureList: string[];
   howToSteps: string[];
@@ -23,7 +24,7 @@ export type ToolSeo = {
 
 const toolById = new Map(toolCatalog.map((tool) => [tool.id, tool]));
 const toolByHref = new Map(toolCatalog.map((tool) => [tool.href, tool]));
-const TOOL_CONTENT_ROOT = path.join(process.cwd(), "content", "tools");
+const TOOL_CONTENT_ROOT = path.join(/* turbopackIgnore: true */ process.cwd(), "content", "tools");
 
 const normalizePath = (value: string) =>
   value.replace(/^\/+/, "").replace(/^tools\//, "").replace(/\/$/, "");
@@ -95,6 +96,60 @@ const getToolHowToStepsFromContent = (toolPath: string, locale: Locale) => {
   return [];
 };
 
+const buildFallbackHowToSteps = (
+  tool: (typeof toolCatalog)[number] | null,
+  name: string,
+  locale: Locale,
+) => {
+  const type = tool?.type ?? "calculator";
+
+  if (locale === "en") {
+    if (type === "guide") {
+      return [
+        `Open the ${name} reference page.`,
+        "Select the relevant material, standard, or engineering condition.",
+        "Compare assumptions, limits, and related calculator links before applying the result.",
+      ];
+    }
+
+    if (type === "bundle") {
+      return [
+        `Open the ${name} tool bundle.`,
+        "Choose the calculator or workflow that matches the engineering problem.",
+        "Enter consistent units, review assumptions, and continue with related checks if needed.",
+      ];
+    }
+
+    return [
+      `Open the ${name} calculator.`,
+      "Enter the required input values with consistent engineering units.",
+      "Review the calculated result, assumptions, references, and related validation notes.",
+    ];
+  }
+
+  if (type === "guide") {
+    return [
+      `${name} referans sayfasini acin.`,
+      "Ilgili malzeme, standart veya muhendislik kosulunu secin.",
+      "Sonucu uygulamadan once varsayimlari, sinirlari ve ilgili hesaplayici baglantilarini karsilastirin.",
+    ];
+  }
+
+  if (type === "bundle") {
+    return [
+      `${name} arac grubunu acin.`,
+      "Muhendislik problemine uygun hesaplayiciyi veya is akisini secin.",
+      "Birimleri tutarli girin, varsayimlari inceleyin ve gerekirse ilgili kontrollerle devam edin.",
+    ];
+  }
+
+  return [
+    `${name} hesaplayicisini acin.`,
+    "Gerekli girdi degerlerini tutarli muhendislik birimleriyle girin.",
+    "Hesaplanan sonucu, varsayimlari, referanslari ve dogrulama notlarini inceleyin.",
+  ];
+};
+
 export function getToolSeo(toolPath: string, locale: Locale = DEFAULT_LOCALE): ToolSeo {
   const normalized = normalizePath(toolPath);
   const href = normalized ? `/tools/${normalized}` : "/tools";
@@ -119,6 +174,8 @@ export function getToolSeo(toolPath: string, locale: Locale = DEFAULT_LOCALE): T
   const canonical = buildLocalizedCanonical(tool?.href ?? href, locale);
   const alternates = buildLanguageAlternates(tool?.href ?? href);
 
+  const contentHowToSteps = getToolHowToStepsFromContent(normalized, locale);
+
   return {
     name,
     title,
@@ -127,7 +184,7 @@ export function getToolSeo(toolPath: string, locale: Locale = DEFAULT_LOCALE): T
     canonical,
     alternates,
     featureList: buildFeatureList(normalized, locale),
-    howToSteps: getToolHowToStepsFromContent(normalized, locale),
+    howToSteps: contentHowToSteps.length > 0 ? contentHowToSteps : buildFallbackHowToSteps(tool, name, locale),
   };
 }
 
@@ -186,4 +243,3 @@ export function buildToolSchema(toolPath: string, locale: Locale = DEFAULT_LOCAL
     ],
   };
 }
-

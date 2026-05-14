@@ -1,4 +1,4 @@
-import CoatingGuideClient from "./Client";
+﻿import CoatingGuideClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function CoatingGuidePage() {
   const initialDocs = await getToolDocsResponse("coating-guide", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Coating Guide — ISO 12944
-      </h1>
-
       <ToolSeo toolId="coating-guide" locale={locale} />
       <CoatingGuideClient initialDocs={initialDocs} />
     </>

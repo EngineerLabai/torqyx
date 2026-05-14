@@ -1,4 +1,4 @@
-import ToolPageClient from "@/components/tools/ToolPageClient";
+﻿import ToolPageClient from "@/components/tools/ToolPageClient";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function ParamChartPage() {
   const initialDocs = await getToolDocsResponse("param-chart", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Spring Force Chart — DIN 2089
-      </h1>
-
       <ToolSeo toolId="param-chart" locale={locale} />
       <ToolPageClient toolId="param-chart" initialDocs={initialDocs} />
     </>

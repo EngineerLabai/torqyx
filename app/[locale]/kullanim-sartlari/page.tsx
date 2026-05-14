@@ -217,7 +217,6 @@ export async function generateMetadata({ params }: PageProps) {
     description: copy.description,
     path: "/kullanim-sartlari",
     locale: locale as "tr" | "en",
-    alternatesLanguages: null,
   });
 }
 

@@ -6,7 +6,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
 
-const DISMISS_KEY = "aielab:changelog-dismissed";
+const DISMISS_KEY = "torqyx:changelog-dismissed";
 
 type UpdatesBannerProps = {
   latestVersion?: string;

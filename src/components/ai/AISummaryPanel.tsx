@@ -40,32 +40,32 @@ type SummaryCacheRecord = {
 
 type PanelState = "idle" | "loading" | "ready" | "error";
 
-const STORAGE_PREFIX = "aielab:ai_summary:";
+const STORAGE_PREFIX = "torqyx:ai_summary:";
 
 const LABELS = {
   tr: {
-    titleButton: "AI Özeti",
+    titleButton: "Teknik özet",
     closeButton: "Kapat",
-    loading: "AI özeti hazırlanıyor...",
-    error: "AI özeti şu anda yüklenemedi.",
+    loading: "Teknik özet hazırlanıyor...",
+    error: "Teknik özet şu anda yüklenemedi.",
     retry: "Tekrar Dene",
     assumptions: "Varsayımlar",
     warnings: "Uyarılar",
     nextSteps: "Sonraki Adımlar",
     disclaimer: "Sorumluluk Reddi",
-    fallback: "AI sağlayıcısı şu anda sınırlı olabilir. Bu nedenle varsayılan bilgilendirme özeti gösteriliyor.",
+    fallback: "Açıklama hizmeti şu anda sınırlı olabilir. Bu nedenle varsayılan bilgilendirme özeti gösteriliyor.",
   },
   en: {
-    titleButton: "AI Summary",
+    titleButton: "Technical summary",
     closeButton: "Close",
-    loading: "Preparing AI summary...",
-    error: "AI summary could not be loaded right now.",
+    loading: "Preparing technical summary...",
+    error: "Technical summary could not be loaded right now.",
     retry: "Retry",
     assumptions: "Assumptions",
     warnings: "Warnings",
     nextSteps: "Next Steps",
     disclaimer: "Disclaimer",
-    fallback: "AI provider may currently be limited. A fallback informational summary is shown.",
+    fallback: "The explanation service may currently be limited. A fallback informational summary is shown.",
   },
 } as const;
 

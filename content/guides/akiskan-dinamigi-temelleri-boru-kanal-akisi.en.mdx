@@ -1,0 +1,62 @@
+---
+title: "Fluid dynamics basics: pipe and duct flow"
+description: "A quick guide to laminar flow, turbulent flow, Reynolds number, hydraulic diameter, and pressure loss."
+date: "2026-05-09"
+tags: ["fluids", "Reynolds", "pressure loss", "pipe"]
+category: "Fluids"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Usage note">
+This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+</Callout>
+
+## Problem / Objective
+
+In pipe and duct flow, velocity, diameter, viscosity, and roughness define the result together. Looking only at flow rate hides pressure loss and pump load.
+
+## Assumptions
+
+- Flow is treated as incompressible.
+- Fluid properties are selected at operating temperature.
+- Pipe or duct geometry is known.
+
+## Step by step method
+
+1. Calculate velocity from flow, diameter, and area.
+2. Use Reynolds number to identify flow regime.
+3. Select roughness and friction factor.
+4. Calculate loss with Darcy-Weisbach or a suitable method.
+5. Add elbow, valve, and entrance losses.
+
+## Common mistakes
+
+- Forgetting hydraulic diameter in duct calculations.
+- Skipping viscosity changes with temperature.
+- Calculating only straight pipe loss and missing local losses.
+
+## Related calculators
+
+- [Pipe Pressure Loss Calculator](/tools/pipe-pressure-loss)
+- [Hydraulic Cylinder Force and Speed](/tools/hydraulic-cylinder)
+- [Unit Converter](/tools/unit-converter)
+
+## Related glossary terms
+
+- [Reynolds number](/glossary/reynolds-number)
+- [Viscosity](/glossary/viscosity)
+
+## Quick FAQ
+
+### Question: What does Reynolds number do?
+
+It estimates whether flow behaves as laminar, transitional, or turbulent.
+
+### Question: What is hydraulic diameter?
+
+It represents non-circular ducts with an equivalent flow diameter.
+
+### Question: Why does pressure loss increase?
+
+Pressure loss rises with velocity, length, roughness, and local resistances.

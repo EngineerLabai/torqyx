@@ -1,4 +1,4 @@
-import BeltLengthClient from "./Client";
+﻿import BeltLengthClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function BeltLengthPage() {
   const initialDocs = await getToolDocsResponse("belt-length", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Pulley Belt Length
-      </h1>
-
       <ToolSeo toolId="belt-length" locale={locale} />
       <BeltLengthClient initialDocs={initialDocs} />
     </>

@@ -1,4 +1,4 @@
-import HeatTreatmentClient from "./Client";
+﻿import HeatTreatmentClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function HeatTreatmentPage() {
   const initialDocs = await getToolDocsResponse("heat-treatment", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Heat Treatment Guide
-      </h1>
-
       <ToolSeo toolId="heat-treatment" locale={locale} />
       <HeatTreatmentClient initialDocs={initialDocs} />
     </>

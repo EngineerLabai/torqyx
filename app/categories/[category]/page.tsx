@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   const titleBase = locale === "tr" ? `${label} kategorisi` : `${label} category`;
   const description =
     locale === "tr"
-      ? `${label} kategorisine ait blog, rehber ve hesaplayici listesi.`
-      : `Blog posts, guides, and calculators listed under ${label}.`;
+      ? `${label} kategorisine ait blog, rehber, sözlük terimi ve hesaplayıcı listesi.`
+      : `Blog posts, guides, glossary terms, and calculators listed under ${label}.`;
   const hasTr = trCategories.some((entry) => entry.slug === categorySlug);
   const hasEn = enCategories.some((entry) => entry.slug === categorySlug);
   const alternatesLanguages = hasTr && hasEn ? buildLanguageAlternates(`/categories/${categorySlug}`) : null;
@@ -63,9 +63,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const locale = await getLocaleFromCookies();
   const { category: categoryParam } = await params;
   const categorySlug = decodeURIComponent(categoryParam);
-  const [blog, guides, categories] = await Promise.all([
+  const [blog, guides, glossary, categories] = await Promise.all([
     getContentList("blog", { locale }),
     getContentList("guides", { locale }),
+    getContentList("glossary", { locale }),
     getCategoryIndex(locale),
   ]);
   const copy = getMessages(locale).pages.categories;
@@ -74,11 +75,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const blogMatches = blog.filter((item) => matchesSlug(item.category, categorySlug));
   const guideMatches = guides.filter((item) => matchesSlug(item.category, categorySlug));
+  const glossaryMatches = glossary.filter((item) => matchesSlug(item.category, categorySlug));
   const toolMatches = toolCatalog.filter((tool) => (tool.category ? matchesSlug(tool.category, categorySlug) : false));
 
   const relatedTags = Array.from(
     new Set(
-      [...blogMatches, ...guideMatches]
+      [...blogMatches, ...guideMatches, ...glossaryMatches]
         .flatMap((item) => item.tags)
         .concat(toolMatches.flatMap((tool) => tool.tags ?? []))
         .map((tag) => slugify(tag))
@@ -125,6 +127,26 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           copy={copy}
           items={guideMatches.map((item) => ({
             href: withLocalePrefix(`/guides/${item.slug}`, locale),
+            title: item.title,
+            description: item.description,
+            category: item.category,
+            date: formatDate(item.date, locale),
+            readingTime: formatMessage(copy.readingTimeShort, { count: item.readingTimeMinutes }),
+            tags: item.tags,
+          }))}
+          locale={locale}
+        />
+
+        <ContentSection
+          title={locale === "tr" ? "Sözlük" : "Glossary"}
+          description={
+            locale === "tr"
+              ? "Bu kategorideki teknik terimler ve mühendislik tanımları."
+              : "Technical terms and engineering definitions in this category."
+          }
+          copy={copy}
+          items={glossaryMatches.map((item) => ({
+            href: withLocalePrefix(`/glossary/${item.slug}`, locale),
             title: item.title,
             description: item.description,
             category: item.category,

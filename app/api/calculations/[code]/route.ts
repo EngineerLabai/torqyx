@@ -1,17 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { apiError } from "@/utils/api-response";
+
+export const runtime = "nodejs";
+
+const isValidShareCode = (value: string) => /^[0-9a-z]{6}$/i.test(value);
 
 export async function GET(
-  request: NextRequest,
-  context: { params: Promise<{ code: string }> }
+  _request: NextRequest,
+  context: { params: Promise<{ code: string }> },
 ) {
   try {
     const session = await auth();
     const { code } = await context.params;
 
+    if (!isValidShareCode(code)) {
+      return apiError("invalid_code", 400);
+    }
+
     const sharedCalculation = await prisma.sharedCalculation.findUnique({
-      where: { code },
+      where: { code: code.toLowerCase() },
       include: {
         user: {
           select: {
@@ -23,34 +32,41 @@ export async function GET(
     });
 
     if (!sharedCalculation) {
-      return NextResponse.json({ error: "Share not found" }, { status: 404 });
+      return apiError("share_not_found", 404);
     }
 
-    // Süre kontrolü
     if (sharedCalculation.expiresAt && sharedCalculation.expiresAt < new Date()) {
-      return NextResponse.json({ error: "Share expired" }, { status: 410 });
+      return apiError("share_expired", 410);
     }
 
-    // Sadece public paylaşımlar veya sahibi erişebilir
     const isOwner = session?.user?.id === sharedCalculation.userId;
-
     if (!sharedCalculation.isPublic && !isOwner) {
-      return NextResponse.json({ error: "Access denied" }, { status: 403 });
+      return apiError("access_denied", 403);
     }
 
-    return NextResponse.json({
-      toolSlug: sharedCalculation.toolSlug,
-      inputs: sharedCalculation.inputs,
-      outputs: sharedCalculation.outputs,
-      createdAt: sharedCalculation.createdAt.toISOString(),
-      expiresAt: sharedCalculation.expiresAt?.toISOString(),
-      user: sharedCalculation.user ? {
-        name: sharedCalculation.user.name,
-        isPremium: sharedCalculation.user.tier === "PRO" || sharedCalculation.user.tier === "TEAM",
-      } : null,
-    });
+    return NextResponse.json(
+      {
+        ok: true,
+        toolSlug: sharedCalculation.toolSlug,
+        inputs: sharedCalculation.inputs,
+        outputs: sharedCalculation.outputs,
+        createdAt: sharedCalculation.createdAt.toISOString(),
+        expiresAt: sharedCalculation.expiresAt?.toISOString(),
+        user: sharedCalculation.user
+          ? {
+              name: sharedCalculation.user.name,
+              isPremium: sharedCalculation.user.tier === "PRO" || sharedCalculation.user.tier === "TEAM",
+            }
+          : null,
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      },
+    );
   } catch (error) {
     console.error("Share retrieval error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return apiError("share_unavailable", 500);
   }
 }

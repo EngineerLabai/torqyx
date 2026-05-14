@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { auth } from "@/auth";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { generateShareCode, calculateExpiration, buildShortShareUrl } from "@/utils/share-code";
-import { z } from "zod";
+import { apiError, zodIssueDetails } from "@/utils/api-response";
+
+export const runtime = "nodejs";
 
 const createShareSchema = z.object({
-  toolSlug: z.string(),
+  toolSlug: z.string().trim().min(1).max(160).regex(/^[a-z0-9/_-]+$/i),
   inputs: z.record(z.string(), z.unknown()),
   outputs: z.record(z.string(), z.unknown()).optional(),
   isPublic: z.boolean().default(false),
@@ -31,40 +34,56 @@ const parseInputJsonValue = (value: unknown): Prisma.InputJsonValue | null => {
 };
 
 export async function POST(request: NextRequest) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return apiError("unauthorized", 401);
+  }
+
+  let rawPayload: unknown;
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    rawPayload = await request.json();
+  } catch {
+    return apiError("invalid_json", 400);
+  }
 
-    const body = await request.json();
-    const parsedBody = createShareSchema.parse(body);
-    const toolSlug = parsedBody.toolSlug;
-    const inputs = parseInputJsonValue(parsedBody.inputs) as Prisma.InputJsonValue;
-    const outputs = parsedBody.outputs ? (parseInputJsonValue(parsedBody.outputs) as Prisma.InputJsonValue) : undefined;
-    const isPublic = parsedBody.isPublic;
+  const parsed = createShareSchema.safeParse(rawPayload);
+  if (!parsed.success) {
+    return apiError("invalid_payload", 400, {
+      details: zodIssueDetails(parsed.error),
+    });
+  }
 
-    // Kullanıcı tier'ını kontrol et
+  let inputs: Prisma.InputJsonValue;
+  let outputs: Prisma.InputJsonValue | undefined;
+  try {
+    inputs = parseInputJsonValue(parsed.data.inputs) as Prisma.InputJsonValue;
+    outputs = parsed.data.outputs ? (parseInputJsonValue(parsed.data.outputs) as Prisma.InputJsonValue) : undefined;
+  } catch {
+    return apiError("invalid_json_value", 400, {
+      message: "Payload must contain JSON-serializable values only.",
+    });
+  }
+
+  try {
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
       select: { tier: true },
     });
 
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return apiError("user_not_found", 404);
     }
 
     const isPremium = user.tier === "PRO" || user.tier === "TEAM";
     const expiresAt = calculateExpiration(isPremium);
 
-    // Benzersiz kod üret
     let code: string;
     let attempts = 0;
     do {
       code = generateShareCode();
-      attempts++;
+      attempts += 1;
       if (attempts > 10) {
-        return NextResponse.json({ error: "Failed to generate unique code" }, { status: 500 });
+        return apiError("share_code_unavailable", 500);
       }
     } while (
       await prisma.sharedCalculation.findUnique({
@@ -72,29 +91,33 @@ export async function POST(request: NextRequest) {
       })
     );
 
-    // Veritabanına kaydet
     await prisma.sharedCalculation.create({
       data: {
         code,
         userId: session.user.id,
-        toolSlug,
+        toolSlug: parsed.data.toolSlug,
         inputs,
         outputs,
-        isPublic,
+        isPublic: parsed.data.isPublic,
         expiresAt,
       },
     });
 
-    return NextResponse.json({
-      code,
-      url: buildShortShareUrl(code, request.nextUrl.origin),
-      expiresAt: expiresAt?.toISOString(),
-    });
+    return NextResponse.json(
+      {
+        ok: true,
+        code,
+        url: buildShortShareUrl(code, request.nextUrl.origin),
+        expiresAt: expiresAt?.toISOString(),
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      },
+    );
   } catch (error) {
     console.error("Share creation error:", error);
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: "Invalid input", details: error.issues }, { status: 400 });
-    }
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return apiError("share_unavailable", 500);
   }
 }

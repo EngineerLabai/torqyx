@@ -3,10 +3,12 @@ import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
+import ActionCard from "@/components/ui/ActionCard";
 import { extractToc, getContentBySlug, getContentLocaleAvailability, getContentSlugs } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
+import { getRelatedForGuide } from "@/utils/related-items";
 import { buildLanguageAlternates, buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -16,8 +18,47 @@ const formatDate = (value: string, locale: "tr" | "en") =>
     new Date(value),
   );
 
+const stripMdxText = (value: string) =>
+  value
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[`*_>#-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const extractFaqItems = (content: string) => {
+  const lines = content.split(/\r?\n/);
+  const items: Array<{ question: string; answer: string }> = [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const match = /^###\s+(?:Soru|Question)\s*:\s*(.+)$/i.exec(lines[index].trim());
+    if (!match) continue;
+
+    const answerLines: string[] = [];
+    for (let answerIndex = index + 1; answerIndex < lines.length; answerIndex += 1) {
+      const line = lines[answerIndex];
+      if (/^#{2,4}\s+/.test(line.trim())) break;
+      if (line.trim()) answerLines.push(line);
+    }
+
+    const question = stripMdxText(match[1]);
+    const answer = stripMdxText(answerLines.join(" "));
+    if (question && answer) {
+      items.push({ question, answer });
+    }
+  }
+
+  return items.slice(0, 5);
+};
+
 type GuidePageProps = {
   params: Promise<{ slug: string }>;
+};
+
+const buildGuideSeoTitle = (title: string, locale: "tr" | "en") => {
+  const hasGuideWord = /rehber|guide/i.test(title);
+  if (hasGuideWord) return title;
+  return locale === "tr" ? `${title} Rehberi` : `${title} Guide`;
 };
 
 export async function generateStaticParams() {
@@ -50,7 +91,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
   }
 
   return buildPageMetadata({
-    title: guide.title,
+    title: buildGuideSeoTitle(guide.title, locale),
     description: guide.description,
     path: `/guides/${guide.slug}`,
     locale,
@@ -94,6 +135,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const canonical = buildLocalizedCanonical(`/guides/${guide.slug}`, locale);
   const logoUrl = new URL("/images/logo.png", SITE_URL).toString();
   const listHref = withLocalePrefix("/guides", locale);
+  const related = await getRelatedForGuide(guide, { locale });
   const articleJsonLd = {
     "@type": "TechArticle",
     headline: guide.title,
@@ -144,9 +186,24 @@ export default async function GuidePage({ params }: GuidePageProps) {
       },
     ],
   };
+  const faqItems = extractFaqItems(guide.content);
+  const faqJsonLd =
+    faqItems.length > 0
+      ? {
+          "@type": "FAQPage",
+          mainEntity: faqItems.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }
+      : null;
   const guideJsonLd = {
     "@context": "https://schema.org",
-    "@graph": [articleJsonLd, breadcrumbJsonLd],
+    "@graph": [articleJsonLd, breadcrumbJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])],
   };
 
   const toc = extractToc(guide.content);
@@ -200,9 +257,106 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
           <div className="order-2 space-y-6 mdx-content lg:order-1">
             <MDXRenderer source={guide.content} locale={locale} />
+            <GuideRelatedLinks related={related} locale={locale} />
           </div>
         </div>
       </article>
     </PageShell>
+  );
+}
+
+function GuideRelatedLinks({
+  related,
+  locale,
+}: {
+  related: Awaited<ReturnType<typeof getRelatedForGuide>>;
+  locale: "tr" | "en";
+}) {
+  const hasLinks = related.guides.length > 0 || related.glossary.length > 0 || related.tools.length > 0;
+  if (!hasLinks) return null;
+
+  const copy =
+    locale === "tr"
+      ? {
+          heading: "İlgili mühendislik bağlantıları",
+          description: "Bu rehberle aynı kavramları kullanan hesaplayıcılar, terimler ve tamamlayıcı rehberler.",
+          tools: "Hesaplayıcılar",
+          guides: "Rehberler",
+          glossary: "Sözlük",
+          openTool: "Hesaplayıcıyı aç",
+          read: "Oku",
+        }
+      : {
+          heading: "Related engineering links",
+          description: "Calculators, terms, and companion guides that share the same engineering concepts.",
+          tools: "Calculators",
+          guides: "Guides",
+          glossary: "Glossary",
+          openTool: "Open calculator",
+          read: "Read",
+        };
+
+  return (
+    <section className="border-t border-slate-200 pt-6">
+      <div className="space-y-2">
+        <h2 className="text-xl font-semibold text-slate-900">{copy.heading}</h2>
+        <p className="text-sm leading-relaxed text-slate-600">{copy.description}</p>
+      </div>
+
+      {related.tools.length > 0 ? (
+        <div className="mt-5 space-y-3">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.tools}</h3>
+          <div className="grid gap-3 md:grid-cols-2">
+            {related.tools.map((tool) => (
+              <ActionCard
+                key={tool.id}
+                title={tool.title}
+                description={tool.description}
+                href={tool.href}
+                badge={tool.category}
+                toolId={tool.id}
+                ctaLabel={copy.openTool}
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {related.guides.length > 0 ? (
+        <div className="mt-5 space-y-3">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.guides}</h3>
+          <div className="grid gap-3 md:grid-cols-2">
+            {related.guides.map((item) => (
+              <ActionCard
+                key={item.slug}
+                title={item.title}
+                description={item.description}
+                href={`/guides/${item.slug}`}
+                badge={item.category}
+                ctaLabel={copy.read}
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {related.glossary.length > 0 ? (
+        <div className="mt-5 space-y-3">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.glossary}</h3>
+          <div className="grid gap-3 md:grid-cols-2">
+            {related.glossary.map((item) => (
+              <ActionCard
+                key={item.slug}
+                title={item.title}
+                description={item.description}
+                href={`/glossary/${item.slug}`}
+                badge={item.category}
+                ctaLabel={copy.read}
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </section>
   );
 }

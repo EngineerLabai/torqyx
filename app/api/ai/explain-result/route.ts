@@ -124,7 +124,7 @@ export async function POST(request: Request) {
       {
         error: "rate_limited",
         message:
-          "Free summary limit reached. Upgrade to premium for unlimited AI explanations or try again after the daily quota resets.",
+          "Free summary limit reached. Upgrade to premium for unlimited explanations or try again after the daily quota resets.",
       },
       {
         status: 429,
@@ -174,7 +174,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error: "internal_error",
-        message: "AI explanation service is temporarily unavailable.",
+        message: "Explanation service is temporarily unavailable.",
       },
       { status: 500 },
     );

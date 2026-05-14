@@ -71,7 +71,7 @@ export default function ReportActions<T>({
   reportRootRef,
   copy,
 }: ReportActionsProps<T>) {
-  const storageKey = useMemo(() => `aielab:quality:${toolKey}:saved`, [toolKey]);
+  const storageKey = useMemo(() => `torqyx:quality:${toolKey}:saved`, [toolKey]);
   const { locale } = useLocale();
   const pathname = usePathname() ?? "/";
   const pdfGate = useFeatureGate("pdf_export");
@@ -145,7 +145,7 @@ export default function ReportActions<T>({
 
   function exportSavedJson(entry: SavedReport<T>) {
     const titlePart = safePart(entry.title) || "report";
-    const filename = `AI-Engineers-Lab_${safePart(toolKey) || "quality"}_${titlePart}.json`;
+    const filename = `TORQYX_${safePart(toolKey) || "quality"}_${titlePart}.json`;
     downloadJsonFile(filename, entry);
   }
 

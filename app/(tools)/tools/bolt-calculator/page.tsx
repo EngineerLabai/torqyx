@@ -1,4 +1,4 @@
-import ToolPageClient from "@/components/tools/ToolPageClient";
+﻿import ToolPageClient from "@/components/tools/ToolPageClient";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function BoltCalculatorPage() {
   const initialDocs = await getToolDocsResponse("bolt-calculator", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Bolt Size Calculation — ISO 898
-      </h1>
-
       <ToolSeo toolId="bolt-calculator" locale={locale} />
       <ToolPageClient toolId="bolt-calculator" initialDocs={initialDocs} />
     </>

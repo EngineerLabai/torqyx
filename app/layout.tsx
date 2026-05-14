@@ -1,7 +1,6 @@
 import AdSense from "@/components/ads/AdSense";
 ﻿﻿﻿﻿// app/layout.tsx
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import type { ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "@/components/auth/AuthProvider";
@@ -19,31 +18,21 @@ import { getBrandCopy } from "@/config/brand";
 import { listPublicImagePaths } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
-import { CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
+import { CANONICAL_SITE_URL, IS_INDEXING_ENABLED, SITE_URL, buildOgImageUrl } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
 import { Toaster } from "@/components/ui/toaster";
 import { UnitSystemProvider } from "@/contexts/UnitSystemContext";
 import "../styles/globals.css";
 import "katex/dist/katex.min.css";
 
-const isVercelAppHost = (host: string) => {
-  const normalized = host.toLowerCase().trim().replace(/:\d+$/, "");
-  return normalized === "vercel.app" || normalized.endsWith(".vercel.app");
-};
-
 const DEFAULT_SITE_TITLE = "TORQYX";
 const DEFAULT_SITE_DESCRIPTION =
   "ISO/DIN/VDI referanslı, standart temelli mekanik mühendislik hesaplayıcıları. Tahmin değil, deterministik sonuç.";
 const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar. 500+ mühendis kullanıyor.";
-const DEFAULT_OG_IMAGE = "/og-image.png";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const requestHeaders = await headers();
-  const requestHost = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "";
-  const hasVercelEnvUrl = isVercelAppHost(process.env.VERCEL_URL ?? "");
-  const shouldNoIndex = isVercelAppHost(requestHost) || (!requestHost && hasVercelEnvUrl);
 
   const base = buildPageMetadata({
     title: brandContent.siteName,
@@ -53,6 +42,12 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       siteName: brandContent.siteName,
     },
+  });
+  const defaultOgImage = buildOgImageUrl({
+    title: DEFAULT_SITE_TITLE,
+    description: brandContent.tagline,
+    locale,
+    path: "/",
   });
 
   return {
@@ -67,13 +62,13 @@ export async function generateMetadata(): Promise<Metadata> {
       ...(base.openGraph ?? {}),
       type: "website",
       locale: locale === "tr" ? "tr_TR" : "en_US",
-      url: CANONICAL_SITE_URL,
+      url: base.openGraph?.url ?? CANONICAL_SITE_URL,
       siteName: "TORQYX",
       title: DEFAULT_SITE_TITLE,
       description: brandContent.tagline || DEFAULT_OG_DESCRIPTION,
       images: [
         {
-          url: DEFAULT_OG_IMAGE,
+          url: defaultOgImage,
           width: 1200,
           height: 630,
           alt: "TORQYX — Mühendislik Hesaplayıcıları",
@@ -85,7 +80,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: DEFAULT_SITE_TITLE,
       description: "ISO/DIN/VDI referanslı mekanik hesaplayıcılar.",
-      images: [DEFAULT_OG_IMAGE],
+      images: [defaultOgImage],
     },
     icons: {
       icon: [
@@ -98,11 +93,15 @@ export async function generateMetadata(): Promise<Metadata> {
       other: [{ rel: "mask-icon", url: "/favicon.ico" }],
     },
     manifest: "/site.webmanifest",
-    ...(shouldNoIndex
+    ...(!IS_INDEXING_ENABLED
       ? {
           robots: {
             index: false,
             follow: false,
+            googleBot: {
+              index: false,
+              follow: false,
+            },
           },
         }
       : {}),
@@ -140,7 +139,7 @@ async function getWebsiteJsonLd() {
         },
         potentialAction: {
           "@type": "SearchAction",
-          target: `${SITE_URL}/blog?q={search_term_string}`,
+          target: `${SITE_URL}/tools?q={search_term_string}`,
           "query-input": "required name=search_term_string",
         },
       },

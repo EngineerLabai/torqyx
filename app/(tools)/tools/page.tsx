@@ -45,9 +45,8 @@ export default async function ToolsIndexPage({ searchParams }: ToolsIndexPagePro
         eyebrow={copy.badge}
         imageSrc={heroImage}
         imageAlt="Torqyx Engineering - Tool Library"
+        priority
       />
-
-      <h1 className="sr-only">Engineering Calculators</h1>
 
       <ToolLibraryLazy locale={locale} searchParams={resolvedSearchParams} />
     </PageShell>

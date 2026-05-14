@@ -22,28 +22,32 @@ const upsertEntry = (map: Map<string, TaxonomyEntry>, label: string) => {
 };
 
 export const getTagIndex = async (locale: Locale) => {
-  const [blog, guides] = await Promise.all([
+  const [blog, guides, glossary] = await Promise.all([
     getContentList("blog", { locale }),
     getContentList("guides", { locale }),
+    getContentList("glossary", { locale }),
   ]);
 
   const map = new Map<string, TaxonomyEntry>();
   blog.forEach((item) => item.tags.forEach((tag) => upsertEntry(map, tag)));
   guides.forEach((item) => item.tags.forEach((tag) => upsertEntry(map, tag)));
+  glossary.forEach((item) => item.tags.forEach((tag) => upsertEntry(map, tag)));
   toolCatalog.forEach((tool) => (tool.tags ?? []).forEach((tag) => upsertEntry(map, tag)));
 
   return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, locale === "en" ? "en-US" : "tr-TR"));
 };
 
 export const getCategoryIndex = async (locale: Locale) => {
-  const [blog, guides] = await Promise.all([
+  const [blog, guides, glossary] = await Promise.all([
     getContentList("blog", { locale }),
     getContentList("guides", { locale }),
+    getContentList("glossary", { locale }),
   ]);
 
   const map = new Map<string, TaxonomyEntry>();
   blog.forEach((item) => upsertEntry(map, item.category));
   guides.forEach((item) => upsertEntry(map, item.category));
+  glossary.forEach((item) => upsertEntry(map, item.category));
   toolCatalog.forEach((tool) => {
     if (tool.category) upsertEntry(map, tool.category);
   });

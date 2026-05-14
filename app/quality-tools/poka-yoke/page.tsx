@@ -76,7 +76,7 @@ const INITIAL_FORM: PokaYokeForm = {
 };
 
 const STATUS_OPTIONS: StatusOption[] = ["planned", "inProgress", "done"];
-const DRAFT_KEY = "aielab:quality:poka-yoke:draft";
+const DRAFT_KEY = "torqyx:quality:poka-yoke:draft";
 
 const DEMO_FORM: PokaYokeForm = {
   title: "Wrong Orientation Assembly Prevention",

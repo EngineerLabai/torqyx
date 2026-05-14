@@ -41,10 +41,6 @@ export default async function StandardsLandingPage() {
       />
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Standards Reference
-      </h1>
-
         <div className="space-y-2">
           <h2 className="text-lg font-semibold text-slate-900">{copy.categoriesTitle}</h2>
           <p className="text-sm text-slate-600">{copy.categoriesDescription}</p>

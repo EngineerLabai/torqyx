@@ -1,0 +1,62 @@
+---
+title: "Pompa türleri seçim rehberi"
+description: "Pozitif deplasmanlı ve turbo pompaları debi, basınç, viskozite ve servis koşullarına göre karşılaştırın."
+date: "2026-05-09"
+tags: ["pompa", "debi", "basınç", "viskozite"]
+category: "Akışkanlar"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Kullanım notu">
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+</Callout>
+
+## Problem / Amaç
+
+Pompa seçimi sadece hedef debiyi tutturmak değildir. Akışkan viskozitesi, basınç kaybı, kavitasyon riski ve kontrol yöntemi pompa tipini belirler.
+
+## Varsayımlar
+
+- Akışkan tek fazlı kabul edilir.
+- Boru hattı kayıpları yaklaşık olarak bilinir.
+- Sürekli çalışma noktası tasarım noktasına yakın tutulur.
+
+## Adım adım yöntem
+
+1. Debi ve basma yüksekliği ihtiyacını yaz.
+2. Akışkan viskozitesi ve sıcaklığını kontrol et.
+3. Pozitif deplasmanlı ve santrifüj seçenekleri karşılaştır.
+4. Kavitasyon ve NPSH payını incele.
+5. Kontrol vanası veya hız kontrol stratejisini belirle.
+
+## Sık hatalar
+
+- Pompayı sadece maksimum debiye göre seçmek.
+- Viskozite artışını motor gücüne yansıtmamak.
+- Emiş hattında kavitasyon riskini unutmak.
+
+## İlgili hesaplayıcılar
+
+- [Boru Basınç Kaybı Hesaplayıcı](/tools/pipe-pressure-loss)
+- [Hidrolik Silindir Kuvvet ve Hız](/tools/hydraulic-cylinder)
+- [Birim Dönüştürücü](/tools/unit-converter)
+
+## İlgili sözlük terimleri
+
+- [Viskozite](/glossary/viscosity)
+- [Reynolds sayısı](/glossary/reynolds-number)
+
+## Kısa FAQ
+
+### Soru: Santrifüj pompa ne zaman uygundur?
+
+Düşük-orta viskozite ve değişken debi ihtiyaçlarında genellikle iyi bir seçimdir.
+
+### Soru: Pozitif deplasmanlı pompa ne zaman seçilir?
+
+Yüksek viskozite, hassas dozaj veya yüksek basınç gerektiğinde avantaj sağlar.
+
+### Soru: Kavitasyon nasıl azaltılır?
+
+Emiş kayıpları azaltılır, NPSH payı artırılır ve pompa çalışma noktası doğru seçilir.

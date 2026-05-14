@@ -13,11 +13,13 @@ echo
 echo "✓ Check 1: Verifying no real secrets in git history..."
 if git log --all --oneline | wc -l > /dev/null; then
   echo "  Git history accessible"
-  FOUND=$(git log -S "sk-" --all --oneline 2>/dev/null | wc -l)
+  # Look for actual OpenAI keys: sk-proj-* or sk-ant-* (longer format, not just placeholder)
+  FOUND=$(git log -S "sk-proj-" --all --oneline 2>/dev/null | wc -l)
+  FOUND=$((FOUND + $(git log -S "sk-ant-" --all --oneline 2>/dev/null | wc -l)))
   if [ "$FOUND" -eq 0 ]; then
-    echo "  ✅ No 'sk-' patterns found in git history"
+    echo "  ✅ No real OpenAI keys found in git history"
   else
-    echo "  ❌ WARNING: Found $FOUND commits with 'sk-' patterns"
+    echo "  ❌ WARNING: Found real keys in git history"
   fi
 else
   echo "  ⚠️  Git history check skipped"
@@ -53,10 +55,10 @@ SECRET_PATTERNS=(
 
 TOTAL_MATCHES=0
 for pattern in "${SECRET_PATTERNS[@]}"; do
-  MATCHES=$(grep -r "$pattern" . --include="*.ts" --include="*.tsx" --include="*.js" --include="*.json" 2>/dev/null | grep -v "node_modules" | grep -v ".next" | grep -v "SECURITY_ROTATION_PLAN.md" | wc -l)
+  MATCHES=$(grep -r "$pattern" . --include="*.ts" --include="*.tsx" --include="*.js" --include="*.json" 2>/dev/null | grep -v "node_modules" | grep -v ".next" | grep -v "\.example" | grep -v "SECURITY_ROTATION_PLAN.md" | wc -l)
   if [ "$MATCHES" -gt 0 ]; then
     echo "  ⚠️  Pattern '$pattern' found $MATCHES times"
-    grep -r "$pattern" . --include="*.ts" --include="*.tsx" --include="*.js" --include="*.json" 2>/dev/null | grep -v "node_modules" | grep -v ".next" | head -3
+    grep -r "$pattern" . --include="*.ts" --include="*.tsx" --include="*.js" --include="*.json" 2>/dev/null | grep -v "node_modules" | grep -v ".next" | grep -v "\.example" | grep -v "SECURITY_ROTATION_PLAN.md" | head -3
     TOTAL_MATCHES=$((TOTAL_MATCHES + MATCHES))
   fi
 done

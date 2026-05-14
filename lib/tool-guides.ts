@@ -168,7 +168,7 @@ Step-by-step flow:
 3. Apply the core equation in sequence.
 4. Validate the output range and boundary conditions.
 
-Visual flow (placeholder):
+Decision flow:
 
 \`\`\`text
 Input -> Unit Check -> Formula -> Validation -> Decision
@@ -176,7 +176,7 @@ Input -> Unit Check -> Formula -> Validation -> Decision
 
 ## Worked Example
 
-Use a realistic sample input set and walk through each step to verify intermediate values before final output.
+Start with the calculator defaults, change one input at a time, and compare the intermediate values against the displayed assumptions before accepting the final output.
 
 ## Common Mistakes
 
@@ -207,7 +207,7 @@ Adim adim akis:
 3. Ana formul adimlarini sirayla uygula.
 4. Sonucu sinir kosullari ve mantik kontrolu ile dogrula.
 
-Gorsel akis (placeholder):
+Karar akisi:
 
 \`\`\`text
 Girdi -> Birim Kontrol -> Formul -> Dogrulama -> Karar
@@ -215,7 +215,7 @@ Girdi -> Birim Kontrol -> Formul -> Dogrulama -> Karar
 
 ## Ornek Cozum
 
-Gerçekci bir deger seti ile ara adimlari gostererek nihai sonucu hesapla.
+Hesaplayici varsayilan girdileriyle basla, her seferinde tek bir girdiyi degistir ve nihai sonucu kabul etmeden once ara degerleri varsayimlarla karsilastir.
 
 ## Sik Yapilan Hatalar
 
@@ -376,4 +376,3 @@ export const getToolGuideBySlug = async ({
 
 export const toToolSlugFromPathParts = (parts: string[]) =>
   normalizePathToken(parts.filter(Boolean).join("/"));
-

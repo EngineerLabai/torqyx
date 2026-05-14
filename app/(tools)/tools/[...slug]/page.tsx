@@ -20,7 +20,7 @@ import { decodeToolState } from "@/utils/tool-share";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { buildPageMetadata } from "@/utils/metadata";
-import { buildCanonical, buildLanguageAlternates, buildLocalizedCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
+import { buildLanguageAlternates, buildLocalizedCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
 import { toolRegistry, type ToolChartConfig } from "@/tools/registry";
 import { toolCatalog, getToolCopy } from "@/tools/_shared/catalog";
 import { getToolPageTool } from "@/tools/tool-page-tools";
@@ -181,7 +181,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? `${toolTitle} için mühendislik hesaplayıcıları içeriğini, girdileri ve sonuç yorumlarını teknik açıklamalarla sunan araç sayfası.`
       : `${toolTitle} tool page for engineering calculators, presenting inputs, outputs, and technical interpretation guidance in one workflow.`;
 
-  const canonicalUrl = buildCanonical(path) ?? `${CANONICAL_SITE_URL}${path}`;
+  const canonicalUrl = buildLocalizedCanonical(path, locale) ?? `${CANONICAL_SITE_URL}${path}`;
 
   return buildPageMetadata({
     title,

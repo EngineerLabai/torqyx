@@ -1,0 +1,62 @@
+---
+title: "Standart birim sistemi rehberi"
+description: "SI, metrik ve imperial birimleri karıştırmadan hesap yapmak için temel dönüşüm ve dokümantasyon kontrol listesi."
+date: "2026-05-09"
+tags: ["birim dönüşümü", "SI", "ISO", "standart"]
+category: "Standartlar"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Kullanım notu">
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+</Callout>
+
+## Problem / Amaç
+
+Birim hataları doğru formülü yanlış sonuca çevirebilir. Özellikle basınç, moment, enerji ve kesit alanı hesaplarında birim seti baştan kilitlenmelidir.
+
+## Varsayımlar
+
+- Ana hesap sistemi SI olarak seçilir.
+- Tedarikçi verisi farklı birimde gelirse kaynak birim not edilir.
+- Rapor çıktısında giriş ve sonuç birimleri birlikte gösterilir.
+
+## Adım adım yöntem
+
+1. Proje ana birimini belirle.
+2. Gelen veriyi kaynak birimiyle birlikte kaydet.
+3. Dönüşümü hesap öncesinde yap ve yuvarlama seviyesini yaz.
+4. Sonuçları aynı birim ailesinde raporla.
+5. Kritik değerler için ters dönüşümle hızlı kontrol yap.
+
+## Sık hatalar
+
+- N/mm2 ile MPa eşdeğerliğini unutmak.
+- mm ve m birimlerini aynı formülde karıştırmak.
+- Torkta N m ile N mm arasındaki 1000 katsayısını atlamak.
+
+## İlgili hesaplayıcılar
+
+- [Birim Dönüştürücü](/tools/unit-converter)
+- [Hızlı Referans Merkezi](/reference)
+- [Boru Basınç Kaybı Hesaplayıcı](/tools/pipe-pressure-loss)
+
+## İlgili sözlük terimleri
+
+- [Gerilme](/glossary/stress)
+- [Tork](/glossary/torque)
+
+## Kısa FAQ
+
+### Soru: N/mm2 ile MPa aynı mı?
+
+Evet, 1 N/mm2 değeri 1 MPa değerine eşittir.
+
+### Soru: Ana birim sistemi nasıl seçilir?
+
+Ekip, tedarikçi ve standart gereksinimine göre seçilir; mekanik hesaplarda SI tabanı en güvenli başlangıçtır.
+
+### Soru: Yuvarlama ne zaman yapılmalı?
+
+Ara adımlarda ham değer korunmalı, raporda anlamlı basamakla yuvarlanmalıdır.

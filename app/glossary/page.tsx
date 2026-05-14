@@ -1,12 +1,14 @@
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
+import { buildLocalizedCanonical } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
@@ -16,12 +18,20 @@ const formatDate = (value: string, locale: "tr" | "en") =>
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
-  const copy = getMessages(locale).pages.glossary;
   const brandContent = getBrandCopy(locale);
+  const termCount = (await getContentList("glossary", { locale })).length;
+  const title =
+    locale === "tr"
+      ? "Mühendislik Sözlüğü - Teknik Terimler ve Tanımlar"
+      : "Engineering Glossary - Technical Terms and Definitions";
+  const description =
+    locale === "tr"
+      ? `${termCount} teknik terimi; tork, gerilme, tolerans, malzeme ve akışkanlar için kısa tanımlar ve mühendislik hesaplayıcılarıyla keşfedin.`
+      : `Explore ${termCount} technical terms for torque, stress, tolerances, materials, and fluids with concise definitions and engineering calculators.`;
 
   return buildPageMetadata({
-    title: `${copy.badge} | ${brandContent.siteName}`,
-    description: copy.description,
+    title: `${title} | ${brandContent.siteName}`,
+    description,
     path: "/glossary",
     locale,
   });
@@ -32,9 +42,62 @@ export default async function GlossaryIndexPage() {
   const copy = getMessages(locale).pages.glossary;
   const heroImage = getHeroImageSrc("glossary");
   const terms = await getContentList("glossary", { locale });
+  const glossaryUrl = buildLocalizedCanonical("/glossary", locale);
+  const glossaryJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "DefinedTermSet",
+        name: copy.title,
+        description: copy.description,
+        url: glossaryUrl,
+        inLanguage: locale === "tr" ? "tr-TR" : "en-US",
+        hasDefinedTerm: terms.slice(0, 50).map((term) => ({
+          "@type": "DefinedTerm",
+          name: term.title,
+          description: term.description,
+          url: buildLocalizedCanonical(`/glossary/${term.slug}`, locale),
+        })),
+      },
+      {
+        "@type": "CollectionPage",
+        name: copy.title,
+        description: copy.description,
+        url: glossaryUrl,
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: terms.length,
+          itemListElement: terms.slice(0, 50).map((term, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: term.title,
+            url: buildLocalizedCanonical(`/glossary/${term.slug}`, locale),
+          })),
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: locale === "tr" ? "Ana sayfa" : "Home",
+            item: buildLocalizedCanonical("/", locale),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: copy.badge,
+            item: glossaryUrl,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <PageShell>
+      <JsonLd data={glossaryJsonLd} />
       <PageHero
         title={copy.title}
         description={copy.description}
@@ -44,10 +107,6 @@ export default async function GlossaryIndexPage() {
       />
 
       <section className="grid gap-4">
-      <h1 className="text-3xl font-bold tracking-tight">
-        [Manual] Glossary
-      </h1>
-
         {terms.length === 0 ? (
           <div className="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600 shadow-sm">
             {copy.empty}

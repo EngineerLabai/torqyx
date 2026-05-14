@@ -8,7 +8,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY?.trim();
  */
 export const validateOpenAIApiKey = () => {
   if (!OPENAI_API_KEY) {
-    throw new Error("OPENAI_API_KEY environment variable is not set. The AI explanation feature will not be available.");
+    throw new Error("OPENAI_API_KEY environment variable is not set. The explanation feature will not be available.");
   }
 
   if (!OPENAI_API_KEY.startsWith("sk-")) {

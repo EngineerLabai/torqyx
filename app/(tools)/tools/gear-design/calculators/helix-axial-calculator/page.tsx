@@ -1,4 +1,4 @@
-import HelixAxialCalculatorClient from "./Client";
+﻿import HelixAxialCalculatorClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function HelixAxialCalculatorPage() {
   const initialDocs = await getToolDocsResponse("gear-design/calculators/helix-axial-calculator", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight no-underline border-0">
-        Gear Design Calculator – ISO 6336
-      </h1>
-
       <ToolSeo toolId="gear-design/calculators/helix-axial-calculator" locale={locale} />
       <HelixAxialCalculatorClient initialDocs={initialDocs} />
     </>

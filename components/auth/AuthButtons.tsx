@@ -12,12 +12,13 @@ type AuthButtonsProps = {
 };
 
 export default function AuthButtons({ copy }: AuthButtonsProps) {
-  const { user, loading, available, error, loginWithGoogle, logout } = useAuth();
+  const { user, loading, available, error, loginWithGoogle, logout, clearError } = useAuth();
   const { locale } = useLocale();
   const { track } = useAnalytics();
   const premiumHref = withLocalePrefix("/pricing", locale);
 
   const handleLogin = () => {
+    clearError();
     track("signup_start", { source: "cta" });
     void loginWithGoogle();
   };
@@ -45,23 +46,30 @@ export default function AuthButtons({ copy }: AuthButtonsProps) {
 
   if (!user) {
     return (
-      <div className="flex items-center gap-2 md:gap-3">
-        <button
-          type="button"
-          onClick={handleLogin}
-          className="tap-target inline-flex items-center justify-center whitespace-nowrap text-[13px] font-medium text-gray-700 transition-colors hover:text-gray-900"
-        >
-          {copy.login}
-        </button>
-        <Link
-          onClick={handleUpgradeClick}
-          title={copy.premiumTooltip}
-          aria-label={`${copy.premium}. ${copy.premiumTooltip}`}
-          className="tap-target inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3 py-1.5 text-[12px] font-medium text-white transition-colors hover:bg-blue-700 md:px-4 md:py-2 md:text-[13px]"
-          href={premiumHref}
-        >
-          {copy.premium}
-        </Link>
+      <div className="flex flex-col items-end gap-1">
+        <div className="flex items-center gap-2 md:gap-3">
+          <button
+            type="button"
+            onClick={handleLogin}
+            className="tap-target inline-flex items-center justify-center whitespace-nowrap text-[13px] font-medium text-gray-700 transition-colors hover:text-gray-900"
+          >
+            {copy.login}
+          </button>
+          <Link
+            onClick={handleUpgradeClick}
+            title={copy.premiumTooltip}
+            aria-label={`${copy.premium}. ${copy.premiumTooltip}`}
+            className="tap-target inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3 py-1.5 text-[12px] font-medium text-white transition-colors hover:bg-blue-700 md:px-4 md:py-2 md:text-[13px]"
+            href={premiumHref}
+          >
+            {copy.premium}
+          </Link>
+        </div>
+        {error ? (
+          <p className="max-w-56 text-right text-[11px] font-medium leading-snug text-rose-600">
+            {copy.errorTitle}
+          </p>
+        ) : null}
       </div>
     );
   }

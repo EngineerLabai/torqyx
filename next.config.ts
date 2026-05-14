@@ -38,11 +38,12 @@ const SHOULD_REDIRECT_VERCEL_APP = (() => {
 
 const cspReportOnlyPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  "script-src 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://*.firebaseio.com https://*.firebasestorage.googleapis.com wss://*.firebaseio.com",
+  "frame-src 'self' https://*.firebaseapp.com https://accounts.google.com",
   "frame-ancestors 'none'",
   "report-uri /api/csp-report",
 ].join("; ");
@@ -89,6 +90,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     webVitalsAttribution: ["LCP", "CLS", "INP"],
+    optimizePackageImports: ["lucide-react"],
   },
   async headers() {
     const existingGlobalHeaders: Array<{ key: string; value: string }> = [];
@@ -118,6 +120,18 @@ const nextConfig: NextConfig = {
       {
         source: "/sitemap.xml",
         headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
+      },
+      {
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+      },
+      {
+        source: "/og/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+      },
+      {
+        source: "/site.webmanifest",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
       },
     ];
   },

@@ -1,4 +1,4 @@
-import BendingStressClient from "./Client";
+﻿import BendingStressClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function BendingStressPage() {
   const initialDocs = await getToolDocsResponse("bending-stress", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Bending & Deflection — AISC
-      </h1>
-
       <ToolSeo toolId="bending-stress" locale={locale} />
       <BendingStressClient initialDocs={initialDocs} />
     </>

@@ -40,10 +40,6 @@ export default async function FaqPage() {
 
       {copy.categories.map((category) => (
         <section key={category.title} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-3xl font-bold tracking-tight">
-        FAQ
-      </h1>
-
           <h2 className="text-lg font-semibold text-slate-900">{category.title}</h2>
           <dl className="mt-4 grid gap-3">
             {category.items.map((item) => (

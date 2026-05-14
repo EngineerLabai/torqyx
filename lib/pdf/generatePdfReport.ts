@@ -3,10 +3,19 @@
 import jsPDF from "jspdf";
 import type { ReportData, User } from "./types";
 import { formatValueWithUnit } from "@/utils/units";
+import { SITE_URL } from "@/utils/seo";
+
+const SITE_HOST = (() => {
+  try {
+    return new URL(SITE_URL).host;
+  } catch {
+    return "aiengineerslab.com";
+  }
+})();
 
 const SITE_CONFIG = {
   name: "TORQYX",
-  url: "aiengineerslab.com",
+  url: SITE_HOST,
   logo: "TORQYX", // Text-based logo for now
 };
 

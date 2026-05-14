@@ -5,6 +5,7 @@ import {
   CONSENT_COOKIE,
   CONSENT_CHANGE_EVENT,
   CONSENT_PREFS_KEY,
+  CONSENT_PREFS_OPEN_EVENT,
   CONSENT_STORAGE_KEY,
   readConsentPrefs,
   readConsentStatus,
@@ -100,6 +101,20 @@ export default function ConsentBanner({ copy }: ConsentBannerProps) {
       lastFocusedRef.current?.focus();
     };
   }, [prefsOpen]);
+
+  useEffect(() => {
+    const handleOpenPreferences = () => {
+      const status = readConsentStatus();
+      setPrefs(resolveConsentPrefs(status, readConsentPrefs()));
+      setBannerVisible(false);
+      setPrefsOpen(true);
+    };
+
+    window.addEventListener(CONSENT_PREFS_OPEN_EVENT, handleOpenPreferences);
+    return () => {
+      window.removeEventListener(CONSENT_PREFS_OPEN_EVENT, handleOpenPreferences);
+    };
+  }, []);
 
   const persistConsent = (status: ConsentStatus, nextPrefs: ConsentPrefs) => {
     try {
@@ -221,29 +236,29 @@ export default function ConsentBanner({ copy }: ConsentBannerProps) {
 
       {bannerVisible ? (
         <div className="fixed inset-x-0 bottom-4 z-40 px-4">
-          <div className="mx-auto flex max-w-4xl flex-col gap-4 rounded-3xl border border-slate-200 bg-white/95 p-5 shadow-lg backdrop-blur sm:flex-row sm:items-center sm:justify-between">
-            <div className="space-y-2">
-              <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
-              <p className="text-xs text-slate-600 sm:text-sm">{copy.description}</p>
+          <div className="mx-auto flex max-w-4xl flex-col gap-3 rounded-2xl border border-slate-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
+              <h2 className="inline-block text-sm font-semibold text-slate-900">{copy.title}</h2>
+              <p className="sr-only">{copy.description}</p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="grid grid-cols-3 items-center gap-2 sm:flex sm:flex-wrap">
               <button
                 type="button"
-                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900"
+                className="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900"
                 onClick={handleReject}
               >
                 {copy.reject}
               </button>
               <button
                 type="button"
-                className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-100"
+                className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-100"
                 onClick={() => setPrefsOpen(true)}
               >
                 {copy.preferences}
               </button>
               <button
                 type="button"
-                className="rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-500"
+                className="rounded-full bg-emerald-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-500"
                 onClick={handleAccept}
               >
                 {copy.accept}
@@ -267,6 +282,7 @@ type ConsentToggleProps = {
 
 function ConsentToggle({ label, description, checked, onChange, locked = false, helper }: ConsentToggleProps) {
   const id = `consent-${label.replace(/\s+/g, "-").toLowerCase()}`;
+  const descriptionId = `${id}-description`;
   return (
     <label
       htmlFor={id}
@@ -283,7 +299,7 @@ function ConsentToggle({ label, description, checked, onChange, locked = false, 
             </span>
           ) : null}
         </div>
-        <p className="text-xs text-slate-600">{description}</p>
+        <p id={descriptionId} className="text-xs text-slate-600">{description}</p>
       </div>
       <span className="relative inline-flex h-6 w-11 items-center">
         <input
@@ -294,7 +310,9 @@ function ConsentToggle({ label, description, checked, onChange, locked = false, 
           disabled={locked}
           onChange={(event) => onChange?.(event.target.checked)}
           aria-checked={checked}
-         aria-label={id}/>
+          aria-label={label}
+          aria-describedby={descriptionId}
+        />
         <span className="absolute h-6 w-11 rounded-full bg-slate-200 transition peer-checked:bg-emerald-500 peer-disabled:bg-slate-300" />
         <span className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition peer-checked:translate-x-5 peer-disabled:bg-slate-100" />
       </span>

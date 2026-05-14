@@ -1,0 +1,63 @@
+---
+title: "Machine element life, S-N curve, and fatigue guide"
+description: "Set up a fatigue approach for shafts, bolts, welds, and bearings under repeated loading."
+date: "2026-05-09"
+tags: ["fatigue", "S-N curve", "life", "machine elements"]
+category: "Machine Elements"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Usage note">
+This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+</Callout>
+
+## Problem / Objective
+
+A part may look safe under static load and still crack under repeated load. Fatigue analysis combines load cycle, stress range, and notch effect.
+
+## Assumptions
+
+- Load cycle and mean stress are approximately known.
+- Material S-N data is available.
+- Surface, size, and notch effects are handled with correction factors.
+
+## Step by step method
+
+1. Define load cycle and stress range.
+2. Select material fatigue data.
+3. Add notch, surface, and size corrections.
+4. Evaluate fatigue safety factor separately.
+5. Write inspection or test plan for the critical area.
+
+## Common mistakes
+
+- Assuming static safety factor is enough for fatigue.
+- Forgetting notch effect at weld toes.
+- Treating surface roughness as independent from fatigue strength.
+
+## Related calculators
+
+- [Shaft Torsion Calculator](/tools/shaft-torsion)
+- [Bearing Life Calculator](/tools/bearing-life)
+- [Fillet Weld Sizing Calculator](/tools/fillet-weld)
+
+## Related glossary terms
+
+- [Fatigue](/glossary/fatigue)
+- [Stress](/glossary/stress)
+- [Factor of safety](/glossary/factor-of-safety)
+
+## Quick FAQ
+
+### Question: What is fatigue?
+
+It is failure by crack initiation and growth under repeated loading.
+
+### Question: What does an S-N curve show?
+
+It shows the relation between stress level and cycle life.
+
+### Question: Where is fatigue usually critical?
+
+Notches, section changes, weld toes, and surface defects are common critical regions.

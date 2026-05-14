@@ -82,26 +82,40 @@ export default function CommunityWaitlistForm({ copy }: CommunityWaitlistFormPro
       <label className="space-y-1">
         <span className="block text-[11px] font-semibold text-slate-700">{copy.emailLabel}</span>
         <input
+          id="community-email"
           type="email"
           value={email}
           onChange={(event) => handleEmailChange(event.target.value)}
           placeholder={copy.emailPlaceholder}
           className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
           aria-invalid={Boolean(error)}
+          aria-required="true"
+          aria-describedby={error ? "community-email-error" : undefined}
           required
-         aria-label={copy.emailPlaceholder}/>
-        {error ? <span className="text-[10px] text-red-600">{error}</span> : null}
+          aria-label={copy.emailPlaceholder}
+        />
+        {error ? (
+          <span
+            id="community-email-error"
+            className="block text-[10px] text-red-600"
+            role="alert"
+          >
+            {error}
+          </span>
+        ) : null}
       </label>
 
       <label className="space-y-1">
         <span className="block text-[11px] font-semibold text-slate-700">{copy.focusLabel}</span>
         <input
+          id="community-focus"
           type="text"
           value={focus}
           onChange={(event) => handleFocusChange(event.target.value)}
           placeholder={copy.focusPlaceholder}
           className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
-         aria-label={copy.focusPlaceholder}/>
+          aria-label={copy.focusPlaceholder}
+        />
       </label>
 
       <div className="flex flex-wrap items-center gap-3">

@@ -30,7 +30,7 @@ type Filter = {
   priority: "all" | ProjectPriority;
 };
 
-const STORAGE_KEY = "aiengineerslab-projects-v1";
+const STORAGE_KEY = "torqyx-projects-v1";
 
 export default function ProjectToolsPage() {
   const [projects, setProjects] = useState<Project[]>([]);

@@ -120,6 +120,12 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-[radial-gradient(circle_at_15%_10%,rgba(16,185,129,0.08),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.08),transparent_35%)]">
+      <a
+        href="#main-content"
+        className="sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:not-sr-only focus:rounded-lg focus:bg-slate-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:outline-none focus:ring-2 focus:ring-emerald-300"
+      >
+        {locale === "tr" ? "İçeriğe geç" : "Skip to content"}
+      </a>
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute -left-[8%] -top-[12%] h-[420px] w-[420px] rounded-full bg-emerald-300/40 blur-[120px]" />
         <div className="absolute -bottom-[18%] -right-[12%] h-[520px] w-[520px] rounded-full bg-sky-300/35 blur-[140px]" />
@@ -252,11 +258,13 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
       <TrialEndingBanner />
 
       {isHome ? (
-        children
+        <main id="main-content" className="w-full flex-1">
+          {children}
+        </main>
       ) : (
-        <main className="w-full flex-1">
+        <main id="main-content" className="w-full flex-1">
           <div className="site-container flex w-full min-w-0 flex-col gap-6 py-6 lg:flex-row">
-            <aside className="min-w-0 lg:w-56 lg:shrink-0 xl:w-64">
+            <aside className="hidden min-w-0 lg:block lg:w-56 lg:shrink-0 xl:w-64">
               <div className="sticky top-4 space-y-3 text-xs">
                 {sidebarSections.map((section) => (
                   <SidebarSectionCard key={section.label} section={section} />
@@ -320,7 +328,7 @@ function MegaMenuItem({ section }: { section: NavSection }) {
         aria-expanded="false"
       >
         {section.label}
-        <span className="text-[10px] text-slate-400">v</span>
+        <span aria-hidden="true" className="text-[10px] text-slate-400">v</span>
       </button>
       <div className="pointer-events-none absolute left-0 top-full z-[60] w-[360px] pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
         <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-lg ring-1 ring-slate-100">

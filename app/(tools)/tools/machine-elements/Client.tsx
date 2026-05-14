@@ -298,7 +298,7 @@ function ComponentGallery() {
                 alt={component.name}
                 fill
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
             <div className="p-3">
@@ -345,4 +345,3 @@ function ResultRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-

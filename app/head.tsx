@@ -5,7 +5,6 @@ import { SITE_URL } from "@/utils/seo";
 
 const brandCopy = getBrandCopy("en");
 const pricingUrl = new URL("/pricing", SITE_URL).toString();
-const HOME_LCP_IMAGE = "/images/hero-banner.webp";
 
 const offers: OfferSchema[] = [
   {
@@ -29,7 +28,6 @@ const offers: OfferSchema[] = [
 export default function Head() {
   return (
     <>
-      <link rel="preload" as="image" href={HOME_LCP_IMAGE} fetchPriority="high" />
       <SoftwareApplicationJsonLd
         id="platform-software-application-jsonld"
         data={{

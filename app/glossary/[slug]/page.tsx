@@ -11,8 +11,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
+import { getRelatedForGlossaryTerm } from "@/utils/related-items";
 import { slugify } from "@/utils/slugify";
-import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import { withLocalePrefix } from "@/utils/locale-path";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
@@ -37,6 +37,12 @@ const extractFormulas = (content: string) => {
 
 type GlossaryPageProps = {
   params: Promise<{ slug: string }>;
+};
+
+const buildGlossarySeoTitle = (title: string, description: string) => {
+  const definitionLead = description.split(/[.!?]/)[0]?.trim();
+  if (!definitionLead) return title;
+  return `${title} - ${definitionLead}`;
 };
 
 export async function generateStaticParams() {
@@ -69,7 +75,7 @@ export async function generateMetadata({ params }: GlossaryPageProps) {
   }
 
   return buildPageMetadata({
-    title: term.title,
+    title: buildGlossarySeoTitle(term.title, term.description),
     description: term.description,
     path: `/glossary/${term.slug}`,
     locale,
@@ -154,18 +160,17 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
     ],
   };
 
-  const [blog, guides] = await Promise.all([
+  const [blog, related] = await Promise.all([
     getContentList("blog", { locale }),
-    getContentList("guides", { locale }),
+    getRelatedForGlossaryTerm(term, { locale }),
   ]);
 
   const tagSlugs = new Set(term.tags.map((tag) => slugify(tag)));
   const relatedBlog = blog.filter((item) => item.tags.some((tag) => tagSlugs.has(slugify(tag)))).slice(0, 4);
-  const relatedGuides = guides.filter((item) => item.tags.some((tag) => tagSlugs.has(slugify(tag)))).slice(0, 4);
-  const relatedTools = toolCatalog
-    .filter((tool) => (tool.tags ?? []).some((tag) => tagSlugs.has(slugify(tag))))
-    .slice(0, 4)
-    .map((tool) => ({ tool, copy: getToolCopy(tool, locale) }));
+  const relatedGuides = related.guides;
+  const relatedTools = related.tools;
+  const relatedTerms = related.glossary;
+  const relatedTermsTitle = locale === "tr" ? "İlgili terimler" : "Related terms";
 
   const formulas = extractFormulas(term.content);
 
@@ -236,9 +241,27 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
               <p className="mt-1 text-xs text-slate-600">{copy.relatedDescription}</p>
             </div>
 
-            {relatedBlog.length === 0 && relatedGuides.length === 0 && relatedTools.length === 0 ? (
+            {relatedBlog.length === 0 && relatedGuides.length === 0 && relatedTools.length === 0 && relatedTerms.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4 text-sm text-slate-500">
                 {copy.relatedEmpty}
+              </div>
+            ) : null}
+
+            {relatedTerms.length > 0 ? (
+              <div className="space-y-3">
+                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{relatedTermsTitle}</h4>
+                <div className="space-y-3">
+                  {relatedTerms.map((item) => (
+                    <ActionCard
+                      key={item.slug}
+                      title={item.title}
+                      description={item.description}
+                      href={withLocalePrefix(`/glossary/${item.slug}`, locale)}
+                      badge={item.category}
+                      ctaLabel={copy.readCta}
+                    />
+                  ))}
+                </div>
               </div>
             ) : null}
 
@@ -282,11 +305,11 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
               <div className="space-y-3">
                 <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{copy.relatedTools}</h4>
                 <div className="space-y-3">
-                  {relatedTools.map(({ tool, copy: toolCopy }) => (
+                  {relatedTools.map((tool) => (
                     <ActionCard
                       key={tool.id}
-                      title={toolCopy.title}
-                      description={toolCopy.description}
+                      title={tool.title}
+                      description={tool.description}
                       href={withLocalePrefix(tool.href, locale)}
                       badge={tool.category}
                       toolId={tool.id}

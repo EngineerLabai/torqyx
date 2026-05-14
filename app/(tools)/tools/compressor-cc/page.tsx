@@ -1,4 +1,4 @@
-import CompressorCcClient from "./Client";
+﻿import CompressorCcClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -19,10 +19,6 @@ export default async function CompressorCcPage() {
   }
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Compressor CC Calculator
-      </h1>
-
       <ToolSeo toolId="compressor-cc" locale={locale} />
       <CompressorCcClient initialDocs={initialDocs} />
     </>

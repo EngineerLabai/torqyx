@@ -185,6 +185,7 @@ export default function SupportForm() {
             id="name"
             name="name"
             required
+            aria-required="true"
             value={form.name}
             onChange={handleChange("name")}
             className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
@@ -202,6 +203,7 @@ export default function SupportForm() {
             name="email"
             type="email"
             required
+            aria-required="true"
             value={form.email}
             onChange={handleChange("email")}
             className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
@@ -221,6 +223,7 @@ export default function SupportForm() {
           name="message"
           rows={4}
           required
+          aria-required="true"
           value={form.message}
           onChange={handleChange("message")}
           className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
@@ -242,20 +245,29 @@ export default function SupportForm() {
           disabled={!canUploadFile || isBusy}
           className="block w-full text-sm text-slate-700 file:mr-3 file:rounded-lg file:border-0 file:bg-emerald-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-emerald-500 disabled:opacity-60"
           aria-label="attachment"
+          aria-describedby="attachment-helper"
         />
-        <p className="text-[11px] text-slate-600">
+        <p id="attachment-helper" className="text-[11px] text-slate-600">
           {canUploadFile ? copy.fields.attachment.helper : copy.fields.attachment.unavailable}
         </p>
       </div>
 
       {status === "success" ? (
-        <p className="rounded-xl border border-emerald-200 bg-white px-3 py-2 text-xs text-emerald-700">
+        <p
+          role="status"
+          aria-live="polite"
+          className="rounded-xl border border-emerald-200 bg-white px-3 py-2 text-xs text-emerald-700"
+        >
           {copy.success}
         </p>
       ) : null}
 
       {status === "error" && errorMessage ? (
-        <p className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
+        <p
+          role="alert"
+          aria-live="assertive"
+          className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700"
+        >
           {errorMessage}
         </p>
       ) : null}

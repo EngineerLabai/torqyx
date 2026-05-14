@@ -1,0 +1,61 @@
+---
+title: "Döner ekipmanda dengeleme ve titreşim kontrolü"
+description: "Statik ve dinamik dengeleme, rezonans ve bakım izleme için mühendislik kontrol listesi."
+date: "2026-05-09"
+tags: ["titreşim", "rezonans", "denge", "bakım"]
+category: "Bakım"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Kullanım notu">
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+</Callout>
+
+## Problem / Amaç
+
+Dengesizlik, yatak ömrünü kısaltır ve bağlantı elemanlarında gevşeme oluşturabilir. Rezonans bölgesinde küçük kuvvetler büyük titreşim genliğine dönüşür.
+
+## Varsayımlar
+
+- Rotor çalışma hızı ve yatak düzeni bilinir.
+- Titreşim ölçümü tekrar edilebilir noktadan alınır.
+- Kritik hızlara yaklaşım servis koşulunda kontrol edilir.
+
+## Adım adım yöntem
+
+1. Nominal devir ve çalışma hız aralığını yaz.
+2. Statik mi dinamik mi dengeleme gerektiğini belirle.
+3. Ölçüm noktalarını ve kabul limitini tanımla.
+4. Rezonans riskini hız taramasıyla kontrol et.
+5. Bakım planına trend izleme ekle.
+
+## Sık hatalar
+
+- Tek düzlem dengelemenin her rotor için yeterli olduğunu sanmak.
+- Titreşim sensörünü farklı noktalarda karşılaştırmak.
+- Temel gevşekliğini rotor arızası sanmak.
+
+## İlgili hesaplayıcılar
+
+- [Rulman Ömrü Hesaplayıcı](/tools/bearing-life)
+- [Güç - Tork - Devir Hesaplayıcı](/tools/torque-power)
+- [Kalite Araçları](/quality-tools)
+
+## İlgili sözlük terimleri
+
+- [Yorulma](/glossary/fatigue)
+
+## Kısa FAQ
+
+### Soru: Statik dengeleme ne zaman yeterlidir?
+
+Dar ve düşük hız etkili rotorlar için yeterli olabilir.
+
+### Soru: Dinamik dengeleme ne sağlar?
+
+İki düzlem etkisini hesaba katarak uzun veya hızlı rotorları daha doğru dengeler.
+
+### Soru: Rezonans nasıl anlaşılır?
+
+Belirli hızda titreşim hızlı yükselir ve hız değişince düşer.

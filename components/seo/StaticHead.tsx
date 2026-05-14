@@ -1,5 +1,5 @@
 import type { Locale } from "@/utils/locale";
-import { DEFAULT_OG_IMAGE_META, buildCanonical, buildLanguageAlternates } from "@/utils/seo";
+import { DEFAULT_OG_IMAGE_META, buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
 
 type StaticHeadProps = {
   title: string;
@@ -9,7 +9,7 @@ type StaticHeadProps = {
 };
 
 export default function StaticHead({ title, description, path, locale }: StaticHeadProps) {
-  const canonical = buildCanonical(path) ?? path;
+  const canonical = buildLocalizedCanonical(path, locale);
   const alternates = buildLanguageAlternates(path);
 
   return (
@@ -17,8 +17,9 @@ export default function StaticHead({ title, description, path, locale }: StaticH
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
-      <link rel="alternate" hrefLang="tr" href={alternates.tr} />
-      <link rel="alternate" hrefLang="en" href={alternates.en} />
+      {Object.entries(alternates).map(([hrefLang, href]) => (
+        <link key={hrefLang} rel="alternate" hrefLang={hrefLang} href={href} />
+      ))}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />

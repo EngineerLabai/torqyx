@@ -53,7 +53,7 @@
     "premiumTooltip": "Premium araçlar yakında — şimdi kaydol, ilk sen haberdar ol",
     "userFallback": "Kullanıcı",
     "logout": "Çıkış",
-    "unavailable": "Auth şu an kullanılamıyor.",
+    "unavailable": "Kimlik doğrulama şu an kullanılamıyor.",
     "checking": "Giriş kontrol ediliyor...",
     "readOnlyFallback": "Şu an anonim moddasın - içerikleri okuyabilirsin.",
     "errorTitle": "Giriş kontrolünde hata",
@@ -843,14 +843,14 @@
     },
     "toleranceStackup": {
       "badges": { "primary": "Kalite ve Üretim", "secondary": "Tolerans Yığılma (RSS)" },
-      "header": { "title": "1D Tolerans Yığılma Analizi", "description": "Parçaların nominal ölçüleri ve toleransları ile En Kötü Senaryo (Worst-Case) ve İstatistiksel (RSS) tolerans yığılmasını hesaplayın." },
+      "header": { "title": "1D Tolerans Yığılma Analizi", "description": "Parçaların nominal ölçüleri ve toleransları ile en kötü durum ve istatistiksel (RSS) tolerans yığılmasını hesaplayın." },
       "inputs": { "title": "Parça Listesi", "addPart": "Parça Ekle", "partName": "Parça Adı", "nominal": "Nominal", "tolerance": "Tolerans (±)", "remove": "Sil" },
-      "results": { "title": "Analiz Sonuçları", "nominalSum": "Toplam Nominal Ölçü", "worstCase": "Worst-Case Toleransı (En Kötü Senaryo)", "rss": "RSS Toleransı (İstatistiksel)", "note": "RSS yöntemi parçaların normal dağılıma sahip olduğunu ve tolerans sınırlarının ±3σ'ya denk geldiğini varsayar." }
+      "results": { "title": "Analiz Sonuçları", "nominalSum": "Toplam Nominal Ölçü", "worstCase": "En kötü durum toleransı", "rss": "RSS toleransı (istatistiksel)", "note": "RSS yöntemi parçaların normal dağılıma sahip olduğunu ve tolerans sınırlarının ±3σ'ya denk geldiğini varsayar." }
     },
     "weldStrength": {
       "badges": { "primary": "Yapısal Analiz", "secondary": "Köşe Kaynağı (Fillet Weld)" },
       "header": { "title": "Kaynaklı Bağlantı Dayanımı", "description": "Basit köşe kaynağı (fillet weld) için doğrudan kesme kuvveti altındaki gerilme hesabı." },
-      "inputs": { "title": "Giriş Parametreleri", "force": "Uygulanan Yük F [kN]", "weldLength": "Toplam Kaynak Boyu L [mm]", "legSize": "Kaynak Kalınlığı (Leg Size) z [mm]" },
+      "inputs": { "title": "Giriş Parametreleri", "force": "Uygulanan Yük F [kN]", "weldLength": "Toplam Kaynak Boyu L [mm]", "legSize": "Kaynak bacak ölçüsü z [mm]" },
       "results": { "title": "Hesap Sonuçları", "throatSize": "Boğaz Kalınlığı a [mm]", "weldArea": "Efektif Kaynak Alanı A [mm²]", "shearStress": "Kesme Gerilmesi τ [MPa]", "note": "Gerilme değerini kaynak elektrodunun emniyetli kesme dayanımı ile (genellikle akma dayanımının %30-40'ı) karşılaştırın." }
     },
     "notFound": {
@@ -872,8 +872,8 @@
               "a": "Yayınlanmış formüllere dayanır; doğruluk girişler ve varsayımlara bağlıdır. Standartlarınızla doğrulayın."
             },
             {
-              "q": "Bu AI ne kadar güvenilir?",
-              "a": "AI katmanı serbest tahmin vermez; hesaplama motoru ISO, DIN ve VDI gibi standartlardan gelen deterministik formül ve tablo akışını çalıştırır. Asistan bölümü sadece girdi kontrolü, adım açıklama ve referans yönlendirme yapar; nihai doğrulama yine proje gereksinimleriniz ve sorumlu mühendis kararıdır."
+              "q": "Hesap motoru nasıl çalışır?",
+              "a": "Hesap motoru serbest tahmin üretmez; ISO, DIN ve VDI gibi kaynaklardan türetilen formül ve tablo akışlarını deterministik olarak çalıştırır. Girdi kontrolü, adım açıklamaları ve referans notları karar desteği sağlar; nihai doğrulama proje gereksinimleri ve sorumlu mühendis kararına bağlıdır."
             },
             {
               "q": "Varsayılan değerler gerçek mi?",
@@ -1047,7 +1047,7 @@
         "features": [
           "Gelişmiş rapor şablonları ve marka alanı",
           "Ekip çalışma alanları ve paylaşılan projeler",
-          "Project Hub ve kalite araçları için premium çıktılar",
+          "Proje merkezi ve kalite araçları için gelişmiş çıktılar",
           "Kayıtlı profiller, şablonlar ve geçmiş",
           "Öncelikli destek ve erken erişim"
         ],
@@ -1127,7 +1127,7 @@
       "realtimeBadge": "Gerçek zamanlı",
       "demoBadge": "Demo modu",
       "authChecking": "Giriş kontrol ediliyor...",
-      "authUnavailable": "Auth şu an kullanılamıyor",
+      "authUnavailable": "Kimlik doğrulama şu an kullanılamıyor",
       "login": "Google ile giriş yap",
       "loginPending": "Giriş yapılıyor...",
       "logout": "Çıkış yap",
@@ -1135,7 +1135,7 @@
       "placeholders": {
         "loading": "Bağlantı hazırlanıyor...",
         "demo": "Demo modunda yorum bırak...",
-        "authUnavailable": "Auth şu an kullanılamıyor.",
+        "authUnavailable": "Kimlik doğrulama şu an kullanılamıyor.",
         "signedIn": "Fikrini yaz...",
         "signedOut": "Yorum göndermek için giriş yap."
       },
@@ -1184,20 +1184,20 @@
     },
     "consent": {
       "title": "Çerez tercihleri",
-      "description": "Sitenin çalışması için gerekli çerezleri kullanıyoruz. İstersen analitik ve reklam çerezlerine izin verebilirsin.",
+    "description": "Sitenin çalışması için gerekli çerezleri kullanıyoruz. Analitik ve reklam çerezleri yalnızca açık rızanla etkinleşir.",
       "accept": "Kabul et",
       "reject": "Reddet",
       "preferences": "Tercihler",
       "preferencesTitle": "Çerez tercihleri",
-      "preferencesDescription": "Hangi çerez kategorilerini etkinleştirmek istediğini seç.",
+    "preferencesDescription": "Zorunlu çerezler hizmetin çalışması için açık kalır; analitik ve reklam kategorileri açık rızana bağlıdır.",
       "save": "Tercihleri kaydet",
       "close": "Kapat",
       "necessaryLabel": "Gerekli",
-      "necessaryDescription": "Temel işlevler için zorunlu.",
+    "necessaryDescription": "Dil, güvenlik, oturum ve tercih yönetimi gibi temel işlevler için zorunludur.",
       "analyticsLabel": "Analitik",
-      "analyticsDescription": "Kullanımı anlamamıza ve deneyimi iyileştirmemize yardımcı olur.",
+    "analyticsDescription": "Kullanımı ölçmemize ve deneyimi iyileştirmemize yardımcı olur; yalnızca izin verirsen etkinleşir.",
       "advertisingLabel": "Reklam",
-      "advertisingDescription": "İlgili reklamlar ve performans ölçümü için kullanılır.",
+    "advertisingDescription": "Reklam gösterimi, kişiselleştirme ve performans ölçümü için kullanılır; yalnızca izin verirsen etkinleşir.",
       "alwaysOn": "Her zaman açık"
     },
     "toolLibrary": {

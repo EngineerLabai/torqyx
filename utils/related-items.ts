@@ -168,3 +168,101 @@ export const getRelatedForTool = async (
     glossary: takeTop(relatedGlossary, glossaryLimit),
   };
 };
+
+export const getRelatedForGuide = async (
+  guide: ContentListItem,
+  options: { guideLimit?: number; glossaryLimit?: number; toolLimit?: number; locale?: Locale } = {},
+) => {
+  const locale = options.locale ?? "tr";
+  const [guides, glossary] = await Promise.all([
+    getContentList("guides", { locale }),
+    getContentList("glossary", { locale }),
+  ]);
+
+  const base: RelatedBase = {
+    title: guide.title,
+    tags: guide.tags,
+    category: guide.category,
+  };
+
+  const guideLimit = options.guideLimit ?? 3;
+  const glossaryLimit = options.glossaryLimit ?? 4;
+  const toolLimit = options.toolLimit ?? 4;
+
+  const relatedGuides = rankRelatedItems(
+    base,
+    guides.filter((item) => item.slug !== guide.slug),
+    locale,
+  );
+  const relatedGlossary = rankRelatedItems(base, glossary, locale);
+  const relatedTools = rankRelatedItems(
+    base,
+    toolCatalog.map((tool) => {
+      const copy = getToolCopy(tool, locale);
+      return {
+        title: copy.title,
+        description: copy.description,
+        category: tool.category,
+        tags: tool.tags ?? [],
+        href: tool.href,
+        id: tool.id,
+      };
+    }),
+    locale,
+  );
+
+  return {
+    guides: takeTop(relatedGuides, guideLimit),
+    glossary: takeTop(relatedGlossary, glossaryLimit),
+    tools: takeTop(relatedTools, toolLimit),
+  };
+};
+
+export const getRelatedForGlossaryTerm = async (
+  term: ContentListItem,
+  options: { glossaryLimit?: number; guideLimit?: number; toolLimit?: number; locale?: Locale } = {},
+) => {
+  const locale = options.locale ?? "tr";
+  const [glossary, guides] = await Promise.all([
+    getContentList("glossary", { locale }),
+    getContentList("guides", { locale }),
+  ]);
+
+  const base: RelatedBase = {
+    title: term.title,
+    tags: term.tags,
+    category: term.category,
+  };
+
+  const glossaryLimit = options.glossaryLimit ?? 4;
+  const guideLimit = options.guideLimit ?? 4;
+  const toolLimit = options.toolLimit ?? 4;
+
+  const relatedGlossary = rankRelatedItems(
+    base,
+    glossary.filter((item) => item.slug !== term.slug),
+    locale,
+  );
+  const relatedGuides = rankRelatedItems(base, guides, locale);
+  const relatedTools = rankRelatedItems(
+    base,
+    toolCatalog.map((tool) => {
+      const copy = getToolCopy(tool, locale);
+      return {
+        title: copy.title,
+        description: copy.description,
+        category: tool.category,
+        tags: tool.tags ?? [],
+        href: tool.href,
+        id: tool.id,
+      };
+    }),
+    locale,
+  );
+
+  return {
+    glossary: takeTop(relatedGlossary, glossaryLimit),
+    guides: takeTop(relatedGuides, guideLimit),
+    tools: takeTop(relatedTools, toolLimit),
+  };
+};

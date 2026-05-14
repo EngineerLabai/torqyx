@@ -25,8 +25,8 @@ export const runtime = "nodejs";
 const MODE: ToolSummaryMode = "tool_summary";
 
 const fallbackMessageByLocale = {
-  tr: "AI şu an kullanılamıyor.",
-  en: "AI temporarily unavailable.",
+  tr: "Açıklama hizmeti şu an kullanılamıyor.",
+  en: "Explanation service is temporarily unavailable.",
 } as const;
 
 const mapValidationError = (error: z.ZodError) =>

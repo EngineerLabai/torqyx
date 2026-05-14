@@ -1,4 +1,4 @@
-import HeatEnergyClient from "./Client";
+﻿import HeatEnergyClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function HeatEnergyPage() {
   const initialDocs = await getToolDocsResponse("heat-energy", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Heat Transfer & Energy — ASHRAE
-      </h1>
-
       <ToolSeo toolId="heat-energy" locale={locale} />
       <HeatEnergyClient initialDocs={initialDocs} />
     </>

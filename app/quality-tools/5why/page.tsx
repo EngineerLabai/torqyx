@@ -65,7 +65,7 @@ const DEMO_FORM: FiveWhyForm = {
   ],
 };
 
-const DRAFT_KEY = "aielab:quality:5why:draft";
+const DRAFT_KEY = "torqyx:quality:5why:draft";
 
 export default function FiveWhyPage() {
   const { locale } = useLocale();

@@ -70,10 +70,6 @@ export default async function PricingPage() {
       </PageHero>
 
       <section className="grid gap-4 lg:grid-cols-2">
-      <h1 className="text-3xl font-bold tracking-tight">
-        [Manual] Pricing
-      </h1>
-
         <PlanCard
           title={copy.free.title}
           subtitle={copy.free.subtitle}

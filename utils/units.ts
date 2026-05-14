@@ -1,4 +1,4 @@
-// Unit conversion utilities for aiengineerslab
+// Unit conversion utilities for TORQYX
 // All internal calculations use SI units, conversions are for display only
 
 export type UnitSystem = 'SI' | 'Imperial' | 'Mixed';

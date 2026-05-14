@@ -1,0 +1,62 @@
+---
+title: "Akışkan dinamiği temelleri: boru ve kanal akışı"
+description: "Laminer ve türbülanslı akış, Reynolds sayısı, hidrolik çap ve basınç kaybı için hızlı başlangıç rehberi."
+date: "2026-05-09"
+tags: ["akışkanlar", "Reynolds", "basınç kaybı", "boru"]
+category: "Akışkanlar"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Kullanım notu">
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+</Callout>
+
+## Problem / Amaç
+
+Boru ve kanal akışında hız, çap, viskozite ve pürüzlülük birlikte sonucu belirler. Sadece debiye bakmak basınç kaybını ve pompa yükünü eksik gösterir.
+
+## Varsayımlar
+
+- Akış sıkıştırılamaz kabul edilir.
+- Akışkan özellikleri çalışma sıcaklığına göre seçilir.
+- Boru veya kanal geometrisi bilinir.
+
+## Adım adım yöntem
+
+1. Debi, çap ve kesit alanından hızı hesapla.
+2. Reynolds sayısıyla akış rejimini belirle.
+3. Pürüzlülük ve sürtünme katsayısını seç.
+4. Darcy-Weisbach veya uygun yöntemle kaybı hesapla.
+5. Dirsek, vana ve giriş kayıplarını ekle.
+
+## Sık hatalar
+
+- Hidrolik çapı kanal hesabında unutmak.
+- Sıcaklık değişince viskozitenin değiştiğini atlamak.
+- Sadece düz boru kaybını hesaplayıp lokal kayıpları eklememek.
+
+## İlgili hesaplayıcılar
+
+- [Boru Basınç Kaybı Hesaplayıcı](/tools/pipe-pressure-loss)
+- [Hidrolik Silindir Kuvvet ve Hız](/tools/hydraulic-cylinder)
+- [Birim Dönüştürücü](/tools/unit-converter)
+
+## İlgili sözlük terimleri
+
+- [Reynolds sayısı](/glossary/reynolds-number)
+- [Viskozite](/glossary/viscosity)
+
+## Kısa FAQ
+
+### Soru: Reynolds sayısı ne işe yarar?
+
+Akışın laminer, geçiş veya türbülanslı davranacağını tahmin eder.
+
+### Soru: Hidrolik çap nedir?
+
+Dairesel olmayan kanalları eşdeğer akış çapıyla temsil etmeye yarar.
+
+### Soru: Basınç kaybı neden artar?
+
+Hız, uzunluk, pürüzlülük ve lokal dirençler arttıkça basınç kaybı yükselir.

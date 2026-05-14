@@ -303,13 +303,13 @@ export const buildFallbackToolSummaryResponse = (
 ): ToolSummaryResponse => {
   if (locale === "tr") {
     return {
-      summaryMd: "AI şu an kullanılamıyor.",
+      summaryMd: "Açıklama hizmeti şu an kullanılamıyor.",
       assumptions: [
         "Sadece gönderilen deterministik araç çıktıları esas alınmalıdır.",
         `Araç bağlamı: ${toolName}`,
       ],
       warnings: [
-        "AI sağlayıcısı geçici olarak yanıt veremedi veya kota sınırına ulaşıldı.",
+        "Açıklama hizmeti geçici olarak yanıt veremedi veya kota sınırına ulaşıldı.",
         STANDARD_REFUSAL_BY_LOCALE.tr,
         SAFETY_REFUSAL_BY_LOCALE.tr,
       ],
@@ -322,13 +322,13 @@ export const buildFallbackToolSummaryResponse = (
   }
 
   return {
-    summaryMd: "AI temporarily unavailable.",
+    summaryMd: "Explanation service is temporarily unavailable.",
     assumptions: [
       "Only provided deterministic tool outputs should be considered.",
       `Tool context: ${toolName}`,
     ],
     warnings: [
-      "The AI provider is temporarily unavailable or quota has been reached.",
+      "The explanation service is temporarily unavailable or quota has been reached.",
       STANDARD_REFUSAL_BY_LOCALE.en,
       SAFETY_REFUSAL_BY_LOCALE.en,
     ],

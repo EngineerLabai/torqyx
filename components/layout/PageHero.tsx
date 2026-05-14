@@ -13,6 +13,7 @@ type PageHeroProps = {
   subtitle?: string;
   children?: ReactNode;
   priority?: boolean;
+  unoptimized?: boolean;
 };
 
 export default function PageHero({
@@ -24,6 +25,7 @@ export default function PageHero({
   subtitle,
   children,
   priority = false,
+  unoptimized = false,
 }: PageHeroProps) {
   if (!imageSrc) {
     return null;
@@ -65,6 +67,7 @@ export default function PageHero({
               placeholder="blur"
               blurDataURL={BLUR_DATA_URL}
               priority={priority}
+              unoptimized={unoptimized}
               fetchPriority={priority ? "high" : undefined}
               loading={priority ? undefined : "lazy"}
             />

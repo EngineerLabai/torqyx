@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-07T16:49:38.703Z",
+  "generatedAt": "2026-05-14T20:18:46.002Z",
   "summary": {
     "total": 101,
     "hasH1": 101,
@@ -403,7 +403,7 @@
       "file": "app/glossary/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "${copy.badge} | ${brandContent.siteName}",
+      "title": "${title} | ${brandContent.siteName}",
       "hasH1": true
     },
     {
@@ -417,7 +417,7 @@
       "file": "app/guides/page.tsx",
       "type": "tsx",
       "locale": "unknown",
-      "title": "${copy.badge} | ${brandContent.siteName}",
+      "title": "${title} | ${brandContent.siteName}",
       "hasH1": true
     },
     {

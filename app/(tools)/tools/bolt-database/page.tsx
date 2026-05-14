@@ -1,4 +1,4 @@
-import BoltDatabaseClient from "./Client";
+﻿import BoltDatabaseClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function BoltDatabasePage() {
   const initialDocs = await getToolDocsResponse("bolt-database", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Bolt Data Center
-      </h1>
-
       <ToolSeo toolId="bolt-database" locale={locale} />
       <BoltDatabaseClient initialDocs={initialDocs} />
     </>

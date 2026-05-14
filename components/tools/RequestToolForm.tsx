@@ -13,7 +13,7 @@ import {
   type ToolRequestEntry,
 } from "@/utils/tool-requests";
 
-const GITHUB_ISSUE_URL = "https://github.com/EngineerLabai/aiengineerslab/issues/new";
+const GITHUB_ISSUE_URL = "https://github.com/EngineerLabai/torqyx/issues/new";
 
 type FieldKey = keyof ToolRequestData;
 

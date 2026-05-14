@@ -21,7 +21,6 @@ import FormulaEditor from "@/components/sanity-check/FormulaEditor";
 import ResultPanel from "@/components/sanity-check/ResultPanel";
 import SanityCheckPanel from "@/components/sanity-check/SanityCheckPanel";
 import ClientErrorBoundary from "@/components/sanity-check/ClientErrorBoundary";
-import AISummaryPanel from "@/src/components/ai/AISummaryPanel";
 import ToolFavoriteButton from "@/components/tools/ToolFavoriteButtonLazy";
 import ToolDataActions from "@/components/tools/ToolDataActions";
 import AdvisorPanel from "@/src/components/tools/AdvisorPanel";
@@ -369,27 +368,6 @@ function SanityCheckLabContent() {
             reportUrl={reportUrl}
           />
 
-          {!result.error ? (
-            <AISummaryPanel
-              locale={locale}
-              toolId="sanity-check"
-              toolName={pageCopy.title}
-              inputs={{
-                formula: session.formula,
-                expectedUnit: session.expectedUnit ?? "",
-                variables: session.variables.map((variable) => ({
-                  symbol: variable.symbol,
-                  value: variable.value,
-                  unit: variable.unit ?? "",
-                })),
-              }}
-              outputs={{
-                value: result.value,
-                unit: result.unit,
-                warnings: result.warnings.map((warning) => warning.type),
-              }}
-            />
-          ) : null}
           <AdvisorPanel insights={advisorInsights} />
 
           <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">

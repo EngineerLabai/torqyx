@@ -59,6 +59,15 @@ export default function LoginPanel({ copy, source = "cta" }: LoginPanelProps) {
   return (
     <div className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4 text-sm">
       <p className="text-slate-600">{copy.loginHint}</p>
+      {error ? (
+        <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700">
+          <p className="font-semibold">{copy.errorTitle}</p>
+          <p className="mt-1">
+            {copy.errorDescription}
+            {process.env.NODE_ENV !== "production" ? ` (${error})` : ""}
+          </p>
+        </div>
+      ) : null}
       <button
         type="button"
         onClick={loginWithGoogle}

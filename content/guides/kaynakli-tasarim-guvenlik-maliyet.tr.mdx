@@ -1,0 +1,63 @@
+---
+title: "Kaynaklı tasarımda güvenlik ve maliyet dengesi"
+description: "Köşe kaynak ve tam nüfuziyet kaynak seçiminde yük yolu, kalite kontrol, deformasyon ve maliyet etkilerini birlikte değerlendirin."
+date: "2026-05-09"
+tags: ["kaynak", "fillet weld", "maliyet", "kalite"]
+category: "İmalat"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Kullanım notu">
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+</Callout>
+
+## Problem / Amaç
+
+Kaynaklı tasarımda fazla güvenli görünen çözüm gereksiz maliyet ve deformasyon oluşturabilir; zayıf çözüm ise yorulma ve çatlak riski taşır.
+
+## Varsayımlar
+
+- Yük yolu ve kaynak erişimi bilinir.
+- Malzeme kaynaklanabilirliği kontrol edilir.
+- Kalite kontrol seviyesi uygulama kritikliğine göre seçilir.
+
+## Adım adım yöntem
+
+1. Yük yönünü ve etkin kaynak boyunu belirle.
+2. Köşe kaynak ve tam nüfuziyet seçeneklerini karşılaştır.
+3. Isı girdisi ve çarpılma riskini not et.
+4. Kontrol yöntemini ve kabul kriterini yaz.
+5. Maliyet etkisini kaynak boyu, hazırlık ve kontrol olarak ayır.
+
+## Sık hatalar
+
+- Kaynak boyunu tüm geometrik çevre sanmak.
+- Yorulma etkisini statik hesapla geçmek.
+- Kaynak sonrası deformasyon için fikstür planlamamak.
+
+## İlgili hesaplayıcılar
+
+- [Köşe Kaynak Boyutlandırma](/tools/fillet-weld)
+- [Eğilme ve Sehim Hesaplayıcı](/tools/bending-stress)
+- [Kalite Araçları](/quality-tools)
+
+## İlgili sözlük terimleri
+
+- [Gerilme](/glossary/stress)
+- [Yorulma](/glossary/fatigue)
+- [Güvenlik faktörü](/glossary/factor-of-safety)
+
+## Kısa FAQ
+
+### Soru: Köşe kaynak ne zaman yeterlidir?
+
+Yük seviyesi ve yorulma etkisi sınırlıysa, doğru boğaz kalınlığı ile yeterli olabilir.
+
+### Soru: Tam nüfuziyet kaynak her zaman daha iyi mi?
+
+Hayır. Daha yüksek kalite sağlayabilir ama hazırlık, kontrol ve deformasyon maliyeti artar.
+
+### Soru: Kaynakta en sık hata nedir?
+
+Etkin kaynak boyu ve yük yönünü gerçek montaj koşuluna göre kontrol etmemektir.

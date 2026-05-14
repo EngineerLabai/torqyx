@@ -1,4 +1,4 @@
-import ToolPageClient from "@/components/tools/ToolPageClient";
+﻿import ToolPageClient from "@/components/tools/ToolPageClient";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function BasicEngineeringPage() {
   const initialDocs = await getToolDocsResponse("basic-engineering", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Basic Heat Flow
-      </h1>
-
       <ToolSeo toolId="basic-engineering" locale={locale} />
       <ToolPageClient toolId="basic-engineering" initialDocs={initialDocs} />
     </>

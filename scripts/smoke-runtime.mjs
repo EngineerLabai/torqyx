@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import { spawn } from "node:child_process";
-import { XMLParser } from "fast-xml-parser";
 
 const port = process.env.SMOKE_PORT || "4020";
 const base = process.env.SMOKE_BASE_URL || `http://127.0.0.1:${port}`;
@@ -45,17 +44,27 @@ async function stopServer(server) {
   });
 }
 
+function decodeXmlEntity(value) {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+function extractSitemapUrls(xml) {
+  return Array.from(xml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/gi))
+    .map((match) => decodeXmlEntity(match[1].trim()))
+    .filter(Boolean);
+}
+
 async function crawlSitemap() {
   const sitemapResp = await fetch(`${base}/sitemap.xml`);
   if (!sitemapResp.ok) throw new Error(`sitemap status ${sitemapResp.status}`);
 
   const xml = await sitemapResp.text();
-  const parser = new XMLParser();
-  const parsed = parser.parse(xml);
-  const urlsRaw = parsed?.urlset?.url ?? [];
-  const urls = (Array.isArray(urlsRaw) ? urlsRaw : [urlsRaw])
-    .map((item) => item.loc)
-    .filter(Boolean)
+  const urls = extractSitemapUrls(xml)
     .map((loc) => {
       const url = new URL(loc);
       return `${base}${url.pathname}${url.search}`;

@@ -96,4 +96,14 @@ Notes:
 
 ## Deploy
 
-The easiest way to deploy is Vercel: https://vercel.com/new
+Use the launch checklist before enabling indexing on the production domain:
+
+```bash
+npm run check:secrets
+npm run check:encoding
+npm run lint
+npm test
+npm run build
+```
+
+See `docs/deployment-readiness.md` for the `.com` environment variables, robots/sitemap checks, and runtime smoke flow.

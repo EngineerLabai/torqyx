@@ -3,7 +3,7 @@ import type { WebApplicationSchemaInput } from "@/types/structured-data";
 import type { Locale } from "@/utils/locale";
 import { getBrandCopy } from "@/config/brand";
 import { buildPageMetadata } from "@/utils/metadata";
-import { buildCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
+import { buildLocalizedCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
 import { getToolCopy, toolCatalog, type ToolCatalogItem } from "@/tools/_shared/catalog";
 import { buildHowToSchema, type ToolConfig } from "@/utils/howto-schema";
 import { getToolPageTool } from "@/tools/tool-page-tools";
@@ -56,14 +56,55 @@ const buildFeatureList = (tool: ToolCatalogItem | null) => {
   return Array.from(features);
 };
 
+const hasCalculatorWord = (value: string, locale: Locale) => {
+  const normalized = value.toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US");
+  return locale === "tr"
+    ? /hesap|hesaplayıcı|kalkülatör/.test(normalized)
+    : /calculator|calculation|converter|selector|sizing/.test(normalized);
+};
+
+const buildSeoTitle = (tool: ToolCatalogItem | null, name: string, brandName: string, locale: Locale) => {
+  if (!tool) return brandName;
+
+  if (tool.type === "guide") {
+    const guideWord = locale === "tr" ? "Rehberi" : "Guide";
+    return name.toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US").includes(guideWord.toLocaleLowerCase())
+      ? name
+      : `${name} ${guideWord}`;
+  }
+
+  if (tool.type === "bundle") {
+    return locale === "tr" ? `${name} Araçları` : `${name} Tools`;
+  }
+
+  if (hasCalculatorWord(name, locale)) return name;
+  return locale === "tr" ? `${name} Hesaplayıcı` : `${name} Calculator`;
+};
+
+const buildSeoDescription = (
+  tool: ToolCatalogItem | null,
+  description: string,
+  brandTagline: string,
+  locale: Locale,
+) => {
+  if (!tool) return brandTagline;
+
+  const support =
+    locale === "tr"
+      ? " Formüller, birim kontrolü ve ilgili mühendislik hesaplayıcılarıyla hızlı sonuç alın."
+      : " Get fast results with formulas, unit checks, and related engineering calculators.";
+
+  return `${description.replace(/\s+/g, " ").trim()}${support}`;
+};
+
 export const buildToolSeo = (toolKey: string, locale: Locale): ToolSeoPayload => {
   const { tool, path } = resolveTool(toolKey);
   const brand = getBrandCopy(locale);
 
   const toolCopy = tool ? getToolCopy(tool, locale) : null;
-  const title = toolCopy?.title ? `${toolCopy.title} | ${brand.siteName}` : brand.siteName;
-  const description = toolCopy?.description ?? brand.tagline;
-  const canonical = buildCanonical(path);
+  const title = buildSeoTitle(tool, toolCopy?.title ?? brand.siteName, brand.siteName, locale);
+  const description = buildSeoDescription(tool, toolCopy?.description ?? brand.tagline, brand.tagline, locale);
+  const canonical = buildLocalizedCanonical(path, locale);
 
   return {
     tool,

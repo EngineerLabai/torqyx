@@ -1,9 +1,7 @@
 import type { FirebaseApp } from "firebase/app";
-import type { Auth } from "firebase/auth";
+import type { Auth, GoogleAuthProvider } from "firebase/auth";
 import type { Firestore } from "firebase/firestore";
 import type { FirebaseStorage } from "firebase/storage";
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 export type FirebaseCoreServices = {
   app: FirebaseApp;
@@ -66,6 +64,7 @@ const firebaseConfig = {
 let cachedCore: FirebaseCoreServices | null = null;
 let cachedFirestore: Firestore | null | undefined;
 let cachedStorage: FirebaseStorage | null | undefined;
+let corePromise: Promise<FirebaseCoreServices | null> | null = null;
 let firestorePromise: Promise<Firestore | null> | null = null;
 let storagePromise: Promise<FirebaseStorage | null> | null = null;
 let initError: Error | null = null;
@@ -83,10 +82,17 @@ const getMissingConfig = () =>
     .map(([key]) => ENV_KEY_BY_CONFIG[key as keyof typeof ENV_KEY_BY_CONFIG]);
 
 export const getFirebaseCoreServices = (): FirebaseCoreServices | null => {
-  if (cachedCore || initError) return cachedCore;
+  return cachedCore;
+};
 
+export const getFirebaseCoreServicesAsync = async (): Promise<FirebaseCoreServices | null> => {
+  if (cachedCore || initError) return cachedCore;
   if (typeof window === "undefined") {
     return null;
+  }
+
+  if (corePromise) {
+    return corePromise;
   }
 
   const missing = getMissingConfig();
@@ -95,25 +101,32 @@ export const getFirebaseCoreServices = (): FirebaseCoreServices | null => {
     return null;
   }
 
-  try {
-    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-    cachedCore = {
-      app,
-      auth: getAuth(app),
-      googleProvider: new GoogleAuthProvider(),
-    };
-    return cachedCore;
-  } catch (error) {
-    reportInitError(error instanceof Error ? error : new Error("Firebase initialization failed."));
-    return null;
-  }
+  corePromise = Promise.all([import("firebase/app"), import("firebase/auth")])
+    .then(([appModule, authModule]) => {
+      const app = appModule.getApps().length ? appModule.getApp() : appModule.initializeApp(firebaseConfig);
+      cachedCore = {
+        app,
+        auth: authModule.getAuth(app),
+        googleProvider: new authModule.GoogleAuthProvider(),
+      };
+      return cachedCore;
+    })
+    .catch((error) => {
+      reportInitError(error instanceof Error ? error : new Error("Firebase initialization failed."));
+      return null;
+    })
+    .finally(() => {
+      corePromise = null;
+    });
+
+  return corePromise;
 };
 
 export const getFirebaseFirestoreService = async (): Promise<Firestore | null> => {
   if (cachedFirestore !== undefined) return cachedFirestore;
   if (firestorePromise) return firestorePromise;
 
-  const core = getFirebaseCoreServices();
+  const core = await getFirebaseCoreServicesAsync();
   if (!core) {
     cachedFirestore = null;
     return null;
@@ -140,7 +153,7 @@ export const getFirebaseStorageService = async (): Promise<FirebaseStorage | nul
   if (cachedStorage !== undefined) return cachedStorage;
   if (storagePromise) return storagePromise;
 
-  const core = getFirebaseCoreServices();
+  const core = await getFirebaseCoreServicesAsync();
   if (!core) {
     cachedStorage = null;
     return null;

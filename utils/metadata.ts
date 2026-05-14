@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { getBrandCopy } from "@/config/brand";
 import type { Locale } from "@/utils/locale";
-import { DEFAULT_OG_IMAGE_META, buildCanonical, buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
+import {
+  DEFAULT_OG_IMAGE_META,
+  buildCanonical,
+  buildLanguageAlternates,
+  buildLocalizedCanonical,
+  buildOgImageMeta,
+} from "@/utils/seo";
 
 type PageMetadataOptions = {
   title: string;
@@ -104,7 +110,7 @@ export const buildPageMetadata = ({
   openGraph,
   twitter,
   alternatesLanguages: alternatesLanguagesArg,
-  useLocalizedCanonical = false,
+  useLocalizedCanonical = true,
 }: PageMetadataOptions): Metadata => {
   const normalizedTitle = normalizeTitle(title, locale);
   const normalizedDescription = normalizeDescription(description, locale);
@@ -116,7 +122,14 @@ export const buildPageMetadata = ({
     canonical,
     ...(alternatesLanguages ? { languages: alternatesLanguages } : {}),
   };
-  const resolvedImage = image ?? DEFAULT_OG_IMAGE_META;
+  const resolvedImage =
+    image ??
+    buildOgImageMeta({
+      title: normalizedTitle,
+      description: normalizedDescription,
+      locale,
+      path,
+    });
   const openGraphMeta: Metadata["openGraph"] = {
     title: normalizedTitle,
     description: normalizedDescription,

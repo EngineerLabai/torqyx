@@ -72,7 +72,7 @@ const DEMO_FORM: KaizenForm = {
 };
 
 const STATUS_OPTIONS: ActionStatus[] = ["planned", "inProgress", "done"];
-const DRAFT_KEY = "aielab:quality:kaizen:draft";
+const DRAFT_KEY = "torqyx:quality:kaizen:draft";
 
 function uuid() {
   return Math.random().toString(36).slice(2, 9);

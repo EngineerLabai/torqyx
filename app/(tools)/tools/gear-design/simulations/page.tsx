@@ -9,33 +9,33 @@ const simulations = [
   {
     title: "MAAG Sistemi Hareket Animasyonu",
     description: "Planya stroku ve kremayer bıçak senkronu; çift yüzey işleme diyagramı.",
-    status: "Planlandı",
+    status: "Referans",
   },
   {
     title: "FELLOW Sistemi Dinamiği",
     description: "Dişli kesici yukarı çıkışta döner, aşağı inişte keser; eğik tabla ayarı görselleştirmesi.",
-    status: "Planlandı",
+    status: "Referans",
   },
   {
     title: "Azdırma (Hobbing) Kesim Animasyonu",
     description: "Hob sarmal hareketi, radyal/eksenel besleme ve helis açısı ayarı; çok ağızlı hob aşınma senaryosu.",
-    status: "Planlandı",
+    status: "Referans",
   },
   {
     title: "Taşlama Simülasyonu",
     description: "Profil vs form taşlama, soğutma akışı, yanma riski ve honing/superfinish etkisi.",
-    status: "Planlandı",
+    status: "Referans",
   },
   {
     title: "Döküm Soğuma Animasyonu",
     description: "Besleyici/maça yerleşimi, katılaşma sırası ve büzülme risk alanlarının görselleştirilmesi.",
-    status: "Planlandı",
+    status: "Referans",
   },
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Disli Simulasyonlari" : "Gear Simulations";
+  const title = locale === "tr" ? "Disli uretim surecleri" : "Gear Manufacturing Process Notes";
   const description =
     locale === "tr"
       ? "MAAG, FELLOW, azdırma ve taşlama süreçlerini anlatan dişli simülasyonları ile mühendislik hesaplayıcıları içeriğini görsel olarak destekler."
@@ -63,15 +63,15 @@ export default async function GearSimulationsPage() {
               Dişli Üretim Simülasyonları
             </span>
             <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-              Planlandı
+              Referans
             </span>
           </div>
           <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">
             MAAG, FELLOW, Azdırma ve taşlama/döküm simülasyonları
           </h1>
           <p className="text-sm leading-relaxed text-slate-700">
-            Hareket ve proses animasyonları öğrenciler ve mühendisler için hızlı görsel rehber olacak. Her kart,
-            eklenecek video/animasyon alanı için yer tutucu.
+            Hareket ve proses adımları öğrenciler ve mühendisler için hızlı görsel rehber olarak özetlenir. Her kart,
+            prosesin kontrol odağını ve hangi risklerin izlenmesi gerektiğini gösterir.
           </p>
         </div>
       </section>
@@ -92,12 +92,12 @@ export default async function GearSimulationsPage() {
               <p className="text-[12px] leading-relaxed text-slate-700 break-words">{sim.description}</p>
             </div>
             <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-              <span>Animasyon alanı eklenecek</span>
+              <span>Proses kontrol notu</span>
               <button
                 disabled
                 className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-500"
               >
-                Yakında
+                Referans
               </button>
             </div>
           </article>
@@ -107,5 +107,4 @@ export default async function GearSimulationsPage() {
     </PageShell>
   );
 }
-
 

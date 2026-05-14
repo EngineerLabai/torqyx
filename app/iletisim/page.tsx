@@ -31,7 +31,6 @@ export async function generateMetadata() {
     description,
     path: "/iletisim",
     locale,
-    alternatesLanguages: null,
   });
 }
 
@@ -50,10 +49,7 @@ export default async function ContactPage() {
         />
 
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Contact
-      </h1>
-
+          <h2 className="text-xl font-semibold tracking-tight text-slate-900">Contact</h2>
           <p className="text-sm text-slate-700 md:text-base">
             Use the form below for technical questions, new tool requests, or collaboration ideas. If you can share inputs, units, and
             expected results, we can review faster.

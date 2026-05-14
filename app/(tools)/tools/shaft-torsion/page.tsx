@@ -1,4 +1,4 @@
-import ToolPageClient from "@/components/tools/ToolPageClient";
+﻿import ToolPageClient from "@/components/tools/ToolPageClient";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function ShaftTorsionPage() {
   const initialDocs = await getToolDocsResponse("shaft-torsion", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Shaft Torsion Analysis — DIN 743
-      </h1>
-
       <ToolSeo toolId="shaft-torsion" locale={locale} />
       <ToolPageClient toolId="shaft-torsion" initialDocs={initialDocs} />
     </>

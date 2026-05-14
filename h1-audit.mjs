@@ -74,7 +74,7 @@ function resolveLocalImportPath(importPath, currentDir) {
 
 function extractLocalImports(content, currentDir) {
   const imports = [];
-  const regex = /import\s+(?:[^'"\\n]+)\s+from\s+['"](\.\/[^'"]+|\.\.[^'"]+)['"]/g;
+  const regex = /import\s+(?:[^'"\n]+)\s+from\s+['"](\.\/[^'"]+|\.\.[^'"]+)['"]/g;
   let match;
 
   while ((match = regex.exec(content)) !== null) {
@@ -94,7 +94,7 @@ function hasH1InTSXFile(filePath, visited = new Set()) {
 
   if (hasH1InTSXContent(content)) return true;
   if (/redirect\(/.test(content)) return true;
-  if (/<(?:PageHero|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(content)) return true;
+  if (/<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(content)) return true;
 
   const imports = extractLocalImports(content, path.dirname(filePath));
   return imports.some((imp) => hasH1InTSXFile(imp, visited));
@@ -103,7 +103,7 @@ function hasH1InTSXFile(filePath, visited = new Set()) {
 function hasH1InTSX(content, filePath = null) {
   if (hasH1InTSXContent(content)) return true;
   if (/redirect\(/.test(content)) return true;
-  if (/<(?:PageHero|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(content)) return true;
+  if (/<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(content)) return true;
 
   if (filePath) {
     const imports = extractLocalImports(content, path.dirname(filePath));
@@ -230,7 +230,7 @@ const csvRows = allFiles.map(({ file, type }) => {
   const content = fs.readFileSync(file, "utf-8");
   const rel = relativePath(file);
   const locale = detectLocale(file);
-  const hasH1 = type === "tsx" ? hasH1InTSX(content) : hasH1InMDX(content);
+  const hasH1 = type === "tsx" ? hasH1InTSX(content, file) : hasH1InMDX(content);
   const title = type === "tsx" ? extractTitleFromTSX(content) : extractTitleFromMDX(content);
   return `"${rel}","${type}","${locale}","${(title || "").replace(/"/g, '""')}","${hasH1 ? "EVET" : "HAYIR"}"`;
 });

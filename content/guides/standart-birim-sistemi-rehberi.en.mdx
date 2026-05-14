@@ -1,0 +1,62 @@
+---
+title: "Standard unit system guide"
+description: "A practical checklist for SI, metric, and imperial engineering calculations without hidden unit conversion errors."
+date: "2026-05-09"
+tags: ["unit conversion", "SI", "ISO", "standards"]
+category: "Standards"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Usage note">
+This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+</Callout>
+
+## Problem / Objective
+
+Unit mistakes can turn a correct formula into a wrong result. Pressure, torque, energy, and section calculations need a locked unit system before calculation starts.
+
+## Assumptions
+
+- SI is selected as the primary calculation system.
+- Supplier data keeps its source unit in the notes.
+- Reports show input and output units together.
+
+## Step by step method
+
+1. Choose the project base unit system.
+2. Record incoming data with source units.
+3. Convert before calculation and document rounding.
+4. Report results in one unit family.
+5. Check critical values with a reverse conversion.
+
+## Common mistakes
+
+- Forgetting that N/mm2 equals MPa.
+- Mixing mm and m in the same formula.
+- Missing the 1000 factor between N m and N mm torque.
+
+## Related calculators
+
+- [Unit Converter](/tools/unit-converter)
+- [Quick Reference Center](/reference)
+- [Pipe Pressure Loss Calculator](/tools/pipe-pressure-loss)
+
+## Related glossary terms
+
+- [Stress](/glossary/stress)
+- [Torque](/glossary/torque)
+
+## Quick FAQ
+
+### Question: Are N/mm2 and MPa equivalent?
+
+Yes. 1 N/mm2 equals 1 MPa.
+
+### Question: How do I choose a base unit system?
+
+Use the system required by the team, supplier, and standard; SI is usually the safest engineering baseline.
+
+### Question: When should values be rounded?
+
+Keep raw values through intermediate steps and round only for report readability.

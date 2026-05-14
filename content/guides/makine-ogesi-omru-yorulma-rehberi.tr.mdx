@@ -1,0 +1,63 @@
+---
+title: "Makine öğesi ömrü, Wöhler eğrisi ve yorulma rehberi"
+description: "Tekrarlı yük altındaki miller, cıvatalar, kaynaklar ve yataklar için yorulma yaklaşımını hızlıca kurun."
+date: "2026-05-09"
+tags: ["yorulma", "Wöhler", "ömür", "makine elemanları"]
+category: "Makine Elemanları"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Kullanım notu">
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+</Callout>
+
+## Problem / Amaç
+
+Parça statik yükte güvenli görünse bile tekrarlı yük altında çatlak başlatabilir. Yorulma hesabı yük çevrimi, gerilme aralığı ve çentik etkisini birlikte ele alır.
+
+## Varsayımlar
+
+- Yük çevrimi ve ortalama gerilme yaklaşık bilinir.
+- Malzeme S-N veya Wöhler verisi bulunur.
+- Yüzey, boyut ve çentik etkileri düzeltme faktörüyle ele alınır.
+
+## Adım adım yöntem
+
+1. Yük çevrimini ve gerilme aralığını belirle.
+2. Malzemenin yorulma verisini seç.
+3. Çentik, yüzey ve boyut düzeltmelerini ekle.
+4. Güvenlik faktörünü yorulma için ayrı değerlendir.
+5. Kritik bölgede kalite kontrol veya test planı yaz.
+
+## Sık hatalar
+
+- Statik güvenlik faktörünü yorulma için yeterli sanmak.
+- Kaynak dikişindeki çentik etkisini unutmak.
+- Yüzey pürüzlülüğünü yorulma dayanımından bağımsız düşünmek.
+
+## İlgili hesaplayıcılar
+
+- [Mil Burulma Hesaplayıcı](/tools/shaft-torsion)
+- [Rulman Ömrü Hesaplayıcı](/tools/bearing-life)
+- [Köşe Kaynak Boyutlandırma](/tools/fillet-weld)
+
+## İlgili sözlük terimleri
+
+- [Yorulma](/glossary/fatigue)
+- [Gerilme](/glossary/stress)
+- [Güvenlik faktörü](/glossary/factor-of-safety)
+
+## Kısa FAQ
+
+### Soru: Yorulma nedir?
+
+Tekrarlı yük altında çatlak oluşumu ve ilerlemesiyle parça hasarıdır.
+
+### Soru: Wöhler eğrisi ne gösterir?
+
+Gerilme seviyesi ile çevrim ömrü arasındaki ilişkiyi gösterir.
+
+### Soru: Yorulma için en kritik bölge neresidir?
+
+Çentik, kesit değişimi, kaynak ucu ve yüzey kusurları genellikle kritiktir.

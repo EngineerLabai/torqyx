@@ -3,19 +3,20 @@ import { NextResponse } from "next/server";
 import { FieldValue } from "firebase-admin/firestore";
 import { z } from "zod";
 import { getAdminFirestore } from "@/utils/firebase-admin";
+import { apiError, zodIssueDetails } from "@/utils/api-response";
 
 export const runtime = "nodejs";
 
 const supportSchema = z.object({
-  name: z.string().min(2).max(120),
-  email: z.string().email(),
-  message: z.string().min(10).max(5000),
+  name: z.string().trim().min(2).max(120),
+  email: z.string().trim().email().max(254).transform((value) => value.toLowerCase()),
+  message: z.string().trim().min(10).max(5000),
   attachment: z
     .object({
-      url: z.string().url(),
-      name: z.string().max(200).optional(),
+      url: z.string().trim().url().max(1000),
+      name: z.string().trim().max(200).optional(),
       size: z.number().max(25 * 1024 * 1024).optional(),
-      type: z.string().max(100).optional(),
+      type: z.string().trim().max(100).optional(),
     })
     .optional()
     .nullable(),
@@ -26,12 +27,14 @@ export async function POST(request: NextRequest) {
   try {
     payload = await request.json();
   } catch {
-    return NextResponse.json({ error: "invalid_json" }, { status: 400 });
+    return apiError("invalid_json", 400);
   }
 
   const parsed = supportSchema.safeParse(payload);
   if (!parsed.success) {
-    return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
+    return apiError("invalid_payload", 400, {
+      details: zodIssueDetails(parsed.error),
+    });
   }
 
   try {
@@ -45,9 +48,9 @@ export async function POST(request: NextRequest) {
       userAgent: request.headers.get("user-agent") ?? null,
     });
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("[support] Failed to store request:", error);
-    return NextResponse.json({ error: "support_unavailable" }, { status: 500 });
+    return apiError("support_unavailable", 500);
   }
 }

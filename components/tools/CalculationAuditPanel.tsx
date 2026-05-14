@@ -10,7 +10,7 @@ const LABELS = {
   tr: {
     title: "Hesaplama Detayları",
     formulaHelp: "Bu formül nedir?",
-    explanationTitle: "AI Açıklaması",
+    explanationTitle: "Formül açıklaması",
     noSteps: "Hesaplama adımı yok.",
     variables: "Değerler",
     result: "Sonuç",
@@ -25,7 +25,7 @@ const LABELS = {
   en: {
     title: "Calculation Details",
     formulaHelp: "What is this formula?",
-    explanationTitle: "AI Explanation",
+    explanationTitle: "Formula explanation",
     noSteps: "No calculation steps available.",
     variables: "Values",
     result: "Result",
@@ -181,13 +181,13 @@ export default function CalculationAuditPanel({
       });
 
       if (!response.ok) {
-        throw new Error("ai_request_failed");
+        throw new Error("explanation_request_failed");
       }
 
       const payload = await response.json() as { data?: ToolSummaryResponse };
       const summaryMd = payload?.data?.summaryMd;
       if (!summaryMd) {
-        throw new Error("invalid_ai_response");
+        throw new Error("invalid_explanation_response");
       }
 
       setExplanations((current) => ({ ...current, [stepKey]: summaryMd }));

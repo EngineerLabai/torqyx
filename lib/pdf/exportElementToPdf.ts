@@ -14,7 +14,7 @@ export function buildQualityPdfFilename(toolSlug: string, date = new Date()) {
   const mm = String(date.getMonth() + 1).padStart(2, "0");
   const dd = String(date.getDate()).padStart(2, "0");
   const tool = safePart(toolSlug) || "report";
-  return `AI-Engineers-Lab_${tool}_${yyyy}-${mm}-${dd}.pdf`;
+  return `TORQYX_${tool}_${yyyy}-${mm}-${dd}.pdf`;
 }
 
 export async function exportElementToPdf(element: HTMLElement, filename: string) {

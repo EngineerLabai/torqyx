@@ -1,12 +1,14 @@
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
+import { buildLocalizedCanonical } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
@@ -16,12 +18,20 @@ const formatDate = (value: string, locale: "tr" | "en") =>
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
-  const copy = getMessages(locale).pages.guides;
   const brandContent = getBrandCopy(locale);
+  const guideCount = (await getContentList("guides", { locale })).length;
+  const title =
+    locale === "tr"
+      ? "Mühendislik Rehberleri - Malzeme, Standart ve Üretim"
+      : "Engineering Guides - Materials, Standards and Manufacturing";
+  const description =
+    locale === "tr"
+      ? `${guideCount} pratik mühendislik rehberiyle malzeme seçimi, tolerans, akışkanlar ve üretim kararlarını hesaplayıcılarla doğrulayın.`
+      : `Validate material selection, tolerances, fluids, and manufacturing decisions with ${guideCount} practical engineering guides and calculators.`;
 
   return buildPageMetadata({
-    title: `${copy.badge} | ${brandContent.siteName}`,
-    description: copy.description,
+    title: `${title} | ${brandContent.siteName}`,
+    description,
     path: "/guides",
     locale,
   });
@@ -32,6 +42,46 @@ export default async function GuidesIndexPage() {
   const copy = getMessages(locale).pages.guides;
   const heroImage = getHeroImageSrc("guides");
   const guides = await getContentList("guides", { locale });
+  const guidesUrl = buildLocalizedCanonical("/guides", locale);
+  const guidesJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: copy.title,
+        description: copy.description,
+        url: guidesUrl,
+        inLanguage: locale === "tr" ? "tr-TR" : "en-US",
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: guides.length,
+          itemListElement: guides.slice(0, 24).map((guide, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: guide.title,
+            url: buildLocalizedCanonical(`/guides/${guide.slug}`, locale),
+          })),
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: locale === "tr" ? "Ana sayfa" : "Home",
+            item: buildLocalizedCanonical("/", locale),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: copy.badge,
+            item: guidesUrl,
+          },
+        ],
+      },
+    ],
+  };
   const grouped = guides.reduce<Record<string, typeof guides>>((acc, guide) => {
     const key = guide.category || copy.fallbackCategory;
     if (!acc[key]) acc[key] = [];
@@ -44,6 +94,7 @@ export default async function GuidesIndexPage() {
 
   return (
     <PageShell>
+      <JsonLd data={guidesJsonLd} />
       <PageHero
         title={copy.title}
         description={copy.description}
@@ -53,10 +104,6 @@ export default async function GuidesIndexPage() {
       />
 
       <section className="space-y-8">
-      <h1 className="text-3xl font-bold tracking-tight">
-        [Manual] Guides
-      </h1>
-
         {guides.length === 0 ? (
           <div className="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600 shadow-sm">
             {copy.empty}

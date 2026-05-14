@@ -1,4 +1,4 @@
-import SealingGuideClient from "./Client";
+﻿import SealingGuideClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function SealingGuidePage() {
   const initialDocs = await getToolDocsResponse("sealing-guide", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Sealing Guide — ISO 4572
-      </h1>
-
       <ToolSeo toolId="sealing-guide" locale={locale} />
       <SealingGuideClient initialDocs={initialDocs} />
     </>

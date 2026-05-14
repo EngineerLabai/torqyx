@@ -24,6 +24,9 @@ export const calculateExpiration = (isPremium: boolean) => {
 // Kısa link URL oluşturma
 export const buildShortShareUrl = (code: string, baseUrl?: string) => {
   const resolvedBaseUrl =
-    baseUrl ?? (typeof window !== "undefined" ? window.location.origin : "https://aiengineerslab.com");
+    baseUrl ??
+    (typeof window !== "undefined"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://aiengineerslab.com");
   return `${resolvedBaseUrl.replace(/\/$/, "")}/s/${code}`;
 };

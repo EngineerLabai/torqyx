@@ -1,7 +1,7 @@
 import { LabSessionSchema, type LabSession } from "@/lib/sanityCheck/types";
 
-const LAST_SESSION_KEY = "aielab:sanity_check:last_session";
-const SAVED_SESSIONS_KEY = "aielab:sanity_check:saved_sessions";
+const LAST_SESSION_KEY = "torqyx:sanity_check:last_session";
+const SAVED_SESSIONS_KEY = "torqyx:sanity_check:saved_sessions";
 
 export type SavedSession = {
   id: string;

@@ -1,15 +1,11 @@
 User-agent: *
-Allow: /
-
-# Arama motoru botlarına özel izinler
 User-agent: Googlebot
+User-agent: Bingbot
 Allow: /
 
-User-agent: Bingbot  
-Allow: /
-
-# Engellenmesi gerekenler (varsa)
 Disallow: /api/
-Disallow: /_next/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /saved-calculations/
 
 Sitemap: https://aiengineerslab.com/sitemap.xml

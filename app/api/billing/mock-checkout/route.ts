@@ -1,24 +1,35 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-
-type CheckoutPayload = {
-  plan?: string;
-  source?: string;
-};
+import { z } from "zod";
+import { apiError, zodIssueDetails } from "@/utils/api-response";
 
 export const runtime = "nodejs";
 
+const checkoutPayloadSchema = z
+  .object({
+    plan: z.string().trim().min(1).max(40).regex(/^[a-z0-9_-]+$/i).optional(),
+    source: z.string().trim().min(1).max(120).optional(),
+  })
+  .optional();
+
 export async function POST(request: NextRequest) {
-  let payload: CheckoutPayload | null = null;
+  let rawPayload: unknown = undefined;
 
   try {
-    payload = (await request.json()) as CheckoutPayload;
+    rawPayload = await request.json();
   } catch {
-    payload = null;
+    rawPayload = undefined;
   }
 
-  const plan = typeof payload?.plan === "string" && payload.plan.trim() ? payload.plan.trim().toLowerCase() : "pro";
-  const source = typeof payload?.source === "string" && payload.source.trim() ? payload.source.trim() : "unknown";
+  const parsed = checkoutPayloadSchema.safeParse(rawPayload);
+  if (!parsed.success) {
+    return apiError("invalid_payload", 400, {
+      details: zodIssueDetails(parsed.error),
+    });
+  }
+
+  const plan = parsed.data?.plan?.toLowerCase() ?? "pro";
+  const source = parsed.data?.source ?? "unknown";
 
   return NextResponse.json({
     ok: true,

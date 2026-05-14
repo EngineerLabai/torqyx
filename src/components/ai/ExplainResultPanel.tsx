@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useBillingStatus } from "@/hooks/useBillingStatus";
 import type { Locale } from "@/utils/locale";
 
-const STORAGE_PREFIX = "aielab:ai_explain_history:";
-const USAGE_PREFIX = "aielab:ai_explain_usage:";
+const STORAGE_PREFIX = "torqyx:ai_explain_history:";
+const USAGE_PREFIX = "torqyx:ai_explain_usage:";
 
 const LABELS = {
   tr: {
@@ -20,6 +20,8 @@ const LABELS = {
     noExplanation: "Henüz açıklama yok.",
     reset: "Sohbeti Sıfırla",
     feedback: "Açıklama faydalı mıydı?",
+    feedbackUp: "Faydalı olarak işaretle",
+    feedbackDown: "Faydalı değil olarak işaretle",
     thanks: "Geri bildiriminiz için teşekkürler.",
     error: "Açıklama şu anda alınamıyor.",
     premiumNote: "Premium kullanıcılar için sınırsız açıklama.",
@@ -37,6 +39,8 @@ const LABELS = {
     noExplanation: "No explanation yet.",
     reset: "Reset conversation",
     feedback: "Was this explanation helpful?",
+    feedbackUp: "Mark explanation as helpful",
+    feedbackDown: "Mark explanation as not helpful",
     thanks: "Thanks for your feedback.",
     error: "Explanation could not be loaded.",
     premiumNote: "Unlimited explanations for premium users.",
@@ -327,6 +331,7 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
           </label>
           <input
             id="explain-followup"
+            aria-label={labels.askMore}
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             placeholder={labels.placeholder}
@@ -359,6 +364,7 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
           <span className="text-xs text-slate-500">{labels.feedback}</span>
           <button
             type="button"
+            aria-label={labels.feedbackUp}
             onClick={() => handleFeedback("up")}
             className={`rounded-full px-3 py-1 text-sm font-semibold ${feedback === "up" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
           >
@@ -366,6 +372,7 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
           </button>
           <button
             type="button"
+            aria-label={labels.feedbackDown}
             onClick={() => handleFeedback("down")}
             className={`rounded-full px-3 py-1 text-sm font-semibold ${feedback === "down" ? "bg-rose-100 text-rose-800" : "bg-slate-100 text-slate-700"}`}
           >

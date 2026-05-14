@@ -1,7 +1,7 @@
 {
-  "name": "AI Engineers Lab",
-  "short_name": "AIEngLab",
-  "description": "Deterministik mühendislik hesaplayıcıları",
+  "name": "TORQYX",
+  "short_name": "TORQYX",
+  "description": "Deterministic engineering calculators, standards, and reporting.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

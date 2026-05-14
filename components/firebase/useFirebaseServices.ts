@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { Firestore } from "firebase/firestore";
 import type { FirebaseStorage } from "firebase/storage";
 import {
-  getFirebaseCoreServices,
+  getFirebaseCoreServicesAsync,
   getFirebaseFirestoreService,
   getFirebaseInitError,
   getFirebaseStorageService,
@@ -22,22 +22,26 @@ export default function useFirebaseServices() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const core = getFirebaseCoreServices();
-    if (!core) {
-      const initError = getFirebaseInitError();
-      Promise.resolve().then(() => {
+    let cancelled = false;
+
+    const loadServices = async () => {
+      const core = await getFirebaseCoreServicesAsync();
+      if (cancelled) return;
+
+      if (!core) {
+        const initError = getFirebaseInitError();
         if (initError) {
           setError(initError.message);
         }
         setReady(true);
-      });
-      return;
-    }
+        return;
+      }
 
-    let cancelled = false;
-
-    Promise.all([getFirebaseFirestoreService(), getFirebaseStorageService()])
-      .then(([firestore, storage]) => {
+      try {
+        const [firestore, storage] = await Promise.all([
+          getFirebaseFirestoreService(),
+          getFirebaseStorageService(),
+        ]);
         if (cancelled) return;
         setServices({
           ...core,
@@ -46,8 +50,7 @@ export default function useFirebaseServices() {
         });
         setError(null);
         setReady(true);
-      })
-      .catch((nextError) => {
+      } catch (nextError) {
         if (cancelled) return;
         setServices({
           ...core,
@@ -56,7 +59,10 @@ export default function useFirebaseServices() {
         });
         setError(nextError instanceof Error ? nextError.message : "Firebase services unavailable.");
         setReady(true);
-      });
+      }
+    };
+
+    void loadServices();
 
     return () => {
       cancelled = true;

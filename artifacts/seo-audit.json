@@ -1,14 +1,411 @@
 {
-  "generatedAt": "2026-03-04T18:33:28.008Z",
+  "generatedAt": "2026-05-09T18:35:09.954Z",
   "summary": {
     "scannedPages": 101,
     "pagesWithIssues": 78,
     "issueCounts": {
-      "h1_missing_in_file": 75,
-      "h1_multiple_in_file": 3
+      "h1_multiple_in_file": 4,
+      "h1_missing_in_file": 74
     }
   },
   "pages": [
+    {
+      "file": "app/(auth)/login/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/(blog)/blog/[slug]/page.tsx",
+      "h1CountInFile": 2,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_multiple_in_file"
+      ]
+    },
+    {
+      "file": "app/(blog)/blog/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/[...slug]/page.tsx",
+      "h1CountInFile": 2,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_multiple_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/basic-engineering/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/bearing-life/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/belt-length/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/bending-stress/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/bolt-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/bolt-database/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/bolt-size-torque/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/coating-guide/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/compressor-cc/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/fillet-weld/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/fluids-hvac/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/backlash-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/contact-ratio-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/force-torque-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/helix-axial-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/module-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/ratio-calculator/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/viscosity-selector/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/calculators/weight-optimization/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/gear-design/simulations/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/(tools)/tools/heat-energy/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/heat-treatment/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/hydraulic-cylinder/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/machine-elements/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/material-cards/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/materials-manufacturing/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/param-chart/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/pipe-pressure-loss/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/production-project/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/sanity-check/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/sanity-check/report/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/(tools)/tools/sealing-guide/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/shaft-torsion/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/simple-stress/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/strength-statics/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/torque-power/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/(tools)/tools/unit-converter/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
+    {
+      "file": "app/[locale]/(tools)/tools/gear-design/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/[locale]/kullanim-sartlari/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": [
+        "h1_missing_in_file"
+      ]
+    },
     {
       "file": "app/[locale]/materials/[id]/page.tsx",
       "h1CountInFile": 1,
@@ -108,24 +505,6 @@
     },
     {
       "file": "app/[locale]/standards/threads/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/blog/[slug]/page.tsx",
-      "h1CountInFile": 2,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_multiple_in_file"
-      ]
-    },
-    {
-      "file": "app/blog/page.tsx",
       "h1CountInFile": 0,
       "delegatedH1Comment": false,
       "metadataProvidedByLayout": "app/layout.tsx",
@@ -311,22 +690,6 @@
       ]
     },
     {
-      "file": "app/kullanim-sartlari/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/login/page.tsx",
-      "h1CountInFile": 1,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": []
-    },
-    {
       "file": "app/page.tsx",
       "h1CountInFile": 0,
       "delegatedH1Comment": false,
@@ -358,13 +721,6 @@
       "h1CountInFile": 1,
       "delegatedH1Comment": false,
       "metadataProvidedByLayout": "app/project-hub/devreye-alma/layout.tsx",
-      "issues": []
-    },
-    {
-      "file": "app/project-hub/page.tsx",
-      "h1CountInFile": 1,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
       "issues": []
     },
     {
@@ -460,6 +816,13 @@
       ]
     },
     {
+      "file": "app/s/[code]/page.tsx",
+      "h1CountInFile": 1,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
       "file": "app/saved-calculations/page.tsx",
       "h1CountInFile": 1,
       "delegatedH1Comment": false,
@@ -508,369 +871,6 @@
       "delegatedH1Comment": false,
       "metadataProvidedByLayout": "app/layout.tsx",
       "issues": []
-    },
-    {
-      "file": "app/tools/[...slug]/page.tsx",
-      "h1CountInFile": 1,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": []
-    },
-    {
-      "file": "app/tools/basic-engineering/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/bearing-life/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/belt-length/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/bending-stress/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/bolt-calculator/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/bolt-database/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/bolt-size-torque/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/coating-guide/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/compressor-cc/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/fillet-weld/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/fluids-hvac/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/backlash-calculator/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/contact-ratio-calculator/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/force-torque-calculator/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/helix-axial-calculator/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/module-calculator/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/ratio-calculator/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/viscosity-selector/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/calculators/weight-optimization/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/gear-design/page.tsx",
-      "h1CountInFile": 1,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": []
-    },
-    {
-      "file": "app/tools/gear-design/simulations/page.tsx",
-      "h1CountInFile": 1,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": []
-    },
-    {
-      "file": "app/tools/heat-energy/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/heat-treatment/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/hydraulic-cylinder/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/machine-elements/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/material-cards/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/materials-manufacturing/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/param-chart/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/pipe-pressure-loss/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/production-project/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/sanity-check/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/sanity-check/report/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/sealing-guide/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/shaft-torsion/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/simple-stress/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/strength-statics/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/torque-power/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
-    },
-    {
-      "file": "app/tools/unit-converter/page.tsx",
-      "h1CountInFile": 0,
-      "delegatedH1Comment": false,
-      "metadataProvidedByLayout": "app/layout.tsx",
-      "issues": [
-        "h1_missing_in_file"
-      ]
     }
   ]
 }

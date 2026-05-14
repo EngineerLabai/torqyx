@@ -25,7 +25,12 @@ const normalizeSrc = (src?: string, fallbackSrc = DEFAULT_FALLBACK_SRC) => {
   return `/${next.replace(/^[./]+/, "")}`;
 };
 
-const mergeClassName = (base: string, extra?: string) => (extra ? `${base} ${extra}` : base);
+const OBJECT_FIT_CLASS = /\b!?object-(contain|cover|fill|none|scale-down)\b/;
+
+const mergeClassName = (base: string, extra?: string) => {
+  if (!extra) return base;
+  return OBJECT_FIT_CLASS.test(extra) ? extra : `${base} ${extra}`;
+};
 
 export default function OptimizedImage({
   src,

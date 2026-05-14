@@ -8,7 +8,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 import { useBillingStatus } from "@/hooks/useBillingStatus";
 import { withLocalePrefix } from "@/utils/locale-path";
 
-const DISMISS_STORAGE_PREFIX = "aielab:trial-ending-banner:dismissed";
+const DISMISS_STORAGE_PREFIX = "torqyx:trial-ending-banner:dismissed";
 
 const readDismissed = (key: string) => {
   if (typeof window === "undefined") return false;

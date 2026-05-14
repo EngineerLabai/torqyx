@@ -9,6 +9,7 @@ const ONE_YEAR = 60 * 60 * 24 * 365;
 const LOCALE_PREFIXED_PATHS = ["/tools", "/project-hub", "/quality-tools", "/standards", "/materials", "/projects"];
 const LOCALE_PRESERVE_PATHS = new Set([
   "/tools/gear-design",
+  "/kullanim-sartlari",
   "/standards/threads",
   "/standards/materials",
   "/standards/fits",
@@ -108,6 +109,14 @@ export default function proxy(request: NextRequest) {
     if (shouldPreserve) {
       const requestHeaders = new Headers(request.headers);
       requestHeaders.set("x-locale", segment);
+      if (basePath !== internalPath) {
+        const rewritten = request.nextUrl.clone();
+        rewritten.pathname = toLocalePath(segment, internalPath);
+        rewritten.search = request.nextUrl.search;
+        const response = NextResponse.rewrite(rewritten, { request: { headers: requestHeaders } });
+        response.cookies.set(LOCALE_COOKIE, segment, { path: "/", maxAge: ONE_YEAR });
+        return response;
+      }
       const response = NextResponse.next({ request: { headers: requestHeaders } });
       response.cookies.set(LOCALE_COOKIE, segment, { path: "/", maxAge: ONE_YEAR });
       return response;

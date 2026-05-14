@@ -1,4 +1,4 @@
-import ContactRatioCalculatorClient from "./Client";
+﻿import ContactRatioCalculatorClient from "./Client";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -14,10 +14,6 @@ export default async function ContactRatioCalculatorPage() {
   const initialDocs = await getToolDocsResponse("gear-design/calculators/contact-ratio-calculator", locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight no-underline border-0">
-        Gear Design Calculator – ISO 6336
-      </h1>
-
       <ToolSeo toolId="gear-design/calculators/contact-ratio-calculator" locale={locale} />
       <ContactRatioCalculatorClient initialDocs={initialDocs} />
     </>

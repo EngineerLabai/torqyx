@@ -72,7 +72,7 @@ type EightDSnapshot = {
   form: FormState;
 };
 
-const DRAFT_KEY = "aielab:quality:8d:draft";
+const DRAFT_KEY = "torqyx:quality:8d:draft";
 
 const DEMO_FORM: FormState = {
   caseId: "Q-2026-024",

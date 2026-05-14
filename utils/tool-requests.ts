@@ -1,5 +1,5 @@
-export const REQUESTS_STORAGE_KEY = "aielab:requests";
-export const REQUESTS_EVENT = "aielab:requests-updated";
+export const REQUESTS_STORAGE_KEY = "torqyx:requests";
+export const REQUESTS_EVENT = "torqyx:requests-updated";
 
 export type ToolRequestData = {
   problem: string;

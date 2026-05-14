@@ -9,9 +9,9 @@ import { buildToolMetadata } from "@/utils/tool-seo";
 function SanityCheckSkeleton() {
   return (
     <section className="space-y-3 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-500 shadow-sm animate-pulse">
-      <h1 className="text-3xl font-bold tracking-tight">
+      <div className="text-3xl font-bold tracking-tight">
         Engineering Sanity Check Lab
-      </h1>
+      </div>
 
       <div className="h-4 w-48 rounded bg-slate-200" />
       <div className="h-3 w-72 rounded bg-slate-100" />
@@ -44,4 +44,3 @@ export default async function SanityCheckPage() {
     </>
   );
 }
-

@@ -1,7 +1,7 @@
-export const FAVORITES_STORAGE_KEY = "aielab:favorites";
-export const RECENTS_STORAGE_KEY = "aielab:recents";
-export const FAVORITES_EVENT = "aielab:favorites-updated";
-export const RECENTS_EVENT = "aielab:recents-updated";
+export const FAVORITES_STORAGE_KEY = "torqyx:favorites";
+export const RECENTS_STORAGE_KEY = "torqyx:recents";
+export const FAVORITES_EVENT = "torqyx:favorites-updated";
+export const RECENTS_EVENT = "torqyx:recents-updated";
 
 export type RecentToolEntry = {
   toolId: string;

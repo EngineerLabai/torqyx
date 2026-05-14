@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import GenericToolPage from "@/components/tools/GenericToolPage";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getToolById } from "@/tools/registry";
@@ -20,10 +20,6 @@ export default async function TorquePowerPage() {
   const initialDocs = await getToolDocsResponse(toolId, locale);
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">
-        Power - Torque - RPM
-      </h1>
-
       <ToolSeo toolId="torque-power" locale={locale} />
       <GenericToolPage toolId={toolId} initialDocs={initialDocs} />
     </>

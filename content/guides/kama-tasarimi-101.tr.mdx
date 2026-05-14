@@ -1,0 +1,62 @@
+---
+title: "Kama tasarımı 101"
+description: "Basit makinelerde kama geometrisi, sürtünme açısı ve kuvvet dağılımı için pratik başlangıç rehberi."
+date: "2026-05-09"
+tags: ["kama", "mekanizma", "sürtünme", "kuvvet"]
+category: "Makine Elemanları"
+draft: false
+readingTime: 7
+---
+
+<Callout type="info" title="Kullanım notu">
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+</Callout>
+
+## Problem / Amaç
+
+Kama, küçük bir giriş kuvvetini yüksek normal kuvvete dönüştürebilir. Ancak sürtünme, malzeme ezilmesi ve yüzey kalitesi kontrol edilmezse kilitlenme veya aşınma oluşur.
+
+## Varsayımlar
+
+- Kama rijit kabul edilir.
+- Sürtünme katsayısı yüzey çifti için tahmini alınır.
+- Temas basıncı emniyetli sınırda tutulur.
+
+## Adım adım yöntem
+
+1. Kama açısını ve temas boyunu belirle.
+2. Giriş kuvveti ile normal kuvvet ilişkisini yaz.
+3. Sürtünme açısını kontrol et.
+4. Yüzey basıncını ve malzeme ezilmesini incele.
+5. Geri sökme ve yağlama ihtiyacını planla.
+
+## Sık hatalar
+
+- Sürtünmeyi sıfır kabul etmek.
+- Temas alanını gerçek yüzeyden büyük almak.
+- Kilitlenme koşulunu montaj sonrası fark etmek.
+
+## İlgili hesaplayıcılar
+
+- [Fikstür Araçları](/fixture-tools)
+- [Hızlı Referans Merkezi](/reference)
+- [Çekme Gerilmesi Hesaplayıcı](/tools/simple-stress)
+
+## İlgili sözlük terimleri
+
+- [Gerilme](/glossary/stress)
+- [Güvenlik faktörü](/glossary/factor-of-safety)
+
+## Kısa FAQ
+
+### Soru: Kama açısı küçülürse ne olur?
+
+Aynı giriş kuvvetiyle normal kuvvet artar; fakat sürtünme ve kilitlenme riski de yükselir.
+
+### Soru: Kama için hangi malzeme uygundur?
+
+Temas basıncına dayanacak, aşınma davranışı bilinen ve işlenebilir bir malzeme seçilmelidir.
+
+### Soru: Yağlama gerekli mi?
+
+Yüksek temas basıncı veya sık hareket varsa yağlama aşınmayı azaltır.

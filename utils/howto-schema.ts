@@ -2,6 +2,7 @@ import type { ToolInputMeta, ToolReference } from "@/tools/_shared/types";
 import type { HowToSchemaInput, HowToStepSchema, SoftwareApplicationSchemaInput } from "@/types/structured-data";
 import type { Locale } from "@/utils/locale";
 import { resolveLocalizedValue, type LocalizedValue } from "@/utils/locale-values";
+import { SITE_URL } from "@/utils/seo";
 
 export type ToolConfig = {
   id: string;
@@ -149,7 +150,7 @@ function buildSoftwareApplicationSchema(
 export function buildHowToSchema(
   tool: ToolConfig,
   locale: Locale,
-  baseUrl: string = "https://aiengineerslab.com"
+  baseUrl: string = SITE_URL
 ): HowToSchemaInput & { application: SoftwareApplicationSchemaInput } {
   const toolUrl = `${baseUrl}/tools/${tool.id}`;
 
@@ -173,7 +174,7 @@ export function buildHowToSchema(
  */
 export function buildLocalizedHowToSchemas(
   tool: ToolConfig,
-  baseUrl: string = "https://aiengineerslab.com"
+  baseUrl: string = SITE_URL
 ): Record<Locale, HowToSchemaInput & { application: SoftwareApplicationSchemaInput }> {
   return {
     tr: buildHowToSchema(tool, "tr", baseUrl),

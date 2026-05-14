@@ -40,7 +40,7 @@ export default function BrandLogo({
             className={`flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-[11px] font-semibold uppercase tracking-[0.2em] text-white ${markClassName}`.trim()}
             aria-hidden="true"
           >
-            AI
+            TQ
           </div>
         )}
       </div>
