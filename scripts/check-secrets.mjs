@@ -44,6 +44,7 @@ const VALUE_ALLOWLIST = [
 
 const IGNORED_DIRECTORIES = new Set([
   ".git",
+  ".lighthouseci",
   ".next",
   ".vercel",
   "artifacts",
