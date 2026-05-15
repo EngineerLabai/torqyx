@@ -93,6 +93,10 @@ export async function generateMetadata(): Promise<Metadata> {
       other: [{ rel: "mask-icon", url: "/favicon.ico" }],
     },
     manifest: "/site.webmanifest",
+    other: {
+      ...(base.other ?? {}),
+      "google-adsense-account": "ca-pub-8444187117761223",
+    },
     ...(!IS_INDEXING_ENABLED
       ? {
           robots: {
@@ -170,7 +174,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="w-full overflow-x-hidden">
       <body className="w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased"> 
-        <AdSense publisherId="pub-0000000000000000" />
+        <AdSense publisherId="ca-pub-8444187117761223" />
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
           <AuthProvider>

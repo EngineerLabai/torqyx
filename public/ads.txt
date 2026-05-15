@@ -1,2 +1,1 @@
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
-# Not: Yukarıdaki pub-0000000000000000 kısmını kendi Google AdSense yayıncı kimliğinizle değiştirin.
+google.com, pub-8444187117761223, DIRECT, f08c47fec0942fa0
