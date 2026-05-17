@@ -1,6 +1,6 @@
 ---
-title: "Boru Basinc Kaybi Hesabi: Nasil Kullanilir?"
-description: "Darcy-Weisbach temelli basinc kaybi hesabini adim adim uygulama rehberi."
+title: "Boru Basınç Kaybı Hesabı: Nasıl Kullanılır?"
+description: "Darcy-Weisbach temelli basınç kaybı hesabını adım adım uygulama rehberi."
 date: "2026-03-07"
 updatedAt: "2026-03-07"
 standards:
@@ -26,63 +26,63 @@ Temel denklem Darcy-Weisbach:
 
 `DeltaP = f * (L / D) * (rho * v^2 / 2)`
 
-- `DeltaP`: basinc kaybi (Pa)
-- `f`: surtunme katsayisi
-- `L`: boru uzunlugu (m)
-- `D`: ic cap (m)
-- `rho`: yogunluk (kg/m^3)
-- `v`: ortalama hiz (m/s)
+- `DeltaP`: basınç kaybı (Pa)
+- `f`: sürtünme katsayısı
+- `L`: boru uzunluğu (m)
+- `D`: iç çap (m)
+- `rho`: yoğunluk (kg/m^3)
+- `v`: ortalama hız (m/s)
 
-Adim 1: Debiden hiz bulunur.
+Adım 1: Debiden hız bulunur.
 
-Adim 2: Reynolds sayisi hesaplanir.
+Adım 2: Reynolds sayısı hesaplanır.
 
-Adim 3: Akis rejimine gore surtunme katsayisi secilir.
+Adım 3: Akış rejimine göre sürtünme katsayısı seçilir.
 
-Adim 4: Toplam basinc kaybi hesaplanir ve hedef sinirlarla karsilastirilir.
+Adım 4: Toplam basınç kaybı hesaplanır ve hedef sınırlarla karşılaştırılır.
 
-Gorsel akis:
+Görsel akış:
 
-![Hydraulic Blueprint](/images/blueprint-hydraulic.jpg)
+![Hidrolik devre görseli](/images/hydraulic-circuit.webp)
 
-## Ornek Cozum
+## Örnek Çözüm
 
-Ornek giris:
+Örnek giriş:
 
 - Debi: `12 m^3/h`
-- Ic cap: `80 mm`
+- İç çap: `80 mm`
 - Uzunluk: `120 m`
-- Yogunluk: `998 kg/m^3`
+- Yoğunluk: `998 kg/m^3`
 - Kinematik viskozite: `1.0e-6 m^2/s`
-- Yaklasik surtunme katsayisi: `f = 0.022`
+- Yaklaşık sürtünme katsayısı: `f = 0.022`
 
-Ara adimlar:
+Ara adımlar:
 
 1. Debi `Q = 0.00333 m^3/s`
 2. Alan `A = pi*D^2/4 = 0.00503 m^2`
-3. Hiz `v = Q/A = 0.66 m/s`
-4. Reynolds `Re ~ 5.3e4` (turbulans bolgesi)
+3. Hız `v = Q/A = 0.66 m/s`
+4. Reynolds `Re ~ 5.3e4` (türbülans bölgesi)
 
-Basinc kaybi:
+Basınç kaybı:
 
 `DeltaP = 0.022 * (120/0.08) * (998 * 0.66^2 / 2) ~ 7.2 kPa`
 
-## Sik Yapilan Hatalar
+## Sık Yapılan Hatalar
 
-- Debiyi `m^3/h` yerine `m^3/s` kullanmadan dogrudan denklemde kullanmak
-- Ic cap yerine dis cap kullanmak
-- Viskozite birimini karistirmak
-- Yalnizca duz boru kaybina bakip fittings kaybini ihmal etmek
+- Debiyi `m^3/h` yerine `m^3/s` kullanmadan doğrudan denklemde kullanmak
+- İç çap yerine dış çap kullanmak
+- Viskozite birimini karıştırmak
+- Yalnızca düz boru kaybına bakıp fittings kaybını ihmal etmek
 
-## Ilgili Standart Referansi (ISO/DIN/VDI)
+## İlgili Standart Referansı (ISO/DIN/VDI)
 
-- ISO 5167: Debi olcumu ve basinc farki yaklasimi
-- VDI 2040: Isletme verimliligi ve sistem degerlendirmesi
-- DIN EN 13480: Endustriyel metal borulama gereksinimleri
+- ISO 5167: Debi ölçümü ve basınç farkı yaklaşımı
+- VDI 2040: İşletme verimliliği ve sistem değerlendirmesi
+- DIN EN 13480: Endüstriyel metal borulama gereksinimleri
 
-## Ilgili Araclar
+## İlgili Araçlar
 
-- [Akiskanlar ve HVAC](/tools/fluids-hvac)
-- [Hidrolik Silindir Kuvvet & Hiz](/tools/hydraulic-cylinder)
-- [Birim Donusturucu](/tools/unit-converter)
-- [Guc - Tork - Devir](/tools/torque-power)
+- [Akışkanlar ve HVAC](/tools/fluids-hvac)
+- [Hidrolik Silindir Kuvvet & Hız](/tools/hydraulic-cylinder)
+- [Birim Dönüştürücü](/tools/unit-converter)
+- [Güç - Tork - Devir](/tools/torque-power)

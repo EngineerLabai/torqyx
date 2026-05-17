@@ -5,10 +5,10 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "8D Problem Cozme Raporu" : "8D Problem Solving Report";
+  const title = locale === "tr" ? "8D Problem Çözme Raporu" : "8D Problem Solving Report";
   const description =
     locale === "tr"
-      ? "8D adimlarini kullanarak disiplinli problem cozum raporu olusturan, ekip koordinasyonunu ve takip surecini kolaylastiran teknik aractir."
+      ? "8D adımlarını kullanarak disiplinli problem çözüm raporu oluşturan, ekip koordinasyonunu ve takip sürecini kolaylaştıran teknik araçtır."
       : "8D report page for disciplined problem solving, improving team coordination and follow-up in technical engineering calculators workflows.";
 
   return buildPageMetadata({

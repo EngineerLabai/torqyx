@@ -4,7 +4,7 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "5 Why Kok Neden Analizi",
+    title: "5 Why Kök Neden Analizi",
     description: "Kök neden analizi için 5 Why zinciri oluştur.",
   },
   en: {

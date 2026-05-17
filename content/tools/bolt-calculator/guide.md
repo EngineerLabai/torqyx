@@ -1,6 +1,6 @@
 ---
-title: "Civata Boyut ve On Yuk Hesabi: Nasil Kullanilir?"
-description: "Civata on yuk, tork ve emniyet degerlerini adim adim hesaplamak icin pratik rehber."
+title: "Cıvata Boyut ve Ön Yük Hesabı: Nasıl Kullanılır?"
+description: "Cıvata ön yük, tork ve emniyet değerlerini adım adım hesaplamak için pratik rehber."
 date: "2026-03-07"
 updatedAt: "2026-03-07"
 standards:
@@ -14,13 +14,13 @@ relatedTools:
   - "pipe-pressure-loss"
 ---
 
-## Problem Tanimi
+## Problem Tanımı
 
-Civata baglantilarinda iki kritik risk vardir: yetersiz on yuk ve asiri sikma.
-Yetersiz on yuk gevsemeye, asiri sikma ise kalici uzamaya veya kopmaya gider.
-Bu hesap, baglanti guvenligini hizli ve tekrarlanabilir sekilde kontrol etmek icin yapilir.
+Cıvata bağlantılarında iki kritik risk vardır: yetersiz ön yük ve aşırı sıkma.
+Yetersiz ön yük gevşemeye, aşırı sıkma ise kalıcı uzamaya veya kopmaya gider.
+Bu hesap, bağlantı güvenliğini hızlı ve tekrarlanabilir şekilde kontrol etmek için yapılır.
 
-## Formul Aciklamasi
+## Formül Açıklaması
 
 Adım 1: Diş adımı ve nominal çap ile gerilme alanı `As` hesaplanır.
 
@@ -33,51 +33,51 @@ Adım 3: Sıkma torku yaklaşık olarak bulunur:
 
 - `T`: sıkma torku (N.m)
 - `K`: sürtünme/oturma etkisini kapsayan katsayı
-- `F_preload`: on yuk (N)
-- `d`: nominal cap (m)
+- `F_preload`: ön yük (N)
+- `d`: nominal çap (m)
 
-Adim 4: Elde edilen gerilme, malzeme siniri ile karsilastirilir ve emniyet katsayisi yorumlanir.
+Adım 4: Elde edilen gerilme, malzeme sınırı ile karşılaştırılır ve emniyet katsayısı yorumlanır.
 
-Karar akisi:
+Karar akışı:
 
 ```text
-Malzeme + Geometri -> As -> Hedef On Yuk -> Tork -> Gerilme Kontrolu
+Malzeme + Geometri -> As -> Hedef Ön Yük -> Tork -> Gerilme Kontrolü
 ```
 
-## Ornek Cozum
+## Örnek Çözüm
 
-Ornek giris:
+Örnek giriş:
 
-- Nominal cap: `M12`
-- Dis adimi: `1.75 mm`
-- Malzeme sinifi: `8.8`
-- Hedef on yuk: `35 kN`
-- K katsayisi: `0.20`
+- Nominal çap: `M12`
+- Diş adımı: `1.75 mm`
+- Malzeme sınıfı: `8.8`
+- Hedef ön yük: `35 kN`
+- K katsayısı: `0.20`
 
 Hesap:
 
-1. Yaklasik `d = 0.012 m`
+1. Yaklaşık `d = 0.012 m`
 2. `T = 0.20 * 35000 * 0.012 = 84 N.m`
-3. Sonuc: Yaklasik `84 N.m` sikma torku gerekir.
+3. Sonuç: Yaklaşık `84 N.m` sıkma torku gerekir.
 
-Bu deger saha kosullarinda anahtar hassasiyeti ve yaglama durumuna gore dogrulanmalidir.
+Bu değer saha koşullarında anahtar hassasiyeti ve yağlama durumuna göre doğrulanmalıdır.
 
-## Sik Yapilan Hatalar
+## Sık Yapılan Hatalar
 
-- `mm` ile `m` karistirmak
-- K katsayisini sabit kabul etmek (yaglama degisirse sonuc ciddi degisir)
-- Diadaki tolerans etkilerini goz ardi etmek
-- Sonucu malzeme akma siniri ile karsilastirmamak
+- `mm` ile `m` karıştırmak
+- K katsayısını sabit kabul etmek (yağlama değişirse sonuç ciddi değişir)
+- Diş tolerans etkilerini göz ardı etmek
+- Sonucu malzeme akma sınırı ile karşılaştırmamak
 
-## Ilgili Standart Referansi (ISO/DIN/VDI)
+## İlgili Standart Referansı (ISO/DIN/VDI)
 
 - ISO 898-1: Carbon/alloy steel fastener mekanik özellikleri
-- ISO 68-1: Metrik dis temel geometrisi
-- VDI 2230: Civata baglantilarinin sistematik hesap yontemi
+- ISO 68-1: Metrik diş temel geometrisi
+- VDI 2230: Cıvata bağlantılarının sistematik hesap yöntemi
 
-## Ilgili Araclar
+## İlgili Araçlar
 
-- [Guc - Tork - Devir](/tools/torque-power)
+- [Güç - Tork - Devir](/tools/torque-power)
 - [Mil Burulma](/tools/shaft-torsion)
-- [Kose Kaynak Boyutlandirma](/tools/fillet-weld)
-- [Boru Basinc Kaybi](/tools/pipe-pressure-loss)
+- [Köşe Kaynak Boyutlandırma](/tools/fillet-weld)
+- [Boru Basınç Kaybı](/tools/pipe-pressure-loss)

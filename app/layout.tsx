@@ -1,5 +1,5 @@
 import AdSense from "@/components/ads/AdSense";
-﻿﻿﻿﻿// app/layout.tsx
+// app/layout.tsx
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";

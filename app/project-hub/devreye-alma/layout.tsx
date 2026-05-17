@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = locale === "tr" ? "Devreye Alma Kontrol Paneli" : "Commissioning Checklist Panel";
   const description =
     locale === "tr"
-      ? "Devreye alma adimlari, test kontrolleri ve operasyonel dogrulama maddelerini yonetmek icin proje ekiplerine ozel teknik kontrol paneli."
+      ? "Devreye alma adımları, test kontrolleri ve operasyonel doğrulama maddelerini yönetmek için proje ekiplerine özel teknik kontrol paneli."
       : "Commissioning panel for project teams to track startup steps, test checkpoints, and operational validation tasks in one workflow.";
 
   return buildPageMetadata({

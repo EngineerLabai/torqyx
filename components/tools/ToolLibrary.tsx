@@ -138,7 +138,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   const messages = getMessages(locale);
   const { status: billingStatus } = useBillingStatus();
   const copy = messages.components.toolLibrary;
-  const guideLinkLabel = locale === "tr" ? "Nasil Kullanilir?" : "How to Use?";
+  const guideLinkLabel = locale === "tr" ? "Nasıl Kullanılır?" : "How to Use?";
   const labels = copy.labels;
   const labelsEn = getMessages("en").components.toolLibrary.labels;
   const labelsTr = getMessages("tr").components.toolLibrary.labels;
@@ -500,7 +500,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
               title={locale === "tr" ? "Free plan arac limiti aktif." : "Free plan tool limit is active."}
               description={
                 locale === "tr"
-                  ? "Daha fazla araca erismek icin Pro'ya gecebilirsiniz."
+                  ? "Daha fazla araca erişmek için Pro'ya geçebilirsiniz."
                   : "Upgrade to Pro to unlock more tools."
               }
             />

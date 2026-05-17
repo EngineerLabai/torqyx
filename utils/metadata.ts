@@ -16,11 +16,14 @@ type PageMetadataOptions = {
   locale: Locale;
   type?: "website" | "article";
   keywords?: string[];
+  noIndex?: boolean;
+  robots?: Metadata["robots"];
   image?: typeof DEFAULT_OG_IMAGE_META;
   openGraph?: Metadata["openGraph"];
   twitter?: Metadata["twitter"];
   alternatesLanguages?: NonNullable<Metadata["alternates"]> extends { languages?: infer L } ? L | null : null;
   useLocalizedCanonical?: boolean;
+  absoluteTitle?: boolean;
 };
 
 const TITLE_MAX_LENGTH = 60;
@@ -34,7 +37,7 @@ const SEO_KEYWORD_BY_LOCALE: Record<Locale, string> = {
 };
 
 const DESCRIPTION_SUFFIX_BY_LOCALE: Record<Locale, string> = {
-  tr: " Standartlar, hesap adımları ve pratik raporlarla hızlı karar desteği sunar.",
+  tr: " Standart referanslar, hesap adımları ve pratik raporlarla hızlı karar desteği sunar.",
   en: " It includes standards, calculation steps, and practical reports for faster decisions.",
 };
 
@@ -46,6 +49,19 @@ const trimToWordBoundary = (value: string, maxLength: number) => {
     return sliced.slice(0, lastSpace).trimEnd();
   }
   return value.slice(0, maxLength).trimEnd();
+};
+
+const normalizeWhitespace = (value: string) => value.replace(/\s+/g, " ").trim();
+
+const ensureSentenceEnd = (value: string) => {
+  const trimmed = value.trim().replace(/[,:;]+$/g, "");
+  return /[.!?]$/.test(trimmed) ? trimmed : `${trimmed}.`;
+};
+
+const clampDescription = (value: string) => {
+  if (value.length <= DESCRIPTION_MAX_LENGTH) return ensureSentenceEnd(value);
+  const clipped = trimToWordBoundary(value, DESCRIPTION_MAX_LENGTH - 1);
+  return ensureSentenceEnd(clipped);
 };
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -71,32 +87,31 @@ const normalizeTitle = (title: string, locale: Locale) => {
 const normalizeDescription = (description: string | undefined, locale: Locale) => {
   const keyword = SEO_KEYWORD_BY_LOCALE[locale];
   const fallbackByLocale: Record<Locale, string> = {
-    tr: `TORQYX, ${keyword} ve mühendislik standartlari ile teknik analiz, dogrulama ve raporlama surecini tek yerde toplar.`,
+    tr: `TORQYX, ${keyword}, mühendislik standartları, teknik analiz, doğrulama ve raporlama sürecini tek yerde toplar.`,
     en: `TORQYX combines ${keyword}, engineering standards, technical analysis, validation, and reporting in one place.`,
   };
 
-  let normalized = (description ?? "").trim();
+  let normalized = normalizeWhitespace(description ?? "");
   if (!normalized || /^untitled$/i.test(normalized)) {
     normalized = fallbackByLocale[locale];
   }
 
-  if (!normalized.toLowerCase().includes(keyword)) {
-    normalized = `${normalized} ${keyword}.`;
-  }
-
   while (normalized.length < DESCRIPTION_MIN_LENGTH) {
-    const next = `${normalized}${DESCRIPTION_SUFFIX_BY_LOCALE[locale]}`;
+    const next = `${ensureSentenceEnd(normalized)}${DESCRIPTION_SUFFIX_BY_LOCALE[locale]}`;
     if (next.length === normalized.length) {
       break;
     }
     normalized = next;
   }
 
-  if (normalized.length > DESCRIPTION_MAX_LENGTH) {
-    normalized = trimToWordBoundary(normalized, DESCRIPTION_MAX_LENGTH);
+  if (
+    !normalized.toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US").includes(keyword) &&
+    normalized.length + keyword.length + 2 <= DESCRIPTION_MAX_LENGTH
+  ) {
+    normalized = `${ensureSentenceEnd(normalized)} ${keyword}.`;
   }
 
-  return normalized;
+  return clampDescription(normalized);
 };
 
 export const buildPageMetadata = ({
@@ -106,11 +121,14 @@ export const buildPageMetadata = ({
   locale,
   type = "website",
   keywords,
+  noIndex = false,
+  robots,
   image,
   openGraph,
   twitter,
   alternatesLanguages: alternatesLanguagesArg,
   useLocalizedCanonical = true,
+  absoluteTitle = false,
 }: PageMetadataOptions): Metadata => {
   const normalizedTitle = normalizeTitle(title, locale);
   const normalizedDescription = normalizeDescription(description, locale);
@@ -148,9 +166,21 @@ export const buildPageMetadata = ({
   };
 
   return {
-    title: normalizedTitle,
+    title: absoluteTitle ? { absolute: normalizedTitle } : normalizedTitle,
     description: normalizedDescription,
     keywords,
+    robots:
+      robots ??
+      (noIndex
+        ? {
+            index: false,
+            follow: false,
+            googleBot: {
+              index: false,
+              follow: false,
+            },
+          }
+        : undefined),
     alternates,
     openGraph: openGraphMeta,
     twitter: twitterMeta,

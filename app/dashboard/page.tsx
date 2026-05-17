@@ -17,6 +17,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/dashboard",
     locale,
+    noIndex: true,
   });
 }
 
@@ -39,4 +40,3 @@ export default async function DashboardPage() {
     </PageShell>
   );
 }
-

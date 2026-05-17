@@ -15,8 +15,8 @@ const COPY = {
   tr: {
     title: "Giriş Parametreleri",
     description:
-      "Boyut, malzeme sınıfı ve sürtünme varsayımına göre temel civata değerlerini hesapla. Değerleri güncelledikçe sonuç otomatik hesaplanır.",
-    presetLabel: "Standart civata seç (opsiyonel)",
+      "Boyut, malzeme sınıfı ve sürtünme varsayımına göre temel cıvata değerlerini hesapla. Değerleri güncelledikçe sonuç otomatik hesaplanır.",
+    presetLabel: "Standart cıvata seç (opsiyonel)",
     customPreset: "Manuel giriş",
     presetHelper: "Preset seçersen d ve P alanları otomatik dolar; istersen elle güncelleyebilirsin.",
     nominalDiameter: "Nominal çap d [mm]",

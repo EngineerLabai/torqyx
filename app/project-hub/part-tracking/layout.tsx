@@ -5,10 +5,10 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Parca Revizyon Takip Paneli" : "Part Revision Tracking Panel";
+  const title = locale === "tr" ? "Parça Revizyon Takip Paneli" : "Part Revision Tracking Panel";
   const description =
     locale === "tr"
-      ? "Parca revizyonlari, PPAP durumu ve SOP asamalarini izlemek icin proje mühendisleri tarafindan kullanilan teknik takip panelidir."
+      ? "Parça revizyonları, PPAP durumu ve SOP aşamalarını izlemek için proje mühendisleri tarafından kullanılan teknik takip panelidir."
       : "Part tracking panel for project engineers to monitor revision status, PPAP progress, and SOP stage transitions with clear visibility.";
 
   return buildPageMetadata({

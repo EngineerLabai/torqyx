@@ -128,13 +128,13 @@ export const toolMethodNotes: Record<string, ToolMethodNotesByLocale> = {
             "Yağlama K katsayısını düşürür; aynı torkla daha yüksek ön yük oluşur. Yağlı durumda tork düşürülmelidir.",
         },
         {
-          question: "İnç (UNC/UNF) civatalar için geçerli mi?",
+          question: "İnç (UNC/UNF) cıvatalar için geçerli mi?",
           answer:
             "Bu hesap ISO metrik diş profiline göre yapılır. İnç dişler için farklı gerilme alanı formülü gerekir.",
         },
       ],
       references: [
-        { title: "ISO 898-1 (Civata mekanik özellikleri)" },
+        { title: "ISO 898-1 (Cıvata mekanik özellikleri)" },
         { title: "VDI 2230 (Cıvata bağlantıları tasarımı)" },
       ],
     },

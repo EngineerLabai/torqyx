@@ -13,7 +13,7 @@ describe("SEO metadata helpers", () => {
       }),
     );
 
-    expect(url.origin).toBe("https://aiengineerslab.com");
+    expect(url.origin).toBe("https://torqyx.com");
     expect(url.pathname).toBe("/og");
     expect(url.searchParams.get("title")).toBe("Bolt Calculator");
     expect(url.searchParams.get("locale")).toBe("en");

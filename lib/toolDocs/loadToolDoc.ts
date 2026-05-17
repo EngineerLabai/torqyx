@@ -224,6 +224,12 @@ const hasDraftHint = (value: string | null | undefined) => {
   return DRAFT_HINTS.some((hint) => normalized.includes(hint));
 };
 
+const shouldUseSectionSource = (sectionContent: string | null, existingContent: string | null) => {
+  if (!sectionContent) return false;
+  if (!hasDraftHint(sectionContent)) return true;
+  return !existingContent;
+};
+
 const isDraftFromMeta = (meta: ToolDocMeta) => {
   const explicit = asOptionalBoolean(meta.draft) ?? asOptionalBoolean(meta.isDraft);
   if (explicit === true) return true;
@@ -275,24 +281,30 @@ export const loadToolDoc = async ({
 
   const explanationFile = await pickFirstFile(buildSectionCandidates(safeSlug, "explanation", locale));
   if (explanationFile) {
-    rawSources.push(explanationFile.content);
     const parsed = matter(explanationFile.content);
-    if (!Object.keys(meta).length) {
-      meta = parsed.data ?? {};
-      examplesFromMeta = normalizeExamples(parsed.data?.examples);
+    const sectionContent = parsed.content.trim() || null;
+    if (shouldUseSectionSource(sectionContent, explanation)) {
+      rawSources.push(explanationFile.content);
+      if (!Object.keys(meta).length) {
+        meta = parsed.data ?? {};
+        examplesFromMeta = normalizeExamples(parsed.data?.examples);
+      }
+      explanation = sectionContent;
     }
-    explanation = parsed.content.trim() || null;
   }
 
   const examplesFile = await pickFirstFile(buildSectionCandidates(safeSlug, "examples", locale));
   if (examplesFile) {
-    rawSources.push(examplesFile.content);
     const parsed = matter(examplesFile.content);
-    if (!Object.keys(meta).length) {
-      meta = parsed.data ?? {};
-      examplesFromMeta = normalizeExamples(parsed.data?.examples);
+    const sectionContent = parsed.content.trim() || null;
+    if (shouldUseSectionSource(sectionContent, examples)) {
+      rawSources.push(examplesFile.content);
+      if (!Object.keys(meta).length) {
+        meta = parsed.data ?? {};
+        examplesFromMeta = normalizeExamples(parsed.data?.examples);
+      }
+      examples = sectionContent;
     }
-    examples = parsed.content.trim() || null;
   }
 
   const hasExamples = Boolean(examples) || Boolean(examplesFromMeta);

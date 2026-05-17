@@ -27,6 +27,6 @@ export const buildShortShareUrl = (code: string, baseUrl?: string) => {
     baseUrl ??
     (typeof window !== "undefined"
       ? window.location.origin
-      : process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://aiengineerslab.com");
+      : process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://torqyx.com");
   return `${resolvedBaseUrl.replace(/\/$/, "")}/s/${code}`;
 };

@@ -206,7 +206,7 @@ const BoltDiagram = (
       viewBox={`0 0 ${width} ${height}`}
       className={className}
       role="img"
-      aria-label={t(locale, "Civata diyagramı", "Bolt diagram")}
+      aria-label={t(locale, "Cıvata diyagramı", "Bolt diagram")}
     >
       <rect x={0} y={0} width={width} height={height} fill={COLORS.background} />
       {params.showGrid ? renderGrid(width, height, 20) : null}

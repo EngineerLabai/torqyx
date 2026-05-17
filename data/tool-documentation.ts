@@ -35,14 +35,14 @@ export type ResolvedToolDocumentation = {
 
 export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
   scope: {
-    tr: "Bu arac belirli bir mühendislik problemi icin girdileri alir ve standart tabanli hesap sonucu uretir.",
+    tr: "Bu araç belirli bir mühendislik problemi için girdileri alır ve standart tabanlı hesap sonucu üretir.",
     en: "This tool accepts engineering inputs for a defined problem and returns a standards-based calculation result.",
   },
   assumptionsAndUnits: {
     tr: [
-      "SI birimleri esas alinir; girisler arasi birim uyumu kullanici tarafinda dogrulanmalidir.",
-      "Hesap adimlari deterministik formul akisi ile calisir (ayni girdi = ayni cikti).",
-      "Malzeme ve cevre kosullari icin varsayilan degerler kullaniliyorsa proje degerleri ile guncellenmelidir.",
+      "SI birimleri esas alınır; girişler arası birim uyumu kullanıcı tarafında doğrulanmalıdır.",
+      "Hesap adımları deterministik formül akışı ile çalışır (aynı girdi = aynı çıktı).",
+      "Malzeme ve çevre koşulları için varsayılan değerler kullanılıyorsa proje değerleri ile güncellenmelidir.",
     ],
     en: [
       "SI units are the baseline; input unit consistency must be verified by the user.",
@@ -53,7 +53,7 @@ export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
   limits: {
     tr: [
       "Araç ön boyutlandırma ve teknik kontrol amaçlıdır; final tasarım onayı yerine geçmez.",
-      "Deger araligi disina cikan girdilerde sonuc yorumundan once girdi kalitesi kontrol edilmelidir.",
+      "Değer aralığı dışına çıkan girdilerde sonuç yorumundan önce girdi kalitesi kontrol edilmelidir.",
     ],
     en: [
       "This tool is intended for preliminary sizing and technical checks, not final design approval.",
@@ -61,20 +61,20 @@ export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
     ],
   },
   referenceStandards: {
-    tr: ["ISO / DIN / VDI kaynaklari ve yaygin mühendislik el kitaplari"],
+    tr: ["ISO / DIN / VDI kaynakları ve yaygın mühendislik el kitapları"],
     en: ["ISO / DIN / VDI references and common engineering handbooks"],
   },
   validationExamples: {
     tr: [
       {
-        title: "Ornek dogrulama",
+        title: "Örnek doğrulama",
         rows: [
           {
-            input: "Girdi seti: Proje verileri ile birim uyumlu degerler",
-            expectedOutput: "Beklenen cikti: Arac sonucu standart tablolar ile ayni mertebede",
+            input: "Girdi seti: Proje verileri ile birim uyumlu değerler",
+            expectedOutput: "Beklenen çıktı: Araç sonucu standart tablolar ile aynı mertebede",
           },
         ],
-        note: "Gerçek projede en az bir manuel kontrol veya referans tablo karsilastirmasi yapin.",
+        note: "Gerçek projede en az bir manuel kontrol veya referans tablo karşılaştırması yapın.",
       },
     ],
     en: [
@@ -97,14 +97,14 @@ export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
 const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
   "bolt-calculator": {
     scope: {
-      tr: "Civata gerilme alani, on yuk (preload) ve sikma torku tahmini hesaplar.",
+      tr: "Cıvata gerilme alanı, ön yük (preload) ve sıkma torku tahmini hesaplar.",
       en: "Calculates bolt stress area, preload estimate, and tightening torque estimate.",
     },
     assumptionsAndUnits: {
       tr: [
-        "SI birimleri kullanilir (N, mm, MPa, Nm).",
-        "Dis geometrisi ve surtunme katsayisi icin tipik degerler kullanilir; uygulamaya gore guncellenmelidir.",
-        "Malzeme sinifi mekanik özellikleri ISO 898-1 referansina gore yorumlanir.",
+        "SI birimleri kullanılır (N, mm, MPa, Nm).",
+        "Diş geometrisi ve sürtünme katsayısı için tipik değerler kullanılır; uygulamaya göre güncellenmelidir.",
+        "Malzeme sınıfı mekanik özellikleri ISO 898-1 referansına göre yorumlanır.",
       ],
       en: [
         "SI units are used (N, mm, MPa, Nm).",
@@ -114,8 +114,8 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     },
     limits: {
       tr: [
-        "Tork-preload iliskisi surtunmeye yuksek hassastir; gerçek montajda kalibrasyon gerekir.",
-        "Dinamik yorulma, gevseme ve servis sicakligi etkileri bu hizli modelde sinirlidir.",
+        "Tork-preload ilişkisi sürtünmeye yüksek hassastır; gerçek montajda kalibrasyon gerekir.",
+        "Dinamik yorulma, gevşeme ve servis sıcaklığı etkileri bu hızlı modelde sınırlıdır.",
       ],
       en: [
         "Torque-preload relation is highly friction-sensitive; real assembly requires calibration.",
@@ -123,20 +123,20 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
       ],
     },
     referenceStandards: {
-      tr: ["ISO 898-1", "VDI 2230", "ISO 68-1 / ISO 261 (metrik dis temel referanslari)"],
+      tr: ["ISO 898-1", "VDI 2230", "ISO 68-1 / ISO 261 (metrik diş temel referansları)"],
       en: ["ISO 898-1", "VDI 2230", "ISO 68-1 / ISO 261 (metric thread baseline references)"],
     },
     validationExamples: {
       tr: [
         {
-          title: "M10 - 8.8 sinifi civata kontrolu",
+          title: "M10 - 8.8 sınıfı cıvata kontrolü",
           rows: [
             {
-              input: "d=10 mm, p=1.5 mm, hedef preload=25 kN, surtunme=0.14",
-              expectedOutput: "As yaklasik 58 mm^2, tahmini tork yaklasik 45-55 Nm araliginda",
+              input: "d=10 mm, p=1.5 mm, hedef preload=25 kN, sürtünme=0.14",
+              expectedOutput: "As yaklaşık 58 mm^2, tahmini tork yaklaşık 45-55 Nm aralığında",
             },
           ],
-          note: "Kesin tork degeri icin saha surtunme katsayisi ve anahtar kalibrasyonu ile dogrulayin.",
+          note: "Kesin tork değeri için saha sürtünme katsayısı ve anahtar kalibrasyonu ile doğrulayın.",
         },
       ],
       en: [
@@ -157,14 +157,14 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
   },
   "unit-converter": {
     scope: {
-      tr: "Uzunluk, kuvvet, basinc, enerji ve benzeri birim donusumlerini sabit katsayilarla hesaplar.",
+      tr: "Uzunluk, kuvvet, basınç, enerji ve benzeri birim dönüşümlerini sabit katsayılarla hesaplar.",
       en: "Converts units such as length, force, pressure, and energy using fixed conversion factors.",
     },
     assumptionsAndUnits: {
       tr: [
-        "Donusumler SI tabanli referans birim uzerinden yapilir.",
-        "Girdiler sayisal kabul edilir; birim sembol tutarliligi kullanici tarafindan saglanir.",
-        "Yuvarlama yalnizca gosterim icindir; hesaplama icerde tam hassasiyete yakin yapilir.",
+        "Dönüşümler SI tabanlı referans birim üzerinden yapılır.",
+        "Girdiler sayısal kabul edilir; birim sembol tutarlılığı kullanıcı tarafından sağlanır.",
+        "Yuvarlama yalnızca gösterim içindir; hesaplama içeride tam hassasiyete yakın yapılır.",
       ],
       en: [
         "Conversions run through SI-base reference units.",
@@ -174,8 +174,8 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     },
     limits: {
       tr: [
-        "Sicaklik gibi ofsetli donusumlerde secilen formata gore sonuc degisimi kontrol edilmelidir.",
-        "Standart disi birimler veya proje icin ozel katsayilar bu arac kapsaminda değildir.",
+        "Sıcaklık gibi ofsetli dönüşümlerde seçilen formata göre sonuç değişimi kontrol edilmelidir.",
+        "Standart dışı birimler veya proje için özel katsayılar bu araç kapsamında değildir.",
       ],
       en: [
         "Offset-based conversions (such as temperature) must be checked against the selected formula.",
@@ -189,7 +189,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     validationExamples: {
       tr: [
         {
-          title: "Birim donusum kontrolu",
+          title: "Birim dönüşüm kontrolü",
           rows: [
             { input: "1000 mm", expectedOutput: "1 m" },
             { input: "1 bar", expectedOutput: "100000 Pa" },
@@ -211,14 +211,14 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
   },
   "pipe-pressure-loss": {
     scope: {
-      tr: "Boru icindeki akis icin Reynolds sayisi, surtunme katsayisi ve basinc kaybini hesaplar.",
+      tr: "Boru içindeki akış için Reynolds sayısı, sürtünme katsayısı ve basınç kaybını hesaplar.",
       en: "Calculates Reynolds number, friction factor, and pressure loss for internal pipe flow.",
     },
     assumptionsAndUnits: {
       tr: [
-        "Model Darcy-Weisbach yaklasimina dayanir; SI birimleri kullanilir (m, kg/s, Pa).",
-        "Akiskan özellikleri secilen sicaklikta sabit kabul edilir (hizli hesap varsayimi).",
-        "Pruzululuk, cap ve uzunluk girdileri duz boru segmenti mantigiyla yorumlanir.",
+        "Model Darcy-Weisbach yaklaşımına dayanır; SI birimleri kullanılır (m, kg/s, Pa).",
+        "Akışkan özellikleri seçilen sıcaklıkta sabit kabul edilir (hızlı hesap varsayımı).",
+        "Pürüzlülük, çap ve uzunluk girdileri düz boru segmenti mantığıyla yorumlanır.",
       ],
       en: [
         "The model is based on Darcy-Weisbach; SI units are used (m, kg/s, Pa).",
@@ -228,8 +228,8 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     },
     limits: {
       tr: [
-        "Cok fazli akis, ani genisleme/daralma ve lokal kayiplar bu temel modelde sinirlidir.",
-        "Yuksek sicaklikta viskozite degisimi ve kompresibilite etkileri ayri dogrulama gerektirir.",
+        "Çok fazlı akış, ani genişleme/daralma ve lokal kayıplar bu temel modelde sınırlıdır.",
+        "Yüksek sıcaklıkta viskozite değişimi ve kompresibilite etkileri ayrı doğrulama gerektirir.",
       ],
       en: [
         "Multiphase flow, abrupt expansion/contraction, and local losses are limited in this baseline model.",
@@ -237,20 +237,20 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
       ],
     },
     referenceStandards: {
-      tr: ["Darcy-Weisbach yaklasimi", "EN ISO 5167 (olcum/akis referansi)", "VDI 2048 (uygulama notlari)"],
+      tr: ["Darcy-Weisbach yaklaşımı", "EN ISO 5167 (ölçüm/akış referansı)", "VDI 2048 (uygulama notları)"],
       en: ["Darcy-Weisbach approach", "EN ISO 5167 (flow/measurement reference)", "VDI 2048 (application notes)"],
     },
     validationExamples: {
       tr: [
         {
-          title: "Su hatti hizli kontrolu",
+          title: "Su hattı hızlı kontrolü",
           rows: [
             {
-              input: "Q=2.0 L/s, D=50 mm, L=20 m, puruzluluk=0.045 mm",
-              expectedOutput: "Re > 4000, basinc kaybi yaklasik 8-15 kPa araligi",
+              input: "Q=2.0 L/s, D=50 mm, L=20 m, pürüzlülük=0.045 mm",
+              expectedOutput: "Re > 4000, basınç kaybı yaklaşık 8-15 kPa aralığı",
             },
           ],
-          note: "Gerçek sistemde lokal kayip katsayilari (dirsek, vana) eklenmelidir.",
+          note: "Gerçek sistemde lokal kayıp katsayıları (dirsek, vana) eklenmelidir.",
         },
       ],
       en: [
@@ -274,7 +274,7 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
 const buildFallbackDocumentation = (toolTitle: string): ToolDocumentationEntry => ({
   ...TOOL_DOCUMENTATION_TEMPLATE,
   scope: {
-    tr: `${toolTitle} araci bu arac tipine ait temel mühendislik hesabini yapar ve sonucu izlenebilir formatta sunar.`,
+    tr: `${toolTitle} aracı bu araç tipine ait temel mühendislik hesabını yapar ve sonucu izlenebilir formatta sunar.`,
     en: `${toolTitle} performs the core engineering calculation for this tool type and presents results in a traceable format.`,
   },
 });

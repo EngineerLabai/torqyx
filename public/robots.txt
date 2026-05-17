@@ -1,11 +1,9 @@
-User-agent: *
-User-agent: Googlebot
-User-agent: Bingbot
+﻿User-agent: *
 Allow: /
-
 Disallow: /api/
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /saved-calculations/
+Disallow: /dashboard
+Disallow: /login
+Disallow: /saved-calculations
+Disallow: /health
 
-Sitemap: https://aiengineerslab.com/sitemap.xml
+Sitemap: https://torqyx.com/sitemap.xml

@@ -169,12 +169,14 @@ const toolCatalogBase: ToolCatalogBaseItem[] = [
   {
     id: "belt-length",
     type: "calculator",
-    title: "Kasnak Kayış Uzunluğu",
-    description: "İki kasnak çapı ve merkez mesafesine göre kayış uzunluğunu hesapla.",
-    titleEn: "Pulley Belt Length",
-    descriptionEn: "Calculate belt length from pulley diameters and center distance.",
+    title: "Kasnak Kayışı Uzunluğu ve Sarma Açısı",
+    description: "Açık kayış düzeninde iki kasnak çapı ve merkez mesafesine göre kayış uzunluğunu, küçük kasnak sarma açısını ve germe payı kontrolünü hesapla.",
+    titleEn: "Pulley Belt Length and Wrap Angle",
+    descriptionEn: "Calculate open belt length, small pulley wrap angle, and tension allowance checks from pulley diameters and center distance.",
     href: "/tools/belt-length",
     category: "Mechanical",
+    tags: ["engineering"],
+    lastUpdated: "2026-05-17",
   },
   {
     id: "torque-power",

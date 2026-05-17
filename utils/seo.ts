@@ -1,7 +1,7 @@
 import type { Locale } from "@/utils/locale";
 import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
 
-const FALLBACK_SITE_URL = "https://aiengineerslab.com";
+const FALLBACK_SITE_URL = "https://torqyx.com";
 
 const ensureProtocol = (value: string) => (/^https?:\/\//i.test(value) ? value : `https://${value}`);
 
@@ -16,11 +16,11 @@ const normalizeSiteUrl = (value: string) => {
 };
 
 const resolveSiteUrl = () => {
+  const explicitSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL;
+  const vercelSiteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
   const envSiteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.SITE_URL ??
-    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
-    process.env.VERCEL_URL ??
+    explicitSiteUrl ??
+    (process.env.VERCEL_ENV === "production" ? FALLBACK_SITE_URL : vercelSiteUrl) ??
     FALLBACK_SITE_URL;
 
   try {

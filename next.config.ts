@@ -19,11 +19,11 @@ const normalizePrimarySiteUrl = (value: string) => {
 };
 
 const PRIMARY_SITE_URL = (() => {
-  const candidate = process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://aiengineerslab.com";
+  const candidate = process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://torqyx.com";
   try {
     return normalizePrimarySiteUrl(candidate);
   } catch {
-    return "https://aiengineerslab.com";
+    return "https://torqyx.com";
   }
 })();
 

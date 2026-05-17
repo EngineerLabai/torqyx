@@ -1,45 +1,55 @@
-﻿{/* Tool: belt-length */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve degiskenleri araca göre güncelle.
-</Callout>
+{/* Tool: belt-length */}
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Açık kayış uzunluğu ve sarma açısı">
+L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
+β = π − 2·arcsin((D2 − D1)/(2C))
 </Formula>
 
-## Değişken açıklamaları
+Bu formül açık kayış düzeninde kasnak kayışı uzunluğu ve küçük kasnak sarma açısı için geometrik bir ön seçim verir. Eşit çaplı kasnaklarda sarma açısı yaklaşık 180° olur; çap farkı büyüdükçe küçük kasnaktaki sarma açısı azalabilir.
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
       <th>Açıklama</th>
-      <th>Not</th>
+      <th>Birim</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>D1</td>
+      <td>Birinci kasnak çapı</td>
+      <td>mm</td>
+    </tr>
+    <tr>
+      <td>D2</td>
+      <td>İkinci kasnak çapı</td>
+      <td>mm</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>Kasnak merkezleri arasındaki mesafe</td>
+      <td>mm</td>
+    </tr>
+    <tr>
+      <td>L</td>
+      <td>Yaklaşık açık kayış uzunluğu</td>
+      <td>mm</td>
+    </tr>
+    <tr>
+      <td>β</td>
+      <td>Küçük kasnak sarma açısı</td>
+      <td>derece</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Doğrulama ve Uyarı Notları
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Dogrulama ve uyarı notlari
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Kayış seçimi">
+Son kayış boyunu seçerken üretici kataloglarındaki standart boyları, germe payını, kasnak kanal tipini ve çalışma yükünü ayrıca kontrol et.
 </Callout>
-

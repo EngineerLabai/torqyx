@@ -224,7 +224,7 @@ export default async function MaterialDetailPage({ params }: PageProps) {
               />
               <PropertyRow
                 label={copy.labels.alpha}
-                value={formatWithUnit(material.alpha, "um/m-K", locale, { maximumFractionDigits: 2 })}
+                value={formatWithUnit(material.alpha, "µm/m-K", locale, { maximumFractionDigits: 2 })}
               />
             </dl>
           </section>

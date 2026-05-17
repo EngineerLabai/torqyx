@@ -5,7 +5,7 @@ const BOLT_CALCULATOR_COPY = {
     visualization: {
       title: "G\u00f6rselle\u015ftirme",
       description:
-        "Canl\u0131 sigma-akma dayan\u0131m\u0131 kar\u015f\u0131la\u015ft\u0131rmas\u0131, \u00f6n y\u00fck y\u00fczdesi ve d-P de\u011ferlerine ba\u011fl\u0131 civata \u015femas\u0131.",
+        "Canl\u0131 sigma-akma dayan\u0131m\u0131 kar\u015f\u0131la\u015ft\u0131rmas\u0131, \u00f6n y\u00fck y\u00fczdesi ve d-P de\u011ferlerine ba\u011fl\u0131 c\u0131vata \u015femas\u0131.",
       chartTitle: "sigma - Akma dayan\u0131m\u0131 kar\u015f\u0131la\u015ft\u0131rmas\u0131",
       chartSeriesLabel: "Gerilme kar\u015f\u0131la\u015ft\u0131rmas\u0131",
       chartSigmaLabel: "sigma",
@@ -14,8 +14,8 @@ const BOLT_CALCULATOR_COPY = {
       preloadGaugeUnit: "%Re",
       sigmaLabel: "sigma",
       yieldLabel: "Re",
-      schematicTitle: "Civata \u015femas\u0131",
-      schematicAria: "Nominal \u00e7ap ve di\u015f ad\u0131m\u0131na g\u00f6re g\u00fcncellenen civata \u015femas\u0131",
+      schematicTitle: "C\u0131vata \u015femas\u0131",
+      schematicAria: "Nominal \u00e7ap ve di\u015f ad\u0131m\u0131na g\u00f6re g\u00fcncellenen c\u0131vata \u015femas\u0131",
     },
   },
   en: {

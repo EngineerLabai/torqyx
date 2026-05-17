@@ -375,7 +375,7 @@
         "G": "Shear modulus G (GPa)",
         "yield": "Yield strength (MPa)",
         "UTS": "Ultimate tensile strength (MPa)",
-        "alpha": "Thermal expansion α (um/m-K)"
+        "alpha": "Thermal expansion α (µm/m-K)"
       },
       "disclaimer": "Values are typical and for comparison only. Confirm supplier data and standards for final design.",
       "categories": {

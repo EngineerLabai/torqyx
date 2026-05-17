@@ -135,12 +135,12 @@ export default async function AboutPage() {
 
         <section className="space-y-3">
           <h2 className="text-lg font-semibold text-slate-900">Mühendislik Metodolojisi</h2>
-          <div className="relative h-64 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
+          <div className="relative mx-auto h-40 w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm sm:h-48 md:h-56">
             <Image
               src="/images/workspace-flat-lay.webp"
               alt="Engineering Workspace"
               fill
-              sizes="(min-width: 768px) 720px, 100vw"
+              sizes="(min-width: 768px) 672px, calc(100vw - 48px)"
               className="object-cover"
             />
           </div>

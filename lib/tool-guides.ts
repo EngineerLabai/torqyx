@@ -194,42 +194,42 @@ Use the related tool links below to continue with upstream or downstream checks.
 `;
   }
 
-  return `## Problem Tanimi
+  return `## Problem Tanımı
 
-${toolName} tekrarlayan mühendislik hesaplarinda hiz ve tutarlilik saglamak icin kullanilir.
+${toolName} tekrarlayan mühendislik hesaplarında hız ve tutarlılık sağlamak için kullanılır.
 
-## Formul Aciklamasi
+## Formül Açıklaması
 
-Adim adim akis:
+Adım adım akış:
 
-1. Giris degerlerini ve birimleri tanimla.
-2. Tum birimleri ayni sistemde normalize et.
-3. Ana formul adimlarini sirayla uygula.
-4. Sonucu sinir kosullari ve mantik kontrolu ile dogrula.
+1. Giriş değerlerini ve birimleri tanımla.
+2. Tüm birimleri aynı sistemde normalize et.
+3. Ana formül adımlarını sırayla uygula.
+4. Sonucu sınır koşulları ve mantık kontrolü ile doğrula.
 
-Karar akisi:
+Karar akışı:
 
 \`\`\`text
-Girdi -> Birim Kontrol -> Formul -> Dogrulama -> Karar
+Girdi -> Birim Kontrol -> Formül -> Doğrulama -> Karar
 \`\`\`
 
-## Ornek Cozum
+## Örnek Çözüm
 
-Hesaplayici varsayilan girdileriyle basla, her seferinde tek bir girdiyi degistir ve nihai sonucu kabul etmeden once ara degerleri varsayimlarla karsilastir.
+Hesaplayıcı varsayılan girdileriyle başla, her seferinde tek bir girdiyi değiştir ve nihai sonucu kabul etmeden önce ara değerleri varsayımlarla karşılaştır.
 
-## Sik Yapilan Hatalar
+## Sık Yapılan Hatalar
 
-- Birim donusumunu atlamak
-- Sinir kosullarini goz ardi etmek
-- Ara adimlarda erken yuvarlama yapmak
+- Birim dönüşümünü atlamak
+- Sınır koşullarını göz ardı etmek
+- Ara adımlarda erken yuvarlama yapmak
 
-## Ilgili Standart Referansi (ISO/DIN/VDI)
+## İlgili Standart Referansı (ISO/DIN/VDI)
 
 Temel referans: ${standard}
 
-## Ilgili Araclar
+## İlgili Araçlar
 
-Asagidaki ilgili arac linkleri ile bagli hesap kontrollerine devam edebilirsin.
+Aşağıdaki ilgili araç linkleri ile bağlı hesap kontrollerine devam edebilirsin.
 `;
 };
 
@@ -323,12 +323,12 @@ const parseGuideSource = (
   return {
     title:
       asOptionalString(meta.title) ??
-      (locale === "en" ? `${fallbackCopy.title}: How to Use Guide` : `${fallbackCopy.title}: Nasil Kullanilir Rehberi`),
+      (locale === "en" ? `${fallbackCopy.title}: How to Use Guide` : `${fallbackCopy.title}: Nasıl Kullanılır Rehberi`),
     description:
       asOptionalString(meta.description) ??
       (locale === "en"
         ? `${fallbackCopy.description} Step-by-step method, examples, common mistakes, standards, and related tools.`
-        : `${fallbackCopy.description} Adim adim yontem, ornek cozum, sik hatalar, standartlar ve ilgili araclar.`),
+        : `${fallbackCopy.description} Adım adım yöntem, örnek çözüm, sık hatalar, standartlar ve ilgili araçlar.`),
     datePublished: toIsoDate(meta.date, publishedFallback),
     dateModified: toIsoDate(meta.updatedAt, publishedFallback),
     standards: asStringArray(meta.standards).length > 0 ? asStringArray(meta.standards) : [fallbackTool.validationStandard],

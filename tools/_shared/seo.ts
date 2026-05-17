@@ -129,24 +129,24 @@ const buildFallbackHowToSteps = (
 
   if (type === "guide") {
     return [
-      `${name} referans sayfasini acin.`,
-      "Ilgili malzeme, standart veya muhendislik kosulunu secin.",
-      "Sonucu uygulamadan once varsayimlari, sinirlari ve ilgili hesaplayici baglantilarini karsilastirin.",
+      `${name} referans sayfasını açın.`,
+      "İlgili malzeme, standart veya mühendislik koşulunu seçin.",
+      "Sonucu uygulamadan önce varsayımları, sınırları ve ilgili hesaplayıcı bağlantılarını karşılaştırın.",
     ];
   }
 
   if (type === "bundle") {
     return [
-      `${name} arac grubunu acin.`,
-      "Muhendislik problemine uygun hesaplayiciyi veya is akisini secin.",
-      "Birimleri tutarli girin, varsayimlari inceleyin ve gerekirse ilgili kontrollerle devam edin.",
+      `${name} araç grubunu açın.`,
+      "Mühendislik problemine uygun hesaplayıcıyı veya iş akışını seçin.",
+      "Birimleri tutarlı girin, varsayımları inceleyin ve gerekirse ilgili kontrollerle devam edin.",
     ];
   }
 
   return [
-    `${name} hesaplayicisini acin.`,
-    "Gerekli girdi degerlerini tutarli muhendislik birimleriyle girin.",
-    "Hesaplanan sonucu, varsayimlari, referanslari ve dogrulama notlarini inceleyin.",
+    `${name} hesaplayıcısını açın.`,
+    "Gerekli girdi değerlerini tutarlı mühendislik birimleriyle girin.",
+    "Hesaplanan sonucu, varsayımları, referansları ve doğrulama notlarını inceleyin.",
   ];
 };
 
@@ -164,12 +164,12 @@ export function getToolSeo(toolPath: string, locale: Locale = DEFAULT_LOCALE): T
     toolCopy?.description ??
     tool?.description ??
     (locale === "tr"
-      ? "Mekanik hesaplama araci. Parametreleri gir, sonucu adim adim gor."
+      ? "Mekanik hesaplama aracı. Parametreleri gir, sonucu adım adım gör."
       : "Engineering calculator. Enter parameters and review step-by-step results.");
 
   const brandName = getBrandCopy(locale).siteName;
-  const suffix = locale === "tr" ? "Hesaplayici" : "Calculator";
-  const title = `${name} ${suffix} | ${brandName}`;
+  const suffix = locale === "tr" ? "Hesaplayıcı" : "Calculator";
+  const title = tool?.id === "belt-length" ? name : `${name} ${suffix} | ${brandName}`;
 
   const canonical = buildLocalizedCanonical(tool?.href ?? href, locale);
   const alternates = buildLanguageAlternates(tool?.href ?? href);

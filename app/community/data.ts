@@ -22,14 +22,14 @@ export type Thread = {
 const threadsTr: Thread[] = [
   {
     slug: "m12-civata-torku",
-    title: "M12 10.9 civata torku ve yağlama",
+    title: "M12 10.9 cıvata torku ve yağlama",
     author: "Ayşe Yılmaz",
     category: "Tork / Bağlantı",
     details:
       "Tablo değerleriyle gerçek sıkma arasında fark var. Moment anahtarı kalibrasyonu ve yağlama seçimi torku nasıl etkiler? Kuru/yağlı değerleri nasıl ayırıyorsunuz?",
     excerpt: "Tablo ve gerçek tork farkı; moment anahtarı kalibrasyonu ve yağlama seçimi torku nasıl değiştiriyor?",
     updated: "2 saat önce",
-    tags: ["tork", "civata", "yağlama"],
+    tags: ["tork", "cıvata", "yağlama"],
     views: 240,
     replies: [
       {
@@ -162,7 +162,7 @@ const threadsEn: Thread[] = [
     replies: [
       {
         user: "Elif",
-        text: "Ra 1.6-3.2 um is usually enough. Clean surfaces and no burrs are critical.",
+        text: "Ra 1.6-3.2 µm is usually enough. Clean surfaces and no burrs are critical.",
         time: "2 min ago",
       },
     ],

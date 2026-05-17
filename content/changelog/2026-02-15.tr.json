@@ -4,20 +4,20 @@
     "date": "2026-02-15",
     "tool": "Bolt Calculator",
     "badge": "new",
-    "description": "- Metrik civata secimi icin hizli presetler eklendi."
+    "description": "- Metrik cıvata seçimi için hızlı presetler eklendi."
   },
   {
     "version": "2026.02.15",
     "date": "2026-02-15",
     "tool": "Pipe Pressure Loss",
     "badge": "fixed",
-    "description": "- Debi girdilerinde birim donusumu kaynakli yuvarlama hatasi duzeltildi."
+    "description": "- Debi girdilerinde birim dönüşümü kaynaklı yuvarlama hatası düzeltildi."
   },
   {
     "version": "2026.02.15",
     "date": "2026-02-15",
     "tool": "Legacy Gear Notes",
     "badge": "removed",
-    "description": "- Eski not karti kaldirildi ve yeni dokumantasyon akisina tasindi."
+    "description": "- Eski not kartı kaldırıldı ve yeni dokümantasyon akışına taşındı."
   }
 ]

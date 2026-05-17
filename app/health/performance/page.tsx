@@ -16,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     path: "/health/performance",
     locale,
+    noIndex: true,
   });
 }
 

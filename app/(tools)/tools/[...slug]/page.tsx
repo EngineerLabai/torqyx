@@ -104,17 +104,17 @@ const getGuideCopy = (locale: "tr" | "en"): GuideCopy => {
   }
 
   return {
-    badge: "Arac Rehberi",
-    backToTool: "Araca don",
-    tocTitle: "Icindekiler",
-    tocEmpty: "Henuz baslik bulunmuyor.",
-    standardsTitle: "Ilgili Standartlar",
-    relatedTitle: "Ilgili Araclar",
-    relatedDescription: "Slug, kategori ve ortak etiketlere gore otomatik oneriler.",
-    openTool: "Araci ac",
-    openGuide: "Nasil kullanilir",
+    badge: "Araç Rehberi",
+    backToTool: "Araca dön",
+    tocTitle: "İçindekiler",
+    tocEmpty: "Henüz başlık bulunmuyor.",
+    standardsTitle: "İlgili Standartlar",
+    relatedTitle: "İlgili Araçlar",
+    relatedDescription: "Slug, kategori ve ortak etiketlere göre otomatik öneriler.",
+    openTool: "Aracı aç",
+    openGuide: "Nasıl kullanılır",
     breadcrumbHome: "Ana sayfa",
-    breadcrumbTools: "Araclar",
+    breadcrumbTools: "Araçlar",
     readGuide: "Rehber",
   };
 };
@@ -133,10 +133,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const guide = await getToolGuideBySlug({ slug: toolSlug, locale });
     if (!guide) {
       return buildPageMetadata({
-        title: locale === "tr" ? "Rehber bulunamadi" : "Guide not found",
+        title: locale === "tr" ? "Rehber bulunamadı" : "Guide not found",
         description:
           locale === "tr"
-            ? "Istenen arac rehberi bulunamadi."
+            ? "İstenen araç rehberi bulunamadı."
             : "The requested tool guide could not be found.",
         path,
         locale,
@@ -150,7 +150,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       path,
       locale,
       type: "article",
-      keywords: [...(guide.tool.tags ?? []), "guide", "how-to"],
+      keywords:
+        locale === "tr"
+          ? [...(guide.tool.tags ?? []), "rehber", "nasıl kullanılır"]
+          : [...(guide.tool.tags ?? []), "guide", "how-to"],
       alternatesLanguages: buildLanguageAlternates(`/tools/${guide.slug}/guide`),
       openGraph: {
         type: "article",

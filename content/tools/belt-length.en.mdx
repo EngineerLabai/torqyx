@@ -1,5 +1,17 @@
 ---
-title: Belt Length (EN)
+title: Pulley Belt Length and Wrap Angle
 ---
 
-Placeholder English documentation for the Belt Length tool.
+## Calculation Explanation
+
+Use this calculator to estimate open pulley belt length and the small pulley wrap angle from two pulley diameters and the center distance. It is intended for early mechanical layout checks before selecting the final catalog belt size.
+
+<Formula label="Open belt length and wrap angle">
+L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
+β = π − 2·arcsin((D2 − D1)/(2C))
+</Formula>
+
+**Assumptions**
+- Open belt geometry, not a crossed belt.
+- Belt thickness, stretch, and manufacturer tension allowance are not included.
+- Final selection should be checked against catalog belt lengths and pulley profile data.

@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "5 Neden Kok Neden Analizi" : "5 Why Root Cause Analysis";
+  const title = locale === "tr" ? "5 Neden Kök Neden Analizi" : "5 Why Root Cause Analysis";
   const description =
     locale === "tr"
       ? "5 Neden metoduyla kök neden analizi yaparak düzeltici aksiyonları sistematik şekilde planlayan kalite ve mühendislik hesaplayıcıları aracı."

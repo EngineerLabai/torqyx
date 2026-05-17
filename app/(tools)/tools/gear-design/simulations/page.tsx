@@ -35,7 +35,7 @@ const simulations = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Disli uretim surecleri" : "Gear Manufacturing Process Notes";
+  const title = locale === "tr" ? "Dişli Üretim Süreçleri" : "Gear Manufacturing Process Notes";
   const description =
     locale === "tr"
       ? "MAAG, FELLOW, azdırma ve taşlama süreçlerini anlatan dişli simülasyonları ile mühendislik hesaplayıcıları içeriğini görsel olarak destekler."
@@ -107,4 +107,3 @@ export default async function GearSimulationsPage() {
     </PageShell>
   );
 }
-

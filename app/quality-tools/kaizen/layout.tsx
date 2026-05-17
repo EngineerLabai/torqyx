@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Kaizen Iyilestirme Takip Araci" : "Kaizen Improvement Tracker";
+  const title = locale === "tr" ? "Kaizen İyileştirme Takip Aracı" : "Kaizen Improvement Tracker";
   const description =
     locale === "tr"
       ? "Kaizen iyileştirme fikirlerini, aksiyon planlarını ve sonuç metriklerini izleyerek sürekli gelişimi destekleyen mühendislik hesaplayıcıları aracı."

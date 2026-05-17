@@ -93,7 +93,7 @@ export default function RfqSummaryPage() {
 
   function exportToCSV() {
     if (items.length === 0) return;
-    const headers = ["Musteri", "Proje_Kodu", "Parca_Adi", "Yillik_Hacim", "SOP_Tarihi", "Durum", "Notlar"];
+    const headers = ["Müşteri", "Proje_Kodu", "Parça_Adı", "Yıllık_Hacim", "SOP_Tarihi", "Durum", "Notlar"];
     const rows = items.map(p => [
       p.customer, p.projectCode, p.partName, p.annualVolume, p.sopDate, p.status, p.qualityNotes
     ].map(v => `"${(v || '').replace(/"/g, '""')}"`).join(","));

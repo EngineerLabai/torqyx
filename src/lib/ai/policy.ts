@@ -115,7 +115,7 @@ export const buildToolSummaryUserPrompt = (payload: ToolSummaryRequest) => {
 const TOOL_EXPLAIN_PROMPTS_BY_ID: Record<string, { tr: string; en: string }> = {
   bolt: {
     tr:
-      "Bu açıklamada ISO 898-1 ve DIN 931 bağlamında mavi somun/civata tasarımına odaklan. Tipik olarak 8.8 ve 10.9 sınıf civatalarda gerilme dayanımı, çekme mukavemeti ve öngerilmenin etkisi önemlidir. Yaygın hatalar: yetersiz ön gerilme, sürtünme tahmini, kayma ve yorulma hesabını göz ardı etmek.",
+      "Bu açıklamada ISO 898-1 ve DIN 931 bağlamında mavi somun/cıvata tasarımına odaklan. Tipik olarak 8.8 ve 10.9 sınıf cıvatalarda gerilme dayanımı, çekme mukavemeti ve öngerilmenin etkisi önemlidir. Yaygın hatalar: yetersiz ön gerilme, sürtünme tahmini, kayma ve yorulma hesabını göz ardı etmek.",
     en:
       "Focus on bolt and fastener design in the context of ISO 898-1 and DIN 931. Typical strength classes are 8.8 and 10.9, where tensile strength, preload, and shear interaction matter. Common mistakes include underestimating preload, friction effects, and fatigue margins.",
   },

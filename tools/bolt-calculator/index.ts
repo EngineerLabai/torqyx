@@ -7,7 +7,7 @@ import VisualizationSection from "./VisualizationSection";
 import { BOLT_PRESETS } from "./logic";
 
 const INPUT_META: ToolInputMeta[] = [
-  { key: "presetId", label: "Standart civata", type: "select", options: ["custom", ...BOLT_PRESETS.map((item) => item.id)] },
+  { key: "presetId", label: "Standart cıvata", type: "select", options: ["custom", ...BOLT_PRESETS.map((item) => item.id)] },
   { key: "d", label: "Nominal çap", unit: "mm", min: 0.1 },
   { key: "P", label: "Diş adımı", unit: "mm", min: 0.01 },
   { key: "grade", label: "Kalite sınıfı", type: "select", options: ["8.8", "10.9", "12.9"] },
@@ -42,9 +42,9 @@ export const boltCalculatorTool: ToolDefinition<BoltInput, BoltResult> = {
   },
   references: {
     tr: [
-      { title: "ISO 898-1 (Civata mekanik özellikleri)" },
+      { title: "ISO 898-1 (Cıvata mekanik özellikleri)" },
       { title: "ISO 68-1 (Metrik diş temel profil)" },
-      { title: "VDI 2230 (Civata bağlantıları tasarımı)" },
+      { title: "VDI 2230 (Cıvata bağlantıları tasarımı)" },
     ],
     en: [
       { title: "ISO 898-1 (Mechanical properties of fasteners)" },

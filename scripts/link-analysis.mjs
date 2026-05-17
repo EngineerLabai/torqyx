@@ -139,7 +139,7 @@ function normalizeHref(href) {
   if (isExternal(withoutQuery)) {
     try {
       const parsed = new URL(withoutQuery.startsWith("//") ? `https:${withoutQuery}` : withoutQuery);
-      if (!/torqyx|aiengineerslab/i.test(parsed.hostname)) return null;
+      if (!/torqyx/i.test(parsed.hostname)) return null;
       return normalizePathname(parsed.pathname);
     } catch {
       return null;

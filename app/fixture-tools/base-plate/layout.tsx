@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Taban Plaka Boyutlandirma Araci" : "Base Plate Sizing Tool";
+  const title = locale === "tr" ? "Taban Plaka Boyutlandırma Aracı" : "Base Plate Sizing Tool";
   const description =
     locale === "tr"
       ? "Taban plaka kalınlığı, seçim ve ağırlık kestirimi için mühendislik hesaplayıcıları ile uyumlu hızlı boyutlandırma ve kontrol sayfası."

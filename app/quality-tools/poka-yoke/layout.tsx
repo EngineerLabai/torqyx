@@ -5,10 +5,10 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Poka Yoke Hata Onleme Araci" : "Poka Yoke Error Proofing Tool";
+  const title = locale === "tr" ? "Poka Yoke Hata Önleme Aracı" : "Poka Yoke Error Proofing Tool";
   const description =
     locale === "tr"
-      ? "Poka yoke prensipleriyle hata onleme fikirlerini degerlendiren, risk ve dogrulama adimlarini kaydeden kalite odakli teknik sayfa."
+      ? "Poka yoke prensipleriyle hata önleme fikirlerini değerlendiren, risk ve doğrulama adımlarını kaydeden kalite odaklı teknik sayfa."
       : "Poka yoke page for evaluating error-proofing ideas with risk checks and validation steps in practical engineering calculators workflows.";
 
   return buildPageMetadata({

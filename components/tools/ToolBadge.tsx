@@ -23,9 +23,9 @@ const LABELS: Record<Locale, Record<ToolStatus, string>> = {
 
 const buildTooltip = (status: ToolStatus, locale: Locale, standard: string) => {
   if (locale === "tr") {
-    if (status === "verified") return `Bu arac ${standard} ile dogrulanmistir.`;
-    if (status === "beta") return `Bu arac beta asamasindadir. Sonuclari ${standard} referanslariyla kontrol edin.`;
-    return "Bu arac deneysel asamadadir. Uretim kararlarindan once ek dogrulama yapin.";
+    if (status === "verified") return `Bu araç ${standard} ile doğrulanmıştır.`;
+    if (status === "beta") return `Bu araç beta aşamasındadır. Sonuçları ${standard} referanslarıyla kontrol edin.`;
+    return "Bu araç deneysel aşamadadır. Üretim kararlarından önce ek doğrulama yapın.";
   }
 
   if (status === "verified") return `This tool is validated against ${standard}.`;

@@ -102,7 +102,7 @@ export default function PartTrackingPage() {
 
   function exportToCSV() {
     if (rows.length === 0) return;
-    const headers = ["Musteri", "Proje_Kodu", "Parca_Kodu", "Parca_Adi", "Asama", "PPAP_Durumu", "SOP_Tarihi", "Risk", "Notlar"];
+    const headers = ["Müşteri", "Proje_Kodu", "Parça_Kodu", "Parça_Adı", "Aşama", "PPAP_Durumu", "SOP_Tarihi", "Risk", "Notlar"];
     const csvRows = rows.map(r => [
       r.customer, r.projectCode, r.partCode, r.partName, r.stage, r.ppapStatus, r.sopDate, r.risk, r.notes
     ].map(v => `"${(v || '').replace(/"/g, '""')}"`).join(","));

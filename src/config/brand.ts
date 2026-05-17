@@ -1,4 +1,4 @@
-﻿﻿﻿import type { Locale } from "@/utils/locale";
+import type { Locale } from "@/utils/locale";
 import { DEFAULT_LOCALE } from "@/utils/locale";
 
 export type BrandConfig = {

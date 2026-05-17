@@ -15,6 +15,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/saved-calculations",
     locale,
+    noIndex: true,
   });
 }
 

@@ -1,4 +1,6 @@
-﻿## Hesaplama Açıklaması
+## Hesaplama Açıklaması
+
+Kasnak kayışı uzunluğu ve sarma açısı hesabı, açık kayışlı iki kasnak sistemi için gereken yaklaşık kayış boyunu hızlıca seçmekte kullanılır. Araç; D1 ve D2 kasnak çapları ile C merkez mesafesinden kayış uzunluğunu, küçük kasnağın sarma açısını ve geometrinin uygulanabilir olup olmadığını hesaplar.
 
 <Callout type="info" title="Nasıl kullanılır?">
 <StepList title="Kısa adımlar" steps={["Kasnak çapları ve merkez mesafesini gir", "C > (D1 + D2)/2 koşulunu kontrol et", "Kayış uzunluğu ve sarma açısını oku"]} />
@@ -12,6 +14,7 @@ L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
 **Varsayımlar**
 - Açık kayış düzeni (çapraz değil).
 - Kayış kalınlığı ve germe etkisi ihmal edilir; geometrik yaklaşım yapılır.
+- Son kayış seçimi yapılırken katalog stok boyu ve üretici germe payı ayrıca kontrol edilir.
 
 **Birimler**
 - D1, D2, C: mm
@@ -27,9 +30,9 @@ Triger veya çapraz kayışlar ve germe payı dahil değildir. Üretici verisine
 
 <Confidence
   locale="tr"
-  version="v1.0"
-  lastUpdated="2026-02-07"
-  assumptions={["Açık kayış geometrisi", "Germe ve kalınlık ihmal"]}
+  version="v1.1"
+  lastUpdated="2026-05-17"
+  assumptions={["Açık kayış geometrisi", "Germe ve kalınlık ihmal", "Katalog stok boyu ayrıca doğrulanır"]}
   references={["Makine elemanları el kitapları"]}
 />
 

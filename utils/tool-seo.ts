@@ -65,6 +65,7 @@ const hasCalculatorWord = (value: string, locale: Locale) => {
 
 const buildSeoTitle = (tool: ToolCatalogItem | null, name: string, brandName: string, locale: Locale) => {
   if (!tool) return brandName;
+  if (tool.id === "belt-length") return name;
 
   if (tool.type === "guide") {
     const guideWord = locale === "tr" ? "Rehberi" : "Guide";
@@ -94,7 +95,11 @@ const buildSeoDescription = (
       ? " Formüller, birim kontrolü ve ilgili mühendislik hesaplayıcılarıyla hızlı sonuç alın."
       : " Get fast results with formulas, unit checks, and related engineering calculators.";
 
-  return `${description.replace(/\s+/g, " ").trim()}${support}`;
+  const normalized = description.replace(/\s+/g, " ").trim();
+  if (normalized.length >= 120) {
+    return normalized;
+  }
+  return `${normalized}${support}`;
 };
 
 export const buildToolSeo = (toolKey: string, locale: Locale): ToolSeoPayload => {
@@ -121,6 +126,7 @@ export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => 
   const toolCopy = seo.tool ? getToolCopy(seo.tool, locale) : null;
   const toolName = toolCopy?.title ?? seo.title;
   const canonicalUrl = seo.canonical ?? new URL(seo.path, CANONICAL_SITE_URL).toString();
+  const socialTitle = seo.tool?.id === "belt-length" ? toolName : `${toolName} | TORQYX`;
 
   return buildPageMetadata({
     title: seo.title,
@@ -128,14 +134,15 @@ export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => 
     path: seo.path,
     locale,
     openGraph: {
-      title: `${toolName} | TORQYX`,
+      title: socialTitle,
       description: seo.description,
       url: canonicalUrl,
     },
     twitter: {
-      title: `${toolName} | TORQYX`,
+      title: socialTitle,
       description: seo.description,
     },
+    absoluteTitle: seo.tool?.id === "belt-length",
   });
 };
 

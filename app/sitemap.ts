@@ -46,14 +46,19 @@ const staticPaths = [
   "/reference",
 ] as const;
 
-const toolSlugs = Array.from(
-  new Set(
+const toolRoutes = Array.from(
+  new Map(
     toolCatalog
-      .map((tool) => tool.href)
-      .filter((href) => href.startsWith("/tools/"))
-      .map((href) => href.replace(/^\/tools\//, "")),
-  ),
+      .filter((tool) => tool.href.startsWith("/tools/"))
+      .map((tool) => [tool.href, tool]),
+  ).values(),
 );
+
+const toOptionalDate = (value?: string) => {
+  if (!value) return undefined;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+};
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
@@ -71,15 +76,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (seen.has(key)) return;
     seen.add(key);
 
-    entries.push({
+    const entry: MetadataRoute.Sitemap[number] = {
       url: resolveUrl(withLocalePrefix(path, locale)),
-      lastModified: options?.lastModified ?? new Date(),
       changeFrequency: options?.changeFrequency ?? "weekly",
       priority: options?.priority ?? 0.8,
       alternates: {
         languages: buildLanguageAlternates(path),
       },
-    });
+    };
+
+    if (options?.lastModified) {
+      entry.lastModified = options.lastModified;
+    }
+
+    entries.push(entry);
   };
 
   staticPaths.forEach((path) => {
@@ -119,13 +129,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-    toolSlugs.forEach((slug) => {
-      const path = `/tools/${slug}`;
+    toolRoutes.forEach((tool) => {
+      const path = tool.href;
+      const lastModified = toOptionalDate(tool.lastUpdated);
       addEntry(path, locale, {
+        lastModified,
         changeFrequency: "monthly",
         priority: 0.9,
       });
       addEntry(`${path}/guide`, locale, {
+        lastModified,
         changeFrequency: "monthly",
         priority: 0.8,
       });

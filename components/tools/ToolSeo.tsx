@@ -24,7 +24,7 @@ export default function ToolSeo({ toolId, locale }: ToolSeoProps) {
   const howToSteps = howToSchema?.step.map((step) => step.text ?? step.name) ?? fallbackSteps;
   const howToName =
     howToSchema?.name ??
-    (locale === "tr" ? `${data.name} kullanim adimlari` : `${data.name} usage steps`);
+    (locale === "tr" ? `${data.name} kullanım adımları` : `${data.name} usage steps`);
 
   return (
     <>
@@ -85,23 +85,23 @@ function buildFallbackSteps({
 
   if (type === "guide") {
     return [
-      `${name} referans sayfasini acin.`,
-      "Ilgili malzeme, standart veya muhendislik kosulunu secin.",
-      "Sonucu uygulamadan once varsayimlari, sinirlari ve ilgili hesaplayici baglantilarini karsilastirin.",
+      `${name} referans sayfasını açın.`,
+      "İlgili malzeme, standart veya mühendislik koşulunu seçin.",
+      "Sonucu uygulamadan önce varsayımları, sınırları ve ilgili hesaplayıcı bağlantılarını karşılaştırın.",
     ];
   }
 
   if (type === "bundle") {
     return [
-      `${name} arac grubunu acin.`,
-      "Muhendislik problemine uygun hesaplayiciyi veya is akisini secin.",
-      "Birimleri tutarli girin, varsayimlari inceleyin ve gerekirse ilgili kontrollerle devam edin.",
+      `${name} araç grubunu açın.`,
+      "Mühendislik problemine uygun hesaplayıcıyı veya iş akışını seçin.",
+      "Birimleri tutarlı girin, varsayımları inceleyin ve gerekirse ilgili kontrollerle devam edin.",
     ];
   }
 
   return [
-    `${name} hesaplayicisini acin.`,
-    "Gerekli girdi degerlerini tutarli muhendislik birimleriyle girin.",
-    "Hesaplanan sonucu, varsayimlari, referanslari ve dogrulama notlarini inceleyin.",
+    `${name} hesaplayıcısını açın.`,
+    "Gerekli girdi değerlerini tutarlı mühendislik birimleriyle girin.",
+    "Hesaplanan sonucu, varsayımları, referansları ve doğrulama notlarını inceleyin.",
   ];
 }

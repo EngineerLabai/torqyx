@@ -76,7 +76,7 @@ export function getAdvisorInsights(
         title: t(locale, "Yüksek kalite – düşük ön yük", "High grade with low preload"),
         message: t(
           locale,
-          "12.9 kalite için düşük ön yük seçildi. Civata sınıfını ve çalışma koşullarını doğrula.",
+          "12.9 kalite için düşük ön yük seçildi. Cıvata sınıfını ve çalışma koşullarını doğrula.",
           "A low preload was set for grade 12.9. Verify the bolt class and service conditions.",
         ),
       });

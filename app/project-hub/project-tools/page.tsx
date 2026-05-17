@@ -132,7 +132,7 @@ export default function ProjectToolsPage() {
 
   function exportToCSV() {
     if (projects.length === 0) return;
-    const headers = ["Baslik", "Musteri", "Hat_Alan", "Durum", "Oncelik", "Hedef_Tarih", "Notlar"];
+    const headers = ["Başlık", "Müşteri", "Hat_Alan", "Durum", "Öncelik", "Hedef_Tarih", "Notlar"];
     const rows = projects.map(p => [
       p.title, p.customer, p.lineOrArea, p.status, p.priority, p.dueDate, p.notes
     ].map(v => `"${(v || '').replace(/"/g, '""')}"`).join(","));
@@ -209,9 +209,9 @@ export default function ProjectToolsPage() {
                 value={form.title}
                 onChange={(e) => handleFormChange("title", e)}
                 className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-                placeholder="Örn. Ön süspansiyon civata tork dokümanının revizyonu, Hat 2 verimlilik iyileştirmesi..."
+                placeholder="Örn. Ön süspansiyon cıvata tork dokümanının revizyonu, Hat 2 verimlilik iyileştirmesi..."
                 required
-               aria-label="Örn. Ön süspansiyon civata tork dokümanının revizyonu, Hat 2 verimlilik iyileştirmesi..."/>
+               aria-label="Örn. Ön süspansiyon cıvata tork dokümanının revizyonu, Hat 2 verimlilik iyileştirmesi..."/>
             </div>
 
             <div className="space-y-1">

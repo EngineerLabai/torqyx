@@ -144,7 +144,7 @@ function WeightCalculator() {
       <p className="mt-3 text-[11px] text-slate-600">
         {t(
           locale,
-          "Hafifletme faktörü kaburga/boşaltım ile alınan malzeme oranıdır (0: katı, 0.3: %30 boşaltma). 0.6 üzeri koşullar için yapısal analiz yapın. Tasarımda emniyet için balans, kaynak veya civata delikleri ayrıca kontrol edilmelidir.",
+          "Hafifletme faktörü kaburga/boşaltım ile alınan malzeme oranıdır (0: katı, 0.3: %30 boşaltma). 0.6 üzeri koşullar için yapısal analiz yapın. Tasarımda emniyet için balans, kaynak veya cıvata delikleri ayrıca kontrol edilmelidir.",
           "Lightening factor represents removed material ratio via ribs/pockets (0: solid, 0.3: 30% removal). For values above 0.6, run structural analysis. Also verify balancing, welds, or bolt holes for design safety.",
         )}
       </p>

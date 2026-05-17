@@ -11,6 +11,40 @@ const readUtf8 = (filePath) => fs.readFileSync(filePath, "utf8");
 
 const toPosix = (filePath) => filePath.split(path.sep).join("/");
 
+const resolveLocalImportPath = (importPath, currentDir) => {
+  const candidates = [
+    importPath,
+    `${importPath}.tsx`,
+    `${importPath}.ts`,
+    `${importPath}.jsx`,
+    `${importPath}.js`,
+    path.join(importPath, "index.tsx"),
+    path.join(importPath, "index.ts"),
+    path.join(importPath, "index.jsx"),
+    path.join(importPath, "index.js"),
+  ];
+
+  for (const candidate of candidates) {
+    const fullPath = path.resolve(currentDir, candidate);
+    if (fs.existsSync(fullPath)) return fullPath;
+  }
+
+  return null;
+};
+
+const extractLocalImports = (source, currentDir) => {
+  const imports = [];
+  const regex = /import\s+(?:[^'"\n]+)\s+from\s+['"](\.\/[^'"]+|\.\.[^'"]+)['"]/g;
+  let match;
+
+  while ((match = regex.exec(source)) !== null) {
+    const resolved = resolveLocalImportPath(match[1], currentDir);
+    if (resolved) imports.push(resolved);
+  }
+
+  return imports;
+};
+
 const listFiles = (startDir, matcher) => {
   if (!fs.existsSync(startDir)) return [];
   const output = [];
@@ -50,6 +84,29 @@ const countH1InFile = (source) => {
   return matches ? matches.length : 0;
 };
 
+const hasDelegatedH1Signal = (source) =>
+  /redirect\(/.test(source) ||
+  /<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(source) ||
+  /<H1[\s/>]/.test(source) ||
+  /<PageTitle[\s/>]/.test(source) ||
+  /Heading[^>]*as=["']h1["']/.test(source);
+
+const hasH1SignalInFile = (filePath, visited = new Set()) => {
+  if (visited.has(filePath)) return false;
+  visited.add(filePath);
+  if (!fs.existsSync(filePath)) return false;
+
+  const source = readUtf8(filePath);
+  if (countH1InFile(source) > 0 || hasDelegatedH1Signal(source)) return true;
+
+  return extractLocalImports(source, path.dirname(filePath)).some((importPath) =>
+    hasH1SignalInFile(importPath, visited),
+  );
+};
+
+const hasMutuallyExclusiveH1Branches = (source) =>
+  /notFound\(|fallbackCopy|isGuideRoute|isReportRoute/.test(source);
+
 const findNearestMetadataLayout = (pageFilePath) => {
   let cursor = path.dirname(pageFilePath);
   while (cursor.startsWith(APP_DIR)) {
@@ -75,6 +132,12 @@ const collectIssues = (pageFilePath) => {
   const hasFileMetadata = hasMetadataSignal(source);
   const hasMetadata = hasFileMetadata || Boolean(metadataLayout);
   const delegatedH1 = hasDelegatedH1Comment(source);
+  const h1Count = countH1InFile(source);
+  const hasH1Signal =
+    h1Count > 0 ||
+    delegatedH1 ||
+    hasDelegatedH1Signal(source) ||
+    extractLocalImports(source, path.dirname(pageFilePath)).some((importPath) => hasH1SignalInFile(importPath));
 
   if (!hasMetadata) issues.push("metadata_missing");
   if (!hasTitleSignal(source) && !metadataLayout) issues.push("title_missing_signal");
@@ -83,9 +146,8 @@ const collectIssues = (pageFilePath) => {
   if (hasFileMetadata && hasEmptyDescription(source)) issues.push("description_empty");
   if (hasFileMetadata && hasUntitled(source)) issues.push("untitled_default_detected");
 
-  const h1Count = countH1InFile(source);
-  if (h1Count === 0 && !delegatedH1) issues.push("h1_missing_in_file");
-  if (h1Count > 1) issues.push("h1_multiple_in_file");
+  if (!hasH1Signal) issues.push("h1_missing_in_file");
+  if (h1Count > 1 && !hasMutuallyExclusiveH1Branches(source)) issues.push("h1_multiple_in_file");
 
   return {
     file: relPath,

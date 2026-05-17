@@ -10,7 +10,7 @@ if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 const routes = process.argv.length > 2 ? process.argv.slice(2) : ["/", "/en"];
 const locales = (process.env.OG_LOCALES || "tr,en").split(",").map((value) => value.trim()).filter(Boolean);
-const siteUrl = (process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://aiengineerslab.com").replace(/\/$/, "");
+const siteUrl = (process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://torqyx.com").replace(/\/$/, "");
 const siteHost = new URL(siteUrl).host;
 const siteName = process.env.OG_SITE_NAME || "TORQYX";
 const tagline = process.env.OG_TAGLINE || "Deterministic engineering calculators";

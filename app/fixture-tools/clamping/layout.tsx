@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Sikistirma Planlama Araci" : "Clamping Planning Tool";
+  const title = locale === "tr" ? "Sıkıştırma Planlama Aracı" : "Clamping Planning Tool";
   const description =
     locale === "tr"
       ? "Sıkıştırma kuvveti, reaksiyon noktası ve proses sırası planlaması için mühendislik hesaplayıcıları odaklı teknik clamping sayfasıdır."

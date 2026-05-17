@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "5N1K Analiz Araci" : "5W1H Analysis Tool";
+  const title = locale === "tr" ? "5N1K Analiz Aracı" : "5W1H Analysis Tool";
   const description =
     locale === "tr"
       ? "5N1K soru seti ile problemi netleştirip aksiyon planını hızlandıran kalite odaklı mühendislik hesaplayıcıları destek aracıdır."

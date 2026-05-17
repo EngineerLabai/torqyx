@@ -9,7 +9,7 @@ const SITE_HOST = (() => {
   try {
     return new URL(SITE_URL).host;
   } catch {
-    return "aiengineerslab.com";
+    return "torqyx.com";
   }
 })();
 

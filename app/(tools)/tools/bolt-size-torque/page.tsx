@@ -6,10 +6,10 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Civata Boyut ve Tork Hesabi" : "Bolt Size and Torque Calculator";
+  const title = locale === "tr" ? "Cıvata Boyut ve Tork Hesabı" : "Bolt Size and Torque Calculator";
   const description =
     locale === "tr"
-      ? "Civata boyutu ve tork hesaplayıcısı için mühendislik hesaplayıcıları aracına yönlendiren teknik geçiş sayfası ve doğru canonical yönetimi."
+      ? "Cıvata boyutu ve tork hesaplayıcısı için mühendislik hesaplayıcıları aracına yönlendiren teknik geçiş sayfası ve doğru canonical yönetimi."
       : "Redirect page for engineering calculators that routes users to the bolt size and torque tool with canonical metadata for SEO consistency.";
 
   return buildPageMetadata({
@@ -24,5 +24,4 @@ export default async function BoltSizeTorqueRedirect() {
   const locale = await getLocaleFromCookies();
   redirect(withLocalePrefix("/tools/bolt-calculator", locale));
 }
-
 

@@ -128,7 +128,7 @@
     },
     "seo": {
       "title": "Mekanik Mühendislik Hesaplayıcıları",
-      "description": "Makine tasarımı, civata seçimi, güç aktarımı ve termal kontroller için ISO/DIN doğrulamalı hesaplayıcılar."
+      "description": "Makine tasarımı, cıvata seçimi, güç aktarımı ve termal kontroller için ISO/DIN doğrulamalı hesaplayıcılar."
     },
     "valueProps": {
       "kicker": "Neden geçiş yapılıyor?",
@@ -182,7 +182,7 @@
         ],
         "cards": [
           "Son 50 çalışmayı hazır tutar",
-          "Standart civatalar için preset kaydet",
+          "Standart cıvatalar için preset kaydet",
           "Tek link ile ekip paylaşımı"
         ]
       }
@@ -375,7 +375,7 @@
         "G": "Kayma modülü G (GPa)",
         "yield": "Akma dayanımı (MPa)",
         "UTS": "Çekme dayanımı (MPa)",
-        "alpha": "Genleşme katsayısı α (um/m-K)"
+        "alpha": "Genleşme katsayısı α (µm/m-K)"
       },
       "disclaimer": "Değerler tipik ve karşılaştırma amaçlıdır. Nihai tasarım için tedarikçi verisini ve standartları doğrulayın.",
       "categories": {
@@ -628,7 +628,7 @@
       "imageAlt": "Talep detayları ve dosya yükleme alanı olan destek formu",
       "tipsTitle": "Talep oluştururken öneriler",
       "tips": [
-        "Kısa bir konu başlığı ekle (örn. \"M12 10.9 civata torku\").",
+        "Kısa bir konu başlığı ekle (örn. \"M12 10.9 cıvata torku\").",
         "Varsa malzeme, yük, limit veya standartları belirt."
       ]
     },

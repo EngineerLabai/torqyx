@@ -4,8 +4,8 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 
 const copy = {
   tr: {
-    title: "Parca Durumu Takip Panosu",
-    description: "Kick-off'tan SOP'a kadar parca durumlarini takip et.",
+    title: "Parça Durumu Takip Panosu",
+    description: "Kick-off'tan SOP'a kadar parça durumlarını takip et.",
   },
   en: {
     title: "Part Status Tracking",
