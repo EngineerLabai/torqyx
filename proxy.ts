@@ -6,6 +6,8 @@ import { consumeFixedWindowRateLimit } from "@/utils/rate-limit";
 
 const PUBLIC_FILE = /\.(.*)$/;
 const ONE_YEAR = 60 * 60 * 24 * 365;
+const CANONICAL_HOST = "torqyx.com";
+const VERCEL_APP_HOST = "vercel.app";
 const LOCALE_PREFIXED_PATHS = ["/tools", "/project-hub", "/quality-tools", "/standards", "/materials", "/projects"];
 const LOCALE_PRESERVE_PATHS = new Set([
   "/tools/gear-design",
@@ -35,6 +37,17 @@ const pathMatchesBase = (pathname: string, basePath: string) =>
 const resolveApiRateLimitRule = (pathname: string) =>
   API_RATE_LIMIT_RULES.find((rule) => rule.basePaths.some((basePath) => pathMatchesBase(pathname, basePath)));
 
+const normalizeHostname = (host: string) => host.trim().toLowerCase().replace(/:\d+$/u, "");
+
+const getRequestHostname = (request: NextRequest) => {
+  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0];
+  const host = forwardedHost || request.headers.get("host") || request.nextUrl.hostname;
+  return normalizeHostname(host);
+};
+
+const shouldRedirectToCanonicalHost = (hostname: string) =>
+  hostname === `www.${CANONICAL_HOST}` || hostname === VERCEL_APP_HOST || hostname.endsWith(`.${VERCEL_APP_HOST}`);
+
 const getClientIp = (request: NextRequest) => {
   const forwardedFor = request.headers.get("x-forwarded-for");
   if (forwardedFor) {
@@ -54,6 +67,16 @@ const getClientIp = (request: NextRequest) => {
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const hostname = getRequestHostname(request);
+
+  if (shouldRedirectToCanonicalHost(hostname)) {
+    const canonicalUrl = request.nextUrl.clone();
+    canonicalUrl.protocol = "https:";
+    canonicalUrl.hostname = CANONICAL_HOST;
+    canonicalUrl.port = "";
+    return NextResponse.redirect(canonicalUrl, 301);
+  }
+
   const rateLimitRule = resolveApiRateLimitRule(pathname);
 
   if (rateLimitRule) {

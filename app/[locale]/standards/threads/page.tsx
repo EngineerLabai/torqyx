@@ -1,5 +1,5 @@
 import Client from "./Client";
-import { getHeroImageSrc } from "@/lib/assets";
+import { getStandardHeroImageSrc } from "@/lib/assets";
 import { buildPageMetadata } from "@/utils/metadata";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
 
@@ -38,7 +38,6 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function ThreadsStandardsPage({ params }: PageProps) {
   const { locale: localeParam } = await params;
   const locale = resolveLocale(localeParam);
-  const heroImage = getHeroImageSrc("tools");
+  const heroImage = getStandardHeroImageSrc("threads");
   return <Client locale={locale} heroImage={heroImage} />;
 }
-

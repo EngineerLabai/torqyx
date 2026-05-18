@@ -2,6 +2,15 @@ import type { Locale } from "@/utils/locale";
 import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
 
 const FALLBACK_SITE_URL = "https://torqyx.com";
+const VERCEL_APP_HOST = "vercel.app";
+
+type SiteUrlEnv = {
+  NEXT_PUBLIC_SITE_URL?: string;
+  SITE_URL?: string;
+  VERCEL_PROJECT_PRODUCTION_URL?: string;
+  VERCEL_URL?: string;
+  VERCEL_ENV?: string;
+};
 
 const ensureProtocol = (value: string) => (/^https?:\/\//i.test(value) ? value : `https://${value}`);
 
@@ -15,19 +24,50 @@ const normalizeSiteUrl = (value: string) => {
   return parsed.toString().replace(/\/$/, "");
 };
 
-const resolveSiteUrl = () => {
-  const explicitSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL;
-  const vercelSiteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
-  const envSiteUrl =
-    explicitSiteUrl ??
-    (process.env.VERCEL_ENV === "production" ? FALLBACK_SITE_URL : vercelSiteUrl) ??
-    FALLBACK_SITE_URL;
+const isVercelAppHost = (host: string) => {
+  const normalizedHost = host.toLowerCase();
+  return normalizedHost === VERCEL_APP_HOST || normalizedHost.endsWith(`.${VERCEL_APP_HOST}`);
+};
 
+const isVercelAppUrl = (value: string) => {
   try {
-    return normalizeSiteUrl(envSiteUrl);
+    return isVercelAppHost(new URL(value).hostname);
   } catch {
-    return FALLBACK_SITE_URL;
+    return false;
   }
+};
+
+export const resolveCanonicalSiteUrl = (env?: SiteUrlEnv) => {
+  const source: SiteUrlEnv =
+    env ?? {
+      NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+      SITE_URL: process.env.SITE_URL,
+      VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+      VERCEL_URL: process.env.VERCEL_URL,
+      VERCEL_ENV: process.env.VERCEL_ENV,
+    };
+  const candidates = [
+    source.NEXT_PUBLIC_SITE_URL,
+    source.SITE_URL,
+    source.VERCEL_PROJECT_PRODUCTION_URL,
+    source.VERCEL_ENV === "production" ? FALLBACK_SITE_URL : source.VERCEL_URL,
+    FALLBACK_SITE_URL,
+  ];
+
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+
+    try {
+      const normalized = normalizeSiteUrl(candidate);
+      if (!isVercelAppUrl(normalized)) {
+        return normalized;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return FALLBACK_SITE_URL;
 };
 
 const isExplicitlyFalseEnv = (value?: string) => {
@@ -35,7 +75,7 @@ const isExplicitlyFalseEnv = (value?: string) => {
   return ["0", "false", "no", "off"].includes(value.trim().toLowerCase());
 };
 
-export const SITE_URL = resolveSiteUrl();
+export const SITE_URL = resolveCanonicalSiteUrl();
 export const CANONICAL_SITE_URL = SITE_URL;
 export const IS_INDEXING_ENABLED = !isExplicitlyFalseEnv(process.env.INDEX_SITE ?? process.env.NEXT_PUBLIC_INDEX_SITE);
 

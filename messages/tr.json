@@ -63,8 +63,8 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Mekanik Mühendislik Hesaplayıcıları",
-      "headline": "Standartlara dayalı, deterministik mühendislik hesaplamaları",
+      "eyebrow": "Standartlara dayalı deterministik hesaplamalar",
+      "headline": "TORQYX mühendislik hesaplayıcıları",
       "subheadline": "Deterministik hesap motoru, ISO/DIN/VDI referansları ile adım adım asistan rehberliğini birleştirir. Sihirli tahmin yapmaz; aynı girdide aynı sonucu verir.",
       "subtitle": "Hız ve izlenebilirlik isteyen mekanik mühendisler için.",
       "ctaPrimary": "Ücretsiz Başla",

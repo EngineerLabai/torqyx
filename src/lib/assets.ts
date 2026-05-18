@@ -35,6 +35,8 @@ export type BlueprintAssetKey =
   | "fea"
   | "exploded";
 
+export type StandardHeroAssetKey = "fluids" | "fits" | "materials" | "threads";
+
 export const HERO_PLACEHOLDER = "/images/hero-background.webp";
 
 export const HERO_ASSETS: Record<HeroAssetKey, string> = {
@@ -74,6 +76,13 @@ export const BLUEPRINT_ASSETS: Record<BlueprintAssetKey, string> = {
   weldJoint: "/images/weld-joint-diagram.webp",
   fea: "/images/fea.webp",
   exploded: "/images/exploded-view.webp",
+};
+
+export const STANDARD_HERO_ASSETS: Record<StandardHeroAssetKey, string> = {
+  fluids: "/images/hydraulic-circuit.webp",
+  fits: "/images/shaft.webp",
+  materials: "/images/fea.webp",
+  threads: "/images/threaded-connection.webp",
 };
 
 const TOOL_HERO_ASSETS: Record<string, string> = {
@@ -144,6 +153,10 @@ export function getBlueprintImageSrc(key: BlueprintAssetKey): string {
   return BLUEPRINT_ASSETS[key] ?? HERO_PLACEHOLDER;
 }
 
+export function getStandardHeroImageSrc(key: StandardHeroAssetKey): string {
+  return STANDARD_HERO_ASSETS[key] ?? HERO_PLACEHOLDER;
+}
+
 export function listBlueprintImagePaths(): string[] {
   return Array.from(new Set(Object.values(BLUEPRINT_ASSETS)));
 }
@@ -153,6 +166,7 @@ export function listPublicImagePaths(): string[] {
     new Set([
       ...listHeroImagePaths(),
       ...listBlueprintImagePaths(),
+      ...Object.values(STANDARD_HERO_ASSETS),
       ...Object.values(TOOL_HERO_ASSETS),
       ...ADDITIONAL_PUBLIC_IMAGE_PATHS,
       "/images/logo.png",

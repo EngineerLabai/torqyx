@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildPageMetadata } from "@/utils/metadata";
-import { buildOgImageUrl } from "@/utils/seo";
+import { buildOgImageUrl, resolveCanonicalSiteUrl } from "@/utils/seo";
 
 describe("SEO metadata helpers", () => {
   it("builds absolute dynamic OG image URLs with safe query params", () => {
@@ -33,5 +33,27 @@ describe("SEO metadata helpers", () => {
     const [image] = images as Array<{ url: string }>;
     expect(image.url).toContain("/og?");
     expect(image.url).toContain("Mechanical+Engineering+Calculators");
+  });
+
+  it("does not allow Vercel deployment hosts to become canonical", () => {
+    expect(
+      resolveCanonicalSiteUrl({
+        NEXT_PUBLIC_SITE_URL: "https://torqyx.vercel.app",
+        SITE_URL: "https://torqyx.com",
+      }),
+    ).toBe("https://torqyx.com");
+
+    expect(
+      resolveCanonicalSiteUrl({
+        SITE_URL: "torqyx.vercel.app",
+        VERCEL_PROJECT_PRODUCTION_URL: "torqyx.com",
+      }),
+    ).toBe("https://torqyx.com");
+
+    expect(
+      resolveCanonicalSiteUrl({
+        VERCEL_URL: "torqyx-git-main.vercel.app",
+      }),
+    ).toBe("https://torqyx.com");
   });
 });

@@ -125,6 +125,7 @@ async function getWebsiteJsonLd() {
         "@type": "Organization",
         "@id": `${SITE_URL}#organization`,
         name: brandContent.siteName,
+        alternateName: ["Torqyx", "TORQYX Engineering"],
         url: SITE_URL,
         logo: {
           "@type": "ImageObject",
@@ -135,6 +136,7 @@ async function getWebsiteJsonLd() {
         "@type": "WebSite",
         "@id": `${SITE_URL}#website`,
         name: brandContent.siteName,
+        alternateName: "Torqyx",
         url: SITE_URL,
         description: brandContent.tagline,
         inLanguage: locale === "tr" ? "tr-TR" : "en-US",

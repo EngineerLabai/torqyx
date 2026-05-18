@@ -63,8 +63,8 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Mechanical Engineering Calculators",
-      "headline": "Engineering calculations with standards-based, deterministic results",
+      "eyebrow": "Standards-based deterministic calculations",
+      "headline": "TORQYX engineering calculators",
       "subheadline": "A deterministic calculation engine grounded in ISO/DIN/VDI references plus guided assistant support. The same input set produces the same result.",
       "subtitle": "Engineering & Calculation Tools for Professionals",
       "ctaPrimary": "Start Free",

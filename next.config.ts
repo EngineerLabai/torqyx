@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
 
+const FALLBACK_SITE_URL = "https://torqyx.com";
+const VERCEL_APP_HOST = "vercel.app";
+
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
   openAnalyzer: false,
@@ -18,23 +21,45 @@ const normalizePrimarySiteUrl = (value: string) => {
   return parsed.toString().replace(/\/$/, "");
 };
 
-const PRIMARY_SITE_URL = (() => {
-  const candidate = process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://torqyx.com";
+const isVercelAppHost = (host: string) => {
+  const normalizedHost = host.toLowerCase();
+  return normalizedHost === VERCEL_APP_HOST || normalizedHost.endsWith(`.${VERCEL_APP_HOST}`);
+};
+
+const isVercelAppUrl = (value: string) => {
   try {
-    return normalizePrimarySiteUrl(candidate);
+    return isVercelAppHost(new URL(value).hostname);
   } catch {
-    return "https://torqyx.com";
+    return false;
   }
+};
+
+const PRIMARY_SITE_URL = (() => {
+  const candidates = [
+    process.env.SITE_URL,
+    process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    FALLBACK_SITE_URL,
+  ];
+
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+
+    try {
+      const normalized = normalizePrimarySiteUrl(candidate);
+      if (!isVercelAppUrl(normalized)) {
+        return normalized;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return FALLBACK_SITE_URL;
 })();
 
-const SHOULD_REDIRECT_VERCEL_APP = (() => {
-  try {
-    const host = new URL(PRIMARY_SITE_URL).host.toLowerCase();
-    return host !== "vercel.app" && !host.endsWith(".vercel.app");
-  } catch {
-    return true;
-  }
-})();
+const SHOULD_REDIRECT_VERCEL_APP = !isVercelAppUrl(PRIMARY_SITE_URL);
+const PRIMARY_SITE_HOST = new URL(PRIMARY_SITE_URL).host;
 
 const cspReportOnlyPolicy = [
   "default-src 'self'",
@@ -136,6 +161,16 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
+    const wwwRedirects = PRIMARY_SITE_HOST.startsWith("www.")
+      ? []
+      : [
+          {
+            source: "/:path*",
+            has: [{ type: "host" as const, value: `www.${PRIMARY_SITE_HOST}` }],
+            destination: `${PRIMARY_SITE_URL}/:path*`,
+            statusCode: 301 as const,
+          },
+        ];
     const vercelAppRedirects = SHOULD_REDIRECT_VERCEL_APP
       ? [
           {
@@ -154,6 +189,7 @@ const nextConfig: NextConfig = {
       : [];
 
     return [
+      ...wwwRedirects,
       ...vercelAppRedirects,
       { source: "/en/hakkinda", destination: "/en/about", permanent: true },
       { source: "/en/gizlilik", destination: "/en/privacy", permanent: true },
