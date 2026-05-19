@@ -17,7 +17,7 @@ type PremiumCTAProps = {
 export default function PremiumCTA({ copy, variant = "compact", className = "" }: PremiumCTAProps) {
   const { locale } = useLocale();
   const { track } = useAnalytics();
-  const supportHref = withLocalePrefix("/support", locale);
+  const supportHref = `${withLocalePrefix("/support", locale)}#support-form`;
   const premiumHref = withLocalePrefix("/pricing", locale);
   const rootClassName = `${className} ${variant === "compact" ? "" : ""}`.trim();
 
@@ -40,14 +40,14 @@ export default function PremiumCTA({ copy, variant = "compact", className = "" }
           <div className="flex flex-wrap items-center gap-2 text-xs">
             <Link
               href={supportHref}
-              className="rounded-full bg-amber-600 px-4 py-2 font-semibold text-white shadow-sm transition hover:bg-amber-500"
+              className="rounded-md bg-brand px-6 py-3 font-semibold text-white shadow-sm transition hover:brightness-90"
             >
               {copy.ctaPrimary}
             </Link>
             <Link
               onClick={handleUpgradeClick}
               href={premiumHref}
-              className="rounded-full border border-amber-200 px-4 py-2 font-semibold text-amber-700 hover:border-amber-300 hover:bg-amber-100"
+              className="rounded-md border border-brand bg-transparent px-6 py-3 font-semibold text-brand transition hover:bg-brand hover:text-white"
             >
               {copy.ctaSecondary}
             </Link>
@@ -72,14 +72,14 @@ export default function PremiumCTA({ copy, variant = "compact", className = "" }
           <div className="flex flex-wrap items-center gap-3 text-xs">
             <Link
               href={supportHref}
-              className="rounded-full bg-amber-600 px-4 py-2 font-semibold text-white shadow-sm transition hover:bg-amber-500"
+              className="rounded-md bg-brand px-6 py-3 font-semibold text-white shadow-sm transition hover:brightness-90"
             >
               {copy.ctaPrimary}
             </Link>
             <Link
               onClick={handleUpgradeClick}
               href={premiumHref}
-              className="rounded-full border border-slate-200 px-4 py-2 font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+              className="rounded-md border border-brand bg-transparent px-6 py-3 font-semibold text-brand transition hover:bg-brand hover:text-white"
             >
               {copy.ctaSecondary}
             </Link>

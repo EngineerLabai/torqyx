@@ -9,6 +9,7 @@ type ValuePropsSectionProps = {
 
 export default function ValuePropsSection({ locale }: ValuePropsSectionProps) {
   const copy = getMessages(locale).home.valueProps;
+  const formulaLines = copy.accuracy.formulaExample.split(/\s+·\s+/u).filter(Boolean);
 
   return (
     <section id="value-props" className="w-full py-12">
@@ -47,7 +48,9 @@ export default function ValuePropsSection({ locale }: ValuePropsSectionProps) {
                   {copy.excel.metricLabel}
                 </p>
                 <p className="mt-2 text-2xl font-semibold text-slate-900">{copy.excel.metricValue}</p>
-                <p className="mt-1 text-xs text-slate-500">{copy.excel.metricNote}</p>
+                <p className="mt-1 text-xs text-slate-500" title={copy.excel.metricNote}>
+                  {copy.excel.metricNote}
+                </p>
               </div>
             </div>
 
@@ -92,8 +95,12 @@ export default function ValuePropsSection({ locale }: ValuePropsSectionProps) {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
                   {copy.accuracy.formulaLabel}
                 </p>
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-mono text-xs text-slate-700">
-                  {copy.accuracy.formulaExample}
+                <div className="rounded border border-slate-200 bg-gray-100 p-4 font-mono text-xs leading-relaxed text-slate-800 dark:border-gray-700 dark:bg-gray-800 dark:text-slate-100">
+                  {formulaLines.map((formula) => (
+                    <code key={formula} className="block whitespace-pre-wrap">
+                      {formula}
+                    </code>
+                  ))}
                 </div>
                 <div className="grid gap-2 text-xs text-slate-600">
                   {copy.accuracy.formulaNotes.map((item) => (

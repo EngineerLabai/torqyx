@@ -14,6 +14,7 @@ type PageHeroProps = {
   children?: ReactNode;
   priority?: boolean;
   unoptimized?: boolean;
+  headingLevel?: "h1" | "h2";
 };
 
 export default function PageHero({
@@ -26,6 +27,7 @@ export default function PageHero({
   children,
   priority = false,
   unoptimized = false,
+  headingLevel = "h1",
 }: PageHeroProps) {
   if (!imageSrc) {
     return null;
@@ -35,6 +37,7 @@ export default function PageHero({
     imageSrc.startsWith("/") || /^(https?:)?\/\//.test(imageSrc)
       ? imageSrc
       : `/${imageSrc.replace(/^[./]+/, "")}`;
+  const HeadingTag = headingLevel;
 
   return (
     <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-sm md:p-8">
@@ -43,9 +46,9 @@ export default function PageHero({
           {eyebrow ? (
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-600">{eyebrow}</p>
           ) : null}
-          <h1 className="text-balance text-[clamp(2.75rem,4.2vw,3.5rem)] font-semibold text-slate-900">
+          <HeadingTag className="text-balance text-[clamp(2.75rem,4.2vw,3.5rem)] font-semibold text-slate-900">
             {title}
-          </h1>
+          </HeadingTag>
           {subtitle ? (
             <p className="text-sm font-medium text-slate-500 md:text-base">{subtitle}</p>
           ) : null}

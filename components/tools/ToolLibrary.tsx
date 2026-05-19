@@ -32,16 +32,19 @@ const TYPE_ALL = "All" as const;
 const CATEGORY_ALL = "All" as const;
 const TAG_ALL = "All" as const;
 const STATUS_ALL = "All" as const;
+const QUICK_FILTER_ALL = "all" as const;
 const NEW_WINDOW_DAYS = 14;
 const DEFAULT_TYPE: ToolType = "calculator";
 const NOW = Date.now();
 const INITIAL_VISIBLE_TOOLS = 24;
 const VISIBLE_TOOLS_STEP = 24;
+const TOOL_COUNT_LABEL_TR = "40+ hesaplayıcı — ihtiyacın olanı filtrele";
 
 type TypeFilter = typeof TYPE_ALL | ToolType;
 type CategoryFilter = typeof CATEGORY_ALL | (typeof toolCategories)[number];
 type TagFilter = typeof TAG_ALL | (typeof toolTags)[number];
 type StatusFilter = typeof STATUS_ALL | ToolStatus;
+type QuickFilter = typeof QUICK_FILTER_ALL | "mechanical" | "gear" | "fastening" | "fluid" | "thermal" | "quality" | "general";
 
 type ToolLibraryProps = {
   locale: Locale;
@@ -53,8 +56,20 @@ type FilterState = {
   category: CategoryFilter;
   tag: TagFilter;
   status: StatusFilter;
+  quick: QuickFilter;
   query: string;
 };
+
+const QUICK_FILTERS_TR: Array<{ id: QuickFilter; label: string }> = [
+  { id: QUICK_FILTER_ALL, label: "Tümü" },
+  { id: "mechanical", label: "Mekanik" },
+  { id: "gear", label: "Dişli" },
+  { id: "fastening", label: "Bağlantı" },
+  { id: "fluid", label: "Akışkan" },
+  { id: "thermal", label: "Isı" },
+  { id: "quality", label: "Kalite" },
+  { id: "general", label: "Genel" },
+];
 
 const getParam = (value?: string | string[]) => (Array.isArray(value) ? value[0] : value ?? "");
 
@@ -86,7 +101,38 @@ const resolveStatusFilter = (value: string): StatusFilter => {
   return STATUS_ALL;
 };
 
-const buildHref = (basePath: string, { type, category, tag, status, query }: FilterState) => {
+const resolveQuickFilter = (value: string): QuickFilter => {
+  const quick = QUICK_FILTERS_TR.find((item) => item.id === value);
+  return quick?.id ?? QUICK_FILTER_ALL;
+};
+
+const matchesQuickFilter = (tool: ToolCatalogItem, quick: QuickFilter): boolean => {
+  if (quick === QUICK_FILTER_ALL) return true;
+  const id = tool.id.toLowerCase();
+  const href = tool.href.toLowerCase();
+  const tags = tool.tags ?? [];
+
+  switch (quick) {
+    case "mechanical":
+      return tool.category === "Mechanical";
+    case "gear":
+      return id.startsWith("gear-") || href.includes("/gear-design");
+    case "fastening":
+      return id.includes("bolt") || id.includes("weld") || id.includes("sealing");
+    case "fluid":
+      return tags.includes("flow") || id.includes("pipe") || id.includes("hydraulic") || id.includes("fluids") || id.includes("compressor");
+    case "thermal":
+      return tags.includes("thermal") || id.includes("heat") || id.includes("thermal");
+    case "quality":
+      return tags.includes("validation") || id.includes("sanity") || id.includes("production") || id.includes("project");
+    case "general":
+      return tool.category === "General Engineering" && !matchesQuickFilter(tool, "fluid") && !matchesQuickFilter(tool, "thermal") && !matchesQuickFilter(tool, "quality");
+    default:
+      return true;
+  }
+};
+
+const buildHref = (basePath: string, { type, category, tag, status, quick, query }: FilterState) => {
   const params = new URLSearchParams();
 
   if (type === TYPE_ALL) {
@@ -105,6 +151,10 @@ const buildHref = (basePath: string, { type, category, tag, status, query }: Fil
 
   if (status !== STATUS_ALL) {
     params.set("status", status);
+  }
+
+  if (quick !== QUICK_FILTER_ALL) {
+    params.set("group", quick);
   }
 
   if (query) {
@@ -150,6 +200,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   const category = resolveCategoryFilter(getParam(searchParams?.category));
   const tag = resolveTagFilter(getParam(searchParams?.tag));
   const status = resolveStatusFilter(getParam(searchParams?.status));
+  const quick = resolveQuickFilter(getParam(searchParams?.group));
   const initialQuery = getParam(searchParams?.q).trim();
   const [query, setQuery] = useState(initialQuery);
   const [visibleToolsCount, setVisibleToolsCount] = useState(INITIAL_VISIBLE_TOOLS);
@@ -161,10 +212,10 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
 
   useEffect(() => {
     setVisibleToolsCount(INITIAL_VISIBLE_TOOLS);
-  }, [typeFilter, category, tag, status, debouncedQuery, locale]);
+  }, [typeFilter, category, tag, status, quick, debouncedQuery, locale]);
 
   const typeOptions: TypeFilter[] = [...toolTypes, TYPE_ALL];
-  const filterState: FilterState = { type: typeFilter, category, tag, status, query: query.trim() };
+  const filterState: FilterState = { type: typeFilter, category, tag, status, quick, query: query.trim() };
 
   const toolById = useMemo(() => new Map(toolCatalog.map((tool) => [tool.id, tool])), []);
 
@@ -175,9 +226,10 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         const categoryMatch = category === CATEGORY_ALL || tool.category === category;
         const tagMatch = tag === TAG_ALL || (tool.tags ?? []).includes(tag);
         const statusMatch = status === STATUS_ALL || tool.status === status;
-        return typeMatch && categoryMatch && tagMatch && statusMatch;
+        const quickMatch = matchesQuickFilter(tool, quick);
+        return typeMatch && categoryMatch && tagMatch && statusMatch && quickMatch;
       }),
-    [typeFilter, category, tag, status],
+    [typeFilter, category, tag, status, quick],
   );
 
   const baseToolIds = useMemo(() => new Set(baseTools.map((tool) => tool.id)), [baseTools]);
@@ -293,6 +345,57 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
     <div className="w-full min-w-0 space-y-6">
       <RecentToolsStrip tone="light" />
       <InlineSearch />
+
+      {locale === "tr" ? (
+        <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">{TOOL_COUNT_LABEL_TR}</p>
+              <h2 className="text-lg font-semibold text-slate-900">Araç kütüphanesinde ara</h2>
+            </div>
+            <label className="w-full max-w-xl">
+              <span className="sr-only">Araçlarda ara</span>
+              <input
+                type="search"
+                inputMode="search"
+                enterKeyHint="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Cıvata, dişli, basınç kaybı, rulman..."
+                className="h-12 w-full rounded-md border border-slate-300 bg-white px-4 text-sm text-slate-800 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15"
+                aria-label="Araçlarda ara"
+              />
+            </label>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {QUICK_FILTERS_TR.map((item) => {
+              const href = buildHref(basePath, {
+                ...filterState,
+                quick: item.id,
+                category: CATEGORY_ALL,
+                tag: TAG_ALL,
+              });
+              const isActive = quick === item.id;
+              return (
+                <Link
+                  key={item.id}
+                  href={href}
+                  prefetch={false}
+                  className={`inline-flex min-h-10 items-center rounded-full border px-4 py-2 text-xs font-semibold transition ${
+                    isActive
+                      ? "border-brand bg-brand text-white shadow-sm"
+                      : "border-slate-200 bg-white text-slate-700 hover:border-brand hover:text-brand"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
       <section className="w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -403,6 +506,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
         >
           <input type="hidden" name="type" value={typeFilter} />
+          <input type="hidden" name="group" value={quick} />
           <div className="space-y-1">
             <label htmlFor="tool-filter-category" className="block text-[11px] font-medium text-slate-700">
               {copy.filterSection.categoryLabel}
@@ -497,7 +601,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
             <UpgradePrompt
               compact
               source="tool_limit_library"
-              title={locale === "tr" ? "Free plan arac limiti aktif." : "Free plan tool limit is active."}
+              title={locale === "tr" ? "Free plan araç limiti aktif." : "Free plan tool limit is active."}
               description={
                 locale === "tr"
                   ? "Daha fazla araca erişmek için Pro'ya geçebilirsiniz."

@@ -294,10 +294,10 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
       <PageShell>
         <UpgradePrompt
           source="tool_access_limit_generic"
-          title={locale === "tr" ? "Bu araca Pro plan ile erisebilirsiniz." : "This tool requires Pro access."}
+          title={locale === "tr" ? "Bu araca Pro plan ile erişebilirsiniz." : "This tool requires Pro access."}
           description={
             locale === "tr"
-              ? "Free plan arac limitini doldurdunuz. Pro'ya gecerek tum araclari acabilirsiniz."
+              ? "Free plan araç limitini doldurdunuz. Pro'ya geçerek tüm araçları açabilirsiniz."
               : "You reached the Free plan tool limit. Upgrade to Pro to unlock all tools."
           }
         />
@@ -370,10 +370,10 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
               <UpgradePrompt
                 compact
                 source="daily_calculation_limit_generic"
-                title={locale === "tr" ? "Gunluk hesap limiti doldu." : "Daily calculation limit reached."}
+                title={locale === "tr" ? "Günlük hesap limiti doldu." : "Daily calculation limit reached."}
                 description={
                   locale === "tr"
-                    ? "Pro'ya gec, sinirsiz hesap yap."
+                    ? "Pro'ya geç, sınırsız hesap yap."
                     : "Upgrade to Pro for unlimited calculations."
                 }
               />

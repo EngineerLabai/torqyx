@@ -58,8 +58,8 @@ export default function TrialEndingBanner() {
   const copy = useMemo(() => {
     if (locale === "tr") {
       return {
-        title: "Pro deneme suresi bitmek uzere.",
-        cta: "Pro'ya gec",
+        title: "Pro deneme süresi bitmek üzere.",
+        cta: "Pro'ya geç",
         close: "Kapat",
         badge: "Trial",
       };

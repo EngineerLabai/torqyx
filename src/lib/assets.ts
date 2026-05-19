@@ -40,7 +40,7 @@ export type StandardHeroAssetKey = "fluids" | "fits" | "materials" | "threads";
 export const HERO_PLACEHOLDER = "/images/hero-background.webp";
 
 export const HERO_ASSETS: Record<HeroAssetKey, string> = {
-  about: "/images/office-atmosphere.webp",
+  about: "/images/general-machine-diagram.webp",
   home: "/images/home-hero.webp",
   tools: "/images/general-machine-diagram.webp",
   blog: "/images/blog-hero.webp",

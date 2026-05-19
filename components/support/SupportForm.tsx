@@ -13,6 +13,8 @@ type AttachmentPayload = {
   type?: string;
 };
 
+type SubjectValue = "technical" | "feature" | "bug" | "other";
+
 const MAX_ATTACHMENT_SIZE = 10 * 1024 * 1024;
 const UPGRADE_PLAN = "pro";
 const CHECKOUT_SOURCE = "support_form";
@@ -27,7 +29,12 @@ export default function SupportForm() {
   const hasTrackedCheckoutStart = useRef(false);
   const hasTrackedPaymentInfoEntered = useRef(false);
 
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState<{ name: string; email: string; subject: SubjectValue; message: string }>({
+    name: "",
+    email: "",
+    subject: "technical",
+    message: "",
+  });
   const [attachment, setAttachment] = useState<File | null>(null);
   const [status, setStatus] = useState<"idle" | "uploading" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -70,12 +77,12 @@ export default function SupportForm() {
     });
   };
 
-  const handleChange = (field: "name" | "email" | "message") =>
-    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (field: "name" | "email" | "message" | "subject") =>
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       trackCheckoutStart();
       if (status !== "idle") setStatus("idle");
       if (errorMessage) setErrorMessage("");
-      setForm((prev) => ({ ...prev, [field]: event.target.value }));
+      setForm((prev) => ({ ...prev, [field]: event.target.value as SubjectValue }));
     };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -116,8 +123,14 @@ export default function SupportForm() {
     trackCheckoutStart();
     setErrorMessage("");
 
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    if (!form.name.trim() || !form.email.trim() || !form.subject.trim() || !form.message.trim()) {
       setErrorMessage(copy.errors.required);
+      setStatus("error");
+      return;
+    }
+
+    if (form.message.trim().length < 20) {
+      setErrorMessage(copy.errors.messageTooShort);
       setStatus("error");
       return;
     }
@@ -139,6 +152,7 @@ export default function SupportForm() {
         body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
+          subject: form.subject,
           message: form.message.trim(),
           attachment: attachmentPayload,
         }),
@@ -153,7 +167,7 @@ export default function SupportForm() {
       }
 
       setStatus("success");
-      setForm({ name: "", email: "", message: "" });
+      setForm({ name: "", email: "", subject: "technical", message: "" });
       setAttachment(null);
     } catch (error) {
       console.error("[support] submit failed", error);
@@ -165,7 +179,7 @@ export default function SupportForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-4 space-y-4 rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 shadow-sm"
+      className="mt-4 space-y-4 rounded-2xl border border-orange-100 bg-orange-50/50 p-4 shadow-sm"
     >
       {toastMessage ? (
         <div
@@ -188,7 +202,7 @@ export default function SupportForm() {
             aria-required="true"
             value={form.name}
             onChange={handleChange("name")}
-            className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+            className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-brand focus:ring-2 focus:ring-orange-100"
             placeholder={copy.fields.name.placeholder}
             disabled={isBusy}
             aria-label={copy.fields.name.placeholder}
@@ -206,12 +220,34 @@ export default function SupportForm() {
             aria-required="true"
             value={form.email}
             onChange={handleChange("email")}
-            className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+            className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-brand focus:ring-2 focus:ring-orange-100"
             placeholder={copy.fields.email.placeholder}
             disabled={isBusy}
             aria-label={copy.fields.email.placeholder}
           />
         </div>
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-xs font-semibold text-slate-700" htmlFor="subject">
+          {copy.fields.subject.label}
+        </label>
+        <select
+          id="subject"
+          name="subject"
+          required
+          aria-required="true"
+          value={form.subject}
+          onChange={handleChange("subject")}
+          className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-brand focus:ring-2 focus:ring-orange-100"
+          disabled={isBusy}
+        >
+          {Object.entries(copy.fields.subject.options).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="space-y-1">
@@ -223,10 +259,11 @@ export default function SupportForm() {
           name="message"
           rows={4}
           required
+          minLength={20}
           aria-required="true"
           value={form.message}
           onChange={handleChange("message")}
-          className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+          className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-brand focus:ring-2 focus:ring-orange-100"
           placeholder={copy.fields.message.placeholder}
           disabled={isBusy}
           aria-label={copy.fields.message.placeholder}
@@ -243,7 +280,7 @@ export default function SupportForm() {
           type="file"
           onChange={handleFileChange}
           disabled={!canUploadFile || isBusy}
-          className="block w-full text-sm text-slate-700 file:mr-3 file:rounded-lg file:border-0 file:bg-emerald-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-emerald-500 disabled:opacity-60"
+          className="block w-full text-sm text-slate-700 file:mr-3 file:rounded-md file:border-0 file:bg-brand file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:brightness-90 disabled:opacity-60"
           aria-label="attachment"
           aria-describedby="attachment-helper"
         />
@@ -275,7 +312,7 @@ export default function SupportForm() {
       <button
         type="submit"
         disabled={isBusy}
-        className="tap-target w-full rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-60"
+        className="tap-target w-full rounded-md bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:brightness-90 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {submitLabel}
       </button>

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Bolt, Cog, Droplets, Gauge, Sigma, Wrench } from "lucide-react";
+import { ArrowUpDown, CircleDot, Cog, Droplets, RotateCw, Wrench } from "lucide-react";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
@@ -15,12 +14,12 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
   const copy = messages.home.showcase;
   const categoryLabels = messages.components.toolLibrary.labels;
   const tools = [
-    { id: "bolt-calculator", icon: Bolt, image: "/images/bolt-assembly.webp", usage: 12400 },
-    { id: "gear-module", icon: Cog, image: "/images/Gear.webp", usage: 9800 },
-    { id: "pipe-pressure-loss", icon: Droplets, image: "/images/hydraulic-circuit.webp", usage: 8600 },
-    { id: "shaft-torsion", icon: Gauge, image: "/images/shaft.webp", usage: 7400 },
-    { id: "bearing-life", icon: Sigma, image: "/images/bearing-section.webp", usage: 6900 },
-    { id: "hydraulic-cylinder", icon: Wrench, image: "/images/pin-spring.webp", usage: 6100 },
+    { id: "bolt-calculator", icon: Wrench, usage: 12400 },
+    { id: "gear-module", icon: Cog, usage: 9800 },
+    { id: "pipe-pressure-loss", icon: Droplets, usage: 8600 },
+    { id: "shaft-torsion", icon: RotateCw, usage: 7400 },
+    { id: "bearing-life", icon: CircleDot, usage: 6900 },
+    { id: "hydraulic-cylinder", icon: ArrowUpDown, usage: 6100 },
   ]
     .map((item) => ({
       ...item,
@@ -41,48 +40,37 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map(({ tool, icon: Icon, usage, image }) => {
+          {tools.map(({ tool, icon: Icon, usage }) => {
             const toolCopy = getToolCopy(tool, locale);
             const categoryLabel = tool.category ? categoryLabels.category[tool.category] : categoryLabels.generalCategory;
             return (
               <Link
                 key={tool.id}
                 href={withLocalePrefix(tool.href, locale)}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md"
+                className="group flex min-h-[220px] flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand hover:shadow-md"
               >
-            <div className="relative h-36 w-full bg-slate-100">
-              <Image
-                src={image}
-                alt={toolCopy.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-contain transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex flex-col flex-grow p-5">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
-                    <Icon size={16} />
-                    </span>
-                    <div>
+                <div className="flex items-start gap-3">
+                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-brand">
+                    <Icon size={19} />
+                  </span>
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-sm font-semibold text-slate-900 group-hover:text-slate-950">
                         {toolCopy.title}
                       </h3>
-                      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    <span className="mt-2 inline-flex rounded-full border border-slate-200 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
                         {categoryLabel}
                       </span>
-                    </div>
                   </div>
+                </div>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{toolCopy.description}</p>
+                <div className="mt-5 flex items-center justify-between gap-3">
                   <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600">
                     {formatUsage(usage)}
                   </span>
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{toolCopy.description}</p>
-                <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-emerald-700">
+                  <span className="inline-flex items-center gap-2 text-xs font-semibold text-brand">
                   {copy.tryNow}
+                  </span>
               </div>
-                </div>
               </Link>
             );
           })}
@@ -90,7 +78,7 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
 
         <Link
           href={libraryHref}
-          className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+          className="inline-flex items-center justify-center rounded-md border border-brand bg-transparent px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand transition hover:bg-brand hover:text-white"
         >
           {copy.cta}
         </Link>

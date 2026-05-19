@@ -194,7 +194,7 @@ const termsSectionsEn: TermsSection[] = [
   {
     title: "Governing Law and Jurisdiction",
     paragraphs: [
-      "These Terms are governed by the laws of the Republic of Turkiye, without regard to conflict-of-law principles.",
+      "These Terms are governed by the laws of the Republic of Türkiye, without regard to conflict-of-law principles.",
       "Any dispute arising out of or in connection with these Terms shall be subject to the exclusive jurisdiction of the Istanbul (Central) Courts and Enforcement Offices.",
     ],
   },

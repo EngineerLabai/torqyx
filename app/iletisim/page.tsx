@@ -1,34 +1,32 @@
+import type { ReactNode } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import SupportForm from "@/components/support/SupportForm";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
+import { Linkedin, Mail, Timer } from "lucide-react";
 
 const pageCopy = {
-  title: "İletişim",
-  description: "Sorular, geri bildirimler ve iş birliği talepleri için bize ulaşın.",
+  title: "Bize Ulaşın",
+  description: "Teknik soru, özellik önerisi veya hata bildirimi için aşağıdaki formu kullanın. Her mesaja yanıt veriyoruz.",
   imageAlt: "İletişim sayfası görseli",
 };
 
 const pageCopyEn = {
-  title: "Contact",
-  description: "Reach out for questions, feedback, or collaboration requests.",
+  title: "Contact Us",
+  description: "Use the form below for technical questions, feature suggestions, or bug reports. We respond to every message.",
   imageAlt: "Contact page visual",
 };
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const copy = locale === "en" ? pageCopyEn : pageCopy;
-  const title = locale === "tr" ? "İletişim" : copy.title;
-  const description =
-    locale === "tr"
-      ? "TORQYX ekibiyle iletişime geçin. Teknik destek, öneri ve iş birliği talepleriniz için hızlı geri dönüş alın."
-      : copy.description;
 
   return buildPageMetadata({
-    title,
-    description,
+    title: copy.title,
+    description: copy.description,
     path: "/iletisim",
     locale,
   });
@@ -36,6 +34,7 @@ export async function generateMetadata() {
 
 export default async function ContactPage() {
   const locale = await getLocaleFromCookies();
+  const supportCopy = getMessages(locale).pages.support;
   const heroImage = getHeroImageSrc("contact");
 
   if (locale === "en") {
@@ -48,12 +47,13 @@ export default async function ContactPage() {
           imageAlt="Torqyx Engineering - Contact Hero"
         />
 
+        <section className="grid gap-4 md:grid-cols-3">
+          <ContactInfoCard icon={<Mail size={18} />} title={supportCopy.emailLabel} body={supportCopy.email} href={`mailto:${supportCopy.email}`} />
+          <ContactInfoCard icon={<Timer size={18} />} title={supportCopy.responseTitle} body={supportCopy.responseTime} />
+          <ContactInfoCard icon={<Linkedin size={18} />} title={supportCopy.linkedinLabel} body={supportCopy.linkedinUnavailable} />
+        </section>
+
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold tracking-tight text-slate-900">Contact</h2>
-          <p className="text-sm text-slate-700 md:text-base">
-            Use the form below for technical questions, new tool requests, or collaboration ideas. If you can share inputs, units, and
-            expected results, we can review faster.
-          </p>
           <SupportForm />
         </section>
 
@@ -69,7 +69,7 @@ export default async function ContactPage() {
         <section className="rounded-3xl border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-sm">
           <h2 className="text-base font-semibold text-slate-900">Response time</h2>
           <ul className="mt-3 list-disc space-y-1 pl-5">
-            <li>We typically respond to weekday requests within 1-2 business days.</li>
+            <li>We typically respond within 24 hours.</li>
             <li>Providing context and attachments helps us resolve issues faster.</li>
           </ul>
         </section>
@@ -86,21 +86,47 @@ export default async function ContactPage() {
         imageAlt="Torqyx Engineering - Contact Hero"
       />
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <p className="text-sm text-slate-700 md:text-base">
-          Teknik sorular, yeni araç talepleri veya iş birliği için aşağıdaki formu kullanabilirsiniz. Ek dosya veya
-          bağlantı paylaşırsanız inceleme sürecimiz hızlanır.
-        </p>
+      <section className="grid gap-4 md:grid-cols-3">
+        <ContactInfoCard icon={<Mail size={18} />} title={supportCopy.emailLabel} body={supportCopy.email} href={`mailto:${supportCopy.email}`} />
+        <ContactInfoCard icon={<Timer size={18} />} title={supportCopy.responseTitle} body={supportCopy.responseTime} />
+        <ContactInfoCard icon={<Linkedin size={18} />} title={supportCopy.linkedinLabel} body={supportCopy.linkedinUnavailable} />
+      </section>
+
+      <section id="support-form" className="scroll-mt-24 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <SupportForm />
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-sm">
         <h2 className="text-base font-semibold text-slate-900">Yanıt süresi</h2>
         <ul className="mt-3 list-disc space-y-1 pl-5">
-          <li>Hafta içi taleplere genellikle 1-2 iş günü içinde dönüş yapıyoruz.</li>
+          <li>Genellikle 24 saat içinde yanıt veriyoruz.</li>
           <li>Acil notlarınızı mesaj alanında belirtmeniz süreci hızlandırır.</li>
         </ul>
       </section>
     </PageShell>
   );
+}
+
+function ContactInfoCard({
+  icon,
+  title,
+  body,
+  href,
+}: {
+  icon: ReactNode;
+  title: string;
+  body: string;
+  href?: string;
+}) {
+  const content = (
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 text-sm shadow-sm transition hover:border-brand">
+      <div className="flex items-center gap-2 text-brand">
+        {icon}
+        <h2 className="font-semibold text-slate-900">{title}</h2>
+      </div>
+      <p className="mt-3 leading-relaxed text-slate-600">{body}</p>
+    </div>
+  );
+
+  return href ? <a href={href}>{content}</a> : content;
 }

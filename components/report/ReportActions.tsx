@@ -124,7 +124,7 @@ export default function ReportActions<T>({
   async function exportCurrentPdf() {
     if (!pdfGate.hasAccess) {
       setStatusText(
-        locale === "tr" ? "PDF disa aktarma Pro planinda acilir." : "PDF export is available on Pro.",
+        locale === "tr" ? "PDF dışa aktarma Pro planında açılır." : "PDF export is available on Pro.",
       );
       return;
     }
@@ -152,7 +152,7 @@ export default function ReportActions<T>({
   async function exportSavedPdf(entry: SavedReport<T>) {
     if (!pdfGate.hasAccess) {
       setStatusText(
-        locale === "tr" ? "PDF disa aktarma Pro planinda acilir." : "PDF export is available on Pro.",
+        locale === "tr" ? "PDF dışa aktarma Pro planında açılır." : "PDF export is available on Pro.",
       );
       return;
     }

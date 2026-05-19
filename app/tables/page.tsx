@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Mühendislik Referans Tablolari" : "Engineering Reference Tables";
+  const title = locale === "tr" ? "Mühendislik Referans Tabloları" : "Engineering Reference Tables";
   const description =
     locale === "tr"
       ? "Mühendislik hesaplayıcıları ile uyumlu referans tablolarına hızlı erişim sağlayan sayfa; birimler, malzemeler ve teknik değerler tek noktada."
@@ -23,5 +23,4 @@ export default async function TablesAliasPage() {
   const locale = await getLocaleFromCookies();
   redirect(`/${locale}/reference`);
 }
-
 

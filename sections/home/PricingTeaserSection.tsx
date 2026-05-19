@@ -1,5 +1,6 @@
-import AuthModalTrigger from "@/components/auth/AuthModalTrigger";
+import TrackedUpgradeLink from "@/components/analytics/TrackedUpgradeLink";
 import type { Locale } from "@/utils/locale";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 
 type PricingTeaserSectionProps = {
@@ -8,6 +9,7 @@ type PricingTeaserSectionProps = {
 
 export default function PricingTeaserSection({ locale }: PricingTeaserSectionProps) {
   const copy = getMessages(locale).home.pricing;
+  const supportHref = `${withLocalePrefix("/support", locale)}#support-form`;
 
   return (
     <section id="pricing-teaser" className="w-full py-12">
@@ -52,11 +54,18 @@ export default function PricingTeaserSection({ locale }: PricingTeaserSectionPro
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <AuthModalTrigger
-                label={copy.ctaPrimary}
-                className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:from-amber-600 hover:via-orange-600 hover:to-rose-600"
-              />
-              <p className="mt-3 text-[11px] text-slate-500">{copy.note}</p>
+              <TrackedUpgradeLink
+                href={supportHref}
+                plan="pro"
+                source="home_pricing_plan_card"
+                className="mt-5 inline-flex w-full items-center justify-center rounded-md bg-brand px-6 py-3 text-xs font-semibold text-white shadow-sm transition hover:brightness-90"
+              >
+                {copy.ctaPrimary}
+              </TrackedUpgradeLink>
+              <p className="mt-3 text-[11px] leading-relaxed text-slate-600">{copy.pro.ctaNote}</p>
+              <p className="mt-3 rounded-2xl border border-amber-200 bg-white/70 px-3 py-2 text-[11px] leading-relaxed text-amber-800">
+                {copy.note}
+              </p>
             </div>
           </div>
         </div>

@@ -40,7 +40,7 @@ export default function ExportPanel({
   const resolvedPreviewAlt = previewAlt ?? copy.previewAlt;
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const pdfLockedText =
-    locale === "tr" ? "PDF disa aktarma Pro planinda acilir." : "PDF export is available on Pro.";
+    locale === "tr" ? "PDF dışa aktarma Pro planında açılır." : "PDF export is available on Pro.";
 
   const run = async (action?: () => Promise<boolean> | boolean, successText?: string, eventName?: "export_pdf") => {
     if (!action) return;
@@ -143,7 +143,7 @@ export default function ExportPanel({
           compact
           source="pdf_export_gate"
           className="mt-3"
-          description={locale === "tr" ? "PDF disa aktarma ve sinirsiz rapor icin Pro'ya gec." : undefined}
+          description={locale === "tr" ? "PDF dışa aktarma ve sınırsız rapor için Pro'ya geç." : undefined}
         />
       ) : null}
     </div>

@@ -29,9 +29,9 @@ export default function UpgradePrompt({
   const defaults =
     locale === "tr"
       ? {
-          title: "Bu özellik Pro planinda.",
-          description: "Pro'ya gec, sinirsiz kullan.",
-          ctaLabel: "Pro'ya gec",
+          title: "Bu özellik Pro planında.",
+          description: "Pro'ya geç, sınırsız kullan.",
+          ctaLabel: "Pro'ya geç",
         }
       : {
           title: "This feature is available on Pro.",

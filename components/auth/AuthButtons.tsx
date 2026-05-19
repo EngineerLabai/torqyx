@@ -59,7 +59,7 @@ export default function AuthButtons({ copy }: AuthButtonsProps) {
             onClick={handleUpgradeClick}
             title={copy.premiumTooltip}
             aria-label={`${copy.premium}. ${copy.premiumTooltip}`}
-            className="tap-target inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3 py-1.5 text-[12px] font-medium text-white transition-colors hover:bg-blue-700 md:px-4 md:py-2 md:text-[13px]"
+            className="tap-target inline-flex items-center justify-center whitespace-nowrap rounded-md bg-brand px-4 py-2 text-[12px] font-semibold text-white transition hover:brightness-90 md:px-5 md:py-2.5 md:text-[13px]"
             href={premiumHref}
           >
             {copy.premium}

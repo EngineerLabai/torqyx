@@ -19,6 +19,7 @@ type PlanCardProps = {
   features: string[];
   ctaLabel: string;
   ctaHref: string;
+  ctaNote?: string;
   tone?: PlanTone;
   upgradeSource?: string;
 };
@@ -41,7 +42,7 @@ export default async function PricingPage() {
   const copy = getMessages(locale).pages.pricing;
   const heroImage = getHeroImageSrc("premium");
   const toolsHref = withLocalePrefix("/tools", locale);
-  const supportHref = withLocalePrefix("/support", locale);
+  const supportHref = `${withLocalePrefix("/support", locale)}#support-form`;
 
   return (
     <PageShell>
@@ -55,7 +56,7 @@ export default async function PricingPage() {
       >
         <Link
           href={toolsHref}
-          className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
+          className="rounded-md border border-brand bg-transparent px-6 py-3 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
         >
           {copy.free.cta}
         </Link>
@@ -63,7 +64,7 @@ export default async function PricingPage() {
           plan="pro"
           source="pricing_hero"
           href={supportHref}
-          className="rounded-full border border-amber-200 bg-amber-50 px-5 py-2 text-sm font-semibold text-amber-800 transition hover:border-amber-300 hover:bg-amber-100"
+          className="rounded-md bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-90"
         >
           {copy.premium.cta}
         </TrackedUpgradeLink>
@@ -86,13 +87,15 @@ export default async function PricingPage() {
           features={copy.premium.features}
           ctaLabel={copy.premium.cta}
           ctaHref={supportHref}
+          ctaNote={copy.premium.ctaNote}
           tone="premium"
           upgradeSource="pricing_plan_card"
         />
       </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600 shadow-sm">
-        {copy.note}
+      <section className="space-y-2 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600 shadow-sm">
+        <p>{copy.note}</p>
+        <p className="font-semibold text-slate-800">{copy.guarantee}</p>
       </section>
     </PageShell>
   );
@@ -105,6 +108,7 @@ function PlanCard({
   features,
   ctaLabel,
   ctaHref,
+  ctaNote,
   tone = "free",
   upgradeSource,
 }: PlanCardProps) {
@@ -114,8 +118,8 @@ function PlanCard({
       : "border-emerald-200 bg-emerald-50 text-emerald-700";
   const ctaClass =
     tone === "premium"
-      ? "border-amber-200 bg-amber-100 text-amber-800 hover:border-amber-300 hover:bg-amber-200"
-      : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50";
+      ? "border-brand bg-brand text-white hover:brightness-90"
+      : "border-brand bg-transparent text-brand hover:bg-brand hover:text-white";
 
   return (
     <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -138,18 +142,19 @@ function PlanCard({
           href={ctaHref}
           plan="pro"
           source={upgradeSource}
-          className={`mt-5 inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold transition ${ctaClass}`}
+          className={`mt-5 inline-flex items-center justify-center rounded-md border px-6 py-3 text-xs font-semibold transition ${ctaClass}`}
         >
           {ctaLabel}
         </TrackedUpgradeLink>
       ) : (
         <Link
           href={ctaHref}
-          className={`mt-5 inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold transition ${ctaClass}`}
+          className={`mt-5 inline-flex items-center justify-center rounded-md border px-6 py-3 text-xs font-semibold transition ${ctaClass}`}
         >
           {ctaLabel}
         </Link>
       )}
+      {ctaNote ? <p className="mt-3 text-xs leading-relaxed text-slate-500">{ctaNote}</p> : null}
     </article>
   );
 }

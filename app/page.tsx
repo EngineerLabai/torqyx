@@ -2,6 +2,7 @@ import WebPageJsonLd from "@/components/seo/WebPageJsonLd";
 import HeroSection from "@/sections/home/HeroSection";
 import PopularToolsSection from "@/sections/home/PopularToolsSection";
 import PricingTeaserSection from "@/sections/home/PricingTeaserSection";
+import TestimonialSection from "@/sections/home/TestimonialSection";
 import ValuePropsSection from "@/sections/home/ValuePropsSection";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -14,7 +15,7 @@ export async function generateMetadata() {
   const copy = getMessages(locale).home.seo;
   const description =
     locale === "tr"
-      ? "ISO/DIN/VDI standartlarına dayalı deterministik mühendislik hesaplayıcıları. Tahmin değil standart temelli sonuç. 500+ mühendis kullanıyor."
+      ? "Cıvata, tork, dişli, rulman ve 40+ mekanik hesap aracı. ISO/DIN/VDI standartlarına dayalı, adım adım doğrulanmış sonuçlar. Ücretsiz dene."
       : copy.description;
   const baseTitle = locale === "tr" ? "Mekanik Mühendislik Hesaplayıcıları" : "Mechanical Engineering Calculators";
   const base = buildPageMetadata({
@@ -56,6 +57,7 @@ export default async function Home() {
       <HeroSection locale={locale} />
       <ValuePropsSection locale={locale} />
       <PopularToolsSection locale={locale} />
+      <TestimonialSection locale={locale} />
       <PricingTeaserSection locale={locale} />
     </main>
   );

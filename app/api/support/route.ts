@@ -10,7 +10,8 @@ export const runtime = "nodejs";
 const supportSchema = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(254).transform((value) => value.toLowerCase()),
-  message: z.string().trim().min(10).max(5000),
+  subject: z.enum(["technical", "feature", "bug", "other"]).default("technical"),
+  message: z.string().trim().min(20).max(5000),
   attachment: z
     .object({
       url: z.string().trim().url().max(1000),

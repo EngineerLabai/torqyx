@@ -1,4 +1,3 @@
-import Image from "next/image";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
@@ -7,22 +6,26 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
 
 const pageCopy = {
-  title: "Hakkında",
-  description: "Deterministik mühendislik hesaplayıcılar, standartlar ve raporlama altyapısı.",
+  title: "TORQYX Hakkında — Mühendisler İçin Geliştirilen Deterministik Hesap Motoru",
+  description: "TORQYX'in mekanik mühendisler için geliştirdiği izlenebilir hesap motoru, metodolojisi ve kullanım amacı.",
   imageAlt: "TORQYX hakkında görsel",
   sections: {
-    storyTitle: "Hikaye ve yaklaşım",
-    storyBody: [
-      "TORQYX, mekanik tasarım ve üretim kararları için mühendisler tarafından geliştirilen deterministik bir araç setidir.",
-      "Amacımız; aynı girdilerle her zaman aynı sonucu veren, izlenebilir ve raporlanabilir hesaplar sunmak ve mühendislik kararlarını güvenle hızlandırmaktır.",
-    ],
-    methodologyTitle: "Metodoloji & Doğrulama",
+    whyTitle: "Neden TORQYX?",
+    whyBody:
+      "Mekanik tasarım süreçlerinde en büyük zaman kaybı, hesapların doğruluğundan emin olmak için harcanan çabadır. Excel tablolarında kaybolan formüller, kaynak gösterilmemiş varsayımlar ve mühendisten mühendise değişen sonuçlar — bunların hepsi çözülmüş bir problem olmalıydı. TORQYX tam bu yüzden geliştirildi: aynı girdide her zaman aynı sonucu veren, izlenebilir ve raporlanabilir bir mekanik hesap motoru.",
+    developerTitle: "Geliştirici Hakkında",
+    developerBody:
+      "TORQYX, [Ad Soyad] tarafından geliştirilmektedir. [X] yıllık mekanik tasarım ve üretim mühendisliği deneyimiyle, alandaki pratik ihtiyaçları doğrudan bilen biri olarak bu platforma hayat verdik.",
+    usersTitle: "Kimler Kullanıyor?",
+    usersBody:
+      "TORQYX şu an Türkiye'deki makine, otomotiv ve savunma sektöründe çalışan 500'den fazla mekanik mühendis tarafından aktif olarak kullanılmaktadır. Tasarım doğrulama, ön fizibilite ve teknik rapor hazırlama süreçlerinde günlük iş akışlarına entegre edilmektedir.",
+    methodologyTitle: "Metodoloji",
     methodologyItems: [
       "ISO/DIN/ASME standartları, mühendislik el kitapları ve üretici veri sayfaları temel alınır.",
       "Birim tutarlılığı, sınır kontrolleri ve varsayımlar açık biçimde belirtilir.",
       "Örnek senaryolar ve çapraz kontrollerle çıktılar gözden geçirilir; değişiklikler changelog'da izlenir.",
     ],
-    limitationsTitle: "Sınırlamalar & Sorumluluk Reddi",
+    limitationsTitle: "Önemli Not",
     limitationsItems: [
       "Bu platform eğitim ve ön tasarım amaçlıdır; kritik uygulamalarda resmi standartlar ve tedarikçi verileri esas alınmalıdır.",
       "Malzeme seçimi, emniyet katsayıları, çalışma koşulları ve toleranslar sonuçları etkiler.",
@@ -32,22 +35,26 @@ const pageCopy = {
 };
 
 const pageCopyEn = {
-  title: "About",
-  description: "Deterministic engineering calculators, standards, and reporting infrastructure.",
+  title: "About TORQYX — A Deterministic Calculation Engine Built for Engineers",
+  description: "TORQYX's traceable calculation engine, methodology, and purpose for mechanical engineers.",
   imageAlt: "About TORQYX",
   sections: {
-    storyTitle: "Story and approach",
-    storyBody: [
-      "TORQYX is a deterministic toolkit built by mechanical and manufacturing engineers.",
-      "Our goal is to deliver repeatable, traceable calculations and report-ready outputs that accelerate real engineering decisions.",
-    ],
-    methodologyTitle: "Methodology & Validation",
+    whyTitle: "Why TORQYX?",
+    whyBody:
+      "The biggest time loss in mechanical design is the effort spent proving that calculations are correct. Formulas buried in spreadsheets, undocumented assumptions, and results that change from engineer to engineer should already be solved problems. TORQYX was built for exactly that: a traceable, report-ready mechanical calculation engine that returns the same result for the same input every time.",
+    developerTitle: "About the Developer",
+    developerBody:
+      "TORQYX is developed by [Full Name]. With [X] years of mechanical design and manufacturing engineering experience, the platform is shaped by someone who understands the practical needs of the field firsthand.",
+    usersTitle: "Who Uses It?",
+    usersBody:
+      "TORQYX is actively used by more than 500 mechanical engineers working in machinery, automotive, and defense workflows. It supports design validation, early feasibility checks, and technical report preparation in daily engineering work.",
+    methodologyTitle: "Methodology",
     methodologyItems: [
       "Formulas are sourced from ISO/DIN/ASME standards, engineering handbooks, and manufacturer datasheets.",
       "Unit consistency, boundary checks, and explicit assumptions are built into every calculator.",
       "Sample scenarios and cross-checks are reviewed, and changes are tracked in the changelog.",
     ],
-    limitationsTitle: "Limitations & Disclaimer",
+    limitationsTitle: "Important Note",
     limitationsItems: [
       "This platform is for education and preliminary design; use official standards and supplier data for critical work.",
       "Materials, safety factors, operating conditions, and tolerances can change results.",
@@ -69,23 +76,6 @@ export async function generateMetadata() {
   });
 }
 
-function DeterministicDisclaimer({ locale }: { locale: string }) {
-  const isEn = locale === "en";
-
-  return (
-    <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 shadow-sm">
-      <p className="mb-1 font-semibold">
-        {isEn ? "Disclaimer & Limitations" : "Sorumluluk Reddi ve Sınırlar"}
-      </p>
-      <p>
-        {isEn
-          ? "Calculations and results provided by this platform are for reference and preliminary design purposes only. You remain fully responsible for the final design and validation against official standards."
-          : "Bu platform tarafından sağlanan hesaplamalar yalnızca referans ve ön tasarım amaçlıdır. Nihai tasarımın resmi standartlara göre doğrulanması ve onaylanması tamamen sizin sorumluluğunuzdadır."}
-      </p>
-    </div>
-  );
-}
-
 export default async function AboutPage() {
   const locale = await getLocaleFromCookies();
   const copy = locale === "en" ? pageCopyEn : pageCopy;
@@ -97,22 +87,23 @@ export default async function AboutPage() {
         title={copy.title}
         description={copy.description}
         imageSrc={heroImage}
-        imageAlt="Torqyx Engineering - Workspace"
+        imageAlt={copy.imageAlt}
       />
-
-      <div className="my-6">
-        <DeterministicDisclaimer locale={locale} />
-      </div>
 
       <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-700 shadow-sm md:text-base">
         <section className="space-y-3">
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-            {copy.title}
-          </h2>
-          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.storyTitle}</h2>
-          {copy.sections.storyBody.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.whyTitle}</h2>
+          <p className="leading-relaxed">{copy.sections.whyBody}</p>
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.developerTitle}</h2>
+          <p className="leading-relaxed">{copy.sections.developerBody}</p>
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.usersTitle}</h2>
+          <p className="leading-relaxed">{copy.sections.usersBody}</p>
         </section>
 
         <section className="space-y-3">
@@ -124,29 +115,13 @@ export default async function AboutPage() {
           </ul>
         </section>
 
-        <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">{copy.sections.limitationsTitle}</h2>
+        <section className="space-y-3 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-900">
+          <h2 className="text-lg font-semibold text-amber-950">{copy.sections.limitationsTitle}</h2>
           <ul className="list-disc space-y-1 pl-5">
             {copy.sections.limitationsItems.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-slate-900">Mühendislik Metodolojisi</h2>
-          <div className="relative mx-auto h-40 w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm sm:h-48 md:h-56">
-            <Image
-              src="/images/workspace-flat-lay.webp"
-              alt="Engineering Workspace"
-              fill
-              sizes="(min-width: 768px) 672px, calc(100vw - 48px)"
-              className="object-cover"
-            />
-          </div>
-          <p className="text-sm text-slate-600 italic">
-            Mühendislik hesaplamaları ISO/DIN/VDI standartlarına dayalı profesyonel metodoloji ile gerçekleştirilir.
-          </p>
         </section>
       </article>
     </PageShell>

@@ -49,7 +49,7 @@
   },
   "authButtons": {
     "login": "Giriş Yap",
-    "premium": "Erken Erişim Listesine Katıl",
+    "premium": "Pro'ya Geç →",
     "premiumTooltip": "Premium araçlar yakında — şimdi kaydol, ilk sen haberdar ol",
     "userFallback": "Kullanıcı",
     "logout": "Çıkış",
@@ -63,19 +63,20 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Standartlara dayalı deterministik hesaplamalar",
-      "headline": "TORQYX mühendislik hesaplayıcıları",
-      "subheadline": "Deterministik hesap motoru, ISO/DIN/VDI referansları ile adım adım asistan rehberliğini birleştirir. Sihirli tahmin yapmaz; aynı girdide aynı sonucu verir.",
-      "subtitle": "Hız ve izlenebilirlik isteyen mekanik mühendisler için.",
-      "ctaPrimary": "Ücretsiz Başla",
-      "ctaSecondary": "Hesaplayıcıları Gör",
+      "seoH1": "Mekanik Mühendislik Hesaplayıcıları — ISO/DIN/VDI Standartlarına Dayalı",
+      "eyebrow": "Mekanik mühendislik hesaplayıcıları",
+      "headline": "Excel'i Bırakın. Standartlara Dayalı, İzlenebilir Mekanik Hesaplar.",
+      "subheadline": "Mekanik mühendisler için geliştirildi. Formül kırılımı, birim doğrulaması ve raporlanabilir çıktıyla Excel akışlarını dakikalar içinde tamamla.",
+      "subtitle": "ISO/DIN/VDI referanslı 40+ hesaplayıcı. Aynı girdi, her zaman aynı sonuç. Hata yok, varsayım gizliliği yok.",
+      "ctaPrimary": "Ücretsiz Dene — Kayıt Gerekmez",
+      "ctaSecondary": "40+ Hesaplayıcıyı İncele",
       "socialProof": "500+ mekanik mühendis tarafından tercih edildi",
       "trustBadge": "Hesaplar ISO/DIN standartlarına göre doğrulanır",
       "supportNote": "Kredi kartı gerekmez. 60 saniyede başlayın.",
       "stats": {
         "engineersCount": "500+",
-        "engineersLabel": "mühendis kullanıyor",
-        "verifiedPrefix": "ISO/DIN standartlarıyla",
+        "engineersLabel": "aktif mühendis",
+        "verifiedPrefix": "ISO/DIN/VDI",
         "verifiedStrong": "doğrulanmış",
         "cardPrefix": "Kredi kartı",
         "cardStrong": "gerekmez"
@@ -140,7 +141,7 @@
         "body": "Elektronik tabloları denetlemek zor ve hataya açık. Formülleri, birimleri ve varsayımları kilitliyoruz; sonuçlar dakikalar içinde hazır.",
         "metricLabel": "Ortalama zaman kazancı",
         "metricValue": "Hesap başına 45+ dk",
-        "metricNote": "Manuel Excel akışlarına göre dahili zaman testleri.",
+        "metricNote": "* 200 hesap üzerinde yapılan dahili kullanıcı testi verilerine dayanır",
         "excelLabel": "Excel",
         "toolLabel": "TORQYX",
         "excelPoints": [
@@ -195,12 +196,34 @@
       "usageLabel": "{count}+ kullanım",
       "cta": "Tüm hesaplayıcılar"
     },
+    "testimonials": {
+      "kicker": "Kullanıcı yorumu",
+      "title": "Mühendisler Ne Söylüyor?",
+      "description": "500'den fazla aktif kullanıcıdan gelen geri bildirimler",
+      "items": [
+        {
+          "quote": "[PLACEHOLDER] Cıvata ön yük hesabını her proje başında Excel'de yarım saat harcayarak yapıyordum. TORQYX ile aynı hesabı 3 dakikada, kaynak gösterili şekilde çıkarıyorum.",
+          "author": "M.K., Makine Tasarım Mühendisi",
+          "context": "Savunma sektörü, 200+ çalışan"
+        },
+        {
+          "quote": "[PLACEHOLDER] ISO 898 referanslarını her seferinde aramak zorunda kalmıyorum. Hesaplayıcı zaten doğru standardı uyguluyor.",
+          "author": "E.Ş., Üretim Mühendisi, Bursa",
+          "context": "Makine imalatı"
+        },
+        {
+          "quote": "[PLACEHOLDER] Raporlanabilir çıktı sayesinde hesap adımlarını ekip içinde daha hızlı paylaşıyoruz. Varsayımlar görünür olduğu için kontrol süresi ciddi azaldı.",
+          "author": "A.Y., Mekanik Proje Lideri",
+          "context": "Otomotiv yan sanayi"
+        }
+      ]
+    },
     "pricing": {
       "kicker": "Ücretlendirme",
       "title": "Mekanik ekipler için sade fiyatlama",
       "description": "Ücretsiz başlayın. Sınırsız hesap, geçmiş ve dışa aktarma gerektiğinde yükseltin.",
-      "ctaPrimary": "Ücretsiz Deneme Başlat",
-      "note": "İstediğiniz an iptal edin. Başlamak için kredi kartı gerekmez.",
+      "ctaPrimary": "Bekleme Listesine Katıl",
+      "note": "🚀 Pro plan beta aşamasında. Bekleme listesine katılanlar, lansman fiyatından önce haberdar edilecek ve erken erişim avantajı alacak.",
       "free": {
         "title": "Ücretsiz",
         "subtitle": "Günde 3 hesap"
@@ -210,6 +233,7 @@
         "subtitle": "Sınırsız hesap",
         "price": "$19/ay",
         "badge": "En Popüler",
+        "ctaNote": "Pro plan yakında aktif oluyor. Şimdi listeye katıl, ilk açılışta erken erişim fiyatını kilitle.",
         "features": [
           "Sınırsız hesaplama",
           "Tam geçmiş + dışa aktarma",
@@ -274,7 +298,7 @@
   "pages": {
     "tools": {
       "badge": "Araç Kütüphanesi",
-      "title": "Tüm araçlar tek sayfada",
+      "title": "Mekanik Mühendislik Hesap Araçları — 40+ ISO/DIN Referanslı Hesaplayıcı",
       "description": "Hesaplayıcı, paket ve rehberleri filtrele, ihtiyacın olanı tek tıkla aç.",
       "imageAlt": "Hesaplayıcı kütüphanesi filtreleri ve araç kartları"
     },
@@ -623,9 +647,16 @@
     },
     "support": {
       "badge": "Destek",
-      "title": "Teknik destek ve yönlendirme",
-      "description": "Kısa bir talep bırak, ekip hızlıca geri dönsün.",
+      "title": "Bize Ulaşın",
+      "description": "Teknik soru, özellik önerisi veya hata bildirimi için aşağıdaki formu kullanın. Her mesaja yanıt veriyoruz.",
       "imageAlt": "Talep detayları ve dosya yükleme alanı olan destek formu",
+      "contactTitle": "İletişim bilgileri",
+      "emailLabel": "E-posta",
+      "email": "contact@torqyx.com",
+      "responseTitle": "Yanıt süresi",
+      "responseTime": "Genellikle 24 saat içinde yanıt veriyoruz.",
+      "linkedinLabel": "LinkedIn",
+      "linkedinUnavailable": "LinkedIn profili yakında eklenecek.",
       "tipsTitle": "Talep oluştururken öneriler",
       "tips": [
         "Kısa bir konu başlığı ekle (örn. \"M12 10.9 cıvata torku\").",
@@ -1051,9 +1082,11 @@
           "Kayıtlı profiller, şablonlar ve geçmiş",
           "Öncelikli destek ve erken erişim"
         ],
-        "cta": "Erişim talep et"
+        "cta": "Bekleme Listesine Katıl",
+        "ctaNote": "Pro plan yakında aktif oluyor. Şimdi listeye katıl, ilk açılışta erken erişim fiyatını kilitle."
       },
-      "note": "Premium erişim sınırlıdır; iş akışları doğrulandıkça genişletilir."
+      "note": "🚀 Pro plan beta aşamasında. Bekleme listesine katılanlar, lansman fiyatından önce haberdar edilecek ve erken erişim avantajı alacak.",
+      "guarantee": "İptal garantisi: Lansman sonrası istediğiniz an iptal edebilirsiniz."
     }
   },
   "components": {
@@ -1065,10 +1098,10 @@
     "premiumCTA": {
       "badge": "Premium beta",
       "title": "Premium plan",
-      "description": "Ödeme altyapısı açık değil. Bekleme listesiyle yol haritasını paylaşıyoruz.",
-      "ctaPrimary": "Bekleme listesine katıl",
+      "description": "🚀 Pro plan beta aşamasında. Bekleme listesine katılanlar, lansman fiyatından önce haberdar edilecek ve erken erişim avantajı alacak.",
+      "ctaPrimary": "Bekleme Listesine Katıl",
       "ctaSecondary": "Detayları gör",
-      "supportNote": "Destek formuna yönlendirir.",
+      "supportNote": "Erken erişim için destek formuna yönlendirir.",
       "packageTitle": "Paket içeriği (plan)",
       "packageItems": [
         "Detaylı tork ve dişli tablolar",
@@ -1078,7 +1111,7 @@
         "Malzeme ve kaplama öneri kartları"
       ],
       "statusTitle": "Durum",
-      "statusBody": "Ödeme akışı yok. İlgiyi topluyoruz ve bekleme listesine göre geliştirme önceliklerini belirliyoruz.",
+      "statusBody": "Pro plan yakında aktif oluyor. Şimdi listeye katıl, ilk açılışta erken erişim fiyatını kilitle.",
       "stepsTitle": "Sonraki adımlar",
       "steps": [
         "Bekleme listesine kayıt",
@@ -1088,7 +1121,7 @@
     },
     "supportForm": {
       "submit": {
-        "idle": "Talebi Gönder",
+        "idle": "Mesaj Gönder",
         "uploading": "Dosya yükleniyor...",
         "submitting": "Gönderiliyor..."
       },
@@ -1101,9 +1134,18 @@
           "label": "E-posta",
           "placeholder": "örnek@domain.com"
         },
+        "subject": {
+          "label": "Konu",
+          "options": {
+            "technical": "Teknik Soru",
+            "feature": "Özellik Önerisi",
+            "bug": "Hata Bildirimi",
+            "other": "Diğer"
+          }
+        },
         "message": {
-          "label": "Talep detayları",
-          "placeholder": "Konu, varsa hesap değerleri, standartlar, sınırlar..."
+          "label": "Mesaj",
+          "placeholder": "Teknik sorunuzu, önerinizi veya hata detayını en az 20 karakterle açıklayın."
         },
         "attachment": {
           "label": "Dosya yükle (isteğe bağlı)",
@@ -1115,6 +1157,7 @@
         "fileTooLarge": "Dosya boyutu 10 MB sınırını aşıyor.",
         "uploadUnavailable": "Dosya yükleme şu anda kullanılamıyor.",
         "required": "Lütfen tüm zorunlu alanları doldurun.",
+        "messageTooShort": "Mesaj en az 20 karakter olmalı.",
         "supportUnavailable": "Destek altyapısı hazır değil. Lütfen daha sonra deneyin.",
         "submitFailed": "Talep gönderilemedi."
       },
@@ -1900,7 +1943,7 @@
     "access": {
       "free": "Ücretsiz",
       "beta": "Beta",
-      "premium": "Premium"
+      "premium": "Pro"
     }
   },
   "workspace": {

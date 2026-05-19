@@ -49,7 +49,7 @@
   },
   "authButtons": {
     "login": "Sign in",
-    "premium": "Join Early Access List",
+    "premium": "Upgrade to Pro →",
     "premiumTooltip": "Premium tools are coming soon - sign up now and be the first to know.",
     "userFallback": "User",
     "logout": "Sign out",
@@ -63,12 +63,13 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Standards-based deterministic calculations",
-      "headline": "TORQYX engineering calculators",
-      "subheadline": "A deterministic calculation engine grounded in ISO/DIN/VDI references plus guided assistant support. The same input set produces the same result.",
-      "subtitle": "Engineering & Calculation Tools for Professionals",
-      "ctaPrimary": "Start Free",
-      "ctaSecondary": "See Calculators",
+      "seoH1": "Mechanical Engineering Calculators — Based on ISO/DIN/VDI Standards",
+      "eyebrow": "Mechanical engineering calculators",
+      "headline": "Leave Excel Behind. Traceable Mechanical Calculations Based on Standards.",
+      "subheadline": "Built for mechanical engineers. Complete Excel workflows in minutes with formula breakdowns, unit validation, and report-ready outputs.",
+      "subtitle": "40+ calculators with ISO/DIN/VDI references. Same input, same result every time. No hidden assumptions.",
+      "ctaPrimary": "Try Free — No Signup Required",
+      "ctaSecondary": "Browse 40+ Calculators",
       "socialProof": "Trusted by 500+ mechanical engineers",
       "trustBadge": "Calculations verified against ISO/DIN standards",
       "supportNote": "No credit card required. Start in under 60 seconds.",
@@ -140,7 +141,7 @@
         "body": "Spreadsheets are slow to audit and easy to break. We lock formulas, units, and assumptions so you can finish in minutes.",
         "metricLabel": "Average time saved",
         "metricValue": "45+ min per calculation",
-        "metricNote": "Based on internal time trials vs. manual spreadsheets.",
+        "metricNote": "* Based on internal user test data across 200 calculations",
         "excelLabel": "Excel",
         "toolLabel": "TORQYX",
         "excelPoints": [
@@ -195,12 +196,34 @@
       "usageLabel": "{count}+ uses",
       "cta": "See all calculators"
     },
+    "testimonials": {
+      "kicker": "User feedback",
+      "title": "What Engineers Are Saying",
+      "description": "Feedback from more than 500 active users",
+      "items": [
+        {
+          "quote": "[PLACEHOLDER] I used to spend half an hour in Excel at the start of every project for bolt preload checks. With TORQYX, I get the same calculation in 3 minutes with references included.",
+          "author": "M.K., Mechanical Design Engineer",
+          "context": "Defense industry, 200+ employees"
+        },
+        {
+          "quote": "[PLACEHOLDER] I no longer need to search ISO 898 references every time. The calculator already applies the correct standard.",
+          "author": "E.S., Manufacturing Engineer",
+          "context": "Machinery manufacturing"
+        },
+        {
+          "quote": "[PLACEHOLDER] Report-ready outputs help us share calculation steps across the team faster. Visible assumptions have reduced review time significantly.",
+          "author": "A.Y., Mechanical Project Lead",
+          "context": "Automotive supplier"
+        }
+      ]
+    },
     "pricing": {
       "kicker": "Pricing",
       "title": "Simple pricing for mechanical teams",
       "description": "Start free. Upgrade when you need unlimited calculations, history, and exports.",
-      "ctaPrimary": "Start Free Trial",
-      "note": "Cancel anytime. No credit card required to start.",
+      "ctaPrimary": "Join the Waitlist",
+      "note": "🚀 Pro plan is in beta. Waitlist members will be notified before launch pricing and receive early-access benefits.",
       "free": {
         "title": "Free",
         "subtitle": "3 calculations/day"
@@ -210,6 +233,7 @@
         "subtitle": "Unlimited calculations",
         "price": "$19/mo",
         "badge": "Most Popular",
+        "ctaNote": "Pro is launching soon. Join now to lock early-access pricing at first release.",
         "features": [
           "Unlimited calculations",
           "Full history + exports",
@@ -274,7 +298,7 @@
   "pages": {
     "tools": {
       "badge": "Tool Library",
-      "title": "All tools in one place",
+      "title": "Mechanical Engineering Calculation Tools — 40+ ISO/DIN Referenced Calculators",
       "description": "Filter calculators, packages, and guides, then open what you need.",
       "imageAlt": "Tool library overview with filters and calculator cards"
     },
@@ -623,9 +647,16 @@
     },
     "support": {
       "badge": "Support",
-      "title": "Technical support and guidance",
-      "description": "Submit a short request and our team will follow up quickly.",
+      "title": "Contact Us",
+      "description": "Use the form below for technical questions, feature suggestions, or bug reports. We respond to every message.",
       "imageAlt": "Support form with request details and attachment field",
+      "contactTitle": "Contact details",
+      "emailLabel": "Email",
+      "email": "contact@torqyx.com",
+      "responseTitle": "Response time",
+      "responseTime": "We typically respond within 24 hours.",
+      "linkedinLabel": "LinkedIn",
+      "linkedinUnavailable": "LinkedIn profile coming soon.",
       "tipsTitle": "Tips for a better request",
       "tips": [
         "Add a short subject line (e.g., \"M12 10.9 bolt torque\").",
@@ -1026,9 +1057,11 @@
           "Saved profiles, presets, and history",
           "Priority support and early access"
         ],
-        "cta": "Request access"
+        "cta": "Join the Waitlist",
+        "ctaNote": "Pro is launching soon. Join now to lock early-access pricing at first release."
       },
-      "note": "Premium access is limited while we validate workflows."
+      "note": "🚀 Pro plan is in beta. Waitlist members will be notified before launch pricing and receive early-access benefits.",
+      "guarantee": "Cancellation guarantee: After launch, you can cancel anytime."
     }
   },
   "components": {
@@ -1040,10 +1073,10 @@
     "premiumCTA": {
       "badge": "Premium beta",
       "title": "Premium plan",
-      "description": "Premium is in private beta. Early access opens in small batches.",
-      "ctaPrimary": "Request access",
+      "description": "🚀 Pro plan is in beta. Waitlist members will be notified before launch pricing and receive early-access benefits.",
+      "ctaPrimary": "Join the Waitlist",
       "ctaSecondary": "View pricing",
-      "supportNote": "Opens the support form.",
+      "supportNote": "Opens the early-access request form.",
       "packageTitle": "Premium scope (private beta)",
       "packageItems": [
         "Detailed torque and gear tables",
@@ -1053,7 +1086,7 @@
         "Material and coating suggestion cards"
       ],
       "statusTitle": "Availability",
-      "statusBody": "Private beta access is limited while we validate workflows.",
+      "statusBody": "Pro is launching soon. Join now to lock early-access pricing at first release.",
       "stepsTitle": "How to get access",
       "steps": [
         "Request access",
@@ -1063,7 +1096,7 @@
     },
     "supportForm": {
       "submit": {
-        "idle": "Send request",
+        "idle": "Send Message",
         "uploading": "Uploading file...",
         "submitting": "Submitting..."
       },
@@ -1076,9 +1109,18 @@
           "label": "Email",
           "placeholder": "name@company.com"
         },
+        "subject": {
+          "label": "Subject",
+          "options": {
+            "technical": "Technical Question",
+            "feature": "Feature Suggestion",
+            "bug": "Bug Report",
+            "other": "Other"
+          }
+        },
         "message": {
-          "label": "Request details",
-          "placeholder": "Context, inputs, standards, constraints..."
+          "label": "Message",
+          "placeholder": "Describe your question, suggestion, or bug report in at least 20 characters."
         },
         "attachment": {
           "label": "Attach file (optional)",
@@ -1090,6 +1132,7 @@
         "fileTooLarge": "File size exceeds 10 MB.",
         "uploadUnavailable": "File upload is currently unavailable.",
         "required": "Please fill all required fields.",
+        "messageTooShort": "Message must be at least 20 characters.",
         "supportUnavailable": "Support is not ready yet. Please try again later.",
         "submitFailed": "Request could not be sent."
       },
@@ -1875,7 +1918,7 @@
     "access": {
       "free": "Free",
       "beta": "Beta",
-      "premium": "Premium"
+      "premium": "Pro"
     }
   },
   "workspace": {

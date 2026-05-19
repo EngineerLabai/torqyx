@@ -11,19 +11,28 @@ import TrialEndingBanner from "@/components/billing/TrialEndingBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import useDevRenderLogger from "@/components/monitoring/useDevRenderLogger";
-import PremiumCTA from "@/components/premium/PremiumCTA";
 import { openCommandPalette } from "@/components/search/commandPaletteEvents";
 import { UnitSystemSwitcher } from "@/components/units/UnitSystemSwitcher";
 import { getBrandCopy } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
-import { stripLocaleFromPath } from "@/utils/locale-path";
+import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
+import { isAdsAllowedPath } from "@/utils/ads";
 import type { Messages } from "@/utils/messages";
+import { Linkedin } from "lucide-react";
 
 type NavSection = {
+  id: string;
   label: string;
   description: string;
-  links: { label: string; href: string; badge?: string }[];
+  links: { label: string; href: string; route: NavLinkConfig["route"]; badge?: string }[];
+};
+
+type DirectNavLink = {
+  id: string;
+  label: string;
+  href: string;
+  route: NavLinkConfig["route"];
 };
 
 type SidebarSection = {
@@ -82,20 +91,41 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
     descriptions?: Record<string, string>;
     badges?: Record<string, string>;
   };
-  const { navSections, sidebarSections } = useMemo(() => {
+  const { navSections, directNavLinks, sidebarSections } = useMemo(() => {
     const resolveLabel = (key: string) => navCopy.labels?.[key] ?? key;
     const resolveDescription = (key?: string) => (key ? navCopy.descriptions?.[key] ?? "" : "");
     const resolveBadge = (key?: string) => (key ? navCopy.badges?.[key] : undefined);
     const resolveHref = (route: NavLinkConfig["route"]) => getRoute(route, locale);
 
-    const nextNavSections: NavSection[] = (navConfig.megaMenu as unknown as NavSectionConfig[]).map((section) => ({
+    const nextNavSections: NavSection[] = (navConfig.megaMenu as unknown as NavSectionConfig[])
+      .filter((section) => section.id === "calculators" || section.id === "tools")
+      .map((section) => ({
+      id: section.id,
       label: resolveLabel(section.labelKey),
       description: resolveDescription(section.descriptionKey ?? section.labelKey),
-      links: (section.links as NavLinkConfig[]).map((link) => ({
-        label: resolveLabel(link.labelKey),
-        href: resolveHref(link.route),
-        badge: resolveBadge(link.badgeKey),
-      })),
+      links: (section.links as NavLinkConfig[])
+        .filter((link) => link.route !== "blog")
+        .map((link) => ({
+          label: resolveLabel(link.labelKey),
+          href: resolveHref(link.route),
+          route: link.route,
+          badge: resolveBadge(link.badgeKey),
+        })),
+    }));
+
+    const directLinkConfigs: Array<{ id: string; labelKey: string; route: NavLinkConfig["route"] }> = [
+      { id: "standards", labelKey: "sectionStandards", route: "standards" },
+      { id: "quality", labelKey: "sectionQuality", route: "qualityTools" },
+      { id: "blog", labelKey: "linkBlog", route: "blog" },
+      { id: "faq", labelKey: "sectionFaq", route: "faq" },
+      { id: "contact", labelKey: "sectionContact", route: "support" },
+    ];
+
+    const nextDirectNavLinks: DirectNavLink[] = directLinkConfigs.map((link) => ({
+      id: link.id,
+      label: resolveLabel(link.labelKey),
+      href: resolveHref(link.route),
+      route: link.route,
     }));
 
     const nextSidebarSections: SidebarSection[] = (navConfig.sidebar as unknown as NavSectionConfig[]).map((section) => ({
@@ -108,15 +138,20 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
     return {
       navSections: nextNavSections,
+      directNavLinks: nextDirectNavLinks,
       sidebarSections: nextSidebarSections,
     };
   }, [locale, navCopy]);
   const pathname = usePathname() ?? "/";
   const isHome = stripLocaleFromPath(pathname) === "/";
-  const year = new Date().getFullYear();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpenSectionId, setMobileOpenSectionId] = useState<string | null>("calculators");
   const [headerSearchQuery, setHeaderSearchQuery] = useState("");
   const mobileMenuToggleCopy = locale === "tr" ? { open: "Menu", close: "Kapat" } : { open: "Menu", close: "Close" };
+  const currentPath = stripLocaleFromPath(pathname);
+  const showAdDisclosure = isAdsAllowedPath(pathname);
+  const mobileDirectNavLinks = directNavLinks.filter((link) => link.id !== "quality");
+  const contactEmail = "contact@torqyx.com";
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-[radial-gradient(circle_at_15%_10%,rgba(16,185,129,0.08),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.08),transparent_35%)]">
@@ -165,7 +200,10 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
             <nav className="hidden items-center gap-4 text-[13px] font-medium text-gray-600 lg:flex lg:gap-5">
               {navSections.map((section) => (
-                <MegaMenuItem key={section.label} section={section} />
+                <MegaMenuItem key={section.label} section={section} currentPath={currentPath} />
+              ))}
+              {directNavLinks.map((link) => (
+                <DirectNavItem key={link.id} link={link} currentPath={currentPath} />
               ))}
             </nav>
 
@@ -190,7 +228,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               />
               <button
                 type="submit"
-                className="inline-flex h-10 items-center justify-center rounded-2xl bg-emerald-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white shadow-sm transition hover:brightness-90"
               >
                 {locale === "tr" ? "Ara" : "Search"}
               </button>
@@ -216,38 +254,78 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
           </div>
 
           {mobileMenuOpen ? (
-            <div className="border-t border-slate-100 pb-3 pt-3 lg:hidden">
-              <div className="flex flex-col gap-3">
+            <div className="border-t border-slate-100 bg-white pb-3 pt-3 shadow-sm lg:hidden">
+              <div className="flex max-h-[calc(100vh-4rem)] flex-col gap-3 overflow-y-auto">
                 <button
                   type="button"
                   onClick={() => openCommandPalette()}
-                  className="tap-target inline-flex h-10 w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 shadow-sm"
+                  className="tap-target mx-4 inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 shadow-sm"
                   aria-label={searchCopy.paletteOpen}
                 >
                   {searchCopy.paletteTitle}
                 </button>
-                <div className="flex items-center justify-between gap-3">
+                <div className="mx-4 flex items-center justify-between gap-3">
                   <LanguageSwitcher
                     tone="light"
                     copy={messages.languageSwitcher}
                     onLocaleChange={() => setMobileMenuOpen(false)}
                   />
                   <UnitSystemSwitcher />
-                  <div className="min-w-0 flex-1">
-                    <AuthButtons copy={messages.authButtons} />
-                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-1">
+
+                <div className="space-y-2 px-4 pt-1">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    {locale === "tr" ? "Ana linkler" : "Main links"}
+                  </p>
                   {navSections.map((section) => (
-                    <Link
-                      key={section.label}
-                      href={section.links[0]?.href ?? "#"}
-                      prefetch={false}
-                      className="tap-target inline-flex h-10 items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 shadow-sm"
-                    >
-                      {section.label}
-                    </Link>
+                    <MobileAccordionSection
+                      key={section.id}
+                      section={section}
+                      currentPath={currentPath}
+                      isOpen={mobileOpenSectionId === section.id}
+                      onToggle={() =>
+                        setMobileOpenSectionId((current) => (current === section.id ? null : section.id))
+                      }
+                      onNavigate={() => setMobileMenuOpen(false)}
+                    />
                   ))}
+                  {mobileDirectNavLinks.map((link) => {
+                    const isActive = isPathActive(currentPath, link.href);
+                    return (
+                    <Link
+                      key={link.id}
+                      href={link.href}
+                      prefetch={false}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`tap-target flex min-h-11 items-center rounded-lg border px-4 text-sm font-semibold shadow-sm transition ${
+                        isActive
+                          ? "border-brand bg-brand/10 text-brand"
+                          : "border-slate-200 bg-white text-slate-700 hover:border-brand hover:text-brand"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                    );
+                  })}
+                </div>
+
+                <div className="sticky bottom-0 grid grid-cols-2 gap-2 border-t border-slate-100 bg-white px-4 py-3">
+                  <Link
+                    href={withLocalePrefix("/login", locale)}
+                    prefetch={false}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="tap-target inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand hover:text-brand"
+                  >
+                    {messages.authButtons.login}
+                  </Link>
+                  <Link
+                    href={getRoute("tools", locale)}
+                    prefetch={false}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="tap-target inline-flex min-h-11 items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white shadow-sm transition hover:brightness-90"
+                  >
+                    {locale === "tr" ? "Ücretsiz Dene" : "Try for free"}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -277,38 +355,72 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
         </main>
       )}
 
+      {showAdDisclosure ? (
+        <aside className="border-t border-slate-100 bg-white/80 py-3 text-center text-[11px] text-slate-500">
+          {locale === "tr"
+            ? "Ücretsiz araçlar bu reklamların desteğiyle sunulmaktadır."
+            : "Free tools are supported by these ads."}
+        </aside>
+      ) : null}
+
       <footer className="border-t border-slate-200 bg-white/90">
-        <div className="site-container grid gap-6 py-8 md:grid-cols-[1.1fr_2fr]">
+        <div className="site-container grid gap-8 py-8 md:grid-cols-3">
           <div className="space-y-3">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">{brandContent.siteName}</div>
-            <p className="text-sm text-slate-700">{brandContent.tagline}</p>
-            <PremiumCTA variant="compact" copy={messages.components.premiumCTA} />
+            <Link href={getRoute("home", locale)} className="inline-flex items-center gap-2" aria-label={brandContent.siteName}>
+              <Image
+                src="/images/logo.png"
+                alt={`${brandContent.siteName} logo`}
+                width={635}
+                height={702}
+                className="h-9 w-auto object-contain"
+                style={{ width: "auto" }}
+              />
+              <span className="text-sm font-semibold text-slate-950">{brandContent.siteName}</span>
+            </Link>
+            <p className="max-w-sm text-sm leading-relaxed text-slate-700">
+              {locale === "tr"
+                ? "ISO/DIN/VDI standartlarına dayalı mekanik hesap motoru."
+                : "A mechanical calculation engine based on ISO/DIN/VDI standards."}
+            </p>
+            <a className="block text-sm font-semibold text-brand hover:brightness-90" href={`mailto:${contactEmail}`}>
+              {contactEmail}
+            </a>
+            <p className="inline-flex items-center gap-2 text-sm text-slate-500">
+              <Linkedin size={16} aria-hidden="true" />
+              {locale === "tr" ? "LinkedIn yakında" : "LinkedIn coming soon"}
+            </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {sidebarSections.map((section) => (
-              <div key={section.label} className="space-y-2 text-xs">
-                <div className="font-semibold uppercase tracking-[0.12em] text-slate-500">{section.label}</div>
-                <div className="space-y-1">
-                  {section.links.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      prefetch={false}
-                      className="block text-[13px] font-semibold text-slate-700 hover:text-slate-900"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <FooterLinkColumn
+            title={locale === "tr" ? "Araçlar" : "Tools"}
+            links={[
+              { label: navCopy.labels.linkToolLibrary, href: getRoute("tools", locale) },
+              { label: navCopy.labels.linkGearCalculators, href: getRoute("gearCalculators", locale) },
+              { label: navCopy.labels.linkTorquePower, href: getRoute("torquePower", locale) },
+              { label: navCopy.labels.linkStandards, href: getRoute("standards", locale) },
+              { label: navCopy.labels.linkQualityTools, href: getRoute("qualityTools", locale) },
+            ]}
+          />
+
+          <FooterLinkColumn
+            title={locale === "tr" ? "Site" : "Site"}
+            links={[
+              { label: navCopy.labels.linkHome, href: getRoute("home", locale) },
+              { label: navCopy.labels.linkAbout, href: getRoute("about", locale) },
+              { label: navCopy.labels.linkBlog, href: getRoute("blog", locale) },
+              { label: navCopy.labels.linkFaq, href: getRoute("faq", locale) },
+              { label: navCopy.labels.sectionContact, href: getRoute("support", locale) },
+              { label: navCopy.labels.linkPrivacy, href: getRoute("privacy", locale) },
+              { label: navCopy.labels.linkTerms, href: getRoute("terms", locale) },
+            ]}
+          />
         </div>
 
         <div className="site-container flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 py-4 text-[11px] text-slate-500">
-          <span>(c) {year} {brandContent.siteName}</span>
-          <span>{brandContent.tagline}</span>
+          <span>© 2026 {brandContent.siteName}. {locale === "tr" ? "Tüm hesaplamalar referans amaçlıdır." : "All calculations are for reference only."}</span>
+          <Link href={getRoute("pricing", locale)} className="font-semibold text-brand hover:brightness-90">
+            {locale === "tr" ? "Pro erken erişim" : "Pro early access"}
+          </Link>
         </div>
       </footer>
 
@@ -319,12 +431,35 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
   );
 }
 
-function MegaMenuItem({ section }: { section: NavSection }) {
+function isPathActive(currentPath: string, href: string) {
+  const targetPath = stripLocaleFromPath(href);
+  return currentPath === targetPath || (targetPath !== "/" && currentPath.startsWith(`${targetPath}/`));
+}
+
+function DirectNavItem({ link, currentPath }: { link: DirectNavLink; currentPath: string }) {
+  const isActive = isPathActive(currentPath, link.href);
+
+  return (
+    <Link
+      href={link.href}
+      prefetch={false}
+      className={`text-[13px] font-semibold transition hover:text-brand ${isActive ? "text-brand" : "text-gray-600"}`}
+    >
+      {link.label}
+    </Link>
+  );
+}
+
+function MegaMenuItem({ section, currentPath }: { section: NavSection; currentPath: string }) {
+  const isActive = section.links.some((link) => isPathActive(currentPath, link.href));
+
   return (
     <div className="group relative">
       <button
         type="button"
-        className="flex cursor-pointer items-center gap-1 text-[13px] font-medium text-gray-600 transition-colors hover:text-gray-900 focus:outline-none"
+        className={`flex cursor-pointer items-center gap-1 text-[13px] font-semibold transition-colors hover:text-brand focus:outline-none ${
+          isActive ? "text-brand" : "text-gray-600"
+        }`}
         aria-expanded="false"
       >
         {section.label}
@@ -339,7 +474,7 @@ function MegaMenuItem({ section }: { section: NavSection }) {
                 key={link.href}
                 href={link.href}
                 prefetch={false}
-                className="group/card relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-3 transition-colors duration-150 hover:border-slate-300"
+                className="group/card relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-3 transition-colors duration-150 hover:border-brand"
               >
                 <h3 className="mb-1 text-sm font-semibold text-slate-900 group-hover/card:text-slate-950">{link.label}</h3>
                 {link.badge ? (
@@ -347,11 +482,86 @@ function MegaMenuItem({ section }: { section: NavSection }) {
                     {link.badge}
                   </span>
                 ) : null}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-slate-900 transition-all duration-200 group-hover/card:w-full" />
+                <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-brand transition-all duration-200 group-hover/card:w-full" />
               </Link>
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileAccordionSection({
+  section,
+  currentPath,
+  isOpen,
+  onToggle,
+  onNavigate,
+}: {
+  section: NavSection;
+  currentPath: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  onNavigate: () => void;
+}) {
+  const isActive = section.links.some((link) => isPathActive(currentPath, link.href));
+
+  return (
+    <div className={`overflow-hidden rounded-lg border shadow-sm transition ${isOpen || isActive ? "border-brand/30 bg-slate-50" : "border-slate-200 bg-white"}`}>
+      <button
+        type="button"
+        onClick={onToggle}
+        className="tap-target flex min-h-11 w-full items-center justify-between px-4 text-left text-sm font-semibold text-slate-800"
+        aria-expanded={isOpen}
+      >
+        <span>{section.label}</span>
+        <span className={`text-xs text-slate-500 transition-transform ${isOpen ? "rotate-180" : ""}`} aria-hidden="true">
+          v
+        </span>
+      </button>
+      <div
+        className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
+        style={{ maxHeight: isOpen ? `${section.links.length * 56 + 12}px` : "0px" }}
+      >
+        <div className="space-y-1 px-2 pb-2">
+          {section.links.map((link) => {
+            const linkActive = isPathActive(currentPath, link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                prefetch={false}
+                onClick={onNavigate}
+                className={`flex min-h-11 items-center rounded-md px-3 text-sm font-medium transition ${
+                  linkActive ? "bg-brand text-white" : "text-slate-700 hover:bg-white hover:text-brand"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FooterLinkColumn({ title, links }: { title: string; links: Array<{ label: string; href: string }> }) {
+  return (
+    <div className="space-y-3 text-sm">
+      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">{title}</div>
+      <div className="space-y-2">
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            prefetch={false}
+            className="block font-semibold text-slate-700 transition hover:text-brand"
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
     </div>
   );
