@@ -121,7 +121,7 @@ export default function proxy(request: NextRequest) {
       const canonicalUrl = request.nextUrl.clone();
       canonicalUrl.pathname = toLocalePath(segment, canonicalPublicPath);
       canonicalUrl.search = request.nextUrl.search;
-      const response = NextResponse.redirect(canonicalUrl);
+      const response = NextResponse.redirect(canonicalUrl, 308);
       response.cookies.set(LOCALE_COOKIE, segment, { path: "/", maxAge: ONE_YEAR });
       return response;
     }
@@ -164,5 +164,6 @@ export default function proxy(request: NextRequest) {
   const redirected = request.nextUrl.clone();
   redirected.pathname = toLocalePath(redirectLocale, localizedPath);
   redirected.search = request.nextUrl.search;
-  return NextResponse.redirect(redirected);
+  const hasStoredLocale = isLocale(request.cookies.get(LOCALE_COOKIE)?.value);
+  return NextResponse.redirect(redirected, hasStoredLocale && shouldLocaleRedirect ? 307 : 308);
 }

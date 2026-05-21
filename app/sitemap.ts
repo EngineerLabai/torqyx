@@ -1,6 +1,5 @@
 ﻿import type { MetadataRoute } from "next";
 import { getContentList } from "@/utils/content";
-import { getCategoryIndex, getTagIndex } from "@/utils/taxonomy";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import { standardsManifest } from "@/data/standards";
 import { materials } from "@/src/data/materials";
@@ -97,12 +96,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   for (const locale of locales) {
-    const [blog, guides, glossary, tags, categories] = await Promise.all([
+    const [blog, guides, glossary] = await Promise.all([
       getContentList("blog", { locale }),
       getContentList("guides", { locale }),
       getContentList("glossary", { locale }),
-      getTagIndex(locale),
-      getCategoryIndex(locale),
     ]);
 
     blog.forEach((post) => {
@@ -180,19 +177,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-    tags.forEach((tag) => {
-      addEntry(`/tags/${tag.slug}`, locale, {
-        changeFrequency: "weekly",
-        priority: 0.55,
-      });
-    });
-
-    categories.forEach((category) => {
-      addEntry(`/categories/${category.slug}`, locale, {
-        changeFrequency: "weekly",
-        priority: 0.55,
-      });
-    });
   }
 
   return entries;

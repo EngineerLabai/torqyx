@@ -92,7 +92,8 @@ export const buildLocalizedPath = (path: string, locale: Locale) => withLocalePr
 export const buildLocalizedCanonical = (path: string, locale: Locale) =>
   buildCanonical(buildLocalizedPath(path, locale)) ?? buildLocalizedPath(path, locale);
 
-export const buildXDefaultCanonical = (path: string) => buildCanonical(stripLocaleFromPath(path)) ?? SITE_URL;
+export const buildXDefaultCanonical = (path: string) =>
+  buildLocalizedCanonical(stripLocaleFromPath(path), "tr") ?? SITE_URL;
 
 export const buildLanguageAlternates = (path: string) => ({
   tr: buildLocalizedCanonical(path, "tr"),

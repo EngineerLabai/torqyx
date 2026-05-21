@@ -5,7 +5,7 @@ import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { getTagIndex, matchesSlug, resolveLabelBySlug } from "@/utils/taxonomy";
 import { slugify } from "@/utils/slugify";
 import { buildLanguageAlternates } from "@/utils/seo";
@@ -50,6 +50,7 @@ export async function generateMetadata({ params }: TagPageProps) {
     path: `/tags/${tagSlug}`,
     locale,
     alternatesLanguages,
+    robots: NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

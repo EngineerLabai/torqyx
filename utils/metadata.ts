@@ -41,6 +41,15 @@ const DESCRIPTION_SUFFIX_BY_LOCALE: Record<Locale, string> = {
   en: " It includes standards, calculation steps, and practical reports for faster decisions.",
 };
 
+export const NOINDEX_FOLLOW_ROBOTS: Metadata["robots"] = {
+  index: false,
+  follow: true,
+  googleBot: {
+    index: false,
+    follow: true,
+  },
+};
+
 const trimToWordBoundary = (value: string, maxLength: number) => {
   if (value.length <= maxLength) return value;
   const sliced = value.slice(0, maxLength + 1);

@@ -19,7 +19,7 @@ import { getMessages } from "@/utils/messages";
 import { decodeToolState } from "@/utils/tool-share";
 import { resolveLocalizedValue } from "@/utils/locale-values";
 import { withLocalePrefix } from "@/utils/locale-path";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { buildLanguageAlternates, buildLocalizedCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
 import { toolRegistry, type ToolChartConfig } from "@/tools/registry";
 import { toolCatalog, getToolCopy } from "@/tools/_shared/catalog";
@@ -200,6 +200,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `${toolTitle} | TORQYX`,
       description,
     },
+    robots: isReportRoute ? NOINDEX_FOLLOW_ROBOTS : undefined,
   });
 }
 

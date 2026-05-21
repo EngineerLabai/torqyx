@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildPageMetadata } from "@/utils/metadata";
-import { buildOgImageUrl, resolveCanonicalSiteUrl } from "@/utils/seo";
+import { buildLanguageAlternates, buildOgImageUrl, resolveCanonicalSiteUrl } from "@/utils/seo";
 
 describe("SEO metadata helpers", () => {
   it("builds absolute dynamic OG image URLs with safe query params", () => {
@@ -55,5 +55,13 @@ describe("SEO metadata helpers", () => {
         VERCEL_URL: "torqyx-git-main.vercel.app",
       }),
     ).toBe("https://torqyx.com");
+  });
+
+  it("uses canonical locale URLs for language alternates", () => {
+    const alternates = buildLanguageAlternates("/tools/unit-converter");
+
+    expect(alternates.tr).toBe("https://torqyx.com/tr/tools/unit-converter");
+    expect(alternates.en).toBe("https://torqyx.com/en/tools/unit-converter");
+    expect(alternates["x-default"]).toBe("https://torqyx.com/tr/tools/unit-converter");
   });
 });
