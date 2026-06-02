@@ -28,11 +28,6 @@ const offers: OfferSchema[] = [
 export default function Head() {
   return (
     <>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8444187117761223"
-        crossOrigin="anonymous"
-      />
       <SoftwareApplicationJsonLd
         id="platform-software-application-jsonld"
         data={{
