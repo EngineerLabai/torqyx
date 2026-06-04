@@ -13,7 +13,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import useDevRenderLogger from "@/components/monitoring/useDevRenderLogger";
 import { openCommandPalette } from "@/components/search/commandPaletteEvents";
 import { UnitSystemSwitcher } from "@/components/units/UnitSystemSwitcher";
-import { getBrandCopy } from "@/config/brand";
+import { getBrandCopy, SITE_CONTACT_EMAIL } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
 import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
@@ -151,7 +151,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
   const currentPath = stripLocaleFromPath(pathname);
   const showAdDisclosure = isAdsAllowedPath(pathname);
   const mobileDirectNavLinks = directNavLinks.filter((link) => link.id !== "quality");
-  const contactEmail = "contact@torqyx.com";
+  const contactEmail = SITE_CONTACT_EMAIL;
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-[radial-gradient(circle_at_15%_10%,rgba(16,185,129,0.08),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.08),transparent_35%)]">
@@ -182,8 +182,8 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               <Image
                 src="/images/logo.png"
                 alt={`${brandContent.siteName} logo`}
-                width={635}
-                height={702}
+                width={36}
+                height={40}
                 className="h-8 max-h-9 w-auto flex-shrink-0 object-contain md:h-9"
                 style={{ width: "auto" }}
                 priority
@@ -370,10 +370,9 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               <Image
                 src="/images/logo.png"
                 alt={`${brandContent.siteName} logo`}
-                width={635}
-                height={702}
-                className="h-9 w-auto object-contain"
-                style={{ width: "auto" }}
+                width={40}
+                height={44}
+                className="h-10 w-10 object-contain"
               />
               <span className="text-sm font-semibold text-slate-950">{brandContent.siteName}</span>
             </Link>

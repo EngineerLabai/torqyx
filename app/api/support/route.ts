@@ -2,6 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { FieldValue } from "firebase-admin/firestore";
 import { z } from "zod";
+import { isSupportEmailRequired, sendSupportNotification } from "@/lib/support-mail";
 import { getAdminFirestore } from "@/utils/firebase-admin";
 import { apiError, zodIssueDetails } from "@/utils/api-response";
 
@@ -40,14 +41,59 @@ export async function POST(request: NextRequest) {
 
   try {
     const db = getAdminFirestore();
-    await db.collection("supportRequests").add({
+    const requestRef = await db.collection("supportRequests").add({
       ...parsed.data,
       attachment: parsed.data.attachment ?? null,
       status: "new",
       createdAt: FieldValue.serverTimestamp(),
       source: "support-form",
       userAgent: request.headers.get("user-agent") ?? null,
+      emailNotification: {
+        status: "pending",
+        updatedAt: FieldValue.serverTimestamp(),
+      },
     });
+
+    try {
+      const notification = await sendSupportNotification(parsed.data, requestRef.id);
+      await requestRef.update({
+        emailNotification:
+          notification.status === "sent"
+            ? {
+                status: "sent",
+                to: notification.to,
+                updatedAt: FieldValue.serverTimestamp(),
+              }
+            : {
+                status: "skipped",
+                to: notification.to,
+                reason: notification.reason,
+                updatedAt: FieldValue.serverTimestamp(),
+              },
+      });
+
+      if (notification.status !== "sent" && isSupportEmailRequired()) {
+        console.error("[support] Email notification is required but SMTP is not configured.");
+        return apiError("support_email_unavailable", 500);
+      }
+    } catch (emailError) {
+      console.error("[support] Failed to send notification email:", emailError);
+      await requestRef
+        .update({
+          emailNotification: {
+            status: "failed",
+            error: emailError instanceof Error ? emailError.message : "Unknown email error",
+            updatedAt: FieldValue.serverTimestamp(),
+          },
+        })
+        .catch((updateError) => {
+          console.error("[support] Failed to update email notification status:", updateError);
+        });
+
+      if (isSupportEmailRequired()) {
+        return apiError("support_email_unavailable", 500);
+      }
+    }
 
     return NextResponse.json({ ok: true }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {

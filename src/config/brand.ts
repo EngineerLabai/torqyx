@@ -3,6 +3,7 @@ import { DEFAULT_LOCALE } from "@/utils/locale";
 
 export type BrandConfig = {
   siteName: string;
+  supportEmail: string;
   taglineTR: string;
   taglineEN: string;
   brandStoryTR: string;
@@ -20,6 +21,7 @@ export type BrandCopy = {
 
 export const brandConfig: BrandConfig = {
   siteName: "TORQYX",
+  supportEmail: "infotorqyx@gmail.com",
   taglineTR: "Deterministik mühendislik hesaplayıcıları, standartlar ve raporlama.",
   taglineEN: "Deterministic engineering calculators, standards, and reporting.",
   brandStoryTR:
@@ -47,3 +49,4 @@ export { DEFAULT_LOCALE };
 export const BRAND_NAME = brandConfig.siteName;
 export const BRAND_TAGLINE = getBrandCopy(DEFAULT_LOCALE).tagline;
 export const BRAND_DESCRIPTION = BRAND_TAGLINE;
+export const SITE_CONTACT_EMAIL = brandConfig.supportEmail;

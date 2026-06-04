@@ -160,7 +160,7 @@ export default function SupportForm() {
 
       if (!response.ok) {
         const data = await response.json().catch(() => null);
-        if (data?.error === "support_unavailable") {
+        if (data?.error === "support_unavailable" || data?.error === "support_email_unavailable") {
           throw new Error(copy.errors.supportUnavailable);
         }
         throw new Error(data?.error ?? copy.errors.submitFailed);

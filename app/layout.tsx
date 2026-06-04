@@ -13,7 +13,7 @@ import ImagePathWarnings from "@/components/monitoring/ImagePathWarnings";
 import WebVitalsReporter from "@/components/monitoring/WebVitalsReporter";
 import UserStateSync from "@/components/sync/UserStateSync";
 import JsonLd from "@/components/seo/JsonLd";
-import { getBrandCopy } from "@/config/brand";
+import { getBrandCopy, SITE_CONTACT_EMAIL } from "@/config/brand";
 import { listPublicImagePaths } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
@@ -126,6 +126,7 @@ async function getWebsiteJsonLd() {
         name: brandContent.siteName,
         alternateName: ["Torqyx", "TORQYX Engineering"],
         url: SITE_URL,
+        email: SITE_CONTACT_EMAIL,
         logo: {
           "@type": "ImageObject",
           url: LOGO_URL,

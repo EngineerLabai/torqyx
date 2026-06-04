@@ -28,8 +28,8 @@ export default function BrandLogo({
           <Image
             src="/images/logo.png"
             alt={`${name} logo mark`}
-            width={635}
-            height={702}
+            width={32}
+            height={35}
             className={`h-8 w-auto ${markClassName}`.trim()}
             style={{ width: "auto" }}
             onError={() => setMarkVisible(false)}
@@ -50,8 +50,8 @@ export default function BrandLogo({
           <Image
             src="/images/logo.png"
             alt={`${name} logo`}
-            width={635}
-            height={702}
+            width={32}
+            height={35}
             className={`h-8 w-auto ${wordClassName}`.trim()}
             style={{ width: "auto" }}
             onError={() => setWordVisible(false)}
