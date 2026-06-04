@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { FieldValue } from "firebase-admin/firestore";
+import { FieldValue, type DocumentReference } from "firebase-admin/firestore";
 import { z } from "zod";
 import { isSupportEmailRequired, sendSupportNotification } from "@/lib/support-mail";
 import { getAdminFirestore } from "@/utils/firebase-admin";
@@ -39,9 +39,12 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  let requestRef: DocumentReference | null = null;
+  let storeError: unknown = null;
+
   try {
     const db = getAdminFirestore();
-    const requestRef = await db.collection("supportRequests").add({
+    requestRef = await db.collection("supportRequests").add({
       ...parsed.data,
       attachment: parsed.data.attachment ?? null,
       status: "new",
@@ -53,9 +56,14 @@ export async function POST(request: NextRequest) {
         updatedAt: FieldValue.serverTimestamp(),
       },
     });
+  } catch (error) {
+    storeError = error;
+    console.error("[support] Failed to store request:", error);
+  }
 
-    try {
-      const notification = await sendSupportNotification(parsed.data, requestRef.id);
+  try {
+    const notification = await sendSupportNotification(parsed.data, requestRef?.id);
+    if (requestRef) {
       await requestRef.update({
         emailNotification:
           notification.status === "sent"
@@ -71,13 +79,15 @@ export async function POST(request: NextRequest) {
                 updatedAt: FieldValue.serverTimestamp(),
               },
       });
+    }
 
-      if (notification.status !== "sent" && isSupportEmailRequired()) {
-        console.error("[support] Email notification is required but SMTP is not configured.");
-        return apiError("support_email_unavailable", 500);
-      }
-    } catch (emailError) {
-      console.error("[support] Failed to send notification email:", emailError);
+    if (notification.status !== "sent" && isSupportEmailRequired()) {
+      console.error("[support] Email notification is required but SMTP is not configured.");
+      return apiError("support_email_unavailable", 500);
+    }
+  } catch (emailError) {
+    console.error("[support] Failed to send notification email:", emailError);
+    if (requestRef) {
       await requestRef
         .update({
           emailNotification: {
@@ -89,15 +99,19 @@ export async function POST(request: NextRequest) {
         .catch((updateError) => {
           console.error("[support] Failed to update email notification status:", updateError);
         });
-
-      if (isSupportEmailRequired()) {
-        return apiError("support_email_unavailable", 500);
-      }
     }
 
-    return NextResponse.json({ ok: true }, { headers: { "Cache-Control": "no-store" } });
-  } catch (error) {
-    console.error("[support] Failed to store request:", error);
+    if (isSupportEmailRequired()) {
+      return apiError("support_email_unavailable", 500);
+    }
+  }
+
+  if (!requestRef && storeError && !isSupportEmailRequired()) {
     return apiError("support_unavailable", 500);
   }
+
+  return NextResponse.json(
+    { ok: true, persisted: Boolean(requestRef) },
+    { headers: { "Cache-Control": "no-store" } },
+  );
 }
