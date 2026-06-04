@@ -42,7 +42,7 @@ const parseSmtpSecure = (port: number) => {
 const getSmtpConfig = () => {
   const host = process.env.SMTP_HOST?.trim();
   const user = process.env.SMTP_USER?.trim();
-  const pass = process.env.SMTP_PASS;
+  const pass = process.env.SMTP_PASS?.replace(/\s/g, "");
   const to = getSupportRecipient();
 
   if (!host || !user || !pass) {
