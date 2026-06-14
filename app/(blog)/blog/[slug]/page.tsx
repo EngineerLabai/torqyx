@@ -4,14 +4,15 @@ import PageShell from "@/components/layout/PageShell";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import JsonLd from "@/components/seo/JsonLd";
 import ActionCard from "@/components/ui/ActionCard";
-import { extractToc, getContentBySlug, getContentList, getContentLocaleAvailability, getContentSlugs } from "@/utils/content";
+import { extractToc, getContentBySlug, getContentLocaleAvailability, getContentSlugs, getIndexableContentList } from "@/utils/content";
 import { getRelatedForBlogPost } from "@/utils/related-items";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { buildLanguageAlternates, buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { isContentIndexable } from "@/utils/content-quality";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
   new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
@@ -48,6 +49,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       path: `/blog/${slug}`,
       locale,
       alternatesLanguages,
+      noIndex: true,
     });
   }
 
@@ -57,6 +59,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     path: `/blog/${post.slug}`,
     locale,
     type: "article",
+    robots: isContentIndexable(post) ? undefined : NOINDEX_FOLLOW_ROBOTS,
     keywords: post.tags,
     alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/blog/${post.slug}`) : null,
     openGraph: {
@@ -152,7 +155,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   const toc = extractToc(post.content);
-  const allPosts = await getContentList("blog", { locale });
+  const allPosts = await getIndexableContentList("blog", { locale });
   const { relatedPosts, relatedTools } = getRelatedForBlogPost(post, allPosts, { locale });
 
   return (

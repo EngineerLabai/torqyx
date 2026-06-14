@@ -70,14 +70,14 @@
       "subtitle": "40+ calculators with ISO/DIN/VDI references. Same input, same result every time. No hidden assumptions.",
       "ctaPrimary": "Try Free — No Signup Required",
       "ctaSecondary": "Browse 40+ Calculators",
-      "socialProof": "Trusted by 500+ mechanical engineers",
+      "socialProof": "Standards-referenced mechanical calculation tools",
       "trustBadge": "Calculations verified against ISO/DIN standards",
       "supportNote": "No credit card required. Start in under 60 seconds.",
       "stats": {
-        "engineersCount": "500+",
-        "engineersLabel": "engineers are using it",
-        "verifiedPrefix": "Verified with ISO/DIN standards",
-        "verifiedStrong": "validated",
+        "engineersCount": "40+",
+        "engineersLabel": "calculation tools",
+        "verifiedPrefix": "ISO/DIN/VDI",
+        "verifiedStrong": "referenced",
         "cardPrefix": "No credit card",
         "cardStrong": "required"
       },
@@ -199,22 +199,22 @@
     "testimonials": {
       "kicker": "User feedback",
       "title": "What Engineers Are Saying",
-      "description": "Feedback from more than 500 active users",
+      "description": "Verified user feedback will be published here when available",
       "items": [
         {
-          "quote": "[PLACEHOLDER] I used to spend half an hour in Excel at the start of every project for bolt preload checks. With TORQYX, I get the same calculation in 3 minutes with references included.",
-          "author": "M.K., Mechanical Design Engineer",
-          "context": "Defense industry, 200+ employees"
+          "quote": "No verified user testimonial has been published yet.",
+          "author": "TORQYX",
+          "context": "Transparency note"
         },
         {
-          "quote": "[PLACEHOLDER] I no longer need to search ISO 898 references every time. The calculator already applies the correct standard.",
-          "author": "E.S., Manufacturing Engineer",
-          "context": "Machinery manufacturing"
+          "quote": "User testimonials will only be published after consent and verification.",
+          "author": "TORQYX",
+          "context": "Transparency note"
         },
         {
-          "quote": "[PLACEHOLDER] Report-ready outputs help us share calculation steps across the team faster. Visible assumptions have reduced review time significantly.",
-          "author": "A.Y., Mechanical Project Lead",
-          "context": "Automotive supplier"
+          "quote": "Product claims are limited to published features and transparent methodology.",
+          "author": "TORQYX",
+          "context": "Transparency note"
         }
       ]
     },

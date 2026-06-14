@@ -6,7 +6,7 @@ import { materials } from "@/src/data/materials";
 import type { MaterialEntry } from "@/src/data/materials/types";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
 import { getMessages } from "@/utils/messages";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { encodeToolState } from "@/utils/tool-share";
 import { encodeSession } from "@/lib/sanityCheck/share";
@@ -117,6 +117,7 @@ export async function generateMetadata({ params }: PageProps) {
       path: `/materials/${id}`,
       locale,
       useLocalizedCanonical: true,
+      noIndex: true,
     });
   }
 
@@ -131,6 +132,7 @@ export async function generateMetadata({ params }: PageProps) {
     path: `/materials/${material.id}`,
     locale,
     useLocalizedCanonical: true,
+    robots: NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

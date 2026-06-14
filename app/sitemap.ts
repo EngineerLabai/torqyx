@@ -1,21 +1,19 @@
 ﻿import type { MetadataRoute } from "next";
-import { getContentList } from "@/utils/content";
+import { getIndexableContentList } from "@/utils/content";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import { standardsManifest } from "@/data/standards";
-import { materials } from "@/src/data/materials";
+import { getToolGuideBySlug } from "@/lib/tool-guides";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { SITE_URL, buildLanguageAlternates } from "@/utils/seo";
 
 const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
 const locales = ["tr", "en"] as const;
 const staticPaths = [
-  "/request-tool",
   "/changelog",
   "/tools",
   "/blog",
   "/guides",
   "/glossary",
-  "/premium",
   "/pricing",
   "/faq",
   "/support",
@@ -97,9 +95,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const locale of locales) {
     const [blog, guides, glossary] = await Promise.all([
-      getContentList("blog", { locale }),
-      getContentList("guides", { locale }),
-      getContentList("glossary", { locale }),
+      getIndexableContentList("blog", { locale }),
+      getIndexableContentList("guides", { locale }),
+      getIndexableContentList("glossary", { locale }),
     ]);
 
     blog.forEach((post) => {
@@ -126,7 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-    toolRoutes.forEach((tool) => {
+    for (const tool of toolRoutes) {
       const path = tool.href;
       const lastModified = toOptionalDate(tool.lastUpdated);
       addEntry(path, locale, {
@@ -134,12 +132,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly",
         priority: 0.9,
       });
-      addEntry(`${path}/guide`, locale, {
-        lastModified,
-        changeFrequency: "monthly",
-        priority: 0.8,
+      const guide = await getToolGuideBySlug({
+        slug: path.replace(/^\/tools\//u, ""),
+        locale,
       });
-    });
+      if (guide?.source === "file") {
+        addEntry(`${path}/guide`, locale, {
+          lastModified,
+          changeFrequency: "monthly",
+          priority: 0.8,
+        });
+      }
+    }
 
     toolCatalog
       .map((tool) => tool.href)
@@ -162,13 +166,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.95,
       });
     }
-
-    materials.forEach((material) => {
-      addEntry(`/materials/${material.id}`, locale, {
-        changeFrequency: "monthly",
-        priority: 0.6,
-      });
-    });
 
     standardsManifest.categories.forEach((category) => {
       addEntry(`/standards/${category.slug}`, locale, {

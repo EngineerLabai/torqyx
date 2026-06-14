@@ -1,6 +1,6 @@
 import "server-only";
 import { slugify } from "@/utils/slugify";
-import { getContentList } from "@/utils/content";
+import { getIndexableContentList } from "@/utils/content";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import type { Locale } from "@/utils/locale";
 
@@ -23,9 +23,9 @@ const upsertEntry = (map: Map<string, TaxonomyEntry>, label: string) => {
 
 export const getTagIndex = async (locale: Locale) => {
   const [blog, guides, glossary] = await Promise.all([
-    getContentList("blog", { locale }),
-    getContentList("guides", { locale }),
-    getContentList("glossary", { locale }),
+    getIndexableContentList("blog", { locale }),
+    getIndexableContentList("guides", { locale }),
+    getIndexableContentList("glossary", { locale }),
   ]);
 
   const map = new Map<string, TaxonomyEntry>();
@@ -39,9 +39,9 @@ export const getTagIndex = async (locale: Locale) => {
 
 export const getCategoryIndex = async (locale: Locale) => {
   const [blog, guides, glossary] = await Promise.all([
-    getContentList("blog", { locale }),
-    getContentList("guides", { locale }),
-    getContentList("glossary", { locale }),
+    getIndexableContentList("blog", { locale }),
+    getIndexableContentList("guides", { locale }),
+    getIndexableContentList("glossary", { locale }),
   ]);
 
   const map = new Map<string, TaxonomyEntry>();

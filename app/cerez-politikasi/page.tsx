@@ -106,6 +106,10 @@ const CookiePolicyTr = () => (
         Gerekli çerezler hizmetin çalışması için kullanılır ve kapatılamaz. Analitik ve reklam kategorileri
         yalnızca çerez tercih panelinde açık rıza verdiğinizde etkinleşir. Rızanızı istediğiniz zaman geri alabilirsiniz.
       </p>
+      <p>
+        Google reklamları etkinleştirildiğinde, Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre kullanıcıları için
+        Google sertifikalı bir izin yönetim platformu üzerinden gerekli bölgesel izin akışı ayrıca uygulanır.
+      </p>
       <CookiePreferencesButton locale="tr" />
     </section>
 
@@ -140,6 +144,10 @@ const CookiePolicyEn = () => (
         Necessary cookies are used for the service to work and cannot be disabled in the site panel. Analytics and
         advertising categories are enabled only when you consent in the cookie preferences panel. You can withdraw
         consent at any time.
+      </p>
+      <p>
+        When Google advertising is enabled, the required regional consent flow is also provided through a
+        Google-certified consent management platform for users in the EEA, the UK, and Switzerland.
       </p>
       <CookiePreferencesButton locale="en" />
     </section>

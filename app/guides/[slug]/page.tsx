@@ -10,8 +10,9 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { getRelatedForGuide } from "@/utils/related-items";
 import { buildLanguageAlternates, buildLocalizedCanonical, SITE_URL } from "@/utils/seo";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { isContentIndexable } from "@/utils/content-quality";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
   new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
@@ -87,9 +88,11 @@ export async function generateMetadata({ params }: GuidePageProps) {
       path: `/guides/${slug}`,
       locale,
       alternatesLanguages,
+      noIndex: true,
     });
   }
 
+  const isIndexable = isContentIndexable(guide);
   return buildPageMetadata({
     title: buildGuideSeoTitle(guide.title, locale),
     description: guide.description,
@@ -97,6 +100,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
     locale,
     type: "article",
     keywords: guide.tags,
+    robots: isIndexable ? undefined : NOINDEX_FOLLOW_ROBOTS,
     alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/guides/${guide.slug}`) : null,
     openGraph: {
       type: "article",

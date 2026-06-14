@@ -3,7 +3,7 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import { getHeroImageSrc } from "@/lib/assets";
-import { getContentList } from "@/utils/content";
+import { getIndexableContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -19,7 +19,7 @@ const formatDate = (value: string, locale: "tr" | "en") =>
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const guideCount = (await getContentList("guides", { locale })).length;
+  const guideCount = (await getIndexableContentList("guides", { locale })).length;
   const title =
     locale === "tr"
       ? "Mühendislik Rehberleri - Malzeme, Standart ve Üretim"
@@ -41,7 +41,7 @@ export default async function GuidesIndexPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.guides;
   const heroImage = getHeroImageSrc("guides");
-  const guides = await getContentList("guides", { locale });
+  const guides = await getIndexableContentList("guides", { locale });
   const guidesUrl = buildLocalizedCanonical("/guides", locale);
   const guidesJsonLd = {
     "@context": "https://schema.org",

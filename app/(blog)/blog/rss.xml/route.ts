@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { getContentList } from "@/utils/content";
+import { getIndexableContentList } from "@/utils/content";
 import { BRAND_NAME } from "@/config/brand";
 import { SITE_URL } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -22,7 +22,7 @@ const resolveLocale = async (): Promise<Locale> => {
 
 export async function GET() {
   const locale = await resolveLocale();
-  const posts = await getContentList("blog", { includeDrafts: false, locale });
+  const posts = await getIndexableContentList("blog", { includeDrafts: false, locale });
   const siteUrl = SITE_URL.replace(/\/$/, "");
   const feedUrl = `${siteUrl}${withLocalePrefix("/blog/rss.xml", locale)}`;
   const listHref = `${siteUrl}${withLocalePrefix("/blog", locale)}`;

@@ -5,15 +5,16 @@ import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import Formula from "@/components/mdx/Formula";
 import ActionCard from "@/components/ui/ActionCard";
-import { getContentBySlug, getContentList, getContentLocaleAvailability, getContentSlugs } from "@/utils/content";
+import { getContentBySlug, getContentLocaleAvailability, getContentSlugs, getIndexableContentList } from "@/utils/content";
 import { BRAND_NAME } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { buildLanguageAlternates, buildLocalizedCanonical } from "@/utils/seo";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { getRelatedForGlossaryTerm } from "@/utils/related-items";
 import { slugify } from "@/utils/slugify";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { isContentIndexable } from "@/utils/content-quality";
 
 const formatDate = (value: string, locale: "tr" | "en") =>
   new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
@@ -71,9 +72,11 @@ export async function generateMetadata({ params }: GlossaryPageProps) {
       path: `/glossary/${slug}`,
       locale,
       alternatesLanguages,
+      noIndex: true,
     });
   }
 
+  const isIndexable = isContentIndexable(term);
   return buildPageMetadata({
     title: buildGlossarySeoTitle(term.title, term.description),
     description: term.description,
@@ -81,6 +84,7 @@ export async function generateMetadata({ params }: GlossaryPageProps) {
     locale,
     type: "article",
     keywords: term.tags,
+    robots: isIndexable ? undefined : NOINDEX_FOLLOW_ROBOTS,
     alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/glossary/${term.slug}`) : null,
   });
 }
@@ -161,7 +165,7 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
   };
 
   const [blog, related] = await Promise.all([
-    getContentList("blog", { locale }),
+    getIndexableContentList("blog", { locale }),
     getRelatedForGlossaryTerm(term, { locale }),
   ]);
 

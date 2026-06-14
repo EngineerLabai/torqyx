@@ -17,6 +17,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/404",
     locale,
+    noIndex: true,
   });
 }
 

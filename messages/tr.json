@@ -70,14 +70,14 @@
       "subtitle": "ISO/DIN/VDI referanslı 40+ hesaplayıcı. Aynı girdi, her zaman aynı sonuç. Hata yok, varsayım gizliliği yok.",
       "ctaPrimary": "Ücretsiz Dene — Kayıt Gerekmez",
       "ctaSecondary": "40+ Hesaplayıcıyı İncele",
-      "socialProof": "500+ mekanik mühendis tarafından tercih edildi",
+      "socialProof": "Standart referanslı mekanik hesap araçları",
       "trustBadge": "Hesaplar ISO/DIN standartlarına göre doğrulanır",
       "supportNote": "Kredi kartı gerekmez. 60 saniyede başlayın.",
       "stats": {
-        "engineersCount": "500+",
-        "engineersLabel": "aktif mühendis",
+        "engineersCount": "40+",
+        "engineersLabel": "hesap aracı",
         "verifiedPrefix": "ISO/DIN/VDI",
-        "verifiedStrong": "doğrulanmış",
+        "verifiedStrong": "referanslı",
         "cardPrefix": "Kredi kartı",
         "cardStrong": "gerekmez"
       },
@@ -199,22 +199,22 @@
     "testimonials": {
       "kicker": "Kullanıcı yorumu",
       "title": "Mühendisler Ne Söylüyor?",
-      "description": "500'den fazla aktif kullanıcıdan gelen geri bildirimler",
+      "description": "Doğrulanmış kullanıcı yorumları yayınlandığında burada gösterilecektir",
       "items": [
         {
-          "quote": "[PLACEHOLDER] Cıvata ön yük hesabını her proje başında Excel'de yarım saat harcayarak yapıyordum. TORQYX ile aynı hesabı 3 dakikada, kaynak gösterili şekilde çıkarıyorum.",
-          "author": "M.K., Makine Tasarım Mühendisi",
-          "context": "Savunma sektörü, 200+ çalışan"
+          "quote": "Doğrulanmış kullanıcı yorumu henüz yayınlanmadı.",
+          "author": "TORQYX",
+          "context": "Şeffaflık notu"
         },
         {
-          "quote": "[PLACEHOLDER] ISO 898 referanslarını her seferinde aramak zorunda kalmıyorum. Hesaplayıcı zaten doğru standardı uyguluyor.",
-          "author": "E.Ş., Üretim Mühendisi, Bursa",
-          "context": "Makine imalatı"
+          "quote": "Kullanıcı yorumları yalnızca açık izin ve doğrulama sonrasında yayınlanacaktır.",
+          "author": "TORQYX",
+          "context": "Şeffaflık notu"
         },
         {
-          "quote": "[PLACEHOLDER] Raporlanabilir çıktı sayesinde hesap adımlarını ekip içinde daha hızlı paylaşıyoruz. Varsayımlar görünür olduğu için kontrol süresi ciddi azaldı.",
-          "author": "A.Y., Mekanik Proje Lideri",
-          "context": "Otomotiv yan sanayi"
+          "quote": "Ürün iddiaları, yayınlanmış özellikler ve açık metodolojiyle sınırlandırılır.",
+          "author": "TORQYX",
+          "context": "Şeffaflık notu"
         }
       ]
     },

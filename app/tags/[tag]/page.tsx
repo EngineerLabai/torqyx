@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
-import { getContentList } from "@/utils/content";
+import { getIndexableContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -59,9 +59,9 @@ export default async function TagPage({ params }: TagPageProps) {
   const { tag: tagParam } = await params;
   const tagSlug = decodeURIComponent(tagParam);
   const [blog, guides, glossary, tags] = await Promise.all([
-    getContentList("blog", { locale }),
-    getContentList("guides", { locale }),
-    getContentList("glossary", { locale }),
+    getIndexableContentList("blog", { locale }),
+    getIndexableContentList("guides", { locale }),
+    getIndexableContentList("glossary", { locale }),
     getTagIndex(locale),
   ]);
   const copy = getMessages(locale).pages.tags;

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
@@ -150,6 +151,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       path,
       locale,
       type: "article",
+      robots: guide.source === "fallback" ? NOINDEX_FOLLOW_ROBOTS : undefined,
       keywords:
         locale === "tr"
           ? [...(guide.tool.tags ?? []), "rehber", "nasıl kullanılır"]
@@ -231,6 +233,9 @@ export default async function ToolReportRoute({ params, searchParams }: PageProp
     const guideCopy = getGuideCopy(locale);
     const canonical = buildLocalizedCanonical(`/tools/${guide.slug}/guide`, locale);
     const toolHref = withLocalePrefix(guide.tool.href, locale);
+    if (guide.source === "fallback") {
+      redirect(toolHref);
+    }
     const listHref = withLocalePrefix("/tools", locale);
     const brand = getBrandCopy(locale);
     const logoUrl = new URL("/images/logo.png", SITE_URL).toString();

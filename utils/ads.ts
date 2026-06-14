@@ -9,5 +9,5 @@ export const isAdsAllowedPath = (pathname: string) => {
     return true;
   }
 
-  return path === "/tools/sanity-check/report" || /^\/tools\/.+\/report$/u.test(path);
+  return false;
 };

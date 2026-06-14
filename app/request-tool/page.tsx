@@ -15,6 +15,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/request-tool",
     locale,
+    noIndex: true,
   });
 }
 
@@ -25,5 +26,4 @@ export default function RequestToolPage() {
     </PageShell>
   );
 }
-
 

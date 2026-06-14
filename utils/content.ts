@@ -4,6 +4,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import GithubSlugger from "github-slugger";
 import type { Locale } from "@/utils/locale";
+import { isContentIndexable } from "@/utils/content-quality";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -355,6 +356,27 @@ export const getContentItems = async (type: ContentType, options: ContentQueryOp
 
 export const getContentList = async (type: ContentType, options: ContentQueryOptions = {}) => {
   const items = await getContentItems(type, options);
+  return items.map((item) => ({
+    slug: item.slug,
+    type: item.type,
+    title: item.title,
+    description: item.description,
+    date: item.date,
+    tags: item.tags,
+    category: item.category,
+    draft: item.draft,
+    readingTimeMinutes: item.readingTimeMinutes,
+    canonical: item.canonical,
+  }));
+};
+
+export const getIndexableContentItems = async (type: ContentType, options: ContentQueryOptions = {}) => {
+  const items = await getContentItems(type, options);
+  return items.filter(isContentIndexable);
+};
+
+export const getIndexableContentList = async (type: ContentType, options: ContentQueryOptions = {}) => {
+  const items = await getIndexableContentItems(type, options);
   return items.map((item) => ({
     slug: item.slug,
     type: item.type,

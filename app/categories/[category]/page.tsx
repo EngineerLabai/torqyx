@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
-import { getContentList } from "@/utils/content";
+import { getIndexableContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -65,9 +65,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category: categoryParam } = await params;
   const categorySlug = decodeURIComponent(categoryParam);
   const [blog, guides, glossary, categories] = await Promise.all([
-    getContentList("blog", { locale }),
-    getContentList("guides", { locale }),
-    getContentList("glossary", { locale }),
+    getIndexableContentList("blog", { locale }),
+    getIndexableContentList("guides", { locale }),
+    getIndexableContentList("glossary", { locale }),
     getCategoryIndex(locale),
   ]);
   const copy = getMessages(locale).pages.categories;

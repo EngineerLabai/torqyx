@@ -16,6 +16,7 @@
     "check:secrets": "node scripts/check-secrets.mjs",
     "seo:h1": "node h1-audit.mjs",
     "seo:links": "node scripts/link-analysis.mjs",
+    "adsense:audit": "node scripts/audit-adsense-readiness.mjs",
     "lhci": "node scripts/run-lhci.mjs",
     "perf:ci": "npm run build && npm run lhci",
     "analyze": "cross-env ANALYZE=true npm run build",

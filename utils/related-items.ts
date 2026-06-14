@@ -1,5 +1,5 @@
 ﻿import "server-only";
-import { getContentList, type ContentListItem } from "@/utils/content";
+import { getIndexableContentList, type ContentListItem } from "@/utils/content";
 import { getToolCopy, toolCatalog, type ToolCatalogItem } from "@/tools/_shared/catalog";
 import type { Locale } from "@/utils/locale";
 
@@ -146,8 +146,8 @@ export const getRelatedForTool = async (
 ) => {
   const locale = options.locale ?? "tr";
   const [guides, glossary] = await Promise.all([
-    getContentList("guides", { locale }),
-    getContentList("glossary", { locale }),
+    getIndexableContentList("guides", { locale }),
+    getIndexableContentList("glossary", { locale }),
   ]);
 
   const toolCopy = getToolCopy(tool, locale);
@@ -175,8 +175,8 @@ export const getRelatedForGuide = async (
 ) => {
   const locale = options.locale ?? "tr";
   const [guides, glossary] = await Promise.all([
-    getContentList("guides", { locale }),
-    getContentList("glossary", { locale }),
+    getIndexableContentList("guides", { locale }),
+    getIndexableContentList("glossary", { locale }),
   ]);
 
   const base: RelatedBase = {
@@ -224,8 +224,8 @@ export const getRelatedForGlossaryTerm = async (
 ) => {
   const locale = options.locale ?? "tr";
   const [glossary, guides] = await Promise.all([
-    getContentList("glossary", { locale }),
-    getContentList("guides", { locale }),
+    getIndexableContentList("glossary", { locale }),
+    getIndexableContentList("guides", { locale }),
   ]);
 
   const base: RelatedBase = {

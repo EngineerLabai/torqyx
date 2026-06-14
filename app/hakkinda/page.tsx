@@ -15,10 +15,10 @@ const pageCopy = {
       "Mekanik tasarım süreçlerinde en büyük zaman kaybı, hesapların doğruluğundan emin olmak için harcanan çabadır. Excel tablolarında kaybolan formüller, kaynak gösterilmemiş varsayımlar ve mühendisten mühendise değişen sonuçlar — bunların hepsi çözülmüş bir problem olmalıydı. TORQYX tam bu yüzden geliştirildi: aynı girdide her zaman aynı sonucu veren, izlenebilir ve raporlanabilir bir mekanik hesap motoru.",
     developerTitle: "Geliştirici Hakkında",
     developerBody:
-      "TORQYX, [Ad Soyad] tarafından geliştirilmektedir. [X] yıllık mekanik tasarım ve üretim mühendisliği deneyimiyle, alandaki pratik ihtiyaçları doğrudan bilen biri olarak bu platforma hayat verdik.",
-    usersTitle: "Kimler Kullanıyor?",
+      "TORQYX bağımsız olarak geliştirilen ve sürdürülen bir mühendislik yazılımıdır. Ürün kararları; açık hesap adımları, kaynak gösterimi, birim tutarlılığı ve kullanıcı geri bildirimleri temel alınarak verilir.",
+    usersTitle: "Kimler İçin?",
     usersBody:
-      "TORQYX şu an Türkiye'deki makine, otomotiv ve savunma sektöründe çalışan 500'den fazla mekanik mühendis tarafından aktif olarak kullanılmaktadır. Tasarım doğrulama, ön fizibilite ve teknik rapor hazırlama süreçlerinde günlük iş akışlarına entegre edilmektedir.",
+      "TORQYX; mekanik tasarım, üretim, kalite ve proje çalışmalarında ön hesap, tasarım doğrulama ve teknik rapor hazırlama süreçlerini desteklemek için geliştirilmiştir.",
     methodologyTitle: "Metodoloji",
     methodologyItems: [
       "ISO/DIN/ASME standartları, mühendislik el kitapları ve üretici veri sayfaları temel alınır.",
@@ -44,10 +44,10 @@ const pageCopyEn = {
       "The biggest time loss in mechanical design is the effort spent proving that calculations are correct. Formulas buried in spreadsheets, undocumented assumptions, and results that change from engineer to engineer should already be solved problems. TORQYX was built for exactly that: a traceable, report-ready mechanical calculation engine that returns the same result for the same input every time.",
     developerTitle: "About the Developer",
     developerBody:
-      "TORQYX is developed by [Full Name]. With [X] years of mechanical design and manufacturing engineering experience, the platform is shaped by someone who understands the practical needs of the field firsthand.",
-    usersTitle: "Who Uses It?",
+      "TORQYX is independently developed and maintained as engineering software. Product decisions prioritize transparent calculation steps, cited references, unit consistency, and user feedback.",
+    usersTitle: "Who Is It For?",
     usersBody:
-      "TORQYX is actively used by more than 500 mechanical engineers working in machinery, automotive, and defense workflows. It supports design validation, early feasibility checks, and technical report preparation in daily engineering work.",
+      "TORQYX is built to support preliminary calculations, design validation, and technical reporting across mechanical design, manufacturing, quality, and project workflows.",
     methodologyTitle: "Methodology",
     methodologyItems: [
       "Formulas are sourced from ISO/DIN/ASME standards, engineering handbooks, and manufacturer datasheets.",

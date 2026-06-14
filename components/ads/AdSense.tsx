@@ -13,7 +13,10 @@ type AdSenseProps = {
 export default function AdSense({ publisherId }: AdSenseProps) {
   const pathname = usePathname() ?? "/";
   const consentGiven = useSyncExternalStore(subscribeToConsent, getAdvertisingSnapshot, getServerSnapshot);
-  const shouldLoadAds = process.env.NODE_ENV === "production" && publisherId !== "pub-0000000000000000";
+  const shouldLoadAds =
+    process.env.NODE_ENV === "production" &&
+    process.env.NEXT_PUBLIC_ADSENSE_ENABLED === "true" &&
+    publisherId !== "ca-pub-0000000000000000";
   const allowedOnPath = isAdsAllowedPath(pathname);
 
   if (!shouldLoadAds || !consentGiven || !allowedOnPath) return null;

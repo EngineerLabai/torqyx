@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "@/components/auth/AuthProvider";
+import AdSense from "@/components/ads/AdSense";
 import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
 import UpgradeFunnelAbandonmentTracker from "@/components/analytics/UpgradeFunnelAbandonmentTracker";
 import UpgradeSuccessTracker from "@/components/analytics/UpgradeSuccessTracker";
@@ -25,9 +26,10 @@ import "../styles/globals.css";
 import "katex/dist/katex.min.css";
 
 const DEFAULT_SITE_TITLE = "TORQYX";
+const ADSENSE_PUBLISHER_ID = "ca-pub-8444187117761223";
 const DEFAULT_SITE_DESCRIPTION =
   "ISO/DIN/VDI referanslı, standart temelli mekanik mühendislik hesaplayıcıları. Tahmin değil, deterministik sonuç.";
-const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar. 500+ mühendis kullanıyor.";
+const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar, izlenebilir formüller ve raporlanabilir sonuçlar.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
@@ -94,7 +96,7 @@ export async function generateMetadata(): Promise<Metadata> {
     manifest: "/site.webmanifest",
     other: {
       ...(base.other ?? {}),
-      "google-adsense-account": "ca-pub-8444187117761223",
+      "google-adsense-account": ADSENSE_PUBLISHER_ID,
     },
     ...(!IS_INDEXING_ENABLED
       ? {
@@ -170,13 +172,6 @@ export default async function RootLayout({
   };
   return (
     <html lang={locale} className="w-full overflow-x-hidden">
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8444187117761223"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className="w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased"> 
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
@@ -189,6 +184,7 @@ export default async function RootLayout({
               {process.env.NODE_ENV === "production" ? <WebVitalsReporter /> : null}
               {process.env.NODE_ENV === "production" ? <SpeedInsights /> : null}
               {process.env.NODE_ENV === "development" ? <ImagePathWarnings knownAssets={knownImageAssets} /> : null}
+              <AdSense publisherId={ADSENSE_PUBLISHER_ID} />
               <UserStateSync />
               <SiteShell messages={shellMessages}>{children}</SiteShell>
               <Toaster />

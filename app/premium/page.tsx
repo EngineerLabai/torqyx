@@ -18,6 +18,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/premium",
     locale,
+    noIndex: true,
   });
 }
 
@@ -41,4 +42,3 @@ export default async function PremiumPage() {
     </PageShell>
   );
 }
-
