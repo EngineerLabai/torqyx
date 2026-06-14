@@ -484,7 +484,7 @@ const toolCatalogBase: ToolCatalogBaseItem[] = [
 export const toolCatalog: ToolCatalogItem[] = toolCatalogBase.map((tool) => ({
   ...tool,
   access: toolAccessById[tool.id] ?? "free",
-  status: toolStatusById[tool.id] ?? "verified",
+  status: toolStatusById[tool.id] ?? "beta",
   validationStandard: toolValidationStandardById[tool.id] ?? DEFAULT_VALIDATION_STANDARD,
 }));
 

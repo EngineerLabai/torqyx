@@ -10,12 +10,12 @@ type ToolBadgeProps = {
 
 const LABELS: Record<Locale, Record<ToolStatus, string>> = {
   tr: {
-    verified: "Do\u011frulanm\u0131\u015f \u2713",
+    verified: "Referansl\u0131",
     beta: "Beta \ud83d\udd2c",
     experimental: "Deneysel \u26a0\ufe0f",
   },
   en: {
-    verified: "Verified \u2713",
+    verified: "Referenced",
     beta: "Beta \ud83d\udd2c",
     experimental: "Experimental \u26a0\ufe0f",
   },
@@ -23,12 +23,12 @@ const LABELS: Record<Locale, Record<ToolStatus, string>> = {
 
 const buildTooltip = (status: ToolStatus, locale: Locale, standard: string) => {
   if (locale === "tr") {
-    if (status === "verified") return `Bu araç ${standard} ile doğrulanmıştır.`;
+    if (status === "verified") return `Bu ara\u00e7ta ${standard} referanslar\u0131 belirtilir. Sonu\u00e7lar\u0131 proje ko\u015fullar\u0131na g\u00f6re ba\u011f\u0131ms\u0131z olarak kontrol edin.`;
     if (status === "beta") return `Bu araç beta aşamasındadır. Sonuçları ${standard} referanslarıyla kontrol edin.`;
     return "Bu araç deneysel aşamadadır. Üretim kararlarından önce ek doğrulama yapın.";
   }
 
-  if (status === "verified") return `This tool is validated against ${standard}.`;
+  if (status === "verified") return `This tool lists ${standard} references. Independently verify outputs for the project conditions.`;
   if (status === "beta") return `This tool is in beta. Verify outputs against ${standard} references.`;
   return "This tool is experimental. Run an extra verification before production decisions.";
 };

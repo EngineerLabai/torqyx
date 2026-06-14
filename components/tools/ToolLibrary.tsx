@@ -38,7 +38,7 @@ const DEFAULT_TYPE: ToolType = "calculator";
 const NOW = Date.now();
 const INITIAL_VISIBLE_TOOLS = 24;
 const VISIBLE_TOOLS_STEP = 24;
-const TOOL_COUNT_LABEL_TR = "40+ hesaplayıcı — ihtiyacın olanı filtrele";
+const TOOL_COUNT_LABEL_TR = `${toolCatalog.length} hesaplayıcı — ihtiyacın olanı filtrele`;
 
 type TypeFilter = typeof TYPE_ALL | ToolType;
 type CategoryFilter = typeof CATEGORY_ALL | (typeof toolCategories)[number];

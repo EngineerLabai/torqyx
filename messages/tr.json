@@ -63,19 +63,19 @@
   },
   "home": {
     "hero": {
-      "seoH1": "Mekanik Mühendislik Hesaplayıcıları — ISO/DIN/VDI Standartlarına Dayalı",
+      "seoH1": "Mekanik Mühendislik Hesaplayıcıları — ISO/DIN/VDI Referanslı",
       "eyebrow": "Mekanik mühendislik hesaplayıcıları",
       "headline": "Excel'i Bırakın. Standartlara Dayalı, İzlenebilir Mekanik Hesaplar.",
-      "subheadline": "Mekanik mühendisler için geliştirildi. Formül kırılımı, birim doğrulaması ve raporlanabilir çıktıyla Excel akışlarını dakikalar içinde tamamla.",
-      "subtitle": "ISO/DIN/VDI referanslı 40+ hesaplayıcı. Aynı girdi, her zaman aynı sonuç. Hata yok, varsayım gizliliği yok.",
+      "subheadline": "Mekanik mühendislik hesapları için formül kırılımını, birim kontrollerini ve raporlanabilir çıktıları aynı akışta inceleyin.",
+      "subtitle": "ISO/DIN/VDI referansları, görünür formüller ve açık varsayımlarla deterministik mekanik hesap akışları.",
       "ctaPrimary": "Ücretsiz Dene — Kayıt Gerekmez",
-      "ctaSecondary": "40+ Hesaplayıcıyı İncele",
+      "ctaSecondary": "Hesaplayıcıları İncele",
       "socialProof": "Standart referanslı mekanik hesap araçları",
-      "trustBadge": "Hesaplar ISO/DIN standartlarına göre doğrulanır",
-      "supportNote": "Kredi kartı gerekmez. 60 saniyede başlayın.",
+      "trustBadge": "İlgili ISO/DIN/VDI referansları hesaplarda belirtilir",
+      "supportNote": "Kredi kartı gerekmez. Araçları kayıt olmadan inceleyebilirsiniz.",
       "stats": {
-        "engineersCount": "40+",
-        "engineersLabel": "hesap aracı",
+        "engineersCount": "Açık",
+        "engineersLabel": "formül ve varsayımlar",
         "verifiedPrefix": "ISO/DIN/VDI",
         "verifiedStrong": "referanslı",
         "cardPrefix": "Kredi kartı",
@@ -84,8 +84,8 @@
       "imageAlt": "Mekanik mühendislik hesaplayıcı paneli"
     },
     "popularTools": {
-      "kicker": "Popüler araçlar",
-      "title": "En çok kullanılan hesaplayıcılar",
+      "kicker": "Öne çıkan araçlar",
+      "title": "Öne çıkan hesaplayıcılar",
       "description": "Boyutlama, kontrol ve dönüşüm için hızlı başlangıç sağlayan 6 araç.",
       "cta": "Araç kütüphanesine git",
       "defaultCategory": "Genel"
@@ -106,7 +106,7 @@
       "items": [
         {
           "title": "Hesapları doğrula",
-          "description": "Formülleri, birimleri ve varsayımları dakikalar içinde kontrol et."
+          "description": "Formülleri, birimleri ve varsayımları görünür bir akışta kontrol et."
         },
         {
           "title": "Kararları hızlandır",
@@ -129,19 +129,19 @@
     },
     "seo": {
       "title": "Mekanik Mühendislik Hesaplayıcıları",
-      "description": "Makine tasarımı, cıvata seçimi, güç aktarımı ve termal kontroller için ISO/DIN doğrulamalı hesaplayıcılar."
+      "description": "Makine tasarımı, cıvata seçimi, güç aktarımı ve termal kontroller için ISO/DIN referanslı hesap araçları."
     },
     "valueProps": {
       "kicker": "Neden geçiş yapılıyor?",
-      "title": "Excel belirsizliğini doğrulanmış hesaplara dönüştürün",
-      "description": "Daha hızlı sonuç alın, hataları azaltın, varsayımları görünür kılın.",
+      "title": "Excel belirsizliğini izlenebilir hesap akışlarına dönüştürün",
+      "description": "Formülleri, birimleri ve varsayımları görünür bir hesap akışında inceleyin.",
       "excel": {
-        "badge": "Excel’de zaman kaybetmeyin",
-        "title": "Excel’de zaman kaybetmeyin",
-        "body": "Elektronik tabloları denetlemek zor ve hataya açık. Formülleri, birimleri ve varsayımları kilitliyoruz; sonuçlar dakikalar içinde hazır.",
-        "metricLabel": "Ortalama zaman kazancı",
-        "metricValue": "Hesap başına 45+ dk",
-        "metricNote": "* 200 hesap üzerinde yapılan dahili kullanıcı testi verilerine dayanır",
+        "badge": "Hesap akışını görünür kılın",
+        "title": "Formülleri ve varsayımları aynı yerde inceleyin",
+        "body": "TORQYX formülleri, birimleri ve varsayımları görünür bir akışta bir araya getirir.",
+        "metricLabel": "Öne çıkan özellik",
+        "metricValue": "İzlenebilir hesap akışı",
+        "metricNote": "Formüller, birimler ve varsayımlar aynı ekranda gösterilir.",
         "excelLabel": "Excel",
         "toolLabel": "TORQYX",
         "excelPoints": [
@@ -156,8 +156,8 @@
         ]
       },
       "accuracy": {
-        "badge": "Sonuçlardan emin olun",
-        "title": "Hesaplarınızı bir daha sorgulamayın",
+        "badge": "Sonuçları inceleyin",
+        "title": "Hesap akışını adım adım inceleyin",
         "body": "Her formülü, varsayımı ve birimi dışa aktarmadan önce görün.",
         "bullets": [
           "Denetlenebilir formül kırılımı",
@@ -189,20 +189,20 @@
       }
     },
     "showcase": {
-      "kicker": "Popüler hesaplayıcılar",
-      "title": "Kanıtlanmış hesaplayıcılarla başla",
-      "description": "Bu ay mekanik ekiplerin en çok kullandığı araçlar.",
+      "kicker": "Öne çıkan hesaplayıcılar",
+      "title": "Öne çıkan hesaplayıcılarla başla",
+      "description": "Sık karşılaşılan mekanik hesap türleri için seçilmiş araçlar.",
       "tryNow": "Şimdi Dene →",
-      "usageLabel": "{count}+ kullanım",
+      "usageLabel": "{count} araç",
       "cta": "Tüm hesaplayıcılar"
     },
     "testimonials": {
       "kicker": "Kullanıcı yorumu",
       "title": "Mühendisler Ne Söylüyor?",
-      "description": "Doğrulanmış kullanıcı yorumları yayınlandığında burada gösterilecektir",
+      "description": "İzinli kullanıcı yorumları yayımlandığında burada gösterilecektir",
       "items": [
         {
-          "quote": "Doğrulanmış kullanıcı yorumu henüz yayınlanmadı.",
+          "quote": "İzinli kullanıcı yorumu henüz yayımlanmadı.",
           "author": "TORQYX",
           "context": "Şeffaflık notu"
         },
@@ -220,10 +220,10 @@
     },
     "pricing": {
       "kicker": "Ücretlendirme",
-      "title": "Mekanik ekipler için sade fiyatlama",
-      "description": "Ücretsiz başlayın. Sınırsız hesap, geçmiş ve dışa aktarma gerektiğinde yükseltin.",
+      "title": "Planlanan Pro özellikleri",
+      "description": "Pro plan hazırlık aşamasındadır; planlanan özellikler lansman öncesinde değişebilir.",
       "ctaPrimary": "Bekleme Listesine Katıl",
-      "note": "🚀 Pro plan beta aşamasında. Bekleme listesine katılanlar, lansman fiyatından önce haberdar edilecek ve erken erişim avantajı alacak.",
+      "note": "Pro plan hazırlık aşamasında. Özellikler ve fiyatlandırma lansman öncesinde kesinleşecektir.",
       "free": {
         "title": "Ücretsiz",
         "subtitle": "Günde 3 hesap"
@@ -231,9 +231,9 @@
       "pro": {
         "title": "Pro",
         "subtitle": "Sınırsız hesap",
-        "price": "$19/ay",
-        "badge": "En Popüler",
-        "ctaNote": "Pro plan yakında aktif oluyor. Şimdi listeye katıl, ilk açılışta erken erişim fiyatını kilitle.",
+        "price": "Yakında",
+        "badge": "Planlanan",
+        "ctaNote": "Pro plan hazır olduğunda bilgi almak için bekleme listesine katıl.",
         "features": [
           "Sınırsız hesaplama",
           "Tam geçmiş + dışa aktarma",
@@ -268,37 +268,37 @@
     },
     "trust": {
       "kicker": "Güven",
-      "title": "Uyumluluk ve hız için tasarlandı",
-      "description": "Mekanik ekipler hataları azaltmak ve kararları belgelemek için TORQYX kullanıyor.",
+      "title": "İzlenebilirlik ve açık metodoloji için tasarlandı",
+      "description": "Formülleri, varsayımları ve kaynak notlarını görünür tutmak için tasarlandı.",
       "testimonials": [
         {
-          "quote": "Tork tablolarımızı bir haftada değiştirdik; onay süresi ciddi kısaldı.",
-          "name": "Aylin K.",
-          "role": "Mekanik Tasarım Mühendisi"
+          "quote": "Yayınlanmış kullanıcı yorumu bulunmuyor.",
+          "name": "TORQYX",
+          "role": "Şeffaflık notu"
         },
         {
-          "quote": "Formül kırılımı ve birim kontrolleri daha önce kaçırdığımız hataları yakaladı.",
-          "name": "Tom R.",
-          "role": "Güç Aktarım Lideri"
+          "quote": "Kullanıcı yorumları yalnızca açık izin ve doğrulama sonrasında yayımlanır.",
+          "name": "TORQYX",
+          "role": "Şeffaflık notu"
         },
         {
-          "quote": "Rapor çıktıları iç onaylarda büyük hız kazandırıyor.",
-          "name": "Murat S.",
-          "role": "Üretim Mühendisi"
+          "quote": "Ürün iddiaları yayımlanmış özellikler ve açık metodolojiyle sınırlıdır.",
+          "name": "TORQYX",
+          "role": "Şeffaflık notu"
         }
       ],
       "logosTitle": "Görüldüğü yerler",
       "logos": [],
       "guarantee": {
-        "title": "Hesap doğruluğu garantisi",
-        "body": "Bir sonuç şüpheli görünürse 24 saat içinde doğrular ve düzeltiriz."
+        "title": "Sorumlu kullanım",
+        "body": "Sonuçları proje koşulları, resmi standartlar ve yetkili mühendislik değerlendirmesiyle bağımsız olarak kontrol edin."
       }
     }
   },
   "pages": {
     "tools": {
       "badge": "Araç Kütüphanesi",
-      "title": "Mekanik Mühendislik Hesap Araçları — 40+ ISO/DIN Referanslı Hesaplayıcı",
+      "title": "Mekanik Mühendislik Hesap Araçları — ISO/DIN Referanslı Hesaplayıcılar",
       "description": "Hesaplayıcı, paket ve rehberleri filtrele, ihtiyacın olanı tek tıkla aç.",
       "imageAlt": "Hesaplayıcı kütüphanesi filtreleri ve araç kartları"
     },
@@ -1036,7 +1036,7 @@
       "roadmapIntro": "Üzerinde çalıştıklarımız:",
       "roadmapItems": [
         "Etiketli ve arama destekli tartışmalar",
-        "Kaynaklı, doğrulanmış yanıtlar",
+        "Kaynaklı, incelenebilir yanıtlar",
         "Proje bazlı özel çalışma alanları",
         "Rapor paylaşımı ve anlık özetler",
         "Moderasyon kuralları ve güvenlik kontrolleri"
@@ -1083,9 +1083,9 @@
           "Öncelikli destek ve erken erişim"
         ],
         "cta": "Bekleme Listesine Katıl",
-        "ctaNote": "Pro plan yakında aktif oluyor. Şimdi listeye katıl, ilk açılışta erken erişim fiyatını kilitle."
+        "ctaNote": "Pro plan hazır olduğunda bilgi almak için bekleme listesine katıl."
       },
-      "note": "🚀 Pro plan beta aşamasında. Bekleme listesine katılanlar, lansman fiyatından önce haberdar edilecek ve erken erişim avantajı alacak.",
+      "note": "Pro plan hazırlık aşamasında. Özellikler ve fiyatlandırma lansman öncesinde kesinleşecektir.",
       "guarantee": "İptal garantisi: Lansman sonrası istediğiniz an iptal edebilirsiniz."
     }
   },
@@ -1098,7 +1098,7 @@
     "premiumCTA": {
       "badge": "Premium beta",
       "title": "Premium plan",
-      "description": "🚀 Pro plan beta aşamasında. Bekleme listesine katılanlar, lansman fiyatından önce haberdar edilecek ve erken erişim avantajı alacak.",
+      "description": "Pro plan hazırlık aşamasında. Özellikler ve fiyatlandırma lansman öncesinde kesinleşecektir.",
       "ctaPrimary": "Bekleme Listesine Katıl",
       "ctaSecondary": "Detayları gör",
       "supportNote": "Erken erişim için destek formuna yönlendirir.",
@@ -1111,7 +1111,7 @@
         "Malzeme ve kaplama öneri kartları"
       ],
       "statusTitle": "Durum",
-      "statusBody": "Pro plan yakında aktif oluyor. Şimdi listeye katıl, ilk açılışta erken erişim fiyatını kilitle.",
+      "statusBody": "Pro plan hazır olduğunda bilgi almak için bekleme listesine katıl.",
       "stepsTitle": "Sonraki adımlar",
       "steps": [
         "Bekleme listesine kayıt",
@@ -1362,7 +1362,7 @@
         "generalCategory": "Genel",
         "openAria": "{title} sayfasını aç",
         "status": {
-          "verified": "Doğrulanmış",
+          "verified": "Referanslı",
           "beta": "Beta",
           "experimental": "Deneysel"
         }

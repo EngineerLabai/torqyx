@@ -101,7 +101,7 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
   const tool = getToolById(toolId) as ToolDefinition<GenericToolInputs, Record<string, unknown>> | null;
   const catalogEntry = tool ? toolCatalog.find((item) => item.id === tool.id) ?? null : null;
   const access = catalogEntry?.access ?? "free";
-  const status = catalogEntry?.status ?? "verified";
+  const status = catalogEntry?.status ?? "beta";
   const validationStandard = catalogEntry?.validationStandard;
   const accessLabel = messages.common.access?.[access] ?? messages.common.access?.free ?? "";
   const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool?.inputs ?? []));

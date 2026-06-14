@@ -63,19 +63,19 @@
   },
   "home": {
     "hero": {
-      "seoH1": "Mechanical Engineering Calculators — Based on ISO/DIN/VDI Standards",
+      "seoH1": "Mechanical Engineering Calculators — ISO/DIN/VDI Referenced",
       "eyebrow": "Mechanical engineering calculators",
       "headline": "Leave Excel Behind. Traceable Mechanical Calculations Based on Standards.",
-      "subheadline": "Built for mechanical engineers. Complete Excel workflows in minutes with formula breakdowns, unit validation, and report-ready outputs.",
-      "subtitle": "40+ calculators with ISO/DIN/VDI references. Same input, same result every time. No hidden assumptions.",
+      "subheadline": "Review formula breakdowns, unit checks, and report-ready outputs in one mechanical calculation flow.",
+      "subtitle": "Deterministic mechanical calculation flows with ISO/DIN/VDI references, visible formulas, and explicit assumptions.",
       "ctaPrimary": "Try Free — No Signup Required",
-      "ctaSecondary": "Browse 40+ Calculators",
+      "ctaSecondary": "Browse Calculators",
       "socialProof": "Standards-referenced mechanical calculation tools",
-      "trustBadge": "Calculations verified against ISO/DIN standards",
-      "supportNote": "No credit card required. Start in under 60 seconds.",
+      "trustBadge": "Relevant ISO/DIN/VDI references are listed with calculations",
+      "supportNote": "No credit card required. Browse the tools without signing up.",
       "stats": {
-        "engineersCount": "40+",
-        "engineersLabel": "calculation tools",
+        "engineersCount": "Visible",
+        "engineersLabel": "formulas and assumptions",
         "verifiedPrefix": "ISO/DIN/VDI",
         "verifiedStrong": "referenced",
         "cardPrefix": "No credit card",
@@ -84,8 +84,8 @@
       "imageAlt": "Mechanical engineering calculator dashboard"
     },
     "popularTools": {
-      "kicker": "Popular tools",
-      "title": "Most used calculators",
+      "kicker": "Featured tools",
+      "title": "Featured calculators",
       "description": "Six quick-start tools to jump into sizing, checks, and conversions.",
       "cta": "Open tool library",
       "defaultCategory": "General"
@@ -106,7 +106,7 @@
       "items": [
         {
           "title": "Validate calculations",
-          "description": "Check formulas, units, and assumptions in minutes."
+          "description": "Check formulas, units, and assumptions in a visible flow."
         },
         {
           "title": "Make decisions faster",
@@ -129,19 +129,19 @@
     },
     "seo": {
       "title": "TORQYX | Engineering & Calculation Tools",
-      "description": "ISO/DIN-verified mechanical calculators for machine design, fasteners, power transmission, and thermal checks."
+      "description": "ISO/DIN-referenced calculation tools for machine design, fasteners, power transmission, and thermal checks."
     },
     "valueProps": {
       "kicker": "Why teams switch",
-      "title": "Replace spreadsheet guesswork with verified calculations",
-      "description": "Finish checks faster, reduce errors, and keep every assumption visible.",
+      "title": "Replace spreadsheet guesswork with traceable calculation flows",
+      "description": "Review formulas, units, and assumptions in a visible calculation flow.",
       "excel": {
-        "badge": "Stop wasting time in Excel",
-        "title": "Stop wasting time in Excel",
-        "body": "Spreadsheets are slow to audit and easy to break. We lock formulas, units, and assumptions so you can finish in minutes.",
-        "metricLabel": "Average time saved",
-        "metricValue": "45+ min per calculation",
-        "metricNote": "* Based on internal user test data across 200 calculations",
+        "badge": "Make the calculation flow visible",
+        "title": "Review formulas and assumptions together",
+        "body": "TORQYX brings formulas, units, and assumptions together in a visible calculation flow.",
+        "metricLabel": "Featured capability",
+        "metricValue": "Traceable calculation flow",
+        "metricNote": "Formulas, units, and assumptions are shown together.",
         "excelLabel": "Excel",
         "toolLabel": "TORQYX",
         "excelPoints": [
@@ -156,8 +156,8 @@
         ]
       },
       "accuracy": {
-        "badge": "Never question your results",
-        "title": "Never question your calculations",
+        "badge": "Review the result",
+        "title": "Inspect the calculation flow step by step",
         "body": "See every formula, assumption, and unit before you export.",
         "bullets": [
           "Formula breakdowns you can audit",
@@ -189,20 +189,20 @@
       }
     },
     "showcase": {
-      "kicker": "Popular calculators",
-      "title": "Start with proven calculators",
-      "description": "Most used by mechanical teams this month.",
+      "kicker": "Featured calculators",
+      "title": "Start with featured calculators",
+      "description": "Selected tools for common mechanical calculation types.",
       "tryNow": "Try Now →",
-      "usageLabel": "{count}+ uses",
+      "usageLabel": "{count} tools",
       "cta": "See all calculators"
     },
     "testimonials": {
       "kicker": "User feedback",
       "title": "What Engineers Are Saying",
-      "description": "Verified user feedback will be published here when available",
+      "description": "Consented user feedback will be published here when available",
       "items": [
         {
-          "quote": "No verified user testimonial has been published yet.",
+          "quote": "No consented user testimonial has been published yet.",
           "author": "TORQYX",
           "context": "Transparency note"
         },
@@ -220,10 +220,10 @@
     },
     "pricing": {
       "kicker": "Pricing",
-      "title": "Simple pricing for mechanical teams",
-      "description": "Start free. Upgrade when you need unlimited calculations, history, and exports.",
+      "title": "Planned Pro features",
+      "description": "The Pro plan is in preparation; planned features may change before launch.",
       "ctaPrimary": "Join the Waitlist",
-      "note": "🚀 Pro plan is in beta. Waitlist members will be notified before launch pricing and receive early-access benefits.",
+      "note": "The Pro plan is in preparation. Features and pricing will be finalized before launch.",
       "free": {
         "title": "Free",
         "subtitle": "3 calculations/day"
@@ -231,9 +231,9 @@
       "pro": {
         "title": "Pro",
         "subtitle": "Unlimited calculations",
-        "price": "$19/mo",
-        "badge": "Most Popular",
-        "ctaNote": "Pro is launching soon. Join now to lock early-access pricing at first release.",
+        "price": "Coming soon",
+        "badge": "Planned",
+        "ctaNote": "Join the waitlist to be notified when the Pro plan is ready.",
         "features": [
           "Unlimited calculations",
           "Full history + exports",
@@ -268,37 +268,37 @@
     },
     "trust": {
       "kicker": "Trusted",
-      "title": "Built for compliance and speed",
-      "description": "Mechanical teams use TORQYX to cut errors and document decisions.",
+      "title": "Built for traceability and transparent methodology",
+      "description": "Designed to keep formulas, assumptions, and source notes visible.",
       "testimonials": [
         {
-          "quote": "We replaced our torque spreadsheets in a week and immediately reduced review time.",
-          "name": "Aylin K.",
-          "role": "Mechanical Design Engineer"
+          "quote": "No user testimonial has been published.",
+          "name": "TORQYX",
+          "role": "Transparency note"
         },
         {
-          "quote": "The formula breakdown and unit checks caught issues we used to miss.",
-          "name": "Tom R.",
-          "role": "Power Transmission Lead"
+          "quote": "User testimonials are published only after explicit consent and verification.",
+          "name": "TORQYX",
+          "role": "Transparency note"
         },
         {
-          "quote": "Export-ready outputs make internal approvals much faster.",
-          "name": "Murat S.",
-          "role": "Manufacturing Engineer"
+          "quote": "Product claims are limited to published features and transparent methodology.",
+          "name": "TORQYX",
+          "role": "Transparency note"
         }
       ],
       "logosTitle": "As seen on",
       "logos": [],
       "guarantee": {
-        "title": "Calculation accuracy guarantee",
-        "body": "If a result looks off, we validate and correct it within 24 hours."
+        "title": "Responsible use",
+        "body": "Independently verify outputs against project conditions, official standards, and qualified engineering review."
       }
     }
   },
   "pages": {
     "tools": {
       "badge": "Tool Library",
-      "title": "Mechanical Engineering Calculation Tools — 40+ ISO/DIN Referenced Calculators",
+      "title": "Mechanical Engineering Calculation Tools — ISO/DIN Referenced Calculators",
       "description": "Filter calculators, packages, and guides, then open what you need.",
       "imageAlt": "Tool library overview with filters and calculator cards"
     },
@@ -1011,7 +1011,7 @@
       "roadmapIntro": "What we are building next:",
       "roadmapItems": [
         "Threaded discussions with tags and search",
-        "Verified answers with sources",
+        "Source-backed, reviewable answers",
         "Project-based private workspaces",
         "Report sharing and snapshots",
         "Moderator guidelines and safety checks"
@@ -1058,9 +1058,9 @@
           "Priority support and early access"
         ],
         "cta": "Join the Waitlist",
-        "ctaNote": "Pro is launching soon. Join now to lock early-access pricing at first release."
+        "ctaNote": "Join the waitlist to be notified when the Pro plan is ready."
       },
-      "note": "🚀 Pro plan is in beta. Waitlist members will be notified before launch pricing and receive early-access benefits.",
+      "note": "The Pro plan is in preparation. Features and pricing will be finalized before launch.",
       "guarantee": "Cancellation guarantee: After launch, you can cancel anytime."
     }
   },
@@ -1073,7 +1073,7 @@
     "premiumCTA": {
       "badge": "Premium beta",
       "title": "Premium plan",
-      "description": "🚀 Pro plan is in beta. Waitlist members will be notified before launch pricing and receive early-access benefits.",
+      "description": "The Pro plan is in preparation. Features and pricing will be finalized before launch.",
       "ctaPrimary": "Join the Waitlist",
       "ctaSecondary": "View pricing",
       "supportNote": "Opens the early-access request form.",
@@ -1086,7 +1086,7 @@
         "Material and coating suggestion cards"
       ],
       "statusTitle": "Availability",
-      "statusBody": "Pro is launching soon. Join now to lock early-access pricing at first release.",
+      "statusBody": "Join the waitlist to be notified when the Pro plan is ready.",
       "stepsTitle": "How to get access",
       "steps": [
         "Request access",
@@ -1337,7 +1337,7 @@
         "loadMore": "Load more",
         "openAria": "Open {title}",
         "status": {
-          "verified": "Verified",
+          "verified": "Referenced",
           "beta": "Beta",
           "experimental": "Experimental"
         }

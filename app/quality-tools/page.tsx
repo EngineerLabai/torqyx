@@ -38,7 +38,7 @@ export async function generateMetadata() {
   const title = locale === "tr" ? "Kalite ve Doğrulama Süreci" : copy.badge;
   const description =
     locale === "tr"
-      ? "Hesaplayıcılarımız nasıl doğrulanır? Standart referanslar, test süreçleri ve kalite güvencesi hakkında bilgi al."
+      ? "Hesap araçlarının standart referansları, test süreçleri ve kalite kontrolleri hakkında bilgi al."
       : copy.description;
 
   return buildPageMetadata({

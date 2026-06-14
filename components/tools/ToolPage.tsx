@@ -83,7 +83,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   const toolCopy = catalogEntry ? getToolCopy(catalogEntry, locale) : null;
   const access = catalogEntry?.access ?? "free";
   const accessLabel = accessLabels?.[access] ?? accessLabels?.free ?? "";
-  const status = catalogEntry?.status ?? "verified";
+  const status = catalogEntry?.status ?? "beta";
   const validationStandard = catalogEntry?.validationStandard;
   const toolTitle = toolCopy?.title ?? tool.title;
   const toolDescription = toolCopy?.description ?? tool.description;

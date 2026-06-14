@@ -13,7 +13,7 @@ export async function generateMetadata() {
   const title = locale === "tr" ? "Mühendislik Hesaplayıcıları" : "Engineering Calculators";
   const description =
     locale === "tr"
-      ? "Cıvata, kuvvet, tork, malzeme ve daha fazlası. Tüm hesaplayıcılar ISO/DIN referanslı, adım adım doğrulanmış sonuçlarla."
+      ? "Cıvata, kuvvet, tork, malzeme ve daha fazlası için referansları, varsayımları ve formül adımlarını gösteren hesap araçları."
       : copy.description;
 
   return buildPageMetadata({

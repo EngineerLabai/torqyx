@@ -63,7 +63,7 @@ const buildFeatureList = (toolId: string, locale: Locale) => {
   }
 
   if (tool?.validationStandard) {
-    features.add(`Validation baseline: ${tool.validationStandard}`);
+    features.add(`Reference baseline: ${tool.validationStandard}`);
   }
 
   return Array.from(features);

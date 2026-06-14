@@ -13,6 +13,11 @@ if (layout.includes("pagead2.googlesyndication.com")) {
 if (!layout.includes('"google-adsense-account"')) {
   failures.push("AdSense ownership meta tag is missing.");
 }
+const publisherId = layout.match(/ADSENSE_PUBLISHER_ID\s*=\s*"(ca-pub-\d+)"/u)?.[1];
+const adsTxtPublisherId = read("public/ads.txt").match(/google\.com,\s*(pub-\d+),\s*DIRECT/u)?.[1];
+if (!publisherId || !adsTxtPublisherId || publisherId.replace(/^ca-/u, "") !== adsTxtPublisherId) {
+  failures.push("AdSense ownership meta and ads.txt publisher IDs do not match.");
+}
 
 const sitemap = read("app/sitemap.ts");
 if (sitemap.includes("materials.forEach")) {
@@ -27,11 +32,31 @@ if (/getContentList\("(blog|guides|glossary)"/u.test(sitemap)) {
 
 const publicFacingSources = [
   "app/hakkinda/page.tsx",
+  "app/page.tsx",
+  "app/(tools)/tools/page.tsx",
+  "components/tools/ToolLibrary.tsx",
   "messages/tr.json",
   "messages/en.json",
 ].map((relativePath) => ({ relativePath, content: read(relativePath) }));
 
-const trustMarkers = [/\[Ad Soyad\]/u, /\[Full Name\]/u, /\[X\]/u, /\[PLACEHOLDER\]/u, /500\+\s*(mühendis|mechanical)/iu];
+const trustMarkers = [
+  /\[Ad Soyad\]/u,
+  /\[Full Name\]/u,
+  /\[X\]/u,
+  /\[PLACEHOLDER\]/u,
+  /500\+\s*(mühendis|mechanical)/iu,
+  /40\+\s*(hesap|calculation|calculator)/iu,
+  /hesap doğruluğu garantisi/iu,
+  /calculation accuracy guarantee/iu,
+  /45\+\s*(dk|min)/iu,
+  /200\s*(hesap|calculations)/iu,
+  /en çok kullanılan hesaplayıcılar/iu,
+  /most used calculators/iu,
+  /most popular/iu,
+  /erken erişim avantajı/iu,
+  /early-access benefits/iu,
+  /lock early-access pricing/iu,
+];
 publicFacingSources.forEach(({ relativePath, content }) => {
   trustMarkers.forEach((marker) => {
     if (marker.test(content)) {
