@@ -5,6 +5,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import Formula from "@/components/mdx/Formula";
 import ActionCard from "@/components/ui/ActionCard";
+import EditorialTrustLine from "@/components/content/EditorialTrustLine";
 import { getContentBySlug, getContentLocaleAvailability, getContentSlugs, getIndexableContentList } from "@/utils/content";
 import { BRAND_NAME } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -201,6 +202,7 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
             {term.title}
           </h1>
           <p className="text-[15px] leading-relaxed text-slate-600 md:text-base">{term.description}</p>
+          <EditorialTrustLine locale={locale} />
           <div className="flex flex-wrap gap-2">
             {term.tags.map((tag) => (
               <Link

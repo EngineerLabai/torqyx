@@ -4,6 +4,7 @@ import PageShell from "@/components/layout/PageShell";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import JsonLd from "@/components/seo/JsonLd";
 import ActionCard from "@/components/ui/ActionCard";
+import EditorialTrustLine from "@/components/content/EditorialTrustLine";
 import { extractToc, getContentBySlug, getContentLocaleAvailability, getContentSlugs, getIndexableContentList } from "@/utils/content";
 import { getRelatedForBlogPost } from "@/utils/related-items";
 import { getBrandCopy } from "@/config/brand";
@@ -177,13 +178,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.title}
           </h1>
           <p className="text-[15px] leading-relaxed text-slate-600 md:text-base">{post.description}</p>
-          <p className="text-xs text-slate-500">
-            {locale === "tr" ? "Hazırlayan: TORQYX Mühendislik Ekibi" : "Reviewed by: TORQYX Engineering Team"}
-            {" · "}
-            <Link href={withLocalePrefix("/hakkinda", locale)} className="font-semibold text-emerald-700 hover:underline">
-              {locale === "tr" ? "Metodoloji ve ekip" : "Methodology and team"}
-            </Link>
-          </p>
+          <EditorialTrustLine locale={locale} />
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <span key={tag} className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600">

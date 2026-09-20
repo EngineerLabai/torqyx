@@ -4,6 +4,7 @@ import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import ActionCard from "@/components/ui/ActionCard";
+import EditorialTrustLine from "@/components/content/EditorialTrustLine";
 import { extractToc, getContentBySlug, getContentLocaleAvailability, getContentSlugs } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -231,6 +232,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
             {guide.title}
           </h1>
           <p className="text-[15px] leading-relaxed text-slate-600 md:text-base">{guide.description}</p>
+          <EditorialTrustLine locale={locale} />
           <div className="flex flex-wrap gap-2">
             {guide.tags.map((tag) => (
               <span key={tag} className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600">
