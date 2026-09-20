@@ -22,6 +22,7 @@ import { CANONICAL_SITE_URL, IS_INDEXING_ENABLED, SITE_URL, buildOgImageUrl } fr
 import { buildPageMetadata } from "@/utils/metadata";
 import { GOOGLE_ANALYTICS_MEASUREMENT_ID } from "@/utils/google-analytics";
 import { Toaster } from "@/components/ui/toaster";
+import AdSenseVerification from "@/components/ads/AdSenseVerification";
 import { UnitSystemProvider } from "@/contexts/UnitSystemContext";
 import "../styles/globals.css";
 import "katex/dist/katex.min.css";
@@ -171,6 +172,7 @@ export default async function RootLayout({
     <html lang={locale} className="w-full overflow-x-hidden">
       <head>
         <GoogleAnalyticsTag measurementId={GOOGLE_ANALYTICS_MEASUREMENT_ID} />
+        <AdSenseVerification />
       </head>
       <body className="w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased"> 
         <JsonLd data={websiteJsonLd} />
