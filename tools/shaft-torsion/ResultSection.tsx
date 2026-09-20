@@ -32,7 +32,7 @@ export default function ResultSection({ result }: ToolResultProps<ShaftTorsionRe
           <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.tau, 2, locale)} MPa</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.twistAngleLabel}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.twistAngleDegLabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.thetaDeg, 3, locale)} deg</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">

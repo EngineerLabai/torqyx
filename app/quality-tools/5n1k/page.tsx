@@ -1,7 +1,6 @@
 "use client";
 
 // app/quality-tools/5n1k/page.tsx
-import Link from "next/link";
 import { useState, ChangeEvent } from "react";
 import { QualityToolStatusBadge } from "@/components/quality-tools/QualityToolStatusBadge";
 import PageShell from "@/components/layout/PageShell";
@@ -9,7 +8,6 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getQualityToolById } from "@/data/quality-tools/registry";
 import { formatMessage } from "@/utils/messages";
 import { assertNoTurkish } from "@/utils/i18n-assert";
-import { withLocalePrefix } from "@/utils/locale-path";
 import { fiveN1kCopy } from "@/data/quality-tools/5n1k";
 
 type FiveN1KForm = {
@@ -29,7 +27,6 @@ type SavedSummary = {
 
 type SummaryCopy = typeof fiveN1kCopy.tr.summary;
 type SavedCopy = typeof fiveN1kCopy.tr.saved;
-type PremiumCopy = typeof fiveN1kCopy.tr.premium;
 
 const INITIAL_FORM: FiveN1KForm = {
   what: "",
@@ -45,7 +42,6 @@ export default function FiveN1KPage() {
   const copy = fiveN1kCopy[locale];
   const toolStatus = getQualityToolById("5n1k", locale)?.status ?? "beta";
   assertNoTurkish(locale, copy, "quality-tools/5n1k");
-  const premiumHref = withLocalePrefix("/pricing", locale);
 
   const [form, setForm] = useState<FiveN1KForm>(INITIAL_FORM);
   const [savedSummaries, setSavedSummaries] = useState<SavedSummary[]>([]);
@@ -180,13 +176,7 @@ export default function FiveN1KPage() {
             </div>
           </div>
 
-          <p className="mt-3 text-[11px] text-slate-500">
-            {copy.sessionNote.prefix}{" "}
-            <Link href={premiumHref} className="font-semibold text-amber-700 hover:underline">
-              {copy.sessionNote.link}
-            </Link>
-            {copy.sessionNote.suffix}
-          </p>
+          <p className="mt-3 text-[11px] text-slate-500">{copy.sessionNote}</p>
         </div>
 
         <div className="space-y-4">
@@ -197,7 +187,6 @@ export default function FiveN1KPage() {
             onFilterTextChange={setFilterText}
             copy={copy.saved}
           />
-          <PremiumExportNotice copy={copy.premium} premiumHref={premiumHref} />
         </div>
       </section>
     </PageShell>
@@ -339,37 +328,6 @@ function SavedSummariesList({ items, filterText, onFilterTextChange, copy }: Sav
         </ol>
       )}
     </aside>
-  );
-}
-
-function PremiumExportNotice({ copy, premiumHref }: { copy: PremiumCopy; premiumHref: string }) {
-  return (
-    <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
-      <h3 className="mb-1 text-sm font-semibold">{copy.title}</h3>
-      <p className="mb-2">
-        {copy.prefix}{" "}
-        <Link href={premiumHref} className="font-semibold text-amber-700 hover:underline">
-          {copy.link}
-        </Link>
-        {copy.suffix}
-      </p>
-      <div className="flex gap-2">
-        <button
-          type="button"
-          disabled
-          className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60"
-        >
-          {copy.pdf}
-        </button>
-        <button
-          type="button"
-          disabled
-          className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60"
-        >
-          {copy.excel}
-        </button>
-      </div>
-    </div>
   );
 }
 

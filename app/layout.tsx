@@ -3,10 +3,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "@/components/auth/AuthProvider";
-import AdSense from "@/components/ads/AdSense";
+import GoogleAnalyticsTag from "@/components/analytics/GoogleAnalyticsTag";
+import GoogleConsentSync from "@/components/analytics/GoogleConsentSync";
 import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
-import UpgradeFunnelAbandonmentTracker from "@/components/analytics/UpgradeFunnelAbandonmentTracker";
-import UpgradeSuccessTracker from "@/components/analytics/UpgradeSuccessTracker";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import SiteShell, { type SiteShellMessages } from "@/components/layout/SiteShell";
 import GlobalErrorMonitor from "@/components/monitoring/GlobalErrorMonitor";
@@ -15,18 +14,19 @@ import WebVitalsReporter from "@/components/monitoring/WebVitalsReporter";
 import UserStateSync from "@/components/sync/UserStateSync";
 import JsonLd from "@/components/seo/JsonLd";
 import { getBrandCopy, SITE_CONTACT_EMAIL } from "@/config/brand";
+import { ADSENSE_PUBLISHER_ID } from "@/config/adsense";
 import { listPublicImagePaths } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { CANONICAL_SITE_URL, IS_INDEXING_ENABLED, SITE_URL, buildOgImageUrl } from "@/utils/seo";
 import { buildPageMetadata } from "@/utils/metadata";
+import { GOOGLE_ANALYTICS_MEASUREMENT_ID } from "@/utils/google-analytics";
 import { Toaster } from "@/components/ui/toaster";
 import { UnitSystemProvider } from "@/contexts/UnitSystemContext";
 import "../styles/globals.css";
 import "katex/dist/katex.min.css";
 
 const DEFAULT_SITE_TITLE = "TORQYX";
-const ADSENSE_PUBLISHER_ID = "ca-pub-8444187117761223";
 const DEFAULT_SITE_DESCRIPTION =
   "ISO/DIN/VDI referanslı, standart temelli mekanik mühendislik hesaplayıcıları. Tahmin değil, deterministik sonuç.";
 const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar, izlenebilir formüller ve raporlanabilir sonuçlar.";
@@ -161,17 +161,17 @@ export default async function RootLayout({
   const messages = getMessages(locale);
   const shellMessages: SiteShellMessages = {
     nav: messages.nav,
-    authButtons: messages.authButtons,
     languageSwitcher: messages.languageSwitcher,
     components: {
       search: messages.components.search,
-      authModal: messages.components.authModal,
       consent: messages.components.consent,
-      premiumCTA: messages.components.premiumCTA,
     },
   };
   return (
     <html lang={locale} className="w-full overflow-x-hidden">
+      <head>
+        <GoogleAnalyticsTag measurementId={GOOGLE_ANALYTICS_MEASUREMENT_ID} />
+      </head>
       <body className="w-full overflow-x-hidden bg-slate-50 font-sans text-slate-900 antialiased"> 
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider initialLocale={locale}>
@@ -179,12 +179,10 @@ export default async function RootLayout({
             <UnitSystemProvider>
               <GlobalErrorMonitor />
               <AnalyticsTracker />
-              <UpgradeFunnelAbandonmentTracker />
-              <UpgradeSuccessTracker />
+              <GoogleConsentSync />
               {process.env.NODE_ENV === "production" ? <WebVitalsReporter /> : null}
               {process.env.NODE_ENV === "production" ? <SpeedInsights /> : null}
               {process.env.NODE_ENV === "development" ? <ImagePathWarnings knownAssets={knownImageAssets} /> : null}
-              <AdSense publisherId={ADSENSE_PUBLISHER_ID} />
               <UserStateSync />
               <SiteShell messages={shellMessages}>{children}</SiteShell>
               <Toaster />

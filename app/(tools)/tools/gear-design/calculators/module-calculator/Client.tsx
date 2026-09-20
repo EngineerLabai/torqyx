@@ -10,8 +10,7 @@ import ExportPanel from "@/components/tools/ExportPanel";
 import EngineeringDiagram from "@/src/components/visuals/EngineeringDiagram";
 import { exportSvgToPng, getSvgPreview } from "@/utils/export";
 import { withLocalePrefix } from "@/utils/locale-path";
-
-const STANDARD_MODULES = [0.5, 0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20];
+import { calculateGearModule, STANDARD_MODULES } from "@/tools/gear-module/logic";
 
 type ModuleCalculatorClientProps = {
   initialDocs?: ToolDocsResponse | null;
@@ -44,33 +43,7 @@ function ModuleCalculator() {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");
 
-  const result = useMemo(() => {
-    const d = Number(inputs.diameter);
-    const z = Number(inputs.teeth);
-    if (!isFinite(d) || !isFinite(z) || d <= 0 || z <= 0) return null;
-    const mRaw = d / z;
-    const circularPitch = Math.PI * mRaw;
-    const closest = STANDARD_MODULES.reduce(
-      (best, m) => {
-        const diff = Math.abs(m - mRaw);
-        return diff < best.diff ? { m, diff } : best;
-      },
-      { m: STANDARD_MODULES[0], diff: Math.abs(STANDARD_MODULES[0] - mRaw) },
-    );
-    const suggestedM = closest.m;
-    const suggestedDiameter = suggestedM * z;
-    const diffPercent = ((suggestedM - mRaw) / mRaw) * 100;
-    const zMin20deg = 17;
-    return {
-      mRaw,
-      circularPitch,
-      suggestedM,
-      suggestedDiameter,
-      diffPercent,
-      zMinWarning: z < zMin20deg,
-      zMin20deg,
-    };
-  }, [inputs]);
+  const result = useMemo(() => calculateGearModule(inputs), [inputs]);
 
   const diameterValue = Number(inputs.diameter);
   const teethValue = Number(inputs.teeth);
@@ -121,13 +94,13 @@ function ModuleCalculator() {
           <Result label={t(locale, "Önerilen çap (m_std·z)", "Suggested diameter (m_std·z)")} value={`${result.suggestedDiameter.toFixed(2)} mm`} />
           <Result label={t(locale, "Standart sapma", "Standard deviation")} value={`${result.diffPercent >= 0 ? "+" : ""}${result.diffPercent.toFixed(1)} %`} />
           <Result
-            label={t(locale, "Undercut uyarısı (20°)", "Undercut warning (20°)")}
-            value={result.zMinWarning ? t(locale, `Risk: z < ${result.zMin20deg}`, `Risk: z < ${result.zMin20deg}`) : t(locale, "Uygun", "OK")}
-            tone={result.zMinWarning ? "warn" : "ok"}
+            label={t(locale, "Yaklaşık undercut ön kontrolü", "Approximate undercut pre-check")}
+            value={result.approximateUndercutRisk ? t(locale, `Risk: z < ${result.approximateMinimumTeeth}`, `Risk: z < ${result.approximateMinimumTeeth}`) : t(locale, "Eşik üstünde", "Above threshold")}
+            tone={result.approximateUndercutRisk ? "warn" : "ok"}
           />
         </div>
       ) : (
-        <p className="mt-3 text-xs text-red-600">{t(locale, "Pozitif sayılar giriniz.", "Please enter positive values.")}</p>
+        <p className="mt-3 text-xs text-red-600">{t(locale, "Pozitif çap ve pozitif tam sayı diş sayısı girin.", "Enter a positive diameter and a positive integer tooth count.")}</p>
       )}
 
       <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
@@ -169,9 +142,13 @@ function ModuleCalculator() {
       <p className="mt-3 text-[11px] text-slate-600">
         {t(
           locale,
-          `Standart modül serisi: ${STANDARD_MODULES.join(", ")}. Çap/diş sayısını değiştirdiğinde en yakın standart modül ve buna karşılık gelen önerilen hatve çapı gösterilir.`,
-          `Standard module series: ${STANDARD_MODULES.join(", ")}. Changing diameter/tooth count updates nearest standard module and corresponding recommended pitch diameter.`,
+          `ISO 54 modül serisinden kullanılan öneri kümesi: ${STANDARD_MODULES.join(", ")}. Öneri, ham m=d/z sonucundan ayrı gösterilir. z<17 uyarısı yalnız 20° standart tam diş yüksekliği ve profil kaydırmasız dış dişli için yaklaşık ön kontroldür.`,
+          `Recommendation subset from the ISO 54 module series: ${STANDARD_MODULES.join(", ")}. It is shown separately from raw m=d/z. The z<17 warning is only an approximate pre-check for a 20° standard full-depth external gear with no profile shift.`,
         )}
+        {" "}
+        <a href="https://www.iso.org/standard/22644.html" target="_blank" rel="noreferrer" className="font-semibold text-sky-700 hover:underline">
+          ISO 54:1996
+        </a>
       </p>
     </section>
   );
@@ -220,7 +197,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
-        aria-label="Number input"
+        aria-label={label}
       />
     </label>
   );

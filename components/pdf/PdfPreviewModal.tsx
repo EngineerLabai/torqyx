@@ -11,7 +11,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
 import { usePdfExport } from "@/hooks/usePdfExport";
 import type { ReportData } from "@/lib/pdf/types";
 
@@ -27,7 +26,11 @@ export default function PdfPreviewModal({
   trigger,
 }: PdfPreviewModalProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { isPremiumRequired } = usePdfExport({ toolId });
+  const { isPdfUnavailable } = usePdfExport({ toolId });
+
+  if (isPdfUnavailable) {
+    return null;
+  }
 
   const getStatusColor = (status: ReportData["results"][0]["status"]) => {
     switch (status) {
@@ -74,11 +77,6 @@ export default function PdfPreviewModal({
           <DialogTitle className="flex items-center gap-2">
             <FileText className="w-5 h-5" />
             PDF Rapor Önizlemesi
-            {isPremiumRequired && (
-              <Badge variant="secondary" className="ml-2">
-                Premium
-              </Badge>
-            )}
           </DialogTitle>
         </DialogHeader>
 
@@ -166,9 +164,9 @@ export default function PdfPreviewModal({
                           <td className="border border-gray-300 px-4 py-2">{result.value}</td>
                           <td className="border border-gray-300 px-4 py-2">{result.unit || "-"}</td>
                           <td className="border border-gray-300 px-4 py-2">
-                            <Badge className={getStatusColor(result.status)}>
+                            <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${getStatusColor(result.status)}`}>
                               {getStatusText(result.status)}
-                            </Badge>
+                            </span>
                           </td>
                         </tr>
                       ))}

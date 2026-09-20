@@ -22,7 +22,7 @@ export async function generateMetadata() {
   });
 }
 
-type FixtureToolStatus = "planned" | "beta";
+type FixtureToolStatus = "beta";
 
 type FixtureTool = {
   id: string;
@@ -31,7 +31,7 @@ type FixtureTool = {
   description: string;
   highlights: string[];
   status: FixtureToolStatus;
-  href?: string;
+  href: string;
 };
 
 const FIXTURE_TOOLS_BY_LOCALE: Record<"tr" | "en", FixtureTool[]> = {
@@ -140,7 +140,7 @@ export default async function FixtureToolsPage() {
                       {tool.name}
                     </h3>
                   </div>
-                  <StatusBadge status={tool.status} activeLabel={copy.active} plannedLabel={copy.planned} />
+                  <StatusBadge status={tool.status} activeLabel={copy.active} />
                 </div>
               </header>
 
@@ -160,25 +160,15 @@ export default async function FixtureToolsPage() {
 
             <footer className="mt-3 flex min-w-0 items-center justify-between gap-2 text-[11px] text-slate-500">
               <span className="min-w-0 break-words">
-                {tool.href ? copy.footerActive : copy.footerPlanned}
+                {copy.footerActive}
               </span>
 
-              {tool.href ? (
-                <Link
-                  href={localizeHref(tool.href) ?? tool.href}
-                  className="shrink-0 rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold text-white hover:bg-slate-800"
-                >
-                  {copy.openTool}
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  disabled
-                  className="shrink-0 rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[10px] font-medium text-slate-500"
-                >
-                  {copy.comingSoon}
-                </button>
-              )}
+              <Link
+                href={localizeHref(tool.href) ?? tool.href}
+                className="shrink-0 rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold text-white hover:bg-slate-800"
+              >
+                {copy.openTool}
+              </Link>
             </footer>
           </article>
         ))}
@@ -187,26 +177,10 @@ export default async function FixtureToolsPage() {
   );
 }
 
-function StatusBadge({
-  status,
-  activeLabel,
-  plannedLabel,
-}: {
-  status: FixtureToolStatus;
-  activeLabel: string;
-  plannedLabel: string;
-}) {
-  if (status === "beta") {
-    return (
-      <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-        {activeLabel}
-      </span>
-    );
-  }
-
+function StatusBadge({ activeLabel }: { status: FixtureToolStatus; activeLabel: string }) {
   return (
-    <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-600">
-      {plannedLabel}
+    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+      {activeLabel}
     </span>
   );
 }

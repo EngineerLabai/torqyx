@@ -4,9 +4,9 @@
   "howTo": [
     "Enter dynamic load C and equivalent load P.",
     "Select bearing type and speed.",
-    "Set reliability factor a1 if needed and review L10/L10h."
+    "Set reliability factor a1 and review basic L10/L10h separately from adjusted Lna/Lnah."
   ],
-  "formula": "L10 = a1·(C/P)^p | L10h = (L10·10^6)/(60·n) | p = 3 (ball), p = 10/3 (roller)",
+  "formula": "L10 = (C/P)^p | L10h = (L10·10^6)/(60·n) | Lna = a1·L10 | p = 3 (ball), p = 10/3 (roller)",
   "examples": [
     {
       "title": "Ball bearing",
@@ -20,7 +20,9 @@
       },
       "outputs": {
         "L10": "15.63 million rev",
-        "L10h": "173.6 hours"
+        "L10h": "173.6 hours",
+        "Lna": "15.63 million rev",
+        "Lnah": "173.6 hours"
       },
       "inputValues": {
         "C": "25",
@@ -31,7 +33,9 @@
       },
       "expected": {
         "L10": 15.625,
-        "L10h": 173.6111
+        "L10h": 173.6111,
+        "Lna": 15.625,
+        "Lnah": 173.6111
       }
     },
     {
@@ -45,8 +49,10 @@
         "a1": "0.62"
       },
       "outputs": {
-        "L10": "21.98 million rev",
-        "L10h": "407.0 hours"
+        "L10": "35.45 million rev",
+        "L10h": "656.49 hours",
+        "Lna": "21.98 million rev",
+        "Lnah": "407.0 hours"
       },
       "inputValues": {
         "C": "35",
@@ -56,8 +62,10 @@
         "a1": "0.62"
       },
       "expected": {
-        "L10": 21.9793,
-        "L10h": 407.0245
+        "L10": 35.4505,
+        "L10h": 656.4912,
+        "Lna": 21.9793,
+        "Lnah": 407.0245
       }
     }
   ],

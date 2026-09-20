@@ -24,6 +24,8 @@
     "bundle:diff": "node scripts/bundle-stats.mjs",
     "smoke:runtime": "node scripts/smoke-runtime.mjs",
     "test": "vitest run",
+    "test:e2e": "playwright test",
+    "type-check": "tsc --noEmit",
     "test:pdf": "tsx test-pdf-system.ts",
     "generate:og": "node scripts/generate-og-images.mjs"
   },

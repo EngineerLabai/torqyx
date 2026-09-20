@@ -104,7 +104,7 @@ export async function POST(request: Request) {
   const payload = parsed.data;
   const session = await auth();
   const userId = session?.user?.id ?? null;
-  let isPremium = false;
+  let hasExtendedQuota = false;
 
   if (userId) {
     const user = await prisma.user.findUnique({
@@ -113,18 +113,20 @@ export async function POST(request: Request) {
     });
 
     if (user) {
-      isPremium = user.tier === "PRO" || user.tier === "TEAM" || isTrialActive({ trialStart: user.trialStart, trialEnd: user.trialEnd });
+      hasExtendedQuota =
+        user.tier === "PRO" ||
+        user.tier === "TEAM" ||
+        isTrialActive({ trialStart: user.trialStart, trialEnd: user.trialEnd });
     }
   }
 
   const userKey = userId ?? getClientIp(request);
-  const rateLimit = checkExplainResultRateLimit(userKey, isPremium);
+  const rateLimit = checkExplainResultRateLimit(userKey, hasExtendedQuota);
   if (!rateLimit.allowed) {
     return NextResponse.json(
       {
         error: "rate_limited",
-        message:
-          "Free summary limit reached. Upgrade to premium for unlimited explanations or try again after the daily quota resets.",
+        message: "Daily summary limit reached. Please try again after the quota resets.",
       },
       {
         status: 429,

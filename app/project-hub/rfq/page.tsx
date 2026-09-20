@@ -1,7 +1,6 @@
 "use client";
 
 // app/project-hub/rfq/page.tsx
-import Link from "next/link";
 import { useState, FormEvent } from "react";
 import PageShell from "@/components/layout/PageShell";
 
@@ -131,15 +130,11 @@ export default function RfqSummaryPage() {
         </h1>
         <p className="mt-2 text-xs text-slate-600">
           Müşteriden gelen RFQ ve teknik şartnameleri; müşteri, proje kodu, parça adı, hedef adet ve SOP bilgisi ile
-          özetlemek için hafif bir takip ekranı. Girdiğin satırlar bu sayfada tutulur. PDF/Excel dışa aktarma premium
-          paketinin özel beta kapsamındadır. Erken erişim için{" "}
-          <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
-            ücretlendirmeye göz at
-          </Link>.
+          özetlemek için hafif bir takip ekranı. Girdiğin satırlar bu sayfada tutulur; listeyi CSV olarak indirebilirsin.
         </p>
       </section>
 
-      {/* Form + Liste + Premium export alanı */}
+      {/* Form + Liste */}
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         {/* Sol: RFQ formu */}
         <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
@@ -274,7 +269,7 @@ export default function RfqSummaryPage() {
           </form>
         </div>
 
-        {/* Sağ: Liste + Premium export box */}
+        {/* Sağ: Liste */}
         <div className="space-y-4">
           {/* Liste */}
           <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
@@ -282,10 +277,20 @@ export default function RfqSummaryPage() {
               <h2 className="text-sm font-semibold text-slate-900">
                 RFQ Listesi
               </h2>
-              <StatusFilterChips
-                value={statusFilter}
-                onChange={setStatusFilter}
-              />
+              <div className="flex flex-wrap items-center justify-end gap-2">
+                <StatusFilterChips
+                  value={statusFilter}
+                  onChange={setStatusFilter}
+                />
+                <button
+                  type="button"
+                  onClick={exportToCSV}
+                  disabled={items.length === 0}
+                  className="rounded-full border border-slate-200 px-3 py-1 text-[10px] font-semibold text-slate-600 hover:border-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  CSV indir
+                </button>
+              </div>
             </div>
 
             {filteredItems.length === 0 ? (
@@ -367,33 +372,6 @@ export default function RfqSummaryPage() {
             )}
           </div>
 
-          {/* Premium export kutusu */}
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
-            <h3 className="mb-1 text-sm font-semibold">PDF / Excel&apos;e Aktar - Premium (özel beta)</h3>
-            <p className="mb-2">
-              RFQ listenizi PDF veya Excel olarak dışa aktarma ve ekiplerle paylaşma özelliği premium paketinin özel beta
-              kapsamındadır. Erken erişim için{" "}
-              <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
-                ücretlendirmeye göz at
-              </Link>.
-            </p>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                disabled
-                className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60 cursor-not-allowed"
-              >
-                PDF&apos;e Aktar (Premium)
-              </button>
-              <button
-                type="button"
-                onClick={exportToCSV}
-                className="flex-1 rounded-full border border-amber-500 bg-amber-100 px-3 py-1.5 font-semibold text-amber-900 hover:bg-amber-200 transition"
-              >
-                Excel (CSV) Aktar
-              </button>
-            </div>
-          </div>
         </div>
       </section>
     </PageShell>

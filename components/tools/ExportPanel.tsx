@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import UpgradePrompt from "@/components/billing/UpgradePrompt";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useFeatureGate } from "@/hooks/useFeatureGate";
@@ -39,8 +38,11 @@ export default function ExportPanel({
   const copy = getMessages(locale).components.exportPanel;
   const resolvedPreviewAlt = previewAlt ?? copy.previewAlt;
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
-  const pdfLockedText =
-    locale === "tr" ? "PDF dışa aktarma Pro planında açılır." : "PDF export is available on Pro.";
+  const showPdfButton = Boolean(onPdf && pdfGate.hasAccess);
+
+  if (!onPng && !onSvg && !showPdfButton) {
+    return null;
+  }
 
   const run = async (action?: () => Promise<boolean> | boolean, successText?: string, eventName?: "export_pdf") => {
     if (!action) return;
@@ -102,23 +104,11 @@ export default function ExportPanel({
                 SVG
               </button>
             ) : null}
-            {onPdf ? (
+            {showPdfButton ? (
               <button
                 type="button"
-                onClick={() => {
-                  if (!pdfGate.hasAccess) {
-                    setMessage({ type: "error", text: pdfLockedText });
-                    window.setTimeout(() => setMessage(null), 2000);
-                    return;
-                  }
-                  void run(onPdf, copy.pdfDownloading, "export_pdf");
-                }}
-                disabled={!pdfGate.hasAccess}
-                className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition ${
-                  pdfGate.hasAccess
-                    ? "border-slate-200 text-slate-600 hover:border-slate-400"
-                    : "cursor-not-allowed border-amber-200 bg-amber-50 text-amber-700"
-                }`}
+                onClick={() => void run(onPdf, copy.pdfDownloading, "export_pdf")}
+                className="rounded-full border border-slate-200 px-3 py-1.5 text-[11px] font-semibold text-slate-600 transition hover:border-slate-400"
               >
                 PDF
               </button>
@@ -126,26 +116,12 @@ export default function ExportPanel({
           </div>
           {helperText ? <p className="text-[11px] text-slate-500">{helperText}</p> : null}
           {message ? (
-            <p
-              className={
-                message.type === "success"
-                  ? "text-[11px] text-emerald-600"
-                  : "text-[11px] text-red-600"
-              }
-            >
+            <p className={message.type === "success" ? "text-[11px] text-emerald-600" : "text-[11px] text-red-600"}>
               {message.text}
             </p>
           ) : null}
         </div>
       </div>
-      {onPdf && !pdfGate.hasAccess ? (
-        <UpgradePrompt
-          compact
-          source="pdf_export_gate"
-          className="mt-3"
-          description={locale === "tr" ? "PDF dışa aktarma ve sınırsız rapor için Pro'ya geç." : undefined}
-        />
-      ) : null}
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import { buildCsv, downloadCsv } from "@/utils/csv";
 import type { Locale } from "@/utils/locale";
 import { warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import { COMMISSIONING_COPY, COMMISSIONING_STEPS, type ChecklistItem } from "./copy";
@@ -37,7 +38,11 @@ export default function CommissioningClient({ locale, heroImage }: { locale: Loc
       hasPersistedRef.current = true;
       return;
     }
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+    } catch {
+      return;
+    }
   }, [checked]);
 
   useEffect(() => {
@@ -83,7 +88,27 @@ export default function CommissioningClient({ locale, heroImage }: { locale: Loc
     setChecked((prev) => ({ ...prev, [key]: !prev[key] }));
 
   const resetChecklist = () => {
+    if (!window.confirm(copy.resetConfirm)) return;
     setChecked({});
+  };
+
+  const handleExport = () => {
+    const pendingLabel = locale === "tr" ? "Bekliyor" : "Open";
+    const rows = steps.flatMap((step) =>
+      step.items.map((item) => {
+        const key = makeItemKey(step.id, item);
+        return [
+          step.title,
+          item.title,
+          checked[key] ? copy.completedLabel : pendingLabel,
+          item.detail,
+        ];
+      }),
+    );
+    downloadCsv(
+      buildCsv([copy.checklistTitle, "Madde / Item", "Durum / Status", "Detay / Detail"], rows),
+      `commissioning-checklist-${locale}.csv`,
+    );
   };
 
   return (
@@ -114,10 +139,10 @@ export default function CommissioningClient({ locale, heroImage }: { locale: Loc
             </button>
             <button
               type="button"
-              disabled
-              className="rounded-full border border-amber-300 px-4 py-2 text-[11px] font-semibold text-amber-700 opacity-70"
+              onClick={handleExport}
+              className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-[11px] font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100"
             >
-            {copy.exportLabel} - {copy.exportSoon}
+              {copy.exportLabel}
             </button>
           </div>
         </div>

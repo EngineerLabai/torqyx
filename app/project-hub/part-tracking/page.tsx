@@ -1,7 +1,6 @@
 "use client";
 
 // app/project-hub/part-tracking/page.tsx
-import Link from "next/link";
 import { useState, FormEvent } from "react";
 import PageShell from "@/components/layout/PageShell";
 
@@ -150,11 +149,7 @@ export default function PartTrackingPage() {
         </h1>
         <p className="mt-2 text-xs text-slate-600">
           Kick-off&apos;tan SOP&apos;a kadar proje parçalarının durumunu takip etmek için hafif bir dashboard. Aşamalar:
-          Kick-off, Tasarım, Numune, PPAP, SOP. Girdiğin satırlar bu sayfada tutulur. Dışa aktarma (PDF/Excel) premium
-          paketinin özel beta kapsamındadır. Erken erişim için{" "}
-          <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
-            ücretlendirmeye göz at
-          </Link>.
+          Kick-off, Tasarım, Numune, PPAP, SOP. Girdiğin satırlar bu sayfada tutulur; listeyi CSV olarak indirebilirsin.
         </p>
       </section>
 
@@ -344,7 +339,17 @@ export default function PartTrackingPage() {
               <h2 className="text-sm font-semibold text-slate-900">
                 Parça Listesi
               </h2>
-              <StageFilterChips value={stageFilter} onChange={setStageFilter} />
+              <div className="flex flex-wrap items-center justify-end gap-2">
+                <StageFilterChips value={stageFilter} onChange={setStageFilter} />
+                <button
+                  type="button"
+                  onClick={exportToCSV}
+                  disabled={rows.length === 0}
+                  className="rounded-full border border-slate-200 px-3 py-1 text-[10px] font-semibold text-slate-600 hover:border-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  CSV indir
+                </button>
+              </div>
             </div>
 
             {filteredRows.length === 0 ? (
@@ -425,33 +430,6 @@ export default function PartTrackingPage() {
                 ))}
               </div>
             )}
-
-    {/* Premium export kutusu */}
-    <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[11px] text-amber-900 shadow-sm">
-      <h3 className="mb-1 text-sm font-semibold">PDF / Excel&apos;e Aktar - Premium (özel beta)</h3>
-      <p className="mb-2">
-        Parça listenizi PDF veya Excel olarak dışa aktarma özelliği premium paketinin özel beta kapsamındadır. Erken erişim için{" "}
-        <Link href="/pricing" className="font-semibold text-amber-700 hover:underline">
-          ücretlendirmeye göz at
-        </Link>.
-      </p>
-      <div className="flex gap-2">
-        <button
-          type="button"
-          disabled
-          className="flex-1 rounded-full border border-amber-300 px-3 py-1.5 font-semibold text-amber-700 opacity-60 cursor-not-allowed"
-        >
-          PDF&apos;e Aktar (Premium)
-        </button>
-        <button
-          type="button"
-          onClick={exportToCSV}
-          className="flex-1 rounded-full border border-amber-500 bg-amber-100 px-3 py-1.5 font-semibold text-amber-900 hover:bg-amber-200 transition"
-        >
-          Excel (CSV) Aktar
-        </button>
-      </div>
-    </div>
           </div>
         </div>
       </section>

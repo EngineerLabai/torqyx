@@ -19,14 +19,13 @@ export const ROUTES = {
   qa: "/faq",
   faq: "/faq",
   support: "/support",
-  pricing: "/pricing",
   contact: "/iletisim",
   privacy: "/gizlilik",
   cookies: "/cerez-politikasi",
   terms: "/kullanim-sartlari",
+  salesPolicy: "/satis-iade-teslimat",
   about: "/hakkinda",
   blog: "/blog",
-  premium: "/premium",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;

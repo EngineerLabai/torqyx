@@ -154,6 +154,11 @@ export const navConfig = {
           route: "terms",
         },
         {
+          id: "sales-policy",
+          labelKey: "linkSalesPolicy",
+          route: "salesPolicy",
+        },
+        {
           id: "contact",
           labelKey: "linkContact",
           route: "contact",

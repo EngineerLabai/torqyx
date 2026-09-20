@@ -44,8 +44,6 @@ const TOOL_KEYWORDS = [
   { pattern: /\/hakkinda(\/|$)/i,             tr: "Hakkında",                     en: "About",                        std: null },
   { pattern: /\/iletisim(\/|$)/i,             tr: "İletişim",                     en: "Contact",                      std: null },
   { pattern: /\/kullanim-sartlari(\/|$)/i,    tr: "Kullanım Şartları",            en: "Terms of Use",                 std: null },
-  { pattern: /\/premium(\/|$)/i,              tr: "Premium",                      en: "Premium",                      std: null },
-  { pattern: /\/pricing(\/|$)/i,              tr: "Fiyatlandırma",                en: "Pricing",                      std: null },
   { pattern: /\/qa(\/|$)/i,                   tr: "Soru & Cevap",                 en: "QA",                           std: null },
   { pattern: /\/quality-tools(\/|$)/i,        tr: "Kalite Araçları",              en: "Quality Tools",                std: null },
   { pattern: /\/reference(\/|$)/i,            tr: "Referans",                     en: "Reference",                    std: null },

@@ -4,24 +4,17 @@ import type { OfferSchema } from "@/types/structured-data";
 import { SITE_URL } from "@/utils/seo";
 
 const brandCopy = getBrandCopy("en");
-const pricingUrl = new URL("/pricing", SITE_URL).toString();
+const toolsUrl = new URL("/tools", SITE_URL).toString();
 
 const offers: OfferSchema[] = [
   {
     "@type": "Offer",
-    name: "Free Plan",
-    description: "Starter access for engineering calculators.",
-    url: pricingUrl,
+    name: "Free engineering calculators",
+    description: "Open access to engineering calculators.",
+    url: toolsUrl,
     price: "0",
     priceCurrency: "USD",
     category: "Free",
-  },
-  {
-    "@type": "Offer",
-    name: "Premium Plan",
-    description: "Expanded limits, exports, and premium workflows.",
-    url: pricingUrl,
-    category: "Paid",
   },
 ];
 

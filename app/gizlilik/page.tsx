@@ -88,6 +88,12 @@ const PrivacyContentTr = () => (
         Analitik ve reklam tedarikçileri yalnızca ilgili çerez kategorisine izin verdiğinizde çalışır.
         Yurt dışı aktarım gerektiren tedarikçilerde uygulanabilir güvenceler ve ilgili mevzuat şartları dikkate alınır.
       </p>
+      <p>
+        Google AdSense etkinleştirildiğinde Google ve sertifikalı reklam iş ortakları; reklam gösterimi,
+        frekans sınırlama, kötüye kullanım önleme, reklam performans ölçümü ve izin verilen durumlarda
+        kişiselleştirme için çerez veya benzeri tanımlayıcılar kullanabilir. Reklam kategorisini reddederseniz
+        reklam teknolojileri site panelindeki tercihe göre sınırlandırılır.
+      </p>
     </section>
 
     <section className="space-y-2">
@@ -157,6 +163,11 @@ const PrivacyContentEn = () => (
         file storage, support, analytics, and advertising providers. Analytics and advertising providers are used only
         after you consent to the relevant category. Where vendors involve international transfers, we consider applicable
         safeguards and legal requirements.
+      </p>
+      <p>
+        When Google AdSense is enabled, Google and certified advertising partners may use cookies or similar identifiers
+        for ad delivery, frequency capping, abuse prevention, ad performance measurement, and personalization where
+        permitted. If you reject the advertising category, ad technologies are limited according to your site preference.
       </p>
     </section>
 

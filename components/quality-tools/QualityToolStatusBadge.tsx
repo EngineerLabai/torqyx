@@ -5,7 +5,6 @@ const STATUS_BADGE_CLASS: Record<QualityToolStatus, string> = {
   free: "border-emerald-200 bg-emerald-50 text-emerald-700",
   beta: "border-sky-200 bg-sky-50 text-sky-700",
   planned: "border-slate-200 bg-slate-50 text-slate-600",
-  premium: "border-amber-200 bg-amber-50 text-amber-800",
 };
 
 const joinClassNames = (...classes: Array<string | undefined>) => classes.filter(Boolean).join(" ");

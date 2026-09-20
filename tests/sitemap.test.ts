@@ -1,0 +1,80 @@
+import { beforeAll, describe, expect, it, vi } from "vitest";
+import type { MetadataRoute } from "next";
+
+vi.mock("server-only", () => ({}));
+
+let entries: MetadataRoute.Sitemap;
+
+beforeAll(async () => {
+  const { default: buildSitemap } = await import("@/app/sitemap");
+  entries = await buildSitemap();
+});
+
+describe("sitemap indexability policy", () => {
+  it("excludes local user project records and publishes only the Turkish changelog", () => {
+    const paths = entries.map((entry) => new URL(entry.url).pathname);
+
+    expect(paths).not.toContain("/tr/projects");
+    expect(paths).not.toContain("/en/projects");
+    expect(paths.filter((path) => path.endsWith("/changelog"))).toEqual(["/tr/changelog"]);
+
+    const changelog = entries.find((entry) => new URL(entry.url).pathname === "/tr/changelog");
+    expect(changelog?.alternates?.languages).toEqual({
+      tr: "https://torqyx.com/tr/changelog",
+      "x-default": "https://torqyx.com/tr/changelog",
+    });
+  });
+
+  it("emits only hreflang targets that are also canonical sitemap URLs", () => {
+    const sitemapUrls = new Set(entries.map((entry) => entry.url));
+
+    for (const entry of entries) {
+      for (const alternate of Object.values(entry.alternates?.languages ?? {})) {
+        expect(sitemapUrls.has(String(alternate)), `${entry.url} -> ${String(alternate)}`).toBe(true);
+      }
+    }
+  });
+
+  it("contains no duplicate canonical URLs", () => {
+    const urls = entries.map((entry) => entry.url);
+    expect(new Set(urls).size).toBe(urls.length);
+  });
+});
+
+describe("taxonomy quality gate", () => {
+  it("keeps only tags and categories backed by visible indexable content or a tool", async () => {
+    const [{ getIndexableContentList }, { getCategoryIndex, getTagIndex, matchesSlug }, { toolCatalog }] =
+      await Promise.all([
+        import("@/utils/content"),
+        import("@/utils/taxonomy"),
+        import("@/tools/_shared/catalog"),
+      ]);
+
+    for (const locale of ["tr", "en"] as const) {
+      const [blog, guides, glossary, tags, categories] = await Promise.all([
+        getIndexableContentList("blog", { locale }),
+        getIndexableContentList("guides", { locale }),
+        getIndexableContentList("glossary", { locale }),
+        getTagIndex(locale),
+        getCategoryIndex(locale),
+      ]);
+      const content = [...blog, ...guides, ...glossary];
+
+      for (const tag of tags) {
+        const hasContent = content.some((item) => item.tags.some((value) => matchesSlug(value, tag.slug)));
+        const hasTool = toolCatalog.some((tool) =>
+          (tool.tags ?? []).some((value) => matchesSlug(value, tag.slug)),
+        );
+        expect(hasContent || hasTool, `${locale} tag ${tag.slug}`).toBe(true);
+      }
+
+      for (const category of categories) {
+        const hasContent = content.some((item) => matchesSlug(item.category, category.slug));
+        const hasTool = toolCatalog.some(
+          (tool) => Boolean(tool.category) && matchesSlug(tool.category ?? "", category.slug),
+        );
+        expect(hasContent || hasTool, `${locale} category ${category.slug}`).toBe(true);
+      }
+    }
+  });
+});

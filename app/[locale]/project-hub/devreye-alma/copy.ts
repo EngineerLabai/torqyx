@@ -19,8 +19,8 @@ export const COMMISSIONING_COPY: Record<Locale, {
   hero: { title: string; description: string; eyebrow: string; imageAlt: string };
   progressLabel: string;
   resetLabel: string;
+  resetConfirm: string;
   exportLabel: string;
-  exportSoon: string;
   completedLabel: string;
   markDoneLabel: string;
   checklistTitle: string;
@@ -40,8 +40,8 @@ export const COMMISSIONING_COPY: Record<Locale, {
     },
     progressLabel: "Genel ilerleme",
     resetLabel: "Checklist sıfırla",
+    resetConfirm: "Tüm checklist işaretlerini sıfırlamak istediğinizden emin misiniz? Bu işlem geri alınamaz.",
     exportLabel: "Checklist dışa aktar",
-    exportSoon: "Çok yakında",
     completedLabel: "Tamamlandı",
     markDoneLabel: "Tamamla",
     checklistTitle: "Komisyoning checklisti",
@@ -61,8 +61,8 @@ export const COMMISSIONING_COPY: Record<Locale, {
     },
     progressLabel: "Overall progress",
     resetLabel: "Reset checklist",
+    resetConfirm: "Are you sure you want to reset every checklist item? This action cannot be undone.",
     exportLabel: "Export checklist",
-    exportSoon: "Coming soon",
     completedLabel: "Completed",
     markDoneLabel: "Mark done",
     checklistTitle: "Commissioning checklist",

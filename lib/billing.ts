@@ -34,11 +34,11 @@ export const getTrialDaysRemaining = ({ trialEnd, now = new Date() }: TrialInput
 
 export const resolveEffectivePlanId = ({ tier, trialStart, trialEnd, now = new Date() }: PlanInput): PlanId => {
   if (tier === "PRO" || tier === "TEAM") {
-    return "pro";
+    return "extended";
   }
 
   if (isTrialActive({ trialStart, trialEnd, now })) {
-    return "pro";
+    return "extended";
   }
 
   return DEFAULT_PLAN_ID;

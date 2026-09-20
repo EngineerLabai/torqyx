@@ -21,19 +21,13 @@ export default function VisualizationSection({
   const flow = Number(input.flow);
 
   const isTr = locale === "tr";
-  const regime = result.reynolds
-    ? result.reynolds < 2000
-      ? isTr
-        ? "Laminer"
-        : "Laminar"
-      : result.reynolds < 4000
-        ? isTr
-          ? "Geçiş"
-          : "Transition"
-        : isTr
-          ? "Türbülans"
-          : "Turbulent"
-    : "-";
+  const regime = result.regime === "laminar"
+    ? isTr ? "Laminer" : "Laminar"
+    : result.regime === "transition"
+      ? isTr ? "Geçiş" : "Transition"
+      : result.regime === "turbulent"
+        ? isTr ? "Türbülans" : "Turbulent"
+        : "-";
 
   useEffect(() => {
     setPreviewUrl(getSvgPreview(svgRef.current));

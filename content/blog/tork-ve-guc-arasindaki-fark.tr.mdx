@@ -1,0 +1,62 @@
+---
+title: "Tork ve Güç Arasındaki Fark: Mühendislik Perspektifinden"
+description: "Tork ve gücün farkını, P = T x omega ilişkisini ve motor-redüktör seçiminde bu iki değerin birlikte nasıl yorumlanacağını öğrenin."
+date: "2026-06-16"
+tags: ["tork ve güç arasındaki fark", "tork ve aktarma", "mühendislik hesabı"]
+category: "Tork ve Aktarma"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/tork-ve-guc-arasindaki-fark"
+---
+
+<Image src="/images/blog/tork-ve-guc-arasindaki-fark.webp" alt="Tork ve guc arasindaki farki gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz tork ve guc gorseli." />
+
+## Tork ve güç aynı şey değildir
+
+Tork, bir milin dönme eğilimini ifade eden momenttir ve genellikle Nm ile ölçülür. Güç ise iş yapma hızıdır; mekanik sistemin belirli bir zamanda ne kadar enerji aktardığını anlatır ve W veya kW ile ifade edilir. Bir motorun yüksek tork üretmesi, her devirde yüksek güç ürettiği anlamına gelmez. Güç, tork ile açısal hızın birlikte sonucudur. Bu nedenle aynı tork farklı devirlerde farklı güç değerlerine karşılık gelir. Mühendislikte sık kullanılan ilişki P(kW) = T(Nm) x n(rpm) / 9550 biçimindedir. Bu formül, tork ve devir biliniyorsa gücü; güç ve devir biliniyorsa torku hesaplamaya yarar.
+
+## Devir neden sonucu değiştirir?
+
+Aynı 100 Nm torku 500 rpm'de veren bir mil ile 3.000 rpm'de veren bir milin güçleri aynı değildir. İkinci mil aynı momenti daha sık döndürdüğü için birim zamanda daha fazla iş yapar. Buna karşılık sabit güçte devir düştükçe elde edilebilen tork artar. Redüktörlerin temel işlevi de burada anlaşılır: giriş devrini düşürerek, kayıplar hesaba katıldıktan sonra çıkış torkunu yükseltirler. Bu yüzden düşük hızda ağır yük kaldıran bir vinç tamburu yüksek torka ihtiyaç duyarken, fan veya pompa gibi yüksek hızlı ekipmanlarda güç ve çalışma eğrisi daha belirleyici olabilir.
+
+## Motor seçerken iki değeri birlikte okuyun
+
+Bir tahrik sisteminde sadece motorun kW değeriyle karar vermek risklidir. Kalkış torku, sürekli tork, kısa süreli aşırı yük kapasitesi, hız kontrol aralığı ve yük ataleti de değerlendirilmelidir. Örneğin 7,5 kW ve 1.500 rpm nominal bir motorun teorik şaft torku yaklaşık 47,8 Nm'dir. Motor bir redüktörle 30:1 oranında düşürülürse, uygun verim varsayımı altında çıkışta daha yüksek tork elde edilir; ancak çıkış devri de yaklaşık 50 rpm seviyesine iner. Bu ilişki, motorun güç etiketinin tek başına uygulamanın yükünü taşıyacağı anlamına gelmediğini gösterir.
+
+## Verim ve çalışma tipi unutulmamalı
+
+Güç aktarımında redüktör, kayış, zincir, rulman ve kaplin kayıpları vardır. Bu kayıplar toplam verim içinde dikkate alınmalıdır. Ayrıca katalogdaki nominal tork sürekli çalışma koşuluna ait olabilir; sık start-stop, yön değiştirme veya darbeli yüklerde gerekli tork daha yüksek çıkar. Motorun kısa süreli pik torka izin vermesi, termal olarak sürekli aynı yükü taşıyabileceği anlamına da gelmez. Bu yüzden çalışma çevrimi ve istenen hız profili, kW-tork hesabının devamı olarak değerlendirilmelidir.
+
+## Sık karıştırılan noktalar
+
+"Yüksek beygir her zaman daha güçlü çeker" veya "yüksek tork her zaman daha hızlıdır" gibi yorumlar eksiktir. Çekme kuvveti tekerlek çapı, redüksiyon ve verimle; hız ise devir ve oranla birlikte oluşur. Bir başka hata, elektrik motorunun etiket gücünü doğrudan çıkış milindeki güç kabul etmektir. Sistem verimi ve servis koşulları nedeniyle kullanılabilir şaft gücü farklı olabilir. Sağlıklı yaklaşım, yükte gereken torku ve hızı önce belirlemek; ardından bu ikisinden gerekli gücü hesaplamaktır.
+
+## Saha senaryosu ve karar mantığı
+
+Bir konveyörün sabit hızda taşıdığı yükte gerekli tork ile, aynı konveyörü belirli sürede hızlandırmak için gereken tork aynı değildir. Hızlanma sırasında atalet momenti ek yük getirir. Motor seçimi yalnız sürekli çalışma değerine göre yapılırsa, sistemin kalkışta zorlanması şaşırtıcı olmaz. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın içinde güç ve torkun aynı anda hangi devirde değerlendirildiği açıkça yazılmalıdır. 9550 sabitiyle kullanılan formül birim dönüşümüne dayanır; girişte kW, Nm ve rpm kullanılmadığında sonuç yeniden gözden geçirilmelidir. Karar sürecinde nominal değer, pik değer ve sürekli çalışma değeri birbirinden ayrılmalıdır. Yalnızca motor etiketindeki güce bakmak yerine, şaftta kalan gerçek güç ve redüktör çıkışındaki kullanılabilir tork hesaplanmalıdır. Özellikle sık kalkışlı sistemlerde termik sınır, hızlanma süresi ve emniyet payı birlikte doğrulanmalıdır.
+
+## Aynı anda hem tork hem güç neden izlenir?
+
+Tork, dönmeye karşı gösterilen dirençle mücadele kapasitesini; güç ise bu işin hangi hızda yapıldığını anlatır. Bu yüzden düşük devirde yüksek tork üreten bir sistem, hareketi başlatmak için güçlü olabilir fakat hız arttıkça aynı güç sınırında tork düşer. Motor, redüktör ve yük değerlendirmesinde yalnız birini izlemek yanlış yönlendirebilir. Örneğin konveyörün kalkışında tork sınırı belirleyici iken, sürekli hızda çalışan fanın enerji ve kapasite değerlendirmesinde güç daha görünür hale gelir. Birim dönüşümlerinde de dikkat gerekir: Nm, kW, rpm ve rad/s aynı denklem içinde tutarlı kullanılmalıdır. En doğru yorum, motor eğrisi ile yük eğrisini aynı hız ekseninde birlikte okumaktır.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde sürekli tork, pik tork, giriş devri, istenen çıkış devri, redüksiyon oranı ve toplam verim birlikte kayıt altına alınmalıdır. Torqyx Güç - Tork - Devir Hesaplayıcı, bu temel ilişkiyi hızlıca görünür hale getirir ve motor-redüktör ön seçimine yardımcı olur.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Güç - Tork - Devir Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/torque-power" title="Güç - Tork - Devir Hesaplayıcı" description="Güç, devir ve tork arasındaki ilişkiyi hızlıca hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- ISO 80000-4 - Quantities and units in mechanics.
+
+- ISO 3046 - Reciprocating internal combustion engines - Performance.
+
+- DIN 70020 - Road vehicles - Motor performance.

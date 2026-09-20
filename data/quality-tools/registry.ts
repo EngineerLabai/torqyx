@@ -1,6 +1,6 @@
 import type { Locale } from "@/utils/locale";
 
-export type QualityToolStatus = "free" | "beta" | "planned" | "premium";
+export type QualityToolStatus = "free" | "beta" | "planned";
 export type QualityToolLevel = "basic" | "advanced";
 
 export type QualityToolRegistryItem = {
@@ -42,7 +42,7 @@ const QUALITY_TOOLS_BY_LOCALE: Record<Locale, QualityToolRegistryItem[]> = {
         "Müşteri şikayetinde kök neden arayışı",
         "İç kalite uygunsuzlukları",
       ],
-      status: "planned",
+      status: "beta",
       level: "basic",
       href: "/quality-tools/5why",
     },
@@ -119,7 +119,7 @@ const QUALITY_TOOLS_BY_LOCALE: Record<Locale, QualityToolRegistryItem[]> = {
         "Root cause in customer complaints",
         "Internal quality nonconformities",
       ],
-      status: "planned",
+      status: "beta",
       level: "basic",
       href: "/quality-tools/5why",
     },
@@ -175,14 +175,12 @@ const QUALITY_TOOL_STATUS_LABELS: Record<Locale, Record<QualityToolStatus, strin
   tr: {
     free: "Ücretsiz",
     beta: "Beta",
-    planned: "Yakında",
-    premium: "Premium",
+    planned: "Pasif",
   },
   en: {
     free: "Free",
     beta: "Beta",
-    planned: "Coming Soon",
-    premium: "Premium",
+    planned: "Inactive",
   },
 };
 

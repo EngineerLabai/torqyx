@@ -9,7 +9,7 @@ readingTime: 3
 canonical: "https://torqyx.com/blog/darcy-weisbach-boru-basinc-kaybi"
 ---
 
-Boru hatlarında basınç kaybı, pompa seçimi ve sistem verimi için erken tasarım aşamasında kontrol edilmelidir. Bu başlangıç içeriği Darcy-Weisbach yaklaşımının temel H2 iskeletini verir.
+Boru hatlarında basınç kaybı, pompa seçimi ve sistem verimi için erken tasarım aşamasında kontrol edilmelidir. Darcy-Weisbach yaklaşımı; boru çapı, hat uzunluğu, akış hızı, akışkan yoğunluğu ve sürtünme katsayısını aynı denklemde birleştirerek izlenebilir bir kayıp hesabı sağlar.
 
 ## Teori
 
@@ -34,3 +34,9 @@ Boru hatlarında basınç kaybı, pompa seçimi ve sistem verimi için erken tas
 - Debi, çap, uzunluk, pürüzlülük ve akışkan özellikleri girilir.
 - Hız, Reynolds sayısı, sürtünme katsayısı ve basınç kaybı hesaplanır.
 - Sonuç pompa basma yüksekliği ve enerji kaybı açısından yorumlanır.
+
+## Tasarım yorumu
+
+Basınç kaybı hesabı yalnızca boru segmentinin sonunda kaç kPa kayıp olduğunu söylemez; aynı zamanda çap seçiminin enerji tüketimine etkisini de gösterir. Küçük çap yatırım maliyetini azaltabilir fakat akış hızını ve sürtünme kaybını artırır. Büyük çap ise pompa gücünü düşürürken tesisat maliyetini yükseltir. Bu denge, özellikle sürekli çalışan soğutma suyu, proses suyu ve HVAC hatlarında yıllık enerji tüketimini doğrudan etkiler.
+
+Hesap yapılırken yerel kayıplar ihmal edilmemelidir. Dirsek, vana, filtre, daralma ve ani genişleme gibi elemanlar toplam kaybı düz boru kaybından daha yüksek hale getirebilir. TORQYX sonucunu kullanırken önce düz boru kaybını kontrol edin, ardından sistemdeki bağlantı elemanları için kayıp katsayılarını ayrıca toplayın. Böylece pompa seçiminde hem nominal çalışma noktasını hem de emniyet payını daha gerçekçi belirleyebilirsiniz.

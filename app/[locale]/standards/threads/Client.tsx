@@ -8,11 +8,16 @@ import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 
 type ThreadSeries = "coarse" | "fine";
 
+type ThreadPitchOption = {
+  pitch: number;
+  tapDrill: number;
+};
+
 type ThreadSpec = {
   label: string;
   nominal: number;
-  coarse: number;
-  fine: number[];
+  coarse: ThreadPitchOption;
+  fine: ThreadPitchOption[];
   clearance: {
     close: number;
     normal: number;
@@ -27,16 +32,16 @@ type EngagementGuideRow = {
 };
 
 const THREAD_SPECS: ThreadSpec[] = [
-  { label: "M3", nominal: 3, coarse: 0.5, fine: [0.35], clearance: { close: 3.2, normal: 3.4, loose: 3.6 } },
-  { label: "M4", nominal: 4, coarse: 0.7, fine: [0.5], clearance: { close: 4.3, normal: 4.5, loose: 4.8 } },
-  { label: "M5", nominal: 5, coarse: 0.8, fine: [0.5], clearance: { close: 5.3, normal: 5.5, loose: 5.8 } },
-  { label: "M6", nominal: 6, coarse: 1.0, fine: [0.75], clearance: { close: 6.4, normal: 6.6, loose: 7.0 } },
-  { label: "M8", nominal: 8, coarse: 1.25, fine: [1.0], clearance: { close: 8.4, normal: 9.0, loose: 10.0 } },
-  { label: "M10", nominal: 10, coarse: 1.5, fine: [1.25, 1.0], clearance: { close: 10.5, normal: 11.0, loose: 12.0 } },
-  { label: "M12", nominal: 12, coarse: 1.75, fine: [1.5, 1.25], clearance: { close: 13.0, normal: 13.5, loose: 14.5 } },
-  { label: "M16", nominal: 16, coarse: 2.0, fine: [1.5], clearance: { close: 17.0, normal: 18.0, loose: 19.0 } },
-  { label: "M20", nominal: 20, coarse: 2.5, fine: [2.0, 1.5], clearance: { close: 21.0, normal: 22.0, loose: 24.0 } },
-  { label: "M24", nominal: 24, coarse: 3.0, fine: [2.0], clearance: { close: 25.0, normal: 26.0, loose: 28.0 } },
+  { label: "M3", nominal: 3, coarse: { pitch: 0.5, tapDrill: 2.5 }, fine: [{ pitch: 0.35, tapDrill: 2.65 }], clearance: { close: 3.2, normal: 3.4, loose: 3.6 } },
+  { label: "M4", nominal: 4, coarse: { pitch: 0.7, tapDrill: 3.3 }, fine: [{ pitch: 0.5, tapDrill: 3.5 }], clearance: { close: 4.3, normal: 4.5, loose: 4.8 } },
+  { label: "M5", nominal: 5, coarse: { pitch: 0.8, tapDrill: 4.2 }, fine: [{ pitch: 0.5, tapDrill: 4.5 }], clearance: { close: 5.3, normal: 5.5, loose: 5.8 } },
+  { label: "M6", nominal: 6, coarse: { pitch: 1.0, tapDrill: 5.0 }, fine: [{ pitch: 0.75, tapDrill: 5.2 }], clearance: { close: 6.4, normal: 6.6, loose: 7.0 } },
+  { label: "M8", nominal: 8, coarse: { pitch: 1.25, tapDrill: 6.8 }, fine: [{ pitch: 1.0, tapDrill: 7.0 }], clearance: { close: 8.4, normal: 9.0, loose: 10.0 } },
+  { label: "M10", nominal: 10, coarse: { pitch: 1.5, tapDrill: 8.5 }, fine: [{ pitch: 1.25, tapDrill: 8.8 }, { pitch: 1.0, tapDrill: 9.0 }], clearance: { close: 10.5, normal: 11.0, loose: 12.0 } },
+  { label: "M12", nominal: 12, coarse: { pitch: 1.75, tapDrill: 10.2 }, fine: [{ pitch: 1.5, tapDrill: 10.5 }, { pitch: 1.25, tapDrill: 10.8 }], clearance: { close: 13.0, normal: 13.5, loose: 14.5 } },
+  { label: "M16", nominal: 16, coarse: { pitch: 2.0, tapDrill: 14.0 }, fine: [{ pitch: 1.5, tapDrill: 14.5 }], clearance: { close: 17.0, normal: 18.0, loose: 19.0 } },
+  { label: "M20", nominal: 20, coarse: { pitch: 2.5, tapDrill: 17.5 }, fine: [{ pitch: 2.0, tapDrill: 18.0 }, { pitch: 1.5, tapDrill: 18.5 }], clearance: { close: 21.0, normal: 22.0, loose: 24.0 } },
+  { label: "M24", nominal: 24, coarse: { pitch: 3.0, tapDrill: 21.0 }, fine: [{ pitch: 2.0, tapDrill: 22.0 }], clearance: { close: 25.0, normal: 26.0, loose: 28.0 } },
 ];
 
 const ENGAGEMENT_GUIDE: EngagementGuideRow[] = [
@@ -109,8 +114,12 @@ const COPY: Record<Locale, {
     pitchLabel: string;
     engagementLabel: string;
     drillLabel: string;
+    standardDrillLabel: string;
+    calculatedDrillLabel: string;
     drillGuidance: string;
     hardMaterialLabel: string;
+    selectedThreadLabel: string;
+    m8Example: string;
     calloutLabel: string;
     copy: string;
     copied: string;
@@ -128,57 +137,61 @@ const COPY: Record<Locale, {
     hero: {
       title: "Metrik dişler: pratik standart özeti",
       description:
-        "Kaba/ince hatve seçim notları, hızlı kılavuz delik hesabı ve montajda işe yarayan kısa tablolar.",
+        "Kaba/standart hatve ile ince hatve farkını, kılavuz matkap çapını ve boşluk deliğini aynı ekranda netleştiren pratik özet.",
       eyebrow: STANDARDS_EYEBROW.tr,
       imageAlt: "Metrik diş mühendislik referansı",
     },
     overview: {
       coarseTitle: "Kaba (standart hatve)",
-      coarseBody: "Genel montaj için varsayılan seçenektir, üretimde daha toleranslıdır.",
+      coarseBody: "Hatve yazılmadığında varsayılan seridir. Örneğin M8 tek başına M8x1.25 anlamına gelir.",
       coarseBullets: [
-        "Hatve yazılmamışsa (ör. M10) coarse kabul edilir.",
+        "M8 kaba/standart için yaygın kılavuz matkap 6.8 mm'dir.",
         "Saha montajında kir ve hasara karşı daha dayanıklıdır.",
         "Titreşimli uygulamalarda kilitleme elemanı ile kullanılmalıdır.",
       ],
-      fineTitle: "İnce (küçük hatve)",
-      fineBody: "Aynı çapta daha fazla diş adımı sağlar ve hassas ayara uygundur.",
+      fineTitle: "İnce hatve",
+      fineBody: "Aynı nominal çapta daha küçük hatve kullanır; bu yüzden kılavuz matkap çapı kaba seriden farklı çıkar.",
       fineBullets: [
+        "M8x1 gibi hatve mutlaka çağrıda yazılır; M8x1 için tipik kılavuz matkap 7.0 mm'dir.",
         "İnce cidarlı parçalarda daha kontrollü sıkma sağlar.",
         "Daha yüksek eksenel ayar hassasiyeti sunar.",
-        "Kirlenmeye ve çapak etkisine coarse seriye göre daha duyarlıdır.",
       ],
     },
     pitch: {
-      title: "Yaygın hatve tablosu",
-      description: "M3-M24 arası pratik coarse/fine hatve görünümü.",
-      columns: ["Ölçü", "Kaba P (mm)", "İnce P (mm)"],
+      title: "Yaygın hatve ve kılavuz matkap tablosu",
+      description: "Kaba/standart ve ince hatve için pratik başlangıç değerleri. Kılavuz matkap, diş açılacak ön deliktir.",
+      columns: ["Ölçü", "Kaba P (mm)", "Kaba kılavuz matkap", "İnce P -> matkap"],
     },
     mini: {
       label: getUiLabel("tr", "miniTool"),
-      title: "Tap drill hesaplayıcı",
+      title: "Kılavuz matkap hesaplayıcı",
       description:
-        "Yaklaşık delik çapı: D - P x factor. Factor değeri, seçilen diş doluluk yüzdesine göre ayarlanır.",
+        "Önce yaygın atölye matkabını gösterir; alttaki hesap değeri seçilen diş doluluğuna göre değişir.",
       sizeLabel: "Nominal metrik ölçü",
       seriesLabel: "Hatve serisi",
-      coarse: "Kaba",
-      fine: "İnce",
+      coarse: "Kaba / standart",
+      fine: "İnce hatve",
       pitchLabel: "Hatve P (mm)",
       engagementLabel: "Diş doluluğu (%)",
-      drillLabel: "Önerilen delik çapı",
-      drillGuidance: "Atölye uygulamasında en yakın standart matkap çapına yuvarlayın.",
+      drillLabel: "Kılavuz matkap çapı",
+      standardDrillLabel: "Yaygın atölye değeri",
+      calculatedDrillLabel: "Seçili doluluğa göre hesap",
+      drillGuidance: "Bu değer diş çekilecek ön delik içindir; cıvatanın serbest geçtiği boşluk deliği aşağıdaki tabloda ayrıdır.",
       hardMaterialLabel: "Sert malzeme başlangıç önerisi",
+      selectedThreadLabel: "Seçilen diş",
+      m8Example: "Örnek: M8 = M8x1.25 kaba/standart ve 6.8 mm kılavuz matkap; M8x1 ince hatvede tipik kılavuz matkap 7.0 mm olur.",
       calloutLabel: "Kopyalanabilir çağrı metni",
       copy: "Kopyala",
       copied: "Kopyalandı",
       copyFailed: "Kopyalama başarısız",
       formulaTitle: "Formül notu",
       formula: "D_tap ≈ D_nominal - P x (engagement/77)",
-      formulaNote: "Sert malzemede genellikle +0.10 / +0.20 mm ile başlamak takım yükünü azaltır.",
+      formulaNote: "Tablo değeri pratik standart başlangıçtır; hesap değeri doluluk yüzdesiyle takım yükünü ve diş yüksekliğini tartmak için kullanılır.",
     },
     clearance: {
       title: "Boşluk deliği hızlı tablosu",
-      description: "Yakın / normal / gevşek delik çapları (tipik değerler).",
-      columns: ["Ölçü", "Close", "Normal", "Loose"],
+      description: "Yakın / normal / gevşek delik çapları cıvatanın serbest geçmesi içindir; kılavuz matkapla karıştırılmamalıdır.",
+      columns: ["Ölçü", "Yakın", "Normal", "Geniş"],
     },
     engagement: {
       title: "Diş kavrama uzunluğu (kural tabanlı)",
@@ -207,56 +220,60 @@ const COPY: Record<Locale, {
     hero: {
       title: "Metric threads: practical standards notes",
       description:
-        "Coarse/fine selection guidance, quick tap drill calculator, and compact workshop tables.",
+        "A practical view that separates coarse/default pitch, fine pitch, tap drill diameter, and clearance hole diameter.",
       eyebrow: STANDARDS_EYEBROW.en,
       imageAlt: "Metric threads engineering reference",
     },
     overview: {
       coarseTitle: "Coarse (standard pitch)",
-      coarseBody: "Default for general assembly and usually more forgiving in manufacturing.",
+      coarseBody: "Default when pitch is omitted. For example, M8 by itself means M8x1.25.",
       coarseBullets: [
-        "If pitch is omitted (ex: M10), coarse is assumed.",
+        "For M8 coarse/default, the common tap drill is 6.8 mm.",
         "More robust against dirt and handling damage.",
         "Use locking features in vibration-heavy applications.",
       ],
-      fineTitle: "Fine (smaller pitch)",
-      fineBody: "Provides more threads per length at the same diameter for finer adjustment.",
+      fineTitle: "Fine pitch",
+      fineBody: "Uses a smaller pitch at the same nominal diameter, so the tap drill diameter differs from the coarse series.",
       fineBullets: [
+        "The pitch must be called out, such as M8x1; typical tap drill for M8x1 is 7.0 mm.",
         "Works well in thin-wall sections.",
         "Improves clamp adjustment sensitivity.",
-        "More sensitive to contamination and burrs than coarse threads.",
       ],
     },
     pitch: {
-      title: "Common pitch snapshot",
-      description: "Practical coarse/fine view from M3 to M24.",
-      columns: ["Size", "Coarse P (mm)", "Fine P (mm)"],
+      title: "Common pitch and tap drill snapshot",
+      description: "Practical starting values for coarse/default and fine pitch. Tap drill means the pre-hole before threading.",
+      columns: ["Size", "Coarse P (mm)", "Coarse tap drill", "Fine P -> drill"],
     },
     mini: {
       label: getUiLabel("en", "miniTool"),
       title: "Tap drill calculator",
       description:
-        "Approximate drill diameter: D - P x factor. The factor is adjusted by selected thread engagement.",
+        "Shows the common workshop drill first; the calculated value below changes with selected thread engagement.",
       sizeLabel: "Nominal metric size",
       seriesLabel: "Pitch series",
-      coarse: "Coarse",
-      fine: "Fine",
+      coarse: "Coarse / default",
+      fine: "Fine pitch",
       pitchLabel: "Pitch P (mm)",
       engagementLabel: "Thread engagement (%)",
-      drillLabel: "Recommended drill diameter",
-      drillGuidance: "Round to the nearest practical drill size in your workshop.",
+      drillLabel: "Tap drill diameter",
+      standardDrillLabel: "Common workshop value",
+      calculatedDrillLabel: "Calculated from engagement",
+      drillGuidance: "This is the pre-hole for tapping; bolt clearance holes are separate in the table below.",
       hardMaterialLabel: "Starting point for hard materials",
+      selectedThreadLabel: "Selected thread",
+      m8Example: "Example: M8 = M8x1.25 coarse/default with a 6.8 mm tap drill; M8x1 fine pitch typically uses a 7.0 mm tap drill.",
       calloutLabel: "Copy-ready callout",
       copy: "Copy",
       copied: "Copied",
       copyFailed: "Copy failed",
       formulaTitle: "Formula note",
       formula: "D_tap ≈ D_nominal - P x (engagement/77)",
-      formulaNote: "For harder materials, opening +0.10 / +0.20 mm often lowers tap load.",
+      formulaNote: "The table value is a practical standard starting point; the calculated value helps trade thread height against tap load.",
     },
     clearance: {
       title: "Clearance hole quick table",
-      description: "Close / normal / loose values (typical practical ranges).",
+      description: "Close / normal / loose diameters are for free bolt passage; do not mix them with tap drills.",
       columns: ["Size", "Close", "Normal", "Loose"],
     },
     engagement: {
@@ -284,7 +301,7 @@ const COPY: Record<Locale, {
   },
 };
 
-const DEFAULT_SIZE = "M10";
+const DEFAULT_SIZE = "M8";
 
 function formatNumber(locale: Locale, value: number, maxFractionDigits = 2) {
   return value.toLocaleString(locale === "tr" ? "tr-TR" : "en-US", {
@@ -322,8 +339,8 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
   const fallbackSpec = THREAD_SPECS.find((row) => row.label === DEFAULT_SIZE) ?? THREAD_SPECS[0];
   const [size, setSize] = useState<string>(fallbackSpec.label);
   const [series, setSeries] = useState<ThreadSeries>("coarse");
-  const [pitch, setPitch] = useState<number>(fallbackSpec.coarse);
-  const [engagementPercent, setEngagementPercent] = useState<number>(65);
+  const [pitch, setPitch] = useState<number>(fallbackSpec.coarse.pitch);
+  const [engagementPercent, setEngagementPercent] = useState<number>(75);
   const [copyState, setCopyState] = useState<"idle" | "ok" | "error">("idle");
 
   const selectedSpec = useMemo(
@@ -331,12 +348,17 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
     [size, fallbackSpec],
   );
 
-  const availablePitches = useMemo<number[]>(
+  const availablePitchOptions = useMemo<ThreadPitchOption[]>(
     () =>
       series === "fine" && selectedSpec.fine.length > 0
         ? selectedSpec.fine
         : [selectedSpec.coarse],
     [selectedSpec, series],
+  );
+
+  const selectedPitchOption = useMemo(
+    () => availablePitchOptions.find((option) => option.pitch === pitch) ?? availablePitchOptions[0],
+    [availablePitchOptions, pitch],
   );
 
   useEffect(() => {
@@ -377,8 +399,8 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
     setSize(nextSpec.label);
     const nextPitchOptions =
       series === "fine" && nextSpec.fine.length > 0 ? nextSpec.fine : [nextSpec.coarse];
-    if (!nextPitchOptions.includes(pitch)) {
-      setPitch(nextPitchOptions[0]);
+    if (!nextPitchOptions.some((option) => option.pitch === pitch)) {
+      setPitch(nextPitchOptions[0].pitch);
     }
   };
 
@@ -386,15 +408,18 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
     setSeries(nextSeries);
     const nextPitchOptions =
       nextSeries === "fine" && selectedSpec.fine.length > 0 ? selectedSpec.fine : [selectedSpec.coarse];
-    if (!nextPitchOptions.includes(pitch)) {
-      setPitch(nextPitchOptions[0]);
+    if (!nextPitchOptions.some((option) => option.pitch === pitch)) {
+      setPitch(nextPitchOptions[0].pitch);
     }
   };
 
   const engagementFactor = engagementPercent / 77;
   const rawDrillDiameter = selectedSpec.nominal - pitch * engagementFactor;
-  const suggestedDrill = Math.max(0.1, Math.round(rawDrillDiameter * 20) / 20);
-  const hardMaterialDrill = suggestedDrill + 0.15;
+  const calculatedDrill = Math.max(0.1, Math.round(rawDrillDiameter * 20) / 20);
+  const standardTapDrill = selectedPitchOption.tapDrill;
+  const hardMaterialDrill = standardTapDrill + 0.15;
+  const selectedSeriesLabel = series === "coarse" ? copy.mini.coarse : copy.mini.fine;
+  const selectedThreadText = `${selectedSpec.label}x${formatNumber(locale, pitch, 2)} (${selectedSeriesLabel})`;
   const callout = `${selectedSpec.label}x${pitch} - 6H/6g`;
 
   const handleCopyCallout = async () => {
@@ -458,8 +483,11 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
               {THREAD_SPECS.map((row) => (
                 <tr key={row.label} className="border-b border-slate-100 last:border-b-0">
                   <td className="px-4 py-2 text-slate-700">{row.label}</td>
-                  <td className="px-4 py-2 text-slate-700">{row.coarse}</td>
-                  <td className="px-4 py-2 text-slate-700">{row.fine.join(" / ")}</td>
+                  <td className="px-4 py-2 text-slate-700">{formatNumber(locale, row.coarse.pitch, 2)}</td>
+                  <td className="px-4 py-2 text-slate-700">{formatNumber(locale, row.coarse.tapDrill, 2)} mm</td>
+                  <td className="px-4 py-2 text-slate-700">
+                    {row.fine.map((option) => `${formatNumber(locale, option.pitch, 2)} -> ${formatNumber(locale, option.tapDrill, 2)} mm`).join(" / ")}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -509,9 +537,9 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
               onChange={(event) => setPitch(Number(event.target.value))}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/30"
              aria-label="Select field">
-              {availablePitches.map((option) => (
-                <option key={option} value={option}>
-                  {option}
+              {availablePitchOptions.map((option) => (
+                <option key={option.pitch} value={option.pitch}>
+                  {formatNumber(locale, option.pitch, 2)}
                 </option>
               ))}
             </select>
@@ -538,7 +566,18 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           <article className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{copy.mini.drillLabel}</h3>
-            <p className="mt-2 text-2xl font-semibold text-slate-900">{formatNumber(locale, suggestedDrill, 2)} mm</p>
+            <p className="mt-2 text-xs font-semibold text-slate-600">{copy.mini.standardDrillLabel}</p>
+            <p className="mt-1 text-2xl font-semibold text-slate-900">{formatNumber(locale, standardTapDrill, 2)} mm</p>
+            <dl className="mt-3 grid gap-2 text-xs text-slate-600 sm:grid-cols-2">
+              <div>
+                <dt className="font-semibold text-slate-700">{copy.mini.selectedThreadLabel}</dt>
+                <dd>{selectedThreadText}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-slate-700">{copy.mini.calculatedDrillLabel}</dt>
+                <dd>{formatNumber(locale, calculatedDrill, 2)} mm</dd>
+              </div>
+            </dl>
             <p className="mt-2 text-xs text-slate-600">{copy.mini.drillGuidance}</p>
             <p className="mt-2 text-xs text-slate-600">
               {copy.mini.hardMaterialLabel}: <span className="font-semibold">{formatNumber(locale, hardMaterialDrill, 2)} mm</span>
@@ -568,6 +607,7 @@ export default function ThreadsStandardsClient({ locale, heroImage }: { locale: 
           <p className="font-semibold text-slate-800">{copy.mini.formulaTitle}</p>
           <p className="mt-1 font-mono">{copy.mini.formula}</p>
           <p className="mt-1">{copy.mini.formulaNote}</p>
+          <p className="mt-2 font-semibold text-slate-800">{copy.mini.m8Example}</p>
         </div>
       </section>
 

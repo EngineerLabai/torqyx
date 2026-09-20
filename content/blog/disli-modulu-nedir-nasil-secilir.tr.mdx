@@ -1,0 +1,62 @@
+---
+title: "Dişli Modülü Nedir? Nasıl Seçilir?"
+description: "Dişli modülünün ne olduğunu, m = d/z ilişkisini ve tork, diş sayısı, imalat ve ömür kriterleriyle nasıl seçileceğini öğrenin."
+date: "2026-06-22"
+tags: ["dişli modülü", "dişli", "dişli tasarımı", "mühendislik hesabı"]
+category: "Dişli"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/disli-modulu-nedir-nasil-secilir"
+---
+
+<Image src="/images/blog/disli-modulu-nedir-nasil-secilir.webp" alt="Disli modulu secimini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz disli modulu gorseli." />
+
+## Modül, dişlinin ölçeğini belirler
+
+Dişli modülü, metrik silindirik dişlilerde diş boyutunu ifade eden temel parametredir. En basit tanımıyla hatve çapının diş sayısına oranıdır: m = d / z. Burada m milimetre cinsinden modül, d hatve çapı ve z diş sayısıdır. Aynı diş sayısında modül büyüdükçe dişli çapı, diş yüksekliği ve genel olarak taşıyabileceği çevresel kuvvet artar. Ancak daha büyük modül otomatik olarak daha iyi tasarım anlamına gelmez. Paket hacmi, gürültü, merkez mesafesi, imalat yöntemi, ağırlık ve hız gibi kriterler de aynı anda değişir. Bir dişli çiftinin birbirine çalışabilmesi için modülünün aynı olması gerekir; basınç açısı ve helis açısı gibi diğer geometri parametreleri de uyumlu olmalıdır.
+
+## Ham hesap ile gerçek seçim arasındaki fark
+
+Bir dişlinin hatve çapı ve diş sayısı biliniyorsa ham modül kolayca bulunur. Örneğin 120 mm hatve çapı ve 30 diş için m = 4 mm olur. Fakat tasarımın asıl kısmı bundan sonra başlar. Dişli, taşıyacağı torka göre diş dibi eğilme dayanımını ve diş yüzeyi temas dayanımını sağlamalıdır. Aynı zamanda yeterli diş genişliği, uygun malzeme ve yağlama düzeni bulunmalıdır. Tasarımcı çoğu zaman teorik değere en yakın standart modülü seçer; sonra çap, merkez mesafesi ve diş sayısını bu standart değere göre yeniden düzenler. Standart seri kullanmak kesici, kontrol mastarı, stok ve üretim maliyeti açısından avantajlıdır.
+
+## Modül seçerken bakılacak temel kriterler
+
+İlk kriter aktarılan tork ve çevresel kuvvettir. Dişli çapı büyüdükçe aynı tork daha düşük çevresel kuvvete karşılık gelebilir, fakat paket alanı artar. İkinci kriter diş sayısıdır. Çok düşük diş sayısında standart 20 derece basınç açılı dişlilerde undercut riski ortaya çıkabilir; profil kaydırma veya geometri optimizasyonu gerekebilir. Üçüncü kriter imalattır. Küçük modüller daha hassas işleme, daha düşük pürüzlülük ve dikkatli montaj ister; büyük modüller ise daha ağır ve pahalı olabilir. Dördüncü kriter çalışma hızıdır. Yüksek devirli sistemlerde çok kaba dişler gürültü ve dinamik yük açısından istenmeyen sonuç doğurabilir. Son olarak dişli gövdesi, mil ve rulmanlar da seçilen modülün taşıdığı kuvvetlere göre kontrol edilmelidir.
+
+## Uygulama örneği
+
+Bir redüktörde 40 dişli bir çark için yaklaşık 160 mm hatve çapı hedeflendiğini düşünelim. Ham modül 4 mm çıkar. Tasarımcı bu değeri doğrudan kabul etmek yerine standart modül 4 ile diş genişliği, malzeme sertliği, çevresel kuvvet ve emniyet katsayılarını kontrol eder. Eğer diş kökü gerilmesi yüksek çıkarsa yalnız modülü 5'e büyütmek tek seçenek değildir. Diş genişliği artırılabilir, malzeme ve ısıl işlem değiştirilebilir, diş sayısı veya merkez mesafesi yeniden düzenlenebilir. En iyi çözüm, aktarma sistemi üzerinde en az yan etkiyi oluşturan çözüm olmalıdır.
+
+## Sık yapılan hatalar
+
+Modülü sadece çap ve diş sayısından hesaplayıp yük analizini atlamak başlıca hatadır. İkinci hata, iki dişlinin modülü aynı olduğu için mutlaka çalışacağını varsaymaktır; basınç açısı, helis açısı, yön ve profil düzeltmeleri de kontrol edilmelidir. Üçüncü hata, çok küçük pinyonda undercut ve temas oranını incelememektir. Dördüncü hata ise modül büyütülünce rulman, mil ve gövde yüklerinin artacağını gözden kaçırmaktır. Sağlıklı seçim, geometri ile mukavemet hesabını birlikte yürütür.
+
+## Saha senaryosu ve karar mantığı
+
+Modül seçimini doğrulamak için aynı torkta iki alternatif tasarım karşılaştırılabilir: daha küçük modül ve daha geniş diş yüzü ya da daha büyük modül ve daha kompakt genişlik. Hangi çözümün daha iyi olduğu; malzeme, imalat kalitesi, gürültü ve gövde alanına bağlıdır. Bu karşılaştırma, modülün yalnız geometrik bir sayı olmadığını gösterir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın içinde standarda yakın modül seçildikten sonra hatve çapı, merkez mesafesi ve pinyon diş sayısının tekrar hesaplanması gerektiğini belirtin. Ham sonucu yuvarlamak, diğer geometri ilişkilerini otomatik düzeltmez. Tasarım gözden geçirmesinde dişli geometrisi, yük kapasitesi, gürültü, yağlama ve üretim toleransı ayrı ayrı kontrol edilmelidir. Özellikle seri üretim parçalarında ölçüm yöntemi, kalite sınıfı ve kabul kriteri çizimde veya teknik şartnamede yazılı olmalıdır. Bu yaklaşım, hesapta uygun görünen fakat üretimde hassasiyet kaybeden çözümleri erken aşamada ayıklamaya yardım eder.
+
+## Modül seçimi için pratik başlangıç
+
+Dişli modülü belirlenirken hedef torku taşıyacak kadar büyük, ancak gereksiz hacim ve atalet yaratmayacak kadar da dengeli bir değer aranır. Küçük modül daha kompakt ve daha düzgün kavrama sağlayabilir; fakat diş kökü dayanımı ve üretim hassasiyeti daha kritik hale gelir. Büyük modül ise kaba fakat daha sağlam dişler sunabilir ve düşük devirli ağır hizmetlerde avantajlıdır. İlk seçimden sonra diş sayısı, merkez mesafesi, basınç açısı ve yüz genişliği birlikte kontrol edilmelidir. Örneğin pinyon diş sayısının çok düşük seçilmesi alttan kesme ve temas problemleri doğurabilir. Sonuç olarak modül, yalnız çapı belirleyen bir sayı değil; dayanım, gürültü, maliyet ve üretilebilirlik arasında denge kuran temel tasarım parametresidir.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde diş sayısı, hatve çapı, standart modül, basınç açısı, diş genişliği, tork ve malzeme aynı tasarım kaydında yer almalıdır. Torqyx Modül Hesaplayıcı ham modülü ve yakın standart seçimi hızlıca gösterir; yük kapasitesi ve üretim doğrulaması ayrıca yapılmalıdır.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Dişli Modül Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/gear-design/calculators/module-calculator" title="Dişli Modül Hesaplayıcı" description="Modül ve temel dişli boyutlarını hızlıca hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- ISO 54 - Cylindrical gears for general engineering and heavy engineering - Modules.
+
+- ISO 21771 - Gears - Cylindrical involute gears and gear pairs - Concepts and geometry.
+
+- ISO 6336-1 - Calculation of load capacity of spur and helical gears.

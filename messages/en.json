@@ -22,6 +22,7 @@
       "linkPrivacy": "Privacy Policy",
       "linkCookies": "Cookie Policy",
       "linkTerms": "Terms",
+      "linkSalesPolicy": "Sales, Refunds & Delivery",
       "linkAbout": "About",
       "linkContact": "Contact",
       "linkHome": "Home",
@@ -49,8 +50,6 @@
   },
   "authButtons": {
     "login": "Sign in",
-    "premium": "Upgrade to Pro →",
-    "premiumTooltip": "Premium tools are coming soon - sign up now and be the first to know.",
     "userFallback": "User",
     "logout": "Sign out",
     "unavailable": "Auth is unavailable right now.",
@@ -217,54 +216,6 @@
           "context": "Transparency note"
         }
       ]
-    },
-    "pricing": {
-      "kicker": "Pricing",
-      "title": "Planned Pro features",
-      "description": "The Pro plan is in preparation; planned features may change before launch.",
-      "ctaPrimary": "Join the Waitlist",
-      "note": "The Pro plan is in preparation. Features and pricing will be finalized before launch.",
-      "free": {
-        "title": "Free",
-        "subtitle": "3 calculations/day"
-      },
-      "pro": {
-        "title": "Pro",
-        "subtitle": "Unlimited calculations",
-        "price": "Coming soon",
-        "badge": "Planned",
-        "ctaNote": "Join the waitlist to be notified when the Pro plan is ready.",
-        "features": [
-          "Unlimited calculations",
-          "Full history + exports",
-          "Priority support"
-        ]
-      },
-      "table": {
-        "feature": "Feature",
-        "rows": [
-          {
-            "label": "Daily calculations",
-            "free": "3 per day",
-            "pro": "Unlimited"
-          },
-          {
-            "label": "Calculation history",
-            "free": "No history",
-            "pro": "Full history"
-          },
-          {
-            "label": "PDF export",
-            "free": "Locked",
-            "pro": "Included"
-          },
-          {
-            "label": "API access",
-            "free": "—",
-            "pro": "Included"
-          }
-        ]
-      }
     },
     "trust": {
       "kicker": "Trusted",
@@ -528,14 +479,10 @@
       "typical": "Typical use",
       "free": "Free",
       "active": "Active (Beta)",
-      "planned": "Planned",
       "basic": "Basic level",
       "advanced": "Advanced level",
-      "premiumBadge": "Premium (Private beta)",
       "openTool": "Open tool",
-      "comingSoon": "Coming soon",
-      "footerActive": "Interactive form available (draft).",
-      "footerPlanned": "Template and form design in progress."
+      "footerActive": "Interactive form available (draft)."
     },
     "fixtureTools": {
       "badge": "Fixture tools",
@@ -544,11 +491,8 @@
       "imageAlt": "Fixture design cards for locating and clamping workflows",
       "focus": "Focus",
       "active": "Active (Beta)",
-      "planned": "Planned",
       "openTool": "Open tool",
-      "comingSoon": "Coming soon",
-      "footerActive": "Interactive card available.",
-      "footerPlanned": "Card in preparation."
+      "footerActive": "Interactive card available."
     },
     "projectHub": {
       "badgeTitle": "Project Hub",
@@ -655,19 +599,13 @@
       "email": "infotorqyx@gmail.com",
       "responseTitle": "Response time",
       "responseTime": "We typically respond within 24 hours.",
-      "linkedinLabel": "LinkedIn",
-      "linkedinUnavailable": "LinkedIn profile coming soon.",
+      "linkedinLabel": "Legal and privacy requests",
+      "linkedinUnavailable": "Use the support email for account, data, advertising preference, or legal notices.",
       "tipsTitle": "Tips for a better request",
       "tips": [
         "Add a short subject line (e.g., \"M12 10.9 bolt torque\").",
         "Share materials, loads, limits, or standards if available."
       ]
-    },
-    "premium": {
-      "badge": "Premium",
-      "title": "Premium private beta",
-      "description": "Premium is in private beta. We onboard teams in small batches.",
-      "imageAlt": "Premium roadmap cards with feature highlights"
     },
     "changelog": {
       "badge": "Changelog",
@@ -1004,8 +942,8 @@
     "communityComingSoon": {
       "badge": "Community",
       "title": "Community is coming soon",
-      "description": "We are preparing moderated discussions, shared notes, and Q&A. Join the waitlist to get early access.",
-      "statusTitle": "Private beta soon",
+      "description": "We are preparing moderated discussions, shared notes, and Q&A.",
+      "statusTitle": "In preparation",
       "statusBody": "We are validating content quality and moderation flows before opening publicly.",
       "roadmapTitle": "Roadmap",
       "roadmapIntro": "What we are building next:",
@@ -1016,52 +954,7 @@
         "Report sharing and snapshots",
         "Moderator guidelines and safety checks"
       ],
-      "waitlist": {
-        "title": "Join the waitlist",
-        "description": "Leave your email to be notified when community access opens.",
-        "emailLabel": "Email address",
-        "emailPlaceholder": "you@company.com",
-        "focusLabel": "Focus area (optional)",
-        "focusPlaceholder": "e.g., standards, reporting, tooling",
-        "cta": "Join waitlist",
-        "success": "You are on the list. We will email you at launch.",
-        "errorInvalid": "Please enter a valid email address.",
-        "disclaimer": "We only use your email to notify you about the community launch."
-      }
-    },
-    "pricing": {
-      "badge": "Pricing",
-      "title": "Plans & availability",
-      "description": "All tools show clear access labels. Premium is in private beta.",
-      "free": {
-        "title": "Free",
-        "subtitle": "Available now",
-        "description": "Core calculators, references, and reporting essentials.",
-        "features": [
-          "All standard calculators and references",
-          "Input validation + assumptions",
-          "CSV/JSON export for inputs and outputs",
-          "PDF reports for supported tools",
-          "Local saved calculations on this device"
-        ],
-        "cta": "Browse tools"
-      },
-      "premium": {
-        "title": "Premium",
-        "subtitle": "Private beta",
-        "description": "Advanced reporting, team workflows, and exports in private beta.",
-        "features": [
-          "Advanced report templates and branding",
-          "Team workspaces and shared projects",
-          "Premium exports for Project Hub and Quality Tools",
-          "Saved profiles, presets, and history",
-          "Priority support and early access"
-        ],
-        "cta": "Join the Waitlist",
-        "ctaNote": "Join the waitlist to be notified when the Pro plan is ready."
-      },
-      "note": "The Pro plan is in preparation. Features and pricing will be finalized before launch.",
-      "guarantee": "Cancellation guarantee: After launch, you can cancel anytime."
+      "contact": "Use the support form for questions or feedback."
     }
   },
   "components": {
@@ -1069,30 +962,6 @@
       "title": "New updates are live",
       "cta": "View changelog",
       "dismiss": "Dismiss"
-    },
-    "premiumCTA": {
-      "badge": "Premium beta",
-      "title": "Premium plan",
-      "description": "The Pro plan is in preparation. Features and pricing will be finalized before launch.",
-      "ctaPrimary": "Join the Waitlist",
-      "ctaSecondary": "View pricing",
-      "supportNote": "Opens the early-access request form.",
-      "packageTitle": "Premium scope (private beta)",
-      "packageItems": [
-        "Detailed torque and gear tables",
-        "Advanced mechanical calculators",
-        "PDF/Excel exports (RFQ, quality tools, project lists)",
-        "Multi-device access and saved projects",
-        "Material and coating suggestion cards"
-      ],
-      "statusTitle": "Availability",
-      "statusBody": "Join the waitlist to be notified when the Pro plan is ready.",
-      "stepsTitle": "How to get access",
-      "steps": [
-        "Request access",
-        "Share your use case",
-        "We onboard in small batches"
-      ]
     },
     "supportForm": {
       "submit": {
@@ -1464,16 +1333,16 @@
       "loadingBody": "If it stays here, this calculator may not have explanation/examples yet.",
       "docsFailedTitle": "Documentation unavailable",
       "docsFailedBody": "We could not load the explanation and examples right now.",
-      "docsMissingTitle": "Documentation coming soon",
-      "docsMissingBody": "Documentation for this tool is coming soon.",
+      "docsMissingTitle": "Standard documentation",
+      "docsMissingBody": "Scope, assumptions, limits, and reference information are shown in the calculator tab.",
       "metaDocVersion": "Doc version: {value}",
       "metaUpdated": "Updated: {value}",
       "metaTranslated": "Translated: {value}",
-      "explanationEmptyTitle": "Explanation (coming soon)",
-      "explanationEmptyBody": "This calculator does not have an explanation card yet. You can still use it.",
-      "examplesEmptyTitle": "Examples (coming soon)",
-      "examplesEmptyBody": "No examples are available yet. We will add sample inputs soon.",
-      "examplesEmptyHint": "Examples are being prepared.",
+      "explanationEmptyTitle": "Standard explanation",
+      "explanationEmptyBody": "Scope, assumptions, and limits are shown in the standard documentation panel on the calculator tab.",
+      "examplesEmptyTitle": "Validation examples",
+      "examplesEmptyBody": "Validation examples are shown in the standard documentation panel on the calculator tab.",
+      "examplesEmptyHint": "A validation example is available in the standard documentation panel.",
       "inputs": "Inputs",
       "outputs": "Outputs",
       "note": "Note",
@@ -1917,8 +1786,7 @@
     "general": "General",
     "access": {
       "free": "Free",
-      "beta": "Beta",
-      "premium": "Pro"
+      "beta": "Beta"
     }
   },
   "workspace": {

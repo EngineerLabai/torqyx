@@ -26,6 +26,18 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Type-check
+        run: npm run type-check
+
+      - name: Unit and integration tests
+        run: npm test
+
+      - name: Validate internal links
+        run: npm run seo:links
+
+      - name: Audit AdSense route policy
+        run: npm run adsense:audit
+
       - name: Build
         run: npm run build
 
@@ -72,11 +84,8 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Run i18n visual smoke
-        run: npx playwright test tests/i18n-visual.spec.ts
-
-      - name: Run accessibility checks
-        run: npx playwright test tests/a11y.spec.ts
+      - name: Run end-to-end, mobile and accessibility checks
+        run: npm run test:e2e
 
   lighthouse-ci:
     runs-on: ubuntu-latest

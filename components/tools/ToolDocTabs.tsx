@@ -10,7 +10,6 @@ import ToolDocStandard from "@/components/tools/ToolDocStandard";
 import ToolDocumentation from "@/components/tools/ToolDocumentation";
 import Callout from "@/components/mdx/Callout";
 import MDXClient from "@/components/mdx/MDXClient";
-import PremiumCTA from "@/components/premium/PremiumCTA";
 import { getToolDocumentation } from "@/data/tool-documentation";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -37,7 +36,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const { locale } = useLocale();
   const copy = getMessages(locale).components.toolDocTabs;
   const standardCopy = getMessages(locale).components.toolDocStandard;
-  const premiumCopy = getMessages(locale).components.premiumCTA;
   const allTabs = useMemo(() => TAB_IDS.map((id) => ({ id, label: copy.tabs[id] })), [copy]);
   const searchParams = useSearchParams();
   const tabParam = searchParams?.get("tab");
@@ -113,7 +111,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   const hasExamples =
     !shouldSuppressDocs &&
     Boolean(docs?.examples && (docs.examples.kind !== "json" || docs.examples.items.length > 0));
-  const shouldShowMissingNote = shouldSuppressDocs;
   const docsMetaLine = useMemo(() => {
     if (!docs?.metaInfo || shouldSuppressDocs) return null;
     const segments: string[] = [];
@@ -158,7 +155,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   }, [availableTabs, activeTab]);
 
   const renderExplanation = () => {
-    if (shouldShowMissingNote) {
+    if (shouldSuppressDocs) {
       return null;
     }
 
@@ -182,7 +179,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
   };
 
   const renderExamples = () => {
-    if (shouldShowMissingNote) {
+    if (shouldSuppressDocs) {
       return null;
     }
 
@@ -264,11 +261,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
         ) : null}
       </div>
 
-      {shouldShowMissingNote ? (
-        <p className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-          {copy.docsMissingTitle}
-        </p>
-      ) : null}
       {docsMetaLine ? (
         <p className="text-xs text-slate-500">
           <Link href={changelogHref} className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700">
@@ -290,7 +282,6 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
           version={documentation.version}
           lastUpdated={documentation.lastUpdated}
         />
-        <PremiumCTA variant="compact" copy={premiumCopy} />
       </div>
 
       {hasExplanation ? (

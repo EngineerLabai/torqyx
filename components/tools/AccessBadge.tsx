@@ -10,7 +10,6 @@ type AccessBadgeProps = {
 const TONE_CLASSES: Record<ToolAccess, string> = {
   free: "bg-emerald-100 text-emerald-700",
   beta: "bg-amber-100 text-amber-700",
-  premium: "bg-brand text-white",
 };
 
 export default function AccessBadge({ access, label, size = "xs", className = "" }: AccessBadgeProps) {

@@ -74,8 +74,8 @@ export async function POST(request: NextRequest) {
       return apiError("user_not_found", 404);
     }
 
-    const isPremium = user.tier === "PRO" || user.tier === "TEAM";
-    const expiresAt = calculateExpiration(isPremium);
+    const hasExtendedRetention = user.tier === "PRO" || user.tier === "TEAM";
+    const expiresAt = calculateExpiration(hasExtendedRetention);
 
     let code: string;
     let attempts = 0;

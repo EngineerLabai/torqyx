@@ -17,32 +17,6 @@ export type AnalyticsEventMap = {
   signup_start: {
     source: SignupStartSource;
   };
-  upgrade_click: {
-    plan: string;
-    source: string;
-  };
-  plan_view: {
-    plan: string;
-    source: string;
-  };
-  checkout_start: {
-    plan: string;
-    source: string;
-  };
-  payment_info_entered: {
-    plan: string;
-    source: string;
-  };
-  upgrade_success: {
-    plan: string;
-    amount: number;
-  };
-  funnel_abandoned: {
-    plan: string;
-    source: string;
-    drop_off_step: "upgrade_click" | "plan_view" | "checkout_start" | "payment_info_entered";
-    elapsed_seconds: number;
-  };
 };
 
 export type AnalyticsEventName = keyof AnalyticsEventMap;
@@ -54,10 +28,4 @@ export const ANALYTICS_TAXONOMY_EVENTS = [
   "export_pdf",
   "copy_link",
   "signup_start",
-  "upgrade_click",
-  "plan_view",
-  "checkout_start",
-  "payment_info_entered",
-  "upgrade_success",
-  "funnel_abandoned",
 ] as const satisfies ReadonlyArray<AnalyticsEventName>;

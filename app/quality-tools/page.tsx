@@ -5,7 +5,6 @@ import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import {
   getQualityToolsRegistry,
-  getQualityToolStatusLabel,
   isQualityToolStatusActive,
   type QualityToolLevel,
 } from "@/data/quality-tools/registry";
@@ -14,22 +13,6 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
-
-type QualityToolsPageProps = {
-  searchParams?: Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
-};
-
-type QualityToolsTab = "active" | "planned";
-
-const getParam = (value?: string | string[]) => (Array.isArray(value) ? value[0] : value);
-
-const resolveTab = (value?: string): QualityToolsTab => {
-  if (value === "planned") return "planned";
-  return "active";
-};
-
-const buildTabHref = (basePath: string, tab: QualityToolsTab) =>
-  tab === "active" ? basePath : `${basePath}?tab=planned`;
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
@@ -52,25 +35,20 @@ export async function generateMetadata() {
   });
 }
 
-export default async function QualityToolsPage({ searchParams }: QualityToolsPageProps) {
+export default async function QualityToolsPage() {
   const locale = await getLocaleFromCookies();
   const tools = getQualityToolsRegistry(locale);
   const copy = getMessages(locale).pages.qualityTools;
   const heroImage = getHeroImageSrc("qualityTools");
-  const basePath = withLocalePrefix("/quality-tools", locale);
-  const resolvedSearchParams = (await searchParams) ?? {};
-  const tab = resolveTab(getParam(resolvedSearchParams.tab));
   const activeTools = tools.filter((tool) => isQualityToolStatusActive(tool.status));
-  const plannedTools = tools.filter((tool) => tool.status === "planned");
-  const visibleTools = tab === "planned" ? plannedTools : activeTools;
+  const visibleTools = activeTools;
 
   const tabBase = "rounded-full border px-3 py-1 text-[11px] font-semibold transition md:text-xs";
   const tabActive = "border-slate-900 bg-slate-900 text-white";
-  const tabInactive = "border-slate-200 bg-white text-slate-600 hover:border-slate-300";
   const activeTabLabel = locale === "tr" ? "Kullanıma Açık" : "Available Now";
-  const plannedTabLabel = getQualityToolStatusLabel(locale, "planned");
   const footerActiveLabel = locale === "tr" ? "Araç kullanıma açık." : "Tool is available now.";
-  const footerPlannedLabel = locale === "tr" ? "Bu araç yakında yayınlanacak." : "This tool will be released soon.";
+  const footerUnavailableLabel =
+    locale === "tr" ? "Bu aracın herkese açık bağlantısı bulunmuyor." : "This tool has no public link.";
   const emptyLabel =
     locale === "tr"
       ? "Bu görünümde listelenecek araç bulunmuyor."
@@ -92,18 +70,9 @@ export default async function QualityToolsPage({ searchParams }: QualityToolsPag
           </div>
 
           <div className="inline-flex items-center gap-2">
-            <Link
-              href={buildTabHref(basePath, "active")}
-              className={`${tabBase} ${tab === "active" ? tabActive : tabInactive}`}
-            >
+            <span className={`${tabBase} ${tabActive}`}>
               {activeTabLabel} ({activeTools.length})
-            </Link>
-            <Link
-              href={buildTabHref(basePath, "planned")}
-              className={`${tabBase} ${tab === "planned" ? tabActive : tabInactive}`}
-            >
-              {plannedTabLabel} ({plannedTools.length})
-            </Link>
+            </span>
           </div>
         </div>
       </section>
@@ -117,7 +86,7 @@ export default async function QualityToolsPage({ searchParams }: QualityToolsPag
 
         {visibleTools.map((tool) => {
           const canOpenTool = Boolean(tool.href && isQualityToolStatusActive(tool.status));
-          const buttonLabel = canOpenTool ? copy.openTool : getQualityToolStatusLabel(locale, tool.status);
+          const buttonLabel = canOpenTool ? copy.openTool : locale === "tr" ? "Bağlantı yok" : "No public link";
           const href = tool.href ? withLocalePrefix(tool.href, locale) : undefined;
 
           return (
@@ -157,7 +126,7 @@ export default async function QualityToolsPage({ searchParams }: QualityToolsPag
               </div>
 
               <footer className="mt-3 flex min-w-0 items-center justify-between gap-2 text-[11px] text-slate-500">
-                <span className="min-w-0 break-words">{canOpenTool ? footerActiveLabel : footerPlannedLabel}</span>
+                <span className="min-w-0 break-words">{canOpenTool ? footerActiveLabel : footerUnavailableLabel}</span>
 
                 {canOpenTool && href ? (
                   <Link

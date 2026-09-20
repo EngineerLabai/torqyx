@@ -28,14 +28,12 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const plan = parsed.data?.plan?.toLowerCase() ?? "pro";
   const source = parsed.data?.source ?? "unknown";
 
   return NextResponse.json({
     ok: true,
     provider: "mock",
-    plan,
     source,
-    checkoutUrl: `/pricing?checkout=mock&plan=${encodeURIComponent(plan)}&source=${encodeURIComponent(source)}`,
+    checkoutUrl: `/tools?source=${encodeURIComponent(source)}`,
   });
 }

@@ -110,6 +110,10 @@ const CookiePolicyTr = () => (
         Google reklamları etkinleştirildiğinde, Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre kullanıcıları için
         Google sertifikalı bir izin yönetim platformu üzerinden gerekli bölgesel izin akışı ayrıca uygulanır.
       </p>
+      <p>
+        Reklam kategorisini kabul etmediğinizde kişiselleştirilmiş reklam, reklam ölçümü ve reklam tanımlayıcıları
+        site tercihlerinize göre kısıtlanır. Tarayıcı veya cihaz düzeyindeki reklam tercihleri de ayrıca uygulanabilir.
+      </p>
       <CookiePreferencesButton locale="tr" />
     </section>
 
@@ -148,6 +152,10 @@ const CookiePolicyEn = () => (
       <p>
         When Google advertising is enabled, the required regional consent flow is also provided through a
         Google-certified consent management platform for users in the EEA, the UK, and Switzerland.
+      </p>
+      <p>
+        If you do not accept the advertising category, personalized ads, ad measurement, and advertising identifiers are
+        limited according to your site preferences. Browser or device-level ad preferences may also apply.
       </p>
       <CookiePreferencesButton locale="en" />
     </section>

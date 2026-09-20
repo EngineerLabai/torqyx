@@ -10,7 +10,6 @@ import ToolActions from "@/components/tools/ToolActions";
 import AccessBadge from "@/components/tools/AccessBadge";
 import ToolBadge from "@/components/tools/ToolBadge";
 import InfoTooltip from "@/components/ui/InfoTooltip";
-import UpgradePrompt from "@/components/billing/UpgradePrompt";
 import { ShareButton } from "@/components/share/ShareButton";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { ToolDefinition, ToolInputMeta } from "@/tools/_shared/types";
@@ -275,15 +274,11 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   if (!toolAccessGate.isLoading && !toolAccessGate.hasAccess) {
     return (
       <PageShell>
-        <UpgradePrompt
-          source="tool_access_limit"
-          title={locale === "tr" ? "Bu araca Pro plan ile erişebilirsiniz." : "This tool requires Pro access."}
-          description={
-            locale === "tr"
-              ? "Ücretsiz plan araç limitini doldurdunuz. Pro'ya geçerek tüm araçları açabilirsiniz."
-              : "You reached the Free plan tool limit. Upgrade to Pro to unlock all tools."
-          }
-        />
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-sm">
+          {locale === "tr"
+            ? "Bu araç şu anda kullanılamıyor. Lütfen araç kütüphanesinden başka bir hesaplayıcı seçin."
+            : "This tool is currently unavailable. Please choose another calculator from the tool library."}
+        </section>
       </PageShell>
     );
   }
@@ -321,16 +316,11 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
                 <ResultSection result={gatedResult} />
               </>
             ) : dailyLimitReached ? (
-              <UpgradePrompt
-                compact
-                source="daily_calculation_limit"
-                title={locale === "tr" ? "Günlük hesap limiti doldu." : "Daily calculation limit reached."}
-                description={
-                  locale === "tr"
-                    ? "Pro'ya geç, sınırsız hesap yap."
-                    : "Upgrade to Pro for unlimited calculations."
-                }
-              />
+              <p className="text-xs text-red-600">
+                {locale === "tr"
+                  ? "Günlük hesap limiti doldu. Lütfen daha sonra tekrar deneyin."
+                  : "Daily calculation limit reached. Please try again later."}
+              </p>
             ) : (
               <p className="text-xs text-red-600">{calcError}</p>
             )}

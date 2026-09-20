@@ -7,6 +7,7 @@ export type BoltInput = {
   P: string;
   grade: GradeKey;
   preloadPercent: string;
+  /** Legacy field name retained for shared URLs/history; selects an empirical torque-factor preset. */
   friction: FrictionKey;
 };
 
@@ -16,6 +17,9 @@ export type BoltResult = {
   As: number | null;
   Fv: number | null;
   torque: number | null;
+  torqueFactor: number | null;
+  yieldStrength: number | null;
+  proofStrength: number | null;
   sigma: number | null;
   safety: number | null;
   error?: string;

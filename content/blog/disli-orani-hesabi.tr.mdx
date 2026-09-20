@@ -1,0 +1,60 @@
+---
+title: "Dişli Oranı Hesabı: Adım Adım Rehber"
+description: "Dişli oranını diş sayısı, devir ve tork üzerinden adım adım hesaplayın; yön değişimi, verim ve çok kademeli sistemleri doğru yorumlayın."
+date: "2026-06-20"
+tags: ["dişli oranı hesabı", "dişli", "dişli tasarımı", "mühendislik hesabı"]
+category: "Dişli"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/disli-orani-hesabi"
+---
+
+<Image src="/images/blog/disli-orani-hesabi.webp" alt="Disli orani hesabini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz disli orani gorseli." />
+
+## Dişli oranı neyi ifade eder?
+
+Dişli oranı, giriş ve çıkış arasındaki devir değişimini ifade eder. İki dış dişli için temel ilişki, tahrik eden dişlinin diş sayısının tahrik edilen dişlinin diş sayısına oranı üzerinden kurulur. Yaygın redüktör tanımıyla i = z2 / z1 yazılabilir; z1 giriş pinyonunun, z2 çıkış dişlisinin diş sayısıdır. Çıkış dişlisi daha fazla dişe sahipse oran 1'den büyük olur, devir düşer ve ideal durumda tork yükselir. Örneğin 20 dişli pinyonun 60 dişli çarkı çevirdiği sistemde oran 3:1'dir. Giriş 1.500 rpm ise çıkış yaklaşık 500 rpm olur. Dış dişli çiftinde dönüş yönü tersine döner; yön bilgisi bazı mekanizmalarda oran kadar önemlidir.
+
+## Devir, tork ve verim ilişkisi
+
+İdeal sistemde güç korunur; devir üçte bire düşerken tork yaklaşık üç katına çıkar. Gerçekte ise yatak, yağ karıştırma, diş sürtünmesi ve diğer kayıplar nedeniyle verim yüzde 100 değildir. Bu yüzden çıkış torku T2 yaklaşık T1 x i x eta şeklinde düşünülmelidir. eta, toplam verimi temsil eder. Tek kademeli iyi tasarlanmış dişli çiftinde verim yüksek olabilir; ancak çok kademeli redüktörde her kademe toplam verimi düşürür. Bu nedenle yalnız hedef oran değil, giriş gücü, izin verilen tork, çalışma sıcaklığı ve yağlama koşulları da hesaplanmalıdır.
+
+## Adım adım hesap yöntemi
+
+Önce giriş ve çıkış elemanlarının diş sayısını tanımlayın. İkinci adımda oranı hesaplayın. Üçüncü adımda giriş devrini orana bölerek çıkış devrini bulun. Dördüncü adımda giriş torkunu, oran ve verimle çarparak yaklaşık çıkış torkunu hesaplayın. Beşinci adımda dişli çaplarının modülle uyumlu olup olmadığını, merkez mesafesini ve çevresel kuvvetleri kontrol edin. Son olarak, yön değişimini not edin. Araya bir avara dişli eklemek oranı değiştirmez; ancak çıkış yönünü değiştirebilir ve paket yerleşimini etkiler. Bu detaylar çizim aşamasında atlanırsa mekanizma beklenen yönde çalışmayabilir.
+
+## Çok kademeli sistemlerde oran
+
+Tek kademede çok yüksek oran hedeflemek pinyon diş sayısını aşırı küçültebilir veya dişli çapını büyütebilir. Bu nedenle yüksek oranlar çoğu zaman iki veya daha fazla kademeye bölünür. Toplam oran, kademelerin çarpımıdır. Birinci kademe 3:1, ikinci kademe 4:1 ise toplam oran 12:1 olur. Ancak toplam verim de kademelerin verimlerinin çarpımı olarak değerlendirilmelidir. Her kademede oluşan kuvvetler, ara miller ve rulmanlar ayrıca boyutlandırılmalıdır. Oran dağılımı yapılırken diş sayıları, undercut riski, standart modül, merkez mesafesi ve paket ölçüsü birlikte düşünülmelidir.
+
+## Sık yapılan hatalar
+
+En sık hata, diş sayısı oranının ters yazılmasıdır. Bu hata çıkış devri ve tork yorumunu tamamen değiştirir. İkinci hata, çap oranını kullanırken iki dişlinin modülünün aynı olması gerektiğini unutmak veya çapı dış çap sanmaktır. Üçüncü hata, ideal tork artışını gerçek tork gibi kabul edip verimi ihmal etmektir. Dördüncü hata da çok kademeli sistemde ara milin devir ve yüklerini göz ardı etmektir. Sağlıklı hesap, oranı sadece bir sayı olarak değil; devir, tork, yön, verim ve kuvvet zinciri olarak ele alır.
+
+## Saha senaryosu ve karar mantığı
+
+Üç kat redüksiyon istenen bir çift için 18 dişli pinyon ve 54 dişli çark seçmek yalnız başlangıçtır. Çıkış devrini hesaplarken yön değişimi, verim ve pinyonun mekanik sınırları ayrıca düşünülmelidir. Birden fazla kademede oranı dengeli dağıtmak, tek kademeyi zorlamaktan daha iyi sonuç verebilir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın içinde hesap sonucunun dış dişli, iç dişli veya planet düzeni için aynı yön yorumu ile kullanılmaması gerektiğini hatırlatın. Oran büyüklüğü benzer olsa da dönüş yönü ve yük paylaşımı farklılaşabilir. Tasarım gözden geçirmesinde dişli geometrisi, yük kapasitesi, gürültü, yağlama ve üretim toleransı ayrı ayrı kontrol edilmelidir. Özellikle seri üretim parçalarında ölçüm yöntemi, kalite sınıfı ve kabul kriteri çizimde veya teknik şartnamede yazılı olmalıdır. Bu yaklaşım, hesapta uygun görünen fakat üretimde hassasiyet kaybeden çözümleri erken aşamada ayıklamaya yardım eder.
+
+## Oran hesabında yön ve verimi unutmayın
+
+Basit iki dişlili bir sistemde oran, sürücü ve sürülen diş sayılarıyla kolayca bulunur; ancak gerçek sistemlerde yön değişimi ve kayıplar da önemlidir. Dıştan kavraşan iki dişli farklı yönde dönerken, araya eklenen avare dişli toplam oranı değiştirmez fakat dönüş yönünü değiştirir. Çok kademeli redüktörlerde her kademenin oranı çarpılır; ayrıca her kademenin verimi toplam çıkış gücünü azaltır. Bu nedenle yalnız çıkış devrini hesaplamak yeterli değildir. Motor gücü, toplam verim, yük torku ve kalkış koşulu da kontrol edilmelidir. Hesap sonucunda çıkan oran, diş sayılarının üretilebilirliği ve merkez mesafesiyle çelişiyorsa çözümün geometrisi yeniden gözden geçirilmelidir.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde giriş devri, çıkış devri, diş sayıları, kademe verimleri ve hedef çıkış torku aynı hesap kaydında gösterilmelidir. Torqyx Dişli Oranı Hesaplayıcı, bu temel ilişkiyi hızlıca kontrol etmenize yardımcı olur; final tasarımda diş dayanımı ve rulman yükleri ayrıca doğrulanmalıdır.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Dişli Oranı Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/gear-design/calculators/ratio-calculator" title="Dişli Oranı Hesaplayıcı" description="Diş sayısı, oran ve çıkış devri ilişkisini kontrol edin." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- ISO 21771 - Cylindrical involute gears and gear pairs - Concepts and geometry.
+
+- ISO 6336-1 - Gear load capacity calculation principles.

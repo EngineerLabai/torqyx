@@ -14,7 +14,6 @@ import { getBlueprintImageSrc } from "@/lib/assets";
 type CalcCard = {
   name: string;
   description: string;
-  status: "active" | "soon";
   href: string;
   badge: string;
 };
@@ -27,56 +26,48 @@ const getCalculators = (locale: "tr" | "en"): CalcCard[] => [
   {
     name: t(locale, "Modül Hesaplayıcı", "Module Calculator"),
     description: t(locale, "Dişli boyutu, diş sayısı ve kaliteye göre modül önerisi ve kontrolü.", "Module recommendation and checks based on gear size, tooth count, and quality."),
-    status: "active",
     href: "/tools/gear-design/calculators/module-calculator",
     badge: t(locale, "Modül", "Module"),
   },
   {
     name: t(locale, "Dişli Oranı Hesaplayıcı", "Gear Ratio Calculator"),
     description: t(locale, "z1/z2 veya d1/d2 ile oran, rpm ve tork ilişkisi.", "Ratio, rpm, and torque relation from z1/z2 or d1/d2."),
-    status: "active",
     href: "/tools/gear-design/calculators/ratio-calculator",
     badge: t(locale, "Oran", "Ratio"),
   },
   {
     name: t(locale, "Çevresel Kuvvet / Tork Hesaplayıcı", "Tangential Force / Torque Calculator"),
-    description: t(locale, "Ft = 2·π·T/d ve Fr/Fa (helis) otomatik hesap.", "Automatic Ft = 2·π·T/d and Fr/Fa (helix) calculation."),
-    status: "active",
+    description: t(locale, "Ft = 2·T/d (T N·m ve d mm ise Ft = 2000·T/d) ile Fr/Fa bileşenlerini hesaplar.", "Calculates Ft = 2·T/d (Ft = 2000·T/d for T in N·m and d in mm) plus Fr/Fa components."),
     href: "/tools/gear-design/calculators/force-torque-calculator",
     badge: t(locale, "Kuvvet", "Force"),
   },
   {
     name: t(locale, "Helis Aksiyel Kuvvet Hesaplayıcı", "Helical Axial Force Calculator"),
     description: t(locale, "Helis açısı ve basınç açısıyla Fa hesaplar; yatak yük tahmini.", "Calculates Fa using helix and pressure angles; bearing load estimate."),
-    status: "active",
     href: "/tools/gear-design/calculators/helix-axial-calculator",
     badge: t(locale, "Helis", "Helix"),
   },
   {
     name: t(locale, "Kontak Oranı Hesaplayıcı", "Contact Ratio Calculator"),
     description: t(locale, "e_alpha + e_beta (profil + overlap) ile temas sırasını tahmin eder.", "Estimates contact sequence with e_alpha + e_beta (profile + overlap)."),
-    status: "active",
     href: "/tools/gear-design/calculators/contact-ratio-calculator",
     badge: t(locale, "Kontak", "Contact"),
   },
   {
     name: t(locale, "Yağ Viskozitesi Seçici", "Lubricant Viscosity Selector"),
     description: t(locale, "ks ve v değerlerine göre ISO VG ve yağlama yöntemi önerisi.", "ISO VG and lubrication method recommendation from ks and v values."),
-    status: "active",
     href: "/tools/gear-design/calculators/viscosity-selector",
     badge: t(locale, "Yağlama", "Lubrication"),
   },
   {
     name: t(locale, "Dişli Ağırlığı / Gövde Optimizasyonu", "Gear Weight / Body Optimization"),
     description: t(locale, "Geometri + boşaltma/kaburga bilgisiyle ağırlık ve tasarruf tahmini.", "Weight and savings estimate using geometry + pocket/rib data."),
-    status: "active",
     href: "/tools/gear-design/calculators/weight-optimization",
     badge: t(locale, "Ağırlık", "Weight"),
   },
   {
     name: t(locale, "Backlash Hesaplayıcı", "Backlash Calculator"),
     description: t(locale, "Min/nom/max backlash; modül, merkez mesafesi, sıcaklık girdisi.", "Min/nom/max backlash with module, center distance, and temperature input."),
-    status: "active",
     href: "/tools/gear-design/calculators/backlash-calculator",
     badge: "Backlash",
   },
@@ -135,39 +126,26 @@ export default function GearCalculatorsPage({ initialDocs }: GearCalculatorsClie
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
                   <h2 className="break-words text-sm font-semibold leading-snug text-slate-900">{calc.name}</h2>
-                  <span
-                    className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
-                      calc.status === "active" ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-700"
-                    }`}
-                  >
-                    {calc.status === "active" ? t(locale, "Aktif", "Active") : t(locale, "Yakında", "Soon")}
+                  <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
+                    {t(locale, "Aktif", "Active")}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-slate-600">
                   <span className="rounded-full bg-slate-100 px-2 py-0.5 font-semibold text-slate-700">{calc.badge}</span>
                 </div>
                 <p className="break-words text-[12px] leading-relaxed text-slate-700">{calc.description}</p>
-                {calc.status === "active" && resolveToolId(calc.href) ? (
+                {resolveToolId(calc.href) ? (
                   <ToolFavoriteButton toolId={resolveToolId(calc.href)} toolTitle={calc.name} size="sm" />
                 ) : null}
               </div>
               <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-                <span>{calc.status === "active" ? "" : t(locale, "Hazırlanacak", "Planned")}</span>
-                {calc.status === "active" ? (
-                  <Link
-                    href={withLocalePrefix(calc.href, locale)}
-                    className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-semibold text-sky-700 transition hover:border-sky-300 hover:bg-sky-100"
-                  >
-                    {t(locale, "Kullan", "Use")}
-                  </Link>
-                ) : (
-                  <button
-                    disabled
-                    className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-500"
-                  >
-                    {t(locale, "Yakında", "Soon")}
-                  </button>
-                )}
+                <span />
+                <Link
+                  href={withLocalePrefix(calc.href, locale)}
+                  className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-semibold text-sky-700 transition hover:border-sky-300 hover:bg-sky-100"
+                >
+                  {t(locale, "Kullan", "Use")}
+                </Link>
               </div>
             </article>
           ))}

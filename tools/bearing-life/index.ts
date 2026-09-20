@@ -10,13 +10,13 @@ const INPUT_META: ToolInputMeta[] = [
   { key: "P", label: "Eşdeğer yük P", unit: "kN", min: 0.01 },
   { key: "bearingType", label: "Rulman tipi", type: "select", options: ["ball", "roller"] },
   { key: "rpm", label: "Devir", unit: "rpm", min: 1 },
-  { key: "a1", label: "Güvenilirlik a1", min: 0 },
+  { key: "a1", label: "Güvenilirlik katsayısı a1", min: 0.01 },
 ];
 
 export const bearingLifeTool: ToolDefinition<BearingLifeInput, BearingLifeResult> = {
   id: "bearing-life",
   title: "Rulman Ömrü (L10)",
-  description: "Dinamik yük, eşdeğer yük ve devir ile L10 ve L10h ömrünü hesapla.",
+  description: "Temel L10 ömrünü ve a1 ile ayarlanmış Lna ömrünü ayrı hesapla.",
   initialInput: DEFAULT_INPUT,
   calculate: calculateBearingLife,
   InputSection,
@@ -24,8 +24,8 @@ export const bearingLifeTool: ToolDefinition<BearingLifeInput, BearingLifeResult
   VisualizationSection,
   inputMeta: INPUT_META,
   formula: {
-    tr: "L10 = a1 * (C / P)^p | L10h = (L10 * 10^6) / (60 * n)",
-    en: "L10 = a1 * (C / P)^p | L10h = (L10 * 10^6) / (60 * n)",
+    tr: "L10 = (C / P)^p | L10h = (L10 * 10^6) / (60 * n) | Lna = a1 * L10",
+    en: "L10 = (C / P)^p | L10h = (L10 * 10^6) / (60 * n) | Lna = a1 * L10",
   },
   assumptions: {
     tr: ["Yükler sabit kabul edilir.", "L10 %90 güvenilirlik tanımıdır."],

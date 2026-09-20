@@ -1,9 +1,7 @@
-import PageHero from "@/components/layout/PageHero";
-import PageShell from "@/components/layout/PageShell";
-import QaBoard from "@/components/community/QaBoard";
+import { redirect } from "next/navigation";
 import { getBrandCopy } from "@/config/brand";
-import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -23,20 +21,5 @@ export async function generateMetadata() {
 
 export default async function ForumPage() {
   const locale = await getLocaleFromCookies();
-  const copy = getMessages(locale).components.qaBoard;
-  const heroImage = getHeroImageSrc("community");
-  const title = locale === "tr" ? "Forum" : "Forum";
-
-  return (
-    <PageShell>
-      <PageHero
-        title={title}
-        description={copy.description}
-        eyebrow={copy.badge}
-        imageSrc={heroImage}
-        imageAlt="Torqyx Engineering - Community Hero"
-      />
-      <QaBoard />
-    </PageShell>
-  );
+  redirect(withLocalePrefix("/faq", locale));
 }

@@ -5,27 +5,28 @@ import { standardsManifest } from "@/data/standards";
 import { getToolGuideBySlug } from "@/lib/tool-guides";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { SITE_URL, buildLanguageAlternates } from "@/utils/seo";
+import { getCategoryIndex, getTagIndex } from "@/utils/taxonomy";
 
 const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
 const locales = ["tr", "en"] as const;
+type SitemapLocale = (typeof locales)[number];
+
 const staticPaths = [
-  "/changelog",
   "/tools",
   "/blog",
   "/guides",
   "/glossary",
-  "/pricing",
   "/faq",
   "/support",
   "/iletisim",
   "/gizlilik",
   "/cerez-politikasi",
   "/kullanim-sartlari",
+  "/satis-iade-teslimat",
   "/hakkinda",
   "/standards",
   "/materials",
   "/project-hub",
-  "/projects",
   "/project-hub/devreye-alma",
   "/project-hub/part-tracking",
   "/project-hub/project-tools",
@@ -57,7 +58,52 @@ const toOptionalDate = (value?: string) => {
   return Number.isNaN(parsed.getTime()) ? undefined : parsed;
 };
 
+const buildSitemapLanguageAlternates = (path: string, supportedLocales: readonly SitemapLocale[]) => {
+  const allAlternates = buildLanguageAlternates(path);
+  const languages: Record<string, string> = {};
+
+  supportedLocales.forEach((locale) => {
+    languages[locale] = allAlternates[locale];
+  });
+
+  const defaultLocale = supportedLocales.includes("tr") ? "tr" : supportedLocales[0];
+  if (defaultLocale) {
+    languages["x-default"] = allAlternates[defaultLocale];
+  }
+
+  return languages;
+};
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const localizedContent = await Promise.all(
+    locales.map(async (locale) => {
+      const [blog, guides, glossary, tags, categories] = await Promise.all([
+        getIndexableContentList("blog", { locale }),
+        getIndexableContentList("guides", { locale }),
+        getIndexableContentList("glossary", { locale }),
+        getTagIndex(locale),
+        getCategoryIndex(locale),
+      ]);
+
+      return { locale, blog, guides, glossary, tags, categories };
+    }),
+  );
+  const toolGuides = await Promise.all(
+    toolRoutes.flatMap((tool) =>
+      locales.map(async (locale) => ({
+        locale,
+        path: tool.href,
+        guide: await getToolGuideBySlug({
+          slug: tool.href.replace(/^\/tools\//u, ""),
+          locale,
+        }),
+      })),
+    ),
+  );
+  const supportedLocalesFor = (
+    predicate: (content: (typeof localizedContent)[number]) => boolean,
+  ): SitemapLocale[] => localizedContent.filter(predicate).map((content) => content.locale);
+
   const entries: MetadataRoute.Sitemap = [];
   const seen = new Set<string>();
   const addEntry = (
@@ -67,6 +113,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified?: Date;
       changeFrequency?: MetadataRoute.Sitemap[number]["changeFrequency"];
       priority?: number;
+      supportedLocales?: readonly SitemapLocale[];
     },
   ) => {
     const key = `${locale}:${path}`;
@@ -78,7 +125,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: options?.changeFrequency ?? "weekly",
       priority: options?.priority ?? 0.8,
       alternates: {
-        languages: buildLanguageAlternates(path),
+        languages: buildSitemapLanguageAlternates(path, options?.supportedLocales ?? locales),
       },
     };
 
@@ -93,18 +140,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locales.forEach((locale) => addEntry(path, locale));
   });
 
-  for (const locale of locales) {
-    const [blog, guides, glossary] = await Promise.all([
-      getIndexableContentList("blog", { locale }),
-      getIndexableContentList("guides", { locale }),
-      getIndexableContentList("glossary", { locale }),
-    ]);
+  addEntry("/changelog", "tr", {
+    changeFrequency: "weekly",
+    priority: 0.8,
+    supportedLocales: ["tr"],
+  });
+
+  for (const { locale, blog, guides, glossary, tags, categories } of localizedContent) {
 
     blog.forEach((post) => {
       addEntry(`/blog/${post.slug}`, locale, {
         lastModified: new Date(post.date),
         changeFrequency: "weekly",
         priority: 0.7,
+        supportedLocales: supportedLocalesFor((content) =>
+          content.blog.some((candidate) => candidate.slug === post.slug),
+        ),
       });
     });
 
@@ -113,6 +164,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(guide.date),
         changeFrequency: "monthly",
         priority: 0.75,
+        supportedLocales: supportedLocalesFor((content) =>
+          content.guides.some((candidate) => candidate.slug === guide.slug),
+        ),
       });
     });
 
@@ -121,6 +175,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(term.date),
         changeFrequency: "monthly",
         priority: 0.7,
+        supportedLocales: supportedLocalesFor((content) =>
+          content.glossary.some((candidate) => candidate.slug === term.slug),
+        ),
+      });
+    });
+
+    categories.forEach((category) => {
+      addEntry(`/categories/${category.slug}`, locale, {
+        changeFrequency: "weekly",
+        priority: 0.55,
+        supportedLocales: supportedLocalesFor((content) =>
+          content.categories.some((candidate) => candidate.slug === category.slug),
+        ),
+      });
+    });
+
+    tags.forEach((tag) => {
+      addEntry(`/tags/${tag.slug}`, locale, {
+        changeFrequency: "weekly",
+        priority: 0.45,
+        supportedLocales: supportedLocalesFor((content) =>
+          content.tags.some((candidate) => candidate.slug === tag.slug),
+        ),
       });
     });
 
@@ -132,15 +209,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly",
         priority: 0.9,
       });
-      const guide = await getToolGuideBySlug({
-        slug: path.replace(/^\/tools\//u, ""),
-        locale,
-      });
+      const guide = toolGuides.find((candidate) => candidate.path === path && candidate.locale === locale)?.guide;
       if (guide?.source === "file") {
+        const supportedGuideLocales = toolGuides
+          .filter((candidate) => candidate.path === path && candidate.guide?.source === "file")
+          .map((candidate) => candidate.locale);
         addEntry(`${path}/guide`, locale, {
           lastModified,
           changeFrequency: "monthly",
           priority: 0.8,
+          supportedLocales: supportedGuideLocales,
         });
       }
     }

@@ -1,0 +1,58 @@
+---
+title: "Metrik ve İnç Vida Adımı Farkları: Hangi Durumda Hangisi Kullanılır?"
+description: "Metrik diş adımı ile inç sistemindeki TPI farkını, UNC-UNF kullanımını ve yanlış eşleştirme risklerini teknik örneklerle inceleyin."
+date: "2026-06-27"
+tags: ["metrik ve inç vida adımı farkları", "cıvata", "cıvata bağlantısı", "mühendislik hesabı"]
+category: "Cıvata"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/metrik-ve-inc-vida-adimi-farklari"
+---
+
+<Image src="/images/blog/metrik-ve-inc-vida-adimi-farklari.webp" alt="Metrik ve inc vida adimi farklarini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz vida adimi karsilastirma gorseli." />
+
+## Aynı görünen dişler her zaman uyumlu değildir
+
+Vida bağlantılarında metrik ve inç sistemleri arasındaki fark yalnız ölçü birimi değildir. Metrik sistemde cıvata M10 x 1,5 gibi ifade edilir; ilk değer nominal dış çapı milimetre olarak, ikinci değer ise iki diş tepesi arasındaki eksenel mesafeyi milimetre olarak belirtir. İnç sisteminde ise 3/8-16 UNC biçimi yaygındır. Burada 3/8 inç nominal çapı, 16 ise bir inç uzunlukta bulunan diş sayısını yani TPI değerini gösterir. Başka bir deyişle metrikte "bir dişin ilerleme mesafesi", inç sisteminde ise "bir inçte kaç diş olduğu" yazılır. Bu ters anlatım, sahada sık yapılan ölçüm ve tedarik hatalarının temel nedenidir.
+
+## Adım ve TPI arasındaki ilişki
+
+Dönüşüm mantığı basittir: bir inç 25,4 mm olduğuna göre inç vida adımı mm cinsinden 25,4 / TPI ile bulunur. Örneğin 16 TPI için teorik adım 1,5875 mm'dir. Bu değer M10 x 1,5'e yakın görünse bile diş çapı, tolerans sistemi, kök ve tepe geometrisi ile üretim standardı aynı olmayabilir. Bu nedenle "yakın adım" uyumluluk anlamına gelmez. Cıvata kısa süre elle tutuyor gibi görünse dahi çapraz diş açma, diş sıyırma veya sahte sıkılık oluşabilir. Özellikle bakımda eski bir inç cıvatayı metrik benzeri bir parça ile değiştirmek, parçayı ilk anda monte etse bile servis sırasında ciddi hasara neden olabilir.
+
+## UNC, UNF ve metrik kaba-ince diş karşılaştırması
+
+İnç sisteminde UNC genel amaçlı kaba seri, UNF ise daha ince dişli seri olarak bilinir. Metrik tarafta da standart adım ve ince adım seçenekleri vardır. İnce adımın avantajı aynı boyda daha büyük çekirdek kesiti, daha hassas ayar ve belirli uygulamalarda daha yüksek sökülme direnci sağlayabilmesidir. Buna karşılık kirlenme, darbe ve diş hasarına karşı kaba diş daha hoşgörülü olabilir. Seçim, üretim hattındaki standartlaşma, servis altyapısı, malzeme kalınlığı, titreşim ve diş açılan malzemenin dayanımıyla ilişkilidir. Metrik veya inç seçimi genellikle ürünün kökeni ve ekosisteminden gelir: Avrupa ve Türkiye odaklı makine sistemlerinde ISO metrik dişler, Kuzey Amerika kökenli ekipmanlarda ise Unified serileri daha yaygındır.
+
+## Hangi durumda hangi sistem tercih edilmeli?
+
+Yeni bir tasarımda, mevcut üretim ve servis ekosistemi metrikse metrik sistemde kalmak; takım, mastar, kesici ve yedek parça standardını sadeleştirir. İnç sistemli bir makineye ek parça tasarlanıyorsa, sırf atölyede metrik takım bulunduğu için metrik dişe geçmek doğru değildir. Eşleşen somun, saplama, kör tapa ve servis kılavuzu aynı standardı kullanmalıdır. Hidrolik, pnömatik ve ithal ekipmanlarda vida bağlantısının yanında boru dişi tipi de ayrıca kontrol edilmelidir; BSP, NPT ve UNF gibi ifadeler birbirinin yerine kullanılamaz. Teknik resimde çap, adım/TPI, tolerans sınıfı ve diş derinliği net verilmelidir.
+
+## Sahada güvenli doğrulama
+
+Bir dişi tanımlamak için yalnız kumpasla dış çap ölçmek yeterli değildir. Diş tarağı ile adım veya TPI teyit edilmeli, gerekiyorsa geçer-geçmez mastarı kullanılmalı ve teknik resimle karşılaştırma yapılmalıdır. Diş hasarlıysa yeni cıvatayı zorlayarak denemek yerine deliğin standardı doğrulanmalıdır. Birim dönüşümünde de ölçülerin hangi tarafının milimetre, hangisinin inç olduğu kayıt altına alınmalıdır. Bu basit adımlar, özellikle bakım ve fason üretim süreçlerinde yanlış diş nedeniyle oluşan hurda ve duruşları azaltır.
+
+## Saha senaryosu ve karar mantığı
+
+Bakım sırasında bir makineden çıkan 3/8-16 UNC cıvatanın yerine M10 x 1,5 benzeri bir ürün takılmaya çalışılırsa, çap veya adım yakın görünse bile dişler uyumlu olmayabilir. Zorlama ile başlayan montaj, karşı parçadaki dişi geri dönülmesi zor biçimde bozabilir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın için pratik öneri, hem metrik hem inç sahalarında diş tarağı ve geçer-geçmez mastar kullanımını vurgulamaktır. Kumpasla yalnız dış çap ölçmek, diş formunu ve tolerans sistemini doğrulamak için yeterli değildir. Pratikte en güvenilir süreç; bağlantı fonksiyonunu tanımlamak, uygun ürün sınıfını seçmek, hedef ön yükü belirlemek, tork yöntemini netleştirmek ve montaj sonucunu kayıt altına almaktır. Daha sonra gevşeme, oturma veya korozyon ihtimali olan bağlantılar bakım planına dahil edilmelidir. Böylece seçim bir katalog tercihi olmaktan çıkar ve izlenebilir bir montaj standardına dönüşür.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde nominal çap, adım veya TPI, diş serisi, tolerans sınıfı ve eşleşen somun bilgisi aynı parça kaydında bulunmalıdır. Torqyx Cıvata Veri Merkezi, metrik ve imperial ölçüleri ilk karşılaştırma için hızlıca görmenize yardımcı olur; nihai seçimde teknik resim ve mastar doğrulaması esastır.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Cıvata Veri Merkezi aracını kullanın.
+
+<ToolLink href="/tools/bolt-database" title="Cıvata Veri Merkezi" description="Metrik ve imperial cıvata ölçülerini hızlıca karşılaştırın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- ISO 68-1 - Basic profile for ISO general purpose metric screw threads.
+
+- ISO 261 - ISO general purpose metric screw threads - General plan.
+
+- ASME B1.1 - Unified inch screw threads.

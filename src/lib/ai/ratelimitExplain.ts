@@ -25,10 +25,10 @@ const getCurrentDayKey = (now = Date.now()) => {
 
 export const checkExplainResultRateLimit = (
   userKey: string,
-  isPremium: boolean,
+  hasExtendedQuota: boolean,
   now = Date.now(),
 ): ExplainRateLimitResult => {
-  if (isPremium) {
+  if (hasExtendedQuota) {
     return {
       allowed: true,
       remaining: null,

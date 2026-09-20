@@ -29,9 +29,11 @@ export const calculateShaftTorsion = (input: ShaftTorsionInput): ShaftTorsionRes
   ) {
     return {
       tau: null,
+      polarMoment: null,
+      thetaRad: null,
       thetaDeg: null,
       safety: null,
-      error: "Pozitif değerler gir.",
+      error: "Pozitif ve sonlu değerler girin.",
     };
   }
 
@@ -43,5 +45,22 @@ export const calculateShaftTorsion = (input: ShaftTorsionInput): ShaftTorsionRes
   const thetaDeg = (thetaRad * 180) / Math.PI;
   const safety = Number.isFinite(allowable) && allowable > 0 ? allowable / tau : null;
 
-  return { tau, thetaDeg, safety };
+  if (
+    !Number.isFinite(tau) ||
+    !Number.isFinite(polarMoment) ||
+    !Number.isFinite(thetaRad) ||
+    !Number.isFinite(thetaDeg) ||
+    (safety !== null && !Number.isFinite(safety))
+  ) {
+    return {
+      tau: null,
+      polarMoment: null,
+      thetaRad: null,
+      thetaDeg: null,
+      safety: null,
+      error: "Girdiler hesaplama aralığının dışında.",
+    };
+  }
+
+  return { tau, polarMoment, thetaRad, thetaDeg, safety };
 };

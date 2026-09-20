@@ -1,27 +1,22 @@
 import { customAlphabet } from "nanoid";
 
-// Kısa kod üretme (MOD 2 için)
 const nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 6);
 
 export const generateShareCode = () => {
   return nanoid();
 };
 
-// TTL hesaplaması
-export const calculateExpiration = (isPremium: boolean) => {
+export const calculateExpiration = (hasExtendedRetention: boolean) => {
   const now = new Date();
-  if (isPremium) {
-    // Premium: sınırsız (null döner)
+  if (hasExtendedRetention) {
     return null;
-  } else {
-    // Ücretsiz: 7 gün
-    const expiration = new Date(now);
-    expiration.setDate(now.getDate() + 7);
-    return expiration;
   }
+
+  const expiration = new Date(now);
+  expiration.setDate(now.getDate() + 7);
+  return expiration;
 };
 
-// Kısa link URL oluşturma
 export const buildShortShareUrl = (code: string, baseUrl?: string) => {
   const resolvedBaseUrl =
     baseUrl ??

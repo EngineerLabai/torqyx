@@ -1,4 +1,4 @@
-export type PlanId = "free" | "pro";
+export type PlanId = "free" | "extended";
 
 export type PlanLimits = {
   dailyCalculations: number | null;
@@ -20,14 +20,14 @@ export const PLAN_DEFINITIONS: Record<PlanId, PlanDefinition> = {
     id: "free",
     label: "Free",
     limits: {
-      dailyCalculations: 25,
-      maxTools: 12,
+      dailyCalculations: null,
+      maxTools: null,
       pdfExport: false,
     },
   },
-  pro: {
-    id: "pro",
-    label: "Pro",
+  extended: {
+    id: "extended",
+    label: "Extended",
     limits: {
       dailyCalculations: null,
       maxTools: null,

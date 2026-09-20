@@ -10,7 +10,6 @@ export type HeroAssetKey =
   | "faq"
   | "contact"
   | "privacy"
-  | "premium"
   | "toolDetail"
   | "projectHub"
   | "commissioning"
@@ -51,7 +50,6 @@ export const HERO_ASSETS: Record<HeroAssetKey, string> = {
   faq: "/images/support-hero.webp",
   contact: "/images/support-hero.webp",
   privacy: "/images/office-atmosphere.webp",
-  premium: "/images/premium-hero.webp",
   toolDetail: "/images/tool-detail.webp",
   projectHub: "/images/industrial-facility.webp",
   commissioning: "/images/project-page.webp",
@@ -135,6 +133,39 @@ const ADDITIONAL_PUBLIC_IMAGE_PATHS = [
   "/og-image.png",
 ];
 
+const BLOG_IMAGE_ASSETS = [
+  "/images/blog/bilyali-rulman-mi-makarali-rulman-mi.webp",
+  "/images/blog/boru-capi-seciminde-hiz-ve-basinc-dengesi.webp",
+  "/images/blog/civata-gevsemesinin-5-ana-nedeni.webp",
+  "/images/blog/civata-mukavemet-siniflari-8-8-10-9-12-9.webp",
+  "/images/blog/civata-on-yuk-kuvveti-nedir.webp",
+  "/images/blog/darcy-weisbach-denklemi-boru-basinc-kaybi.webp",
+  "/images/blog/din-931-ve-din-933-farki.webp",
+  "/images/blog/dinamik-ve-statik-yuk-kapasitesi-c-ve-c0.webp",
+  "/images/blog/disli-modulu-nedir-nasil-secilir.webp",
+  "/images/blog/disli-omrunu-kisaltan-tasarim-hatalari.webp",
+  "/images/blog/disli-orani-hesabi.webp",
+  "/images/blog/duz-disli-mi-helisel-disli-mi.webp",
+  "/images/blog/evolvent-dis-profili-nedir.webp",
+  "/images/blog/excel-ile-muhendislik-hesabi-yapmanin-7-riski.webp",
+  "/images/blog/hidrolik-silindir-kuvveti-nasil-hesaplanir.webp",
+  "/images/blog/iso-din-vdi-standartlari-arasindaki-fark.webp",
+  "/images/blog/l10-rulman-omru-nedir-nasil-hesaplanir.webp",
+  "/images/blog/metrik-ve-inc-vida-adimi-farklari.webp",
+  "/images/blog/mil-gobek-baglantisi-kamali-flansli-gecme-cakma.webp",
+  "/images/blog/motor-seciminde-tork-egrisi-nasil-okunur.webp",
+  "/images/blog/muhendislik-hesaplarinda-guvenlik-katsayisi.webp",
+  "/images/blog/paslanmaz-celik-civata-mi-galvanizli-mi.webp",
+  "/images/blog/reduktor-seciminde-5-kriter.webp",
+  "/images/blog/reynolds-sayisi-laminar-turbulansli-akis.webp",
+  "/images/blog/rulman-toleranslari-iso-286-sistemi.webp",
+  "/images/blog/saft-boyutlandirma-tork-burulma-gerilmesi.webp",
+  "/images/blog/tork-anahtari-nasil-dogru-kullanilir.webp",
+  "/images/blog/tork-katsayisi-k-faktoru-nedir.webp",
+  "/images/blog/tork-ve-guc-arasindaki-fark.webp",
+  "/images/blog/zincir-kasnak-sistemi-mi-disli-kutusu-mu.webp",
+];
+
 export function getToolHeroImage(toolId?: string | null): string {
   if (!toolId) return HERO_ASSETS.toolDetail ?? HERO_PLACEHOLDER;
 
@@ -168,6 +199,7 @@ export function listPublicImagePaths(): string[] {
       ...listBlueprintImagePaths(),
       ...Object.values(STANDARD_HERO_ASSETS),
       ...Object.values(TOOL_HERO_ASSETS),
+      ...BLOG_IMAGE_ASSETS,
       ...ADDITIONAL_PUBLIC_IMAGE_PATHS,
       "/images/logo.png",
     ]),

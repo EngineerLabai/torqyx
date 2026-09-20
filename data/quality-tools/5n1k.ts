@@ -5,12 +5,6 @@ type FieldCopy = {
   placeholder?: string;
 };
 
-type InlineNoteCopy = {
-  prefix: string;
-  link: string;
-  suffix: string;
-};
-
 type FiveN1kCopy = {
   badge: string;
   badgeSub: string;
@@ -30,7 +24,7 @@ type FiveN1kCopy = {
     why: FieldCopy;
     how: FieldCopy;
   };
-  sessionNote: InlineNoteCopy;
+  sessionNote: string;
   summary: {
     title: string;
     empty: string;
@@ -61,11 +55,6 @@ type FiveN1kCopy = {
     empty: string;
     metaTemplate: string;
     emptyValue: string;
-  };
-  premium: InlineNoteCopy & {
-    title: string;
-    pdf: string;
-    excel: string;
   };
 };
 
@@ -108,12 +97,8 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
         placeholder: "Örn. Araç darbeye maruz kaldığında, belirli tork altında, belirli hız/sıcaklık koşullarında...",
       },
     },
-    sessionNote: {
-      prefix:
-        "Not: Buraya girilen bilgiler yalnızca bu tarayıcı oturumunda saklanır. Gelecekte PDF/Excel çıktısı ve hesap açarak kayıt tutma özellikleri premium paket özel betasında. ",
-      link: "Erişim listesine katıl",
-      suffix: ".",
-    },
+    sessionNote:
+      "Not: Buraya girilen bilgiler yalnızca bu tarayıcı oturumunda saklanır.",
     summary: {
       title: "Problem Özeti (5N1K)",
       empty:
@@ -148,15 +133,6 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
       empty: "Henüz kaydedilmiş problem özeti yok veya filtreye uyan sonuç bulunamadı.",
       metaTemplate: "Ne: {what} · Nerede: {where} · Ne zaman: {when} · Kim: {who}",
       emptyValue: "-",
-    },
-    premium: {
-      title: "PDF / Excel'e Aktar - Premium (özel beta)",
-      prefix:
-        "5N1K problem tanımlama kayıtlarını PDF veya Excel olarak dışa aktarma ve ekiplerle paylaşma özelliği premium paket özel betasında. ",
-      link: "Erişim listesine katıl",
-      suffix: ".",
-      pdf: "PDF'e Aktar (Premium)",
-      excel: "Excel'e Aktar (Premium)",
     },
   },
   en: {
@@ -197,12 +173,8 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
         placeholder: "e.g. Occurs under impact load, below a torque threshold, or at specific speed/temperature conditions...",
       },
     },
-    sessionNote: {
-      prefix:
-        "Note: The information entered here is stored only in this browser session. PDF/Excel export and account-based saving are in the Premium private beta. ",
-      link: "Request early access",
-      suffix: ".",
-    },
+    sessionNote:
+      "Note: The information entered here is stored only in this browser session.",
     summary: {
       title: "Problem Summary (5W1H)",
       empty:
@@ -237,15 +209,6 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
       empty: "No saved summaries yet or no matches found.",
       metaTemplate: "What: {what} · Where: {where} · When: {when} · Who: {who}",
       emptyValue: "-",
-    },
-    premium: {
-      title: "Export to PDF / Excel - Premium (private beta)",
-      prefix:
-        "Export 5W1H problem definitions to PDF or Excel and share them with your team in the Premium private beta. ",
-      link: "Request early access",
-      suffix: ".",
-      pdf: "Export to PDF (Premium)",
-      excel: "Export to Excel (Premium)",
     },
   },
 };

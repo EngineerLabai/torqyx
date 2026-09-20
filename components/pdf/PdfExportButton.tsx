@@ -22,7 +22,7 @@ export default function PdfExportButton({
   size = "default",
   className,
 }: PdfExportButtonProps) {
-  const { exportPdf, isExporting, isPremiumRequired, canExport } = usePdfExport({
+  const { exportPdf, isExporting, isPdfUnavailable, canExport } = usePdfExport({
     toolId,
     onSuccess: () => {
       alert("PDF rapor başarıyla indirildi!");
@@ -36,19 +36,8 @@ export default function PdfExportButton({
     exportPdf(reportData);
   };
 
-  if (isPremiumRequired) {
-    return (
-      <Button
-        variant={variant}
-        size={size}
-        disabled
-        className={className}
-        title="PDF rapor özelliği premium üyeler için kullanılabilir"
-      >
-        <FileText className="w-4 h-4 mr-2" />
-        PDF Rapor (Premium)
-      </Button>
-    );
+  if (isPdfUnavailable) {
+    return null;
   }
 
   return (

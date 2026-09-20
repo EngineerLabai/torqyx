@@ -2,9 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useFeatureGate } from "@/hooks/useFeatureGate";
 import { buildShareUrlShort } from "@/utils/tool-share";
-import { buildShortShareUrl } from "@/utils/share-code";
 
 interface UseShareableUrlOptions {
   toolId: string;
@@ -28,12 +26,9 @@ type ShareResponse = {
   error: string;
 };
 
-export function useShareableUrl({ toolId, currentInput, currentResult }: UseShareableUrlOptions) {
+export function useShareableUrl({ toolId, currentInput }: UseShareableUrlOptions) {
   const pathname = usePathname();
-  const { hasAccess: isPremium } = useFeatureGate("tool_access", {
-    toolId,
-  });
-  const [isSharing, setIsSharing] = useState(false);
+  const isSharing = false;
   const [lastShare, setLastShare] = useState<ShareResult | null>(null);
 
   // MOD 1: URL paylaşımı (anonim, basit)
@@ -62,62 +57,6 @@ export function useShareableUrl({ toolId, currentInput, currentResult }: UseShar
     }
   }, [toolId, pathname, currentInput]);
 
-  // MOD 2: Kısa link paylaşımı (premium, veritabanı)
-  const shareViaShortLink = useCallback(async (isPublic: boolean = false): Promise<ShareResponse> => {
-    if (!isPremium) {
-      return { success: false, error: "Bu özellik premium üyelere özeldir" };
-    }
-
-    setIsSharing(true);
-    try {
-      const response = await fetch("/api/calculations/share", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          toolSlug: toolId,
-          inputs: currentInput,
-          outputs: currentResult,
-          isPublic,
-        }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Paylaşım oluşturulamadı");
-      }
-
-      const data = await response.json();
-      const url =
-        typeof data.url === "string"
-          ? data.url
-          : buildShortShareUrl(data.code, window.location.origin);
-
-      // Clipboard'a kopyala
-      if (navigator.clipboard) {
-        await navigator.clipboard.writeText(url);
-      }
-
-      const result: ShareResult = {
-        url,
-        code: data.code,
-        expiresAt: data.expiresAt,
-      };
-
-      setLastShare(result);
-      return { success: true, ...result };
-    } catch (error) {
-      console.error("Short link share error:", error);
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : "Paylaşım oluşturulamadı"
-      };
-    } finally {
-      setIsSharing(false);
-    }
-  }, [toolId, currentInput, currentResult, isPremium]);
-
   // Paylaşılan hesaplama verilerini yükle (MOD 2 için)
   const loadSharedCalculation = useCallback(async (code: string) => {
     try {
@@ -133,14 +72,9 @@ export function useShareableUrl({ toolId, currentInput, currentResult }: UseShar
   }, []);
 
   return {
-    // MOD 1
     shareViaUrl,
-    // MOD 2
-    shareViaShortLink,
     loadSharedCalculation,
-    // State
     isSharing,
     lastShare,
-    isPremium,
   };
 }

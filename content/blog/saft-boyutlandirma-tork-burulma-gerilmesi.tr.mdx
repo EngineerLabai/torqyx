@@ -1,0 +1,66 @@
+---
+title: "Şaft Boyutlandırma: Tork ve Burulma Gerilmesi Hesabı"
+description: "Şaft çapını tork, burulma gerilmesi ve burulma açısı üzerinden ön boyutlandırın; eğilme, yorulma ve kama etkisini unutmayın."
+date: "2026-06-14"
+tags: ["şaft boyutlandırma", "tork ve aktarma", "mühendislik hesabı"]
+category: "Tork ve Aktarma"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/saft-boyutlandirma-tork-burulma-gerilmesi"
+---
+
+<Image src="/images/blog/saft-boyutlandirma-tork-burulma-gerilmesi.webp" alt="Saft boyutlandirma ve burulma gerilmesini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz saft burulma gorseli." />
+
+## Şaft çapı sadece torka göre belirlenmez
+
+Bir şaftın temel görevi tork iletmek olabilir; fakat gerçek uygulamada şaft aynı anda eğilme, eksenel yük, çentik etkisi, kama yuvası, rulman reaksiyonu ve yorulma yükü de taşır. İlk ön boyutlandırmada burulma gerilmesi önemli bir başlangıç kriteridir. Dolu dairesel bir şaft için basitleştirilmiş gerilme ilişkisi tau = 16T / (pi d^3) olarak yazılabilir. Burada T tork, d çap ve tau kayma gerilmesidir. Çapın küp kuvvetiyle etkili olması, küçük çap değişimlerinin gerilme üzerinde büyük fark yaratabildiğini gösterir. Ancak bu formül tek başına nihai tasarım için yeterli değildir.
+
+## Burulma açısı neden önemlidir?
+
+Şaft yeterince sağlam olabilir ama fazla dönebilir. Burulma açısı, özellikle konum hassasiyeti, senkron hareket veya dişli temasının kararlı olması gereken sistemlerde kritik hale gelir. Burulma açısı tork, şaft boyu, malzemenin kayma modülü ve polar atalet momentiyle ilişkilidir. Uzun ve ince şaftlarda gerilme kabul edilebilir görünse bile elastik dönme fazla olabilir. Bu durum redüktör backlash'iyle birleştiğinde konum hatası, titreşim veya kontrol kararsızlığı yaratabilir. Bu nedenle şaft boyutlandırmasında hem dayanım hem rijitlik kontrolü yapılmalıdır.
+
+## Tasarım adımları
+
+İlk olarak motor veya aktarma elemanından gelen maksimum ve sürekli tork belirlenir. İkinci adımda şaft üzerindeki kasnak, dişli, zincir ve kaplin kuvvetlerinden doğan eğilme momentleri hesaplanır. Üçüncü adımda kesit değişimleri, kama kanalı, segman yuvası ve omuz radyüsleri gibi çentik bölgeleri değerlendirilir. Dördüncü adımda seçilen malzemenin akma, yorulma ve yüzey durumuna göre izin verilen gerilmeler belirlenir. Sonra şaft çapı, burulma ve birleşik gerilme koşullarına göre iteratif olarak seçilir. Rulman yerleri, geçmeler ve imalat toleransları da bu geometriyi etkiler.
+
+## Kama, kaplin ve dişli etkisi
+
+Şaftın en zayıf noktası çoğu zaman nominal gövde çapı değildir. Kama yuvası kesit alanını azaltır ve çentik etkisi oluşturur. Dişli veya kasnak göbeği yanlış geçmeyle monte edilirse şaft yüzeyinde fretting, aşınma veya ilave eğilme doğabilir. Kaplin hizasızlığı ise özellikle uzun şaftlarda tekrarlı eğilme yükü yaratır. Bu nedenle şaft hesabı, güç iletim elemanlarından bağımsız düşünülemez. İyi bir tasarımda dişli ve rulman yerleşimi, eğilme momentini ve sehimleri azaltacak şekilde yapılır.
+
+## Sık yapılan hatalar
+
+Sadece nominal torkla hesap yapmak, dinamik yük katsayılarını ve kalkış momentini atlamak en yaygın hatadır. İkinci hata, şaft çapını gerilmeye göre seçip burulma açısını kontrol etmemektir. Üçüncü hata, kama kanalı veya diş açılmış bölgelerde çentik etkisini yok saymaktır. Dördüncü hata ise yüksek dayanımlı malzeme kullanınca her geometrinin güvenli olacağını düşünmektir. Yorulma dayanımı yüzey kalitesi, çentik, korozyon ve gerilme yığılmasıyla ciddi biçimde değişir.
+
+## Saha senaryosu ve karar mantığı
+
+Bir şaftta dişli veya kasnak konumu rulmanlara uzaksa, aynı torkta eğilme momenti büyür. Bu nedenle sadece burulma denkleminden çıkan çapla imalata gitmek risklidir. Şaft boyu ve yatak aralığı değişince sehim ve yorulma koşulları da değişir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın içinde kama kanalı, segman yuvası ve omuz radyüsü gibi ayrıntıların nominal çap kadar önemli olduğu vurgulanabilir. Yorulma kırıkları çoğu zaman bu kesit geçişlerinde başlar. Karar sürecinde nominal değer, pik değer ve sürekli çalışma değeri birbirinden ayrılmalıdır. Yalnızca motor etiketindeki güce bakmak yerine, şaftta kalan gerçek güç ve redüktör çıkışındaki kullanılabilir tork hesaplanmalıdır. Özellikle sık kalkışlı sistemlerde termik sınır, hızlanma süresi ve emniyet payı birlikte doğrulanmalıdır.
+
+## Burulma hesabına eklenmesi gerekenler
+
+Şaft çapı yalnız izin verilen kayma gerilmesiyle seçilmemelidir. Kama kanalı, omuz geçişi, segman yuvası ve kesit değişimleri gerilme yığılması oluşturabilir. Eğilme momenti ile burulma aynı anda bulunuyorsa eşdeğer gerilme yaklaşımı kullanılmalı; özellikle dönen millerde yorulma etkisi göz ardı edilmemelidir. Rijitlik de çoğu uygulamada dayanım kadar önemlidir: çok ince bir şaft kırılmadan çalışsa bile fazla burulabilir, hizalamayı bozabilir veya titreşimi artırabilir. Ayrıca kritik devir, yatak açıklığı, kaplin tipi ve üretim toleransları şaft tasarımının parçasıdır. Nihai çap seçiminde hem statik dayanım hem de çalışma kalitesi kontrol edilmelidir.
+
+## Kontrolün tamamlanması
+
+Son çap belirlendikten sonra seçilen malzemenin yorulma dayanımı, yüzey işlemi ve imalat yöntemi de teknik resimde açıkça belirtilmelidir. Böylece hesapta kabul edilen sınırlar, üretimde farkında olmadan zayıflatılmaz.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde maksimum tork, çevrimsel tork, şaft boyu, malzeme, kesit değişimleri ve izin verilen burulma açısı birlikte tanımlanmalıdır. Torqyx Mil Burulma Hesaplayıcı, tork-çap-uzunluk ilişkisini ilk ön boyutlandırmada hızlıca değerlendirmenizi sağlar.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Mil Burulma Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/shaft-torsion" title="Mil Burulma Hesaplayıcı" description="Tork, çap ve uzunluğa göre burulma gerilmesi ve dönme açısını hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- Shigley's Mechanical Engineering Design - Shaft design and fatigue chapters.
+
+- ISO 281 - Rolling bearings - Dynamic load ratings and rating life.
+
+- DIN 743 - Calculation of load capacity of shafts and axles.

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { DEFAULT_LOCALE, LOCALE_COOKIE, isLocale } from "@/utils/locale";
 import { resolveInternalPath, resolveLocalePublicPath, stripLocaleFromPath } from "@/utils/locale-path";
 import { consumeFixedWindowRateLimit } from "@/utils/rate-limit";
+import { resolveApiRateLimitRule } from "@/utils/api-rate-limit-policy";
 
 const PUBLIC_FILE = /\.(.*)$/;
 const ONE_YEAR = 60 * 60 * 24 * 365;
@@ -18,11 +19,6 @@ const LOCALE_PRESERVE_PATHS = new Set([
   "/standards/fluids",
 ]);
 const LOCALE_PRESERVE_PREFIXES = ["/project-hub", "/materials", "/projects"];
-const API_RATE_LIMIT_RULES = [
-  { name: "compute", limit: 30, basePaths: ["/api/calculate", "/api/tools"] },
-  { name: "export", limit: 10, basePaths: ["/api/export"] },
-  { name: "auth", limit: 5, basePaths: ["/api/auth"] },
-] as const;
 
 const toLocalePath = (locale: "tr" | "en", pathname: string) => (pathname === "/" ? `/${locale}` : `/${locale}${pathname}`);
 
@@ -30,12 +26,6 @@ const getPreferredLocale = (request: NextRequest) => {
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
   return isLocale(cookieLocale) ? cookieLocale : DEFAULT_LOCALE;
 };
-
-const pathMatchesBase = (pathname: string, basePath: string) =>
-  pathname === basePath || pathname.startsWith(`${basePath}/`);
-
-const resolveApiRateLimitRule = (pathname: string) =>
-  API_RATE_LIMIT_RULES.find((rule) => rule.basePaths.some((basePath) => pathMatchesBase(pathname, basePath)));
 
 const normalizeHostname = (host: string) => host.trim().toLowerCase().replace(/:\d+$/u, "");
 
@@ -75,6 +65,12 @@ export default function proxy(request: NextRequest) {
     canonicalUrl.hostname = CANONICAL_HOST;
     canonicalUrl.port = "";
     return NextResponse.redirect(canonicalUrl, 301);
+  }
+
+  if (pathname === "/favicon.ico" && request.nextUrl.search) {
+    const canonicalUrl = request.nextUrl.clone();
+    canonicalUrl.search = "";
+    return NextResponse.redirect(canonicalUrl, 308);
   }
 
   const rateLimitRule = resolveApiRateLimitRule(pathname);

@@ -30,16 +30,22 @@ export const calculatePipePressureLoss = (input: PipePressureLossInput): PipePre
     mu <= 0 ||
     flow <= 0 ||
     diameterMm <= 0 ||
-    length <= 0
+    length <= 0 ||
+    roughnessMm < 0
   ) {
     return {
+      area: null,
       velocity: null,
       reynolds: null,
+      relativeRoughness: null,
+      regime: null,
+      frictionMethod: null,
       frictionFactor: null,
       deltaP: null,
       deltaPBar: null,
+      headLoss: null,
       pumpPower: null,
-      error: "Pozitif değerler gir.",
+      error: "Yoğunluk, viskozite, debi, çap ve uzunluk pozitif; pürüzlülük sıfır veya pozitif olmalıdır.",
     };
   }
 
@@ -48,18 +54,38 @@ export const calculatePipePressureLoss = (input: PipePressureLossInput): PipePre
   const area = (Math.PI * diameter * diameter) / 4;
   const velocity = flow / area;
   const reynolds = (rho * velocity * diameter) / mu;
+  const relativeRoughness = roughness / diameter;
 
   let frictionFactor: number;
-  if (reynolds < 2000) {
+  let regime: PipePressureLossResult["regime"];
+  let frictionMethod: PipePressureLossResult["frictionMethod"];
+  if (reynolds < 2300) {
     frictionFactor = 64 / reynolds;
+    regime = "laminar";
+    frictionMethod = "64/Re";
   } else {
     const term = roughness / (3.7 * diameter) + 5.74 / Math.pow(reynolds, 0.9);
     frictionFactor = 0.25 / Math.pow(Math.log10(term), 2);
+    regime = reynolds <= 4000 ? "transition" : "turbulent";
+    frictionMethod = "Swamee-Jain";
   }
 
   const deltaP = frictionFactor * (length / diameter) * (rho * velocity * velocity / 2);
   const deltaPBar = deltaP / 100000;
+  const headLoss = deltaP / (rho * 9.80665);
   const pumpPower = (deltaP * flow) / 0.7 / 1000;
 
-  return { velocity, reynolds, frictionFactor, deltaP, deltaPBar, pumpPower };
+  return {
+    area,
+    velocity,
+    reynolds,
+    relativeRoughness,
+    regime,
+    frictionMethod,
+    frictionFactor,
+    deltaP,
+    deltaPBar,
+    headLoss,
+    pumpPower,
+  };
 };

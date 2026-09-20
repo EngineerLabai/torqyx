@@ -10,8 +10,7 @@ const USAGE_PREFIX = "torqyx:ai_explain_usage:";
 const LABELS = {
   tr: {
     title: "Bu sonucu açıkla",
-    badgePremium: "Premium",
-    badgeFree: "Ücretsiz 3/gün",
+    badge: "Açıklama",
     firstFree: "İlk açıklama ücretsiz.",
     start: "Açıklamayı Başlat",
     asking: "Yanıt hazırlanıyor...",
@@ -24,13 +23,12 @@ const LABELS = {
     feedbackDown: "Faydalı değil olarak işaretle",
     thanks: "Geri bildiriminiz için teşekkürler.",
     error: "Açıklama şu anda alınamıyor.",
-    premiumNote: "Premium kullanıcılar için sınırsız açıklama.",
-    freeNote: "Ücretsiz kullanıcılar için günde üç açıklama limiti.",
+    quotaNote: "Günlük açıklama kotası uygulanır.",
+    remaining: "Kalan açıklama",
   },
   en: {
     title: "Explain this result",
-    badgePremium: "Premium",
-    badgeFree: "Free 3/day",
+    badge: "Explanation",
     firstFree: "First explanation is free.",
     start: "Start explanation",
     asking: "Preparing answer...",
@@ -43,8 +41,8 @@ const LABELS = {
     feedbackDown: "Mark explanation as not helpful",
     thanks: "Thanks for your feedback.",
     error: "Explanation could not be loaded.",
-    premiumNote: "Unlimited explanations for premium users.",
-    freeNote: "Free users are limited to three explanations per day.",
+    quotaNote: "A daily explanation quota applies.",
+    remaining: "Explanations left",
   },
 } as const;
 
@@ -159,9 +157,9 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
   const [usageCount, setUsageCount] = useState(0);
   const controllerRef = useRef<AbortController | null>(null);
 
-  const isPremium = status.effectivePlan === "pro" || status.trial.isActive;
-  const hasFreeQuota = isPremium || usageCount < 3;
-  const isFirstUse = !isPremium && usageCount === 0;
+  const hasExtendedQuota = status.effectivePlan !== "free" || status.trial.isActive;
+  const hasQuota = hasExtendedQuota || usageCount < 3;
+  const isFirstUse = !hasExtendedQuota && usageCount === 0;
 
   useEffect(() => {
     setHistory(safeReadJson<ConversationMessage[]>(getStorageKey(toolId), []));
@@ -176,11 +174,8 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
     safeWriteJson(getUsageKey(toolId), usageCount);
   }, [usageCount, toolId]);
 
-  const displayBadge = isPremium ? labels.badgePremium : labels.badgeFree;
-  const badgeTitle = isPremium ? labels.premiumNote : labels.freeNote;
-
   const streamExplanation = async (overrideQuestion?: string) => {
-    if (!hasFreeQuota) {
+    if (!hasQuota) {
       setError(labels.error);
       return;
     }
@@ -237,7 +232,7 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
         setResponseText(accumulator);
       }
 
-      if (!isPremium) {
+      if (!hasExtendedQuota) {
         setUsageCount((current) => Math.min(3, current + 1));
       }
 
@@ -302,10 +297,10 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-sm font-semibold text-slate-900">{labels.title}</h2>
-          <p className="text-xs text-slate-500">{badgeTitle}</p>
+          <p className="text-xs text-slate-500">{labels.quotaNote}</p>
         </div>
         <span className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
-          {displayBadge}
+          {labels.badge}
         </span>
       </div>
 
@@ -313,15 +308,15 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
         <button
           type="button"
           onClick={startExplanation}
-          disabled={isLoading || (!hasFreeQuota && !isPremium)}
+          disabled={isLoading || !hasQuota}
           className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isLoading ? labels.asking : labels.start}
         </button>
 
-        {!isPremium ? (
+        {!hasExtendedQuota ? (
           <p className="text-xs text-slate-500">
-            {isFirstUse ? labels.firstFree : `${labels.freeNote} ${3 - usageCount} kaldı.`}
+            {isFirstUse ? labels.firstFree : `${labels.remaining}: ${Math.max(0, 3 - usageCount)}`}
           </p>
         ) : null}
 
@@ -340,7 +335,7 @@ export default function ExplainResultPanel({ locale, toolId, toolName, inputs, o
           <button
             type="button"
             onClick={handleFollowUp}
-            disabled={isLoading || !question.trim() || (!hasFreeQuota && !isPremium)}
+            disabled={isLoading || !question.trim() || !hasQuota}
             className="rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {labels.askMore}

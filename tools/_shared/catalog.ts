@@ -19,7 +19,7 @@ export type ToolTag = (typeof toolTags)[number];
 export const toolTypes = ["calculator", "bundle", "guide"] as const;
 export type ToolType = (typeof toolTypes)[number];
 
-export type ToolAccess = "free" | "beta" | "premium";
+export type ToolAccess = "free" | "beta";
 export const toolStatuses = ["verified", "beta", "experimental"] as const;
 export type ToolStatus = (typeof toolStatuses)[number];
 

@@ -9,7 +9,7 @@ readingTime: 3
 canonical: "https://torqyx.com/blog/civata-on-yuku-vdi-2230"
 ---
 
-Cıvata ön yükü, bağlantının gevşemeden ve emniyetli şekilde çalışması için en kritik başlangıç değerlerinden biridir. Bu yazı, VDI 2230 yaklaşımıyla hazırlanacak detaylı hesap rehberinin ana iskeletini sunar.
+Cıvata ön yükü, bağlantının gevşemeden ve emniyetli şekilde çalışması için en kritik başlangıç değerlerinden biridir. VDI 2230 yaklaşımı bu değeri yalnızca bir tork tablosu olarak değil; cıvata rijitliği, sıkılan parçaların rijitliği, servis yükü ve montaj saçılımı ile birlikte ele alır.
 
 ## Ön yük nedir
 
@@ -34,3 +34,9 @@ Cıvata ön yükü, bağlantının gevşemeden ve emniyetli şekilde çalışmas
 - TORQYX cıvata hesaplayıcısı girişleri birim kontrolünden geçirir.
 - Formül kırılımı, varsayımlar ve kaynak notları raporlanabilir şekilde sunulur.
 - Hesap sonucu manuel Excel akışına göre daha izlenebilir hale gelir.
+
+## Uygulama kontrolü
+
+Ön yük hesabında ilk hata genellikle sürtünme katsayısının tek bir sabit kabul edilmesidir. Aynı M10 veya M12 cıvata, kuru yüzeyde, hafif yağlı montajda veya kaplamalı yüzeyde farklı ön yük üretir. Bu nedenle hesap sonucunu doğrudan üretim talimatına taşımadan önce rondela yüzeyi, diş yağlaması, sıkma yöntemi ve moment anahtarı kalibrasyonu birlikte kontrol edilmelidir.
+
+Pratik bir mühendislik akışında hedef ön yük belirlendikten sonra üç soru sorulur: Cıvata akma sınırına ne kadar yaklaşıyor, sıkılan parçalar ayrılmaya karşı yeterli rijitlik sağlıyor mu, montaj saçılımı en kötü durumda kabul edilebilir mi? TORQYX çıktısı bu soruları tek tek görünür kılar; yine de kritik bağlantılarda sonuç VDI 2230 hesap föyü, tedarikçi datası ve saha testiyle doğrulanmalıdır.

@@ -35,7 +35,6 @@ export const REVISION_COPY: Record<Locale, {
   filtersTitle: string;
   tableTitle: string;
   exportLabel: string;
-  exportSoon: string;
   searchPlaceholder: string;
   fields: {
     partCode: string;
@@ -49,7 +48,7 @@ export const REVISION_COPY: Record<Locale, {
     notes: string;
   };
   emptyState: string;
-  actions: { delete: string };
+  actions: { delete: string; confirmDelete: string };
   storageNote: string;
 }> = {
   tr: {
@@ -70,7 +69,6 @@ export const REVISION_COPY: Record<Locale, {
     filtersTitle: "Filtreler ve sıralama",
     tableTitle: "Revizyon listesi",
     exportLabel: "Tabloyu dışarı aktar",
-    exportSoon: "Çok yakında",
     searchPlaceholder: "Parça, sahip veya not içinde ara",
     fields: {
       partCode: "Parça kodu",
@@ -84,7 +82,10 @@ export const REVISION_COPY: Record<Locale, {
       notes: "Notlar",
     },
     emptyState: "Henüz revizyon kaydı yok. Üstteki formdan yeni kayıt ekleyin.",
-    actions: { delete: "Sil" },
+    actions: {
+      delete: "Sil",
+      confirmDelete: "Bu parça ve revizyon kaydını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    },
     storageNote: "Veriler cihazınızda saklanır (localStorage).",
   },
   en: {
@@ -105,7 +106,6 @@ export const REVISION_COPY: Record<Locale, {
     filtersTitle: "Filters and sorting",
     tableTitle: "Revision list",
     exportLabel: "Export table",
-    exportSoon: "Coming soon",
     searchPlaceholder: "Search part, owner, or notes",
     fields: {
       partCode: "Part code",
@@ -119,7 +119,10 @@ export const REVISION_COPY: Record<Locale, {
       notes: "Notes",
     },
     emptyState: "No revision entries yet. Add one using the form above.",
-    actions: { delete: "Delete" },
+    actions: {
+      delete: "Delete",
+      confirmDelete: "Are you sure you want to delete this part and revision entry? This action cannot be undone.",
+    },
     storageNote: "Data is stored on this device (localStorage).",
   },
 };

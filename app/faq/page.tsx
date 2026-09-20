@@ -11,7 +11,7 @@ export async function generateMetadata() {
   const title = locale === "tr" ? "Sık Sorulan Sorular" : copy.title;
   const description =
     locale === "tr"
-      ? "TORQYX hesaplayıcıları hakkında merak edilenler. Hesap motoru nasıl çalışır, sonuçlar güvenilir mi, premium ne sunar?"
+      ? "TORQYX hesaplayıcıları hakkında merak edilenler. Hesap motoru nasıl çalışır, sonuçlar nasıl doğrulanır ve araçlar nasıl kullanılır?"
       : copy.description;
 
   return buildPageMetadata({

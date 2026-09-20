@@ -5,6 +5,7 @@ import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { calculateOpenBelt } from "@/tools/belt-length/logic";
 
 type Inputs = {
   d1: string;
@@ -28,23 +29,7 @@ export default function BeltLengthPage({ initialDocs }: BeltLengthClientProps) {
   const { locale } = useLocale();
   const [inputs, setInputs] = useState<Inputs>(INITIAL);
 
-  const results = useMemo(() => {
-    const d1 = Number(inputs.d1);
-    const d2 = Number(inputs.d2);
-    const c = Number(inputs.center);
-    if (d1 <= 0 || d2 <= 0 || c <= (d1 + d2) / 2) {
-      return null;
-    }
-    const term1 = 2 * c;
-    const term2 = (Math.PI / 2) * (d1 + d2);
-    const term3 = ((d2 - d1) * (d2 - d1)) / (4 * c);
-    const L = term1 + term2 + term3;
-
-    const betaSmall = Math.PI - 2 * Math.asin((d2 - d1) / (2 * c));
-    const betaSmallDeg = (betaSmall * 180) / Math.PI;
-
-    return { length: L, betaSmallDeg };
-  }, [inputs]);
+  const results = useMemo(() => calculateOpenBelt(inputs), [inputs]);
 
   function handleChange<K extends keyof Inputs>(key: K, value: Inputs[K]) {
     setInputs((prev) => ({ ...prev, [key]: value }));
@@ -97,15 +82,15 @@ export default function BeltLengthPage({ initialDocs }: BeltLengthClientProps) {
             <p className="mt-2 text-[11px] text-slate-600">
               {t(
                 locale,
-                "Koşul: C > (D1+D2)/2; aksi halde kayış geometrisi oluşmaz. Germe payını uzunluk sonucuna eklemek gerekir (tipik %0.5-1).",
-                "Condition: C > (D1 + D2)/2; otherwise belt geometry is not feasible. Add tension allowance to the final length (typically 0.5-1%).",
+                "Koşullar: çaplar ve C pozitif olmalı; kasnaklar fiziksel olarak çakışmamalı ve (Dbüyük-Dküçük)/(2C) < 1 olmalıdır. Germe payı ve üretici toleransı ayrıca değerlendirilir.",
+                "Conditions: diameters and C must be positive; pulley pitch circles must not overlap and (Dbig-Dsmall)/(2C) must be below 1. Evaluate tension allowance and manufacturer tolerances separately.",
               )}
             </p>
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
             <h3 className="mb-3 text-sm font-semibold text-slate-900">{t(locale, "Sonuçlar", "Results")}</h3>
-            {results ? (
+            {results.ok ? (
               <div className="space-y-2">
                 <ResultRow
                   label={t(locale, "Kayış uzunluğu", "Belt length")}
@@ -115,17 +100,39 @@ export default function BeltLengthPage({ initialDocs }: BeltLengthClientProps) {
                   label={t(locale, "Küçük kasnak sarma açısı", "Small pulley wrap angle")}
                   value={`${results.betaSmallDeg.toFixed(1)}°`}
                 />
+                <ResultRow
+                  label={t(locale, "Büyük kasnak sarma açısı", "Large pulley wrap angle")}
+                  value={`${results.betaBigDeg.toFixed(1)}°`}
+                />
+                <ResultRow
+                  label={t(locale, "Küçük kabul edilen kasnak", "Pulley treated as small")}
+                  value={`${results.dSmall.toFixed(1)} mm (${results.smallPulleySource})`}
+                />
+                <ResultRow
+                  label={t(locale, "Büyük kabul edilen kasnak", "Pulley treated as large")}
+                  value={`${results.dBig.toFixed(1)} mm (${results.bigPulleySource})`}
+                />
                 <div className="rounded-lg bg-slate-50 px-3 py-2 text-[11px] text-slate-700">
                   {t(
                     locale,
-                    "Formül: L = 2C + π/2(D1+D2) + (D2-D1)²/(4C). Küçük kasnak sarma açısı: β = π - 2·arcsin((D2-D1)/(2C)). Kapalı kayış veya çapraz düzen için farklı formüller gerekir.",
-                    "Formula: L = 2C + π/2(D1+D2) + (D2-D1)²/(4C). Small pulley wrap angle: β = π - 2·arcsin((D2-D1)/(2C)). Closed-belt or crossed setups require different formulas.",
+                    "Formüller: L = 2C + π/2(Dbüyük+Dküçük) + (Dbüyük-Dküçük)²/(4C); βküçük = π - 2·asin(r), βbüyük = π + 2·asin(r), r=(Dbüyük-Dküçük)/(2C). Çapraz kayış için farklı formüller gerekir.",
+                    "Formulas: L = 2C + π/2(Dbig+Dsmall) + (Dbig-Dsmall)²/(4C); βsmall = π - 2·asin(r), βbig = π + 2·asin(r), r=(Dbig-Dsmall)/(2C). Crossed belts require different formulas.",
                   )}
                 </div>
               </div>
             ) : (
               <p className="text-[11px] text-red-600">
-                {t(locale, "D1, D2 > 0 ve C > (D1+D2)/2 olacak şekilde değer girin.", "Enter values such that D1, D2 > 0 and C > (D1 + D2)/2.")}
+                {results.reason === "overlapping-pulleys"
+                  ? t(
+                      locale,
+                      "Merkez mesafesi kasnakların çakışmasını önleyecek kadar büyük olmalıdır.",
+                      "Center distance must be large enough to prevent the pulley pitch circles from overlapping.",
+                    )
+                  : t(
+                      locale,
+                      "Pozitif çap ve merkez mesafesi girin; (Dbüyük-Dküçük)/(2C) oranı 1'den küçük olmalıdır.",
+                      "Enter positive diameters and center distance; (Dbig-Dsmall)/(2C) must be below 1.",
+                    )}
               </p>
             )}
           </div>
@@ -152,7 +159,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-        aria-label="Number input"
+        aria-label={label}
       />
     </label>
   );

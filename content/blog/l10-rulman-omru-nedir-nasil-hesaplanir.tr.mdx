@@ -1,0 +1,62 @@
+---
+title: "L10 Rulman Ömrü Nedir ve Nasıl Hesaplanır?"
+description: "L10 rulman ömrünün yüzde 90 güvenilirlik anlamını, ISO 281 temel formülünü ve C-P-devir ilişkisini pratik örneklerle öğrenin."
+date: "2026-06-11"
+tags: ["L10 rulman ömrü", "rulman ve mil", "rulman seçimi", "mühendislik hesabı"]
+category: "Rulman ve Mil"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/l10-rulman-omru-nedir-nasil-hesaplanir"
+---
+
+<Image src="/images/blog/l10-rulman-omru-nedir-nasil-hesaplanir.webp" alt="L10 rulman omru hesabini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz L10 rulman omru gorseli." />
+
+## L10 bir arıza tarihi değildir
+
+L10 rulman ömrü, standartlaştırılmış temel ömür tanımıdır. Aynı koşullarda çalışan aynı tip rulman grubunun yüzde 90'ının en az bu ömre ulaşması, yüzde 10'unun ise daha önce yorulma hasarı gösterebilmesi anlamına gelir. Bu nedenle L10, tek bir rulmanın kesin ne zaman bozulacağını söylemez; karşılaştırma ve tasarım için istatistiksel bir referans sunar. Ömür genellikle milyon devir olarak ifade edilir. Saat cinsinden yorum yapmak için devir sayısı çalışma hızına bölünür. Yüksek rpm'de aynı milyon devir daha kısa saat süresine karşılık gelir.
+
+## Temel formül nasıl çalışır?
+
+Basitleştirilmiş temel ilişki L10 = (C / P)^p şeklindedir. C, rulmanın katalogdaki dinamik yük kapasitesi; P ise uygulamadaki eşdeğer dinamik yüktür. p değeri bilyalı rulmanlar için 3, makaralı rulmanlar için 10/3 alınır. Buradaki en önemli sonuç şudur: yükteki küçük artışlar ömür üzerinde büyük etki yapabilir. Çünkü C/P oranı üs kuvvetiyle değerlendirilir. Eşdeğer yük doğru hesaplanmazsa ömür sonucu da güvenilir olmaz. Radyal ve aksiyel yüklerin birleşimi, rulman tipi ve katalogdaki X-Y katsayılarıyla değerlendirilmelidir.
+
+## L10h hesabı ve devirin etkisi
+
+Saat cinsinden ömür için L10h = L10 x 10^6 / (60 x n) ilişkisi kullanılır. n rpm değeridir. Örneğin aynı rulman ve aynı yükte devir iki katına çıkarsa, milyon devir cinsinden temel ömür değişmeyebilir; ancak bu devire ulaşmak için gereken zaman yarıya iner. Bu nedenle "rulmanın L10 değeri yüksek" ifadesi tek başına yeterli değildir. Çalışma devir aralığı, günlük çalışma saati, dur-kalk sayısı ve sıcaklık birlikte ele alınmalıdır. Ayrıca çok düşük hız, titreşim veya osilasyon gibi bazı koşullar standart ömür formülünün dışında ek değerlendirme gerektirebilir.
+
+## Neden katalog hesabı saha ömründen farklı çıkabilir?
+
+ISO 281 temel hesabı yük ve devir için güçlü bir başlangıçtır; fakat gerçek rulman ömrü yağlama filmi, yağ temizliği, hizasızlık, montaj geçmesi, sıcaklık, conta performansı ve darbe yükleriyle değişir. Kirlilik nedeniyle oluşan yüzey hasarı, yetersiz yağlama veya yanlış montaj, yorulma ömründen önce arızaya neden olabilir. Bu durumda katalogdaki L10 yüksek görünse bile sahada erken arıza yaşanabilir. Kritik uygulamalarda temel ömür sonucuna ek olarak yağlama, kirlenme ve güvenilirlik düzeltmeleri de incelenmelidir.
+
+## Kısa örnek ve sık hata
+
+Bir rulmanın C değeri sabit olsa da eşdeğer P yükü arttığında L10 hızla düşer. Bu nedenle sadece radyal yükü hesaba katıp helisel dişliden gelen aksiyel yükü ihmal etmek ciddi hata olabilir. Bir başka yaygın hata, C ve P değerlerini farklı birimlerde kullanmaktır; oran boyutsuz olsa da iki değer aynı birimde olmalıdır. Üçüncü hata, bilyalı ve makaralı rulman için aynı üs değerini kullanmaktır. Sağlıklı hesap, doğru rulman tipi, doğru eşdeğer yük ve gerçek çalışma devriyle yapılır.
+
+## Saha senaryosu ve karar mantığı
+
+Bir rulmanın katalog L10 sonucu yüksek çıktığında, bu sonucu gerçek bakım planına bağlamak gerekir. Yağ değişim aralığı, conta tipi, kirlenme seviyesi ve sıcaklık takibi yapılmıyorsa, teorik yorulma ömrüne ulaşmadan arıza görülebilir. L10 hesabı güvenli seçim için başlangıçtır, bitiş değildir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın içinde milyon devir ile saat dönüşümünün neden devre bağlı olduğu örneklenebilir. Aynı L10 değeri 300 rpm'de yıllarca çalışmaya karşılık gelirken, 3.000 rpm'de çok daha kısa süreye karşılık gelebilir. Sağlıklı bir doğrulama için montajdan önce mil ve yatak toleransları kontrol edilmeli, montajdan sonra ise sıcaklık, ses, titreşim veya yağ durumu izlenmelidir. Bu basit izleme verileri, erken hasarı tamamen önlemese bile problemin yükten mi, yağlamadan mı yoksa hizalamadan mı kaynaklandığını ayırt etmeyi kolaylaştırır.
+
+## L10 sonucunu doğru yorumlamak
+
+L10 ömrü, aynı koşullarda çalışan bir rulman grubunun yüzde 90'ının ulaşması beklenen temel ömürdür; tek bir rulmanın kesin ömrü olarak okunmamalıdır. Hesapta dinamik kapasite, eşdeğer dinamik yük ve devir sayısı doğru girilmelidir. Yük değişkense tek bir ortalama değer yerine yük spektrumu kullanmak daha gerçekçi olur. Yağlama, kirlilik, montaj hatası ve çalışma sıcaklığı katalog tabanlı temel ömrü önemli ölçüde değiştirebilir. Bu nedenle L10 sonucu, seçim için başlangıç kriteridir. Kritik makinelerde üretici tarafından verilen ömür düzeltme yöntemleri, güvenilirlik seviyesi ve gerçek saha verileriyle birlikte değerlendirilmelidir.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde C, P, rulman tipi, devir, hedef güvenilirlik ve çalışma saati ayrı ayrı kaydedilmelidir. Torqyx Rulman Ömrü (L10) Hesaplayıcı, temel ISO 281 ilişkisini ve L10h dönüşümünü hızlıca kontrol etmenize yardımcı olur; yağlama ve kirlilik koşulları için ilave doğrulama gereklidir.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Rulman Ömrü (L10) Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/bearing-life" title="Rulman Ömrü (L10) Hesaplayıcı" description="Dinamik yük kapasitesi, eşdeğer yük ve devirle L10 ömrünü hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- ISO 281 - Rolling bearings - Dynamic load ratings and rating life.
+
+- ISO 76 - Rolling bearings - Static load ratings.
+
+- ISO 15243 - Rolling bearings - Damage and failures - Terms, characteristics and causes.

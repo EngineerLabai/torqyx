@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import { buildCsv, downloadCsv } from "@/utils/csv";
 import type { Locale } from "@/utils/locale";
 import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import {
@@ -84,7 +85,11 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
       hasPersistedRef.current = true;
       return;
     }
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    } catch {
+      return;
+    }
   }, [items]);
 
   useEffect(() => {
@@ -179,7 +184,38 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
   };
 
   const deleteItem = (id: string) => {
+    if (!window.confirm(copy.actions.confirmDelete)) return;
     setItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleExport = () => {
+    const header = [
+      copy.fields.customer,
+      copy.fields.rfqId,
+      copy.fields.part,
+      copy.fields.owner,
+      copy.fields.status,
+      copy.fields.priority,
+      copy.fields.dueDate,
+      copy.fields.volume,
+      copy.fields.sopDate,
+      copy.fields.link,
+      copy.fields.notes,
+    ];
+    const rows = sortedItems.map((item) => [
+      item.customer,
+      item.rfqId,
+      item.part,
+      item.owner,
+      RFQ_STATUS_OPTIONS.find((option) => option.value === item.status)?.label[locale] ?? item.status,
+      RFQ_PRIORITY_OPTIONS.find((option) => option.value === item.priority)?.label[locale] ?? item.priority,
+      item.dueDate,
+      item.volume,
+      item.sopDate,
+      item.link,
+      item.notes,
+    ]);
+    downloadCsv(buildCsv(header, rows), `rfq-tracker-${locale}.csv`);
   };
 
   return (
@@ -382,10 +418,6 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
               ))}
             </select>
 
-            <div className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-800">
-              <div className="font-semibold">{copy.exportLabel}</div>
-              <div>{copy.exportSoon}</div>
-            </div>
           </div>
         </aside>
       </section>
@@ -398,10 +430,10 @@ export default function RfqClient({ locale, heroImage }: { locale: Locale; heroI
           </div>
           <button
             type="button"
-            disabled
-            className="rounded-full border border-amber-300 px-4 py-2 text-[11px] font-semibold text-amber-700 opacity-70"
+            onClick={handleExport}
+            className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-[11px] font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100"
           >
-            {copy.exportLabel} - {copy.exportSoon}
+            {copy.exportLabel}
           </button>
         </div>
 

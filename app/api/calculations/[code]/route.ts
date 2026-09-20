@@ -55,7 +55,7 @@ export async function GET(
         user: sharedCalculation.user
           ? {
               name: sharedCalculation.user.name,
-              isPremium: sharedCalculation.user.tier === "PRO" || sharedCalculation.user.tier === "TEAM",
+              hasExtendedRetention: sharedCalculation.user.tier === "PRO" || sharedCalculation.user.tier === "TEAM",
             }
           : null,
       },

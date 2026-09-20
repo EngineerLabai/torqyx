@@ -17,14 +17,40 @@ const formatValue = (value: number | null, decimals: number, locale: "tr" | "en"
 
 export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
   const { locale } = useLocale();
+  const copy = locale === "tr"
+    ? {
+        title: "Hesap Sonuçları",
+        description: "Gerilme alanı, ön yük ve ampirik tork faktörü K ile hesaplanan sıkma torku.",
+        area: "Gerilme alanı As",
+        preload: "Ön yük Fv",
+        factor: "Tork faktörü K",
+        torque: "Hesaplanan sıkma torku T",
+        yield: "Akma dayanımı Re",
+        proof: "Proof strength",
+        proofUnused: "Bu basit modelde kullanılmıyor",
+        stress: "Çekme gerilmesi σ",
+        safety: "Akma dayanımına göre güvenlik katsayısı S",
+        modelNote: "T = K·F·d modelindeki K; diş, baş altı/somun yüzeyi, yağlama ve kaplama etkilerini birlikte temsil eden ampirik tork faktörüdür. Sürtünme katsayısı μ değildir.",
+      }
+    : {
+        title: "Calculation Results",
+        description: "Stress area, preload, and tightening torque calculated with empirical torque factor K.",
+        area: "Stress area As",
+        preload: "Preload Fv",
+        factor: "Torque factor K",
+        torque: "Calculated tightening torque T",
+        yield: "Yield strength Re",
+        proof: "Proof strength",
+        proofUnused: "Not used by this simplified model",
+        stress: "Tensile stress σ",
+        safety: "Safety factor against yield S",
+        modelNote: "In T = K·F·d, K is an empirical torque factor combining thread, bearing-surface, lubrication, and coating effects. It is not the coefficient of friction μ.",
+      };
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Hesap Sonuçları</h2>
-        <p className="text-xs text-slate-500">
-          Sonuçlar yaklaşık formüllerle hesaplanır. Kritik uygulamalarda standart tablolarla
-          kontrol edilmelidir.
-        </p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       {result.error && (
@@ -34,16 +60,18 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
       )}
 
       <div className="space-y-2 text-xs">
-        <ResultRow label="Gerilme alanı As" value={formatValue(result.As, 1, locale, "mm^2")} />
-        <ResultRow label="Ön yük Fv" value={formatValue(result.Fv, 2, locale, "kN")} />
-        <ResultRow label="Önerilen tork T" value={formatValue(result.torque, 1, locale, "Nm")} />
-        <ResultRow label="Çekme gerilmesi sigma" value={formatValue(result.sigma, 0, locale, "MPa")} />
-        <ResultRow label="Güvenlik katsayısı S" value={formatValue(result.safety, 2, locale)} />
+        <ResultRow label={copy.area} value={formatValue(result.As, 1, locale, "mm²")} />
+        <ResultRow label={copy.preload} value={formatValue(result.Fv, 2, locale, "kN")} />
+        <ResultRow label={copy.factor} value={formatValue(result.torqueFactor, 2, locale)} />
+        <ResultRow label={copy.torque} value={formatValue(result.torque, 1, locale, "N·m")} />
+        <ResultRow label={copy.yield} value={formatValue(result.yieldStrength, 0, locale, "MPa")} />
+        <ResultRow label={copy.proof} value={copy.proofUnused} />
+        <ResultRow label={copy.stress} value={formatValue(result.sigma, 0, locale, "MPa")} />
+        <ResultRow label={copy.safety} value={formatValue(result.safety, 2, locale)} />
       </div>
 
       <p className="text-[11px] text-slate-500">
-        Metrik dişler için gerilme alanı yaklaşık olarak hesaplanır. ISO 898-1 gibi
-        standartlar ve OEM tablolar ile doğrulama önerilir.
+        {copy.modelNote}
       </p>
 
       <ExplanationPanel
@@ -60,15 +88,15 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
           { symbol: "As", description: "Gerilme alanı (mm^2)." },
           { symbol: "Re", description: "Akma dayanımı (MPa)." },
           { symbol: "Fv", description: "Ön yük (N)." },
-          { symbol: "K", description: "Sürtünme katsayısı (tork faktörü)." },
+          { symbol: "K", description: locale === "tr" ? "Ampirik tork (nut) faktörü; μ değildir." : "Empirical torque/nut factor; not μ." },
           { symbol: "T", description: "Tork (Nm). d metreye çevrilerek kullanılır." },
           { symbol: "sigma", description: "Çekme gerilmesi (MPa)." },
           { symbol: "S", description: "Güvenlik katsayısı." },
         ]}
         notes={[
           "Metrik dişler için yaklaşık gerilme alanı formülü kullanılır.",
-          "Sürtünme katsayısı, yağlama ve kaplamaya göre değişir.",
-          "Kritik uygulamalarda standart tabloları referans alın.",
+          locale === "tr" ? "K değeri bağlantı geometrisi, yağlama ve kaplamaya göre deneysel olarak doğrulanmalıdır." : "K should be verified experimentally for the joint geometry, lubrication, and coating.",
+          locale === "tr" ? "Kritik bağlantılarda VDI 2230 gibi ayrıntılı bir bağlantı modeli kullanın." : "Use a detailed joint model such as VDI 2230 for critical connections.",
         ]}
       />
     </div>

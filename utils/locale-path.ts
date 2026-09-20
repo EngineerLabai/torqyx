@@ -26,6 +26,7 @@ const LOCALE_PUBLIC_ALIASES = {
     "/gizlilik": "/gizlilik",
     "/cerez-politikasi": "/cerez-politikasi",
     "/kullanim-sartlari": "/kullanim-sartlari",
+    "/satis-iade-teslimat": "/satis-iade-teslimat",
     "/iletisim": "/iletisim",
   },
   en: {
@@ -33,6 +34,7 @@ const LOCALE_PUBLIC_ALIASES = {
     "/gizlilik": "/privacy",
     "/cerez-politikasi": "/cookies",
     "/kullanim-sartlari": "/terms",
+    "/satis-iade-teslimat": "/sales-refunds-delivery",
     "/iletisim": "/contact",
   },
 } as const satisfies Record<Locale, Record<string, string>>;

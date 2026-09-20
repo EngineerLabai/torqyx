@@ -1,0 +1,62 @@
+---
+title: "Dinamik ve Statik Yük Kapasitesi: C ve C0 Değerleri Ne Anlama Gelir?"
+description: "Rulman kataloglarındaki C ve C0 değerlerinin farkını, L10 ömrü ve statik emniyet kontrolüyle birlikte doğru yorumlayın."
+date: "2026-06-07"
+tags: ["dinamik ve statik yük kapasitesi C C0", "rulman ve mil", "mühendislik hesabı"]
+category: "Rulman ve Mil"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/dinamik-ve-statik-yuk-kapasitesi-c-ve-c0"
+---
+
+<Image src="/images/blog/dinamik-ve-statik-yuk-kapasitesi-c-ve-c0.webp" alt="Rulman dinamik ve statik yuk kapasitesini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz C ve C0 rulman yuk gorseli." />
+
+## C ve C0 iki farklı riski temsil eder
+
+Rulman kataloglarında görülen C ve C0 değerleri benzer görünse de farklı tasarım sorularına cevap verir. C, dinamik yük kapasitesidir ve esas olarak rulmanın yorulma ömrü hesaplarında kullanılır. L10 formülündeki C/P oranının C kısmı bu değerdir. C0 ise statik yük kapasitesidir; rulman dururken veya çok düşük hızda iken aşırı yük altında kalıcı deformasyon riskiyle ilişkilidir. Bir rulmanın C değeri yüksek olabilir ama darbe veya duruş yükü nedeniyle C0 kontrolü yetersiz kalabilir. Bu yüzden rulman seçimi yalnız ömür hesabına indirgenmemelidir.
+
+## Dinamik kapasite ve ömür ilişkisi
+
+Rulman belirli hızda ve tekrarlı yük altında çalışıyorsa, yuvarlanma temaslarında zamanla yorulma hasarı oluşabilir. Dinamik kapasite C, bu davranışı karşılaştırmak için kullanılan temel katalog değeridir. Eşdeğer dinamik yük P ile birlikte L10 ömrünü hesaplamaya yarar. P arttıkça ömür hızla düşer. Bilyalı ve makaralı rulmanlarda üs değeri farklı olduğu için aynı C/P oranı farklı ömür davranışı verebilir. Ancak C değeri; yağlama eksikliği, kirlenme, hizasızlık veya yanlış montajdan doğan erken hasarları tek başına öngörmez.
+
+## Statik kapasite ne zaman kritik olur?
+
+Rulman dönmüyorken ağır yük taşıyorsa, darbe alıyorsa veya çok yavaş salınım hareketi yapıyorsa yuvarlanma elemanları ile bilezik yollarında kalıcı iz oluşabilir. Bu izler daha sonra gürültü, titreşim ve düzensiz hareket olarak ortaya çıkar. C0, bu tür kalıcı deformasyon riskini değerlendirmek için kullanılır. Statik emniyet faktörü çoğunlukla s0 = C0 / P0 mantığıyla kontrol edilir; P0 eşdeğer statik yüktür. Gerekli emniyet faktörü uygulamanın darbeli olup olmamasına, hassasiyet ihtiyacına ve üretici tavsiyesine göre değişir. Hassas konumlama uygulamalarında küçük izler bile kabul edilemez olabilir.
+
+## C ve C0 nasıl birlikte kullanılır?
+
+Normal dönme hızında çalışan bir rulmanda önce dinamik eşdeğer yük ve hedef L10h hesaplanır. Ardından maksimum duruş yükü, montaj yükü, darbe veya yanlış kullanım senaryosu için P0 belirlenir ve C0 kontrolü yapılır. Helisel dişliden gelen aksiyel kuvvet, kayış gerginliği veya konik dişli reaksiyonları hem dinamik hem statik değerlendirmede yer alabilir. Rulman, mil ve gövde düzeni bunları doğru taşımalıdır. Katalogdaki büyük C değeri, C0 ve montaj sınırları incelenmeden seçim gerekçesi olmamalıdır.
+
+## Sık yapılan hatalar
+
+C ve C0 birimlerini veya değerlerini birbirinin yerine kullanmak temel hatadır. Bir başka hata, yalnız ortalama yükü kullanıp kalkış ve darbe yüklerini atlamaktır. Üçüncü hata, rulmanı presle takarken oluşan montaj kuvvetini yanlış halkadan geçirmek ve sonradan oluşan izleri yalnız çalışma yüküne bağlamaktır. Sağlıklı karar, L10 ömrü ile statik emniyet kontrolünü aynı seçim dosyasında bir araya getirir.
+
+## Saha senaryosu ve karar mantığı
+
+Rulman dururken ağır yük taşıyan bir ekipmanda L10 hesabı iyi görünse bile statik iz riski kalabilir. Darbeli taşımada veya hassas konumlandırmada C0 ve statik emniyet faktörü ayrıca kontrol edilmelidir. Bu fark, dinamik ve statik katalog değerlerinin neden ayrı verildiğini açıklar. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın içinde P ve P0 eşdeğer yüklerinin aynı şey olmadığı hatırlatılabilir. Biri yorulma ömrü için, diğeri kalıcı deformasyon riski için kullanılır; bu nedenle iki kontrol farklı yük senaryolarını temsil eder. Sağlıklı bir doğrulama için montajdan önce mil ve yatak toleransları kontrol edilmeli, montajdan sonra ise sıcaklık, ses, titreşim veya yağ durumu izlenmelidir. Bu basit izleme verileri, erken hasarı tamamen önlemese bile problemin yükten mi, yağlamadan mı yoksa hizalamadan mı kaynaklandığını ayırt etmeyi kolaylaştırır.
+
+## C ve C0 verilerini doğru kullanmak
+
+Dinamik kapasite C, rulmanın dönme altında ömür hesabında kullanılan temel kapasitedir; statik kapasite C0 ise çok düşük hızda, duruşta veya darbe altında oluşabilecek kalıcı deformasyon riskini değerlendirmeye yardımcı olur. Bu iki değer birbirinin alternatifi değildir. Örneğin ağır fakat yavaş hareket eden bir mekanizmada C0 kontrolü kritik hale gelebilir; yüksek devirli sürekli çalışmada ise C ve eşdeğer dinamik yük öne çıkar. Darbe, titreşim ve montaj sırasında uygulanan kuvvetler de statik kontrolün içine girmelidir. Katalog değeri seçilirken yalnız kapasitenin yüksek olması değil, iç boşluk, yağlama ve yatak düzeninin yük paylaşımı da dikkate alınmalıdır.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde C, C0, eşdeğer dinamik yük P, eşdeğer statik yük P0, devir ve darbe senaryosu ayrı ayrı kaydedilmelidir. Torqyx Rulman Ömrü (L10) Hesaplayıcı, C-P ilişkisini ve temel ömür hesabını görünür hale getirir; C0 için ayrıca statik yük kontrolü yapılmalıdır.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Rulman Ömrü (L10) Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/bearing-life" title="Rulman Ömrü (L10) Hesaplayıcı" description="Dinamik yük kapasitesi, eşdeğer yük ve devirle L10 ömrünü hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- ISO 281 - Dynamic load ratings and rating life.
+
+- ISO 76 - Static load ratings.
+
+- ISO 15243 - Rolling bearing damage and failures.

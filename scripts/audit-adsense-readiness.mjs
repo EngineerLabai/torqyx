@@ -7,27 +7,58 @@ const failures = [];
 const notes = [];
 
 const layout = read("app/layout.tsx");
+const adsenseConfig = read("config/adsense.ts");
+const blogAdLayout = read("app/(blog)/blog/[slug]/layout.tsx");
 if (layout.includes("pagead2.googlesyndication.com")) {
   failures.push("app/layout.tsx still contains an unconditional AdSense script.");
+}
+if (/<AdSense\b/u.test(layout)) {
+  failures.push("app/layout.tsx must not mount AdSense before route-level content eligibility is known.");
 }
 if (!layout.includes('"google-adsense-account"')) {
   failures.push("AdSense ownership meta tag is missing.");
 }
-const publisherId = layout.match(/ADSENSE_PUBLISHER_ID\s*=\s*"(ca-pub-\d+)"/u)?.[1];
+const publisherId = adsenseConfig.match(/ADSENSE_PUBLISHER_ID\s*=\s*"(ca-pub-\d+)"/u)?.[1];
 const adsTxtPublisherId = read("public/ads.txt").match(/google\.com,\s*(pub-\d+),\s*DIRECT/u)?.[1];
 if (!publisherId || !adsTxtPublisherId || publisherId.replace(/^ca-/u, "") !== adsTxtPublisherId) {
   failures.push("AdSense ownership meta and ads.txt publisher IDs do not match.");
+}
+if (!blogAdLayout.includes("isBlogPostAdEligible") || !blogAdLayout.includes("getContentBySlug")) {
+  failures.push("Blog AdSense loading must be gated by a server-verified, indexable post.");
 }
 
 const sitemap = read("app/sitemap.ts");
 if (sitemap.includes("materials.forEach")) {
   failures.push("Templated material detail pages are still added to the sitemap.");
 }
+if (!sitemap.includes('"/satis-iade-teslimat"')) {
+  failures.push("Sales/refund/delivery policy is missing from the sitemap.");
+}
 if (/addEntry\(`\$\{path\}\/guide`/u.test(sitemap) && !sitemap.includes('guide?.source === "file"')) {
   failures.push("Fallback tool guides can still be added to the sitemap.");
 }
 if (/getContentList\("(blog|guides|glossary)"/u.test(sitemap)) {
   failures.push("Sitemap still includes a content collection without the quality gate.");
+}
+
+const routes = read("config/routes.ts");
+if (!routes.includes('salesPolicy: "/satis-iade-teslimat"')) {
+  failures.push("Sales/refund/delivery policy route is missing.");
+}
+
+const footer = read("components/layout/SiteShell.tsx");
+if (!footer.includes("linkCookies") || !footer.includes("linkSalesPolicy")) {
+  failures.push("Footer must link to cookie and sales/refund/delivery policy pages.");
+}
+
+const toolTabs = read("components/tools/ToolDocTabs.tsx");
+if (toolTabs.includes("docsMissingTitle")) {
+  failures.push("Tool pages still render a visible missing-documentation placeholder.");
+}
+
+const qualityToolsPage = read("app/quality-tools/page.tsx");
+if (qualityToolsPage.includes("tab=planned") || /yakında|coming soon/iu.test(qualityToolsPage)) {
+  failures.push("Quality tools page still exposes planned/coming-soon public content.");
 }
 
 const publicFacingSources = [
@@ -53,9 +84,7 @@ const trustMarkers = [
   /en çok kullanılan hesaplayıcılar/iu,
   /most used calculators/iu,
   /most popular/iu,
-  /erken erişim avantajı/iu,
   /early-access benefits/iu,
-  /lock early-access pricing/iu,
 ];
 publicFacingSources.forEach(({ relativePath, content }) => {
   trustMarkers.forEach((marker) => {

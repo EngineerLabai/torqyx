@@ -25,26 +25,27 @@ const calculators: Record<string, (input: Record<string, unknown>) => Record<str
 
 describe("tool doc standard examples", () => {
   ACTIVE_TOOL_DOCS.forEach((toolId) => {
-    it(`${toolId} example outputs match`, async () => {
-      const doc = await readToolDoc(toolId, "tr");
-      expect(doc).toBeTruthy();
-      if (!doc) return;
+    (["tr", "en"] as const).forEach((locale) => {
+      it(`${toolId}.${locale} example outputs match`, async () => {
+        const doc = await readToolDoc(toolId, locale);
+        expect(doc).toBeTruthy();
+        if (!doc) return;
 
-      const calc = calculators[toolId];
-      expect(calc, `${toolId} calculator is missing`).toBeDefined();
-      if (!calc) return;
+        const calc = calculators[toolId];
+        expect(calc, `${toolId} calculator is missing`).toBeDefined();
+        if (!calc) return;
 
-      doc.examples.forEach((example) => {
-        const result = calc(example.inputValues as Record<string, unknown>);
-        expect(result, `${toolId} result should exist`).toBeTruthy();
-        if (!result) return;
+        doc.examples.forEach((example) => {
+          const result = calc(example.inputValues as Record<string, unknown>);
+          expect(result, `${toolId}.${locale} result should exist`).toBeTruthy();
+          if (!result) return;
 
-        Object.entries(example.expected).forEach(([key, expected]) => {
-          const value = result[key] as number | null | undefined;
-          expect(value, `${toolId} missing result ${key}`).not.toBeNull();
-          if (typeof value === "number") {
-            expect(value).toBeCloseTo(expected, 2);
-          }
+          Object.entries(example.expected).forEach(([key, expected]) => {
+            const value = result[key];
+            expect(typeof value, `${toolId}.${locale} result ${key} must be numeric`).toBe("number");
+            expect(Number.isFinite(value), `${toolId}.${locale} result ${key} must be finite`).toBe(true);
+            expect(value as number).toBeCloseTo(expected, 2);
+          });
         });
       });
     });

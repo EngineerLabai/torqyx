@@ -63,11 +63,11 @@ const PRIMARY_SITE_HOST = new URL(PRIMARY_SITE_URL).host;
 
 const cspReportOnlyPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com",
+  "script-src 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self'",
-  "connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://*.firebaseio.com https://*.firebasestorage.googleapis.com wss://*.firebaseio.com",
+  "connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://*.firebaseio.com https://*.firebasestorage.googleapis.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net wss://*.firebaseio.com",
   "frame-src 'self' https://*.firebaseapp.com https://accounts.google.com",
   "frame-ancestors 'none'",
   "report-uri /api/csp-report",
@@ -203,6 +203,12 @@ const nextConfig: NextConfig = {
       { source: "/tr/contact", destination: "/tr/iletisim", permanent: true },
       { source: "/qa", destination: "/tr/faq", permanent: true },
       { source: "/en/qa", destination: "/en/faq", permanent: true },
+      { source: "/pricing", destination: "/tr/tools", permanent: true },
+      { source: "/tr/pricing", destination: "/tr/tools", permanent: true },
+      { source: "/en/pricing", destination: "/en/tools", permanent: true },
+      { source: "/premium", destination: "/tr/tools", permanent: true },
+      { source: "/tr/premium", destination: "/tr/tools", permanent: true },
+      { source: "/en/premium", destination: "/en/tools", permanent: true },
     ];
   },
 };

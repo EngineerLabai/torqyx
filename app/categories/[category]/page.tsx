@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
     path: `/categories/${categorySlug}`,
     locale,
     alternatesLanguages,
-    robots: NOINDEX_FOLLOW_ROBOTS,
+    robots: categories.some((entry) => entry.slug === categorySlug) ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

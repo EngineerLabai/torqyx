@@ -65,10 +65,29 @@ type TorquePowerInputs = {
 };
 
 type TorquePowerResults = {
-  torqueNm: number;
-  torqueNmEff: number;
-  powerHp: number;
+  torqueNm: number | null;
+  torqueNmEff: number | null;
+  powerHp: number | null;
+  inputPowerKw: number | null;
+  outputPowerKw: number | null;
+  efficiency: number | null;
+  error?: string;
 };
+
+export const torqueFromPowerAndSpeed = (powerKw: number, rpm: number): number | null =>
+  Number.isFinite(powerKw) && Number.isFinite(rpm) && powerKw > 0 && rpm > 0
+    ? (9550 * powerKw) / rpm
+    : null;
+
+export const powerFromTorqueAndSpeed = (torqueNm: number, rpm: number): number | null =>
+  Number.isFinite(torqueNm) && Number.isFinite(rpm) && torqueNm > 0 && rpm > 0
+    ? (torqueNm * rpm) / 9550
+    : null;
+
+export const speedFromPowerAndTorque = (powerKw: number, torqueNm: number): number | null =>
+  Number.isFinite(powerKw) && Number.isFinite(torqueNm) && powerKw > 0 && torqueNm > 0
+    ? (9550 * powerKw) / torqueNm
+    : null;
 
 export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResults> = {
   id: "torque-power",
@@ -86,7 +105,7 @@ export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResul
       min: 0.1,
       step: 0.1,
       default: 5.5,
-      help: "Elektrik motoru gücü (kW).",
+      help: "Kayıplardan önceki mekanik giriş gücü (kW).",
     },
     {
       key: "rpm",
@@ -107,18 +126,38 @@ export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResul
       max: 100,
       step: 1,
       default: 95,
-      help: "Mil çıkış verimi. Tipik %90–98.",
+      help: "Giriş gücünden çıkış gücüne mekanik verim. Tipik %90–98.",
     },
   ],
   calculate: (inputs) => {
-    const torqueNm = (9550 * inputs.powerKw) / inputs.rpm;
-    const torqueNmEff = torqueNm * (inputs.mechEff / 100);
+    const efficiency = inputs.mechEff / 100;
+    const torqueNm = torqueFromPowerAndSpeed(inputs.powerKw, inputs.rpm);
+    if (torqueNm === null || !Number.isFinite(efficiency) || efficiency < 0 || efficiency > 1) {
+      return {
+        torqueNm: null,
+        torqueNmEff: null,
+        powerHp: null,
+        inputPowerKw: null,
+        outputPowerKw: null,
+        efficiency: null,
+        error: "Güç ve devir pozitif; verim %0-%100 aralığında olmalıdır.",
+      };
+    }
+    const outputPowerKw = inputs.powerKw * efficiency;
+    const torqueNmEff = torqueNm * efficiency;
     const powerHp = inputs.powerKw * 1.34102;
-    return { torqueNm, torqueNmEff, powerHp };
+    return {
+      torqueNm,
+      torqueNmEff,
+      powerHp,
+      inputPowerKw: inputs.powerKw,
+      outputPowerKw,
+      efficiency,
+    };
   },
   chartConfig: (results) => ({
     type: "bar",
-    labels: ["Tork (ideal)", "Tork (verim)", "Güç (hp)"],
+    labels: ["Giriş torku (ideal)", "Çıkış torku (verimli)", "Giriş gücü (hp)"],
     datasets: [
       {
         label: "Değer",
@@ -130,10 +169,10 @@ export const torquePowerTool: ToolDefinition<TorquePowerInputs, TorquePowerResul
     yLabel: "Değer",
   }),
   formulaDisplay:
-    "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
+    "T_in = 9550 * P_in / n | P_out = η * P_in | T_out = η * T_in | P = T * n / 9550 | n = 9550 * P / T",
   formula: {
-    tr: "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
-    en: "P(kW) = T(Nm) * n(rpm) / 9550 | T = 9550 * P / n | hp = kW * 1.34102 | T_eff = T * η",
+    tr: "T_giriş = 9550 * P_giriş / n | P_çıkış = η * P_giriş | T_çıkış = η * T_giriş | P = T * n / 9550 | n = 9550 * P / T",
+    en: "T_input = 9550 * P_input / n | P_output = η * P_input | T_output = η * T_input | P = T * n / 9550 | n = 9550 * P / T",
   },
   assumptions: {
     tr: ["Sürekli rejim, kayıplar mekanik verim ile temsil edilir.", "RPM sabit ve moment dalgalanması ihmal edilir."],

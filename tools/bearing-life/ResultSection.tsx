@@ -35,6 +35,14 @@ export default function ResultSection({ result }: ToolResultProps<BearingLifeRes
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.l10hLabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.L10h, 2, locale)}</p>
         </div>
+        <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.lnaLabel}</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.Lna, 2, locale)}</p>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.lnahLabel}</p>
+          <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.Lnah, 2, locale)}</p>
+        </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.exponentLabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">
@@ -45,7 +53,12 @@ export default function ResultSection({ result }: ToolResultProps<BearingLifeRes
 
       <ExplanationPanel
         title={copy.explanationTitle}
-        formulas={["L10 = a1 * (C / P)^p", "L10h = (L10 * 10^6) / (60 * n)"]}
+        formulas={[
+          "L10 = (C / P)^p",
+          "L10h = (L10 * 10^6) / (60 * n)",
+          "Lna = a1 * L10",
+          "Lnah = a1 * L10h",
+        ]}
         variables={copy.variables}
         notes={copy.notes}
       />

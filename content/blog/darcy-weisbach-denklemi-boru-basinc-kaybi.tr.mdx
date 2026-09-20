@@ -1,0 +1,66 @@
+---
+title: "Darcy-Weisbach Denklemi Nedir? Boru Basınç Kaybı Hesabı"
+description: "Darcy-Weisbach denklemiyle boru basınç kaybını; debi, çap, hız, pürüzlülük ve sürtünme faktörü üzerinden adım adım hesaplayın."
+date: "2026-06-06"
+tags: ["Darcy-Weisbach denklemi", "akışkanlar", "mühendislik hesabı"]
+category: "Akışkanlar"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/darcy-weisbach-denklemi-boru-basinc-kaybi"
+---
+
+<Image src="/images/blog/darcy-weisbach-denklemi-boru-basinc-kaybi.webp" alt="Darcy Weisbach basinc kaybi hesabini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz Darcy Weisbach gorseli." />
+
+## Basınç kaybının temel modeli
+
+Darcy-Weisbach denklemi, düz bir boru boyunca akışkanın sürtünme nedeniyle kaybettiği basıncı hesaplamak için kullanılan genel yaklaşımdır. Temel ifade DeltaP = f x (L/D) x (rho v^2 / 2) biçimindedir. Burada f Darcy sürtünme faktörü, L boru uzunluğu, D iç çap, rho akışkan yoğunluğu ve v ortalama akış hızıdır. Denklem su, yağ, hava ve başka birçok akışkan için kullanılabilir; fakat yoğunluk, viskozite, sıkışabilirlik ve sıcaklık gibi özelliklerin uygulamaya uygun seçilmesi gerekir. En önemli avantajı, boru çapı, debi ve pürüzlülük etkisini aynı çerçevede gösterebilmesidir.
+
+## Hesabın adımları
+
+İlk olarak debi ve boru iç çapından hız hesaplanır. Dairesel boruda v = 4Q / (pi D^2) ilişkisinden yararlanılır. İkinci adım Reynolds sayısını bulmaktır: Re = rho v D / mu. Reynolds sayısı akış rejimini ve sürtünme faktörünün nasıl belirleneceğini etkiler. Laminer akışta f = 64/Re ilişkisi kullanılabilir. Türbülanslı akışta boru pürüzlülüğü ile Reynolds sayısı birlikte değerlendirilir; Colebrook veya uygun yaklaşık ifadeler kullanılır. Son adımda düz boru kaybı hesaplanır ve gerekiyorsa pompa gücüne dönüştürülür.
+
+## Çapın etkisi neden büyüktür?
+
+Boru çapı küçüldükçe aynı debi için hız yükselir. Basınç kaybı hızın karesiyle ilişkili olduğu için küçük çap değişimleri bile pompa ihtiyacını ciddi biçimde etkileyebilir. Buna karşılık çok büyük çap seçmek ilk yatırım maliyetini, yer ihtiyacını ve bazı akışkanlarda düşük hız kaynaklı işletme sorunlarını artırabilir. Bu nedenle boru çapı, sadece kayıp minimum olsun diye değil; yatırım-işletme maliyeti, hız limiti, gürültü, erozyon ve bakım gereksinimi birlikte değerlendirilerek seçilmelidir.
+
+## Düz boru kaybı ve yerel kayıplar
+
+Darcy-Weisbach denklemi düz boru segmenti için temel kaybı verir. Gerçek tesisatta dirsek, vana, filtre, daralma, genişleme, T bağlantısı ve ekipman giriş-çıkışları ek kayıp oluşturur. Bu yerel kayıplar K katsayısı ile v^2/2 enerji terimi üzerinden ayrıca hesaplanabilir. Uzun ve sade bir hatta düz boru kaybı baskın olabilir; kısa ama çok armatürlü hatta ise yerel kayıplar ana bileşen haline gelebilir. Sadece boru boyunu girip vanaları ve filtreleri unutmak pompa seçimini iyimser gösterir.
+
+## Kısa örnekle yorum
+
+Debi sabitken çap küçük seçilirse hız artar, Reynolds sayısı değişir, sürtünme etkisi büyür ve basınç kaybı hızla yükselir. Pürüzlü eski çelik boru ile yeni pürüzsüz plastik borunun aynı çapta davranışı da aynı değildir. Akışkan sıcaklığı değiştiğinde viskozite değişebilir; özellikle yağ devrelerinde bu etki önemlidir. Bu nedenle hesapta kullanılan yoğunluk ve viskozite değerinin hangi sıcaklığa ait olduğu mutlaka kaydedilmelidir.
+
+## Saha senaryosu ve karar mantığı
+
+Bir pompa hattında hesaplanan düz boru kaybı düşük görünebilir; ancak filtre, vana, çekvalf ve kısmi açık kontrol elemanları eklendiğinde toplam kayıp belirgin artabilir. Özellikle filtre kirlendikçe basınç düşümü değiştiği için temiz ve kirli durumlar ayrı değerlendirilmelidir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın için debi biriminin m3/s, m3/h veya L/dk olarak hangi biçimde girildiği açıkça belirtilmelidir. Birim dönüşüm hatası, Darcy-Weisbach hesabında en yaygın ve en yüksek etkili yanlışlardan biridir. Tasarım kararı verilirken en iyi yol, hesap sonucunu iki çalışma noktasıyla kontrol etmektir: beklenen normal çalışma ve olası maksimum debi. Böylece sistem normalde verimli çalışırken pik durumda aşırı hız, gürültü veya kabul edilemez basınç kaybı üretip üretmediği görülebilir. Kritik hatlarda ölçüm noktaları daha proje aşamasında düşünülmelidir.
+
+## Darcy-Weisbach hesabında direnç kaynağını ayırmak
+
+Darcy-Weisbach denklemi, düz boru boyunca oluşan sürtünme kaybını hesaplamak için güçlü bir temel sağlar. Ancak gerçek hatta yalnız boru uzunluğu yoktur; dirsekler, vanalar, daralmalar, filtreler ve giriş-çıkış elemanları da yerel kayıp oluşturur. Bu nedenle toplam basınç kaybı hesabında majör ve minör kayıplar ayrı ayrı yazılmalıdır. Sürtünme katsayısı seçilirken Reynolds sayısı ve bağıl pürüzlülük dikkate alınır. Laminar akışta yaklaşım daha basit olabilirken, türbülanslı bölgede Moody diyagramı veya uygun korelasyon kullanımı önem kazanır. Sonuç, pompa seçiminde yalnız “kayıp” değil, gereken toplam basma yüksekliğinin bir bileşeni olarak ele alınmalıdır.
+
+## Son kontrol
+
+Basınç kaybı sonucunu pompanın yalnız nominal eğrisiyle değil, seçilen vana ve filtrelerin kirli çalışma durumundaki kayıplarıyla da karşılaştırmak daha gerçekçi bir tasarım kontrolüdür.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde debi, gerçek iç çap, boru boyu, pürüzlülük, akışkan sıcaklığı ve yerel kayıplar ayrı ayrı girilmelidir. Torqyx Boru Basınç Kaybı Hesaplayıcı, Reynolds sayısı, sürtünme faktörü ve düz boru basınç kaybını hızlı bir ilk kontrol için hesaplar.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Boru Basınç Kaybı Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/pipe-pressure-loss" title="Boru Basınç Kaybı Hesaplayıcı" description="Debi, çap ve pürüzlülükle Darcy-Weisbach basınç kaybını hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- Crane TP-410 - Flow of Fluids Through Valves, Fittings and Pipe.
+
+- EN ISO 5167 - Measurement of fluid flow by means of pressure differential devices.
+
+- VDI 2048 - Flow measurement and calculation guidance.

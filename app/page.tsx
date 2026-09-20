@@ -1,7 +1,6 @@
 import WebPageJsonLd from "@/components/seo/WebPageJsonLd";
 import HeroSection from "@/sections/home/HeroSection";
 import PopularToolsSection from "@/sections/home/PopularToolsSection";
-import PricingTeaserSection from "@/sections/home/PricingTeaserSection";
 import ValuePropsSection from "@/sections/home/ValuePropsSection";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -56,7 +55,6 @@ export default async function Home() {
       <HeroSection locale={locale} />
       <ValuePropsSection locale={locale} />
       <PopularToolsSection locale={locale} />
-      <PricingTeaserSection locale={locale} />
     </main>
   );
 }

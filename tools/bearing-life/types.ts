@@ -9,6 +9,8 @@ export type BearingLifeInput = {
 export type BearingLifeResult = {
   L10: number | null;
   L10h: number | null;
+  Lna: number | null;
+  Lnah: number | null;
   exponent: number | null;
   error?: string;
 };

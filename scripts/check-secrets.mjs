@@ -128,7 +128,13 @@ const readProjectFiles = async (dirPath, output = []) => {
 
 const scanFile = async (relativePath) => {
   const fullPath = path.join(ROOT, relativePath);
-  const content = await fs.readFile(fullPath, "utf8");
+  let content = "";
+  try {
+    content = await fs.readFile(fullPath, "utf8");
+  } catch (error) {
+    if (error?.code === "ENOENT") return [];
+    throw error;
+  }
   const findings = [];
 
   for (const { name, pattern } of HIGH_CONFIDENCE_PATTERNS) {

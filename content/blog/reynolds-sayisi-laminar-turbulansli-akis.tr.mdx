@@ -1,0 +1,66 @@
+---
+title: "Reynolds Sayısı Nedir? Laminar ve Türbülanslı Akış Farkı"
+description: "Reynolds sayısının ne olduğunu, Re = rho v D / mu formülünü ve boru akışında laminar, geçiş ve türbülanslı rejim farklarını öğrenin."
+date: "2026-06-04"
+tags: ["Reynolds sayısı nedir", "akışkanlar", "mühendislik hesabı"]
+category: "Akışkanlar"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/reynolds-sayisi-laminar-turbulansli-akis"
+---
+
+<Image src="/images/blog/reynolds-sayisi-laminar-turbulansli-akis.webp" alt="Laminar ve turbulansli akis ayrimini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz Reynolds sayisi gorseli." />
+
+## Reynolds sayısı neyi karşılaştırır?
+
+Reynolds sayısı, akışkan içindeki atalet etkilerinin viskoz etkilerle göreli büyüklüğünü gösteren boyutsuz bir sayıdır. Boru akışı için yaygın ifade Re = rho v D / mu biçimindedir. Yoğunluk rho, ortalama hız v, karakteristik çap D ve dinamik viskozite mu kullanılır. Aynı ilişki kinematik viskozite nu ile Re = vD/nu şeklinde de yazılabilir. Reynolds sayısı, akışın düzenli katmanlar halinde mi yoksa girdaplı ve karışımlı mı davranacağını anlamak için ilk göstergedir. Borunun çapı, hız ve akışkanın sıcaklığa bağlı viskozitesi değiştiğinde Reynolds sayısı da değişir.
+
+## Laminar akışın karakteri
+
+Laminar akışta akışkan parçacıkları daha düzenli tabakalar halinde ilerler. Dairesel borularda yaklaşık Re &lt; 2.300 aralığı genellikle laminar kabul edilir; fakat giriş koşulları ve sistem titreşimi geçişi etkileyebilir. Laminar akışta viskoz etkiler baskındır ve sürtünme faktörü için f = 64/Re gibi daha doğrudan ilişkiler kullanılır. Akış düzenli olduğu için karışma sınırlıdır. Isı transferi veya karışım istenen bazı proseslerde bu avantaj değil, sınırlama olabilir. Çok viskoz yağlarda veya düşük debilerde laminar davranış sık görülür.
+
+## Türbülanslı akışın karakteri
+
+Türbülanslı akışta hız dalgalanmaları ve girdaplar daha belirgindir. Dairesel borularda Re &gt; 4.000 çoğu pratik hesapta türbülanslı rejim kabul edilir; aradaki bölge geçiş alanıdır. Türbülans karışmayı ve ısı transferini artırabilir, fakat basınç kaybını da yükseltir. Türbülanslı akışta pürüzlülük, boru çapı ve Reynolds sayısı sürtünme faktörünü birlikte etkiler. Bu nedenle basit bir sabit katsayıyla hesap yapmak yerine uygun diyagram veya denklemler kullanılır. Yüksek hızlı su hatları, hava kanalları ve proses borularında türbülanslı rejim yaygındır.
+
+## Eşik değerleri mutlak kural değildir
+
+2.300 ve 4.000 sınırları, düzgün dairesel borular için kullanılan pratik referanslardır. Açık kanallar, dar aralıklar, kanallar, kısmi dolu borular veya karmaşık geometride karakteristik uzunluk ve geçiş davranışı farklı olabilir. Ayrıca boru girişindeki bozulma, titreşim, dirsekler ve pompa dalgalanmaları geçişi değiştirebilir. Bu yüzden Reynolds sayısı ilk karar aracıdır; tek başına tüm akış problemini çözmez. Basınç kaybı, ısı transferi, gürültü ve erozyon gibi sonuçlar ayrıca hesaplanmalıdır.
+
+## Tasarımda nasıl kullanılır?
+
+Bir boru çapı seçerken önce hedef debi ve kabul edilebilir hız tanımlanır. Sonra Reynolds sayısı hesaplanarak sürtünme faktörü yaklaşımı seçilir. Akışkan sıcaklığı değişiyorsa viskozite değerleri gerçek çalışma sıcaklığına göre güncellenir. Özellikle yağ devrelerinde soğukta çok yüksek viskozite, sıcaklık yükseldiğinde ise farklı bir rejim oluşabilir. Bu nedenle tek sıcaklıkta yapılan hesap, geniş çalışma aralığı varsa yetersiz kalabilir.
+
+## Saha senaryosu ve karar mantığı
+
+Yüksek viskoziteli yağ, düşük hız ve küçük çap kombinasyonunda Reynolds sayısı laminar bölgede kalabilir. Aynı sistem ısındığında viskozite düşer, Reynolds sayısı yükselir ve basınç kaybı karakteri değişir. Bu nedenle tek sıcaklıkta hesap yapmak geniş sıcaklık aralığında yetersiz kalabilir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın için 2.300 ve 4.000 eşiklerinin düzgün dairesel borular için pratik referans olduğu notu eklenebilir. Karmaşık kanallarda karakteristik uzunluk ve geçiş davranışı farklı yorumlanmalıdır. Tasarım kararı verilirken en iyi yol, hesap sonucunu iki çalışma noktasıyla kontrol etmektir: beklenen normal çalışma ve olası maksimum debi. Böylece sistem normalde verimli çalışırken pik durumda aşırı hız, gürültü veya kabul edilemez basınç kaybı üretip üretmediği görülebilir. Kritik hatlarda ölçüm noktaları daha proje aşamasında düşünülmelidir.
+
+## Reynolds sayısını tasarım kararına bağlamak
+
+Reynolds sayısı, akışın laminar mı yoksa türbülanslı mı olma eğiliminde olduğunu anlamaya yardım eden boyutsuz bir büyüklüktür. Ancak pratikte yalnız tek bir eşik değere bakmak yeterli değildir; boru pürüzlülüğü, giriş koşulu ve akışkan özellikleri geçiş bölgesini etkileyebilir. Laminar akışta hız profili daha düzenli, basınç kaybı ilişkileri daha öngörülebilir olabilir. Türbülanslı akışta karışım artar, fakat sürtünme ve gürültü de belirginleşebilir. Isı transferi istenen bazı sistemlerde türbülans fayda sağlayabilirken, hassas veya düşük kayıplı hatlarda daha kontrollü hızlar tercih edilebilir. Bu yüzden Reynolds sayısı, tek başına sonuç değil, diğer tasarım hedefleriyle birlikte yorumlanacak bir göstergedir.
+
+## Akışkan özelliği
+
+Viskozitenin sıcaklıkla değişmesi, özellikle yağ devrelerinde Reynolds sayısını ve basınç kaybını değiştirebilir. Hesap girişleri mümkün olduğunda çalışma sıcaklığındaki akışkan verileriyle yapılmalıdır.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde akışkan türü, sıcaklık, yoğunluk, viskozite, debi ve gerçek iç çap birlikte kaydedilmelidir. Torqyx Boru Basınç Kaybı Hesaplayıcı, Reynolds sayısını ve bu değerle ilişkili sürtünme-basınç kaybı etkisini hızlıca kontrol etmek için kullanılabilir.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Boru Basınç Kaybı Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/pipe-pressure-loss" title="Boru Basınç Kaybı Hesaplayıcı" description="Debi, çap ve pürüzlülükle Darcy-Weisbach basınç kaybını hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- Osborne Reynolds - An experimental investigation of the circumstances which determine whether the motion of water shall be direct or sinuous, 1883.
+
+- Crane TP-410 - Flow of Fluids Through Valves, Fittings and Pipe.
+
+- EN ISO 5167 - Fluid flow measurement references.

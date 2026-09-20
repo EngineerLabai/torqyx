@@ -5,15 +5,12 @@ import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
+import {
+  calculateCompressorCc,
+  type CompressorCcInput,
+} from "@/tools/compressor-cc/logic";
 
-type Inputs = {
-  bore: string;
-  stroke: string;
-  cylinders: string;
-  rpm: string;
-  volumetricEff: string; // %
-  acting: "single" | "double";
-};
+type Inputs = CompressorCcInput;
 
 const INITIAL: Inputs = {
   bore: "60",
@@ -32,7 +29,7 @@ const COPY = {
     },
     title: "Kompresör CC / Debi Hesaplayıcı (Pistonlu)",
     description:
-      "Piston çapı, strok, silindir sayısı ve devir ile teorik hacimsel kapasiteyi hesaplar. Tek/çift etkili seçimi ve volumetrik verim ile yaklaşık gerçek debiyi verir. Sonuçlar serbest hava debisi (FAD) değildir; tahmini iç hacim deplasmanıdır.",
+      "Piston çapı, strok, silindir sayısı ve devir ile ideal geometrik deplasmanı hesaplar. Tek/çift etkili seçimi ve volumetrik verim ile verim-düzeltilmiş deplasman debisini verir. Sonuçlar serbest hava debisi (FAD) değildir.",
     sections: {
       inputs: "Girişler",
       results: "Sonuçlar",
@@ -50,15 +47,15 @@ const COPY = {
       },
     },
     helpers: {
-      volumetricEff: "Tipik 70-90%",
+      volumetricEff: "Tipik %70-90; ondalık virgül desteklenir",
     },
     results: {
-      sweptCc: "Süpürülen hacim (cc/dev)",
-      sweptL: "Süpürülen hacim (L/dev)",
-      theoreticalFlow: "Teorik debi",
-      actualFlow: "Tahmini gerçek debi",
+      sweptCc: "Geometrik deplasman (cc/dev)",
+      sweptL: "Geometrik deplasman (L/dev)",
+      theoreticalFlow: "Geometrik deplasman debisi",
+      actualFlow: "Verim-düzeltilmiş deplasman debisi",
       assumptions:
-        "Varsayımlar: Basit pistonlu, kayıpsız hacim = π/4·D²·S·(silindir·etki). Debi = hacim/dev × rpm × volumetrik verim. FAD için test/standart yöntem gerekir.",
+        "Model sınırı: Bu sonuç FAD değil, ideal geometrik piston deplasmanıdır. Çift etkili seçimde iki yüz de tam piston alanı kabul edilir; mil alanı, ölü hacim, valf ve kaçak kayıpları, basınç oranı ile FAD referans koşulları hesaba katılmaz.",
     },
     units: {
       cc: "cc",
@@ -66,7 +63,12 @@ const COPY = {
       lPerMin: "L/dk",
     },
     errors: {
-      invalid: "Lütfen pozitif ve makul sayılar girin (verim ≤ 120%).",
+      "invalid-number": "Sonlu sayılar girin; ondalık ayırıcı olarak virgül veya nokta kullanabilirsiniz.",
+      "non-positive": "Piston çapı, strok ve devir sıfırdan büyük olmalıdır.",
+      "invalid-cylinder-count": "Silindir adedi pozitif bir tam sayı olmalıdır.",
+      "invalid-efficiency": "Volumetrik verim %0'dan büyük ve en fazla %120 olmalıdır.",
+      "invalid-acting": "Geçerli bir etki tipi seçin.",
+      "result-out-of-range": "Girdiler hesaplanabilir aralığın dışında. Daha küçük, sonlu değerler girin.",
     },
   },
   en: {
@@ -76,7 +78,7 @@ const COPY = {
     },
     title: "Piston Compressor Displacement & Flow Calculator",
     description:
-      "Calculates theoretical swept volume from bore, stroke, cylinder count, and rpm. Applies single/double-acting selection and volumetric efficiency to estimate actual flow. Results are not FAD; they represent internal displacement estimates.",
+      "Calculates ideal geometric displacement from bore, stroke, cylinder count, and rpm. Applies single/double-acting selection and volumetric efficiency to estimate efficiency-adjusted displacement flow. Results are not Free Air Delivery (FAD).",
     sections: {
       inputs: "Inputs",
       results: "Results",
@@ -94,15 +96,15 @@ const COPY = {
       },
     },
     helpers: {
-      volumetricEff: "Typical 70–90%",
+      volumetricEff: "Typically 70–90%; decimal comma is supported",
     },
     results: {
-      sweptCc: "Swept volume (cc/rev)",
-      sweptL: "Swept volume (L/rev)",
-      theoreticalFlow: "Theoretical flow",
-      actualFlow: "Estimated actual flow",
+      sweptCc: "Geometric displacement (cc/rev)",
+      sweptL: "Geometric displacement (L/rev)",
+      theoreticalFlow: "Geometric displacement flow",
+      actualFlow: "Efficiency-adjusted displacement flow",
       assumptions:
-        "Assumptions: Ideal piston displacement = π/4·D²·S·(cylinders·acting factor). Flow = volume/rev × rpm × volumetric efficiency. Use test data or standards to determine FAD.",
+        "Model boundary: This result is ideal geometric piston displacement, not FAD. Double-acting mode assumes full bore area on both faces; rod area, clearance volume, valve/leakage losses, pressure ratio, and FAD reference conditions are not modeled.",
     },
     units: {
       cc: "cc",
@@ -110,7 +112,12 @@ const COPY = {
       lPerMin: "L/min",
     },
     errors: {
-      invalid: "Enter positive, reasonable values (efficiency ≤ 120%).",
+      "invalid-number": "Enter finite numbers; either a decimal point or decimal comma is accepted.",
+      "non-positive": "Bore, stroke, and RPM must be greater than zero.",
+      "invalid-cylinder-count": "Cylinder count must be a positive integer.",
+      "invalid-efficiency": "Volumetric efficiency must be greater than 0% and no more than 120%.",
+      "invalid-acting": "Select a valid acting type.",
+      "result-out-of-range": "The inputs are outside the calculable range. Enter smaller finite values.",
     },
   },
 } as const;
@@ -124,45 +131,9 @@ export default function CompressorCcPage({ initialDocs }: CompressorCcClientProp
   const copy = COPY[locale];
   const [inputs, setInputs] = useState<Inputs>(INITIAL);
 
-  const results = useMemo(() => {
-    const bore = parseNumber(inputs.bore);
-    const stroke = parseNumber(inputs.stroke);
-    const cylinders = parseNumber(inputs.cylinders);
-    const rpm = parseNumber(inputs.rpm);
-    const ve = parseNumber(inputs.volumetricEff);
-    const actingFactor = inputs.acting === "double" ? 2 : 1;
-
-    const valid =
-      bore !== null &&
-      stroke !== null &&
-      cylinders !== null &&
-      rpm !== null &&
-      ve !== null &&
-      bore > 0 &&
-      stroke > 0 &&
-      cylinders > 0 &&
-      rpm > 0 &&
-      ve > 0 &&
-      ve <= 120;
-    if (!valid) {
-      return null;
-    }
-
-    // mm^3 per rev
-    const sweptPerRev_mm3 =
-      (Math.PI / 4) * bore * bore * stroke * cylinders * actingFactor;
-    const sweptPerRev_cc = sweptPerRev_mm3 / 1000;
-    const sweptPerRev_L = sweptPerRev_cc / 1000;
-    const theoFlow_L_min = sweptPerRev_L * rpm;
-    const actualFlow_L_min = theoFlow_L_min * (ve / 100);
-
-    return {
-      sweptPerRev_cc,
-      sweptPerRev_L,
-      theoFlow_L_min,
-      actualFlow_L_min,
-    };
-  }, [inputs]);
+  const calculation = useMemo(() => calculateCompressorCc(inputs), [inputs]);
+  const results = calculation.ok ? calculation.result : null;
+  const errorMessage = calculation.ok ? null : copy.errors[calculation.error];
 
   function handleChange<K extends keyof Inputs>(key: K, value: Inputs[K]) {
     setInputs((prev) => ({ ...prev, [key]: value }));
@@ -256,19 +227,19 @@ export default function CompressorCcPage({ initialDocs }: CompressorCcClientProp
               <div className="space-y-2">
                 <ResultRow
                   label={copy.results.sweptCc}
-                  value={`${results.sweptPerRev_cc.toFixed(1)} ${copy.units.cc}`}
+                  value={`${results.geometricDisplacementCcPerRev.toFixed(1)} ${copy.units.cc}`}
                 />
                 <ResultRow
                   label={copy.results.sweptL}
-                  value={`${results.sweptPerRev_L.toFixed(3)} ${copy.units.lPerRev}`}
+                  value={`${results.geometricDisplacementLPerRev.toFixed(3)} ${copy.units.lPerRev}`}
                 />
                 <ResultRow
                   label={copy.results.theoreticalFlow}
-                  value={`${results.theoFlow_L_min.toFixed(1)} ${copy.units.lPerMin}`}
+                  value={`${results.geometricFlowLMin.toFixed(1)} ${copy.units.lPerMin}`}
                 />
                 <ResultRow
                   label={copy.results.actualFlow}
-                  value={`${results.actualFlow_L_min.toFixed(1)} ${copy.units.lPerMin}`}
+                  value={`${results.efficiencyAdjustedFlowLMin.toFixed(1)} ${copy.units.lPerMin}`}
                 />
                 <div className="rounded-lg bg-slate-50 px-3 py-2 text-[11px] text-slate-700">
                   {copy.results.assumptions}
@@ -276,7 +247,7 @@ export default function CompressorCcPage({ initialDocs }: CompressorCcClientProp
               </div>
             ) : (
               <p className="text-[11px] text-red-600">
-                {copy.errors.invalid}
+                {errorMessage}
               </p>
             )}
           </div>
@@ -330,12 +301,4 @@ function ResultRow({ label, value }: { label: string; value: string }) {
       <span className="font-mono text-[11px] font-semibold text-slate-900">{value}</span>
     </div>
   );
-}
-
-function parseNumber(value: string) {
-  if (value === null || value === undefined) return null;
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-  const parsed = Number(trimmed);
-  return Number.isFinite(parsed) ? parsed : null;
 }

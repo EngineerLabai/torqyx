@@ -51,7 +51,7 @@ export const eightDCopy: Record<Locale, EightDCopy> = {
     },
     title: "8D Rapor İskeleti (Etkileşimli Taslak)",
     description:
-      "Müşteri şikayetleri ve kritik uygunsuzluklar için 8D adımlarını yapılandırılmış şekilde doldur. Geçici/kalıcı aksiyonları, kök neden analizini ve yayılım planını aynı dosyada sakla. PDF/Word çıktısı gelecekte eklenecek.",
+      "Müşteri şikayetleri ve kritik uygunsuzluklar için 8D adımlarını yapılandırılmış şekilde doldur. Geçici/kalıcı aksiyonları, kök neden analizini ve yayılım planını aynı dosyada sakla.",
     caseTitle: "Vaka Temel Bilgileri",
     fields: {
       caseId: { label: "Vaka / Şikayet No", placeholder: "Örn: Q-2025-118" },
@@ -227,7 +227,7 @@ export const eightDCopy: Record<Locale, EightDCopy> = {
     },
     title: "8D Report Skeleton (Interactive Draft)",
     description:
-      "Fill out 8D steps for customer complaints and critical nonconformities. Capture containment and permanent actions, root cause analysis, and spread plan in one file. PDF/Word export will be added later.",
+      "Fill out 8D steps for customer complaints and critical nonconformities. Capture containment and permanent actions, root cause analysis, and spread plan in one file.",
     caseTitle: "Case Basics",
     fields: {
       caseId: { label: "Case / Complaint ID", placeholder: "e.g. Q-2025-118" },

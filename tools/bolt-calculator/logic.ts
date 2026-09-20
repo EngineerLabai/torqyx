@@ -16,7 +16,7 @@ const GRADE_DATA: Record<GradeKey, { Re: number }> = {
   "12.9": { Re: 1100 },
 };
 
-const FRICTION_K: Record<FrictionKey, { K: number }> = {
+export const TORQUE_FACTOR_PRESETS: Record<FrictionKey, { K: number }> = {
   dry: { K: 0.25 },
   oiled: { K: 0.2 },
   coated: { K: 0.18 },
@@ -24,6 +24,32 @@ const FRICTION_K: Record<FrictionKey, { K: number }> = {
 
 export function getYieldStrength(grade: GradeKey): number {
   return GRADE_DATA[grade].Re;
+}
+
+export function getTorqueFactor(preset: FrictionKey): number {
+  return TORQUE_FACTOR_PRESETS[preset].K;
+}
+
+export function calculateTorqueFromNutFactor({
+  nutFactor,
+  preloadN,
+  nominalDiameterM,
+}: {
+  nutFactor: number;
+  preloadN: number;
+  nominalDiameterM: number;
+}): number | null {
+  if (
+    !Number.isFinite(nutFactor) ||
+    !Number.isFinite(preloadN) ||
+    !Number.isFinite(nominalDiameterM) ||
+    nutFactor <= 0 ||
+    preloadN <= 0 ||
+    nominalDiameterM <= 0
+  ) {
+    return null;
+  }
+  return nutFactor * preloadN * nominalDiameterM;
 }
 
 export const DEFAULT_INPUT: BoltInput = {
@@ -55,7 +81,7 @@ function buildBoltAuditTrail(
     {
       id: "as",
       name: "Etkin Kesit Alanı As",
-      formula: "A_s = \frac{\pi}{4} \times (d - 0.9382 \times P)^2",
+      formula: String.raw`A_s = \frac{\pi}{4} \times (d - 0.9382 \times P)^2`,
       variables: [
         { key: "d", label: "Nominal çap d", value: input.d, unit: "mm" },
         { key: "P", label: "Diş adımı P", value: input.P, unit: "mm" },
@@ -68,7 +94,7 @@ function buildBoltAuditTrail(
     {
       id: "fv",
       name: "Ön Yük Kuvveti F_v",
-      formula: "F_v = \frac{\mathrm{preload}}{100} \times R_e \times A_s",
+      formula: String.raw`F_v = \frac{\mathrm{preload}}{100} \times R_e \times A_s`,
       variables: [
         { key: "preloadPercent", label: "Ön yük %Re", value: input.preloadPercent, unit: "%" },
         { key: "Re", label: "Akma dayanımı R_e", value: Re, unit: "MPa" },
@@ -82,7 +108,7 @@ function buildBoltAuditTrail(
     {
       id: "sigma",
       name: "Gerilme σ",
-      formula: "\sigma = \frac{F_v}{A_s}",
+      formula: String.raw`\sigma = \frac{F_v}{A_s}`,
       variables: [
         { key: "Fv", label: "Ön yük F_v", value: (Fv_N / 1000).toFixed(2), unit: "kN" },
         { key: "As", label: "Kesit alanı A_s", value: As.toFixed(2), unit: "mm²" },
@@ -93,9 +119,23 @@ function buildBoltAuditTrail(
       status: getStepStatusForSafety(safety) as CalculationStepStatus,
     },
     {
+      id: "torque",
+      name: "Sıkma Torku T",
+      formula: String.raw`T = K \times F_v \times d`,
+      variables: [
+        { key: "K", label: "Tork faktörü K", value: getTorqueFactor(input.friction), unit: "-" },
+        { key: "Fv", label: "Ön yük F_v", value: (Fv_N / 1000).toFixed(2), unit: "kN" },
+        { key: "d", label: "Nominal çap d", value: input.d, unit: "mm" },
+      ],
+      result: T_Nm.toFixed(2),
+      unit: "N·m",
+      standard: "Basitleştirilmiş tork faktörü modeli",
+      status: "info" as CalculationStepStatus,
+    },
+    {
       id: "safety",
       name: "Güvenlik Katsayısı S",
-      formula: "S = \frac{R_e}{\sigma}",
+      formula: String.raw`S = \frac{R_e}{\sigma}`,
       variables: [
         { key: "Re", label: "Akma dayanımı R_e", value: Re, unit: "MPa" },
         { key: "sigma", label: "Gerilme σ", value: sigma.toFixed(1), unit: "MPa" },
@@ -118,6 +158,9 @@ export function calculateBolt(input: BoltInput): BoltResult {
       As: null,
       Fv: null,
       torque: null,
+      torqueFactor: null,
+      yieldStrength: null,
+      proofStrength: null,
       sigma: null,
       safety: null,
       error: "d ve P değerlerini pozitif sayı olarak girin.",
@@ -129,19 +172,54 @@ export function calculateBolt(input: BoltInput): BoltResult {
       As: null,
       Fv: null,
       torque: null,
+      torqueFactor: null,
+      yieldStrength: null,
+      proofStrength: null,
       sigma: null,
       safety: null,
       error: "Ön yük yüzdesi 1-90 aralığında olmalı.",
     };
   }
 
-  const Re = getYieldStrength(input.grade);
-  const K = FRICTION_K[input.friction].K;
+  const gradeData = GRADE_DATA[input.grade];
+  const torquePreset = TORQUE_FACTOR_PRESETS[input.friction];
+  if (!gradeData || !torquePreset) {
+    return {
+      As: null,
+      Fv: null,
+      torque: null,
+      torqueFactor: null,
+      yieldStrength: null,
+      proofStrength: null,
+      sigma: null,
+      safety: null,
+      error: "Geçerli bir dayanım sınıfı ve tork faktörü ön ayarı seçin.",
+    };
+  }
+  const Re = gradeData.Re;
+  const K = torquePreset.K;
 
   const As = (Math.PI / 4) * Math.pow(d - 0.9382 * P, 2);
   const preloadRatio = preload / 100;
   const Fv_N = preloadRatio * Re * As;
-  const T_Nm = K * Fv_N * (d / 1000);
+  const T_Nm = calculateTorqueFromNutFactor({
+    nutFactor: K,
+    preloadN: Fv_N,
+    nominalDiameterM: d / 1000,
+  });
+  if (T_Nm === null) {
+    return {
+      As: null,
+      Fv: null,
+      torque: null,
+      torqueFactor: null,
+      yieldStrength: Re,
+      proofStrength: null,
+      sigma: null,
+      safety: null,
+      error: "Tork hesabı için geçerli K, ön yük ve nominal çap değerleri gerekir.",
+    };
+  }
   const sigma = Fv_N / As;
   const safety = Re / sigma;
 
@@ -149,6 +227,9 @@ export function calculateBolt(input: BoltInput): BoltResult {
     As,
     Fv: Fv_N / 1000,
     torque: T_Nm,
+    torqueFactor: K,
+    yieldStrength: Re,
+    proofStrength: null,
     sigma,
     safety,
     auditTrail: () => buildBoltAuditTrail(input, As, Fv_N, T_Nm, sigma, safety, Re),

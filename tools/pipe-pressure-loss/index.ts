@@ -25,12 +25,12 @@ export const pipePressureLossTool: ToolDefinition<PipePressureLossInput, PipePre
   VisualizationSection,
   inputMeta: INPUT_META,
   formula: {
-    tr: "Re = rho * v * D / mu | f = 0.25 / [log10(eps/3.7D + 5.74/Re^0.9)]^2 | DeltaP = f * (L/D) * (rho v^2 / 2)",
-    en: "Re = rho * v * D / mu | f = 0.25 / [log10(eps/3.7D + 5.74/Re^0.9)]^2 | DeltaP = f * (L/D) * (rho v^2 / 2)",
+    tr: "A = pi*D^2/4 | v = Q/A | Re = rho*v*D/mu | laminer: f=64/Re | türbülans: Swamee-Jain | DeltaP = f*(L/D)*(rho*v^2/2)",
+    en: "A = pi*D^2/4 | v = Q/A | Re = rho*v*D/mu | laminar: f=64/Re | turbulent: Swamee-Jain | DeltaP = f*(L/D)*(rho*v^2/2)",
   },
   assumptions: {
-    tr: ["Dairesel boru ve tek fazlı akış kabul edilir.", "Re < 2000 ise laminer f=64/Re kullanılır."],
-    en: ["Circular pipe and single-phase flow assumed.", "Laminar flow uses f=64/Re."],
+    tr: ["Dairesel boru, tek fazlı ve tam gelişmiş akış kabul edilir.", "Re < 2300 için f=64/Re; Re > 4000 için Swamee-Jain kullanılır.", "Yerel kayıplar dahil değildir; pompa gücü %70 verim varsayar."],
+    en: ["Circular, single-phase, fully developed flow is assumed.", "f=64/Re below Re 2300; Swamee-Jain above Re 4000.", "Minor losses are excluded; pump power assumes 70% efficiency."],
   },
   references: {
     tr: [{ title: "Moody diyagramı / Swamee-Jain" }],

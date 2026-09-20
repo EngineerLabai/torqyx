@@ -13,7 +13,7 @@ type UsePdfExportOptions = {
 type UsePdfExportResult = {
   exportPdf: (reportData: ReportData) => Promise<void>;
   isExporting: boolean;
-  isPremiumRequired: boolean;
+  isPdfUnavailable: boolean;
   canExport: boolean;
 };
 
@@ -23,14 +23,14 @@ export function usePdfExport({
   onError,
 }: UsePdfExportOptions): UsePdfExportResult {
   const [isExporting, setIsExporting] = useState(false);
-  const { hasAccess: isPremium, isLoading: isCheckingPremium } = useFeatureGate("pdf_export", {
+  const { hasAccess: hasPdfAccess, isLoading: isCheckingPdfAccess } = useFeatureGate("pdf_export", {
     toolId,
   });
 
   const exportPdf = useCallback(
     async (reportData: ReportData) => {
-      if (!isPremium) {
-        onError?.("PDF rapor özelliği premium üyeler için kullanılabilir.");
+      if (!hasPdfAccess) {
+        onError?.("PDF rapor dışa aktarımı şu anda kullanılamıyor.");
         return;
       }
 
@@ -72,13 +72,13 @@ export function usePdfExport({
         setIsExporting(false);
       }
     },
-    [toolId, isPremium, onSuccess, onError]
+    [toolId, hasPdfAccess, onSuccess, onError]
   );
 
   return {
     exportPdf,
     isExporting,
-    isPremiumRequired: !isPremium,
-    canExport: isPremium && !isCheckingPremium,
+    isPdfUnavailable: !hasPdfAccess,
+    canExport: hasPdfAccess && !isCheckingPdfAccess,
   };
 }

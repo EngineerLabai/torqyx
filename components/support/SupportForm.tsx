@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import useFirebaseServices from "@/components/firebase/useFirebaseServices";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { useAnalytics } from "@/hooks/useAnalytics";
 import { getMessages } from "@/utils/messages";
 
 type AttachmentPayload = {
@@ -16,19 +15,13 @@ type AttachmentPayload = {
 type SubjectValue = "technical" | "feature" | "bug" | "other";
 
 const MAX_ATTACHMENT_SIZE = 10 * 1024 * 1024;
-const UPGRADE_PLAN = "pro";
-const CHECKOUT_SOURCE = "support_form";
 
 export default function SupportForm() {
   const { locale } = useLocale();
-  const { track } = useAnalytics();
   const copy = getMessages(locale).components.supportForm;
   const { services } = useFirebaseServices();
   const storage = services?.storage ?? null;
   const canUploadFile = Boolean(storage);
-  const hasTrackedCheckoutStart = useRef(false);
-  const hasTrackedPaymentInfoEntered = useRef(false);
-
   const [form, setForm] = useState<{ name: string; email: string; subject: SubjectValue; message: string }>({
     name: "",
     email: "",
@@ -59,34 +52,14 @@ export default function SupportForm() {
     return () => clearTimeout(timer);
   }, [toastMessage]);
 
-  const trackCheckoutStart = () => {
-    if (hasTrackedCheckoutStart.current) return;
-    hasTrackedCheckoutStart.current = true;
-    track("checkout_start", {
-      plan: UPGRADE_PLAN,
-      source: CHECKOUT_SOURCE,
-    });
-  };
-
-  const trackPaymentInfoEntered = () => {
-    if (hasTrackedPaymentInfoEntered.current) return;
-    hasTrackedPaymentInfoEntered.current = true;
-    track("payment_info_entered", {
-      plan: UPGRADE_PLAN,
-      source: CHECKOUT_SOURCE,
-    });
-  };
-
   const handleChange = (field: "name" | "email" | "message" | "subject") =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      trackCheckoutStart();
       if (status !== "idle") setStatus("idle");
       if (errorMessage) setErrorMessage("");
       setForm((prev) => ({ ...prev, [field]: event.target.value as SubjectValue }));
     };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    trackCheckoutStart();
     if (status !== "idle") setStatus("idle");
     const file = event.target.files?.[0] ?? null;
     if (!file) {
@@ -120,7 +93,6 @@ export default function SupportForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    trackCheckoutStart();
     setErrorMessage("");
 
     if (!form.name.trim() || !form.email.trim() || !form.subject.trim() || !form.message.trim()) {
@@ -134,8 +106,6 @@ export default function SupportForm() {
       setStatus("error");
       return;
     }
-
-    trackPaymentInfoEntered();
 
     let attachmentPayload: AttachmentPayload | undefined;
 

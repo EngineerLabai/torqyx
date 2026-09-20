@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: TagPageProps) {
     path: `/tags/${tagSlug}`,
     locale,
     alternatesLanguages,
-    robots: NOINDEX_FOLLOW_ROBOTS,
+    robots: tags.some((entry) => entry.slug === tagSlug) ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

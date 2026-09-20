@@ -6,8 +6,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import AuthButtons from "@/components/auth/AuthButtons";
-import TrialEndingBanner from "@/components/billing/TrialEndingBanner";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import useDevRenderLogger from "@/components/monitoring/useDevRenderLogger";
@@ -16,10 +14,9 @@ import { UnitSystemSwitcher } from "@/components/units/UnitSystemSwitcher";
 import { getBrandCopy, SITE_CONTACT_EMAIL } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
-import { stripLocaleFromPath, withLocalePrefix } from "@/utils/locale-path";
+import { stripLocaleFromPath } from "@/utils/locale-path";
 import { isAdsAllowedPath } from "@/utils/ads";
 import type { Messages } from "@/utils/messages";
-import { Linkedin } from "lucide-react";
 
 type NavSection = {
   id: string;
@@ -42,9 +39,8 @@ type SidebarSection = {
 
 export type SiteShellMessages = {
   nav: Messages["nav"];
-  authButtons: Messages["authButtons"];
   languageSwitcher: Messages["languageSwitcher"];
-  components: Pick<Messages["components"], "search" | "authModal" | "consent" | "premiumCTA">;
+  components: Pick<Messages["components"], "search" | "consent">;
 };
 
 function OverlaySkeleton() {
@@ -67,11 +63,6 @@ function BannerSkeleton() {
 
 // Bundle estimate (webpack analyzer, parsed): ~10-18KB expected to move out of shared app chunk.
 const CommandPalette = dynamic(() => import("@/components/search/CommandPalette"), {
-  ssr: false,
-  loading: () => <OverlaySkeleton />,
-});
-
-const AuthModal = dynamic(() => import("@/components/auth/AuthModal"), {
   ssr: false,
   loading: () => <OverlaySkeleton />,
 });
@@ -151,6 +142,12 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
   const currentPath = stripLocaleFromPath(pathname);
   const showAdDisclosure = isAdsAllowedPath(pathname);
   const mobileDirectNavLinks = directNavLinks.filter((link) => link.id !== "quality");
+  const mobileLegalLinks = [
+    { label: navCopy.labels.linkPrivacy, href: getRoute("privacy", locale) },
+    { label: navCopy.labels.linkCookies, href: getRoute("cookies", locale) },
+    { label: navCopy.labels.linkTerms, href: getRoute("terms", locale) },
+    { label: navCopy.labels.linkSalesPolicy, href: getRoute("salesPolicy", locale) },
+  ];
   const contactEmail = SITE_CONTACT_EMAIL;
 
   return (
@@ -239,7 +236,6 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                 onLocaleChange={() => setMobileMenuOpen(false)}
               />
               <UnitSystemSwitcher />
-              <AuthButtons copy={messages.authButtons} />
             </form>
 
             <button
@@ -309,22 +305,33 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                   })}
                 </div>
 
-                <div className="sticky bottom-0 grid grid-cols-2 gap-2 border-t border-slate-100 bg-white px-4 py-3">
-                  <Link
-                    href={withLocalePrefix("/login", locale)}
-                    prefetch={false}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="tap-target inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand hover:text-brand"
-                  >
-                    {messages.authButtons.login}
-                  </Link>
+                <div className="space-y-2 px-4 pt-1">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    {locale === "tr" ? "Yasal sayfalar" : "Legal pages"}
+                  </p>
+                  <div className="grid gap-2">
+                    {mobileLegalLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        prefetch={false}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="tap-target flex min-h-11 items-center rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand hover:text-brand"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="sticky bottom-0 border-t border-slate-100 bg-white px-4 py-3">
                   <Link
                     href={getRoute("tools", locale)}
                     prefetch={false}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="tap-target inline-flex min-h-11 items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white shadow-sm transition hover:brightness-90"
+                    className="tap-target inline-flex min-h-11 w-full items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white shadow-sm transition hover:brightness-90"
                   >
-                    {locale === "tr" ? "Ücretsiz Dene" : "Try for free"}
+                    {locale === "tr" ? "Hesaplayıcıları Aç" : "Open Calculators"}
                   </Link>
                 </div>
               </div>
@@ -332,8 +339,6 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
           ) : null}
         </div>
       </header>
-
-      <TrialEndingBanner />
 
       {isHome ? (
         <main id="main-content" className="w-full flex-1">
@@ -384,10 +389,6 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
             <a className="block text-sm font-semibold text-brand hover:brightness-90" href={`mailto:${contactEmail}`}>
               {contactEmail}
             </a>
-            <p className="inline-flex items-center gap-2 text-sm text-slate-500">
-              <Linkedin size={16} aria-hidden="true" />
-              {locale === "tr" ? "LinkedIn yakında" : "LinkedIn coming soon"}
-            </p>
           </div>
 
           <FooterLinkColumn
@@ -410,21 +411,19 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               { label: navCopy.labels.linkFaq, href: getRoute("faq", locale) },
               { label: navCopy.labels.sectionContact, href: getRoute("support", locale) },
               { label: navCopy.labels.linkPrivacy, href: getRoute("privacy", locale) },
+              { label: navCopy.labels.linkCookies, href: getRoute("cookies", locale) },
               { label: navCopy.labels.linkTerms, href: getRoute("terms", locale) },
+              { label: navCopy.labels.linkSalesPolicy, href: getRoute("salesPolicy", locale) },
             ]}
           />
         </div>
 
-        <div className="site-container flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 py-4 text-[11px] text-slate-500">
+        <div className="site-container border-t border-slate-100 py-4 text-[11px] text-slate-500">
           <span>© 2026 {brandContent.siteName}. {locale === "tr" ? "Tüm hesaplamalar referans amaçlıdır." : "All calculations are for reference only."}</span>
-          <Link href={getRoute("pricing", locale)} className="font-semibold text-brand hover:brightness-90">
-            {locale === "tr" ? "Pro erken erişim" : "Pro early access"}
-          </Link>
         </div>
       </footer>
 
       <ConsentBanner copy={messages.components.consent} />
-      <AuthModal copy={messages.components.authModal} authCopy={messages.authButtons} />
       <CommandPalette copy={messages.components.search} />
     </div>
   );

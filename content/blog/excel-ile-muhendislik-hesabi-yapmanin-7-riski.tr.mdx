@@ -1,0 +1,74 @@
+---
+title: "Excel ile Mühendislik Hesabı Yapmanın 7 Tehlikeli Riski"
+description: "Excel ile mühendislik hesaplarında görülen birim, formül, kopyalama, sürüm, veri girişi, doğrulama ve izlenebilirlik risklerini öğrenin."
+date: "2026-05-31"
+tags: ["Excel ile mühendislik hesabı riskleri", "mühendislik yöntemleri", "mühendislik hesabı"]
+category: "Mühendislik Yöntemleri"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/excel-ile-muhendislik-hesabi-yapmanin-7-riski"
+---
+
+<Image src="/images/blog/excel-ile-muhendislik-hesabi-yapmanin-7-riski.webp" alt="Muhendislik hesaplarinda tablo ve form risklerini gosteren blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz hesap tablosu risk gorseli." />
+
+## Excel sorun değildir; kontrolsüz Excel sorundur
+
+Excel, ön boyutlandırma, veri analizi ve mühendislik hesapları için güçlü bir araçtır. Sorun, formülün nasıl kurulduğunun, hangi birimlerin kullanıldığının, hangi revizyonun geçerli olduğunun ve sonuçların nasıl doğrulandığının görünmez hale gelmesidir. Özellikle yıllar içinde kopyalanarak büyüyen dosyalarda bir hücredeki küçük hata, çok sayıda projeye yayılabilir. Bu nedenle Excel'i bırakmak değil; hesap akışını denetlenebilir hale getirmek gerekir. Aşağıdaki yedi risk, teknik ekiplerin en sık karşılaştığı hata kaynaklarını özetler.
+
+## 1. Birim karışıklığı
+
+mm ile m, MPa ile Pa, N ile kN veya rpm ile rad/s karıştığında sonuç yüzlerce veya binlerce kat sapabilir. Hücrede yalnız sayı varsa, dosyayı devralan kişi bu değerin hangi birime ait olduğunu anlayamayabilir. Çözüm; her girişin yanında birim yazmak, dönüşümleri merkezi yapmak ve kritik sonuçlarda boyut kontrolü uygulamaktır.
+
+## 2. Gizli veya kırık formüller
+
+Sabit sayı ile değiştirilmiş formül, yanlış hücre referansı veya boş hücreye bağlı hesap fark edilmeden kalabilir. Özellikle satır ekleme, kopyala-yapıştır ve filtreleme sırasında referanslar bozulabilir. Çözüm; kilitli şablon, formül görünümü, hücre koruması, bağımsız kontrol hesabı ve sürüm onayı kullanmaktır.
+
+## 3. Kopya dosya ve revizyon karmaşası
+
+"son", "son2", "son_final", "final_yeni" isimli dosyalar hangi hesabın geçerli olduğunu belirsizleştirir. Aynı ürün için farklı ekiplerin farklı katsayılarla çalışması kalite riskidir. Çözüm; tek kaynaklı dosya yönetimi, değişiklik kaydı, onay durumu ve açık dosya sorumluluğu tanımlamaktır. Kritik hesaplar için PDF raporu veya değiştirilemeyen çıktı saklamak izlenebilirliği artırır.
+
+## 4. Girdi doğrulamasının olmaması
+
+Bir kullanıcı nominal çap yerine yarıçap, debi yerine hacim veya yüzde yerine oran girebilir. Excel çoğu zaman bu değeri kabul eder ve matematiksel olarak sonuç üretir. Çözüm; veri doğrulama listeleri, aralık kontrolleri, mantık uyarıları ve sınır dışı değerlerde hata mesajı kullanmaktır. Hesaplayıcıların giriş alanlarında birim ve tipik aralık göstermesi bu yüzden önemlidir.
+
+## 5. Varsayımların kaybolması
+
+Sürtünme katsayısı, verim, malzeme dayanımı veya sıcaklık gibi varsayımlar ayrı bir notta kalırsa zamanla unutulur. Sonuç doğru görünür ama hangi koşul için doğru olduğu bilinmez. Çözüm; varsayımları sonuçla aynı sayfada, görünür ve güncellenebilir biçimde tutmaktır.
+
+## 6. Bağımsız doğrulama yapılmaması
+
+Bir formül doğru kopyalanmış olsa bile yanlış model seçilmiş olabilir. Örneğin sadece düz boru kaybı hesabı ile pompa seçmek veya statik gerilme hesabıyla yorulma ömrü sonucu vermek model hatasıdır. Çözüm; ikinci kişi kontrolü, referans tablo, alternatif yöntem veya fiziksel test kullanmaktır.
+
+## 7. Raporlanabilirlik eksikliği
+
+Sonuç ekrana yazdırılmış bir sayıysa, aylar sonra hangi girişlerden üretildiğini bulmak zorlaşır. Mühendislik hesabı için girişler, formüller, birimler, varsayımlar, kaynaklar ve sonuçlar birlikte saklanmalıdır. Bu yaklaşım kalite denetimi, müşteri iletişimi ve hata araştırmasında büyük zaman kazandırır.
+
+## Saha senaryosu ve karar mantığı
+
+Bir Excel dosyasında tek bir hücreye yanlışlıkla 1.5 yerine 15 yazılması, uygun sınır kontrolü yoksa çok farklı bir tork veya basınç sonucu üretebilir. Formül doğru olsa bile girdi yanlışsa hesap tehlikeli biçimde ikna edici görünür. Bu nedenle veri doğrulama tasarımın parçasıdır. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın için hesap çıktısının yanında girilen parametrelerin, birimlerin ve sürüm bilgisinin saklanması önerilebilir. Böylece aylar sonra bir sonuç sorgulandığında, yalnız sayıyı değil o sayının üretildiği bağlamı da görmek mümkün olur. Bir mühendislik hesabını yayımlamadan veya onaya göndermeden önce birim dönüşümleri, giriş hücreleri, varsayımlar ve sonuçların uygulanabilir sınırları tekrar gözden geçirilmelidir. İyi bir doküman, yalnız sonucu değil, sonuca hangi koşullarda ulaşıldığını da açıkça anlatır. Bu nedenle hesap dosyası ile teknik çizim ve satın alma şartnamesi arasında sürüm uyumu kurulmalıdır.
+
+## Excel kullanırken doğrulama katmanı kurmak
+
+Excel, hızlı hesap ve veri karşılaştırması için çok yararlıdır; risk, dosyanın hesap makinesi gibi görünmesine rağmen sürüm ve giriş hatalarını gizleyebilmesidir. Yanlış hücre referansı, kopmuş formül, karışmış birim, eski katalog verisi veya yanlış kopyalanmış satır uzun süre fark edilmeyebilir. Kritik hesaplarda giriş hücreleri belirginleştirilmeli, birim kontrolleri eklenmeli ve formüller kilitlenmelidir. Bağımsız ikinci kontrol, örnek elle hesap veya doğrulanmış bir araçla sonuç kıyaslaması da gerekir. Dosya adı, revizyon tarihi, veri kaynağı ve sorumlu kişi görünür olduğunda Excel dosyası daha izlenebilir hale gelir. Böylece hız avantajı korunurken karar hatası riski azaltılır.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde her hesap için girişler, birimler, formüller, varsayımlar, revizyon ve doğrulama notu aynı kayıtta tutulmalıdır. Torqyx Mühendislik Hesaplayıcı Kütüphanesi, hesap akışını daha görünür ve izlenebilir hale getiren araçlara doğrudan erişim sağlar.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Mühendislik Hesaplayıcı Kütüphanesi aracını kullanın.
+
+<ToolLink href="/tools" title="Mühendislik Hesaplayıcı Kütüphanesi" description="Aktif mühendislik hesaplayıcılarını tek kütüphanede açın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- Panko, R.R. - What We Know About Spreadsheet Errors, Journal of End User Computing.
+
+- ISO 9001 - Quality management systems - Requirements, documented information principles.
+
+- ISO 80000-1 - Quantities and units - General.

@@ -1,0 +1,62 @@
+---
+title: "Motor Seçiminde Tork Eğrisi Nasıl Okunur?"
+description: "Motor tork eğrisini nominal, sürekli, pik ve kalkış torku üzerinden okuyun; yük eğrisi ve çalışma çevrimiyle doğru motor seçimi yapın."
+date: "2026-06-15"
+tags: ["motor tork eğrisi nasıl okunur", "tork ve aktarma", "mühendislik hesabı"]
+category: "Tork ve Aktarma"
+draft: false
+readingTime: 4
+canonical: "https://torqyx.com/blog/motor-seciminde-tork-egrisi-nasil-okunur"
+---
+
+<Image src="/images/blog/motor-seciminde-tork-egrisi-nasil-okunur.webp" alt="Motor tork egrisini gosteren teknik blog gorseli" width={1200} height={900} caption="Bu yazi icin olusturulan benzersiz motor tork egrisi gorseli." />
+
+## Eğri, motorun hangi hızda ne verebildiğini anlatır
+
+Motor kataloglarında görülen tork-devir eğrisi, motorun belirli koşullarda üretebildiği torkun devre göre nasıl değiştiğini gösterir. Eğriyi doğru okumak için önce hangi eğriye bakıldığını ayırmak gerekir: sürekli çalışma torku, kısa süreli pik tork, kalkış torku, devrilme torku veya değişken hızlı sürücü ile elde edilen bölge aynı şey değildir. Bir motorun kısa süreyle yüksek moment üretmesi, o momentte sürekli çalışabileceği anlamına gelmez. Özellikle servo, asenkron ve fırçasız motorlarda katalog grafikleri farklı referans sıcaklığı, besleme gerilimi ve sürücü koşullarına göre verilebilir.
+
+## Yük eğrisi ile motor eğrisi kesişmelidir
+
+Doğru motor seçimi, motor eğrisini tek başına beğenmek değildir; yükün istediği tork-devir eğrisinin motorun izin verilen bölgesinde kalmasıdır. Fan ve pompa yüklerinde tork genellikle hızın karesiyle artar. Konveyörlerde sabit yüke daha yakın bir tork ihtiyacı oluşabilir. Vidalı mekanizmalarda kalkış sürtünmesi nedeniyle başlangıç torku yüksek olabilir. Motorun çalışma noktası, hedef hızda gerekli sürekli torku güvenli marjla karşılamalıdır. Eğriler sadece bir noktada kesişiyorsa, yük veya besleme koşulu değiştiğinde sistemin performansı yetersiz kalabilir.
+
+## Nominal tork, pik tork ve kalkış torku
+
+Nominal tork, motorun tanımlı ortam koşullarında termal olarak sürekli verebildiği torktur. Pik tork, genellikle kısa süreli hızlanma veya yük değişimi için kullanılabilir daha yüksek değerdir; süre ve tekrar sıklığı sınırlıdır. Kalkış torku ise motor dururken veya çok düşük hızdayken mevcut momenti ifade eder. Ağır yükü duruştan kaldıracak sistemde yalnız nominal torkun yeterli olması yetmez, kalkış ve hızlanma için ek tork gerekir. Buna ek olarak redüktör, kaplin ve milin de bu geçici momentleri taşıyıp taşımadığı kontrol edilmelidir.
+
+## Atalet ve hızlanma hesabı
+
+Tork eğrisinin en çok gözden kaçan bölümü hızlanma ihtiyacıdır. Yük ataleti yüksekse motor, yalnız sürtünme ve proses torkunu değil; kütleyi istenen süre içinde hızlandıracak ilave momenti de üretmelidir. Basitleştirilmiş biçimde gerekli hızlanma torku, eşdeğer atalet ile açısal ivmenin çarpımına bağlıdır. Çok büyük redüksiyon seçmek motor torkunu yükseltebilir ama ataleti motora farklı yansıtır, sistem hızını düşürür ve boşluğu artırabilir. Bu nedenle oran, motor eğrisi ve çevrim süresi birlikte optimize edilmelidir.
+
+## Sağlıklı okuma için kontrol listesi
+
+Katalog eğrisindeki gerilim, sürücü ayarı, ortam sıcaklığı ve soğutma koşulu uygulamanızla aynı mı? Yük eğrisi sürekli mi yoksa değişken mi? Kalkışta, frenlemede ve yön değiştirmede gereken tork nedir? Motor bu bölgeyi hangi süreyle taşıyabilir? Bu sorulara yanıt verilmeden sadece kW veya nominal rpm ile seçim yapmak, saha performansını tahmin etmeyi zorlaştırır. Güvenli seçim, sürekli çalışma ve geçici çalışma noktalarını aynı grafikte göstermeyi gerektirir.
+
+## Saha senaryosu ve karar mantığı
+
+Bir servo ekseninde motor eğrisinin yalnız tepe tork bölgesine göre seçim yapmak, çevrim süresi uzadığında motorun termal sınırını aşabilir. Sürekli RMS tork, pik tork kadar önemlidir. Katalog eğrisinin hangi besleme gerilimi ve soğutma koşulunda verildiği de aynı derecede belirleyicidir. Bu yaklaşım, okuyucunun tek bir tablo değerini doğrudan tasarım kararı olarak kullanmasını engeller. Hesap sonucu ilk filtreleme için güçlü bir araçtır; ancak nihai seçimde uygulamanın kendi yükleri, malzemeleri, çevresi ve bakım şekli mutlaka dikkate alınmalıdır.
+
+## Tasarım ve yayın notu
+
+Yayın için yük eğrisini oluşturmanın basit yolunu anlatın: proses torku, sürtünme torku ve hızlanma torkunu zaman ekseninde ayırmak, motorun hangi bölgede ne kadar kaldığını görünür kılar. Karar sürecinde nominal değer, pik değer ve sürekli çalışma değeri birbirinden ayrılmalıdır. Yalnızca motor etiketindeki güce bakmak yerine, şaftta kalan gerçek güç ve redüktör çıkışındaki kullanılabilir tork hesaplanmalıdır. Özellikle sık kalkışlı sistemlerde termik sınır, hızlanma süresi ve emniyet payı birlikte doğrulanmalıdır.
+
+## Tork eğrisiyle yük eğrisini eşleştirmek
+
+Motor seçiminde katalogdaki en yüksek tork değerini görmek tek başına yeterli değildir. Asıl önemli olan, motorun her devirde üretebildiği torkun yükün o devirde istediği torktan yeterli emniyet payıyla yüksek olmasıdır. Fan ve pompa gibi yüklerde ihtiyaç duyulan tork hızla değişirken, konveyör veya kaldırma düzeneklerinde kalkış torku daha baskın olabilir. Hızlanma süresi, atalet momenti ve sık dur-kalk çevrimi de motordan ek tork isteyebilir. Eğer çalışma noktası motor eğrisinin sınırına çok yakınsa gerilim, sıcaklık veya sürtünme değişimleri sistemi kararsız hale getirebilir. Bu nedenle seçim tablosunda nominal, sürekli, kalkış ve kısa süreli pik torklar ayrı satırlarda gösterilmelidir.
+
+## Uygulama kontrolü
+
+Uygulama kontrolünde motor eğrisi ile yük eğrisi aynı birimlerde üst üste değerlendirilmelidir. Torqyx Güç - Tork - Devir Hesaplayıcı, hedef hız ve güç üzerinden gerekli şaft torkunu ilk aşamada hesaplamak için kullanılabilir; nihai seçimde motor üreticisinin gerçek eğrisi esas alınmalıdır.
+
+## İlgili Torqyx hesaplayıcısı
+
+Bu konudaki temel girdileri hızlıca kontrol etmek için Güç - Tork - Devir Hesaplayıcı aracını kullanın.
+
+<ToolLink href="/tools/torque-power" title="Güç - Tork - Devir Hesaplayıcı" description="Güç, devir ve tork arasındaki ilişkiyi hızlıca hesaplayın." badge="Hesaplayıcı" />
+
+## Teknik kaynaklar
+
+- IEC 60034-1 - Rotating electrical machines - Rating and performance.
+
+- NEMA MG 1 - Motors and Generators.
+
+- ISO 80000-4 - Quantities and units in mechanics.

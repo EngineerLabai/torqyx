@@ -6,7 +6,7 @@ import { getBrandCopy } from "@/config/brand";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 import { getChangelogEntries, type ChangelogBadge } from "@/utils/changelog";
-import { withLocalePrefix } from "@/utils/locale-path";
+import { buildLocalizedCanonical } from "@/utils/seo";
 import type { Locale } from "@/utils/locale";
 
 export const dynamic = "force-static";
@@ -45,6 +45,10 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/changelog",
     locale: CHANGELOG_LOCALE,
+    alternatesLanguages: {
+      tr: buildLocalizedCanonical("/changelog", "tr"),
+      "x-default": buildLocalizedCanonical("/changelog", "tr"),
+    },
   });
 }
 
@@ -52,7 +56,7 @@ export default async function ChangelogPage() {
   const locale = CHANGELOG_LOCALE;
   const copy = getMessages(locale).pages.changelog;
   const entries = await getChangelogEntries(locale, { includeDrafts: false });
-  const feedHref = withLocalePrefix("/changelog/feed.xml", locale);
+  const feedHref = "/changelog/feed.xml";
   const toolOptions = Array.from(
     entries.reduce((acc, entry) => {
       const current = acc.get(entry.toolSlug);

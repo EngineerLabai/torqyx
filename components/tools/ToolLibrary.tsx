@@ -2,13 +2,11 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
-import UpgradePrompt from "@/components/billing/UpgradePrompt";
 import ToolLibraryCard from "@/components/tools/ToolLibraryCard";
 import RecentToolsStrip from "@/components/tools/RecentToolsStripLazy";
 import InlineSearch from "@/components/search/InlineSearch";
 import { filterSearchResults } from "@/components/search/useSearchIndex";
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
-import { useBillingStatus } from "@/hooks/useBillingStatus";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -186,7 +184,6 @@ const highlightMatch = (text: string, query: string): ReactNode => {
 
 export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) {
   const messages = getMessages(locale);
-  const { status: billingStatus } = useBillingStatus();
   const copy = messages.components.toolLibrary;
   const guideLinkLabel = locale === "tr" ? "Nasıl Kullanılır?" : "How to Use?";
   const labels = copy.labels;
@@ -289,15 +286,6 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
   }, [debouncedQuery, toolSearchItems, baseToolIds, toolById]);
 
   const filtered = debouncedQuery.trim().length > 0 ? rankedTools : baseTools;
-  const maxTools = billingStatus.plan.limits.maxTools;
-  const hasLockedToolsInResult = useMemo(() => {
-    if (maxTools === null) return false;
-    return filtered.some((tool) => {
-      const index = toolCatalog.findIndex((catalogTool) => catalogTool.id === tool.id);
-      if (index < 0) return false;
-      return index >= maxTools;
-    });
-  }, [filtered, maxTools]);
   const visibleTools = useMemo(() => filtered.slice(0, visibleToolsCount), [filtered, visibleToolsCount]);
   const hasMoreTools = filtered.length > visibleTools.length;
   const toolCardModels = useMemo(
@@ -597,18 +585,6 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
         </section>
       ) : (
         <section className="w-full min-w-0 space-y-5">
-          {hasLockedToolsInResult ? (
-            <UpgradePrompt
-              compact
-              source="tool_limit_library"
-              title={locale === "tr" ? "Free plan araç limiti aktif." : "Free plan tool limit is active."}
-              description={
-                locale === "tr"
-                  ? "Daha fazla araca erişmek için Pro'ya geçebilirsiniz."
-                  : "Upgrade to Pro to unlock more tools."
-              }
-            />
-          ) : null}
           <div className="grid min-w-0 auto-rows-fr items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {toolCardModels.map(({ tool, title, description, guideHref, categoryLabel, tagLabels, accessLabel, status, validationStandard, isNew }) => (
               <ToolLibraryCard

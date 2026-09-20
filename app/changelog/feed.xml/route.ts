@@ -4,6 +4,7 @@ import { getMessages } from "@/utils/messages";
 import { SITE_URL } from "@/utils/seo";
 import { getChangelogEntries } from "@/utils/changelog";
 import type { Locale } from "@/utils/locale";
+import { withLocalePrefix } from "@/utils/locale-path";
 
 export const dynamic = "force-static";
 
@@ -31,7 +32,7 @@ export async function GET() {
   const copy = getMessages(LOCALE).pages.changelog;
   const entries = await getChangelogEntries(LOCALE, { includeDrafts: false });
   const siteUrl = SITE_URL.replace(/\/$/, "");
-  const listUrl = `${siteUrl}/changelog`;
+  const listUrl = `${siteUrl}${withLocalePrefix("/changelog", LOCALE)}`;
   const feedUrl = `${siteUrl}/changelog/feed.xml`;
 
   const items = entries

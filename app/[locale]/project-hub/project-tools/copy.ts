@@ -34,7 +34,6 @@ export const PROJECT_COPY: Record<Locale, {
   filtersTitle: string;
   tableTitle: string;
   exportLabel: string;
-  exportSoon: string;
   searchPlaceholder: string;
   fields: {
     title: string;
@@ -47,7 +46,7 @@ export const PROJECT_COPY: Record<Locale, {
     notes: string;
   };
   emptyState: string;
-  actions: { delete: string; status: string };
+  actions: { delete: string; confirmDelete: string; status: string };
   storageNote: string;
 }> = {
   tr: {
@@ -68,7 +67,6 @@ export const PROJECT_COPY: Record<Locale, {
     filtersTitle: "Filtreler ve sıralama",
     tableTitle: "Kayıt listesi",
     exportLabel: "Tabloyu dışarı aktar",
-    exportSoon: "Çok yakında",
     searchPlaceholder: "Başlık, sahip, alan veya not içinde ara",
     fields: {
       title: "Başlık",
@@ -81,7 +79,11 @@ export const PROJECT_COPY: Record<Locale, {
       notes: "Notlar",
     },
     emptyState: "Henüz kayıt yok. Üstteki formdan yeni kayıt ekleyebilirsiniz.",
-    actions: { delete: "Sil", status: "Durum değiştir" },
+    actions: {
+      delete: "Sil",
+      confirmDelete: "Bu proje kaydını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+      status: "Durum değiştir",
+    },
     storageNote: "Veriler cihazınızda saklanır (localStorage).",
   },
   en: {
@@ -102,7 +104,6 @@ export const PROJECT_COPY: Record<Locale, {
     filtersTitle: "Filters and sorting",
     tableTitle: "Entry list",
     exportLabel: "Export table",
-    exportSoon: "Coming soon",
     searchPlaceholder: "Search title, owner, area, or notes",
     fields: {
       title: "Title",
@@ -115,7 +116,11 @@ export const PROJECT_COPY: Record<Locale, {
       notes: "Notes",
     },
     emptyState: "No entries yet. Add one using the form above.",
-    actions: { delete: "Delete", status: "Change status" },
+    actions: {
+      delete: "Delete",
+      confirmDelete: "Are you sure you want to delete this project entry? This action cannot be undone.",
+      status: "Change status",
+    },
     storageNote: "Data is stored on this device (localStorage).",
   },
 };

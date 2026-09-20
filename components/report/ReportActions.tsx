@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useState, type RefObject } from "react";
 import { usePathname } from "next/navigation";
-import UpgradePrompt from "@/components/billing/UpgradePrompt";
-import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useFeatureGate } from "@/hooks/useFeatureGate";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { buildQualityPdfFilename, exportElementToPdf } from "@/lib/pdf/exportElementToPdf";
@@ -72,7 +70,6 @@ export default function ReportActions<T>({
   copy,
 }: ReportActionsProps<T>) {
   const storageKey = useMemo(() => `torqyx:quality:${toolKey}:saved`, [toolKey]);
-  const { locale } = useLocale();
   const pathname = usePathname() ?? "/";
   const pdfGate = useFeatureGate("pdf_export");
   const { track } = useAnalytics();
@@ -123,9 +120,6 @@ export default function ReportActions<T>({
 
   async function exportCurrentPdf() {
     if (!pdfGate.hasAccess) {
-      setStatusText(
-        locale === "tr" ? "PDF dışa aktarma Pro planında açılır." : "PDF export is available on Pro.",
-      );
       return;
     }
 
@@ -151,9 +145,6 @@ export default function ReportActions<T>({
 
   async function exportSavedPdf(entry: SavedReport<T>) {
     if (!pdfGate.hasAccess) {
-      setStatusText(
-        locale === "tr" ? "PDF dışa aktarma Pro planında açılır." : "PDF export is available on Pro.",
-      );
       return;
     }
 
@@ -225,19 +216,16 @@ export default function ReportActions<T>({
           >
             {copy.manage} ({savedReports.length})
           </button>
-          <button
-            type="button"
-            onClick={exportCurrentPdf}
-            data-testid="report-actions-export-pdf"
-            disabled={!pdfGate.hasAccess}
-            className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition ${
-              pdfGate.hasAccess
-                ? "bg-slate-900 text-white hover:bg-slate-800"
-                : "cursor-not-allowed bg-amber-100 text-amber-800"
-            }`}
-          >
-            {copy.exportPdf}
-          </button>
+          {pdfGate.hasAccess ? (
+            <button
+              type="button"
+              onClick={exportCurrentPdf}
+              data-testid="report-actions-export-pdf"
+              className="rounded-full bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white transition hover:bg-slate-800"
+            >
+              {copy.exportPdf}
+            </button>
+          ) : null}
           <button
             type="button"
             onClick={onReset}
@@ -247,7 +235,6 @@ export default function ReportActions<T>({
             {copy.reset}
           </button>
         </div>
-        {!pdfGate.hasAccess ? <UpgradePrompt compact source="quality_report_pdf_gate" className="mt-3" /> : null}
         {statusText ? <p className="mt-2 text-[11px] text-slate-600">{statusText}</p> : null}
       </section>
 
@@ -347,19 +334,16 @@ export default function ReportActions<T>({
                         >
                           {copy.remove}
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => exportSavedPdf(entry)}
-                          data-testid="report-actions-export-pdf-saved"
-                          disabled={!pdfGate.hasAccess}
-                          className={`rounded-full border px-3 py-1 text-[11px] font-semibold transition ${
-                            pdfGate.hasAccess
-                              ? "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
-                              : "cursor-not-allowed border-amber-200 bg-amber-50 text-amber-700"
-                          }`}
-                        >
-                          {copy.exportPdf}
-                        </button>
+                        {pdfGate.hasAccess ? (
+                          <button
+                            type="button"
+                            onClick={() => exportSavedPdf(entry)}
+                            data-testid="report-actions-export-pdf-saved"
+                            className="rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700 transition hover:bg-slate-50"
+                          >
+                            {copy.exportPdf}
+                          </button>
+                        ) : null}
                         <button
                           type="button"
                           onClick={() => exportSavedJson(entry)}

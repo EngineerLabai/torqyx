@@ -13,7 +13,9 @@ npm run build
 - Site ownership stays verifiable through the `google-adsense-account` meta tag and `public/ads.txt`.
 - AdSense JavaScript is disabled unless `NEXT_PUBLIC_ADSENSE_ENABLED="true"`.
 - Ads are limited to article routes and require the site's advertising consent.
-- Error, report, form, premium-preview, and other behavioral pages do not load AdSense.
+- Error, report, form, and other behavioral pages do not load AdSense.
+- About, contact, privacy, cookie, terms, and sales/refund/digital-delivery policy pages are linked from the public navigation/footer and included in the sitemap.
+- Draft/community/forum/planned surfaces must redirect to active support or FAQ pages instead of rendering placeholder content.
 - Fallback tool guides redirect to the real tool page.
 - Thin blog posts, fallback guides, and templated material details are excluded from the sitemap or marked `noindex`.
 
@@ -25,8 +27,8 @@ These steps cannot be completed from the repository:
 2. Configure Google's European regulations message or another Google-certified TCF CMP.
 3. Verify the message covers EEA, UK, and Switzerland traffic.
 4. Confirm `torqyx.com` ownership and `ads.txt` status in AdSense.
-5. Request review while `NEXT_PUBLIC_ADSENSE_ENABLED="false"`.
-6. Enable ads only after approval and CMP verification.
+5. Keep the ownership meta tag and `ads.txt` live during review.
+6. If AdSense specifically asks for script verification, enable `NEXT_PUBLIC_ADSENSE_ENABLED="true"` only after CMP verification and confirm it appears on approved, content-rich public pages.
 
 ## Content Publication Rules
 

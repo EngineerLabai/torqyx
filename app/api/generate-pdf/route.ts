@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (billingStatus.data.effectivePlan === "free") {
-      return apiError("premium_required", 403);
+      return apiError("pdf_export_unavailable", 403);
     }
 
     let rawPayload: unknown;

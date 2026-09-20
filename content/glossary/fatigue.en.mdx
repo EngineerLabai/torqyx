@@ -18,6 +18,9 @@ Parts that are safe statically can still fail under cyclic loading.
 
 In a design check, first define the relevant load, dimension, material, or flow condition. Then interpret this term by its role in the formula and compare it with limits.
 
+## Design note
+
+Fatigue checks should consider mean stress, surface finish, notch effects, and the expected number of load cycles together. Sharp corners, weld toes, keyways, and holes can create local stresses higher than the nominal value. A part may look safe in a static check while still needing S-N data, service spectrum review, and inspection intervals for cyclic duty.
 
 <Callout type="info" title="Example">
 Alternating bending stress in a rotating shaft requires fatigue review.
