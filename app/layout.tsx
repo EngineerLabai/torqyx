@@ -98,6 +98,7 @@ export async function generateMetadata(): Promise<Metadata> {
     other: {
       ...(base.other ?? {}),
       "google-adsense-account": ADSENSE_PUBLISHER_ID,
+      "google-site-verification": "4fBhqPWjSU42SLLF8IHs_QOyIqTTEAq2quXN8tIXLxE",
     },
     ...(!IS_INDEXING_ENABLED
       ? {
