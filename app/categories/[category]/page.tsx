@@ -27,6 +27,9 @@ type CategoryPageProps = {
   params: Promise<{ category: string }>;
 };
 
+// Do not serve arbitrary archive slugs as soft-200 pages.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const [trCategories, enCategories] = await Promise.all([
     getCategoryIndex("tr"),

@@ -27,6 +27,9 @@ type TagPageProps = {
   params: Promise<{ tag: string }>;
 };
 
+// Do not serve arbitrary archive slugs as soft-200 pages.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const [trTags, enTags] = await Promise.all([getTagIndex("tr"), getTagIndex("en")]);
   const slugs = new Set([...trTags, ...enTags].map((tag) => tag.slug));
