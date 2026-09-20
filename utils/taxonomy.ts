@@ -10,6 +10,14 @@ export type TaxonomyEntry = {
   count: number;
 };
 
+// Archive pages need a meaningful content cluster before they are exposed to
+// search engines. A single matching item is useful for navigation, but it is
+// not a strong standalone landing page.
+export const MIN_INDEXABLE_TAXONOMY_ITEMS = 3;
+
+export const isIndexableTaxonomyEntry = (entry: TaxonomyEntry | undefined) =>
+  Boolean(entry && entry.count >= MIN_INDEXABLE_TAXONOMY_ITEMS);
+
 const upsertEntry = (map: Map<string, TaxonomyEntry>, label: string) => {
   const slug = slugify(label);
   if (!slug) return;

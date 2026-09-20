@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
 import { getIndexableContentList } from "@/utils/content";
@@ -6,7 +7,12 @@ import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
-import { getTagIndex, matchesSlug, resolveLabelBySlug } from "@/utils/taxonomy";
+import {
+  getTagIndex,
+  isIndexableTaxonomyEntry,
+  matchesSlug,
+  resolveLabelBySlug,
+} from "@/utils/taxonomy";
 import { slugify } from "@/utils/slugify";
 import { buildLanguageAlternates } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -34,6 +40,7 @@ export async function generateMetadata({ params }: TagPageProps) {
   const [trTags, enTags] = await Promise.all([getTagIndex("tr"), getTagIndex("en")]);
   const tags = locale === "tr" ? trTags : enTags;
   const tagSlug = decodeURIComponent(tagParam);
+  const currentTag = tags.find((entry) => entry.slug === tagSlug);
   const label = resolveLabelBySlug(tagSlug, tags) ?? tagSlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} etiketi` : `${label} tag`;
   const description =
@@ -50,7 +57,7 @@ export async function generateMetadata({ params }: TagPageProps) {
     path: `/tags/${tagSlug}`,
     locale,
     alternatesLanguages,
-    robots: tags.some((entry) => entry.slug === tagSlug) ? undefined : NOINDEX_FOLLOW_ROBOTS,
+    robots: isIndexableTaxonomyEntry(currentTag) ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 
@@ -64,6 +71,7 @@ export default async function TagPage({ params }: TagPageProps) {
     getIndexableContentList("glossary", { locale }),
     getTagIndex(locale),
   ]);
+  if (!tags.some((entry) => entry.slug === tagSlug)) notFound();
   const copy = getMessages(locale).pages.tags;
 
   const label = resolveLabelBySlug(tagSlug, tags) ?? tagSlug.replace(/-/g, " ");

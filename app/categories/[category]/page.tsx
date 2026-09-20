@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
 import { getIndexableContentList } from "@/utils/content";
@@ -6,7 +7,12 @@ import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
-import { getCategoryIndex, matchesSlug, resolveLabelBySlug } from "@/utils/taxonomy";
+import {
+  getCategoryIndex,
+  isIndexableTaxonomyEntry,
+  matchesSlug,
+  resolveLabelBySlug,
+} from "@/utils/taxonomy";
 import { slugify } from "@/utils/slugify";
 import { buildLanguageAlternates } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -40,6 +46,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   ]);
   const categories = locale === "tr" ? trCategories : enCategories;
   const categorySlug = decodeURIComponent(categoryParam);
+  const currentCategory = categories.find((entry) => entry.slug === categorySlug);
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} kategorisi` : `${label} category`;
   const description =
@@ -56,7 +63,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
     path: `/categories/${categorySlug}`,
     locale,
     alternatesLanguages,
-    robots: categories.some((entry) => entry.slug === categorySlug) ? undefined : NOINDEX_FOLLOW_ROBOTS,
+    robots: isIndexableTaxonomyEntry(currentCategory) ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 
@@ -70,6 +77,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     getIndexableContentList("glossary", { locale }),
     getCategoryIndex(locale),
   ]);
+  if (!categories.some((entry) => entry.slug === categorySlug)) notFound();
   const copy = getMessages(locale).pages.categories;
 
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");

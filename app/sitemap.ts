@@ -5,7 +5,7 @@ import { standardsManifest } from "@/data/standards";
 import { getToolGuideBySlug } from "@/lib/tool-guides";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { SITE_URL, buildLanguageAlternates } from "@/utils/seo";
-import { getCategoryIndex, getTagIndex } from "@/utils/taxonomy";
+import { getCategoryIndex, getTagIndex, isIndexableTaxonomyEntry } from "@/utils/taxonomy";
 
 const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
 const locales = ["tr", "en"] as const;
@@ -181,22 +181,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-    categories.forEach((category) => {
+    categories.filter(isIndexableTaxonomyEntry).forEach((category) => {
       addEntry(`/categories/${category.slug}`, locale, {
         changeFrequency: "weekly",
         priority: 0.55,
         supportedLocales: supportedLocalesFor((content) =>
-          content.categories.some((candidate) => candidate.slug === category.slug),
+          isIndexableTaxonomyEntry(content.categories.find((candidate) => candidate.slug === category.slug)),
         ),
       });
     });
 
-    tags.forEach((tag) => {
+    tags.filter(isIndexableTaxonomyEntry).forEach((tag) => {
       addEntry(`/tags/${tag.slug}`, locale, {
         changeFrequency: "weekly",
         priority: 0.45,
         supportedLocales: supportedLocalesFor((content) =>
-          content.tags.some((candidate) => candidate.slug === tag.slug),
+          isIndexableTaxonomyEntry(content.tags.find((candidate) => candidate.slug === tag.slug)),
         ),
       });
     });

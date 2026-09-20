@@ -43,7 +43,11 @@ describe("sitemap indexability policy", () => {
 
 describe("taxonomy quality gate", () => {
   it("keeps only tags and categories backed by visible indexable content or a tool", async () => {
-    const [{ getIndexableContentList }, { getCategoryIndex, getTagIndex, matchesSlug }, { toolCatalog }] =
+    const [
+      { getIndexableContentList },
+      { getCategoryIndex, getTagIndex, isIndexableTaxonomyEntry, matchesSlug },
+      { toolCatalog },
+    ] =
       await Promise.all([
         import("@/utils/content"),
         import("@/utils/taxonomy"),
@@ -74,6 +78,18 @@ describe("taxonomy quality gate", () => {
           (tool) => Boolean(tool.category) && matchesSlug(tool.category ?? "", category.slug),
         );
         expect(hasContent || hasTool, `${locale} category ${category.slug}`).toBe(true);
+      }
+
+      const sitemapPaths = entries
+        .map((entry) => new URL(entry.url).pathname)
+        .filter((path) => path.startsWith(`/${locale}/`));
+      for (const tag of tags) {
+        expect(sitemapPaths.includes(`/${locale}/tags/${tag.slug}`)).toBe(isIndexableTaxonomyEntry(tag));
+      }
+      for (const category of categories) {
+        expect(sitemapPaths.includes(`/${locale}/categories/${category.slug}`)).toBe(
+          isIndexableTaxonomyEntry(category),
+        );
       }
     }
   });
