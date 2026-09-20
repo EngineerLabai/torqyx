@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import GithubSlugger from "github-slugger";
 import type { Locale } from "@/utils/locale";
 import { isContentIndexable } from "@/utils/content-quality";
+import { getContentSupplement } from "@/utils/content-supplements";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -285,7 +286,7 @@ const ensureUniqueSlugs = (items: ParsedContentItem[], type: ContentType, locale
   }
 };
 
-const parseContentFile = async (sourcePath: string, type: ContentType, slug: string): Promise<ParsedContentItem> => {
+const parseContentFile = async (sourcePath: string, type: ContentType, slug: string, locale: Locale): Promise<ParsedContentItem> => {
   const raw = await fs.readFile(sourcePath, "utf8");
   const { data, content } = matter(raw);
   const frontmatter = validateFrontmatter(data as Record<string, unknown>, sourcePath);
@@ -294,7 +295,8 @@ const parseContentFile = async (sourcePath: string, type: ContentType, slug: str
     ensureGuideSections(content, sourcePath);
   }
 
-  const readingTimeMinutes = normalizeReadingTime(frontmatter.readingTime, content);
+  const enrichedContent = `${content.trim()}\n${getContentSupplement(type, slug, locale)}`.trim();
+  const readingTimeMinutes = normalizeReadingTime(frontmatter.readingTime, enrichedContent);
 
   return {
     slug,
@@ -307,7 +309,7 @@ const parseContentFile = async (sourcePath: string, type: ContentType, slug: str
     draft: frontmatter.draft,
     readingTimeMinutes,
     canonical: frontmatter.canonical,
-    content,
+    content: enrichedContent,
     sourcePath,
   };
 };
@@ -330,7 +332,7 @@ export const getContentItems = async (type: ContentType, options: ContentQueryOp
   const locale = options.locale ?? "tr";
   const files = await readContentFiles(type, locale);
   const items = await Promise.all(
-    files.map((file) => parseContentFile(file.path, type, file.slug)),
+    files.map((file) => parseContentFile(file.path, type, file.slug, file.locale)),
   );
   ensureUniqueSlugs(items, type, locale);
 
@@ -397,7 +399,7 @@ export const getContentBySlug = async (type: ContentType, slug: string, options:
   const resolvedPath = await resolveContentPath(type, slug, locale);
   if (!resolvedPath) return null;
 
-  const item = await parseContentFile(resolvedPath, type, slug);
+  const item = await parseContentFile(resolvedPath, type, slug, locale);
   if (!includeDrafts && item.draft) return null;
   return item;
 };

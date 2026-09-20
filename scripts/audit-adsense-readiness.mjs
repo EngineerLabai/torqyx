@@ -5,6 +5,18 @@ const ROOT = process.cwd();
 const read = (relativePath) => fs.readFileSync(path.join(ROOT, relativePath), "utf8");
 const failures = [];
 const notes = [];
+const contentSupplements = read("utils/content-supplements.ts");
+
+const getSupplement = (slug, locale) => {
+  const escapedSlug = slug.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+  const entryMatch = new RegExp(`(?:^|\\n)  (?:"${escapedSlug}"|${escapedSlug}): \\{`, "u").exec(contentSupplements);
+  if (!entryMatch) return "";
+  const entryStart = entryMatch.index;
+  const entryEnd = contentSupplements.indexOf("\n  },", entryStart);
+  const entry = contentSupplements.slice(entryStart, entryEnd > entryStart ? entryEnd : undefined);
+  const tick = String.fromCharCode(96);
+  return new RegExp(`${locale}:\\s*${tick}([\\s\\S]*?)${tick}`, "u").exec(entry)?.[1] ?? "";
+};
 
 const layout = read("app/layout.tsx");
 const adsenseConfig = read("config/adsense.ts");
@@ -111,7 +123,10 @@ if (!adsExample.includes('NEXT_PUBLIC_ADSENSE_ENABLED="false"')) {
   const thinFiles = files.filter((name) => {
     const raw = fs.readFileSync(path.join(contentDir, name), "utf8");
     const body = raw.split("---").slice(2).join("---");
-    return body.trim().split(/\s+/u).filter(Boolean).length < threshold;
+    const match = /^(.*)\.(tr|en)\.mdx$/u.exec(name);
+    const supplement = match ? getSupplement(match[1], match[2]) : "";
+    const effectiveBody = `${body}\n${supplement}`;
+    return effectiveBody.trim().split(/\s+/u).filter(Boolean).length < threshold;
   });
   notes.push(`${thinFiles.length}/${files.length} ${type} files remain below the ${threshold}-word publication threshold.`);
 });
