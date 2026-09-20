@@ -99,6 +99,11 @@ export default async function AboutPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-semibold text-slate-900">{copy.sections.developerTitle}</h2>
           <p className="leading-relaxed">{copy.sections.developerBody}</p>
+          <p className="leading-relaxed text-slate-600">
+            {locale === "en"
+              ? "Editorial and technical review is maintained by the TORQYX Engineering Team. The team reviews calculation steps, cited references, unit consistency, and publication changes."
+              : "Editoryal ve teknik inceleme TORQYX Mühendislik Ekibi tarafından yürütülür. Ekip; hesap adımlarını, kaynakları, birim tutarlılığını ve yayın değişikliklerini gözden geçirir."}
+          </p>
         </section>
 
         <section className="space-y-3">

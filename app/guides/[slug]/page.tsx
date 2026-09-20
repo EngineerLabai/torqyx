@@ -153,7 +153,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
     },
     author: {
       "@type": "Organization",
-      name: brandContent.siteName,
+      name: "TORQYX Engineering Team",
+      url: buildLocalizedCanonical("/hakkinda", locale),
     },
     publisher: {
       "@type": "Organization",

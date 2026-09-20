@@ -16,6 +16,7 @@ export default function AdSense({ publisherId }: AdSenseProps) {
   const shouldLoadAds =
     process.env.NODE_ENV === "production" &&
     process.env.NEXT_PUBLIC_ADSENSE_ENABLED === "true" &&
+    process.env.NEXT_PUBLIC_ADSENSE_CMP_READY === "true" &&
     publisherId !== "ca-pub-0000000000000000";
   const allowedOnPath = isAdsAllowedPath(pathname);
 

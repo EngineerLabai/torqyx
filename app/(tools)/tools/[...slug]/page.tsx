@@ -253,7 +253,8 @@ export default async function ToolReportRoute({ params, searchParams }: PageProp
       },
       author: {
         "@type": "Organization",
-        name: brand.siteName,
+        name: "TORQYX Engineering Team",
+        url: buildLocalizedCanonical("/hakkinda", locale),
       },
       publisher: {
         "@type": "Organization",

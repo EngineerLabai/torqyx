@@ -112,7 +112,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     author: {
       "@type": "Organization",
-      name: brandContent.siteName,
+      name: "TORQYX Engineering Team",
+      url: buildLocalizedCanonical("/hakkinda", locale),
     },
     publisher: {
       "@type": "Organization",
@@ -176,6 +177,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.title}
           </h1>
           <p className="text-[15px] leading-relaxed text-slate-600 md:text-base">{post.description}</p>
+          <p className="text-xs text-slate-500">
+            {locale === "tr" ? "Hazırlayan: TORQYX Mühendislik Ekibi" : "Reviewed by: TORQYX Engineering Team"}
+            {" · "}
+            <Link href={withLocalePrefix("/hakkinda", locale)} className="font-semibold text-emerald-700 hover:underline">
+              {locale === "tr" ? "Metodoloji ve ekip" : "Methodology and team"}
+            </Link>
+          </p>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <span key={tag} className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600">
