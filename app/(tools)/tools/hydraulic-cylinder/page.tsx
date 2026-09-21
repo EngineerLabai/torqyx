@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import ToolPageClient from "@/components/tools/ToolPageClient";
 import ToolPageIntro from "@/components/tools/ToolPageIntro";
-import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import ToolPageWithDocs from "@/components/tools/ToolPageWithDocs";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
 import { buildToolMetadata } from "@/utils/tool-seo";
@@ -12,12 +13,13 @@ export async function generateMetadata() {
 
 export default async function HydraulicCylinderPage() {
   const locale = await getLocaleFromCookies();
-  const initialDocs = await getToolDocsResponse("hydraulic-cylinder", locale);
   return (
     <>
       <ToolSeo toolId="hydraulic-cylinder" locale={locale} />
       <ToolPageIntro toolId="hydraulic-cylinder" locale={locale} />
-      <ToolPageClient toolId="hydraulic-cylinder" initialDocs={initialDocs} hideIntro />
+      <Suspense fallback={<ToolPageClient toolId="hydraulic-cylinder" hideIntro />}>
+        <ToolPageWithDocs toolId="hydraulic-cylinder" locale={locale} />
+      </Suspense>
     </>
   );
 }

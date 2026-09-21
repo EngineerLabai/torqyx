@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import ToolPageClient from "@/components/tools/ToolPageClient";
 import ToolPageIntro from "@/components/tools/ToolPageIntro";
-import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import ToolPageWithDocs from "@/components/tools/ToolPageWithDocs";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
 import { buildToolMetadata } from "@/utils/tool-seo";
@@ -12,12 +13,13 @@ export async function generateMetadata() {
 
 export default async function BearingLifePage() {
   const locale = await getLocaleFromCookies();
-  const initialDocs = await getToolDocsResponse("bearing-life", locale);
   return (
     <>
       <ToolSeo toolId="bearing-life" locale={locale} />
       <ToolPageIntro toolId="bearing-life" locale={locale} />
-      <ToolPageClient toolId="bearing-life" initialDocs={initialDocs} hideIntro />
+      <Suspense fallback={<ToolPageClient toolId="bearing-life" hideIntro />}>
+        <ToolPageWithDocs toolId="bearing-life" locale={locale} />
+      </Suspense>
     </>
   );
 }

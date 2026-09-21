@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import ToolPageClient from "@/components/tools/ToolPageClient";
 import ToolPageIntro from "@/components/tools/ToolPageIntro";
-import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import ToolPageWithDocs from "@/components/tools/ToolPageWithDocs";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
 import { buildToolMetadata } from "@/utils/tool-seo";
@@ -12,12 +13,13 @@ export async function generateMetadata() {
 
 export default async function BasicEngineeringPage() {
   const locale = await getLocaleFromCookies();
-  const initialDocs = await getToolDocsResponse("basic-engineering", locale);
   return (
     <>
       <ToolSeo toolId="basic-engineering" locale={locale} />
       <ToolPageIntro toolId="basic-engineering" locale={locale} />
-      <ToolPageClient toolId="basic-engineering" initialDocs={initialDocs} hideIntro />
+      <Suspense fallback={<ToolPageClient toolId="basic-engineering" hideIntro />}>
+        <ToolPageWithDocs toolId="basic-engineering" locale={locale} />
+      </Suspense>
     </>
   );
 }

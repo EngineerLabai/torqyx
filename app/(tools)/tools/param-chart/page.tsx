@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import ToolPageClient from "@/components/tools/ToolPageClient";
 import ToolPageIntro from "@/components/tools/ToolPageIntro";
-import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import ToolPageWithDocs from "@/components/tools/ToolPageWithDocs";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
 import { buildToolMetadata } from "@/utils/tool-seo";
@@ -12,12 +13,13 @@ export async function generateMetadata() {
 
 export default async function ParamChartPage() {
   const locale = await getLocaleFromCookies();
-  const initialDocs = await getToolDocsResponse("param-chart", locale);
   return (
     <>
       <ToolSeo toolId="param-chart" locale={locale} />
       <ToolPageIntro toolId="param-chart" locale={locale} />
-      <ToolPageClient toolId="param-chart" initialDocs={initialDocs} hideIntro />
+      <Suspense fallback={<ToolPageClient toolId="param-chart" hideIntro />}>
+        <ToolPageWithDocs toolId="param-chart" locale={locale} />
+      </Suspense>
     </>
   );
 }
