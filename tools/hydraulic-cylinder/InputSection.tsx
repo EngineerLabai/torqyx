@@ -1,7 +1,12 @@
 import type { ToolInputProps } from "@/tools/_shared/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { HydraulicCylinderInput } from "./types";
 
 export default function InputSection({ input, onChange, errors }: ToolInputProps<HydraulicCylinderInput>) {
+  const { locale } = useLocale();
+  const copy = locale === "tr"
+    ? { title: "Hidrolik silindir hesapları", description: "Basınç, çap ve debi ile kuvvet ve hızları hesapla.", pressure: "Basınç", bore: "Silindir çapı", rod: "Mil çapı", flow: "Debi" }
+    : { title: "Hydraulic cylinder calculations", description: "Calculate force and speed from pressure, diameters, and flow.", pressure: "Pressure", bore: "Bore diameter", rod: "Rod diameter", flow: "Flow rate" };
   const handleChange = <K extends keyof HydraulicCylinderInput>(key: K, value: HydraulicCylinderInput[K]) => {
     onChange({ ...input, [key]: value });
   };
@@ -9,13 +14,13 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Hidrolik silindir hesapları</h2>
-        <p className="text-xs text-slate-500">Basınç, çap ve debi ile kuvvet ve hızları hesapla.</p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       <div className="grid gap-3 text-xs sm:grid-cols-2">
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Basınç (bar)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.pressure} (bar)</label>
           <input
             type="number"
             inputMode="decimal"
@@ -27,7 +32,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Silindir çapı (mm)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.bore} (mm)</label>
           <input
             type="number"
             inputMode="decimal"
@@ -39,7 +44,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Mil çapı (mm)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.rod} (mm)</label>
           <input
             type="number"
             inputMode="decimal"
@@ -51,7 +56,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Debi (L/dk)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.flow} (L/min)</label>
           <input
             type="number"
             inputMode="decimal"
