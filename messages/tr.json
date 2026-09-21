@@ -128,7 +128,7 @@
     },
     "seo": {
       "title": "Mekanik Mühendislik Hesaplayıcıları",
-      "description": "Makine tasarımı, cıvata seçimi, güç aktarımı ve termal kontroller için ISO/DIN referanslı hesap araçları."
+      "description": "Makine tasarımı, cıvata seçimi, güç aktarımı ve termal kontroller için görünür formüllü hesap araçları."
     },
     "valueProps": {
       "kicker": "Neden geçiş yapılıyor?",
@@ -168,7 +168,7 @@
         "formulaNotes": [
           "Her araçta varsayımlar listelenir",
           "Birimler her girişte doğrulanır",
-          "ISO/DIN referansları belirtilir"
+          "Araca özgü referanslar belirtilir"
         ]
       },
       "library": {
@@ -248,7 +248,7 @@
   "pages": {
     "tools": {
       "badge": "Araç Kütüphanesi",
-      "title": "Mekanik Mühendislik Hesap Araçları — ISO/DIN Referanslı Hesaplayıcılar",
+      "title": "Mekanik Mühendislik Hesap Araçları",
       "description": "Hesaplayıcı, paket ve rehberleri filtrele, ihtiyacın olanı tek tıkla aç.",
       "imageAlt": "Hesaplayıcı kütüphanesi filtreleri ve araç kartları"
     },

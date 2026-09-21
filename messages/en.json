@@ -128,7 +128,7 @@
     },
     "seo": {
       "title": "TORQYX | Engineering & Calculation Tools",
-      "description": "ISO/DIN-referenced calculation tools for machine design, fasteners, power transmission, and thermal checks."
+      "description": "Calculation tools with visible formulas for machine design, fasteners, power transmission, and thermal checks."
     },
     "valueProps": {
       "kicker": "Why teams switch",
@@ -168,7 +168,7 @@
         "formulaNotes": [
           "Assumptions listed per tool",
           "Units validated on every input",
-          "Standards referenced (ISO/DIN)"
+          "Tool-specific references where documented"
         ]
       },
       "library": {
@@ -248,7 +248,7 @@
   "pages": {
     "tools": {
       "badge": "Tool Library",
-      "title": "Mechanical Engineering Calculation Tools — ISO/DIN Referenced Calculators",
+      "title": "Mechanical Engineering Calculation Tools",
       "description": "Filter calculators, packages, and guides, then open what you need.",
       "imageAlt": "Tool library overview with filters and calculator cards"
     },

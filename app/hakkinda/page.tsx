@@ -21,7 +21,7 @@ const pageCopy = {
       "TORQYX; mekanik tasarım, üretim, kalite ve proje çalışmalarında ön hesap, tasarım doğrulama ve teknik rapor hazırlama süreçlerini desteklemek için geliştirilmiştir.",
     methodologyTitle: "Metodoloji",
     methodologyItems: [
-      "ISO/DIN/ASME standartları, mühendislik el kitapları ve üretici veri sayfaları temel alınır.",
+      "Her araçta yayımlanan formül, varsayım ve doğrulanmış referanslar ayrı ayrı gösterilir; kritik tasarımda resmi kaynaklar ayrıca kontrol edilir.",
       "Birim tutarlılığı, sınır kontrolleri ve varsayımlar açık biçimde belirtilir.",
       "Örnek senaryolar ve çapraz kontrollerle çıktılar gözden geçirilir; değişiklikler changelog'da izlenir.",
     ],
@@ -50,7 +50,7 @@ const pageCopyEn = {
       "TORQYX is built to support preliminary calculations, design validation, and technical reporting across mechanical design, manufacturing, quality, and project workflows.",
     methodologyTitle: "Methodology",
     methodologyItems: [
-      "Formulas are sourced from ISO/DIN/ASME standards, engineering handbooks, and manufacturer datasheets.",
+      "Each tool publishes its formula, assumptions, and verified references separately; critical design work requires checking the official source material.",
       "Unit consistency, boundary checks, and explicit assumptions are built into every calculator.",
       "Sample scenarios and cross-checks are reviewed, and changes are tracked in the changelog.",
     ],
