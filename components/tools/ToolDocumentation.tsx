@@ -33,11 +33,11 @@ const LABELS: Record<
   }
 > = {
   tr: {
-    sectionTitle: "Standart Dokümantasyon",
+    sectionTitle: "Araç Özel Dokümantasyonu",
     scope: "Kapsam: Bu araç ne hesaplar?",
     assumptionsAndUnits: "Varsayımlar ve Birimler",
     limits: "Limitler / Sınırlar",
-    references: "Referans Standart",
+    references: "Uygulanabilir Referanslar",
     validation: "Doğrulama Örneği",
     release: "Sürüm ve Güncelleme",
     input: "Girdi",
@@ -47,11 +47,11 @@ const LABELS: Record<
     note: "Not",
   },
   en: {
-    sectionTitle: "Standard Documentation",
+    sectionTitle: "Tool-Specific Documentation",
     scope: "Scope: What does this tool calculate?",
     assumptionsAndUnits: "Assumptions and Units",
     limits: "Limits / Boundaries",
-    references: "Reference Standard",
+    references: "Applicable References",
     validation: "Validation Example",
     release: "Version and Update",
     input: "Input",
