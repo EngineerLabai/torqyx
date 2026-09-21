@@ -20,39 +20,6 @@ const formatDate = (value: string, locale: "tr" | "en") =>
     new Date(value),
   );
 
-const stripMdxText = (value: string) =>
-  value
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    .replace(/[`*_>#-]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-const extractFaqItems = (content: string) => {
-  const lines = content.split(/\r?\n/);
-  const items: Array<{ question: string; answer: string }> = [];
-
-  for (let index = 0; index < lines.length; index += 1) {
-    const match = /^###\s+(?:Soru|Question)\s*:\s*(.+)$/i.exec(lines[index].trim());
-    if (!match) continue;
-
-    const answerLines: string[] = [];
-    for (let answerIndex = index + 1; answerIndex < lines.length; answerIndex += 1) {
-      const line = lines[answerIndex];
-      if (/^#{2,4}\s+/.test(line.trim())) break;
-      if (line.trim()) answerLines.push(line);
-    }
-
-    const question = stripMdxText(match[1]);
-    const answer = stripMdxText(answerLines.join(" "));
-    if (question && answer) {
-      items.push({ question, answer });
-    }
-  }
-
-  return items.slice(0, 5);
-};
-
 type GuidePageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -192,24 +159,9 @@ export default async function GuidePage({ params }: GuidePageProps) {
       },
     ],
   };
-  const faqItems = extractFaqItems(guide.content);
-  const faqJsonLd =
-    faqItems.length > 0
-      ? {
-          "@type": "FAQPage",
-          mainEntity: faqItems.map((item) => ({
-            "@type": "Question",
-            name: item.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: item.answer,
-            },
-          })),
-        }
-      : null;
   const guideJsonLd = {
     "@context": "https://schema.org",
-    "@graph": [articleJsonLd, breadcrumbJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])],
+    "@graph": [articleJsonLd, breadcrumbJsonLd],
   };
 
   const toc = extractToc(guide.content);

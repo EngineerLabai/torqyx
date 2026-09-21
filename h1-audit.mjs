@@ -93,8 +93,8 @@ function hasH1InTSXFile(filePath, visited = new Set()) {
   const content = fs.readFileSync(filePath, "utf-8");
 
   if (hasH1InTSXContent(content)) return true;
-  if (/redirect\(/.test(content)) return true;
-  if (/<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(content)) return true;
+  if (/(?:permanentRedirect|redirect)\s*\(/.test(content)) return true;
+  if (/<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|ToleranceLabWorkspace|Client)[\s/>]/.test(content)) return true;
 
   const imports = extractLocalImports(content, path.dirname(filePath));
   return imports.some((imp) => hasH1InTSXFile(imp, visited));
@@ -102,8 +102,8 @@ function hasH1InTSXFile(filePath, visited = new Set()) {
 
 function hasH1InTSX(content, filePath = null) {
   if (hasH1InTSXContent(content)) return true;
-  if (/redirect\(/.test(content)) return true;
-  if (/<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(content)) return true;
+  if (/(?:permanentRedirect|redirect)\s*\(/.test(content)) return true;
+  if (/<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|ToleranceLabWorkspace|Client)[\s/>]/.test(content)) return true;
 
   if (filePath) {
     const imports = extractLocalImports(content, path.dirname(filePath));

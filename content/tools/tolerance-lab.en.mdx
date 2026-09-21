@@ -1,0 +1,19 @@
+## Tolerance Lab usage notes
+
+Tolerance Lab reviews a linear chain of dimensions that are added or subtracted. Enter the nominal value, upper deviation, lower deviation, and direction for each member. All deviations must use the same unit; a typical bilateral tolerance is entered with a positive upper deviation and a negative lower deviation.
+
+### Worst-case calculation
+
+The worst-case result is the deterministic interval formed when each member reaches its limiting value in the same boundary direction. Use it for assembly clearance, minimum wall, or guaranteed interference checks. A subtractive member reverses its nominal contribution and deviation bounds in the chain equation.
+
+### RSS calculation
+
+The RSS view is a statistical estimate that treats tolerance half-ranges as independent contributors. For asymmetric tolerances, the tolerance center is shown as a shift from the nominal result. This estimate does not replace production distributions, process capability, or measured data; critical decisions need worst-case and process verification together.
+
+### Sensitivity and report
+
+The sensitivity bars highlight the members contributing most to RSS variance. The report tab provides a printable summary and turns the current inputs into a shareable state link. Share URLs carry only the user workspace state and are marked noindex for search engines.
+
+### Scope boundary
+
+This tool provides a linear stack and an educational GD&T concept summary. Datum reference frames, MMC/MMR, LMC/LMR, bonus tolerance, virtual condition, and basic position are not implemented as a full drawing-compliance engine. Critical designs with ISO GPS or ASME Y14.5 callouts must be verified by an authorized engineer against the current applicable standard.

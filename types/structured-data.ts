@@ -17,7 +17,8 @@ export type SoftwareApplicationSchemaInput = {
   name: string;
   description?: string;
   url: string;
-  applicationCategory: string;
+  applicationCategory?: string;
+  applicationSubCategory?: string;
   operatingSystem: string;
   inLanguage?: string;
   featureList?: string[];
@@ -70,4 +71,3 @@ export type StructuredDataByType = {
   FAQPage: FAQPageSchemaInput;
   HowTo: HowToSchemaInput;
 };
-

@@ -190,11 +190,15 @@ export function getToolSeo(toolPath: string, locale: Locale = DEFAULT_LOCALE): T
 
 export function buildToolApplicationSchema(toolPath: string, locale: Locale = DEFAULT_LOCALE): WebApplicationSchemaInput {
   const meta = getToolSeo(toolPath, locale);
+  const normalized = normalizePath(toolPath);
+  const tool = toolById.get(normalized) ?? toolByHref.get(meta.href) ?? null;
+  const applicationCategory = tool?.type === "guide" ? "ReferenceApplication" : "UtilitiesApplication";
 
   return {
     name: meta.name,
     description: meta.description,
-    applicationCategory: "EngineeringApplication",
+    applicationCategory,
+    applicationSubCategory: tool?.category === "Mechanical" ? "Mechanical engineering utility" : "Engineering utility",
     operatingSystem: "Web",
     inLanguage: locale === "tr" ? "tr-TR" : "en-US",
     url: meta.canonical,
@@ -223,7 +227,6 @@ export function buildToolHowToSchema(toolPath: string, locale: Locale = DEFAULT_
 
 export function buildToolSchema(toolPath: string, locale: Locale = DEFAULT_LOCALE) {
   const application = buildToolApplicationSchema(toolPath, locale);
-  const howTo = buildToolHowToSchema(toolPath, locale);
 
   return {
     "@context": "https://schema.org",
@@ -232,14 +235,6 @@ export function buildToolSchema(toolPath: string, locale: Locale = DEFAULT_LOCAL
         "@type": "WebApplication",
         ...application,
       },
-      ...(howTo
-        ? [
-            {
-              "@type": "HowTo",
-              ...howTo,
-            },
-          ]
-        : []),
     ],
   };
 }

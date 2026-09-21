@@ -2,6 +2,7 @@ import type { ToolInputMeta, ToolReference } from "@/tools/_shared/types";
 import type { HowToSchemaInput, HowToStepSchema, SoftwareApplicationSchemaInput } from "@/types/structured-data";
 import type { Locale } from "@/utils/locale";
 import { resolveLocalizedValue, type LocalizedValue } from "@/utils/locale-values";
+import { withLocalePrefix } from "@/utils/locale-path";
 import { SITE_URL } from "@/utils/seo";
 
 export type ToolConfig = {
@@ -119,13 +120,14 @@ function buildSoftwareApplicationSchema(
   locale: Locale,
   baseUrl: string
 ): SoftwareApplicationSchemaInput {
-  const toolUrl = `${baseUrl}/tools/${tool.id}`;
+  const toolUrl = new URL(withLocalePrefix(`/tools/${tool.id}`, locale), baseUrl).toString();
 
   return {
     name: tool.title,
     description: tool.description,
     url: toolUrl,
-    applicationCategory: "EngineeringApplication",
+    applicationCategory: "UtilitiesApplication",
+    applicationSubCategory: "Engineering calculation utility",
     operatingSystem: "Web Browser",
     inLanguage: locale,
     featureList: [
@@ -152,7 +154,7 @@ export function buildHowToSchema(
   locale: Locale,
   baseUrl: string = SITE_URL
 ): HowToSchemaInput & { application: SoftwareApplicationSchemaInput } {
-  const toolUrl = `${baseUrl}/tools/${tool.id}`;
+  const toolUrl = new URL(withLocalePrefix(`/tools/${tool.id}`, locale), baseUrl).toString();
 
   const steps = extractHowToSteps(tool, locale);
   const tools = extractHowToTools(tool, locale);

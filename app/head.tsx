@@ -27,7 +27,8 @@ export default function Head() {
           name: brandCopy.siteName,
           description: brandCopy.tagline,
           url: SITE_URL,
-          applicationCategory: "EngineeringApplication",
+          applicationCategory: "UtilitiesApplication",
+          applicationSubCategory: "Engineering calculation utility",
           operatingSystem: "Web",
           offers,
         }}
