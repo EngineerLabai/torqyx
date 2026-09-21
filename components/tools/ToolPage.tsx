@@ -67,9 +67,11 @@ const PdfPreviewModal = dynamic(() => import("@/components/pdf/PdfPreviewModal")
 export default function ToolPage<TInput extends ToolInputRecord, TResult extends ToolResultRecord>({
   tool,
   initialDocs,
+  hideIntro = false,
 }: {
   tool: ToolDefinition<TInput, TResult>;
   initialDocs?: ComponentProps<typeof ToolDocTabs>["initialDocs"];
+  hideIntro?: boolean;
 }) {
   const { locale } = useLocale();
   const { system } = useUnitSystem();
@@ -286,7 +288,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   return (
     <PageShell>
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
-        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        {!hideIntro ? <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -304,7 +306,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
             </div>
             <p className="text-sm text-slate-600">{toolDescription}</p>
           </div>
-        </section>
+        </section> : null}
 
         <section className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
           <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

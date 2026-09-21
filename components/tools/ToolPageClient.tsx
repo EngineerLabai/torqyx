@@ -8,11 +8,12 @@ import { getToolPageTool } from "@/tools/tool-page-tools";
 type ToolPageClientProps = {
   toolId: string;
   initialDocs?: ToolDocsResponse | null;
+  hideIntro?: boolean;
 };
 
-export default function ToolPageClient({ toolId, initialDocs }: ToolPageClientProps) {
+export default function ToolPageClient({ toolId, initialDocs, hideIntro = false }: ToolPageClientProps) {
   const tool = getToolPageTool(toolId);
   if (!tool) return null;
   const typedTool = tool as unknown as ToolDefinition<Record<string, unknown>, Record<string, unknown>>;
-  return <ToolPage tool={typedTool} initialDocs={initialDocs} />;
+  return <ToolPage tool={typedTool} initialDocs={initialDocs} hideIntro={hideIntro} />;
 }

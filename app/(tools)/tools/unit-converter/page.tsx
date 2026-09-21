@@ -1,4 +1,5 @@
-﻿import ToolPageClient from "@/components/tools/ToolPageClient";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import ToolPageIntro from "@/components/tools/ToolPageIntro";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -15,9 +16,8 @@ export default async function UnitConverterPage() {
   return (
     <>
       <ToolSeo toolId="unit-converter" locale={locale} />
-      <ToolPageClient toolId="unit-converter" initialDocs={initialDocs} />
+      <ToolPageIntro toolId="unit-converter" locale={locale} />
+      <ToolPageClient toolId="unit-converter" initialDocs={initialDocs} hideIntro />
     </>
   );
 }
-
-

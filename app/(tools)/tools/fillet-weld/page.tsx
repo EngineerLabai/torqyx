@@ -1,4 +1,5 @@
-﻿import ToolPageClient from "@/components/tools/ToolPageClient";
+import ToolPageClient from "@/components/tools/ToolPageClient";
+import ToolPageIntro from "@/components/tools/ToolPageIntro";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import ToolSeo from "@/components/tools/ToolSeo";
@@ -15,9 +16,8 @@ export default async function FilletWeldPage() {
   return (
     <>
       <ToolSeo toolId="fillet-weld" locale={locale} />
-      <ToolPageClient toolId="fillet-weld" initialDocs={initialDocs} />
+      <ToolPageIntro toolId="fillet-weld" locale={locale} />
+      <ToolPageClient toolId="fillet-weld" initialDocs={initialDocs} hideIntro />
     </>
   );
 }
-
-
