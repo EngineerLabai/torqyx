@@ -420,15 +420,13 @@ export default function ReferenceCenter() {
 
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-4">
-            <h2 className="text-sm font-semibold text-slate-900">Makine Bileşenleri - Blueprint Referanslar</h2>
-            <p className="mt-1 text-xs text-slate-600">
-              Teknik çizim ve blueprint referansları
-            </p>
+            <h2 className="text-sm font-semibold text-slate-900">{copy.blueprintTitle}</h2>
+            <p className="mt-1 text-xs text-slate-600">{copy.blueprintDescription}</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { title: "Rulman Blueprint", image: "/images/rulman-blueprint.webp" },
-              { title: "Hidrolik Silindir Blueprint", image: "/images/hydraulic-circuit.webp" },
+              { title: copy.bearingBlueprint, image: "/images/rulman-blueprint.webp" },
+              { title: copy.hydraulicBlueprint, image: "/images/hydraulic-circuit.webp" },
             ].map((blueprint) => (
               <div
                 key={blueprint.title}

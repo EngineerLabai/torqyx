@@ -13,6 +13,7 @@ import frictionQuickData from "../../data/reference/friction-quick.json";
 import siPrefixesData from "../../data/reference/si-prefixes.json";
 import { withLocalePrefix } from "../../utils/locale-path";
 import { buildSearchText, type SearchIndexData, type SearchIndexItem } from "../../utils/search-index";
+import { toolSearchAliases } from "./tool-aliases";
 import { ACTIVE_TOOL_DOCS } from "../tool-docs/registry";
 import { toolDocStandardSchema } from "../tool-docs/schema";
 import { getMessages } from "../../utils/messages";
@@ -77,17 +78,23 @@ const buildKeywords = (...values: Array<string | string[] | null | undefined>) =
 
 const buildReferenceItems = (locale: Locale) => {
   const items: SearchIndexItem[] = [];
+  const alternateLocale: Locale = locale === "tr" ? "en" : "tr";
   for (const section of referenceSections) {
     const sectionTitle = section.title[locale];
     for (const row of section.rows) {
       const rowValues = section.columns.map((column) => getLocalized(row[column.key], locale));
+      const alternateRowValues = section.columns.map((column) => getLocalized(row[column.key], alternateLocale));
       const rowTitle = rowValues[0] || sectionTitle;
       const keywords = buildKeywords(
         sectionTitle,
+        section.title[alternateLocale],
         rowTitle,
         rowValues,
+        alternateRowValues,
         section.description?.[locale],
+        section.description?.[alternateLocale],
         section.note?.[locale],
+        section.note?.[alternateLocale],
       );
       items.push({
         id: `reference:${section.id}:${rowTitle}`,
@@ -188,7 +195,10 @@ const buildStandardsItems = (locale: Locale) => {
 const buildToolItems = (locale: Locale) => {
   return toolCatalog.map((tool) => {
     const copy = getToolCopy(tool, locale);
+    const turkishCopy = getToolCopy(tool, "tr");
+    const englishCopy = getToolCopy(tool, "en");
     const tags = tool.tags ?? [];
+    const aliases = toolSearchAliases[tool.id] ?? [];
     const localeTitles = { tr: tool.title, en: tool.titleEn ?? tool.title };
     return {
       id: `tool:${tool.id}`,
@@ -197,14 +207,20 @@ const buildToolItems = (locale: Locale) => {
       description: copy.description,
       href: withLocalePrefix(tool.href, locale),
       tags,
+      keywords: aliases,
       localeTitles,
       searchText: buildSearchText(
         copy.title,
         copy.description,
+        turkishCopy.title,
+        turkishCopy.description,
+        englishCopy.title,
+        englishCopy.description,
         tool.id,
         tags.join(" "),
         tool.category ?? "",
         tool.type,
+        aliases.join(" "),
         ...Object.values(localeTitles),
       ),
     } satisfies SearchIndexItem;
@@ -340,13 +356,14 @@ export const buildSearchIndexData = async (locale: Locale) => {
   const updatedAt = new Date().toISOString();
   const contentItems = await buildContentItems(locale);
 
-  const items: SearchIndexItem[] = [
+  const rawItems: SearchIndexItem[] = [
     ...buildToolItems(locale),
     ...buildStandardsHubItems(locale),
     ...buildReferenceItems(locale),
     ...buildStandardsItems(locale),
     ...contentItems,
   ];
+  const items = Array.from(new Map(rawItems.map((item) => [item.id, item])).values());
 
   const index: SearchIndexData = {
     locale,

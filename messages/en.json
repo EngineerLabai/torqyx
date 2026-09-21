@@ -269,12 +269,12 @@
       "description": "Please check back soon for the English version."
     },
     "reference": {
-      "badge": "Engineering Tables",
-      "title": "Engineering Tables Hub",
-      "description": "Use one hub for practical thread, fit, hardness, surface, friction, and SI reference tables.",
-      "imageAlt": "Engineering tables hub with searchable practical reference modules",
-      "searchTitle": "One search across all engineering tables",
-      "searchDescription": "Your query filters all modules at once and matched terms are highlighted in results.",
+      "badge": "Engineering References",
+      "title": "Engineering Reference Hub",
+      "description": "Find reliable paths to calculation tools, technical tables, material data, and standards in one place.",
+      "imageAlt": "Engineering reference hub with searchable technical tables and calculation tools",
+      "searchTitle": "One search across technical references and tables",
+      "searchDescription": "Your query filters the available reference modules at once and highlights matching terms.",
       "searchLabel": "Search tables",
       "searchPlaceholder": "M12, HRC, N7, MPa, µ, friction...",
       "sidebarTitle": "Categories",
@@ -287,6 +287,10 @@
       "copyTableSuccess": "Table copied to clipboard.",
       "copyError": "Copy failed.",
       "emptyState": "No matching rows found.",
+      "blueprintTitle": "Visual reference for machine elements",
+      "blueprintDescription": "Short visual references for technical drawings and component layout.",
+      "bearingBlueprint": "Bearing drawing reference",
+      "hydraulicBlueprint": "Hydraulic cylinder drawing reference",
       "disclaimer": "Tables are for quick engineering reference. Final decisions must be verified against standards, project specifications, and responsible engineering approval."
     },
     "materials": {

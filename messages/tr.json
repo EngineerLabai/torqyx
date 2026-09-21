@@ -269,12 +269,12 @@
       "description": "Türkçe sürüm yakında eklenecek. Lütfen daha sonra tekrar kontrol edin."
     },
     "reference": {
-      "badge": "Mühendislik Tabloları",
-      "title": "Mühendislik Tablo Merkezi",
-      "description": "Diş, geçme, sertlik, yüzey, sürtünme ve SI birim tablolarını tek merkezde yönet.",
-      "imageAlt": "Mühendislik tablo modülleri ve hızlı arama merkezi",
-      "searchTitle": "Tek arama, tüm mühendislik tabloları",
-      "searchDescription": "Arama terimi tüm tablo modüllerinde eşzamanlı filtrelenir ve eşleşmeler vurgulanır.",
+      "badge": "Mühendislik Referansları",
+      "title": "Mühendislik Referans Merkezi",
+      "description": "Hesap araçlarına, teknik tablolara, malzeme verilerine ve standartlara giden güvenilir yolları tek yerde keşfedin.",
+      "imageAlt": "Aranabilir teknik tablolar ve hesap araçları içeren mühendislik referans merkezi",
+      "searchTitle": "Tek arama, teknik referanslar ve tablolar",
+      "searchDescription": "Arama terimi mevcut referans modüllerinde eşzamanlı filtrelenir; eşleşmeler görünür biçimde vurgulanır.",
       "searchLabel": "Tablolarda ara",
       "searchPlaceholder": "M12, HRC, N7, MPa, µ, sürtünme...",
       "sidebarTitle": "Kategoriler",
@@ -287,6 +287,10 @@
       "copyTableSuccess": "Tablo panoya kopyalandı.",
       "copyError": "Kopyalama başarısız oldu.",
       "emptyState": "Eşleşen kayıt bulunamadı.",
+      "blueprintTitle": "Makine bileşenleri için görsel referanslar",
+      "blueprintDescription": "Teknik çizim ve bileşen yerleşimi için kısa görsel referanslar.",
+      "bearingBlueprint": "Rulman çizim referansı",
+      "hydraulicBlueprint": "Hidrolik silindir çizim referansı",
       "disclaimer": "Tablolar hızlı mühendislik kontrolü içindir. Nihai karar için ilgili standartlar, teknik şartname ve sorumlu mühendis onayı gereklidir."
     },
     "materials": {
