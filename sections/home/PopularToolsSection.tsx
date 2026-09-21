@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpDown, CircleDot, Cog, Droplets, RotateCw, Wrench } from "lucide-react";
 import type { Locale } from "@/utils/locale";
-import { formatMessage, getMessages } from "@/utils/messages";
+import { getMessages } from "@/utils/messages";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -14,12 +14,12 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
   const copy = messages.home.showcase;
   const categoryLabels = messages.components.toolLibrary.labels;
   const tools = [
-    { id: "bolt-calculator", icon: Wrench, usage: 12400 },
-    { id: "gear-module", icon: Cog, usage: 9800 },
-    { id: "pipe-pressure-loss", icon: Droplets, usage: 8600 },
-    { id: "shaft-torsion", icon: RotateCw, usage: 7400 },
-    { id: "bearing-life", icon: CircleDot, usage: 6900 },
-    { id: "hydraulic-cylinder", icon: ArrowUpDown, usage: 6100 },
+    { id: "bolt-calculator", icon: Wrench },
+    { id: "gear-module", icon: Cog },
+    { id: "pipe-pressure-loss", icon: Droplets },
+    { id: "shaft-torsion", icon: RotateCw },
+    { id: "bearing-life", icon: CircleDot },
+    { id: "hydraulic-cylinder", icon: ArrowUpDown },
   ]
     .map((item) => ({
       ...item,
@@ -27,9 +27,6 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
     }))
     .filter((item): item is typeof item & { tool: NonNullable<typeof item.tool> } => Boolean(item.tool));
   const libraryHref = withLocalePrefix("/tools", locale);
-  const formatUsage = (value: number) =>
-    formatMessage(copy.usageLabel, { count: new Intl.NumberFormat(locale === "tr" ? "tr-TR" : "en-US").format(value) });
-
   return (
     <section id="calculator-showcase" className="w-full py-12">
       <div className="site-container space-y-6">
@@ -40,7 +37,7 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map(({ tool, icon: Icon, usage }) => {
+          {tools.map(({ tool, icon: Icon }) => {
             const toolCopy = getToolCopy(tool, locale);
             const categoryLabel = tool.category ? categoryLabels.category[tool.category] : categoryLabels.generalCategory;
             return (
@@ -64,9 +61,6 @@ export default function PopularToolsSection({ locale }: PopularToolsSectionProps
                 </div>
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{toolCopy.description}</p>
                 <div className="mt-5 flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600">
-                    {formatUsage(usage)}
-                  </span>
                   <span className="inline-flex items-center gap-2 text-xs font-semibold text-brand">
                   {copy.tryNow}
                   </span>

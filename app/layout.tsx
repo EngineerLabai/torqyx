@@ -28,8 +28,8 @@ import "katex/dist/katex.min.css";
 
 const DEFAULT_SITE_TITLE = "TORQYX";
 const DEFAULT_SITE_DESCRIPTION =
-  "ISO/DIN/VDI referanslı, standart temelli mekanik mühendislik hesaplayıcıları. Tahmin değil, deterministik sonuç.";
-const DEFAULT_OG_DESCRIPTION = "ISO/DIN/VDI referanslı mekanik hesaplayıcılar, izlenebilir formüller ve raporlanabilir sonuçlar.";
+  "Görünür formüller, birim kontrolleri ve araca özgü referanslarla mekanik mühendislik hesaplayıcıları.";
+const DEFAULT_OG_DESCRIPTION = "Görünür formüller, açık varsayımlar ve raporlanabilir mekanik hesap sonuçları.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
@@ -80,7 +80,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ...(base.twitter ?? {}),
       card: "summary_large_image",
       title: DEFAULT_SITE_TITLE,
-      description: "ISO/DIN/VDI referanslı mekanik hesaplayıcılar.",
+      description: "Görünür formüller ve araca özgü referanslarla mekanik hesaplayıcılar.",
       images: [defaultOgImage],
     },
     icons: {

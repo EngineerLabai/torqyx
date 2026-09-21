@@ -62,21 +62,21 @@
   },
   "home": {
     "hero": {
-      "seoH1": "Mechanical Engineering Calculators — ISO/DIN/VDI Referenced",
+      "seoH1": "Mechanical Engineering Calculators — Visible Formulas and References",
       "eyebrow": "Mechanical engineering calculators",
-      "headline": "Leave Excel Behind. Traceable Mechanical Calculations Based on Standards.",
+      "headline": "Leave Excel Behind. Traceable Mechanical Calculations.",
       "subheadline": "Review formula breakdowns, unit checks, and report-ready outputs in one mechanical calculation flow.",
-      "subtitle": "Deterministic mechanical calculation flows with ISO/DIN/VDI references, visible formulas, and explicit assumptions.",
+      "subtitle": "Deterministic mechanical calculation flows with visible formulas, unit checks, explicit assumptions, and tool-specific references.",
       "ctaPrimary": "Try Free — No Signup Required",
       "ctaSecondary": "Browse Calculators",
       "socialProof": "Standards-referenced mechanical calculation tools",
-      "trustBadge": "Relevant ISO/DIN/VDI references are listed with calculations",
+      "trustBadge": "Applicable references are listed in each tool's calculation notes",
       "supportNote": "No credit card required. Browse the tools without signing up.",
       "stats": {
         "engineersCount": "Visible",
         "engineersLabel": "formulas and assumptions",
-        "verifiedPrefix": "ISO/DIN/VDI",
-        "verifiedStrong": "referenced",
+        "verifiedPrefix": "Tool-specific",
+        "verifiedStrong": "references",
         "cardPrefix": "No credit card",
         "cardStrong": "required"
       },
@@ -192,7 +192,6 @@
       "title": "Start with featured calculators",
       "description": "Selected tools for common mechanical calculation types.",
       "tryNow": "Try Now →",
-      "usageLabel": "{count} tools",
       "cta": "See all calculators"
     },
     "testimonials": {
@@ -1552,7 +1551,7 @@
     "toolPage": {
       "badge": "Calculator",
       "howItWorksLabel": "How does it work?",
-      "howItWorksDescription": "These tools use a standards-based deterministic calculation engine plus guided assistant support. With ISO, DIN, and VDI references, the same inputs produce the same result."
+      "howItWorksDescription": "These tools use a deterministic calculation flow with visible formulas, explicit assumptions, and tool-specific references where documented."
     },
     "confidence": {
       "title": "Confidence Snapshot",

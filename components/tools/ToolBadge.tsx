@@ -10,32 +10,40 @@ type ToolBadgeProps = {
 
 const LABELS: Record<Locale, Record<ToolStatus, string>> = {
   tr: {
-    verified: "Referansl\u0131",
-    beta: "Beta \ud83d\udd2c",
-    experimental: "Deneysel \u26a0\ufe0f",
+    verified: "Referanslı",
+    beta: "Beta 🔬",
+    experimental: "Deneysel ⚠️",
   },
   en: {
     verified: "Referenced",
-    beta: "Beta \ud83d\udd2c",
-    experimental: "Experimental \u26a0\ufe0f",
+    beta: "Beta 🔬",
+    experimental: "Experimental ⚠️",
   },
 };
 
-const buildTooltip = (status: ToolStatus, locale: Locale, standard: string) => {
+const buildTooltip = (status: ToolStatus, locale: Locale, standard?: string) => {
+  const referenceHint = standard
+    ? locale === "tr"
+      ? `${standard} referansları`
+      : `${standard} references`
+    : locale === "tr"
+      ? "bu araç için listelenen referanslar"
+      : "the references listed for this tool";
+
   if (locale === "tr") {
-    if (status === "verified") return `Bu ara\u00e7ta ${standard} referanslar\u0131 belirtilir. Sonu\u00e7lar\u0131 proje ko\u015fullar\u0131na g\u00f6re ba\u011f\u0131ms\u0131z olarak kontrol edin.`;
-    if (status === "beta") return `Bu araç beta aşamasındadır. Sonuçları ${standard} referanslarıyla kontrol edin.`;
+    if (status === "verified") return `Bu araçta ${referenceHint} belirtilir. Sonuçları proje koşullarına göre bağımsız olarak kontrol edin.`;
+    if (status === "beta") return `Bu araç beta aşamasındadır. Sonuçları ${referenceHint} ile kontrol edin.`;
     return "Bu araç deneysel aşamadadır. Üretim kararlarından önce ek doğrulama yapın.";
   }
 
-  if (status === "verified") return `This tool lists ${standard} references. Independently verify outputs for the project conditions.`;
-  if (status === "beta") return `This tool is in beta. Verify outputs against ${standard} references.`;
+  if (status === "verified") return `This tool lists ${referenceHint}. Independently verify outputs for the project conditions.`;
+  if (status === "beta") return `This tool is in beta. Verify outputs against ${referenceHint}.`;
   return "This tool is experimental. Run an extra verification before production decisions.";
 };
 
 export default function ToolBadge({
   status,
-  standard = "ISO / DIN / VDI",
+  standard,
   locale = "tr",
   className = "",
 }: ToolBadgeProps) {

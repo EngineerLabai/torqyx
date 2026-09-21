@@ -152,7 +152,7 @@ const toIsoDate = (value: unknown, fallback: string) => {
 const buildFallbackGuideContent = (tool: ToolCatalogItem, locale: Locale) => {
   const copy = getToolCopy(tool, locale);
   const toolName = copy.title;
-  const standard = tool.validationStandard || "ISO / DIN / VDI";
+  const standard = tool.validationStandard;
 
   if (locale === "en") {
     return `## Problem Definition
@@ -184,9 +184,9 @@ Start with the calculator defaults, change one input at a time, and compare the 
 - Ignoring boundary conditions
 - Rounding too early in intermediate steps
 
-## Relevant Standards (ISO/DIN/VDI)
+## Relevant References
 
-Reference baseline: ${standard}
+${standard ? `Tool-specific reference baseline: ${standard}` : "No single standard is assigned to this fallback guide. Verify the applicable standard, supplier data, and project specification before use."}
 
 ## Related Tools
 
@@ -223,9 +223,9 @@ Hesaplayıcı varsayılan girdileriyle başla, her seferinde tek bir girdiyi de�
 - Sınır koşullarını göz ardı etmek
 - Ara adımlarda erken yuvarlama yapmak
 
-## İlgili Standart Referansı (ISO/DIN/VDI)
+## İlgili Referanslar
 
-Temel referans: ${standard}
+${standard ? `Temel referans: ${standard}` : "Bu rehber için tek bir standart atanmadı. Kullanımdan önce ilgili standardı, tedarikçi verisini ve proje şartnamesini doğrula."}
 
 ## İlgili Araçlar
 
@@ -331,7 +331,12 @@ const parseGuideSource = (
         : `${fallbackCopy.description} Adım adım yöntem, örnek çözüm, sık hatalar, standartlar ve ilgili araçlar.`),
     datePublished: toIsoDate(meta.date, publishedFallback),
     dateModified: toIsoDate(meta.updatedAt, publishedFallback),
-    standards: asStringArray(meta.standards).length > 0 ? asStringArray(meta.standards) : [fallbackTool.validationStandard],
+    standards:
+      asStringArray(meta.standards).length > 0
+        ? asStringArray(meta.standards)
+        : fallbackTool.validationStandard
+          ? [fallbackTool.validationStandard]
+          : [],
     content: parsed.content.trim(),
     manualRelated: asStringArray(meta.relatedTools),
   };

@@ -23,14 +23,12 @@ export type ToolAccess = "free" | "beta";
 export const toolStatuses = ["verified", "beta", "experimental"] as const;
 export type ToolStatus = (typeof toolStatuses)[number];
 
-const DEFAULT_VALIDATION_STANDARD = "ISO / DIN / VDI";
-
 export type ToolCatalogItem = {
   id: string;
   type: ToolType;
   access: ToolAccess;
   status: ToolStatus;
-  validationStandard: string;
+  validationStandard?: string;
   featured?: boolean;
   title: string;
   description: string;
@@ -58,7 +56,6 @@ const toolStatusById: Partial<Record<string, ToolStatus>> = {
 };
 
 const toolValidationStandardById: Partial<Record<string, string>> = {
-  "sanity-check": "ISO / DIN / VDI",
   "gear-simulations": "DIN / AGMA",
   "gear-weight": "DIN 3990",
   "production-project": "VDI 3423",
@@ -498,7 +495,7 @@ export const toolCatalog: ToolCatalogItem[] = toolCatalogBase.map((tool) => ({
   ...tool,
   access: toolAccessById[tool.id] ?? "free",
   status: toolStatusById[tool.id] ?? "beta",
-  validationStandard: toolValidationStandardById[tool.id] ?? DEFAULT_VALIDATION_STANDARD,
+  validationStandard: toolValidationStandardById[tool.id],
 }));
 
 export const getToolCopy = (tool: ToolCatalogItem, locale: Locale) => {

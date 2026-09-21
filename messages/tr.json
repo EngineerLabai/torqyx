@@ -62,21 +62,21 @@
   },
   "home": {
     "hero": {
-      "seoH1": "Mekanik Mühendislik Hesaplayıcıları — ISO/DIN/VDI Referanslı",
+      "seoH1": "Mekanik Mühendislik Hesaplayıcıları — Görünür Formüller ve Referanslar",
       "eyebrow": "Mekanik mühendislik hesaplayıcıları",
-      "headline": "Excel'i Bırakın. Standartlara Dayalı, İzlenebilir Mekanik Hesaplar.",
+      "headline": "Excel'i Bırakın. İzlenebilir Mekanik Hesaplar.",
       "subheadline": "Mekanik mühendislik hesapları için formül kırılımını, birim kontrollerini ve raporlanabilir çıktıları aynı akışta inceleyin.",
-      "subtitle": "ISO/DIN/VDI referansları, görünür formüller ve açık varsayımlarla deterministik mekanik hesap akışları.",
+      "subtitle": "Görünür formüller, birim kontrolleri, açık varsayımlar ve araca özgü referanslarla deterministik mekanik hesap akışları.",
       "ctaPrimary": "Ücretsiz Dene — Kayıt Gerekmez",
       "ctaSecondary": "Hesaplayıcıları İncele",
       "socialProof": "Standart referanslı mekanik hesap araçları",
-      "trustBadge": "İlgili ISO/DIN/VDI referansları hesaplarda belirtilir",
+      "trustBadge": "Uygulanabilir referanslar her aracın hesap notlarında belirtilir",
       "supportNote": "Kredi kartı gerekmez. Araçları kayıt olmadan inceleyebilirsiniz.",
       "stats": {
         "engineersCount": "Açık",
         "engineersLabel": "formül ve varsayımlar",
-        "verifiedPrefix": "ISO/DIN/VDI",
-        "verifiedStrong": "referanslı",
+        "verifiedPrefix": "Araca özgü",
+        "verifiedStrong": "referanslar",
         "cardPrefix": "Kredi kartı",
         "cardStrong": "gerekmez"
       },
@@ -192,7 +192,6 @@
       "title": "Öne çıkan hesaplayıcılarla başla",
       "description": "Sık karşılaşılan mekanik hesap türleri için seçilmiş araçlar.",
       "tryNow": "Şimdi Dene →",
-      "usageLabel": "{count} araç",
       "cta": "Tüm hesaplayıcılar"
     },
     "testimonials": {
@@ -1577,7 +1576,7 @@
     "toolPage": {
       "badge": "Hesaplayıcı",
       "howItWorksLabel": "Nasıl çalışır?",
-      "howItWorksDescription": "Bu araçlar, standartlara dayalı deterministik hesaplama motoru ve akıllı asistan rehberliği kullanır. ISO, DIN ve VDI referanslarıyla aynı girdide aynı sonucu üretir."
+      "howItWorksDescription": "Bu araçlar görünür formüller, açık varsayımlar ve belgelendiğinde araca özgü referanslar içeren deterministik hesap akışları kullanır."
     },
     "confidence": {
       "title": "Güven Özeti",

@@ -271,17 +271,19 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
         {children}
-        <ToolDocumentation
-          toolTitle={resolvedTool?.title ?? slug}
-          locale={locale}
-          scope={documentation.scope}
-          assumptionsAndUnits={documentation.assumptionsAndUnits}
-          limits={documentation.limits}
-          referenceStandards={documentation.referenceStandards}
-          validationExamples={documentation.validationExamples}
-          version={documentation.version}
-          lastUpdated={documentation.lastUpdated}
-        />
+        {documentation.isSpecific ? (
+          <ToolDocumentation
+            toolTitle={resolvedTool?.title ?? slug}
+            locale={locale}
+            scope={documentation.scope}
+            assumptionsAndUnits={documentation.assumptionsAndUnits}
+            limits={documentation.limits}
+            referenceStandards={documentation.referenceStandards}
+            validationExamples={documentation.validationExamples}
+            version={documentation.version}
+            lastUpdated={documentation.lastUpdated}
+          />
+        ) : null}
       </div>
 
       {hasExplanation ? (

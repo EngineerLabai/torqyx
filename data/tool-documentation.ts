@@ -24,6 +24,7 @@ export type ToolDocumentationEntry = {
 };
 
 export type ResolvedToolDocumentation = {
+  isSpecific: boolean;
   scope: string;
   assumptionsAndUnits: string[];
   limits: string[];
@@ -36,7 +37,7 @@ export type ResolvedToolDocumentation = {
 export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
   scope: {
     tr: "Bu araç belirli bir mühendislik problemi için girdileri alır ve standart tabanlı hesap sonucu üretir.",
-    en: "This tool accepts engineering inputs for a defined problem and returns a standards-based calculation result.",
+    en: "This tool accepts engineering inputs for a defined problem and returns a documented calculation result.",
   },
   assumptionsAndUnits: {
     tr: [
@@ -61,34 +62,12 @@ export const TOOL_DOCUMENTATION_TEMPLATE: ToolDocumentationEntry = {
     ],
   },
   referenceStandards: {
-    tr: ["ISO / DIN / VDI kaynakları ve yaygın mühendislik el kitapları"],
-    en: ["ISO / DIN / VDI references and common engineering handbooks"],
+    tr: [],
+    en: [],
   },
   validationExamples: {
-    tr: [
-      {
-        title: "Örnek doğrulama",
-        rows: [
-          {
-            input: "Girdi seti: Proje verileri ile birim uyumlu değerler",
-            expectedOutput: "Beklenen çıktı: Araç sonucu standart tablolar ile aynı mertebede",
-          },
-        ],
-        note: "Gerçek projede en az bir manuel kontrol veya referans tablo karşılaştırması yapın.",
-      },
-    ],
-    en: [
-      {
-        title: "Validation example",
-        rows: [
-          {
-            input: "Input set: Unit-consistent project values",
-            expectedOutput: "Expected output: Tool result is in the same order as standard references",
-          },
-        ],
-        note: "In real projects, run at least one manual check or reference-table comparison.",
-      },
-    ],
+    tr: [],
+    en: [],
   },
   version: "v0.1.0",
   lastUpdated: "2026-03-04",
@@ -154,6 +133,168 @@ const toolDocumentationById: Partial<Record<string, ToolDocumentationEntry>> = {
     },
     version: "v1.0.0",
     lastUpdated: "2026-03-04",
+  },
+  "bearing-life": {
+    scope: {
+      tr: "Dinamik yük kapasitesi C, eşdeğer yük P, rulman tipi ve devirden temel L10/L10h ömrünü; a1 katsayısından ayarlanmış Lna tahminini üretir.",
+      en: "Calculates basic L10/L10h life from dynamic capacity C, equivalent load P, bearing type, and speed, then applies the a1 factor for an adjusted Lna estimate.",
+    },
+    assumptionsAndUnits: {
+      tr: [
+        "C ve P değerleri aynı yük biriminde girilir; sonuç L10 için milyon devir, L10h için saat olarak gösterilir.",
+        "Sabit yük ve sabit devir varsayılır; bilyalı rulman için p=3, makaralı rulman için p=10/3 kullanılır.",
+        "a1 katsayısı, temel L10 değerine uygulanan kullanıcı girdisidir; gerçek güvenilirlik ve çalışma koşulları ayrıca doğrulanmalıdır.",
+      ],
+      en: [
+        "Enter C and P in the same load unit; L10 is reported in million revolutions and L10h in hours.",
+        "The model assumes constant load and speed; p=3 is used for ball bearings and p=10/3 for roller bearings.",
+        "a1 is a user-supplied multiplier for the basic L10 value; actual reliability and operating conditions need separate verification.",
+      ],
+    },
+    limits: {
+      tr: [
+        "Yağlama, kirlenme, hizasızlık, sıcaklık, montaj ve değişken yük etkileri bu hızlı modelde ayrıntılı olarak çözülmez.",
+        "L10 sonucu rulman seçimi veya servis ömrü garantisi değildir; üretici kataloğu ve proje yük spektrumu ile kontrol edilmelidir.",
+      ],
+      en: [
+        "Lubrication, contamination, misalignment, temperature, mounting, and variable-load effects are not resolved in this quick model.",
+        "The L10 result is not a bearing-selection or service-life guarantee; verify it with the manufacturer catalogue and project load spectrum.",
+      ],
+    },
+    referenceStandards: {
+      tr: ["ISO 281 (rulman ömrü hesapları)", "Rulman üreticisinin katalog verileri ve proje şartnamesiyle doğrulama"],
+      en: ["ISO 281 (rolling bearing life calculations)", "Verification against manufacturer catalogue data and the project specification"],
+    },
+    validationExamples: {
+      tr: [
+        {
+          title: "Temel L10 kontrolü",
+          rows: [
+            { input: "C=25 kN, P=10 kN, bilyalı, n=1500 rpm, a1=1", expectedOutput: "L10=15,625 milyon devir; L10h≈173,6 saat" },
+          ],
+          note: "Sonucu gerçek yük spektrumu, üretici verileri ve uygulanabilir proje koşullarıyla ayrıca kontrol edin.",
+        },
+      ],
+      en: [
+        {
+          title: "Basic L10 check",
+          rows: [
+            { input: "C=25 kN, P=10 kN, ball bearing, n=1500 rpm, a1=1", expectedOutput: "L10=15.625 million revolutions; L10h≈173.6 hours" },
+          ],
+          note: "Cross-check the result against the actual load spectrum, manufacturer data, and project conditions.",
+        },
+      ],
+    },
+    version: "v1.0.0",
+    lastUpdated: "2026-02-07",
+  },
+  "hydraulic-cylinder": {
+    scope: {
+      tr: "Basınç, piston/mil çapı ve debiden ileri-geri kuvveti, hızı ve ideal hidrolik gücü hesaplar.",
+      en: "Calculates extend/retract force, speed, and ideal hydraulic power from pressure, bore/rod diameters, and flow.",
+    },
+    assumptionsAndUnits: {
+      tr: [
+        "Basınç bar, çaplar mm ve debi L/dk girilir; kuvvet kN, hız mm/s ve güç kW olarak gösterilir.",
+        "İleri kuvvet piston alanı, geri kuvvet halka alanı ile; hızlar debinin ilgili alana bölünmesiyle hesaplanır.",
+        "İdeal modelde basınç sabit ve akışkan sıkıştırılamaz kabul edilir; silindir verimi hesaba katılmadıysa gerçek kayıplar ayrıca eklenmelidir.",
+      ],
+      en: [
+        "Enter pressure in bar, diameters in mm, and flow in L/min; results are shown in kN, mm/s, and kW.",
+        "Extend force uses the bore area, retract force uses the annulus area, and speed is flow divided by the relevant area.",
+        "The ideal model assumes constant pressure and incompressible flow; account for real efficiency losses separately when required.",
+      ],
+    },
+    limits: {
+      tr: [
+        "Valf, hat, kaçak, sürtünme, sıkışabilirlik ve dinamik basınç değişimleri temel hesapta modellenmez.",
+        "Mil çapı piston çapından küçük olmalı; nihai komponent seçimi üretici datası, devre şeması ve güvenlik gerekleriyle doğrulanmalıdır.",
+      ],
+      en: [
+        "Valve, line, leakage, friction, compressibility, and transient pressure effects are outside this baseline calculation.",
+        "The rod diameter must be smaller than the bore; verify final component selection against supplier data, the circuit, and safety requirements.",
+      ],
+    },
+    referenceStandards: {
+      tr: ["ISO 6020 (hidrolik silindir boyutlandırma referansı)", "Üretici katalog verileri ve devre tasarım şartlarıyla doğrulama"],
+      en: ["ISO 6020 (hydraulic cylinder sizing reference)", "Verification against manufacturer data and circuit design requirements"],
+    },
+    validationExamples: {
+      tr: [
+        {
+          title: "İleri-geri alan kontrolü",
+          rows: [
+            { input: "p=160 bar, D=80 mm, d=45 mm, Q=25 L/dk", expectedOutput: "İleri kuvvet≈80,4 kN; geri kuvvet≈55,0 kN" },
+          ],
+          note: "Gerçek kuvvet için verim, sürtünme ve devre basınç kayıplarını ayrıca değerlendirin.",
+        },
+      ],
+      en: [
+        {
+          title: "Extend/retract area check",
+          rows: [
+            { input: "p=160 bar, D=80 mm, d=45 mm, Q=25 L/min", expectedOutput: "Extend force≈80.4 kN; retract force≈55.0 kN" },
+          ],
+          note: "For real force, account separately for efficiency, friction, and circuit pressure losses.",
+        },
+      ],
+    },
+    version: "v1.0.0",
+    lastUpdated: "2026-02-07",
+  },
+  "shaft-torsion": {
+    scope: {
+      tr: "Dairesel ve homojen bir mil için tork, çap, uzunluk ve kayma modülünden burulma gerilmesi, kutupsal atalet ve dönme açısını hesaplar.",
+      en: "Calculates torsional shear stress, polar moment, and twist angle for a circular homogeneous shaft from torque, diameter, length, and shear modulus.",
+    },
+    assumptionsAndUnits: {
+      tr: [
+        "Tork N·m, çap ve uzunluk mm, kayma modülü GPa ve isteğe bağlı izin verilen gerilme MPa girilir.",
+        "Katı dairesel kesit ve elastik davranış varsayılır; τ=16T/(πd³), θ=TL/(JG) kullanılır.",
+        "Dönme açısı dereceye çevrilir; izin verilen gerilme verilirse basit bir gerilme oranı gösterilir.",
+      ],
+      en: [
+        "Enter torque in N·m, diameter and length in mm, shear modulus in GPa, and optional allowable shear stress in MPa.",
+        "The model assumes a solid circular section and elastic behavior; it uses τ=16T/(πd³) and θ=TL/(JG).",
+        "Twist is converted to degrees; when an allowable stress is supplied, a simple stress ratio is shown.",
+      ],
+    },
+    limits: {
+      tr: [
+        "Çentik, kama kanalı, eğilme, birleşik yük, plastik davranış ve yorulma etkileri bu temel burulma modelinde yoktur.",
+        "Mil çapı ve malzeme seçimi, gerçek yük spektrumu, bağlantı detayları ve proje güvenlik kriterleriyle doğrulanmalıdır.",
+      ],
+      en: [
+        "Notches, keyways, bending, combined loading, plastic behavior, and fatigue are outside this baseline torsion model.",
+        "Verify shaft sizing against the real load spectrum, connection details, material data, and project safety criteria.",
+      ],
+    },
+    referenceStandards: {
+      tr: ["Shigley, Mechanical Engineering Design (burulma ve mil tasarımı için mühendislik referansı)", "Proje malzeme verileri ve ilgili tasarım şartlarıyla doğrulama"],
+      en: ["Shigley, Mechanical Engineering Design (engineering reference for torsion and shaft design)", "Verification against project material data and applicable design requirements"],
+    },
+    validationExamples: {
+      tr: [
+        {
+          title: "Katı dairesel mil kontrolü",
+          rows: [
+            { input: "T=250 N·m, d=30 mm, L=800 mm, G=80 GPa", expectedOutput: "τ≈47,16 MPa; θ≈1,801°" },
+          ],
+          note: "Şaftın gerçek geometrisi, bağlantı zayıflıkları ve birleşik yükleri ayrıca değerlendirin.",
+        },
+      ],
+      en: [
+        {
+          title: "Solid circular shaft check",
+          rows: [
+            { input: "T=250 N·m, d=30 mm, L=800 mm, G=80 GPa", expectedOutput: "τ≈47.16 MPa; θ≈1.801°" },
+          ],
+          note: "Evaluate the actual geometry, connection discontinuities, and combined loads separately.",
+        },
+      ],
+    },
+    version: "v1.0.0",
+    lastUpdated: "2026-02-07",
   },
   "unit-converter": {
     scope: {
@@ -290,6 +431,7 @@ export const getToolDocumentation = ({
 }): ResolvedToolDocumentation => {
   const entry = toolDocumentationById[toolId] ?? buildFallbackDocumentation(toolTitle);
   return {
+    isSpecific: Boolean(toolDocumentationById[toolId]),
     scope: resolveLocalizedValue(entry.scope, locale) ?? "",
     assumptionsAndUnits: resolveLocalizedValue(entry.assumptionsAndUnits, locale) ?? [],
     limits: resolveLocalizedValue(entry.limits, locale) ?? [],

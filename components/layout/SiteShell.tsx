@@ -383,8 +383,8 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-slate-700">
               {locale === "tr"
-                ? "ISO/DIN/VDI standartlarına dayalı mekanik hesap motoru."
-                : "A mechanical calculation engine based on ISO/DIN/VDI standards."}
+                ? "Görünür formüller ve araca özgü referanslarla mekanik hesap motoru."
+                : "A mechanical calculation engine with visible formulas and tool-specific references."}
             </p>
             <a className="block text-sm font-semibold text-brand hover:brightness-90" href={`mailto:${contactEmail}`}>
               {contactEmail}

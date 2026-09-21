@@ -95,11 +95,11 @@ function extractHowToTools(tool: ToolConfig, locale: Locale): Array<{ "@type": "
     }
   }
 
-  // Eğer hiç referans yoksa genel mühendislik araçları ekle
+  // Doğrulanmış referans yoksa genel araç adları kullan; doğrulanmamış standart iddiası ekleme.
   if (tools.length === 0) {
     const defaultTools = locale === "tr"
-      ? ["ISO/DIN/VDI standartları", "Mühendislik hesap makinesi", "Teknik çizim araçları"]
-      : ["ISO/DIN/VDI standards", "Engineering calculator", "Technical drawing tools"];
+      ? ["Mühendislik hesap makinesi", "Birim dönüşüm araçları", "Teknik çizim araçları"]
+      : ["Engineering calculator", "Unit conversion tools", "Technical drawing tools"];
 
     defaultTools.forEach(toolName => {
       tools.push({

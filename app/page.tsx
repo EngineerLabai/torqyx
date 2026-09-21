@@ -13,7 +13,7 @@ export async function generateMetadata() {
   const copy = getMessages(locale).home.seo;
   const description =
     locale === "tr"
-      ? "Cıvata, tork, dişli ve rulman için ISO/DIN/VDI referansları, görünür formüller ve izlenebilir mekanik hesap akışları."
+      ? "Cıvata, tork, dişli ve rulman için görünür formüller, birim kontrolleri ve araca özgü referanslarla izlenebilir mekanik hesap akışları."
       : copy.description;
   const baseTitle = locale === "tr" ? "Mekanik Mühendislik Hesaplayıcıları" : "Mechanical Engineering Calculators";
   const base = buildPageMetadata({
