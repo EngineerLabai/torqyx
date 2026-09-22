@@ -10,17 +10,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useUnitSystem } from "@/contexts/UnitSystemContext";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import type { Locale } from "@/utils/locale";
 import type { UnitSystem } from "@/utils/units";
 
-const UNIT_SYSTEM_LABELS: Record<UnitSystem, string> = {
-  SI: "SI (mm, N, MPa)",
-  Imperial: "Imperial (in, lbf, psi)",
-  Mixed: "Mixed (her ikisi)",
+const UNIT_SYSTEM_LABELS: Record<Locale, Record<UnitSystem, string>> = {
+  tr: {
+    SI: "SI (mm, N, MPa)",
+    Imperial: "Imperyal (in, lbf, psi)",
+    Mixed: "Karma (her ikisi)",
+  },
+  en: {
+    SI: "SI (mm, N, MPa)",
+    Imperial: "Imperial (in, lbf, psi)",
+    Mixed: "Mixed (both)",
+  },
 };
 
 export function UnitSystemSwitcher() {
   const { system, setSystem } = useUnitSystem();
+  const { locale } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
+  const labels = UNIT_SYSTEM_LABELS[locale];
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -29,14 +40,14 @@ export function UnitSystemSwitcher() {
           variant="ghost"
           size="sm"
           className="h-8 w-8 p-0"
-          title="Birim sistemi"
+          title={locale === "tr" ? "Birim sistemi" : "Unit system"}
         >
           <Settings className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <div className="px-2 py-1.5 text-sm font-medium text-muted-foreground">
-          Birim Sistemi
+          {locale === "tr" ? "Birim sistemi" : "Unit system"}
         </div>
         {(Object.keys(UNIT_SYSTEM_LABELS) as UnitSystem[]).map((unitSystem) => (
           <DropdownMenuItem
@@ -57,7 +68,7 @@ export function UnitSystemSwitcher() {
                 )}
               </span>
               <span className="text-xs text-muted-foreground">
-                {UNIT_SYSTEM_LABELS[unitSystem]}
+                {labels[unitSystem]}
               </span>
             </div>
           </DropdownMenuItem>
@@ -70,6 +81,7 @@ export function UnitSystemSwitcher() {
 // Compact version for mobile
 export function UnitSystemToggle() {
   const { system, setSystem } = useUnitSystem();
+  const { locale } = useLocale();
 
   const toggleSystem = () => {
     if (system === 'SI') {
@@ -87,7 +99,7 @@ export function UnitSystemToggle() {
       size="sm"
       onClick={toggleSystem}
       className="h-8 px-2 text-xs"
-      title={`Şu anki: ${UNIT_SYSTEM_LABELS[system]}`}
+      title={`${locale === "tr" ? "Şu anki" : "Current"}: ${UNIT_SYSTEM_LABELS[locale][system]}`}
     >
       {system === 'SI' ? 'SI' : system === 'Imperial' ? 'Imp' : 'Mix'}
     </Button>

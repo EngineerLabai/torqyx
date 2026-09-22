@@ -497,17 +497,3 @@ export const toolMethodNotes: Record<string, ToolMethodNotesByLocale> = {
 
 export const getToolMethodNotes = (toolId: string, locale: Locale): ToolMethodNotes | null =>
   toolMethodNotes[toolId]?.[locale] ?? null;
-
-export const buildFaqJsonLd = (notes: ToolMethodNotes, locale: Locale) => ({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  inLanguage: locale === "tr" ? "tr-TR" : "en-US",
-  mainEntity: notes.faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-});

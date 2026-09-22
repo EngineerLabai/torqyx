@@ -5,8 +5,6 @@ import { getBrandCopy } from "@/config/brand";
 import { buildPageMetadata } from "@/utils/metadata";
 import { buildLocalizedCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
 import { getToolCopy, toolCatalog, type ToolCatalogItem } from "@/tools/_shared/catalog";
-import { buildHowToSchema, type ToolConfig } from "@/utils/howto-schema";
-import { getToolPageTool } from "@/tools/tool-page-tools";
 
 const normalize = (value: string) => value.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
 
@@ -120,7 +118,6 @@ export const buildToolSeo = (toolKey: string, locale: Locale): ToolSeoPayload =>
     featureList: buildFeatureList(tool),
   };
 };
-
 export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => {
   const seo = buildToolSeo(toolKey, locale);
   const toolCopy = seo.tool ? getToolCopy(seo.tool, locale) : null;
@@ -165,26 +162,4 @@ export const buildToolJsonLd = (toolKey: string, locale: Locale): WebApplication
       priceCurrency: "USD",
     },
   };
-};
-
-/**
- * Tool için HowTo JSON-LD schema üretir
- */
-export const buildToolHowToJsonLd = (toolKey: string, locale: Locale) => {
-  const toolPageTool = getToolPageTool(toolKey);
-  const catalogTool = toolCatalog.find(t => t.id === toolKey);
-
-  if (!toolPageTool || !catalogTool) {
-    return null;
-  }
-
-  // ToolConfig oluştur
-  const toolConfig: ToolConfig = {
-    ...toolPageTool,
-    id: catalogTool.id,
-    title: catalogTool.title,
-    description: catalogTool.description,
-  };
-
-  return buildHowToSchema(toolConfig, locale);
 };

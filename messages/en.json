@@ -172,18 +172,18 @@
         ]
       },
       "library": {
-        "badge": "Build your library",
-        "title": "Build your engineering library",
-        "body": "Save, reuse, and share calculation sets across projects.",
+        "badge": "Explore with context",
+        "title": "Build your engineering workflow",
+        "body": "Move from a calculation to related tools, references, and guides in one place.",
         "bullets": [
-          "Calculation history for every tool",
-          "Reusable templates for common parts",
-          "Team sharing and review-ready exports"
+          "Related calculators and references",
+          "Tool-specific assumptions and limits",
+          "Guides for common engineering decisions"
         ],
         "cards": [
-          "History keeps your last 50 runs ready",
-          "Save presets for common fasteners",
-          "Share a single link with your team"
+          "Continue with related engineering checks",
+          "Compare tools and technical references",
+          "Open the next relevant guide"
         ]
       }
     },
@@ -1336,7 +1336,7 @@
       "loadingBody": "If it stays here, this calculator may not have explanation/examples yet.",
       "docsFailedTitle": "Documentation unavailable",
       "docsFailedBody": "We could not load the explanation and examples right now.",
-      "docsMissingTitle": "Standard documentation",
+      "docsMissingTitle": "Technical documentation",
       "docsMissingBody": "Scope, assumptions, limits, and reference information are shown in the calculator tab.",
       "metaDocVersion": "Doc version: {value}",
       "metaUpdated": "Updated: {value}",

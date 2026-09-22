@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   calculateToleranceStack,
   convertLength,
@@ -191,24 +191,27 @@ const decodeState = (value: string) => {
   }
 };
 
+const getInitialWorkspaceState = () => {
+  if (typeof window === "undefined") {
+    return { unit: "mm" as ToleranceUnit, dimensions: initialDimensions() };
+  }
+
+  const encodedState = new URLSearchParams(window.location.search).get("state");
+  return encodedState
+    ? decodeState(encodedState) ?? { unit: "mm" as ToleranceUnit, dimensions: initialDimensions() }
+    : { unit: "mm" as ToleranceUnit, dimensions: initialDimensions() };
+};
+
 const number = (value: number, locale: Locale) =>
   value.toLocaleString(locale === "tr" ? "tr-TR" : "en-US", { maximumFractionDigits: 5 });
 
 export default function ToleranceLabWorkspace({ locale }: { locale: Locale }) {
   const text = copy[locale];
-  const [unit, setUnit] = useState<ToleranceUnit>("mm");
-  const [dimensions, setDimensions] = useState<ToleranceDimension[]>(initialDimensions);
+  const [initialWorkspaceState] = useState(getInitialWorkspaceState);
+  const [unit, setUnit] = useState<ToleranceUnit>(initialWorkspaceState.unit);
+  const [dimensions, setDimensions] = useState<ToleranceDimension[]>(initialWorkspaceState.dimensions);
   const [tab, setTab] = useState<Tab>("stack");
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    const state = new URLSearchParams(window.location.search).get("state");
-    const decoded = state ? decodeState(state) : null;
-    if (decoded) {
-      setUnit(decoded.unit);
-      setDimensions(decoded.dimensions);
-    }
-  }, []);
 
   const result = useMemo(() => {
     try {
@@ -469,17 +472,22 @@ function ToleranceDiagram({ result, dimensions, unit, text }: { result: ReturnTy
   const height = 220;
   const maxNominal = Math.max(...dimensions.map((item) => Math.abs(item.nominal)), 1);
   const scale = 520 / (dimensions.reduce((sum, item) => sum + Math.abs(item.nominal), 0) || 1);
-  let x = 80;
+  const segments = dimensions.reduce<Array<{ dimension: ToleranceDimension; start: number; end: number }>>(
+    (items, dimension) => {
+      const start = items.at(-1)?.end ?? 80;
+      const end = start + Math.max(54, Math.abs(dimension.nominal) * scale);
+      return [...items, { dimension, start, end }];
+    },
+    [],
+  );
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <h2 className="text-lg font-semibold text-slate-900">{text.equation}</h2>
       <svg viewBox={`0 0 ${width} ${height}`} className="mt-4 h-auto w-full" role="img" aria-label={`${text.equation}: ${formatToleranceEquation(dimensions)}`}>
         <title>{formatToleranceEquation(dimensions)}</title>
         <line x1="60" y1="120" x2="700" y2="120" stroke="#0f172a" strokeWidth="2" />
-        {dimensions.map((dimension) => {
-          const start = x;
-          const length = Math.max(54, Math.abs(dimension.nominal) * scale);
-          x += length;
+        {segments.map(({ dimension, start, end }) => {
+          const x = end;
           return (
             <g key={dimension.id}>
               <line x1={start} y1="82" x2={x} y2="82" stroke={dimension.direction === -1 ? "#e11d48" : "#0284c7"} strokeWidth="8" strokeLinecap="round" />

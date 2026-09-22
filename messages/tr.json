@@ -172,18 +172,18 @@
         ]
       },
       "library": {
-        "badge": "Mühendislik kütüphaneni kur",
-        "title": "Mühendislik kütüphaneni oluştur",
-        "body": "Hesap setlerini kaydet, yeniden kullan, ekiplerinle paylaş.",
+        "badge": "Bağlamla keşfet",
+        "title": "Mühendislik iş akışını oluştur",
+        "body": "Bir hesaplamadan ilgili araçlara, referanslara ve rehberlere aynı yerde geç.",
         "bullets": [
-          "Her araç için hesap geçmişi",
-          "Sık kullanılan parçalar için şablonlar",
-          "Ekip paylaşımı ve onay-ready çıktı"
+          "İlgili hesaplayıcılar ve referanslar",
+          "Araca özgü varsayımlar ve limitler",
+          "Yaygın mühendislik kararları için rehberler"
         ],
         "cards": [
-          "Son 50 çalışmayı hazır tutar",
-          "Standart cıvatalar için preset kaydet",
-          "Tek link ile ekip paylaşımı"
+          "İlgili mühendislik kontrolleriyle devam et",
+          "Araçları ve teknik referansları karşılaştır",
+          "Sonraki ilgili rehberi aç"
         ]
       }
     },
@@ -1170,7 +1170,7 @@
       ],
       "requestSection": {
         "title": "Yeni bir araca mı ihtiyacın var?",
-        "description": "Input ve çıktı ihtiyacını yaz. En çok talep edilen araçları önceleyeceğiz.",
+        "description": "Girdi ve çıktı ihtiyacını yaz. En çok talep edilen araçları önceleyeceğiz.",
         "cta": "Bir araç iste",
         "ctaAria": "Bir araç iste"
       },
@@ -1361,7 +1361,7 @@
       "loadingBody": "Kısa sürede gelmezse bu hesaplayıcı için açıklama/örnekler henüz yayınlanmamış olabilir.",
       "docsFailedTitle": "Dokümantasyon erişilemedi",
       "docsFailedBody": "Şu anda açıklama ve örnekler getirilemiyor.",
-      "docsMissingTitle": "Standart dokümantasyon",
+      "docsMissingTitle": "Teknik dokümantasyon",
       "docsMissingBody": "Bu araç için temel kapsam, varsayım, limit ve referans bilgileri hesaplayıcı sekmesinde gösterilir.",
       "metaDocVersion": "Doküman sürümü: {value}",
       "metaUpdated": "Güncelleme: {value}",
@@ -1555,8 +1555,8 @@
       "required": "Bu alan zorunlu.",
       "fields": {
         "problem": "Problem / Kullanım alanı",
-        "inputs": "Girdiler (input listesi)",
-        "outputs": "Beklenen çıktı (result)",
+        "inputs": "Girdiler",
+        "outputs": "Beklenen çıktı",
         "standards": "Birimler / standartlar",
         "examples": "Örnek değerler"
       }
