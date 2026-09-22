@@ -320,19 +320,21 @@ export default async function ToolReportRoute({ params, searchParams }: PageProp
                 <MDXRenderer source={guide.content} locale={locale} />
               </section>
 
-              <section className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h2 className="text-sm font-semibold text-slate-900">{guideCopy.standardsTitle}</h2>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {guide.standards.map((standard) => (
-                    <span
-                      key={standard}
-                      className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700"
-                    >
-                      {standard}
-                    </span>
-                  ))}
-                </div>
-              </section>
+              {guide.standards.length > 0 ? (
+                <section className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <h2 className="text-sm font-semibold text-slate-900">{guideCopy.standardsTitle}</h2>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {guide.standards.map((standard) => (
+                      <span
+                        key={standard}
+                        className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+                      >
+                        {standard}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
 
               <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
                 <h2 className="text-lg font-semibold text-slate-900">{guideCopy.relatedTitle}</h2>
