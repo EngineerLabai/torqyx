@@ -7,6 +7,7 @@ import RecentToolsStrip from "@/components/tools/RecentToolsStripLazy";
 import InlineSearch from "@/components/search/InlineSearch";
 import { filterSearchResults } from "@/components/search/useSearchIndex";
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
+import { toolSearchAliases } from "@/lib/search/tool-aliases";
 import type { Locale } from "@/utils/locale";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
@@ -236,6 +237,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
       toolCatalog.map((tool) => {
         const copy = getToolCopy(tool, locale);
         const tags = tool.tags ?? [];
+        const aliases = toolSearchAliases[tool.id] ?? [];
         const localeTitles = { tr: tool.title, en: tool.titleEn ?? tool.title };
         const categoryLabel = tool.category
           ? labels.category[tool.category] ?? categoryLabelMap[tool.category] ?? tool.category
@@ -262,6 +264,7 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
             categoryLabelEn,
             categoryLabelTr,
             tool.type,
+            ...aliases,
             ...localizedTags,
             ...englishTags,
             ...turkishTags,
