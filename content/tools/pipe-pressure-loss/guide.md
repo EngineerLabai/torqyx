@@ -3,10 +3,6 @@ title: "Boru Basınç Kaybı Hesabı: Nasıl Kullanılır?"
 description: "Darcy-Weisbach temelli basınç kaybı hesabını adım adım uygulama rehberi."
 date: "2026-03-07"
 updatedAt: "2026-03-07"
-standards:
-  - "ISO 5167"
-  - "VDI 2040"
-  - "DIN EN 13480"
 relatedTools:
   - "fluids-hvac"
   - "hydraulic-cylinder"
@@ -74,11 +70,11 @@ Basınç kaybı:
 - Viskozite birimini karıştırmak
 - Yalnızca düz boru kaybına bakıp fittings kaybını ihmal etmek
 
-## İlgili Standart Referansı (ISO/DIN/VDI)
+## Uygulama sınırı ve doğrulama
 
-- ISO 5167: Debi ölçümü ve basınç farkı yaklaşımı
-- VDI 2040: İşletme verimliliği ve sistem değerlendirmesi
-- DIN EN 13480: Endüstriyel metal borulama gereksinimleri
+Bu araç, düz boru için klasik Darcy-Weisbach ilişkisini kullanır. ISO 5167 diferansiyel basınçlı debi ölçümüyle ilgilidir; bu hesap için tasarım standardı olarak gösterilmez. Bağlantı elemanları, iki fazlı akış, geçici rejim, pompa seçimi ve boru dayanımı bu kapsamın dışındadır.
+
+Nihai borulama tasarımında proje şartnamesi, yürürlükteki borulama standardı, malzeme/üretici verisi ve fittings için kayıp katsayıları ayrıca doğrulanmalıdır.
 
 ## İlgili Araçlar
 

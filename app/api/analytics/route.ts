@@ -8,6 +8,8 @@ const ALLOWED_EVENTS = new Set([
   "tool_open",
   "calculate_click",
   "save_result",
+  "engineering_search",
+  "reference_search",
 ]);
 const DEBUG_ANALYTICS = process.env.DEBUG_ANALYTICS === "true";
 

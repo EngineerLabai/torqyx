@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/utils/messages";
 import { withLocalePrefix } from "@/utils/locale-path";
+import { trackEvent } from "@/utils/analytics";
 import materialsData from "@/data/reference/materials.json";
 import threadsData from "@/data/reference/threads.json";
 import fitsData from "@/data/reference/fits.json";
@@ -139,6 +140,7 @@ export default function ReferenceCenter() {
   const copy = getMessages(locale).pages.reference;
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<{ tone: "ok" | "error"; text: string } | null>(null);
+  const trackedSearches = useRef(new Set<string>());
 
   const localeLower = locale === "tr" ? "tr-TR" : "en-US";
   const trimmedQuery = query.trim();
@@ -163,6 +165,18 @@ export default function ReferenceCenter() {
     });
     return { ...section, filteredRows };
   });
+  const matchedRowCount = filteredSections.reduce((total, section) => total + section.filteredRows.length, 0);
+
+  useEffect(() => {
+    if (normalizedQuery.length < 2) return;
+    const key = `${locale}:${normalizedQuery}:${matchedRowCount}`;
+    if (trackedSearches.current.has(key)) return;
+    trackedSearches.current.add(key);
+    trackEvent("reference_search", {
+      query_length: normalizedQuery.length,
+      result_count: matchedRowCount,
+    });
+  }, [locale, matchedRowCount, normalizedQuery]);
 
   const highlightedValue = (value: string): ReactNode => {
     if (!trimmedQuery) return value;

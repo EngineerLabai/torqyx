@@ -9,7 +9,9 @@ export type AnalyticsEventName =
   | "tool_open"
   | "calculate_click"
   | "save_result"
-  | "export_pdf";
+  | "export_pdf"
+  | "engineering_search"
+  | "reference_search";
 
 type PageViewPayload = {
   path: string;

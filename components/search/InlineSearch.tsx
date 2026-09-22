@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BookOpen, Bookmark, Compass, FileText, Scale, Wrench } from "lucide-react";
 import { useSearchIndex, filterSearchResults } from "@/components/search/useSearchIndex";
 import { useDebouncedValue } from "@/components/search/useDebouncedValue";
@@ -10,6 +10,7 @@ import { getMessages } from "@/utils/messages";
 import { buildSearchText } from "@/utils/search-index";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
+import { trackEvent } from "@/utils/analytics";
 import type { SearchIndexItem } from "@/utils/search-index";
 
 const ICONS = {
@@ -37,6 +38,7 @@ export default function InlineSearch() {
   const toolLibraryLabelsEn = getMessages("en").components.toolLibrary.labels;
   const toolLibraryLabelsTr = getMessages("tr").components.toolLibrary.labels;
   const [query, setQuery] = useState("");
+  const trackedSearches = useRef(new Set<string>());
   const searchEnabled = query.trim().length > 0;
   const { items, loading } = useSearchIndex(searchEnabled);
   const debouncedQuery = useDebouncedValue(query, 100);
@@ -91,6 +93,20 @@ export default function InlineSearch() {
     () => (searchEnabled ? filterSearchResults(searchableItems, debouncedQuery, 8) : []),
     [searchableItems, debouncedQuery, searchEnabled],
   );
+
+  useEffect(() => {
+    const normalizedQuery = debouncedQuery.trim().toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US");
+    if (!searchEnabled || loading || normalizedQuery.length < 2) return;
+
+    const key = `${locale}:${normalizedQuery}:${results.length}`;
+    if (trackedSearches.current.has(key)) return;
+    trackedSearches.current.add(key);
+    trackEvent("engineering_search", {
+      surface: "inline",
+      query_length: normalizedQuery.length,
+      result_count: results.length,
+    });
+  }, [debouncedQuery, loading, locale, results.length, searchEnabled]);
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" data-testid="inline-search">

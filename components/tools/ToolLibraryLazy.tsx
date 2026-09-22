@@ -22,13 +22,12 @@ function ToolLibrarySkeleton() {
   );
 }
 
-// Bundle estimate (webpack analyzer, parsed): /tools initial page chunk ~46KB -> ~20-30KB (lazy-loaded rest).
+// Filters remain interactive after hydration, while the tool inventory is
+// server-rendered so tool names and descriptions are discoverable without JS.
 const ToolLibrary = dynamic(() => import("@/components/tools/ToolLibrary"), {
   loading: () => <ToolLibrarySkeleton />,
-  ssr: false,
 });
 
 export default function ToolLibraryLazy(props: ToolLibraryLazyProps) {
   return <ToolLibrary {...props} />;
 }
-

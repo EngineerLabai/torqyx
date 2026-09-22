@@ -34,6 +34,7 @@ export default async function ReferencePage() {
         eyebrow={copy.badge}
         imageSrc={heroImage}
         imageAlt={copy.imageAlt}
+        priority
       />
 
       <ReferenceHubNavigator locale={locale} />
@@ -41,5 +42,4 @@ export default async function ReferencePage() {
     </PageShell>
   );
 }
-
 

@@ -6,7 +6,6 @@ updatedAt: "2026-03-07"
 standards:
   - "ISO 898-1"
   - "ISO 68-1"
-  - "VDI 2230"
 relatedTools:
   - "torque-power"
   - "shaft-torsion"
@@ -69,11 +68,11 @@ Bu değer saha koşullarında anahtar hassasiyeti ve yağlama durumuna göre do�
 - Diş tolerans etkilerini göz ardı etmek
 - Sonucu malzeme akma sınırı ile karşılaştırmamak
 
-## İlgili Standart Referansı (ISO/DIN/VDI)
+## Uygulama sınırı ve doğrulama
 
-- ISO 898-1: Carbon/alloy steel fastener mekanik özellikleri
-- ISO 68-1: Metrik diş temel geometrisi
-- VDI 2230: Cıvata bağlantılarının sistematik hesap yöntemi
+Bu araç, ön yük ile tork arasındaki `T = K × F_preload × d` yaklaşımını hızlı bir ilk kontrol için kullanır. VDI 2230'un tam birleşim modeli, sürtünme dağılımı, oturma kaybı veya işletme yükü analizi burada uygulanmaz.
+
+Bağlantı sınıfı ve diş geometrisi için proje dokümanında kullanılan ISO 898-1 ve ISO 68-1 sürümleri doğrulanmalıdır. Nihai tasarımda lisanslı standart metni, üretici verileri ve gerçek yağlama/anahtar koşulları esas alınmalıdır.
 
 ## İlgili Araçlar
 

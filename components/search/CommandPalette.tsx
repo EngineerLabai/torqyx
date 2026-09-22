@@ -10,6 +10,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { localePath } from "@/utils/locale-path";
 import type { SearchIndexItem } from "@/utils/search-index";
 import type { Messages } from "@/utils/messages";
+import { trackEvent } from "@/utils/analytics";
 
 const ICONS = {
   tool: Wrench,
@@ -40,6 +41,7 @@ export default function CommandPalette({ copy }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const trackedSearches = useRef(new Set<string>());
   const debouncedQuery = useDebouncedValue(query, 100);
   const { items, loading } = useSearchIndex(open);
 
@@ -47,6 +49,20 @@ export default function CommandPalette({ copy }: CommandPaletteProps) {
     if (!open) return [];
     return filterSearchResults(items, debouncedQuery, 20);
   }, [items, debouncedQuery, open]);
+
+  useEffect(() => {
+    const normalizedQuery = debouncedQuery.trim().toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US");
+    if (!open || loading || normalizedQuery.length < 2) return;
+
+    const key = `${locale}:${normalizedQuery}:${results.length}`;
+    if (trackedSearches.current.has(key)) return;
+    trackedSearches.current.add(key);
+    trackEvent("engineering_search", {
+      surface: "command_palette",
+      query_length: normalizedQuery.length,
+      result_count: results.length,
+    });
+  }, [debouncedQuery, loading, locale, open, results.length]);
 
   useEffect(() => {
     if (!open) return;

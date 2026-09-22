@@ -34,10 +34,11 @@ function ReferenceCenterSkeleton() {
   );
 }
 
-// Bundle estimate (webpack analyzer, parsed): /reference initial page chunk ~40-50KB -> ~18-30KB (lazy-loaded center).
+// The table controls hydrate on the client, but the reference data itself must
+// be in the initial HTML. Keeping SSR enabled makes technical values available
+// to search engines and avoids a client-only content gap for users on slow links.
 const ReferenceCenter = dynamic(() => import("@/components/reference/ReferenceCenter"), {
   loading: () => <ReferenceCenterSkeleton />,
-  ssr: false,
 });
 
 export default function ReferenceCenterLazy() {
