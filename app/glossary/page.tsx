@@ -7,7 +7,7 @@ import { getContentList, getIndexableContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { buildLocalizedCanonical } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
 
@@ -22,21 +22,22 @@ export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
   const termCount = (await getIndexableContentList("glossary", { locale, includeDrafts: false })).length;
+  const isIndexable = termCount >= MIN_INDEXABLE_GLOSSARY_TERMS;
   const title =
     locale === "tr"
       ? "Mühendislik Sözlüğü - Teknik Terimler ve Tanımlar"
       : "Engineering Glossary - Technical Terms and Definitions";
   const description =
     locale === "tr"
-      ? `${termCount} teknik terimi; tork, gerilme, tolerans, malzeme ve akışkanlar için kısa tanımlar ve mühendislik hesaplayıcılarıyla keşfedin.`
-      : `Explore ${termCount} technical terms for torque, stress, tolerances, materials, and fluids with concise definitions and engineering calculators.`;
+      ? "Tork, gerilme, tolerans, malzeme ve akışkanlarla ilgili teknik terimlere göz atın."
+      : "Browse technical terms for torque, stress, tolerances, materials, and fluids.";
 
   return buildPageMetadata({
     title: `${title} | ${brandContent.siteName}`,
     description,
     path: "/glossary",
     locale,
-    noIndex: termCount < MIN_INDEXABLE_GLOSSARY_TERMS,
+    robots: isIndexable ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 
