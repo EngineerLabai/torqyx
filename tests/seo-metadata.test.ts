@@ -35,6 +35,19 @@ describe("SEO metadata helpers", () => {
     expect(image.url).toContain("Mechanical+Engineering+Calculators");
   });
 
+  it("keeps a page-specific description instead of appending generic SEO filler", () => {
+    const metadata = buildPageMetadata({
+      title: "Datum",
+      description: "A reference feature used to establish measurement and inspection orientation.",
+      path: "/glossary/datum",
+      locale: "en",
+    });
+
+    expect(metadata.description).toBe(
+      "A reference feature used to establish measurement and inspection orientation.",
+    );
+  });
+
   it("does not allow Vercel deployment hosts to become canonical", () => {
     expect(
       resolveCanonicalSiteUrl({

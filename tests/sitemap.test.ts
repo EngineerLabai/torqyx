@@ -93,4 +93,22 @@ describe("taxonomy quality gate", () => {
       }
     }
   });
+
+  it("keeps generated glossary templates out of the sitemap while preserving navigable archives", async () => {
+    const [{ getContentBySlug }, { getCategoryIndex, getNavigableCategoryIndex }] = await Promise.all([
+      import("@/utils/content"),
+      import("@/utils/taxonomy"),
+    ]);
+    const datum = await getContentBySlug("glossary", "datum", { locale: "en", includeDrafts: false });
+    const sitemapPaths = entries.map((entry) => new URL(entry.url).pathname);
+    const [indexableCategories, navigableCategories] = await Promise.all([
+      getCategoryIndex("en"),
+      getNavigableCategoryIndex("en"),
+    ]);
+
+    expect(datum).toBeTruthy();
+    expect(sitemapPaths).not.toContain("/en/glossary/datum");
+    expect(indexableCategories.some((entry) => entry.slug === "electrical")).toBe(false);
+    expect(navigableCategories.some((entry) => entry.slug === "electrical")).toBe(true);
+  });
 });

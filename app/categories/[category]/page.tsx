@@ -2,13 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
-import { getIndexableContentList } from "@/utils/content";
+import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import {
   getCategoryIndex,
+  getNavigableCategoryIndex,
   isIndexableTaxonomyEntry,
   matchesSlug,
   resolveLabelBySlug,
@@ -32,8 +33,8 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const [trCategories, enCategories] = await Promise.all([
-    getCategoryIndex("tr"),
-    getCategoryIndex("en"),
+    getNavigableCategoryIndex("tr"),
+    getNavigableCategoryIndex("en"),
   ]);
   const slugs = new Set([...trCategories, ...enCategories].map((category) => category.slug));
   return Array.from(slugs.values()).map((category) => ({ category }));
@@ -43,13 +44,16 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
   const { category: categoryParam } = await params;
-  const [trCategories, enCategories] = await Promise.all([
+  const [trCategories, enCategories, trIndexableCategories, enIndexableCategories] = await Promise.all([
+    getNavigableCategoryIndex("tr"),
+    getNavigableCategoryIndex("en"),
     getCategoryIndex("tr"),
     getCategoryIndex("en"),
   ]);
   const categories = locale === "tr" ? trCategories : enCategories;
+  const indexableCategories = locale === "tr" ? trIndexableCategories : enIndexableCategories;
   const categorySlug = decodeURIComponent(categoryParam);
-  const currentCategory = categories.find((entry) => entry.slug === categorySlug);
+  const currentCategory = indexableCategories.find((entry) => entry.slug === categorySlug);
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} kategorisi` : `${label} category`;
   const description =
@@ -75,10 +79,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category: categoryParam } = await params;
   const categorySlug = decodeURIComponent(categoryParam);
   const [blog, guides, glossary, categories] = await Promise.all([
-    getIndexableContentList("blog", { locale }),
-    getIndexableContentList("guides", { locale }),
-    getIndexableContentList("glossary", { locale }),
-    getCategoryIndex(locale),
+    getContentList("blog", { locale, includeDrafts: false }),
+    getContentList("guides", { locale, includeDrafts: false }),
+    getContentList("glossary", { locale, includeDrafts: false }),
+    getNavigableCategoryIndex(locale),
   ]);
   if (!categories.some((entry) => entry.slug === categorySlug)) notFound();
   const copy = getMessages(locale).pages.categories;

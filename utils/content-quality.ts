@@ -25,6 +25,11 @@ const LOW_VALUE_MARKERS = [
   "başlangıç içeriği",
 ] as const;
 
+const GENERATED_GLOSSARY_MARKERS = [
+  "is a core engineering term. definition, usage notes, and a practical example.",
+  "in a design check, first define the relevant load, dimension, material, or flow condition.",
+] as const;
+
 const normalizeText = (value: string) =>
   value
     .toLocaleLowerCase("tr-TR")
@@ -49,6 +54,14 @@ export const getContentQualityIssues = (item: ContentQualityCandidate) => {
       issues.push(`low_value_marker:${marker}`);
     }
   });
+
+  if (item.type === "glossary") {
+    GENERATED_GLOSSARY_MARKERS.forEach((marker) => {
+      if (searchableText.includes(normalizeText(marker))) {
+        issues.push(`generated_glossary_marker:${marker}`);
+      }
+    });
+  }
 
   return issues;
 };

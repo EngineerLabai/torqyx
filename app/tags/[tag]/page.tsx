@@ -2,13 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
-import { getIndexableContentList } from "@/utils/content";
+import { getContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import {
   getTagIndex,
+  getNavigableTagIndex,
   isIndexableTaxonomyEntry,
   matchesSlug,
   resolveLabelBySlug,
@@ -31,7 +32,7 @@ type TagPageProps = {
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const [trTags, enTags] = await Promise.all([getTagIndex("tr"), getTagIndex("en")]);
+  const [trTags, enTags] = await Promise.all([getNavigableTagIndex("tr"), getNavigableTagIndex("en")]);
   const slugs = new Set([...trTags, ...enTags].map((tag) => tag.slug));
   return Array.from(slugs.values()).map((tag) => ({ tag }));
 }
@@ -40,10 +41,16 @@ export async function generateMetadata({ params }: TagPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
   const { tag: tagParam } = await params;
-  const [trTags, enTags] = await Promise.all([getTagIndex("tr"), getTagIndex("en")]);
+  const [trTags, enTags, trIndexableTags, enIndexableTags] = await Promise.all([
+    getNavigableTagIndex("tr"),
+    getNavigableTagIndex("en"),
+    getTagIndex("tr"),
+    getTagIndex("en"),
+  ]);
   const tags = locale === "tr" ? trTags : enTags;
+  const indexableTags = locale === "tr" ? trIndexableTags : enIndexableTags;
   const tagSlug = decodeURIComponent(tagParam);
-  const currentTag = tags.find((entry) => entry.slug === tagSlug);
+  const currentTag = indexableTags.find((entry) => entry.slug === tagSlug);
   const label = resolveLabelBySlug(tagSlug, tags) ?? tagSlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} etiketi` : `${label} tag`;
   const description =
@@ -69,10 +76,10 @@ export default async function TagPage({ params }: TagPageProps) {
   const { tag: tagParam } = await params;
   const tagSlug = decodeURIComponent(tagParam);
   const [blog, guides, glossary, tags] = await Promise.all([
-    getIndexableContentList("blog", { locale }),
-    getIndexableContentList("guides", { locale }),
-    getIndexableContentList("glossary", { locale }),
-    getTagIndex(locale),
+    getContentList("blog", { locale, includeDrafts: false }),
+    getContentList("guides", { locale, includeDrafts: false }),
+    getContentList("glossary", { locale, includeDrafts: false }),
+    getNavigableTagIndex(locale),
   ]);
   if (!tags.some((entry) => entry.slug === tagSlug)) notFound();
   const copy = getMessages(locale).pages.tags;

@@ -28,18 +28,7 @@ type PageMetadataOptions = {
 
 const TITLE_MAX_LENGTH = 60;
 const TITLE_TEMPLATE_SUFFIX = " | TORQYX";
-const DESCRIPTION_MIN_LENGTH = 120;
 const DESCRIPTION_MAX_LENGTH = 155;
-
-const SEO_KEYWORD_BY_LOCALE: Record<Locale, string> = {
-  tr: "mühendislik hesaplayıcıları",
-  en: "engineering calculators",
-};
-
-const DESCRIPTION_SUFFIX_BY_LOCALE: Record<Locale, string> = {
-  tr: " Standart referanslar, hesap adımları ve pratik raporlarla hızlı karar desteği sunar.",
-  en: " It includes standards, calculation steps, and practical reports for faster decisions.",
-};
 
 export const NOINDEX_FOLLOW_ROBOTS: Metadata["robots"] = {
   index: false,
@@ -94,10 +83,9 @@ const normalizeTitle = (title: string, locale: Locale) => {
 };
 
 const normalizeDescription = (description: string | undefined, locale: Locale) => {
-  const keyword = SEO_KEYWORD_BY_LOCALE[locale];
   const fallbackByLocale: Record<Locale, string> = {
-    tr: `TORQYX, ${keyword}, mühendislik standartları, teknik analiz, doğrulama ve raporlama sürecini tek yerde toplar.`,
-    en: `TORQYX combines ${keyword}, engineering standards, technical analysis, validation, and reporting in one place.`,
+    tr: "TORQYX; mühendislik hesapları, teknik referanslar ve doğrulama için tek bir çalışma alanı sunar.",
+    en: "TORQYX combines engineering calculations, technical references, and validation in one workspace.",
   };
 
   let normalized = normalizeWhitespace(description ?? "");
@@ -105,21 +93,7 @@ const normalizeDescription = (description: string | undefined, locale: Locale) =
     normalized = fallbackByLocale[locale];
   }
 
-  while (normalized.length < DESCRIPTION_MIN_LENGTH) {
-    const next = `${ensureSentenceEnd(normalized)}${DESCRIPTION_SUFFIX_BY_LOCALE[locale]}`;
-    if (next.length === normalized.length) {
-      break;
-    }
-    normalized = next;
-  }
-
-  if (
-    !normalized.toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US").includes(keyword) &&
-    normalized.length + keyword.length + 2 <= DESCRIPTION_MAX_LENGTH
-  ) {
-    normalized = `${ensureSentenceEnd(normalized)} ${keyword}.`;
-  }
-
+  // Accurate short descriptions are better than a repeated SEO suffix.
   return clampDescription(normalized);
 };
 

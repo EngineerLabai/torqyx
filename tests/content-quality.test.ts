@@ -33,4 +33,21 @@ describe("content quality", () => {
     expect(countContentWords(item.content)).toBeGreaterThan(250);
     expect(isContentIndexable(item)).toBe(true);
   });
+
+  it("keeps generated glossary templates out of the search index", () => {
+    const item = {
+      type: "glossary" as const,
+      title: "Datum",
+      description: "Datum is a core engineering term. Definition, usage notes, and a practical example.",
+      content:
+        "A datum is a reference feature. In a design check, first define the relevant load, dimension, material, or flow condition. ".repeat(
+          8,
+        ),
+    };
+
+    expect(isContentIndexable(item)).toBe(false);
+    expect(getContentQualityIssues(item)).toContain(
+      "generated_glossary_marker:is a core engineering term. definition, usage notes, and a practical example.",
+    );
+  });
 });

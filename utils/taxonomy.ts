@@ -1,6 +1,6 @@
 import "server-only";
 import { slugify } from "@/utils/slugify";
-import { getIndexableContentList } from "@/utils/content";
+import { getContentList, getIndexableContentList } from "@/utils/content";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import type { Locale } from "@/utils/locale";
 
@@ -29,12 +29,17 @@ const upsertEntry = (map: Map<string, TaxonomyEntry>, label: string) => {
   map.set(slug, { slug, label, count: 1 });
 };
 
-export const getTagIndex = async (locale: Locale) => {
-  const [blog, guides, glossary] = await Promise.all([
-    getIndexableContentList("blog", { locale }),
-    getIndexableContentList("guides", { locale }),
-    getIndexableContentList("glossary", { locale }),
+const getTaxonomyContent = async (locale: Locale, indexableOnly: boolean) => {
+  const getList = indexableOnly ? getIndexableContentList : getContentList;
+  return Promise.all([
+    getList("blog", { locale, includeDrafts: false }),
+    getList("guides", { locale, includeDrafts: false }),
+    getList("glossary", { locale, includeDrafts: false }),
   ]);
+};
+
+const buildTagIndex = async (locale: Locale, indexableOnly: boolean) => {
+  const [blog, guides, glossary] = await getTaxonomyContent(locale, indexableOnly);
 
   const map = new Map<string, TaxonomyEntry>();
   blog.forEach((item) => item.tags.forEach((tag) => upsertEntry(map, tag)));
@@ -45,12 +50,8 @@ export const getTagIndex = async (locale: Locale) => {
   return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, locale === "en" ? "en-US" : "tr-TR"));
 };
 
-export const getCategoryIndex = async (locale: Locale) => {
-  const [blog, guides, glossary] = await Promise.all([
-    getIndexableContentList("blog", { locale }),
-    getIndexableContentList("guides", { locale }),
-    getIndexableContentList("glossary", { locale }),
-  ]);
+const buildCategoryIndex = async (locale: Locale, indexableOnly: boolean) => {
+  const [blog, guides, glossary] = await getTaxonomyContent(locale, indexableOnly);
 
   const map = new Map<string, TaxonomyEntry>();
   blog.forEach((item) => upsertEntry(map, item.category));
@@ -62,6 +63,14 @@ export const getCategoryIndex = async (locale: Locale) => {
 
   return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, locale === "en" ? "en-US" : "tr-TR"));
 };
+
+// Navigable archives remain available to people even when their supporting
+// content is not ready for search. The indexable variants are the only ones
+// used by metadata and the sitemap.
+export const getTagIndex = (locale: Locale) => buildTagIndex(locale, true);
+export const getNavigableTagIndex = (locale: Locale) => buildTagIndex(locale, false);
+export const getCategoryIndex = (locale: Locale) => buildCategoryIndex(locale, true);
+export const getNavigableCategoryIndex = (locale: Locale) => buildCategoryIndex(locale, false);
 
 export const resolveLabelBySlug = (slug: string, entries: TaxonomyEntry[]) => {
   return entries.find((entry) => entry.slug === slug)?.label ?? null;
