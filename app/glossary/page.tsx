@@ -3,7 +3,7 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import { getHeroImageSrc } from "@/lib/assets";
-import { getIndexableContentList } from "@/utils/content";
+import { getContentList, getIndexableContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
@@ -16,10 +16,12 @@ const formatDate = (value: string, locale: "tr" | "en") =>
     new Date(value),
   );
 
+const MIN_INDEXABLE_GLOSSARY_TERMS = 3;
+
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const termCount = (await getIndexableContentList("glossary", { locale })).length;
+  const termCount = (await getIndexableContentList("glossary", { locale, includeDrafts: false })).length;
   const title =
     locale === "tr"
       ? "Mühendislik Sözlüğü - Teknik Terimler ve Tanımlar"
@@ -34,6 +36,7 @@ export async function generateMetadata() {
     description,
     path: "/glossary",
     locale,
+    noIndex: termCount < MIN_INDEXABLE_GLOSSARY_TERMS,
   });
 }
 
@@ -41,7 +44,9 @@ export default async function GlossaryIndexPage() {
   const locale = await getLocaleFromCookies();
   const copy = getMessages(locale).pages.glossary;
   const heroImage = getHeroImageSrc("glossary");
-  const terms = await getIndexableContentList("glossary", { locale });
+  // Keep all published terms available to readers. Search visibility is
+  // governed separately by the editorial quality gate in metadata/sitemap.
+  const terms = await getContentList("glossary", { locale, includeDrafts: false });
   const glossaryUrl = buildLocalizedCanonical("/glossary", locale);
   const glossaryJsonLd = {
     "@context": "https://schema.org",

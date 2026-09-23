@@ -107,6 +107,7 @@ describe("taxonomy quality gate", () => {
     ]);
 
     expect(datum).toBeTruthy();
+    expect(sitemapPaths).not.toContain("/en/glossary");
     expect(sitemapPaths).not.toContain("/en/glossary/datum");
     expect(indexableCategories.some((entry) => entry.slug === "electrical")).toBe(false);
     expect(navigableCategories.some((entry) => entry.slug === "electrical")).toBe(true);

@@ -137,7 +137,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   };
 
   staticPaths.forEach((path) => {
-    locales.forEach((locale) => addEntry(path, locale));
+    locales.forEach((locale) => {
+      const localeContent = localizedContent.find((content) => content.locale === locale);
+      if (path === "/glossary" && (localeContent?.glossary.length ?? 0) < 3) return;
+      const supportedLocales =
+        path === "/glossary"
+          ? localizedContent
+              .filter((content) => content.glossary.length >= 3)
+              .map((content) => content.locale)
+          : undefined;
+      addEntry(path, locale, { supportedLocales });
+    });
   });
 
   addEntry("/changelog", "tr", {
