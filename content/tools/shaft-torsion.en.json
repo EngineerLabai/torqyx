@@ -1,27 +1,27 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2026-02-07",
+  "version": "1.1.0",
+  "lastUpdated": "2026-09-26",
   "howTo": [
-    "Enter torque, diameter, length, and shear modulus.",
-    "Add allowable shear stress if you have a limit.",
-    "Check shear stress, twist angle, and safety factor."
+    "Enter transmitted torque, solid-shaft diameter, free length, and shear modulus using the units shown by the calculator.",
+    "Add an allowable shear-stress value only when it is traceable to the material condition and the design method.",
+    "Read stress and twist together: a shaft can pass a simple stress check while still having unacceptable angular deflection."
   ],
-  "formula": "τ = 16·T / (π·d^3) | J = π·d^4/32 | θ = (T·L)/(J·G)",
+  "formula": "J = pi d^4 / 32 | tau_max = 16 T / (pi d^3) | theta = T L / (J G)",
   "examples": [
     {
-      "title": "Ø30 mm shaft",
-      "description": "T=250 N·m, L=800 mm, G=80 GPa.",
+      "title": "30 mm solid shaft transmitting 250 N m",
+      "description": "An original elastic-torsion example for a uniformly loaded solid circular shaft.",
       "inputs": {
-        "Torque": "250 N·m",
-        "Diameter": "30 mm",
-        "Length": "800 mm",
-        "G": "80 GPa",
-        "Allowable τ": "80 MPa"
+        "Torque, T": "250 N m",
+        "Diameter, d": "30 mm",
+        "Length, L": "800 mm",
+        "Shear modulus, G": "80 GPa",
+        "Illustrative allowable shear stress": "80 MPa"
       },
       "outputs": {
-        "τ": "47.16 MPa",
-        "θ": "1.80°",
-        "Safety": "1.70"
+        "Maximum shear stress": "47.16 MPa",
+        "Twist angle": "1.801 degrees",
+        "Stress ratio": "1.70"
       },
       "inputValues": {
         "torque": "250",
@@ -34,22 +34,26 @@
         "tau": 47.157,
         "thetaDeg": 1.8013,
         "safety": 1.6965
-      }
+      },
+      "notes": [
+        "The stress ratio is only an aid to interpretation; it is not a fatigue or combined-loading verification.",
+        "A keyway, shoulder, spline, or coupling can govern the real design before the plain-shaft section does."
+      ]
     },
     {
-      "title": "Ø40 mm shaft",
-      "description": "T=120 N·m, L=600 mm, G=79 GPa.",
+      "title": "40 mm solid shaft transmitting 120 N m",
+      "description": "A lower-torque comparison that illustrates the strong diameter effect in the d-cubed stress relationship.",
       "inputs": {
-        "Torque": "120 N·m",
-        "Diameter": "40 mm",
-        "Length": "600 mm",
-        "G": "79 GPa",
-        "Allowable τ": "60 MPa"
+        "Torque, T": "120 N m",
+        "Diameter, d": "40 mm",
+        "Length, L": "600 mm",
+        "Shear modulus, G": "79 GPa",
+        "Illustrative allowable shear stress": "60 MPa"
       },
       "outputs": {
-        "τ": "9.55 MPa",
-        "θ": "0.21°",
-        "Safety": "6.28"
+        "Maximum shear stress": "9.55 MPa",
+        "Twist angle": "0.208 degrees",
+        "Stress ratio": "6.28"
       },
       "inputValues": {
         "torque": "120",
@@ -62,22 +66,30 @@
         "tau": 9.5493,
         "thetaDeg": 0.2078,
         "safety": 6.2832
-      }
+      },
+      "notes": [
+        "Compare twist against the driven equipment's positional and vibration requirements, not only stress capacity."
+      ]
     }
   ],
   "references": [
     {
       "title": "Shigley's Mechanical Engineering Design",
-      "note": "Torsion stress and twist formulas."
+      "note": "Use the applicable edition and project design method for shaft and torsion verification."
+    },
+    {
+      "title": "Project material and component data",
+      "note": "Confirm material condition, allowable stresses, fatigue factors, and connection geometry against project requirements."
     }
   ],
   "commonMistakes": [
-    "Entering diameter in meters instead of mm.",
-    "Using G in MPa instead of GPa.",
-    "Mixing length units (mm vs m)."
+    "Using a hollow or stepped shaft with a formula intended for a solid uniform circular section.",
+    "Mixing N m, mm, GPa, and MPa without checking the internal unit conversion.",
+    "Ignoring stress concentrations from keyways, shoulders, splines, or cross holes."
   ],
   "assumptions": [
-    "Circular, uniform cross-section.",
-    "Linear elastic behavior."
+    "The model assumes a homogeneous, solid, circular shaft in the elastic range.",
+    "It does not include bending, axial load, notches, contact stresses, plasticity, or fatigue.",
+    "Final shaft sizing must be verified against the actual load spectrum, connection details, and applicable safety criteria."
   ]
 }

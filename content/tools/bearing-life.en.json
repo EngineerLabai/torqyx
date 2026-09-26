@@ -1,28 +1,27 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2026-02-07",
+  "version": "1.1.0",
+  "lastUpdated": "2026-09-26",
   "howTo": [
-    "Enter dynamic load C and equivalent load P.",
-    "Select bearing type and speed.",
-    "Set reliability factor a1 and review basic L10/L10h separately from adjusted Lna/Lnah."
+    "Enter the catalogue dynamic load rating C and the equivalent dynamic bearing load P in the same load unit.",
+    "Choose ball or roller bearing, then enter the operating speed in rpm.",
+    "Use a1 only when its value is justified by the applicable reliability method; review L10 and adjusted Lna separately."
   ],
-  "formula": "L10 = (C/P)^p | L10h = (L10·10^6)/(60·n) | Lna = a1·L10 | p = 3 (ball), p = 10/3 (roller)",
+  "formula": "L10 = (C / P)^p | L10h = (L10 x 10^6) / (60 x n) | Lna = a1 x L10 | p = 3 for ball bearings; p = 10/3 for roller bearings",
   "examples": [
     {
-      "title": "Ball bearing",
-      "description": "C=25 kN, P=10 kN, 1500 rpm, a1=1.",
+      "title": "Ball bearing at a constant radial load",
+      "description": "An original screening example for a bearing with a 25 kN dynamic rating operating at 1,500 rpm.",
       "inputs": {
-        "C": "25 kN",
-        "P": "10 kN",
-        "Type": "Ball",
-        "Speed": "1500 rpm",
-        "a1": "1.0"
+        "Dynamic rating, C": "25 kN",
+        "Equivalent load, P": "10 kN",
+        "Bearing type": "Ball",
+        "Speed, n": "1,500 rpm",
+        "a1": "1.00"
       },
       "outputs": {
-        "L10": "15.63 million rev",
-        "L10h": "173.6 hours",
-        "Lna": "15.63 million rev",
-        "Lnah": "173.6 hours"
+        "Basic rating life, L10": "15.625 million revolutions",
+        "Basic rating life, L10h": "173.6 h",
+        "Adjusted result, Lna": "15.625 million revolutions"
       },
       "inputValues": {
         "C": "25",
@@ -36,23 +35,27 @@
         "L10h": 173.6111,
         "Lna": 15.625,
         "Lnah": 173.6111
-      }
+      },
+      "notes": [
+        "a1 = 1 leaves the basic L10 result unchanged and does not model contamination, lubrication, or mounting quality.",
+        "A short calculated life is a design signal, not a catalogue-selection decision by itself."
+      ]
     },
     {
-      "title": "Roller bearing",
-      "description": "C=35 kN, P=12 kN, 900 rpm, a1=0.62.",
+      "title": "Roller bearing with an adjusted reliability factor",
+      "description": "This comparison shows why bearing type and the selected adjustment factor must be documented.",
       "inputs": {
-        "C": "35 kN",
-        "P": "12 kN",
-        "Type": "Roller",
-        "Speed": "900 rpm",
+        "Dynamic rating, C": "35 kN",
+        "Equivalent load, P": "12 kN",
+        "Bearing type": "Roller",
+        "Speed, n": "900 rpm",
         "a1": "0.62"
       },
       "outputs": {
-        "L10": "35.45 million rev",
-        "L10h": "656.49 hours",
-        "Lna": "21.98 million rev",
-        "Lnah": "407.0 hours"
+        "Basic rating life, L10": "35.45 million revolutions",
+        "Basic rating life, L10h": "656.5 h",
+        "Adjusted result, Lna": "21.98 million revolutions",
+        "Adjusted result, Lnah": "407.0 h"
       },
       "inputValues": {
         "C": "35",
@@ -66,21 +69,30 @@
         "L10h": 656.4912,
         "Lna": 21.9793,
         "Lnah": 407.0245
-      }
+      },
+      "notes": [
+        "The a1 input is a multiplier in this screening tool. Establish its engineering basis outside the calculator."
+      ]
     }
   ],
   "references": [
     {
-      "title": "ISO 281 (Rolling bearing life)"
+      "title": "ISO 281",
+      "note": "Rolling bearing dynamic load ratings and rating life; use the current licensed edition for design decisions."
+    },
+    {
+      "title": "Bearing manufacturer catalogue",
+      "note": "Use manufacturer-specific C values, operating limits, lubrication guidance, and application factors."
     }
   ],
   "commonMistakes": [
-    "Mixing units for C and P.",
-    "Entering speed in rad/s instead of rpm.",
-    "Ignoring the a1 reliability factor."
+    "Mixing C and P units, for example entering C in kN and P in N.",
+    "Using radial load alone when the bearing application requires an equivalent dynamic load calculation.",
+    "Treating L10 as a guaranteed service-life value or omitting the real load spectrum."
   ],
   "assumptions": [
-    "Loads are assumed constant.",
-    "L10 corresponds to 90% reliability."
+    "The calculation assumes constant equivalent load and constant speed.",
+    "It uses the basic rating-life exponents for ball and roller bearings.",
+    "Lubrication, contamination, misalignment, temperature, installation, and transient load effects require separate engineering review."
   ]
 }

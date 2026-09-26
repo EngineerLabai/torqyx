@@ -1,20 +1,20 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2026-02-07",
+  "version": "1.1.0",
+  "lastUpdated": "2026-09-26",
   "howTo": [
-    "Enter pressure, bore, rod diameter, and flow.",
-    "Check extend/retract forces from piston areas.",
-    "Review speeds and hydraulic power output."
+    "Enter working pressure, bore diameter, rod diameter, and available flow with the units shown by the calculator.",
+    "Compare extend force against the full bore area and retract force against the annulus area.",
+    "Use the speed and ideal-power results as a circuit screening check, then add real pressure losses and efficiency effects."
   ],
-  "formula": "F_ext = P·A_bore | F_ret = P·(A_bore - A_rod) | v = Q/A | P_h = P·Q",
+  "formula": "A_bore = pi D^2 / 4 | A_annulus = pi (D^2 - d^2) / 4 | F_extend = p A_bore | F_retract = p A_annulus | v = Q / A | P_hydraulic = p Q",
   "examples": [
     {
-      "title": "80/45 mm cylinder",
-      "description": "160 bar and 25 L/min.",
+      "title": "80 / 45 mm cylinder at 160 bar",
+      "description": "An original sizing example for checking the difference between extending and retracting performance.",
       "inputs": {
         "Pressure": "160 bar",
-        "Bore": "80 mm",
-        "Rod": "45 mm",
+        "Bore diameter": "80 mm",
+        "Rod diameter": "45 mm",
         "Flow": "25 L/min"
       },
       "outputs": {
@@ -22,7 +22,7 @@
         "Retract force": "54.98 kN",
         "Extend speed": "82.9 mm/s",
         "Retract speed": "121.3 mm/s",
-        "Hydraulic power": "6.67 kW"
+        "Ideal hydraulic power": "6.67 kW"
       },
       "inputValues": {
         "pressure": "160",
@@ -36,23 +36,27 @@
         "speedExtend": 82.8932,
         "speedRetract": 121.2609,
         "hydraulicPower": 6.6667
-      }
+      },
+      "notes": [
+        "Retract speed is higher because flow passes through the smaller annulus area.",
+        "The displayed force is theoretical. Seal friction, back pressure, leakage, and line losses reduce available force."
+      ]
     },
     {
-      "title": "100/50 mm cylinder",
-      "description": "200 bar and 40 L/min.",
+      "title": "100 / 50 mm cylinder at 200 bar",
+      "description": "A second check to compare the effect of a larger bore and flow rate.",
       "inputs": {
         "Pressure": "200 bar",
-        "Bore": "100 mm",
-        "Rod": "50 mm",
+        "Bore diameter": "100 mm",
+        "Rod diameter": "50 mm",
         "Flow": "40 L/min"
       },
       "outputs": {
         "Extend force": "157.08 kN",
         "Retract force": "117.81 kN",
         "Extend speed": "84.9 mm/s",
-        "Retract speed": "113.18 mm/s",
-        "Hydraulic power": "13.33 kW"
+        "Retract speed": "113.2 mm/s",
+        "Ideal hydraulic power": "13.33 kW"
       },
       "inputValues": {
         "pressure": "200",
@@ -66,22 +70,30 @@
         "speedExtend": 84.8826,
         "speedRetract": 113.1768,
         "hydraulicPower": 13.3333
-      }
+      },
+      "notes": [
+        "Check rod buckling, end mounting, valve capacity, hose rating, and system safety separately before selecting hardware."
+      ]
     }
   ],
   "references": [
     {
       "title": "ISO 4413",
-      "note": "Hydraulic system safety and calculation notes."
+      "note": "Hydraulic fluid power safety requirements and system guidance; consult the current licensed edition."
+    },
+    {
+      "title": "Cylinder and valve manufacturer data",
+      "note": "Confirm pressure rating, seals, friction, allowable side load, speed limits, and mounting arrangement with supplier data."
     }
   ],
   "commonMistakes": [
-    "Entering rod diameter larger than bore.",
-    "Mixing flow units (L/min vs m³/s).",
-    "Entering pressure in Pa instead of bar."
+    "Entering a rod diameter equal to or larger than the bore diameter.",
+    "Reading theoretical force as net force at the load after valve, hose, and back-pressure losses.",
+    "Comparing flow values without converting L/min consistently when checking another calculation."
   ],
   "assumptions": [
-    "Leakage and efficiency losses are ignored.",
-    "Pressure is assumed constant."
+    "Pressure is treated as constant and the fluid as incompressible for this baseline calculation.",
+    "The model does not resolve dynamic pressure spikes, leakage, seal friction, compressibility, or circuit transients.",
+    "Final hydraulic-component selection requires the complete circuit and safety assessment."
   ]
 }
