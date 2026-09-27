@@ -6,6 +6,7 @@ import { getToolGuideBySlug } from "@/lib/tool-guides";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { SITE_URL, buildLanguageAlternates } from "@/utils/seo";
 import { getCategoryIndex, getTagIndex, isIndexableTaxonomyEntry } from "@/utils/taxonomy";
+import { getToolIndexReadyLocales } from "@/utils/tool-content-readiness";
 
 const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
 const locales = ["tr", "en"] as const;
@@ -214,10 +215,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const tool of toolRoutes) {
       const path = tool.href;
       const lastModified = toOptionalDate(tool.lastUpdated);
+      const supportedToolLocales = getToolIndexReadyLocales(tool.id);
+      if (!supportedToolLocales.includes(locale)) continue;
       addEntry(path, locale, {
         lastModified,
         changeFrequency: "monthly",
         priority: 0.9,
+        supportedLocales: supportedToolLocales,
       });
       const guide = toolGuides.find((candidate) => candidate.path === path && candidate.locale === locale)?.guide;
       if (guide?.source === "file") {

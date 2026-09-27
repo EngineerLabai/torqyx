@@ -11,6 +11,14 @@ beforeAll(async () => {
 });
 
 describe("sitemap indexability policy", () => {
+  it("excludes English tool routes that are not content-ready", () => {
+    const paths = entries.map((entry) => new URL(entry.url).pathname);
+
+    expect(paths).toContain("/tr/tools/gear-design");
+    expect(paths).not.toContain("/en/tools/gear-design");
+    expect(paths).toContain("/en/tools/bearing-life");
+  });
+
   it("excludes local user project records and publishes only the Turkish changelog", () => {
     const paths = entries.map((entry) => new URL(entry.url).pathname);
 

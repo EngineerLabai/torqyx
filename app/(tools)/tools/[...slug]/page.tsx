@@ -1,7 +1,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
@@ -130,6 +130,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const isGuideRoute = slugParts.at(-1) === "guide";
   const toolSlug = isReportRoute || isGuideRoute ? slugParts.slice(0, -1).join("/") : normalizedSlug;
 
+  if (!isReportRoute && !isGuideRoute) {
+    return buildPageMetadata({
+      title: locale === "tr" ? "Sayfa bulunamadı" : "Page not found",
+      description: locale === "tr" ? "İstenen araç sayfası bulunamadı." : "The requested tool page was not found.",
+      path,
+      locale,
+      robots: NOINDEX_FOLLOW_ROBOTS,
+    });
+  }
+
   if (isGuideRoute && toolSlug) {
     const guide = await getToolGuideBySlug({ slug: toolSlug, locale });
     if (!guide) {
@@ -218,16 +228,12 @@ export default async function ToolReportRoute({ params, searchParams }: PageProp
   const isGuideRoute = slugParts.at(-1) === "guide";
   const toolSlug = isReportRoute || isGuideRoute ? slugParts.slice(0, -1).join("/") : "";
 
+  if (!isReportRoute && !isGuideRoute) notFound();
+
   if (isGuideRoute && toolSlug) {
     const guide = await getToolGuideBySlug({ slug: toolSlug, locale });
     if (!guide) {
-      return (
-        <PageShell>
-          <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
-            {copy.missing}
-          </section>
-        </PageShell>
-      );
+      notFound();
     }
 
     const guideCopy = getGuideCopy(locale);
@@ -402,13 +408,7 @@ export default async function ToolReportRoute({ params, searchParams }: PageProp
   const reportData = isReportRoute && toolSlug ? buildReportData(toolSlug, shared ?? {}, locale, common) : null;
 
   if (!reportData) {
-    return (
-      <PageShell>
-        <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
-          {copy.missing}
-        </section>
-      </PageShell>
-    );
+    notFound();
   }
 
   const today = new Date().toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US", DATE_FORMAT);

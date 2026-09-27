@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import type { WebApplicationSchemaInput } from "@/types/structured-data";
 import type { Locale } from "@/utils/locale";
 import { getBrandCopy } from "@/config/brand";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { buildLocalizedCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
+import { isToolLocaleIndexReady } from "@/utils/tool-content-readiness";
 import { getToolCopy, toolCatalog, type ToolCatalogItem } from "@/tools/_shared/catalog";
 
 const normalize = (value: string) => value.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
@@ -139,6 +140,7 @@ export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => 
       title: socialTitle,
       description: seo.description,
     },
+    robots: seo.tool && !isToolLocaleIndexReady(seo.tool.id, locale) ? NOINDEX_FOLLOW_ROBOTS : undefined,
     absoluteTitle: seo.tool?.id === "belt-length",
   });
 };

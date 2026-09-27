@@ -5,7 +5,8 @@ import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { withLocalePrefix } from "@/utils/locale-path";
-import { buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
+import { isToolLocaleIndexReady } from "@/utils/tool-content-readiness";
 type Bullet = { title: string; points: string[] };
 
 type Section = {
@@ -621,6 +622,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     path: "/tools/gear-design",
     locale,
+    robots: isToolLocaleIndexReady("gear-design", locale) ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 
