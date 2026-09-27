@@ -628,6 +628,28 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function GearDesignPage() {
   const locale = await getLocaleFromCookies();
+  if (locale === "en") {
+    return (
+      <PageShell>
+        <article className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Gear Design</p>
+          <h1 className="mt-3 text-balance text-3xl font-semibold text-slate-950 md:text-4xl">
+            English technical edition in preparation
+          </h1>
+          <p className="mt-4 text-base leading-relaxed text-slate-700">
+            The current detailed guide is available in Turkish. We are preparing an engineering-reviewed English edition
+            rather than presenting an incomplete translation as a finished reference.
+          </p>
+          <Link
+            href={withLocalePrefix("/tools/gear-design", "tr")}
+            className="mt-6 inline-flex rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700"
+          >
+            Open the Turkish gear design guide
+          </Link>
+        </article>
+      </PageShell>
+    );
+  }
   const initialDocs = await getToolDocsResponse("gear-design", locale);
   const calculatorsHref = withLocalePrefix("/tools/gear-design/calculators", locale);
   const simulationsHref = withLocalePrefix("/tools/gear-design/simulations", locale);
