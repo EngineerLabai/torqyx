@@ -115,7 +115,16 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     webVitalsAttribution: ["LCP", "CLS", "INP"],
-    optimizePackageImports: ["lucide-react"],
+    optimizePackageImports: [
+      "lucide-react",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-scroll-area",
+      "@radix-ui/react-toast",
+      "framer-motion",
+      "katex",
+      "mathjs",
+    ],
   },
   async headers() {
     const existingGlobalHeaders: Array<{ key: string; value: string }> = [];

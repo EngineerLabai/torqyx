@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-17T08:57:39.003Z",
+  "generatedAt": "2026-10-06T08:06:47.894Z",
   "summary": {
-    "scannedPages": 101,
+    "scannedPages": 103,
     "pagesWithIssues": 0,
     "issueCounts": {}
   },
@@ -294,6 +294,13 @@
       "issues": []
     },
     {
+      "file": "app/(tools)/tools/tolerance-lab/page.tsx",
+      "h1CountInFile": 0,
+      "delegatedH1Comment": true,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
       "file": "app/(tools)/tools/torque-power/page.tsx",
       "h1CountInFile": 0,
       "delegatedH1Comment": false,
@@ -309,7 +316,7 @@
     },
     {
       "file": "app/[locale]/(tools)/tools/gear-design/page.tsx",
-      "h1CountInFile": 1,
+      "h1CountInFile": 2,
       "delegatedH1Comment": false,
       "metadataProvidedByLayout": "app/layout.tsx",
       "issues": []
@@ -562,14 +569,14 @@
     {
       "file": "app/premium/page.tsx",
       "h1CountInFile": 0,
-      "delegatedH1Comment": false,
+      "delegatedH1Comment": true,
       "metadataProvidedByLayout": "app/layout.tsx",
       "issues": []
     },
     {
       "file": "app/pricing/page.tsx",
       "h1CountInFile": 0,
-      "delegatedH1Comment": false,
+      "delegatedH1Comment": true,
       "metadataProvidedByLayout": "app/layout.tsx",
       "issues": []
     },
@@ -666,7 +673,14 @@
     },
     {
       "file": "app/s/[code]/page.tsx",
-      "h1CountInFile": 1,
+      "h1CountInFile": 0,
+      "delegatedH1Comment": false,
+      "metadataProvidedByLayout": "app/layout.tsx",
+      "issues": []
+    },
+    {
+      "file": "app/satis-iade-teslimat/page.tsx",
+      "h1CountInFile": 0,
       "delegatedH1Comment": false,
       "metadataProvidedByLayout": "app/layout.tsx",
       "issues": []
