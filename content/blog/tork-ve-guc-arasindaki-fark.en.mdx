@@ -1,0 +1,54 @@
+---
+title: "The Difference Between Torque and Power: An Engineering Perspective"
+description: "Understand the fundamental relationship between torque and power, P = T x omega, and how to size electric motors and gear reducers correctly."
+date: "2026-06-16"
+tags: ["torque and power difference", "torque and transmission", "engineering calculation"]
+category: "Torque and Transmission"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/tork-ve-guc-arasindaki-fark"
+---
+
+<Image src="/images/blog/tork-ve-guc-arasindaki-fark.webp" alt="Technical illustration demonstrating the difference between torque and power in rotary machinery" width={1200} height={900} caption="Engineering diagram illustrating rotary torque and mechanical power relationships." />
+
+## Torque and Power Are Not the Same
+
+Torque is the rotational turning moment applied to a shaft, measured in newton-meters (Nm) or pound-feet (lb-ft). Mechanical power is the time rate at which work is performed or energy is transmitted, expressed in watts (W), kilowatts (kW), or horsepower (hp). A machine delivering massive torque does not inherently deliver high power unless it turns at an appreciable rotational velocity. 
+
+Power is the mathematical product of torque and angular velocity:
+
+$$P = T \cdot \omega$$
+
+In SI engineering practice with rotational speed in revolutions per minute (rpm), this relationship is expressed as:
+
+$$P (\text{kW}) = \frac{T (\text{Nm}) \cdot n (\text{rpm})}{9550}$$
+
+This formula allows mechanical engineers to derive required power when torque and operating speed are known, or calculate available shaft torque when motor power and speed ratings are provided.
+
+## Why Rotational Speed Changes the Outcome
+
+A drive shaft delivering 100 Nm at 500 rpm performs work at a drastically different rate than a shaft transmitting that same 100 Nm at 3,000 rpm. The second shaft completes six times as many revolutions per second, requiring six times more input power ($P \approx 31.4\text{ kW}$ versus $5.23\text{ kW}$). 
+
+Conversely, at constant input power, reducing shaft speed through a mechanical transmission multiplies available output torque. This explains the function of industrial speed reducers: by stepping down angular velocity, they amplify usable output torque to overcome high starting resistances, such as crane winches, heavy conveyors, or extruder screws.
+
+## Sizing Motors: Evaluating Both Parameters Together
+
+Selecting an electric motor solely on nominal nameplate power ($kW$) introduces operational risk. Mechanical designers must analyze starting torque, breakdown torque, continuous duty cycle, thermal dissipation, and driven inertia ($J$). For example, a standard 7.5 kW 4-pole motor operating at 1,460 rpm provides a continuous shaft torque of approximately 49 Nm. Sizing a gearbox with a 30:1 reduction yields nearly 1,350 Nm of usable torque at ~48 rpm (accounting for mechanical efficiency). 
+
+Evaluating torque-speed curves across all transient operating states guarantees that equipment starts reliably without tripping over-current protection or stalling under peak resistance.
+
+## Practical Engineering Verification
+
+In mechanical driveline design, continuous torque, peak startup torque, input speed, target output velocity, transmission reduction ratios, and component efficiencies must all be logged. Use the TORQYX Power - Torque - Speed Calculator to quickly verify these relationships and streamline drivetrain component sizing.
+
+## Related TORQYX Tool
+
+Quickly analyze and convert motor power, operating speed, and shaft torque:
+
+<ToolLink href="/tools/torque-power" title="Torque - Power - Speed Calculator" description="Compute the exact relationship between mechanical power, rotational speed, and shaft torque." badge="Calculator" />
+
+## Technical Standards
+
+- ISO 80000-4 - Quantities and units in mechanics.
+- ISO 3046 - Reciprocating internal combustion engines - Performance.
+- DIN 70020 - Road vehicles - Motor performance.

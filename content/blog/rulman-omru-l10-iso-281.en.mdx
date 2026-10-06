@@ -1,0 +1,41 @@
+---
+title: "Bearing Life (L10) Calculation: ISO 281 and SKF Methodology"
+description: "Step-by-step engineering guide to calculating basic bearing rating life (L10 and L10h) according to ISO 281 standards with the TORQYX bearing calculator."
+date: "2026-05-17"
+tags: ["bearing", "L10", "ISO 281", "SKF"]
+category: "Machine Elements"
+draft: false
+readingTime: 3
+canonical: "https://torqyx.com/blog/rulman-omru-l10-iso-281"
+---
+
+Calculating rolling bearing life requires evaluating applied loads, rotational speed, bearing kinematics, and operating environments concurrently. The ISO 281 rating methodology brings together basic dynamic load ratings, equivalent dynamic loads, and rolling element exponent factors to predict basic rating life.
+
+## What is L10 Bearing Life?
+
+- The L10 rating life represents the operating period that 90% of a sufficiently large group of identical bearings can endure before the first evidence of material fatigue spalling occurs.
+- Results are customarily expressed in millions of revolutions ($L_{10}$) or operational operating hours ($L_{10h}$).
+- Real-world service life is strongly influenced by lubricant film thickness, operating temperature, shaft deflection, contamination, and installation tolerances.
+
+## Dynamic Load Rating and Equivalent Load
+
+- The basic dynamic load rating ($C$) represents the theoretical constant load under which the bearing achieves a basic rating life of one million revolutions.
+- The equivalent dynamic load ($P$) consolidates combined radial and axial components via standard radial and thrust factors ($X$ and $Y$).
+- Bearing type (deep groove ball, cylindrical roller, spherical roller, or tapered roller) dictates the fatigue life exponent ($p = 3$ for ball bearings, $p = 10/3$ for roller bearings).
+
+## Speed and Operating Load Influence
+
+- Because life varies inversely with load raised to the exponent $p$, small increases in dynamic load cause significant non-linear reductions in fatigue life.
+- Rotational speed proportionally accelerates revolution accumulation, directly reducing available life in operating hours.
+- Variable operating cycles must be analyzed using weighted root-mean-load spectrums rather than simplistic arithmetic averages.
+
+## Step-by-Step Calculation Flow
+
+- Retrieve catalog basic dynamic load rating ($C$) and static load rating ($C_0$).
+- Calculate radial and axial forces, determine the load ratio ($F_a / F_r$), and evaluate equivalent dynamic load ($P$).
+- Apply the ISO 281 life equation and convert revolution life into operating hours based on rotational speed ($n$).
+- The TORQYX bearing life calculator automates this calculation step-by-step with verified units and standard formulas.
+
+## Interpreting Rating Life in Machine Design
+
+The basic $L_{10}$ figure is a statistical rating baseline rather than an absolute commercial guarantee. An impressive theoretical $L_{10h}$ result can quickly be undermined in the field by inadequate elastohydrodynamic lubrication, contaminated greases, misaligned housings, or excessive clearance. In mission-critical drivetrains, engineers should augment basic $L_{10}$ with modified life factors ($a_{ISO}$) that account for lubrication viscosity ratios ($\kappa$), cleanliness levels, and fatigue load limits ($P_u$).
