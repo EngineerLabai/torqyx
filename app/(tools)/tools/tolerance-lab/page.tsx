@@ -20,6 +20,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
 }
 
 export default async function ToleranceLabPage() {
+  /* seo-h1: delegated-to-child */
   const locale = await getLocaleFromCookies();
   const isTurkish = locale === "tr";
 

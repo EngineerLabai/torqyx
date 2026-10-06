@@ -85,7 +85,7 @@ const countH1InFile = (source) => {
 };
 
 const hasDelegatedH1Signal = (source) =>
-  /redirect\(/.test(source) ||
+  /(?:permanentRedirect|redirect)\(/.test(source) ||
   /<(?:Hero|HeroSection|PageHero|ToolPageClient|GenericToolPage|SanityCheckLab|RequestToolForm|DashboardClient|LocatingCardClient|MaterialsLibraryClientLazy|Client)[\s/>]/.test(source) ||
   /<H1[\s/>]/.test(source) ||
   /<PageTitle[\s/>]/.test(source) ||
@@ -105,7 +105,7 @@ const hasH1SignalInFile = (filePath, visited = new Set()) => {
 };
 
 const hasMutuallyExclusiveH1Branches = (source) =>
-  /notFound\(|fallbackCopy|isGuideRoute|isReportRoute/.test(source);
+  /notFound\(|fallbackCopy|isGuideRoute|isReportRoute|locale\s*===/.test(source);
 
 const findNearestMetadataLayout = (pageFilePath) => {
   let cursor = path.dirname(pageFilePath);
