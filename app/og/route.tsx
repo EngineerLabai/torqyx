@@ -30,7 +30,7 @@ export function GET(req: Request) {
   const subtitle = cleanText(searchParams.get("subtitle"), brandContent.siteName, 132);
   const pathLabel = cleanPath(searchParams.get("path"));
 
-  const image = new ImageResponse(
+  return new ImageResponse(
     (
       <div
         style={{

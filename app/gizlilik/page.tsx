@@ -94,6 +94,18 @@ const PrivacyContentTr = () => (
         kişiselleştirme için çerez veya benzeri tanımlayıcılar kullanabilir. Reklam kategorisini reddederseniz
         reklam teknolojileri site panelindeki tercihe göre sınırlandırılır.
       </p>
+      <p>
+        Google&apos;ın iş ortağı sitelerinde ve uygulamalarında verileri nasıl kullandığı hakkında daha fazla bilgi için{" "}
+        <a
+          href="https://www.google.com/policies/privacy/partners/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-emerald-700 underline underline-offset-2 hover:text-emerald-600"
+        >
+          Google&apos;ın ortak siteler veri kullanım politikasını
+        </a>{" "}
+        inceleyebilirsiniz.
+      </p>
     </section>
 
     <section className="space-y-2">
@@ -168,6 +180,18 @@ const PrivacyContentEn = () => (
         When Google AdSense is enabled, Google and certified advertising partners may use cookies or similar identifiers
         for ad delivery, frequency capping, abuse prevention, ad performance measurement, and personalization where
         permitted. If you reject the advertising category, ad technologies are limited according to your site preference.
+      </p>
+      <p>
+        For more information about how Google uses data on partner sites and apps, please review the{" "}
+        <a
+          href="https://www.google.com/policies/privacy/partners/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-emerald-700 underline underline-offset-2 hover:text-emerald-600"
+        >
+          Google partner sites data usage policy
+        </a>
+        .
       </p>
     </section>
 
