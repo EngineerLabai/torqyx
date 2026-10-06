@@ -127,6 +127,10 @@ function extractLinks(source) {
     links.push({ anchor: match[2].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(), href: match[1].trim() });
   }
 
+  for (const match of source.matchAll(/<ToolLink[^>]*?\bhref=["']([^"']+)["'][^>]*?(?:\btitle=["']([^"']+)["'])?[^>]*?\/?>/gi)) {
+    links.push({ anchor: (match[2] ?? "Tool Link").trim(), href: match[1].trim() });
+  }
+
   return links;
 }
 
