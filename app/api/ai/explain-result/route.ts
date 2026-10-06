@@ -107,16 +107,20 @@ export async function POST(request: Request) {
   let hasExtendedQuota = false;
 
   if (userId) {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { tier: true, trialStart: true, trialEnd: true },
-    });
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { tier: true, trialStart: true, trialEnd: true },
+      });
 
-    if (user) {
-      hasExtendedQuota =
-        user.tier === "PRO" ||
-        user.tier === "TEAM" ||
-        isTrialActive({ trialStart: user.trialStart, trialEnd: user.trialEnd });
+      if (user) {
+        hasExtendedQuota =
+          user.tier === "PRO" ||
+          user.tier === "TEAM" ||
+          isTrialActive({ trialStart: user.trialStart, trialEnd: user.trialEnd });
+      }
+    } catch (err) {
+      console.warn("[ai][explain-result] DB lookup failed, falling back to standard quota:", err);
     }
   }
 
