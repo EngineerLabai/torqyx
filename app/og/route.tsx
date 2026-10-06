@@ -60,14 +60,11 @@ export function GET(req: Request) {
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      headers: {
+        "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
+      },
+    },
   );
-
-  try {
-    image.headers.set("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
-  } catch (err) {
-    console.warn("Could not set Cache-Control header on ImageResponse:", err);
-  }
-
-  return image;
 }
