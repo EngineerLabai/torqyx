@@ -24,7 +24,16 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/dashboard", "/login", "/saved-calculations", "/health"],
+      disallow: [
+        "/api/",
+        "/dashboard",
+        "/login",
+        "/saved-calculations",
+        "/health",
+        // Material detail pages are NOINDEX_FOLLOW_ROBOTS — block to prevent Soft 404 in GSC
+        "/tr/materials/",
+        "/en/materials/",
+      ],
     },
     ...(host ? { host } : {}),
     sitemap: buildCanonical("/sitemap.xml") ?? "/sitemap.xml",

@@ -1,4 +1,4 @@
-﻿import type { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { getIndexableContentList } from "@/utils/content";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import { standardsManifest } from "@/data/standards";
@@ -26,7 +26,6 @@ const staticPaths = [
   "/satis-iade-teslimat",
   "/hakkinda",
   "/standards",
-  "/materials",
   "/project-hub",
   "/project-hub/devreye-alma",
   "/project-hub/part-tracking",
@@ -42,7 +41,6 @@ const staticPaths = [
   "/fixture-tools/locating",
   "/fixture-tools/clamping",
   "/fixture-tools/base-plate",
-  "/reference",
 ] as const;
 
 const toolRoutes = Array.from(
@@ -147,7 +145,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
               .filter((content) => content.glossary.length >= 3)
               .map((content) => content.locale)
           : undefined;
-      addEntry(path, locale, { supportedLocales });
+      addEntry(path, locale, { lastModified: new Date(), supportedLocales });
     });
   });
 
