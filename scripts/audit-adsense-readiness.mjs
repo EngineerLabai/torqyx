@@ -21,8 +21,8 @@ const getSupplement = (slug, locale) => {
 const layout = read("app/layout.tsx");
 const adsenseConfig = read("config/adsense.ts");
 const blogAdLayout = read("app/(blog)/blog/[slug]/layout.tsx");
-if (layout.includes("pagead2.googlesyndication.com")) {
-  failures.push("app/layout.tsx still contains an unconditional AdSense script.");
+if (!layout.includes("pagead2.googlesyndication.com")) {
+  failures.push("app/layout.tsx must contain the official AdSense script in <head> for site verification.");
 }
 if (/<AdSense\b/u.test(layout)) {
   failures.push("app/layout.tsx must not mount AdSense before route-level content eligibility is known.");
