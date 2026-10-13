@@ -21,20 +21,30 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   })();
 
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: [
-        "/api/",
-        "/dashboard",
-        "/login",
-        "/saved-calculations",
-        "/health",
-        // Material detail pages are NOINDEX_FOLLOW_ROBOTS — block to prevent Soft 404 in GSC
-        "/tr/materials/",
-        "/en/materials/",
-      ],
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: [
+          "/api/",
+          "/dashboard",
+          "/login",
+          "/saved-calculations",
+          "/health",
+          // Material detail pages are NOINDEX_FOLLOW_ROBOTS — block to prevent Soft 404 in GSC
+          "/tr/materials/",
+          "/en/materials/",
+        ],
+      },
+      {
+        userAgent: "Mediapartners-Google",
+        allow: "/",
+      },
+      {
+        userAgent: "Google-adstxt",
+        allow: ["/", "/ads.txt"],
+      },
+    ],
     ...(host ? { host } : {}),
     sitemap: buildCanonical("/sitemap.xml") ?? "/sitemap.xml",
   };
