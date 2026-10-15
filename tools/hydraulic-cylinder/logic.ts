@@ -1,4 +1,5 @@
 import type { HydraulicCylinderInput, HydraulicCylinderResult } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const DEFAULT_INPUT: HydraulicCylinderInput = {
   pressure: "160",
@@ -8,7 +9,7 @@ export const DEFAULT_INPUT: HydraulicCylinderInput = {
   efficiency: "90",
 };
 
-const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
+const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
 
 const emptyResult = (
   error: string,

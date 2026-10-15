@@ -1,4 +1,5 @@
 import type { UnitCategory, UnitInput, UnitResult } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 type UnitDefinition = {
   id: string;
@@ -73,7 +74,7 @@ export function calculateUnit(input: UnitInput): UnitResult {
   const category = CATEGORY_MAP[input.category];
   const from = findUnit(input.category, input.fromUnit);
   const to = findUnit(input.category, input.toUnit);
-  const numericValue = Number.parseFloat(String(input.value ?? "").replace(",", "."));
+  const numericValue = parseEngineeringNumber(input.value);
 
   if (!from || !to) {
     return {
@@ -90,7 +91,7 @@ export function calculateUnit(input: UnitInput): UnitResult {
     };
   }
 
-  if (!Number.isFinite(numericValue)) {
+  if (numericValue === null) {
     return {
       output: null,
       baseValue: null,

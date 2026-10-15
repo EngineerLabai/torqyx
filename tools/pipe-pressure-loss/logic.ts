@@ -1,4 +1,5 @@
 import type { PipePressureLossInput, PipePressureLossResult } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const DEFAULT_INPUT: PipePressureLossInput = {
   rho: "998",
@@ -9,7 +10,7 @@ export const DEFAULT_INPUT: PipePressureLossInput = {
   roughness: "0.045",
 };
 
-const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
+const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
 
 export const calculatePipePressureLoss = (input: PipePressureLossInput): PipePressureLossResult => {
   const rho = toNumber(input.rho);

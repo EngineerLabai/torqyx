@@ -1,0 +1,110 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-15",
+  "howTo": [
+    "Enter the piston bore diameter and stroke length in millimetres (mm).",
+    "Enter the number of cylinders (integer ≥ 1).",
+    "Select single-acting (compression on one stroke per revolution) or double-acting (compression on both forward and return strokes).",
+    "Enter the operating speed in rpm.",
+    "Enter the estimated volumetric efficiency (1–120 %). Typical reciprocating compressors achieve 65–85 % under nominal conditions.",
+    "Review geometric displacement (cc/rev, L/rev), geometric flow rate (L/min), and efficiency-adjusted delivery (L/min)."
+  ],
+  "formula": "V_geom = (π/4) · D² · S · n_cyl · f_act | Q_geom = V_geom [L/rev] · rpm | Q_adj = Q_geom · (η_v / 100) | f_act = 1 (single-acting), 2 (double-acting)",
+  "examples": [
+    {
+      "title": "Single-stage single-acting compressor",
+      "description": "A single-cylinder single-acting compressor with an 80 mm bore and 60 mm stroke running at 1 450 rpm with 80 % volumetric efficiency.",
+      "inputs": {
+        "Bore, D": "80 mm",
+        "Stroke, S": "60 mm",
+        "Cylinders": "1",
+        "Speed": "1 450 rpm",
+        "Volumetric efficiency": "80 %",
+        "Acting": "Single"
+      },
+      "outputs": {
+        "Geometric displacement": "301.6 cc/rev",
+        "Geometric displacement": "0.302 L/rev",
+        "Geometric flow rate": "436.8 L/min",
+        "Adjusted flow rate": "349.4 L/min"
+      },
+      "inputValues": {
+        "bore": "80",
+        "stroke": "60",
+        "cylinders": "1",
+        "rpm": "1450",
+        "volumetricEff": "80",
+        "acting": "single"
+      },
+      "expected": {
+        "geometricDisplacementCcPerRev": 301.5929,
+        "geometricFlowLMin": 436.8097,
+        "efficiencyAdjustedFlowLMin": 349.4478
+      },
+      "notes": [
+        "V = π/4 × 80² × 60 × 1 × 1 = 301 593 mm³ ≈ 301.59 cc/rev.",
+        "Ideal geometric flow is 436.8 L/min; at 80 % volumetric efficiency the delivery is 349.4 L/min."
+      ]
+    },
+    {
+      "title": "Two-cylinder double-acting compressor",
+      "description": "A two-cylinder double-acting compressor with a 100 mm bore, 80 mm stroke, running at 960 rpm with 75 % volumetric efficiency.",
+      "inputs": {
+        "Bore, D": "100 mm",
+        "Stroke, S": "80 mm",
+        "Cylinders": "2",
+        "Speed": "960 rpm",
+        "Volumetric efficiency": "75 %",
+        "Acting": "Double"
+      },
+      "outputs": {
+        "Geometric displacement": "1 256.6 cc/rev",
+        "Geometric displacement": "1.257 L/rev",
+        "Geometric flow rate": "1 206.4 L/min",
+        "Adjusted flow rate": "904.8 L/min"
+      },
+      "inputValues": {
+        "bore": "100",
+        "stroke": "80",
+        "cylinders": "2",
+        "rpm": "960",
+        "volumetricEff": "75",
+        "acting": "double"
+      },
+      "expected": {
+        "geometricDisplacementCcPerRev": 1256.6371,
+        "geometricFlowLMin": 1206.3716,
+        "efficiencyAdjustedFlowLMin": 904.7787
+      },
+      "notes": [
+        "Double-acting mode uses ideal factor f_act = 2 without deducting piston rod area.",
+        "For precision rod-deducted capacity, refer to manufacturer datasheets."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 1217",
+      "note": "Displacement compressors — Acceptance tests."
+    },
+    {
+      "title": "CAGI Handbook",
+      "note": "Compressed Air and Gas Institute: Engineering reference guide for positive displacement compressors."
+    },
+    {
+      "title": "Thermodynamics: An Engineering Approach",
+      "note": "Cengel & Boles, McGraw-Hill — Reciprocating compressor displacement and volumetric efficiency."
+    }
+  ],
+  "commonMistakes": [
+    "Equating geometric displacement with Free Air Delivery (FAD) without accounting for clearance volume or pressure ratio.",
+    "Assuming double-acting cylinders deliver exactly double the volume while ignoring rod volume on the crank end.",
+    "Entering rotational speed in rad/s or Hz instead of rpm."
+  ],
+  "assumptions": [
+    "Geometric piston displacement is based on ideal cylindrical cylinder swept volume.",
+    "Double-acting mode treats both stroke faces with equal bore area; rod cross-section is not deducted.",
+    "Volumetric efficiency is applied as an overall scalar multiplier to geometric delivery.",
+    "Inlet air pressure, temperature, and relative humidity corrections are omitted in this geometric model."
+  ]
+}

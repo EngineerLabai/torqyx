@@ -1,5 +1,6 @@
 import type { BoltInput, BoltResult, BoltPreset, GradeKey, FrictionKey } from "./types";
 import type { CalculationStep, CalculationStepStatus } from "@/tools/_shared/types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const BOLT_PRESETS: BoltPreset[] = [
   { id: "M3", label: "M3 x 0.50", d: 3, P: 0.5 },
@@ -149,9 +150,9 @@ function buildBoltAuditTrail(
 }
 
 export function calculateBolt(input: BoltInput): BoltResult {
-  const d = Number(input.d);
-  const P = Number(input.P);
-  const preload = Number(input.preloadPercent);
+  const d = parseEngineeringNumber(input.d);
+  const P = parseEngineeringNumber(input.P);
+  const preload = parseEngineeringNumber(input.preloadPercent);
 
   if (!d || d <= 0 || !P || P <= 0) {
     return {

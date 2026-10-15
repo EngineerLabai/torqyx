@@ -1,0 +1,90 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-15",
+  "howTo": [
+    "Enter the applied tensile or compressive force F in newtons (N).",
+    "Enter the resisting cross-sectional area A in square millimetres (mm²).",
+    "Select the material grade to establish the reference yield strength Re (MPa).",
+    "Review the resulting nominal stress σ = F / A and static safety factor n = Re / σ."
+  ],
+  "formula": "σ = F / A | n = Re / σ",
+  "examples": [
+    {
+      "title": "Tensile tie rod in structural steel S355",
+      "description": "A 50 mm solid circular rod (A = 1 963.5 mm²) under a 200 kN axial tensile load.",
+      "inputs": {
+        "Force, F": "200 000 N",
+        "Cross-sectional area, A": "1 963.5 mm²",
+        "Material": "S355 (Re = 355 MPa)"
+      },
+      "outputs": {
+        "Stress, σ": "101.9 MPa",
+        "Safety factor, n": "3.48",
+        "Status": "Safe (n ≥ 2)"
+      },
+      "inputValues": {
+        "force": "200000",
+        "area": "1963.5",
+        "material": "S355"
+      },
+      "expected": {
+        "stress": 101.859,
+        "safetyFactor": 3.485
+      },
+      "notes": [
+        "A = π × 50² / 4 ≈ 1 963.5 mm².",
+        "Stress is well within the elastic capacity of S355 steel with static safety factor n ≈ 3.48."
+      ]
+    },
+    {
+      "title": "Net plate section under tension",
+      "description": "A plate with net area A = 300 mm² under a 50 kN axial force using S235 steel.",
+      "inputs": {
+        "Force, F": "50 000 N",
+        "Cross-sectional area, A": "300 mm²",
+        "Material": "S235 (Re = 235 MPa)"
+      },
+      "outputs": {
+        "Stress, σ": "166.7 MPa",
+        "Safety factor, n": "1.41",
+        "Status": "Marginal (1.2 ≤ n < 2)"
+      },
+      "inputValues": {
+        "force": "50000",
+        "area": "300",
+        "material": "S235"
+      },
+      "expected": {
+        "stress": 166.667,
+        "safetyFactor": 1.41
+      },
+      "notes": [
+        "Safety factor 1.41 indicates marginal capacity under static loading; fatigue or notch sensitivity requires further investigation."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "EN 1993-1-1",
+      "note": "Eurocode 3: Design of steel structures — General rules and rules for buildings."
+    },
+    {
+      "title": "ISO 6892-1",
+      "note": "Metallic materials — Tensile testing — Part 1: Method of test at room temperature."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Budynas & Nisbett, 10th ed. — Chapter 3: Load and Stress Analysis."
+    }
+  ],
+  "commonMistakes": [
+    "Entering force in kilonewtons (kN) without converting to newtons (N), leading to an error factor of 1 000 in calculated stress.",
+    "Using gross area instead of net area when holes, slots, or cutouts reduce the effective cross-section.",
+    "Applying nominal stress directly without checking stress concentration factors (Kt) near geometric discontinuities."
+  ],
+  "assumptions": [
+    "Axial load is applied along the centroidal axis with zero eccentricity.",
+    "Stress is uniformly distributed across the cross-section (Saint-Venant's principle).",
+    "Material is homogeneous, isotropic, and operates strictly within the linear elastic range."
+  ]
+}

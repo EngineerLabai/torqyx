@@ -1,4 +1,5 @@
 import type { ShaftTorsionInput, ShaftTorsionResult } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const DEFAULT_INPUT: ShaftTorsionInput = {
   torque: "250",
@@ -8,7 +9,7 @@ export const DEFAULT_INPUT: ShaftTorsionInput = {
   allowableShear: "0",
 };
 
-const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
+const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
 
 export const calculateShaftTorsion = (input: ShaftTorsionInput): ShaftTorsionResult => {
   const torque = toNumber(input.torque);

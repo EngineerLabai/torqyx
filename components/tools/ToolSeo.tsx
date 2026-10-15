@@ -48,7 +48,7 @@ export default function ToolSeo({ toolId, locale }: ToolSeoProps) {
 
   return (
     <>
-      <ToolApplicationJsonLd id={`${idPrefix}-software-jsonld`} data={data} schemaType="SoftwareApplication" />
+      <ToolApplicationJsonLd id={`${idPrefix}-webapp-jsonld`} data={data} schemaType="WebApplication" />
       <JsonLd id={`${idPrefix}-breadcrumb-jsonld`} data={breadcrumbData} />
     </>
   );

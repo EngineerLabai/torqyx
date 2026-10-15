@@ -1,4 +1,5 @@
 import type { ChartInput, ChartResult, ChartPoint } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const DEFAULT_INPUT: ChartInput = {
   stiffness: "500",
@@ -7,7 +8,7 @@ export const DEFAULT_INPUT: ChartInput = {
 };
 
 const format = (value: number) => value.toFixed(3);
-const toNumber = (value: string) => Number.parseFloat(String(value ?? "").replace(",", "."));
+const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
 
 export function calculateChart(input: ChartInput): ChartResult {
   const stiffness = toNumber(input.stiffness);

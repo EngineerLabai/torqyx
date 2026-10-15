@@ -1,4 +1,5 @@
 import type { BearingLifeInput, BearingLifeResult } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const DEFAULT_INPUT: BearingLifeInput = {
   C: "25",
@@ -8,7 +9,7 @@ export const DEFAULT_INPUT: BearingLifeInput = {
   a1: "1",
 };
 
-const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
+const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
 
 export const calculateBearingLife = (input: BearingLifeInput): BearingLifeResult => {
   const C = toNumber(input.C);

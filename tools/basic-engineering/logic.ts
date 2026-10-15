@@ -1,4 +1,5 @@
 import type { HeatInput, HeatResult } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const DEFAULT_INPUT: HeatInput = {
   conductivity: "45",
@@ -8,7 +9,7 @@ export const DEFAULT_INPUT: HeatInput = {
 };
 
 const format = (value: number) => value.toFixed(4);
-const toNumber = (value: string) => Number.parseFloat(String(value ?? "").replace(",", "."));
+const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
 
 export function calculateHeat(input: HeatInput): HeatResult {
   const k = toNumber(input.conductivity);

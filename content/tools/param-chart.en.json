@@ -1,0 +1,90 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-15",
+  "howTo": [
+    "Enter the linear spring stiffness k in N/m (e.g. 500 N/m).",
+    "Enter the maximum displacement x_max in millimetres (mm).",
+    "Specify the number of evaluation points (steps ≥ 2).",
+    "Review the resulting force–displacement curve and numerical step-by-step table based on Hooke's Law."
+  ],
+  "formula": "F = k · x | x [m] = x_mm / 1000 | Step size = x_max / (steps − 1)",
+  "examples": [
+    {
+      "title": "Return spring with 6 evaluation steps",
+      "description": "A spring with stiffness k = 500 N/m compressed up to 20 mm across 6 equally spaced points.",
+      "inputs": {
+        "Stiffness, k": "500 N/m",
+        "Max displacement": "20 mm",
+        "Steps": "6"
+      },
+      "outputs": {
+        "Step size": "4 mm",
+        "Max force": "10 N",
+        "F at 20 mm": "10 N"
+      },
+      "inputValues": {
+        "stiffness": "500",
+        "maxDisplacement": "20",
+        "steps": "6"
+      },
+      "expected": {
+        "maxForce": 10.0,
+        "stepSize": 4.0
+      },
+      "notes": [
+        "F_max = 500 N/m × (20/1000) m = 10 N.",
+        "Step interval = 20 mm / (6 - 1) = 4 mm per point."
+      ]
+    },
+    {
+      "title": "Industrial compression spring",
+      "description": "A heavy-duty compression spring with k = 8 000 N/m compressed up to 50 mm evaluated over 11 steps.",
+      "inputs": {
+        "Stiffness, k": "8 000 N/m",
+        "Max displacement": "50 mm",
+        "Steps": "11"
+      },
+      "outputs": {
+        "Step size": "5 mm",
+        "Max force": "400 N"
+      },
+      "inputValues": {
+        "stiffness": "8000",
+        "maxDisplacement": "50",
+        "steps": "11"
+      },
+      "expected": {
+        "maxForce": 400.0,
+        "stepSize": 5.0
+      },
+      "notes": [
+        "F_max = 8 000 N/m × 0.050 m = 400 N.",
+        "Linear Hooke's Law assumption requires operating strictly below the spring solid height."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "EN 13906-1",
+      "note": "Cylindrical helical springs made from round wire and bar — Calculation and design — Part 1: Compression springs."
+    },
+    {
+      "title": "Mechanical Springs",
+      "note": "Wahl, A.M., 2nd ed., McGraw-Hill — Spring rate, stress concentration, and deflection theory."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Budynas & Nisbett, 10th ed. — Chapter 10: Mechanical Springs."
+    }
+  ],
+  "commonMistakes": [
+    "Entering displacement in millimetres while treating stiffness as N/mm instead of N/m.",
+    "Exceeding the physical solid height or maximum allowable deflection of the spring.",
+    "Applying linear Hooke's Law to progressive-rate or dual-rate non-linear springs."
+  ],
+  "assumptions": [
+    "Ideal linear elastic behaviour (Hooke's Law) over the entire displacement range.",
+    "Initial preload at zero displacement is assumed to be zero.",
+    "Hysteresis, temperature degradation, and damping are not modelled."
+  ]
+}

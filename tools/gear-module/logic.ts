@@ -11,10 +11,9 @@ export type GearModuleResult = {
   approximateMinimumTeeth: number;
 };
 
-const toNumber = (value: string | number) => {
-  const parsed = typeof value === "number" ? value : Number(value.replace(",", "."));
-  return Number.isFinite(parsed) ? parsed : null;
-};
+import { parseEngineeringNumber } from "@/utils/number-parser";
+
+const toNumber = (value: string | number) => parseEngineeringNumber(value);
 
 export function calculateGearModule({
   diameter,

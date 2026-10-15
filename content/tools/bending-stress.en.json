@@ -1,0 +1,121 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-15",
+  "howTo": [
+    "Enter the simply-supported beam length (mm) and the midpoint concentrated load (kN).",
+    "Select the cross-section geometry: rectangular (width b × height h) or solid circular (diameter d).",
+    "Enter the material Young's modulus E (MPa) and yield strength Re (MPa). Typical structural steel defaults are 210 000 MPa and 355 MPa.",
+    "The tool calculates maximum bending moment, section modulus, second moment of area, bending stress, mid-span deflection, and static safety factor."
+  ],
+  "formula": "M_max = F·L / 4 | σ = M_max / W | W_rect = b·h² / 6 | W_circle = π·d³ / 32 | I_rect = b·h³ / 12 | I_circle = π·d⁴ / 64 | δ_max = F·L³ / (48·E·I) | n = Re / σ",
+  "examples": [
+    {
+      "title": "Simply-supported steel rectangular beam under midpoint load",
+      "description": "A 500 mm steel beam with a 40 × 8 mm rectangular cross-section carries a 2 kN load at mid-span. Material: S355 (Re = 355 MPa, E = 210 000 MPa).",
+      "inputs": {
+        "Beam length, L": "500 mm",
+        "Force, F": "2 kN",
+        "Cross-section": "Rectangular",
+        "Width, b": "40 mm",
+        "Height, h": "8 mm",
+        "Young's modulus, E": "210 000 MPa",
+        "Yield strength, Re": "355 MPa"
+      },
+      "outputs": {
+        "Max bending moment, M_max": "0.250 kN·m",
+        "Second moment of area, I": "1.707 × 10³ mm⁴",
+        "Section modulus, W": "426.7 mm³",
+        "Bending stress, σ": "586 MPa",
+        "Mid-span deflection, δ": "0.93 mm",
+        "Safety factor, n": "0.61"
+      },
+      "inputValues": {
+        "beamLengthMm": "500",
+        "forcekN": "2",
+        "sectionType": "rect",
+        "widthMm": "40",
+        "heightMm": "8",
+        "youngModulus": "210000",
+        "yieldStrength": "355"
+      },
+      "expected": {
+        "maxMoment": 250000,
+        "inertia": 1706.6667,
+        "sectionModulus": 426.6667,
+        "sigma": 585.9375,
+        "deflection": 0.9275,
+        "safety": 0.6059
+      },
+      "notes": [
+        "σ > Re produces a safety factor < 1.0, highlighting that this cross-section is undersized for the applied load.",
+        "Increasing beam depth h produces a cubic increase in moment of inertia I and quadratic increase in section modulus W."
+      ]
+    },
+    {
+      "title": "Solid circular steel shaft as a simply-supported beam",
+      "description": "A 300 mm shaft with a 30 mm diameter carries a 0.5 kN central load. Material: C45 (Re = 600 MPa, E = 210 000 MPa).",
+      "inputs": {
+        "Beam length, L": "300 mm",
+        "Force, F": "0.5 kN",
+        "Cross-section": "Circular",
+        "Diameter, d": "30 mm",
+        "Young's modulus, E": "210 000 MPa",
+        "Yield strength, Re": "600 MPa"
+      },
+      "outputs": {
+        "Max bending moment, M_max": "0.038 kN·m",
+        "Second moment of area, I": "3.976 × 10⁴ mm⁴",
+        "Section modulus, W": "2 651 mm³",
+        "Bending stress, σ": "14.1 MPa",
+        "Mid-span deflection, δ": "0.0054 mm",
+        "Safety factor, n": "42.4"
+      },
+      "inputValues": {
+        "beamLengthMm": "300",
+        "forcekN": "0.5",
+        "sectionType": "circle",
+        "widthMm": "30",
+        "heightMm": "30",
+        "youngModulus": "210000",
+        "yieldStrength": "600"
+      },
+      "expected": {
+        "maxMoment": 37500,
+        "inertia": 39760.782,
+        "sectionModulus": 2650.7188,
+        "sigma": 14.147,
+        "deflection": 0.00536,
+        "safety": 42.41
+      },
+      "notes": [
+        "A high static safety factor indicates adequate static bending capacity; shaft deflection and torsional fatigue should be verified separately.",
+        "For circular sections only the diameter input is used in the calculation."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "EN 1993-1-1",
+      "note": "Eurocode 3: Design of steel structures — Part 1-1: General rules and rules for buildings."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Budynas & Nisbett, 10th ed., McGraw-Hill — Chapter 5: Failures Resulting from Static Loading."
+    },
+    {
+      "title": "Mechanics of Materials",
+      "note": "Hibbeler, R.C., 10th ed., Pearson — Pure bending, elastic flexure formula, and beam deflection."
+    }
+  ],
+  "commonMistakes": [
+    "Using total beam depth (h) instead of the distance to the extreme fiber (c = h/2) when deriving section modulus.",
+    "Mixing units: entering beam span in metres and cross-section in millimetres without converting force or length consistently.",
+    "Evaluating static bending stress alone while omitting deflection limits, lateral-torsional buckling, or cyclic fatigue."
+  ],
+  "assumptions": [
+    "Beam is simply supported at both ends with a single concentrated load at mid-span.",
+    "Linear elastic material response according to Hooke's Law; no plastic deformation.",
+    "Slender beam geometry satisfying Euler–Bernoulli beam theory (span-to-depth ratio L/h ≥ 10).",
+    "Self-weight of the beam is negligible compared to the applied load."
+  ]
+}

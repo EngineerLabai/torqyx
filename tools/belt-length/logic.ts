@@ -23,10 +23,9 @@ export type OpenBeltResult =
       reason: "invalid-input" | "invalid-geometry" | "overlapping-pulleys";
     };
 
-const toFiniteNumber = (value: string | number) => {
-  const parsed = typeof value === "number" ? value : Number(value.replace(",", "."));
-  return Number.isFinite(parsed) ? parsed : null;
-};
+import { parseEngineeringNumber } from "@/utils/number-parser";
+
+const toFiniteNumber = (value: string | number) => parseEngineeringNumber(value);
 
 /**
  * Open-belt approximation for pulley pitch diameters and shaft centre distance.

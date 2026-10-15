@@ -32,23 +32,17 @@ export type CompressorCcCalculation =
   | { ok: true; result: CompressorCcResult }
   | { ok: false; error: CompressorCcErrorCode };
 
-export const MAX_VOLUMETRIC_EFFICIENCY_PERCENT = 120;
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
-const DECIMAL_NUMBER = /^[+-]?(?:\d+(?:[.,]\d*)?|[.,]\d+)(?:[eE][+-]?\d+)?$/;
+export const MAX_VOLUMETRIC_EFFICIENCY_PERCENT = 120;
 
 /**
  * Parses a strict finite decimal value and accepts either a decimal point or
  * decimal comma. Thousands separators and partially numeric strings are
  * intentionally rejected.
  */
-export const parseCompressorNumber = (value: string): number | null => {
-  if (typeof value !== "string") return null;
-  const trimmed = value.trim();
-  if (!trimmed || !DECIMAL_NUMBER.test(trimmed)) return null;
-
-  const parsed = Number(trimmed.replace(",", "."));
-  return Number.isFinite(parsed) ? parsed : null;
-};
+export const parseCompressorNumber = (value: string): number | null =>
+  parseEngineeringNumber(value);
 
 /**
  * Ideal geometric piston displacement model.

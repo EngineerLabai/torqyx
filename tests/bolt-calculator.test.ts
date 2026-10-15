@@ -41,6 +41,23 @@ describe("bolt preload and tightening torque", () => {
     expect(Number.isFinite(small.torque)).toBe(true);
   });
 
+  it("handles comma decimal inputs (Turkish/European format)", () => {
+    const result = calculateBolt({ presetId: "custom", d: "10,5", P: "1,25", grade: "10.9", preloadPercent: "65,5", friction: "coated" });
+    expect(result.error).toBeUndefined();
+    expect(Number.isFinite(result.torque)).toBe(true);
+    expect(result.torque).toBeGreaterThan(0);
+  });
+
+  it("rejects ambiguous thousands separators and trailing junk", () => {
+    const junk = calculateBolt({ presetId: "custom", d: "10,5abc", P: "1.25", grade: "8.8", preloadPercent: "70", friction: "dry" });
+    expect(junk.error).toBeTruthy();
+    expect(junk.torque).toBeNull();
+
+    const thousands = calculateBolt({ presetId: "custom", d: "1.234,56", P: "1.25", grade: "8.8", preloadPercent: "70", friction: "dry" });
+    expect(thousands.error).toBeTruthy();
+    expect(thousands.torque).toBeNull();
+  });
+
   it("rejects invalid direct nut-factor inputs", () => {
     expect(calculateTorqueFromNutFactor({ nutFactor: 0, preloadN: 25_000, nominalDiameterM: 0.01 })).toBeNull();
     expect(calculateTorqueFromNutFactor({ nutFactor: 0.14, preloadN: -1, nominalDiameterM: 0.01 })).toBeNull();

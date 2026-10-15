@@ -1,4 +1,5 @@
 import type { FilletWeldInput, FilletWeldResult } from "./types";
+import { parseEngineeringNumber } from "@/utils/number-parser";
 
 export const DEFAULT_INPUT: FilletWeldInput = {
   load: "15000",
@@ -7,7 +8,7 @@ export const DEFAULT_INPUT: FilletWeldInput = {
   fillet: "0",
 };
 
-const toNumber = (value: string) => Number.parseFloat(value.replace(",", "."));
+const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
 
 export const calculateFilletWeld = (input: FilletWeldInput): FilletWeldResult => {
   const load = toNumber(input.load);
