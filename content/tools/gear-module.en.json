@@ -1,0 +1,98 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-16",
+  "howTo": [
+    "Enter the required pitch diameter D (mm) and the number of teeth Z. The tool calculates the raw module m = D / Z, then finds the nearest standard module from the ISO 54 / DIN 780 series.",
+    "Review the suggested standard module, the corrected pitch diameter, and the deviation percentage. A deviation above 2–3 % typically requires a design revision.",
+    "Check the undercut risk flag. For involute gears with a pressure angle of 20°, undercut is geometrically possible when Z < 17."
+  ],
+  "formula": "m_raw = D / Z | m_std = nearest value from ISO series | D_std = m_std × Z | deviation = |D_std − D| / D × 100 %",
+  "examples": [
+    {
+      "title": "Spur gear design from pitch diameter",
+      "description": "A gearbox design calls for a pinion with a 60 mm pitch diameter and 20 teeth. Find the standard module.",
+      "inputs": {
+        "Pitch diameter, D": "60 mm",
+        "Number of teeth, Z": "20"
+      },
+      "outputs": {
+        "Raw module, m_raw": "3.000",
+        "Standard module, m_std": "3",
+        "Standard pitch diameter": "60 mm",
+        "Deviation": "0.00 %",
+        "Undercut risk (Z < 17)": "No"
+      },
+      "inputValues": {
+        "diameter": "60",
+        "teeth": "20"
+      },
+      "expected": {
+        "mRaw": 3.0,
+        "pitchDiameter": 60.0,
+        "suggestedM": 3,
+        "suggestedDiameter": 60,
+        "diffPercent": 0.0,
+        "approximateUndercutRisk": false
+      },
+      "notes": [
+        "m = 60 / 20 = 3.000 — an exact match with the ISO standard series, so no deviation correction is needed.",
+        "Standard modules from ISO 54 preferred series: 0.5, 0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20."
+      ]
+    },
+    {
+      "title": "Small gear with undercut risk",
+      "description": "A compact reducer needs Z = 14 teeth with a 28 mm pitch diameter. Assess module selection and undercut.",
+      "inputs": {
+        "Pitch diameter, D": "28 mm",
+        "Number of teeth, Z": "14"
+      },
+      "outputs": {
+        "Raw module, m_raw": "2.000",
+        "Standard module, m_std": "2",
+        "Standard pitch diameter": "28 mm",
+        "Deviation": "0.00 %",
+        "Undercut risk (Z < 17)": "Yes"
+      },
+      "inputValues": {
+        "diameter": "28",
+        "teeth": "14"
+      },
+      "expected": {
+        "mRaw": 2.0,
+        "pitchDiameter": 28.0,
+        "suggestedM": 2,
+        "suggestedDiameter": 28,
+        "diffPercent": 0.0,
+        "approximateUndercutRisk": true
+      },
+      "notes": [
+        "Z = 14 < 17 triggers the undercut risk flag for a standard 20° pressure angle involute profile.",
+        "Mitigations: profile shift (addendum modification), increasing pressure angle to 25°, or increasing tooth count. Verify with tooth geometry software before production."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 54",
+      "note": "Cylindrical gears — ISO system of accuracy — Part 1: Definitions and allowable values of deviations relevant to corresponding flanks of gear teeth. The standard module series used in this tool."
+    },
+    {
+      "title": "DIN 780",
+      "note": "Module series for gears. Equivalent to ISO 54 preferred module values, widely referenced in European mechanical engineering."
+    },
+    {
+      "title": "ISO 53",
+      "note": "Cylindrical gears for general and heavy engineering — Standard basic rack tooth profile. Defines the 20° pressure angle reference geometry."
+    }
+  ],
+  "commonMistakes": [
+    "Selecting a non-standard module (e.g. m = 2.8) — this requires custom tooling and significantly increases manufacturing cost.",
+    "Ignoring the undercut risk flag for small tooth counts and assuming a standard profile will still produce a valid tooth form.",
+    "Confusing pitch diameter (reference diameter) with tip diameter — the tip diameter is D_a = m × (Z + 2) for a standard tooth profile."
+  ],
+  "assumptions": [
+    "Standard involute tooth profile with a 20° pressure angle, as defined by ISO 53.",
+    "No profile shift (addendum modification coefficient x = 0). Profile shift calculations require a separate gear design tool.",
+    "The undercut threshold of Z < 17 is approximate for a 20° standard pressure angle. The exact limit depends on the profile shift coefficient."
+  ]
+}

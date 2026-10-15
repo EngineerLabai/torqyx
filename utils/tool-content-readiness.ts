@@ -9,12 +9,14 @@ import type { Locale } from "@/utils/locale";
  * scope, assumptions, limits, worked examples, and references.
  */
 const ENGLISH_INDEX_READY_TOOL_IDS = new Set([
+  "basic-engineering",
   "bearing-life",
   "belt-length",
   "bending-stress",
   "bolt-calculator",
   "compressor-cc",
   "fillet-weld",
+  "gear-module",
   "hydraulic-cylinder",
   "param-chart",
   "pipe-pressure-loss",

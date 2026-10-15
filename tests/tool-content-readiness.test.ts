@@ -16,7 +16,8 @@ describe("tool content index-readiness policy", () => {
   });
 
   it("sets noindex,follow on incomplete English tool pages", () => {
-    const incomplete = buildToolMetadata("basic-engineering", "en");
+    // gear-design is intentionally not in ENGLISH_INDEX_READY_TOOL_IDS
+    const incomplete = buildToolMetadata("gear-design", "en");
     const complete = buildToolMetadata("bearing-life", "en");
 
     expect(incomplete.robots).toMatchObject({ index: false, follow: true });
