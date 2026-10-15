@@ -73,7 +73,7 @@ export function calculateUnit(input: UnitInput): UnitResult {
   const category = CATEGORY_MAP[input.category];
   const from = findUnit(input.category, input.fromUnit);
   const to = findUnit(input.category, input.toUnit);
-  const numericValue = Number(input.value);
+  const numericValue = Number.parseFloat(String(input.value ?? "").replace(",", "."));
 
   if (!from || !to) {
     return {

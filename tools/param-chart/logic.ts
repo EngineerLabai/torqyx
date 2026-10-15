@@ -7,11 +7,12 @@ export const DEFAULT_INPUT: ChartInput = {
 };
 
 const format = (value: number) => value.toFixed(3);
+const toNumber = (value: string) => Number.parseFloat(String(value ?? "").replace(",", "."));
 
 export function calculateChart(input: ChartInput): ChartResult {
-  const stiffness = Number(input.stiffness);
-  const maxDisplacement = Number(input.maxDisplacement);
-  const stepsRaw = Number(input.steps);
+  const stiffness = toNumber(input.stiffness);
+  const maxDisplacement = toNumber(input.maxDisplacement);
+  const stepsRaw = toNumber(input.steps);
   const stepsCount = Number.isFinite(stepsRaw) ? Math.round(stepsRaw) : 0;
 
   if (!Number.isFinite(stiffness) || stiffness <= 0) {

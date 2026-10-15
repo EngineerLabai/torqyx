@@ -8,12 +8,13 @@ export const DEFAULT_INPUT: HeatInput = {
 };
 
 const format = (value: number) => value.toFixed(4);
+const toNumber = (value: string) => Number.parseFloat(String(value ?? "").replace(",", "."));
 
 export function calculateHeat(input: HeatInput): HeatResult {
-  const k = Number(input.conductivity);
-  const area = Number(input.area);
-  const deltaT = Number(input.deltaT);
-  const thickness = Number(input.thickness);
+  const k = toNumber(input.conductivity);
+  const area = toNumber(input.area);
+  const deltaT = toNumber(input.deltaT);
+  const thickness = toNumber(input.thickness);
 
   if (!Number.isFinite(k) || k <= 0 || !Number.isFinite(area) || area <= 0) {
     return {
