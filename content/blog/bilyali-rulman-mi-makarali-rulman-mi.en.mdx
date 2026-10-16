@@ -1,0 +1,80 @@
+---
+title: "Ball Bearings vs. Roller Bearings: Sizing and Selection Criteria"
+description: "Compare ball and roller bearings across radial load, axial thrust, rotational speed, misalignment tolerance, boundary lubrication, and ISO 281 L10 life."
+date: "2026-06-10"
+tags: ["ball bearings", "roller bearings", "bearing selection", "machine elements", "ISO 281"]
+category: "Bearings & Shafts"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/blog/bilyali-rulman-mi-makarali-rulman-mi"
+---
+
+<Image src="/images/blog/bilyali-rulman-mi-makarali-rulman-mi.webp" alt="Technical diagram comparing contact geometry between ball and roller bearings" width={1200} height={900} caption="Point contact in ball bearings versus line contact in roller bearings: kinematics and load capacity comparison." />
+
+## Point contact vs. line contact: fundamental kinematic distinction
+
+The foundational mechanical distinction between ball bearings and roller bearings lies in their elastohydrodynamic contact geometry:
+
+1. **Ball Bearings (Point Contact)**:
+   Rolling elements are spherical balls conforming into circular raceway grooves. Under load, contact occurs over a small elliptical contact patch (approximated as point contact). Because contact area is small, rolling friction, torque resistance, and frictional heat generation are exceptionally low. This allows deep groove and angular contact ball bearings to achieve exceptionally high rotational speeds. However, concentrated Hertzian contact stresses limit dynamic load ratings.
+
+2. **Roller Bearings (Line Contact)**:
+   Rolling elements are cylindrical, tapered, spherical, or needle rollers running along flat or cylindrical raceways. Under load, contact forms an elongated rectangular contact strip (approximated as line contact). The larger contact area drastically reduces contact pressure at identical forces, enabling roller bearings to sustain substantially higher static and dynamic radial loads and shock impacts. Conversely, sliding friction at roller ends and higher churning losses impose lower maximum limiting speeds.
+
+## Key performance criteria and trade-off analysis
+
+When choosing between ball and roller configurations for a rotating shaft assembly, engineers must systematically evaluate seven coupled engineering parameters:
+
+### 1. Magnitude and direction of applied loads
+- **Pure Radial Loads**: Deep groove ball bearings handle light to moderate loads. For heavy radial loads or severe shock impacts (e.g., crushers, gearboxes, heavy electric motors), **cylindrical roller bearings** (N, NU series) provide superior load capacity and high radial stiffness.
+- **Combined Radial and Axial Loads**: **Angular contact ball bearings** (7000, 7200 series) excel in high-speed combined load duties. For high axial thrust coupled with high radial forces (e.g., vehicle wheel hubs, bevel gear shafts, reduction pinions), **tapered roller bearings** (30000 series) are the industry standard.
+- **Pure Axial Loads**: Thrust ball bearings (51000 series) handle light thrust at moderate speeds, whereas spherical roller thrust bearings (29000 series) carry massive vertical thrust loads with self-aligning capability.
+
+### 2. Operating speed and limiting speed ratings
+Because point contact produces minimal rolling resistance, ball bearings achieve the highest limiting speeds (nd_m factors up to 1,000,000 mm·rpm or higher with ceramic hybrid balls). Cylindrical and tapered roller bearings typically operate at 50–70% of equivalent-size ball bearing speed limits due to sliding friction at roller guide flanges.
+
+### 3. Structural rigidity and elastic deflection
+Spindle accuracy and gear meshing stability depend heavily on bearing deflection. Under load, elastic deformation in line contact scales with F^0.9, compared to F^0.67 in point contact. Roller bearings offer 2–3 times higher radial and tilting stiffness than ball bearings of identical bore diameter. High-precision machine tool spindles frequently combine double-row cylindrical roller bearings for radial rigidity with angular contact ball bearings for axial location.
+
+### 4. Shaft deflection and angular misalignment
+- Deep groove ball bearings tolerate only 2 to 10 arcminutes of angular misalignment before raceway edge-loading drastically degrades fatigue life.
+- Cylindrical roller bearings tolerate only 2 to 4 arcminutes.
+- Where structural deflection or long bearing spans are present, **spherical roller bearings** (22200, 23200 series) accommodate up to **1.5° to 2.5° of angular misalignment** without loss of rated load capacity.
+
+### 5. Rating life calculation: exponent difference (p = 3 vs. p = 10/3)
+According to **ISO 281**, the basic dynamic rating life L10 (in millions of revolutions) is calculated as:
+
+**L10 = (C / P)^p**
+
+where:
+- **C** is the basic dynamic load rating from manufacturer catalogues
+- **P** is the equivalent dynamic bearing load
+- **p = 3** for ball bearings
+- **p = 10/3 (≈ 3.333)** for roller bearings
+
+Because the exponent is higher for roller bearings, any increase in load rating or reduction in equivalent load results in a significantly larger life extension compared to a ball bearing operating under comparable ratios.
+
+## Systematic bearing arrangement: locating vs. non-locating
+
+A robust shaft layout requires a designated **locating (fixed) bearing** and a **non-locating (floating) bearing** to accommodate thermal axial expansion of the shaft without inducing parasitic thrust loads:
+
+- **Locating Position**: Restrains shaft axially in both directions. Suitable types: Deep groove ball bearing, paired angular contact ball bearings, double-row tapered roller bearings, or a spherical roller bearing.
+- **Non-Locating Position**: Permits frictionless axial displacement. An NU or N design cylindrical roller bearing is ideal because internal axial displacement occurs directly between rollers and raceway with zero sliding friction against the housing bore.
+
+## Related Torqyx calculator
+
+Use the Torqyx Bearing Life (L10) Calculator to evaluate basic rating life in hours (L10h), adjusted life factors, and compare ball versus roller bearing reliability under ISO 281 standards.
+
+<ToolLink href="/tools/bearing-life" title="Bearing Life (L10) Calculator" description="Compute ISO 281 basic rating life (L10/L10h) from dynamic load capacity, equivalent load, and speed." badge="Calculator" />
+
+## Related engineering guides
+
+- [Quick Reference Guide to Bearing Selection and Sizing](/guides/rulman-secimi-icin-hizli-rehber)
+- [Tolerance Stacks and GD&T Guide](/guides/tolerans-zinciri-ve-gdt-rehberi)
+
+## Technical references
+
+- ISO 281 — Rolling bearings — Dynamic load ratings and rating life.
+- ISO 76 — Rolling bearings — Static load ratings.
+- ISO 15243 — Rolling bearings — Damage and failures — Terms, characteristics and causes.
+- SKF General Catalogue — Bearing selection principles and engineering calculation rules.
