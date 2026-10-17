@@ -1,25 +1,25 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2026-02-07",
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-16",
   "howTo": [
-    "Enter load, weld length, and allowable stress.",
-    "Leave fillet size empty if unknown.",
-    "Review required a, throat size, and stress check."
+    "Enter the design shear/tension force (F) in Newtons (N), the total effective weld length (L) in millimeters (mm), and the allowable weld shear stress (σ_allow or τ_allow) in MPa (N/mm²).",
+    "If sizing a new joint, leave fillet leg size (a) empty or 0 to compute the minimum required leg length and throat thickness.",
+    "If checking an existing weld, enter the specified leg size (a) in millimeters to evaluate calculated throat stress against allowable stress."
   ],
-  "formula": "a = F / (0.707·L·σ_allow) | throat = 0.707·a | σ = F / (0.707·a·L)",
+  "formula": "a_req = F / (0.707 · L · σ_allow) | throat = 0.707 · a | τ_throat = F / (0.707 · a · L)",
   "examples": [
     {
-      "title": "Required a sizing",
-      "description": "F=15 kN, L=120 mm, σ_allow=140 MPa.",
+      "title": "Required leg size calculation (sizing mode)",
+      "description": "F = 15 kN static load, L = 120 mm total effective length, allowable weld shear stress σ_allow = 140 MPa.",
       "inputs": {
-        "Load": "15000 N",
-        "Weld length": "120 mm",
-        "Allowable": "140 MPa",
-        "Fillet a": "-"
+        "Load, F": "15000 N",
+        "Weld length, L": "120 mm",
+        "Allowable stress": "140 MPa",
+        "Fillet leg size, a": "0 (sizing mode)"
       },
       "outputs": {
-        "Required a": "1.26 mm",
-        "Throat": "0.89 mm"
+        "Required leg size, a_req": "1.26 mm",
+        "Effective throat thickness": "0.89 mm"
       },
       "inputValues": {
         "load": "15000",
@@ -30,21 +30,25 @@
       "expected": {
         "requiredA": 1.2629,
         "throat": 0.8929
-      }
+      },
+      "notes": [
+        "In production, round up the required 1.26 mm leg size to the minimum practical weld size (typically 3 mm or 4 mm based on plate thickness requirements).",
+        "Effective weld length excludes start and stop end craters (deduct 2 · a from physical run length if no run-on/run-off tabs are used)."
+      ]
     },
     {
-      "title": "Stress check",
-      "description": "F=20 kN, L=150 mm, σ_allow=160 MPa, a=6 mm.",
+      "title": "Existing weld verification (stress check mode)",
+      "description": "F = 20 kN static load, L = 150 mm, allowable stress = 160 MPa, existing leg size a = 6 mm.",
       "inputs": {
-        "Load": "20000 N",
-        "Weld length": "150 mm",
-        "Allowable": "160 MPa",
-        "Fillet a": "6 mm"
+        "Load, F": "20000 N",
+        "Weld length, L": "150 mm",
+        "Allowable stress": "160 MPa",
+        "Existing leg size, a": "6 mm"
       },
       "outputs": {
-        "Required a": "1.18 mm",
-        "Stress": "31.43 MPa",
-        "Safe": "Yes"
+        "Required leg size": "1.18 mm",
+        "Calculated throat stress": "31.43 MPa",
+        "Safety evaluation": "Safe (31.43 MPa ≤ 160 MPa)"
       },
       "inputValues": {
         "load": "20000",
@@ -55,22 +59,37 @@
       "expected": {
         "requiredA": 1.1787,
         "stress": 31.4317
-      }
+      },
+      "notes": [
+        "Calculated throat shear stress is 31.43 MPa, well below allowable 160 MPa (utilization ratio ≈ 19.6%).",
+        "Assumes equal load distribution across the 150 mm joint without out-of-plane peel or tearing moments."
+      ]
     }
   ],
   "references": [
     {
-      "title": "AWS D1.1",
-      "note": "Welding design guidance."
+      "title": "AWS D1.1 / D1.1M (Structural Welding Code — Steel)",
+      "note": "Section 2.4/2.5 covering effective throat dimensioning (t_e = 0.707 · w) for equal-leg 45° fillet welds under simplified static shear analysis."
+    },
+    {
+      "title": "EN 1993-1-8 (Eurocode 3: Design of steel structures — Design of joints)",
+      "note": "Section 4.5.3.3 covering the simplified method for design resistance of fillet welds where resultant force is transferred through the throat area."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Chapter on welded joints in tension, compression, and shear. Basis for the simplified throat shear stress approximation."
     }
   ],
   "commonMistakes": [
-    "Using single weld length instead of total effective length.",
-    "Confusing allowable stress with yield strength.",
-    "Treating a as throat thickness."
+    "Entering total physical bead length without deducting start and crater end run-off lengths (effective length L_eff = L_total − 2·a).",
+    "Confusing fillet leg length (a or w) with throat thickness (throat = 0.707·a). Note that Eurocode 3 designates throat thickness as 'a' whereas American textbooks designate leg length as 'a' or 'w'.",
+    "Using material ultimate tensile strength (Rm) or yield strength (Re) directly as allowable stress instead of applying appropriate joint efficiency and safety factors."
   ],
   "assumptions": [
-    "Load is static and uniaxial.",
-    "Fillet weld is continuous and uniform."
+    "Equal-leg 45° fillet weld profile: the effective throat thickness is taken as the theoretical throat t = a · cos(45°) ≈ 0.707 · a.",
+    "Simplified shear method: the applied resultant load is assumed uniformly distributed as pure shear across the minimum throat plane, regardless of load orientation.",
+    "Static loading only: dynamic fatigue cyclic reversal, residual thermal stresses, and weld metal toughness factors are omitted.",
+    "Zero load eccentricity: out-of-plane bending, peel stresses, and secondary moments on the connection are neglected.",
+    "Preliminary engineering screening: this simplified tool does not substitute for licensed structural joint verification under full directional methods (e.g. AWS D1.1 directional factor or EN 1993-1-8 directional formulation with β_w and γ_M2)."
   ]
 }

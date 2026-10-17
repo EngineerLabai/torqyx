@@ -6,9 +6,12 @@ Kasnak kayışı uzunluğu ve sarma açısı hesabı, açık kayışlı iki kasn
 <StepList title="Kısa adımlar" steps={["Kasnak çapları ve merkez mesafesini gir", "C > (D1 + D2)/2 koşulunu kontrol et", "Kayış uzunluğu ve sarma açısını oku"]} />
 </Callout>
 
-<Formula label="Açık kayış uzunluğu">
-L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
-β = π − 2·arcsin((D2 − D1)/(2C))
+<Formula label="Açık kayış uzunluğu ve sarma açıları">
+D_büyük = max(D1, D2),  D_küçük = min(D1, D2)
+r = (D_büyük − D_küçük) / (2C)
+L = 2C + (π/2)(D_büyük + D_küçük) + (D_büyük − D_küçük)^2 / (4C)
+β_küçük = 180° − 2·arcsin(r)  [rad: π − 2·arcsin(r)]
+β_büyük = 180° + 2·arcsin(r)  [rad: π + 2·arcsin(r)]
 </Formula>
 
 **Varsayımlar**
@@ -46,7 +49,8 @@ Triger veya çapraz kayışlar ve germe payı dahil değildir. Üretici verisine
 
 **Çıktılar**
 - L = 1115.2 mm
-- β = 185.7°
+- β_küçük = 174.3°
+- β_büyük = 185.7°
 
 ### Örnek 2: Eş kasnaklar
 
@@ -57,3 +61,14 @@ Triger veya çapraz kayışlar ve germe payı dahil değildir. Üretici verisine
 **Çıktılar**
 - L = 1471.2 mm
 - β = 180°
+
+### Örnek 3: Geniş merkez mesafesi ve farklı kasnaklar
+
+**Girdiler**
+- D1 = 250 mm, D2 = 100 mm
+- C = 600 mm
+
+**Çıktılar**
+- L = 1759.15 mm
+- β_küçük = 165.64°
+- β_büyük = 194.36°

@@ -4,6 +4,7 @@ export type OpenBeltInput = {
   d1: string | number;
   d2: string | number;
   center: string | number;
+  locale?: "tr" | "en";
 };
 
 export type OpenBeltResult =
@@ -25,7 +26,8 @@ export type OpenBeltResult =
 
 import { parseEngineeringNumber } from "@/utils/number-parser";
 
-const toFiniteNumber = (value: string | number) => parseEngineeringNumber(value);
+const toFiniteNumber = (value: string | number, locale?: "tr" | "en") =>
+  parseEngineeringNumber(value, { locale });
 
 /**
  * Open-belt approximation for pulley pitch diameters and shaft centre distance.
@@ -33,9 +35,9 @@ const toFiniteNumber = (value: string | number) => parseEngineeringNumber(value)
  * whether the user entered the larger diameter as D1 or D2.
  */
 export function calculateOpenBelt(input: OpenBeltInput): OpenBeltResult {
-  const d1 = toFiniteNumber(input.d1);
-  const d2 = toFiniteNumber(input.d2);
-  const center = toFiniteNumber(input.center);
+  const d1 = toFiniteNumber(input.d1, input.locale);
+  const d2 = toFiniteNumber(input.d2, input.locale);
+  const center = toFiniteNumber(input.center, input.locale);
 
   if (d1 === null || d2 === null || center === null || d1 <= 0 || d2 <= 0 || center <= 0) {
     return { ok: false, reason: "invalid-input" };

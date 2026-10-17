@@ -5,6 +5,7 @@ export type PipePressureLossInput = {
   diameter: string;
   length: string;
   roughness: string;
+  locale?: "tr" | "en";
 };
 
 export type PipePressureLossResult = {

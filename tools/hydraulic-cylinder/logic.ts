@@ -9,7 +9,8 @@ export const DEFAULT_INPUT: HydraulicCylinderInput = {
   efficiency: "90",
 };
 
-const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
+const toNumber = (value: string, locale?: "tr" | "en"): number =>
+  parseEngineeringNumber(value, { locale }) ?? Number.NaN;
 
 const emptyResult = (
   error: string,
@@ -32,13 +33,13 @@ const emptyResult = (
 });
 
 export const calculateHydraulicCylinder = (input: HydraulicCylinderInput): HydraulicCylinderResult => {
-  const pressureBar = toNumber(input.pressure);
-  const boreMm = toNumber(input.bore);
-  const rodMm = toNumber(input.rod);
-  const flowLpm = toNumber(input.flow);
+  const pressureBar = toNumber(input.pressure, input.locale);
+  const boreMm = toNumber(input.bore, input.locale);
+  const rodMm = toNumber(input.rod, input.locale);
+  const flowLpm = toNumber(input.flow, input.locale);
   // Legacy shared states and documentation examples do not contain this field.
   // A missing value therefore preserves the former ideal-force behaviour.
-  const efficiencyPercent = input.efficiency === undefined ? 100 : toNumber(input.efficiency);
+  const efficiencyPercent = input.efficiency === undefined ? 100 : toNumber(input.efficiency, input.locale);
 
   if (
     !Number.isFinite(pressureBar) ||

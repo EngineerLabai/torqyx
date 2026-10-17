@@ -13,17 +13,20 @@ export type GearModuleResult = {
 
 import { parseEngineeringNumber } from "@/utils/number-parser";
 
-const toNumber = (value: string | number) => parseEngineeringNumber(value);
+const toNumber = (value: string | number, locale?: "tr" | "en") =>
+  parseEngineeringNumber(value, { locale });
 
 export function calculateGearModule({
   diameter,
   teeth,
+  locale,
 }: {
   diameter: string | number;
   teeth: string | number;
+  locale?: "tr" | "en";
 }): GearModuleResult | null {
-  const d = toNumber(diameter);
-  const z = toNumber(teeth);
+  const d = toNumber(diameter, locale);
+  const z = toNumber(teeth, locale);
   if (d === null || z === null || d <= 0 || z <= 0 || !Number.isInteger(z)) return null;
 
   const mRaw = d / z;

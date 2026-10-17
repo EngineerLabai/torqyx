@@ -1,0 +1,130 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-16",
+  "howTo": [
+    "Enter the pitch diameter of pulley 1 (D1) and pulley 2 (D2) in millimeters (mm). Either pulley can be the driver or driven.",
+    "Enter the shaft center-to-center distance (C) in millimeters. Verify that the center distance exceeds half the sum of both pulley diameters to avoid physical pulley interference.",
+    "The tool computes the required theoretical pitch length (L) of an open belt, the contact wrap angle on the smaller pulley (β_small), and the wrap angle on the larger pulley (β_big). Use the small pulley wrap angle to check against the minimum recommended 120° wrap for adequate friction."
+  ],
+  "formula": "D_big = max(D1, D2), D_small = min(D1, D2), r = (D_big − D_small)/(2C) | L ≈ 2C + (π/2)(D_big + D_small) + (D_big − D_small)² / (4C) | β_small = 180° − 2·arcsin(r) | β_big = 180° + 2·arcsin(r)",
+  "examples": [
+    {
+      "title": "Speed reduction drive with 2:1 pulley ratio",
+      "description": "Standard layout with D1 = 120 mm driver pulley, D2 = 60 mm driven pulley, and shaft center distance C = 300 mm.",
+      "inputs": {
+        "Pulley 1 diameter, D1": "120 mm",
+        "Pulley 2 diameter, D2": "60 mm",
+        "Center distance, C": "300 mm"
+      },
+      "outputs": {
+        "Open belt pitch length, L": "885.74 mm",
+        "Small pulley wrap angle, β_small": "168.52°",
+        "Large pulley wrap angle, β_big": "191.48°"
+      },
+      "inputValues": {
+        "d1": "120",
+        "d2": "60",
+        "center": "300"
+      },
+      "expected": {
+        "length": 885.74,
+        "dBig": 120,
+        "dSmall": 60,
+        "betaSmallDeg": 168.52,
+        "betaBigDeg": 191.48
+      },
+      "notes": [
+        "Theoretical pitch length is 885.74 mm. Check standard catalog sizes (e.g. 880 mm or 900 mm pitch lengths) and adjust motor take-up slot travel accordingly.",
+        "The small pulley wrap angle is 168.52°, well above the critical 120° minimum limit, ensuring reliable friction transmission without slippage."
+      ]
+    },
+    {
+      "title": "Equal diameter pulleys (1:1 direct transfer drive)",
+      "description": "A conveyor transfer drive with identical 100 mm pitch diameter pulleys at 400 mm center distance.",
+      "inputs": {
+        "Pulley 1 diameter, D1": "100 mm",
+        "Pulley 2 diameter, D2": "100 mm",
+        "Center distance, C": "400 mm"
+      },
+      "outputs": {
+        "Open belt pitch length, L": "1114.16 mm",
+        "Small pulley wrap angle, β_small": "180.00°",
+        "Large pulley wrap angle, β_big": "180.00°"
+      },
+      "inputValues": {
+        "d1": "100",
+        "d2": "100",
+        "center": "400"
+      },
+      "expected": {
+        "length": 1114.16,
+        "dBig": 100,
+        "dSmall": 100,
+        "betaSmallDeg": 180.0,
+        "betaBigDeg": 180.0
+      },
+      "notes": [
+        "When D1 = D2, the ratio term (D_big − D_small)² / (4C) equals zero, simplifying length to L = 2C + π·D = 800 + 314.16 = 1114.16 mm.",
+        "Both pulleys achieve a 180° contact wrap angle."
+      ]
+    },
+    {
+      "title": "Heavy-duty drive with large center distance (250 mm / 100 mm / 600 mm)",
+      "description": "Industrial drive layout with D_big = 250 mm, D_small = 100 mm, and shaft center distance C = 600 mm.",
+      "inputs": {
+        "Pulley 1 diameter, D1": "250 mm",
+        "Pulley 2 diameter, D2": "100 mm",
+        "Center distance, C": "600 mm"
+      },
+      "outputs": {
+        "Open belt pitch length, L": "1759.15 mm",
+        "Small pulley wrap angle, β_small": "165.64°",
+        "Large pulley wrap angle, β_big": "194.36°"
+      },
+      "inputValues": {
+        "d1": "250",
+        "d2": "100",
+        "center": "600"
+      },
+      "expected": {
+        "length": 1759.15,
+        "dBig": 250,
+        "dSmall": 100,
+        "betaSmallDeg": 165.64,
+        "betaBigDeg": 194.36
+      },
+      "notes": [
+        "Theoretical pitch length is L = 2(600) + (π/2)(350) + (150)²/(2400) = 1200 + 549.78 + 9.38 = 1759.15 mm.",
+        "Small pulley wrap angle is β_small = 180° − 2·arcsin(0.125) = 165.64°, well above the critical 120° threshold."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "Shigley's Mechanical Engineering Design (Budynas & Nisbett)",
+      "note": "Chapter on Flexible Mechanical Elements. Theoretical basis for planar two-pulley Euclidean geometry, contact wrap angle derivations, and open belt pitch length series approximation."
+    },
+    {
+      "title": "DIN 7753-1 (Endless narrow V-belts for mechanical engineering)",
+      "note": "Defines standardized datum lengths (L_d), datum diameters (d_d), and center distance adjustment ranges for narrow V-belts. Used for selecting nearest preferred stock size; does not define general flat or timing belt geometries."
+    },
+    {
+      "title": "ISO 5296 (Synchronous belt drives — Belts)",
+      "note": "Defines pitch codes and standard pitch lengths specifically for toothed timing belts where length must correspond to an integer tooth count (L_p = z · p_b)."
+    },
+    {
+      "title": "Machinery's Handbook (Industrial Press)",
+      "note": "Section on Pulleys and Belt Drives: contact angle friction limits, open belt trigonometry, and recommendation of β_small ≥ 120° for non-positive friction drives."
+    }
+  ],
+  "commonMistakes": [
+    "Entering outside (tip) diameter instead of pitch (datum) diameter. V-belts ride within pulley grooves, so pitch diameter is always smaller than pulley OD.",
+    "Ignoring center distance adjustment travel for installation and tensioning. Belt drives require center distance adjustment to slip the belt over flanges without prying.",
+    "Selecting center distance too close to pulley boundaries, leading to small pulley wrap angle β < 120° which severely reduces torque capacity."
+  ],
+  "assumptions": [
+    "Open belt configuration where both pulleys rotate in the same direction (not a crossed belt drive).",
+    "Both shafts are parallel and in coplanar alignment without angular or axial offset.",
+    "The calculation provides theoretical pitch length; belt manufacturing stretch, elastic deflection under preload, and profile thickness are omitted and must be verified against manufacturer catalogue tables."
+  ]
+}

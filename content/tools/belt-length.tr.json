@@ -1,0 +1,130 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-17",
+  "howTo": [
+    "Birinci kasnak (D1) ve ikinci kasnak (D2) hatve (bölüm dairesi) çaplarını milimetre (mm) cinsinden girin. Kasnaklardan herhangi biri tahrik eden veya edilen olabilir.",
+    "Kasnak milleri arasındaki merkez mesafesini (C) milimetre cinsinden girin. Kasnakların fiziksel olarak çakışmaması için merkez mesafesinin iki çapın toplamının yarısından büyük olduğunu doğrulayın.",
+    "Hesaplayıcı; açık kayışın teorik hatve boyunu (L), küçük kasnak sarma açısını (β_küçük) ve büyük kasnak sarma açısını (β_büyük) hesaplar. Kayma riskini önlemek için küçük kasnak sarma açısının sürtünmeli kayışlarda önerilen minimum 120° sınırının üzerinde olduğunu kontrol edin."
+  ],
+  "formula": "D_büyük = max(D1, D2), D_küçük = min(D1, D2), r = (D_büyük − D_küçük)/(2C) | L ≈ 2C + (π/2)(D_büyük + D_küçük) + (D_büyük − D_küçük)² / (4C) | β_küçük = 180° − 2·arcsin(r) | β_büyük = 180° + 2·arcsin(r)",
+  "examples": [
+    {
+      "title": "2:1 oranlı hız düşürücü kayış düzeni",
+      "description": "D1 = 120 mm büyük kasnak, D2 = 60 mm küçük kasnak ve C = 300 mm mil merkez mesafesine sahip standart düzen.",
+      "inputs": {
+        "Kasnak 1 çapı, D1": "120 mm",
+        "Kasnak 2 çapı, D2": "60 mm",
+        "Merkez mesafesi, C": "300 mm"
+      },
+      "outputs": {
+        "Açık kayış hatve boyu, L": "885,74 mm",
+        "Küçük kasnak sarma açısı, β_küçük": "168,52°",
+        "Büyük kasnak sarma açısı, β_büyük": "191,48°"
+      },
+      "inputValues": {
+        "d1": "120",
+        "d2": "60",
+        "center": "300"
+      },
+      "expected": {
+        "length": 885.74,
+        "dBig": 120,
+        "dSmall": 60,
+        "betaSmallDeg": 168.52,
+        "betaBigDeg": 191.48
+      },
+      "notes": [
+        "Teorik hatve boyu 885,74 mm'dir. Standart katalog boyları (ör. 880 mm veya 900 mm) incelenmeli ve motor gerdirme kanalı mesafesi buna göre ayarlanmalıdır.",
+        "Küçük kasnak sarma açısı 168,52° olup kritik 120° alt sınırının oldukça üzerindedir; bu sayede kayma olmadan güvenli güç iletimi sağlanır."
+      ]
+    },
+    {
+      "title": "Eşit çaplı kasnaklar (1:1 doğrudan aktarım)",
+      "description": "400 mm merkez mesafesinde iki adet özdeş 100 mm hatve çaplı kasnaktan oluşan konveyör aktarımı.",
+      "inputs": {
+        "Kasnak 1 çapı, D1": "100 mm",
+        "Kasnak 2 çapı, D2": "100 mm",
+        "Merkez mesafesi, C": "400 mm"
+      },
+      "outputs": {
+        "Açık kayış hatve boyu, L": "1114,16 mm",
+        "Küçük kasnak sarma açısı, β_küçük": "180,00°",
+        "Büyük kasnak sarma açısı, β_büyük": "180,00°"
+      },
+      "inputValues": {
+        "d1": "100",
+        "d2": "100",
+        "center": "400"
+      },
+      "expected": {
+        "length": 1114.16,
+        "dBig": 100,
+        "dSmall": 100,
+        "betaSmallDeg": 180.0,
+        "betaBigDeg": 180.0
+      },
+      "notes": [
+        "D1 = D2 olduğunda, (D_büyük − D_küçük)² / (4C) terimi sıfıra eşit olur ve formül L = 2C + π·D = 800 + 314,16 = 1114,16 mm haline gelir.",
+        "Her iki kasnakta da temas sarma açısı tam 180° gerçekleşir."
+      ]
+    },
+    {
+      "title": "Geniş merkez mesafeli ağır hizmet aktarımı (250 mm / 100 mm / 600 mm)",
+      "description": "D_büyük = 250 mm, D_küçük = 100 mm ve C = 600 mm mil merkez mesafesine sahip endüstriyel sürücü düzeni.",
+      "inputs": {
+        "Kasnak 1 çapı, D1": "250 mm",
+        "Kasnak 2 çapı, D2": "100 mm",
+        "Merkez mesafesi, C": "600 mm"
+      },
+      "outputs": {
+        "Açık kayış hatve boyu, L": "1759,15 mm",
+        "Küçük kasnak sarma açısı, β_küçük": "165,64°",
+        "Büyük kasnak sarma açısı, β_büyük": "194,36°"
+      },
+      "inputValues": {
+        "d1": "250",
+        "d2": "100",
+        "center": "600"
+      },
+      "expected": {
+        "length": 1759.15,
+        "dBig": 250,
+        "dSmall": 100,
+        "betaSmallDeg": 165.64,
+        "betaBigDeg": 194.36
+      },
+      "notes": [
+        "Teorik hatve boyu L = 2(600) + (π/2)(350) + (150)²/(2400) = 1200 + 549,78 + 9,38 = 1759,15 mm'dir.",
+        "Küçük kasnak sarma açısı β_küçük = 180° − 2·arcsin(0,125) = 165,64° olup kritik 120° sınırının üzerindedir."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "Shigley's Mechanical Engineering Design (Budynas & Nisbett)",
+      "note": "Esnek Makine Elemanları bölümü. İki kasnaklı düzlemsel Öklid geometrisi, temas sarma açıları çıkarımları ve açık kayış hatve boyu seri yaklaşımının teorik temeli."
+    },
+    {
+      "title": "DIN 7753-1 (Makine İmalatı için Sonsuz Dar V-Kayışları)",
+      "note": "Dar V-kayışları için standart anma boyları (L_d), anma çapları (d_d) ve merkez mesafesi ayar paylarını tanımlar. Hesaplanan teorik boya en yakın standart katalog boyunu seçmekte kullanılır; düz veya triger kayış geometrilerini tanımlamaz."
+    },
+    {
+      "title": "ISO 5296 (Senkron Kayış Sürücüleri — Triger Kayışları)",
+      "note": "Dişli triger kayışlarında hatve tanımları ve tercih edilen hatve boylarını belirler. Yalnızca kayış uzunluğunun tam diş sayısına (L_p = z · p_b) uyması gereken senkron sistemleri kapsar."
+    },
+    {
+      "title": "Machinery's Handbook (Industrial Press)",
+      "note": "Kasnaklar ve Kayış Sürücüleri bölümü: temas açısı sürtünme sınırları, açık kayış trigonometrisi ve pozitif olmayan sürtünmeli sürücüler için β_küçük ≥ 120° tavsiyesi."
+    }
+  ],
+  "commonMistakes": [
+    "Kasnak hatve (bölüm dairesi) çapı yerine kasnak dış tepe çapını girmek. V-kayışları kanal içinde oturduğundan hatve çapı dış çaptan her zaman daha küçüktür.",
+    "Montaj ve gerdirme için gereken merkez mesafesi ayar kursunu ihmal etmek. Kayışın kanaldan zedelenmeden takılabilmesi için merkez mesafesi ayar payı bırakılmalıdır.",
+    "Merkez mesafesini kasnak çaplarına göre çok kısa tutarak küçük kasnak sarma açısını 120°'nin altına düşürmek; bu durum kayışın tork taşıma kapasitesini ciddi şekilde azaltır."
+  ],
+  "assumptions": [
+    "Her iki kasnağın aynı yönde döndüğü açık kayış düzeni (çapraz kayış değildir).",
+    "Miller birbirine paralel ve açısal ya da eksenel kaçıklık olmaksızın aynı düzlemdedir.",
+    "Hesaplama teorik geometrik hatve boyunu verir; kayış imalat esnemesi, ön yük altındaki elastik uzama ve et payı üretici kataloglarından ayrıca doğrulanmalıdır."
+  ]
+}

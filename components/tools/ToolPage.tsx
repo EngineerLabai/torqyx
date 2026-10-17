@@ -26,6 +26,8 @@ import { getToolMethodNotes } from "@/lib/tool-method-notes";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 import { useUnitSystem } from "@/contexts/UnitSystemContext";
 import type { TraceSource } from "@/hooks/useCalculationTrace";
+import { parseEngineeringNumber } from "@/utils/number-parser";
+import type { Locale } from "@/utils/locale";
 
 type ToolInputRecord = Record<string, unknown>;
 type ToolResultRecord = Record<string, unknown>;
@@ -160,10 +162,10 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
     if (!resolvedInputMeta) return null;
     const shape: Record<string, z.ZodTypeAny> = {};
     resolvedInputMeta.forEach((meta) => {
-      shape[meta.key] = buildToolFieldSchema(meta, validationCopy);
+      shape[meta.key] = buildToolFieldSchema(meta, validationCopy, locale);
     });
     return z.object(shape);
-  }, [resolvedInputMeta, validationCopy]);
+  }, [resolvedInputMeta, validationCopy, locale]);
 
   const validation = useMemo(() => {
     if (!schema) return { success: true, data: input } as const;
@@ -186,11 +188,11 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
       return { result: null as TResult | null, calcError: validationCopy.resultFix };
     }
     try {
-      return { result: tool.calculate(validation.data as TInput), calcError: "" };
+      return { result: tool.calculate({ ...(validation.data as TInput), locale }), calcError: "" };
     } catch {
       return { result: null as TResult | null, calcError: validationCopy.calcFailed };
     }
-  }, [validation, tool, validationCopy.calcFailed, validationCopy.resultFix]);
+  }, [validation, tool, validationCopy.calcFailed, validationCopy.resultFix, locale]);
 
   const encodedState = useMemo(() => encodeToolState(input), [input]);
   const toolAccessGate = useFeatureGate("tool_access", { toolId: tool.id });
@@ -431,7 +433,7 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
   );
 }
 
-function buildToolFieldSchema(meta: ToolInputMeta, copy: Record<string, string>) {
+function buildToolFieldSchema(meta: ToolInputMeta, copy: Record<string, string>, locale?: Locale) {
   const label = meta.unit ? `${meta.label} (${meta.unit})` : meta.label;
   const fieldType = meta.type ?? "number";
 
@@ -446,7 +448,7 @@ function buildToolFieldSchema(meta: ToolInputMeta, copy: Record<string, string>)
   let schema = z
     .string()
     .min(1, formatMessage(copy.required, { field: label }))
-    .refine((value) => Number.isFinite(Number(value)), formatMessage(copy.invalidNumber, { field: label }));
+    .refine((value) => parseEngineeringNumber(value, { locale }) !== null, formatMessage(copy.invalidNumber, { field: label }));
 
   const minValue = meta.min;
   if (typeof minValue === "number") {
@@ -454,7 +456,10 @@ function buildToolFieldSchema(meta: ToolInputMeta, copy: Record<string, string>)
       field: label,
       min: meta.unit ? `${minValue} ${meta.unit}` : minValue,
     });
-    schema = schema.refine((value) => Number(value) >= minValue, minLabel);
+    schema = schema.refine((value) => {
+      const parsed = parseEngineeringNumber(value, { locale });
+      return parsed !== null && parsed >= minValue;
+    }, minLabel);
   }
 
   const maxValue = meta.max;
@@ -463,7 +468,10 @@ function buildToolFieldSchema(meta: ToolInputMeta, copy: Record<string, string>)
       field: label,
       max: meta.unit ? `${maxValue} ${meta.unit}` : maxValue,
     });
-    schema = schema.refine((value) => Number(value) <= maxValue, maxLabel);
+    schema = schema.refine((value) => {
+      const parsed = parseEngineeringNumber(value, { locale });
+      return parsed !== null && parsed <= maxValue;
+    }, maxLabel);
   }
 
   return schema;

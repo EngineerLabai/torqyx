@@ -4,6 +4,7 @@ export type ShaftTorsionInput = {
   length: string;
   shearModulus: string;
   allowableShear: string;
+  locale?: "tr" | "en";
 };
 
 export type ShaftTorsionResult = {

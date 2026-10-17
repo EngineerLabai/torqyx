@@ -98,4 +98,39 @@ describe("unit-converter calculator", () => {
     expect(res.output).toBeNull();
     expect(res.errorKey).toBe("missingUnits");
   });
+
+  it("parses locale-formatted inputs when locale is provided", () => {
+    // Turkish locale: 1.234,56 mm -> 1.23456 m
+    const trRes = calculateUnit({
+      category: "length",
+      fromUnit: "mm",
+      toUnit: "m",
+      value: "1.234,56",
+      locale: "tr",
+    });
+    expect(trRes.output).toBeCloseTo(1.23456, 5);
+    expect(trRes.errorKey).toBeUndefined();
+
+    // English locale: 1,234.56 mm -> 1.23456 m
+    const enRes = calculateUnit({
+      category: "length",
+      fromUnit: "mm",
+      toUnit: "m",
+      value: "1,234.56",
+      locale: "en",
+    });
+    expect(enRes.output).toBeCloseTo(1.23456, 5);
+    expect(enRes.errorKey).toBeUndefined();
+
+    // Cross-locale inputs are safely rejected
+    const trMismatch = calculateUnit({
+      category: "length",
+      fromUnit: "mm",
+      toUnit: "m",
+      value: "1,234.56",
+      locale: "tr",
+    });
+    expect(trMismatch.output).toBeNull();
+    expect(trMismatch.errorKey).toBe("invalidNumber");
+  });
 });

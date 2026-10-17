@@ -1,0 +1,98 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-16",
+  "howTo": [
+    "Add linear dimensions to the chain. For each feature, specify its nominal length, upper deviation, and lower deviation in the same unit.",
+    "Assign the direction of each dimension in the stack: positive (+1) for additive features or negative (-1) for internal gaps, subtractive steps, or pockets.",
+    "Evaluate both the deterministic Worst-Case (WC) boundary interval for guaranteed fit and the Root-Sum-Square (RSS) statistical interval for high-volume production sizing."
+  ],
+  "formula": "X_nom = Σ (dir_i · N_i) | WC_max = Σ max(dir_i · [N_i + dev]) | WC_min = Σ min(dir_i · [N_i + dev]) | T_rss = √(Σ t_i²)",
+  "examples": [
+    {
+      "title": "Two-part additive assembly stack",
+      "description": "Two pinned plates stacked end-to-end: Part A is 20 ± 0.10 mm and Part B is 10 ± 0.05 mm.",
+      "inputs": {
+        "Part A nominal & tolerance": "20 mm (+0.10 / -0.10 mm)",
+        "Part B nominal & tolerance": "10 mm (+0.05 / -0.05 mm)",
+        "Directions": "Both additive (+1)"
+      },
+      "outputs": {
+        "Nominal stack, X_nom": "30.00 mm",
+        "Worst-case minimum, WC_min": "29.85 mm",
+        "Worst-case maximum, WC_max": "30.15 mm",
+        "Worst-case total tolerance": "0.30 mm",
+        "RSS statistical half-range": "0.11 mm"
+      },
+      "inputValues": {
+        "dimensions": [
+          { "nominal": 20, "upper": 0.1, "lower": -0.1, "direction": 1 },
+          { "nominal": 10, "upper": 0.05, "lower": -0.05, "direction": 1 }
+        ]
+      },
+      "expected": {
+        "nominalResult": 30.0,
+        "worstCaseMin": 29.85,
+        "worstCaseMax": 30.15,
+        "worstCaseTolerance": 0.3
+      },
+      "notes": [
+        "Worst-case limits guarantee zero interference across 100% of manufactured parts regardless of supplier process capability.",
+        "Sensitivity analysis shows Part A contributes 80% of the total variance due to its larger ±0.10 mm tolerance band."
+      ]
+    },
+    {
+      "title": "Shaft and bushing internal axial clearance",
+      "description": "Shaft shoulder (50 ± 0.20 mm) fitting inside a housing cavity (40 ± 0.10 mm) to verify axial end-play.",
+      "inputs": {
+        "Housing cavity nominal & tolerance": "50 mm (+0.20 / -0.20 mm), dir = +1",
+        "Shaft collar nominal & tolerance": "40 mm (+0.10 / -0.10 mm), dir = -1"
+      },
+      "outputs": {
+        "Nominal axial clearance": "10.00 mm",
+        "Worst-case minimum clearance": "9.70 mm",
+        "Worst-case maximum clearance": "10.30 mm",
+        "Worst-case total clearance range": "0.60 mm"
+      },
+      "inputValues": {
+        "dimensions": [
+          { "nominal": 50, "upper": 0.2, "lower": -0.2, "direction": 1 },
+          { "nominal": 40, "upper": 0.1, "lower": -0.1, "direction": -1 }
+        ]
+      },
+      "expected": {
+        "nominalResult": 10.0,
+        "worstCaseMin": 9.7,
+        "worstCaseMax": 10.3,
+        "worstCaseTolerance": 0.6
+      },
+      "notes": [
+        "The subtractive feature reverses its upper and lower bounds: minimum clearance occurs when housing is at lower limit (49.8 mm) and shaft is at upper limit (40.1 mm), resulting in 9.7 mm.",
+        "Always verify that minimum clearance remains strictly positive to prevent binding under thermal expansion."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 286-1",
+      "note": "Geometrical product specifications (GPS) — ISO code system for tolerances on linear sizes. Fundamental tolerance classes and deviation definitions."
+    },
+    {
+      "title": "ASME Y14.5",
+      "note": "Dimensioning and Tolerancing standard covering linear tolerance stackup fundamentals and coordinate tolerancing limits."
+    },
+    {
+      "title": "ISO 14405-1",
+      "note": "Geometrical product specifications (GPS) — Dimensional tolerancing — Part 1: Linear sizes."
+    }
+  ],
+  "commonMistakes": [
+    "Entering lower deviation as a positive magnitude when it is below nominal (e.g. entering +0.1 instead of -0.1).",
+    "Applying RSS statistical stacking on low-volume production (< 30 parts) or uncentered processes where normal distribution cannot be assumed.",
+    "Neglecting thermal expansion differences between mating materials (e.g. aluminum housing with steel shaft) over the operating temperature spectrum."
+  ],
+  "assumptions": [
+    "One-dimensional linear stackup: all dimensions are parallel and coplanar along a single measurement vector.",
+    "RSS statistical stacking assumes independent, normally distributed component tolerances with a process capability index Cp ≥ 1.0 centered at nominal.",
+    "Geometric form, orientation, and location tolerances (GD&T feature control frames, MMC/MMR bonus tolerances) require separate 3D variation analysis."
+  ]
+}

@@ -69,4 +69,30 @@ describe("parseEngineeringNumber", () => {
     expect(parseEngineeringNumber("Infinity")).toBeNull();
     expect(parseEngineeringNumber("1e999")).toBeNull();
   });
+
+  it("parses valid thousands grouping when locale is explicitly provided", () => {
+    // Turkish locale: '.' is thousands, ',' is decimal
+    expect(parseEngineeringNumber("1.234,56", { locale: "tr" })).toBe(1234.56);
+    expect(parseEngineeringNumber("1.000.000", { locale: "tr" })).toBe(1000000);
+    expect(parseEngineeringNumber("1.000.000,50", { locale: "tr" })).toBe(1000000.5);
+    expect(parseEngineeringNumber("-1.234,56", { locale: "tr" })).toBe(-1234.56);
+
+    // English locale: ',' is thousands, '.' is decimal
+    expect(parseEngineeringNumber("1,234.56", { locale: "en" })).toBe(1234.56);
+    expect(parseEngineeringNumber("1,000,000", { locale: "en" })).toBe(1000000);
+    expect(parseEngineeringNumber("1,000,000.50", { locale: "en" })).toBe(1000000.5);
+    expect(parseEngineeringNumber("-1,234.56", { locale: "en" })).toBe(-1234.56);
+
+    // Rejects cross-locale or ill-formed groupings
+    expect(parseEngineeringNumber("1,234.56", { locale: "tr" })).toBeNull();
+    expect(parseEngineeringNumber("1.234,56", { locale: "en" })).toBeNull();
+    expect(parseEngineeringNumber("1.23.4", { locale: "tr" })).toBeNull();
+    expect(parseEngineeringNumber("1,23,4", { locale: "en" })).toBeNull();
+
+    // Standard decimals still parse regardless of locale
+    expect(parseEngineeringNumber("12,5", { locale: "tr" })).toBe(12.5);
+    expect(parseEngineeringNumber("12.5", { locale: "tr" })).toBe(12.5);
+    expect(parseEngineeringNumber("12.5", { locale: "en" })).toBe(12.5);
+    expect(parseEngineeringNumber("12,5", { locale: "en" })).toBe(12.5);
+  });
 });

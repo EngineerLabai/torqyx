@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
@@ -29,7 +29,7 @@ export default function BeltLengthPage({ initialDocs }: BeltLengthClientProps) {
   const { locale } = useLocale();
   const [inputs, setInputs] = useState<Inputs>(INITIAL);
 
-  const results = useMemo(() => calculateOpenBelt(inputs), [inputs]);
+  const results = useMemo(() => calculateOpenBelt({ ...inputs, locale }), [inputs, locale]);
 
   function handleChange<K extends keyof Inputs>(key: K, value: Inputs[K]) {
     setInputs((prev) => ({ ...prev, [key]: value }));
@@ -93,7 +93,7 @@ export default function BeltLengthPage({ initialDocs }: BeltLengthClientProps) {
             {results.ok ? (
               <div className="space-y-2">
                 <ResultRow
-                  label={t(locale, "Kayış uzunluğu", "Belt length")}
+                  label={t(locale, "Yaklaşık kayış uzunluğu (L)", "Approximate belt length (L)")}
                   value={`${results.length.toFixed(1)} mm`}
                 />
                 <ResultRow
@@ -115,8 +115,8 @@ export default function BeltLengthPage({ initialDocs }: BeltLengthClientProps) {
                 <div className="rounded-lg bg-slate-50 px-3 py-2 text-[11px] text-slate-700">
                   {t(
                     locale,
-                    "Formüller: L = 2C + π/2(Dbüyük+Dküçük) + (Dbüyük-Dküçük)²/(4C); βküçük = π - 2·asin(r), βbüyük = π + 2·asin(r), r=(Dbüyük-Dküçük)/(2C). Çapraz kayış için farklı formüller gerekir.",
-                    "Formulas: L = 2C + π/2(Dbig+Dsmall) + (Dbig-Dsmall)²/(4C); βsmall = π - 2·asin(r), βbig = π + 2·asin(r), r=(Dbig-Dsmall)/(2C). Crossed belts require different formulas.",
+                    "Formüller: Dbüyük = max(D1, D2), Dküçük = min(D1, D2), r = (Dbüyük-Dküçük)/(2C); L = 2C + (π/2)(Dbüyük+Dküçük) + (Dbüyük-Dküçük)²/(4C); βküçük = 180° - 2·arcsin(r) [rad: π - 2·arcsin(r)], βbüyük = 180° + 2·arcsin(r) [rad: π + 2·arcsin(r)].",
+                    "Formulas: Dbig = max(D1, D2), Dsmall = min(D1, D2), r = (Dbig-Dsmall)/(2C); L = 2C + (π/2)(Dbig+Dsmall) + (Dbig-Dsmall)²/(4C); βsmall = 180° - 2·arcsin(r) [rad: π - 2·arcsin(r)], βbig = 180° + 2·arcsin(r) [rad: π + 2·arcsin(r)].",
                   )}
                 </div>
               </div>

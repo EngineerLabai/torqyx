@@ -23,6 +23,7 @@ export default function InputSection({ input, onChange }: ToolInputProps<UnitInp
 
     onChange({
       ...input,
+      locale,
       category,
       fromUnit,
       toUnit,
@@ -30,12 +31,13 @@ export default function InputSection({ input, onChange }: ToolInputProps<UnitInp
   };
 
   const handleFieldChange = <K extends keyof UnitInput>(key: K, value: UnitInput[K]) => {
-    onChange({ ...input, [key]: value });
+    onChange({ ...input, locale, [key]: value });
   };
 
   const swapUnits = () => {
     onChange({
       ...input,
+      locale,
       fromUnit: input.toUnit,
       toUnit: input.fromUnit,
     });

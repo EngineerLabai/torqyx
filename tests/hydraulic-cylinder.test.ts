@@ -83,4 +83,41 @@ describe("hydraulic cylinder calculator", () => {
     expect(result.forceExtend).toBeGreaterThan(0);
     expect(result.speedExtend).toBeGreaterThan(0);
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateHydraulicCylinder({
+      pressure: "160",
+      bore: "1.000",
+      rod: "500",
+      flow: "25",
+      efficiency: "90",
+      locale: "tr",
+    });
+    expect(trRes.error).toBeUndefined();
+    expect(trRes.forceExtend).toBeGreaterThan(0);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateHydraulicCylinder({
+      pressure: "160",
+      bore: "1,000",
+      rod: "500",
+      flow: "25",
+      efficiency: "90",
+      locale: "en",
+    });
+    expect(enRes.error).toBeUndefined();
+    expect(enRes.forceExtend).toBeGreaterThan(0);
+
+    // Cross-locale grouping is rejected (English grouping 1,000.50 in Turkish locale)
+    const trMismatch = calculateHydraulicCylinder({
+      pressure: "160",
+      bore: "1,000.50",
+      rod: "500",
+      flow: "25",
+      efficiency: "90",
+      locale: "tr",
+    });
+    expect(trMismatch.error).toBeTruthy();
+  });
 });

@@ -3,6 +3,7 @@ export type FilletWeldInput = {
   length: string;
   allowable: string;
   fillet: string;
+  locale?: "tr" | "en";
 };
 
 export type FilletWeldResult = {

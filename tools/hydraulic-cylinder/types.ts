@@ -5,6 +5,7 @@ export type HydraulicCylinderInput = {
   flow: string;
   /** Force-efficiency estimate in percent. Optional for legacy links and examples. */
   efficiency?: string;
+  locale?: "tr" | "en";
 };
 
 export type HydraulicCylinderResult = {

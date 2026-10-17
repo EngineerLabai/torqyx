@@ -1,4 +1,4 @@
-﻿import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "vitest";
 import { calculateUnit } from "@/tools/unit-converter/logic";
 import { calculateBolt } from "@/tools/bolt-calculator/logic";
 import { evaluateFormula } from "@/lib/sanityCheck/engine";
@@ -70,21 +70,40 @@ describe("tool example outputs", () => {
 
   describe("belt length", () => {
     const calcBelt = (D1: number, D2: number, C: number) => {
-      const length = 2 * C + (PI / 2) * (D1 + D2) + Math.pow(D2 - D1, 2) / (4 * C);
-      const beta = PI - 2 * Math.asin((D2 - D1) / (2 * C));
-      return { length, betaDeg: (beta * 180) / PI };
+      const dBig = Math.max(D1, D2);
+      const dSmall = Math.min(D1, D2);
+      const length = 2 * C + (PI / 2) * (dBig + dSmall) + Math.pow(dBig - dSmall, 2) / (4 * C);
+      const r = (dBig - dSmall) / (2 * C);
+      const offset = 2 * Math.asin(r);
+      const betaSmallDeg = ((PI - offset) * 180) / PI;
+      const betaBigDeg = ((PI + offset) * 180) / PI;
+      return { length, betaSmallDeg, betaBigDeg };
     };
 
-    it("computes open belt length for unequal pulleys", () => {
-      const { length, betaDeg } = calcBelt(120, 80, 400);
-      expect(length).toBeCloseTo(1115.2, 1);
-      expect(betaDeg).toBeCloseTo(185.7, 1);
+    it("computes open belt length for unequal pulleys regardless of order", () => {
+      const forward = calcBelt(120, 80, 400);
+      const reversed = calcBelt(80, 120, 400);
+
+      expect(forward.length).toBeCloseTo(1115.159, 2);
+      expect(reversed.length).toBeCloseTo(1115.159, 2);
+      expect(forward.betaSmallDeg).toBeCloseTo(174.27, 1);
+      expect(reversed.betaSmallDeg).toBeCloseTo(174.27, 1);
+      expect(forward.betaBigDeg).toBeCloseTo(185.73, 1);
+      expect(reversed.betaBigDeg).toBeCloseTo(185.73, 1);
     });
 
     it("computes open belt length for equal pulleys", () => {
-      const { length, betaDeg } = calcBelt(150, 150, 500);
+      const { length, betaSmallDeg, betaBigDeg } = calcBelt(150, 150, 500);
       expect(length).toBeCloseTo(1471.2, 1);
-      expect(betaDeg).toBeCloseTo(180, 1);
+      expect(betaSmallDeg).toBeCloseTo(180, 1);
+      expect(betaBigDeg).toBeCloseTo(180, 1);
+    });
+
+    it("verifies the 250 mm / 100 mm / 600 mm example with correct length 1759.15 mm", () => {
+      const { length, betaSmallDeg, betaBigDeg } = calcBelt(250, 100, 600);
+      expect(length).toBeCloseTo(1759.154, 2);
+      expect(betaSmallDeg).toBeCloseTo(165.64, 1);
+      expect(betaBigDeg).toBeCloseTo(194.36, 1);
     });
   });
 

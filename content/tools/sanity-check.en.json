@@ -1,0 +1,90 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-16",
+  "howTo": [
+    "Define your engineering variables with symbols, numeric values, and standard engineering units (e.g., T = 250 N·m, n = 1500 rpm, v = 12 m/s).",
+    "Enter your target calculation formula using standard mathematical operators and functions.",
+    "Specify the expected output unit. The engine evaluates dimensional consistency, performs automatic SI unit conversions, and flags dimensional mismatches or illegal operations."
+  ],
+  "formula": "DimensionCheck: [L]^a · [M]^b · [T]^c · [I]^d · [Θ]^e | P = T · ω | F = m · a | Q = k · A · ΔT / L",
+  "examples": [
+    {
+      "title": "Rotational mechanical power from torque and angular speed",
+      "description": "Evaluate mechanical power output from a motor producing 25 N·m torque at 300 rad/s angular velocity.",
+      "inputs": {
+        "Torque, T": "25 N·m",
+        "Angular velocity, ω": "300 rad/s",
+        "Target formula": "P = T · ω",
+        "Expected unit": "W (Watts)"
+      },
+      "outputs": {
+        "Calculated power, P": "7500 W",
+        "Dimensional check": "Pass ([M]·[L]²·[T]⁻³)",
+        "Alternative units": "7.5 kW | 10.06 hp"
+      },
+      "inputValues": {
+        "torque": 25,
+        "omega": 300
+      },
+      "expected": {
+        "powerWatts": 7500.0,
+        "powerKW": 7.5
+      },
+      "notes": [
+        "1 N·m × 1 rad/s = 1 (kg·m/s²·m) × (1/s) = 1 kg·m²/s³ = 1 Joule/s = 1 Watt.",
+        "Radian (rad) is dimensionless in SI unit coherence, allowing direct multiplication without conversion factors."
+      ]
+    },
+    {
+      "title": "Kinetic energy of a moving carriage",
+      "description": "Verify dimensional consistency and magnitude for an automated guided vehicle: mass m = 400 kg moving at velocity v = 2.5 m/s.",
+      "inputs": {
+        "Mass, m": "400 kg",
+        "Velocity, v": "2.5 m/s",
+        "Target formula": "E_k = 0.5 · m · v²",
+        "Expected unit": "J (Joules)"
+      },
+      "outputs": {
+        "Kinetic energy, E_k": "1250 J",
+        "Dimensional check": "Pass ([M]·[L]²·[T]⁻²)",
+        "Alternative units": "1.25 kJ | 0.347 Wh"
+      },
+      "inputValues": {
+        "mass": 400,
+        "velocity": 2.5
+      },
+      "expected": {
+        "energyJoules": 1250.0,
+        "energyKJ": 1.25
+      },
+      "notes": [
+        "kg × (m/s)² = kg·m²/s² = (kg·m/s²)·m = N·m = Joule.",
+        "Dimensional homogeneity confirms that energy cannot be added to momentum or power without violating physical laws."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 80000-1",
+      "note": "Quantities and units — Part 1: General. Defines base physical dimensions and principles of dimensional homogeneity."
+    },
+    {
+      "title": "ISO 80000-4",
+      "note": "Quantities and units — Part 4: Mechanics. Establishes coherent SI derived units for force, torque, work, energy, and power."
+    },
+    {
+      "title": "NIST Special Publication 811",
+      "note": "Guide for the Use of the International System of Units (SI). Reference for unit conversions, prefixes, and dimensional consistency rules."
+    }
+  ],
+  "commonMistakes": [
+    "Treating rotational speed in rpm as rad/s without the (2π/60) conversion factor — results in an error by a factor of ≈ 9.55.",
+    "Adding quantities with incompatible dimensions (e.g. attempting to add force in N to pressure in bar).",
+    "Confusing gauge pressure (barg) with absolute pressure (bara) when evaluating thermodynamic gas laws."
+  ],
+  "assumptions": [
+    "Evaluations follow coherent SI base dimensions: length [m], mass [kg], time [s], current [A], temperature [K], amount of substance [mol], and luminous intensity [cd].",
+    "Angles in radians are treated as dimensionless ratios (m/m = 1) in accordance with ISO 80000-1.",
+    "This tool performs dimensional consistency and unit verification; it does not replace structural stress, thermal finite-element, or fatigue failure analysis."
+  ]
+}

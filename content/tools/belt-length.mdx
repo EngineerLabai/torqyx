@@ -1,12 +1,15 @@
-﻿## Calculation Explanation
+## Calculation Explanation
 
 <Callout type="info" title="How to use?">
 <StepList title="Quick steps" steps={["Enter pulley diameters and center distance", "Check that C > (D1 + D2)/2", "Read belt length and wrap angle"]} />
 </Callout>
 
-<Formula label="Open belt length">
-L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
-β = π − 2·arcsin((D2 − D1)/(2C))
+<Formula label="Open belt length and wrap angles">
+D_big = max(D1, D2),  D_small = min(D1, D2)
+r = (D_big − D_small) / (2C)
+L = 2C + (π/2)(D_big + D_small) + (D_big − D_small)^2 / (4C)
+β_small = 180° − 2·arcsin(r)  [rad: π − 2·arcsin(r)]
+β_big = 180° + 2·arcsin(r)    [rad: π + 2·arcsin(r)]
 </Formula>
 
 **Assumptions**
@@ -43,7 +46,8 @@ Timing belts, crossed belts, and tensioning allowances are not included. Add a s
 
 **Outputs**
 - L = 1115.2 mm
-- β = 185.7°
+- β_small = 174.3°
+- β_big = 185.7°
 
 ### Example 2: Equal pulleys
 
@@ -54,3 +58,14 @@ Timing belts, crossed belts, and tensioning allowances are not included. Add a s
 **Outputs**
 - L = 1471.2 mm
 - β = 180°
+
+### Example 3: Large center distance and unequal pulleys
+
+**Inputs**
+- D1 = 250 mm, D2 = 100 mm
+- C = 600 mm
+
+**Outputs**
+- L = 1759.15 mm
+- β_small = 165.64°
+- β_big = 194.36°

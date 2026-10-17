@@ -9,14 +9,15 @@ export const DEFAULT_INPUT: ShaftTorsionInput = {
   allowableShear: "0",
 };
 
-const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
+const toNumber = (value: string, locale?: "tr" | "en"): number =>
+  parseEngineeringNumber(value, { locale }) ?? Number.NaN;
 
 export const calculateShaftTorsion = (input: ShaftTorsionInput): ShaftTorsionResult => {
-  const torque = toNumber(input.torque);
-  const diameter = toNumber(input.diameter);
-  const length = toNumber(input.length);
-  const shearModulus = toNumber(input.shearModulus);
-  const allowable = toNumber(input.allowableShear);
+  const torque = toNumber(input.torque, input.locale);
+  const diameter = toNumber(input.diameter, input.locale);
+  const length = toNumber(input.length, input.locale);
+  const shearModulus = toNumber(input.shearModulus, input.locale);
+  const allowable = toNumber(input.allowableShear, input.locale);
 
   if (
     !Number.isFinite(torque) ||

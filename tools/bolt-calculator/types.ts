@@ -9,6 +9,7 @@ export type BoltInput = {
   preloadPercent: string;
   /** Legacy field name retained for shared URLs/history; selects an empirical torque-factor preset. */
   friction: FrictionKey;
+  locale?: "tr" | "en";
 };
 
 import type { CalculationStep } from "@/tools/_shared/types";

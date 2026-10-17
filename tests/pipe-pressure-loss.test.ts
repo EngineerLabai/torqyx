@@ -63,4 +63,32 @@ describe("Darcy-Weisbach pipe pressure loss", () => {
       expect(Number.isFinite(result.deltaP)).toBe(true);
     }
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculatePipePressureLoss({
+      ...base,
+      length: "1.000",
+      locale: "tr",
+    });
+    expect(trRes.error).toBeUndefined();
+    expect(trRes.deltaP).toBeGreaterThan(0);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculatePipePressureLoss({
+      ...base,
+      length: "1,000",
+      locale: "en",
+    });
+    expect(enRes.error).toBeUndefined();
+    expect(enRes.deltaP).toBeGreaterThan(0);
+
+    // Cross-locale grouping is rejected (English grouping 1,000.50 in Turkish locale)
+    const trMismatch = calculatePipePressureLoss({
+      ...base,
+      length: "1,000.50",
+      locale: "tr",
+    });
+    expect(trMismatch.error).toBeTruthy();
+  });
 });

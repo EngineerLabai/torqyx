@@ -35,4 +35,4 @@ export const formatNumberFixed = (
     fallback,
   );
 
-export { parseEngineeringNumber } from "./number-parser";
+export { parseEngineeringNumber, type ParseEngineeringNumberOptions } from "./number-parser";

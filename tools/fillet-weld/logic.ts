@@ -8,13 +8,14 @@ export const DEFAULT_INPUT: FilletWeldInput = {
   fillet: "0",
 };
 
-const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
+const toNumber = (value: string, locale?: "tr" | "en"): number =>
+  parseEngineeringNumber(value, { locale }) ?? Number.NaN;
 
 export const calculateFilletWeld = (input: FilletWeldInput): FilletWeldResult => {
-  const load = toNumber(input.load);
-  const length = toNumber(input.length);
-  const allowable = toNumber(input.allowable);
-  const fillet = toNumber(input.fillet);
+  const load = toNumber(input.load, input.locale);
+  const length = toNumber(input.length, input.locale);
+  const allowable = toNumber(input.allowable, input.locale);
+  const fillet = toNumber(input.fillet, input.locale);
 
   if (!Number.isFinite(load) || !Number.isFinite(length) || !Number.isFinite(allowable) || load <= 0 || length <= 0 || allowable <= 0) {
     return {

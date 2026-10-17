@@ -150,9 +150,9 @@ function buildBoltAuditTrail(
 }
 
 export function calculateBolt(input: BoltInput): BoltResult {
-  const d = parseEngineeringNumber(input.d);
-  const P = parseEngineeringNumber(input.P);
-  const preload = parseEngineeringNumber(input.preloadPercent);
+  const d = parseEngineeringNumber(input.d, { locale: input.locale });
+  const P = parseEngineeringNumber(input.P, { locale: input.locale });
+  const preload = parseEngineeringNumber(input.preloadPercent, { locale: input.locale });
 
   if (!d || d <= 0 || !P || P <= 0) {
     return {

@@ -9,13 +9,14 @@ export const DEFAULT_INPUT: HeatInput = {
 };
 
 const format = (value: number) => value.toFixed(4);
-const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
+const toNumber = (value: string, locale?: "tr" | "en"): number =>
+  parseEngineeringNumber(value, { locale }) ?? Number.NaN;
 
 export function calculateHeat(input: HeatInput): HeatResult {
-  const k = toNumber(input.conductivity);
-  const area = toNumber(input.area);
-  const deltaT = toNumber(input.deltaT);
-  const thickness = toNumber(input.thickness);
+  const k = toNumber(input.conductivity, input.locale);
+  const area = toNumber(input.area, input.locale);
+  const deltaT = toNumber(input.deltaT, input.locale);
+  const thickness = toNumber(input.thickness, input.locale);
 
   if (!Number.isFinite(k) || k <= 0 || !Number.isFinite(area) || area <= 0) {
     return {

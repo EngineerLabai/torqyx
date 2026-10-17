@@ -41,4 +41,41 @@ describe("bearing life calculator", () => {
       expect(Number.isFinite(result.L10)).toBe(true);
     }
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateBearingLife({
+      C: "25.000",
+      P: "10.000",
+      bearingType: "ball",
+      rpm: "1.500",
+      a1: "1",
+      locale: "tr",
+    });
+    expect(trRes.error).toBeUndefined();
+    expect(trRes.L10).toBeCloseTo(15.625, 3);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateBearingLife({
+      C: "25,000",
+      P: "10,000",
+      bearingType: "ball",
+      rpm: "1,500",
+      a1: "1",
+      locale: "en",
+    });
+    expect(enRes.error).toBeUndefined();
+    expect(enRes.L10).toBeCloseTo(15.625, 3);
+
+    // Cross-locale grouping is rejected (English grouping 25,000.50 in Turkish locale)
+    const trMismatch = calculateBearingLife({
+      C: "25,000.50",
+      P: "10,000.50",
+      bearingType: "ball",
+      rpm: "1,500",
+      a1: "1",
+      locale: "tr",
+    });
+    expect(trMismatch.error).toBeTruthy();
+  });
 });

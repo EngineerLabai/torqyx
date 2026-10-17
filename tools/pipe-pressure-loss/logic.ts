@@ -10,15 +10,16 @@ export const DEFAULT_INPUT: PipePressureLossInput = {
   roughness: "0.045",
 };
 
-const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
+const toNumber = (value: string, locale?: "tr" | "en"): number =>
+  parseEngineeringNumber(value, { locale }) ?? Number.NaN;
 
 export const calculatePipePressureLoss = (input: PipePressureLossInput): PipePressureLossResult => {
-  const rho = toNumber(input.rho);
-  const mu = toNumber(input.mu);
-  const flow = toNumber(input.flow);
-  const diameterMm = toNumber(input.diameter);
-  const length = toNumber(input.length);
-  const roughnessMm = toNumber(input.roughness);
+  const rho = toNumber(input.rho, input.locale);
+  const mu = toNumber(input.mu, input.locale);
+  const flow = toNumber(input.flow, input.locale);
+  const diameterMm = toNumber(input.diameter, input.locale);
+  const length = toNumber(input.length, input.locale);
+  const roughnessMm = toNumber(input.roughness, input.locale);
 
   if (
     !Number.isFinite(rho) ||

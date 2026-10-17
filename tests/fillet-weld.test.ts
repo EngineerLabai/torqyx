@@ -79,4 +79,38 @@ describe("fillet weld calculator", () => {
     expect(result.requiredA).toBeGreaterThan(0);
     expect(result.stress).toBeGreaterThan(0);
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateFilletWeld({
+      load: "15.000",
+      length: "120",
+      allowable: "140",
+      fillet: "0",
+      locale: "tr",
+    });
+    expect(trRes.error).toBeUndefined();
+    expect(trRes.requiredA).toBeCloseTo(1.2629, 3);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateFilletWeld({
+      load: "15,000",
+      length: "120",
+      allowable: "140",
+      fillet: "0",
+      locale: "en",
+    });
+    expect(enRes.error).toBeUndefined();
+    expect(enRes.requiredA).toBeCloseTo(1.2629, 3);
+
+    // Cross-locale grouping is rejected (English grouping 15,000.50 in Turkish locale)
+    const trMismatch = calculateFilletWeld({
+      load: "15,000.50",
+      length: "120",
+      allowable: "140",
+      fillet: "0",
+      locale: "tr",
+    });
+    expect(trMismatch.error).toBeTruthy();
+  });
 });

@@ -7,6 +7,7 @@ export type CompressorCcInput = {
   rpm: string;
   volumetricEff: string;
   acting: CompressorActing;
+  locale?: "tr" | "en";
 };
 
 export type CompressorCcErrorCode =
@@ -41,8 +42,8 @@ export const MAX_VOLUMETRIC_EFFICIENCY_PERCENT = 120;
  * decimal comma. Thousands separators and partially numeric strings are
  * intentionally rejected.
  */
-export const parseCompressorNumber = (value: string): number | null =>
-  parseEngineeringNumber(value);
+export const parseCompressorNumber = (value: string, locale?: "tr" | "en"): number | null =>
+  parseEngineeringNumber(value, { locale });
 
 /**
  * Ideal geometric piston displacement model.
@@ -58,11 +59,11 @@ export const calculateCompressorCc = (input: CompressorCcInput): CompressorCcCal
     return { ok: false, error: "invalid-acting" };
   }
 
-  const bore = parseCompressorNumber(input.bore);
-  const stroke = parseCompressorNumber(input.stroke);
-  const cylinders = parseCompressorNumber(input.cylinders);
-  const rpm = parseCompressorNumber(input.rpm);
-  const volumetricEfficiency = parseCompressorNumber(input.volumetricEff);
+  const bore = parseCompressorNumber(input.bore, input.locale);
+  const stroke = parseCompressorNumber(input.stroke, input.locale);
+  const cylinders = parseCompressorNumber(input.cylinders, input.locale);
+  const rpm = parseCompressorNumber(input.rpm, input.locale);
+  const volumetricEfficiency = parseCompressorNumber(input.volumetricEff, input.locale);
 
   if (
     bore === null ||

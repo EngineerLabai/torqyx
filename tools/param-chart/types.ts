@@ -2,6 +2,7 @@ export type ChartInput = {
   stiffness: string;
   maxDisplacement: string;
   steps: string;
+  locale?: "tr" | "en";
 };
 
 export type ChartPoint = {

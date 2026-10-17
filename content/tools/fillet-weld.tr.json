@@ -1,25 +1,25 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2026-02-07",
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-16",
   "howTo": [
-    "Yük, kaynak boyu ve izin verilen gerilmeyi gir.",
-    "Fillet a değeri bilinmiyorsa boş bırak.",
-    "Gerekli a, boğaz kalınlığı ve gerilme kontrolünü incele."
+    "Tasarım kesme/çekme kuvvetini (F) Newton (N), toplam etkin kaynak boyunu (L) milimetre (mm) ve izin verilen kaynak kayma gerilmesini (σ_allow veya τ_allow) MPa (N/mm²) olarak girin.",
+    "Yeni bir birleşim boyutlandırıyorsanız, minimum gerekli bacak boyunu ve boğaz kalınlığını hesaplamak için köşe kaynak bacak boyunu (a) boş veya 0 bırakın.",
+    "Mevcut bir kaynak dikişini tahkik ediyorsanız, boğaz düzlemindeki hesaplanan gerilmeyi izin verilen gerilmeyle karşılaştırmak için mevcut bacak boyunu (a) girin."
   ],
-  "formula": "a = F / (0.707·L·σ_allow) | throat = 0.707·a | σ = F / (0.707·a·L)",
+  "formula": "a_req = F / (0.707 · L · σ_allow) | throat = 0.707 · a | τ_throat = F / (0.707 · a · L)",
   "examples": [
     {
-      "title": "Gerekli a hesabı",
-      "description": "F=15 kN, L=120 mm, σ_allow=140 MPa.",
+      "title": "Gerekli kaynak bacak boyu hesabı (boyutlandırma)",
+      "description": "F = 15 kN statik yük, L = 120 mm toplam etkin kaynak boyu, izin verilen kaynak kayma gerilmesi σ_allow = 140 MPa.",
       "inputs": {
-        "Yük": "15000 N",
-        "Kaynak boyu": "120 mm",
-        "İzin verilen": "140 MPa",
-        "Fillet a": "-"
+        "Yük, F": "15000 N",
+        "Kaynak boyu, L": "120 mm",
+        "İzin verilen gerilme": "140 MPa",
+        "Kaynak bacak boyu, a": "0 (boyutlandırma modu)"
       },
       "outputs": {
-        "Gerekli a": "1,26 mm",
-        "Boğaz": "0,89 mm"
+        "Gerekli bacak boyu, a_req": "1,26 mm",
+        "Etkin boğaz kalınlığı": "0,89 mm"
       },
       "inputValues": {
         "load": "15000",
@@ -30,21 +30,25 @@
       "expected": {
         "requiredA": 1.2629,
         "throat": 0.8929
-      }
+      },
+      "notes": [
+        "İmalatta hesaplanan 1,26 mm değeri, birleştirilen parça kalınlığına göre standart minimum pratik kaynak boyutuna (genellikle 3 mm veya 4 mm) yuvarlanmalıdır.",
+        "Etkin kaynak boyuna krater ve başlangıç kusurları dahil edilmemelidir (başlangıç/bitiş plakası kullanılmıyorsa fiziksel boydan 2·a düşülmelidir)."
+      ]
     },
     {
-      "title": "Gerilme kontrolü",
-      "description": "F=20 kN, L=150 mm, σ_allow=160 MPa, a=6 mm.",
+      "title": "Mevcut kaynak dikişi kontrolü (gerilme tahkiki)",
+      "description": "F = 20 kN statik yük, L = 150 mm, izin verilen gerilme = 160 MPa, mevcut kaynak bacak boyu a = 6 mm.",
       "inputs": {
-        "Yük": "20000 N",
-        "Kaynak boyu": "150 mm",
-        "İzin verilen": "160 MPa",
-        "Fillet a": "6 mm"
+        "Yük, F": "20000 N",
+        "Kaynak boyu, L": "150 mm",
+        "İzin verilen gerilme": "160 MPa",
+        "Mevcut bacak boyu, a": "6 mm"
       },
       "outputs": {
-        "Gerekli a": "1,18 mm",
-        "Gerilme": "31,43 MPa",
-        "Güvenli": "Evet"
+        "Gerekli bacak boyu": "1,18 mm",
+        "Hesaplanan boğaz gerilmesi": "31,43 MPa",
+        "Emniyet değerlendirmesi": "Emniyetli (31,43 MPa ≤ 160 MPa)"
       },
       "inputValues": {
         "load": "20000",
@@ -55,22 +59,37 @@
       "expected": {
         "requiredA": 1.1787,
         "stress": 31.4317
-      }
+      },
+      "notes": [
+        "Boğaz düzlemindeki kayma gerilmesi 31,43 MPa olup izin verilen 160 MPa değerinin oldukça altındadır (kapasite kullanım oranı ≈ %19,6).",
+        "150 mm hat boyunca yükün düzgün yayılı olduğu, düzlem dışı soyulma veya burulma momentlerinin bulunmadığı varsayılmıştır."
+      ]
     }
   ],
   "references": [
     {
-      "title": "AWS D1.1",
-      "note": "Kaynak tasarım notları."
+      "title": "AWS D1.1 / D1.1M (Structural Welding Code — Steel)",
+      "note": "Basitleştirilmiş statik kesme analizinde eşit kenarlı 45° köşe kaynaklarında etkin boğaz hesabı (t_e = 0.707 · w) ile ilgili Bölüm 2.4/2.5 hükümleri."
+    },
+    {
+      "title": "EN 1993-1-8 (Eurocode 3: Çelik Yapıların Tasarımı — Birleşimler)",
+      "note": "Kuvvetin kritik boğaz kesit alanı üzerinden aktarıldığı köşe kaynakları tasarım direncine ilişkin basitleştirilmiş yöntem (Bölüm 4.5.3.3)."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Çekme, basma ve kesme altındaki kaynaklı birleşimler bölümü. Basitleştirilmiş boğaz kayma gerilmesi yaklaşımının temeli."
     }
   ],
   "commonMistakes": [
-    "Kaynak boyunu toplam yerine tek hat uzunluğu olarak almak.",
-    "İzin verilen gerilmeyi malzeme akmasıyla karıştırmak.",
-    "a değerini boğaz kalınlığı sanmak."
+    "Fiziksel paso boyundan başlangıç ve krater bitiş uzunluklarını düşmeden toplam boyu doğrudan etkin boy almak (etkin boy L_eff = L_fiziksel − 2·a).",
+    "Köşe kaynak bacak boyu (a veya w) ile boğaz kalınlığını (throat = 0.707·a) karıştırmak. Eurocode 3 standardında boğaz kalınlığı 'a' simgesiyle gösterilirken, Amerikan literatüründe bacak boyu 'a' veya 'w' ile ifade edilir.",
+    "Malzemenin akma veya çekme dayanımını emniyet ve birleşim faktörleri uygulamaksızın doğrudan izin verilen gerilme olarak girmek."
   ],
   "assumptions": [
-    "Yük tek eksenli ve statik kabul edilir.",
-    "Kaynak dikişi düzgün ve tam nüfuziyetli değildir."
+    "Eşit kenarlı 45° köşe kaynak geometrisi: teorik boğaz kalınlığı t = a · cos(45°) ≈ 0.707 · a kabul edilir.",
+    "Basitleştirilmiş boğaz kayma yaklaşımı: uygulanan bileşke kuvvet, yük doğrultusundan bağımsız olarak en küçük boğaz düzlemi üzerinde düzgün yayılı saf kesme gerilmesi oluşturur varsayılır.",
+    "Yalnızca statik yükleme: dinamik yorulma döngüleri, artık ısıl gerilmeler ve kaynak metali darbe tokluğu faktörleri dikkate alınmamıştır.",
+    "Sıfır yük eksantrikliği: düzlem dışı eğilme, soyulma momentleri ve ikincil gerilmeler ihmal edilmiştir.",
+    "Ön mühendislik kontrolü: bu basitleştirilmiş hesaplayıcı, tam yönsel analiz gerektiren (AWS D1.1 yön faktörü veya EN 1993-1-8 yönsel bileşen yöntemi β_w, γ_M2) resmi yapısal proje onaylarının yerine geçmez."
   ]
 }

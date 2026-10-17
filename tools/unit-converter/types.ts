@@ -5,6 +5,7 @@ export type UnitInput = {
   value: string;
   fromUnit: string;
   toUnit: string;
+  locale?: "tr" | "en";
 };
 
 export type UnitResult = {

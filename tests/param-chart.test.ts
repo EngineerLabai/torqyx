@@ -46,4 +46,20 @@ describe("param chart spring force calculator", () => {
     expect(result.maxForce).toBeNull();
     expect(result.points).toEqual([]);
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateChart({ stiffness: "1.500", maxDisplacement: "20", steps: "5", locale: "tr" });
+    expect(trRes.error).toBeUndefined();
+    expect(trRes.maxForce).toBe(30);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateChart({ stiffness: "1,500", maxDisplacement: "20", steps: "5", locale: "en" });
+    expect(enRes.error).toBeUndefined();
+    expect(enRes.maxForce).toBe(30);
+
+    // Cross-locale grouping is rejected (English grouping 1,500.50 in Turkish locale)
+    const trMismatch = calculateChart({ stiffness: "1,500.50", maxDisplacement: "20", steps: "5", locale: "tr" });
+    expect(trMismatch.error).toBeTruthy();
+  });
 });

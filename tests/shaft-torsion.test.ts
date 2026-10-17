@@ -66,4 +66,41 @@ describe("shaft torsion calculator", () => {
     expect(result.thetaDeg).toBeGreaterThan(0);
     expect(result.safety).toBeGreaterThan(0);
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateShaftTorsion({
+      torque: "1.250",
+      diameter: "30",
+      length: "1.000",
+      shearModulus: "80",
+      allowableShear: "100",
+      locale: "tr",
+    });
+    expect(trRes.error).toBeUndefined();
+    expect(trRes.tau).toBeCloseTo(235.785, 2);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateShaftTorsion({
+      torque: "1,250",
+      diameter: "30",
+      length: "1,000",
+      shearModulus: "80",
+      allowableShear: "100",
+      locale: "en",
+    });
+    expect(enRes.error).toBeUndefined();
+    expect(enRes.tau).toBeCloseTo(235.785, 2);
+
+    // Cross-locale grouping is rejected (English grouping 1,250.50 in Turkish locale)
+    const trMismatch = calculateShaftTorsion({
+      torque: "1,250.50",
+      diameter: "30",
+      length: "1,000.50",
+      shearModulus: "80",
+      allowableShear: "100",
+      locale: "tr",
+    });
+    expect(trMismatch.error).toBeTruthy();
+  });
 });

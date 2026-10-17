@@ -3,6 +3,7 @@ export type HeatInput = {
   area: string;
   deltaT: string;
   thickness: string;
+  locale?: "tr" | "en";
 };
 
 export type HeatResult = {

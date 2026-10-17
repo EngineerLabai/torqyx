@@ -39,4 +39,18 @@ describe("gear module calculator", () => {
     expect(calculateGearModule({ diameter: "200,5", teeth: "40" })?.mRaw).toBeCloseTo(5.0125, 10);
     expect(Number.isFinite(calculateGearModule({ diameter: 1e12, teeth: 1_000_000 })?.mRaw)).toBe(true);
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateGearModule({ diameter: "1.000", teeth: "50", locale: "tr" });
+    expect(trRes?.mRaw).toBe(20);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateGearModule({ diameter: "1,000", teeth: "50", locale: "en" });
+    expect(enRes?.mRaw).toBe(20);
+
+    // Cross-locale grouping is rejected (English grouping 1,000.50 in Turkish locale)
+    const trMismatch = calculateGearModule({ diameter: "1,000.50", teeth: "50", locale: "tr" });
+    expect(trMismatch).toBeNull();
+  });
 });

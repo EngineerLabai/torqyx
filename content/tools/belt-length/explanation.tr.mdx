@@ -2,9 +2,12 @@
 
 ## Formüller
 
-<Formula label="Açık kayış uzunluğu ve sarma açısı">
-L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
-β = π − 2·arcsin((D2 − D1)/(2C))
+<Formula label="Açık kayış uzunluğu ve sarma açıları">
+D_büyük = max(D1, D2),  D_küçük = min(D1, D2)
+r = (D_büyük − D_küçük) / (2C)
+L = 2C + (π/2)(D_büyük + D_küçük) + (D_büyük − D_küçük)^2 / (4C)
+β_küçük = 180° − 2·arcsin(r)  [rad: π − 2·arcsin(r)]
+β_büyük = 180° + 2·arcsin(r)  [rad: π + 2·arcsin(r)]
 </Formula>
 
 Bu formül açık kayış düzeninde kasnak kayışı uzunluğu ve küçük kasnak sarma açısı için geometrik bir ön seçim verir. Eşit çaplı kasnaklarda sarma açısı yaklaşık 180° olur; çap farkı büyüdükçe küçük kasnaktaki sarma açısı azalabilir.

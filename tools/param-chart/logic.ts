@@ -8,12 +8,13 @@ export const DEFAULT_INPUT: ChartInput = {
 };
 
 const format = (value: number) => value.toFixed(3);
-const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
+const toNumber = (value: string, locale?: "tr" | "en"): number =>
+  parseEngineeringNumber(value, { locale }) ?? Number.NaN;
 
 export function calculateChart(input: ChartInput): ChartResult {
-  const stiffness = toNumber(input.stiffness);
-  const maxDisplacement = toNumber(input.maxDisplacement);
-  const stepsRaw = toNumber(input.steps);
+  const stiffness = toNumber(input.stiffness, input.locale);
+  const maxDisplacement = toNumber(input.maxDisplacement, input.locale);
+  const stepsRaw = toNumber(input.steps, input.locale);
   const stepsCount = Number.isFinite(stepsRaw) ? Math.round(stepsRaw) : 0;
 
   if (!Number.isFinite(stiffness) || stiffness <= 0) {

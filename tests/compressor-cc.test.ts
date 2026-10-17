@@ -115,4 +115,18 @@ describe("compressor displacement calculation", () => {
   it("rejects finite inputs whose calculated result overflows", () => {
     expectError({ ...VALID_INPUT, bore: "1e308" }, "result-out-of-range");
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateCompressorCc({ ...VALID_INPUT, rpm: "1.450", locale: "tr" });
+    expect(trRes.ok).toBe(true);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateCompressorCc({ ...VALID_INPUT, rpm: "1,450", locale: "en" });
+    expect(enRes.ok).toBe(true);
+
+    // Cross-locale grouping is rejected (English grouping 1,450.50 in Turkish locale)
+    const trMismatch = calculateCompressorCc({ ...VALID_INPUT, rpm: "1,450.50", locale: "tr" });
+    expect(trMismatch.ok).toBe(false);
+  });
 });

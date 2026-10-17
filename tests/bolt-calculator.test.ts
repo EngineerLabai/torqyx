@@ -48,7 +48,7 @@ describe("bolt preload and tightening torque", () => {
     expect(result.torque).toBeGreaterThan(0);
   });
 
-  it("rejects ambiguous thousands separators and trailing junk", () => {
+  it("rejects ambiguous thousands separators and trailing junk without explicit locale", () => {
     const junk = calculateBolt({ presetId: "custom", d: "10,5abc", P: "1.25", grade: "8.8", preloadPercent: "70", friction: "dry" });
     expect(junk.error).toBeTruthy();
     expect(junk.torque).toBeNull();
@@ -56,6 +56,32 @@ describe("bolt preload and tightening torque", () => {
     const thousands = calculateBolt({ presetId: "custom", d: "1.234,56", P: "1.25", grade: "8.8", preloadPercent: "70", friction: "dry" });
     expect(thousands.error).toBeTruthy();
     expect(thousands.torque).toBeNull();
+  });
+
+  it("accepts valid localized thousands separators when locale is provided", () => {
+    const trBolt = calculateBolt({
+      presetId: "custom",
+      d: "10,5",
+      P: "1,5",
+      grade: "8.8",
+      preloadPercent: "70",
+      friction: "dry",
+      locale: "tr",
+    });
+    expect(trBolt.error).toBeUndefined();
+    expect(trBolt.torque).toBeGreaterThan(0);
+
+    const enBolt = calculateBolt({
+      presetId: "custom",
+      d: "10.5",
+      P: "1.5",
+      grade: "8.8",
+      preloadPercent: "70",
+      friction: "dry",
+      locale: "en",
+    });
+    expect(enBolt.error).toBeUndefined();
+    expect(enBolt.torque).toBeGreaterThan(0);
   });
 
   it("rejects invalid direct nut-factor inputs", () => {

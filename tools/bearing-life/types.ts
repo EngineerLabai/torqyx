@@ -4,6 +4,7 @@ export type BearingLifeInput = {
   bearingType: "ball" | "roller";
   rpm: string;
   a1: string;
+  locale?: "tr" | "en";
 };
 
 export type BearingLifeResult = {

@@ -40,4 +40,38 @@ describe("basic engineering heat flow calculator", () => {
     expect(result.error).toBeTruthy();
     expect(result.heatFlow).toBeNull();
   });
+
+  it("handles locale thousands grouping when locale is provided", () => {
+    // TR: '.' is thousands, ',' is decimal
+    const trRes = calculateHeat({
+      conductivity: "45",
+      area: "2.000",
+      deltaT: "30",
+      thickness: "1.000",
+      locale: "tr",
+    });
+    expect(trRes.error).toBeUndefined();
+    expect(trRes.heatFlow).toBe(2700);
+
+    // EN: ',' is thousands, '.' is decimal
+    const enRes = calculateHeat({
+      conductivity: "45",
+      area: "2,000",
+      deltaT: "30",
+      thickness: "1,000",
+      locale: "en",
+    });
+    expect(enRes.error).toBeUndefined();
+    expect(enRes.heatFlow).toBe(2700);
+
+    // Cross-locale grouping is rejected (English thousands+decimal 2,000.50 in Turkish locale)
+    const trMismatch = calculateHeat({
+      conductivity: "45",
+      area: "2,000.50",
+      deltaT: "30",
+      thickness: "1,000.50",
+      locale: "tr",
+    });
+    expect(trMismatch.error).toBeTruthy();
+  });
 });

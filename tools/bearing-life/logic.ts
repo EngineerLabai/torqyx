@@ -9,13 +9,14 @@ export const DEFAULT_INPUT: BearingLifeInput = {
   a1: "1",
 };
 
-const toNumber = (value: string): number => parseEngineeringNumber(value) ?? Number.NaN;
+const toNumber = (value: string, locale?: "tr" | "en"): number =>
+  parseEngineeringNumber(value, { locale }) ?? Number.NaN;
 
 export const calculateBearingLife = (input: BearingLifeInput): BearingLifeResult => {
-  const C = toNumber(input.C);
-  const P = toNumber(input.P);
-  const rpm = toNumber(input.rpm);
-  const a1 = toNumber(input.a1);
+  const C = toNumber(input.C, input.locale);
+  const P = toNumber(input.P, input.locale);
+  const rpm = toNumber(input.rpm, input.locale);
+  const a1 = toNumber(input.a1, input.locale);
 
   if (
     !Number.isFinite(C) ||

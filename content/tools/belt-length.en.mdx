@@ -6,9 +6,12 @@ title: Pulley Belt Length and Wrap Angle
 
 Use this calculator to estimate open pulley belt length and the small pulley wrap angle from two pulley diameters and the center distance. It is intended for early mechanical layout checks before selecting the final catalog belt size.
 
-<Formula label="Open belt length and wrap angle">
-L = 2C + (π/2)(D1 + D2) + (D2 − D1)^2 / (4C)
-β = π − 2·arcsin((D2 − D1)/(2C))
+<Formula label="Open belt length and wrap angles">
+D_big = max(D1, D2),  D_small = min(D1, D2)
+r = (D_big − D_small) / (2C)
+L = 2C + (π/2)(D_big + D_small) + (D_big − D_small)^2 / (4C)
+β_small = 180° − 2·arcsin(r)  [rad: π − 2·arcsin(r)]
+β_big = 180° + 2·arcsin(r)    [rad: π + 2·arcsin(r)]
 </Formula>
 
 **Assumptions**

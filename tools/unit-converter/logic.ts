@@ -74,7 +74,7 @@ export function calculateUnit(input: UnitInput): UnitResult {
   const category = CATEGORY_MAP[input.category];
   const from = findUnit(input.category, input.fromUnit);
   const to = findUnit(input.category, input.toUnit);
-  const numericValue = parseEngineeringNumber(input.value);
+  const numericValue = parseEngineeringNumber(input.value, { locale: input.locale });
 
   if (!from || !to) {
     return {
