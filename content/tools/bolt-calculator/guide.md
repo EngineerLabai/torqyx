@@ -76,7 +76,7 @@ Bağlantı sınıfı ve diş geometrisi için proje dokümanında kullanılan IS
 
 ## İlgili Araçlar
 
-- [Güç - Tork - Devir](/tools/torque-power)
-- [Mil Burulma](/tools/shaft-torsion)
-- [Köşe Kaynak Boyutlandırma](/tools/fillet-weld)
-- [Boru Basınç Kaybı](/tools/pipe-pressure-loss)
+- [Güç - Tork - Devir](/tr/tools/torque-power)
+- [Mil Burulma](/tr/tools/shaft-torsion)
+- [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
+- [Boru Basınç Kaybı](/tr/tools/pipe-pressure-loss)

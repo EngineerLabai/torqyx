@@ -78,7 +78,7 @@ Nihai borulama tasarımında proje şartnamesi, yürürlükteki borulama standar
 
 ## İlgili Araçlar
 
-- [Akışkanlar ve HVAC](/tools/fluids-hvac)
-- [Hidrolik Silindir Kuvvet & Hız](/tools/hydraulic-cylinder)
-- [Birim Dönüştürücü](/tools/unit-converter)
-- [Güç - Tork - Devir](/tools/torque-power)
+- [Akışkanlar ve HVAC](/tr/tools/fluids-hvac)
+- [Hidrolik Silindir Kuvvet & Hız](/tr/tools/hydraulic-cylinder)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Güç - Tork - Devir](/tr/tools/torque-power)
