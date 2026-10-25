@@ -1,62 +1,78 @@
 ---
-title: "Isı yalıtımı ve termal genleşme rehberi"
-description: "Yüksek sıcaklık uygulamalarında ısı akışı, yalıtım kalınlığı ve termal genleşme payını birlikte kontrol edin."
+title: "Isı Yalıtımı ve Termal Genleşme Mühendislik Rehberi"
+description: "Yüksek sıcaklık endüstriyel hatlarında ısı kaybı, yalıtım kalınlığı, Fourier iletimi ve termal genleşme hesabı (DIN/ISO/ASTM)."
 date: "2026-05-09"
-tags: ["ısı transferi", "yalıtım", "termal genleşme"]
+tags: ["ısı transferi", "yalıtım", "termal genleşme", "fourier", "mekanik tasarım"]
 category: "Termal"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+<Callout type="info" title="Mühendislik Doğrulama Notu">
+Bu rehber, endüstriyel boru hatları, fırın gövdeleri ve mekanik flanş bağlantılarında ısı geçişi ile boyutsal genleşmenin eş zamanlı kontrolü için ISO 12241 ve ASTM C547 esas alınarak hazırlanmıştır. Kritik yüksek basınç ve sıcaklık uygulamalarında borulama stres analizi (ASME B31.3 / B31.1) ve yetkili mühendis onayı şarttır.
 </Callout>
 
 ## Problem / Amaç
 
-Yalıtım sadece enerji kaybını azaltmaz; yüzey sıcaklığı, güvenlik, genleşme boşluğu ve bağlantı gerilmelerini de etkiler.
+Endüstriyel tesislerde ısı yalıtımı yalnızca enerji verimliliği ve yakıt tasarrufu sağlamakla kalmaz; aynı zamanda:
+- **Personel İş Güvenliği:** Yüzey temas sıcaklığının 60 °C (ISO 13732-1 standardına göre) altına indirilmesi,
+- **Termal Genleşme Yönetimi:** Sıcaklıkla uzayan boruların mesnetlere, pompalara ve vana gövdelerine aşırı eksenel gerilme iletmesini engellemek,
+- **Kondenzasyon ve Korozyon Kontrolü (CUI):** Boru dış yüzeyinde yoğuşma oluşumunun önlenmesi için kritik bir mühendislik parametresidir.
 
 ## Varsayımlar
 
-- Isı iletimi baskın mekanizma olarak alınır.
-- Malzeme ısıl iletkenliği çalışma sıcaklığına göre seçilir.
-- Genleşme için hareket serbestliği veya kompansasyon planlanır.
+- Sabit rejimde 1 boyutlu ısı iletimi (Fourier yasası) geçerlidir; kenar etkileri ve geçici rejim dalgalanmaları ihmal edilmiştir.
+- Malzemenin elastisite modülü ve termal genleşme katsayısı çalışma sıcaklığı aralığında homojen ve izotropik kabul edilir.
+- Doğrusal genleşme hesabı eksenel serbestlik doğrultusunda ele alınır; kısıtlanmış sistemlerde termal gerilme analizi yapılır.
+- Yalıtım malzemesi gözeneksiz ve kuru kabul edilmiş olup nem kaynaklı iletkenlik artışı güvenlik faktörüyle karşılanır.
 
 ## Adım adım yöntem
 
-1. Sıcaklık farkını ve temas alanını belirle.
-2. Malzeme iletkenliğini çalışma sıcaklığında seç.
-3. Yalıtım kalınlığı ile yüzey sıcaklığını kontrol et.
-4. Termal genleşme miktarını hesapla.
-5. Bağlantı ve boşluk tasarımını genleşmeye göre revize et.
+1. **Sıcaklık Farkını ve Ortam Koşullarını Belirleyin:**
+   Montaj ortam sıcaklığı ($T_{ortam}$) ile akışkan çalışma sıcaklığı ($T_{calisma}$) arasındaki farkı tespit edin:
+   $$\Delta T = T_{calisma} - T_{ortam}$$
+
+2. **Fourier Yasası ile Yalıtım Isı Akısını Hesaplayın:**
+   Düzlem yüzeyler için birim alandan geçen ısı akısı ($q$ [$\text{W/m}^2$]):
+   $$q = \frac{k}{s} \cdot (T_{ic} - T_{dis}) = \frac{\Delta T}{R_{th}}$$
+   Silindirik borularda birim boy başına ısı kaybı ($q_L$ [$\text{W/m}$]):
+   $$q_L = \frac{2\pi \cdot k \cdot (T_{boru} - T_{dis})}{\ln(D_{dis} / D_{ic})}$$
+
+3. **Doğrusal Termal Genleşme Miktarını Hesaplayın:**
+   Hattın serbest uzama payı ($\Delta L$):
+   $$\Delta L = \alpha \cdot L_0 \cdot \Delta T$$
+   *(Örn: Karbon çeliği için $\alpha \approx 12 \times 10^{-6}\text{ / °C}$, Paslanmaz AISI 304 için $\alpha \approx 16.5 \times 10^{-6}\text{ / °C}$)*
+
+4. **Kısıtlanmış Sistemde Termal Gerilmeyi Kontrol Edin:**
+   Eğer boru rijit sabit mesnetlerle (anchor) kilitlenmişse oluşan basma gerilmesi:
+   $$\sigma_{termal} = E \cdot \alpha \cdot \Delta T$$
+   Bu gerilme akma sınırını ($R_e$) aşıyorsa hatta mutlaka genleşme döngüsü (U-loop) veya kompansatör eklenmelidir.
+
+5. **Çözümlü Endüstriyel Tasarım Senaryosu:**
+   25 metre uzunluğunda DN100 (Dış çap: 114.3 mm) karbon çelik buhar hattı 150 °C çalışma ve 20 °C montaj sıcaklığına sahiptir:
+   - $\Delta T = 150 - 20 = 130\text{ °C}$
+   - $\Delta L = (12 \times 10^{-6}\text{ / °C}) \times 25\,000\text{ mm} \times 130\text{ °C} = \mathbf{39.0\text{ mm}}$
+   - *Sonuç:* 25 metrelik boru 39 mm uzar; sabit mesnetler arasına eksenel kompansatör yerleştirilir.
 
 ## Sık hatalar
 
-- Yalıtım kalınlığını mekanik montaj boşluğundan bağımsız seçmek.
-- Sıcaklıkla iletkenlik değişimini unutmak.
-- Genleşmeyi sabit bağlantıyla tamamen kısıtlamak.
+- **Yalıtım Kalınlığını Mekanik Mesnet Boşluklarından Bağımsız Seçmek:** Kelepçelerin doğrudan boruya basması termal köprü ve yerel gerilme oluşturur; yalıtımlı boru takozu (shoe) kullanılmalıdır.
+- **Sıcaklıkla Isıl İletkenliğin Değişimini Göz Ardı Etmek:** Taş yününde $k$ değeri 50 °C'de $0.038\text{ W/(m}\cdot\text{K)}$ iken 250 °C'de $0.070\text{ W/(m}\cdot\text{K)}$ seviyesine çıkabilir; ortalama sıcaklık $k$ değeri alınmalıdır.
+- **İki Sabit Mesnet Arasına Genleşme Elemanı Koymamak:** Genleşme engellendiğinde flanş cıvataları aşırı çekme ve kesmeye maruz kalır.
+- **Farklı Malzemelerin Bimetalik Genleşme Farkını Unutmak:** Çelik şase ile paslanmaz boru arasındaki %40 genleşme farkı kayar mesnet boşluklarıyla dengelenmelidir.
+- **CUI (Yalıtım Altı Korozyonu) Korumasını Atlamak:** Dış ceket sızdırmazlığı sağlanmadığında yalıtıma sızan nem boruyu hızla deler.
 
 ## İlgili hesaplayıcılar
 
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
-- [Hızlı Referans Merkezi](/reference)
-- [Malzeme Kütüphanesi](/materials)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)
+- [Boru Basınç Kaybı Hesabı](/tr/tools/pipe-pressure-loss)
+- [Hidrolik Silindir Güç Hesabı](/tr/tools/hydraulic-cylinder)
+- [Malzeme Kütüphanesi ve Mekanik Dayanım Değerleri](/tr/materials)
 
-## İlgili sözlük terimleri
+## İlgili standartlar
 
-- [Gerilme](/tr/glossary/stress)
-- [Güvenlik faktörü](/tr/glossary/factor-of-safety)
-
-## Kısa FAQ
-
-### Soru: Yalıtım kalınlığı nasıl belirlenir?
-
-Enerji kaybı, yüzey sıcaklığı, yerleşim ve maliyet birlikte değerlendirilir.
-
-### Soru: Termal genleşme neden önemlidir?
-
-Kısıtlanırsa bağlantılarda ek gerilme ve şekil değişimi oluşturabilir.
-
-### Soru: Isıl iletkenlik sabit midir?
-
-Birçok malzemede sıcaklığa bağlı değişir; veri sayfası sıcaklık aralığı kontrol edilmelidir.
+- **ISO 12241:** Endüstriyel Tesisatta Isı Yalıtımı Hesaplama Kuralları.
+- **ASTM C547:** Mineral Yün Boru İzolasyonu Standart Şartnamesi.
+- **ASME B31.3:** Proses Borulama ve Termal Genleşme Gerilmesi Esasları.
+- **DIN EN ISO 13732-1:** Sıcak Yüzeylerle Temasta Ergonomi ve Yanık Eşikleri.

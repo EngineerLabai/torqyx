@@ -1,0 +1,98 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Tolerans zincirine doğrusal boyutları ekleyin. Her bir eleman için nominal uzunluğu, üst sapmayı ve alt sapmayı aynı birim cinsinden belirtin.",
+    "Her boyutun zincirdeki yönünü atayın: Eklenen/büyüten boyutlar için pozitif (+1), iç boşluklar, çıkarılan adımlar veya cepler için negatif (-1).",
+    "Garantili montaj uyumu için deterministik En Kötü Durum (Worst-Case - WC) sınır aralığını ve seri üretim optimizasyonu için Kareler Toplamının Kökü (RSS) istatistiksel aralığını değerlendirin."
+  ],
+  "formula": "X_nom = Σ (yon_i · N_i) | WC_max = Σ max(yon_i · [N_i + sapma]) | WC_min = Σ min(yon_i · [N_i + sapma]) | T_rss = √(Σ t_i²)",
+  "examples": [
+    {
+      "title": "İki parçalı uç uca eklemeli montaj zinciri",
+      "description": "Uç uca monte edilen iki pimli plaka: Parça A 20 ± 0,10 mm ve Parça B 10 ± 0,05 mm toleransındadır.",
+      "inputs": {
+        "Parça A nominal & tolerans": "20 mm (+0,10 / -0,10 mm)",
+        "Parça B nominal & tolerans": "10 mm (+0,05 / -0,05 mm)",
+        "Yönler": "Her ikisi de eklemeli (+1)"
+      },
+      "outputs": {
+        "Nominal zincir boyu, X_nom": "30,00 mm",
+        "En kötü durum minimum, WC_min": "29,85 mm",
+        "En kötü durum maksimum, WC_max": "30,15 mm",
+        "En kötü durum toplam tolerans": "0,30 mm",
+        "RSS istatistiksel yarı aralık": "0,11 mm"
+      },
+      "inputValues": {
+        "dimensions": [
+          { "nominal": 20, "upper": 0.1, "lower": -0.1, "direction": 1 },
+          { "nominal": 10, "upper": 0.05, "lower": -0.05, "direction": 1 }
+        ]
+      },
+      "expected": {
+        "nominalResult": 30.0,
+        "worstCaseMin": 29.85,
+        "worstCaseMax": 30.15,
+        "worstCaseTolerance": 0.3
+      },
+      "notes": [
+        "En kötü durum (WC) sınırları, tedarikçi proses yeteneğinden bağımsız olarak üretilen parçaların %100'ünde sıfır çakışma garantisi verir.",
+        "Hassasiyet analizi, daha geniş olan ±0,10 mm tolerans bandı sebebiyle Parça A'nın toplam varyansın %80'ini oluşturduğunu gösterir."
+      ]
+    },
+    {
+      "title": "Mil ve burç iç eksenel boşluk kontrolü",
+      "description": "Bir gövde boşluğu (50 ± 0,20 mm) içine yerleşen mil faturası (40 ± 0,10 mm) eksenel boşluğun (end-play) doğrulanması.",
+      "inputs": {
+        "Gövde boşluğu nominal & tolerans": "50 mm (+0,20 / -0,20 mm), yön = +1",
+        "Mil faturası nominal & tolerans": "40 mm (+0,10 / -0,10 mm), yön = -1"
+      },
+      "outputs": {
+        "Nominal eksenel boşluk": "10,00 mm",
+        "En kötü durum minimum boşluk": "9,70 mm",
+        "En kötü durum maksimum boşluk": "10,30 mm",
+        "En kötü durum toplam boşluk aralığı": "0,60 mm"
+      },
+      "inputValues": {
+        "dimensions": [
+          { "nominal": 50, "upper": 0.2, "lower": -0.2, "direction": 1 },
+          { "nominal": 40, "upper": 0.1, "lower": -0.1, "direction": -1 }
+        ]
+      },
+      "expected": {
+        "nominalResult": 10.0,
+        "worstCaseMin": 9.7,
+        "worstCaseMax": 10.3,
+        "worstCaseTolerance": 0.6
+      },
+      "notes": [
+        "Çıkarılan (negatif yönlü) boyut alt ve üst sınırları tersine çevirir: Minimum boşluk, gövde alt sınırda (49,8 mm) ve mil üst sınırda (40,1 mm) olduğunda 9,7 mm olarak gerçekleşir.",
+        "Termal genleşme altında sıkışmayı önlemek için minimum boşluğun kesinlikle pozitif kaldığı daima doğrulanmalıdır."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 286-1",
+      "note": "Geometrik ürün özellikleri (GPS) — Doğrusal boyutlar için ISO tolerans kod sistemi."
+    },
+    {
+      "title": "ASME Y14.5",
+      "note": "Doğrusal tolerans zinciri temellerini ve koordinat tolerans sınırlarını kapsayan Boyutlandırma ve Toleranslandırma standardı."
+    },
+    {
+      "title": "ISO 14405-1",
+      "note": "Geometrik ürün özellikleri (GPS) — Boyutsal toleranslandırma — Bölüm 1: Doğrusal boyutlar."
+    }
+  ],
+  "commonMistakes": [
+    "Nominal değerin altında kalan alt sapmayı eksi işaret koymadan pozitif bir büyüklük olarak girmek (örn. -0,1 yerine +0,1 yazmak).",
+    "Az adetli üretimlerde (< 30 parça) veya merkezlenmemiş proseslerde normal dağılım varsayımı geçerli olmadığı halde RSS istatistiksel yığma uygulamak.",
+    "Çalışma sıcaklığı aralığında eşleşen malzemeler arasındaki termal genleşme farkını (örn. alüminyum gövde ile çelik mil) hesaba katmamak."
+  ],
+  "assumptions": [
+    "Bir boyutlu doğrusal tolerans zinciri: Tüm boyutlar tek bir ölçüm vektörü boyunca paralel ve aynı düzlemdedir.",
+    "RSS istatistiksel yığma, nominalde merkezlenmiş ve proses yetenek indeksi Cp ≥ 1,0 olan bağımsız normal dağılımlı parça toleranslarını varsayar.",
+    "Form, yön ve konum toleransları (GD&T referans çerçeveleri, MMC bonus toleransları) ayrı 3 boyutlu varyasyon analizi gerektirir."
+  ]
+}

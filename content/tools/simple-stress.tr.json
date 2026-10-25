@@ -1,0 +1,90 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Uygulanan eksenel çekme veya basma kuvvetini F newton (N) cinsinden girin.",
+    "Yüke direnen kesit alanını A milimetrekare (mm²) cinsinden girin.",
+    "Referans akma mukavemetini Re (MPa) belirlemek için malzeme kalitesini seçin.",
+    "Oluşan nominal gerilmeyi σ = F / A ve statik güvenlik faktörünü n = Re / σ inceleyin."
+  ],
+  "formula": "σ = F / A | n = Re / σ",
+  "examples": [
+    {
+      "title": "S355 yapı çeliğinden çekme gergi çubuğu",
+      "description": "50 mm dolu dairesel çubuk (A = 1.963,5 mm²), 200 kN eksenel çekme yükü altındadır.",
+      "inputs": {
+        "Kuvvet, F": "200.000 N",
+        "Kesit alanı, A": "1.963,5 mm²",
+        "Malzeme": "S355 (Re = 355 MPa)"
+      },
+      "outputs": {
+        "Gerilme, σ": "101,9 MPa",
+        "Güvenlik katsayısı, n": "3,48",
+        "Durum": "Güvenli (n ≥ 2)"
+      },
+      "inputValues": {
+        "force": "200000",
+        "area": "1963.5",
+        "material": "S355"
+      },
+      "expected": {
+        "stress": 101.859,
+        "safetyFactor": 3.485
+      },
+      "notes": [
+        "A = π × 50² / 4 ≈ 1.963,5 mm².",
+        "Oluşan gerilme S355 çeliğinin elastik sınırları içindedir ve n ≈ 3,48 statik güvenlik payı sağlar."
+      ]
+    },
+    {
+      "title": "Çekme altındaki net plaka kesiti",
+      "description": "S235 çeliğinden imal edilmiş, net kesit alanı A = 300 mm² olan plaka 50 kN eksenel kuvvete maruz kalmaktadır.",
+      "inputs": {
+        "Kuvvet, F": "50.000 N",
+        "Kesit alanı, A": "300 mm²",
+        "Malzeme": "S235 (Re = 235 MPa)"
+      },
+      "outputs": {
+        "Gerilme, σ": "166,7 MPa",
+        "Güvenlik katsayısı, n": "1,41",
+        "Durum": "Sınırda (1,2 ≤ n < 2)"
+      },
+      "inputValues": {
+        "force": "50000",
+        "area": "300",
+        "material": "S235"
+      },
+      "expected": {
+        "stress": 166.667,
+        "safetyFactor": 1.41
+      },
+      "notes": [
+        "1,41 güvenlik katsayısı statik yük altında sınırda bir kapasiteyi gösterir; dinamik yükler veya çentik hassasiyeti durumunda kesit büyütülmelidir."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "EN 1993-1-1 (Eurocode 3)",
+      "note": "Çelik Yapıların Tasarımı — Genel kurallar ve binalar için kurallar."
+    },
+    {
+      "title": "ISO 6892-1",
+      "note": "Metalik malzemeler — Çekme deneyi — Bölüm 1: Oda sıcaklığında deney metodu."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Budynas & Nisbett — Bölüm 3: Yük ve Gerilme Analizi."
+    }
+  ],
+  "commonMistakes": [
+    "Kuvveti kilonewton (kN) cinsinden girip newton (N) dönüşümünü yapmamak; bu durum gerilme sonucunda 1.000 kat hataya yol açar.",
+    "Cıvata delikleri, kanallar veya oyuklar kesiti daralttığında brüt alan yerine net alanı hesaba katmayı unutmak.",
+    "Geometrik süreksizliklerde gerilme yığılması katsayısını (Kt) dikkate almadan doğrudan nominal gerilmeye güvenmek."
+  ],
+  "assumptions": [
+    "Eksenel kuvvet ağırlık merkezi ekseni boyunca sıfır dışmerkezlikle uygulanmaktadır.",
+    "Saint-Venant ilkesine göre gerilme kesit boyunca homojen dağılmaktadır.",
+    "Malzeme homojen, izotropik olup tamamen lineer elastik bölgede çalışmaktadır."
+  ]
+}

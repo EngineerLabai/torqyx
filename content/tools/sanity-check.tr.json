@@ -1,0 +1,90 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Mühendislik değişkenlerinizi sembolleri, sayısal değerleri ve standart mühendislik birimleriyle tanımlayın (örn. T = 250 N·m, n = 1500 rpm, v = 12 m/s).",
+    "Hedef hesaplama formülünüzü standart matematiksel operatörler ve fonksiyonlarla girin.",
+    "Beklenen çıkış birimini belirleyin. Motor, boyutsal tutarlılığı (boyut analizi) değerlendirir, otomatik SI birim dönüşümlerini yapar ve birim uyumsuzluklarını veya hatalı işlemleri bildirir."
+  ],
+  "formula": "BoyutKontrol: [L]^a · [M]^b · [T]^c · [I]^d · [Θ]^e | P = T · ω | F = m · a | Q = k · A · ΔT / L",
+  "examples": [
+    {
+      "title": "Tork ve açısal hızdan mekanik güç hesabı",
+      "description": "300 rad/s açısal hızda 25 N·m tork üreten bir elektrik motorunun mekanik çıkış gücünü ve birim tutarlılığını doğrulayınız.",
+      "inputs": {
+        "Tork, T": "25 N·m",
+        "Açısal hız, ω": "300 rad/s",
+        "Hedef formül": "P = T · ω",
+        "Beklenen birim": "W (Watt)"
+      },
+      "outputs": {
+        "Hesaplanan güç, P": "7.500 W",
+        "Boyut kontrolü": "Geçti ([M]·[L]²·[T]⁻³)",
+        "Alternatif birimler": "7,5 kW | 10,06 hp"
+      },
+      "inputValues": {
+        "torque": 25,
+        "omega": 300
+      },
+      "expected": {
+        "powerWatts": 7500.0,
+        "powerKW": 7.5
+      },
+      "notes": [
+        "1 N·m × 1 rad/s = 1 (kg·m/s²·m) × (1/s) = 1 kg·m²/s³ = 1 Joule/s = 1 Watt.",
+        "Radyan (rad) SI birim sisteminde boyutsuz orandır; dönüşüm çarpanı olmadan doğrudan çarpılabilir."
+      ]
+    },
+    {
+      "title": "Hareketli taşıyıcı arabanın kinetik enerjisi",
+      "description": "Otomatik yönlendirmeli bir aracın (AGV) kütlesi m = 400 kg ve hızı v = 2,5 m/s iken kinetik enerji ve boyutsal tutarlılık kontrolü.",
+      "inputs": {
+        "Kütle, m": "400 kg",
+        "Hız, v": "2,5 m/s",
+        "Hedef formül": "E_k = 0.5 · m · v²",
+        "Beklenen birim": "J (Joule)"
+      },
+      "outputs": {
+        "Kinetik enerji, E_k": "1.250 J",
+        "Boyut kontrolü": "Geçti ([M]·[L]²·[T]⁻²)",
+        "Alternatif birimler": "1,25 kJ | 0,347 Wh"
+      },
+      "inputValues": {
+        "mass": 400,
+        "velocity": 2.5
+      },
+      "expected": {
+        "energyJoules": 1250.0,
+        "energyKJ": 1.25
+      },
+      "notes": [
+        "kg × (m/s)² = kg·m²/s² = (kg·m/s²)·m = N·m = Joule.",
+        "Boyutsal homojenlik ilkesi, enerjinin momentum veya güç ile doğrudan toplanamayacağını doğrular."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 80000-1",
+      "note": "Büyüklükler ve birimler — Bölüm 1: Genel. Temel fiziksel boyutları ve boyutsal homojenlik ilkelerini tanımlar."
+    },
+    {
+      "title": "ISO 80000-4",
+      "note": "Büyüklükler ve birimler — Bölüm 4: Mekanik. Kuvvet, tork, iş, enerji ve güç için tutarlı SI türetilmiş birimlerini belirler."
+    },
+    {
+      "title": "NIST Özel Yayını 811",
+      "note": "Uluslararası Birimler Sistemi (SI) Kullanım Kılavuzu — Birim dönüşümleri, önekler ve boyut tutarlılığı kuralları."
+    }
+  ],
+  "commonMistakes": [
+    "Dönme hızını rpm cinsinden alıp (2π/60) çarpanını uygulamadan doğrudan rad/s gibi kullanmak — yaklaşık 9,55 kat hataya neden olur.",
+    "Boyutları uyumsuz büyüklükleri toplamaya çalışmak (örn. N cinsinden kuvvet ile bar cinsinden basıncı toplamak).",
+    "Termodinamik gaz yasalarında efektif (manometre) basıncı (barg) mutlak basınç (bara) ile karıştırmak."
+  ],
+  "assumptions": [
+    "Değerlendirmeler tutarlı SI temel boyutlarını izler: uzunluk [m], kütle [kg], zaman [s], akım [A], sıcaklık [K], madde miktarı [mol], ışık şiddeti [cd].",
+    "ISO 80000-1 uyarınca radyan cinsinden açılar boyutsuz oran (m/m = 1) olarak kabul edilir.",
+    "Bu araç formül boyutsal tutarlılığını ve birim dönüşümünü doğrular; yapısal gerilme veya sonlu elemanlar analizinin yerini almaz."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Piston çapını ve kurs (strok) boyunu milimetre (mm) cinsinden girin.",
+    "Silindir sayısını girin (tam sayı ≥ 1).",
+    "Tek etkili (devir başına tek strokta sıkıştırma) veya çift etkili (hem ileri hem geri strokta sıkıştırma) seçeneğini belirleyin.",
+    "Çalışma devrini rpm (devir/dakika) olarak girin.",
+    "Tahmini hacimsel verimi (%1–120) girin. Pistonlu kompresörler nominal koşullarda tipik olarak %65–85 verimle çalışır.",
+    "Geometrik süpürme hacmini (cc/devir, L/devir), geometrik debiyi (L/dak) ve verim düzeltmeli efektif debiyi (L/dak) inceleyin."
+  ],
+  "formula": "V_geom = (π/4) · D² · S · n_cyl · f_act | Q_geom = V_geom [L/rev] · rpm | Q_adj = Q_geom · (η_v / 100) | f_act = 1 (tek etkili), 2 (çift etkili)",
+  "examples": [
+    {
+      "title": "Tek kademeli tek etkili kompresör",
+      "description": "80 mm piston çapına ve 60 mm kurs boyuna sahip tek silindirli, tek etkili kompresör; 1.450 rpm devirde %80 hacimsel verimle çalışmaktadır.",
+      "inputs": {
+        "Piston çapı, D": "80 mm",
+        "Kurs boyu, S": "60 mm",
+        "Silindir sayısı": "1",
+        "Devir": "1.450 rpm",
+        "Hacimsel verim": "%80",
+        "Etki tipi": "Tek etkili"
+      },
+      "outputs": {
+        "Geometrik süpürme hacmi": "301,6 cc/devir",
+        "Geometrik süpürme hacmi": "0,302 L/devir",
+        "Geometrik debi": "436,8 L/dak",
+        "Düzeltilmiş debi": "349,4 L/dak"
+      },
+      "inputValues": {
+        "bore": "80",
+        "stroke": "60",
+        "cylinders": "1",
+        "rpm": "1450",
+        "volumetricEff": "80",
+        "acting": "single"
+      },
+      "expected": {
+        "geometricDisplacementCcPerRev": 301.5929,
+        "geometricFlowLMin": 436.8097,
+        "efficiencyAdjustedFlowLMin": 349.4478
+      },
+      "notes": [
+        "V = π/4 × 80² × 60 × 1 × 1 = 301.593 mm³ ≈ 301,59 cc/devir.",
+        "İdeal geometrik debi 436,8 L/dak iken %80 hacimsel verimle gerçek hava debisi 349,4 L/dak olmaktadır."
+      ]
+    },
+    {
+      "title": "İki silindirli çift etkili kompresör",
+      "description": "100 mm çapında, 80 mm stroklu iki silindirli çift etkili kompresör; 960 rpm devirde %75 hacimsel verimle çalışmaktadır.",
+      "inputs": {
+        "Piston çapı, D": "100 mm",
+        "Kurs boyu, S": "80 mm",
+        "Silindir sayısı": "2",
+        "Devir": "960 rpm",
+        "Hacimsel verim": "%75",
+        "Etki tipi": "Çift etkili"
+      },
+      "outputs": {
+        "Geometrik süpürme hacmi": "1.256,6 cc/devir",
+        "Geometrik süpürme hacmi": "1,257 L/devir",
+        "Geometrik debi": "1.206,4 L/dak",
+        "Düzeltilmiş debi": "904,8 L/dak"
+      },
+      "inputValues": {
+        "bore": "100",
+        "stroke": "80",
+        "cylinders": "2",
+        "rpm": "960",
+        "volumetricEff": "75",
+        "acting": "double"
+      },
+      "expected": {
+        "geometricDisplacementCcPerRev": 1256.6371,
+        "geometricFlowLMin": 1206.3716,
+        "efficiencyAdjustedFlowLMin": 904.7787
+      },
+      "notes": [
+        "Çift etkili modda ideal f_act = 2 çarpanı kullanılır; piston mili kesit alanı düşülmemiştir.",
+        "Mil kesiti düşülmüş net debi için üretici teknik kataloğuna başvurulmalıdır."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 1217",
+      "note": "Hacimsel deplasmanlı kompresörler — Kabul deneyleri (Displacement compressors — Acceptance tests)."
+    },
+    {
+      "title": "CAGI El Kitabı",
+      "note": "Basınçlı Hava ve Gaz Enstitüsü (CAGI): Pozitif deplasmanlı kompresörler mühendislik başvuru kılavuzu."
+    },
+    {
+      "title": "Termodinamik: Mühendislik Yaklaşımıyla",
+      "note": "Çengel & Boles — Pistonlu kompresörlerde süpürme hacmi ve hacimsel verim analizi."
+    }
+  ],
+  "commonMistakes": [
+    "Geometrik süpürme debisini, ölü hacim ve basınç oranı kayıplarını dikkate almadan Serbest Hava Debisi (FAD) ile eşit kabul etmek.",
+    "Çift etkili silindirlerde krank tarafındaki piston mili hacmini düşmeyi unutarak tam 2 kat debi çıkacağını varsaymak.",
+    "Dönme hızını rpm yerine rad/s veya Hz cinsinden girmek."
+  ],
+  "assumptions": [
+    "Geometrik süpürme hacmi ideal dairesel silindir hacmine dayalıdır.",
+    "Çift etkili modda her iki yüzey alanı eşit kabul edilir; piston mili kesiti düşülmemiştir.",
+    "Hacimsel verim geometrik debi üzerine skaler bir çarpım faktörü olarak uygulanır.",
+    "Giriş havası basınç, sıcaklık ve bağıl nem düzeltmeleri bu geometrik modelde ihmal edilmiştir."
+  ]
+}

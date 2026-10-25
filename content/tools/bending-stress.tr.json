@@ -1,0 +1,121 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Basit mesnetli kiriş boyunu (mm) ve orta noktaya etki eden tekil kuvveti (kN) girin.",
+    "Kesit geometrisini seçin: Dikdörtgen kesit (genişlik b × yükseklik h) veya dolu dairesel kesit (çap d).",
+    "Malzemenin elastisite modülünü E (MPa) ve akma mukavemetini Re (MPa) girin. Yapı çelikleri için tipik değerler 210.000 MPa ve 355 MPa'dır.",
+    "Araç; maksimum eğilme momentini, kesit mukavemet momentini, atalet momentini, eğilme gerilmesini, orta nokta sehmini ve statik güvenlik katsayısını hesaplar."
+  ],
+  "formula": "M_max = F·L / 4 | σ = M_max / W | W_rect = b·h² / 6 | W_circle = π·d³ / 32 | I_rect = b·h³ / 12 | I_circle = π·d⁴ / 64 | δ_max = F·L³ / (48·E·I) | n = Re / σ",
+  "examples": [
+    {
+      "title": "Orta noktasından yüklü basit mesnetli dikdörtgen çelik kiriş",
+      "description": "40 × 8 mm dikdörtgen kesitli ve 500 mm boyundaki çelik kiriş, açıklık ortasında 2 kN tekil yüke maruz kalmaktadır. Malzeme: S355 (Re = 355 MPa, E = 210.000 MPa).",
+      "inputs": {
+        "Kiriş boyu, L": "500 mm",
+        "Kuvvet, F": "2 kN",
+        "Kesit tipi": "Dikdörtgen",
+        "Genişlik, b": "40 mm",
+        "Yükseklik, h": "8 mm",
+        "Elastisite modülü, E": "210.000 MPa",
+        "Akma mukavemeti, Re": "355 MPa"
+      },
+      "outputs": {
+        "Maksimum eğilme momenti, M_max": "0.250 kN·m",
+        "Atalet momenti, I": "1.707 × 10³ mm⁴",
+        "Mukavemet momenti, W": "426.7 mm³",
+        "Eğilme gerilmesi, σ": "586 MPa",
+        "Orta nokta sehmi, δ": "0.93 mm",
+        "Güvenlik katsayısı, n": "0.61"
+      },
+      "inputValues": {
+        "beamLengthMm": "500",
+        "forcekN": "2",
+        "sectionType": "rect",
+        "widthMm": "40",
+        "heightMm": "8",
+        "youngModulus": "210000",
+        "yieldStrength": "355"
+      },
+      "expected": {
+        "maxMoment": 250000,
+        "inertia": 1706.6667,
+        "sectionModulus": 426.6667,
+        "sigma": 585.9375,
+        "deflection": 0.9275,
+        "safety": 0.6059
+      },
+      "notes": [
+        "σ > Re durumu güvenlik katsayısının < 1.0 olmasına neden olur; kesit uygulanan yük altında yetersizdir ve plastik deformasyona uğrar.",
+        "Kiriş yüksekliğinin (h) artırılması atalet momentini kübik, mukavemet momentini ise karesel oranda büyütür."
+      ]
+    },
+    {
+      "title": "Basit mesnetli dolu dairesel çelik mil",
+      "description": "30 mm çapa ve 300 mm mesnet aralığına sahip çelik mil açıklık ortasında 0.5 kN yük taşımaktadır. Malzeme: C45 ıslah çeliği (Re = 600 MPa, E = 210.000 MPa).",
+      "inputs": {
+        "Kiriş boyu, L": "300 mm",
+        "Kuvvet, F": "0.5 kN",
+        "Kesit tipi": "Dairesel",
+        "Çap, d": "30 mm",
+        "Elastisite modülü, E": "210.000 MPa",
+        "Akma mukavemeti, Re": "600 MPa"
+      },
+      "outputs": {
+        "Maksimum eğilme momenti, M_max": "0.038 kN·m",
+        "Atalet momenti, I": "3.976 × 10⁴ mm⁴",
+        "Mukavemet momenti, W": "2.651 mm³",
+        "Eğilme gerilmesi, σ": "14.1 MPa",
+        "Orta nokta sehmi, δ": "0.0054 mm",
+        "Güvenlik katsayısı, n": "42.4"
+      },
+      "inputValues": {
+        "beamLengthMm": "300",
+        "forcekN": "0.5",
+        "sectionType": "circle",
+        "widthMm": "30",
+        "heightMm": "30",
+        "youngModulus": "210000",
+        "yieldStrength": "600"
+      },
+      "expected": {
+        "maxMoment": 37500,
+        "inertia": 39760.782,
+        "sectionModulus": 2650.7188,
+        "sigma": 14.147,
+        "deflection": 0.00536,
+        "safety": 42.41
+      },
+      "notes": [
+        "Yüksek statik güvenlik katsayısı yeterli statik eğilme kapasitesini gösterir; dinamik çalışma koşullarında yorulma ömrü ayrıca kontrol edilmelidir.",
+        "Dairesel kesitlerde hesaplama doğrudan çap (d) girdisi üzerinden yürütülür."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "EN 1993-1-1 (Eurocode 3)",
+      "note": "Çelik Yapıların Tasarımı — Bölüm 1-1: Genel kurallar ve binalar için kurallar."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Budynas & Nisbett, McGraw-Hill — Bölüm 5: Statik Yükleme Sonucu Oluşan Hasarlar."
+    },
+    {
+      "title": "Cisimlerin Mukavemeti (Mechanics of Materials)",
+      "note": "R.C. Hibbeler — Elastik eğilme formülü, kesit mukavemet momenti ve kiriş sehim denklemleri."
+    }
+  ],
+  "commonMistakes": [
+    "Mukavemet momenti hesabında en dış lif mesafesi (c = h/2) yerine toplam kiriş yüksekliğini kullanmak.",
+    "Birim uyumsuzluğu: Kiriş açıklığını metre cinsinden girip kesit boyutlarını milimetre bırakmak ve kuvvet dönüşümünü atlamak.",
+    "Yalnızca statik eğilme gerilmesini kontrol edip sehim limitlerini, yanal burulmalı burkulmayı ve çevrimsel yorulmayı göz ardı etmek."
+  ],
+  "assumptions": [
+    "Kiriş iki uçtan basit mesnetlenmiş olup açıklık ortasında tekil odaklanmış yüke maruzdur.",
+    "Hooke kanununa uygun lineer elastik malzeme davranışı; plastik şekil değişimi oluşmaz.",
+    "Euler-Bernoulli kiriş teorisi gereğince narin kiriş geometrisi geçerlidir (L/h ≥ 10 açıklık/yükseklik oranı).",
+    "Kirişin kendi öz ağırlığı uygulanan yüke kıyasla ihmal edilebilir mertebededir."
+  ]
+}

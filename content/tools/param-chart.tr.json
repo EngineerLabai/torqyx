@@ -1,0 +1,90 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Lineer yay rijitliğini k N/m cinsinden girin (örn. 500 N/m).",
+    "Maksimum yer değiştirme (çökme) miktarını x_max milimetre (mm) cinsinden girin.",
+    "Hesaplanacak adım sayısını (adım ≥ 2) belirleyin.",
+    "Hooke kanununa dayalı kuvvet–yer değiştirme eğrisini ve adım adım sayısal sonuç tablosunu inceleyin."
+  ],
+  "formula": "F = k · x | x [m] = x_mm / 1000 | Adım boyutu = x_max / (adım − 1)",
+  "examples": [
+    {
+      "title": "6 değerlendirme adımlı geri çekme yayı",
+      "description": "500 N/m rijitliğe sahip bir yay, 6 eşit aralıklı nokta boyunca 20 mm sıkıştırılmaktadır.",
+      "inputs": {
+        "Yay rijitliği, k": "500 N/m",
+        "Maksimum yer değiştirme": "20 mm",
+        "Adım sayısı": "6"
+      },
+      "outputs": {
+        "Adım boyutu": "4 mm",
+        "Maksimum kuvvet": "10 N",
+        "20 mm'deki kuvvet F": "10 N"
+      },
+      "inputValues": {
+        "stiffness": "500",
+        "maxDisplacement": "20",
+        "steps": "6"
+      },
+      "expected": {
+        "maxForce": 10.0,
+        "stepSize": 4.0
+      },
+      "notes": [
+        "F_max = 500 N/m × (20/1000) m = 10 N.",
+        "Adım aralığı = 20 mm / (6 - 1) = 4 mm / nokta."
+      ]
+    },
+    {
+      "title": "Endüstriyel basma yayı",
+      "description": "k = 8.000 N/m rijitliğindeki ağır hizmet basma yayı 50 mm sıkıştırılmakta ve 11 adımda incelenmektedir.",
+      "inputs": {
+        "Yay rijitliği, k": "8.000 N/m",
+        "Maksimum yer değiştirme": "50 mm",
+        "Adım sayısı": "11"
+      },
+      "outputs": {
+        "Adım boyutu": "5 mm",
+        "Maksimum kuvvet": "400 N"
+      },
+      "inputValues": {
+        "stiffness": "8000",
+        "maxDisplacement": "50",
+        "steps": "11"
+      },
+      "expected": {
+        "maxForce": 400.0,
+        "stepSize": 5.0
+      },
+      "notes": [
+        "F_max = 8.000 N/m × 0,050 m = 400 N.",
+        "Lineer Hooke kanunu yaklaşımı yayın blok boyu (tam kapanma) sınırları altında kalınmasını gerektirir."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "EN 13906-1",
+      "note": "Yuvarlak tel ve çubuktan yapılmış silindirik helisel yaylar — Hesaplama ve tasarım — Bölüm 1: Basma yayları."
+    },
+    {
+      "title": "Mechanical Springs",
+      "note": "A.M. Wahl, McGraw-Hill — Yay katsayısı, gerilme yığılması ve sehim teorisi."
+    },
+    {
+      "title": "Shigley's Mechanical Engineering Design",
+      "note": "Budynas & Nisbett — Bölüm 10: Mekanik Yaylar."
+    }
+  ],
+  "commonMistakes": [
+    "Yer değiştirmeyi milimetre girerken rijitliği N/mm yerine N/m birim karmaşasıyla yanlış hesaplamak.",
+    "Yayın fiziksel blok boyunu (tüm sarımların birbirine temas ettiği boy) aşan yer değiştirmeler talep etmek.",
+    "Progresif veya kademeli sertleşen lineer olmayan yaylara sabit katsayılı Hooke kanunu uygulamak."
+  ],
+  "assumptions": [
+    "Tüm yer değiştirme aralığında ideal lineer elastik davranış (Hooke kanunu) geçerlidir.",
+    "Sıfır yer değiştirmede başlangıç ön yükü sıfır kabul edilmiştir.",
+    "Histerezis kayıpları, sıcaklık etkisiyle elastisite düşüşü ve sönümleme ihmal edilmiştir."
+  ]
+}

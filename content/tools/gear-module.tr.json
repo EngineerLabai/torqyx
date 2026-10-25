@@ -1,0 +1,98 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Gerekli taksimat dairesi çapını D (mm) ve diş sayısını Z girin. Araç ham modülü m = D / Z olarak hesaplar ve ISO 54 / DIN 780 serisinden en yakın standart modülü bulur.",
+    "Önerilen standart modülü, düzeltilmiş taksimat çapını ve sapma yüzdesini inceleyin. %2–3 üzerindeki sapmalar genellikle eksen mesafesi veya diş sayısı revizyonu gerektirir.",
+    "Alttan kesme (undercut) riskini kontrol edin. 20° kavrama açısına sahip standart evolvent dişlilerde Z < 17 durumunda alttan kesme riski doğar."
+  ],
+  "formula": "m_ham = D / Z | m_std = ISO serisinden en yakın değer | D_std = m_std × Z | sapma = |D_std − D| / D × %100",
+  "examples": [
+    {
+      "title": "Taksimat çapından düz dişli tasarımı",
+      "description": "Bir redüktör pinyon dişlisi için 60 mm taksimat çapı ve 20 diş hedeflenmiştir. Standart modül seçimi yapınız.",
+      "inputs": {
+        "Taksimat çapı, D": "60 mm",
+        "Diş sayısı, Z": "20"
+      },
+      "outputs": {
+        "Ham modül, m_ham": "3,000",
+        "Standart modül, m_std": "3",
+        "Standart taksimat çapı": "60 mm",
+        "Sapma": "%0,00",
+        "Alttan kesme riski (Z < 17)": "Yok"
+      },
+      "inputValues": {
+        "diameter": "60",
+        "teeth": "20"
+      },
+      "expected": {
+        "mRaw": 3.0,
+        "pitchDiameter": 60.0,
+        "suggestedM": 3,
+        "suggestedDiameter": 60,
+        "diffPercent": 0.0,
+        "approximateUndercutRisk": false
+      },
+      "notes": [
+        "m = 60 / 20 = 3,000 — ISO standart serisiyle tam örtüşmektedir; hiçbir geometrik sapma oluşmaz.",
+        "ISO 54 öncelikli standart modül serisi: 0.5, 0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20."
+      ]
+    },
+    {
+      "title": "Alttan kesme riski taşıyan küçük pinyon dişli",
+      "description": "Kompakt bir tahrik mekanizmasında 28 mm taksimat çapında Z = 14 diş hedeflenmiştir. Modül ve alttan kesme riskini değerlendiriniz.",
+      "inputs": {
+        "Taksimat çapı, D": "28 mm",
+        "Diş sayısı, Z": "14"
+      },
+      "outputs": {
+        "Ham modül, m_ham": "2,000",
+        "Standart modül, m_std": "2",
+        "Standart taksimat çapı": "28 mm",
+        "Sapma": "%0,00",
+        "Alttan kesme riski (Z < 17)": "Var"
+      },
+      "inputValues": {
+        "diameter": "28",
+        "teeth": "14"
+      },
+      "expected": {
+        "mRaw": 2.0,
+        "pitchDiameter": 28.0,
+        "suggestedM": 2,
+        "suggestedDiameter": 28,
+        "diffPercent": 0.0,
+        "approximateUndercutRisk": true
+      },
+      "notes": [
+        "Z = 14 < 17 durumu 20° standart kavrama açısında alttan kesme riski uyarısını tetikler.",
+        "Önlemler: Pozitif profil kaydırma (x > 0), kavrama açısının 25°'ye çıkarılması veya diş sayısının artırılması."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ISO 54",
+      "note": "Silindirik dişliler — Standart modül serileri ve hassasiyet sistemi."
+    },
+    {
+      "title": "DIN 780",
+      "note": "Dişliler için modül serileri (Modulreihe für Zahnräder) — Avrupa makine imalatında temel referans normu."
+    },
+    {
+      "title": "ISO 53",
+      "note": "Genel ve ağır makine mühendisliği için silindirik dişliler — Standart temel kremayer diş profili (20° kavrama açısı)."
+    }
+  ],
+  "commonMistakes": [
+    "Standart dışı bir modül seçmek (örn. m = 2,8) — bu durum özel azdırma çakısı gerektirerek imalat maliyetini katlar.",
+    "Düşük diş sayılarında alttan kesme riskini göz ardı edip diş dibinin zayıflamasına ve diş kırılmasına yol açmak.",
+    "Taksimat dairesi çapı (D) ile diş üstü çapını karıştırmak — standart profilde diş üstü çapı Da = m × (Z + 2)'dir."
+  ],
+  "assumptions": [
+    "ISO 53 normuna uygun 20° kavrama açısına sahip standart evolvent diş profili.",
+    "Profil kaydırma uygulanmamıştır (profil kaydırma katsayısı x = 0).",
+    "Z < 17 alttan kesme eşiği 20° standart kavrama açısı için yaklaşık sınırdır; kesin sınır profil kaydırmaya bağlıdır."
+  ]
+}

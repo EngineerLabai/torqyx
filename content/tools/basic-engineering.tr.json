@@ -1,0 +1,92 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-10-25",
+  "howTo": [
+    "Malzemenin ısıl iletkenliğini k girin (W/m·K). Referans değerler: Çelik ≈ 45–50, alüminyum ≈ 160–210, bakır ≈ 385, beton ≈ 0,8–1,4.",
+    "Isı akışına dik kesit alanını A (m²), malzeme üzerindeki sıcaklık farkını ΔT (K veya °C) ve ısı akışı yönündeki kalınlığı L (m) girin.",
+    "Araç, kararlı rejim ısı akış debisini Q (W) ve ısıl direnci R (K/W) hesaplar. Mühendislik değerlendirmesi yapmadan önce tüm girdilerin SI birimlerinde tutarlı olduğunu doğrulayın."
+  ],
+  "formula": "Q = k · A · ΔT / L | R = L / (k · A) | Q = ΔT / R",
+  "examples": [
+    {
+      "title": "Çelik duvar, endüstriyel fırın paneli",
+      "description": "10 mm kalınlığındaki yumuşak çelik plakada, iki yüzey arasında 30 K sıcaklık farkı altındaki kararlı rejim ısı kaybı hesabı.",
+      "inputs": {
+        "Isıl iletkenlik, k": "45 W/m·K",
+        "Kesit alanı, A": "0,02 m²",
+        "Sıcaklık farkı, ΔT": "30 K",
+        "Kalınlık, L": "0,01 m"
+      },
+      "outputs": {
+        "Isı akış debisi, Q": "2.700,0000 W",
+        "Isıl direnç, R": "0,0111 K/W"
+      },
+      "inputValues": {
+        "conductivity": "45",
+        "area": "0.02",
+        "deltaT": "30",
+        "thickness": "0.01"
+      },
+      "expected": {
+        "Q": 2700.0,
+        "R": 0.011111
+      },
+      "notes": [
+        "Q = 45 × 0,02 × 30 / 0,01 = 2.700 W. Isıl iletkenlik değerini gerçek malzeme kalitesi ve çalışma sıcaklığına göre doğrulayın.",
+        "Bu hesaplama tek boyutlu, kararlı rejim yaklaşımıdır; kenar etkileri, yüzey taşınımı (konveksiyon) ve ışınım (radyasyon) dahil değildir."
+      ]
+    },
+    {
+      "title": "Beton duvar, bina enerji analizi",
+      "description": "15 K iç-dış sıcaklık farkı altındaki 200 mm kalınlığında, 1 m² alana sahip beton duvar paneli.",
+      "inputs": {
+        "Isıl iletkenlik, k": "1,2 W/m·K",
+        "Kesit alanı, A": "1,0 m²",
+        "Sıcaklık farkı, ΔT": "15 K",
+        "Kalınlık, L": "0,2 m"
+      },
+      "outputs": {
+        "Isı akış debisi, Q": "90,0000 W",
+        "Isıl direnç, R": "0,1667 K/W"
+      },
+      "inputValues": {
+        "conductivity": "1.2",
+        "area": "1.0",
+        "deltaT": "15",
+        "thickness": "0.2"
+      },
+      "expected": {
+        "Q": 90.0,
+        "R": 0.16667
+      },
+      "notes": [
+        "Q = 1,2 × 1,0 × 15 / 0,2 = 90 W. Gerçek yapı duvarları çok katmanlıdır; kompozit duvarlarda ısıl dirençlerin toplamı (R_toplam = R1 + R2 + …) kullanılmalıdır.",
+        "Nem oranı beton ve kargir yapılarda k değerini önemli ölçüde artırır. Standart uygunluk hesaplarında sertifikalı laboratuvar verileri kullanılmalıdır."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "Fourier Isı İletim Yasası",
+      "note": "Q = −k A (dT/dx). Araç, düzlem plaka için tek boyutlu, kararlı rejim eşitliğini uygular."
+    },
+    {
+      "title": "ISO 10456",
+      "note": "Yapı malzemeleri ve ürünleri — Beyan edilen ve tasarım ısıl değerlerinin belirlenmesi kuralları."
+    },
+    {
+      "title": "Incropera & DeWitt — Isı ve Kütle Geçişinin Temelleri",
+      "note": "İletim, taşınım ve ışınım temelleri için uluslararası standart ders kitabı referansı."
+    }
+  ],
+  "commonMistakes": [
+    "Alanı m² yerine cm² cinsinden girerek sonucu 10.000 kat daha küçük bulmak.",
+    "Kalınlığı m yerine mm cinsinden girerek ısı debisini 1.000 kat fazla hesaplamak.",
+    "Çok katmanlı kompozit duvarlarda katman ara yüzey temas dirençlerini ve bireysel katman dirençlerini hesaba katmadan tek katman formülü uygulamak."
+  ],
+  "assumptions": [
+    "Düzlem, homojen bir plaka boyunca tek boyutlu kararlı rejim iletimi.",
+    "Isıl iletkenlik k, belirtilen sıcaklık aralığında sabit ve sıcaklıktan bağımsız kabul edilmiştir.",
+    "Yüzey ısı taşınım katsayıları (konveksiyon, radyasyon) dahil edilmemiştir; sonuç yalnızca katı içi iletim yolunu kapsar."
+  ]
+}
