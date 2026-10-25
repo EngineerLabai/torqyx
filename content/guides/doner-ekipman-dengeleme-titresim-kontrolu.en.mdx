@@ -1,9 +1,17 @@
 ---
-title: "Rotating equipment balancing and vibration control"
-description: "Rotor static and dynamic balancing, ISO 21940 balance quality grades, ISO 20816 vibration severity levels, and resonance mitigation guide."
-date: "2026-05-09"
-tags: ["vibration", "resonance", "balance", "ISO 21940", "ISO 20816", "rotordynamics"]
-category: "Maintenance"
+title: Rotating equipment balancing and vibration control
+description: >-
+  Rotor static and dynamic balancing, ISO 21940 balance quality grades, ISO
+  20816 vibration severity levels, and resonance mitigation guide.
+date: '2026-05-09'
+tags:
+  - vibration
+  - resonance
+  - balance
+  - ISO 21940
+  - ISO 20816
+  - rotordynamics
+category: Maintenance
 draft: false
 readingTime: 9
 ---
@@ -14,53 +22,63 @@ This guide provides practical methodologies to verify rotor unbalance and evalua
 
 ## Problem / Objective
 
-In rotating machinery, any offset between the center of mass and the geometric axis of rotation generates centrifugal forces proportional to the square of rotational speed ($F_c \propto \omega^2$). Left unmitigated, unbalance forces cause:
+In rotating machinery, any offset between the center of mass and the geometric axis of rotation generates centrifugal forces proportional to the square of rotational speed (`F_c propto ω^2`). Left unmitigated, unbalance forces cause:
 - Rapid depletion of bearing L10 life and premature fatigue spalling,
 - Bolt loosening, keyway fretting, and structural fatigue cracking at foundation supports,
 - Destructive resonance and catastrophic shaft deflection when forcing frequencies align with system natural frequencies.
 
 ## Assumptions
 
-- The rotor behaves as a rigid body operating safely below its first critical bending speed ($n_{operating} < 0.70 \cdot n_{critical}$).
+- The rotor behaves as a rigid body operating safely below its first critical bending speed (`n_operating &lt; 0.70  *  n_critical`).
 - Bearing housings and support structures provide symmetric, linear stiffness characteristics.
-- Vibration velocity is measured as RMS ($v_{rms}$) across the standard 10 Hz to 1000 Hz frequency range according to ISO 20816-1.
+- Vibration velocity is measured as RMS (`v_rms`) across the standard 10 Hz to 1000 Hz frequency range according to ISO 20816-1.
 
 ## Step by step method
 
 1. **Select Balancing Mode Based on Rotor Geometry:**
-   - **Single-Plane (Static Balancing):** For disc-shaped rotors where length-to-diameter ratio is small ($L/D < 0.20$ and $n < 1000\text{ rpm}$), such as narrow pulleys, flywheels, and grinding wheels.
-   - **Dual-Plane (Dynamic Balancing):** For elongated cylindrical rotors ($L/D \ge 0.20$ or higher operating speeds), such as electric motor armatures, multi-stage pump impellers, and industrial fans.
+   - **Single-Plane (Static Balancing):** For disc-shaped rotors where length-to-diameter ratio is small (`L/D &lt; 0.20` and `n &lt; 1000  rpm`), such as narrow pulleys, flywheels, and grinding wheels.
+   - **Dual-Plane (Dynamic Balancing):** For elongated cylindrical rotors (`L/D  >=  0.20` or higher operating speeds), such as electric motor armatures, multi-stage pump impellers, and industrial fans.
 
-2. **Determine the ISO 21940-11 Balance Quality Grade ($G$):**
+2. **Determine the ISO 21940-11 Balance Quality Grade (`G`):**
    - **G6.3:** Standard industrial fans, gearbox shafts, agricultural equipment.
    - **G2.5:** Electric motors, machine tool spindles, gas/steam turbines, process compressors.
    - **G1.0:** High-precision grinding spindles, gyroscopes, turbocharger components.
 
-3. **Calculate Permissible Residual Unbalance ($U_{per}$):**
-   With total rotor mass $m$ [$\text{kg}$] and angular velocity $\omega = \frac{2\pi \cdot n}{60}$ [$\text{rad/s}$]:
-   $$U_{per} = 1000 \cdot \frac{G \cdot m}{\omega} \quad [\text{g}\cdot\text{mm}]$$
-   For dual-plane balancing, distribute $U_{per}$ between the two correction planes based on distance from the center of gravity ($U_1 = U_2 = U_{per} / 2$ for symmetric rotors).
+3. **Calculate Permissible Residual Unbalance (`U_per`):**
+   With total rotor mass `m` [`kg`] and angular velocity `ω = (2pi  *  n / 60)` [`rad/s`]:
+   
+`U_per = 1000  *  (G  *  m / ω)   [ g  *  mm ]`
+
+   For dual-plane balancing, distribute `U_per` between the two correction planes based on distance from the center of gravity (`U_1 = U_2 = U_per / 2` for symmetric rotors).
 
 4. **Quantify Unbalance Dynamic Centrifugal Force:**
    The cyclic force transmitted into radial bearings is:
-   $$F_c = m_u \cdot r \cdot \omega^2 = \frac{U_{per}}{1000} \cdot \omega^2 \quad [\text{N}]$$
+   
+`F_c = m_u  *  r  *  ω^2 = fracU_per1000  *  ω^2   [ N ]`
+
 
 5. **Evaluate ISO 20816 Vibration Severity Zones:**
-   Evaluate overall bearing housing RMS velocity ($v_{rms}$ [$\text{mm/s}$]):
-   - **Zone A (New Machine / Commissioning):** $v_{rms} < 1.4\text{ mm/s}$ (Medium industrial motors)
-   - **Zone B (Unrestricted Long-Term Operation):** $1.4 \le v_{rms} \le 2.8\text{ mm/s}$
-   - **Zone C (Restricted Operation / Plan Maintenance):** $2.8 < v_{rms} \le 4.5\text{ mm/s}$
-   - **Zone D (Unacceptable / Immediate Shutdown):** $v_{rms} > 4.5\text{ mm/s}$
+   Evaluate overall bearing housing RMS velocity (`v_rms` [`mm/s`]):
+   - **Zone A (New Machine / Commissioning):** `v_rms &lt; 1.4  mm/s` (Medium industrial motors)
+   - **Zone B (Unrestricted Long-Term Operation):** `1.4  <=  v_rms  <=  2.8  mm/s`
+   - **Zone C (Restricted Operation / Plan Maintenance):** `2.8 &lt; v_rms  <=  4.5  mm/s`
+   - **Zone D (Unacceptable / Immediate Shutdown):** `v_rms > 4.5  mm/s`
 
 6. **Industrial Worked Example:**
-   An industrial electric motor rotor with mass $m = 60\text{ kg}$ operates at $n = 3000\text{ rpm}$. The target balancing grade is G2.5:
-   - Angular velocity: $\omega = \frac{2\pi \times 3000}{60} = \mathbf{314.16\text{ rad/s}}$
+   An industrial electric motor rotor with mass `m = 60  kg` operates at `n = 3000  rpm`. The target balancing grade is G2.5:
+   - Angular velocity: `ω = (2pi  *  3000 / 60) = mathbf314.16  rad/s`
    - Maximum permissible residual unbalance:
-     $$U_{per} = 1000 \cdot \frac{2.5 \times 60}{314.16} = \mathbf{477.5\text{ g}\cdot\text{mm}}$$
+     
+`U_per = 1000  *  (2.5  *  60 / 314.16) = mathbf477.5  g  *  mm`
+
    - Shared between two symmetrical balancing correction planes:
-     $$U_1 = U_2 = \frac{477.5}{2} = \mathbf{238.8\text{ g}\cdot\text{mm}}$$
-   - At a bolt correction radius of $r = 120\text{ mm}$, the permissible unbalance mass tolerance is:
-     $$m_{corr} = \frac{238.8}{120} = \mathbf{1.99\text{ grams}}$$
+     
+`U_1 = U_2 = (477.5 / 2) = mathbf238.8  g  *  mm`
+
+   - At a bolt correction radius of `r = 120  mm`, the permissible unbalance mass tolerance is:
+     
+`m_corr = (238.8 / 120) = mathbf1.99  grams`
+
 
 ## Common mistakes
 

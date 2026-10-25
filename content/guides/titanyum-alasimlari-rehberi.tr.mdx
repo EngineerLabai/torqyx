@@ -1,9 +1,17 @@
 ---
-title: "Titanyum alaşımları mühendislik rehberi: Ti-6Al-4V ve saf titanyum"
-description: "Ti-6Al-4V Grade 5 ve CP titanyum özellikleri, özgül mukavemet, CNC işlenebilirlik parametreleri, elastisite modülü ve korozyon direnci rehberi."
-date: "2026-05-09"
-tags: ["titanyum", "Ti-6Al-4V", "özgül dayanım", "hafif tasarım", "ASTM B348", "CNC işleme"]
-category: "Malzeme"
+title: 'Titanyum alaşımları mühendislik rehberi: Ti-6Al-4V ve saf titanyum'
+description: >-
+  Ti-6Al-4V Grade 5 ve CP titanyum özellikleri, özgül mukavemet, CNC
+  işlenebilirlik parametreleri, elastisite modülü ve korozyon direnci rehberi.
+date: '2026-05-09'
+tags:
+  - titanyum
+  - Ti-6Al-4V
+  - özgül dayanım
+  - hafif tasarım
+  - ASTM B348
+  - CNC işleme
+category: Malzeme
 draft: false
 readingTime: 9
 ---
@@ -16,52 +24,60 @@ Bu rehber, havacılık, savunma, kimya endüstrisi ve medikal implant uygulamala
 
 Hafifletme ve yüksek korozyon direncinin kritik olduğu projelerde titanyum cazip bir seçenektir. Ancak titanyumun mekanik ve termal davranışını tam kavramadan tasarım yapmak yüksek maliyet ve imalat krizlerine yol açar:
 - Çeliğe göre yarı yarıya düşük elastisite modülü sebebiyle mil ve konsollarda aşırı elastik sehim (deflection) ve titreşim,
-- Düşük ısıl iletkenlik ($k \approx 7\text{ W/m}\cdot\text{K}$) nedeniyle talaşlı imalatta kesici takım ucunda $1000\text{ °C}$'ye varan ısı birikimi ve anında takım aşınması,
+- Düşük ısıl iletkenlik (`k  ≈  7  W/m  *  K`) nedeniyle talaşlı imalatta kesici takım ucunda `1000  °C`'ye varan ısı birikimi ve anında takım aşınması,
 - Alüminyum veya çelikle temasta galvanik korozyon pili oluşumu ve sürtünmeli yüzeylerde şiddetli kaynama/yapışma (galling) hasarı.
 
 ## Varsayımlar
 
 - Alaşım Grade 5 (Ti-6Al-4V / W.Nr. 3.7165) tavlanmış (annealed) durumda kabul edilir.
-- Çalışma sıcaklığı $350 - 400\text{ °C}$ sınırını aşmaz (titanyum yüksek sıcaklıkta oksijen ve hidrojen kırılganlığına maruz kalır).
+- Çalışma sıcaklığı `350 - 400  °C` sınırını aşmaz (titanyum yüksek sıcaklıkta oksijen ve hidrojen kırılganlığına maruz kalır).
 - Karbon fiber takviyeli polimerler (CFRP) ile temas durumunda galvanik uyumluluk avantajı değerlendirilir.
 
 ## Adım adım yöntem
 
 1. **Titanyum Sınıfını Uygulama Amacına Göre Seçin:**
    - **Grade 1 - Grade 4 (Ticari Saf - CP Titanium):** Üstün korozyon direnci, yüksek süneklik, kimyasal kaplama kazanları, eşanjör plakaları.
-   - **Grade 5 (Ti-6Al-4V - $\alpha+\beta$ Alaşımı):** Yüksek akma mukavemeti ($R_e \ge 830\text{ MPa}$), havacılık yapısal elemanları, motor bağlantıları, medikal protezler.
+   - **Grade 5 (Ti-6Al-4V - `α+β` Alaşımı):** Yüksek akma mukavemeti (`R_e  >=  830  MPa`), havacılık yapısal elemanları, motor bağlantıları, medikal protezler.
    - **Grade 23 (Ti-6Al-4V ELI):** Çok düşük arayer elementi (Extra Low Interstitial), üstün kırılma tokluğu ve biyouyumluluk.
 
 2. **Özgül Mukavemet Karşılaştırmasını Yapın:**
-   Malzemelerin çekme mukavemeti ($R_m$) ile yoğunlukları ($\rho$) oranlandığında:
-   - AISI 4340 Çelik: $\sigma / \rho = \frac{1000\text{ MPa}}{7.85\text{ g/cm}^3} \approx 127\text{ kN}\cdot\text{m/kg}$
-   - Al 7075-T6: $\sigma / \rho = \frac{540\text{ MPa}}{2.81\text{ g/cm}^3} \approx 192\text{ kN}\cdot\text{m/kg}$
-   - Ti-6Al-4V Grade 5: $\sigma / \rho = \frac{950\text{ MPa}}{4.43\text{ g/cm}^3} \approx \mathbf{214\text{ kN}\cdot\text{m/kg}}$
+   Malzemelerin çekme mukavemeti (`R_m`) ile yoğunlukları (`ρ`) oranlandığında:
+   - AISI 4340 Çelik: `σ / ρ = (1000  MPa  / 7.85  g/cm ^3)  ≈  127  kN  *  m/kg`
+   - Al 7075-T6: `σ / ρ = (540  MPa  / 2.81  g/cm ^3)  ≈  192  kN  *  m/kg`
+   - Ti-6Al-4V Grade 5: `σ / ρ = (950  MPa  / 4.43  g/cm ^3)  ≈  mathbf214  kN  *  m/kg`
    Titanyum çeliğe göre **%40'a varan ağırlık tasarrufu** sağlar.
 
 3. **Düşük Elastisite Modülü Sehimini Kontrol Edin:**
    Çelik mil yerine titanyum kullanıldığında aynı geometri altında sehim iki katına çıkar:
-   $$f_{Ti} = \frac{E_{celik}}{E_{Ti}} \cdot f_{celik} \approx \frac{210\text{ GPa}}{110\text{ GPa}} \cdot f_{celik} \approx 1.91 \cdot f_{celik}$$
-   Rijitlik gerektiren şaftlarda titanyum kullanılıyorsa atalet momenti ($I$) kesit büyütülerek dengelenmelidir.
+   
+`f_Ti = fracE_celikE_Ti  *  f_celik  ≈  (210  GPa  / 110  GPa )  *  f_celik  ≈  1.91  *  f_celik`
+
+   Rijitlik gerektiren şaftlarda titanyum kullanılıyorsa atalet momenti (`I`) kesit büyütülerek dengelenmelidir.
 
 4. **CNC Talaşlı İmalat Parametrelerini Optimize Edin:**
-   - Düşük kesme hızı: $v_c = 40 - 70\text{ m/dak}$ (karbür takımlar ile).
-   - Yüksek ve sabit ilerleme: $f_z = 0.08 - 0.15\text{ mm/diş}$ (iş sertleşmesi tabakasının altına girmek için).
+   - Düşük kesme hızı: `v_c = 40 - 70  m/dak` (karbür takımlar ile).
+   - Yüksek ve sabit ilerleme: `f_z = 0.08 - 0.15  mm/diş` (iş sertleşmesi tabakasının altına girmek için).
    - Yüksek basınçlı soğutma: Minimum 20 - 70 bar kesme sıvısı doğrudan kesme kenarına yönlendirilmelidir.
 
 5. **Çözümlü Endüstriyel Tasarım Karşılaştırması:**
-   Bir havacılık bağlantı braketi 45 kN çekme kuvveti taşımaktadır ($S_g = 1.5$):
+   Bir havacılık bağlantı braketi 45 kN çekme kuvveti taşımaktadır (`S_g = 1.5`):
    - Gereken emniyetli kesit alanı:
-     $$A_{req} = \frac{45\,000 \times 1.5}{830\text{ MPa}} = \mathbf{81.3\text{ mm}^2}$$
+     
+`A_req = (45,000  *  1.5 / 830  MPa ) = mathbf81.3  mm ^2`
+
    - 200 mm uzunluğundaki çubuk gövdesinin kütlesi:
-     $$m_{Ti} = (81.3 \times 10^{-6}\text{ m}^2) \times 0.20\text{ m} \times 4430\text{ kg/m}^3 = \mathbf{0.072\text{ kg}}\ (72\text{ g})$$
-   - Aynı parça ıslah çeliğinden imal edilirse ($R_e = 600\text{ MPa}$, $\rho = 7850\text{ kg/m}^3$):
-     $$A_{req,celik} = \frac{67\,500}{600} = 112.5\text{ mm}^2 \implies m_{celik} = 112.5 \times 10^{-6} \times 0.20 \times 7850 = \mathbf{0.177\text{ kg}}\ (177\text{ g})$$
+     
+`m_Ti = (81.3  *  10^-6  m ^2)  *  0.20  m   *  4430  kg/m ^3 = mathbf0.072  kg  (72  g )`
+
+   - Aynı parça ıslah çeliğinden imal edilirse (`R_e = 600  MPa`, `ρ = 7850  kg/m ^3`):
+     
+`A_req,celik = (67,500 / 600) = 112.5  mm ^2 implies m_celik = 112.5  *  10^-6  *  0.20  *  7850 = mathbf0.177  kg  (177  g )`
+
    - *Tasarruf:* Parça başına 105 gram (%59.3) net hafifleme elde edilir.
 
 ## Sık hatalar
 
-- **Titanyumu Çelik Gibi Yüksek Hızda İşlemek:** $v_c > 100\text{ m/dak}$ hızlara çıkıldığında takım ucu aşırı ısınıp yanar veya iş parçasına kaynar.
+- **Titanyumu Çelik Gibi Yüksek Hızda İşlemek:** `v_c > 100  m/dak` hızlara çıkıldığında takım ucu aşırı ısınıp yanar veya iş parçasına kaynar.
 - **Yaylanmayı (Springback) Büküm Kalıbında İhmal Etmek:** Düşük elastisite modülü nedeniyle sac bükümünde geri yaylanma açısı çeliğin 2 katıdır.
 - **Dişli Bağlantılarda Kaynama (Galling) Koruması Yapmamak:** Titanyum cıvatanın titanyum somuna kuru takılması durumunda ilk sıkmada soğuk kaynak (seizure) gerçekleşir; MoS2 kaplama veya gümüş kaplama şarttır.
 - **Karbon Fiber ile Temasta Yanlış Malzeme Eşleştirmesi:** Alüminyum CFRP ile temas ettiğinde hızla korozyona uğrarken, titanyum elektrokimyasal potansiyeli sebebiyle karbon fiber ile mükemmel uyumludur.

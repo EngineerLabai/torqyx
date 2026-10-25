@@ -1,25 +1,34 @@
 ---
-title: "Kavitasyon"
-description: "Hidrolik sistemlerde kavitasyon mekanizması, buhar basıncı, çark kanadı erozyonu ve NPSH güvenlik payı hesabı."
-date: "2026-05-09"
-tags: ["kavitasyon","pompa","NPSH","buhar basıncı","akışkanlar"]
-category: "Akışkanlar"
+title: Kavitasyon
+description: >-
+  Hidrolik sistemlerde kavitasyon mekanizması, buhar basıncı, çark kanadı
+  erozyonu ve NPSH güvenlik payı hesabı.
+date: '2026-05-09'
+tags:
+  - kavitasyon
+  - pompa
+  - NPSH
+  - buhar basıncı
+  - akışkanlar
+category: Akışkanlar
 draft: false
 readingTime: 4
 ---
 
-Kavitasyon, hidrolik pompalarda, vanalarda ve boru hatlarında yerel statik basıncın akışkanın o sıcaklıktaki doymuş buhar basıncının ($P_v$) altına düşmesiyle mikroskobik buhar kabarcıklarının oluşması ve ardından yüksek basınç bölgesinde şiddetle patlayarak çökmesidir.
+Kavitasyon, hidrolik pompalarda, vanalarda ve boru hatlarında yerel statik basıncın akışkanın o sıcaklıktaki doymuş buhar basıncının (`P_v`) altına düşmesiyle mikroskobik buhar kabarcıklarının oluşması ve ardından yüksek basınç bölgesinde şiddetle patlayarak çökmesidir.
 
 ## Neden önemli?
 
-Buhar kabarcıklarının çökmesi sırasında oluşan mikro-jetler metal yüzeye $1000	ext{ MPa}$'yı aşan yerel darbe basınçları uygular. Bu durum pompa çark kanatlarında süngerimsi oyuklaşma (pitting), gürültü, şiddetli titreşim ve pompalama veriminin tamamen çökmesine yol açar.
+Buhar kabarcıklarının çökmesi sırasında oluşan mikro-jetler metal yüzeye `1000	ext MPa`'yı aşan yerel darbe basınçları uygular. Bu durum pompa çark kanatlarında süngerimsi oyuklaşma (pitting), gürültü, şiddetli titreşim ve pompalama veriminin tamamen çökmesine yol açar.
 
 ## Mühendislik uygulaması ve standartlar
 
-Kavitasyonu engellemek için sistemin net pozitif emme yüksekliği ($NPSH_A$) pompanın gerektirdiği değerden ($NPSH_R$) büyük olmalıdır:
-$$NPSH_A = rac{P_{ortam} - P_v}{ho cdot g} pm h_s - h_{f,emis} ge NPSH_R + 0.5dots 1.0	ext{ m}$$
-- **Emiş Borusu Boyutlandırma:** Emiş hattındaki akış hızı $1.0 - 1.2	ext{ m/s}$ ile sınırlandırılmalı, emiş filtresi ve dirsek sürtünme kayıpları en aza indirilmelidir.
-- **Sıcaklık Kontrolü:** Akışkan sıcaklığı arttıkça buhar basıncı üstel olarak artar; $80	ext{ °C}$ suyun buhar basıncı $47.4	ext{ kPa}$'ya çıkarak kavitasyon riskini katlar.
+Kavitasyonu engellemek için sistemin net pozitif emme yüksekliği (`NPSH_A`) pompanın gerektirdiği değerden (`NPSH_R`) büyük olmalıdır:
+
+`NPSH_A = racP_ortam - P_vho cdot g pm h_s - h_f,emis ge NPSH_R + 0.5dots 1.0	ext m`
+
+- **Emiş Borusu Boyutlandırma:** Emiş hattındaki akış hızı `1.0 - 1.2	ext m/s` ile sınırlandırılmalı, emiş filtresi ve dirsek sürtünme kayıpları en aza indirilmelidir.
+- **Sıcaklık Kontrolü:** Akışkan sıcaklığı arttıkça buhar basıncı üstel olarak artar; `80	ext °C` suyun buhar basıncı `47.4	ext kPa`'ya çıkarak kavitasyon riskini katlar.
 
 <Callout type="info" title="Pratik Teşhis">
 Pompa içinde sanki çakıl taşları veya bilyalar dönüyormuş gibi çatırtılı bir ses geliyorsa ve debi aniden dalgalanıyorsa pompa kavitasyondadır.

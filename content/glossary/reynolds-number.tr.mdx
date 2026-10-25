@@ -1,6 +1,6 @@
 ---
 title: "Reynolds sayısı (Re)"
-description: "Boyutsuz Reynolds sayısı formülü ($Re = \rho v D / mu$), laminer ve türbülanslı akış geçiş kriteri ve boru sürtünme faktörü."
+description: "Boyutsuz Reynolds sayısı formülü (Re = ρ * v * D / μ), laminer ve türbülanslı akış geçiş kriteri ve boru sürtünme faktörü."
 date: "2026-05-09"
 tags: ["Reynolds sayısı","akış rejimleri","laminer","türbülanslı","akışkanlar"]
 category: "Akışkanlar"
@@ -8,7 +8,7 @@ draft: false
 readingTime: 4
 ---
 
-Reynolds sayısı ($Re$), akışkanlar mekaniğinde akışkanın atalet kuvvetlerinin viskoz sürtünme kuvvetlerine oranını temsil eden en temel boyutsuz sayıdır. Akışın düzenli laminer mi yoksa girdaplı türbülanslı mı davranacağını belirler.
+Reynolds sayısı (`Re`), akışkanlar mekaniğinde akışkanın atalet kuvvetlerinin viskoz sürtünme kuvvetlerine oranını temsil eden en temel boyutsuz sayıdır. Akışın düzenli laminer mi yoksa girdaplı türbülanslı mı davranacağını belirler.
 
 ## Neden önemli?
 
@@ -17,23 +17,26 @@ Boru çapı, debi, viskozite veya sıcaklık değiştiğinde akış rejiminin de
 ## Mühendislik uygulaması ve standartlar
 
 Dairesel boru akışında Reynolds sayısı formülü:
-$$Re = rac{ho cdot v cdot D}{mu} = rac{v cdot D}{
-u}$$
-- $ho$: Akışkan yoğunluğu [$	ext{kg/m}^3$],
-- $v$: Ortalama akış hızı [$	ext{m/s}$],
-- $D$: Boru iç çapı [$	ext{m}$],
-- $mu$: Dinamik viskozite [$	ext{Pa}cdot	ext{s}$], $
-u$: Kinematik viskozite [$	ext{m}^2	ext{/s}$].
+
+`Re = (ρ * v * D) / μ = (v * D) / ν`
+
+- `ρ`: Akışkan yoğunluğu [kg/m³],
+- `v`: Ortalama akış hızı [m/s],
+- `D`: Boru iç çapı [m],
+- `μ`: Dinamik viskozite [Pa·s],
+- `ν`: Kinematik viskozite [m²/s].
+
 **Kritik Sınırlar:**
-- $Re < 2300$: Kararlı Laminer Akış.
-- $2300 le Re le 4000$: Geçiş Bölgesi (kararsız akış).
-- $Re > 4000$: Tam Türbülanslı Akış.
+- `Re < 2300`: Kararlı Laminer Akış.
+- `2300 <= Re <= 4000`: Geçiş Bölgesi (kararsız akış).
+- `Re > 4000`: Tam Türbülanslı Akış.
 
 <Callout type="info" title="Pratik Örnek">
-20 °C su ($
-u = 1.0 	imes 10^{-6}	ext{ m}^2	ext{/s}$), $D = 50	ext{ mm}$ borudan $v = 1.5	ext{ m/s}$ hızla akarken:
-$$Re = rac{1.5 	imes 0.050}{1.0 	imes 10^{-6}} = mathbf{75,000}$$
-$75,000 gg 4000$ olduğundan akış tam türbülanslıdır.
+20 °C su (ν = 1.0 * 10^-6 m²/s), D = 50 mm borudan v = 1.5 m/s hızla akarken:
+
+`Re = (1.5 * 0.050) / (1.0 * 10^-6) = 75,000`
+
+75,000 değeri 4000 limitinden çok büyük olduğundan akış tam türbülanslıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar

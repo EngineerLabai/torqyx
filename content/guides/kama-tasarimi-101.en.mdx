@@ -1,9 +1,17 @@
 ---
-title: "Key design 101: parallel keys and mechanical wedges"
-description: "DIN 6885 shaft-hub parallel keys, shear and bearing crushing stress verification, wedge mechanics, and self-locking conditions."
-date: "2026-05-09"
-tags: ["keys", "DIN 6885", "shaft-hub", "friction", "shear stress", "crushing"]
-category: "Machine Elements"
+title: 'Key design 101: parallel keys and mechanical wedges'
+description: >-
+  DIN 6885 shaft-hub parallel keys, shear and bearing crushing stress
+  verification, wedge mechanics, and self-locking conditions.
+date: '2026-05-09'
+tags:
+  - keys
+  - DIN 6885
+  - shaft-hub
+  - friction
+  - shear stress
+  - crushing
+category: Machine Elements
 draft: false
 readingTime: 9
 ---
@@ -23,48 +31,60 @@ DIN 6885 parallel keys (feather keys) are the most prevalent mechanical coupling
 
 - Key material is medium-carbon or alloy engineering steel (e.g., C45E or 16MnCr5) with yield strength equal to or greater than shaft and hub materials.
 - Tangential force is uniformly distributed along the effective key engagement length (shaft torsional twist distortion is neglected).
-- In round-ended keys (DIN 6885 Form A), the semicircular ends do not bear load; effective length is $l_k = l - b$.
-- The friction coefficient ($\mu$) between steel wedge surfaces is assumed constant for dry or lubricated contact.
+- In round-ended keys (DIN 6885 Form A), the semicircular ends do not bear load; effective length is `l_k = l - b`.
+- The friction coefficient (`μ`) between steel wedge surfaces is assumed constant for dry or lubricated contact.
 
 ## Step by step method
 
-1. **Calculate Transmitted Tangential Force ($F_t$):**
-   From shaft diameter $d$ [$\text{m}$] and nominal operating torque $T$ [$\text{Nm}$]:
-   $$F_t = \frac{2 \cdot T}{d}$$
+1. **Calculate Transmitted Tangential Force (`F_t`):**
+   From shaft diameter `d` [`m`] and nominal operating torque `T` [`Nm`]:
+   
+`F_t = (2  *  T / d)`
+
 
 2. **Select Standard Key Cross-Section (DIN 6885-1 / ISO 773):**
-   Standard dimensions for key width ($b$), height ($h$), and shaft seat depth ($t_1$) are selected based on shaft diameter ($d$):
-   - For $d = 38\dots 44\text{ mm}$: $b = 12\text{ mm}$, $h = 8\text{ mm}$, $t_1 = 5.0\text{ mm}$, and hub depth $t_2 = 3.3\text{ mm}$.
+   Standard dimensions for key width (`b`), height (`h`), and shaft seat depth (`t_1`) are selected based on shaft diameter (`d`):
+   - For `d = 38dots 44  mm`: `b = 12  mm`, `h = 8  mm`, `t_1 = 5.0  mm`, and hub depth `t_2 = 3.3  mm`.
 
-3. **Verify Hub Surface Bearing/Crushing Stress ($\sigma_p$):**
-   Because the hub is usually the softer material, check the compressive stress over the effective engagement length $l_k$:
-   $$\sigma_p = \frac{F_t}{l_k \cdot t_2} \le \sigma_{p,allow}$$
-   *(Permissible crushing limits: Grey Cast Iron GG-25: $60 - 80\text{ MPa}$; Cast Steel GS-45: $90 - 120\text{ MPa}$; Quenched & Tempered C45: $120 - 150\text{ MPa}$)*
+3. **Verify Hub Surface Bearing/Crushing Stress (`σ_p`):**
+   Because the hub is usually the softer material, check the compressive stress over the effective engagement length `l_k`:
+   
+`σ_p = (F_t / l_k  *  t_2)  <=  σ_p,allow`
 
-4. **Verify Key Shear Stress ($\tau_k$):**
+   *(Permissible crushing limits: Grey Cast Iron GG-25: `60 - 80  MPa`; Cast Steel GS-45: `90 - 120  MPa`; Quenched & Tempered C45: `120 - 150  MPa`)*
+
+4. **Verify Key Shear Stress (`τ_k`):**
    Check shear across the transverse cross-section:
-   $$\tau_k = \frac{F_t}{b \cdot l_k} \le \tau_{allow} \approx 0.6 \cdot R_e / S_f$$
+   
+`τ_k = (F_t / b  *  l_k)  <=  τ_allow  ≈  0.6  *  R_e / S_f`
+
 
 5. **Verify Wedge Clamping Angle and Self-Locking Condition:**
-   In inclined mechanical clamping wedges, self-locking occurs when the wedge taper angle $\alpha$ satisfies:
-   $$\tan(\alpha) \le \mu \implies \alpha \le \arctan(\mu)$$
-   *(Lubricated steel: $\mu \approx 0.10 \implies \alpha \le 5.7^\circ$; Dry clean steel: $\mu \approx 0.15 \implies \alpha \le 8.5^\circ$)*
+   In inclined mechanical clamping wedges, self-locking occurs when the wedge taper angle `α` satisfies:
+   
+`tan(α)  <=  μ implies α  <=  arctan(μ)`
+
+   *(Lubricated steel: `μ  ≈  0.10 implies α  <=  5.7^circ`; Dry clean steel: `μ  ≈  0.15 implies α  <=  8.5^circ`)*
 
 6. **Industrial Worked Example:**
-   A drive shaft with $d = 40\text{ mm}$ transmits $T = 300\text{ Nm}$ torque to a cast steel GS-45 hub. A DIN 6885 Form A key is specified ($b = 12\text{ mm}$, $h = 8\text{ mm}$, $t_2 = 3.3\text{ mm}$, total length $l = 50\text{ mm}$):
-   - Tangential force: $F_t = \frac{2 \times 300}{0.040} = \mathbf{15\,000\text{ N}}$
-   - Effective contact length: $l_k = 50 - 12 = \mathbf{38\text{ mm}}$
+   A drive shaft with `d = 40  mm` transmits `T = 300  Nm` torque to a cast steel GS-45 hub. A DIN 6885 Form A key is specified (`b = 12  mm`, `h = 8  mm`, `t_2 = 3.3  mm`, total length `l = 50  mm`):
+   - Tangential force: `F_t = (2  *  300 / 0.040) = mathbf15,000  N`
+   - Effective contact length: `l_k = 50 - 12 = mathbf38  mm`
    - Compressive bearing stress:
-     $$\sigma_p = \frac{15\,000}{38 \times 3.3} = \mathbf{119.6\text{ MPa}} \le \sigma_{p,allow} \approx 120\text{ MPa} \quad \text{(Safe)}$$
+     
+`σ_p = (15,000 / 38  *  3.3) = mathbf119.6  MPa   <=  σ_p,allow  ≈  120  MPa     (Safe)`
+
    - Key shear stress:
-     $$\tau_k = \frac{15\,000}{12 \times 38} = \mathbf{32.9\text{ MPa}} \ll \tau_{allow} \approx 75\text{ MPa} \quad \text{(High Safety Factor)}$$
+     
+`τ_k = (15,000 / 12  *  38) = mathbf32.9  MPa  ll τ_allow  ≈  75  MPa     (High Safety Factor)`
+
 
 ## Common mistakes
 
-- **Using Total Length for Rounded-End Form A Keys:** Semicircular ends do not carry tangential load; using $l$ instead of $l_k = l - b$ underestimates bearing stress by 20% to 30%.
-- **Ignoring Application Peak Torque ($K_A$):** In reciprocating compressors or press drives, dynamic shock multipliers range from 1.5 to 2.5; calculations must evaluate peak torque.
-- **Overlooking Keyway Stress Concentration:** Machining a keyseat into a rotating shaft introduces a severe stress concentration factor ($K_t \approx 2.5 - 3.0$) in fatigue bending/torsion.
-- **Insufficient Hub Wall Thickness:** The radial wall thickness of the hub above the keyway must be at least $1.5 \times h$ to avoid fatigue bursting.
+- **Using Total Length for Rounded-End Form A Keys:** Semicircular ends do not carry tangential load; using `l` instead of `l_k = l - b` underestimates bearing stress by 20% to 30%.
+- **Ignoring Application Peak Torque (`K_A`):** In reciprocating compressors or press drives, dynamic shock multipliers range from 1.5 to 2.5; calculations must evaluate peak torque.
+- **Overlooking Keyway Stress Concentration:** Machining a keyseat into a rotating shaft introduces a severe stress concentration factor (`K_t  ≈  2.5 - 3.0`) in fatigue bending/torsion.
+- **Insufficient Hub Wall Thickness:** The radial wall thickness of the hub above the keyway must be at least `1.5  *  h` to avoid fatigue bursting.
 
 ## Related calculators
 

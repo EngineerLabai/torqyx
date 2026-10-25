@@ -1,9 +1,17 @@
 ---
-title: "Fluid dynamics basics: pipe and duct flow"
-description: "A comprehensive engineering guide to laminar and turbulent flow, Reynolds number, hydraulic diameter, Darcy-Weisbach pressure loss, and piping hydraulics."
-date: "2026-05-09"
-tags: ["fluids", "Reynolds", "pressure loss", "pipe", "hydraulics"]
-category: "Fluids"
+title: 'Fluid dynamics basics: pipe and duct flow'
+description: >-
+  A comprehensive engineering guide to laminar and turbulent flow, Reynolds
+  number, hydraulic diameter, Darcy-Weisbach pressure loss, and piping
+  hydraulics.
+date: '2026-05-09'
+tags:
+  - fluids
+  - Reynolds
+  - pressure loss
+  - pipe
+  - hydraulics
+category: Fluids
 draft: false
 readingTime: 9
 ---
@@ -14,56 +22,70 @@ This guide is designed for sizing and validating piping and ductwork systems, pr
 
 ## Problem / Objective
 
-Sizing fluid transport systems based solely on volumetric flow rate ($Q$) is a common engineering mistake. Fluid viscosity, internal pipe diameter, velocity, and wall roughness together dictate the hydraulic friction. Failing to accurately identify the flow regime (laminar vs. turbulent) leads to:
+Sizing fluid transport systems based solely on volumetric flow rate (`Q`) is a common engineering mistake. Fluid viscosity, internal pipe diameter, velocity, and wall roughness together dictate the hydraulic friction. Failing to accurately identify the flow regime (laminar vs. turbulent) leads to:
 - Underpowered pumps or fans that fail to deliver the design flow,
 - Excessive flow velocities causing severe noise, pipe erosion, and water hammer hazards,
 - Overly low velocities that induce particulate settling and degraded heat transfer coefficients.
 
 ## Assumptions
 
-- The fluid exhibits Newtonian behavior and is treated as incompressible ($\rho \approx \text{constant}$).
-- Fluid properties (density $\rho$ and dynamic viscosity $\mu$) are evaluated at the bulk operating temperature.
+- The fluid exhibits Newtonian behavior and is treated as incompressible (`ρ  ≈   constant`).
+- Fluid properties (density `ρ` and dynamic viscosity `μ`) are evaluated at the bulk operating temperature.
 - Flow is fully developed and steady-state along the pipe or duct section.
-- Non-circular ducts are handled via the hydraulic diameter ($D_h$) formulation.
+- Non-circular ducts are handled via the hydraulic diameter (`D_h`) formulation.
 
 ## Step by step method
 
 1. **Calculate Flow Area and Mean Velocity:**
-   Given volumetric flow ($Q$ [$\text{m}^3\text{/s}$]) and pipe inside diameter ($D$ [$\text{m}$]):
-   $$v = \frac{4 \cdot Q}{\pi \cdot D^2}$$
+   Given volumetric flow (`Q` [`m ^3 /s`]) and pipe inside diameter (`D` [`m`]):
+   
+`v = (4  *  Q / pi  *  D^2)`
+
 
 2. **Compute Hydraulic Diameter for Non-Circular Conduits:**
-   For rectangular or non-circular cross-sections with flow area $A$ and wetted perimeter $P_{wetted}$:
-   $$D_h = \frac{4 \cdot A}{P_{wetted}}$$
+   For rectangular or non-circular cross-sections with flow area `A` and wetted perimeter `P_wetted`:
+   
+`D_h = frac4  *  AP_wetted`
+
 
 3. **Evaluate the Reynolds Number:**
    Determine the ratio of inertial to viscous forces:
-   $$Re = \frac{\rho \cdot v \cdot D_h}{\mu} = \frac{v \cdot D_h}{\nu}$$
-   - **$Re < 2300$:** Laminar flow regime (parabolic velocity profile).
-   - **$2300 \le Re \le 4000$:** Transitional flow regime.
-   - **$Re > 4000$:** Fully turbulent flow regime (flat velocity core with eddy dissipation).
+   
+`Re = (ρ  *  v  *  D_h / μ) = (v  *  D_h / ν)`
 
-4. **Determine the Darcy Friction Factor ($f$):**
+   - **`Re &lt; 2300`:** Laminar flow regime (parabolic velocity profile).
+   - **`2300  <=  Re  <=  4000`:** Transitional flow regime.
+   - **`Re > 4000`:** Fully turbulent flow regime (flat velocity core with eddy dissipation).
+
+4. **Determine the Darcy Friction Factor (`f`):**
    - In the laminar regime, friction is independent of surface roughness:
-     $$f = \frac{64}{Re}$$
-   - In the turbulent regime, calculate $f$ using the explicit Haaland approximation ($\varepsilon$: pipe roughness):
-     $$\frac{1}{\sqrt{f}} \approx -1.8 \cdot \log_{10}\left[ \left(\frac{\varepsilon / D}{3.7}\right)^{1.11} + \frac{6.9}{Re} \right]$$
+     
+`f = (64 / Re)`
+
+   - In the turbulent regime, calculate `f` using the explicit Haaland approximation (`varepsilon`: pipe roughness):
+     
+`frac1sqrtf  ≈  -1.8  *  log_10 <= ft[ ((varepsilon / D / 3.7))^1.11 + (6.9 / Re) right]`
+
 
 5. **Compute Straight Pipe Friction Loss (Darcy-Weisbach):**
-   The major pressure drop along length $L$ is:
-   $$\Delta P_{major} = f \cdot \frac{L}{D_h} \cdot \frac{\rho \cdot v^2}{2}$$
+   The major pressure drop along length `L` is:
+   
+`Δ P_major = f  *  (L / D_h)  *  (ρ  *  v^2 / 2)`
+
 
 6. **Add Minor Losses from Fittings and Valves:**
-   Sum the resistance coefficients ($K$) of all bends, valves, and transitions:
-   $$\Delta P_{total} = \Delta P_{major} + \sum K \cdot \frac{\rho \cdot v^2}{2}$$
+   Sum the resistance coefficients (`K`) of all bends, valves, and transitions:
+   
+`Δ P_total = Δ P_major + sum K  *  (ρ  *  v^2 / 2)`
+
 
 7. **Industrial Worked Example:**
-   Water at 20 °C ($\rho = 998\text{ kg/m}^3$, $\mu = 1.002 \times 10^{-3}\text{ Pa}\cdot\text{s}$) flows at $Q = 10\text{ m}^3\text{/h}$ ($0.00278\text{ m}^3\text{/s}$) through a 50 m commercial steel pipe DN50 ($D = 53\text{ mm}$, $\varepsilon = 0.045\text{ mm}$):
-   - Flow velocity: $v = \frac{4 \times 0.00278}{\pi \times 0.053^2} = \mathbf{1.26\text{ m/s}}$ *(Optimal liquid range: 1.0 - 2.0 m/s)*
-   - Reynolds number: $Re = \frac{998 \times 1.26 \times 0.053}{0.001002} = \mathbf{66\,480}$ *(Turbulent)*
-   - Relative roughness: $\varepsilon / D = 0.045 / 53 \approx 0.00085$
-   - Haaland equation yields: $f \approx 0.0224$
-   - Major head loss: $\Delta P_{major} = 0.0224 \times \frac{50}{0.053} \times \frac{998 \times 1.26^2}{2} = \mathbf{16\,740\text{ Pa}} \approx \mathbf{0.167\text{ bar}}$
+   Water at 20 °C (`ρ = 998  kg/m ^3`, `μ = 1.002  *  10^-3  Pa  *  s`) flows at `Q = 10  m ^3 /h` (`0.00278  m ^3 /s`) through a 50 m commercial steel pipe DN50 (`D = 53  mm`, `varepsilon = 0.045  mm`):
+   - Flow velocity: `v = (4  *  0.00278 / pi  *  0.053^2) = mathbf1.26  m/s` *(Optimal liquid range: 1.0 - 2.0 m/s)*
+   - Reynolds number: `Re = (998  *  1.26  *  0.053 / 0.001002) = mathbf66,480` *(Turbulent)*
+   - Relative roughness: `varepsilon / D = 0.045 / 53  ≈  0.00085`
+   - Haaland equation yields: `f  ≈  0.0224`
+   - Major head loss: `Δ P_major = 0.0224  *  (50 / 0.053)  *  (998  *  1.26^2 / 2) = mathbf16,740  Pa   ≈  mathbf0.167  bar`
 
 ## Common mistakes
 

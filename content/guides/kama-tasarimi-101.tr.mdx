@@ -1,9 +1,17 @@
 ---
-title: "Kama tasarımı 101: paralel feder ve kama mekanizmaları"
-description: "DIN 6885 mil-göbek paralel kamaları, kesme ve ezilme gerilmesi, kama mekanizmalarında sürtünme açısı ve kilitlenme mühendislik rehberi."
-date: "2026-05-09"
-tags: ["kama", "DIN 6885", "mil-göbek", "sürtünme", "kesme gerilmesi", "ezilme"]
-category: "Makine Elemanları"
+title: 'Kama tasarımı 101: paralel feder ve kama mekanizmaları'
+description: >-
+  DIN 6885 mil-göbek paralel kamaları, kesme ve ezilme gerilmesi, kama
+  mekanizmalarında sürtünme açısı ve kilitlenme mühendislik rehberi.
+date: '2026-05-09'
+tags:
+  - kama
+  - DIN 6885
+  - mil-göbek
+  - sürtünme
+  - kesme gerilmesi
+  - ezilme
+category: Makine Elemanları
 draft: false
 readingTime: 9
 ---
@@ -23,48 +31,60 @@ Döner millerde torku dişliye, kasnağa veya kapline aktarırken en yaygın kul
 
 - Kama malzemesi genel makine yapım çeliği (C45E veya 16MnCr5) kabul edilir; akma sınırı mil ve göbekten yüksek veya eşittir.
 - Teğetsel kuvvet kama boyu boyunca üniform yayılı yük olarak etkir (mil burulma deformasyonu ihmal edilmiştir).
-- Yuvarlak uçlu kamalarda (DIN 6885 Form A) uç kavisleri taşıyıcı boya dahil edilmez; aktif boy $l_k = l - b$ alınır.
-- Takoz kamalarında sürtünme katsayısı ($\mu$) kuru veya yağlı çelik-çelik yüzey çiftine göre sabit kabul edilir.
+- Yuvarlak uçlu kamalarda (DIN 6885 Form A) uç kavisleri taşıyıcı boya dahil edilmez; aktif boy `l_k = l - b` alınır.
+- Takoz kamalarında sürtünme katsayısı (`μ`) kuru veya yağlı çelik-çelik yüzey çiftine göre sabit kabul edilir.
 
 ## Adım adım yöntem
 
-1. **İletilen Teğetsel Kuvveti ($F_t$) Bulun:**
-   Mil çapı $d$ [$\text{m}$] ve iletilen nominal tork $T$ [$\text{Nm}$] üzerinden:
-   $$F_t = \frac{2 \cdot T}{d}$$
+1. **İletilen Teğetsel Kuvveti (`F_t`) Bulun:**
+   Mil çapı `d` [`m`] ve iletilen nominal tork `T` [`Nm`] üzerinden:
+   
+`F_t = (2  *  T / d)`
+
 
 2. **DIN 6885-1 Standardından Kama Kesitini Seçin:**
-   Mil çapına ($d$) göre kamanın genişliği ($b$), toplam yüksekliği ($h$) ve mil kanalı derinliği ($t_1$) standart tablodan belirlenir:
-   - $d = 38\dots 44\text{ mm}$ için: $b = 12\text{ mm}$, $h = 8\text{ mm}$, $t_1 = 5.0\text{ mm}$, göbek derinliği $t_2 = 3.3\text{ mm}$.
+   Mil çapına (`d`) göre kamanın genişliği (`b`), toplam yüksekliği (`h`) ve mil kanalı derinliği (`t_1`) standart tablodan belirlenir:
+   - `d = 38dots 44  mm` için: `b = 12  mm`, `h = 8  mm`, `t_1 = 5.0  mm`, göbek derinliği `t_2 = 3.3  mm`.
 
-3. **Göbek Yüzey Ezilme Gerilmesini ($\sigma_p$) Kontrol Edin:**
-   En zayıf halkanın genellikle göbek malzemesi olduğu göz önüne alınarak aktif kama boyu $l_k$ üzerinden temas basıncı:
-   $$\sigma_p = \frac{F_t}{l_k \cdot t_2} \le \sigma_{p,em}$$
-   *(Emniyetli ezilme sınırları: Gri dökme demir GG-25 için $60 - 80\text{ MPa}$, Çelik döküm GS-45 için $90 - 120\text{ MPa}$, C45 ıslah çeliği için $120 - 150\text{ MPa}$)*
+3. **Göbek Yüzey Ezilme Gerilmesini (`σ_p`) Kontrol Edin:**
+   En zayıf halkanın genellikle göbek malzemesi olduğu göz önüne alınarak aktif kama boyu `l_k` üzerinden temas basıncı:
+   
+`σ_p = (F_t / l_k  *  t_2)  <=  σ_p,em`
 
-4. **Kama Kesme Gerilmesini ($\tau_k$) Kontrol Edin:**
+   *(Emniyetli ezilme sınırları: Gri dökme demir GG-25 için `60 - 80  MPa`, Çelik döküm GS-45 için `90 - 120  MPa`, C45 ıslah çeliği için `120 - 150  MPa`)*
+
+4. **Kama Kesme Gerilmesini (`τ_k`) Kontrol Edin:**
    Kamanın gövde kesitindeki kayma gerilmesi:
-   $$\tau_k = \frac{F_t}{b \cdot l_k} \le \tau_{em} \approx 0.6 \cdot R_{e} / S_g$$
+   
+`τ_k = (F_t / b  *  l_k)  <=  τ_em  ≈  0.6  *  R_e / S_g`
+
 
 5. **Mekanik Kama/Takoz Açısı ve Kendi Kendine Kilitlenme Kontrolü:**
    Kuvvet artıran eğimli takoz mekanizmalarında kamayı yerinde tutan kendi kendine kilitlenme (self-locking) şartı:
-   $$\tan(\alpha) \le \mu \implies \alpha \le \arctan(\mu)$$
-   *(Yağlanmış çelikte $\mu \approx 0.10 \implies \alpha \le 5.7^\circ$; kuru çelikte $\mu \approx 0.15 \implies \alpha \le 8.5^\circ$)*
+   
+`tan(α)  <=  μ implies α  <=  arctan(μ)`
+
+   *(Yağlanmış çelikte `μ  ≈  0.10 implies α  <=  5.7^circ`; kuru çelikte `μ  ≈  0.15 implies α  <=  8.5^circ`)*
 
 6. **Çözümlü Endüstriyel Tasarım Örneği:**
-   $d = 40\text{ mm}$ çapındaki elektrik motoru milinden $T = 300\text{ Nm}$ tork GS-45 döküm çelik göbeğe aktarılacaktır. Standart kama $b = 12\text{ mm}$, $h = 8\text{ mm}$, $t_2 = 3.3\text{ mm}$, toplam boy $l = 50\text{ mm}$ (Form A yuvarlak uçlu):
-   - Teğetsel kuvvet: $F_t = \frac{2 \times 300}{0.040} = \mathbf{15\,000\text{ N}}$
-   - Aktif temas boyu: $l_k = 50 - 12 = \mathbf{38\text{ mm}}$
+   `d = 40  mm` çapındaki elektrik motoru milinden `T = 300  Nm` tork GS-45 döküm çelik göbeğe aktarılacaktır. Standart kama `b = 12  mm`, `h = 8  mm`, `t_2 = 3.3  mm`, toplam boy `l = 50  mm` (Form A yuvarlak uçlu):
+   - Teğetsel kuvvet: `F_t = (2  *  300 / 0.040) = mathbf15,000  N`
+   - Aktif temas boyu: `l_k = 50 - 12 = mathbf38  mm`
    - Yüzey ezilme gerilmesi:
-     $$\sigma_p = \frac{15\,000}{38 \times 3.3} = \mathbf{119.6\text{ MPa}} \le \sigma_{p,em} \approx 120\text{ MPa} \quad \text{(Emniyetli)}$$
+     
+`σ_p = (15,000 / 38  *  3.3) = mathbf119.6  MPa   <=  σ_p,em  ≈  120  MPa     (Emniyetli)`
+
    - Kesme gerilmesi:
-     $$\tau_k = \frac{15\,000}{12 \times 38} = \mathbf{32.9\text{ MPa}} \ll \tau_{em} \approx 75\text{ MPa} \quad \text{(Yüksek emniyet)}$$
+     
+`τ_k = (15,000 / 12  *  38) = mathbf32.9  MPa  ll τ_em  ≈  75  MPa     (Yüksek emniyet)`
+
 
 ## Sık hatalar
 
-- **Aktif Boyu Toplam Boy ile Aynı Almak:** DIN 6885 Form A yuvarlak başlı kamalarda iki uç kavis yük taşımaz; $l_k = l - b$ formülü kullanılmalıdır.
-- **Dinamik Darbe Faktörünü ($K_A$) Unutmak:** Pistonlu kompresör veya pres tahriklerinde anlık tepe tork nominalin 2-3 katına çıkabilir; ezilme hesabı tepe yükte yapılmalıdır.
-- **Kanal Açılan Mil Kesitinde Çentik Etkisini İhmal Etmek:** Kama kanalı milin yorulma mukavemetinde $K_t \approx 2.5 - 3.0$ mertebesinde stres yoğunlaşması yaratır.
-- **Göbek Et Kalınlığını Yetersiz Bırakmak:** Kama yuvasının üzerindeki göbek radyal et kalınlığı en az $1.5 \times h$ olmalıdır; aksi halde göbek çatlar.
+- **Aktif Boyu Toplam Boy ile Aynı Almak:** DIN 6885 Form A yuvarlak başlı kamalarda iki uç kavis yük taşımaz; `l_k = l - b` formülü kullanılmalıdır.
+- **Dinamik Darbe Faktörünü (`K_A`) Unutmak:** Pistonlu kompresör veya pres tahriklerinde anlık tepe tork nominalin 2-3 katına çıkabilir; ezilme hesabı tepe yükte yapılmalıdır.
+- **Kanal Açılan Mil Kesitinde Çentik Etkisini İhmal Etmek:** Kama kanalı milin yorulma mukavemetinde `K_t  ≈  2.5 - 3.0` mertebesinde stres yoğunlaşması yaratır.
+- **Göbek Et Kalınlığını Yetersiz Bırakmak:** Kama yuvasının üzerindeki göbek radyal et kalınlığı en az `1.5  *  h` olmalıdır; aksi halde göbek çatlar.
 
 ## İlgili hesaplayıcılar
 

@@ -1,9 +1,17 @@
 ---
-title: "Pompa türleri seçim rehberi: santrifüj ve pozitif deplasmanlı"
-description: "Santrifüj ve pozitif deplasmanlı pompaların karşılaştırılması, hidrolik güç hesabı, NPSH ve kavitasyon önleme mühendislik rehberi."
-date: "2026-05-09"
-tags: ["pompa", "santrifüj", "pozitif deplasman", "NPSH", "kavitasyon", "hidrolik güç"]
-category: "Akışkanlar"
+title: 'Pompa türleri seçim rehberi: santrifüj ve pozitif deplasmanlı'
+description: >-
+  Santrifüj ve pozitif deplasmanlı pompaların karşılaştırılması, hidrolik güç
+  hesabı, NPSH ve kavitasyon önleme mühendislik rehberi.
+date: '2026-05-09'
+tags:
+  - pompa
+  - santrifüj
+  - pozitif deplasman
+  - NPSH
+  - kavitasyon
+  - hidrolik güç
+category: Akışkanlar
 draft: false
 readingTime: 9
 ---
@@ -28,42 +36,60 @@ Endüstriyel akışkan transferinde yanlış pompa türü seçmek sistem verimin
 ## Adım adım yöntem
 
 1. **Akışkan Viskozitesine Göre Pompa Ailesini Seçin:**
-   - **Santrifüj Pompalar:** Düşük viskoziteli sıvılar ($\mu < 150\text{ cSt}$ / su, solvent, hafif yağlar), yüksek debi ($Q$) ve orta-düşük basınç ihtiyaçları için idealdir.
-   - **Pozitif Deplasmanlı Pompalar (Dişli, Loblu, İlerleyen Boşluklu, Pistonlu):** Yüksek viskozite ($\mu > 150\text{ cSt}$ / ağır yağ, reçine, macun), sabit debi gereksinimi veya yüksek basınç ($P > 25\text{ bar}$) için seçilir.
+   - **Santrifüj Pompalar:** Düşük viskoziteli sıvılar (`μ &lt; 150  cSt` / su, solvent, hafif yağlar), yüksek debi (`Q`) ve orta-düşük basınç ihtiyaçları için idealdir.
+   - **Pozitif Deplasmanlı Pompalar (Dişli, Loblu, İlerleyen Boşluklu, Pistonlu):** Yüksek viskozite (`μ > 150  cSt` / ağır yağ, reçine, macun), sabit debi gereksinimi veya yüksek basınç (`P > 25  bar`) için seçilir.
 
-2. **Gerekli Toplam Basma Yüksekliğini ($H$) Hesaplayın:**
-   Statik basma kot farkı ($\Delta z$), sistem basınç farkı ($\Delta P / \rho g$) ve boru sürtünme kayıpları ($\sum h_f$) toplamı:
-   $$H = \Delta z + \frac{P_{cikis} - P_{giris}}{\rho \cdot g} + \sum h_f \quad [\text{mSS}]$$
+2. **Gerekli Toplam Basma Yüksekliğini (`H`) Hesaplayın:**
+   Statik basma kot farkı (`Δ z`), sistem basınç farkı (`Δ P / ρ g`) ve boru sürtünme kayıpları (`sum h_f`) toplamı:
+   
+`H = Δ z + fracP_cikis - P_girisρ  *  g + sum h_f   [ mSS ]`
 
-3. **Hidrolik Güç ($P_h$) ve Motor Gücünü ($P_m$) Belirleyin:**
-   Debi $Q$ [$\text{m}^3\text{/s}$], basma yüksekliği $H$ [$\text{m}$] ve sıvı yoğunluğu $\rho$ [$\text{kg/m}^3$] için:
-   $$P_h = \frac{\rho \cdot g \cdot Q \cdot H}{1000} \quad [\text{kW}]$$
-   Pompa hidrolik verimi ($\eta_p$) ve mekanik emniyet marjı ($S_m \approx %15 - %20$) eklenerek şebeke motor gücü:
-   $$P_m = \frac{P_h}{\eta_p} \cdot (1 + S_m)$$
+
+3. **Hidrolik Güç (`P_h`) ve Motor Gücünü (`P_m`) Belirleyin:**
+   Debi `Q` [`m ^3 /s`], basma yüksekliği `H` [`m`] ve sıvı yoğunluğu `ρ` [`kg/m ^3`] için:
+   
+`P_h = (ρ  *  g  *  Q  *  H / 1000)   [ kW ]`
+
+   Pompa hidrolik verimi (`η_p`) ve mekanik emniyet marjı (`S_m  ≈  %15 - %20`) eklenerek şebeke motor gücü:
+   
+`P_m = (P_h / η_p)  *  (1 + S_m)`
+
 
 4. **NPSH ve Kavitasyon Kontrolünü Yapın:**
-   Pompa emiş ağzındaki net pozitif emme yüksekliği ($NPSH_A$):
-   $$NPSH_A = \frac{P_{ortam} - P_{buhar}}{\rho \cdot g} \pm h_{statik} - h_{f,emis}$$
-   Kavitasyonsuz güvenli çalışma için pompanın üretici tarafından istenen $NPSH_R$ değerinden en az $0.5 - 1.0\text{ m}$ yüksek olmalıdır:
-   $$NPSH_A \ge NPSH_R + 0.5\text{ m}$$
+   Pompa emiş ağzındaki net pozitif emme yüksekliği (`NPSH_A`):
+   
+`NPSH_A = fracP_ortam - P_buharρ  *  g pm h_statik - h_f,emis`
+
+   Kavitasyonsuz güvenli çalışma için pompanın üretici tarafından istenen `NPSH_R` değerinden en az `0.5 - 1.0  m` yüksek olmalıdır:
+   
+`NPSH_A  >=  NPSH_R + 0.5  m`
+
 
 5. **Çözümlü Endüstriyel Seçim Senaryosu:**
-   $Q = 36\text{ m}^3\text{/h}$ ($0.01\text{ m}^3\text{/s}$) temiz su ($\rho = 1000\text{ kg/m}^3$), toplam $H = 45\text{ mSS}$ yüksekliğe basılacaktır. Seçilen radyal çarklı santrifüj pompanın BEP verimi $\eta_p = 0.72$, $NPSH_R = 2.4\text{ m}$'dir:
+   `Q = 36  m ^3 /h` (`0.01  m ^3 /s`) temiz su (`ρ = 1000  kg/m ^3`), toplam `H = 45  mSS` yüksekliğe basılacaktır. Seçilen radyal çarklı santrifüj pompanın BEP verimi `η_p = 0.72`, `NPSH_R = 2.4  m`'dir:
    - Hidrolik güç:
-     $$P_h = \frac{1000 \times 9.81 \times 0.01 \times 45}{1000} = \mathbf{4.41\text{ kW}}$$
+     
+`P_h = (1000  *  9.81  *  0.01  *  45 / 1000) = mathbf4.41  kW`
+
    - Pompa mil gücü:
-     $$P_{mil} = \frac{4.41}{0.72} = \mathbf{6.13\text{ kW}}$$
+     
+`P_mil = (4.41 / 0.72) = mathbf6.13  kW`
+
    - %20 emniyet payı ile standart motor seçimi:
-     $$P_m = 6.13 \times 1.20 = 7.36\text{ kW} \implies \mathbf{7.5\text{ kW}}\text{ standart elektrik motoru}$$
-   - Atmosferik açık emiş deposunda ($1.013\text{ bar}$), 20 °C su buhar basıncı $0.0234\text{ bar}$, emiş kotu $h_s = +2.0\text{ m}$, emiş boru sürtünme kaybı $h_{f,emis} = 0.6\text{ m}$:
-     $$NPSH_A = \frac{101\,300 - 2340}{1000 \times 9.81} + 2.0 - 0.6 = 10.09 + 1.4 = \mathbf{11.49\text{ m}}$$
-   - $NPSH_A (11.49\text{ m}) \gg NPSH_R (2.4\text{ m}) + 0.5\text{ m}$, kavitasyon riski sıfırdır.
+     
+`P_m = 6.13  *  1.20 = 7.36  kW  implies mathbf7.5  kW   standart elektrik motoru`
+
+   - Atmosferik açık emiş deposunda (`1.013  bar`), 20 °C su buhar basıncı `0.0234  bar`, emiş kotu `h_s = +2.0  m`, emiş boru sürtünme kaybı `h_f,emis = 0.6  m`:
+     
+`NPSH_A = (101,300 - 2340 / 1000  *  9.81) + 2.0 - 0.6 = 10.09 + 1.4 = mathbf11.49  m`
+
+   - `NPSH_A (11.49  m ) gg NPSH_R (2.4  m ) + 0.5  m`, kavitasyon riski sıfırdır.
 
 ## Sık hatalar
 
 - **Pozitif Deplasmanlı Pompa Basma Hattına Emniyet Ventili (PRV) Koymamak:** Santrifüj pompalar kapalı vanaya basabilirken pozitif deplasmanlı pompalar mekanik kırılma veya motor yanmasına yol açar; hatta mutlaka entegre tahliye ventili bulunmalıdır.
 - **Pompayı Yalnızca Tasarım Tepe Debisine Göre Seçmek:** Pompa sürekli olarak BEP noktasının çok solunda çalıştırılırsa çark içinde devridaim (internal recirculation) ve yüksek radyal rulman yükleri oluşur.
-- **Sıcak Su Uygulamalarında Buhar Basıncını Unutmak:** 85 °C sıcak suda buhar basıncı $0.58\text{ bar}$ seviyesine çıkar; emişte pozitif basınç sağlanmazsa kavitasyon kaçınılmazdır.
+- **Sıcak Su Uygulamalarında Buhar Basıncını Unutmak:** 85 °C sıcak suda buhar basıncı `0.58  bar` seviyesine çıkar; emişte pozitif basınç sağlanmazsa kavitasyon kaçınılmazdır.
 - **Emiş Hattı Çapını Pompa Giriş Çapıyla Aynı Tutmak:** Emiş borusu sürtünmeyi ve hız basıncını düşürmek için daima pompa emme flanşından bir boy büyük (redüksiyonlu eksantrik) seçilmelidir.
 
 ## İlgili hesaplayıcılar

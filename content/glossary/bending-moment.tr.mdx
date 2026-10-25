@@ -1,14 +1,21 @@
 ---
-title: "Eğilme momenti"
-description: "Kiriş ve millerde eğilme momenti dağılımı, Navier eğilme gerilmesi formülü, kesme kuvveti diyagramı ve mukavemet momenti hesabı."
-date: "2026-05-09"
-tags: ["eğilme momenti","mukavemet","kiriş","gerilme","atalet momenti"]
-category: "Mekanik"
+title: Eğilme momenti
+description: >-
+  Kiriş ve millerde eğilme momenti dağılımı, Navier eğilme gerilmesi formülü,
+  kesme kuvveti diyagramı ve mukavemet momenti hesabı.
+date: '2026-05-09'
+tags:
+  - eğilme momenti
+  - mukavemet
+  - kiriş
+  - gerilme
+  - atalet momenti
+category: Mekanik
 draft: false
 readingTime: 4
 ---
 
-Eğilme momenti ($M_b$), bir yapısal elemanın (kiriş, mil, profil) enine yüklere veya dış kuvvet çiftlerine maruz kaldığında kesit boyunca eksenel eğilmeye zorlayan iç moment bileşkesidir.
+Eğilme momenti (`M_b`), bir yapısal elemanın (kiriş, mil, profil) enine yüklere veya dış kuvvet çiftlerine maruz kaldığında kesit boyunca eksenel eğilmeye zorlayan iç moment bileşkesidir.
 
 ## Neden önemli?
 
@@ -17,15 +24,19 @@ Millerde ve makine şaselerinde en yüksek çekme ve basma gerilmeleri genellikl
 ## Mühendislik uygulaması ve standartlar
 
 Euler-Bernoulli kiriş teorisine (Navier formülü) göre eğilme gerilmesi:
-$$sigma_b = rac{M_b cdot y}{I_x} = rac{M_b}{W_b}$$
-- $M_b$: Kesitteki eğilme momenti [$	ext{N}cdot	ext{mm}$],
-- $y$: Tarafsız eksenden en uzak lifin mesafesi [$	ext{mm}$],
-- $I_x$: Kesitin tarafsız eksene göre atalet momenti [$	ext{mm}^4$],
-- $W_b = I_x / y_{max}$: Kesit mukavemet momenti [$	ext{mm}^3$] (Dairesel dolu mil için $W_b = rac{pi cdot d^3}{32}$).
+
+`sigma_b = (M_b  *  y / I_x) = (M_b / W_b)`
+
+- `M_b`: Kesitteki eğilme momenti [`extN * 	extmm`],
+- `y`: Tarafsız eksenden en uzak lifin mesafesi [`extmm`],
+- `I_x`: Kesitin tarafsız eksene göre atalet momenti [`extmm^4`],
+- `W_b = I_x / y_max`: Kesit mukavemet momenti [`extmm^3`] (Dairesel dolu mil için `W_b = (pi  *  d^3 / 32)`).
 
 <Callout type="info" title="Mühendislik Hesabı">
-$d = 50	ext{ mm}$ çapında bir çelik mil üzerinde $M_b = 600	ext{ Nm} = 600,000	ext{ N}cdot	ext{mm}$ eğilme momenti etkiyorsa:
-$$W_b = rac{pi 	imes 50^3}{32} approx 12,272	ext{ mm}^3 implies sigma_b = rac{600,000}{12,272} approx mathbf{48.9	ext{ MPa}}$$
+`d = 50	ext mm` çapında bir çelik mil üzerinde `M_b = 600	ext Nm = 600,000	ext N * 	extmm` eğilme momenti etkiyorsa:
+
+`W_b = (pi 	imes 50^3 / 32) approx 12,272	ext mm^3 implies sigma_b = (600,000 / 12,272) approx mathbf48.9	ext MPa`
+
 Bu gerilme izin verilen dinamik eğilme yorulma sınırıyla karşılaştırılır.
 </Callout>
 

@@ -1,29 +1,40 @@
 ---
-title: "Yük kaybı (head loss)"
-description: "Boru hatlarında ve hidrolik devrelerde sürtünme yük kaybı ($h_f$), Darcy-Weisbach denklemi, armatür lokal kayıpları ve pompa gücü."
-date: "2026-05-09"
-tags: ["yük kaybı","basınç kaybı","Darcy-Weisbach","akışkanlar","boru"]
-category: "Akışkanlar"
+title: Yük kaybı (head loss)
+description: >-
+  Boru hatlarında ve hidrolik devrelerde sürtünme yük kaybı ($h_f$),
+  Darcy-Weisbach denklemi, armatür lokal kayıpları ve pompa gücü.
+date: '2026-05-09'
+tags:
+  - yük kaybı
+  - basınç kaybı
+  - Darcy-Weisbach
+  - akışkanlar
+  - boru
+category: Akışkanlar
 draft: false
 readingTime: 4
 ---
 
-Yük kaybı ($h_f$ veya $Delta H$), bir akışkanın boru, kanal veya hidrolik devrede akışı esnasında akışkanın iç viskoz sürtünmesi ve çeper pürüzlülüğü sebebiyle kaybettiği mekanik enerji miktarının sıvı sütunu yüksekliği [$	ext{mSS}$] cinsinden ifadesidir.
+Yük kaybı (`h_f` veya `Delta H`), bir akışkanın boru, kanal veya hidrolik devrede akışı esnasında akışkanın iç viskoz sürtünmesi ve çeper pürüzlülüğü sebebiyle kaybettiği mekanik enerji miktarının sıvı sütunu yüksekliği [`extmSS`] cinsinden ifadesidir.
 
 ## Neden önemli?
 
-Pompa seçiminde debi ile birlikte basma yüksekliğini ($H$) belirleyen ana bileşen yük kaybıdır. Yük kayıplarının yanlış hesaplanması pompanın sistemi basamamasına veya aşırı büyük motor seçilerek enerji israf edilmesine yol açar.
+Pompa seçiminde debi ile birlikte basma yüksekliğini (`H`) belirleyen ana bileşen yük kaybıdır. Yük kayıplarının yanlış hesaplanması pompanın sistemi basamamasına veya aşırı büyük motor seçilerek enerji israf edilmesine yol açar.
 
 ## Mühendislik uygulaması ve standartlar
 
-Darcy-Weisbach denklemi düz borulardaki ana sürtünme yük kaybını ($h_f$) verir:
-$$h_f = f cdot rac{L}{D} cdot rac{v^2}{2g} quad [	ext{m}]$$
-- $f$: Darcy sürtünme faktörü (Laminer akışta $f = 64/Re$, türbülanslı akışta Colebrook veya Haaland formülü),
-- $L$: Boru hattı toplam boyu [$	ext{m}$],
-- $D$: Boru iç çapı [$	ext{m}$],
-- $v$: Akış hızı [$	ext{m/s}$], $g = 9.81	ext{ m/s}^2$.
-**Lokal / Minör Kayıplar ($h_{lokal}$):** Dirsekler, vanalar ve redüksiyonlar için kayıp katsayısı ($K$) kullanılarak toplanır:
-$$h_{lokal} = sum K cdot rac{v^2}{2g}$$
+Darcy-Weisbach denklemi düz borulardaki ana sürtünme yük kaybını (`h_f`) verir:
+
+`h_f = f cdot racLD cdot racv^22g quad [	extm]`
+
+- `f`: Darcy sürtünme faktörü (Laminer akışta `f = 64/Re`, türbülanslı akışta Colebrook veya Haaland formülü),
+- `L`: Boru hattı toplam boyu [`extm`],
+- `D`: Boru iç çapı [`extm`],
+- `v`: Akış hızı [`extm/s`], `g = 9.81	ext m/s^2`.
+**Lokal / Minör Kayıplar (`h_lokal`):** Dirsekler, vanalar ve redüksiyonlar için kayıp katsayısı (`K`) kullanılarak toplanır:
+
+`h_lokal = sum K cdot racv^22g`
+
 
 <Callout type="info" title="Hızın Karesi Etkisi">
 Boru çapı yarıya indirilirse akış hızı 4 katına, sürtünme kaybı ise hızın karesi ve çapın etkisiyle ($v^2/D$) tam **32 katına** çıkar!

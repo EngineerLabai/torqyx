@@ -1,9 +1,17 @@
 ---
-title: "Titanium alloys engineering guide: Ti-6Al-4V and pure titanium"
-description: "Ti-6Al-4V Grade 5 and CP titanium mechanical properties, specific strength, CNC machining parameters, elastic modulus, and corrosion resistance guide."
-date: "2026-05-09"
-tags: ["titanium", "Ti-6Al-4V", "specific strength", "lightweight design", "ASTM B348", "CNC machining"]
-category: "Materials"
+title: 'Titanium alloys engineering guide: Ti-6Al-4V and pure titanium'
+description: >-
+  Ti-6Al-4V Grade 5 and CP titanium mechanical properties, specific strength,
+  CNC machining parameters, elastic modulus, and corrosion resistance guide.
+date: '2026-05-09'
+tags:
+  - titanium
+  - Ti-6Al-4V
+  - specific strength
+  - lightweight design
+  - ASTM B348
+  - CNC machining
+category: Materials
 draft: false
 readingTime: 9
 ---
@@ -16,53 +24,61 @@ This guide details the structural and chemical selection criteria for titanium a
 
 Titanium alloys offer exceptional specific strength (strength-to-weight ratio) and virtually complete immunity to atmospheric and marine corrosion. However, integrating titanium without understanding its fundamental mechanical and thermal idiosyncrasies triggers severe engineering and cost penalties:
 - Twice the elastic deflection and compliance compared to structural steel due to its low elastic modulus, leading to chatter and dimensional instability,
-- Severe tool wear and thermal breakdown in CNC machining caused by exceptionally low thermal conductivity ($k \approx 7\text{ W/m}\cdot\text{K}$) concentrating heat at the tool edge,
+- Severe tool wear and thermal breakdown in CNC machining caused by exceptionally low thermal conductivity (`k  ≈  7  W/m  *  K`) concentrating heat at the tool edge,
 - Severe galling and thread cold-welding when fasteners or sliding interfaces lack appropriate barrier coatings.
 
 ## Assumptions
 
 - Grade 5 alloy (Ti-6Al-4V / UNS R56400) is evaluated in the mill-annealed state.
-- Continuous operating temperatures remain below $350 - 400\text{ °C}$ to prevent interstitial embrittlement from oxygen and hydrogen uptake.
+- Continuous operating temperatures remain below `350 - 400  °C` to prevent interstitial embrittlement from oxygen and hydrogen uptake.
 - Compatibility with carbon fiber reinforced polymers (CFRP) is considered for galvanic corrosion isolation.
 
 ## Step by step method
 
 1. **Select the Applicable Titanium Alloy Grade:**
-   - **Grades 1 to 4 (Commercially Pure - CP Titanium):** Yield strength $170 - 480\text{ MPa}$; unmatched resistance to wet chlorine, organic acids, and marine immersion; easily formable and weldable.
-   - **Grade 5 (Ti-6Al-4V - $\alpha+\beta$ Alloy):** Yield strength $R_{p0.2} \ge 830\text{ MPa}$, ultimate strength $950\text{ MPa}$; workhorse for aerospace airframes, aero-engine discs, and high-performance motorsports.
+   - **Grades 1 to 4 (Commercially Pure - CP Titanium):** Yield strength `170 - 480  MPa`; unmatched resistance to wet chlorine, organic acids, and marine immersion; easily formable and weldable.
+   - **Grade 5 (Ti-6Al-4V - `α+β` Alloy):** Yield strength `R_p0.2  >=  830  MPa`, ultimate strength `950  MPa`; workhorse for aerospace airframes, aero-engine discs, and high-performance motorsports.
    - **Grade 23 (Ti-6Al-4V ELI):** Extra-low interstitial variant optimized for cryogenic toughness and surgical orthopaedic implants.
 
 2. **Evaluate Specific Strength (Strength-to-Density Ratio):**
-   Compare structural efficiency across material candidates ($\sigma / \rho$):
-   - AISI 4340 Alloy Steel: $\frac{1000\text{ MPa}}{7.85\text{ g/cm}^3} \approx 127\text{ kN}\cdot\text{m/kg}$
-   - Aluminum 7075-T6: $\frac{540\text{ MPa}}{2.81\text{ g/cm}^3} \approx 192\text{ kN}\cdot\text{m/kg}$
-   - Ti-6Al-4V Grade 5: $\frac{950\text{ MPa}}{4.43\text{ g/cm}^3} \approx \mathbf{214\text{ kN}\cdot\text{m/kg}}$
+   Compare structural efficiency across material candidates (`σ / ρ`):
+   - AISI 4340 Alloy Steel: `(1000  MPa  / 7.85  g/cm ^3)  ≈  127  kN  *  m/kg`
+   - Aluminum 7075-T6: `(540  MPa  / 2.81  g/cm ^3)  ≈  192  kN  *  m/kg`
+   - Ti-6Al-4V Grade 5: `(950  MPa  / 4.43  g/cm ^3)  ≈  mathbf214  kN  *  m/kg`
    Titanium delivers up to a **40% to 55% direct weight reduction** over high-strength steel.
 
 3. **Compensate for Low Elastic Modulus Deflection:**
-   Because $E_{Ti} \approx 110\text{ GPa}$ is roughly half that of structural steel ($210\text{ GPa}$), identical cross-sections deflect roughly twice as much under bending:
-   $$f_{Ti} = \frac{E_{steel}}{E_{Ti}} \cdot f_{steel} \approx 1.91 \cdot f_{steel}$$
-   Rigidity-driven shafts and spindles require increased section moments of inertia ($I$).
+   Because `E_Ti  ≈  110  GPa` is roughly half that of structural steel (`210  GPa`), identical cross-sections deflect roughly twice as much under bending:
+   
+`f_Ti = fracE_steelE_Ti  *  f_steel  ≈  1.91  *  f_steel`
+
+   Rigidity-driven shafts and spindles require increased section moments of inertia (`I`).
 
 4. **Establish CNC Milling and Turning Parameters:**
-   - Low surface speed: $v_c = 40 - 70\text{ m/min}$ using rigid sub-micron carbide tooling with TiAlN or AlTiN PVD coatings.
-   - High chip load: $f_z = 0.08 - 0.15\text{ mm/tooth}$ to cut beneath the work-hardened sub-surface zone.
+   - Low surface speed: `v_c = 40 - 70  m/min` using rigid sub-micron carbide tooling with TiAlN or AlTiN PVD coatings.
+   - High chip load: `f_z = 0.08 - 0.15  mm/tooth` to cut beneath the work-hardened sub-surface zone.
    - High-pressure coolant: Direct minimum 20 to 70 bar flood delivery into the shear zone.
 
 5. **Industrial Worked Example:**
-   An aerospace structural tie-rod transmits a tensile design load of 45 kN with a design factor of safety $S_f = 1.5$:
+   An aerospace structural tie-rod transmits a tensile design load of 45 kN with a design factor of safety `S_f = 1.5`:
    - Required tensile area:
-     $$A_{req} = \frac{45\,000 \times 1.5}{830\text{ MPa}} = \mathbf{81.3\text{ mm}^2}$$
+     
+`A_req = (45,000  *  1.5 / 830  MPa ) = mathbf81.3  mm ^2`
+
    - Weight for a 200 mm length tie-rod:
-     $$m_{Ti} = (81.3 \times 10^{-6}\text{ m}^2) \times 0.20\text{ m} \times 4430\text{ kg/m}^3 = \mathbf{0.072\text{ kg}}\ (72\text{ g})$$
-   - Comparison with quenched & tempered 42CrMo4 steel ($S_y = 600\text{ MPa}$, $\rho = 7850\text{ kg/m}^3$):
-     $$A_{req,steel} = \frac{67\,500}{600} = 112.5\text{ mm}^2 \implies m_{steel} = 112.5 \times 10^{-6} \times 0.20 \times 7850 = \mathbf{0.177\text{ kg}}\ (177\text{ g})$$
+     
+`m_Ti = (81.3  *  10^-6  m ^2)  *  0.20  m   *  4430  kg/m ^3 = mathbf0.072  kg  (72  g )`
+
+   - Comparison with quenched & tempered 42CrMo4 steel (`S_y = 600  MPa`, `ρ = 7850  kg/m ^3`):
+     
+`A_req,steel = (67,500 / 600) = 112.5  mm ^2 implies m_steel = 112.5  *  10^-6  *  0.20  *  7850 = mathbf0.177  kg  (177  g )`
+
    - *Net Savings:* 105 grams (59.3% mass reduction) per structural tie-rod.
 
 ## Common mistakes
 
-- **Running Tooling at Steel Surface Speeds:** Exceeding $v_c = 90\text{ m/min}$ creates catastrophic thermal tool failure within seconds due to titanium's low thermal dissipation.
-- **Ignoring Springback in Sheet Metal Forming:** Titanium springs back twice as much as cold-rolled steel upon die release; hot forming or creep forming at $550 - 650\text{ °C}$ is standard practice.
+- **Running Tooling at Steel Surface Speeds:** Exceeding `v_c = 90  m/min` creates catastrophic thermal tool failure within seconds due to titanium's low thermal dissipation.
+- **Ignoring Springback in Sheet Metal Forming:** Titanium springs back twice as much as cold-rolled steel upon die release; hot forming or creep forming at `550 - 650  °C` is standard practice.
 - **Dry Assembly of Fasteners (Galling):** Uncoated titanium threads seize instantly during torque tightening; solid film MoS2 or silver plating must be specified.
 - **Direct Aluminum-CFRP Contact:** Aluminum forms an aggressive galvanic couple with carbon fiber in moist marine environments, whereas titanium is galvanically compatible with CFRP.
 

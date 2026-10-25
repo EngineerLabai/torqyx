@@ -1,9 +1,17 @@
 ---
-title: "Döner ekipmanda dengeleme ve titreşim kontrolü"
-description: "Rotor statik ve dinamik balans ayarı, ISO 21940 balans kalitesi, ISO 20816 titreşim şiddeti ve rezonans kontrol mühendislik rehberi."
-date: "2026-05-09"
-tags: ["titreşim", "rezonans", "denge", "balans", "ISO 21940", "ISO 20816"]
-category: "Bakım"
+title: Döner ekipmanda dengeleme ve titreşim kontrolü
+description: >-
+  Rotor statik ve dinamik balans ayarı, ISO 21940 balans kalitesi, ISO 20816
+  titreşim şiddeti ve rezonans kontrol mühendislik rehberi.
+date: '2026-05-09'
+tags:
+  - titreşim
+  - rezonans
+  - denge
+  - balans
+  - ISO 21940
+  - ISO 20816
+category: Bakım
 draft: false
 readingTime: 9
 ---
@@ -14,53 +22,63 @@ Bu rehber, elektrik motorları, fanlar, pompalar, türbinler ve şaft hatlarınd
 
 ## Problem / Amaç
 
-Döner makinelerde kütle merkezinin geometrik dönme ekseninden kaçık olması, devir sayısının karesiyle orantılı santrifüj kuvvetler yaratır ($F_c \propto \omega^2$). Kontrol altına alınmayan bu dengesizlik kuvvetleri:
+Döner makinelerde kütle merkezinin geometrik dönme ekseninden kaçık olması, devir sayısının karesiyle orantılı santrifüj kuvvetler yaratır (`F_c propto ω^2`). Kontrol altına alınmayan bu dengesizlik kuvvetleri:
 - Rulman yataklarının dinamik yük kapasitesini hızla tüketerek erken yatak yorulmasına (spalling / flaking),
 - Mil-göbek ve cıvatalı flanş bağlantılarında gevşeme ve dinamik yorulma çatlaklarına,
 - Makinenin doğal frekansıyla eşleştiğinde rezonans felaketlerine ve yapısal kırılmalara yol açar.
 
 ## Varsayımlar
 
-- Rotor rijit (rigid rotor) kabul edilir; çalışma hızı ilk kritik eğilme hızının (critical flexural speed) en az %30 altındadır ($n_{calisma} < 0.70 \cdot n_{kritik}$).
+- Rotor rijit (rigid rotor) kabul edilir; çalışma hızı ilk kritik eğilme hızının (critical flexural speed) en az %30 altındadır (`n_calisma &lt; 0.70  *  n_kritik`).
 - Yatak yuvaları ve şase rijitliği yön bağımsız ve doğrusal davranış gösterir.
-- Titreşim ölçümleri ISO 20816-1 kılavuzuna göre rulman yatak gövdelerinden radyal ve eksenel doğrultularda RMS hız ($v_{rms}$) olarak alınır.
+- Titreşim ölçümleri ISO 20816-1 kılavuzuna göre rulman yatak gövdelerinden radyal ve eksenel doğrultularda RMS hız (`v_rms`) olarak alınır.
 
 ## Adım adım yöntem
 
 1. **Rotorun Geometrisine Göre Balans Türünü Seçin:**
-   - **Tek Düzlem (Statik Balans):** Disk tipi, ince yapılı rotorlar için ($L/D < 0.20$ ve $n < 1000\text{ rpm}$); volanlar, dar kayış kasnakları.
-   - **Çift Düzlem (Dinamik Balans):** Uzun silindirik rotorlar için ($L/D \ge 0.20$ veya yüksek devir); elektrik motoru rotorları, çok kademeli pompalar, endüstriyel fanlar.
+   - **Tek Düzlem (Statik Balans):** Disk tipi, ince yapılı rotorlar için (`L/D &lt; 0.20` ve `n &lt; 1000  rpm`); volanlar, dar kayış kasnakları.
+   - **Çift Düzlem (Dinamik Balans):** Uzun silindirik rotorlar için (`L/D  >=  0.20` veya yüksek devir); elektrik motoru rotorları, çok kademeli pompalar, endüstriyel fanlar.
 
-2. **ISO 21940-11 Kalite Sınıfını ($G$) Belirleyin:**
+2. **ISO 21940-11 Kalite Sınıfını (`G`) Belirleyin:**
    - **G6.3:** Genel endüstriyel fanlar, dişli kutusu milleri, tarım makineleri.
    - **G2.5:** Elektrik motorları, takım tezgahı ana milleri, türbinler, kompresörler.
    - **G1.0:** Yüksek hassasiyetli taşlama milleri, kayıt cihazları.
 
-3. **İzin Verilen Kalan Dengesizliği ($U_{per}$) Hesaplayın:**
-   Toplam rotor kütlesi $m$ [$\text{kg}$] ve açısal hız $\omega = \frac{2\pi \cdot n}{60}$ [$\text{rad/s}$] bilindiğinde:
-   $$U_{per} = 1000 \cdot \frac{G \cdot m}{\omega} \quad [\text{g}\cdot\text{mm}]$$
-   İki düzlemli balanslama yapılıyorsa bu değer düzlemlerin kütle merkezine mesafesine göre paylaştırılır (simetrik ise $U_1 = U_2 = U_{per} / 2$).
+3. **İzin Verilen Kalan Dengesizliği (`U_per`) Hesaplayın:**
+   Toplam rotor kütlesi `m` [`kg`] ve açısal hız `ω = (2pi  *  n / 60)` [`rad/s`] bilindiğinde:
+   
+`U_per = 1000  *  (G  *  m / ω)   [ g  *  mm ]`
+
+   İki düzlemli balanslama yapılıyorsa bu değer düzlemlerin kütle merkezine mesafesine göre paylaştırılır (simetrik ise `U_1 = U_2 = U_per / 2`).
 
 4. **Dengesizlik Santrifüj Kuvvetini Doğrulayın:**
    Radyal yataklara iletilen dinamik kuvvet:
-   $$F_c = m_u \cdot r \cdot \omega^2 = \frac{U_{per}}{1000} \cdot \omega^2 \quad [\text{N}]$$
+   
+`F_c = m_u  *  r  *  ω^2 = fracU_per1000  *  ω^2   [ N ]`
+
 
 5. **ISO 20816 Titreşim Şiddeti Seviyelerini Kontrol Edin:**
-   10 Hz - 1000 Hz frekans bandında ölçülen RMS hız ($v_{rms}$ [$\text{mm/s}$]):
-   - **Bölge A (Yeni/Mükemmel):** $v_{rms} < 1.4\text{ mm/s}$ (Orta boy motorlar için)
-   - **Bölge B (Kabul Edilebilir Sürekli Çalışma):** $1.4 \le v_{rms} \le 2.8\text{ mm/s}$
-   - **Bölge C (Sınırlı İzin - Bakım Planlanmalı):** $2.8 < v_{rms} \le 4.5\text{ mm/s}$
-   - **Bölge D (Tehlikeli - Acil Durdurma):** $v_{rms} > 4.5\text{ mm/s}$
+   10 Hz - 1000 Hz frekans bandında ölçülen RMS hız (`v_rms` [`mm/s`]):
+   - **Bölge A (Yeni/Mükemmel):** `v_rms &lt; 1.4  mm/s` (Orta boy motorlar için)
+   - **Bölge B (Kabul Edilebilir Sürekli Çalışma):** `1.4  <=  v_rms  <=  2.8  mm/s`
+   - **Bölge C (Sınırlı İzin - Bakım Planlanmalı):** `2.8 &lt; v_rms  <=  4.5  mm/s`
+   - **Bölge D (Tehlikeli - Acil Durdurma):** `v_rms > 4.5  mm/s`
 
 6. **Çözümlü Endüstriyel Hesap Örneği:**
-   Kütlesi $m = 60\text{ kg}$ olan bir sanayi elektrik motoru rotoru $n = 3000\text{ rpm}$ devirde dönecektir. Kalite sınıfı G2.5 seçilmiştir:
-   - Açısal hız: $\omega = \frac{2\pi \times 3000}{60} = \mathbf{314.16\text{ rad/s}}$
+   Kütlesi `m = 60  kg` olan bir sanayi elektrik motoru rotoru `n = 3000  rpm` devirde dönecektir. Kalite sınıfı G2.5 seçilmiştir:
+   - Açısal hız: `ω = (2pi  *  3000 / 60) = mathbf314.16  rad/s`
    - İzin verilen toplam artık dengesizlik:
-     $$U_{per} = 1000 \cdot \frac{2.5 \times 60}{314.16} = \mathbf{477.5\text{ g}\cdot\text{mm}}$$
+     
+`U_per = 1000  *  (2.5  *  60 / 314.16) = mathbf477.5  g  *  mm`
+
    - İki simetrik balans düzlemi için düzlem başına:
-     $$U_1 = U_2 = \frac{477.5}{2} = \mathbf{238.8\text{ g}\cdot\text{mm}}$$
-   - Balans cıvatalarının takıldığı yarıçap $r = 120\text{ mm}$ ise eklenecek/çıkarılacak azami tolerans kütlesi:
-     $$m_{ek} = \frac{238.8}{120} = \mathbf{1.99\text{ gram}}$$
+     
+`U_1 = U_2 = (477.5 / 2) = mathbf238.8  g  *  mm`
+
+   - Balans cıvatalarının takıldığı yarıçap `r = 120  mm` ise eklenecek/çıkarılacak azami tolerans kütlesi:
+     
+`m_ek = (238.8 / 120) = mathbf1.99  gram`
+
 
 ## Sık hatalar
 

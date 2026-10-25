@@ -1,14 +1,20 @@
 ---
-title: "Tork (döndürme momenti)"
+title: Tork (döndürme momenti)
 description: "Tork formülü ($T = F \times r$), motor gücü ve devir sayısı ilişkisi ($P = T cdot omega$), burulma gerilmesi ve tork hesabı."
-date: "2026-05-09"
-tags: ["tork","döndürme momenti","güç","devir","şaft","Nm"]
-category: "Mekanik"
+date: '2026-05-09'
+tags:
+  - tork
+  - döndürme momenti
+  - güç
+  - devir
+  - şaft
+  - Nm
+category: Mekanik
 draft: false
 readingTime: 4
 ---
 
-Tork ($T$), bir kuvvetin bir cismi belirli bir dönme ekseni veya merkez noktası etrafında döndürme eğilimini ifade eden mekanik döndürme momentidir. SI birim sisteminde Newton metre [$	ext{Nm}$] olarak ifade edilir.
+Tork (`T`), bir kuvvetin bir cismi belirli bir dönme ekseni veya merkez noktası etrafında döndürme eğilimini ifade eden mekanik döndürme momentidir. SI birim sisteminde Newton metre [`extNm`] olarak ifade edilir.
 
 ## Neden önemli?
 
@@ -16,18 +22,26 @@ Elektrik motorları, redüktörler ve tahrik milleri tork üreterek ve aktararak
 
 ## Mühendislik uygulaması ve standartlar
 
-- **Temel Tork Formülü:** Kuvvet ($F$) ve dönme merkezine olan dik mesafe ($r$):
-  $$T = F cdot r quad [	ext{Nm}]$$
+- **Temel Tork Formülü:** Kuvvet (`F`) ve dönme merkezine olan dik mesafe (`r`):
+  
+`T = F  *  r quad [	extNm]`
+
 - **Güç, Tork ve Devir Sayısı İlişkisi:**
-  $$P = T cdot omega = T cdot rac{2pi cdot n}{60} implies T = rac{9550 cdot P}{n}$$
-  *(burada $P$ mekanik güç [$	ext{kW}$], $n$ dönme devri [$	ext{rpm}$], $T$ torktur [$	ext{Nm}$]).*
+  
+`P = T  *  omega = T  *  (2pi  *  n / 60) implies T = (9550  *  P / n)`
+
+  *(burada `P` mekanik güç [`extkW`], `n` dönme devri [`extrpm`], `T` torktur [`extNm`]).*
 - **Burulma Kayma Gerilmesi:**
-  $$	au = rac{16 cdot T}{pi cdot d^3} le 	au_{em}$$
+  
+`au = (16  *  T / pi  *  d^3) le 	au_em`
+
 
 <Callout type="info" title="Motor Torku Hesabı">
-$15	ext{ kW}$ gücünde ve $n = 1450	ext{ rpm}$ devirle dönen bir asenkron elektrik motorunun milindeki tork:
-$$T = rac{9550 	imes 15}{1450} approx mathbf{98.8	ext{ Nm}}$$
-Redüktör ile devir 10 kat düşürülürse ($145	ext{ rpm}$), tork yaklaşık 10 katına ($988	ext{ Nm}$) çıkar.
+`15	ext kW` gücünde ve `n = 1450	ext rpm` devirle dönen bir asenkron elektrik motorunun milindeki tork:
+
+`T = (9550 	imes 15 / 1450) approx mathbf98.8	ext Nm`
+
+Redüktör ile devir 10 kat düşürülürse (`145	ext rpm`), tork yaklaşık 10 katına (`988	ext Nm`) çıkar.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar

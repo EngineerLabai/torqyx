@@ -1,14 +1,22 @@
 ---
-title: "Sıkı geçme girişimi (interference)"
-description: "ISO 286 sıkı geçmelerde negatif boşluk (girişim), Lamé temas basıncı formülü, iletilebilir tork ve ısıl büzülme montajı."
-date: "2026-05-09"
-tags: ["sıkı geçme","girişim","ISO 286","press fit","Lamé","tork iletimi"]
-category: "Tolerans"
+title: Sıkı geçme girişimi (interference)
+description: >-
+  ISO 286 sıkı geçmelerde negatif boşluk (girişim), Lamé temas basıncı formülü,
+  iletilebilir tork ve ısıl büzülme montajı.
+date: '2026-05-09'
+tags:
+  - sıkı geçme
+  - girişim
+  - ISO 286
+  - press fit
+  - Lamé
+  - tork iletimi
+category: Tolerans
 draft: false
 readingTime: 4
 ---
 
-Girişim (Interference), montaj öncesinde dış elemanın (şaft / mil) dış çapının, iç elemanın (delik / göbek) iç çapından büyük olması durumunda aradaki negatif boyutsal farktır ($Delta = d_{mil} - D_{delik} > 0$). Sıkı geçme bağlantısının temelidir.
+Girişim (Interference), montaj öncesinde dış elemanın (şaft / mil) dış çapının, iç elemanın (delik / göbek) iç çapından büyük olması durumunda aradaki negatif boyutsal farktır (`Delta = d_mil - D_delik > 0`). Sıkı geçme bağlantısının temelidir.
 
 ## Neden önemli?
 
@@ -18,10 +26,14 @@ Kamasız, boşluksuz ve yüksek dinamik yorulma dayanımlı mil-göbek bağlant�
 
 ISO 286 ve DIN 7190 standartlarına göre:
 - **Minimum ve Maksimum Girişim:**
-  $$Delta_{min} = d_{mil,min} - D_{delik,max}, quad Delta_{max} = d_{mil,max} - D_{delik,min}$$
-- **Lamé Temas Basıncı ($p$):** Katı çelik mil ve göbek için ($E = 210,000	ext{ MPa}$):
-  $$p = rac{Delta_{eff}}{d} cdot rac{E}{2} cdot left(1 - rac{d^2}{D_o^2}ight)$$
-- **Tork Aktarım Kapasitesi:** $T = rac{1}{2} pi cdot d^2 cdot L cdot p cdot mu$.
+  
+`Delta_min = d_mil,min - D_delik,max, quad Delta_max = d_mil,max - D_delik,min`
+
+- **Lamé Temas Basıncı (`p`):** Katı çelik mil ve göbek için (`E = 210,000	ext MPa`):
+  
+`p = racDelta_effd cdot racE2 cdot left(1 - racd^2D_o^2ight)`
+
+- **Tork Aktarım Kapasitesi:** `T = rac12 pi cdot d^2 cdot L cdot p cdot mu`.
 
 <Callout type="info" title="Tasarım Uyarısı">
 Yüzey pürüzlülük tepeleri montaj esnasında ezildiği için efektif girişim $Delta_{eff} = Delta - 1.2(R_{z,mil} + R_{z,delik})$ formülüyle düzeltilmelidir.

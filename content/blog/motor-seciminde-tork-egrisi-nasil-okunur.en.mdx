@@ -1,57 +1,66 @@
 ---
-title: "How to Read an Electric Motor Torque-Speed Curve"
-description: "Learn how to read motor torque-speed curves: nominal, peak, breakdown, and locked-rotor torque; match motor capabilities with dynamic load curves."
-date: "2026-06-15"
-tags: ["motor torque speed curve", "electric motor sizing", "torque calculation", "motor selection", "IEC 60034-1"]
-category: "Torque & Drivetrain"
+title: How to Read an Electric Motor Torque-Speed Curve
+description: >-
+  Learn how to read motor torque-speed curves: nominal, peak, breakdown, and
+  locked-rotor torque; match motor capabilities with dynamic load curves.
+date: '2026-06-15'
+tags:
+  - motor torque speed curve
+  - electric motor sizing
+  - torque calculation
+  - motor selection
+  - IEC 60034-1
+category: Torque & Drivetrain
 draft: false
 readingTime: 5
-canonical: "https://torqyx.com/en/blog/motor-seciminde-tork-egrisi-nasil-okunur"
+canonical: 'https://torqyx.com/en/blog/motor-seciminde-tork-egrisi-nasil-okunur'
 ---
 
 <Image src="/images/blog/motor-seciminde-tork-egrisi-nasil-okunur.webp" alt="Electric motor torque-speed curve diagram with operating zones" width={1200} height={900} caption="Understanding electric motor torque-speed curves: continuous duty, peak acceleration, and breakdown limits." />
 
 ## What Does the Torque-Speed Characteristic Curve Tell You?
 
-An electric motor's torque-speed curve graphically displays the exact rotational torque ($T$ in $\text{N}\cdot\text{m}$) the machine can produce across its entire rotational velocity range ($n$ in $\text{rpm}$ or $\omega$ in $\text{rad/s}$).
+An electric motor's torque-speed curve graphically displays the exact rotational torque (T in N *  m) the machine can produce across its entire rotational velocity range (n in rpm or ω in rad/s).
 
-Selecting an electric motor based solely on nameplate mechanical power (e.g., "7.5 kW") without inspecting its torque curve frequently leads to machine startup failures, drive trips, or motor burnout. A motor capable of delivering 7.5 kW at 3000 rpm produces only half the torque of a 7.5 kW motor rated at 1500 rpm ($P = T \cdot \omega$). Furthermore, the transient torque available during initial breakaway and acceleration differs vastly across motor architectures (induction, brushless DC, synchronous reluctance, or servo).
+Selecting an electric motor based solely on nameplate mechanical power (e.g., "7.5 kW") without inspecting its torque curve frequently leads to machine startup failures, drive trips, or motor burnout. A motor capable of delivering 7.5 kW at 3000 rpm produces only half the torque of a 7.5 kW motor rated at 1500 rpm (P = T  *  ω). Furthermore, the transient torque available during initial breakaway and acceleration differs vastly across motor architectures (induction, brushless DC, synchronous reluctance, or servo).
 
 ## Key Torque Benchmarks on Induction & Servo Curves
 
 When evaluating manufacturer datasheets (governed by IEC 60034-1 or NEMA MG 1), identify these five critical points:
 
-1. **Locked-Rotor Torque ($T_L$ or Starting Torque):** The torque the motor develops at zero speed ($n = 0$) when rated voltage and frequency are applied. If $T_L$ is lower than static system stiction (breakaway torque), the machine will not turn.
-2. **Pull-Up Torque ($T_u$):** The minimum torque developed between standstill and the breakdown point. In induction motors, this dip can stall high-inertia machinery during spin-up.
-3. **Breakdown / Pull-Out Torque ($T_b$):** The maximum transient torque the motor can generate at operating speed before immediately stalling. Typically $2.0$ to $3.5$ times rated torque in AC induction motors.
-4. **Rated Continuous Torque ($T_N$ - S1 Duty):** The steady-state torque the motor can deliver continuously without exceeding thermal insulation class limits (e.g., Class F/B rise).
-5. **Peak Intermittent Torque ($T_{\text{peak}}$ - S3 Duty):** Available on servo and inverter-duty motors for short accelerations (e.g., $200\text{--}300\%$ of $T_N$), strictly bounded by drive current limits and rotor demagnetization thresholds.
+1. **Locked-Rotor Torque (T_L or Starting Torque):** The torque the motor develops at zero speed (n = 0) when rated voltage and frequency are applied. If T_L is lower than static system stiction (breakaway torque), the machine will not turn.
+2. **Pull-Up Torque (T_u):** The minimum torque developed between standstill and the breakdown point. In induction motors, this dip can stall high-inertia machinery during spin-up.
+3. **Breakdown / Pull-Out Torque (T_b):** The maximum transient torque the motor can generate at operating speed before immediately stalling. Typically 2.0 to 3.5 times rated torque in AC induction motors.
+4. **Rated Continuous Torque (T_N - S1 Duty):** The steady-state torque the motor can deliver continuously without exceeding thermal insulation class limits (e.g., Class F/B rise).
+5. **Peak Intermittent Torque (T_ peak - S3 Duty):** Available on servo and inverter-duty motors for short accelerations (e.g., 200 --300% of T_N), strictly bounded by drive current limits and rotor demagnetization thresholds.
 
 ## Matching the Load Profile to the Motor Curve
 
 A drive system operates reliably only when the load torque curve lies comfortably within the motor's permissible operating envelope across all operating points:
 
-- **Quadratic Torque Loads (Centrifugal Fans & Pumps):** Torque scales with the square of speed ($T \propto n^2$). Breakaway demand is low, but continuous demand surges at full operating speed.
+- **Quadratic Torque Loads (Centrifugal Fans & Pumps):** Torque scales with the square of speed (T propto n^2). Breakaway demand is low, but continuous demand surges at full operating speed.
 - **Constant Torque Loads (Conveyors, Extruders, Positive Displacement Pumps):** Friction requires consistent torque from 1 rpm to rated speed. Adequate low-speed cooling (forced cooling fan) is vital when operated via VFDs.
 - **High Breakaway / High Inertia Loads (Centrifuges, Crushers, Loaded Ball Mills):** Starting torque demand spikes drastically at standstill. Locked-rotor torque and acceleration margins dominate selection.
 
 ## Factoring Rotational Inertia and Acceleration Demands
 
-Motors do not just overcome steady friction; they must accelerate rotating masses to target cycle times. Total required dynamic motor torque during acceleration ($T_{\text{mot}}$) is:
+Motors do not just overcome steady friction; they must accelerate rotating masses to target cycle times. Total required dynamic motor torque during acceleration (T_ mot) is:
 
-$$T_{\text{mot}} = T_{\text{load}} + T_{\text{acc}} = T_{\text{load}} + J_{\text{total}} \cdot \frac{d\omega}{dt} = T_{\text{load}} + J_{\text{total}} \cdot \frac{2\pi \cdot \Delta n}{60 \cdot t_{\text{acc}}}$$
+
+`T_ mot  = T_ load  + T_ acc  = T_ load  + J_ total   *  (dω / dt) = T_ load  + J_ total   *  (2pi  *  Δ n / 60  *  t_ acc )`
+
 
 Where:
-- $J_{\text{total}} = J_{\text{motor}} + J_{\text{load, reflected}}$ is total mass moment of inertia ($\text{kg}\cdot\text{m}^2$).
-- $t_{\text{acc}}$ is desired acceleration time in seconds.
+- J_ total = J_ motor + J_ load, reflected is total mass moment of inertia (kg *  m^2).
+- t_ acc is desired acceleration time in seconds.
 
-If the load inertia reflected to the motor shaft is excessively large relative to motor rotor inertia ($J_{\text{load}} / J_{\text{motor}} > 10$ for servos, or $>20$ for general industrial machines), the motor spends excessive time in high-current slip regions, triggering thermal overload trips.
+If the load inertia reflected to the motor shaft is excessively large relative to motor rotor inertia (J_ load / J_ motor > 10 for servos, or >20 for general industrial machines), the motor spends excessive time in high-current slip regions, triggering thermal overload trips.
 
 ## VFD (Inverter Duty) Considerations: Constant Torque vs. Constant Power
 
 When controlled by a Variable Frequency Drive:
-- **Base Speed Region ($0$ to $f_{\text{base}}$, e.g., $0\text{--}50\text{ Hz}$):** Operates under constant volts-per-hertz ($V/f$), maintaining full rated continuous torque $T_N$.
-- **Field Weakening Region (Above $f_{\text{base}}$, e.g., $>50\text{ Hz}$):** Voltage cannot exceed mains supply; motor flux weakens, causing available torque to decay inversely with speed ($T \propto 1/n$) while power remains constant. Sizing a machine above base speed must account for this torque drop-off.
+- **Base Speed Region (0 to f_ base, e.g., 0 --50  Hz):** Operates under constant volts-per-hertz (V/f), maintaining full rated continuous torque T_N.
+- **Field Weakening Region (Above f_ base, e.g., >50  Hz):** Voltage cannot exceed mains supply; motor flux weakens, causing available torque to decay inversely with speed (T propto 1/n) while power remains constant. Sizing a machine above base speed must account for this torque drop-off.
 
 ## Related Torqyx Calculation Tool
 

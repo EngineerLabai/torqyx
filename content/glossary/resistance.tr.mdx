@@ -1,32 +1,43 @@
 ---
-title: "Elektriksel direnç (resistance)"
+title: Elektriksel direnç (resistance)
 description: "Ohm yasası ($V=IR$), iletken direnci formülü ($R = \rho L / A$), sıcaklık katsayısı ve kablo gerilim düşümü hesabı."
-date: "2026-05-09"
-tags: ["direnç","elektrik","Ohm yasası","iletkenlik","gerilim düşümü"]
-category: "Elektrik"
+date: '2026-05-09'
+tags:
+  - direnç
+  - elektrik
+  - Ohm yasası
+  - iletkenlik
+  - gerilim düşümü
+category: Elektrik
 draft: false
 readingTime: 4
 ---
 
-Elektriksel direnç ($R$), bir elektrik devresinde veya iletkende serbest elektronların akışına (elektrik akımına) karşı gösterilen zorluk derecesidir. SI birim sisteminde birimi Ohm [$Omega$]'dur.
+Elektriksel direnç (`R`), bir elektrik devresinde veya iletkende serbest elektronların akışına (elektrik akımına) karşı gösterilen zorluk derecesidir. SI birim sisteminde birimi Ohm [`Omega`]'dur.
 
 ## Neden önemli?
 
-Kablo kesiti yetersiz seçildiğinde direnç sebebiyle kabloda gerilim düşümü ($Delta V = I cdot R$) ve Joule ısınması ($P = I^2 cdot R$) oluşur. Bu durum motor klemensinde düşük voltaja, yangın tehlikesine ve enerji kaybına yol açar.
+Kablo kesiti yetersiz seçildiğinde direnç sebebiyle kabloda gerilim düşümü (`Delta V = I  *  R`) ve Joule ısınması (`P = I^2  *  R`) oluşur. Bu durum motor klemensinde düşük voltaja, yangın tehlikesine ve enerji kaybına yol açar.
 
 ## Mühendislik uygulaması ve standartlar
 
-- **İletken Direnci Formülü:** Malzemenin özdirenci ($ho_e$), boyu ($L$) ve kesit alanı ($A$):
-  $$R = ho_e cdot rac{L}{A}$$
-  *(Örn: Standart bakır için $ho_e approx 0.0175 Omegacdot	ext{mm}^2	ext{/m}$).*
+- **İletken Direnci Formülü:** Malzemenin özdirenci (`ho_e`), boyu (`L`) ve kesit alanı (`A`):
+  
+`R = ho_e  *  (L / A)`
+
+  *(Örn: Standart bakır için `ho_e approx 0.0175 Omega * 	extmm^2	ext/m`).*
 - **Sıcaklıkla Direnç Değişimi:** Metallerde sıcaklık arttıkça direnç artar:
-  $$R_T = R_0 cdot [1 + alpha cdot (T - T_0)]$$
+  
+`R_T = R_0  *  [1 + alpha  *  (T - T_0)]`
+
 - **Gerilim Düşümü Sınırı:** Endüstriyel tesislerde ana panodan motora giden hatlarda gerilim düşümü %3'ü, aydınlatma hatlarında %1.5'i aşmamalıdır (IEC 60364).
 
 <Callout type="info" title="Kablo Hesabı Örneği">
-$50	ext{ m}$ mesafedeki motora $2.5	ext{ mm}^2$ bakır kablo çekildiğinde gidiş-dönüş ($100	ext{ m}$) hat direnci:
-$$R = 0.0175 	imes rac{100}{2.5} = mathbf{0.70 Omega}$$
-16 A akım geçtiğinde kabloda $11.2	ext{ V}$ gerilim düşümü ve $179	ext{ W}$ ısı kaybı oluşur.
+`50	ext m` mesafedeki motora `2.5	ext mm^2` bakır kablo çekildiğinde gidiş-dönüş (`100	ext m`) hat direnci:
+
+`R = 0.0175 	imes (100 / 2.5) = mathbf0.70 Omega`
+
+16 A akım geçtiğinde kabloda `11.2	ext V` gerilim düşümü ve `179	ext W` ısı kaybı oluşur.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar

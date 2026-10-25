@@ -1,14 +1,19 @@
 ---
-title: "Kayma gerilmesi (kesme gerilmesi)"
+title: Kayma gerilmesi (kesme gerilmesi)
 description: "Mekanik kayma gerilmesi ($\tau = F/A$), cıvatalarda çift tesirli kesme, millerde burulma kayma gerilmesi ve Tresca akma kriteri."
-date: "2026-05-09"
-tags: ["kayma gerilmesi","kesme gerilmesi","burulma","tresca","von mises"]
-category: "Mekanik"
+date: '2026-05-09'
+tags:
+  - kayma gerilmesi
+  - kesme gerilmesi
+  - burulma
+  - tresca
+  - von mises
+category: Mekanik
 draft: false
 readingTime: 4
 ---
 
-Kayma gerilmesi ($	au$), bir elemanın kesitine paralel (teğetsel) doğrultuda etkiyen kuvvetlerin, malzemenin düzlemlerini birbirinin üzerinden kaydırmaya zorlamasıyla oluşan iç gerilmedir. SI birim sisteminde Megapaskal [$	ext{MPa}$] veya [$	ext{N/mm}^2$] olarak ölçülür.
+Kayma gerilmesi (`au`), bir elemanın kesitine paralel (teğetsel) doğrultuda etkiyen kuvvetlerin, malzemenin düzlemlerini birbirinin üzerinden kaydırmaya zorlamasıyla oluşan iç gerilmedir. SI birim sisteminde Megapaskal [`extMPa`] veya [`extN/mm^2`] olarak ölçülür.
 
 ## Neden önemli?
 
@@ -17,16 +22,24 @@ Pimler, perçinler, kama gövdeleri ve cıvatalı mafsal bağlantıları doğrud
 ## Mühendislik uygulaması ve standartlar
 
 - **Doğrudan (Düzlem) Kesme Gerilmesi:**
-  $$	au = rac{F}{A_{kesit}} le 	au_{em}$$
-  Çift tesirli pim bağlantılarında kesilen yüzey iki katına çıkar: $	au = rac{F}{2 cdot A}$.
+  
+`au = fracFA_kesit le 	au_em`
+
+  Çift tesirli pim bağlantılarında kesilen yüzey iki katına çıkar: `au = (F / 2  *  A)`.
 - **Şaft Burulma Kayma Gerilmesi:**
-  $$	au_{tork} = rac{T cdot r}{I_p} = rac{T}{W_p} = rac{16 cdot T}{pi cdot d^3}$$
+  
+`au_tork = (T  *  r / I_p) = (T / W_p) = (16  *  T / pi  *  d^3)`
+
 - **Kayma Akma Dayanımı:** von Mises akma kriterine göre çeliklerin kayma akma sınırı çekme akma sınırının %57.7'sidir:
-  $$	au_y approx 0.577 cdot R_e$$
+  
+`au_y approx 0.577  *  R_e`
+
 
 <Callout type="info" title="Hesaplama Örneği">
-$10	ext{ mm}$ çapında 8.8 kalite bir pim ($R_e = 640	ext{ MPa}$, $	au_y approx 370	ext{ MPa}$) tek tesirli olarak $20	ext{ kN}$ kesme kuvveti taşıyorsa:
-$$A = rac{pi 	imes 10^2}{4} approx 78.5	ext{ mm}^2 implies 	au = rac{20,000}{78.5} approx mathbf{254.8	ext{ MPa}} le 370	ext{ MPa}$$
+`10	ext mm` çapında 8.8 kalite bir pim (`R_e = 640	ext MPa`, `au_y approx 370	ext MPa`) tek tesirli olarak `20	ext kN` kesme kuvveti taşıyorsa:
+
+`A = (pi 	imes 10^2 / 4) approx 78.5	ext mm^2 implies 	au = (20,000 / 78.5) approx mathbf254.8	ext MPa le 370	ext MPa`
+
 Pim emniyetlidir.
 </Callout>
 

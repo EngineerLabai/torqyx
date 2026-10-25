@@ -1,9 +1,16 @@
 ---
-title: "Laminer akış"
-description: "Laminer akış rejimi ($Re < 2300$), düzenli katmanlı akış, Hagen-Poiseuille yasası ve düşük sürtünmeli boru hidroliği."
-date: "2026-05-09"
-tags: ["laminer akış","Reynolds","akışkanlar","viskozite","Poiseuille"]
-category: "Akışkanlar"
+title: Laminer akış
+description: >-
+  Laminer akış rejimi ($Re < 2300$), düzenli katmanlı akış, Hagen-Poiseuille
+  yasası ve düşük sürtünmeli boru hidroliği.
+date: '2026-05-09'
+tags:
+  - laminer akış
+  - Reynolds
+  - akışkanlar
+  - viskozite
+  - Poiseuille
+category: Akışkanlar
 draft: false
 readingTime: 4
 ---
@@ -16,11 +23,13 @@ Laminer akışta çeper sürtünmesi pürüzlülükten tamamen bağımsızdır v
 
 ## Mühendislik uygulaması ve standartlar
 
-- **Reynolds Sayısı Kriteri:** Dairesel borularda $Re < 2300$ olduğunda akış kesin olarak laminerdir.
-- **Parabolik Hız Profili:** Boru çeperinde hız sıfır (kaymama koşulu), merkez eksende ise ortalama hızın iki katıdır ($v_{max} = 2 cdot v_{ort}$).
+- **Reynolds Sayısı Kriteri:** Dairesel borularda `Re &lt; 2300` olduğunda akış kesin olarak laminerdir.
+- **Parabolik Hız Profili:** Boru çeperinde hız sıfır (kaymama koşulu), merkez eksende ise ortalama hızın iki katıdır (`v_max = 2 cdot v_ort`).
 - **Hagen-Poiseuille Yasası:** Laminer akışta basınç kaybı boru pürüzlülüğünden bağımsızdır ve viskoziteyle doğru orantılıdır:
-  $$Delta P = rac{32 cdot mu cdot L cdot v}{D^2} = rac{128 cdot mu cdot L cdot Q}{pi cdot D^4}$$
-  *(Darcy sürtünme faktörü: $f = rac{64}{Re}$)*.
+  
+`Delta P = rac32 cdot mu cdot L cdot vD^2 = rac128 cdot mu cdot L cdot Qpi cdot D^4`
+
+  *(Darcy sürtünme faktörü: `f = rac64Re`)*.
 
 <Callout type="info" title="Akışkan Karşılaştırması">
 Laminer akışta boru iç yüzeyinin pürüzlü veya ayna gibi olması basınç kaybını zerre kadar değiştirmez; sürtünme tamamen akışkanın iç vizkozitesi tarafından belirlenir.

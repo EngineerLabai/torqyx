@@ -1,33 +1,45 @@
 ---
-title: "ISO 898-1 Cıvata Standartları: Mukavemet Sınıfları ve Malzeme Özellikleri"
-description: "ISO 898-1 cıvata standartları, 8.8, 10.9 ve 12.9 mukavemet sınıflarının mekanik anlamı, çekme ve akma dayanımı formülleri ve somun eşleştirme rehberi."
-date: "2026-05-18"
-tags: ["ISO 898-1", "cıvata", "mukavemet sınıfı", "malzeme", "çekme dayanımı", "akma sınırı"]
-category: "Standartlar"
+title: 'ISO 898-1 Cıvata Standartları: Mukavemet Sınıfları ve Malzeme Özellikleri'
+description: >-
+  ISO 898-1 cıvata standartları, 8.8, 10.9 ve 12.9 mukavemet sınıflarının
+  mekanik anlamı, çekme ve akma dayanımı formülleri ve somun eşleştirme rehberi.
+date: '2026-05-18'
+tags:
+  - ISO 898-1
+  - cıvata
+  - mukavemet sınıfı
+  - malzeme
+  - çekme dayanımı
+  - akma sınırı
+category: Standartlar
 draft: false
 readingTime: 6
-canonical: "https://torqyx.com/blog/iso-898-1-civata-standartlari"
+canonical: 'https://torqyx.com/blog/iso-898-1-civata-standartlari'
 ---
 
 ISO 898-1, karbon çeliği ve alaşımlı çelikten imal edilen metrik cıvataların, vidaların ve saplamaların mekanik özelliklerini, çekme dayanımlarını ve test yöntemlerini tanımlayan uluslararası temel referans standardıdır. Makine mühendisliğinde cıvata başlarında görülen "8.8", "10.9" veya "12.9" gibi kabartma işaretler doğrudan bu standardın kodlama sistemine dayanır.
 
 ## Mukavemet sınıfı kodlarının matematiksel anlamı
 
-ISO 898-1 standardında mukavemet sınıfı iki basamaklı bir sayı ve aradaki bir nokta ile ifade edilir (örn: $X.Y$):
-1. **İlk Rakam ($X$):** Cıvatanın nominal minimum çekme mukavemetinin ($R_m$) 100'e bölünmüş halidir:
-   $$R_m = X \times 100 \quad [\text{MPa}]$$
-2. **İkinci Rakam ($Y$):** Akma mukavemetinin ($R_{eL}$ veya $R_{p0.2}$) çekme mukavemetine ($R_m$) olan oranının 10 katıdır:
-   $$R_{p0.2} = R_m \times \frac{Y}{10} = (X \times 100) \times \frac{Y}{10} = X \times Y \times 10 \quad [\text{MPa}]$$
+ISO 898-1 standardında mukavemet sınıfı iki basamaklı bir sayı ve aradaki bir nokta ile ifade edilir (örn: X.Y):
+1. **İlk Rakam (X):** Cıvatanın nominal minimum çekme mukavemetinin (R_m) 100'e bölünmüş halidir:
+   
+`R_m = X  *  100   [ MPa ]`
+
+2. **İkinci Rakam (Y):** Akma mukavemetinin (R_eL veya R_p0.2) çekme mukavemetine (R_m) olan oranının 10 katıdır:
+   
+`R_p0.2 = R_m  *  (Y / 10) = (X  *  100)  *  (Y / 10) = X  *  Y  *  10   [ MPa ]`
+
 
 ### Temel mukavemet sınıfları karşılaştırma tablosu
 
-| Mukavemet Sınıfı | Min. Çekme Mukavemeti $R_m$ [$\text{MPa}$] | Min. Akma Mukavemeti $R_{p0.2}$ [$\text{MPa}$] | Akma / Çekme Oranı | Sertlik Aralığı (HRC) | Kopma Uzaması ($A_5$) |
+| Mukavemet Sınıfı | Min. Çekme Mukavemeti R_m [MPa] | Min. Akma Mukavemeti R_p0.2 [MPa] | Akma / Çekme Oranı | Sertlik Aralığı (HRC) | Kopma Uzaması (A_5) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| **4.6** | $400\text{ MPa}$ | $240\text{ MPa}$ | %60 | $67 - 95\text{ HRB}$ | $\ge \%22$ |
-| **5.8** | $500\text{ MPa}$ | $400\text{ MPa}$ | %80 | $82 - 95\text{ HRB}$ | $\ge \%10$ |
-| **8.8** | $800\text{ MPa}$ | $640\text{ MPa}$ | %80 | $22 - 32\text{ HRC}$ | $\ge \%12$ |
-| **10.9** | $1000\text{ MPa}$ | $900\text{ MPa}$ | %90 | $32 - 39\text{ HRC}$ | $\ge \%9$ |
-| **12.9** | $1200\text{ MPa}$ | $1080\text{ MPa}$ | %90 | $39 - 44\text{ HRC}$ | $\ge \%8$ |
+| **4.6** | 400  MPa | 240  MPa | %60 | 67 - 95  HRB | >=  %22 |
+| **5.8** | 500  MPa | 400  MPa | %80 | 82 - 95  HRB | >=  %10 |
+| **8.8** | 800  MPa | 640  MPa | %80 | 22 - 32  HRC | >=  %12 |
+| **10.9** | 1000  MPa | 900  MPa | %90 | 32 - 39  HRC | >=  %9 |
+| **12.9** | 1200  MPa | 1080  MPa | %90 | 39 - 44  HRC | >=  %8 |
 
 ## 8.8 vs 10.9 vs 12.9: Hangi sınıf ne zaman seçilmeli?
 
@@ -44,11 +56,15 @@ Cıvatalı bağlantılarda temel kural, aşırı yük altında dişlerin sıyrı
 
 ## Çözümlü mühendislik hesabı
 
-M16 (Sınıf 8.8) bir cıvatanın gerilme kesit alanı $A_s = 157\text{ mm}^2$'dir:
+M16 (Sınıf 8.8) bir cıvatanın gerilme kesit alanı A_s = 157  mm^2'dir:
 - Akma kuvveti:
-  $$F_y = R_{p0.2} \cdot A_s = 640\text{ MPa} \times 157\text{ mm}^2 = \mathbf{100\,480\text{ N}} \approx \mathbf{100.5\text{ kN}}$$
+  
+`F_y = R_p0.2  *  A_s = 640  MPa   *  157  mm ^2 = mathbf100,480  N   ≈  mathbf100.5  kN`
+
 - VDI 2230 standardına göre %90 akma sınırında tavsiye edilen maksimum montaj ön yükü:
-  $$F_{M,max} = 0.90 \cdot F_y = 0.90 \times 100.5\text{ kN} = \mathbf{90.4\text{ kN}}$$
+  
+`F_M,max = 0.90  *  F_y = 0.90  *  100.5  kN  = mathbf90.4  kN`
+
 
 ## İlgili mühendislik rehberleri ve hesaplayıcılar
 

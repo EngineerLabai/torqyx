@@ -1,14 +1,21 @@
 ---
-title: "Hidrolik çap (hydraulic diameter)"
-description: "Dairesel olmayan boru ve havalandırma kanallarında hidrolik çap ($D_h$), ıslak çevre hesabı ve Reynolds sayısı eşdeğerliği."
-date: "2026-05-09"
-tags: ["hidrolik çap","kanal akışı","akışkanlar","Reynolds","basınç kaybı"]
-category: "Akışkanlar"
+title: Hidrolik çap (hydraulic diameter)
+description: >-
+  Dairesel olmayan boru ve havalandırma kanallarında hidrolik çap ($D_h$), ıslak
+  çevre hesabı ve Reynolds sayısı eşdeğerliği.
+date: '2026-05-09'
+tags:
+  - hidrolik çap
+  - kanal akışı
+  - akışkanlar
+  - Reynolds
+  - basınç kaybı
+category: Akışkanlar
 draft: false
 readingTime: 4
 ---
 
-Hidrolik çap ($D_h$), dairesel olmayan enkesitlere (dikdörtgen kanallar, eliptik borular, eşmerkezli boru halkaları) sahip akış hatlarında akış dinamiği ve sürtünme kaybı hesaplarını eşdeğer dairesel boru formüllerine uyarlamak için kullanılan karakteristik boyuttur.
+Hidrolik çap (`D_h`), dairesel olmayan enkesitlere (dikdörtgen kanallar, eliptik borular, eşmerkezli boru halkaları) sahip akış hatlarında akış dinamiği ve sürtünme kaybı hesaplarını eşdeğer dairesel boru formüllerine uyarlamak için kullanılan karakteristik boyuttur.
 
 ## Neden önemli?
 
@@ -16,17 +23,25 @@ Dikdörtgen bir havalandırma kanalında doğrudan genişlik veya yükseklik üz
 
 ## Mühendislik uygulaması ve standartlar
 
-Hidrolik çap akış kesit alanı ($A$) ve ıslak çevre ($P_{islak}$) üzerinden tanımlanır:
-$$D_h = rac{4 cdot A}{P_{islak}}$$
-- **Genişliği $a$, yüksekliği $b$ olan dikdörtgen kanal:**
-  $$D_h = rac{4 cdot (a cdot b)}{2(a + b)} = rac{2 cdot a cdot b}{a + b}$$
-- **İç çapı $D_i$, dış çapı $D_o$ olan konsantrik boru halkası (annulus):**
-  $$D_h = D_o - D_i$$
-- Reynolds sayısı ve Darcy sürtünme kaybı hesaplarında doğrudan $D_h$ kullanılır.
+Hidrolik çap akış kesit alanı (`A`) ve ıslak çevre (`P_islak`) üzerinden tanımlanır:
+
+`D_h = frac4  *  AP_islak`
+
+- **Genişliği `a`, yüksekliği `b` olan dikdörtgen kanal:**
+  
+`D_h = (4  *  (a  *  b) / 2(a + b)) = (2  *  a  *  b / a + b)`
+
+- **İç çapı `D_i`, dış çapı `D_o` olan konsantrik boru halkası (annulus):**
+  
+`D_h = D_o - D_i`
+
+- Reynolds sayısı ve Darcy sürtünme kaybı hesaplarında doğrudan `D_h` kullanılır.
 
 <Callout type="info" title="Hesaplama Örneği">
-$a = 400	ext{ mm}$, $b = 200	ext{ mm}$ dikdörtgen hava kanalının hidrolik çapı:
-$$D_h = rac{2 	imes 400 	imes 200}{400 + 200} = rac{160,000}{600} approx mathbf{266.7	ext{ mm}}$$
+`a = 400	ext mm`, `b = 200	ext mm` dikdörtgen hava kanalının hidrolik çapı:
+
+`D_h = (2 	imes 400 	imes 200 / 400 + 200) = (160,000 / 600) approx mathbf266.7	ext mm`
+
 Akış hızı ve Reynolds hesabı bu eşdeğer çap üzerinden yapılır.
 </Callout>
 

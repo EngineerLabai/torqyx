@@ -1,9 +1,18 @@
 ---
-title: "Yüzey işleme ve kaplama yöntemleri mühendislik rehberi"
-description: "Sıcak daldırma galvaniz, eloksal (anodize), sert krom, akımsız nikel, korozyon direnci, kaplama toleransı ve hidrojen kırılganlığı rehberi."
-date: "2026-05-09"
-tags: ["yüzey işleme", "kaplama", "anodize", "galvaniz", "korozyon", "ISO 1461", "ISO 9227"]
-category: "İmalat"
+title: Yüzey işleme ve kaplama yöntemleri mühendislik rehberi
+description: >-
+  Sıcak daldırma galvaniz, eloksal (anodize), sert krom, akımsız nikel, korozyon
+  direnci, kaplama toleransı ve hidrojen kırılganlığı rehberi.
+date: '2026-05-09'
+tags:
+  - yüzey işleme
+  - kaplama
+  - anodize
+  - galvaniz
+  - korozyon
+  - ISO 1461
+  - ISO 9227
+category: İmalat
 draft: false
 readingTime: 9
 ---
@@ -15,7 +24,7 @@ Bu rehber, makine parçaları, çelik yapılar ve alüminyum gövdelerde yüzey 
 ## Problem / Amaç
 
 Malzeme seçiminde en yüksek mukavemetli alaşım tercih edilse bile, servis ortamına uygun yüzey koruma işlemi uygulanmadığında parça kısa sürede fonksiyonunu yitirir. Yüzey işleme prosesinin hatalı kurgulanması:
-- Kaplama kalınlığının ($5 - 80\ \mu\text{m}$) parça toleransını aşarak rulman yuvalarında, pim geçmelerinde ve dişli vidalarda montaj sıkışmasına,
+- Kaplama kalınlığının (`5 - 80 μ m`) parça toleransını aşarak rulman yuvalarında, pim geçmelerinde ve dişli vidalarda montaj sıkışmasına,
 - Yüksek mukavemetli çeliklerde kaplama banyosunda emilen atomik hidrojen sebebiyle yük altında aniden kopmaya (hydrogen embrittlement),
 - Yanlış kaplama-ana metal eşleşmesi durumunda galvanik korozyon oluşarak ana malzemenin hızla delinmesine neden olur.
 
@@ -23,45 +32,51 @@ Malzeme seçiminde en yüksek mukavemetli alaşım tercih edilse bile, servis or
 
 - Servis ortamının koroziflik sınıfı (ISO 12944 C1'den C5-M'ye kadar) belirlenmiştir.
 - Kaplama kalınlığı montaj tolerans zincirine dahil edilmiş; diş ve geçme bölgelerinde ham talaşlı imalat ölçüsü buna göre ayarlanmıştır.
-- Kaplanacak yüzeylerde keskin köşeler kırılarak radyal geçişler ($R \ge 1.0\text{ mm}$) sağlanmıştır.
+- Kaplanacak yüzeylerde keskin köşeler kırılarak radyal geçişler (`R  >=  1.0  mm`) sağlanmıştır.
 
 ## Adım adım yöntem
 
 1. **Uygulamaya Uygun Kaplama Türünü Seçin:**
-   - **Sıcak Daldırma Galvaniz (HDG - ISO 1461):** $45 - 85\ \mu\text{m}$ kalınlık; çelik konstrüksiyonlar ve dış ortam şaselerinde 30+ yıl katodik koruma sağlar.
-   - **Elektro-Galvaniz (Çinko Kaplama - ISO 2081):** $8 - 15\ \mu\text{m}$ kalınlık; ince toleranslı makine parçaları ve cıvatalar için mavi/sarı pasivasyonlu ekonomik koruma.
-   - **Sert Eloksal / Hard Anodize (Type III - ISO 7599):** $25 - 50\ \mu\text{m}$ alümina tabakası; alüminyuma $60\text{ HRC}$ eşdeğeri yüzey sertliği, elektrik yalıtımı ve aşınma direnci kazandırır.
-   - **Akımsız Nikel (Electroless Nickel - ISO 4527):** $10 - 25\ \mu\text{m}$ fosforlu nikel; kör deliklerde dahi %100 homojen et kalınlığı, $50 - 65\text{ HRC}$ sertlik ve üstün kimyasal direnç.
-   - **Sert Krom Kaplama:** $20 - 100\ \mu\text{m}$; hidrolik silindir milleri, düşük sürtünme katsayısı ($\mu \approx 0.12$) ve $68 - 72\text{ HRC}$ aşınma dayanımı.
+   - **Sıcak Daldırma Galvaniz (HDG - ISO 1461):** `45 - 85 μ m` kalınlık; çelik konstrüksiyonlar ve dış ortam şaselerinde 30+ yıl katodik koruma sağlar.
+   - **Elektro-Galvaniz (Çinko Kaplama - ISO 2081):** `8 - 15 μ m` kalınlık; ince toleranslı makine parçaları ve cıvatalar için mavi/sarı pasivasyonlu ekonomik koruma.
+   - **Sert Eloksal / Hard Anodize (Type III - ISO 7599):** `25 - 50 μ m` alümina tabakası; alüminyuma `60  HRC` eşdeğeri yüzey sertliği, elektrik yalıtımı ve aşınma direnci kazandırır.
+   - **Akımsız Nikel (Electroless Nickel - ISO 4527):** `10 - 25 μ m` fosforlu nikel; kör deliklerde dahi %100 homojen et kalınlığı, `50 - 65  HRC` sertlik ve üstün kimyasal direnç.
+   - **Sert Krom Kaplama:** `20 - 100 μ m`; hidrolik silindir milleri, düşük sürtünme katsayısı (`μ  ≈  0.12`) ve `68 - 72  HRC` aşınma dayanımı.
 
 2. **Kaplama Kalınlığının Çap ve Vidalara Etkisini Hesaplayın:**
-   Dış çapta kaplama her iki tarafta kalınlık ($t$) kadar büyür, deliklerde ise küçülür:
-   $$D_{kapli} = D_{ham} + 2 \cdot t, \quad d_{delik,kapli} = d_{delik,ham} - 2 \cdot t$$
-   Metrik dişli vidalarda $60^\circ$ diş açısı nedeniyle yanak kalınlığı hatve çapında (pitch diameter) 4 kat etki yaratır:
-   $$\Delta d_{hatve} = 4 \cdot t$$
-   *(Örn: $12\ \mu\text{m}$ çinko kaplama, cıvata hatve çapını $48\ \mu\text{m}$ büyütür; 6g tolerans aralığını tamamen doldurabilir).*
+   Dış çapta kaplama her iki tarafta kalınlık (`t`) kadar büyür, deliklerde ise küçülür:
+   
+`D_kapli = D_ham + 2  *  t,   d_delik,kapli = d_delik,ham - 2  *  t`
+
+   Metrik dişli vidalarda `60^circ` diş açısı nedeniyle yanak kalınlığı hatve çapında (pitch diameter) 4 kat etki yaratır:
+   
+`Δ d_hatve = 4  *  t`
+
+   *(Örn: `12 μ m` çinko kaplama, cıvata hatve çapını `48 μ m` büyütür; 6g tolerans aralığını tamamen doldurabilir).*
 
 3. **Yüksek Mukavemetli Parçalarda Hidrojen Giderme (Baking) Şartını Ekleyin:**
-   ISO 4042 gereğince $R_m \ge 1000\text{ MPa}$ olan çeliklerde (özellikle 10.9 ve 12.9 kalite bağlantı elemanları) asitleme veya elektrokaplamadan sonra **en geç 4 saat içinde** $200 - 220\text{ °C}$ sıcaklıkta 4 ila 24 saat fırınlama uygulanmalıdır.
+   ISO 4042 gereğince `R_m  >=  1000  MPa` olan çeliklerde (özellikle 10.9 ve 12.9 kalite bağlantı elemanları) asitleme veya elektrokaplamadan sonra **en geç 4 saat içinde** `200 - 220  °C` sıcaklıkta 4 ila 24 saat fırınlama uygulanmalıdır.
 
 4. **Tuz Sisi Korozyon Testi (ISO 9227 NSS) Saatlerini Belirleyin:**
    - Standart mavi pasivasyonlu çinko: 72 - 120 saat beyaz pas, 240 saat kırmızı pas.
    - Kalın film sarı pasivasyonlu çinko-nikel (%12-15 Ni): 720 - 1000 saat kırmızı pas direnci.
-   - 25 $\mu\text{m}$ Akımsız nikel: 500+ saat nötr tuz sisi direnci.
+   - 25 `μ m` Akımsız nikel: 500+ saat nötr tuz sisi direnci.
 
 5. **Çözümlü Endüstriyel İmalat Senaryosu:**
-   $d = 25\text{ mm}$ h6 ($0 / -9\ \mu\text{m}$) toleransında taşlanmış bir mil üzerine $15 \pm 3\ \mu\text{m}$ akımsız nikel kaplama yapılacaktır:
-   - İki taraflı kaplama artışı: $2 \times (12\dots 18\ \mu\text{m}) = +24\dots +36\ \mu\text{m}$.
-   - Eğer mil nominal 25.000 mm işlenip kaplanırsa son çap $25.024 - 25.036\text{ mm}$ olur ve h6 toleransının ($24.991 - 25.000\text{ mm}$) tamamen dışına çıkarak rulmana girmez!
+   `d = 25  mm` h6 (`0 / -9 μ m`) toleransında taşlanmış bir mil üzerine `15 pm 3 μ m` akımsız nikel kaplama yapılacaktır:
+   - İki taraflı kaplama artışı: `2  *  (12dots 18 μ m ) = +24dots +36 μ m`.
+   - Eğer mil nominal 25.000 mm işlenip kaplanırsa son çap `25.024 - 25.036  mm` olur ve h6 toleransının (`24.991 - 25.000  mm`) tamamen dışına çıkarak rulmana girmez!
    - **Mühendislik Çözümü:** Ham taşlama toleransı kaplama payı kadar geriye çekilmelidir:
-     $$d_{ham} = [24.991 - 0.036, \ 25.000 - 0.024] = \mathbf{24.955\dots 24.976\text{ mm}}$$
+     
+`d_ham = [24.991 - 0.036,  25.000 - 0.024] = mathbf24.955dots 24.976  mm`
+
    - Bu sayede kaplama sonrası parça tam h6 toleransı içine oturur.
 
 ## Sık hatalar
 
-- **Dişli Parçalarda Kaplama Payını Ham Boyutta Bırakmamak:** M6 cıvataya $20\ \mu\text{m}$ çinko atıldığında somun montaj hattında sıkışır; dişler sıyrılır.
-- **Sert Eloksalın Yarı Yarıya İçe Büyüdüğünü Unutmak:** Sert eloksalda nominal $40\ \mu\text{m}$ tabakanın $20\ \mu\text{m}$'si alüminyumu içe doğru tüketir, $20\ \mu\text{m}$'si dışa büyür.
-- **Sıcak Daldırma Galvanizde Delik ve Boşaltmaları Atlamak:** İçi boş kapalı profiller $450\text{ °C}$ çinko banyosuna daldırıldığında genleşen hava patlamaya yol açar; mutlaka tahliye delikleri açılmalıdır.
+- **Dişli Parçalarda Kaplama Payını Ham Boyutta Bırakmamak:** M6 cıvataya `20 μ m` çinko atıldığında somun montaj hattında sıkışır; dişler sıyrılır.
+- **Sert Eloksalın Yarı Yarıya İçe Büyüdüğünü Unutmak:** Sert eloksalda nominal `40 μ m` tabakanın `20 μ m`'si alüminyumu içe doğru tüketir, `20 μ m`'si dışa büyür.
+- **Sıcak Daldırma Galvanizde Delik ve Boşaltmaları Atlamak:** İçi boş kapalı profiller `450  °C` çinko banyosuna daldırıldığında genleşen hava patlamaya yol açar; mutlaka tahliye delikleri açılmalıdır.
 - **10.9 / 12.9 Cıvatalarda Hidrojen Fırınlamasını Belgelememek:** Fırınlanmayan yüksek mukavemetli cıvatalar montajdan birkaç gün sonra sessizce kopar.
 
 ## İlgili hesaplayıcılar

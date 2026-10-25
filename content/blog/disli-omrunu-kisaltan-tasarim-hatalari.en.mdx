@@ -1,12 +1,20 @@
 ---
-title: "6 Design Mistakes That Slash Gearbox Lifetime"
-description: "Discover the critical gear design mistakes—underestimating application service factor, pinion undercut, lubrication starvation, backlash, and shaft deflection."
-date: "2026-06-18"
-tags: ["gear design mistakes", "gears", "gearbox design", "engineering calculation", "ISO 6336"]
-category: "Gears"
+title: 6 Design Mistakes That Slash Gearbox Lifetime
+description: >-
+  Discover the critical gear design mistakes—underestimating application service
+  factor, pinion undercut, lubrication starvation, backlash, and shaft
+  deflection.
+date: '2026-06-18'
+tags:
+  - gear design mistakes
+  - gears
+  - gearbox design
+  - engineering calculation
+  - ISO 6336
+category: Gears
 draft: false
 readingTime: 6
-canonical: "https://torqyx.com/en/blog/disli-omrunu-kisaltan-tasarim-hatalari"
+canonical: 'https://torqyx.com/en/blog/disli-omrunu-kisaltan-tasarim-hatalari'
 ---
 
 <Image src="/images/blog/disli-omrunu-kisaltan-tasarim-hatalari.webp" alt="Technical diagram illustrating industrial gear tooth contact patterns, pitting, and scuffing failure modes" width={1200} height={900} caption="Engineering diagram illustrating gear tooth contact stresses, pitting, and alignment failure mechanisms." />
@@ -15,37 +23,37 @@ canonical: "https://torqyx.com/en/blog/disli-omrunu-kisaltan-tasarim-hatalari"
 
 Surface micropitting, scuffing, severe abrasive wear, tooth root fatigue breakage, or excessive gearbox whine are seldom the result of an isolated calculation flaw. Gear geometry, application dynamic shocks, elastohydrodynamic (EHD) lubrication, bearing housing rigidity, and manufacturing accuracy operate as an integrated mechanical transmission chain. 
 
-A minor deficiency in one parameter—such as an uncompensated shaft deflection under peak torque—concentrates load onto tooth edges, converting a modest design stress into severe local surface overloading. Consequently, gear reliability cannot be guaranteed simply by specifying high case-hardness ($60\text{ HRC}$) or an arbitrary module ($m$). Mechanical engineers must systematically audit the following six high-risk failure modes during design and commissioning.
+A minor deficiency in one parameter—such as an uncompensated shaft deflection under peak torque—concentrates load onto tooth edges, converting a modest design stress into severe local surface overloading. Consequently, gear reliability cannot be guaranteed simply by specifying high case-hardness (60  HRC) or an arbitrary module (m). Mechanical engineers must systematically audit the following six high-risk failure modes during design and commissioning.
 
-## 1. Underestimating application service factor ($K_A$) and load spectrum
+## 1. Underestimating application service factor (K_A) and load spectrum
 
 Sizing a gear pair purely against nominal steady-state electric motor output power is a classic rookie pitfall. Variable inertia machinery—including reciprocating positive displacement compressors, crushing mills, stamping presses, and conveyor drives—generates severe shock peaks during startup, jamming, or rotational reversals. 
 
-According to ISO 6336-1 standards, design tangential load must incorporate an application service factor ($K_A \approx 1.25 - 2.25$). Calculating root flexural bending stress ($\sigma_F$) and contact Hertzian pressure ($\sigma_H$) without factoring in torque peaks causes subsurface shear yielding and premature fatigue failure within months of installation.
+According to ISO 6336-1 standards, design tangential load must incorporate an application service factor (K_A  ≈  1.25 - 2.25). Calculating root flexural bending stress (σ_F) and contact Hertzian pressure (σ_H) without factoring in torque peaks causes subsurface shear yielding and premature fatigue failure within months of installation.
 
-## 2. Forcing an overly small pinion tooth count ($z_1$)
+## 2. Forcing an overly small pinion tooth count (z_1)
 
-To minimize overall gearbox envelope dimensions and cost, designers frequently minimize the center distance by shrinking the driving pinion tooth count. However, dropping spur pinion tooth count below $z_1 < 17$ without profile shifting (addendum modification, $x$) induces severe manufacturing undercut, dramatically thinning the tooth root profile and increasing bending notch stress concentration. 
+To minimize overall gearbox envelope dimensions and cost, designers frequently minimize the center distance by shrinking the driving pinion tooth count. However, dropping spur pinion tooth count below z_1 < 17 without profile shifting (addendum modification, x) induces severe manufacturing undercut, dramatically thinning the tooth root profile and increasing bending notch stress concentration. 
 
-Furthermore, low tooth counts diminish the contact ratio ($\varepsilon_\alpha < 1.2$), leaving individual teeth to bear single-pair meshing loads without load sharing. The remedy involves applying positive profile shift coefficients ($x_1 > 0$), helical gearing, or selecting a standard module that preserves contact ratios above $\varepsilon_\alpha \ge 1.4$.
+Furthermore, low tooth counts diminish the contact ratio (varepsilon_α < 1.2), leaving individual teeth to bear single-pair meshing loads without load sharing. The remedy involves applying positive profile shift coefficients (x_1 > 0), helical gearing, or selecting a standard module that preserves contact ratios above varepsilon_α  >=  1.4.
 
 ## 3. Treating lubrication as an isolated afterthought
 
-Specifying gearbox lubricant cannot be reduced to merely choosing an ISO VG viscosity number. Pitch line peripheral velocity ($v_t$), sump operating temperature, elastohydrodynamic film thickness ($\lambda = h_{min} / \sqrt{R_{q1}^2 + R_{q2}^2}$), and surface asperity roughness govern whether gears operate in full hydrodynamic separation or boundary metal-to-metal contact. 
+Specifying gearbox lubricant cannot be reduced to merely choosing an ISO VG viscosity number. Pitch line peripheral velocity (v_t), sump operating temperature, elastohydrodynamic film thickness (lambda = h_min / sqrtR_q1^2 + R_q2^2), and surface asperity roughness govern whether gears operate in full hydrodynamic separation or boundary metal-to-metal contact. 
 
-Overly low oil viscosity causes boundary scuffing and destructive micropitting. Conversely, excessive viscosity inflates churning power losses, elevating sump temperatures above $90\text{ °C}$ and rapidly oxidizing synthetic gear oils. Splash lubrication requires precise oil immersion depths ($1\times$ to $3\times$ module); running gears too deep causes violent oil foaming and starvation.
+Overly low oil viscosity causes boundary scuffing and destructive micropitting. Conversely, excessive viscosity inflates churning power losses, elevating sump temperatures above 90  °C and rapidly oxidizing synthetic gear oils. Splash lubrication requires precise oil immersion depths (1 * to 3 * module); running gears too deep causes violent oil foaming and starvation.
 
 ## 4. Neglecting backlash and operating center distance tolerance
 
-Backlash is the essential clearance between non-driving tooth flanks. Designing with near-zero backlash ignores thermal expansion differences between steel gear blanks and cast iron or aluminum housings ($\Delta a_{th} = a \cdot \Delta T \cdot \Delta \alpha$). As the gearbox warms up to operating temperatures, zero-backlash meshes bind, driving bearing reaction loads to destructive levels. 
+Backlash is the essential clearance between non-driving tooth flanks. Designing with near-zero backlash ignores thermal expansion differences between steel gear blanks and cast iron or aluminum housings (Δ a_th = a  *  Δ T  *  Δ α). As the gearbox warms up to operating temperatures, zero-backlash meshes bind, driving bearing reaction loads to destructive levels. 
 
-Conversely, excessive backlash produces severe impact hammering during rotational reversals, positioning instability, and acoustic chatter. Backlash must be verified across the full envelope of minimum and maximum housing bore center distance tolerances ($\pm f_a$).
+Conversely, excessive backlash produces severe impact hammering during rotational reversals, positioning instability, and acoustic chatter. Backlash must be verified across the full envelope of minimum and maximum housing bore center distance tolerances (pm f_a).
 
 ## 5. Overlooking shaft deflection and housing compliance
 
-Even when gear tooth flanks are ground to precision DIN Quality 5 standards, shaft torsional twist and flexural bending under load cause tooth misalignment. When shafts deflect, the contact pattern shifts heavily toward one tooth edge (edge loading), amplifying peak contact stress ($\sigma_H$) by over 200%. 
+Even when gear tooth flanks are ground to precision DIN Quality 5 standards, shaft torsional twist and flexural bending under load cause tooth misalignment. When shafts deflect, the contact pattern shifts heavily toward one tooth edge (edge loading), amplifying peak contact stress (σ_H) by over 200%. 
 
-According to ISO 6336-1, face load distribution factors ($K_{H\beta}$ and $K_{F\beta}$) must be minimized by optimizing bearing support spans, increasing shaft diameters, or introducing lead crowning and end relief modifications to tooth flanks.
+According to ISO 6336-1, face load distribution factors (K_Hβ and K_Fβ) must be minimized by optimizing bearing support spans, increasing shaft diameters, or introducing lead crowning and end relief modifications to tooth flanks.
 
 ## 6. Commissioning without flush and contamination protocols
 

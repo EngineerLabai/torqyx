@@ -1,44 +1,57 @@
 ---
-title: "5 Critical Criteria for Selecting an Industrial Gear Reducer"
-description: "Master industrial gearbox selection: transmission ratio, continuous and peak torque, service factors, thermal limits, and overhung radial loads."
-date: "2026-06-13"
-tags: ["gearbox selection", "speed reducer", "service factor", "gear design", "mechanical transmission"]
-category: "Gears"
+title: 5 Critical Criteria for Selecting an Industrial Gear Reducer
+description: >-
+  Master industrial gearbox selection: transmission ratio, continuous and peak
+  torque, service factors, thermal limits, and overhung radial loads.
+date: '2026-06-13'
+tags:
+  - gearbox selection
+  - speed reducer
+  - service factor
+  - gear design
+  - mechanical transmission
+category: Gears
 draft: false
 readingTime: 5
-canonical: "https://torqyx.com/en/blog/reduktor-seciminde-5-kriter"
+canonical: 'https://torqyx.com/en/blog/reduktor-seciminde-5-kriter'
 ---
 
 <Image src="/images/blog/reduktor-seciminde-5-kriter.webp" alt="Industrial gear reducer selection criteria diagram" width={1200} height={900} caption="Key technical criteria when specifying industrial gearboxes and speed reducers." />
 
 ## 1. Transmission Ratio and Exact Output Speed
 
-The first governing parameter when sizing an industrial gear reducer is the required speed reduction ratio ($i$):
+The first governing parameter when sizing an industrial gear reducer is the required speed reduction ratio (i):
 
-$$i = \frac{n_{\text{in}}}{n_{\text{out}}}$$
 
-Where $n_{\text{in}}$ is prime mover velocity (e.g., standard 4-pole motor running at $1450\text{ rpm}$ at $50\text{ Hz}$) and $n_{\text{out}}$ is the target machine operational speed ($\text{rpm}$).
+`i = fracn_ in n_ out`
 
-In precision continuous processes (such as dosing feeders, printing rollers, or synchronized indexing tables), engineers must distinguish between **nominal catalog ratio** and **exact kinematic ratio**. Because standard gear tooth counts are integers, a catalog ratio quoted as "15:1" might actually be $z_2/z_1 = 46/3 = 15.33:1$. Over an extended shift, this $2\%$ variance can disrupt automation timing unless accounted for during control loop calibration.
+
+Where n_ in is prime mover velocity (e.g., standard 4-pole motor running at 1450  rpm at 50  Hz) and n_ out is the target machine operational speed (rpm).
+
+In precision continuous processes (such as dosing feeders, printing rollers, or synchronized indexing tables), engineers must distinguish between **nominal catalog ratio** and **exact kinematic ratio**. Because standard gear tooth counts are integers, a catalog ratio quoted as "15:1" might actually be z_2/z_1 = 46/3 = 15.33:1. Over an extended shift, this 2% variance can disrupt automation timing unless accounted for during control loop calibration.
 
 ## 2. Continuous Rated Torque vs. Transient Peak Torque
 
 A common sizing mistake is matching the gear reducer purely to the electric motor's nominal kW rating. The mechanical stress on gear teeth is dictated by torque, not power alone:
 
-$$T_{\text{out}} = \frac{9550 \cdot P_{\text{in}} \cdot \eta}{n_{\text{out}}} \quad [\text{N}\cdot\text{m}]$$
+
+`T_ out  = frac9550  *  P_ in   *  ηn_ out    [ N  *  m ]`
+
 
 Two distinct torque limits must be validated against gearbox manufacturer limits:
-- **Nominal Gearbox Torque ($T_{2N}$):** The steady-state continuous torque rating for standard catalog life (typically 20,000 to 100,000 hours per ISO 6336).
-- **Maximum Permissible Peak Torque ($T_{2\max}$):** The highest allowable transient surge during electric motor direct-on-line (DOL) startup, sudden conveyor jams, or emergency stops (typically $2.0\text{--}2.5 \times T_{2N}$).
+- **Nominal Gearbox Torque (T_2N):** The steady-state continuous torque rating for standard catalog life (typically 20,000 to 100,000 hours per ISO 6336).
+- **Maximum Permissible Peak Torque (T_2max):** The highest allowable transient surge during electric motor direct-on-line (DOL) startup, sudden conveyor jams, or emergency stops (typically 2.0 --2.5  *  T_2N).
 
-## 3. Service Factor ($f_B$ or $S_F$) and Operating Duty Cycle
+## 3. Service Factor (f_B or S_F) and Operating Duty Cycle
 
 The service factor corrects catalog mechanical ratings against real-world operational harshness. A gearbox driving a steady centrifugal water pump 8 hours a day experiences far less cumulative fatigue damage than the same gearbox driving a heavy vibrating screen or hammer mill with frequent shock reversals:
 
-$$T_{\text{selection}} = T_{\text{required}} \cdot f_B$$
+
+`T_ selection  = T_ required   *  f_B`
+
 
 The service factor accounts for:
-1. **Shock Severity:** Uniform load ($f_B \approx 1.0$), moderate shock ($f_B \approx 1.25 - 1.5$), heavy shock ($f_B \ge 1.75 - 2.0$).
+1. **Shock Severity:** Uniform load (f_B  ≈  1.0), moderate shock (f_B  ≈  1.25 - 1.5), heavy shock (f_B  >=  1.75 - 2.0).
 2. **Daily Operating Hours:** 8 hours/day vs. 24/7 continuous duty.
 3. **Start/Stop Frequency:** Frequent cycling multiplies impact tooth stress and oil shear heating.
 
@@ -46,23 +59,25 @@ Failing to apply an adequate service factor is the leading cause of premature to
 
 ## 4. Mechanical Efficiency, Thermal Capacity, and Backdriving
 
-Gear types exhibit drastically different internal mechanical efficiencies ($\eta$):
-- **Helical and Bevel-Helical Gearboxes:** $\eta \approx 96\% - 98\%$ per stage. Power loss is minimal.
-- **Planetary Gearboxes:** $\eta \approx 94\% - 97\%$ with compact spatial envelopes.
-- **Worm Gear Reducers:** $\eta \approx 50\% - 85\%$, deteriorating as ratio increases due to sliding friction along bronze gear flanks.
+Gear types exhibit drastically different internal mechanical efficiencies (η):
+- **Helical and Bevel-Helical Gearboxes:** η  ≈  96% - 98% per stage. Power loss is minimal.
+- **Planetary Gearboxes:** η  ≈  94% - 97% with compact spatial envelopes.
+- **Worm Gear Reducers:** η  ≈  50% - 85%, deteriorating as ratio increases due to sliding friction along bronze gear flanks.
 
-In inefficient gearboxes, lost energy converts entirely into heat. Engineers must verify the **thermal power rating** ($P_{th}$) of the housing. If actual continuous power through the box exceeds $P_{th}$, the lubricant temperature will surpass $90^\circ\text{C}$, degrading oil film thickness and triggering tooth scuffing unless external cooling fans or oil coolers are installed.
+In inefficient gearboxes, lost energy converts entirely into heat. Engineers must verify the **thermal power rating** (P_th) of the housing. If actual continuous power through the box exceeds P_th, the lubricant temperature will surpass 90^circ C, degrading oil film thickness and triggering tooth scuffing unless external cooling fans or oil coolers are installed.
 
 Furthermore, if backdriving prevention (hoisting or downhill braking) is required, do not assume worm gears are fully self-locking under vibration. Independent mechanical brakes are mandatory for safety.
 
 ## 5. Mounting Position, Overhung Radial Loads, and Seals
 
 A gearbox is not an isolated component; it is mechanically connected to sprockets, pulleys, or couplings on its output shaft.
-- **Overhung Radial Load ($F_r$):** Mounting a roller chain sprocket or V-belt pulley on the output shaft induces a transverse bending load. The applied radial force must be checked against the manufacturer's permissible overhung load ($F_{r,\text{allow}}$):
+- **Overhung Radial Load (F_r):** Mounting a roller chain sprocket or V-belt pulley on the output shaft induces a transverse bending load. The applied radial force must be checked against the manufacturer's permissible overhung load (F_r, allow):
 
-$$F_r = \frac{2 \cdot T_{\text{out}}}{d_{\text{pitch}}} \cdot k_r$$
 
-Where $k_r$ is the transmission element factor ($k_r \approx 1.0$ for chains, $1.5$ for timing belts, $2.5$ for V-belts). Excessive overhung load causes rapid bearing failure and shaft deflection.
+`F_r = frac2  *  T_ out d_ pitch   *  k_r`
+
+
+Where k_r is the transmission element factor (k_r  ≈  1.0 for chains, 1.5 for timing belts, 2.5 for V-belts). Excessive overhung load causes rapid bearing failure and shaft deflection.
 - **Mounting Orientation (M1 to M6):** Breather plugs, oil sight glasses, and drain valves must be positioned correctly according to orientation. Operating a gearbox with oil levels arranged for horizontal mounting in a vertical orientation leaves upper bearings starved of lubrication.
 
 ## Related Torqyx Calculation Tool

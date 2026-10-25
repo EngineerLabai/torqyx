@@ -1,9 +1,16 @@
 ---
-title: "Burkulma (buckling)"
-description: "Basma altındaki narin elemanlarda Euler burkulması, kritik yük ($P_{cr}$), narinlik oranı ve elastik stabilite kaybı analizi."
-date: "2026-05-09"
-tags: ["burkulma","kolon","Euler","kritik yük","stabilite"]
-category: "Mekanik"
+title: Burkulma (buckling)
+description: >-
+  Basma altındaki narin elemanlarda Euler burkulması, kritik yük ($P_{cr}$),
+  narinlik oranı ve elastik stabilite kaybı analizi.
+date: '2026-05-09'
+tags:
+  - burkulma
+  - kolon
+  - Euler
+  - kritik yük
+  - stabilite
+category: Mekanik
 draft: false
 readingTime: 4
 ---
@@ -16,17 +23,21 @@ Bir hidrolik silindir mili veya kolon statik basma gerilmesi açısından tamame
 
 ## Mühendislik uygulaması ve standartlar
 
-Euler formülü elastik burkulma için kritik yükü ($P_{cr}$) verir:
-$$P_{cr} = rac{pi^2 cdot E cdot I}{(K cdot L)^2}$$
-- $E$: Elastisite modülü [$	ext{MPa}$],
-- $I$: En küçük kesit atalet momenti [$	ext{mm}^4$],
-- $L$: Elemanın serbest boyu [$	ext{mm}$],
-- $K$: Uç mesnet katsayısı (İki ucu mafsallı: $K = 1.0$, bir ucu ankastre bir ucu serbest: $K = 2.0$, iki ucu ankastre: $K = 0.5$).
-Narinlik oranı $lambda = rac{K cdot L}{r_{gyr}}$ kritik narinlik sınırından ($lambda_c approx 89 - 105$ çelik için) küçükse Tetmajer veya Johnson elastoplastik burkulma formülleri uygulanır.
+Euler formülü elastik burkulma için kritik yükü (`P_cr`) verir:
+
+`P_cr = (pi^2  *  E  *  I / (K  *  L)^2)`
+
+- `E`: Elastisite modülü [`extMPa`],
+- `I`: En küçük kesit atalet momenti [`extmm^4`],
+- `L`: Elemanın serbest boyu [`extmm`],
+- `K`: Uç mesnet katsayısı (İki ucu mafsallı: `K = 1.0`, bir ucu ankastre bir ucu serbest: `K = 2.0`, iki ucu ankastre: `K = 0.5`).
+Narinlik oranı `lambda = fracK  *  Lr_gyr` kritik narinlik sınırından (`lambda_c approx 89 - 105` çelik için) küçükse Tetmajer veya Johnson elastoplastik burkulma formülleri uygulanır.
 
 <Callout type="info" title="Çözümlü Örnek">
-$L = 1000	ext{ mm}$ boyunda iki ucu mafsallı ($K = 1$) çelik çubuk ($d = 20	ext{ mm}$, $E = 210,000	ext{ MPa}$, $I = rac{pi 	imes 20^4}{64} approx 7854	ext{ mm}^4$):
-$$P_{cr} = rac{pi^2 	imes 210,000 	imes 7854}{(1 	imes 1000)^2} approx mathbf{16,277	ext{ N}} approx mathbf{16.3	ext{ kN}}$$
+`L = 1000	ext mm` boyunda iki ucu mafsallı (`K = 1`) çelik çubuk (`d = 20	ext mm`, `E = 210,000	ext MPa`, `I = (pi 	imes 20^4 / 64) approx 7854	ext mm^4`):
+
+`P_cr = (pi^2 	imes 210,000 	imes 7854 / (1 	imes 1000)^2) approx mathbf16,277	ext N approx mathbf16.3	ext kN`
+
 16.3 kN üzerindeki eksenel basma yükünde çubuk anında burkulur.
 </Callout>
 

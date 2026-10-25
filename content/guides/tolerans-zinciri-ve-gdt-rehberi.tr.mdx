@@ -1,9 +1,18 @@
 ---
-title: "Tolerans zinciri ve GD&T rehberi: ASME Y14.5 ve ISO 1101"
-description: "Tolerans yığılması (Worst-Case ve RSS), datum referans çerçevesi (3-2-1 kuralı), MMC/LMC modifiyerleri ve geometrik toleranslar rehberi."
-date: "2026-05-09"
-tags: ["GD&T", "tolerans", "datum", "ASME Y14.5", "ISO 1101", "tolerans yığılması", "RSS"]
-category: "Tolerans"
+title: 'Tolerans zinciri ve GD&T rehberi: ASME Y14.5 ve ISO 1101'
+description: >-
+  Tolerans yığılması (Worst-Case ve RSS), datum referans çerçevesi (3-2-1
+  kuralı), MMC/LMC modifiyerleri ve geometrik toleranslar rehberi.
+date: '2026-05-09'
+tags:
+  - GD&T
+  - tolerans
+  - datum
+  - ASME Y14.5
+  - ISO 1101
+  - tolerans yığılması
+  - RSS
+category: Tolerans
 draft: false
 readingTime: 9
 ---
@@ -22,26 +31,34 @@ Bu rehber, mekanik montajlarda boyutsal uyumluluk, datum referans sistemleri ve 
 ## Varsayımlar
 
 - Parçalar rijit kabul edilir (esnek sac ve kauçuk parçalar için özel serbest durum toleransları hariç).
-- İstatistiksel toleranslandırmada (RSS) üretim ölçüleri normal (Gauss) dağılıma uyar ve süreç yeterlilik katsayısı $C_p \ge 1.33$ seviyesindedir.
+- İstatistiksel toleranslandırmada (RSS) üretim ölçüleri normal (Gauss) dağılıma uyar ve süreç yeterlilik katsayısı `C_p  >=  1.33` seviyesindedir.
 - 1 Boyutlu (1D) eksenel veya radyal doğrultuda tolerans yığılması analizi yapılır.
 
 ## Adım adım yöntem
 
 1. **Montajın Kritik Fonksiyon Ölçüsünü (Kapanış Ölçüsü / Gap) Belirleyin:**
-   Montajın çalışmasını belirleyen eksenel boşluk, conta basma mesafesi veya dişli boşluğu zincirin nihai hedefidir ($Y$).
+   Montajın çalışmasını belirleyen eksenel boşluk, conta basma mesafesi veya dişli boşluğu zincirin nihai hedefidir (`Y`).
 
 2. **Tolerans Zinciri Vektör Döngüsünü Kurun:**
-   Başlangıç noktasından hedef noktaya doğru pozitif yön tayin edilir. Döngüyü oluşturan artı yönlü parçalar ($A_i$) ve eksi yönlü parçalar ($B_j$) toplanır:
-   $$Y_{nom} = \sum A_{i,nom} - \sum B_{j,nom}$$
+   Başlangıç noktasından hedef noktaya doğru pozitif yön tayin edilir. Döngüyü oluşturan artı yönlü parçalar (`A_i`) ve eksi yönlü parçalar (`B_j`) toplanır:
+   
+`Y_nom = sum A_i,nom - sum B_j,nom`
+
 
 3. **En Kötü Durum (Worst Case - WC) Analizini Yapın:**
    Tüm parçaların aynı anda en olumsuz tolerans sınırlarında üretildiği aşırı senaryo:
-   $$T_{WC} = \sum_{i=1}^{n} |a_i| \cdot T_i$$
-   $$Y_{min} = Y_{nom} - \sum T_{negatif}, \quad Y_{max} = Y_{nom} + \sum T_{pozitif}$$
+   
+`T_WC = sum_i=1^n |a_i|  *  T_i`
+
+   
+`Y_min = Y_nom - sum T_negatif,   Y_max = Y_nom + sum T_pozitif`
+
 
 4. **İstatistiksel Toleranslandırma (Root Sum Squares - RSS) ile Toleransları Rahatlatın:**
-   Seri imalatta tüm parçaların aynı anda uç değerde çıkma olasılığı sıfıra yakındır. Bağımsız normal dağılım kabulüyle ($3\sigma$):
-   $$T_{RSS} = \sqrt{\sum_{i=1}^{n} (a_i \cdot T_i)^2}$$
+   Seri imalatta tüm parçaların aynı anda uç değerde çıkma olasılığı sıfıra yakındır. Bağımsız normal dağılım kabulüyle (`3σ`):
+   
+`T_RSS = sqrtsum_i=1^n (a_i  *  T_i)^2`
+
    RSS yaklaşımı, montaj hurda oranını %0.27 (3 Sigma) seviyesinde tutarak toleransları **%40 ile %60 oranında genişletme** ve maliyeti düşürme imkanı tanır.
 
 5. **Datum Referans Çerçevesini (3-2-1 Kuralı) Tanımlayın:**
@@ -50,23 +67,33 @@ Bu rehber, mekanik montajlarda boyutsal uyumluluk, datum referans sistemleri ve 
    - **Üçüncül Datum (Tertiary Datum):** En az 1 temas noktası ile son kalan serbestlik derecesini kilitler. Konum sabitleme noktasıdır.
 
 6. **Çözümlü Endüstriyel Tolerans Zinciri Örneği:**
-   Bir redüktör gövdesinde rulman yuvası derinliği $L_1 = 50.00 \pm 0.15\text{ mm}$, rulman dış bilezik genişliği $L_2 = 20.00 \pm 0.05\text{ mm}$ ve segman dayama burcu $L_3 = 28.00 \pm 0.08\text{ mm}$'dir. Eksenel montaj boşluğu ($Gap$):
+   Bir redüktör gövdesinde rulman yuvası derinliği `L_1 = 50.00 pm 0.15  mm`, rulman dış bilezik genişliği `L_2 = 20.00 pm 0.05  mm` ve segman dayama burcu `L_3 = 28.00 pm 0.08  mm`'dir. Eksenel montaj boşluğu (`Gap`):
    - Nominal boşluk:
-     $$Gap_{nom} = 50.00 - 20.00 - 28.00 = \mathbf{2.00\text{ mm}}$$
+     
+`Gap_nom = 50.00 - 20.00 - 28.00 = mathbf2.00  mm`
+
    - En Kötü Durum (Worst Case) toleransı:
-     $$T_{WC} = 0.15 + 0.05 + 0.08 = \mathbf{0.28\text{ mm}}$$
-     $$Gap_{WC} = 2.00 \pm 0.28\text{ mm} \implies [1.72\text{ mm} \dots 2.28\text{ mm}]$$
+     
+`T_WC = 0.15 + 0.05 + 0.08 = mathbf0.28  mm`
+
+     
+`Gap_WC = 2.00 pm 0.28  mm  implies [1.72  mm  dots 2.28  mm ]`
+
    - İstatistiksel (RSS) toleransı:
-     $$T_{RSS} = \sqrt{0.15^2 + 0.05^2 + 0.08^2} = \sqrt{0.0225 + 0.0025 + 0.0064} = \sqrt{0.0314} = \mathbf{0.177\text{ mm}}$$
-     $$Gap_{RSS} = 2.00 \pm 0.177\text{ mm} \implies [1.823\text{ mm} \dots 2.177\text{ mm}]$$
-   - *Mühendislik Yorumu:* RSS analizi ile boşluk dalgalanması 0.28 mm'den 0.18 mm'ye düşürülmüş; gövde işleme toleransı $\pm 0.15$'ten $\pm 0.22$'ye gevşetilerek tezgah işleme süresi kısaltılabilir.
+     
+`T_RSS = sqrt0.15^2 + 0.05^2 + 0.08^2 = sqrt0.0225 + 0.0025 + 0.0064 = sqrt0.0314 = mathbf0.177  mm`
+
+     
+`Gap_RSS = 2.00 pm 0.177  mm  implies [1.823  mm  dots 2.177  mm ]`
+
+   - *Mühendislik Yorumu:* RSS analizi ile boşluk dalgalanması 0.28 mm'den 0.18 mm'ye düşürülmüş; gövde işleme toleransı `pm 0.15`'ten `pm 0.22`'ye gevşetilerek tezgah işleme süresi kısaltılabilir.
 
 ## Sık hatalar
 
 - **Datumları İmalat ve Montaj Fonksiyonundan Bağımsız Seçmek:** Çizimde parça fonksiyonuna uymayan bir referans yüzeyi seçmek, CMM ölçümü ile gerçek montaj davranışı arasında uyumsuzluk yaratır.
 - **Düşük Adetli İmalatta RSS Yöntemi Kullanmak:** 5-10 adetlik prototip üretimlerinde istatistiksel dağılım garantisi yoktur; kesinlikle Worst-Case yöntemi kullanılmalıdır.
-- **Malzeme Durumu Modifiyerlerini (MMC - $\textcircled{\text{M}}$) Atlamak:** Maksimum Malzeme Koşulu (MMC) kullanılmadığında parçaya bonus tolerans verilmez ve hurda oranı yükselir.
-- **Konum Toleransı (True Position) Yerine Artı-Eksi ($\pm$) Kutu Toleransı Vermek:** İki eksenli delik merkezlerinde $\pm$ toleransı kare bölge oluştururken, konum toleransı dairesel bölge tanımlayarak imalata %57 daha fazla tolerans alanı sağlar.
+- **Malzeme Durumu Modifiyerlerini (MMC - `textcircled M`) Atlamak:** Maksimum Malzeme Koşulu (MMC) kullanılmadığında parçaya bonus tolerans verilmez ve hurda oranı yükselir.
+- **Konum Toleransı (True Position) Yerine Artı-Eksi (`pm`) Kutu Toleransı Vermek:** İki eksenli delik merkezlerinde `pm` toleransı kare bölge oluştururken, konum toleransı dairesel bölge tanımlayarak imalata %57 daha fazla tolerans alanı sağlar.
 
 ## İlgili hesaplayıcılar
 

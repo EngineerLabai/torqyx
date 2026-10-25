@@ -1,34 +1,41 @@
 ---
-title: "Özgül kütle (yoğunluk)"
+title: Özgül kütle (yoğunluk)
 description: "Mühendislik malzemelerinin yoğunluğu ($\rho$), parça kütlesi hesabı, atalet momenti ve hafif tasarım malzeme seçimi."
-date: "2026-05-09"
-tags: ["yoğunluk","özgül kütle","malzeme ağırlığı","eylemsizlik","kütle"]
-category: "Malzeme"
+date: '2026-05-09'
+tags:
+  - yoğunluk
+  - özgül kütle
+  - malzeme ağırlığı
+  - eylemsizlik
+  - kütle
+category: Malzeme
 draft: false
 readingTime: 4
 ---
 
-Özgül kütle veya yoğunluk ($ho$), homojen bir malzemenin birim hacmindeki kütle miktarıdır ($ho = m / V$). SI birim sisteminde kilogram bölü metreküp [$	ext{kg/m}^3$] veya gram bölü santimetreküp [$	ext{g/cm}^3$] olarak ifade edilir.
+Özgül kütle veya yoğunluk (`ho`), homojen bir malzemenin birim hacmindeki kütle miktarıdır (`ho = m / V`). SI birim sisteminde kilogram bölü metreküp [`extkg/m^3`] veya gram bölü santimetreküp [`extg/cm^3`] olarak ifade edilir.
 
 ## Neden önemli?
 
-Dönen ve hareket eden makine elemanlarında eylemsizlik kuvvetleri ($F = m cdot a$) ve kütle atalet momenti ($I = m cdot r^2$) doğrudan malzeme yoğunluğuyla orantılıdır. Hafif malzemeler motor güç tüketimini düşürür ve hızlanma dinamiklerini iyileştirir.
+Dönen ve hareket eden makine elemanlarında eylemsizlik kuvvetleri (`F = m  *  a`) ve kütle atalet momenti (`I = m  *  r^2`) doğrudan malzeme yoğunluğuyla orantılıdır. Hafif malzemeler motor güç tüketimini düşürür ve hızlanma dinamiklerini iyileştirir.
 
 ## Mühendislik uygulaması ve standartlar
 
 Mekanik tasarımda sık kullanılan metallerin tipik yoğunlukları:
-- **Karbon ve Alaşımlı Çelikler:** $7850	ext{ kg/m}^3$ ($7.85	ext{ g/cm}^3$)
-- **Dökme Demir (Pik / Sfero):** $7100 - 7300	ext{ kg/m}^3$
-- **Titanyum (Ti-6Al-4V):** $4430	ext{ kg/m}^3$ (Çeliğe göre %43 daha hafif)
-- **Alüminyum Alaşımları (6082, 7075):** $2700 - 2800	ext{ kg/m}^3$ (Çeliğe göre yaklaşık 3 kat hafif)
-- **Magnezyum Alaşımları:** $1780	ext{ kg/m}^3$
-- **Plastikler (POM / PA6 / PEEK):** $1140 - 1420	ext{ kg/m}^3$
+- **Karbon ve Alaşımlı Çelikler:** `7850	ext kg/m^3` (`7.85	ext g/cm^3`)
+- **Dökme Demir (Pik / Sfero):** `7100 - 7300	ext kg/m^3`
+- **Titanyum (Ti-6Al-4V):** `4430	ext kg/m^3` (Çeliğe göre %43 daha hafif)
+- **Alüminyum Alaşımları (6082, 7075):** `2700 - 2800	ext kg/m^3` (Çeliğe göre yaklaşık 3 kat hafif)
+- **Magnezyum Alaşımları:** `1780	ext kg/m^3`
+- **Plastikler (POM / PA6 / PEEK):** `1140 - 1420	ext kg/m^3`
 
 <Callout type="info" title="Hesaplama Örneği">
-$D = 60	ext{ mm}$ çapında ve $L = 500	ext{ mm}$ uzunluğunda dolu bir milin kütlesi:
-$$V = rac{pi cdot 0.06^2}{4} 	imes 0.50 approx 0.001414	ext{ m}^3$$
-- Çelik ise: $m = 0.001414 	imes 7850 = mathbf{11.1	ext{ kg}}$
-- Alüminyum ise: $m = 0.001414 	imes 2700 = mathbf{3.8	ext{ kg}}$
+`D = 60	ext mm` çapında ve `L = 500	ext mm` uzunluğunda dolu bir milin kütlesi:
+
+`V = (pi  *  0.06^2 / 4) 	imes 0.50 approx 0.001414	ext m^3`
+
+- Çelik ise: `m = 0.001414 	imes 7850 = mathbf11.1	ext kg`
+- Alüminyum ise: `m = 0.001414 	imes 2700 = mathbf3.8	ext kg`
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar

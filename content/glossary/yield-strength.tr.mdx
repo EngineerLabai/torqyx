@@ -1,14 +1,21 @@
 ---
-title: "Akma mukavemeti (yield strength)"
-description: "Akma mukavemeti ($R_e$, $R_{p0.2}$), kalıcı plastik deformasyon eşiği, çekme diyagramı ve makine tasarımında izin verilen emniyetli gerilme."
-date: "2026-05-09"
-tags: ["akma mukavemeti","Rp0.2","elastik sınır","plastik deformasyon","akma gerilmesi"]
-category: "Malzeme"
+title: Akma mukavemeti (yield strength)
+description: >-
+  Akma mukavemeti ($R_e$, $R_{p0.2}$), kalıcı plastik deformasyon eşiği, çekme
+  diyagramı ve makine tasarımında izin verilen emniyetli gerilme.
+date: '2026-05-09'
+tags:
+  - akma mukavemeti
+  - Rp0.2
+  - elastik sınır
+  - plastik deformasyon
+  - akma gerilmesi
+category: Malzeme
 draft: false
 readingTime: 4
 ---
 
-Akma mukavemeti ($R_e$ veya $R_{p0.2}$), bir malzemenin uygulanan gerilme altında geri dönüşümlü (elastik) şekil değiştirmeden kalıcı (plastik) şekil değiştirmeye geçtiği kritik gerilme sınırıdır.
+Akma mukavemeti (`R_e` veya `R_p0.2`), bir malzemenin uygulanan gerilme altında geri dönüşümlü (elastik) şekil değiştirmeden kalıcı (plastik) şekil değiştirmeye geçtiği kritik gerilme sınırıdır.
 
 ## Neden önemli?
 
@@ -17,10 +24,12 @@ Makine elemanları (miller, dişliler, flanşlar) çalışma sırasında şekil 
 ## Mühendislik uygulaması ve standartlar
 
 ISO 6892 ve ASTM E8 çekme testlerinde:
-- **Belirgin Akma Gösteren Çelikler:** Üst akma ($R_{eH}$) ve alt akma ($R_{eL}$) sınırı görülür.
-- **Ofset Akma Mukavemeti ($R_{p0.2}$):** Belirgin akma göstermeyen alaşımlarda (paslanmaz çelik, alüminyum) çekme eğrisinde %0.2 (%0.002) kalıcı plastik uzamaya karşılık gelen gerilmedir.
+- **Belirgin Akma Gösteren Çelikler:** Üst akma (`R_eH`) ve alt akma (`R_eL`) sınırı görülür.
+- **Ofset Akma Mukavemeti (`R_p0.2`):** Belirgin akma göstermeyen alaşımlarda (paslanmaz çelik, alüminyum) çekme eğrisinde %0.2 (%0.002) kalıcı plastik uzamaya karşılık gelen gerilmedir.
 - **Tasarım Emniyet Kriteri:**
-  $$sigma_{em} = rac{R_{p0.2}}{S_f} quad (S_f ge 1.3dots 2.0)$$
+  
+`sigma_em = racR_p0.2S_f quad (S_f ge 1.3dots 2.0)`
+
 
 <Callout type="info" title="Çelik Kaliteleri Karşılaştırması">
 - Yapı Çeliği (S235JR): $R_e ge 235	ext{ MPa}$

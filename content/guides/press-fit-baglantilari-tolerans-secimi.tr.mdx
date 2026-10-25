@@ -1,9 +1,18 @@
 ---
-title: "Press fit bağlantılarında tolerans seçimi ve sıkı geçme hesabı"
-description: "ISO 286 tolerans sınıfları, DIN 7190 sıkı geçme basıncı, Lamé gerilme formülleri, montaj kuvveti ve ısıl montaj mühendislik rehberi."
-date: "2026-05-09"
-tags: ["press fit", "tolerans", "sıkı geçme", "ISO 286", "DIN 7190", "Lamé", "montaj"]
-category: "Tolerans"
+title: Press fit bağlantılarında tolerans seçimi ve sıkı geçme hesabı
+description: >-
+  ISO 286 tolerans sınıfları, DIN 7190 sıkı geçme basıncı, Lamé gerilme
+  formülleri, montaj kuvveti ve ısıl montaj mühendislik rehberi.
+date: '2026-05-09'
+tags:
+  - press fit
+  - tolerans
+  - sıkı geçme
+  - ISO 286
+  - DIN 7190
+  - Lamé
+  - montaj
+category: Tolerans
 draft: false
 readingTime: 9
 ---
@@ -15,15 +24,15 @@ Bu rehber, kamasız ve sürtünme esaslı tork veya eksenel kuvvet aktaran silin
 ## Problem / Amaç
 
 Sıkı geçme (press fit / shrink fit), parça üzerinde kama yuvası veya cıvata deliği açmadan yüksek tork ve dinamik yorulma mukavemeti sağlayan en rijit mekanik bağlantı türüdür. Tolerans seçiminin yanlış yapılması iki ölümcül arızaya yol açar:
-- **Yetersiz Girişim ($\Delta_{min}$):** Servis esnasında temas basıncının düşmesiyle mil ve göbeğin birbirine göre kayması, fretting korozyonu ve bağlantının sıyrılması.
-- **Aşırı Girişim ($\Delta_{max}$):** Göbek malzemesinin akma sınırını aşarak radyal çatlaması, montaj sırasında yüzeylerin kaynaması (galling) veya milin aşırı basma gerilmesiyle büzülmesi.
+- **Yetersiz Girişim (`Δ_min`):** Servis esnasında temas basıncının düşmesiyle mil ve göbeğin birbirine göre kayması, fretting korozyonu ve bağlantının sıyrılması.
+- **Aşırı Girişim (`Δ_max`):** Göbek malzemesinin akma sınırını aşarak radyal çatlaması, montaj sırasında yüzeylerin kaynaması (galling) veya milin aşırı basma gerilmesiyle büzülmesi.
 
 ## Varsayımlar
 
 - Mil ve göbek elastik, izotropik ve homojen malzemeden (Hooke yasası) üretilmiştir.
-- Temas yüzeyi boyunca basınç ($p$) eksenel olarak üniform dağılır; kenar gerilme yığılmaları tasarım katsayısıyla karşılanır.
-- Yüzey pürüzlülüğü tepe noktaları montaj esnasında plastik olarak ezilerek teorik girişimi azaltır ($\Delta_{eff} < \Delta_{nominal}$).
-- Isıl montajda ısı transferi üniform kabul edilir ve parçada metalurjik faz değişimi sıcaklığı aşılmaz ($T < 250\text{ °C}$).
+- Temas yüzeyi boyunca basınç (`p`) eksenel olarak üniform dağılır; kenar gerilme yığılmaları tasarım katsayısıyla karşılanır.
+- Yüzey pürüzlülüğü tepe noktaları montaj esnasında plastik olarak ezilerek teorik girişimi azaltır (`Δ_eff &lt; Δ_nominal`).
+- Isıl montajda ısı transferi üniform kabul edilir ve parçada metalurjik faz değişimi sıcaklığı aşılmaz (`T &lt; 250  °C`).
 
 ## Adım adım yöntem
 
@@ -32,49 +41,69 @@ Sıkı geçme (press fit / shrink fit), parça üzerinde kama yuvası veya cıva
    - **H7/s6:** Standart ağır hizmet sıkı geçmesi; yüksek tork aktarımı, kalıcı montaj.
    - **H7/u6:** Çok sıkı pres geçme; büyük torklar, yüksek radyal yükler.
 
-2. **Yüzey Ezilmesi Düzeltmeli Efektif Girişimi ($\Delta_{eff}$) Hesaplayın:**
-   Tornalanmış veya taşlanmış yüzey pürüzlülükleri ($R_z$ [$\mu\text{m}$]) montaj presinde kısmen ezilir (DIN 7190 formülü):
-   $$\Delta_{eff} = \Delta_{nominal} - 1.2 \cdot (R_{z,mil} + R_{z,delik}) \quad [\mu\text{m}]$$
+2. **Yüzey Ezilmesi Düzeltmeli Efektif Girişimi (`Δ_eff`) Hesaplayın:**
+   Tornalanmış veya taşlanmış yüzey pürüzlülükleri (`R_z` [`μ m`]) montaj presinde kısmen ezilir (DIN 7190 formülü):
+   
+`Δ_eff = Δ_nominal - 1.2  *  (R_z,mil + R_z,delik)   [μ m ]`
 
-3. **Lamé Kalın Cidarlı Silindir Denklemiyle Temas Basıncını ($p$) Bulun:**
-   Mil ($d_i, d$) ve göbek ($d, D_o$) aynı çelik malzemeden ($E = 210\,000\text{ MPa}$, $\nu = 0.3$) imal edilmişse ve mil dolu ise ($d_i = 0$):
-   $$p = \frac{\Delta_{eff}}{d} \cdot \frac{E}{2} \cdot \left( 1 - \frac{d^2}{D_o^2} \right) \quad [\text{MPa}]$$
 
-4. **İletilebilecek Tork ($T$) ve Eksenel Tutma Kuvvetini ($F_{ax}$) Kontrol Edin:**
-   Temas boyu $L$, mil çapı $d$ ve sürtünme katsayısı ($\mu \approx 0.12 - 0.15$ kuru pres):
-   $$T = \frac{1}{2} \cdot \pi \cdot d^2 \cdot L \cdot p_{min} \cdot \mu \quad [\text{N}\cdot\text{m}]$$
-   $$F_{ax} = \pi \cdot d \cdot L \cdot p_{min} \cdot \mu \quad [\text{N}]$$
+3. **Lamé Kalın Cidarlı Silindir Denklemiyle Temas Basıncını (`p`) Bulun:**
+   Mil (`d_i, d`) ve göbek (`d, D_o`) aynı çelik malzemeden (`E = 210,000  MPa`, `ν = 0.3`) imal edilmişse ve mil dolu ise (`d_i = 0`):
+   
+`p = fracΔ_effd  *  (E / 2)  *  ( 1 - (d^2 / D_o^2) )   [ MPa ]`
+
+
+4. **İletilebilecek Tork (`T`) ve Eksenel Tutma Kuvvetini (`F_ax`) Kontrol Edin:**
+   Temas boyu `L`, mil çapı `d` ve sürtünme katsayısı (`μ  ≈  0.12 - 0.15` kuru pres):
+   
+`T = (1 / 2)  *  pi  *  d^2  *  L  *  p_min  *  μ   [ N  *  m ]`
+
+   
+`F_ax = pi  *  d  *  L  *  p_min  *  μ   [ N ]`
+
 
 5. **Göbek İç Çeperinde Maksimum von Mises Gerilmesini Doğrulayın:**
    Göbeğin iç yarıçapında oluşan teğetsel gerilme en yüksek seviyededir:
-   $$\sigma_{t,max} = p_{max} \cdot \frac{D_o^2 + d^2}{D_o^2 - d^2}$$
+   
+`σ_t,max = p_max  *  (D_o^2 + d^2 / D_o^2 - d^2)`
+
    von Mises eşdeğer gerilmesi:
-   $$\sigma_{vm} = \sqrt{\sigma_{t,max}^2 + \sigma_{t,max} \cdot p_{max} + p_{max}^2} \le \frac{R_e}{S_g}$$
+   
+`σ_vm = sqrtσ_t,max^2 + σ_t,max  *  p_max + p_max^2  <=  (R_e / S_g)`
+
 
 6. **Isıl Montaj (Shrink Fit) Isıtma Sıcaklığını Hesaplayın:**
-   Pres kullanmadan montaj boşluğu ($\delta_m \approx 0.001 \cdot d$) sağlayarak montaj için gereken sıcaklık artışı:
-   $$\Delta T = \frac{\Delta_{max} + \delta_m}{\alpha \cdot d}$$
+   Pres kullanmadan montaj boşluğu (`delta_m  ≈  0.001  *  d`) sağlayarak montaj için gereken sıcaklık artışı:
+   
+`Δ T = fracΔ_max + delta_mα  *  d`
+
 
 7. **Çözümlü Endüstriyel Sıkı Geçme Örneği:**
-   $d = 50\text{ mm}$ dolu çelik mil üzerine $D_o = 100\text{ mm}$ dış çaplı, $L = 60\text{ mm}$ boyunda C45 çelik göbek ($R_e = 360\text{ MPa}$) H7/s6 toleransıyla takılacaktır:
-   - Delik H7 ($0 / +25\ \mu\text{m}$), Mil s6 ($+43 / +59\ \mu\text{m}$).
-   - $\Delta_{min} = 43 - 25 = 18\ \mu\text{m}$, $\Delta_{max} = 59 - 0 = 59\ \mu\text{m}$.
-   - Taşlanmış yüzeylerde ezilme payı: $1.2 \times (3 + 3) \approx 7.2\ \mu\text{m}$.
-   - Net minimum girişim: $\Delta_{eff,min} = 18 - 7.2 = 10.8\ \mu\text{m} = 0.0108\text{ mm}$.
+   `d = 50  mm` dolu çelik mil üzerine `D_o = 100  mm` dış çaplı, `L = 60  mm` boyunda C45 çelik göbek (`R_e = 360  MPa`) H7/s6 toleransıyla takılacaktır:
+   - Delik H7 (`0 / +25 μ m`), Mil s6 (`+43 / +59 μ m`).
+   - `Δ_min = 43 - 25 = 18 μ m`, `Δ_max = 59 - 0 = 59 μ m`.
+   - Taşlanmış yüzeylerde ezilme payı: `1.2  *  (3 + 3)  ≈  7.2 μ m`.
+   - Net minimum girişim: `Δ_eff,min = 18 - 7.2 = 10.8 μ m  = 0.0108  mm`.
    - Minimum temas basıncı:
-     $$p_{min} = \frac{0.0108}{50} \cdot \frac{210\,000}{2} \cdot \left(1 - \frac{50^2}{100^2}\right) = 0.000216 \times 105\,000 \times 0.75 = \mathbf{17.0\text{ MPa}}$$
-   - Minimum iletilebilir tork ($\mu = 0.14$):
-     $$T = 0.5 \times \pi \times 0.050^2 \times 0.060 \times (17.0 \times 10^6) \times 0.14 = \mathbf{560.7\text{ Nm}}$$
-   - $\Delta_{max}$ altında göbek teğetsel gerilmesi: $\sigma_t \approx 145\text{ MPa} < 360 / 1.5 = 240\text{ MPa}$ (Emniyetli).
-   - Isıl montaj için gereken sıcaklık farkı ($\alpha = 12 \times 10^{-6}\text{ 1/°C}$):
-     $$\Delta T = \frac{0.059 + 0.030}{12 \times 10^{-6} \times 50} \approx \mathbf{148\text{ °C}} \implies \text{Göbek 170 °C'ye ısıtılır.}$$
+     
+`p_min = (0.0108 / 50)  *  (210,000 / 2)  *  (1 - (50^2 / 100^2)) = 0.000216  *  105,000  *  0.75 = mathbf17.0  MPa`
+
+   - Minimum iletilebilir tork (`μ = 0.14`):
+     
+`T = 0.5  *  pi  *  0.050^2  *  0.060  *  (17.0  *  10^6)  *  0.14 = mathbf560.7  Nm`
+
+   - `Δ_max` altında göbek teğetsel gerilmesi: `σ_t  ≈  145  MPa  &lt; 360 / 1.5 = 240  MPa` (Emniyetli).
+   - Isıl montaj için gereken sıcaklık farkı (`α = 12  *  10^-6  1/°C`):
+     
+`Δ T = frac0.059 + 0.03012  *  10^-6  *  50  ≈  mathbf148  °C  implies  Göbek 170 °C'ye ısıtılır.`
+
 
 ## Sık hatalar
 
 - **Yüzey Ezilme Kaybını Hesaba Katmamak:** Taşlanmamış kaba tornalanmış parçalarda yüzey tepeleri ezildiğinde efektif girişimin %40'ı yok olur ve bağlantı kayar.
-- **Kuru Pres Montajında Yağlayıcı Kullanıp Sürtünme Katsayısını Düşürmek:** Montajı kolaylaştırmak için sürülen gres yağı sürtünme katsayısını $0.15$'ten $0.06$'ya düşürerek tork kapasitesini %60 azaltır.
+- **Kuru Pres Montajında Yağlayıcı Kullanıp Sürtünme Katsayısını Düşürmek:** Montajı kolaylaştırmak için sürülen gres yağı sürtünme katsayısını `0.15`'ten `0.06`'ya düşürerek tork kapasitesini %60 azaltır.
 - **Isıl Montajda Sıcaklığı 250 °C Üzerine Çıkarmak:** Islah edilmiş çelik gövdeler aşırı ısıtıldığında menevişlenir (temper dökülür) ve sertliklerini kaybeder.
-- **Montaj Pahlarını Çok Dik Açılı Yapmak:** Presleme ekseninde minimum $15^\circ - 20^\circ$ giriş pahı verilmezse kenarlar metali kazıyarak (shaving) yüzeyi bozar.
+- **Montaj Pahlarını Çok Dik Açılı Yapmak:** Presleme ekseninde minimum `15^circ - 20^circ` giriş pahı verilmezse kenarlar metali kazıyarak (shaving) yüzeyi bozar.
 
 ## İlgili hesaplayıcılar
 

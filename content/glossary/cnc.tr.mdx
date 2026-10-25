@@ -1,9 +1,16 @@
 ---
-title: "CNC (Bilgisayarlı Sayısal Kontrol)"
-description: "CNC talaşlı imalat tezgahları (3/5 eksen frezeleme, torna), G-kodları, kesme hızı ($v_c$), diş başına ilerleme ($f_z$) ve takım ömrü."
-date: "2026-05-09"
-tags: ["CNC","talaşlı imalat","frezeleme","torna","kesme parametreleri"]
-category: "İmalat"
+title: CNC (Bilgisayarlı Sayısal Kontrol)
+description: >-
+  CNC talaşlı imalat tezgahları (3/5 eksen frezeleme, torna), G-kodları, kesme
+  hızı ($v_c$), diş başına ilerleme ($f_z$) ve takım ömrü.
+date: '2026-05-09'
+tags:
+  - CNC
+  - talaşlı imalat
+  - frezeleme
+  - torna
+  - kesme parametreleri
+category: İmalat
 draft: false
 readingTime: 4
 ---
@@ -12,21 +19,29 @@ CNC (Computer Numerical Control), takım tezgahlarının mikroişlemci tabanlı 
 
 ## Neden önemli?
 
-Mikron seviyesinde boyutsal tekrarlanabilirlik ($IT6 - IT7$), karmaşık serbest formlu 3D yüzeylerin işlenmesi ve seri üretimde insan kaynaklı imalat hatalarının ortadan kaldırılmasını sağlar.
+Mikron seviyesinde boyutsal tekrarlanabilirlik (`IT6 - IT7`), karmaşık serbest formlu 3D yüzeylerin işlenmesi ve seri üretimde insan kaynaklı imalat hatalarının ortadan kaldırılmasını sağlar.
 
 ## Mühendislik uygulaması ve standartlar
 
-- **Kesme Hızı ($v_c$ [$	ext{m/dak}$]):** Takım çapı ($D_c$) ve fener mili devri ($n$) ilişkisi:
-  $$v_c = rac{pi cdot D_c cdot n}{1000} implies n = rac{1000 cdot v_c}{pi cdot D_c}$$
-- **Tabla İlerleme Hızı ($v_f$ [$	ext{mm/dak}$]):** Kesici diş sayısı ($z$) ve diş başına ilerleme ($f_z$):
-  $$v_f = n cdot z cdot f_z$$
+- **Kesme Hızı (`v_c` [`extm/dak`]):** Takım çapı (`D_c`) ve fener mili devri (`n`) ilişkisi:
+  
+`v_c = (pi  *  D_c  *  n / 1000) implies n = (1000  *  v_c / pi  *  D_c)`
+
+- **Tabla İlerleme Hızı (`v_f` [`extmm/dak`]):** Kesici diş sayısı (`z`) ve diş başına ilerleme (`f_z`):
+  
+`v_f = n  *  z  *  f_z`
+
 - **Talaş Hacmi Kaldırma Oranı (MRR):**
-  $$MRR = rac{a_p cdot a_e cdot v_f}{1000} quad [	ext{cm}^3	ext{/dak}]$$
-  *(burada $a_p$ eksenel kesme derinliği, $a_e$ radyal kesme genişliğidir).*
+  
+`MRR = (a_p  *  a_e  *  v_f / 1000) quad [	extcm^3	ext/dak]`
+
+  *(burada `a_p` eksenel kesme derinliği, `a_e` radyal kesme genişliğidir).*
 
 <Callout type="info" title="İmalat Örneği">
-$D_c = 10	ext{ mm}$ 4 ağızlı karbür freze ile çelik işlerken ($v_c = 120	ext{ m/dak}$, $f_z = 0.05	ext{ mm/diş}$):
-$$n = rac{1000 	imes 120}{pi 	imes 10} approx mathbf{3820	ext{ rpm}}, quad v_f = 3820 	imes 4 	imes 0.05 approx mathbf{764	ext{ mm/dak}}$$
+`D_c = 10	ext mm` 4 ağızlı karbür freze ile çelik işlerken (`v_c = 120	ext m/dak`, `f_z = 0.05	ext mm/diş`):
+
+`n = (1000 	imes 120 / pi 	imes 10) approx mathbf3820	ext rpm, quad v_f = 3820 	imes 4 	imes 0.05 approx mathbf764	ext mm/dak`
+
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar

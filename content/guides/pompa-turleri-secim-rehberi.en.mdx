@@ -1,9 +1,17 @@
 ---
-title: "Pump selection guide: centrifugal vs positive displacement"
-description: "Comparison of centrifugal and positive displacement pumps, hydraulic power sizing, NPSH calculations, and cavitation prevention engineering guide."
-date: "2026-05-09"
-tags: ["pumps", "centrifugal", "positive displacement", "NPSH", "cavitation", "hydraulic power"]
-category: "Fluids"
+title: 'Pump selection guide: centrifugal vs positive displacement'
+description: >-
+  Comparison of centrifugal and positive displacement pumps, hydraulic power
+  sizing, NPSH calculations, and cavitation prevention engineering guide.
+date: '2026-05-09'
+tags:
+  - pumps
+  - centrifugal
+  - positive displacement
+  - NPSH
+  - cavitation
+  - hydraulic power
+category: Fluids
 draft: false
 readingTime: 9
 ---
@@ -28,42 +36,60 @@ Selecting the wrong pump architecture degrades process efficiency and inflates o
 ## Step by step method
 
 1. **Select Pump Architecture Based on Fluid Viscosity:**
-   - **Centrifugal Pumps (Radial / Mixed / Axial Flow):** Preferred for low-viscosity fluids ($\mu < 150\text{ cSt}$ / water, chemicals, light hydrocarbons), high flow capacity ($Q$), and moderate discharge heads.
-   - **Positive Displacement Pumps (Gear, Lobe, Progressive Cavity, Piston):** Mandatory for high-viscosity fluids ($\mu > 150\text{ cSt}$ / heavy oils, resins, slurries), metering duty, or high pressure ($P > 25\text{ bar}$) where flow must remain constant irrespective of discharge backpressure.
+   - **Centrifugal Pumps (Radial / Mixed / Axial Flow):** Preferred for low-viscosity fluids (`μ &lt; 150  cSt` / water, chemicals, light hydrocarbons), high flow capacity (`Q`), and moderate discharge heads.
+   - **Positive Displacement Pumps (Gear, Lobe, Progressive Cavity, Piston):** Mandatory for high-viscosity fluids (`μ > 150  cSt` / heavy oils, resins, slurries), metering duty, or high pressure (`P > 25  bar`) where flow must remain constant irrespective of discharge backpressure.
 
-2. **Compute Total Dynamic Head ($H$):**
-   Sum static elevation difference ($\Delta z$), differential pressure ($\Delta P / \rho g$), and total piping friction losses ($\sum h_f$):
-   $$H = \Delta z + \frac{P_{discharge} - P_{suction}}{\rho \cdot g} + \sum h_f \quad [\text{m}]$$
+2. **Compute Total Dynamic Head (`H`):**
+   Sum static elevation difference (`Δ z`), differential pressure (`Δ P / ρ g`), and total piping friction losses (`sum h_f`):
+   
+`H = Δ z + fracP_discharge - P_suctionρ  *  g + sum h_f   [ m ]`
+
 
 3. **Determine Hydraulic and Motor Shaft Power:**
-   Given volumetric flow $Q$ [$\text{m}^3\text{/s}$], dynamic head $H$ [$\text{m}$], and liquid density $\rho$ [$\text{kg/m}^3$]:
-   $$P_h = \frac{\rho \cdot g \cdot Q \cdot H}{1000} \quad [\text{kW}]$$
-   Accounting for pump hydraulic efficiency ($\eta_p$) and motor safety margin ($S_m \approx 15\% - 20\%$):
-   $$P_m = \frac{P_h}{\eta_p} \cdot (1 + S_m)$$
+   Given volumetric flow `Q` [`m ^3 /s`], dynamic head `H` [`m`], and liquid density `ρ` [`kg/m ^3`]:
+   
+`P_h = (ρ  *  g  *  Q  *  H / 1000)   [ kW ]`
 
-4. **Verify Available Net Positive Suction Head ($NPSH_A$):**
+   Accounting for pump hydraulic efficiency (`η_p`) and motor safety margin (`S_m  ≈  15% - 20%`):
+   
+`P_m = (P_h / η_p)  *  (1 + S_m)`
+
+
+4. **Verify Available Net Positive Suction Head (`NPSH_A`):**
    Evaluate absolute suction head above vapor pressure at the impeller inlet:
-   $$NPSH_A = \frac{P_{ambient} - P_{vapor}}{\rho \cdot g} \pm h_{static} - h_{f,suction}$$
-   To guarantee cavitation-free service, maintain a positive safety margin over vendor required $NPSH_R$:
-   $$NPSH_A \ge NPSH_R + 0.5\text{ m}$$
+   
+`NPSH_A = fracP_ambient - P_vaporρ  *  g pm h_static - h_f,suction`
+
+   To guarantee cavitation-free service, maintain a positive safety margin over vendor required `NPSH_R`:
+   
+`NPSH_A  >=  NPSH_R + 0.5  m`
+
 
 5. **Industrial Worked Example:**
-   A cooling system requires $Q = 36\text{ m}^3\text{/h}$ ($0.01\text{ m}^3\text{/s}$) of clean water ($\rho = 1000\text{ kg/m}^3$) against a total dynamic head of $H = 45\text{ m}$. The selected radial centrifugal pump offers BEP efficiency $\eta_p = 0.72$ and $NPSH_R = 2.4\text{ m}$:
+   A cooling system requires `Q = 36  m ^3 /h` (`0.01  m ^3 /s`) of clean water (`ρ = 1000  kg/m ^3`) against a total dynamic head of `H = 45  m`. The selected radial centrifugal pump offers BEP efficiency `η_p = 0.72` and `NPSH_R = 2.4  m`:
    - Hydraulic power:
-     $$P_h = \frac{1000 \times 9.81 \times 0.01 \times 45}{1000} = \mathbf{4.41\text{ kW}}$$
+     
+`P_h = (1000  *  9.81  *  0.01  *  45 / 1000) = mathbf4.41  kW`
+
    - Shaft input power:
-     $$P_{shaft} = \frac{4.41}{0.72} = \mathbf{6.13\text{ kW}}$$
+     
+`P_shaft = (4.41 / 0.72) = mathbf6.13  kW`
+
    - Standard motor selection with 20% margin:
-     $$P_m = 6.13 \times 1.20 = 7.36\text{ kW} \implies \mathbf{7.5\text{ kW}}\text{ standard electric motor}$$
-   - Suction from an open atmospheric sump ($1.013\text{ bar}$) with water at 20 °C ($P_v = 0.0234\text{ bar}$), positive head $h_s = +2.0\text{ m}$, suction line loss $h_{f,suction} = 0.6\text{ m}$:
-     $$NPSH_A = \frac{101\,300 - 2340}{1000 \times 9.81} + 2.0 - 0.6 = 10.09 + 1.4 = \mathbf{11.49\text{ m}}$$
-   - $NPSH_A (11.49\text{ m}) \gg NPSH_R (2.4\text{ m}) + 0.5\text{ m}$, cavitation margin is fully satisfied.
+     
+`P_m = 6.13  *  1.20 = 7.36  kW  implies mathbf7.5  kW   standard electric motor`
+
+   - Suction from an open atmospheric sump (`1.013  bar`) with water at 20 °C (`P_v = 0.0234  bar`), positive head `h_s = +2.0  m`, suction line loss `h_f,suction = 0.6  m`:
+     
+`NPSH_A = (101,300 - 2340 / 1000  *  9.81) + 2.0 - 0.6 = 10.09 + 1.4 = mathbf11.49  m`
+
+   - `NPSH_A (11.49  m ) gg NPSH_R (2.4  m ) + 0.5  m`, cavitation margin is fully satisfied.
 
 ## Common mistakes
 
 - **Omitting Pressure Relief Valves on Positive Displacement Pumps:** While centrifugal pumps can briefly run against a closed valve, PD pumps generate destructive pressures that rupture pipework or burn motors; integral PRVs are essential.
 - **Operating Far to the Left of the BEP:** Running below 60% of design flow triggers internal recirculation, thermal cavitation, and destructive radial bearing thrust.
-- **Neglecting Vapor Pressure Rise with Temperature:** At 85 °C, water vapor pressure spikes to $0.58\text{ bar}$; failure to provide pressurized suction leads to immediate vapor flashing.
+- **Neglecting Vapor Pressure Rise with Temperature:** At 85 °C, water vapor pressure spikes to `0.58  bar`; failure to provide pressurized suction leads to immediate vapor flashing.
 - **Matching Suction Pipe Diameter to Pump Suction Nozzle:** Suction piping must be sized one nominal diameter larger using an eccentric reducer (flat on top) to suppress air pocketing.
 
 ## Related calculators

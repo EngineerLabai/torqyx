@@ -1,9 +1,16 @@
 ---
-title: "Thermal Insulation and Thermal Expansion Engineering Guide"
-description: "Heat loss, insulation thickness, 1D Fourier conduction, and thermal expansion design in industrial piping (DIN/ISO/ASTM)."
-date: "2026-05-09"
-tags: ["heat transfer", "insulation", "thermal expansion", "fourier", "mechanical design"]
-category: "Thermal"
+title: Thermal Insulation and Thermal Expansion Engineering Guide
+description: >-
+  Heat loss, insulation thickness, 1D Fourier conduction, and thermal expansion
+  design in industrial piping (DIN/ISO/ASTM).
+date: '2026-05-09'
+tags:
+  - heat transfer
+  - insulation
+  - thermal expansion
+  - fourier
+  - mechanical design
+category: Thermal
 draft: false
 readingTime: 9
 ---
@@ -29,35 +36,45 @@ In industrial process plants, thermal insulation does far more than conserve ene
 ## Step by step method
 
 1. **Determine Operating Temperatures and Ambient Conditions:**
-   Find the thermal delta between ambient installation temperature ($T_{ambient}$) and operating fluid temperature ($T_{operating}$):
-   $$\Delta T = T_{operating} - T_{ambient}$$
+   Find the thermal delta between ambient installation temperature (`T_ambient`) and operating fluid temperature (`T_operating`):
+   
+`Δ T = T_operating - T_ambient`
+
 
 2. **Evaluate Heat Flux with Fourier's Conduction Law:**
-   For plane walls, heat flux per unit area ($q$ [$\text{W/m}^2$]):
-   $$q = \frac{k}{s} \cdot (T_{in} - T_{out}) = \frac{\Delta T}{R_{th}}$$
-   For cylindrical piping, heat loss per linear meter ($q_L$ [$\text{W/m}$]):
-   $$q_L = \frac{2\pi \cdot k \cdot (T_{pipe} - T_{ambient})}{\ln(D_{outer} / D_{inner})}$$
+   For plane walls, heat flux per unit area (`q` [`W/m ^2`]):
+   
+`q = (k / s)  *  (T_in - T_out) = fracΔ TR_th`
+
+   For cylindrical piping, heat loss per linear meter (`q_L` [`W/m`]):
+   
+`q_L = frac2pi  *  k  *  (T_pipe - T_ambient)ln(D_outer / D_inner)`
+
 
 3. **Calculate Unrestrained Linear Thermal Expansion:**
-   Unrestrained elongation ($\Delta L$) along pipe length:
-   $$\Delta L = \alpha \cdot L_0 \cdot \Delta T$$
-   *(e.g., Carbon steel $\alpha \approx 12 \times 10^{-6}\text{ / °C}$, Austenitic Stainless AISI 304 $\approx 16.5 \times 10^{-6}\text{ / °C}$)*
+   Unrestrained elongation (`Δ L`) along pipe length:
+   
+`Δ L = α  *  L_0  *  Δ T`
+
+   *(e.g., Carbon steel `α  ≈  12  *  10^-6  / °C`, Austenitic Stainless AISI 304 `≈  16.5  *  10^-6  / °C`)*
 
 4. **Verify Restrained Thermal Stress:**
    If expansion is fully locked by rigid fixed anchors, internal compressive stress is:
-   $$\sigma_{thermal} = E \cdot \alpha \cdot \Delta T$$
-   If this stress approaches material yield ($R_e$), engineered expansion loops or expansion joints must be added.
+   
+`σ_thermal = E  *  α  *  Δ T`
+
+   If this stress approaches material yield (`R_e`), engineered expansion loops or expansion joints must be added.
 
 5. **Worked Industrial Design Scenario:**
    A 25-meter DN100 carbon steel steam line (outer diameter 114.3 mm) operates at 150 °C with ambient 20 °C:
-   - $\Delta T = 150 - 20 = 130\text{ °C}$
-   - $\Delta L = (12 \times 10^{-6}\text{ / °C}) \times 25\,000\text{ mm} \times 130\text{ °C} = \mathbf{39.0\text{ mm}}$
+   - `Δ T = 150 - 20 = 130  °C`
+   - `Δ L = (12  *  10^-6  / °C )  *  25,000  mm   *  130  °C  = mathbf39.0  mm`
    - *Result:* The 25-meter pipe expands by 39 mm, necessitating an axial bellows or expansion loop between anchors.
 
 ## Common mistakes
 
 - **Selecting Insulation Thickness Separately from Pipe Shoes:** Clamping hangers directly to bare pipe creates severe heat leaks and localized stress; pre-insulated pipe shoes are required.
-- **Treating Thermal Conductivity as Constant:** Mineral wool $k$ increases from 0.038 at 50 °C to 0.070 at 250 °C; mean temperature conductivity must be used.
+- **Treating Thermal Conductivity as Constant:** Mineral wool `k` increases from 0.038 at 50 °C to 0.070 at 250 °C; mean temperature conductivity must be used.
 - **Omitting Expansion Loops Between Fixed Anchors:** Trapping thermal growth shears anchor bolts and distorts equipment nozzles.
 - **Overlooking Bimetallic Expansion Differentials:** Pairing stainless piping with carbon steel skids introduces a 40% thermal growth mismatch that must be slotted.
 - **Neglecting Moisture Ingress (CUI):** Damaged weather jacketing traps water, initiating hidden pipe corrosion under insulation.

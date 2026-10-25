@@ -1,39 +1,52 @@
 ---
-title: "ISO 898-1 Fastener Standards: Property Classes and Mechanical Properties"
-description: "A comprehensive engineering guide to ISO 898-1 metric bolt property classes (8.8, 10.9, 12.9), tensile and yield strength formulas, and nut matching rules."
-date: "2026-05-18"
-tags: ["ISO 898-1", "bolts", "fasteners", "property classes", "tensile strength", "yield strength"]
-category: "Standards"
+title: 'ISO 898-1 Fastener Standards: Property Classes and Mechanical Properties'
+description: >-
+  A comprehensive engineering guide to ISO 898-1 metric bolt property classes
+  (8.8, 10.9, 12.9), tensile and yield strength formulas, and nut matching
+  rules.
+date: '2026-05-18'
+tags:
+  - ISO 898-1
+  - bolts
+  - fasteners
+  - property classes
+  - tensile strength
+  - yield strength
+category: Standards
 draft: false
 readingTime: 6
-canonical: "https://torqyx.com/en/blog/iso-898-1-civata-standartlari"
+canonical: 'https://torqyx.com/en/blog/iso-898-1-civata-standartlari'
 ---
 
 ISO 898-1 is the primary international engineering standard defining the mechanical and physical properties of metric bolts, screws, and studs manufactured from carbon steel and alloy steel. In mechanical design and plant engineering, the raised numeric markings found on fastener heads—such as "8.8", "10.9", or "12.9"—strictly correspond to this standardized classification system.
 
 ## The mathematical logic of ISO 898-1 property class codes
 
-The two-digit designation separated by a dot ($X.Y$) mathematically specifies both ultimate tensile strength and proof yield strength:
-1. **First Digit ($X$):** Represents one-hundredth of the nominal minimum ultimate tensile strength ($R_m$):
-   $$R_m = X \times 100 \quad [\text{MPa}]$$
-2. **Second Digit ($Y$):** Multiplied by 10, expresses the ratio of lower yield strength ($R_{eL}$) or 0.2% proof stress ($R_{p0.2}$) relative to the nominal tensile strength:
-   $$R_{p0.2} = R_m \times \frac{Y}{10} = (X \times 100) \times \frac{Y}{10} = X \times Y \times 10 \quad [\text{MPa}]$$
+The two-digit designation separated by a dot (X.Y) mathematically specifies both ultimate tensile strength and proof yield strength:
+1. **First Digit (X):** Represents one-hundredth of the nominal minimum ultimate tensile strength (R_m):
+   
+`R_m = X  *  100   [ MPa ]`
+
+2. **Second Digit (Y):** Multiplied by 10, expresses the ratio of lower yield strength (R_eL) or 0.2% proof stress (R_p0.2) relative to the nominal tensile strength:
+   
+`R_p0.2 = R_m  *  (Y / 10) = (X  *  100)  *  (Y / 10) = X  *  Y  *  10   [ MPa ]`
+
 
 ### Core property class mechanical specifications
 
-| Property Class | Min. Tensile Strength $R_m$ [$\text{MPa}$] | Min. Yield Strength $R_{p0.2}$ [$\text{MPa}$] | Yield-to-Tensile Ratio | Core Hardness (HRC) | Elongation at Fracture ($A_5$) |
+| Property Class | Min. Tensile Strength R_m [MPa] | Min. Yield Strength R_p0.2 [MPa] | Yield-to-Tensile Ratio | Core Hardness (HRC) | Elongation at Fracture (A_5) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| **4.6** | $400\text{ MPa}$ | $240\text{ MPa}$ | 60% | $67 - 95\text{ HRB}$ | $\ge 22\%$ |
-| **5.8** | $500\text{ MPa}$ | $400\text{ MPa}$ | 80% | $82 - 95\text{ HRB}$ | $\ge 10\%$ |
-| **8.8** | $800\text{ MPa}$ | $640\text{ MPa}$ | 80% | $22 - 32\text{ HRC}$ | $\ge 12\%$ |
-| **10.9** | $1000\text{ MPa}$ | $900\text{ MPa}$ | 90% | $32 - 39\text{ HRC}$ | $\ge 9\%$ |
-| **12.9** | $1200\text{ MPa}$ | $1080\text{ MPa}$ | 90% | $39 - 44\text{ HRC}$ | $\ge 8\%$ |
+| **4.6** | 400  MPa | 240  MPa | 60% | 67 - 95  HRB | >=  22% |
+| **5.8** | 500  MPa | 400  MPa | 80% | 82 - 95  HRB | >=  10% |
+| **8.8** | 800  MPa | 640  MPa | 80% | 22 - 32  HRC | >=  12% |
+| **10.9** | 1000  MPa | 900  MPa | 90% | 32 - 39  HRC | >=  9% |
+| **12.9** | 1200  MPa | 1080  MPa | 90% | 39 - 44  HRC | >=  8% |
 
 ## Selecting between Class 8.8, 10.9, and 12.9
 
 - **Class 8.8 (Structural & Machine Engineering):** Produced from medium carbon quenched and tempered steel. Balances high tensile capability with 12% elongation and superior notch impact toughness, making it the standard baseline for heavy machinery, gearboxes, and structural steel connections.
 - **Class 10.9 (Automotive & High-Torque Machinery):** Manufactured from quenched and tempered alloy steels (e.g., 42CrMo4). Preferred in automotive chassis, engine cylinder heads, and wind turbine slewing bearings where high clamp force is needed within compact geometries.
-- **Class 12.9 (Ultra-High Strength):** Delivers the highest tensile capacity ($1200\text{ MPa}$), but exhibits reduced ductility ($8\%$ elongation). Fasteners above $39\text{ HRC}$ are susceptible to hydrogen embrittlement during acid pickling or electroplating, mandating strict de-embrittlement baking.
+- **Class 12.9 (Ultra-High Strength):** Delivers the highest tensile capacity (1200  MPa), but exhibits reduced ductility (8% elongation). Fasteners above 39  HRC are susceptible to hydrogen embrittlement during acid pickling or electroplating, mandating strict de-embrittlement baking.
 
 ## Nut compatibility rule (ISO 898-2)
 
@@ -44,11 +57,15 @@ In any engineered bolted joint, the failure mode under overload must be bolt sha
 
 ## Industrial worked example
 
-For an M16 Class 8.8 bolt with effective tensile stress area $A_s = 157\text{ mm}^2$:
+For an M16 Class 8.8 bolt with effective tensile stress area A_s = 157  mm^2:
 - Yield force:
-  $$F_y = R_{p0.2} \cdot A_s = 640\text{ MPa} \times 157\text{ mm}^2 = \mathbf{100\,480\text{ N}} \approx \mathbf{100.5\text{ kN}}$$
+  
+`F_y = R_p0.2  *  A_s = 640  MPa   *  157  mm ^2 = mathbf100,480  N   ≈  mathbf100.5  kN`
+
 - Maximum allowable assembly tightening preload per VDI 2230 (90% yield criterion):
-  $$F_{M,max} = 0.90 \cdot F_y = 0.90 \times 100.5\text{ kN} = \mathbf{90.4\text{ kN}}$$
+  
+`F_M,max = 0.90  *  F_y = 0.90  *  100.5  kN  = mathbf90.4  kN`
+
 
 ## Related Torqyx engineering tools and guides
 

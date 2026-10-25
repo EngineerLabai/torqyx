@@ -1,9 +1,18 @@
 ---
-title: "Press-fit tolerance selection and interference fit calculation"
-description: "ISO 286 tolerance classes, DIN 7190 contact pressure, Lamé thick-walled cylinder equations, assembly press force, and shrink-fit thermal sizing."
-date: "2026-05-09"
-tags: ["press fit", "tolerance", "interference fit", "ISO 286", "DIN 7190", "Lamé", "shrink fit"]
-category: "Tolerance"
+title: Press-fit tolerance selection and interference fit calculation
+description: >-
+  ISO 286 tolerance classes, DIN 7190 contact pressure, Lamé thick-walled
+  cylinder equations, assembly press force, and shrink-fit thermal sizing.
+date: '2026-05-09'
+tags:
+  - press fit
+  - tolerance
+  - interference fit
+  - ISO 286
+  - DIN 7190
+  - Lamé
+  - shrink fit
+category: Tolerance
 draft: false
 readingTime: 9
 ---
@@ -15,15 +24,15 @@ This guide details the structural and mechanical sizing of cylindrical interfere
 ## Problem / Objective
 
 Interference fits provide keyless, backlash-free, and high-fatigue-strength mechanical joints capable of transmitting severe alternating torque and axial forces. Flawed tolerance pairing induces two catastrophic failure modes:
-- **Insufficient Interference ($\Delta_{min}$):** Joint slippage under operational loads, severe fretting corrosion, and rapid fretting fatigue failure.
-- **Excessive Interference ($\Delta_{max}$):** Hub tensile stress exceeding material yield, causing radial fracture, severe galling during mechanical pressing, or bore plastification.
+- **Insufficient Interference (`Δ_min`):** Joint slippage under operational loads, severe fretting corrosion, and rapid fretting fatigue failure.
+- **Excessive Interference (`Δ_max`):** Hub tensile stress exceeding material yield, causing radial fracture, severe galling during mechanical pressing, or bore plastification.
 
 ## Assumptions
 
 - Both shaft and hub materials behave elastically and follow Hooke's law without bulk yielding.
-- Contact interface pressure ($p$) is uniformly distributed over the engagement length $L$.
-- Surface roughness asperities flatten plastically during assembly, diminishing the effective operational interference ($\Delta_{eff} < \Delta_{nominal}$).
-- For thermal shrink fitting, heating is uniform and does not exceed the material tempering threshold ($T < 250\text{ °C}$).
+- Contact interface pressure (`p`) is uniformly distributed over the engagement length `L`.
+- Surface roughness asperities flatten plastically during assembly, diminishing the effective operational interference (`Δ_eff &lt; Δ_nominal`).
+- For thermal shrink fitting, heating is uniform and does not exceed the material tempering threshold (`T &lt; 250  °C`).
 
 ## Step by step method
 
@@ -32,49 +41,69 @@ Interference fits provide keyless, backlash-free, and high-fatigue-strength mech
    - **H7/s6:** Permanent heavy-duty interference fit; standard for rigid shaft-hub torque transmission.
    - **H7/u6:** Heavy press fit; for massive torque, severe shock reversals, and thick-walled assemblies.
 
-2. **Calculate Effective Interference ($\Delta_{eff}$) Corrected for Asperity Flattening:**
-   Surface roughness peaks ($R_z$ [$\mu\text{m}$]) flatten during press assembly (DIN 7190):
-   $$\Delta_{eff} = \Delta_{nominal} - 1.2 \cdot (R_{z,shaft} + R_{z,hub}) \quad [\mu\text{m}]$$
+2. **Calculate Effective Interference (`Δ_eff`) Corrected for Asperity Flattening:**
+   Surface roughness peaks (`R_z` [`μ m`]) flatten during press assembly (DIN 7190):
+   
+`Δ_eff = Δ_nominal - 1.2  *  (R_z,shaft + R_z,hub)   [μ m ]`
 
-3. **Determine Interface Contact Pressure ($p$) via Lamé Equations:**
-   For a solid steel shaft ($d_i = 0$, $d$) and outer steel hub ($d, D_o$) with identical elastic modulus ($E = 210\,000\text{ MPa}$, $\nu = 0.3$):
-   $$p = \frac{\Delta_{eff}}{d} \cdot \frac{E}{2} \cdot \left( 1 - \frac{d^2}{D_o^2} \right) \quad [\text{MPa}]$$
 
-4. **Verify Transmissible Torque ($T$) and Axial Retention Force ($F_{ax}$):**
-   With engagement length $L$, diameter $d$, and friction coefficient ($\mu \approx 0.12 - 0.15$ dry clean press):
-   $$T = \frac{1}{2} \cdot \pi \cdot d^2 \cdot L \cdot p_{min} \cdot \mu \quad [\text{N}\cdot\text{m}]$$
-   $$F_{ax} = \pi \cdot d \cdot L \cdot p_{min} \cdot \mu \quad [\text{N}]$$
+3. **Determine Interface Contact Pressure (`p`) via Lamé Equations:**
+   For a solid steel shaft (`d_i = 0`, `d`) and outer steel hub (`d, D_o`) with identical elastic modulus (`E = 210,000  MPa`, `ν = 0.3`):
+   
+`p = fracΔ_effd  *  (E / 2)  *  ( 1 - (d^2 / D_o^2) )   [ MPa ]`
+
+
+4. **Verify Transmissible Torque (`T`) and Axial Retention Force (`F_ax`):**
+   With engagement length `L`, diameter `d`, and friction coefficient (`μ  ≈  0.12 - 0.15` dry clean press):
+   
+`T = (1 / 2)  *  pi  *  d^2  *  L  *  p_min  *  μ   [ N  *  m ]`
+
+   
+`F_ax = pi  *  d  *  L  *  p_min  *  μ   [ N ]`
+
 
 5. **Verify Hub Maximum von Mises Stress:**
    Peak tangential tensile stress develops at the inner bore diameter of the hub:
-   $$\sigma_{t,max} = p_{max} \cdot \frac{D_o^2 + d^2}{D_o^2 - d^2}$$
+   
+`σ_t,max = p_max  *  (D_o^2 + d^2 / D_o^2 - d^2)`
+
    von Mises equivalent stress check:
-   $$\sigma_{vm} = \sqrt{\sigma_{t,max}^2 + \sigma_{t,max} \cdot p_{max} + p_{max}^2} \le \frac{S_y}{S_f}$$
+   
+`σ_vm = sqrtσ_t,max^2 + σ_t,max  *  p_max + p_max^2  <=  (S_y / S_f)`
+
 
 6. **Compute Thermal Shrink-Fit Heating Requirements:**
-   To assemble without hydraulic press force, the hub expansion must clear the maximum interference plus assembly clearance ($\delta_a \approx 0.001 \cdot d$):
-   $$\Delta T = \frac{\Delta_{max} + \delta_a}{\alpha \cdot d}$$
+   To assemble without hydraulic press force, the hub expansion must clear the maximum interference plus assembly clearance (`delta_a  ≈  0.001  *  d`):
+   
+`Δ T = fracΔ_max + delta_aα  *  d`
+
 
 7. **Industrial Worked Example:**
-   A solid steel shaft of $d = 50\text{ mm}$ is fitted to a C45 hub ($S_y = 360\text{ MPa}$) with outer diameter $D_o = 100\text{ mm}$ and length $L = 60\text{ mm}$ using an H7/s6 tolerance pairing:
-   - Hole H7 ($0 / +25\ \mu\text{m}$), Shaft s6 ($+43 / +59\ \mu\text{m}$).
-   - $\Delta_{min} = 43 - 25 = 18\ \mu\text{m}$, $\Delta_{max} = 59 - 0 = 59\ \mu\text{m}$.
-   - Asperity loss for ground surfaces: $1.2 \times (3 + 3) \approx 7.2\ \mu\text{m}$.
-   - Effective minimum interference: $\Delta_{eff,min} = 18 - 7.2 = 10.8\ \mu\text{m} = 0.0108\text{ mm}$.
+   A solid steel shaft of `d = 50  mm` is fitted to a C45 hub (`S_y = 360  MPa`) with outer diameter `D_o = 100  mm` and length `L = 60  mm` using an H7/s6 tolerance pairing:
+   - Hole H7 (`0 / +25 μ m`), Shaft s6 (`+43 / +59 μ m`).
+   - `Δ_min = 43 - 25 = 18 μ m`, `Δ_max = 59 - 0 = 59 μ m`.
+   - Asperity loss for ground surfaces: `1.2  *  (3 + 3)  ≈  7.2 μ m`.
+   - Effective minimum interference: `Δ_eff,min = 18 - 7.2 = 10.8 μ m  = 0.0108  mm`.
    - Minimum interface pressure:
-     $$p_{min} = \frac{0.0108}{50} \cdot \frac{210\,000}{2} \cdot \left(1 - \frac{50^2}{100^2}\right) = 0.000216 \times 105\,000 \times 0.75 = \mathbf{17.0\text{ MPa}}$$
-   - Transmissible torque with $\mu = 0.14$:
-     $$T = 0.5 \times \pi \times 0.050^2 \times 0.060 \times (17.0 \times 10^6) \times 0.14 = \mathbf{560.7\text{ Nm}}$$
-   - Under $\Delta_{max}$, hub maximum hoop stress $\sigma_t \approx 145\text{ MPa} < 360 / 1.5 = 240\text{ MPa}$ (Fully safe against bursting).
-   - Thermal expansion required for zero-force sliding assembly ($\alpha = 12 \times 10^{-6}\text{ 1/°C}$):
-     $$\Delta T = \frac{0.059 + 0.030}{12 \times 10^{-6} \times 50} \approx \mathbf{148\text{ °C}} \implies \text{Heat hub to 170 °C.}$$
+     
+`p_min = (0.0108 / 50)  *  (210,000 / 2)  *  (1 - (50^2 / 100^2)) = 0.000216  *  105,000  *  0.75 = mathbf17.0  MPa`
+
+   - Transmissible torque with `μ = 0.14`:
+     
+`T = 0.5  *  pi  *  0.050^2  *  0.060  *  (17.0  *  10^6)  *  0.14 = mathbf560.7  Nm`
+
+   - Under `Δ_max`, hub maximum hoop stress `σ_t  ≈  145  MPa  &lt; 360 / 1.5 = 240  MPa` (Fully safe against bursting).
+   - Thermal expansion required for zero-force sliding assembly (`α = 12  *  10^-6  1/°C`):
+     
+`Δ T = frac0.059 + 0.03012  *  10^-6  *  50  ≈  mathbf148  °C  implies  Heat hub to 170 °C.`
+
 
 ## Common mistakes
 
 - **Ignoring Asperity Flattening:** On coarse-turned components, surface peaks flatten during pressing, destroying up to 40% of the calculated interference and resulting in joint slippage.
-- **Using Uncontrolled Lubricants in Dry Friction Fits:** Applying heavy anti-seize paste drops friction coefficient $\mu$ from $0.15$ to $0.06$, slashing torque capacity by 60%.
+- **Using Uncontrolled Lubricants in Dry Friction Fits:** Applying heavy anti-seize paste drops friction coefficient `μ` from `0.15` to `0.06`, slashing torque capacity by 60%.
 - **Overheating Hubs Above 250 °C:** Heating quenched and tempered alloy hubs above 250 °C triggers temper embrittlement and permanent hardness degradation.
-- **Omitting Lead-in Chamfers:** Forcing square-shouldered shafts into bores causes metal shaving and galling; a minimum $15^\circ - 20^\circ$ lead-in chamfer is mandatory.
+- **Omitting Lead-in Chamfers:** Forcing square-shouldered shafts into bores causes metal shaving and galling; a minimum `15^circ - 20^circ` lead-in chamfer is mandatory.
 
 ## Related calculators
 

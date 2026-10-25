@@ -1,9 +1,18 @@
 ---
-title: "Machine element life, S-N Wöhler curves, and fatigue guide"
-description: "High-cycle fatigue analysis, S-N Wöhler curves, Marin modification factors, Goodman failure criterion, and Miner cumulative damage rule."
-date: "2026-05-09"
-tags: ["fatigue", "Wöhler", "service life", "Goodman", "S-N curve", "FKM", "DIN 50100"]
-category: "Machine Elements"
+title: 'Machine element life, S-N Wöhler curves, and fatigue guide'
+description: >-
+  High-cycle fatigue analysis, S-N Wöhler curves, Marin modification factors,
+  Goodman failure criterion, and Miner cumulative damage rule.
+date: '2026-05-09'
+tags:
+  - fatigue
+  - Wöhler
+  - service life
+  - Goodman
+  - S-N curve
+  - FKM
+  - DIN 50100
+category: Machine Elements
 draft: false
 readingTime: 9
 ---
@@ -14,14 +23,14 @@ This guide outlines the analytical fatigue verification of dynamic components su
 
 ## Problem / Objective
 
-Over 80% of mechanical component failures occur not from monotonic static overloads, but from progressive fatigue fracture under cyclic stresses far below the material yield strength ($S_y$). Relying solely on static safety factors ($S_{static} \ge 1.5$) leads to:
+Over 80% of mechanical component failures occur not from monotonic static overloads, but from progressive fatigue fracture under cyclic stresses far below the material yield strength (`S_y`). Relying solely on static safety factors (`S_static  >=  1.5`) leads to:
 - Silent micro-crack initiation at stress concentrations (fillets, keyways, weld toes),
 - Sudden catastrophic brittle fracture with zero warning or macroscopic plastic deformation,
 - Costly downtime and cascading mechanical equipment destruction.
 
 ## Assumptions
 
-- High Cycle Fatigue (HCF, $N > 10^4$ cycles) governs, where macroscopic bulk behavior remains within the nominal elastic regime.
+- High Cycle Fatigue (HCF, `N > 10^4` cycles) governs, where macroscopic bulk behavior remains within the nominal elastic regime.
 - The base fatigue limit is derived from rotating beam tests (RR Moore) and corrected via Marin surface, size, and loading factors.
 - Mean stress influence on endurance limit is evaluated using the modified Goodman or Soderberg failure criteria.
 - Variable amplitude spectrum loads follow the Palmgren-Miner linear cumulative damage hypothesis.
@@ -29,41 +38,51 @@ Over 80% of mechanical component failures occur not from monotonic static overlo
 ## Step by step method
 
 1. **Calculate Alternating and Mean Stress Components:**
-   From peak cyclical stress levels ($\sigma_{max}$ and $\sigma_{min}$):
-   $$\sigma_a = \frac{\sigma_{max} - \sigma_{min}}{2}, \quad \sigma_m = \frac{\sigma_{max} + \sigma_{min}}{2}$$
-   Stress ratio: $R = \frac{\sigma_{min}}{\sigma_{max}}$ *(Fully reversed: $R = -1$; zero-to-tension: $R = 0$)*.
+   From peak cyclical stress levels (`σ_max` and `σ_min`):
+   
+`σ_a = fracσ_max - σ_min2,   σ_m = fracσ_max + σ_min2`
 
-2. **Compute Corrected Endurance Limit ($S_e$) via Marin Equation:**
-   Modify laboratory endurance limit ($S_e' \approx 0.5 \cdot S_{ut}$) to represent actual hardware conditions:
-   $$S_e = k_a \cdot k_b \cdot k_c \cdot k_d \cdot k_e \cdot S_e'$$
-   - $k_a$: Surface finish factor (ground, machined, hot-rolled, as-forged),
-   - $k_b$: Size modification factor ($k_b \approx 1.24 \cdot d^{-0.107}$ for $d > 8\text{ mm}$),
-   - $k_c$: Load factor (1.0 for bending, 0.85 for axial, 0.577 for pure torsion),
-   - $k_e$: Fatigue notch sensitivity factor ($k_e = 1 / K_f$).
+   Stress ratio: `R = fracσ_minσ_max` *(Fully reversed: `R = -1`; zero-to-tension: `R = 0`)*.
 
-3. **Determine Fatigue Safety Factor ($n_f$) Using Modified Goodman:**
-   Using ultimate tensile strength $S_{ut}$ and corrected fatigue limit $S_e$:
-   $$\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}} = \frac{1}{n_f} \implies n_f = \frac{1}{\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}}}$$
-   Achieving $n_f \ge 1.3 - 2.0$ guarantees infinite life ($N \ge 10^6 - 10^7$ cycles) under uninterrupted constant amplitude cycling.
+2. **Compute Corrected Endurance Limit (`S_e`) via Marin Equation:**
+   Modify laboratory endurance limit (`S_e'  ≈  0.5  *  S_ut`) to represent actual hardware conditions:
+   
+`S_e = k_a  *  k_b  *  k_c  *  k_d  *  k_e  *  S_e'`
+
+   - `k_a`: Surface finish factor (ground, machined, hot-rolled, as-forged),
+   - `k_b`: Size modification factor (`k_b  ≈  1.24  *  d^-0.107` for `d > 8  mm`),
+   - `k_c`: Load factor (1.0 for bending, 0.85 for axial, 0.577 for pure torsion),
+   - `k_e`: Fatigue notch sensitivity factor (`k_e = 1 / K_f`).
+
+3. **Determine Fatigue Safety Factor (`n_f`) Using Modified Goodman:**
+   Using ultimate tensile strength `S_ut` and corrected fatigue limit `S_e`:
+   
+`(σ_a / S_e) + fracσ_mS_ut = (1 / n_f) implies n_f = frac1(σ_a / S_e) + fracσ_mS_ut`
+
+   Achieving `n_f  >=  1.3 - 2.0` guarantees infinite life (`N  >=  10^6 - 10^7` cycles) under uninterrupted constant amplitude cycling.
 
 4. **Evaluate Cumulative Damage via Miner's Rule:**
-   For multi-stage spectrum loading with applied cycles $n_i$ at stress amplitude $i$ having fatigue life $N_i$:
-   $$D = \sum_{i=1}^{k} \frac{n_i}{N_i} \le 1.0$$
+   For multi-stage spectrum loading with applied cycles `n_i` at stress amplitude `i` having fatigue life `N_i`:
+   
+`D = sum_i=1^k (n_i / N_i)  <=  1.0`
+
 
 5. **Industrial Worked Example:**
-   A gearbox input shaft manufactured from quenched & tempered AISI 4140 steel ($S_{ut} = 900\text{ MPa}$, $S_y = 650\text{ MPa}$, Marin corrected endurance limit $S_e = 360\text{ MPa}$) operates under alternating bending stresses between $\sigma_{max} = 220\text{ MPa}$ and $\sigma_{min} = -80\text{ MPa}$:
-   - Stress amplitude: $\sigma_a = \frac{220 - (-80)}{2} = \mathbf{150\text{ MPa}}$
-   - Mean stress: $\sigma_m = \frac{220 + (-80)}{2} = \mathbf{70\text{ MPa}}$
+   A gearbox input shaft manufactured from quenched & tempered AISI 4140 steel (`S_ut = 900  MPa`, `S_y = 650  MPa`, Marin corrected endurance limit `S_e = 360  MPa`) operates under alternating bending stresses between `σ_max = 220  MPa` and `σ_min = -80  MPa`:
+   - Stress amplitude: `σ_a = (220 - (-80) / 2) = mathbf150  MPa`
+   - Mean stress: `σ_m = (220 + (-80) / 2) = mathbf70  MPa`
    - Modified Goodman factor of safety:
-     $$\frac{1}{n_f} = \frac{150}{360} + \frac{70}{900} = 0.4167 + 0.0778 = 0.4945 \implies n_f = \mathbf{2.02}$$
-   - *Verdict:* $n_f = 2.02 > 1.50$, confirming safe operation in the infinite life domain.
+     
+`(1 / n_f) = (150 / 360) + (70 / 900) = 0.4167 + 0.0778 = 0.4945 implies n_f = mathbf2.02`
+
+   - *Verdict:* `n_f = 2.02 > 1.50`, confirming safe operation in the infinite life domain.
 
 ## Common mistakes
 
 - **Equating Static Yield Safety with Fatigue Life:** A shaft with a static safety factor of 3.0 may exhibit a fatigue safety factor of 0.8 and fracture after only 50,000 cycles.
-- **Specifying Sharp Fillet Radii at Steps:** Increasing the fillet transition radius from $r/d = 0.05$ to $0.15$ slashes stress concentration by nearly 50%.
+- **Specifying Sharp Fillet Radii at Steps:** Increasing the fillet transition radius from `r/d = 0.05` to `0.15` slashes stress concentration by nearly 50%.
 - **Neglecting Surface Roughness in Severe Service:** Rough-machined finishes reduce fatigue endurance limits by up to 35% compared to polished specimens.
-- **Overlooking Environmental Corrosion:** In corrosive environments, ferrous alloys exhibit no true fatigue limit ($S_e$); the S-N curve drops continuously without a horizontal plateau.
+- **Overlooking Environmental Corrosion:** In corrosive environments, ferrous alloys exhibit no true fatigue limit (`S_e`); the S-N curve drops continuously without a horizontal plateau.
 
 ## Related calculators
 

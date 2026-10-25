@@ -1,19 +1,26 @@
 ---
-title: "Shaft-Hub Connections: Keyed, Flanged, and Interference Fit Comparison"
-description: "Compare keyed, flanged, and press-fit shaft-to-hub connections: torque transmission limits, notch effects, disassembly, and concentricity."
-date: "2026-06-08"
-tags: ["shaft-hub connection", "keyed joint", "interference fit", "flange connection", "mechanical design"]
-category: "Bearings & Shafts"
+title: 'Shaft-Hub Connections: Keyed, Flanged, and Interference Fit Comparison'
+description: >-
+  Compare keyed, flanged, and press-fit shaft-to-hub connections: torque
+  transmission limits, notch effects, disassembly, and concentricity.
+date: '2026-06-08'
+tags:
+  - shaft-hub connection
+  - keyed joint
+  - interference fit
+  - flange connection
+  - mechanical design
+category: Bearings & Shafts
 draft: false
 readingTime: 5
-canonical: "https://torqyx.com/en/blog/mil-gobek-baglantisi-kamali-flansli-gecme-cakma"
+canonical: 'https://torqyx.com/en/blog/mil-gobek-baglantisi-kamali-flansli-gecme-cakma'
 ---
 
 <Image src="/images/blog/mil-gobek-baglantisi-kamali-flansli-gecme-cakma.webp" alt="Comparison between keyed, flanged, and interference fit shaft-hub connections" width={1200} height={900} caption="Engineering comparison of shaft-to-hub torque transmission mechanisms." />
 
 ## Connection Choice Affects More Than Pure Torque
 
-The mechanical interface between a rotating shaft and its hub (gear, pulley, coupling, or flywheel) is one of the most critical load paths in any powertrain. While all connections transmit rotary torque ($T$), they behave very differently in terms of:
+The mechanical interface between a rotating shaft and its hub (gear, pulley, coupling, or flywheel) is one of the most critical load paths in any powertrain. While all connections transmit rotary torque (`T`), they behave very differently in terms of:
 - **Stress concentrations and notch fatigue,**
 - **Shaft concentricity and balancing runout,**
 - **Assembly and field disassembly effort,**
@@ -23,14 +30,14 @@ Choosing an oversized shaft diameter does not protect a machine if the hub conne
 
 ## Keyed Connections (DIN 6885): Ubiquitous and Serviceable
 
-Parallel keys per DIN 6885-1 are the industrial standard for general power transmission. Torque is transmitted by form-fit contact: the key experiences transverse shear stress ($\tau$) while its side flanks exert surface compressive pressure ($p$) against the shaft and hub keyways.
+Parallel keys per DIN 6885-1 are the industrial standard for general power transmission. Torque is transmitted by form-fit contact: the key experiences transverse shear stress (`τ`) while its side flanks exert surface compressive pressure (`p`) against the shaft and hub keyways.
 
 ### Advantages:
 - Highly economical and standardized across all metric diameters.
 - Straightforward disassembly using standard pullers.
 
 ### Limitations:
-- **Severe Stress Concentration:** Milling a keyseat introduces high geometric notch factors ($\alpha_k \approx 2.0 - 3.0$), drastically reducing the shaft's torsional and bending fatigue endurance limit.
+- **Severe Stress Concentration:** Milling a keyseat introduces high geometric notch factors (`α_k  ≈  2.0 - 3.0`), drastically reducing the shaft's torsional and bending fatigue endurance limit.
 - **Backlash & Fretting under Reversals:** Under alternating or pulsating torque, slight clearance allows micro-motion, leading to fretting corrosion, peening, and eventual key shearing.
 - **Zero Axial Retention:** Keys do not locate hubs axially; external shaft shoulders, set screws, or retaining rings (DIN 471) are mandatory.
 
@@ -49,11 +56,11 @@ In heavy machinery, marine propulsion, and large turbomachinery, torque is trans
 
 ## Interference Fits (Press-Fit & Shrink-Fit): Notch-Free and Concentric
 
-In interference fits (governed by DIN 7190), the hub bore is machined smaller than the shaft outer diameter (e.g., ISO fit $p6/H7$ or $s6/H7$). When assembled via hydraulic pressing or thermal shrink-fitting (heating the hub / freezing the shaft), the elastic interference generates uniform radial contact pressure ($p_c$). Torque is transmitted purely by frictional shear stress ($\tau = \mu \cdot p_c$).
+In interference fits (governed by DIN 7190), the hub bore is machined smaller than the shaft outer diameter (e.g., ISO fit `p6/H7` or `s6/H7`). When assembled via hydraulic pressing or thermal shrink-fitting (heating the hub / freezing the shaft), the elastic interference generates uniform radial contact pressure (`p_c`). Torque is transmitted purely by frictional shear stress (`τ = μ  *  p_c`).
 
 ### Advantages:
 - **Zero Keyways:** Eliminates keyway stress risers, preserving the maximum fatigue endurance limit of the solid shaft.
-- **Superior Concentricity:** Self-centering action delivers near-zero radial runout, essential for high-speed rotors ($>3000\text{ rpm}$).
+- **Superior Concentricity:** Self-centering action delivers near-zero radial runout, essential for high-speed rotors (`>3000  rpm`).
 - **Immunity to Backlash:** Perfect for dynamic reversing and high shock cycles.
 
 ### Limitations:
@@ -63,7 +70,7 @@ In interference fits (governed by DIN 7190), the hub bore is machined smaller th
 | Feature | Keyed Joint (DIN 6885) | Bolted Flange Joint | Interference Fit (DIN 7190) |
 | :--- | :--- | :--- | :--- |
 | **Transmission Mechanism** | Form-fit (shear & surface contact) | Friction via bolt preload / shear | Friction via radial contact pressure |
-| **Fatigue Notch Effect** | High ($\alpha_k \approx 2.5$) | Low to none | Low (fretting at hub edge) |
+| **Fatigue Notch Effect** | High (`α_k  ≈  2.5`) | Low to none | Low (fretting at hub edge) |
 | **Reversing Torque Resistance** | Moderate to poor (fretting) | Excellent | Outstanding (zero backlash) |
 | **Concentricity & Runout** | Moderate | High | Excellent (self-centering) |
 | **Disassembly Ease** | Simple (standard tools) | Very simple (unbolt) | Difficult (hydraulic/thermal gear) |
@@ -72,9 +79,9 @@ In interference fits (governed by DIN 7190), the hub bore is machined smaller th
 ## Sizing Checks and Design Verification
 
 For verified engineering sizing:
-1. **Keyed Joints:** Check flank surface pressure $p = \frac{2 \cdot T}{d \cdot (h - t_1) \cdot l_e} \le p_{\text{perm}}$, where $l_e$ is effective key length.
-2. **Press-Fits:** Check that interference produces sufficient holding torque $T_{\text{slip}} = \pi \cdot d^2 \cdot l \cdot \mu \cdot p_c / 2 \ge S \cdot T_{\text{peak}}$, while ensuring hub tangential tensile stresses do not exceed material yield: $\sigma_{t,\max} \le R_{p0.2} / S$.
-3. **Flanged Joints:** Verify bolt clamp force against interface friction: $T = \mu \cdot F_M \cdot r_{\text{friction}} \cdot z_{\text{bolts}}$.
+1. **Keyed Joints:** Check flank surface pressure `p = (2  *  T / d  *  (h - t_1)  *  l_e)  <=  p_ perm`, where `l_e` is effective key length.
+2. **Press-Fits:** Check that interference produces sufficient holding torque `T_ slip  = pi  *  d^2  *  l  *  μ  *  p_c / 2  >=  S  *  T_ peak`, while ensuring hub tangential tensile stresses do not exceed material yield: `σ_t,max  <=  R_p0.2 / S`.
+3. **Flanged Joints:** Verify bolt clamp force against interface friction: `T = μ  *  F_M  *  r_ friction   *  z_ bolts`.
 
 ## Related Torqyx Calculation Tool
 

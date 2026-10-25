@@ -1,9 +1,16 @@
 ---
-title: "Isı Yalıtımı ve Termal Genleşme Mühendislik Rehberi"
-description: "Yüksek sıcaklık endüstriyel hatlarında ısı kaybı, yalıtım kalınlığı, Fourier iletimi ve termal genleşme hesabı (DIN/ISO/ASTM)."
-date: "2026-05-09"
-tags: ["ısı transferi", "yalıtım", "termal genleşme", "fourier", "mekanik tasarım"]
-category: "Termal"
+title: Isı Yalıtımı ve Termal Genleşme Mühendislik Rehberi
+description: >-
+  Yüksek sıcaklık endüstriyel hatlarında ısı kaybı, yalıtım kalınlığı, Fourier
+  iletimi ve termal genleşme hesabı (DIN/ISO/ASTM).
+date: '2026-05-09'
+tags:
+  - ısı transferi
+  - yalıtım
+  - termal genleşme
+  - fourier
+  - mekanik tasarım
+category: Termal
 draft: false
 readingTime: 9
 ---
@@ -29,35 +36,45 @@ Endüstriyel tesislerde ısı yalıtımı yalnızca enerji verimliliği ve yakı
 ## Adım adım yöntem
 
 1. **Sıcaklık Farkını ve Ortam Koşullarını Belirleyin:**
-   Montaj ortam sıcaklığı ($T_{ortam}$) ile akışkan çalışma sıcaklığı ($T_{calisma}$) arasındaki farkı tespit edin:
-   $$\Delta T = T_{calisma} - T_{ortam}$$
+   Montaj ortam sıcaklığı (`T_ortam`) ile akışkan çalışma sıcaklığı (`T_calisma`) arasındaki farkı tespit edin:
+   
+`Δ T = T_calisma - T_ortam`
+
 
 2. **Fourier Yasası ile Yalıtım Isı Akısını Hesaplayın:**
-   Düzlem yüzeyler için birim alandan geçen ısı akısı ($q$ [$\text{W/m}^2$]):
-   $$q = \frac{k}{s} \cdot (T_{ic} - T_{dis}) = \frac{\Delta T}{R_{th}}$$
-   Silindirik borularda birim boy başına ısı kaybı ($q_L$ [$\text{W/m}$]):
-   $$q_L = \frac{2\pi \cdot k \cdot (T_{boru} - T_{dis})}{\ln(D_{dis} / D_{ic})}$$
+   Düzlem yüzeyler için birim alandan geçen ısı akısı (`q` [`W/m ^2`]):
+   
+`q = (k / s)  *  (T_ic - T_dis) = fracΔ TR_th`
+
+   Silindirik borularda birim boy başına ısı kaybı (`q_L` [`W/m`]):
+   
+`q_L = frac2pi  *  k  *  (T_boru - T_dis)ln(D_dis / D_ic)`
+
 
 3. **Doğrusal Termal Genleşme Miktarını Hesaplayın:**
-   Hattın serbest uzama payı ($\Delta L$):
-   $$\Delta L = \alpha \cdot L_0 \cdot \Delta T$$
-   *(Örn: Karbon çeliği için $\alpha \approx 12 \times 10^{-6}\text{ / °C}$, Paslanmaz AISI 304 için $\alpha \approx 16.5 \times 10^{-6}\text{ / °C}$)*
+   Hattın serbest uzama payı (`Δ L`):
+   
+`Δ L = α  *  L_0  *  Δ T`
+
+   *(Örn: Karbon çeliği için `α  ≈  12  *  10^-6  / °C`, Paslanmaz AISI 304 için `α  ≈  16.5  *  10^-6  / °C`)*
 
 4. **Kısıtlanmış Sistemde Termal Gerilmeyi Kontrol Edin:**
    Eğer boru rijit sabit mesnetlerle (anchor) kilitlenmişse oluşan basma gerilmesi:
-   $$\sigma_{termal} = E \cdot \alpha \cdot \Delta T$$
-   Bu gerilme akma sınırını ($R_e$) aşıyorsa hatta mutlaka genleşme döngüsü (U-loop) veya kompansatör eklenmelidir.
+   
+`σ_termal = E  *  α  *  Δ T`
+
+   Bu gerilme akma sınırını (`R_e`) aşıyorsa hatta mutlaka genleşme döngüsü (U-loop) veya kompansatör eklenmelidir.
 
 5. **Çözümlü Endüstriyel Tasarım Senaryosu:**
    25 metre uzunluğunda DN100 (Dış çap: 114.3 mm) karbon çelik buhar hattı 150 °C çalışma ve 20 °C montaj sıcaklığına sahiptir:
-   - $\Delta T = 150 - 20 = 130\text{ °C}$
-   - $\Delta L = (12 \times 10^{-6}\text{ / °C}) \times 25\,000\text{ mm} \times 130\text{ °C} = \mathbf{39.0\text{ mm}}$
+   - `Δ T = 150 - 20 = 130  °C`
+   - `Δ L = (12  *  10^-6  / °C )  *  25,000  mm   *  130  °C  = mathbf39.0  mm`
    - *Sonuç:* 25 metrelik boru 39 mm uzar; sabit mesnetler arasına eksenel kompansatör yerleştirilir.
 
 ## Sık hatalar
 
 - **Yalıtım Kalınlığını Mekanik Mesnet Boşluklarından Bağımsız Seçmek:** Kelepçelerin doğrudan boruya basması termal köprü ve yerel gerilme oluşturur; yalıtımlı boru takozu (shoe) kullanılmalıdır.
-- **Sıcaklıkla Isıl İletkenliğin Değişimini Göz Ardı Etmek:** Taş yününde $k$ değeri 50 °C'de $0.038\text{ W/(m}\cdot\text{K)}$ iken 250 °C'de $0.070\text{ W/(m}\cdot\text{K)}$ seviyesine çıkabilir; ortalama sıcaklık $k$ değeri alınmalıdır.
+- **Sıcaklıkla Isıl İletkenliğin Değişimini Göz Ardı Etmek:** Taş yününde `k` değeri 50 °C'de `0.038  W/(m  *  K)` iken 250 °C'de `0.070  W/(m  *  K)` seviyesine çıkabilir; ortalama sıcaklık `k` değeri alınmalıdır.
 - **İki Sabit Mesnet Arasına Genleşme Elemanı Koymamak:** Genleşme engellendiğinde flanş cıvataları aşırı çekme ve kesmeye maruz kalır.
 - **Farklı Malzemelerin Bimetalik Genleşme Farkını Unutmak:** Çelik şase ile paslanmaz boru arasındaki %40 genleşme farkı kayar mesnet boşluklarıyla dengelenmelidir.
 - **CUI (Yalıtım Altı Korozyonu) Korumasını Atlamak:** Dış ceket sızdırmazlığı sağlanmadığında yalıtıma sızan nem boruyu hızla deler.

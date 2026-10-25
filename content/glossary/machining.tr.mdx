@@ -1,9 +1,16 @@
 ---
-title: "Talaşlı imalat (machining)"
-description: "Geleneksel talaşlı imalat (torna, freze, matkap), kesme hızı ($v_c$), Taylor takım ömrü formülü ve işlenebilirlik katsayısı."
-date: "2026-05-09"
-tags: ["talaşlı imalat","torna","freze","kesme hızı","takım ömrü"]
-category: "İmalat"
+title: Talaşlı imalat (machining)
+description: >-
+  Geleneksel talaşlı imalat (torna, freze, matkap), kesme hızı ($v_c$), Taylor
+  takım ömrü formülü ve işlenebilirlik katsayısı.
+date: '2026-05-09'
+tags:
+  - talaşlı imalat
+  - torna
+  - freze
+  - kesme hızı
+  - takım ömrü
+category: İmalat
 draft: false
 readingTime: 4
 ---
@@ -17,10 +24,12 @@ Döküm veya dövme parçaların montaj yüzeyleri, rulman yuvaları ve vida di�
 ## Mühendislik uygulaması ve standartlar
 
 - **Temel Operasyonlar:** Tornalama (silindirik dönel işleme), Frezeleme (döner takım ile prizmatik işleme), Delik Delme ve Raybalama.
-- **Taylor Takım Ömrü Denklemi:** Kesme hızı ($v_c$) ile takımın aşınma ömrü ($T$ [dakika]) arasındaki ilişki:
-  $$v_c cdot T^n = C$$
+- **Taylor Takım Ömrü Denklemi:** Kesme hızı (`v_c`) ile takımın aşınma ömrü (`T` [dakika]) arasındaki ilişki:
+  
+`v_c cdot T^n = C`
+
   *(Kesme hızının %20 artırılması takım ömrünü %50'den fazla düşürebilir).*
-- **Kesme Kuvveti ve Güç:** Kienzle formülüyle talaş kesme kuvveti ($F_c = k_{c1.1} cdot b cdot h^{1-m_c}$) ve tezgah motor gücü ($P_c = F_c cdot v_c / 60,000$) hesaplanır.
+- **Kesme Kuvveti ve Güç:** Kienzle formülüyle talaş kesme kuvveti (`F_c = k_c1.1 cdot b cdot h^1-m_c`) ve tezgah motor gücü (`P_c = F_c cdot v_c / 60,000`) hesaplanır.
 
 <Callout type="info" title="İmalat Kuralı">
 İşleme maliyetini düşürmek için parçada yalnızca çalışan yatak ve montaj yüzeylerine dar tolerans ($IT6 - IT7$) verilmeli; serbest yüzeyler kaba işleme toleransında ($IT11 - IT13$) bırakılmalıdır.

@@ -1,33 +1,44 @@
 ---
-title: "Çekme mukavemeti (tensile strength)"
-description: "Çekme mukavemeti ($R_m$), çekme deneyinde ulaşılan tepe mühendislik gerilmesi, cıvata mukavemet sınıfları ve malzeme sınırları."
-date: "2026-05-09"
-tags: ["çekme mukavemeti","Rm","kopma dayanımı","çekme testi","ASTM E8"]
-category: "Malzeme"
+title: Çekme mukavemeti (tensile strength)
+description: >-
+  Çekme mukavemeti ($R_m$), çekme deneyinde ulaşılan tepe mühendislik gerilmesi,
+  cıvata mukavemet sınıfları ve malzeme sınırları.
+date: '2026-05-09'
+tags:
+  - çekme mukavemeti
+  - Rm
+  - kopma dayanımı
+  - çekme testi
+  - ASTM E8
+category: Malzeme
 draft: false
 readingTime: 4
 ---
 
-Çekme mukavemeti ($R_m$ veya UTS), bir malzemenin eksenel çekme deneyi esnasında boyun verme (necking) başlamadan önce taşıyabildiği en yüksek mühendislik gerilmesidir. Malzemenin nihai mekanik dayanım sınırını temsil eder.
+Çekme mukavemeti (`R_m` veya UTS), bir malzemenin eksenel çekme deneyi esnasında boyun verme (necking) başlamadan önce taşıyabildiği en yüksek mühendislik gerilmesidir. Malzemenin nihai mekanik dayanım sınırını temsil eder.
 
 ## Neden önemli?
 
-Statik tasarımda genellikle akma mukavemeti ($R_e$) esas alınsa da, darbe, patlama ve basınçlı kap hesaplarında nihai güvenlik çekme mukavemeti üzerinden belirlenir. Ayrıca cıvata kalite sınıfları doğrudan çekme mukavemetiyle kodlanır.
+Statik tasarımda genellikle akma mukavemeti (`R_e`) esas alınsa da, darbe, patlama ve basınçlı kap hesaplarında nihai güvenlik çekme mukavemeti üzerinden belirlenir. Ayrıca cıvata kalite sınıfları doğrudan çekme mukavemetiyle kodlanır.
 
 ## Mühendislik uygulaması ve standartlar
 
 ISO 6892-1 ve ASTM E8 çekme testi standartlarına göre:
-$$R_m = rac{F_{max}}{S_0} quad [	ext{MPa}]$$
-- $F_{max}$: Çekme eğrisindeki tepe kuvvet [$	ext{N}$],
-- $S_0$: Numunenin başlangıç orijinal kesit alanı [$	ext{mm}^2$].
+
+`R_m = fracF_maxS_0 quad [	extMPa]`
+
+- `F_max`: Çekme eğrisindeki tepe kuvvet [`extN`],
+- `S_0`: Numunenin başlangıç orijinal kesit alanı [`extmm^2`].
 - **Cıvata Mukavemet Kodları (ISO 898-1):**
-  - **8.8 Cıvata:** İlk rakam "8", nominal çekme mukavemetinin $R_m = 8 	imes 100 = mathbf{800	ext{ MPa}}$ olduğunu belirtir.
-  - **10.9 Cıvata:** $R_m = 10 	imes 100 = mathbf{1000	ext{ MPa}}$.
-  - **12.9 Cıvata:** $R_m = 12 	imes 100 = mathbf{1200	ext{ MPa}}$.
+  - **8.8 Cıvata:** İlk rakam "8", nominal çekme mukavemetinin `R_m = 8 	imes 100 = mathbf800	ext MPa` olduğunu belirtir.
+  - **10.9 Cıvata:** `R_m = 10 	imes 100 = mathbf1000	ext MPa`.
+  - **12.9 Cıvata:** `R_m = 12 	imes 100 = mathbf1200	ext MPa`.
 
 <Callout type="info" title="Çözümlü Örnek">
-M16 (8.8 kalite) bir cıvatanın gerilme kesit alanı $A_s = 157	ext{ mm}^2$'dir. Bu cıvatanın kopabileceği teorik çekme yükü:
-$$F_{kopma} = R_m cdot A_s = 800	ext{ MPa} 	imes 157	ext{ mm}^2 = mathbf{125,600	ext{ N}} approx mathbf{125.6	ext{ kN}}$$
+M16 (8.8 kalite) bir cıvatanın gerilme kesit alanı `A_s = 157	ext mm^2`'dir. Bu cıvatanın kopabileceği teorik çekme yükü:
+
+`F_kopma = R_m  *  A_s = 800	ext MPa 	imes 157	ext mm^2 = mathbf125,600	ext N approx mathbf125.6	ext kN`
+
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar

@@ -1,14 +1,21 @@
 ---
-title: "Güvenlik faktörü (factor of safety)"
-description: "Mühendislik hesaplarında güvenlik faktörü ($S_f$), izin verilen emniyetli gerilme, tasarım belirsizlikleri ve ASME/Eurocode standartları."
-date: "2026-05-09"
-tags: ["güvenlik faktörü","emniyet katsayısı","tasarım marjı","akma","mukavemet"]
-category: "Mekanik"
+title: Güvenlik faktörü (factor of safety)
+description: >-
+  Mühendislik hesaplarında güvenlik faktörü ($S_f$), izin verilen emniyetli
+  gerilme, tasarım belirsizlikleri ve ASME/Eurocode standartları.
+date: '2026-05-09'
+tags:
+  - güvenlik faktörü
+  - emniyet katsayısı
+  - tasarım marjı
+  - akma
+  - mukavemet
+category: Mekanik
 draft: false
 readingTime: 4
 ---
 
-Güvenlik faktörü ($S_f$ veya $n$), bir mekanik parçanın nihai taşıma kapasitesinin (akma veya çekme mukavemeti), maruz kalacağı izin verilen maksimum çalışma gerilmesine oranıdır ($S_f = 	ext{Kapasite} / 	ext{Yük}$).
+Güvenlik faktörü (`S_f` veya `n`), bir mekanik parçanın nihai taşıma kapasitesinin (akma veya çekme mukavemeti), maruz kalacağı izin verilen maksimum çalışma gerilmesine oranıdır (`S_f = 	extKapasite / 	extYük`).
 
 ## Neden önemli?
 
@@ -17,10 +24,14 @@ Malzeme homojenliğindeki kusurları, imalat toleransı sapmalarını, hesaplama
 ## Mühendislik uygulaması ve standartlar
 
 - **Statik Sünek Malzemelerde (Akma Kriteri):**
-  $$S_f = rac{R_{p0.2}}{sigma_{max}} ge 1.3dots 2.0$$
+  
+`S_f = racR_p0.2sigma_max ge 1.3dots 2.0`
+
 - **Statik Gevrek Malzemelerde (Çekme Kriteri):** Gevrek malzemelerde akma olmadığı için çekme mukavemeti kullanılır ve katsayı yüksek tutulur:
-  $$S_f = rac{R_m}{sigma_{max}} ge 3.0dots 5.0$$
-- **Havacılık vs İnşaat:** Havacılıkta ağırlık kritik olduğundan faktör $1.2 - 1.5$ aralığında tutulur ve sıkı testlerle doğrulanır; basınçlı kaplarda ve asansörlerde ise $3.0 - 5.0$ seçilir.
+  
+`S_f = racR_msigma_max ge 3.0dots 5.0`
+
+- **Havacılık vs İnşaat:** Havacılıkta ağırlık kritik olduğundan faktör `1.2 - 1.5` aralığında tutulur ve sıkı testlerle doğrulanır; basınçlı kaplarda ve asansörlerde ise `3.0 - 5.0` seçilir.
 
 <Callout type="info" title="Hesaplama Örneği">
 $R_e = 360	ext{ MPa}$ akma sınırına sahip bir C45 mil üzerinde von Mises eşdeğer gerilmesi $sigma_{vm} = 180	ext{ MPa}$ hesaplanmışsa:

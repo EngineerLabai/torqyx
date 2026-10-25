@@ -1,9 +1,17 @@
 ---
-title: "Kaynaklı birleştirme (welding)"
-description: "Kaynak yöntemleri (MIG/MAG, TIG, Elektrot), köşe kaynak dikişi boynu ($a$), ısıdan etkilenen bölge (HAZ) ve kaynak statik dayanım hesabı."
-date: "2026-05-09"
-tags: ["kaynak","köşe kaynak","kaynak dikişi","Eurocode 3","HAZ","birleştirme"]
-category: "İmalat"
+title: Kaynaklı birleştirme (welding)
+description: >-
+  Kaynak yöntemleri (MIG/MAG, TIG, Elektrot), köşe kaynak dikişi boynu ($a$),
+  ısıdan etkilenen bölge (HAZ) ve kaynak statik dayanım hesabı.
+date: '2026-05-09'
+tags:
+  - kaynak
+  - köşe kaynak
+  - kaynak dikişi
+  - Eurocode 3
+  - HAZ
+  - birleştirme
+category: İmalat
 draft: false
 readingTime: 4
 ---
@@ -17,9 +25,11 @@ Kaynaklı birleştirme (Welding), birbiriyle birleştirilecek metal parçaların
 ## Mühendislik uygulaması ve standartlar
 
 Eurocode 3 (EN 1993-1-8) ve AWS D1.1 standartlarına göre köşe kaynak boyutu:
-- **Kaynak Dikiş Boynu (Boğaz Kalınlığı - $a$):** Köşe kaynağının üçgen kesitinde kökten hipotenüse çizilen en kısa dik mesafedir ($a = z cdot sin 45^circ approx 0.7 cdot z$).
+- **Kaynak Dikiş Boynu (Boğaz Kalınlığı - `a`):** Köşe kaynağının üçgen kesitinde kökten hipotenüse çizilen en kısa dik mesafedir (`a = z cdot sin 45^circ approx 0.7 cdot z`).
 - **Köşe Kaynak Gerilmesi:**
-  $$	au_{kaynak} = rac{F}{a cdot sum L_{kaynak}} le f_{vw,d} = rac{f_u}{sqrt{3} cdot eta_w cdot gamma_{M2}}$$
+  
+`au_kaynak = racFa cdot sum L_kaynak le f_vw,d = racf_usqrt3 cdot eta_w cdot gamma_M2`
+
 - **Isıdan Etkilenen Bölge (HAZ - Heat Affected Zone):** Kaynak dikişinin hemen yanındaki erimemiş ancak yüksek ısıyla mikroyapısı değişmiş bölgedir; sertleşme ve soğuk çatlak riskine karşı ön ısıtma (preheating) uygulanır.
 
 <Callout type="info" title="Tasarım Kuralı">
