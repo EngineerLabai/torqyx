@@ -1,33 +1,41 @@
 ---
-title: "Şekil değiştirme"
-description: "Şekil değiştirme, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Birim şekil değiştirme (strain)"
+description: "Mekanik birim şekil değiştirme ($\u000barepsilon = Delta L / L_0$), gerinim ölçer (strain gauge), Poisson oranı ve elastik-plastik deformasyon."
 date: "2026-05-09"
-tags: ["şekil değiştirme", "elastisite"]
+tags: ["birim şekil değiştirme","deformasyon","uzama","Hooke yasası","Poisson oranı"]
 category: "Mekanik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Şekil değiştirme, boy değişiminin ilk boya oranıdır.
+Birim şekil değiştirme veya gerinim ($arepsilon$), bir cismin mekanik gerilme veya sıcaklık etkisi altında orijinal boyutuna göre gösterdiği boyutsal uzama veya kısalma miktarının boyutsuz oranıdır ($arepsilon = Delta L / L_0$).
 
 ## Neden önemli?
 
-Malzemenin elastik veya plastik bölgede çalıştığını anlamaya yardım eder.
+Gerilme doğrudan gözle görülemez veya ölçülemez; fiziksel olarak ölçülebilen tek büyüklük birim şekil değiştirmedir. Deneysel gerilme analizinde parçalara gerinim ölçer (strain gauge) yapıştırılarak gerilme dolaylı olarak hesaplanır.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Normal Birim Şekil Değiştirme (Hooke Yasası):** Elastik bölgede gerilme ile gerinim arasındaki ilişki:
+  $$arepsilon = rac{Delta L}{L_0} = rac{sigma}{E}$$
+- **Kayma Gerinimi ($gamma$):** Dik açılı elemanın açısal distorsiyonudur: $gamma = 	au / G$.
+- **Poisson Oranı ($
+u$):** Eksenel çekme esnasında enine meydana gelen daralmanın eksenel uzamaya oranıdır:
+  $$
+u = -rac{arepsilon_{enine}}{arepsilon_{eksenel}}$$
+  *(Çelik için $
+u approx 0.30$, alüminyum için $
+u approx 0.33$, mantar için $
+u approx 0.0$'dır).*
 
-
-<Formula label="Temel ifade">
-Strain = delta L / L0
-</Formula>
-
-<Callout type="info" title="Örnek">
-1 m boy 1 mm uzarsa birim şekil değiştirme 0.001 olur.
+<Callout type="info" title="Pratik Dönüşüm">
+$1000	ext{ mm}$ boyundaki bir çelik kolon $1	ext{ mm}$ kısaldığında birim şekil değiştirme:
+$$arepsilon = rac{1}{1000} = 0.001 = 1000 muarepsilon (	ext{mikrostrain})$$
+Oluşan basma gerilmesi: $sigma = E cdot arepsilon = 210,000 	imes 0.001 = mathbf{210	ext{ MPa}}$'dır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Eğilme ve Sehim Hesaplayıcı](/tr/tools/bending-stress)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Malzeme Kütüphanesi ve Elastisite](/tr/materials)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

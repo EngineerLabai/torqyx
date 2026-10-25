@@ -1,0 +1,43 @@
+---
+title: "Pipe Pressure Loss Calculation with the Darcy-Weisbach Equation"
+description: "A step-by-step engineering guide to calculating Darcy-Weisbach pipe head loss, friction factors, and hydraulic sizing under ISO/DIN standards."
+date: "2026-05-16"
+tags: ["Darcy-Weisbach", "pressure loss", "fluid dynamics", "piping"]
+category: "Fluids"
+draft: false
+readingTime: 3
+canonical: "https://torqyx.com/en/blog/darcy-weisbach-boru-basinc-kaybi"
+---
+
+In industrial piping systems, pressure loss must be verified during early mechanical design to ensure proper pump head sizing and operating efficiency. The Darcy-Weisbach equation unifies pipe inner diameter, length, flow velocity, fluid density, and friction factor into a rigorous, verifiable calculation model.
+
+## Governing Hydraulic Theory
+
+The Darcy-Weisbach head loss ($h_f$ in meters) and pressure drop ($\Delta p$ in Pascals) are expressed as:
+
+$$\Delta p = f \cdot \frac{L}{D} \cdot \frac{\rho \cdot v^2}{2}$$
+
+$$h_f = f \cdot \frac{L}{D} \cdot \frac{v^2}{2g}$$
+
+- **Pipe Geometry:** Diameter ($D$) and length ($L$) dictate boundary shear area.
+- **Fluid Velocity:** Flow velocity ($v = 4Q / (\pi D^2)$) impacts pressure loss quadratically ($v^2$).
+- **Friction Factor ($f$):** Evaluated from flow regime and surface roughness via the Colebrook-White equation.
+
+## Determining the Friction Factor
+
+- In laminar flow ($Re < 2300$): $f = 64 / Re$.
+- In turbulent flow ($Re > 4000$): The friction factor is determined iteratively or via Swamee-Jain approximation accounting for relative pipe roughness ($\epsilon / D$).
+
+## Moody Diagram and Modern Computation
+
+The classic Moody chart provides graphical visualization of friction factors across relative roughness curves. The TORQYX calculation engine computes the exact implicit Colebrook root numerically in real time, eliminating visual interpolation errors.
+
+## Engineering Interpretation
+
+Piping pressure drop does more than calculate kPa loss at the outlet; it directly dictates annual electrical pumping energy. Sizing pipes too small reduces initial piping CAPEX but skyrockets lifetime operational pump power. Sizing pipes generously cuts energy consumption and mitigates erosion and water hammer risks.
+
+## Related Engineering Guides & Tools
+
+- [Pipe Pressure Loss Calculator](/en/tools/pipe-pressure-loss)
+- [Fluid Dynamics Basics: Pipe and Duct Flow](/en/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
+- [Viscosity Classification Guide](/en/guides/viskozite-siniflandirmasi-rehberi)

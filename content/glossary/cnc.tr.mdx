@@ -1,29 +1,36 @@
 ---
-title: "CNC"
-description: "CNC, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "CNC (Bilgisayarlı Sayısal Kontrol)"
+description: "CNC talaşlı imalat tezgahları (3/5 eksen frezeleme, torna), G-kodları, kesme hızı ($v_c$), diş başına ilerleme ($f_z$) ve takım ömrü."
 date: "2026-05-09"
-tags: ["CNC", "makineleme", "otomasyon"]
+tags: ["CNC","talaşlı imalat","frezeleme","torna","kesme parametreleri"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-CNC, takım tezgahının bilgisayar sayısal kontrol ile yönetilmesidir.
+CNC (Computer Numerical Control), takım tezgahlarının mikroişlemci tabanlı bilgisayar programları (G ve M kodları) ile otomatik olarak yönlendirildiği modern talaşlı imalat teknolojisidir. 3, 4 ve 5 eksenli frezeler ve çok taretli tornalar endüstrinin omurgasını oluşturur.
 
 ## Neden önemli?
 
-Tekrarlanabilir ölçü, karmaşık takım yolu ve seri üretim için kullanılır.
+Mikron seviyesinde boyutsal tekrarlanabilirlik ($IT6 - IT7$), karmaşık serbest formlu 3D yüzeylerin işlenmesi ve seri üretimde insan kaynaklı imalat hatalarının ortadan kaldırılmasını sağlar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Kesme Hızı ($v_c$ [$	ext{m/dak}$]):** Takım çapı ($D_c$) ve fener mili devri ($n$) ilişkisi:
+  $$v_c = rac{pi cdot D_c cdot n}{1000} implies n = rac{1000 cdot v_c}{pi cdot D_c}$$
+- **Tabla İlerleme Hızı ($v_f$ [$	ext{mm/dak}$]):** Kesici diş sayısı ($z$) ve diş başına ilerleme ($f_z$):
+  $$v_f = n cdot z cdot f_z$$
+- **Talaş Hacmi Kaldırma Oranı (MRR):**
+  $$MRR = rac{a_p cdot a_e cdot v_f}{1000} quad [	ext{cm}^3	ext{/dak}]$$
+  *(burada $a_p$ eksenel kesme derinliği, $a_e$ radyal kesme genişliğidir).*
 
-
-<Callout type="info" title="Örnek">
-CNC frezede takım yolu CAM programı ile oluşturulabilir.
+<Callout type="info" title="İmalat Örneği">
+$D_c = 10	ext{ mm}$ 4 ağızlı karbür freze ile çelik işlerken ($v_c = 120	ext{ m/dak}$, $f_z = 0.05	ext{ mm/diş}$):
+$$n = rac{1000 	imes 120}{pi 	imes 10} approx mathbf{3820	ext{ rpm}}, quad v_f = 3820 	imes 4 	imes 0.05 approx mathbf{764	ext{ mm/dak}}$$
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Hızlı Referans Merkezi](/reference)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Malzeme Kütüphanesi](/tr/materials)

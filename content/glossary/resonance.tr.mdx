@@ -1,29 +1,34 @@
 ---
 title: "Rezonans"
-description: "Rezonans, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+description: "Mekanik sistemlerde doğal frekans ($f_n$), tahrik frekansı, rezonans felaketi, kritik devir sayısı ve titreşim sönümleme."
 date: "2026-05-09"
-tags: ["rezonans", "titreşim", "doğal frekans"]
-category: "Dinamik"
+tags: ["rezonans","doğal frekans","kritik devir","titreşim","modal analiz"]
+category: "Mekanik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Rezonans, uyarı frekansının doğal frekansa yaklaşmasıyla titreşim genliğinin büyümesidir.
+Rezonans, periyodik bir dış zorlayıcı kuvvetin frekansının (tahrik frekansı), mekanik sistemin doğal titreşim frekansıyla ($f_n$) eşleşmesi durumunda titreşim genliğinin teorik olarak sonsuza doğru hızla büyümesi olayıdır.
 
 ## Neden önemli?
 
-Döner ekipman, şasi ve bağlantı elemanlarında yorulma riskini artırır.
+Rezonans durumunda çok küçük bir döner dengesizlik kuvveti dahi devasa mekanik gerilmelere dönüşür. Köprülerin yıkılması, türbin şaftlarının kırılması, boru hatlarının flanşlardan kopması rezonans kaynaklı feci arızalardır.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Doğal Frekans Formülü (Tek Serbestlik Dereceli Sistem):**
+  $$omega_n = sqrt{rac{k}{m}} quad [	ext{rad/s}], quad f_n = rac{1}{2pi}sqrt{rac{k}{m}} quad [	ext{Hz}]$$
+  *(burada $k$ sistem rijitliği [$	ext{N/m}$], $m$ hareketli kütledir [$	ext{kg}$]).*
+- **Kritik Hız ($n_{kritik}$):** Döner şaftlarda doğal eğilme frekansına karşılık gelen devir sayısıdır ($n_{kr} = 60 cdot f_n$).
+- **Rezonanstan Kaçınma Kuralı:** Makinenin çalışma devri doğal frekansın en az $pm %20 - %30$ uzağında tutulmalıdır:
+  $$f_{calisma} < 0.70 cdot f_n quad (	ext{rijit sistem}) quad 	ext{veya} quad f_{calisma} > 1.30 cdot f_n quad (	ext{esnek sistem})$$
 
-
-<Callout type="info" title="Örnek">
-Bir fan belirli devirde aniden titreşimi artırıyorsa rezonans bölgesi olabilir.
+<Callout type="info" title="Tasarım Çözümü">
+Rezonansa giren bir makine şasesini kurtarmak için ya kütle ($m$) artırılarak frekans düşürülür ya da takviye kaburgaları ile rijitlik ($k$) artırılarak doğal frekans çalışma devrinin üzerine taşınır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
+- [Döner Ekipmanda Dengeleme ve Titreşim Rehberi](/tr/guides/doner-ekipman-dengeleme-titresim-kontrolu)
 - [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)

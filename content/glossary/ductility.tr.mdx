@@ -1,28 +1,34 @@
 ---
-title: "Süneklik"
-description: "Süneklik, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Süneklik (ductility)"
+description: "Malzemelerin süneklik özelliği, çekme deneyinde kopma uzaması ($A%$), kesit daralması ($Z%$) ve gevrek kırılma önleme."
 date: "2026-05-09"
-tags: ["süneklik", "malzeme", "şekil verme"]
+tags: ["süneklik","uzama","çekme testi","kopma uzaması","gevrek kırılma"]
 category: "Malzeme"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Süneklik, malzemenin kopmadan plastik şekil değiştirebilme yeteneğidir.
+Süneklik (Ductility), bir malzemenin çekme gerilmesi altında kırılmadan önce kalıcı (plastik) deformasyon gösterebilme kabiliyetidir. Malzemenin tel haline getirilebilme ve bükülebilme kapasitesini ifade eder.
 
 ## Neden önemli?
 
-Darbelere, şekil vermeye ve hasar öncesi uyarı davranışına katkı sağlar.
+Sünek malzemeler aşırı yüklendiğinde kırılmadan önce gözle görülür biçimde sarkar, akar ve şekil değiştirerek tehlikeyi haber verir. Gevrek (düşük sünek) malzemeler ise hiçbir uyarı vermeksizin aniden parçalanır (felaket kırılması).
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ASTM E8 ve ISO 6892 çekme testlerinde süneklik iki parametre ile ölçülür:
+- **Kopma Uzaması ($A_5$ veya $A%$):** Numunenin kopma anındaki uzama yüzdesi:
+  $$A% = rac{L_u - L_0}{L_0} 	imes 100$$
+- **Kesit Daralması ($Z%$):** Boyun verme bölgesindeki alan daralma yüzdesi:
+  $$Z% = rac{S_0 - S_u}{S_0} 	imes 100$$
+- Yapı çeliklerinde (S235, S355) $A% ge 20 - %25$ süneklik bulunurken, gri dökme demirde (GG-25) bu oran $< %1$ seviyesindedir (gevrektir).
 
-
-<Callout type="info" title="Örnek">
-Düşük sıcaklık bazı çeliklerde sünekliği azaltabilir.
+<Callout type="info" title="Tasarım Güvenliği">
+Darbe, patlama veya deprem riski olan yapılarda gerilme yığılmalarını plastik akmayla sönümleyebilmek için kopma uzaması minimum %15'in üzerinde olan sünek çelikler şart koşulur.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
+- [Malzeme Kütüphanesi ve Dayanım Değerleri](/tr/materials)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Standartlar Kütüphanesi](/tr/standards)

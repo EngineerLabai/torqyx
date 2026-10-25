@@ -1,31 +1,33 @@
 ---
-title: "Kaynak"
-description: "Kaynak, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Kaynaklı birleştirme (welding)"
+description: "Kaynak yöntemleri (MIG/MAG, TIG, Elektrot), köşe kaynak dikişi boynu ($a$), ısıdan etkilenen bölge (HAZ) ve kaynak statik dayanım hesabı."
 date: "2026-05-09"
-tags: ["kaynak", "birleştirme", "imalat"]
+tags: ["kaynak","köşe kaynak","kaynak dikişi","Eurocode 3","HAZ","birleştirme"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Kaynak, parçaların ısı veya basınç etkisiyle kalıcı olarak birleştirilmesidir.
+Kaynaklı birleştirme (Welding), birbiriyle birleştirilecek metal parçaların temas yüzeylerinin ısı, basınç veya her ikisi birden kullanılarak ilave dolgu teli ile ergitilip atomik bağlar oluşturularak monoblok hale getirilmesi işlemidir.
 
 ## Neden önemli?
 
-Yük yolu, deformasyon, kalite kontrol ve yorulma davranışını etkiler.
+Çelik yapılarda, vinç kollarında ve basınçlı kaplarda cıvata deliği delmeden ve sızdırmaz şekilde en yüksek mukavemet kaynak dikişleriyle sağlanır. Ancak kaynak dikişindeki gözenekler, cüruf kalıntıları ve çentik etkisi yorulma çatlaklarının en yaygın başlangıç noktasıdır.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+Eurocode 3 (EN 1993-1-8) ve AWS D1.1 standartlarına göre köşe kaynak boyutu:
+- **Kaynak Dikiş Boynu (Boğaz Kalınlığı - $a$):** Köşe kaynağının üçgen kesitinde kökten hipotenüse çizilen en kısa dik mesafedir ($a = z cdot sin 45^circ approx 0.7 cdot z$).
+- **Köşe Kaynak Gerilmesi:**
+  $$	au_{kaynak} = rac{F}{a cdot sum L_{kaynak}} le f_{vw,d} = rac{f_u}{sqrt{3} cdot eta_w cdot gamma_{M2}}$$
+- **Isıdan Etkilenen Bölge (HAZ - Heat Affected Zone):** Kaynak dikişinin hemen yanındaki erimemiş ancak yüksek ısıyla mikroyapısı değişmiş bölgedir; sertleşme ve soğuk çatlak riskine karşı ön ısıtma (preheating) uygulanır.
 
-## Tasarımda dikkat edilecek nokta
-
-Kaynaklı bağlantıda sadece dikiş boyu değil, yükün bağlantıya nasıl aktığı da kontrol edilmelidir. Eksantrik yük, ısı girdisi, çarpılma ve erişilebilir muayene yöntemi dayanım hesabının yanında değerlendirilir. Dinamik yük alan parçalarda kaynak başlangıç ve bitiş bölgeleri gerilme yığılması oluşturabileceği için yorulma kontrolü ayrıca yapılmalıdır.
-
-<Callout type="info" title="Örnek">
-Köşe kaynakta etkin boğaz kalınlığı dayanım hesabının ana girdisidir.
+<Callout type="info" title="Tasarım Kuralı">
+Köşe kaynak boyun kalınlığı ($a$) birleştirilen en ince sac kalınlığının en az %70'i olmalı ($a approx 0.7 cdot t_{min}$), ancak hiçbir zaman sac kalınlığını aşmamalıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
+- [Köşe Kaynak Boyutlandırma Hesaplayıcı](/tr/tools/fillet-weld)
+- [Malzeme Kütüphanesi ve Kaynak Edilebilirlik](/tr/materials)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)

@@ -1,29 +1,32 @@
 ---
-title: "ASTM"
-description: "ASTM, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "ASTM (Amerikan Test ve Malzeme Kuruluşu)"
+description: "ASTM malzeme şartnameleri, metalik ve polimerik test standartları, mekanik test yöntemleri (ASTM E8 çekme testi)."
 date: "2026-05-09"
-tags: ["ASTM", "malzeme", "test"]
+tags: ["ASTM","malzeme testleri","çelik kaliteleri","çekme testi"]
 category: "Standartlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-ASTM, malzeme, test yöntemi ve ürün standartları yayımlayan kuruluştur.
+ASTM International (American Society for Testing and Materials), metallerden kompozitlere, petrolden inşaat ürünlerine kadar tüm mühendislik malzemelerinin kimyasal bileşimini, mekanik özelliklerini ve test yöntemlerini standartlaştıran uluslararası kuruluştur.
 
 ## Neden önemli?
 
-Malzeme sertifikası ve test prosedürü yorumunda sık kullanılır.
+Bir malzemenin sertifikasında "ASTM A36" veya "ASTM A193 B7" ibaresi bulunması, malzemenin kimyasal sınırlarının ve akma/çekme dayanımlarının bağımsız laboratuvarlarca doğrulanabilir olmasını sağlar. İmalatçılar arasındaki malzeme eşdeğerlik analizinin temelidir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **ASTM A36 / A572:** Yapısal karbon çeliği ve yüksek mukavemetli düşük alaşımlı çelik levha/profil şartnameleri.
+- **ASTM A193 / A194:** Yüksek sıcaklık ve basınç servislerinde kullanılan alaşımlı çelik saplama ve somun standartları (B7 saplamalar, 2H somunlar).
+- **ASTM E8 / E8M:** Metalik malzemelerin standart çekme testi yöntemi; akma ($R_{p0.2}$), çekme ($R_m$) ve % uzama ($A_5$) tespit protokolüdür.
+- **ASTM C547:** Mineral yün boru yalıtımı malzeme ve ısıl iletkenlik şartnamesi.
 
-
-<Callout type="info" title="Örnek">
-ASTM A36 yapısal çelik için bilinen bir malzeme standardıdır.
+<Callout type="info" title="Malzeme Eşdeğerliği">
+ASTM A36 yapısal çeliğinin minimum akma mukavemeti $36	ext{ ksi} approx 250	ext{ MPa}$'dır. Avrupa normundaki EN 10025 S235JR veya S275JR kalitelerine yakın mekanik eşdeğerlik gösterir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Hızlı Referans Merkezi](/reference)
+- [Malzeme Kütüphanesi ve Dayanım Değerleri](/tr/materials)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)

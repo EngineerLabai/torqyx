@@ -1,29 +1,32 @@
 ---
-title: "Katmanlı imalat"
-description: "Katmanlı imalat, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Eklemeli imalat (3D baskı)"
+description: "Eklemeli imalat teknolojileri (DMLS, SLM, FDM), tasarım serbestliği, topoloji optimizasyonu ve mekanik parça üretimi."
 date: "2026-05-09"
-tags: ["3D baskı", "katmanlı imalat", "prototip"]
+tags: ["eklemeli imalat","3D baskı","DMLS","SLM","hızlı prototipleme"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Katmanlı imalat, parçayı malzeme ekleyerek katman katman üretir.
+Eklemeli imalat (Additive Manufacturing), CAD verisini kullanarak malzemeyi katman katman ekleyerek üç boyutlu parçalar üreten gelişmiş imalat teknolojisidir. Geleneksel talaşlı imalatın aksine malzeme eksilterek değil, yalnızca gereken bölgeye malzeme yığarak çalışır.
 
 ## Neden önemli?
 
-Prototip, karmaşık iç kanal ve düşük adetli üretimde esneklik sağlar.
+Hafifletme ve topoloji optimizasyonu gerektiren havacılık ve medikal bileşenlerde geleneksel yöntemlerle işlenemeyen karmaşık iç soğutma kanalları, kafes (lattice) yapılar ve monoblok montajlar üretmeye olanak tanır. Malzeme israfını (buy-to-fly oranını) radikal biçimde düşürür.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ISO/ASTM 52900 standardına göre sınıflandırılan eklemeli imalat yöntemlerinde:
+- **Metal Sistemler (PBF - DMLS / SLM):** Titanyum (Ti-6Al-4V), Nikel süperalaşımları (Inconel 718) ve AlSi10Mg tozları lazerle eritilerek dövme kalitesine yakın mekanik dayanım elde edilir.
+- **Anizotropi Kontrolü:** Parçanın Z eksenindeki çekme ve yorulma mukavemeti, katmanlar arası yapışma nedeniyle X-Y düzlemine göre %10-20 daha düşük olabilir; bu durum gerilme analizinde ortotropik malzeme modeliyle hesaba katılmalıdır.
+- **Gerilim Giderme:** Lazer sinterleme sonrası oluşan yüksek termal iç gerilmeleri gidermek için parça tabladan kesilmeden önce vakum fırınında gerilim giderme tavlamasına tabi tutulur.
 
-
-<Callout type="info" title="Örnek">
-Bir fikstür çenesi hızlı prototip için 3D baskı ile denenebilir.
+<Callout type="info" title="Endüstriyel Örnek">
+Bir havacılık yakıt nozulu 20 farklı döküm ve kaynaklı parçanın birleşiminden oluşurken, DMLS eklemeli imalat ile tek parça (monoblok) olarak üretilmiş; parça ağırlığı %25 azalırken dayanıklılığı 5 kat artırılmıştır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Fikstür Araçları](/fixture-tools)
-- [Kalite Araçları](/quality-tools)
+- [Malzeme Kütüphanesi ve Dayanım Değerleri](/tr/materials)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)

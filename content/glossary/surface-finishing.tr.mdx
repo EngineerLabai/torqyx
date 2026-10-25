@@ -1,29 +1,36 @@
 ---
-title: "Yüzey işleme"
-description: "Yüzey işleme, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Yüzey işleme ve pürüzlülük"
+description: "Yüzey pürüzlülük parametreleri ($Ra$, $Rz$), ISO 4287 standardı, talaşlı imalat yöntemlerinin pürüzlülük kabiliyeti ve korozyon direnci."
 date: "2026-05-09"
-tags: ["yüzey işleme", "kaplama", "korozyon"]
+tags: ["yüzey pürüzlülüğü","Ra","Rz","yüzey işleme","ISO 4287","kaplama"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Yüzey işleme, parçanın yüzey özelliklerini değiştiren son işlemlerin genel adıdır.
+Yüzey işleme ve pürüzlülük, imalat süreçleri (torna, freze, taşlama, honlama) sonrasında parçanın yüzeyinde kalan mikroskobik tepe ve vadilerin geometrik profil sapmalarıdır. ISO 4287 standardına göre aritmetik ortalama sapma ($Ra$ [$mu	ext{m}$]) ile ifade edilir.
 
 ## Neden önemli?
 
-Korozyon, sürtünme, görünüm ve temizlenebilirlik üzerinde etkilidir.
+Yüzey pürüzlülüğü yorulma mukavemetini, hidrodinamik sürtünmeyi, sızdırmazlık keçelerinin aşınmasını ve korozyon direncini doğrudan belirler. Kaba işlenmiş bir yüzey gerilme yığılması yaratarak yorulma ömrünü %30'a kadar düşürür.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Aritmetik Ortalama Pürüzlülük ($Ra$):** Profil sapmalarının mutlak değer ortalamasıdır:
+  $$Ra = rac{1}{L} int_0^L |y(x)| dx$$
+- **On Nokta Yükseklik Ortalaması ($Rz$):** En yüksek 5 tepe ile en derin 5 vadi arasındaki farktır ($Rz approx 4dots 7 cdot Ra$).
+- **İmalat Yöntemleri Kabiliyeti:**
+  - Kaba Torna / Freze: $Ra = 3.2 - 6.3 mu	ext{m}$
+  - Hassas Torna / Freze: $Ra = 0.8 - 1.6 mu	ext{m}$
+  - Silindirik Taşlama: $Ra = 0.2 - 0.4 mu	ext{m}$
+  - Honlama / Parlatma: $Ra le 0.05 - 0.1 mu	ext{m}$
 
-
-<Callout type="info" title="Örnek">
-Anodize, galvaniz, boya ve pasivasyon yaygın örneklerdir.
+<Callout type="info" title="Keçe Yüzeyi Kuralı">
+Döner mil radyal yağ keçelerinin (simmering) bastığı bölgelerde $Ra = 0.2 - 0.5 mu	ext{m}$ ve $Rz = 1.0 - 3.0 mu	ext{m}$ olmalı; ayrıca yüzeyde spiral işleme izi (lead-in) kesinlikle bulunmamalıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Hızlı Referans Merkezi](/reference)
+- [Yüzey İşleme Yöntemleri Rehberi](/tr/guides/yuzey-isleme-yontemleri-rehberi)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)

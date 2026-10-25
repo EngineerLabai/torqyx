@@ -1,62 +1,81 @@
 ---
-title: "Pompa türleri seçim rehberi"
-description: "Pozitif deplasmanlı ve turbo pompaları debi, basınç, viskozite ve servis koşullarına göre karşılaştırın."
+title: "Pompa türleri seçim rehberi: santrifüj ve pozitif deplasmanlı"
+description: "Santrifüj ve pozitif deplasmanlı pompaların karşılaştırılması, hidrolik güç hesabı, NPSH ve kavitasyon önleme mühendislik rehberi."
 date: "2026-05-09"
-tags: ["pompa", "debi", "basınç", "viskozite"]
+tags: ["pompa", "santrifüj", "pozitif deplasman", "NPSH", "kavitasyon", "hidrolik güç"]
 category: "Akışkanlar"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber, endüstriyel tesislerde proses pompalarının hidrolik güç, basma yüksekliği ($H$), emme koşulları ($NPSH$) ve viskozite sınırlarına göre ISO 5199, ISO 9906 ve API 610 standartları doğrultusunda seçilmesi için hazırlanmıştır. Aşındırıcı çamur veya yüksek viskoziteli polimerlerde özel salmastra ve malzeme konfigürasyonu gerekir.
 </Callout>
 
 ## Problem / Amaç
 
-Pompa seçimi sadece hedef debiyi tutturmak değildir. Akışkan viskozitesi, basınç kaybı, kavitasyon riski ve kontrol yöntemi pompa tipini belirler.
+Endüstriyel akışkan transferinde yanlış pompa türü seçmek sistem verimini düşürür ve yüksek bakım masraflarına yol açar. Yalnızca debi ve katalog verilerine bakılarak yapılan seçimlerde:
+- Yüksek viskoziteli yağ veya polimerlerde santrifüj pompa basma yüksekliğinin ve debisinin çökmesi,
+- Yetersiz emiş koşullarında kavitasyon oluşarak çark kanatlarının oyulması ve aşırı titreşim,
+- Pozitif deplasmanlı pompalarda basma hattı tıkanıklığında aşırı basınç yükselmesi ve gövde patlama tehlikesi ortaya çıkar.
 
 ## Varsayımlar
 
-- Akışkan tek fazlı kabul edilir.
-- Boru hattı kayıpları yaklaşık olarak bilinir.
-- Sürekli çalışma noktası tasarım noktasına yakın tutulur.
+- Akışkan homojen, tek fazlı Newtonian sıvı kabul edilir (viskoz sıvılarda Hydraulic Institute düzeltme eğrileri uygulanır).
+- Pompa emme ve basma hatlarındaki statik yükseklikler, boru sürtünme kayıpları ve armatür dirençleri belirlenmiştir.
+- Çalışma noktası pompanın en yüksek verim noktasının (BEP - Best Efficiency Point) %80 ile %110 aralığında tutulur.
 
 ## Adım adım yöntem
 
-1. Debi ve basma yüksekliği ihtiyacını yaz.
-2. Akışkan viskozitesi ve sıcaklığını kontrol et.
-3. Pozitif deplasmanlı ve santrifüj seçenekleri karşılaştır.
-4. Kavitasyon ve NPSH payını incele.
-5. Kontrol vanası veya hız kontrol stratejisini belirle.
+1. **Akışkan Viskozitesine Göre Pompa Ailesini Seçin:**
+   - **Santrifüj Pompalar:** Düşük viskoziteli sıvılar ($\mu < 150\text{ cSt}$ / su, solvent, hafif yağlar), yüksek debi ($Q$) ve orta-düşük basınç ihtiyaçları için idealdir.
+   - **Pozitif Deplasmanlı Pompalar (Dişli, Loblu, İlerleyen Boşluklu, Pistonlu):** Yüksek viskozite ($\mu > 150\text{ cSt}$ / ağır yağ, reçine, macun), sabit debi gereksinimi veya yüksek basınç ($P > 25\text{ bar}$) için seçilir.
+
+2. **Gerekli Toplam Basma Yüksekliğini ($H$) Hesaplayın:**
+   Statik basma kot farkı ($\Delta z$), sistem basınç farkı ($\Delta P / \rho g$) ve boru sürtünme kayıpları ($\sum h_f$) toplamı:
+   $$H = \Delta z + \frac{P_{cikis} - P_{giris}}{\rho \cdot g} + \sum h_f \quad [\text{mSS}]$$
+
+3. **Hidrolik Güç ($P_h$) ve Motor Gücünü ($P_m$) Belirleyin:**
+   Debi $Q$ [$\text{m}^3\text{/s}$], basma yüksekliği $H$ [$\text{m}$] ve sıvı yoğunluğu $\rho$ [$\text{kg/m}^3$] için:
+   $$P_h = \frac{\rho \cdot g \cdot Q \cdot H}{1000} \quad [\text{kW}]$$
+   Pompa hidrolik verimi ($\eta_p$) ve mekanik emniyet marjı ($S_m \approx %15 - %20$) eklenerek şebeke motor gücü:
+   $$P_m = \frac{P_h}{\eta_p} \cdot (1 + S_m)$$
+
+4. **NPSH ve Kavitasyon Kontrolünü Yapın:**
+   Pompa emiş ağzındaki net pozitif emme yüksekliği ($NPSH_A$):
+   $$NPSH_A = \frac{P_{ortam} - P_{buhar}}{\rho \cdot g} \pm h_{statik} - h_{f,emis}$$
+   Kavitasyonsuz güvenli çalışma için pompanın üretici tarafından istenen $NPSH_R$ değerinden en az $0.5 - 1.0\text{ m}$ yüksek olmalıdır:
+   $$NPSH_A \ge NPSH_R + 0.5\text{ m}$$
+
+5. **Çözümlü Endüstriyel Seçim Senaryosu:**
+   $Q = 36\text{ m}^3\text{/h}$ ($0.01\text{ m}^3\text{/s}$) temiz su ($\rho = 1000\text{ kg/m}^3$), toplam $H = 45\text{ mSS}$ yüksekliğe basılacaktır. Seçilen radyal çarklı santrifüj pompanın BEP verimi $\eta_p = 0.72$, $NPSH_R = 2.4\text{ m}$'dir:
+   - Hidrolik güç:
+     $$P_h = \frac{1000 \times 9.81 \times 0.01 \times 45}{1000} = \mathbf{4.41\text{ kW}}$$
+   - Pompa mil gücü:
+     $$P_{mil} = \frac{4.41}{0.72} = \mathbf{6.13\text{ kW}}$$
+   - %20 emniyet payı ile standart motor seçimi:
+     $$P_m = 6.13 \times 1.20 = 7.36\text{ kW} \implies \mathbf{7.5\text{ kW}}\text{ standart elektrik motoru}$$
+   - Atmosferik açık emiş deposunda ($1.013\text{ bar}$), 20 °C su buhar basıncı $0.0234\text{ bar}$, emiş kotu $h_s = +2.0\text{ m}$, emiş boru sürtünme kaybı $h_{f,emis} = 0.6\text{ m}$:
+     $$NPSH_A = \frac{101\,300 - 2340}{1000 \times 9.81} + 2.0 - 0.6 = 10.09 + 1.4 = \mathbf{11.49\text{ m}}$$
+   - $NPSH_A (11.49\text{ m}) \gg NPSH_R (2.4\text{ m}) + 0.5\text{ m}$, kavitasyon riski sıfırdır.
 
 ## Sık hatalar
 
-- Pompayı sadece maksimum debiye göre seçmek.
-- Viskozite artışını motor gücüne yansıtmamak.
-- Emiş hattında kavitasyon riskini unutmak.
+- **Pozitif Deplasmanlı Pompa Basma Hattına Emniyet Ventili (PRV) Koymamak:** Santrifüj pompalar kapalı vanaya basabilirken pozitif deplasmanlı pompalar mekanik kırılma veya motor yanmasına yol açar; hatta mutlaka entegre tahliye ventili bulunmalıdır.
+- **Pompayı Yalnızca Tasarım Tepe Debisine Göre Seçmek:** Pompa sürekli olarak BEP noktasının çok solunda çalıştırılırsa çark içinde devridaim (internal recirculation) ve yüksek radyal rulman yükleri oluşur.
+- **Sıcak Su Uygulamalarında Buhar Basıncını Unutmak:** 85 °C sıcak suda buhar basıncı $0.58\text{ bar}$ seviyesine çıkar; emişte pozitif basınç sağlanmazsa kavitasyon kaçınılmazdır.
+- **Emiş Hattı Çapını Pompa Giriş Çapıyla Aynı Tutmak:** Emiş borusu sürtünmeyi ve hız basıncını düşürmek için daima pompa emme flanşından bir boy büyük (redüksiyonlu eksantrik) seçilmelidir.
 
 ## İlgili hesaplayıcılar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Hidrolik Silindir Kuvvet ve Hız](/tr/tools/hydraulic-cylinder)
+- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
+- [Hidrolik Silindir Hacim ve Debi](/tr/tools/hydraulic-cylinder)
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
 
-## İlgili sözlük terimleri
+## İlgili standartlar
 
-- [Viskozite](/tr/glossary/viscosity)
-- [Reynolds sayısı](/tr/glossary/reynolds-number)
-
-## Kısa FAQ
-
-### Soru: Santrifüj pompa ne zaman uygundur?
-
-Düşük-orta viskozite ve değişken debi ihtiyaçlarında genellikle iyi bir seçimdir.
-
-### Soru: Pozitif deplasmanlı pompa ne zaman seçilir?
-
-Yüksek viskozite, hassas dozaj veya yüksek basınç gerektiğinde avantaj sağlar.
-
-### Soru: Kavitasyon nasıl azaltılır?
-
-Emiş kayıpları azaltılır, NPSH payı artırılır ve pompa çalışma noktası doğru seçilir.
+- **ISO 5199:** Santrifüj Pompalar için Teknik Şartname - Sınıf II.
+- **ISO 9906:** Döner Pompalarda Hidrolik Performans Kabul Testleri.
+- **API 610:** Petrol, Petrokimya ve Doğal Gaz Endüstrileri için Santrifüj Pompalar.
+- **Hydraulic Institute (HI):** ANSI/HI Pompa Standartları ve NPSH Kılavuzu.

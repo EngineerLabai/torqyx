@@ -1,29 +1,32 @@
 ---
 title: "Kavitasyon"
-description: "Kavitasyon, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+description: "Hidrolik sistemlerde kavitasyon mekanizması, buhar basıncı, çark kanadı erozyonu ve NPSH güvenlik payı hesabı."
 date: "2026-05-09"
-tags: ["kavitasyon", "pompa", "basınç"]
+tags: ["kavitasyon","pompa","NPSH","buhar basıncı","akışkanlar"]
 category: "Akışkanlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Kavitasyon, yerel basınç buhar basıncının altına düştüğünde kabarcık oluşup çökmesidir.
+Kavitasyon, hidrolik pompalarda, vanalarda ve boru hatlarında yerel statik basıncın akışkanın o sıcaklıktaki doymuş buhar basıncının ($P_v$) altına düşmesiyle mikroskobik buhar kabarcıklarının oluşması ve ardından yüksek basınç bölgesinde şiddetle patlayarak çökmesidir.
 
 ## Neden önemli?
 
-Pompa çarkında aşınma, gürültü ve performans kaybı oluşturur.
+Buhar kabarcıklarının çökmesi sırasında oluşan mikro-jetler metal yüzeye $1000	ext{ MPa}$'yı aşan yerel darbe basınçları uygular. Bu durum pompa çark kanatlarında süngerimsi oyuklaşma (pitting), gürültü, şiddetli titreşim ve pompalama veriminin tamamen çökmesine yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+Kavitasyonu engellemek için sistemin net pozitif emme yüksekliği ($NPSH_A$) pompanın gerektirdiği değerden ($NPSH_R$) büyük olmalıdır:
+$$NPSH_A = rac{P_{ortam} - P_v}{ho cdot g} pm h_s - h_{f,emis} ge NPSH_R + 0.5dots 1.0	ext{ m}$$
+- **Emiş Borusu Boyutlandırma:** Emiş hattındaki akış hızı $1.0 - 1.2	ext{ m/s}$ ile sınırlandırılmalı, emiş filtresi ve dirsek sürtünme kayıpları en aza indirilmelidir.
+- **Sıcaklık Kontrolü:** Akışkan sıcaklığı arttıkça buhar basıncı üstel olarak artar; $80	ext{ °C}$ suyun buhar basıncı $47.4	ext{ kPa}$'ya çıkarak kavitasyon riskini katlar.
 
-
-<Callout type="info" title="Örnek">
-Emiş hattı kayıpları yüksekse pompa girişinde kavitasyon başlayabilir.
+<Callout type="info" title="Pratik Teşhis">
+Pompa içinde sanki çakıl taşları veya bilyalar dönüyormuş gibi çatırtılı bir ses geliyorsa ve debi aniden dalgalanıyorsa pompa kavitasyondadır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Hidrolik Silindir Kuvvet ve Hız](/tr/tools/hydraulic-cylinder)
+- [Pompa Türleri ve Seçim Rehberi](/tr/guides/pompa-turleri-secim-rehberi)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

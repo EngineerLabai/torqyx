@@ -1,40 +1,76 @@
 ---
 title: "Akışkan dinamiği temelleri: boru ve kanal akışı"
-description: "Laminer ve türbülanslı akış, Reynolds sayısı, hidrolik çap ve basınç kaybı için hızlı başlangıç rehberi."
+description: "Laminer ve türbülanslı akış, Reynolds sayısı, hidrolik çap, Darcy-Weisbach basınç kaybı ve pompa hidroliği mühendislik rehberi."
 date: "2026-05-09"
-tags: ["akışkanlar", "Reynolds", "basınç kaybı", "boru"]
+tags: ["akışkanlar", "Reynolds", "basınç kaybı", "boru", "hidrolik"]
 category: "Akışkanlar"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber, endüstriyel boru hatları ve hava kanallarında hidrolik sürtünme kaybı, akış rejimi ve pompa/fan seçim parametrelerini doğrulamak için hazırlanmıştır. Kritik yüksek basınçlı proses tesislerinde DIN EN 10255 ve ISO 5167 standartlarına uygun hidrolik boyutlandırma yapılmalıdır.
 </Callout>
 
 ## Problem / Amaç
 
-Boru ve kanal akışında hız, çap, viskozite ve pürüzlülük birlikte sonucu belirler. Sadece debiye bakmak basınç kaybını ve pompa yükünü eksik gösterir.
+Boru ve kanal akışında yalnızca debi ($Q$) bilgisine bakarak hat boyutlandırmak mühendislikte sık karşılaşılan bir hatadır. Akışkanın viskozitesi, boru iç çapı, akış hızı ve yüzey pürüzlülüğü bir araya gelerek sistem direncini oluşturur. Akış rejiminin (laminer veya türbülanslı) doğru tayin edilmemesi:
+- Pompa veya fan motor gücünün yetersiz kalmasına,
+- Hatta aşırı hız sebebiyle gürültü, erozyon ve su koçu (water hammer) riskine,
+- Yetersiz hız sebebiyle çökelme ve ısı transfer veriminin düşmesine neden olur.
 
 ## Varsayımlar
 
-- Akış sıkıştırılamaz kabul edilir.
-- Akışkan özellikleri çalışma sıcaklığına göre seçilir.
-- Boru veya kanal geometrisi bilinir.
+- Akışkan Newtonian özellik gösterir ve akış sıkıştırılamaz ($\rho \approx \text{sabit}$) kabul edilir.
+- Akışkan özellikleri (yoğunluk $\rho$ ve dinamik viskozite $\mu$) çalışma sıcaklığındaki ortalama değerler üzerinden alınır.
+- Boru hattı boyunca akış tam gelişmiş (fully developed) sürekli rejimdedir.
+- Dairesel olmayan kesitlerde hidrolik çap ($D_h$) yaklaşımı kullanılır.
 
 ## Adım adım yöntem
 
-1. Debi, çap ve kesit alanından hızı hesapla.
-2. Reynolds sayısıyla akış rejimini belirle.
-3. Pürüzlülük ve sürtünme katsayısını seç.
-4. Darcy-Weisbach veya uygun yöntemle kaybı hesapla.
-5. Dirsek, vana ve giriş kayıplarını ekle.
+1. **Kesit Alanı ve Akış Hızını Belirleyin:**
+   Debi ($Q$ [$\text{m}^3\text{/s}$]) ve boru iç çapı ($D$ [$\text{m}$]) bilindiğinde ortalama akış hızı:
+   $$v = \frac{4 \cdot Q}{\pi \cdot D^2}$$
+
+2. **Dairesel Olmayan Kesitlerde Hidrolik Çapı Hesaplayın:**
+   Dikdörtgen veya özel kesitli kanallarda akış alanı ($A$) ve ıslak çevre ($P_{islak}$) üzerinden:
+   $$D_h = \frac{4 \cdot A}{P_{islak}}$$
+
+3. **Reynolds Sayısı ile Akış Rejimini Belirleyin:**
+   Atalet kuvvetlerinin viskoz kuvvetlere oranını temsil eden boyutsuz Reynolds sayısı:
+   $$Re = \frac{\rho \cdot v \cdot D_h}{\mu} = \frac{v \cdot D_h}{\nu}$$
+   - **$Re < 2300$:** Laminer akış (parabolik hız profili).
+   - **$2300 \le Re \le 4000$:** Kararsız geçiş bölgesi.
+   - **$Re > 4000$:** Türbülanslı akış (girdaplı, homojen çekirdek profil).
+
+4. **Darcy Sürtünme Katsayısını ($f$) Belirleyin:**
+   - Laminer akışta sürtünme pürüzlülükten bağımsızdır:
+     $$f = \frac{64}{Re}$$
+   - Türbülanslı akışta Haaland formülüyle hızlı ve güvenilir yaklaşık hesap yapılır ($\varepsilon$: boru iç pürüzlülüğü):
+     $$\frac{1}{\sqrt{f}} \approx -1.8 \cdot \log_{10}\left[ \left(\frac{\varepsilon / D}{3.7}\right)^{1.11} + \frac{6.9}{Re} \right]$$
+
+5. **Darcy-Weisbach ile Sürtünme Basınç Kaybını Hesaplayın:**
+   $L$ boyundaki düz boruda meydana gelen basınç düşüşü ($\Delta P_s$ [$\text{Pa}$]):
+   $$\Delta P_s = f \cdot \frac{L}{D_h} \cdot \frac{\rho \cdot v^2}{2}$$
+
+6. **Lokal Direnç Kayıplarını (Dirsek, Vana, Redüksiyon) Ekleyin:**
+   Her lokal bağlantının direnç katsayısı ($K$) kullanılarak toplam kayıp:
+   $$\Delta P_{toplam} = \Delta P_s + \sum K \cdot \frac{\rho \cdot v^2}{2}$$
+
+7. **Çözümlü Endüstriyel Uygulama Örneği:**
+   20 °C su ($\rho = 998\text{ kg/m}^3$, $\mu = 1.002 \times 10^{-3}\text{ Pa}\cdot\text{s}$), $Q = 10\text{ m}^3\text{/h}$ ($0.00278\text{ m}^3\text{/s}$) debiyle 50 metre uzunluğunda DN50 ticari çelik borudan ($D = 53\text{ mm}$, $\varepsilon = 0.045\text{ mm}$) iletilmektedir:
+   - Akış hızı: $v = \frac{4 \times 0.00278}{\pi \times 0.053^2} = \mathbf{1.26\text{ m/s}}$ *(Tavsiye edilen aralıkta: 1.0 - 2.0 m/s)*
+   - Reynolds sayısı: $Re = \frac{998 \times 1.26 \times 0.053}{0.001002} = \mathbf{66\,480}$ *(Tam türbülanslı)*
+   - Bağıl pürüzlülük: $\varepsilon / D = 0.045 / 53 \approx 0.00085$
+   - Haaland ile $f \approx 0.0224$
+   - 50 m düz boru kaybı: $\Delta P_s = 0.0224 \times \frac{50}{0.053} \times \frac{998 \times 1.26^2}{2} = \mathbf{16\,740\text{ Pa}} \approx \mathbf{0.167\text{ bar}}$
 
 ## Sık hatalar
 
-- Hidrolik çapı kanal hesabında unutmak.
-- Sıcaklık değişince viskozitenin değiştiğini atlamak.
-- Sadece düz boru kaybını hesaplayıp lokal kayıpları eklememek.
+- **Dikdörtgen Havalandırma Kanalında Hidrolik Çapı Atlamak:** Kanalın genişlik ve yükseklik ortalamasını doğrudan çap almak hidrolik direnci %20'den fazla yanlış hesaplatır.
+- **Sıcaklıkla Viskozite Değişimini İhmal Etmek:** Yağ ve yakıt hatlarında 20 °C ile 60 °C arasındaki viskozite farkı 5 ila 10 kat olabilir; soğuk başlatma anında pompa aşırı yüke girebilir.
+- **Tavsiye Edilen Hat Hızlarını Aşmak:** Sıvı basma hatlarında 2.5 m/s, emme hatlarında 1.2 m/s üzerine çıkıldığında kavitasyon ve gürültü kaçınılmazdır.
+- **Lokal Armatür Kayıplarını Unutmak:** Çok sayıda dirsek, çekvalf ve filtre içeren kısa hatlarda armatür kayıpları düz boru kaybından daha büyük olabilir.
 
 ## İlgili hesaplayıcılar
 
@@ -46,17 +82,5 @@ Boru ve kanal akışında hız, çap, viskozite ve pürüzlülük birlikte sonuc
 
 - [Reynolds sayısı](/tr/glossary/reynolds-number)
 - [Viskozite](/tr/glossary/viscosity)
-
-## Kısa FAQ
-
-### Soru: Reynolds sayısı ne işe yarar?
-
-Akışın laminer, geçiş veya türbülanslı davranacağını tahmin eder.
-
-### Soru: Hidrolik çap nedir?
-
-Dairesel olmayan kanalları eşdeğer akış çapıyla temsil etmeye yarar.
-
-### Soru: Basınç kaybı neden artar?
-
-Hız, uzunluk, pürüzlülük ve lokal dirençler arttıkça basınç kaybı yükselir.
+- [Laminer akış](/tr/glossary/laminar-flow)
+- [Türbülanslı akış](/tr/glossary/turbulent-flow)

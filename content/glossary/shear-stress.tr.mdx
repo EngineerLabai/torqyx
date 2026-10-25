@@ -1,35 +1,37 @@
 ---
-title: "Kesme gerilmesi"
-description: "Kesme gerilmesi, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Kayma gerilmesi (kesme gerilmesi)"
+description: "Mekanik kayma gerilmesi ($\tau = F/A$), cıvatalarda çift tesirli kesme, millerde burulma kayma gerilmesi ve Tresca akma kriteri."
 date: "2026-05-09"
-tags: ["kesme", "gerilme", "tork"]
+tags: ["kayma gerilmesi","kesme gerilmesi","burulma","tresca","von mises"]
 category: "Mekanik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Kesme gerilmesi, yüzeye paralel etki eden iç kuvvetin oluşturduğu gerilmedir.
+Kayma gerilmesi ($	au$), bir elemanın kesitine paralel (teğetsel) doğrultuda etkiyen kuvvetlerin, malzemenin düzlemlerini birbirinin üzerinden kaydırmaya zorlamasıyla oluşan iç gerilmedir. SI birim sisteminde Megapaskal [$	ext{MPa}$] veya [$	ext{N/mm}^2$] olarak ölçülür.
 
 ## Neden önemli?
 
-Pim, cıvata, kaynak ve burulma kontrollerinde kritik hale gelir.
+Pimler, perçinler, kama gövdeleri ve cıvatalı mafsal bağlantıları doğrudan kesme gerilmesiyle yük taşır. Ayrıca burulmaya maruz kalan tüm döner millerde oluşan gerilme türü kayma gerilmesidir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Doğrudan (Düzlem) Kesme Gerilmesi:**
+  $$	au = rac{F}{A_{kesit}} le 	au_{em}$$
+  Çift tesirli pim bağlantılarında kesilen yüzey iki katına çıkar: $	au = rac{F}{2 cdot A}$.
+- **Şaft Burulma Kayma Gerilmesi:**
+  $$	au_{tork} = rac{T cdot r}{I_p} = rac{T}{W_p} = rac{16 cdot T}{pi cdot d^3}$$
+- **Kayma Akma Dayanımı:** von Mises akma kriterine göre çeliklerin kayma akma sınırı çekme akma sınırının %57.7'sidir:
+  $$	au_y approx 0.577 cdot R_e$$
 
-
-<Formula label="Temel ifade">
-Shear stress = Shear force / Area
-</Formula>
-
-<Callout type="info" title="Örnek">
-Bir pimde yük kesit boyunca kayma eğilimi oluşturuyorsa kesme gerilmesi kontrol edilir.
+<Callout type="info" title="Hesaplama Örneği">
+$10	ext{ mm}$ çapında 8.8 kalite bir pim ($R_e = 640	ext{ MPa}$, $	au_y approx 370	ext{ MPa}$) tek tesirli olarak $20	ext{ kN}$ kesme kuvveti taşıyorsa:
+$$A = rac{pi 	imes 10^2}{4} approx 78.5	ext{ mm}^2 implies 	au = rac{20,000}{78.5} approx mathbf{254.8	ext{ MPa}} le 370	ext{ MPa}$$
+Pim emniyetlidir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Mil Burulma Hesaplayıcı](/tr/tools/shaft-torsion)
-- [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
-- [Cıvata Boyut ve Ön Yük Hesaplayıcı](/tr/tools/bolt-calculator)
-- [Eğilme ve Sehim Hesaplayıcı](/tr/tools/bending-stress)
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)

@@ -1,28 +1,33 @@
 ---
 title: "Türbülanslı akış"
-description: "Türbülanslı akış, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+description: "Türbülanslı akış rejimi ($Re > 4000$), kaotik girdaplar, çeper pürüzlülüğü etkisi, Colebrook denklemi ve yüksek ısı transferi."
 date: "2026-05-09"
-tags: ["türbülans", "Reynolds", "basınç kaybı"]
+tags: ["türbülanslı akış","Reynolds","akışkanlar","girdap","basınç kaybı"]
 category: "Akışkanlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Türbülanslı akış, girdaplı ve karışımlı akış rejimidir.
+Türbülanslı akış, akışkan parçacıklarının kaotik, düzensiz ve üç boyutlu girdaplar (eddies) halinde hızla birbirine karıştığı yüksek enerjili akış rejimidir. Atalet kuvvetlerinin viskoz sönümleme kuvvetlerine baskın geldiği durumlarda oluşur.
 
 ## Neden önemli?
 
-Boru kayıpları, karışım ve ısı transferi davranışını güçlü etkiler.
+Endüstriyel su borularında, havalandırma kanallarında ve proses hatlarında akışın %95'ten fazlası türbülanslı rejimdedir. Türbülans akış sürtünmesini artırırken, ısı ve kütle transfer verimini katbekat yükseltir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Reynolds Kriteri:** Dairesel borularda $Re > 4000$ olduğunda akış tam türbülanslıdır.
+- **Yüzey Pürüzlülüğü Etkisi:** Laminer akışın aksine türbülanslı akışta boru çeper pürüzlülüğü ($arepsilon$) sürtünme faktörünü doğrudan etkiler.
+- **Colebrook-White ve Haaland Denklemi:** Darcy sürtünme faktörü ($f$):
+  $$rac{1}{sqrt{f}} approx -1.8 cdot log_{10}left[ left(rac{arepsilon / D}{3.7}ight)^{1.11} + rac{6.9}{Re} ight]$$
+- **Hız Profili:** Türbülanslı akışta hız profili laminerdeki gibi sivri parabolik değil; çekirdek bölgesinde düz ve homojen, çeperde ise çok dik bir gradyene sahiptir.
 
-
-<Callout type="info" title="Örnek">
-Yüksek debili su hatlarında türbülanslı akış sık görülür.
+<Callout type="info" title="Eşanjör Tasarımı">
+Isı eşanjörlerinde boru içindeki akışın türbülanslı olması istenir; girdaplı karışma akışkanın çeperle ısı alışverişini 5 ila 10 kat hızlandırır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

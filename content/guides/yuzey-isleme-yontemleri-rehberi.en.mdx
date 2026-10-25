@@ -1,62 +1,80 @@
 ---
-title: "Surface finishing methods guide"
-description: "Compare coating, paint, anodizing, galvanizing, and passivation by environment, cost, and maintenance."
+title: "Surface finishing and coating engineering guide"
+description: "Hot-dip galvanizing, hard anodizing, hard chrome, electroless nickel, corrosion protection, coating tolerance stack-up, and hydrogen embrittlement guide."
 date: "2026-05-09"
-tags: ["surface finishing", "coating", "anodizing", "corrosion"]
+tags: ["surface treatment", "coatings", "anodizing", "galvanizing", "corrosion", "ISO 1461", "ISO 9227"]
 category: "Manufacturing"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+<Callout type="info" title="Engineering Usage Note">
+This guide details industrial surface engineering, plating thicknesses, corrosion protection ratings, and dimensional tolerances according to ISO 1461, ISO 7599, ISO 4527, and ISO 9227 salt spray tests. For high-tensile Grade 10.9 and 12.9 fasteners, hydrogen de-embrittlement baking according to ISO 4042 is strictly mandatory.
 </Callout>
 
 ## Problem / Objective
 
-Surface finish determines corrosion resistance, friction, appearance, and maintenance cost. A wrong finish can make a good material fail early.
+Even the highest-grade engineering alloys degrade catastrophically if exposed to harsh service environments without appropriate surface protection. Misjudging surface treatment parameters introduces severe engineering liabilities:
+- Coating build-up ($5 - 80\ \mu\text{m}$) violating precision fit tolerances, jamming bearing journals and seizing threaded fasteners,
+- Hydrogen embrittlement cracking in high-strength fasteners induced by acid pickling and electroplating, causing delayed brittle fracture under tension,
+- Accelerating localized galvanic corrosion when incompatible plating metals contact the underlying substrate.
 
 ## Assumptions
 
-- Base material and service environment are known.
-- Coating thickness is included in the tolerance stack.
-- Maintenance and cleaning conditions are realistic.
+- Atmospheric corrosivity categories are defined according to ISO 12944 (C1 through C5-M).
+- Coating thickness build-up is factored into pre-plate machining drawing tolerances.
+- External sharp edges feature generous corner break radii ($R \ge 1.0\text{ mm}$) to ensure uniform barrier thickness.
 
 ## Step by step method
 
-1. Classify environment and corrosion risk.
-2. Check coating thickness impact on tolerance.
-3. Write wear, friction, and appearance needs.
-4. Review process temperature and distortion risk.
-5. Add thickness and adhesion tests to the control plan.
+1. **Select Coating Process for Application Duty:**
+   - **Hot-Dip Galvanizing (HDG - ISO 1461):** $45 - 85\ \mu\text{m}$ thickness; sacrificial cathodic protection providing 30+ years outdoor service life for structural steel.
+   - **Electro-Galvanized Zinc (ISO 2081):** $8 - 15\ \mu\text{m}$ thickness with blue/yellow trivalent passivation; cost-effective corrosion protection for precision mechanical fasteners.
+   - **Hard Anodizing / Type III (ISO 7599):** $25 - 50\ \mu\text{m}$ ceramic alumina layer; imparts $60\text{ HRC}$ equivalent surface hardness, dielectric isolation, and wear resistance to aluminum.
+   - **Electroless Nickel (ENP - ISO 4527):** $10 - 25\ \mu\text{m}$ uniform autocatalytic deposit; 100% uniform thickness in blind bores, $50 - 65\text{ HRC}$ hardness, and superior chemical resistance.
+   - **Hard Chrome Plating:** $20 - 100\ \mu\text{m}$; standard for hydraulic cylinder rods, low friction coefficient ($\mu \approx 0.12$), and $68 - 72\text{ HRC}$ abrasion resistance.
+
+2. **Calculate Dimensional Shift from Plating Layer Build-Up:**
+   External diameters increase by double the coating thickness ($t$), while internal bore diameters decrease:
+   $$D_{plated} = D_{machined} + 2 \cdot t, \quad d_{bore,plated} = d_{bore,machined} - 2 \cdot t$$
+   On standard $60^\circ$ metric screw threads, flank deposition shifts pitch diameter by four times coating thickness:
+   $$\Delta d_{pitch} = 4 \cdot t$$
+   *(e.g., A $12\ \mu\text{m}$ zinc layer expands screw pitch diameter by $48\ \mu\text{m}$, consuming the entire 6g tolerance allowance).*
+
+3. **Mandate Hydrogen De-Embrittlement Baking for High-Strength Fasteners:**
+   Per ISO 4042, steels with tensile strength $R_m \ge 1000\text{ MPa}$ (especially 10.9 and 12.9 grade bolts) must be baked at $200 - 220\text{ °C}$ for 4 to 24 hours **within 4 hours** of electroplating to drive out trapped atomic hydrogen.
+
+4. **Specify Neutral Salt Spray (ISO 9227 NSS) Exposure Benchmarks:**
+   - Commercial zinc with blue trivalent passivate: 72 - 120 hours to white rust, 240 hours to red rust.
+   - Zinc-Nickel alloy plating (12-15% Ni): 720 - 1000 hours red rust resistance.
+   - Electroless Nickel (25 $\mu\text{m}$ high-phosphorus): 500+ hours neutral salt spray resistance.
+
+5. **Industrial Worked Example:**
+   A precision journal shaft of $d = 25\text{ mm}$ with h6 tolerance ($0 / -9\ \mu\text{m} \implies 24.991 - 25.000\text{ mm}$) requires $15 \pm 3\ \mu\text{m}$ electroless nickel plating:
+   - Bilateral coating build-up: $2 \times (12\dots 18\ \mu\text{m}) = +24\dots +36\ \mu\text{m}$.
+   - If machined to nominal 25.000 mm before plating, final diameter becomes $25.024 - 25.036\text{ mm}$, completely failing the bearing fit!
+   - **Correct Engineering Solution:** Pre-plate machining dimensions are derated:
+     $$d_{pre-plate} = [24.991 - 0.036, \ 25.000 - 0.024] = \mathbf{24.955\dots 24.976\text{ mm}}$$
+   - Post-plating dimensions will land precisely within the intended h6 tolerance limits.
 
 ## Common mistakes
 
-- Treating coating thickness separately from dimensional tolerance.
-- Assuming paint and galvanizing provide the same performance.
-- Forgetting coating continuity on sharp edges.
+- **Failing to Undersize Thread Flanks Before Plating:** Applying $20\ \mu\text{m}$ zinc to standard 6g bolts prevents nuts from threading on assembly lines.
+- **Overlooking 50% Penetration in Hard Anodizing:** Type III anodizing grows 50% inward into the substrate and 50% outward beyond the original surface.
+- **Omitting Vent and Drain Holes for Hot-Dip Galvanizing:** Dipping enclosed tubular weldments into $450\text{ °C}$ molten zinc without pressure relief holes causes explosive blowouts.
+- **Omitting Hydrogen Bake Documentation on Critical Bolts:** Unbaked 10.9/12.9 bolts crack under preload within hours of assembly through silent delayed hydrogen fracture.
 
 ## Related calculators
 
-- [Materials Library](/en/
-- [Quick Reference Center](/reference)
-- [Quality Tools](/quality-tools)
+- [Materials Library and Mechanical Properties](/en/materials)
+- [Bolt Strength and Preload Calculator](/en/tools/bolt-calculator)
+- [Fixture & Locating Tools](/fixture-tools)
+- [Unit Converter](/en/tools/unit-converter)
 
-## Related glossary terms
+## Related standards
 
-- [Corrosion resistance](/en/glossary/corrosion-resistance)
-- [Tolerance](/en/glossary/tolerance)
-
-## Quick FAQ
-
-### Question: Which material is anodized?
-
-It is usually used on aluminum alloys for corrosion resistance and surface hardness.
-
-### Question: Does coating affect tolerance?
-
-Yes. Coating thickness changes dimensions, especially on fits and threaded surfaces.
-
-### Question: What does passivation do?
-
-It helps strengthen the protective oxide layer on stainless steel.
+- **ISO 1461:** Hot Dip Galvanized Coatings on Fabricated Iron and Steel Articles.
+- **ISO 7599:** Anodizing of Aluminium and Its Alloys - General Specifications.
+- **ISO 4527:** Metallic Coatings - Autocatalytic (Electroless) Nickel-Phosphorus Alloy Coatings.
+- **ISO 9227:** Corrosion Tests in Artificial Atmospheres - Salt Spray Tests (NSS).
+- **ISO 4042:** Fasteners - Electroplated Coating Systems and Hydrogen De-Embrittlement.

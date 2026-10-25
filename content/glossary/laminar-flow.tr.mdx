@@ -1,28 +1,33 @@
 ---
 title: "Laminer akış"
-description: "Laminer akış, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+description: "Laminer akış rejimi ($Re < 2300$), düzenli katmanlı akış, Hagen-Poiseuille yasası ve düşük sürtünmeli boru hidroliği."
 date: "2026-05-09"
-tags: ["laminer akış", "Reynolds", "boru"]
+tags: ["laminer akış","Reynolds","akışkanlar","viskozite","Poiseuille"]
 category: "Akışkanlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Laminer akış, akışkanın düzenli tabakalar halinde hareket ettiği rejimdir.
+Laminer akış, akışkan parçacıklarının birbirine karışmadan, düzgün paralel katmanlar (laminalar) halinde ve düzenli yörüngelerde hareket ettiği akış rejimidir. Viskoz kuvvetlerin atalet kuvvetlerine baskın olduğu düşük hızlarda görülür.
 
 ## Neden önemli?
 
-Düşük hız veya yüksek viskozite koşullarında basınç kaybı tahminini değiştirir.
+Laminer akışta çeper sürtünmesi pürüzlülükten tamamen bağımsızdır ve akış direnci türbülanslı akışa göre çok daha düşüktür. Yağlama kanallarında, mikroakışkanlarda ve ağır yağ transfer hatlarında laminer rejim geçerlidir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Reynolds Sayısı Kriteri:** Dairesel borularda $Re < 2300$ olduğunda akış kesin olarak laminerdir.
+- **Parabolik Hız Profili:** Boru çeperinde hız sıfır (kaymama koşulu), merkez eksende ise ortalama hızın iki katıdır ($v_{max} = 2 cdot v_{ort}$).
+- **Hagen-Poiseuille Yasası:** Laminer akışta basınç kaybı boru pürüzlülüğünden bağımsızdır ve viskoziteyle doğru orantılıdır:
+  $$Delta P = rac{32 cdot mu cdot L cdot v}{D^2} = rac{128 cdot mu cdot L cdot Q}{pi cdot D^4}$$
+  *(Darcy sürtünme faktörü: $f = rac{64}{Re}$)*.
 
-
-<Callout type="info" title="Örnek">
-İnce yağ kanallarında laminer davranış görülebilir.
+<Callout type="info" title="Akışkan Karşılaştırması">
+Laminer akışta boru iç yüzeyinin pürüzlü veya ayna gibi olması basınç kaybını zerre kadar değiştirmez; sürtünme tamamen akışkanın iç vizkozitesi tarafından belirlenir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

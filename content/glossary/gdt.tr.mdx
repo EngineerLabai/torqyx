@@ -1,29 +1,35 @@
 ---
-title: "GD&T"
-description: "GD&T, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "GD&T (Geometrik Boyutlandırma ve Toleranslandırma)"
+description: "ASME Y14.5 ve ISO 1101 standartlarında Geometrik Boyutlandırma ve Toleranslandırma (GD&T) sembolleri, konum toleransı ve kontrol çerçevesi."
 date: "2026-05-09"
-tags: ["GD&T", "tolerans", "datum"]
-category: "Tasarım"
+tags: ["GD&T","geometrik toleranslar","ASME Y14.5","ISO 1101","datum"]
+category: "Tolerans"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-GD&T, geometrik boyutlandırma ve toleranslandırma sistemidir.
+GD&T (Geometric Dimensioning and Tolerancing), teknik resimlerde parçanın yalnızca artı-eksi boyutsal ölçülerini değil; biçim (form), yönelim (orientation), profil ve konum (location) geometrisini sembolik bir dille tanımlayan küresel mühendislik standardıdır.
 
 ## Neden önemli?
 
-Parçanın form, yönelim, konum ve salınım gereksinimlerini işlev odaklı tanımlar.
+Klasik artı-eksi ($pm$) toleransları delik merkezlerinde kare tolerans bölgesi oluşturur ve montaj fonksiyonunu tam yansıtmaz. GD&T dairesel tolerans bölgeleri ve malzeme durumu modifiyerleri (MMC) kullanarak imalata %57 daha geniş tolerans alanı sağlar ve montaj uyumunu garanti eder.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ASME Y14.5-2018 ve ISO 1101 (GPS) standartlarında GD&T 5 temel kategoriye ayrılır:
+- **Biçim Toleransları:** Düzlemsellik ($\unicode{x25B1}$), Doğrusallık ($-$), Dairesellik ($igcirc$), Silindiriklik ($\unicode{x232D}$). (Datum gerektirmez).
+- **Yönelim Toleransları:** Diklik ($ot$), Paralellik ($//$), Açısallık ($angle$).
+- **Konum Toleransları:** Konum / Pozisyon ($igoplus$).
+- **Salgı Toleransları:** Dairesel Salgı ($
+earrow$), Toplam Salgı ($\unicode{x2330}$).
+- **Profil Toleransları:** Yüzey Profili ($\unicode{x2312}$).
 
-
-<Callout type="info" title="Örnek">
-Konum toleransı, bir deliğin gerçek yerini basit artı eksi ölçüden daha net kontrol eder.
+<Callout type="info" title="Örnek Gösterim">
+Bir delik ekseninde $[igoplus | arnothing 0.2	ext{ 	extcircled{M}} | A | B | C]$ kontrol çerçevesi; deliğin A, B ve C datumlarına göre $0.2	ext{ mm}$ silindirik bölge içinde kalması gerektiğini ve Maksimum Malzeme Koşulunda (MMC) bonus tolerans kazanacağını belirtir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Hızlı Referans Merkezi](/reference)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Tolerans Zinciri ve GD&T Rehberi](/tr/guides/tolerans-zinciri-ve-gdt-rehberi)
 - [Fikstür Araçları](/fixture-tools)

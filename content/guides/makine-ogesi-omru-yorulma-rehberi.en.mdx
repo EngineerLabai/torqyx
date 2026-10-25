@@ -1,63 +1,80 @@
 ---
-title: "Machine element life, S-N curve, and fatigue guide"
-description: "Set up a fatigue approach for shafts, bolts, welds, and bearings under repeated loading."
+title: "Machine element life, S-N Wöhler curves, and fatigue guide"
+description: "High-cycle fatigue analysis, S-N Wöhler curves, Marin modification factors, Goodman failure criterion, and Miner cumulative damage rule."
 date: "2026-05-09"
-tags: ["fatigue", "S-N curve", "life", "machine elements"]
+tags: ["fatigue", "Wöhler", "service life", "Goodman", "S-N curve", "FKM", "DIN 50100"]
 category: "Machine Elements"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+<Callout type="info" title="Engineering Usage Note">
+This guide outlines the analytical fatigue verification of dynamic components such as shafts, bolted joints, welded structures, and springs in accordance with DIN 50100, FKM guidelines, and Shigley mechanical design methodology. For mission-critical aerospace and pressure vessel systems, empirical component testing remains mandatory.
 </Callout>
 
 ## Problem / Objective
 
-A part may look safe under static load and still crack under repeated load. Fatigue analysis combines load cycle, stress range, and notch effect.
+Over 80% of mechanical component failures occur not from monotonic static overloads, but from progressive fatigue fracture under cyclic stresses far below the material yield strength ($S_y$). Relying solely on static safety factors ($S_{static} \ge 1.5$) leads to:
+- Silent micro-crack initiation at stress concentrations (fillets, keyways, weld toes),
+- Sudden catastrophic brittle fracture with zero warning or macroscopic plastic deformation,
+- Costly downtime and cascading mechanical equipment destruction.
 
 ## Assumptions
 
-- Load cycle and mean stress are approximately known.
-- Material S-N data is available.
-- Surface, size, and notch effects are handled with correction factors.
+- High Cycle Fatigue (HCF, $N > 10^4$ cycles) governs, where macroscopic bulk behavior remains within the nominal elastic regime.
+- The base fatigue limit is derived from rotating beam tests (RR Moore) and corrected via Marin surface, size, and loading factors.
+- Mean stress influence on endurance limit is evaluated using the modified Goodman or Soderberg failure criteria.
+- Variable amplitude spectrum loads follow the Palmgren-Miner linear cumulative damage hypothesis.
 
 ## Step by step method
 
-1. Define load cycle and stress range.
-2. Select material fatigue data.
-3. Add notch, surface, and size corrections.
-4. Evaluate fatigue safety factor separately.
-5. Write inspection or test plan for the critical area.
+1. **Calculate Alternating and Mean Stress Components:**
+   From peak cyclical stress levels ($\sigma_{max}$ and $\sigma_{min}$):
+   $$\sigma_a = \frac{\sigma_{max} - \sigma_{min}}{2}, \quad \sigma_m = \frac{\sigma_{max} + \sigma_{min}}{2}$$
+   Stress ratio: $R = \frac{\sigma_{min}}{\sigma_{max}}$ *(Fully reversed: $R = -1$; zero-to-tension: $R = 0$)*.
+
+2. **Compute Corrected Endurance Limit ($S_e$) via Marin Equation:**
+   Modify laboratory endurance limit ($S_e' \approx 0.5 \cdot S_{ut}$) to represent actual hardware conditions:
+   $$S_e = k_a \cdot k_b \cdot k_c \cdot k_d \cdot k_e \cdot S_e'$$
+   - $k_a$: Surface finish factor (ground, machined, hot-rolled, as-forged),
+   - $k_b$: Size modification factor ($k_b \approx 1.24 \cdot d^{-0.107}$ for $d > 8\text{ mm}$),
+   - $k_c$: Load factor (1.0 for bending, 0.85 for axial, 0.577 for pure torsion),
+   - $k_e$: Fatigue notch sensitivity factor ($k_e = 1 / K_f$).
+
+3. **Determine Fatigue Safety Factor ($n_f$) Using Modified Goodman:**
+   Using ultimate tensile strength $S_{ut}$ and corrected fatigue limit $S_e$:
+   $$\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}} = \frac{1}{n_f} \implies n_f = \frac{1}{\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}}}$$
+   Achieving $n_f \ge 1.3 - 2.0$ guarantees infinite life ($N \ge 10^6 - 10^7$ cycles) under uninterrupted constant amplitude cycling.
+
+4. **Evaluate Cumulative Damage via Miner's Rule:**
+   For multi-stage spectrum loading with applied cycles $n_i$ at stress amplitude $i$ having fatigue life $N_i$:
+   $$D = \sum_{i=1}^{k} \frac{n_i}{N_i} \le 1.0$$
+
+5. **Industrial Worked Example:**
+   A gearbox input shaft manufactured from quenched & tempered AISI 4140 steel ($S_{ut} = 900\text{ MPa}$, $S_y = 650\text{ MPa}$, Marin corrected endurance limit $S_e = 360\text{ MPa}$) operates under alternating bending stresses between $\sigma_{max} = 220\text{ MPa}$ and $\sigma_{min} = -80\text{ MPa}$:
+   - Stress amplitude: $\sigma_a = \frac{220 - (-80)}{2} = \mathbf{150\text{ MPa}}$
+   - Mean stress: $\sigma_m = \frac{220 + (-80)}{2} = \mathbf{70\text{ MPa}}$
+   - Modified Goodman factor of safety:
+     $$\frac{1}{n_f} = \frac{150}{360} + \frac{70}{900} = 0.4167 + 0.0778 = 0.4945 \implies n_f = \mathbf{2.02}$$
+   - *Verdict:* $n_f = 2.02 > 1.50$, confirming safe operation in the infinite life domain.
 
 ## Common mistakes
 
-- Assuming static safety factor is enough for fatigue.
-- Forgetting notch effect at weld toes.
-- Treating surface roughness as independent from fatigue strength.
+- **Equating Static Yield Safety with Fatigue Life:** A shaft with a static safety factor of 3.0 may exhibit a fatigue safety factor of 0.8 and fracture after only 50,000 cycles.
+- **Specifying Sharp Fillet Radii at Steps:** Increasing the fillet transition radius from $r/d = 0.05$ to $0.15$ slashes stress concentration by nearly 50%.
+- **Neglecting Surface Roughness in Severe Service:** Rough-machined finishes reduce fatigue endurance limits by up to 35% compared to polished specimens.
+- **Overlooking Environmental Corrosion:** In corrosive environments, ferrous alloys exhibit no true fatigue limit ($S_e$); the S-N curve drops continuously without a horizontal plateau.
 
 ## Related calculators
 
-- [Shaft Torsion Calculator](/en/tools/shaft-torsion)
-- [Bearing Life Calculator](/en/tools/bearing-life)
-- [Fillet Weld Sizing Calculator](/en/tools/fillet-weld)
+- [Shaft Torsion and Stress Analysis](/en/tools/shaft-torsion)
+- [Bolt Strength and Preload Calculator](/en/tools/bolt-calculator)
+- [Fillet Weld Sizing](/en/tools/fillet-weld)
+- [Bearing Life Calculator (ISO 281)](/en/tools/bearing-life)
 
-## Related glossary terms
+## Related standards
 
-- [Fatigue](/en/glossary/fatigue)
-- [Stress](/en/glossary/stress)
-- [Factor of safety](/en/glossary/factor-of-safety)
-
-## Quick FAQ
-
-### Question: What is fatigue?
-
-It is failure by crack initiation and growth under repeated loading.
-
-### Question: What does an S-N curve show?
-
-It shows the relation between stress level and cycle life.
-
-### Question: Where is fatigue usually critical?
-
-Notches, section changes, weld toes, and surface defects are common critical regions.
+- **DIN 50100:** Testing of Materials - Continuous Vibration Fatigue Testing (Wöhler Test).
+- **FKM Guideline:** Analytical Strength Assessment of Mechanical Components (VDI).
+- **ISO 1099:** Metallic Materials - Fatigue Testing - Axial-Force-Controlled Method.
+- **Eurocode 3 (EN 1993-1-9):** Fatigue Assessment of Steel Structures.

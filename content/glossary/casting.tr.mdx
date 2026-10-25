@@ -1,28 +1,31 @@
 ---
-title: "Döküm"
-description: "Döküm, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Metal döküm (casting)"
+description: "Döküm imalat yöntemleri (kum döküm, kokil, hassas döküm), döküm çekme payı, gözeneklilik ve dökme demir mekanik özellikleri."
 date: "2026-05-09"
-tags: ["döküm", "imalat", "kalıp"]
+tags: ["döküm","metal döküm","çekme payı","dökme demir","imalat"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Döküm, ergimiş malzemenin kalıba dökülerek şekillendirilmesidir.
+Döküm (Casting), ergimiş sıvı metalin önceden hazırlanmış bir kalıp boşluğuna dökülerek katılaşması yoluyla istenen geometrinin elde edildiği temel imalat yöntemidir. Redüktör gövdeleri, motor blokları ve karmaşık vanaların üretiminde en ekonomik çözümdür.
 
 ## Neden önemli?
 
-Karmaşık geometriler ve seri üretim için avantaj sağlar.
+Talaşlı imalatla boşaltılması imkansız veya çok pahalı olan karmaşık iç kaviteler ve eğrisel gövdeler döküm ile tek seferde üretilir. Ancak katılaşma esnasında meydana gelen hacimsel çekme (büzülme) ve gaz gözenekliliği doğru yönetilmezse parça hurdaya çıkar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Döküm Çekme Payı:** Sıvı metal soğurken büzülür; model boyutlarına dökme demir için %1, çelik döküm için %2 çekme toleransı eklenir.
+- **Tasarım Kuralları (DFM):** Keskin köşelerden kaçınılmalı, homojen et kalınlığı korunmalı ve kalıptan çıkarma için $1^circ - 3^circ$ döküm eğimi (draft angle) verilmelidir.
+- **Malzeme Türleri:** Gri dökme demir (EN-GJL-250) mükemmel titreşim sönümleme sağlar; sfero dökme demir (EN-GJS-400-15) ise küresel grafit yapısıyla çeliğe yakın tokluk ve süneklik sunar.
 
-
-<Callout type="info" title="Örnek">
-Pompa gövdeleri ve motor blokları sık döküm örnekleridir.
+<Callout type="info" title="İmalat İpucu">
+Döküm parçalarda et kalınlığının aniden değiştiği bölgelerde sıcak nokta (hot spot) ve çekme boşluğu oluşur; kesit geçişleri daima $R ge 	ext{et kalınlığı}$ radyusları ile yumuşatılmalıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
+- [Malzeme Kütüphanesi ve Dayanım Değerleri](/tr/materials)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

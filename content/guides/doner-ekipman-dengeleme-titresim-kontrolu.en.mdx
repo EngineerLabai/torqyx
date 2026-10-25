@@ -1,61 +1,83 @@
 ---
 title: "Rotating equipment balancing and vibration control"
-description: "An engineering checklist for static balancing, dynamic balancing, resonance, and maintenance monitoring."
+description: "Rotor static and dynamic balancing, ISO 21940 balance quality grades, ISO 20816 vibration severity levels, and resonance mitigation guide."
 date: "2026-05-09"
-tags: ["vibration", "resonance", "balancing", "maintenance"]
+tags: ["vibration", "resonance", "balance", "ISO 21940", "ISO 20816", "rotordynamics"]
 category: "Maintenance"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+<Callout type="info" title="Engineering Usage Note">
+This guide provides practical methodologies to verify rotor unbalance and evaluate vibration severity in electric motors, pumps, fans, and turbomachinery in compliance with ISO 21940-11 and ISO 20816-1. For high-speed critical machinery, modal analysis and dual-plane dynamic balancing are mandatory.
 </Callout>
 
 ## Problem / Objective
 
-Unbalance shortens bearing life and can loosen fasteners. Near resonance, small forces can create large vibration amplitudes.
+In rotating machinery, any offset between the center of mass and the geometric axis of rotation generates centrifugal forces proportional to the square of rotational speed ($F_c \propto \omega^2$). Left unmitigated, unbalance forces cause:
+- Rapid depletion of bearing L10 life and premature fatigue spalling,
+- Bolt loosening, keyway fretting, and structural fatigue cracking at foundation supports,
+- Destructive resonance and catastrophic shaft deflection when forcing frequencies align with system natural frequencies.
 
 ## Assumptions
 
-- Rotor speed and bearing arrangement are known.
-- Vibration is measured from repeatable points.
-- Critical speeds are checked under service conditions.
+- The rotor behaves as a rigid body operating safely below its first critical bending speed ($n_{operating} < 0.70 \cdot n_{critical}$).
+- Bearing housings and support structures provide symmetric, linear stiffness characteristics.
+- Vibration velocity is measured as RMS ($v_{rms}$) across the standard 10 Hz to 1000 Hz frequency range according to ISO 20816-1.
 
 ## Step by step method
 
-1. Write nominal speed and operating speed range.
-2. Decide whether static or dynamic balancing is needed.
-3. Define measurement points and acceptance limit.
-4. Check resonance risk with a speed sweep.
-5. Add trend monitoring to the maintenance plan.
+1. **Select Balancing Mode Based on Rotor Geometry:**
+   - **Single-Plane (Static Balancing):** For disc-shaped rotors where length-to-diameter ratio is small ($L/D < 0.20$ and $n < 1000\text{ rpm}$), such as narrow pulleys, flywheels, and grinding wheels.
+   - **Dual-Plane (Dynamic Balancing):** For elongated cylindrical rotors ($L/D \ge 0.20$ or higher operating speeds), such as electric motor armatures, multi-stage pump impellers, and industrial fans.
+
+2. **Determine the ISO 21940-11 Balance Quality Grade ($G$):**
+   - **G6.3:** Standard industrial fans, gearbox shafts, agricultural equipment.
+   - **G2.5:** Electric motors, machine tool spindles, gas/steam turbines, process compressors.
+   - **G1.0:** High-precision grinding spindles, gyroscopes, turbocharger components.
+
+3. **Calculate Permissible Residual Unbalance ($U_{per}$):**
+   With total rotor mass $m$ [$\text{kg}$] and angular velocity $\omega = \frac{2\pi \cdot n}{60}$ [$\text{rad/s}$]:
+   $$U_{per} = 1000 \cdot \frac{G \cdot m}{\omega} \quad [\text{g}\cdot\text{mm}]$$
+   For dual-plane balancing, distribute $U_{per}$ between the two correction planes based on distance from the center of gravity ($U_1 = U_2 = U_{per} / 2$ for symmetric rotors).
+
+4. **Quantify Unbalance Dynamic Centrifugal Force:**
+   The cyclic force transmitted into radial bearings is:
+   $$F_c = m_u \cdot r \cdot \omega^2 = \frac{U_{per}}{1000} \cdot \omega^2 \quad [\text{N}]$$
+
+5. **Evaluate ISO 20816 Vibration Severity Zones:**
+   Evaluate overall bearing housing RMS velocity ($v_{rms}$ [$\text{mm/s}$]):
+   - **Zone A (New Machine / Commissioning):** $v_{rms} < 1.4\text{ mm/s}$ (Medium industrial motors)
+   - **Zone B (Unrestricted Long-Term Operation):** $1.4 \le v_{rms} \le 2.8\text{ mm/s}$
+   - **Zone C (Restricted Operation / Plan Maintenance):** $2.8 < v_{rms} \le 4.5\text{ mm/s}$
+   - **Zone D (Unacceptable / Immediate Shutdown):** $v_{rms} > 4.5\text{ mm/s}$
+
+6. **Industrial Worked Example:**
+   An industrial electric motor rotor with mass $m = 60\text{ kg}$ operates at $n = 3000\text{ rpm}$. The target balancing grade is G2.5:
+   - Angular velocity: $\omega = \frac{2\pi \times 3000}{60} = \mathbf{314.16\text{ rad/s}}$
+   - Maximum permissible residual unbalance:
+     $$U_{per} = 1000 \cdot \frac{2.5 \times 60}{314.16} = \mathbf{477.5\text{ g}\cdot\text{mm}}$$
+   - Shared between two symmetrical balancing correction planes:
+     $$U_1 = U_2 = \frac{477.5}{2} = \mathbf{238.8\text{ g}\cdot\text{mm}}$$
+   - At a bolt correction radius of $r = 120\text{ mm}$, the permissible unbalance mass tolerance is:
+     $$m_{corr} = \frac{238.8}{120} = \mathbf{1.99\text{ grams}}$$
 
 ## Common mistakes
 
-- Assuming single-plane balancing suits every rotor.
-- Comparing vibration readings from different sensor points.
-- Mistaking foundation looseness for a rotor fault.
+- **Attempting Single-Plane Balancing on Long Rotors:** Ignoring couple unbalance across the shaft length leads to high vibration once operating speed is reached.
+- **Confusing Foundation Soft-Foot or Misalignment with Rotor Unbalance:** Misalignment produces dominant 2X shaft rotational frequency peaks, whereas unbalance is strictly 1X; adding trial weights to misaligned machinery exacerbates bearing damage.
+- **Dwell Time During Resonance Pass-Through:** Passing through shaft critical speed slowly creates huge vibration amplitudes; speed ramp-up through critical zones must be accelerated via VFDs.
+- **Ignoring Thermal Bowing at Operational Temperature:** Turbines and hot gas fans balanced cold can bow when heated, creating substantial thermal unbalance during steady-state service.
 
 ## Related calculators
 
-- [Bearing Life Calculator](/en/tools/bearing-life)
-- [Power - Torque - RPM Calculator](/en/tools/torque-power)
-- [Quality Tools](/quality-tools)
+- [Bearing Life Calculator (ISO 281)](/en/tools/bearing-life)
+- [Power - Torque - Speed Calculator](/en/tools/torque-power)
+- [Shaft Sizing and Torsion](/en/tools/shaft-torsion)
+- [Quality and Failure Analysis Tools](/quality-tools)
 
-## Related glossary terms
+## Related standards
 
-- [Fatigue](/en/glossary/fatigue)
-
-## Quick FAQ
-
-### Question: When is static balancing enough?
-
-It may be enough for narrow rotors with limited speed effects.
-
-### Question: What does dynamic balancing add?
-
-It accounts for two-plane effects and works better for long or fast rotors.
-
-### Question: How is resonance recognized?
-
-Vibration rises quickly at a certain speed and drops when speed changes.
+- **ISO 21940-11:** Mechanical Vibration - Rotor Balancing Criteria and Permissible Residual Unbalance.
+- **ISO 20816-1 / ISO 10816:** Measurement and Evaluation of Mechanical Vibration in Non-Reciprocating Machines.
+- **API 610 / API 670:** Centrifugal Pumps for Petroleum, Petrochemical, and Natural Gas Industries & Vibration Monitoring.

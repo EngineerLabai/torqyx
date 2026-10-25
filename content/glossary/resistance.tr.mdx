@@ -1,32 +1,36 @@
 ---
-title: "Direnç"
-description: "Direnç, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Elektriksel direnç (resistance)"
+description: "Ohm yasası ($V=IR$), iletken direnci formülü ($R = \rho L / A$), sıcaklık katsayısı ve kablo gerilim düşümü hesabı."
 date: "2026-05-09"
-tags: ["direnç", "elektrik", "ohm"]
+tags: ["direnç","elektrik","Ohm yasası","iletkenlik","gerilim düşümü"]
 category: "Elektrik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Direnç, elektrik akımına karşı gösterilen zorluktur.
+Elektriksel direnç ($R$), bir elektrik devresinde veya iletkende serbest elektronların akışına (elektrik akımına) karşı gösterilen zorluk derecesidir. SI birim sisteminde birimi Ohm [$Omega$]'dur.
 
 ## Neden önemli?
 
-Isınma, gerilim düşümü ve sensör devrelerinde dikkate alınır.
+Kablo kesiti yetersiz seçildiğinde direnç sebebiyle kabloda gerilim düşümü ($Delta V = I cdot R$) ve Joule ısınması ($P = I^2 cdot R$) oluşur. Bu durum motor klemensinde düşük voltaja, yangın tehlikesine ve enerji kaybına yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **İletken Direnci Formülü:** Malzemenin özdirenci ($ho_e$), boyu ($L$) ve kesit alanı ($A$):
+  $$R = ho_e cdot rac{L}{A}$$
+  *(Örn: Standart bakır için $ho_e approx 0.0175 Omegacdot	ext{mm}^2	ext{/m}$).*
+- **Sıcaklıkla Direnç Değişimi:** Metallerde sıcaklık arttıkça direnç artar:
+  $$R_T = R_0 cdot [1 + alpha cdot (T - T_0)]$$
+- **Gerilim Düşümü Sınırı:** Endüstriyel tesislerde ana panodan motora giden hatlarda gerilim düşümü %3'ü, aydınlatma hatlarında %1.5'i aşmamalıdır (IEC 60364).
 
-
-<Formula label="Temel ifade">
-Resistance = Voltage / Current
-</Formula>
-
-<Callout type="info" title="Örnek">
-Uzun kabloda direnç artarsa gerilim düşümü büyüyebilir.
+<Callout type="info" title="Kablo Hesabı Örneği">
+$50	ext{ m}$ mesafedeki motora $2.5	ext{ mm}^2$ bakır kablo çekildiğinde gidiş-dönüş ($100	ext{ m}$) hat direnci:
+$$R = 0.0175 	imes rac{100}{2.5} = mathbf{0.70 Omega}$$
+16 A akım geçtiğinde kabloda $11.2	ext{ V}$ gerilim düşümü ve $179	ext{ W}$ ısı kaybı oluşur.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
+- [Temel Mühendislik Araçları](/tr/tools/basic-engineering)

@@ -1,0 +1,70 @@
+---
+title: "What is L10 Bearing Life and How is it Calculated?"
+description: "Understand 90% reliability L10 bearing life, the governing ISO 281 formula, dynamic capacity C, equivalent load P, and L10h operating hours."
+date: "2026-06-11"
+tags: ["L10 bearing life", "bearings and shafts", "bearing selection", "mechanical calculation"]
+category: "Bearings & Shafts"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/en/blog/l10-rulman-omru-nedir-nasil-hesaplanir"
+---
+
+<Image src="/images/blog/l10-rulman-omru-nedir-nasil-hesaplanir.webp" alt="Technical diagram explaining ISO 281 L10 bearing fatigue life calculation" width={1200} height={900} caption="The fundamental relationship between dynamic capacity C, equivalent load P, and rating life." />
+
+## L10 is Not an Individual Failure Timestamp
+
+In mechanical engineering, the $L_{10}$ bearing life represents a standardized statistical metric: it is the basic rating life associated with 90% reliability. This means 90% of a sufficiently large population of identical bearings operating under identical conditions will reach or exceed this duration before the initial onset of subsurface material fatigue (spalling or flaking).
+
+$L_{10}$ is conventionally expressed in millions of revolutions. To convert this into operating hours ($L_{10h}$), rotational speed ($n$ in rpm) must be accounted for.
+
+## The Governing ISO 281 Formula
+
+The foundational ISO 281 formula connects dynamic load capacity ($C$) and equivalent dynamic bearing load ($P$):
+
+$$L_{10} = \left( \frac{C}{P} \right)^p \quad [\text{million revolutions}]$$
+
+Where the life exponent $p$ is:
+- **$p = 3$** for ball bearings (point contact)
+- **$p = 10/3 \approx 3.333$** for roller bearings (line contact)
+
+Because $C/P$ is raised to the 3rd or 3.33rd power, small increases in load produce drastic reductions in fatigue life: doubling the load cuts ball bearing life by a factor of 8 ($2^3 = 8$).
+
+## Converting to Operating Hours ($L_{10h}$)
+
+To determine service life in running hours:
+
+$$L_{10h} = \frac{10^6}{60 \cdot n} \cdot \left( \frac{C}{P} \right)^p \quad [\text{hours}]$$
+
+For example, a bearing carrying a given load at 1,500 rpm will accumulate revolutions five times faster than at 300 rpm, reducing $L_{10h}$ by 80% even though total million-revolution fatigue life remains constant.
+
+## Why Field Life Diverges from Catalog Calculations
+
+ISO 281 basic rating life assumes ideal elastohydrodynamic lubrication (EHL), pristine lubricant cleanliness, zero shaft misalignment, and steady loads. In actual industrial machinery:
+1. **Lubricant Viscosity and Film Thickness ($\kappa$):** Operating below the minimum required kinematic viscosity leads to metal-to-metal boundary contact and micro-spalling.
+2. **Solid Contamination:** Ingress of abrasive particles dents raceways, creating stress risers that trigger premature fatigue.
+3. **Shaft Deflection and Angular Misalignment:** Tilting exceeding 2 to 10 arcminutes concentrates contact stress at roller edges.
+
+For mission-critical gearboxes and turbomachinery, the extended ISO 281 life rating ($L_{nm} = a_1 \cdot a_{ISO} \cdot L_{10}$) must be utilized.
+
+## Common Calculation Mistakes
+
+- **Neglecting Axial Thrust from Helical Gearing:** Evaluating radial reaction force alone while ignoring thrust load yields a dangerously understated equivalent load $P$.
+- **Unit Mismatches:** Entering capacity $C$ in kN and equivalent load $P$ in N causes an error of $10^9$ in calculated life.
+- **Using the Ball Exponent for Roller Bearings:** Applying $p = 3$ instead of $p = 10/3$ introduces systematic sizing errors.
+
+## Related Torqyx Calculation Tool
+
+Calculate ISO 281 basic $L_{10}$ revolutions and $L_{10h}$ service hours with our interactive tool:
+
+<ToolLink href="/en/tools/bearing-life" title="Bearing Life (L10) Calculator" description="Compute rating life from dynamic capacity C, equivalent load P, and operating rpm." badge="Calculator" />
+
+## Related Engineering Guides
+
+- [Quick Guide to Bearing Selection](/en/guides/rulman-secimi-icin-hizli-rehber)
+- [Machine Elements Fatigue and Life Rating](/en/guides/makine-ogesi-omru-yorulma-rehberi)
+
+## Reference Standards
+
+- **ISO 281:** Rolling bearings — Dynamic load ratings and rating life.
+- **ISO 76:** Rolling bearings — Static load ratings.
+- **DIN ISO 281 Bbl 1:** Rolling bearings — Explanatory notes on ISO 281.

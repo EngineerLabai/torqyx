@@ -1,0 +1,71 @@
+---
+title: "Stainless Steel vs Galvanized Bolts: Material Selection Guide"
+description: "Compare stainless steel (A2-70, A4-80) and galvanized carbon steel fasteners across corrosion life, mechanical strength, galling risks, and cost."
+date: "2026-06-23"
+tags: ["stainless steel bolts", "galvanized fasteners", "corrosion resistance", "bolted joint", "ISO 3506"]
+category: "Bolts"
+draft: false
+readingTime: 6
+canonical: "https://torqyx.com/en/blog/paslanmaz-celik-civata-mi-galvanizli-mi"
+---
+
+<Image src="/images/blog/paslanmaz-celik-civata-mi-galvanizli-mi.webp" alt="Technical comparison diagram between stainless steel A2/A4 bolts and hot-dip galvanized carbon steel bolts" width={1200} height={900} caption="Engineering diagram illustrating corrosion resistance, yield strength, and galling behavior between stainless and galvanized fasteners." />
+
+## The right engineering question: What does the service environment demand?
+
+Choosing between stainless steel fasteners and zinc-galvanized carbon steel bolts is rarely a straightforward aesthetic or purchasing cost decision. The optimal specification is governed by atmospheric corrosivity (ISO 12944), chemical chlorides, operating temperature, mechanical load class, galling tendency, galvanic couples, and required design service life.
+
+Stainless steel fasteners derive their corrosion protection from an alloyed chromium oxide passive layer throughout the material matrix. In contrast, galvanized fasteners utilize carbon steel cores protected by sacrificial zinc surface coatings. 
+
+Beyond initial unit cost, mechanical designers must evaluate proof load capacity, thread friction variations, thread pitch tolerances, galling seizure during power assembly, and dissimilar metal galvanic potential.
+
+## Stainless steel fasteners: Strengths and metallurgical limits
+
+Standard austenitic stainless fasteners are classified under ISO 3506:
+- **A2-70 (AISI 304 / 1.4301):** Nominal tensile strength $R_m = 700\text{ MPa}$, proof stress $R_{p0.2} = 450\text{ MPa}$. Excellent general atmospheric and clean water corrosion resistance for outdoor mechanical enclosures and food processing machinery.
+- **A4-80 (AISI 316 / 1.4401):** Formulated with $2.0\% - 3.0\%$ Molybdenum ($R_m = 800\text{ MPa}$, $R_{p0.2} = 600\text{ MPa}$). Essential in coastal marine splash zones, chemical washdown skids, and de-icing road salt environments to resist aggressive pitting and crevice corrosion.
+
+### The critical risk of thread galling (cold welding)
+
+Austenitic stainless steels are notoriously prone to thread galling. When tightening stainless fasteners at high pneumatic tool speeds, microscopic thread friction asperities generate localized frictional heat, destroying the protective oxide film and causing atomic cold-welding (seizure). 
+
+To prevent galling:
+1. Always apply anti-seize paste (molybdenum disulfide $\text{MoS}_2$ or nickel-based compound) or specify dry fluoropolymer/PTFE coatings.
+2. Restrict assembly power tool rotational speed below $100\text{ rpm}$.
+3. Pair work-hardened A4-80 bolts with slightly softer A4-70 or bronze nuts to prevent identical crystal lattice cohesion.
+
+## Galvanized carbon steel fasteners: Mechanical muscle and sacrificial protection
+
+Galvanized fasteners rely on the sacrificial anode behavior of elemental zinc. If the coating is scratched down to bare steel, zinc corrodes preferentially, galvanically shielding the exposed iron core.
+- **Electro-Galvanized Zinc (ISO 2081):** $5 - 12\ \mu\text{m}$ thin layer with blue or yellow trivalent passivation. Intended strictly for indoor climate-controlled enclosures or light automotive brackets (72 to 120 hours neutral salt spray resistance).
+- **Hot-Dip Galvanizing (HDG - ISO 10684):** $45 - 85\ \mu\text{m}$ thick metallurgical zinc-iron alloy barrier. Delivers 25+ years of maintenance-free outdoor durability in heavy structural steel bridges, transmission towers, and solar racking.
+
+### Mechanical strength advantages of carbon steel
+
+Unlike austenitic stainless alloys (which exhibit modest yield ratios of $\sim 450\text{ MPa}$), quenched and tempered alloy steels achieve massive structural clamping capacities:
+- **Class 8.8:** $R_{p0.2} = 640\text{ MPa}, \ R_m = 800\text{ MPa}$
+- **Class 10.9:** $R_{p0.2} = 900\text{ MPa}, \ R_m = 1000\text{ MPa}$
+- **Class 12.9:** $R_{p0.2} = 1080\text{ MPa}, \ R_m = 1200\text{ MPa}$
+
+When dynamic shear loading, heavy cyclic vibration, or compact flange clamp loads govern, high-tensile carbon steel is structurally mandatory.
+
+## Avoiding catastrophic galvanic corrosion couples
+
+Never bolt aluminum chassis or copper busbars with uncoated carbon steel or stainless fasteners without isolating washers. In the galvanic electrochemical series:
+- **Stainless Steel in Contact with Aluminum:** Aluminum acts as an active sacrificial anode, corroding rapidly around the bolt hole. Anodized surfaces, non-conductive nylon/mylar isolators, or cadmium/zinc-nickel plating must be specified.
+- **Galvanized Steel in Contact with Carbon Steel:** Galvanically compatible with minimal galvanic potential divergence ($\Delta E < 0.15\text{ V}$).
+
+## Engineering selection summary matrix
+
+| Application Environment | Recommended Fastener | Specification Code | Key Engineering Precaution |
+| :--- | :--- | :--- | :--- |
+| **Indoor Clean Machinery** | Zinc-plated Class 8.8 | ISO 4014 / ISO 898-1 Class 8.8 | Verify wrench tightening torque |
+| **Outdoor Structural Steel** | Hot-Dip Galvanized Class 8.8 | ISO 10684 / EN 14399 HDG | Use overtapped 6AZ/6AX nuts |
+| **Marine & Coastal Splash** | Austenitic Stainless A4-80 | ISO 3506-1 Grade A4-80 | Apply anti-seize paste against galling |
+| **Heavy Dynamic Automotive** | Class 10.9 with Zn-Ni Plating | ISO 898-1 Class 10.9 + Zn-Ni | Mandate hydrogen bake baking |
+
+## Related Torqyx engineering tools
+
+To calculate tightening torque, proof preload limits, and friction assumptions for both metric carbon steel (8.8, 10.9) and stainless steel (A2, A4) fasteners, utilize the Bolt Sizing and Preload Calculator.
+
+<ToolLink href="/en/tools/bolt-calculator" title="Bolt Strength and Preload Calculator" description="Compute tightening torque, tensile stress area, and clamp preload across metric and stainless grades." badge="Calculator" />

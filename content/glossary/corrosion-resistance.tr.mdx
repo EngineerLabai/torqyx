@@ -1,29 +1,33 @@
 ---
 title: "Korozyon direnci"
-description: "Korozyon direnci, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+description: "Metalik malzemelerin korozyon direnci, paslanmaz çeliklerde PREN katsayısı, galvanik korozyon önleme ve tuz sisi dayanımı."
 date: "2026-05-09"
-tags: ["korozyon", "paslanmaz", "kaplama"]
+tags: ["korozyon","paslanmaz çelik","PREN","galvanik korozyon","kaplama"]
 category: "Malzeme"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Korozyon direnci, malzemenin kimyasal veya elektrokimyasal bozulmaya karşı dayanımıdır.
+Korozyon direnci, bir metalin veya alaşımın çevresindeki ortamla (nem, asit, tuz, oksijen) elektrokimyasal reaksiyona girerek oksitlenmeye, çözünmeye ve mekanik özelliklerini kaybetmeye karşı gösterdiği direnç kabiliyetidir.
 
 ## Neden önemli?
 
-Dış ortam, deniz ortamı ve kimyasal proseslerde ömür maliyetini belirler.
+Dünya genelinde üretilen çeliğin yaklaşık %3'ü korozyon sebebiyle kullanılamaz hale gelir. Korozyon, cıvatalarda gerilmeli korozyon çatlağına (SCC), boru hatlarında delinmelere ve köprü bağlantılarında feci yapısal çökmelere yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Pasivasyon Tabakası:** Paslanmaz çeliklerde en az %10.5 Krom (Cr) bulunması, yüzeyde kendiliğinden onarılan mikroskobik bir $Cr_2O_3$ oksit tabakası oluşturur.
+- **PREN Katsayısı (Pitting Resistance Equivalent Number):** Çukurcuk korozyonu direncini ölçmek için kullanılır:
+  $$PREN = %Cr + 3.3 cdot %Mo + 16 cdot %N$$
+  *(Standart AISI 304 için $PREN approx 18 - 20$, deniz suyuna dayanıklı AISI 316 için $PREN approx 23 - 25$, Super Duplex 2507 için $PREN > 40$ olmalıdır).*
+- **Galvanik Korozyon Önleme:** Elektrokimyasal seride birbirinden uzak iki farklı metal (örneğin alüminyum ile paslanmaz çelik) temas ettiğinde araya yalıtkan rondela konmalıdır.
 
-
-<Callout type="info" title="Örnek">
-316 paslanmaz çelik klorürlü ortamda 304 kaliteye göre daha güvenli olabilir.
+<Callout type="info" title="Mühendislik İpucu">
+Deniz kenarında veya klorlu ortamlarda AISI 304 çeliği çukurcuk korozyonuna uğrar; minimum %2 Molibden içeren AISI 316 veya Duplex paslanmaz çelikler seçilmelidir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Hızlı Referans Merkezi](/reference)
+- [Malzeme Kütüphanesi ve Kimyasal Dayanım](/tr/materials)
+- [Yüzey İşleme ve Kaplama Rehberi](/tr/guides/yuzey-isleme-yontemleri-rehberi)
+- [Standartlar Kütüphanesi](/tr/standards)

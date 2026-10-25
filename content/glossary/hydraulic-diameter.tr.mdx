@@ -1,32 +1,37 @@
 ---
-title: "Hidrolik çap"
-description: "Hidrolik çap, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Hidrolik çap (hydraulic diameter)"
+description: "Dairesel olmayan boru ve havalandırma kanallarında hidrolik çap ($D_h$), ıslak çevre hesabı ve Reynolds sayısı eşdeğerliği."
 date: "2026-05-09"
-tags: ["hidrolik çap", "kanal", "akış"]
+tags: ["hidrolik çap","kanal akışı","akışkanlar","Reynolds","basınç kaybı"]
 category: "Akışkanlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Hidrolik çap, dairesel olmayan kesitleri akış hesabında eşdeğer çapla temsil eder.
+Hidrolik çap ($D_h$), dairesel olmayan enkesitlere (dikdörtgen kanallar, eliptik borular, eşmerkezli boru halkaları) sahip akış hatlarında akış dinamiği ve sürtünme kaybı hesaplarını eşdeğer dairesel boru formüllerine uyarlamak için kullanılan karakteristik boyuttur.
 
 ## Neden önemli?
 
-Kanal, dikdörtgen boru ve açık kanal yaklaşımlarında kullanılır.
+Dikdörtgen bir havalandırma kanalında doğrudan genişlik veya yükseklik üzerinden hesap yapmak hidrolik sürtünmeyi %20'den fazla saptırır. Hidrolik çap doğru Reynolds sayısını ve sürtünme faktörünü bulmanın tek yoludur.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+Hidrolik çap akış kesit alanı ($A$) ve ıslak çevre ($P_{islak}$) üzerinden tanımlanır:
+$$D_h = rac{4 cdot A}{P_{islak}}$$
+- **Genişliği $a$, yüksekliği $b$ olan dikdörtgen kanal:**
+  $$D_h = rac{4 cdot (a cdot b)}{2(a + b)} = rac{2 cdot a cdot b}{a + b}$$
+- **İç çapı $D_i$, dış çapı $D_o$ olan konsantrik boru halkası (annulus):**
+  $$D_h = D_o - D_i$$
+- Reynolds sayısı ve Darcy sürtünme kaybı hesaplarında doğrudan $D_h$ kullanılır.
 
-
-<Formula label="Temel ifade">
-Hydraulic diameter = 4 x area / wetted perimeter
-</Formula>
-
-<Callout type="info" title="Örnek">
-Dikdörtgen kanalda alan ve ıslak çevre üzerinden hidrolik çap hesaplanır.
+<Callout type="info" title="Hesaplama Örneği">
+$a = 400	ext{ mm}$, $b = 200	ext{ mm}$ dikdörtgen hava kanalının hidrolik çapı:
+$$D_h = rac{2 	imes 400 	imes 200}{400 + 200} = rac{160,000}{600} approx mathbf{266.7	ext{ mm}}$$
+Akış hızı ve Reynolds hesabı bu eşdeğer çap üzerinden yapılır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

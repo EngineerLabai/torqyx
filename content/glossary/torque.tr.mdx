@@ -1,34 +1,37 @@
 ---
-title: "Tork"
-description: "Tork, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Tork (döndürme momenti)"
+description: "Tork formülü ($T = F \times r$), motor gücü ve devir sayısı ilişkisi ($P = T cdot omega$), burulma gerilmesi ve tork hesabı."
 date: "2026-05-09"
-tags: ["tork", "moment", "kuvvet"]
+tags: ["tork","döndürme momenti","güç","devir","şaft","Nm"]
 category: "Mekanik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Tork, bir kuvvetin bir eksen etrafında döndürme etkisidir.
+Tork ($T$), bir kuvvetin bir cismi belirli bir dönme ekseni veya merkez noktası etrafında döndürme eğilimini ifade eden mekanik döndürme momentidir. SI birim sisteminde Newton metre [$	ext{Nm}$] olarak ifade edilir.
 
 ## Neden önemli?
 
-Cıvata sıkma, mil tasarımı ve güç aktarımında temel büyüklüktür.
+Elektrik motorları, redüktörler ve tahrik milleri tork üreterek ve aktararak iş yapar. Şaft çaplarının burulma dayanımı, kamaların ezilme hesabı ve cıvataların sıkılması doğrudan tork değerine dayanır.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Temel Tork Formülü:** Kuvvet ($F$) ve dönme merkezine olan dik mesafe ($r$):
+  $$T = F cdot r quad [	ext{Nm}]$$
+- **Güç, Tork ve Devir Sayısı İlişkisi:**
+  $$P = T cdot omega = T cdot rac{2pi cdot n}{60} implies T = rac{9550 cdot P}{n}$$
+  *(burada $P$ mekanik güç [$	ext{kW}$], $n$ dönme devri [$	ext{rpm}$], $T$ torktur [$	ext{Nm}$]).*
+- **Burulma Kayma Gerilmesi:**
+  $$	au = rac{16 cdot T}{pi cdot d^3} le 	au_{em}$$
 
-
-<Formula label="Temel ifade">
-Torque = Force x radius
-</Formula>
-
-<Callout type="info" title="Örnek">
-10 N kuvvet 2 m koldan uygulanırsa tork 20 N m olur.
+<Callout type="info" title="Motor Torku Hesabı">
+$15	ext{ kW}$ gücünde ve $n = 1450	ext{ rpm}$ devirle dönen bir asenkron elektrik motorunun milindeki tork:
+$$T = rac{9550 	imes 15}{1450} approx mathbf{98.8	ext{ Nm}}$$
+Redüktör ile devir 10 kat düşürülürse ($145	ext{ rpm}$), tork yaklaşık 10 katına ($988	ext{ Nm}$) çıkar.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
-- [Mil Burulma Hesaplayıcı](/tr/tools/shaft-torsion)
-- [Cıvata Boyut ve Ön Yük Hesaplayıcı](/tr/tools/bolt-calculator)
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)

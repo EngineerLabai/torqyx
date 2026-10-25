@@ -1,30 +1,31 @@
-﻿---
-title: "Backlash"
-description: "Dişli çiftlerinde iki diş arasındaki boşluk ve montaj toleransı."
-date: "2026-01-15"
-tags: ["dişli", "terminoloji"]
-category: "Glossary"
+---
+title: "Dişli boşluğu (backlash)"
+description: "Dişli çarklarda ve tahrik mekanizmalarında diş boşluğu, pozisyonlama hassasiyeti, ısıl genleşme payı ve minimum boşluk hesabı."
+date: "2026-05-09"
+tags: ["dişli boşluğu","backlash","mekanizma","redüktör","pozisyonlama"]
+category: "Mekanik"
 draft: false
+readingTime: 4
 ---
 
-Backlash, dişliler arasındaki boşluk miktarını ifade eder. Bu boşluk, termal genleşme ve montaj toleransları için gereklidir.
+Dişli boşluğu (Backlash), birbiriyle kavraşan iki dişlinin çalışma esnasında temas etmeyen arka diş yanakları arasında kalan dairesel veya normal boşluktur. Dişlilerin sıkışmadan dönebilmesi için zorunlu bir mühendislik payıdır.
 
-<Formula label="Basit yaklaşım">
-Backlash = toplam boşluk / diş sayısı
-</Formula>
+## Neden önemli?
 
-<Callout type="success" title="İpuçları">
-Backlash artarsa ses ve titreşim artabilir. Düşük backlash ise yağlama koşullarını zorlayabilir.
+Boşluğun sıfır veya yetersiz olması ısıl genleşmeyle dişlerin birbirini sıkıştırmasına, yağ filminin yırtılmasına ve diş kırılmasına yol açar. Aşırı boşluk ise robotik ve CNC eksenlerinde pozisyonlama hatasına, yön değişimlerinde darbe sesine ve dinamik titreşime neden olur.
+
+## Mühendislik uygulaması ve standartlar
+
+ISO 21771 ve DIN 3967 standartlarına göre dişli boşluğu modüle ($m$) ve eksenler arası mesafeye ($a$) göre belirlenir:
+- **Minimum Diş Boşluğu ($j_{t,min}$):** Çalışma sıcaklığındaki ısıl genleşme farkını ($Delta a_{th} = a cdot Delta T cdot (alpha_{govde} - alpha_{disli})$) ve yağlama filmi payını karşılayacak seviyede tutulmalıdır.
+- **Boşluksuz Çözümler:** CNC döner tablalarında ve robot eklemlerinde backlash'i sıfıra indirmek için harmonik tahrik (strain wave gears), sikloit redüktörler veya ön yüklemeli çift pinyon (dual pinion) mekanizmaları kullanılır.
+
+<Callout type="info" title="Pratik Tasarım Kuralı">
+Genel sanayi dişlilerinde normal diş boşluğu genellikle $j_n approx 0.03 dots 0.05 cdot m$ (burada $m$ modüldür) formülüyle tayin edilir. Modül 4 dişli için tavsiye edilen boşluk $0.12 - 0.20	ext{ mm}$ aralığındadır.
 </Callout>
 
-## İlgili hesaplayıcılar ve rehberler
+## İlgili hesaplayıcılar ve kaynaklar
 
-<ToolLink
-  href="/tr/tools/gear-design/calculators/backlash-calculator"
-  title="Dişli Backlash hesaplayıcı"
-  description="Backlash aralığını hızlıca kontrol et."
-  badge="Hesaplayıcı"
-/>
-
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+- [Dişli Modülü ve Geometrisi Hesaplayıcı](/tr/tools/gear-module)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)

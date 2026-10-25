@@ -1,29 +1,32 @@
 ---
-title: "Salınım"
-description: "Salınım, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Salgı ve yalpalama (runout)"
+description: "Dairesel ve toplam salgı toleransları ($\nearrow$, $\\unicode{x2330}$), komparatör saati ile TIR ölçümü ve rotor balansına etkisi."
 date: "2026-05-09"
-tags: ["salınım", "mil", "döner ekipman"]
-category: "Tasarım"
+tags: ["salgı","yalpalama","GD&T","ASME Y14.5","komparatör","TIR"]
+category: "Tolerans"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Salınım, dönen bir yüzeyin referans eksene göre yalpalama miktarıdır.
+Salgı (Runout), dönel bir parçanın kendi referans ekseni etrafında $360^circ$ döndürülmesi sırasında yüzeyinin referans eksene göre gösterdiği radyal veya eksenel sapma (yalpalama) miktarıdır. İbreli komparatör saati (TIR - Total Indicator Reading) ile ölçülür.
 
 ## Neden önemli?
 
-Mil, rulman yatağı, dişli ve kasnaklarda titreşim ve aşınmayı etkiler.
+Döner millerde, volanlarda ve kasnaklarda salgı olması; merkezkaç kuvvetler, dinamik titreşim, kayışların kasnaktan atması, keçelerin erken yağ kaçırması ve yatak ömrünün tükenmesine sebep olur.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ASME Y14.5 ve ISO 1101 standartlarında iki tür salgı denetlenir:
+- **Dairesel Salgı (Circular Runout - $
+earrow$):** Parça döndürülürken komparatör tek bir dairesel kesitte sabit tutulur; dairesellik ve eşmerkezlilik sapmalarının bileşkesini denetler.
+- **Toplam Salgı (Total Runout - $\unicode{x2330}$):** Komparatör parça dönerken eksen boyunca boydan boya taranır; dairesellik, eşmerkezlilik, silindiriklik ve doğrusallık hatalarını aynı anda denetleyen en sıkı toleranstır.
 
-
-<Callout type="info" title="Örnek">
-Torna sonrası mil ucunda komparatörle toplam salınım kontrol edilebilir.
+<Callout type="info" title="Ölçüm İpucu">
+Radyal salgı milin ovalliğini ve kaçıklığını ölçerken, eksenel salgı (alın yalpalaması) mil faturasının dönme eksenine dikliğini denetler.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Döner Ekipmanda Dengeleme ve Titreşim Rehberi](/tr/guides/doner-ekipman-dengeleme-titresim-kontrolu)
 - [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
-- [Dişli Tasarımı](/tr/tools/gear-design)

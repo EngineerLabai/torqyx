@@ -1,29 +1,36 @@
 ---
-title: "Tolerans"
-description: "Tolerans, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "İmalat toleransı"
+description: "ISO 286 boyut ve geçme toleransları, temel sapmalar, izin verilen ölçü aralığı ve talaşlı imalat maliyet ilişkisi."
 date: "2026-05-09"
-tags: ["tolerans", "ölçü", "imalat"]
-category: "Tasarım"
+tags: ["tolerans","ISO 286","sapma","imalat","kalite"]
+category: "Tolerans"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Tolerans, bir ölçünün kabul edilebilir değişim aralığıdır.
+Tolerans ($T$), imal edilen bir parçanın teknik resimdeki nominal ölçüsünden sapmasına izin verilen üst limit ölçü ile alt limit ölçü arasındaki mutlak farktır ($T = 	ext{Üst Limit} - 	ext{Alt Limit}$).
 
 ## Neden önemli?
 
-Üretilebilirlik, montaj boşluğu ve maliyeti doğrudan belirler.
+Fiziksel dünyada hiçbir parça tam olarak sıfır hata ile nominal ölçüsünde işlenemez. Tolerans verilmediğinde imalatçı parçayı üretemez; gereğinden dar tolerans verildiğinde ise işleme maliyetleri üstel olarak artar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ISO 286-1 standardına göre tolerans sistemi:
+- **Tolerans Sınıfları (IT Kaliteleri):** IT01'den IT18'e kadar tanımlanır.
+  - $IT4 - IT5$: Yüksek hassasiyetli taşlama, mastarlar.
+  - $IT6 - IT7$: Hassas talaşlı imalat, rulman yuvaları, geçmeler.
+  - $IT8 - IT9$: Genel torna ve freze operasyonları.
+  - $IT11 - IT13$: Kaba döküm, dövme ve sac işleri.
+- **Tolerans Alanı Gösterimi:** Büyük harfler delikleri ($H7$), küçük harfler milleri ($h6$, $s6$) temsil eder.
+  - $50	ext{ H7}$: Nominal $50	ext{ mm}$, alt sapma $0$, üst sapma $+25 mu	ext{m}$ $implies [50.000dots 50.025	ext{ mm}]$.
 
-
-<Callout type="info" title="Örnek">
-25.00 plus minus 0.02 mm ölçüde toplam tolerans aralığı 0.04 mm olur.
+<Callout type="info" title="Maliyet Kuralı">
+Toleransı yarıya indirmek (örneğin $pm 0.1	ext{ mm}$'den $pm 0.05	ext{ mm}$'ye) tezgah işleme süresini ve kalite kontrol maliyetini yaklaşık **2 ila 3 kat** artırır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Hızlı Referans Merkezi](/reference)
-- [Fikstür Araçları](/fixture-tools)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Tolerans Zinciri ve GD&T Rehberi](/tr/guides/tolerans-zinciri-ve-gdt-rehberi)
+- [Press Fit ve Tolerans Seçim Rehberi](/tr/guides/press-fit-baglantilari-tolerans-secimi)

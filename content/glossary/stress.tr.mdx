@@ -1,33 +1,36 @@
 ---
-title: "Gerilme"
-description: "Gerilme, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Mekanik gerilme (stress)"
+description: "Mekanik gerilme türleri ($sigma = F/A$), çekme, basma, eğilme, burulma ve çok eksenli von Mises eşdeğer gerilmesi."
 date: "2026-05-09"
-tags: ["gerilme", "mukavemet", "malzeme"]
+tags: ["gerilme","çekme","basma","von Mises","mukavemet"]
 category: "Mekanik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Gerilme, iç kuvvetin kesit alanına oranıdır.
+Gerilme ($sigma$ veya $	au$), bir cismin uygulanan dış kuvvetlere, momentlere veya termal genleşmeye karşı kendi iç moleküler bağları arasında birim alana düşen iç direnç kuvvetidir. SI birim sisteminde Megapaskal [$	ext{MPa}$] veya [$	ext{N/mm}^2$] olarak tanımlanır.
 
 ## Neden önemli?
 
-Parçanın emniyetli çalışıp çalışmayacağını değerlendirmek için kullanılır.
+Bir parçanın kırılıp kırılmayacağını toplam kuvvet değil, gerilmenin büyüklüğü belirler. Kuvvet aynı kalsa bile kesit alanının küçülmesi gerilmeyi katlayarak parçayı akma veya kırılma sınırına taşır.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Normal Gerilme (Çekme / Basma):**
+  $$sigma = rac{F}{A} quad [	ext{MPa}]$$
+- **Eğilme Gerilmesi:** $sigma_b = rac{M_b}{W_b}$.
+- **Burulma Gerilmesi:** $	au = rac{T}{W_p}$.
+- **von Mises Eşdeğer Gerilmesi ($sigma_{vm}$):** Çok eksenli karmaşık yükler altındaki sünek metallerde eşdeğer gerilme:
+  $$sigma_{vm} = sqrt{sigma_x^2 - sigma_x cdot sigma_y + sigma_y^2 + 3	au_{xy}^2} le rac{R_{p0.2}}{S_f}$$
 
-
-<Formula label="Temel ifade">
-Stress = Force / Area
-</Formula>
-
-<Callout type="info" title="Örnek">
-1000 N yük 100 mm2 alana yayılırsa gerilme 10 MPa olur.
+<Callout type="info" title="Tasarım Kuralı">
+$F = 50	ext{ kN}$ çekme kuvveti taşıyan çelik bir çubukta kesit alanı $A = 250	ext{ mm}^2$ ise nominal çekme gerilmesi:
+$$sigma = rac{50,000	ext{ N}}{250	ext{ mm}^2} = mathbf{200	ext{ MPa}}$$
+Bu gerilme seçilen malzemenin emniyetli akma dayanımıyla ($R_e / S_f$) karşılaştırılır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Eğilme ve Sehim Hesaplayıcı](/tr/tools/bending-stress)
-- [Malzeme Kütüphanesi](/tr/
+- [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)

@@ -1,63 +1,80 @@
 ---
 title: "Makine öğesi ömrü, Wöhler eğrisi ve yorulma rehberi"
-description: "Tekrarlı yük altındaki miller, cıvatalar, kaynaklar ve yataklar için yorulma yaklaşımını hızlıca kurun."
+description: "Tekrarlı dinamik yük altında yorulma ömrü, Wöhler S-N diyagramı, Marin faktörleri, Goodman kriteri ve Miner kümülatif hasar hesabı."
 date: "2026-05-09"
-tags: ["yorulma", "Wöhler", "ömür", "makine elemanları"]
+tags: ["yorulma", "Wöhler", "ömür", "Goodman", "S-N eğrisi", "FKM", "DIN 50100"]
 category: "Makine Elemanları"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber, dinamik veya çevrimsel yük altında çalışan şaftlar, cıvatalar, kaynaklı gövdeler ve yayların yüksek çevrimli yorulma (HCF) doğrulaması için DIN 50100, FKM Kılavuzu ve Shigley makine tasarımı esas alınarak hazırlanmıştır. Kritik uçak, otomotiv ve basınçlı kap uygulamalarında tam ölçekli tezgah yorulma testleri yapılmalıdır.
 </Callout>
 
 ## Problem / Amaç
 
-Parça statik yükte güvenli görünse bile tekrarlı yük altında çatlak başlatabilir. Yorulma hesabı yük çevrimi, gerilme aralığı ve çentik etkisini birlikte ele alır.
+Mekanik arızaların %80'inden fazlası statik aşırı yükten değil, malzeme akma sınırının ($R_e$) çok altındaki gerilmelerde gerçekleşen dinamik yorulmadan (fatigue failure) kaynaklanır. Statik güvenlik faktörüne ($S \ge 1.5$) güvenerek dinamik gerilmeleri göz ardı etmek:
+- Çentik köklerinde mikro çatlakların sessizce ilerlemesine,
+- Parçanın hiçbir boyutsal akma veya haber vermeksizin aniden gevrek şekilde kopmasına (catastrophic brittle fracture),
+- Şaft ve rulman hatlarında zincirleme mekanik yıkımlara yol açar.
 
 ## Varsayımlar
 
-- Yük çevrimi ve ortalama gerilme yaklaşık bilinir.
-- Malzeme S-N veya Wöhler verisi bulunur.
-- Yüzey, boyut ve çentik etkileri düzeltme faktörüyle ele alınır.
+- Yüksek çevrimli yorulma (High Cycle Fatigue, $N > 10^4$ çevrim) rejimi geçerlidir ve plastik deformasyon lokal çentik kökleriyle sınırlıdır.
+- Malzemenin baz yorulma sınırı döner eğilme (RR Moore) testinden alınır ve Marin katsayılarıyla düzeltilir.
+- Ortalama gerilmenin yorulma sınırına etkisi Goodman veya Soderberg kriterleriyle modellenir.
+- Değişken genlikli yük spektrumlarında kümülatif hasar Palmgren-Miner doğrusal hasar kuralına uyar.
 
 ## Adım adım yöntem
 
-1. Yük çevrimini ve gerilme aralığını belirle.
-2. Malzemenin yorulma verisini seç.
-3. Çentik, yüzey ve boyut düzeltmelerini ekle.
-4. Güvenlik faktörünü yorulma için ayrı değerlendir.
-5. Kritik bölgede kalite kontrol veya test planı yaz.
+1. **Dinamik Gerilme Bileşenlerini Belirleyin:**
+   Tekrarlı gerilme döngüsünde maksimum ($\sigma_{max}$) ve minimum ($\sigma_{min}$) değerlerden genlik ($\sigma_a$) ve ortalama gerilme ($\sigma_m$):
+   $$\sigma_a = \frac{\sigma_{max} - \sigma_{min}}{2}, \quad \sigma_m = \frac{\sigma_{max} + \sigma_{min}}{2}$$
+   Gerilme oranı: $R = \frac{\sigma_{min}}{\sigma_{max}}$ *(Tam tersinir yükte $R = -1$, sıfırdan başlayan tekrarlı yükte $R = 0$)*.
+
+2. **Düzeltilmiş Yorulma Mukavemetini ($S_e$) Marin Yöntemiyle Bulun:**
+   Laboratuvar numunesi dayanımı ($S_e' \approx 0.5 \cdot S_{ut}$) gerçek parça koşullarına uyarlanır:
+   $$S_e = k_a \cdot k_b \cdot k_c \cdot k_d \cdot k_e \cdot S_e'$$
+   - $k_a$: Yüzey pürüzlülüğü faktörü (işlenmiş, taşlanmış, dövülmüş),
+   - $k_b$: Boyut faktörü ($d > 8\text{ mm}$ için $k_b \approx 1.24 \cdot d^{-0.107}$),
+   - $k_c$: Yük tipi faktörü (eğilme için 1.0, eksenel için 0.85, burulma için 0.577),
+   - $k_e$: Çentik duyarlılığı ve güvenilirlik faktörü ($k_e = 1 / K_f$).
+
+3. **Goodman Kriteri ile Güvenlik Faktörünü ($n_f$) Hesaplayın:**
+   Çekme mukavemeti $S_{ut}$ ve düzeltilmiş yorulma mukavemeti $S_e$ kullanılarak:
+   $$\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}} = \frac{1}{n_f} \implies n_f = \frac{1}{\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}}}$$
+   $n_f \ge 1.3 - 2.0$ koşulu sağlandığında parça sonsuz ömre ($N \ge 10^6 - 10^7$ çevrim) sahiptir.
+
+4. **Kademeli Yüklerde Miner Kuralı ile Ömür Tüketimini Hesaplayın:**
+   Farklı gerilme bloklarında harcanan çevrimler ($n_i$) ve o seviyedeki kırılma ömrü ($N_i$) için:
+   $$D = \sum_{i=1}^{k} \frac{n_i}{N_i} \le 1.0$$
+
+5. **Çözümlü Endüstriyel Mil Yorulma Örneği:**
+   AISI 4140 ıslah çeliğinden imal edilmiş bir redüktör giriş mili ($S_{ut} = 900\text{ MPa}$, $S_y = 650\text{ MPa}$), Marin düzeltmeleri yapılmış yorulma dayanımına ($S_e = 360\text{ MPa}$) sahiptir. Çalışma esnasında ölçülen gerilmeler $\sigma_{max} = 220\text{ MPa}$ ve $\sigma_{min} = -80\text{ MPa}$'dır:
+   - Gerilme genliği: $\sigma_a = \frac{220 - (-80)}{2} = \mathbf{150\text{ MPa}}$
+   - Ortalama gerilme: $\sigma_m = \frac{220 + (-80)}{2} = \mathbf{70\text{ MPa}}$
+   - Goodman güvenlik katsayısı:
+     $$\frac{1}{n_f} = \frac{150}{360} + \frac{70}{900} = 0.4167 + 0.0778 = 0.4945 \implies n_f = \mathbf{2.02}$$
+   - *Sonuç:* $n_f = 2.02 > 1.50$ olduğundan şaft sonsuz ömür bölgesinde güvenle çalışır.
 
 ## Sık hatalar
 
-- Statik güvenlik faktörünü yorulma için yeterli sanmak.
-- Kaynak dikişindeki çentik etkisini unutmak.
-- Yüzey pürüzlülüğünü yorulma dayanımından bağımsız düşünmek.
+- **Statik Emniyet Katsayısını Yorulma İçin Yeterli Görmek:** Bir şaft statik olarak 3 kat emniyetli görünürken yorulma katsayısı $0.8$ olabilir ve 50.000 çevrimde kırılabilir.
+- **Kademeli Kesitlerde Çentik Yarıçapını Küçük Bırakmak:** Şaft kademesinde $r/d$ oranının $0.05$ yerine $0.15$ yapılması gerilme yığılmasını yarı yarıya düşürür.
+- **Yüzey İşleme İzlerini ve Pürüzlülüğü İhmal Etmek:** Kaba tornalanmış bir yüzey, taşlanmış veya parlatılmış yüzeye göre yorulma dayanımını %35'e kadar düşürür.
+- **Korozyon ve Çevresel Etkileri Unutmak:** Korozif ortamda çelik malzemelerin net bir yorulma limiti ($S_e$) kalmaz; Wöhler eğrisi sürekli aşağıya doğru meyleder.
 
 ## İlgili hesaplayıcılar
 
-- [Mil Burulma Hesaplayıcı](/tr/tools/shaft-torsion)
-- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
+- [Mil Burulma ve Eşdeğer Gerilme](/tr/tools/shaft-torsion)
+- [Cıvata Mukavemeti ve Önyük Hesabı](/tr/tools/bolt-calculator)
 - [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
+- [Rulman Ömrü Hesaplayıcı (ISO 281)](/tr/tools/bearing-life)
 
-## İlgili sözlük terimleri
+## İlgili standartlar
 
-- [Yorulma](/tr/glossary/fatigue)
-- [Gerilme](/tr/glossary/stress)
-- [Güvenlik faktörü](/tr/glossary/factor-of-safety)
-
-## Kısa FAQ
-
-### Soru: Yorulma nedir?
-
-Tekrarlı yük altında çatlak oluşumu ve ilerlemesiyle parça hasarıdır.
-
-### Soru: Wöhler eğrisi ne gösterir?
-
-Gerilme seviyesi ile çevrim ömrü arasındaki ilişkiyi gösterir.
-
-### Soru: Yorulma için en kritik bölge neresidir?
-
-Çentik, kesit değişimi, kaynak ucu ve yüzey kusurları genellikle kritiktir.
+- **DIN 50100:** Malzeme Testleri - Sürekli Titreşim ve Yorulma Testi (Wöhler Testi).
+- **FKM Kılavuzu:** Analytical Strength Assessment of Mechanical Components (VDI).
+- **ISO 1099:** Metalik Malzemeler - Eksenel Kuvvet Kontrollü Yorulma Testi.
+- **Eurocode 3 (EN 1993-1-9):** Çelik Yapıların Yorulma Mukavemeti Doğrulaması.

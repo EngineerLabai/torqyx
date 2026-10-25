@@ -1,61 +1,83 @@
 ---
-title: "Tolerance stack-up and GD&T guide"
-description: "Evaluate how part dimensions affect assembly outcome with datum selection and geometric tolerancing examples."
+title: "Tolerance stack-up and GD&T guide: ASME Y14.5 and ISO 1101"
+description: "Tolerance stack-up analysis (Worst-Case and RSS), datum reference frames (3-2-1 rule), MMC/LMC bonus tolerance, and geometric tolerancing engineering guide."
 date: "2026-05-09"
-tags: ["GD&T", "tolerance", "datum", "assembly"]
+tags: ["GD&T", "tolerance", "datum", "ASME Y14.5", "ISO 1101", "tolerance stackup", "RSS"]
 category: "Tolerance"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+<Callout type="info" title="Engineering Usage Note">
+This guide details the methodology for 1D tolerance stack-up analysis, datum reference frame definition (3-2-1 rule), and Geometric Dimensioning & Tolerancing (GD&T) according to ASME Y14.5-2018 and ISO 1101 (GPS). In high-volume production, statistical RSS tolerance analysis must be applied to optimize machining tolerances without causing assembly failures.
 </Callout>
 
 ## Problem / Objective
 
-Dimensions that look correct one by one can create a poor assembly result. Tolerance stack-up and datum strategy define how parts come together.
+Even when individual component dimensions conform strictly to single-part drawings, assemblies frequently experience binding, interference, or excessive clearance during line integration. Neglecting formal tolerance stack-up analysis and GD&T causes severe engineering penalties:
+- Production line stoppages, costly manual rework, hand-fitting, and custom shimming,
+- Designers applying excessively tight bilateral tolerances ($\pm 0.02\text{ mm}$) out of fear, inflating machining and grinding costs by 300% to 500%,
+- Quality inspection rejections on CMM coordinate machines that do not reflect true mating part functional capability.
 
 ## Assumptions
 
-- Assembly function and critical dimension are defined.
-- Manufacturing tolerance capability is known.
-- Inspection fixture matches the datum strategy.
+- Components are rigid bodies (excluding free-state non-rigid sheet metal or elastomer gaskets).
+- For statistical tolerance analysis (RSS), production dimensions exhibit normal (Gaussian) distributions centered on nominals with process capability $C_p \ge 1.33$.
+- 1D linear stack-up along axial or radial assembly vectors.
 
 ## Step by step method
 
-1. Define the critical functional dimension.
-2. List dimensions in the tolerance chain.
-3. Separate worst-case and statistical approaches.
-4. Choose datums based on assembly function.
-5. Define measurement method in the control plan.
+1. **Identify the Functional Interface Gap (Assembly Closure Dimension):**
+   The assembly clearance, bearing end-play, gasket compression margin, or backlash defines the critical output dimension ($Y$).
+
+2. **Formulate the 1D Closed Loop Vector Chain:**
+   Define a positive direction along the vector path. Sum components contributing positively ($A_i$) and negatively ($B_j$):
+   $$Y_{nom} = \sum A_{i,nom} - \sum B_{j,nom}$$
+
+3. **Perform Worst-Case (WC) Stack-Up Analysis:**
+   Assume every contributing dimension simultaneously lands at its most adverse tolerance boundary:
+   $$T_{WC} = \sum_{i=1}^{n} |a_i| \cdot T_i$$
+   $$Y_{min} = Y_{nom} - \sum T_{neg}, \quad Y_{max} = Y_{nom} + \sum T_{pos}$$
+
+4. **Apply Root Sum Squares (RSS) Statistical Tolerancing:**
+   In mass production, the probability of all independent parts simultaneously hitting extreme tolerance limits is near zero. Assuming centered $3\sigma$ distributions:
+   $$T_{RSS} = \sqrt{\sum_{i=1}^{n} (a_i \cdot T_i)^2}$$
+   RSS statistical analysis permits widening individual manufacturing tolerances by **40% to 60%** while limiting assembly fallout to under 0.27% (3 Sigma).
+
+5. **Establish the Datum Reference Frame (3-2-1 Principle):**
+   - **Primary Datum:** Minimum 3 contact points constraining 3 degrees of freedom (1 translation, 2 rotations). Represents the primary mating seating plane.
+   - **Secondary Datum:** Minimum 2 contact points constraining 2 degrees of freedom. Typically a locating pin, rail, or keyway.
+   - **Tertiary Datum:** Minimum 1 contact point constraining the final rotational or translational degree of freedom.
+
+6. **Industrial Worked Example:**
+   A gearbox housing houses a bearing cartridge. Housing bore depth is $L_1 = 50.00 \pm 0.15\text{ mm}$, bearing outer ring width is $L_2 = 20.00 \pm 0.05\text{ mm}$, and spacer sleeve length is $L_3 = 28.00 \pm 0.08\text{ mm}$. Axial clearance ($Gap$):
+   - Nominal gap:
+     $$Gap_{nom} = 50.00 - 20.00 - 28.00 = \mathbf{2.00\text{ mm}}$$
+   - Worst-Case tolerance:
+     $$T_{WC} = 0.15 + 0.05 + 0.08 = \mathbf{0.28\text{ mm}}$$
+     $$Gap_{WC} = 2.00 \pm 0.28\text{ mm} \implies [1.72\text{ mm} \dots 2.28\text{ mm}]$$
+   - Statistical (RSS) tolerance:
+     $$T_{RSS} = \sqrt{0.15^2 + 0.05^2 + 0.08^2} = \sqrt{0.0225 + 0.0025 + 0.0064} = \sqrt{0.0314} = \mathbf{0.177\text{ mm}}$$
+     $$Gap_{RSS} = 2.00 \pm 0.177\text{ mm} \implies [1.823\text{ mm} \dots 2.177\text{ mm}]$$
+   - *Engineering Conclusion:* RSS analysis demonstrates that gap variation is restricted to $\pm 0.18\text{ mm}$ instead of $\pm 0.28\text{ mm}$, allowing the housing machining tolerance to be safely relaxed to $\pm 0.22\text{ mm}$ to reduce CNC cycle time.
 
 ## Common mistakes
 
-- Choosing drawing datums randomly.
-- Tightening every tolerance equally.
-- Thinking about measurement only after production.
+- **Selecting Arbitrary Datum Features:** Choosing drawing datums that do not correspond to actual physical assembly mating faces creates inspection data that is useless for predicting fit.
+- **Using RSS for Low-Volume / Prototype Runs:** For batches of 5 to 20 parts, normal Gaussian distributions cannot be guaranteed; Worst-Case tolerancing is mandatory.
+- **Omitting Maximum Material Condition (MMC - $\textcircled{\text{M}}$):** Failing to specify MMC modifiers deprives machinists of bonus tolerance as holes depart from minimum size, inflating scrap rates.
+- **Specifying Direct Coordinate ($\pm$) Tolerances on Hole Centers:** Plus-minus coordinate tolerancing generates square tolerance zones, whereas True Position defines a cylindrical zone offering 57% greater allowable tolerance area for identical functional clearance.
 
 ## Related calculators
 
-- [Quick Reference Center](/reference)
-- [Fixture Tools](/fixture-tools)
-- [Materials Library](/en/
+- [Tolerance Stack-Up & GD&T Lab](/en/tools/tolerance-lab)
+- [Fixture & Locating Tools](/fixture-tools)
+- [Unit Converter](/en/tools/unit-converter)
+- [Simple Stress Calculator](/en/tools/simple-stress)
 
-## Related glossary terms
+## Related standards
 
-- [Tolerance](/en/glossary/tolerance)
-
-## Quick FAQ
-
-### Question: What does tolerance stack-up show?
-
-It shows how multiple dimensional tolerances affect final clearance or interference.
-
-### Question: When is GD&T needed?
-
-It is needed when geometric relationship, orientation, or position is critical to function.
-
-### Question: How should a datum be selected?
-
-Use surfaces that locate the part in assembly and can be measured repeatedly.
+- **ASME Y14.5-2018:** Dimensioning and Tolerancing Standard.
+- **ISO 1101:** Geometrical Product Specifications (GPS) - Geometrical Tolerancing.
+- **ISO 286-1:** ISO System of Limits and Fits.
+- **ISO 5459:** Geometrical Product Specifications (GPS) - Datums and Datum Systems.

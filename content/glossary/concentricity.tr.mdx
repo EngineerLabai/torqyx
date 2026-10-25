@@ -1,29 +1,31 @@
 ---
-title: "Konsantriklik"
-description: "Konsantriklik, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Eşmerkezlilik (concentricity)"
+description: "ASME Y14.5 ve ISO 1101 standartlarında eşmerkezlilik, silindirik parçaların medyan eksen kontrolü ve salgı (runout) ile farkı."
 date: "2026-05-09"
-tags: ["konsantriklik", "eksen", "ölçüm"]
-category: "Tasarım"
+tags: ["eşmerkezlilik","GD&T","ASME Y14.5","salgı","koaksiyellik"]
+category: "Tolerans"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Konsantriklik, iki dairesel özelliğin merkezlerinin aynı eksende olma durumudur.
+Eşmerkezlilik (Concentricity), dönel bir yüzeyin tüm karşıt elemanlarının medyan noktalarının (eksenel merkez noktalarının), datum olarak seçilen referans eksenle ne derece çakıştığını denetleyen 3 boyutlu bir GD&T konum toleransıdır.
 
 ## Neden önemli?
 
-Dönen parçalarda dengesizlik, salınım ve montaj kalitesini etkileyebilir.
+Yüksek devirli millerde ve hassas dişli gövdelerinde eşmerkezlilikten sapma, dinamik dengesizliğe, santrifüj kuvvetlere, rulmanlarda aşırı titreşime ve dişli temas çizgisinin bozulmasına yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **ASME Y14.5 Standardı:** Eşmerkezlilik sembolü iç içe iki dairedir ($circledcirc$). Tolerans bölgesi datum ekseni etrafında silindirik bir alandır.
+- **Ölçüm Zorluğu:** Eşmerkezlilik parçanın yüzeyini değil, karşıt noktaların matematiksel orta noktasını denetlediği için CMM veya özel ölçüm probları gerektirir; ölçüm maliyeti yüksektir.
+- **Tasarım Tavsiyesi:** Parçanın dengesini veya temasını sağlamak için çoğu zaman eşmerkezlilik yerine ölçümü komparatörle son derece kolay olan **Dairesel Salgı (Circular Runout)** veya **Toplam Salgı (Total Runout)** tercih edilir.
 
-
-<Callout type="info" title="Örnek">
-Kaplin göbeği ve mil eksenleri uyumlu değilse titreşim artabilir.
+<Callout type="info" title="Tasarım İpucu">
+Yalnızca yüksek devirli hassas rotorlarda ($n > 10,000	ext{ rpm}$) kütle merkezi kaçıklığını denetlemek amacıyla eşmerkezlilik kullanılmalı; genel mekanik geçmelerde eşeksenlilik (koaksiyellik) veya dairesel salgı tercih edilmelidir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Döner Ekipmanda Dengeleme ve Titreşim Rehberi](/tr/guides/doner-ekipman-dengeleme-titresim-kontrolu)
 - [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
-- [Fikstür Araçları](/fixture-tools)

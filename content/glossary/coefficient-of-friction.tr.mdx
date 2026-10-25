@@ -1,31 +1,33 @@
 ---
 title: "Sürtünme katsayısı"
-description: "Sürtünme katsayısı, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+description: "Statik ve dinamik sürtünme katsayısı ($mu$), Coulomb sürtünme yasası, cıvata tork-önyük ilişkisi ve tribolojik yüzey etkileri."
 date: "2026-05-09"
-tags: ["sürtünme", "temas", "tork"]
+tags: ["sürtünme katsayısı","triboloji","Coulomb sürtünmesi","fren","cıvata torku"]
 category: "Mekanik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Sürtünme katsayısı, iki yüzeyin kaymaya karşı gösterdiği direnç oranıdır.
+Sürtünme katsayısı ($mu$), birbirine temas eden iki katı cisim arasındaki teğetsel sürtünme direnç kuvvetinin ($F_s$), yüzeyleri birbirine bastıran dik normal kuvvete ($F_n$) oranını temsil eden boyutsuz bir katsayıdır.
 
 ## Neden önemli?
 
-Cıvata torku, frenleme, kama ve kızak tasarımında sonucu güçlü etkiler.
+Cıvatalı bağlantılarda torkun %90'ı sürtünmeyi yenmeye harcanır. Frenlerde, kavramalarda ve pres geçmelerde sürtünme katsayısının doğru bilinmesi emniyetli güç aktarımının temelini oluşturur.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+Coulomb sürtünme modeline göre:
+$$F_s = mu cdot F_n$$
+- **Statik Sürtünme Katsayısı ($mu_s$):** Hareketi başlatmak için gereken eşik değerdir.
+- **Kinetik / Dinamik Sürtünme Katsayısı ($mu_k$):** Hareket devam ederken etkiyen değerdir ($mu_k < mu_s$).
+- **Cıvata Bağlantılarında K Katsayısı:** Tork formülü $T = K cdot F_p cdot d$ olup buradaki $K$ faktörü diş sürtünmesi ($mu_{dis}$) ve başaltı sürtünmesine ($mu_{bas}$) doğrudan bağlıdır. Yağsız çelikte $mu approx 0.14$, yağlı çelikte $mu approx 0.10$, PTFE kaplıda $mu approx 0.07$'dir.
 
-
-<Callout type="info" title="Örnek">
-Yağlama değişirse aynı cıvata torku farklı ön yük üretebilir.
+<Callout type="info" title="Mühendislik Uyarısı">
+Yağsız montaj için hesaplanan tork ile yağlı bir cıvatayı sıkarsanız sürtünme düşeceği için aynı torkta cıvataya %40 daha fazla ön gerilme biner ve cıvata kopabilir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Cıvata Boyut ve Ön Yük Hesaplayıcı](/tr/tools/bolt-calculator)
-- [Hızlı Referans Merkezi](/reference)
-- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
-- [Mil Burulma Hesaplayıcı](/tr/tools/shaft-torsion)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)

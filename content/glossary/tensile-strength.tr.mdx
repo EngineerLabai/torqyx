@@ -1,29 +1,37 @@
 ---
-title: "Çekme dayanımı"
-description: "Çekme dayanımı, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Çekme mukavemeti (tensile strength)"
+description: "Çekme mukavemeti ($R_m$), çekme deneyinde ulaşılan tepe mühendislik gerilmesi, cıvata mukavemet sınıfları ve malzeme sınırları."
 date: "2026-05-09"
-tags: ["çekme dayanımı", "malzeme"]
+tags: ["çekme mukavemeti","Rm","kopma dayanımı","çekme testi","ASTM E8"]
 category: "Malzeme"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Çekme dayanımı, malzemenin çekme altında taşıyabildiği en yüksek gerilme seviyesidir.
+Çekme mukavemeti ($R_m$ veya UTS), bir malzemenin eksenel çekme deneyi esnasında boyun verme (necking) başlamadan önce taşıyabildiği en yüksek mühendislik gerilmesidir. Malzemenin nihai mekanik dayanım sınırını temsil eder.
 
 ## Neden önemli?
 
-Kopma öncesi kapasiteyi gösterir, fakat tasarımda tek başına yeterli değildir.
+Statik tasarımda genellikle akma mukavemeti ($R_e$) esas alınsa da, darbe, patlama ve basınçlı kap hesaplarında nihai güvenlik çekme mukavemeti üzerinden belirlenir. Ayrıca cıvata kalite sınıfları doğrudan çekme mukavemetiyle kodlanır.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ISO 6892-1 ve ASTM E8 çekme testi standartlarına göre:
+$$R_m = rac{F_{max}}{S_0} quad [	ext{MPa}]$$
+- $F_{max}$: Çekme eğrisindeki tepe kuvvet [$	ext{N}$],
+- $S_0$: Numunenin başlangıç orijinal kesit alanı [$	ext{mm}^2$].
+- **Cıvata Mukavemet Kodları (ISO 898-1):**
+  - **8.8 Cıvata:** İlk rakam "8", nominal çekme mukavemetinin $R_m = 8 	imes 100 = mathbf{800	ext{ MPa}}$ olduğunu belirtir.
+  - **10.9 Cıvata:** $R_m = 10 	imes 100 = mathbf{1000	ext{ MPa}}$.
+  - **12.9 Cıvata:** $R_m = 12 	imes 100 = mathbf{1200	ext{ MPa}}$.
 
-
-<Callout type="info" title="Örnek">
-Bir malzeme yüksek çekme dayanımına sahip olsa bile akma sınırı düşükse kalıcı şekil değiştirebilir.
+<Callout type="info" title="Çözümlü Örnek">
+M16 (8.8 kalite) bir cıvatanın gerilme kesit alanı $A_s = 157	ext{ mm}^2$'dir. Bu cıvatanın kopabileceği teorik çekme yükü:
+$$F_{kopma} = R_m cdot A_s = 800	ext{ MPa} 	imes 157	ext{ mm}^2 = mathbf{125,600	ext{ N}} approx mathbf{125.6	ext{ kN}}$$
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Çekme Gerilmesi Hesaplayıcı](/tr/tools/simple-stress)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Malzeme Kütüphanesi ve Dayanım Değerleri](/tr/materials)

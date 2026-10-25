@@ -1,30 +1,31 @@
 ---
-title: "ASME"
-description: "ASME, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "ASME (Amerikan Mekanik Mühendisleri Topluluğu)"
+description: "ASME standartları, BPVC kazan ve basınçlı kap yönetmelikleri, ASME Y14.5 geometrik toleranslandırma ve borulama kodları."
 date: "2026-05-09"
-tags: ["ASME", "standart", "basınç"]
+tags: ["ASME","kazan ve basınçlı kaplar","GD&T","ASME Y14.5","borulama"]
 category: "Standartlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-ASME, mekanik mühendislik ve basınçlı ekipman standartlarıyla bilinen kuruluştur.
+ASME (American Society of Mechanical Engineers), mekanik mühendisliği alanında dünya çapında kabul gören teknik kodlar ve standartlar yayınlayan köklü bir meslek kuruluşudur. Özellikle basınçlı kaplar, nükleer tesisler, proses borulaması ve geometrik ürün şartnamelerinde küresel referans kabul edilir.
 
 ## Neden önemli?
 
-Kazan, basınçlı kap, borulama ve GD&T uygulamalarında referans olabilir.
+Yüksek basınç altında patlama riski taşıyan depolama tankları, buhar kazanları ve boru hatları ASME onaylı imalat ve kaynak prosedürleri olmadan uluslararası işletmeye alınamaz. Ayrıca teknik resim standardizasyonunda ASME Y14.5 küresel dildir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **ASME BPVC (Boiler and Pressure Vessel Code):** Section VIII Div 1 ve Div 2 basınçlı kap tasarım formülleri, izin verilen gerilmeler, kaynaklı ek verimleri ve tahribatsız muayene (NDT) şartlarını tanımlar.
+- **ASME B31 Serisi:** Endüstriyel borulama kodları (B31.1 Güç borulaması, B31.3 Kimyasal proses borulaması). Termal genleşme gerilmesi ve iç basınç et kalınlığı hesaplarını kurallar bağlar.
+- **ASME Y14.5:** Geometrik Boyutlandırma ve Toleranslandırma (GD&T) standardı; datum referans sistemleri ve geometrik tolerans sembollerinin resmi şartnamesidir.
 
-
-<Callout type="info" title="Örnek">
-ASME Y14.5 geometrik toleranslandırma için yaygın bir kaynaktır.
+<Callout type="info" title="Tasarım Kuralı">
+ASME B31.3'e göre et kalınlığı hesabı: $t = rac{P cdot D}{2(S cdot E + P cdot Y)} + c$ formülüyle yapılır ($S$: izin verilen gerilme, $E$: kaynak dikiş katsayısı, $c$: korozyon payı).
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Hızlı Referans Merkezi](/reference)
-- [Hidrolik Silindir Kuvvet ve Hız](/tr/tools/hydraulic-cylinder)
+- [Standartlar Kütüphanesi](/tr/standards)

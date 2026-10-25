@@ -1,29 +1,34 @@
 ---
-title: "Açıklık"
-description: "Açıklık, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Çalışma boşluğu (clearance)"
+description: "ISO 286 boşluklu geçmeler (H7/g6, H7/h6), radyal yatak çalışma boşluğu, yağ filmi kalınlığı ve ısıl genleşme payı."
 date: "2026-05-09"
-tags: ["açıklık", "geçme", "tolerans"]
-category: "Tasarım"
+tags: ["boşluk","tolerans","ISO 286","çalışma boşluğu","yataklama"]
+category: "Tolerans"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Açıklık, iki parça arasında kalan pozitif boşluktur.
+Çalışma boşluğu (Clearance), montaj halindeki bir delik ve mil çiftinde delik çapının mil çapından daima daha büyük olması durumunda aradaki pozitif boyutsal farktır. Parçaların birbirine göre serbestçe dönmesini veya kaymasını sağlar.
 
 ## Neden önemli?
 
-Dönme, kayma, montaj ve termal genleşme için gerekli olabilir.
+Döner yataklarda ve kayar burçlarda hidrodinamik yağ filminin oluşabilmesi ve parçaların ısıl genleşme ile sıkışmaması için belirli bir minimum boşluk zorunludur. Boşluğun aşırı büyük olması ise eksen kaçıklığına, vuruntuya ve titreşime yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ISO 286-1 geçme sisteminde boşluklu geçmeler (Clearance fits):
+- **H7/h6:** Sıfır boşluklu kayar geçme; elle rahat hareket eden, boşluksuz merkezleme gerektiren takımlar ve pimler.
+- **H7/g6:** Hassas dönme geçmesi; takım tezgahı milleri ve hassas mekanizmalar.
+- **H8/f7:** Genel makine mühendisliği döner yatak geçmesi; termal genleşmeye ve yağlamaya uygun çalışma boşluğu sağlar.
+- **Minimum ve Maksimum Boşluk Hesabı:**
+  $$C_{min} = D_{delik,min} - d_{mil,max}, quad C_{max} = D_{delik,max} - d_{mil,min}$$
 
-
-<Callout type="info" title="Örnek">
-Mil çapı delikten küçükse aradaki fark açıklık olarak değerlendirilir.
+<Callout type="info" title="Endüstriyel Kural">
+Hidrodinamik kaymalı yataklarda tavsiye edilen radyal boşluk oranı genellikle mil çapının binde biri mertebesindedir: $psi = rac{Delta d}{d} approx 0.001 dots 0.0015$.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Hızlı Referans Merkezi](/reference)
-- [Fikstür Araçları](/fixture-tools)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
+- [Standartlar Kütüphanesi](/tr/standards)

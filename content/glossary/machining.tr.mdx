@@ -1,29 +1,33 @@
 ---
-title: "Makineleme"
-description: "Makineleme, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Talaşlı imalat (machining)"
+description: "Geleneksel talaşlı imalat (torna, freze, matkap), kesme hızı ($v_c$), Taylor takım ömrü formülü ve işlenebilirlik katsayısı."
 date: "2026-05-09"
-tags: ["makineleme", "CNC", "talaş"]
+tags: ["talaşlı imalat","torna","freze","kesme hızı","takım ömrü"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Makineleme, malzemenin kesici takımla talaş kaldırılarak şekillendirilmesidir.
+Talaşlı imalat (Machining), ana iş parçasından kesici bir takım vasıtasıyla mekanik kesme kuvveti uygulanarak talaş şeklinde malzeme kaldırılması ve istenen boyutsal tolerans ile yüzey kalitesinin elde edildiği imalat yöntemidir.
 
 ## Neden önemli?
 
-Tolerans, yüzey kalitesi ve prototip üretimde temel süreçtir.
+Döküm veya dövme parçaların montaj yüzeyleri, rulman yuvaları ve vida dişleri yalnızca talaşlı imalat ile mikron mertebesinde hassasiyetle işlenebilir. Talaşlı imalat parça maliyetinin en büyük kalemidir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Temel Operasyonlar:** Tornalama (silindirik dönel işleme), Frezeleme (döner takım ile prizmatik işleme), Delik Delme ve Raybalama.
+- **Taylor Takım Ömrü Denklemi:** Kesme hızı ($v_c$) ile takımın aşınma ömrü ($T$ [dakika]) arasındaki ilişki:
+  $$v_c cdot T^n = C$$
+  *(Kesme hızının %20 artırılması takım ömrünü %50'den fazla düşürebilir).*
+- **Kesme Kuvveti ve Güç:** Kienzle formülüyle talaş kesme kuvveti ($F_c = k_{c1.1} cdot b cdot h^{1-m_c}$) ve tezgah motor gücü ($P_c = F_c cdot v_c / 60,000$) hesaplanır.
 
-
-<Callout type="info" title="Örnek">
-Torna ve freze işlemleri en yaygın talaşlı imalat örnekleridir.
+<Callout type="info" title="İmalat Kuralı">
+İşleme maliyetini düşürmek için parçada yalnızca çalışan yatak ve montaj yüzeylerine dar tolerans ($IT6 - IT7$) verilmeli; serbest yüzeyler kaba işleme toleransında ($IT11 - IT13$) bırakılmalıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Hızlı Referans Merkezi](/reference)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Malzeme Kütüphanesi ve İşlenebilirlik](/tr/materials)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

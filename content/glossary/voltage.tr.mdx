@@ -1,28 +1,35 @@
 ---
-title: "Voltaj"
-description: "Voltaj, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Elektriksel gerilim (voltaj)"
+description: "Elektriksel potansiyel farkı (Volt), Ohm yasası, tek faz ve üç faz ($400\text{ V}$) sistemler ve elektrik motoru beslemesi."
 date: "2026-05-09"
-tags: ["voltaj", "elektrik", "güç"]
+tags: ["gerilim","voltaj","elektrik","Ohm yasası","üç faz","motor"]
 category: "Elektrik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Voltaj, elektriksel potansiyel farkıdır.
+Elektriksel gerilim veya voltaj ($V$ veya $U$), bir elektrik devresinde iki nokta arasında birim elektrik yükünü hareket ettirmek için gereken elektriksel potansiyel farkıdır. SI birim sisteminde birimi Volt [$	ext{V}$]'tur.
 
 ## Neden önemli?
 
-Motor, sensör ve kontrol devresi seçiminde temel giriş değeridir.
+Elektrik motorlarının mil torku şebeke geriliminin karesiyle orantılıdır ($T propto V^2$). Gerilimdeki %10'luk bir düşüş motor torkunu yaklaşık %19 düşürerek motorun yük altında sıkışmasına ve aşırı akım çekerek yanmasına sebep olur.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Ohm Yasası:** Gerilim ($V$), akım ($I$) ve direnç ($R$) ilişkisi:
+  $$V = I cdot R$$
+- **Üç Fazlı Sanayi Şebekesi (400V / 230V):**
+  - Faz-Nötr Gerilimi: $V_{fn} = 230	ext{ V}$
+  - Faz-Faz (Hat) Gerilimi: $V_{ff} = sqrt{3} cdot 230	ext{ V} approx 400	ext{ V}$
+- **Üç Fazlı Motor Elektrik Gücü:**
+  $$P_{elektrik} = sqrt{3} cdot V cdot I cdot cosphi quad [	ext{W}]$$
 
-
-<Callout type="info" title="Örnek">
-24 V DC kontrol devresi, endüstriyel otomasyonda sık kullanılır.
+<Callout type="info" title="Akım ve Gerilim Dengesi">
+Güç sabitken ($P = V cdot I$) gerilim yükseltildiğinde akım düşer. Bu nedenle endüstriyel tesislerde kablo kesitlerini ve ısı kayıplarını düşürmek için 230V yerine 400V üç fazlı besleme tercih edilir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
+- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Temel Mühendislik Araçları](/tr/tools/basic-engineering)

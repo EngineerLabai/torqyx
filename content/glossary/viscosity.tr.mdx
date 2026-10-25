@@ -1,29 +1,38 @@
 ---
-title: "Viskozite"
-description: "Viskozite, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Viskozite (akışkanlık direnci)"
+description: "Dinamik ($mu$) ve kinematik ($\nu$) viskozite, cSt/cPoise birimleri, sıcaklıkla viskozite değişimi ve madeni yağ sınıflandırması."
 date: "2026-05-09"
-tags: ["viskozite", "akışkan", "pompa"]
+tags: ["viskozite","akışkanlar","dinamik viskozite","kinematik viskozite","cSt","yağlama"]
 category: "Akışkanlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Viskozite, akışkanın akmaya karşı gösterdiği iç dirençtir.
+Viskozite, bir akışkanın iç sürtünmesi sebebiyle akmaya ve kesme gerilmelerine karşı gösterdiği direnç kabiliyetidir. "Akışkanın koyuluğu" veya "ağdalığı" olarak bilinir.
 
 ## Neden önemli?
 
-Pompa gücü, basınç kaybı, yağlama filmi ve sıcaklık davranışını etkiler.
+Rulmanların ve dişlilerin yağlanmasında doğru viskoziteye sahip yağ seçilmezse metal-metale temas ve aşınma yaşanır. Boru hatlarında ve pompalarda ise viskozite sürtünme basınç kaybını ve gereken pompa motor gücünü doğrudan belirler.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Dinamik Viskozite ($mu$):** Kesme kuvveti ile hız gradyeni oranıdır: $	au = mu cdot rac{dv}{dy}$. Birimi Pascal-saniye [$	ext{Pa}cdot	ext{s}$] veya centipoise [$	ext{cP}$].
+- **Kinematik Viskozite ($
+u$):** Dinamik viskozitenin yoğunluğa oranıdır:
+  $$
+u = rac{mu}{ho} quad [	ext{m}^2	ext{/s}] quad (1	ext{ cSt} = 1	ext{ mm}^2	ext{/s})$$
+- **Sıcaklık Bağımlılığı (Viskozite İndeksi - VI):** Sıcaklık arttıkça sıvıların viskozitesi üstel olarak düşer. Örneğin ISO VG 46 hidrolik yağın viskozitesi $40	ext{ °C}$'de $46	ext{ cSt}$ iken $100	ext{ °C}$'de $6.8	ext{ cSt}$'ye düşer.
 
-
-<Callout type="info" title="Örnek">
-Soğuk yağın viskozitesi yükselir ve ilk çalışma torkunu artırabilir.
+<Callout type="info" title="Pratik Referanslar (20 °C)">
+- Su: $mu approx 1.0	ext{ cP}$ ($
+u approx 1.0	ext{ cSt}$)
+- Motor Yağı (SAE 30): $mu approx 100 - 300	ext{ cP}$
+- Gliserin: $mu approx 1400	ext{ cP}$
+- Bal: $mu approx 10,000	ext{ cP}$
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Hidrolik Silindir Kuvvet ve Hız](/tr/tools/hydraulic-cylinder)
+- [Pompa Türleri ve Seçim Rehberi](/tr/guides/pompa-turleri-secim-rehberi)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)

@@ -1,28 +1,31 @@
 ---
-title: "Haddeleme"
-description: "Haddeleme, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Metal haddeleme (rolling)"
+description: "Sıcak ve soğuk haddeleme imalat prosesleri, sac ve profil imalatı, tane yönlenmesi ve soğuk şekil sertleşmesi."
 date: "2026-05-09"
-tags: ["haddeleme", "sac", "profil"]
+tags: ["haddeleme","sac","profil","sıcak hadde","soğuk hadde"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Haddeleme, malzemenin merdaneler arasından geçirilerek inceltilmesi veya şekillendirilmesidir.
+Haddeleme (Rolling), metal kütüklerin veya levhaların birbirine ters yönde dönen iki silindirik merdane arasından geçirilerek kalınlığının azaltıldığı ve boyunun uzatıldığı en yaygın plastik şekil verme yöntemidir.
 
 ## Neden önemli?
 
-Sac, profil ve çubuk üretiminde yaygın bir temel prosestir.
+Dünya genelinde üretilen tüm metallerin %80'inden fazlası son formuna getirilmeden önce en az bir kez haddeleme prosesinden geçer. Çelik saclar, I-kirişler, raylar ve boru et kalınlıkları haddeleme ile üretilir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Sıcak Haddeleme (Hot Rolling):** Yeniden kristalleşme sıcaklığının üzerinde ($> 900 - 1200	ext{ °C}$) yapılır; düşük kuvvet gerekir, gözenekler kapanır ancak yüzeyde tufal (scale) oluşur ve toleranslar daha kabadır.
+- **Soğuk Haddeleme (Cold Rolling):** Oda sıcaklığında yapılır; pekleşme (iş sertleşmesi) mekanizması ile malzemenin akma ve çekme mukavemeti %30-50 artar, ayna gibi pürüzsüz yüzey ve dar tolerans elde edilir.
+- **Tane Yönlenmesi (Anizotropi):** Haddeleme yönündeki akma mukavemeti ve tokluk, enine yöne göre daha yüksektir; sac büküm kalıplarında büküm ekseni hadde yönüne dik planlanmalıdır.
 
-
-<Callout type="info" title="Örnek">
-Sıcak hadde malzeme yapısını, soğuk hadde ölçü ve yüzey kalitesini etkiler.
+<Callout type="info" title="Tasarım İpucu">
+Sac parçalarda büküm yaparken büküm çizgisi haddeleme yönüne paralel olursa dış kavis bölgesinde çatlama meydana gelir; büküm ekseni hadde liflerine $90^circ$ dik olmalıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
+- [Malzeme Kütüphanesi ve Dayanım Değerleri](/tr/materials)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Standartlar Kütüphanesi](/tr/standards)

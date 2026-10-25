@@ -1,62 +1,81 @@
 ---
-title: "Pump type selection guide"
-description: "Compare positive displacement and dynamic pumps by flow, pressure, viscosity, and service conditions."
+title: "Pump selection guide: centrifugal vs positive displacement"
+description: "Comparison of centrifugal and positive displacement pumps, hydraulic power sizing, NPSH calculations, and cavitation prevention engineering guide."
 date: "2026-05-09"
-tags: ["pump", "flow", "pressure", "viscosity"]
+tags: ["pumps", "centrifugal", "positive displacement", "NPSH", "cavitation", "hydraulic power"]
 category: "Fluids"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+<Callout type="info" title="Engineering Usage Note">
+This guide details the sizing and technology selection of industrial process pumps based on head requirements ($H$), net positive suction head ($NPSH$), viscosity derating, and fluid rheology in accordance with ISO 5199, ISO 9906, and API 610. For abrasive slurries or non-Newtonian polymer melts, specialized sealing and materials are required.
 </Callout>
 
 ## Problem / Objective
 
-Pump selection is more than meeting a target flow rate. Fluid viscosity, pressure loss, cavitation risk, and control method determine the right pump type.
+Selecting the wrong pump architecture degrades process efficiency and inflates operating and maintenance expenditures. Sizing driven purely by flow rate catalog ratings introduces severe liabilities:
+- Centrifugal pumps suffer catastrophic head and flow derating when handling viscous oils or slurries,
+- Inadequate net positive suction head generates vapor bubble implosions (cavitation), pitting impellers and causing severe vibration,
+- Positive displacement pumps operating against closed discharge valves cause instant overpressurization, line rupture, or motor burnout.
 
 ## Assumptions
 
-- The fluid is treated as single phase.
-- Pipe losses are approximately known.
-- Continuous operating point stays near the design point.
+- The fluid behaves as a single-phase Newtonian liquid (Hydraulic Institute viscosity correction factors apply for viscous oils).
+- System head losses, piping elevation changes, and friction head are established across minimum and maximum flow envelopes.
+- The operating point resides between 80% and 110% of the pump Best Efficiency Point (BEP).
 
 ## Step by step method
 
-1. Write the required flow and head.
-2. Check fluid viscosity and temperature.
-3. Compare positive displacement and centrifugal options.
-4. Review cavitation and NPSH margin.
-5. Choose valve control or speed control strategy.
+1. **Select Pump Architecture Based on Fluid Viscosity:**
+   - **Centrifugal Pumps (Radial / Mixed / Axial Flow):** Preferred for low-viscosity fluids ($\mu < 150\text{ cSt}$ / water, chemicals, light hydrocarbons), high flow capacity ($Q$), and moderate discharge heads.
+   - **Positive Displacement Pumps (Gear, Lobe, Progressive Cavity, Piston):** Mandatory for high-viscosity fluids ($\mu > 150\text{ cSt}$ / heavy oils, resins, slurries), metering duty, or high pressure ($P > 25\text{ bar}$) where flow must remain constant irrespective of discharge backpressure.
+
+2. **Compute Total Dynamic Head ($H$):**
+   Sum static elevation difference ($\Delta z$), differential pressure ($\Delta P / \rho g$), and total piping friction losses ($\sum h_f$):
+   $$H = \Delta z + \frac{P_{discharge} - P_{suction}}{\rho \cdot g} + \sum h_f \quad [\text{m}]$$
+
+3. **Determine Hydraulic and Motor Shaft Power:**
+   Given volumetric flow $Q$ [$\text{m}^3\text{/s}$], dynamic head $H$ [$\text{m}$], and liquid density $\rho$ [$\text{kg/m}^3$]:
+   $$P_h = \frac{\rho \cdot g \cdot Q \cdot H}{1000} \quad [\text{kW}]$$
+   Accounting for pump hydraulic efficiency ($\eta_p$) and motor safety margin ($S_m \approx 15\% - 20\%$):
+   $$P_m = \frac{P_h}{\eta_p} \cdot (1 + S_m)$$
+
+4. **Verify Available Net Positive Suction Head ($NPSH_A$):**
+   Evaluate absolute suction head above vapor pressure at the impeller inlet:
+   $$NPSH_A = \frac{P_{ambient} - P_{vapor}}{\rho \cdot g} \pm h_{static} - h_{f,suction}$$
+   To guarantee cavitation-free service, maintain a positive safety margin over vendor required $NPSH_R$:
+   $$NPSH_A \ge NPSH_R + 0.5\text{ m}$$
+
+5. **Industrial Worked Example:**
+   A cooling system requires $Q = 36\text{ m}^3\text{/h}$ ($0.01\text{ m}^3\text{/s}$) of clean water ($\rho = 1000\text{ kg/m}^3$) against a total dynamic head of $H = 45\text{ m}$. The selected radial centrifugal pump offers BEP efficiency $\eta_p = 0.72$ and $NPSH_R = 2.4\text{ m}$:
+   - Hydraulic power:
+     $$P_h = \frac{1000 \times 9.81 \times 0.01 \times 45}{1000} = \mathbf{4.41\text{ kW}}$$
+   - Shaft input power:
+     $$P_{shaft} = \frac{4.41}{0.72} = \mathbf{6.13\text{ kW}}$$
+   - Standard motor selection with 20% margin:
+     $$P_m = 6.13 \times 1.20 = 7.36\text{ kW} \implies \mathbf{7.5\text{ kW}}\text{ standard electric motor}$$
+   - Suction from an open atmospheric sump ($1.013\text{ bar}$) with water at 20 °C ($P_v = 0.0234\text{ bar}$), positive head $h_s = +2.0\text{ m}$, suction line loss $h_{f,suction} = 0.6\text{ m}$:
+     $$NPSH_A = \frac{101\,300 - 2340}{1000 \times 9.81} + 2.0 - 0.6 = 10.09 + 1.4 = \mathbf{11.49\text{ m}}$$
+   - $NPSH_A (11.49\text{ m}) \gg NPSH_R (2.4\text{ m}) + 0.5\text{ m}$, cavitation margin is fully satisfied.
 
 ## Common mistakes
 
-- Sizing only for maximum flow.
-- Ignoring viscosity impact on motor power.
-- Forgetting cavitation risk in the suction line.
+- **Omitting Pressure Relief Valves on Positive Displacement Pumps:** While centrifugal pumps can briefly run against a closed valve, PD pumps generate destructive pressures that rupture pipework or burn motors; integral PRVs are essential.
+- **Operating Far to the Left of the BEP:** Running below 60% of design flow triggers internal recirculation, thermal cavitation, and destructive radial bearing thrust.
+- **Neglecting Vapor Pressure Rise with Temperature:** At 85 °C, water vapor pressure spikes to $0.58\text{ bar}$; failure to provide pressurized suction leads to immediate vapor flashing.
+- **Matching Suction Pipe Diameter to Pump Suction Nozzle:** Suction piping must be sized one nominal diameter larger using an eccentric reducer (flat on top) to suppress air pocketing.
 
 ## Related calculators
 
 - [Pipe Pressure Loss Calculator](/en/tools/pipe-pressure-loss)
-- [Hydraulic Cylinder Force and Speed](/en/tools/hydraulic-cylinder)
+- [Power - Torque - Speed Calculator](/en/tools/torque-power)
+- [Hydraulic Cylinder Force and Flow](/en/tools/hydraulic-cylinder)
 - [Unit Converter](/en/tools/unit-converter)
 
-## Related glossary terms
+## Related standards
 
-- [Viscosity](/en/glossary/viscosity)
-- [Reynolds number](/en/glossary/reynolds-number)
-
-## Quick FAQ
-
-### Question: When is a centrifugal pump suitable?
-
-It is usually suitable for low to medium viscosity and variable flow duties.
-
-### Question: When should a positive displacement pump be used?
-
-It helps with high viscosity, precise dosing, or high pressure requirements.
-
-### Question: How can cavitation be reduced?
-
-Reduce suction losses, increase NPSH margin, and select the correct operating point.
+- **ISO 5199:** Technical Specifications for Centrifugal Pumps - Class II.
+- **ISO 9906:** Rotodynamic Pumps - Hydraulic Performance Acceptance Tests.
+- **API 610:** Centrifugal Pumps for Petroleum, Petrochemical, and Natural Gas Industries.
+- **Hydraulic Institute (HI):** ANSI/HI Centrifugal and Positive Displacement Standards.

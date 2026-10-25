@@ -1,63 +1,90 @@
 ---
-title: "Press fit bağlantılarında tolerans seçimi"
-description: "Sıkı geçme bağlantılarda tolerans, montaj kuvveti, yüzey pürüzlülüğü ve servis güvenliği için kontrol listesi."
+title: "Press fit bağlantılarında tolerans seçimi ve sıkı geçme hesabı"
+description: "ISO 286 tolerans sınıfları, DIN 7190 sıkı geçme basıncı, Lamé gerilme formülleri, montaj kuvveti ve ısıl montaj mühendislik rehberi."
 date: "2026-05-09"
-tags: ["press fit", "tolerans", "geçme", "montaj"]
+tags: ["press fit", "tolerans", "sıkı geçme", "ISO 286", "DIN 7190", "Lamé", "montaj"]
 category: "Tolerans"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber, kamasız ve sürtünme esaslı tork veya eksenel kuvvet aktaran silindirik sıkı geçme (interference fit) bağlantılarının ISO 286 ve DIN 7190-1 standartlarına uygun olarak tasarlanması için hazırlanmıştır. İnce cidarlı göbeklerde aşırı gerilme çatlamasını önlemek için von Mises eşdeğer gerilmesi akma sınırının altında tutulmalıdır.
 </Callout>
 
 ## Problem / Amaç
 
-Sıkı geçme bağlantıda fazla girişim montaj hasarı oluşturabilir, düşük girişim ise servis sırasında gevşemeye yol açar.
+Sıkı geçme (press fit / shrink fit), parça üzerinde kama yuvası veya cıvata deliği açmadan yüksek tork ve dinamik yorulma mukavemeti sağlayan en rijit mekanik bağlantı türüdür. Tolerans seçiminin yanlış yapılması iki ölümcül arızaya yol açar:
+- **Yetersiz Girişim ($\Delta_{min}$):** Servis esnasında temas basıncının düşmesiyle mil ve göbeğin birbirine göre kayması, fretting korozyonu ve bağlantının sıyrılması.
+- **Aşırı Girişim ($\Delta_{max}$):** Göbek malzemesinin akma sınırını aşarak radyal çatlaması, montaj sırasında yüzeylerin kaynaması (galling) veya milin aşırı basma gerilmesiyle büzülmesi.
 
 ## Varsayımlar
 
-- Mil ve delik malzemeleri elastik aralıkta kalır.
-- Yüzey pürüzlülüğü ve yuvarlaklık kontrol edilir.
-- Montaj sıcaklık farkı veya pres kuvveti planlanır.
+- Mil ve göbek elastik, izotropik ve homojen malzemeden (Hooke yasası) üretilmiştir.
+- Temas yüzeyi boyunca basınç ($p$) eksenel olarak üniform dağılır; kenar gerilme yığılmaları tasarım katsayısıyla karşılanır.
+- Yüzey pürüzlülüğü tepe noktaları montaj esnasında plastik olarak ezilerek teorik girişimi azaltır ($\Delta_{eff} < \Delta_{nominal}$).
+- Isıl montajda ısı transferi üniform kabul edilir ve parçada metalurjik faz değişimi sıcaklığı aşılmaz ($T < 250\text{ °C}$).
 
 ## Adım adım yöntem
 
-1. Çap ve yük aktarım ihtiyacını belirle.
-2. ISO geçme ailesinden başlangıç toleransı seç.
-3. Girişim aralığını minimum ve maksimum olarak hesapla.
-4. Montaj kuvveti veya ısıl montaj stratejisini yaz.
-5. Sökme, servis ve yüzey hasarı riskini değerlendir.
+1. **ISO 286-1 Standart Geçme Çiftini Belirleyin:**
+   - **H7/r6:** Orta sıkı geçme; sökülebilir dişli çarklar ve rulman iç bilezikleri.
+   - **H7/s6:** Standart ağır hizmet sıkı geçmesi; yüksek tork aktarımı, kalıcı montaj.
+   - **H7/u6:** Çok sıkı pres geçme; büyük torklar, yüksek radyal yükler.
+
+2. **Yüzey Ezilmesi Düzeltmeli Efektif Girişimi ($\Delta_{eff}$) Hesaplayın:**
+   Tornalanmış veya taşlanmış yüzey pürüzlülükleri ($R_z$ [$\mu\text{m}$]) montaj presinde kısmen ezilir (DIN 7190 formülü):
+   $$\Delta_{eff} = \Delta_{nominal} - 1.2 \cdot (R_{z,mil} + R_{z,delik}) \quad [\mu\text{m}]$$
+
+3. **Lamé Kalın Cidarlı Silindir Denklemiyle Temas Basıncını ($p$) Bulun:**
+   Mil ($d_i, d$) ve göbek ($d, D_o$) aynı çelik malzemeden ($E = 210\,000\text{ MPa}$, $\nu = 0.3$) imal edilmişse ve mil dolu ise ($d_i = 0$):
+   $$p = \frac{\Delta_{eff}}{d} \cdot \frac{E}{2} \cdot \left( 1 - \frac{d^2}{D_o^2} \right) \quad [\text{MPa}]$$
+
+4. **İletilebilecek Tork ($T$) ve Eksenel Tutma Kuvvetini ($F_{ax}$) Kontrol Edin:**
+   Temas boyu $L$, mil çapı $d$ ve sürtünme katsayısı ($\mu \approx 0.12 - 0.15$ kuru pres):
+   $$T = \frac{1}{2} \cdot \pi \cdot d^2 \cdot L \cdot p_{min} \cdot \mu \quad [\text{N}\cdot\text{m}]$$
+   $$F_{ax} = \pi \cdot d \cdot L \cdot p_{min} \cdot \mu \quad [\text{N}]$$
+
+5. **Göbek İç Çeperinde Maksimum von Mises Gerilmesini Doğrulayın:**
+   Göbeğin iç yarıçapında oluşan teğetsel gerilme en yüksek seviyededir:
+   $$\sigma_{t,max} = p_{max} \cdot \frac{D_o^2 + d^2}{D_o^2 - d^2}$$
+   von Mises eşdeğer gerilmesi:
+   $$\sigma_{vm} = \sqrt{\sigma_{t,max}^2 + \sigma_{t,max} \cdot p_{max} + p_{max}^2} \le \frac{R_e}{S_g}$$
+
+6. **Isıl Montaj (Shrink Fit) Isıtma Sıcaklığını Hesaplayın:**
+   Pres kullanmadan montaj boşluğu ($\delta_m \approx 0.001 \cdot d$) sağlayarak montaj için gereken sıcaklık artışı:
+   $$\Delta T = \frac{\Delta_{max} + \delta_m}{\alpha \cdot d}$$
+
+7. **Çözümlü Endüstriyel Sıkı Geçme Örneği:**
+   $d = 50\text{ mm}$ dolu çelik mil üzerine $D_o = 100\text{ mm}$ dış çaplı, $L = 60\text{ mm}$ boyunda C45 çelik göbek ($R_e = 360\text{ MPa}$) H7/s6 toleransıyla takılacaktır:
+   - Delik H7 ($0 / +25\ \mu\text{m}$), Mil s6 ($+43 / +59\ \mu\text{m}$).
+   - $\Delta_{min} = 43 - 25 = 18\ \mu\text{m}$, $\Delta_{max} = 59 - 0 = 59\ \mu\text{m}$.
+   - Taşlanmış yüzeylerde ezilme payı: $1.2 \times (3 + 3) \approx 7.2\ \mu\text{m}$.
+   - Net minimum girişim: $\Delta_{eff,min} = 18 - 7.2 = 10.8\ \mu\text{m} = 0.0108\text{ mm}$.
+   - Minimum temas basıncı:
+     $$p_{min} = \frac{0.0108}{50} \cdot \frac{210\,000}{2} \cdot \left(1 - \frac{50^2}{100^2}\right) = 0.000216 \times 105\,000 \times 0.75 = \mathbf{17.0\text{ MPa}}$$
+   - Minimum iletilebilir tork ($\mu = 0.14$):
+     $$T = 0.5 \times \pi \times 0.050^2 \times 0.060 \times (17.0 \times 10^6) \times 0.14 = \mathbf{560.7\text{ Nm}}$$
+   - $\Delta_{max}$ altında göbek teğetsel gerilmesi: $\sigma_t \approx 145\text{ MPa} < 360 / 1.5 = 240\text{ MPa}$ (Emniyetli).
+   - Isıl montaj için gereken sıcaklık farkı ($\alpha = 12 \times 10^{-6}\text{ 1/°C}$):
+     $$\Delta T = \frac{0.059 + 0.030}{12 \times 10^{-6} \times 50} \approx \mathbf{148\text{ °C}} \implies \text{Göbek 170 °C'ye ısıtılır.}$$
 
 ## Sık hatalar
 
-- Nominal çapı tolerans aralığı sanmak.
-- Yüzey pürüzlülüğünün gerçek girişimi azaltmasını unutmak.
-- İnce cidarlı parçadaki gerilmeyi kontrol etmemek.
+- **Yüzey Ezilme Kaybını Hesaba Katmamak:** Taşlanmamış kaba tornalanmış parçalarda yüzey tepeleri ezildiğinde efektif girişimin %40'ı yok olur ve bağlantı kayar.
+- **Kuru Pres Montajında Yağlayıcı Kullanıp Sürtünme Katsayısını Düşürmek:** Montajı kolaylaştırmak için sürülen gres yağı sürtünme katsayısını $0.15$'ten $0.06$'ya düşürerek tork kapasitesini %60 azaltır.
+- **Isıl Montajda Sıcaklığı 250 °C Üzerine Çıkarmak:** Islah edilmiş çelik gövdeler aşırı ısıtıldığında menevişlenir (temper dökülür) ve sertliklerini kaybeder.
+- **Montaj Pahlarını Çok Dik Açılı Yapmak:** Presleme ekseninde minimum $15^\circ - 20^\circ$ giriş pahı verilmezse kenarlar metali kazıyarak (shaving) yüzeyi bozar.
 
 ## İlgili hesaplayıcılar
 
-- [Hızlı Referans Merkezi](/reference)
-- [Fikstür Araçları](/fixture-tools)
+- [Mil Burulma ve Tork Kapasitesi](/tr/tools/shaft-torsion)
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Fikstür ve Merkezleme Araçları](/fixture-tools)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
 
-## İlgili sözlük terimleri
+## İlgili standartlar
 
-- [Tolerans](/tr/glossary/tolerance)
-- [Gerilme](/tr/glossary/stress)
-- [Güvenlik faktörü](/tr/glossary/factor-of-safety)
-
-## Kısa FAQ
-
-### Soru: Press fit ne zaman kullanılır?
-
-Boşluksuz, kompakt ve kaymaya dirençli bir bağlantı gerektiğinde kullanılır.
-
-### Soru: Isıl montaj ne sağlar?
-
-Geçici genleşme veya büzülme ile montaj kuvvetini düşürür.
-
-### Soru: En kritik tolerans hangisidir?
-
-Minimum girişim yük aktarımı için, maksimum girişim de montaj hasarı için kritiktir.
+- **ISO 286-1 / ISO 286-2:** ISO Tolerans ve Geçme Sistemi (Hole-basis / Shaft-basis).
+- **DIN 7190-1:** Sıkı Geçmelerin Hesabı ve Boyutlandırma Kuralları (Pres- ve Büzülme Geçmeler).
+- **ANSI B4.1:** Preferred Limits and Fits for Cylindrical Parts.

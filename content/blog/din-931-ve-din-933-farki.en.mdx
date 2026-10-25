@@ -1,0 +1,62 @@
+---
+title: "DIN 931 vs DIN 933: Partial Thread vs Full Thread Hex Bolts"
+description: "Understand the critical differences between DIN 931 (partially threaded) and DIN 933 (fully threaded) hex head bolts for shear and tension joints."
+date: "2026-06-24"
+tags: ["DIN 931 DIN 933 difference", "bolts", "standards", "mechanical engineering"]
+category: "Fasteners"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/en/blog/din-931-ve-din-933-farki"
+---
+
+<Image src="/images/blog/din-931-ve-din-933-farki.webp" alt="Technical diagram illustrating difference between DIN 931 partial thread and DIN 933 full thread bolts" width={1200} height={900} caption="Side-by-side comparison of partially threaded (DIN 931) and fully threaded (DIN 933) hex bolts." />
+
+## The Core Distinction: Unthreaded Shank vs Full-Length Thread
+
+DIN 931 and DIN 933 are the most prevalent metric hexagon head bolt specifications in global manufacturing. The fundamental geometric distinction is straightforward:
+- **DIN 931 (ISO 4014):** Features an unthreaded smooth shank extending from under the head, with threading applied only over a standardized portion of the nominal length.
+- **DIN 933 (ISO 4017):** Threaded continuously right up to the underside of the hex head (full thread).
+
+While this appears simple on paper, selecting between full-thread and partial-thread bolts significantly alters joint shear capacity, stress concentrations, alignment accuracy, and cyclic fatigue behavior.
+
+## When to Specify DIN 931 (Partial Thread)
+
+A partially threaded bolt provides substantial advantages in structural and precision shear joints:
+1. **Shear Plane on Solid Shank:** The unthreaded body provides a larger cross-sectional area ($A = \pi d^2 / 4$) compared to the reduced thread stress area ($A_s \approx 0.78 \times A$). Bearing against a smooth shank avoids notch stress concentrations in the shear plane.
+2. **Precision Alignment:** Solid shanks prevent bolt hole play and minimize joint slip in dowelled or fitted assemblies.
+3. **Fatigue Endurance:** Thread runout situated away from the interface plane increases dynamic fatigue life under fluctuating transverse loads.
+
+*Design Constraint:* The unthreaded shank length ($l - b$) must match the total clamped grip thickness. If the shank is too long, the nut bottom out against the thread runout before clamping preload is achieved.
+
+## When to Specify DIN 933 (Full Thread)
+
+Fully threaded bolts are the standard choice for versatile assembly and general construction:
+1. **Grip Thickness Flexibility:** Ideal for maintenance, variable plate stacks, and clamping varying thickness spacers without stocking multiple bolt lengths.
+2. **Tapped Blind Holes:** Essential when threading into tapped holes where maximum thread engagement is required close to the joint surface.
+3. **Tension-Dominated Joints:** In pure axial tension (e.g., pipe flanges, pressure vessel covers), thread location relative to the interface is less critical because shear stresses are negligible.
+
+## ISO Equivalents and Drawing Callouts
+
+In modern European and international engineering standards:
+- **DIN 931** corresponds closely to **ISO 4014**.
+- **DIN 933** corresponds closely to **ISO 4017**.
+
+*Procurement Best Practice:* An engineering bill of materials (BOM) should never call out "M12 bolt" in isolation. Always specify diameter, pitch, length, standard, property class, and plating:  
+`Hex Bolt M12 x 1.75 x 80, Grade 8.8, ISO 4014 (DIN 931), Zinc Flake ISO 10683`.
+
+## Related Torqyx Engineering Tool
+
+Verify fastener dimensions, thread pitches, and tensile stress areas across metric standards using our Fastener Database:
+
+<ToolLink href="/en/tools/bolt-database" title="Fastener Database" description="Quickly compare metric and imperial standard bolt dimensions, pitch, and tensile stress areas." badge="Database" />
+
+## Related Engineering Guides
+
+- [Bolt Head Styles and Drive Types](/en/guides/civata-basi-sekilleri-ve-turleri)
+- [Corrosion Resistance and Stainless Steel Fasteners](/en/guides/korozyon-direnci-paslanmaz-celik-secimi)
+
+## Reference Standards
+
+- **ISO 4014 / DIN 931:** Hexagon head bolts — Product grades A and B (partially threaded).
+- **ISO 4017 / DIN 933:** Hexagon head screws — Product grades A and B (fully threaded).
+- **ISO 898-1:** Mechanical properties of fasteners made of carbon steel and alloy steel.

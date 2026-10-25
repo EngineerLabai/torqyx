@@ -1,33 +1,38 @@
 ---
-title: "Elastisite modülü"
-description: "Elastisite modülü, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Elastisite modülü (Young modülü)"
+description: "Young elastisite modülü ($E$), malzemenin elastik rijitliği, Hooke yasası ($sigma = E cdot \u000barepsilon$), kiriş sehimi ve malzeme karşılaştırması."
 date: "2026-05-09"
-tags: ["elastisite", "malzeme", "sehim"]
+tags: ["elastisite modülü","Young modülü","rijitlik","Hooke yasası","sehim"]
 category: "Malzeme"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Elastisite modülü, malzemenin elastik rijitliğini gösterir.
+Elastisite modülü veya Young modülü ($E$), bir malzemenin elastik gerilme altında boyutsal deformasyona karşı gösterdiği iç rijitlik veya esnemezlik katsayısıdır. Hooke yasasının orantı sabitidir ($E = sigma / arepsilon$). SI birim sisteminde Gigapaskal [$	ext{GPa}$] veya [$	ext{N/mm}^2$] olarak ifade edilir.
 
 ## Neden önemli?
 
-Sehim, uzama ve titreşim davranışını doğrudan etkiler.
+Isıl işlem veya alaşımlama çeliğin akma dayanımını 3 kat artırabilir; ancak elastisite modülünü zerre kadar değiştirmez ($E approx 210	ext{ GPa}$ sabit kalır). Bir milin sehimini ve rijitliğini belirleyen tek şey malzemenin $E$ modülü ve kesit atalet momentidir ($I$).
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Hooke Yasası:** Tek eksenli gerilme altında:
+  $$sigma = E cdot arepsilon implies Delta L = rac{F cdot L_0}{E cdot A}$$
+- **Kiriş Sehimi Formülü:** Konsol bir kirişte sehim doğrudan $E$ modülüyle ters orantılıdır:
+  $$f = rac{F cdot L^3}{3 cdot E cdot I}$$
+- **Malzemelerin Tipik Elastisite Modülleri:**
+  - Karbon ve Alaşımlı Çelikler: $E approx 200 - 210	ext{ GPa}$
+  - Titanyum Alaşımları (Ti-6Al-4V): $E approx 110 - 114	ext{ GPa}$ (Çeliğin yaklaşık yarısı)
+  - Alüminyum Alaşımları: $E approx 70	ext{ GPa}$ (Çeliğin üçte biri)
+  - Gri Dökme Demir: $E approx 100 - 120	ext{ GPa}$
+  - Plastikler (PA6, POM): $E approx 2.5 - 3.5	ext{ GPa}$
 
-
-<Formula label="Temel ifade">
-E = Stress / Strain
-</Formula>
-
-<Callout type="info" title="Örnek">
-Çelik yaklaşık 210 GPa, alüminyum yaklaşık 70 GPa mertebesindedir.
+<Callout type="info" title="Tasarım Karşılaştırması">
+Çelik bir mili aynı geometriye sahip alüminyum bir mil ile değiştirirseniz, aynı yük altında alüminyum mil tam **3 kat daha fazla sehim** yapar!
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Eğilme ve Sehim Hesaplayıcı](/tr/tools/bending-stress)
+- [Eğilme Gerilmesi ve Kiriş Sehimi](/tr/tools/bending-stress)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Malzeme Kütüphanesi ve Rijitlik Değerleri](/tr/materials)

@@ -1,32 +1,32 @@
 ---
-title: "Güç faktörü"
-description: "Güç faktörü, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Güç faktörü (cos phi)"
+description: "Elektrik motorlarında ve endüstriyel tesislerde güç faktörü ($cosphi$), aktif, reaktif ve görünür güç dengesi ve kompanzasyon."
 date: "2026-05-09"
-tags: ["güç faktörü", "motor", "AC"]
+tags: ["güç faktörü","elektrik","cos phi","reaktif güç","motor"]
 category: "Elektrik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Güç faktörü, gerçek gücün görünür güce oranıdır.
+Güç faktörü ($cosphi$ veya PF), alternatif akım (AC) elektrik sistemlerinde şebekeden çekilen gerçek işi yapan aktif gücün ($P$ [$	ext{kW}$]), devredeki görünür güce ($S$ [$	ext{kVA}$]) olan boyutsuz oranıdır ($PF = P / S$).
 
 ## Neden önemli?
 
-AC motor ve tesis enerji kalitesi hesaplarında kullanılır.
+Asenkron motorlar ve kaynak makineleri manyetik alan oluşturmak için şebekeden endüktif reaktif güç ($Q$ [$	ext{kVAr}$]) çeker. Düşük güç faktörü kablolarda aşırı ısınmaya, gerilim düşümüne ve elektrik faturalarında yüksek reaktif ceza ödenmesine yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+Güç üçgeni ilişkisi:
+$$S = sqrt{P^2 + Q^2}, quad cosphi = rac{P}{S}$$
+- **Asenkron Motorlar:** Tam yükte tipik $cosphi approx 0.82 - 0.88$ seviyesindedir. Ancak motor düşük yükte (%25 yük) çalıştırıldığında $cosphi$ değeri $0.50$'nin altına düşer.
+- **Kompanzasyon:** Güç faktörünü $0.95 - 0.98$ seviyesine yükseltmek için sisteme paralel kondansatör grupları bağlanarak endüktif reaktif güç dengelenir.
 
-
-<Formula label="Temel ifade">
-Power factor = real power / apparent power
-</Formula>
-
-<Callout type="info" title="Örnek">
-Düşük güç faktörü aynı gerçek güç için daha yüksek akım gerektirebilir.
+<Callout type="info" title="Endüstriyel Kural">
+Bir motoru gereğinden çok büyük seçmek motorun sürekli yüksüz çalışmasına ve tesisin güç faktörünü aşağı çekerek reaktif enerji cezası üretmesine neden olur.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
+- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Elektriksel Hesaplama Araçları](/tr/tools/basic-engineering)

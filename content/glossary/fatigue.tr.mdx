@@ -1,33 +1,33 @@
 ---
-title: "Yorulma"
-description: "Yorulma, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Yorulma (fatigue)"
+description: "Dinamik yük altındaki makine elemanlarında metal yorulması, Wöhler S-N eğrisi, Marin faktörleri ve Goodman kırılma kriteri."
 date: "2026-05-09"
-tags: ["yorulma", "ömür", "çatlak"]
+tags: ["yorulma","Wöhler","ömür","Goodman","S-N eğrisi","çevrimsel yük"]
 category: "Mekanik"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Yorulma, tekrarlı yükler altında çatlak oluşumu ve ilerlemesidir.
+Yorulma (Fatigue), tekrarlı veya çevrimsel mekanik gerilmelere maruz kalan bir bileşenin, malzemenin statik akma dayanımının ($R_e$) çok altındaki gerilme seviyelerinde dahi mikro çatlak başlatarak zamanla kırılması olayıdır.
 
 ## Neden önemli?
 
-Statik olarak güvenli parçalar bile çevrimli yükte hasar görebilir.
+Mekanik makine arızalarının %80'inden fazlası dinamik yorulmadan kaynaklanır. Yorulma kırılması plastik akma veya boyutsal uzama uyarısı vermeden aniden ve gevrek biçimde gerçekleşir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+DIN 50100 ve FKM Kılavuzu standartlarına göre yorulma analizi:
+- **Wöhler (S-N) Eğrisi:** Gerilme genliği ($sigma_a$) ile kırılma çevrim sayısı ($N$) arasındaki ilişkiyi gösterir. Çeliklerde $N ge 10^6 - 10^7$ çevrimde yorulma dayanım sınırı ($S_e$) sabit bir platoya ulaşır (sonsuz ömür).
+- **Goodman Yorulma Kriteri:** Ortalama gerilme ($sigma_m$) ve genlik ($sigma_a$) etkisi:
+  $$rac{sigma_a}{S_e} + rac{sigma_m}{R_m} = rac{1}{n_f}$$
+- **Çentik Hassasiyeti:** Kademeli şaftlar, kama kanalları ve cıvata diş kökleri gerilme yığılması yaratarak yorulma ömrünü dramatik şekilde düşürür.
 
-## Tasarımda dikkat edilecek nokta
-
-Yorulma kontrolünde ortalama gerilme, yüzey kalitesi, çentik etkisi ve yük çevrim sayısı birlikte ele alınır. Keskin köşe, kaynak ucu, kama kanalı veya delik çevresi gibi bölgeler nominal gerilmeden daha yüksek yerel gerilme oluşturabilir. Bu nedenle statik emniyet katsayısı yeterli görünse bile kritik parçada S-N verisi, servis spektrumu ve bakım aralığı ayrıca gözden geçirilmelidir.
-
-<Callout type="info" title="Örnek">
-Dönen milde değişken eğilme gerilmesi yorulma kontrolü gerektirir.
+<Callout type="info" title="Tasarım Kuralı">
+Yorulma dayanımını artırmak için kesit geçişlerinde çentik yarıçapı büyütülmeli, taşlama kalitesi artırılmalı ve basma gerilmesi oluşturan bilyeli dövme (shot peening) uygulanmalıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Mil Burulma Hesaplayıcı](/tr/tools/shaft-torsion)
-- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
-- [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
+- [Makine Öğesi Ömrü ve Yorulma Rehberi](/tr/guides/makine-ogesi-omru-yorulma-rehberi)
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)

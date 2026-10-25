@@ -1,28 +1,31 @@
 ---
-title: "Taşlama"
-description: "Taşlama, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Hassas taşlama (grinding)"
+description: "Taşlama talaşlı imalat prosesi (silindirik, düzlem ve puntasız taşlama), yüzey pürüzlülüğü ($Ra le 0.4 mu\text{m}$) ve mikron toleranslar."
 date: "2026-05-09"
-tags: ["taşlama", "yüzey", "hassas işleme"]
+tags: ["taşlama","hassas işleme","yüzey pürüzlülüğü","Ra","rulman yuvası"]
 category: "İmalat"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Taşlama, aşındırıcı tanelerle hassas talaş kaldırma işlemidir.
+Taşlama (Grinding), aşındırıcı mineral taneciklerden (alüminyum oksit, silisyum karbür, CBN veya elmas) oluşan döner bir taşlama diski vasıtasıyla sertleştirilmiş metallerden mikron mertebesinde talaş kaldıran hassas yüzey işleme yöntemidir.
 
 ## Neden önemli?
 
-Sert parçalar, sıkı toleranslar ve iyi yüzey kalitesi için kullanılır.
+Isıl işlemle sertleştirilmiş ($> 50	ext{ HRC}$) çelikleri tornalama veya frezeleme ile işlemek takım aşınması ve esneme sebebiyle zordur. Taşlama, sertleşmiş parçalara $IT4 - IT6$ tolerans sınıfı ve ayna gibi yüzey kalitesi ($Ra le 0.2 - 0.4 mu	ext{m}$) kazandırır.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **Silindirik Taşlama (Cylindrical Grinding):** Rulman basma faturaları, hidrolik silindir milleri ve şaft kademelerinde yüksek eşmerkezlilik ve salgısız silindiriklik elde etmek için kullanılır.
+- **Puntasız Taşlama (Centerless Grinding):** Yüksek adetli pim, burç ve iğneli rulman millerinin merkezleme deliği açılmadan hızlı ve hassas işlenmesini sağlar.
+- **Yüzey Yanığı (Grinding Burn) Kontrolü:** Aşırı talaş veya yetersiz soğutma sıvısı durumunda parça yüzeyinde $900	ext{ °C}$'ye çıkan sıcaklık yeniden su verme (rehardening) veya menevişleşme yaparak yorulma çatlaklarına yol açar.
 
-
-<Callout type="info" title="Örnek">
-Rulman yatağı yüzeyleri taşlama ile hassas hale getirilebilir.
+<Callout type="info" title="İmalat Tavsiyesi">
+Rulman iç bileziğinin oturduğu millerde yüzey pürüzlülüğü $Ra le 0.4 mu	ext{m}$ olmalıdır; aksi halde montajda mikroskobik tepeler ezilerek geçme sıkılığını yok eder.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Hızlı Referans Merkezi](/reference)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
+- [Yüzey İşleme Rehberi](/tr/guides/yuzey-isleme-yontemleri-rehberi)

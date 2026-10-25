@@ -1,29 +1,32 @@
 ---
-title: "Referans yüzeyi"
-description: "Referans yüzeyi, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Referans yüzeyi (datum)"
+description: "ASME Y14.5 ve ISO 5459 standartlarına göre datum referans çerçevesi (DRF), 3-2-1 kuralı ve ölçüm referansları."
 date: "2026-05-09"
-tags: ["datum", "referans", "ölçüm"]
-category: "Tasarım"
+tags: ["datum","referans","GD&T","ASME Y14.5","koordinat"]
+category: "Tolerans"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Datum, ölçüm ve toleransların dayandığı referans yüzey, eksen veya noktadır.
+Datum, bir parçanın geometrik toleranslarını, konumunu ve oryantasyonunu tanımlamak ve ölçmek için teorik olarak tam kabul edilen referans düzlem, eksen, nokta veya çizgidir. İmalat ve kontrolde koordinat sisteminin başlangıcını oluşturur.
 
 ## Neden önemli?
 
-Montaj fonksiyonunu ve ölçüm tekrar edilebilirliğini belirler.
+Datumlar olmadan teknik resimdeki toleransların nereden başlayıp nerede bittiği bilinemez. Datumların rastgele seçilmesi, talaşlı imalatta parça bağlama fikstürü ile CMM kalite ölçüm cihazı arasında referans uyuşmazlığına yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ASME Y14.5 ve ISO 5459 standartlarına göre **Datum Referans Çerçevesi (DRF - 3-2-1 Kuralı)** ile parçanın 6 serbestlik derecesi kilitlenir:
+- **Birincil Datum (Primary Datum - A):** En az 3 temas noktasıyla 3 serbestlik derecesini (1 öteleme, 2 dönme) kilitler. Montajın oturduğu ana düzlemdir.
+- **İkincil Datum (Secondary Datum - B):** Birincil datuma dik, en az 2 temas noktasıyla 2 serbestlik derecesini kilitler.
+- **Üçüncül Datum (Tertiary Datum - C):** Her iki datuma dik, en az 1 temas noktasıyla son serbestlik derecesini kilitler.
 
-
-<Callout type="info" title="Örnek">
-Bir fikstürde parçanın oturduğu ana yüzey genellikle birincil datum olur.
+<Callout type="info" title="Montaj Kuralı">
+Teknik resimdeki datum harflerinin sırası ($[A|B|C]$) montaj sırasını temsil eder. Birincil datum daima parçanın montajda fiziksel olarak ilk temas ettiği en geniş ve rijit yüzey olmalıdır.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Fikstür Araçları](/fixture-tools)
-- [Hızlı Referans Merkezi](/reference)
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Tolerans Zinciri ve GD&T Rehberi](/tr/guides/tolerans-zinciri-ve-gdt-rehberi)
+- [Fikstür ve Merkezleme Araçları](/fixture-tools)

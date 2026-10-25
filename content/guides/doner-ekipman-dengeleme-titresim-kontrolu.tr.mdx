@@ -1,61 +1,83 @@
 ---
 title: "Döner ekipmanda dengeleme ve titreşim kontrolü"
-description: "Statik ve dinamik dengeleme, rezonans ve bakım izleme için mühendislik kontrol listesi."
+description: "Rotor statik ve dinamik balans ayarı, ISO 21940 balans kalitesi, ISO 20816 titreşim şiddeti ve rezonans kontrol mühendislik rehberi."
 date: "2026-05-09"
-tags: ["titreşim", "rezonans", "denge", "bakım"]
+tags: ["titreşim", "rezonans", "denge", "balans", "ISO 21940", "ISO 20816"]
 category: "Bakım"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber, elektrik motorları, fanlar, pompalar, türbinler ve şaft hatlarında döner dengesizliğin ve titreşim şiddetinin ISO 21940-11 ve ISO 20816-1 standartlarına uygun olarak doğrulanması amacıyla hazırlanmıştır. Yüksek devirli kritik makinelerde modal analiz ve iki düzlemli dinamik balans şarttır.
 </Callout>
 
 ## Problem / Amaç
 
-Dengesizlik, yatak ömrünü kısaltır ve bağlantı elemanlarında gevşeme oluşturabilir. Rezonans bölgesinde küçük kuvvetler büyük titreşim genliğine dönüşür.
+Döner makinelerde kütle merkezinin geometrik dönme ekseninden kaçık olması, devir sayısının karesiyle orantılı santrifüj kuvvetler yaratır ($F_c \propto \omega^2$). Kontrol altına alınmayan bu dengesizlik kuvvetleri:
+- Rulman yataklarının dinamik yük kapasitesini hızla tüketerek erken yatak yorulmasına (spalling / flaking),
+- Mil-göbek ve cıvatalı flanş bağlantılarında gevşeme ve dinamik yorulma çatlaklarına,
+- Makinenin doğal frekansıyla eşleştiğinde rezonans felaketlerine ve yapısal kırılmalara yol açar.
 
 ## Varsayımlar
 
-- Rotor çalışma hızı ve yatak düzeni bilinir.
-- Titreşim ölçümü tekrar edilebilir noktadan alınır.
-- Kritik hızlara yaklaşım servis koşulunda kontrol edilir.
+- Rotor rijit (rigid rotor) kabul edilir; çalışma hızı ilk kritik eğilme hızının (critical flexural speed) en az %30 altındadır ($n_{calisma} < 0.70 \cdot n_{kritik}$).
+- Yatak yuvaları ve şase rijitliği yön bağımsız ve doğrusal davranış gösterir.
+- Titreşim ölçümleri ISO 20816-1 kılavuzuna göre rulman yatak gövdelerinden radyal ve eksenel doğrultularda RMS hız ($v_{rms}$) olarak alınır.
 
 ## Adım adım yöntem
 
-1. Nominal devir ve çalışma hız aralığını yaz.
-2. Statik mi dinamik mi dengeleme gerektiğini belirle.
-3. Ölçüm noktalarını ve kabul limitini tanımla.
-4. Rezonans riskini hız taramasıyla kontrol et.
-5. Bakım planına trend izleme ekle.
+1. **Rotorun Geometrisine Göre Balans Türünü Seçin:**
+   - **Tek Düzlem (Statik Balans):** Disk tipi, ince yapılı rotorlar için ($L/D < 0.20$ ve $n < 1000\text{ rpm}$); volanlar, dar kayış kasnakları.
+   - **Çift Düzlem (Dinamik Balans):** Uzun silindirik rotorlar için ($L/D \ge 0.20$ veya yüksek devir); elektrik motoru rotorları, çok kademeli pompalar, endüstriyel fanlar.
+
+2. **ISO 21940-11 Kalite Sınıfını ($G$) Belirleyin:**
+   - **G6.3:** Genel endüstriyel fanlar, dişli kutusu milleri, tarım makineleri.
+   - **G2.5:** Elektrik motorları, takım tezgahı ana milleri, türbinler, kompresörler.
+   - **G1.0:** Yüksek hassasiyetli taşlama milleri, kayıt cihazları.
+
+3. **İzin Verilen Kalan Dengesizliği ($U_{per}$) Hesaplayın:**
+   Toplam rotor kütlesi $m$ [$\text{kg}$] ve açısal hız $\omega = \frac{2\pi \cdot n}{60}$ [$\text{rad/s}$] bilindiğinde:
+   $$U_{per} = 1000 \cdot \frac{G \cdot m}{\omega} \quad [\text{g}\cdot\text{mm}]$$
+   İki düzlemli balanslama yapılıyorsa bu değer düzlemlerin kütle merkezine mesafesine göre paylaştırılır (simetrik ise $U_1 = U_2 = U_{per} / 2$).
+
+4. **Dengesizlik Santrifüj Kuvvetini Doğrulayın:**
+   Radyal yataklara iletilen dinamik kuvvet:
+   $$F_c = m_u \cdot r \cdot \omega^2 = \frac{U_{per}}{1000} \cdot \omega^2 \quad [\text{N}]$$
+
+5. **ISO 20816 Titreşim Şiddeti Seviyelerini Kontrol Edin:**
+   10 Hz - 1000 Hz frekans bandında ölçülen RMS hız ($v_{rms}$ [$\text{mm/s}$]):
+   - **Bölge A (Yeni/Mükemmel):** $v_{rms} < 1.4\text{ mm/s}$ (Orta boy motorlar için)
+   - **Bölge B (Kabul Edilebilir Sürekli Çalışma):** $1.4 \le v_{rms} \le 2.8\text{ mm/s}$
+   - **Bölge C (Sınırlı İzin - Bakım Planlanmalı):** $2.8 < v_{rms} \le 4.5\text{ mm/s}$
+   - **Bölge D (Tehlikeli - Acil Durdurma):** $v_{rms} > 4.5\text{ mm/s}$
+
+6. **Çözümlü Endüstriyel Hesap Örneği:**
+   Kütlesi $m = 60\text{ kg}$ olan bir sanayi elektrik motoru rotoru $n = 3000\text{ rpm}$ devirde dönecektir. Kalite sınıfı G2.5 seçilmiştir:
+   - Açısal hız: $\omega = \frac{2\pi \times 3000}{60} = \mathbf{314.16\text{ rad/s}}$
+   - İzin verilen toplam artık dengesizlik:
+     $$U_{per} = 1000 \cdot \frac{2.5 \times 60}{314.16} = \mathbf{477.5\text{ g}\cdot\text{mm}}$$
+   - İki simetrik balans düzlemi için düzlem başına:
+     $$U_1 = U_2 = \frac{477.5}{2} = \mathbf{238.8\text{ g}\cdot\text{mm}}$$
+   - Balans cıvatalarının takıldığı yarıçap $r = 120\text{ mm}$ ise eklenecek/çıkarılacak azami tolerans kütlesi:
+     $$m_{ek} = \frac{238.8}{120} = \mathbf{1.99\text{ gram}}$$
 
 ## Sık hatalar
 
-- Tek düzlem dengelemenin her rotor için yeterli olduğunu sanmak.
-- Titreşim sensörünü farklı noktalarda karşılaştırmak.
-- Temel gevşekliğini rotor arızası sanmak.
+- **Uzun Rotorları Tek Düzlemde Balanslamaya Çalışmak:** Milin iki ucundaki moment dengesizliğini (couple unbalance) göz ardı etmek, devir yükseldiğinde yatakları hızla dağıtır.
+- **Şase Gevşekliği ve Hizalama Hatasını Rotor Dengesizliğiyle Karıştırmak:** Titreşim analizi yapılmadan balans ağırlığı eklemek sorunu çözmez; açısal veya paralel eksen kaçıklığı (misalignment) 2X devir frekansında tepe yapar.
+- **Kritik Hız Geçişinde Rezonansı Fark Etmemek:** Rotor devri kritik hıza yaklaştığında genlik katlanarak büyür; geçiş süresi frekans invertörü ile hızla aşılmalıdır.
+- **Rotor Isıl Genleşmesinden Kaynaklanan Eğrilmeyi Unutmak:** Soğuk halde dengelenen türbin veya fanlar çalışma sıcaklığında distorsiyona uğrayıp termal unbalance oluşturabilir.
 
 ## İlgili hesaplayıcılar
 
-- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
+- [Rulman Ömrü Hesaplayıcı (ISO 281)](/tr/tools/bearing-life)
 - [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
-- [Kalite Araçları](/quality-tools)
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
+- [Kalite ve Hata Analizi Araçları](/quality-tools)
 
-## İlgili sözlük terimleri
+## İlgili standartlar
 
-- [Yorulma](/tr/glossary/fatigue)
-
-## Kısa FAQ
-
-### Soru: Statik dengeleme ne zaman yeterlidir?
-
-Dar ve düşük hız etkili rotorlar için yeterli olabilir.
-
-### Soru: Dinamik dengeleme ne sağlar?
-
-İki düzlem etkisini hesaba katarak uzun veya hızlı rotorları daha doğru dengeler.
-
-### Soru: Rezonans nasıl anlaşılır?
-
-Belirli hızda titreşim hızlı yükselir ve hız değişince düşer.
+- **ISO 21940-11:** Mekanik Titreşim - Rotor Dengeleme Kalitesi ve Kalan Dengesizlik Değerlendirmesi.
+- **ISO 20816-1 / ISO 10816:** Dönen Makinelerin Titreşim Şiddeti Ölçüm ve Değerlendirme Standartları.
+- **API 610 / API 670:** Ağır Hizmet Santrifüj Pompaları ve Döner Ekipman Titreşim Koruma Sistemleri.

@@ -1,29 +1,32 @@
 ---
-title: "Paralellik"
-description: "Paralellik, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Paralellik (parallelism)"
+description: "ASME Y14.5 ve ISO 1101 standartlarında paralellik toleransı ($//$), yüzey ve eksen paralelliği, komparatörle kontrol yöntemleri."
 date: "2026-05-09"
-tags: ["paralellik", "GD&T", "ölçüm"]
-category: "Tasarım"
+tags: ["paralellik","GD&T","ASME Y14.5","yönelim","datum"]
+category: "Tolerans"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Paralellik, iki yüzey veya eksenin aralarındaki mesafeyi sabit tutma gereksinimidir.
+Paralellik (Parallelism), teknik resimlerde bir yüzeyin, eksenin veya orta düzlemin, datum olarak belirlenen referans bir düzleme veya eksene olan yönelim sapmasını denetleyen bir GD&T oryantasyon toleransıdır. Sembolü iki eğik paralel çizgidir ($//$).
 
 ## Neden önemli?
 
-Kızak, tabla, fikstür ve yatak yüzeylerinde temas kalitesini belirler.
+Lineer kızaklarda, hidrolik silindir bağlama plakalarında ve pres tablalarında paralellikten sapma olması, mekanizmanın sıkışmasına (binding), lineer araba bilyalarının ezilmesine ve kılavuzların tek taraflı aşınmasına yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ASME Y14.5 ve ISO 1101 standartlarında:
+- **Yüzey Paralelliği:** Tolerans bölgesi, datum düzlemine teorik olarak paralel olan ve aralarındaki mesafe tolerans değeri ($t$) kadar olan iki paralel düzlemle sınırlandırılmıştır.
+- **Eksen Paralelliği:** Datum eksenine paralel olan silindirik bir tolerans bölgesidir.
+- **Ölçüm Yöntemi:** Datum yüzeyi pleyt üzerine oturtulur ve kontrol edilecek yüzey komparatör saatiyle taranarak toplam ibre sapması (FIR) ölçülür.
 
-
-<Callout type="info" title="Örnek">
-Freze tablasına paralel olmayan bir bağlama yüzeyi ölçü hatası oluşturabilir.
+<Callout type="info" title="Tasarım Notu">
+Paralellik toleransı daima parçanın kalınlık veya boy ölçü toleransından daha dar olmalıdır ($t_{paralellik} le T_{boyut}$); aksi halde boyutsal sınır zaten paralelliği kontrol eder.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
+- [Tolerans Zinciri ve GD&T Rehberi](/tr/guides/tolerans-zinciri-ve-gdt-rehberi)
 - [Fikstür Araçları](/fixture-tools)
-- [Hızlı Referans Merkezi](/reference)

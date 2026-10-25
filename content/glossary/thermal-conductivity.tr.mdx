@@ -1,33 +1,38 @@
 ---
-title: "Isıl iletkenlik"
-description: "Isıl iletkenlik, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Isıl iletkenlik (thermal conductivity)"
+description: "Isıl iletkenlik katsayısı ($k$), Fourier ısı iletim yasası, endüstriyel yalıtım malzemeleri ve eşanjör tasarımı."
 date: "2026-05-09"
-tags: ["ısı", "iletkenlik", "malzeme"]
+tags: ["ısıl iletkenlik","ısı transferi","Fourier","yalıtım","termodinamik"]
 category: "Termal"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Isıl iletkenlik, malzemenin ısıyı iletme yeteneğidir.
+Isıl iletkenlik ($k$ veya $lambda$), bir malzemenin sıcaklık farkı etkisi altında birim alandan ve birim kalınlıktan birim zamanda iletebildiği ısı enerjisi miktarını temsil eden temel termofiziksel özelliktir. SI birim sisteminde $[	ext{W/(m}cdot	ext{K)}]$ olarak tanımlanır.
 
 ## Neden önemli?
 
-Soğutucu, yalıtım ve sıcaklık gradyeni hesaplarında temel parametredir.
+Elektronik soğutucularda (heat sink) ve eşanjörlerde ısıl iletkenliğin yüksek olması istenirken; fırın gövdelerinde ve kızgın buhar borularında enerji kaybını durdurmak için ısıl iletkenliğin mümkün olduğunca düşük olması gerekir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+Fourier 1 boyutlu ısı iletim yasası:
+$$q = -k cdot rac{dT}{dx} implies Q = k cdot A cdot rac{T_{sicak} - T_{soguk}}{s} quad [	ext{W}]$$
+- $k$: Malzemenin ısıl iletkenliği [$	ext{W/(m}cdot	ext{K)}$],
+- $A$: Isı transfer alanı [$	ext{m}^2$], $s$: Et kalınlığı [$	ext{m}$].
+**Tipik Malzeme Değerleri (20 °C):**
+- Bakır: $k approx 390 - 400	ext{ W/(m}cdot	ext{K)}$ (mükemmel iletken)
+- Alüminyum (6082): $k approx 170 - 200	ext{ W/(m}cdot	ext{K)}$
+- Karbon Çeliği: $k approx 45 - 55	ext{ W/(m}cdot	ext{K)}$
+- Titanyum (Ti-6Al-4V): $k approx 7.2	ext{ W/(m}cdot	ext{K)}$ (çok düşük iletken)
+- Taş Yünü Yalıtımı: $k approx 0.035 - 0.040	ext{ W/(m}cdot	ext{K)}$ (yüksek yalıtım)
 
-
-<Formula label="Temel ifade">
-Heat flow = conductivity x area x temperature difference / thickness
-</Formula>
-
-<Callout type="info" title="Örnek">
-Alüminyum yüksek iletkenliğiyle ısı yaymada sık kullanılır.
+<Callout type="info" title="Yalıtım Örneği">
+$k = 0.04	ext{ W/(m}cdot	ext{K)}$ taş yünü ile yalıtılmış $s = 50	ext{ mm}$ ($0.05	ext{ m}$) kalınlığındaki bir boruda $Delta T = 100	ext{ °C}$ sıcaklık farkında birim alandan geçen ısı kaybı $q = rac{0.04}{0.05} 	imes 100 = mathbf{80	ext{ W/m}^2}$ seviyesine düşer.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
+- [Isı Yalıtımı ve Termal Genleşme Rehberi](/tr/guides/isi-yalitimi-termal-genlesme-rehberi)
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Malzeme Kütüphanesi ve Termal Özellikler](/tr/materials)

@@ -1,28 +1,31 @@
 ---
-title: "ANSI"
-description: "ANSI, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "ANSI (Amerikan Ulusal Standartlar Enstitüsü)"
+description: "ANSI standartlarının endüstriyel makine tasarımı, inç dişli bağlantı elemanları ve borulama sistemlerindeki rolü."
 date: "2026-05-09"
-tags: ["ANSI", "standart", "ABD"]
+tags: ["ANSI","standartlar","Amerikan standartları","bağlantı elemanları"]
 category: "Standartlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-ANSI, ABD standart sisteminde koordinasyon rolü olan kuruluştur.
+ANSI (American National Standards Institute), Amerika Birleşik Devletleri'nde endüstriyel ve teknik standartların geliştirilmesini koordine eden ve onaylayan ulusal akreditasyon kuruluşudur. Kendi başına teknik şartname yazmaktan ziyade ASME, ASTM ve SAE gibi uzman kuruluşların hazırladığı standartları denetler ve resmi ulusal norm haline getirir.
 
 ## Neden önemli?
 
-Ölçü, güvenlik ve ürün uyumluluğu dokümanlarında karşınıza çıkabilir.
+Kuzey Amerika pazarına veya Amerikan normlarına (ASME B1.1 inç dişler, ASME B16.5 boru flanşları) uygun ihracat projelerinde makine ve basınçlı ekipman güvenliğini temin etmek için ANSI standartlarına uyum zorunludur.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+- **ANSI/ASME B1.1:** Unified Inch Screw Threads (UNC kaba, UNF ince diş serileri). Metrik $60^circ$ diş profili ile benzer temel üçgen geometriye sahip olmakla birlikte vida adımı inç başına diş sayısı (TPI) ile tanımlanır.
+- **ANSI/ASME B16.5:** Çelik boru flanşları ve flanşlı bağlantı elemanları (Class 150, 300, 600, 900 basınç kademeleri).
+- **ANSI B4.1:** Silindirik parçalar için inç bazlı tolerans ve geçme (Running and Sliding fits, Locating fits, Force fits) sistemi.
 
-
-<Callout type="info" title="Örnek">
-ANSI sınıfı bir flanş basınç-sıcaklık sınıfıyla birlikte değerlendirilir.
+<Callout type="info" title="Pratik Tasarım Örneği">
+1/2"-13 UNC cıvata tanımında "1/2"" anma dış çapını ($12.7	ext{ mm}$), "13" ise bir inç boyundaki diş sayısını ifade eder. Metrik hatve karşılığı $P = 25.4 / 13 approx 1.954	ext{ mm}$'dir.
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Hızlı Referans Merkezi](/reference)
+- [Birim Dönüştürücü (İnç - Metrik)](/tr/tools/unit-converter)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)
+- [Standartlar Kütüphanesi](/tr/standards)

@@ -1,29 +1,35 @@
 ---
-title: "Akma dayanımı"
-description: "Akma dayanımı, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Akma mukavemeti (yield strength)"
+description: "Akma mukavemeti ($R_e$, $R_{p0.2}$), kalıcı plastik deformasyon eşiği, çekme diyagramı ve makine tasarımında izin verilen emniyetli gerilme."
 date: "2026-05-09"
-tags: ["akma", "dayanım", "tasarım"]
+tags: ["akma mukavemeti","Rp0.2","elastik sınır","plastik deformasyon","akma gerilmesi"]
 category: "Malzeme"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Akma dayanımı, kalıcı şekil değiştirmenin başladığı yaklaşık gerilme seviyesidir.
+Akma mukavemeti ($R_e$ veya $R_{p0.2}$), bir malzemenin uygulanan gerilme altında geri dönüşümlü (elastik) şekil değiştirmeden kalıcı (plastik) şekil değiştirmeye geçtiği kritik gerilme sınırıdır.
 
 ## Neden önemli?
 
-Birçok mekanik tasarımda izin verilen gerilme bu değerden türetilir.
+Makine elemanları (miller, dişliler, flanşlar) çalışma sırasında şekil değiştirmemeli, yük kalktığında orijinal boyutuna dönmelidir. Bu nedenle statik makine tasarımında izin verilen emniyetli gerilme daima akma mukavemetine göre belirlenir.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+ISO 6892 ve ASTM E8 çekme testlerinde:
+- **Belirgin Akma Gösteren Çelikler:** Üst akma ($R_{eH}$) ve alt akma ($R_{eL}$) sınırı görülür.
+- **Ofset Akma Mukavemeti ($R_{p0.2}$):** Belirgin akma göstermeyen alaşımlarda (paslanmaz çelik, alüminyum) çekme eğrisinde %0.2 (%0.002) kalıcı plastik uzamaya karşılık gelen gerilmedir.
+- **Tasarım Emniyet Kriteri:**
+  $$sigma_{em} = rac{R_{p0.2}}{S_f} quad (S_f ge 1.3dots 2.0)$$
 
-
-<Callout type="info" title="Örnek">
-S235 çelikte akma dayanımı tasarım kontrolünün temel girdilerinden biridir.
+<Callout type="info" title="Çelik Kaliteleri Karşılaştırması">
+- Yapı Çeliği (S235JR): $R_e ge 235	ext{ MPa}$
+- Islah Çeliği (C45): $R_e ge 360 - 430	ext{ MPa}$
+- Yüksek Mukavemetli Alaşımlı Çelik (42CrMo4): $R_e ge 650 - 900	ext{ MPa}$
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Eğilme ve Sehim Hesaplayıcı](/tr/tools/bending-stress)
+- [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
+- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)
+- [Malzeme Kütüphanesi ve Dayanım Değerleri](/tr/materials)

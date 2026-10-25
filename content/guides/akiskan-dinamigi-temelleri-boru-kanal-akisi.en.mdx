@@ -1,40 +1,76 @@
 ---
 title: "Fluid dynamics basics: pipe and duct flow"
-description: "A quick guide to laminar flow, turbulent flow, Reynolds number, hydraulic diameter, and pressure loss."
+description: "A comprehensive engineering guide to laminar and turbulent flow, Reynolds number, hydraulic diameter, Darcy-Weisbach pressure loss, and piping hydraulics."
 date: "2026-05-09"
-tags: ["fluids", "Reynolds", "pressure loss", "pipe"]
+tags: ["fluids", "Reynolds", "pressure loss", "pipe", "hydraulics"]
 category: "Fluids"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+<Callout type="info" title="Engineering Usage Note">
+This guide is designed for sizing and validating piping and ductwork systems, pressure drops, and pump/fan operational points. For industrial plants and high-pressure networks, adhere to DIN EN 10255 and ISO 5167 standards.
 </Callout>
 
 ## Problem / Objective
 
-In pipe and duct flow, velocity, diameter, viscosity, and roughness define the result together. Looking only at flow rate hides pressure loss and pump load.
+Sizing fluid transport systems based solely on volumetric flow rate ($Q$) is a common engineering mistake. Fluid viscosity, internal pipe diameter, velocity, and wall roughness together dictate the hydraulic friction. Failing to accurately identify the flow regime (laminar vs. turbulent) leads to:
+- Underpowered pumps or fans that fail to deliver the design flow,
+- Excessive flow velocities causing severe noise, pipe erosion, and water hammer hazards,
+- Overly low velocities that induce particulate settling and degraded heat transfer coefficients.
 
 ## Assumptions
 
-- Flow is treated as incompressible.
-- Fluid properties are selected at operating temperature.
-- Pipe or duct geometry is known.
+- The fluid exhibits Newtonian behavior and is treated as incompressible ($\rho \approx \text{constant}$).
+- Fluid properties (density $\rho$ and dynamic viscosity $\mu$) are evaluated at the bulk operating temperature.
+- Flow is fully developed and steady-state along the pipe or duct section.
+- Non-circular ducts are handled via the hydraulic diameter ($D_h$) formulation.
 
 ## Step by step method
 
-1. Calculate velocity from flow, diameter, and area.
-2. Use Reynolds number to identify flow regime.
-3. Select roughness and friction factor.
-4. Calculate loss with Darcy-Weisbach or a suitable method.
-5. Add elbow, valve, and entrance losses.
+1. **Calculate Flow Area and Mean Velocity:**
+   Given volumetric flow ($Q$ [$\text{m}^3\text{/s}$]) and pipe inside diameter ($D$ [$\text{m}$]):
+   $$v = \frac{4 \cdot Q}{\pi \cdot D^2}$$
+
+2. **Compute Hydraulic Diameter for Non-Circular Conduits:**
+   For rectangular or non-circular cross-sections with flow area $A$ and wetted perimeter $P_{wetted}$:
+   $$D_h = \frac{4 \cdot A}{P_{wetted}}$$
+
+3. **Evaluate the Reynolds Number:**
+   Determine the ratio of inertial to viscous forces:
+   $$Re = \frac{\rho \cdot v \cdot D_h}{\mu} = \frac{v \cdot D_h}{\nu}$$
+   - **$Re < 2300$:** Laminar flow regime (parabolic velocity profile).
+   - **$2300 \le Re \le 4000$:** Transitional flow regime.
+   - **$Re > 4000$:** Fully turbulent flow regime (flat velocity core with eddy dissipation).
+
+4. **Determine the Darcy Friction Factor ($f$):**
+   - In the laminar regime, friction is independent of surface roughness:
+     $$f = \frac{64}{Re}$$
+   - In the turbulent regime, calculate $f$ using the explicit Haaland approximation ($\varepsilon$: pipe roughness):
+     $$\frac{1}{\sqrt{f}} \approx -1.8 \cdot \log_{10}\left[ \left(\frac{\varepsilon / D}{3.7}\right)^{1.11} + \frac{6.9}{Re} \right]$$
+
+5. **Compute Straight Pipe Friction Loss (Darcy-Weisbach):**
+   The major pressure drop along length $L$ is:
+   $$\Delta P_{major} = f \cdot \frac{L}{D_h} \cdot \frac{\rho \cdot v^2}{2}$$
+
+6. **Add Minor Losses from Fittings and Valves:**
+   Sum the resistance coefficients ($K$) of all bends, valves, and transitions:
+   $$\Delta P_{total} = \Delta P_{major} + \sum K \cdot \frac{\rho \cdot v^2}{2}$$
+
+7. **Industrial Worked Example:**
+   Water at 20 °C ($\rho = 998\text{ kg/m}^3$, $\mu = 1.002 \times 10^{-3}\text{ Pa}\cdot\text{s}$) flows at $Q = 10\text{ m}^3\text{/h}$ ($0.00278\text{ m}^3\text{/s}$) through a 50 m commercial steel pipe DN50 ($D = 53\text{ mm}$, $\varepsilon = 0.045\text{ mm}$):
+   - Flow velocity: $v = \frac{4 \times 0.00278}{\pi \times 0.053^2} = \mathbf{1.26\text{ m/s}}$ *(Optimal liquid range: 1.0 - 2.0 m/s)*
+   - Reynolds number: $Re = \frac{998 \times 1.26 \times 0.053}{0.001002} = \mathbf{66\,480}$ *(Turbulent)*
+   - Relative roughness: $\varepsilon / D = 0.045 / 53 \approx 0.00085$
+   - Haaland equation yields: $f \approx 0.0224$
+   - Major head loss: $\Delta P_{major} = 0.0224 \times \frac{50}{0.053} \times \frac{998 \times 1.26^2}{2} = \mathbf{16\,740\text{ Pa}} \approx \mathbf{0.167\text{ bar}}$
 
 ## Common mistakes
 
-- Forgetting hydraulic diameter in duct calculations.
-- Skipping viscosity changes with temperature.
-- Calculating only straight pipe loss and missing local losses.
+- **Neglecting Hydraulic Diameter in Rectangular Ducting:** Taking an arithmetic average of width and height causes over 20% error in pressure drop prediction.
+- **Ignoring Viscosity Shift with Temperature:** For oils and glycols, viscosity drops by an order of magnitude between 20 °C and 80 °C; cold start motor loads will trip breakers if unverified.
+- **Exceeding Recommended Velocity Thresholds:** Velocity above 2.5 m/s in liquid lines produces pipe erosion and cavitation; suction lines must stay below 1.2 m/s to protect pump NPSH.
+- **Overlooking Minor Component Losses:** In compact mechanical skids with multiple elbows, check valves, and strainers, minor losses frequently exceed straight pipe friction.
 
 ## Related calculators
 
@@ -46,17 +82,5 @@ In pipe and duct flow, velocity, diameter, viscosity, and roughness define the r
 
 - [Reynolds number](/en/glossary/reynolds-number)
 - [Viscosity](/en/glossary/viscosity)
-
-## Quick FAQ
-
-### Question: What does Reynolds number do?
-
-It estimates whether flow behaves as laminar, transitional, or turbulent.
-
-### Question: What is hydraulic diameter?
-
-It represents non-circular ducts with an equivalent flow diameter.
-
-### Question: Why does pressure loss increase?
-
-Pressure loss rises with velocity, length, roughness, and local resistances.
+- [Laminar flow](/en/glossary/laminar-flow)
+- [Turbulent flow](/en/glossary/turbulent-flow)

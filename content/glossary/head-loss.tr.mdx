@@ -1,33 +1,36 @@
 ---
-title: "Basınç kaybı"
-description: "Basınç kaybı, mühendislik hesaplarında kullanılan temel bir kavramdır. Tanım, kullanım ve pratik örnek."
+title: "Yük kaybı (head loss)"
+description: "Boru hatlarında ve hidrolik devrelerde sürtünme yük kaybı ($h_f$), Darcy-Weisbach denklemi, armatür lokal kayıpları ve pompa gücü."
 date: "2026-05-09"
-tags: ["basınç kaybı", "boru", "pompa"]
+tags: ["yük kaybı","basınç kaybı","Darcy-Weisbach","akışkanlar","boru"]
 category: "Akışkanlar"
 draft: false
-readingTime: 3
+readingTime: 4
 ---
 
-Basınç kaybı, akış sırasında sürtünme ve lokal dirençlerle kaybedilen enerjiye karşılık gelir.
+Yük kaybı ($h_f$ veya $Delta H$), bir akışkanın boru, kanal veya hidrolik devrede akışı esnasında akışkanın iç viskoz sürtünmesi ve çeper pürüzlülüğü sebebiyle kaybettiği mekanik enerji miktarının sıvı sütunu yüksekliği [$	ext{mSS}$] cinsinden ifadesidir.
 
 ## Neden önemli?
 
-Pompa seçimi, enerji tüketimi ve proses kararlılığı için temel hesaptır.
+Pompa seçiminde debi ile birlikte basma yüksekliğini ($H$) belirleyen ana bileşen yük kaybıdır. Yük kayıplarının yanlış hesaplanması pompanın sistemi basamamasına veya aşırı büyük motor seçilerek enerji israf edilmesine yol açar.
 
-## Nasıl kullanılır?
+## Mühendislik uygulaması ve standartlar
 
-Tasarım kontrolünde önce ilgili yük, ölçü, malzeme veya akış koşulu belirlenir. Sonra bu terim, hesap formülündeki rolüne göre yorumlanır ve sınır değerlerle karşılaştırılır.
+Darcy-Weisbach denklemi düz borulardaki ana sürtünme yük kaybını ($h_f$) verir:
+$$h_f = f cdot rac{L}{D} cdot rac{v^2}{2g} quad [	ext{m}]$$
+- $f$: Darcy sürtünme faktörü (Laminer akışta $f = 64/Re$, türbülanslı akışta Colebrook veya Haaland formülü),
+- $L$: Boru hattı toplam boyu [$	ext{m}$],
+- $D$: Boru iç çapı [$	ext{m}$],
+- $v$: Akış hızı [$	ext{m/s}$], $g = 9.81	ext{ m/s}^2$.
+**Lokal / Minör Kayıplar ($h_{lokal}$):** Dirsekler, vanalar ve redüksiyonlar için kayıp katsayısı ($K$) kullanılarak toplanır:
+$$h_{lokal} = sum K cdot rac{v^2}{2g}$$
 
-
-<Formula label="Temel ifade">
-Darcy loss = friction factor x length / diameter x velocity head
-</Formula>
-
-<Callout type="info" title="Örnek">
-Uzun boru, dar çap ve çok sayıda dirsek basınç kaybını artırır.
+<Callout type="info" title="Hızın Karesi Etkisi">
+Boru çapı yarıya indirilirse akış hızı 4 katına, sürtünme kaybı ise hızın karesi ve çapın etkisiyle ($v^2/D$) tam **32 katına** çıkar!
 </Callout>
 
 ## İlgili hesaplayıcılar ve kaynaklar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Hidrolik Silindir Kuvvet ve Hız](/tr/tools/hydraulic-cylinder)
+- [Pompa Türleri ve Seçim Rehberi](/tr/guides/pompa-turleri-secim-rehberi)
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)

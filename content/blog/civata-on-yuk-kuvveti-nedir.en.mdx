@@ -1,0 +1,51 @@
+---
+title: "What is Bolt Preload Force and Why is it Critical?"
+description: "Understand bolt clamp load, why torque does not equal preload, the physics of bolted joints, and how to size tightening preload safely."
+date: "2026-06-28"
+tags: ["bolt preload", "fasteners", "bolted joint", "engineering calculation", "VDI 2230"]
+category: "Bolts"
+draft: false
+readingTime: 6
+canonical: "https://torqyx.com/en/blog/civata-on-yuk-kuvveti-nedir"
+---
+
+<Image src="/images/blog/civata-on-yuk-kuvveti-nedir.webp" alt="Technical diagram illustrating bolt clamp preload force and joint compression" width={1200} height={900} caption="Engineering diagram illustrating bolt elastic elongation and joint clamp preload." />
+
+## Preload defines the true structural function of a bolt
+
+In mechanical engineering, the primary objective of a threaded fastener is rarely to carry dynamic external service loads in direct unassisted tension. Instead, its true engineering purpose is to apply a controlled axial compressive clamping force (preload, $F_M$ or $F_p$) that squeezes the mating structural clamped components firmly together. During assembly torque tightening, the bolt shank elongates elastically like a stiff tension spring, while the clamped joint members compress like a compression spring.
+
+When an external working load is subsequently applied to a properly preloaded assembly, the joint interface absorbs the majority of the cyclic load by reducing its compressive clamp stress, rather than transferring it directly as cyclic tensile spikes onto the bolt. Consequently, the dynamic alternating stress amplitude experienced by the bolt remains a small fraction of the external load (typically only 5% to 15% according to the joint stiffness ratio $\Phi_K$). However, if initial preload is insufficient, the joint interface separates, transferring 100% of the dynamic working load onto the bolt, precipitating rapid fatigue fracture or vibration-induced loosening.
+
+## Torque and preload are fundamentally different engineering concepts
+
+In field maintenance, assembly technicians apply a tightening torque ($T$) with a calibrated torque wrench. Yet in mechanical engineering design, the required variable is the axial clamping force ($F_p$). While these are conventionally related via the basic short-form formula $T = K \cdot F_p \cdot d$, the torque coefficient ($K$-factor) is far from a fixed physical constant. 
+
+Frictional resistance across the thread flanks and underneath the bolt head or nut collar consumes approximately 85% to 90% of all applied input torque, leaving only 10% to 15% to stretch the bolt elastically. Variables including thread pitch accuracy, zinc electroplating, cadmium or PTFE coatings, burrs, surface roughness, and anti-seize lubricants alter friction coefficients drastically. Under identical wrench torque, a lubricated fastener can develop over 50% higher clamping force than an as-received dry phosphate bolt. For mission-critical joints, torque-angle tightening, ultrasonic elongation measurement, or direct hydraulic tensioning provide far superior preload repeatability.
+
+## Engineering criteria for selecting optimal clamp load
+
+Proper preload sizing maximizes joint friction resistance to transverse shear sliding, maintains compressive seal integrity in pressurized flanges, and stabilizes fatigue load distribution. However, over-tightening is equally hazardous. Excessive preload risks permanent plastic yielding during assembly, thread stripping, surface embedment into soft cast iron or aluminum castings, and flange distortion.
+
+In accordance with VDI 2230 guidelines, target assembly preload is generally specified between 70% and 90% of the fastener proof strength ($R_{p0.2} \cdot A_s$):
+$$F_{M,max} \le 0.90 \cdot R_{p0.2} \cdot A_s$$
+Sizing must account for bolt property class (e.g., 8.8, 10.9, 12.9), tensile stress area ($A_s$), joint resilience ($\delta_M$ and $\delta_P$), and thermal differential expansion between steel fasteners and clamped alloy housings.
+
+## Practical joint sizing procedure
+
+1. **Define Geometry and Material Classes:** Identify nominal fastener diameter ($d$), thread pitch ($P$), and ISO 898-1 property class.
+2. **Calculate Tensile Stress Area ($A_s$):** Use standard thread stress geometry rather than nominal shank cross-section:
+   $$A_s = \frac{\pi}{4} \cdot \left(\frac{d_2 + d_3}{2}\right)^2$$
+3. **Establish Friction Envelope:** Define minimum and maximum expected friction coefficients ($\mu_{min}, \mu_{max}$) for specified thread lubricants and surface finishes.
+4. **Account for Embedding Relaxation:** In newly assembled joints, microscopic roughness asperities flatten plastically under initial clamping pressure, causing embedding loss ($f_z$) that sheds 5% to 15% of initial clamp load over the first operating hours.
+5. **Formulate Torque-Preload Specifications:** Specify wrench tightening torque along with tightening tolerance windows ($\pm 5\%$ for calibrated clicker wrenches, $\pm 2\%$ for transducer tools).
+
+## Field symptoms of preload failure
+
+Polished fretting marks around bolt holes, backed-out nuts, crushed paint beneath washers, chronic gasket weeping, and transverse fatigue fractures near the first engaged thread indicate severe preload mismanagement. A severed bolt does not automatically signify excessive tensile load; in over 70% of forensic investigations, low preload allowed joint separation, subjecting the bolt to severe cyclic flexural bending until fatigue fracture occurred.
+
+## Related Torqyx engineering calculator
+
+To rapidly evaluate tightening torque, axial preload, thread geometry, and friction assumptions compliant with VDI 2230, utilize the Bolt Sizing and Preload Calculator.
+
+<ToolLink href="/en/tools/bolt-calculator" title="Bolt Strength and Preload Calculator" description="Verify nominal diameter, thread pitch, property class, and friction assumptions." badge="Calculator" />

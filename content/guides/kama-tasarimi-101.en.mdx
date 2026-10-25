@@ -1,62 +1,80 @@
 ---
-title: "Wedge design 101"
-description: "A starter guide for wedge geometry, friction angle, and force distribution in simple machines."
+title: "Key design 101: parallel keys and mechanical wedges"
+description: "DIN 6885 shaft-hub parallel keys, shear and bearing crushing stress verification, wedge mechanics, and self-locking conditions."
 date: "2026-05-09"
-tags: ["wedge", "mechanism", "friction", "force"]
+tags: ["keys", "DIN 6885", "shaft-hub", "friction", "shear stress", "crushing"]
 category: "Machine Elements"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
-<Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+<Callout type="info" title="Engineering Usage Note">
+This guide details the strength verification of parallel shaft keys in accordance with DIN 6885-1 and ISO 773, as well as mechanical friction wedge locking mechanisms. For severe reversing torque or high-impact drives, interference press-fits, taper bushes, or involute splines are recommended.
 </Callout>
 
 ## Problem / Objective
 
-A wedge can transform a small input force into a high normal force. If friction, crushing stress, and surface quality are ignored, locking or wear can appear.
+DIN 6885 parallel keys (feather keys) are the most prevalent mechanical coupling elements used to transmit torque between rotating shafts and gears, pulleys, or couplings. Likewise, taper wedges in tooling provide high clamping forces. Inadequate key sizing leads to:
+- Excessive compressive surface pressure resulting in plastic crushing (bearing failure) and rotational backlash,
+- Direct key shear failure along the shaft-hub interface under shock loads,
+- Backwards slipping (loss of self-locking) in mechanical wedge clamps under dynamic vibration.
 
 ## Assumptions
 
-- The wedge is treated as rigid.
-- Friction coefficient is estimated for the surface pair.
-- Contact pressure stays within a safe material limit.
+- Key material is medium-carbon or alloy engineering steel (e.g., C45E or 16MnCr5) with yield strength equal to or greater than shaft and hub materials.
+- Tangential force is uniformly distributed along the effective key engagement length (shaft torsional twist distortion is neglected).
+- In round-ended keys (DIN 6885 Form A), the semicircular ends do not bear load; effective length is $l_k = l - b$.
+- The friction coefficient ($\mu$) between steel wedge surfaces is assumed constant for dry or lubricated contact.
 
 ## Step by step method
 
-1. Define wedge angle and contact length.
-2. Write the relation between input force and normal force.
-3. Check the friction angle.
-4. Review surface pressure and local crushing.
-5. Plan release direction and lubrication.
+1. **Calculate Transmitted Tangential Force ($F_t$):**
+   From shaft diameter $d$ [$\text{m}$] and nominal operating torque $T$ [$\text{Nm}$]:
+   $$F_t = \frac{2 \cdot T}{d}$$
+
+2. **Select Standard Key Cross-Section (DIN 6885-1 / ISO 773):**
+   Standard dimensions for key width ($b$), height ($h$), and shaft seat depth ($t_1$) are selected based on shaft diameter ($d$):
+   - For $d = 38\dots 44\text{ mm}$: $b = 12\text{ mm}$, $h = 8\text{ mm}$, $t_1 = 5.0\text{ mm}$, and hub depth $t_2 = 3.3\text{ mm}$.
+
+3. **Verify Hub Surface Bearing/Crushing Stress ($\sigma_p$):**
+   Because the hub is usually the softer material, check the compressive stress over the effective engagement length $l_k$:
+   $$\sigma_p = \frac{F_t}{l_k \cdot t_2} \le \sigma_{p,allow}$$
+   *(Permissible crushing limits: Grey Cast Iron GG-25: $60 - 80\text{ MPa}$; Cast Steel GS-45: $90 - 120\text{ MPa}$; Quenched & Tempered C45: $120 - 150\text{ MPa}$)*
+
+4. **Verify Key Shear Stress ($\tau_k$):**
+   Check shear across the transverse cross-section:
+   $$\tau_k = \frac{F_t}{b \cdot l_k} \le \tau_{allow} \approx 0.6 \cdot R_e / S_f$$
+
+5. **Verify Wedge Clamping Angle and Self-Locking Condition:**
+   In inclined mechanical clamping wedges, self-locking occurs when the wedge taper angle $\alpha$ satisfies:
+   $$\tan(\alpha) \le \mu \implies \alpha \le \arctan(\mu)$$
+   *(Lubricated steel: $\mu \approx 0.10 \implies \alpha \le 5.7^\circ$; Dry clean steel: $\mu \approx 0.15 \implies \alpha \le 8.5^\circ$)*
+
+6. **Industrial Worked Example:**
+   A drive shaft with $d = 40\text{ mm}$ transmits $T = 300\text{ Nm}$ torque to a cast steel GS-45 hub. A DIN 6885 Form A key is specified ($b = 12\text{ mm}$, $h = 8\text{ mm}$, $t_2 = 3.3\text{ mm}$, total length $l = 50\text{ mm}$):
+   - Tangential force: $F_t = \frac{2 \times 300}{0.040} = \mathbf{15\,000\text{ N}}$
+   - Effective contact length: $l_k = 50 - 12 = \mathbf{38\text{ mm}}$
+   - Compressive bearing stress:
+     $$\sigma_p = \frac{15\,000}{38 \times 3.3} = \mathbf{119.6\text{ MPa}} \le \sigma_{p,allow} \approx 120\text{ MPa} \quad \text{(Safe)}$$
+   - Key shear stress:
+     $$\tau_k = \frac{15\,000}{12 \times 38} = \mathbf{32.9\text{ MPa}} \ll \tau_{allow} \approx 75\text{ MPa} \quad \text{(High Safety Factor)}$$
 
 ## Common mistakes
 
-- Assuming zero friction.
-- Using a contact area larger than the real surface.
-- Discovering self-locking only after assembly.
+- **Using Total Length for Rounded-End Form A Keys:** Semicircular ends do not carry tangential load; using $l$ instead of $l_k = l - b$ underestimates bearing stress by 20% to 30%.
+- **Ignoring Application Peak Torque ($K_A$):** In reciprocating compressors or press drives, dynamic shock multipliers range from 1.5 to 2.5; calculations must evaluate peak torque.
+- **Overlooking Keyway Stress Concentration:** Machining a keyseat into a rotating shaft introduces a severe stress concentration factor ($K_t \approx 2.5 - 3.0$) in fatigue bending/torsion.
+- **Insufficient Hub Wall Thickness:** The radial wall thickness of the hub above the keyway must be at least $1.5 \times h$ to avoid fatigue bursting.
 
 ## Related calculators
 
-- [Fixture Tools](/fixture-tools)
-- [Quick Reference Center](/reference)
-- [Tensile Stress Calculator](/en/tools/simple-stress)
+- [Shaft Sizing and Torsion Stress](/en/tools/shaft-torsion)
+- [Power - Torque - Speed Calculator](/en/tools/torque-power)
+- [Tensile Stress and Safety Factor](/en/tools/simple-stress)
+- [Fixture & Tooling Clamp Calculators](/fixture-tools)
 
-## Related glossary terms
+## Related standards
 
-- [Stress](/en/glossary/stress)
-- [Factor of safety](/en/glossary/factor-of-safety)
-
-## Quick FAQ
-
-### Question: What happens when wedge angle decreases?
-
-Normal force rises for the same input force, but friction and locking risk also increase.
-
-### Question: Which material works for a wedge?
-
-Use a machinable material with known wear behavior and enough contact pressure capacity.
-
-### Question: Is lubrication needed?
-
-Lubrication reduces wear when contact pressure or motion frequency is high.
+- **DIN 6885-1:** Drive Type Fasteners without Taper Action - Parallel Keys (Form A, Form B).
+- **ISO 773:** Rectangular or Square Parallel Keys and Their Corresponding Keyways.
+- **ASME B17.1:** Keys and Keyseats Standard.
