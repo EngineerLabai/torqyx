@@ -1,0 +1,91 @@
+---
+title: "What Is the Nut Factor (K Factor) in Bolted Joint Calculations?"
+description: "Understand the torque coefficient (K-factor) in bolted joints: friction energy distribution, coating effects, lubrication variables, and preload calculation."
+date: "2026-06-12"
+tags: ["nut factor K factor", "torque coefficient", "bolted joints", "bolt tightening", "VDI 2230"]
+category: "Fasteners"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/en/blog/tork-katsayisi-k-faktoru-nedir"
+---
+
+<Image src="/images/blog/tork-katsayisi-k-faktoru-nedir.webp" alt="Nut factor K in bolt tightening calculations diagram" width={1200} height={900} caption="Decomposition of tightening torque into friction dissipation and elastic clamping preload." />
+
+## Why Is the K Factor Used? The Short-Form Torque Equation
+
+In industrial fastener assembly, engineers and assembly technicians frequently calculate tightening torque using the simplified "short-form" empirical formula:
+
+$$T = K \cdot F_M \cdot d$$
+
+Where:
+- $T$ is the applied tightening torque ($\text{N}\cdot\text{m}$).
+- $K$ is the dimensionless **torque coefficient** or **nut factor**.
+- $F_M$ is the target clamp preload force ($\text{N}$).
+- $d$ is the nominal major thread diameter ($\text{m}$).
+
+While elegant in its simplicity, the nut factor $K$ is often misunderstood as a simple synonym for the coefficient of friction ($\mu$). In reality, $K$ is an empirical catch-all constant that bundles thread pitch angle, thread flank friction ($\mu_{th}$), underhead/nut bearing face friction ($\mu_b$), washer interaction, surface roughness, and plating compliance into a single dimensionless number.
+
+## Where Does Applied Tightening Torque Really Go?
+
+When a mechanic applies $100\text{ N}\cdot\text{m}$ to a standard metric bolt:
+- **Only $\approx 10\% - 15\%$** of the energy converts into useful axial tension ($F_M$) that elastically stretches the bolt shank and clamps the joint together.
+- **$\approx 40\% - 45\%$** is dissipated as sliding friction between the mating male and female thread flanks.
+- **$\approx 45\% - 50\%$** is dissipated as rotational friction between the rotating bolt head (or nut) underside and the stationary washer/flange surface.
+
+Because nearly $90\%$ of the torque is consumed entirely by friction, even a minor change in surface chemistry, lubricant, or plating finish dramatically swings the resulting clamp force.
+
+## Typical K-Factor Values Across Fastener Finishes
+
+The table below summarizes empirical $K$-factor ranges commonly observed in industrial assemblies:
+
+| Fastener Condition & Plating | Typical K-Factor Range | Assembly Implications |
+| :--- | :--- | :--- |
+| **As-Received Plain Black Steel (Dry)** | $0.20 - 0.30$ | High scatter; wide variance in clamping force |
+| **Light Machine Oil (As-Received)** | $0.15 - 0.18$ | Standard general engineering benchmark |
+| **Electro-Zinc Plated (Dry / Unwaxed)** | $0.22 - 0.35$ | Risk of thread galling and severe stick-slip |
+| **Zinc Plated with Wax Sealant / Lubricant** | $0.12 - 0.15$ | High consistency for automated multi-spindle assembly |
+| **Cadmium Plated** | $0.12 - 0.14$ | Excellent lubricity (restricted due to environmental toxicity) |
+| **Stainless Steel (A2 / A4, Dry)** | $0.25 - 0.35$ | Extreme risk of galling and cold welding |
+| **Anti-Seize Moly / PTFE Paste** | $0.09 - 0.12$ | Low friction; risk of overstretching if torque is not reduced |
+
+## The Critical Risk: Applying Dry Torque to Lubricated Bolts
+
+The greatest practical danger in field assembly is applying a handbook "dry" tightening torque to a fastener that has been coated with anti-seize paste, grease, or threadlocker.
+
+Consider an M16 Grade 8.8 bolt ($d = 16\text{ mm}$):
+- Specified dry torque ($K = 0.20$): $T \approx 175\text{ N}\cdot\text{m}$ to achieve a target preload of $F_M \approx 54.7\text{ kN}$.
+- If a technician applies moly paste ($K = 0.11$) but continues tightening to $175\text{ N}\cdot\text{m}$:
+
+$$F_M = \frac{T}{K \cdot d} = \frac{175}{0.11 \cdot 0.016} \approx 99.4\text{ kN}$$
+
+The actual clamping force surges to $99.4\text{ kN}$—far exceeding the bolt's yield strength ($R_{p0.2} \approx 640\text{ MPa}$, yield force $\approx 100\text{ kN}$). The fastener stretches past its elastic limit and strips threads or snaps during assembly.
+
+## Rigorous Calculation: The VDI 2230 Approach
+
+For mission-critical bolted connections (pressure containment, rotating machinery, aerospace mounts), the simplified $K$-factor equation is replaced by the rigorous VDI 2230 thread physics formulation:
+
+$$T = F_M \left( \frac{d_2}{2} \tan(\phi + \rho') + \frac{D_m}{2} \mu_b \right)$$
+
+Where:
+- $d_2$ is thread pitch diameter.
+- $\phi$ is thread lead angle ($\tan\phi = P / (\pi \cdot d_2)$).
+- $\rho'$ is friction angle on thread flanks ($\tan\rho' = \mu_{th} / \cos(\alpha/2)$).
+- $D_m$ is mean diameter of the bolt head contact face.
+- $\mu_b$ is friction coefficient under the bolt head or nut.
+
+## Related Torqyx Calculation Tool
+
+Calculate preload force, torque targets, and thread friction sensitivity in seconds:
+
+<ToolLink href="/en/tools/bolt-calculator" title="Bolt Size & Preload Calculator" description="Compute required tightening torque and clamping force based on thread size, grade, and friction." badge="Calculator" />
+
+## Related Engineering Guides
+
+- [Bolt Head Styles & Drive Types Guide](/en/guides/civata-basi-sekilleri-ve-turleri)
+- [Corrosion Resistance & Stainless Steel Selection](/en/guides/korozyon-direnci-paslanmaz-celik-secimi)
+
+## Reference Standards
+
+- **VDI 2230 Part 1:** Systematic calculation of high duty bolted joints — Joints with one cylindrical bolt.
+- **ISO 16047:** Fasteners — Torque/clamp force testing.
+- **ASME PCC-1:** Guidelines for Pressure Boundary Bolted Flange Joint Assembly.

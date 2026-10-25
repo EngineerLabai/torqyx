@@ -1,0 +1,87 @@
+---
+title: "Bearing Fits and Tolerances: The ISO 286 Engineering Guide"
+description: "Learn how to select ISO 286 shaft and housing fits for rolling bearings: rotating ring rules, internal clearance reduction, and thermal considerations."
+date: "2026-06-09"
+tags: ["bearing fits ISO 286", "shaft tolerance", "housing fits", "bearing clearance", "ISO 286"]
+category: "Bearings & Shafts"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/en/blog/rulman-toleranslari-iso-286-sistemi"
+---
+
+<Image src="/images/blog/rulman-toleranslari-iso-286-sistemi.webp" alt="ISO 286 shaft and housing fits for rolling element bearings" width={1200} height={900} caption="Engineering guide to ISO 286 fits, shaft tolerances, and housing bore limits for bearings." />
+
+## Two Fundamentally Distinct Tolerance Concepts
+
+In precision machine design, the phrase "bearing tolerance" frequently causes confusion between two distinct technical concepts:
+
+1. **Bearing Manufacturing Tolerances (ISO 492):** The dimensional accuracy of the rolling bearing itself, including bore diameter ($d$), outer diameter ($D$), ring width ($B$), and radial runout. Governed by precision classes Normal (P0), P6, P5, and P4.
+2. **Shaft and Housing Fits (ISO 286):** The machining tolerance fields specified on manufacturing drawings for the mating shaft diameter and the housing bore (e.g., $k5$, $m5$, $H7$, $J7$).
+
+A 6205 bearing is manufactured to tight ISO 492 limits; however, how it performs inside your machine depends entirely on the ISO 286 fit classes you specify for the shaft seat and housing bore.
+
+## How to Read the ISO 286 Fit System
+
+Under the ISO 286 limit system:
+- **Letters denote tolerance zone position** relative to the nominal dimension:
+  - **Capital Letters (e.g., H, J, N):** Designate internal features (housing bores).
+  - **Lowercase Letters (e.g., h, k, m, p):** Designate external features (shaft diameters).
+- **Numbers denote the International Tolerance (IT) Grade** (e.g., IT5, IT6, IT7), defining the width of the tolerance band. Smaller numbers signify tighter tolerances.
+
+For instance, an $H7$ housing bore provides a unilateral clearance zone starting at zero above nominal. A $k5$ or $m5$ shaft seat establishes a controlled interference fit designed to clamp the bearing inner ring firmly.
+
+## The Cardinal Rule: Rotating Ring vs. Stationary Ring Loading
+
+Choosing between a loose clearance fit and a tight interference fit is governed strictly by the **nature of the applied load relative to ring rotation**:
+
+### 1. Rotating Inner Ring with Stationary Direction Load (Most Common)
+- **Kinematics:** The shaft and inner ring rotate together while the radial load vector points in a fixed direction (e.g., gravity or belt pull).
+- **Physical Effect:** Every point on the inner ring raceway passes through the load zone during every revolution (**circumferential load**). If fitted loosely, the inner ring will slip and creep around the shaft, causing aggressive fretting corrosion, shaft grooving, and severe heat.
+- **Rule:** The inner ring **must have an interference fit** (typically $j6$, $k5$, or $m5$).
+- **Housing Ring:** The outer ring remains stationary relative to the load (**point load**). It should be fitted with a **light clearance or transition fit** (typically $H7$ or $J7$), enabling smooth axial floating to accommodate thermal expansion.
+
+### 2. Rotating Outer Ring / Unbalance Load
+- When the outer ring rotates relative to the load direction (e.g., conveyor idler pulleys, vibrating screens, wheel hubs), the rule reverses: the **outer ring requires an interference fit** ($P7$ or $N7$) while the inner ring has a loose fit ($g6$ or $h6$).
+
+## Impact on Bearing Internal Clearance
+
+When a bearing inner ring is pressed onto an interference-fit shaft, the inner ring expands radially. Conversely, pressing an outer ring into a tight housing contracts the outer raceway.
+
+This geometric expansion reduces the bearing's **radial internal clearance** by approximately $80\%$ of the effective interference:
+
+$$\Delta e \approx 0.8 \cdot \Delta d_{\text{interference}}$$
+
+If an engineer specifies an interference fit on a bearing with "Normal" (CN) clearance, the residual clearance can drop below zero under operating temperature, causing preload pinching, elevated operating temperatures ($>100^\circ\text{C}$), rapid lubricant oxidation, and premature bearing seizure. In such assemblies, specifying **C3 clearance** (greater than normal internal clearance) is vital.
+
+## Differential Thermal Expansion: Steel vs. Light Alloy Housings
+
+In electric motors or gearboxes utilizing aluminum or cast magnesium housings:
+- Aluminum expands at roughly twice the rate of bearing chrome steel ($\alpha_{\text{Al}} \approx 23 \times 10^{-6}/\text{K}$ vs. $\alpha_{\text{Steel}} \approx 11 \times 10^{-6}/\text{K}$).
+- A housing bore fit that provides a snug $J7$ transition fit at $20^\circ\text{C}$ can expand into a loose clearance fit at an operating temperature of $80^\circ\text{C}$, allowing the outer ring to spin in its seat.
+- Engineers must calculate thermal fit growth across the full operational temperature envelope or insert cast iron bushing sleeves.
+
+## Common Shaft & Housing Fit Combinations
+
+| Application Condition | Shaft Diameter Fit (ISO 286) | Housing Bore Fit (ISO 286) | Typical Clearance Class |
+| :--- | :--- | :--- | :--- |
+| **Standard Electric Motor (Normal Load)** | $k5$ (up to $\varnothing 50$), $m5$ ($> \varnothing 50$) | $H7$ (floating side), $J7$ (locating) | Normal (CN) or C3 |
+| **High Radial / Heavy Shock Duty** | $m5$ / $n6$ | $K7$ / $M7$ | C3 |
+| **High-Speed Spindle (Precision)** | $h5$ / $j5$ | $H6$ / $J6$ | Special Preload |
+| **Conveyor Idler Rollers (Outer Ring Rotates)** | $h6$ / $g6$ (loose) | $M7$ / $P7$ (tight) | Normal |
+
+## Related Torqyx Calculation Tool
+
+Look up fits, standard dimensions, and engineering tolerances quickly:
+
+<ToolLink href="/en/tables" title="Engineering Tables Directory" description="Access reference tables for ISO fits, thread pitches, and material properties." badge="Calculator" />
+
+## Related Engineering Guides
+
+- [Press-Fit Joints & Tolerance Selection](/en/guides/press-fit-baglantilari-tolerans-secimi)
+- [Tolerance Stacks & GD&T Guide](/en/guides/tolerans-zinciri-ve-gdt-rehberi)
+
+## Reference Standards
+
+- **ISO 286-1:** ISO code system for tolerances on linear sizes — Basis of tolerances, deviations and fits.
+- **ISO 286-2:** Tables of standard tolerance classes and limit deviations for holes and shafts.
+- **ISO 492:** Rolling bearings — Radial bearings — Geometrical product specifications (GPS) and tolerance values.

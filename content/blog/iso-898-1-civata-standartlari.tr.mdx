@@ -1,43 +1,58 @@
 ---
 title: "ISO 898-1 Cıvata Standartları: Mukavemet Sınıfları ve Malzeme Özellikleri"
-description: "ISO 898-1 cıvata standartları hakkında adım adım rehber. ISO/DIN standartları ve formüller dahil. TORQYX hesaplayıcısı ile otomatik hesapla."
+description: "ISO 898-1 cıvata standartları, 8.8, 10.9 ve 12.9 mukavemet sınıflarının mekanik anlamı, çekme ve akma dayanımı formülleri ve somun eşleştirme rehberi."
 date: "2026-05-18"
-tags: ["ISO 898-1", "cıvata", "mukavemet sınıfı", "malzeme"]
+tags: ["ISO 898-1", "cıvata", "mukavemet sınıfı", "malzeme", "çekme dayanımı", "akma sınırı"]
 category: "Standartlar"
 draft: false
-readingTime: 3
+readingTime: 6
 canonical: "https://torqyx.com/blog/iso-898-1-civata-standartlari"
 ---
 
-ISO 898-1, metrik cıvatalarda mekanik özellikleri ve mukavemet sınıflarını anlamak için temel referanslardan biridir. Standart; sınıf işaretlerinin çekme dayanımı, akma sınırı ve montaj güvenliği açısından nasıl yorumlanacağını belirli bir çerçeveye oturtur.
+ISO 898-1, karbon çeliği ve alaşımlı çelikten imal edilen metrik cıvataların, vidaların ve saplamaların mekanik özelliklerini, çekme dayanımlarını ve test yöntemlerini tanımlayan uluslararası temel referans standardıdır. Makine mühendisliğinde cıvata başlarında görülen "8.8", "10.9" veya "12.9" gibi kabartma işaretler doğrudan bu standardın kodlama sistemine dayanır.
 
-## Mukavemet sınıfları tablosu
+## Mukavemet sınıfı kodlarının matematiksel anlamı
 
-- 8.8, 10.9 ve 12.9 gibi sınıflar akma ve çekme dayanımı açısından karşılaştırılır.
-- Sınıf gösterimi, minimum çekme dayanımı ve akma oranı ile ilişkilidir.
-- Tasarımda tablo değerleri proje sıcaklığı ve kaplama koşullarıyla birlikte değerlendirilir.
+ISO 898-1 standardında mukavemet sınıfı iki basamaklı bir sayı ve aradaki bir nokta ile ifade edilir (örn: $X.Y$):
+1. **İlk Rakam ($X$):** Cıvatanın nominal minimum çekme mukavemetinin ($R_m$) 100'e bölünmüş halidir:
+   $$R_m = X \times 100 \quad [\text{MPa}]$$
+2. **İkinci Rakam ($Y$):** Akma mukavemetinin ($R_{eL}$ veya $R_{p0.2}$) çekme mukavemetine ($R_m$) olan oranının 10 katıdır:
+   $$R_{p0.2} = R_m \times \frac{Y}{10} = (X \times 100) \times \frac{Y}{10} = X \times Y \times 10 \quad [\text{MPa}]$$
 
-## 8.8 vs 10.9 farkı
+### Temel mukavemet sınıfları karşılaştırma tablosu
 
-- 10.9 sınıfı daha yüksek dayanım sağlar, ancak gevrekleşme ve montaj hassasiyeti daha kritik olabilir.
-- 8.8 sınıfı genel makine tasarımında sık kullanılan dengeli bir seçenektir.
-- Seçim yalnızca dayanım değil, yorulma, kaplama ve servis koşullarına göre yapılmalıdır.
+| Mukavemet Sınıfı | Min. Çekme Mukavemeti $R_m$ [$\text{MPa}$] | Min. Akma Mukavemeti $R_{p0.2}$ [$\text{MPa}$] | Akma / Çekme Oranı | Sertlik Aralığı (HRC) | Kopma Uzaması ($A_5$) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| **4.6** | $400\text{ MPa}$ | $240\text{ MPa}$ | %60 | $67 - 95\text{ HRB}$ | $\ge \%22$ |
+| **5.8** | $500\text{ MPa}$ | $400\text{ MPa}$ | %80 | $82 - 95\text{ HRB}$ | $\ge \%10$ |
+| **8.8** | $800\text{ MPa}$ | $640\text{ MPa}$ | %80 | $22 - 32\text{ HRC}$ | $\ge \%12$ |
+| **10.9** | $1000\text{ MPa}$ | $900\text{ MPa}$ | %90 | $32 - 39\text{ HRC}$ | $\ge \%9$ |
+| **12.9** | $1200\text{ MPa}$ | $1080\text{ MPa}$ | %90 | $39 - 44\text{ HRC}$ | $\ge \%8$ |
 
-## Hangi sınıf ne zaman?
+## 8.8 vs 10.9 vs 12.9: Hangi sınıf ne zaman seçilmeli?
 
-- Statik yüklerde emniyet katsayısı ve sıkma torku birlikte kontrol edilir.
-- Titreşimli bağlantılarda gevşeme riski ve ön yük kaybı ayrıca incelenir.
-- Kritik bağlantılarda standart tablo değerleri nihai mühendislik onayıyla doğrulanmalıdır.
+- **Sınıf 8.8 (Genel Makine İmalatı):** Orta karbonlu ıslah çeliğinden imal edilir. Yeterli süneklik (%12 uzama) ve mükemmel darbe tokluğu sunduğu için genel sanayi, redüktörler ve yapısal bağlantılarda en güvenli standart tercihtir.
+- **Sınıf 10.9 (Otomotiv ve Ağır Hizmet):** Alaşımlı çelikten (örn: 42CrMo4) üretilir. Otomotiv yürür aksamlarında, motor silindir kapaklarında ve rüzgar türbini kule bağlantılarında kompakt hacimde yüksek ön yük sağlamak için kullanılır.
+- **Sınıf 12.9 (Ekstrem Mukavemet):** En yüksek statik yük kapasitesini sunar; ancak sünekliği düşüktür (%8 uzama). Asitle temizleme veya galvanik elektrokaplama sonrasında hidrojen kırılganlığına (hydrogen embrittlement) son derece duyarlıdır. Dinamik darbeli ve korozif dış ortamlarda dikkatle kullanılmalıdır.
 
-## Seçim yaparken dikkat edilecekler
+## Somun uyumu kuralı (ISO 898-2)
 
-Mukavemet sınıfı yükseldikçe bağlantı her zaman daha güvenli hale gelmez. 10.9 veya 12.9 sınıfı cıvatalar daha yüksek taşıma kapasitesi sağlar, fakat yüzey hazırlığı, hidrojen gevrekleşmesi, kaplama kalitesi ve sıkma prosedürü daha hassas yönetilmelidir. Daha düşük sınıf bir cıvata, uygun ön yük ve doğru emniyet katsayısı ile bazı uygulamalarda daha dengeli bir çözüm olabilir.
+Cıvatalı bağlantılarda temel kural, aşırı yük altında dişlerin sıyrılmaması (stripping) ve cıvatanın gövdeden sünek kopmasının sağlanmasıdır. Bu nedenle ISO 898-2 gereği somun mukavemet sınıfı cıvata sınıfına eşit veya yüksek olmalıdır:
+- 8.8 kalite cıvata ile **Sınıf 8** somun,
+- 10.9 kalite cıvata ile **Sınıf 10** somun,
+- 12.9 kalite cıvata ile **Sınıf 12** somun eşleştirilmelidir.
 
-Tasarım sürecinde cıvata sınıfı; somun sınıfı, rondela tipi, diş boyu, bağlanan parçanın malzemesi ve servis sıcaklığı ile birlikte değerlendirilmelidir. TORQYX hesaplayıcısı gerilme alanı ve ön yük hesabını hızlandırır, ancak standart tablo değerlerinin proje şartnamesi ve tedarikçi sertifikasıyla uyumlu olduğu ayrıca kontrol edilmelidir. Özellikle otomotiv, kaldırma ekipmanı ve basınçlı sistemlerde bu kontrol son tasarım onayının parçasıdır.
+## Çözümlü mühendislik hesabı
 
-## İlgili mühendislik rehberleri
+M16 (Sınıf 8.8) bir cıvatanın gerilme kesit alanı $A_s = 157\text{ mm}^2$'dir:
+- Akma kuvveti:
+  $$F_y = R_{p0.2} \cdot A_s = 640\text{ MPa} \times 157\text{ mm}^2 = \mathbf{100\,480\text{ N}} \approx \mathbf{100.5\text{ kN}}$$
+- VDI 2230 standardına göre %90 akma sınırında tavsiye edilen maksimum montaj ön yükü:
+  $$F_{M,max} = 0.90 \cdot F_y = 0.90 \times 100.5\text{ kN} = \mathbf{90.4\text{ kN}}$$
+
+## İlgili mühendislik rehberleri ve hesaplayıcılar
 
 - [Cıvata Boyut ve Ön Yük Hesaplayıcı](/tr/tools/bolt-calculator)
+- [Cıvata Mukavemet Sınıfları 8.8, 10.9 ve 12.9 Rehberi](/tr/blog/civata-mukavemet-siniflari-8-8-10-9-12-9)
 - [Cıvata Başı Şekilleri ve Türleri](/tr/guides/civata-basi-sekilleri-ve-turleri)
 - [Malzeme Seçimi Rehberi](/tr/guides/malzeme-secimi-rehberi)
-

@@ -1,0 +1,82 @@
+---
+title: "Dynamic and Static Load Ratings: What Do C and C0 Values Mean?"
+description: "Understand the critical differences between C and C0 in bearing catalogs: fatigue life calculations, plastic indentation limits, and static safety."
+date: "2026-06-07"
+tags: ["dynamic load rating C", "static load rating C0", "bearing selection", "mechanical calculation", "ISO 281"]
+category: "Bearings & Shafts"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/en/blog/dinamik-ve-statik-yuk-kapasitesi-c-ve-c0"
+---
+
+<Image src="/images/blog/dinamik-ve-statik-yuk-kapasitesi-c-ve-c0.webp" alt="Technical diagram illustrating dynamic and static bearing load ratings C and C0" width={1200} height={900} caption="Engineering reference for basic dynamic (C) and static (C0) load capacities." />
+
+## C and C0 Represent Two Distinct Failure Modes
+
+When reviewing rolling element bearing catalogs, engineers frequently encounter two foundational figures: the basic dynamic load rating ($C$) and the basic static load rating ($C_0$). Although both express load capacities in kilonewtons ($\text{kN}$), they address fundamentally different physical failure mechanisms.
+
+- **Dynamic Load Rating ($C$):** Governed by ISO 281, this metric quantifies the constant radial or axial load that a population of nominally identical bearings can endure for an operating life of one million revolutions with 90% statistical reliability. It directly governs subsurface fatigue life (flaking and spalling).
+- **Static Load Rating ($C_0$):** Governed by ISO 76, this value defines the load under which the total permanent plastic deformation of rolling elements and raceways at the most heavily stressed contact zone reaches $0.0001$ times the rolling element diameter ($0.0001 \cdot D_w$). It addresses brinelling, indentations, and rotational smoothness rather than fatigue.
+
+Selecting a bearing solely on fatigue life while ignoring static capacity can lead to premature noise, severe vibration, and immediate equipment rejection during machine startup.
+
+## Dynamic Capacity C and L10 Fatigue Life
+
+Under continuous rotation and alternating contact stress, steel experiences subsurface shear stress reversals that eventually initiate microcracks. The basic rating life ($L_{10}$) in millions of revolutions is calculated via the classical Lundberg-Palmgren equation:
+
+$$L_{10} = \left( \frac{C}{P} \right)^p$$
+
+Where:
+- $C$ is the basic dynamic load rating ($\text{kN}$).
+- $P$ is the dynamic equivalent load ($\text{kN}$), calculated from combined radial ($F_r$) and axial ($F_a$) components using catalog factors ($X, Y$).
+- $p$ is the fatigue exponent: $p = 3$ for ball bearings (point contact) and $p = 10/3 \approx 3.33$ for roller bearings (line contact).
+
+Because life depends on the third or tenth-third power of the ratio $C/P$, small variations in operating load drastically amplify or diminish bearing lifespan. However, $C$ assumes optimal ISO VG viscosity, clean elastohydrodynamic lubrication (EHL), and zero misalignment. Contamination or insufficient oil film cannot be compensated merely by choosing an oversized $C$.
+
+## When Does Static Load Capacity C0 Become Critical?
+
+Static load limits become the primary design bottleneck whenever bearings experience:
+1. **Stationary Clamping Loads:** Equipment standing under heavy deadweight or transportation tie-downs.
+2. **Slow Oscillation:** Applications moving at fewer than 10 rpm or rocking through tight angular arcs where dynamic oil wedge films cannot develop.
+3. **Shock and Impact Loads:** Instantaneous surge forces occurring during emergency braking, press stamping, or material drops.
+
+If contact stresses exceed the material's elastic limit, permanent micro-indentations (brinelling) form along the raceway groove. When regular rotation resumes, each rolling element clicks over these depressions, creating vibration, accelerated fatigue initiation, and acoustic failure.
+
+Static adequacy is verified using the static safety factor ($s_0$):
+
+$$s_0 = \frac{C_0}{P_0}$$
+
+Where $P_0$ is the equivalent static load. Minimum recommended values for $s_0$:
+- **Quiet, vibration-free operation:** $s_0 \ge 1.5 - 2.0$
+- **General industrial machinery:** $s_0 \ge 1.0 - 1.5$
+- **Impact or heavy shock duty:** $s_0 \ge 2.5 - 3.0$
+
+## Combined Application: Evaluating Both Ratings in Design
+
+A comprehensive bearing sizing workflow requires simultaneous validation of both regimes:
+1. **Dynamic Phase:** Compute dynamic equivalent load $P$, determine required $L_{10h}$ service hours based on design speed ($n$), and check that $C \ge P \cdot (L_{10})^{1/p}$.
+2. **Static & Peak Phase:** Identify maximum transient holding load, peak startup torque, or emergency stops to compute equivalent static load $P_0$. Verify that $C_0 \ge s_0 \cdot P_0$.
+3. **Shaft & Housing Fits:** Ensure press-fit interference does not eliminate radial internal clearance (e.g., C3 vs Normal), which would otherwise introduce artificial pre-stresses that degrade both ratings.
+
+## Common Mistakes in Catalog Rating Interpretations
+
+- **Confusing Static Indentation with Immediate Fracture:** Exceeding $C_0$ does not imply catastrophic structural rupture; it indicates permanent plastic raceway dimpling that spoils rotational precision and noise characteristics.
+- **Ignoring Assembly Press Forces:** Transmitting mounting press forces through the rolling elements (e.g., pressing an outer ring while fitting onto a shaft) permanently damages raceways before the machine is ever energized.
+- **Overlooking Axial Thrust Components:** Deep groove ball bearings have reduced $C_0$ margins when subjected to high axial thrust, as contact angles shift closer to raceway shoulders.
+
+## Related Torqyx Calculation Tool
+
+Calculate equivalent dynamic load, L10 revolutions, and operating service hours in seconds:
+
+<ToolLink href="/en/tools/bearing-life" title="Bearing Life (L10) Calculator" description="Compute basic dynamic rating life and required capacity according to ISO 281." badge="Calculator" />
+
+## Related Engineering Guides
+
+- [Quick Guide to Bearing Selection](/en/guides/rulman-secimi-icin-hizli-rehber)
+- [Machine Component Life & Fatigue Guide](/en/guides/makine-ogesi-omru-yorulma-rehberi)
+
+## Reference Standards
+
+- **ISO 281:** Rolling bearings — Dynamic load ratings and rating life.
+- **ISO 76:** Rolling bearings — Static load ratings.
+- **ISO 15243:** Rolling bearings — Damage and failures — Terms, characteristics and causes.

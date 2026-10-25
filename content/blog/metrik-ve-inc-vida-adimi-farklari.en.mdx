@@ -1,0 +1,62 @@
+---
+title: "Metric vs Imperial Thread Pitch: How to Identify and Select Fasteners"
+description: "Understand the mathematical differences between ISO metric pitch (mm) and Unified inch TPI, compare UNC vs UNF, and avoid catastrophic cross-threading."
+date: "2026-06-27"
+tags: ["metric vs inch thread", "threads per inch", "UNC", "UNF", "fasteners", "pitch conversion"]
+category: "Bolts"
+draft: false
+readingTime: 6
+canonical: "https://torqyx.com/en/blog/metrik-ve-inc-vida-adimi-farklari"
+---
+
+<Image src="/images/blog/metrik-ve-inc-vida-adimi-farklari.webp" alt="Technical diagram illustrating metric thread pitch in millimeters versus Unified imperial threads per inch" width={1200} height={900} caption="Engineering diagram illustrating thread flank geometry, pitch measurement, and TPI conversion." />
+
+## Fastener threads that appear identical are often dangerously incompatible
+
+In mechanical maintenance and international machinery procurement, the discrepancy between ISO metric and Unified imperial threaded fasteners extends far beyond unit conversion. The fundamental distinction lies in how thread spacing is mathematically defined:
+- **ISO Metric Threads (e.g., M10 x 1.5):** The first number denotes nominal major diameter in millimeters ($10\text{ mm}$); the second specifies linear axial lead/pitch ($P$)—the exact distance in millimeters between adjacent crests ($1.5\text{ mm}$).
+- **Unified Inch Threads (e.g., 3/8"-16 UNC):** The first fraction denotes nominal major diameter ($3/8" \approx 9.525\text{ mm}$); the second number defines **Threads Per Inch (TPI)**—the number of complete thread turns per one linear inch ($25.4\text{ mm}$).
+
+This inverse definition (linear distance per turn vs turns per linear distance) is the number one cause of cross-threading damage and false torque readings during assembly.
+
+## The mathematical relationship between pitch and TPI
+
+Converting an inch thread pitch to its metric equivalent is calculated via:
+$$P_{metric} = \frac{25.4}{\text{TPI}} \quad [\text{mm}]$$
+For example, a 16 TPI fastener features a theoretical axial pitch of:
+$$P = \frac{25.4}{16} = \mathbf{1.5875\text{ mm}}$$
+
+While $1.5875\text{ mm}$ appears deceptively close to standard coarse metric $M10 \times 1.5\text{ mm}$, forcing a 3/8"-16 bolt into an M10 tapped hole will turn 1 to 2 revolutions by hand before abruptly binding. Forcing it with an impact wrench shreds the internal tapped aluminum or cast iron thread flanks, causing catastrophic joint failure under operating pressure.
+
+## Unified Coarse (UNC) vs Unified Fine (UNF) vs Metric equivalents
+
+| Nominal Size | Metric Coarse (ISO 68-1) | Metric Fine (ISO 261) | Unified Coarse (UNC) | Unified Fine (UNF) |
+| :---: | :---: | :---: | :---: | :---: |
+| **~6 mm (1/4")** | $M6 \times 1.0\text{ mm}$ | $M6 \times 0.75\text{ mm}$ | 1/4"-20 UNC ($P = 1.27\text{ mm}$) | 1/4"-28 UNF ($P = 0.907\text{ mm}$) |
+| **~8 mm (5/16")** | $M8 \times 1.25\text{ mm}$ | $M8 \times 1.0\text{ mm}$ | 5/16"-18 UNC ($P = 1.411\text{ mm}$) | 5/16"-24 UNF ($P = 1.058\text{ mm}$) |
+| **~10 mm (3/8")** | $M10 \times 1.5\text{ mm}$ | $M10 \times 1.25\text{ mm}$ | 3/8"-16 UNC ($P = 1.588\text{ mm}$) | 3/8"-24 UNF ($P = 1.058\text{ mm}$) |
+| **~12 mm (1/2")** | $M12 \times 1.75\text{ mm}$ | $M12 \times 1.5\text{ mm}$ | 1/2"-13 UNC ($P = 1.954\text{ mm}$) | 1/2"-20 UNF ($P = 1.270\text{ mm}$) |
+
+### Engineering advantages of fine threads (UNF / Metric Fine)
+1. **Higher Tensile Load Capacity:** Fine pitch leaves a larger root minor diameter, increasing net tensile stress area ($A_s$) by 10% to 15%.
+2. **Superior Resistance to Vibration Loosening:** The smaller lead angle ($\beta$) generates lower rotational back-off torque components under cyclic dynamic loading.
+3. **Precision Axial Calibration:** Used in optical mounts, valve needle trims, and micrometer heads.
+
+### Engineering advantages of coarse threads (UNC / Metric Coarse)
+1. **Faster Assembly Speed:** Deep thread profile installs with fewer total revolutions.
+2. **Damage Tolerance:** Far more forgiving of paint overspray, rust, nicks, and dirty jobsite environments.
+3. **Superior Strength in Soft Alloys:** Stripping strength in aluminum, brass, and gray cast iron is substantially higher due to deeper shear engagement area.
+
+## Reliable shop-floor fastener identification procedure
+
+Never identify threads relying solely on digital vernier calipers. Calipers measure only external major diameter, completely masking whether the thread is $60^\circ$ ISO, $60^\circ$ Unified, or $55^\circ$ British Standard Whitworth (BSW).
+
+1. **Measure Crest-to-Crest Pitch with a Thread Pitch Gauge:** Use certified leaf gauges to verify whether teeth mate with 1.50 mm metric or 16 TPI imperial profiles without light gaps.
+2. **Verify Thread Flank Angle:** Both ISO metric and Unified threads share a $60^\circ$ included flank angle, but British BSP/BSW profiles use $55^\circ$.
+3. **Test with Go / No-Go Thread Ring Gauges:** Class 6g (metric) or 2A (inch) certified gauges confirm pitch diameter and roundness before installing critical fasteners.
+
+## Related Torqyx engineering tools and databases
+
+To check dimensional thread profiles, pitch diameter clearances, and torque requirements across metric and imperial fastener families, utilize the Bolt Sizing and Database tools.
+
+<ToolLink href="/en/tools/bolt-database" title="Bolt Database and Geometry Reference" description="Search dimensions, thread pitches, and tensile areas across metric and unified fastener families." badge="Database" />

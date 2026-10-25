@@ -1,0 +1,89 @@
+---
+title: "Gear Ratio Calculation: A Step-by-Step Engineering Guide"
+description: "Learn how to calculate gear ratio from teeth count, angular velocity, and torque; understand direction reversal, multi-stage gear trains, and mechanical efficiency."
+date: "2026-06-20"
+tags: ["gear ratio calculation", "gear design", "speed reducer", "mechanical transmission", "ISO 21771"]
+category: "Gears"
+draft: false
+readingTime: 5
+canonical: "https://torqyx.com/en/blog/disli-orani-hesabi"
+---
+
+<Image src="/images/blog/disli-orani-hesabi.webp" alt="Technical illustration demonstrating gear ratio calculation between pinion and gear" width={1200} height={900} caption="Engineering diagram illustrating tooth count ratios, input/output speeds, and torque multiplication." />
+
+## What Does Gear Ratio Really Represent?
+
+In mechanical power transmission, the gear ratio ($i$) defines the exact mathematical relationship between the rotational speed of the driver (input) element and the driven (output) element. For a standard external cylindrical gear pair, the fundamental kinematic ratio is defined by tooth numbers:
+
+$$i = \frac{z_2}{z_1} = \frac{n_1}{n_2} = \frac{d_2}{d_1}$$
+
+Where:
+- $z_1$ and $z_2$ are the tooth counts of the input pinion and output gear, respectively.
+- $n_1$ and $n_2$ are the angular speeds ($\text{rpm}$).
+- $d_1$ and $d_2$ are the pitch circle diameters ($\text{mm}$).
+
+When $z_2 > z_1$, the ratio $i > 1.0$. The mechanism operates as a speed reducer: output velocity decreases while output torque increases proportionally. Conversely, if $i < 1.0$, the assembly functions as an overdrive or speed increaser. External gear meshes inherently reverse rotational direction, an essential geometric constraint that must be accounted for in machine frame layouts.
+
+## Relationship Between Speed, Torque, and Mechanical Efficiency
+
+Under the principle of mechanical power conservation, power input equals power output minus frictional dissipation:
+
+$$P = T \cdot \omega = \frac{T \cdot n}{9550} \quad [\text{kW}]$$
+
+In an ideal, frictionless system ($\eta = 1.0$), torque scales exactly inverse to rotational velocity ($T_2 = T_1 \cdot i$). In real-world industrial transmissions, mechanical losses arise from sliding friction between gear tooth flanks, bearing drag, windage, and oil churning. Consequently, actual output torque must incorporate the mechanical transmission efficiency ($\eta$):
+
+$$T_2 = T_1 \cdot i \cdot \eta$$
+
+Typical single-stage spur and helical gear pairs achieve efficiencies between $97\%$ and $99\%$ ($\eta = 0.97 - 0.99$). However, multi-stage transmissions or worm drives exhibit significantly higher parasitic drag ($\eta = 0.50 - 0.90$), meaning that unverified ratio calculations will severely overestimate available shaft torque if efficiency is omitted.
+
+## Step-by-Step Gear Ratio Calculation Procedure
+
+1. **Establish Tooth Counts:** Verify that both gears share the identical standard module ($m$) and pressure angle ($\alpha = 20^\circ$).
+2. **Compute the Kinematic Ratio:** Divide driven teeth by driver teeth ($i = z_2 / z_1$).
+3. **Determine Output Speed:** Calculate $n_2 = n_1 / i$.
+4. **Evaluate Delivered Torque:** Apply motor torque and estimated stage efficiency ($T_2 = T_1 \cdot i \cdot \eta$).
+5. **Verify Pitch Center Distance:** Calculate $a = \frac{m \cdot (z_1 + z_2)}{2}$ to confirm housing layout dimensions and clearance limits.
+
+## Compound and Multi-Stage Gear Trains
+
+Attempting a large speed reduction in a single stage (e.g., $i > 6:1$) creates severe design compromises: the driving pinion becomes excessively small, causing tooth undercut risks, or the driven gear becomes unwieldy in diameter.
+
+To overcome this, engineers distribute overall reduction across compound gear trains. The overall transmission ratio ($i_{\text{total}}$) equals the product of individual gear mesh ratios:
+
+$$i_{\text{total}} = i_1 \cdot i_2 \cdot i_3 \cdots i_n = \left(\frac{z_2}{z_1}\right) \cdot \left(\frac{z_4}{z_3}\right) \cdots \left(\frac{z_{2n}}{z_{2n-1}}\right)$$
+
+Similarly, total transmission efficiency compounds multiplicatively:
+
+$$\eta_{\text{total}} = \eta_1 \cdot \eta_2 \cdots \eta_n$$
+
+A two-stage reducer with $i_1 = 3:1$ and $i_2 = 4:1$ provides an overall ratio of $12:1$. If each mesh has an efficiency of $0.98$, the net efficiency is $0.98 \times 0.98 = 0.9604$ ($96.0\%$).
+
+## The Role of Idler Gears
+
+Inserting an idler gear between the driver and driven wheels alters the direction of rotation without changing the numerical gear ratio:
+
+$$i = \left(\frac{z_{\text{idler}}}{z_1}\right) \cdot \left(\frac{z_2}{z_{\text{idler}}}\right) = \frac{z_2}{z_1}$$
+
+While the idler cancels out mathematically in the kinematic ratio, its tooth flanks experience two-way bending stress cycles on every revolution, making its fatigue life half that of a unidirectional gear.
+
+## Common Pitfalls in Gearbox Ratio Calculations
+
+- **Using Outside Diameter Instead of Pitch Diameter:** Calculating ratios from overall outside diameters ($d_a$) introduces severe errors because addendum heights do not govern kinematic velocity ratios.
+- **Ignoring Gear Pitch Errors:** Mating gears must possess identical normal modules; differing modules cannot mesh regardless of calculated theoretical ratios.
+- **Neglecting Thermal Dissipation:** High ratio reductions with lower efficiency generate significant heat, requiring thermal rating checks to prevent oil degradation.
+
+## Related Torqyx Calculation Tool
+
+Calculate tooth numbers, center distances, and output speeds instantly with our interactive calculator:
+
+<ToolLink href="/en/tools/gear-design/calculators/ratio-calculator" title="Gear Ratio Calculator" description="Compute transmission ratios, driven speeds, and pitch diameters for spur and helical pairs." badge="Calculator" />
+
+## Related Engineering Guides
+
+- [Standard Unit Systems & Dimensioning Guide](/en/guides/standart-birim-sistemi-rehberi)
+- [Rotating Equipment Balancing & Vibration Control](/en/guides/doner-ekipman-dengeleme-titresim-kontrolu)
+
+## Reference Standards
+
+- **ISO 21771:** Gears — Cylindrical involute gears and gear pairs — Concepts and geometry.
+- **ISO 6336-1:** Calculation of load capacity of spur and helical gears — Basic principles.
