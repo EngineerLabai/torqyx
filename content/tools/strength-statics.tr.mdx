@@ -1,14 +1,14 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: strength-statics */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; eksenel çekme/basma ile kesmenin birlikte etki ettiği bileşik gerilme hallerini (Von Mises kriteri), elastik sütunlarda Euler burkulma sınırlarını ve eğilme ile burulmaya aynı anda maruz kalan transmisyon millerinin statik mukavemetini EN 1993-1-1 ve DIN 4114 standartlarına uygun olarak analiz eder.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Von Mises ve Burkulma">
+σ_vm = √(σ² + 3·τ²) | F_kr = (π² · E · I) / (K · L)² | M_e = √(M² + T²)
 </Formula>
 
 ## Değişken açıklamaları
@@ -17,70 +17,75 @@ Formül burada.
   <thead>
     <tr>
       <th>Değişken</th>
+      <th>Sembol</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Eksenel Yük</td>
+      <td>F_aksial</td>
+      <td>N</td>
+      <td>Normal çekme veya basma kuvveti</td>
+    </tr>
+    <tr>
+      <td>Kesme Yükü</td>
+      <td>F_kesme</td>
+      <td>N</td>
+      <td>Enine makaslama kuvveti</td>
+    </tr>
+    <tr>
+      <td>Kesit Alanı</td>
+      <td>A</td>
+      <td>mm²</td>
+      <td>Taşıyıcı kesit alanı</td>
+    </tr>
+    <tr>
+      <td>Akma Sınırı</td>
+      <td>Re</td>
+      <td>MPa</td>
+      <td>Malzeme akma dayanımı</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Hesaplama Adımları" steps={["Yük tipini belirle", "Kesit ve malzeme değerlerini gir", "Emniyet katsayısını doğrula"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Tasarım Uyarıları">
+Narinlik derecesi kritik sınırın altındaki kısa kolonlarda Euler formülü yerine Johnson formülü uygulanmalıdır. Döner millerde dinamik yorulma analizi yapılmalıdır.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: Eksenel gerilme
+## Örnek 1: Eksenel ve Kesme Bileşik Gerilmesi
 
-Eksenel gerilme ve emniyet.
-
-**Girdiler**
-- Kuvvet 20 kN
-- Alan 200 mm2
-- Akma 250 MPa
-
-**Çıktılar**
-- Gerilme 100 MPa
-- Emniyet katsayısı ~2.5
-
-**Notlar**
-- Yorulma etkisini ayrica kontrol et.
-
-## Örnek 2: Euler burkulma
-
-Euler burkulma kontrolü.
+200 mm² alana sahip çelik bağlantı parçası 20 kN çekme ve 10 kN kesme kuvveti altındadır.
 
 **Girdiler**
-- Uzunluk 1.2 m
-- E=210 GPa
-- I=2e-8 m4
-- Sınır koşulu: pim-pim
+- Eksenel Kuvvet: 20 000 N
+- Kesme Kuvveti: 10 000 N
+- Kesit Alanı: 200 mm²
+- Malzeme Akma Dayanımı: 250 MPa (S235)
 
 **Çıktılar**
-- Euler kritik yük ~29 kN
+- Normal Gerilme: 100 MPa
+- Kayma Gerilmesi: 50 MPa
+- Von Mises Gerilmesi: 132.3 MPa
+- Emniyet Katsayısı: 1.89
 
-**Notlar**
-- Gerçek kolon kusurları sonucu düşürür.
+## Örnek 2: Euler Burkulma Kontrolü
 
+1200 mm boyundaki pim-pim mafsallı çelik çubuk (K = 1.0) basma yükü altındadır.
 
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+**Girdiler**
+- Uzunluk: 1200 mm
+- Elastisite Modülü: 210 GPa
+- Atalet Momenti: 32 000 mm⁴
+
+**Çıktılar**
+- Euler Kritik Burkulma Yükü: ~45.8 kN

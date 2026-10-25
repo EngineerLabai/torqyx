@@ -1,14 +1,14 @@
 # Açıklama
 
 {/* Tool: gear-design */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu merkez; silindirik düz ve helisel dişli mekanizmalarının geometrik boyutlandırmasını (DIN 3960 / ISO 21771), temas oranını ve ISO 6336 yük kapasitesini analiz eder.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Dişli Geometrisi">
+d = (m_n · z) / cos(β) | a = m_n · (z₁ + z₂) / (2 · cos(β)) | i = z₂ / z₁
 </Formula>
 
 ## Değişken açıklamaları
@@ -16,70 +16,54 @@ Formül burada.
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
+      <th>Parametre</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Modül (mn)</td>
+      <td>mm</td>
+      <td>Standart ISO 54 diş modülü</td>
+    </tr>
+    <tr>
+      <td>Diş Sayısı (z)</td>
+      <td>adet</td>
+      <td>Pinyon ve çark diş adetleri</td>
+    </tr>
+    <tr>
+      <td>Helis Açısı (β)</td>
+      <td>derece</td>
+      <td>Diş helis eğim açısı</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Tasarım Akışı" steps={["Çevrim oranını belirle", "Standart modülü seç", "Eksen mesafesi ve kuvvetleri doğrula"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Helisel dişlilerde eksenel kuvveti karşılayacak rulman yataklaması seçilmelidir.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: Oran ve merkez mesafe
+## Örnek 1: Düz Dişli Eksen Mesafesi Hesabı
 
-Oran ve merkez mesafesine göre diş seçimi.
-
-**Girdiler**
-- Oran 3:1
-- Merkez mesafe 120 mm
-- Modül 3
-
-**Çıktılar**
-- Z1=20, Z2=60 (örnek)
-- Dış çapları ~60/180 mm
-
-**Notlar**
-- Standart modül tablosu ile uyumla.
-
-## Örnek 2: Tork aktarımı
-
-Tork aktarımında genel boyut kontrolü.
+z1 = 20, z2 = 60 dişli düz dişli çiftinde modül m = 3 mm'dir.
 
 **Girdiler**
-- Tork 80 Nm
-- Genişlik 20 mm
-- Malzeme C45
+- Modül ($m$): 3 mm
+- Pinyon Diş Sayısı ($z_1$): 20
+- Çark Diş Sayısı ($z_2$): 60
+- Helis Açısı ($\beta$): 0° (Düz dişli)
 
 **Çıktılar**
-- Hızlı boyut kontrolü (yaklaşık)
-
-**Notlar**
-- Detaylı hesap için alt hesaplayıcıları kullan.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+- Pinyon Taksimat Çapı ($d_1$): 60 mm
+- Çark Taksimat Çapı ($d_2$): 180 mm
+- Eksen Mesafesi ($a$): 120 mm
+- Çevrim Oranı ($i$): 3.0

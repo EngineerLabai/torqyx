@@ -1,45 +1,116 @@
-﻿{/* Tool: production-project */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: production-project */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; seri imalat hatlarında yalın üretim Takt zamanı planlamasını, Genel Ekipman Verimliliğini (OEE - ISO 22400), sac metal kalıp kesme pres tonajı hesabını (DIN 9870) ve endüstriyel elektrik motorlarının mekanik güç ve yük faktörü tüketimini analiz eder.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Takt Zamanı Hesabı (Yalın Üretim)
+Müşteri talebini karşılamak için hattın kaç saniyede bir parça üretmesi gerektiğini belirleyen süre:
+
+<Formula label="Takt Zamanı">
+Takt = (Net Çalışma Süresi [dak] × 60) / Müşteri Talebi [adet] [saniye/adet]
 </Formula>
 
-## Değişken açıklamaları
+Burada net süre; toplam vardiya süresinden planlı molalar, bakım ve toplantı süreleri düşülerek bulunur.
+
+### 2. Genel Ekipman Verimliliği (OEE - ISO 22400)
+Üretim hattının gerçek kapasitesinin ne kadarını katma değere dönüştürdüğünü gösteren üçlü verimlilik metriği:
+
+<Formula label="OEE Eşitliği">
+OEE (%) = (Kullanılabilirlik [%] / 100) × (Performans [%] / 100) × (Kalite [%] / 100) × 100
+</Formula>
+
+- **Kullanılabilirlik (Availability):** Plansız duruşlar ve arızaların etkisi.
+- **Performans (Performance):** Hız kayıpları ve küçük duraklamalar.
+- **Kalite (Quality):** Hurda ve yeniden işleme oranları. Dünya klasmanı (World-Class OEE) hedefi $\ge \%85$'tir.
+
+### 3. Sac Metal Kesme Kalıbı Pres Tonajı (DIN 9870)
+Sac parçanın kesme çevresi boyunca zımbanın uygulaması gereken kesme kuvveti ($F$ [N]) ve pres tonajı:
+
+<Formula label="Kalıp Kesme Kuvveti ve Tonaj">
+F_{kesme} = L_{cevre} · t · τ_{kesme} · S [N] | Tonaj = F_{kesme} / (9810) [Ton]
+</Formula>
+
+Burada:
+- $L_{cevre}$: Parçanın dış kontur ve delik toplam kesme çevre uzunluğu [mm]
+- $t$: Sac metal et kalınlığı [mm]
+- $\tau_{kesme}$: Sac malzemenin kayma mukavemeti [MPa] ($\approx 0.8 \times R_m$)
+- $S$: Pres ve kalıp aşınma güvenlik faktörü (Tipik 1.2 – 1.3)
+
+### 4. Elektrik Motoru Güç Hesabı
+Milden aktarılan tork ($T$ [N·m]) ve devir ($n$ [rpm]) ile anlık mil gücü ve yük faktörlü tüketim:
+
+<Formula label="Motor Mekanik Gücü">
+P_{mil} = (T · n) / 9550 [kW] | P_{tuketim} = P_{mil} · (Yük Faktörü [%] / 100)
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Mühendislik Açıklaması</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Net Süre</td>
+      <td>T_net</td>
+      <td>dakika</td>
+      <td>Vardiya başına net üretim çalışma süresi</td>
+    </tr>
+    <tr>
+      <td>Talep</td>
+      <td>D</td>
+      <td>adet/vardiya</td>
+      <td>Müşterinin vardiya başına talep ettiği mamul adedi</td>
+    </tr>
+    <tr>
+      <td>Kesme Çevresi</td>
+      <td>L_cevre</td>
+      <td>mm</td>
+      <td>Sac parçadaki çevre ve delik konturlarının toplam boyu</td>
+    </tr>
+    <tr>
+      <td>Sac Kalınlığı</td>
+      <td>t</td>
+      <td>mm</td>
+      <td>Kesilecek sac metalin anma et kalınlığı</td>
+    </tr>
+    <tr>
+      <td>Kayma Mukavemeti</td>
+      <td>τ_kesme</td>
+      <td>MPa</td>
+      <td>Sac malzemenin kesilme dayanımı (Çelik için tipik 300–450 MPa)</td>
+    </tr>
+    <tr>
+      <td>Pres Emniyeti</td>
+      <td>S</td>
+      <td>boyutsuz</td>
+      <td>Zımba körelmesi ve saç toleransı için emniyet katsayısı (1.2–1.3)</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Üretim Planlama Akışı"
+  steps={[
+    "Müşteri sipariş adedinden Takt zamanını hesaplayarak hat dengelemesini (Line Balancing) kurun.",
+    "Makinelerin 6 büyük kaybını (Six Big Losses) OEE göstergesiyle izleyip darboğazları giderin.",
+    "Sac kalıplarında toplam kesme çevresinden pres tonajını hesaplayıp pres nominal kapasitesinin %80'ini aşmayacak pres seçin.",
+    "Sürekli çalışan tahrik motorlarının güç rezervini ve yük faktörünü doğrulayın."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Üretim Uyarıları">
+1. **Pres Kapasite Sınırı:** Pres gövdesi yorulmasını önlemek için hesaplanan kesme tonajı presin anma tonajının maksimum %75–%80'i mertebesinde tutulmalıdır.
+2. **Kademeli Zımbalama (Staggering):** Çok zımbalı kalıplarda zımba boyları saç kalınlığı kadar kademelendirilirse anlık pik kesme kuvveti %30–50 oranında düşürülebilir.
 </Callout>
-

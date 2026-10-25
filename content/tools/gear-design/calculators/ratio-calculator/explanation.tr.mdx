@@ -1,45 +1,26 @@
-﻿{/* Tool: gear-design/calculators/ratio-calculator */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/ratio-calculator */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; tek ve çok kademeli dişli redüktörlerde toplam çevrim oranını (i), kademe dağılımını, çıkış torkunu ve verim kaybını hesaplar.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Tek kademe ve çok kademeli dişli mekanizması toplam çevrim oranı ($i_{top}$):
+
+<Formula label="Çevrim Oranı Bağıntısı">
+i_k = z_{cark,k} / z_{pinyon,k} | i_{top} = i₁ · i₂ · ... · i_k = n_{giris} / n_{cikis}
 </Formula>
 
-## Değişken açıklamaları
+Toplam mekanik verim ($\eta_{top}$) ve çıkış torku ($T_{cikis}$):
 
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
+<Formula label="Çıkış Torku ve Verim">
+η_{top} = η₁ · η₂ · ... · η_k | T_{cikis} = T_{giris} · i_{top} · η_{top}
+</Formula>
 
-## Birimler
+Düz ve helisel dişli kademelerinde kademe başına tipik verim $\eta \approx 0.97–0.985$'tir.
 
-- X: birim burada
-- Y: birim burada
+## Doğrulama ve Güvenlik Uyarıları
 
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Kademe Dağılım Kuralı">
+Tek kademede silindirik dişliler için maksimum çevrim oranı tipik olarak $i \le 6–8$ olmalıdır; daha yüksek oranlarda redüktör boyutu ve pinyon diş sayısı optimizasyonu için iki veya üç kademeli mimari seçilmelidir.
 </Callout>
-

@@ -1,14 +1,14 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: machine-elements */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; rulman ömrü (ISO 281), paralel kama mukavemeti (DIN 6885-1) ve düz dişli kuvvet/mukavemet analizini (ISO 6336) kapsar.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Makine Elemanları Bağıntıları">
+L₁₀h = (10⁶ / (60 · n)) · (C / P)^p | F_t = (2000 · T) / d | p = F_t / ((h/2) · L) | σ_F = F_t / (b · m · Y)
 </Formula>
 
 ## Değişken açıklamaları
@@ -17,68 +17,59 @@ Formül burada.
   <thead>
     <tr>
       <th>Değişken</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Dinamik Kapasite (C)</td>
+      <td>kN</td>
+      <td>Rulman temel dinamik yük sayısı</td>
+    </tr>
+    <tr>
+      <td>Eşdeğer Yük (P)</td>
+      <td>kN</td>
+      <td>Radyal/eksenel eşdeğer işletme yükü</td>
+    </tr>
+    <tr>
+      <td>Tork (T)</td>
+      <td>N·m</td>
+      <td>Mil burulma momenti</td>
+    </tr>
+    <tr>
+      <td>Kama Boyutları (b, h, L)</td>
+      <td>mm</td>
+      <td>DIN 6885 paralel kama ölçüleri</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Tasarım Adımları" steps={["Tork ve devir değerlerini belirle", "Kama ezilme ve kesme gerilmesini kontrol et", "Rulman nominal ömrünü doğrula"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Kama kanallarının mil üzerinde yarattığı gerilme yığılması ve yorulma faktörü mil boyutlandırmasında dikkate alınmalıdır.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: Rulman ömrü
+## Örnek 1: DIN 6885 Kama Mukavemet Kontrolü
 
-Rulman ömrü (L10) tahmini.
-
-**Girdiler**
-- C=25 kN
-- P=10 kN
-- p=3 (bilyali)
-
-**Çıktılar**
-- L10 ~15.6 milyon devir
-
-**Notlar**
-- Yük katsayısı ile düzelt.
-
-## Örnek 2: Kamalı mil
-
-Kamalı milde kesme gerilmesi.
+40 mm çapındaki C45 mil üzerinden 180 N·m tork aktarılmaktadır. Seçilen kama 12×8×50 mm'dir.
 
 **Girdiler**
-- Tork 250 Nm
-- Kama 8x7 mm
-- Uzunluk 40 mm
+- Mil Çapı: 40 mm
+- Tork: 180 N·m
+- Kama Genişliği: 12 mm
+- Kama Yüksekliği: 8 mm
+- Kama Boyu: 50 mm
+- İzin Verilen Ezilme Basıncı: 200 MPa
 
 **Çıktılar**
-- Kesme gerilmesi ~85 MPa
-
-**Notlar**
-- Gerilme yığılması kontrol et.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+- Teğetsel Kuvvet: 9 000 N
+- Kesme Gerilmesi: 15.0 MPa (Güvenli)
+- Ezilme Basıncı: 45.0 MPa (Güvenli, emniyet katsayısı > 4.4)

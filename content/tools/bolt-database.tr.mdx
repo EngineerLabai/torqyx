@@ -1,14 +1,14 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: bolt-database */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu veritabanı; metrik standart cıvataların (ISO 4014, DIN 933, DIN 912) diş geometrilerini, gerilme kesit alanlarını (As) ve ISO 898-1 uyarınca mukavemet sınıflarını (4.8, 8.8, 10.9, 12.9) sunar.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Gerilme Kesit Alanı (ISO 898-1)">
+A_s = (π / 4) · [ d - 0.9382 · P ]² | F_akma = A_s · R_e
 </Formula>
 
 ## Değişken açıklamaları
@@ -16,70 +16,51 @@ Formül burada.
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
+      <th>Parametre</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Anma Çapı (d)</td>
+      <td>Cıvatanın metrik nominal gövde çapı (mm)</td>
+    </tr>
+    <tr>
+      <td>Adım / Hatve (P)</td>
+      <td>İki diş tepesi arasındaki eksenel mesafe (mm)</td>
+    </tr>
+    <tr>
+      <td>Gerilme Alanı (As)</td>
+      <td>Çekme yükü altındaki efektif taşıyıcı kesit (mm²)</td>
+    </tr>
+    <tr>
+      <td>Kalite Sınıfı</td>
+      <td>ISO 898-1 standardına göre akma ve çekme mukavemeti</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Cıvata Boyutlandırma" steps={["Gereken eksenel yükü belirle", "Standart diş tablosundan uygun çapı ve adımı seç", "Mukavemet sınıfı ile akma emniyetini doğrula"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Cıvata ve somun kalitesi daima eşleşmelidir (8.8 cıvata için 8 somun, 10.9 cıvata için 10 somun).
 </Callout>
 
 # Örnekler
 
-## Örnek 1: M10 kaba dış
+## Örnek 1: M16 8.8 ve 10.9 Mukavemet Karşılaştırması
 
-Metrik M10 kaba dış verileri.
+M16 kaba adım cıvatanın taşıma kapasitesi kontrolü.
 
-**Girdiler**
-- Boyut: M10
-- Standart: ISO
-- Dış: kaba
+**Özellikler**
+- Çap: 16 mm, Adım: 2.0 mm
+- Gerilme Kesit Alanı ($A_s$): 157 mm²
 
-**Çıktılar**
-- Pitch 1.5 mm
-- Anahtar ağzı 17 mm
-
-**Notlar**
-- Kafa tipine göre değişir.
-
-## Örnek 2: 1/4-20 UNC
-
-Imperial 1/4-20 UNC tablosu.
-
-**Girdiler**
-- Boyut: 1/4-20
-- Standart: UNC
-
-**Çıktılar**
-- 20 TPI
-- Anahtar ağzı 7/16 in
-
-**Notlar**
-- Imperial tablolarda tolerans kontrol et.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+**Sonuçlar**
+- 8.8 Kalite ($R_e = 640\text{ MPa}$): Akma Yükü = 100.5 kN
+- 10.9 Kalite ($R_e = 900\text{ MPa}$): Akma Yükü = 141.3 kN
+- 10.9 sınıfı seçilerek aynı çapta %40 daha fazla ön yük ve taşıma kapasitesi elde edilir.

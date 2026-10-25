@@ -1,14 +1,14 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: fluids-hvac */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; endüstriyel boru hatlarındaki hidrolik sürtünme ve basınç kayıplarını (Darcy-Weisbach ve Colebrook-White), havalandırma kanallarında hava debisi ve akış hızı optimizasyonunu ve mekanların hava değişim katsayısına (ACH) göre gerekli taze hava debisini ASHRAE ve DIN 1988 standartlarına uygun olarak hesaplar.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Akışkan ve HVAC Bağıntıları">
+Re = (v · D) / ν | Δp = f · (L / D) · (ρ · v² / 2) | A = Q / (3600 · v) | Q_ach = V · ACH
 </Formula>
 
 ## Değişken açıklamaları
@@ -17,70 +17,57 @@ Formül burada.
   <thead>
     <tr>
       <th>Değişken</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Debi (Q)</td>
+      <td>m³/h, L/s</td>
+      <td>Akışkan hacimsel debisi</td>
+    </tr>
+    <tr>
+      <td>İç Çap (D)</td>
+      <td>mm</td>
+      <td>Boru veya kanal akış iç çapı</td>
+    </tr>
+    <tr>
+      <td>Boru Boyu (L)</td>
+      <td>m</td>
+      <td>Boru segment uzunluğu</td>
+    </tr>
+    <tr>
+      <td>Pürüzlülük (ε)</td>
+      <td>mm</td>
+      <td>Boru iç yüzey pürüzlülüğü</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="HVAC Boyutlandırma Akışı" steps={["Akışkan debisini belirle", "İzin verilen hız sınırını seç", "Boru veya kanal kesitini boyutlandır"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Fitting kayıpları (dirsek, vana vb.) toplam basınca eklenmelidir. Havalandırma kanallarında akustik konfor için hız 5-7 m/s sınırında tutulmalıdır.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: Reynolds sayısı
+## Örnek 1: Su Borusu Basınç Kaybı
 
-Reynolds sayısı ile akim rejimi.
-
-**Girdiler**
-- D=0.05 m
-- Hız 2 m/s
-- Nu=1e-6 m2/s
-
-**Çıktılar**
-- Re ~100000 (turbulans siniri üstü)
-
-**Notlar**
-- Viskoziteye göre değişir.
-
-## Örnek 2: Basınç kaybı
-
-Duct basınç kaybı.
+DN50 çelik boruda 2.0 L/s su debisi.
 
 **Girdiler**
-- L=20 m
-- D=0.1 m
-- f=0.02
-- Hız 3 m/s
-- Rho 1.2 kg/m3
+- İç Çap: 50 mm
+- Debi: 2.0 L/s
+- Uzunluk: 20 m
+- Pürüzlülük: 0.045 mm
 
 **Çıktılar**
-- Basınç kaybı ~22 Pa
-
-**Notlar**
-- Kayip katsayilarini ekle.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+- Hız: 1.02 m/s
+- Reynolds Sayısı: ~51 000 (Türbülanslı)
+- Basınç Düşümü: ~11.2 kPa

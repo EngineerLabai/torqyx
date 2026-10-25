@@ -1,45 +1,63 @@
-﻿{/* Tool: gear-design/calculators/force-torque-calculator */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/force-torque-calculator */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; düz ve helisel dişli çarklarda aktarılan tork ve güçten kaynaklanan üç boyutlu diş temas kuvvetlerini (teğetsel kuvvet Ft, radyal kuvvet Fr ve eksenel itme kuvveti Fa) ISO 6336 standardına göre hesaplar.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Pinyon mili torku ($T_1$ [N·m]) ve taksimat çapından ($d_1$ [mm]) teğetsel çevresel kuvvet:
+
+<Formula label="Teğetsel Kuvvet (Ft)">
+F_t = (2000 · T₁) / d₁ [N]
 </Formula>
 
-## Değişken açıklamaları
+Normal kavrama açısı ($\alpha_n$) ve helis açısına ($\beta$) bağlı olarak ayrıştırılan radyal ve eksenel kuvvetler:
+
+<Formula label="Radyal ve Eksenel Kuvvetler">
+F_r = F_t · [ tan(α_n) / cos(β) ] | F_a = F_t · tan(β)
+</Formula>
+
+Diş yüzeyine etkiyen toplam bileşke normal kuvvet:
+
+<Formula label="Bileşke Normal Kuvvet">
+F_n = F_t / [ cos(α_n) · cos(β) ]
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Kuvvet</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Etki Yönü ve Açıklama</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Teğetsel Kuvvet</td>
+      <td>F_t</td>
+      <td>N</td>
+      <td>Dönme yönüne teğet, tork üreten ana kuvvet</td>
+    </tr>
+    <tr>
+      <td>Radyal Kuvvet</td>
+      <td>F_r</td>
+      <td>N</td>
+      <td>Milleri birbirinden uzaklaştırmaya çalışan radyal itme</td>
+    </tr>
+    <tr>
+      <td>Eksenel Kuvvet</td>
+      <td>F_a</td>
+      <td>N</td>
+      <td>Helis açısından doğan ve mili eksen boyunca iten kuvvet (Düz dişlide 0'dır)</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Doğrulama ve Güvenlik Uyarıları
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Eksenel kuvvet ($F_a$) mil yataklarındaki sabit ve serbest rulman konfigürasyonunu doğrudan belirler; radyal bilyalı rulmanlar yüksek eksenel kuvvete dayanamaz.
 </Callout>
-

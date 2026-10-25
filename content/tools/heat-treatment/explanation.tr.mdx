@@ -1,45 +1,98 @@
-﻿{/* Tool: heat-treatment */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: heat-treatment */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu kılavuz; makine imalatında kullanılan karbon çelikleri, alaşımlı çelikler, takım çelikleri ve dökme demirlerde mekanik dayanım, yüzey aşınma direnci, yorulma ömrü ve boyutsal stabilite hedeflerine yönelik ısıl işlem yöntemlerinin (Islah, Sementasyon, İndüksiyon, Nitrasyon, Gerilim Giderme) DIN EN ISO 683 standartlarına göre belirlenmesini sağlar.
 </Callout>
 
-## Formüller
+## Isıl İşlem Yöntemleri ve Mühendislik Prensipleri
 
-<Formula label="Temel ilişki">
-Formül burada.
-</Formula>
+### 1. Islah İşlemi (Sertleştirme + Yüksek Sıcaklık Temperi - Quench & Temper)
+- **Amaç:** Malzemeye yüksek akma ve çekme mukavemeti sağlarken darbe tokluğunu korumak.
+- **Uygulama:** Parça $Ac_3$ kritik dönüşüm sıcaklığının 30–50°C üzerine (tipik 830–860°C) ısıtılarak östenitleştirilir; ardından yağ veya polimer banyosunda hızla soğutularak sert ve kırılgan iğnemsi martensitik yapı elde edilir. Hemen ardından 540–680°C aralığında temperlenerek (meneviş) tokluk kazandırılır.
+- **Uygun Malzemeler:** C45, 41Cr4, 42CrMo4, 30CrNiMo8, 34CrNiMo6.
 
-## Değişken açıklamaları
+### 2. Sementasyon (Yüzey Karbonlama - Case Hardening)
+- **Amaç:** Aşınmaya dayanıklı sert bir dış kabuk (58–62 HRC) ile darbelere ve dinamik şoklara dayanıklı sünek bir çekirdek (30–40 HRC) oluşturmak.
+- **Uygulama:** Karbon oranı düşük (%0.15–%0.22) çelikler 900–930°C'de karbon verici gaz atmosferinde tutulur. Karbon atomları yüzeyden içeri difüze olur; su verme sonrası yüzeyde sert martensit oluşur.
+- **Sementasyon Derinliği (CHD / Eht):** Genellikle 0.5–2.0 mm (ISO 2639 uyarınca 550 HV sertliğin ölçüldüğü derinlik).
+- **Uygun Malzemeler:** 16MnCr5, 20MnCr5, 17CrNiMo6, 18CrNiMo7-6 (Ağır hizmet redüktör dişlileri).
+
+### 3. İndüksiyonla Yüzey Sertleştirme (Induction Hardening)
+- **Amaç:** Yalnızca aşınmaya maruz kalan yüzeylerin (yatak faturaları, kam milleri, diş profilleri) lokal olarak sertleştirilmesi.
+- **Uygulama:** Yüksek frekanslı alternatif akım bobiniyle yüzey milisaniyeler içinde indüklenerek ısıtılır ve hemen su duşuyla soğutulur. Çekirdek mikroyapısı değişmeden kalır; çarpılma minimumdur.
+- **Etkili Sertlik Derinliği (Rht / DS):** 1.5–5.0 mm aralığında ayarlanabilir (yüzey sertliği 54–60 HRC).
+
+### 4. Gaz / Plazma Nitrasyon (Nitriding)
+- **Amaç:** Sıfıra yakın distorsiyon (boyutsal çarpılma) ile aşırı yüksek yüzey sertliği (800–1200 HV) ve korozyon direnci elde etmek.
+- **Uygulama:** 500–540°C'de ferritik fazda azot difüzyonu yapılır. Faz dönüşümü (östenit-martensit) olmadığı için parçada geometri bozulması yaşanmaz; taşlama gerektirmez.
+- **Uygun Malzemeler:** 31CrMoV9, 42CrMo4, nitrasyon çelikleri, takım çelikleri.
+
+## Isıl İşlem Karşılaştırma Matrisi
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Yöntem</th>
+      <th>Proses Sıcaklığı</th>
+      <th>Tipik Yüzey Sertliği</th>
+      <th>Sertlik Derinliği</th>
+      <th>Çarpılma Riski</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Islah (Suverme + Temper)</td>
+      <td>840–880°C / 550–650°C</td>
+      <td>28–36 HRC (Homojen)</td>
+      <td>Tüm kesit</td>
+      <td>Orta – Yüksek</td>
+    </tr>
+    <tr>
+      <td>Sementasyon</td>
+      <td>900–930°C</td>
+      <td>58–62 HRC</td>
+      <td>0.5–2.0 mm (CHD)</td>
+      <td>Yüksek (Düzeltme taşlaması gerekir)</td>
+    </tr>
+    <tr>
+      <td>İndüksiyonla Sertleştirme</td>
+      <td>880–950°C (Lokal)</td>
+      <td>54–60 HRC</td>
+      <td>1.5–4.0 mm (Rht)</td>
+      <td>Düşük – Orta</td>
+    </tr>
+    <tr>
+      <td>Plazma Nitrasyon</td>
+      <td>500–540°C</td>
+      <td>800–1200 HV (~65–70 HRC)</td>
+      <td>0.1–0.6 mm (Nht)</td>
+      <td>Çok Düşük (Sıfır distorsiyon)</td>
+    </tr>
+    <tr>
+      <td>Gerilim Giderme</td>
+      <td>550–650°C</td>
+      <td>Malzeme sertliği değişmez</td>
+      <td>Tüm kesit</td>
+      <td>İhmal edilebilir</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Isıl İşlem Belirleme Aşamaları"
+  steps={[
+    "Mekanik tasarım gereksinimini tanımlayın: Yüksek genel mukavemet mi, yüzey aşınma direnci mi, yorulma ömrü mü?",
+    "Boyutsal tolerans hassasiyetini değerlendirin: Bitmiş parçalarda çarpılma istenmiyorsa nitrasyon; kaba işlemede ıslah; yüksek torklu dişlilerde sementasyon seçin.",
+    "Çelik alaşımının karbon ve alaşım oranını kontrol edin (C <%0.30 ise sementasyon; C %0.35–%0.50 ise ıslah veya indüksiyon).",
+    "Teknik resimde ısıl işlem derinliğini ve hedef sertlik tolerans bandını (örn: 60 ± 2 HRC, CHD 1.0 +0.2 mm) belirtin."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Isıl İşlem Hataları">
+1. **Keskin Köşe Çatlakları:** Su verme sırasında keskin iç radyuslar ($R < 1\text{ mm}$) ve kademeli faturalar gerilme yığılmasıyla parçanın fırında veya banyoda çatlamasına yol açar; cömert pahlar verilmelidir.
+2. **Sementasyon Sonrası Taşlama Yanığı:** Taşlama pasosu aşırı yüksek tutulursa temperleme yumuşaması (grinding burn) veya mikroyapı çatlakları oluşur.
+3. **Mavi Gevreklik Aralığı:** Çeliklerin 250–350°C temperleme aralığında darbe tokluğu ani düşüş gösterir; bu sıcaklık bandında temperleme yapılmamalıdır.
 </Callout>
-

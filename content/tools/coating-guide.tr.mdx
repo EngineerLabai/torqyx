@@ -1,82 +1,61 @@
 # Açıklama
 
 {/* Tool: coating-guide */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formülleri ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu rehber; makine parçaları, bağlantı elemanları ve sac konstrüksiyonlarda korozyon, aşınma ve tolerans uyumu için uygun yüzey kaplama yöntemini (ISO 2081, ISO 1461, ISO 9227) seçmenizi sağlar.
 </Callout>
 
-## Formüller
+## Kaplama türleri
 
-<Formula label="Temel ilişki">
-Formül burada.
-</Formula>
+- **Elektrolitik Çinko (5-15 µm):** Ekonomik iç ortam koruması, 120-240 saat tuz sisi.
+- **Çinko-Nikel (8-15 µm):** Ağır otomotiv ve dış ortam şartları, 1000+ saat tuz sisi.
+- **Sıcak Daldırma Galvaniz (50-100 µm):** Ağır çelik konstrüksiyon, köprüler, 20-50 yıl açık hava ömrü.
+- **Mangan Fosfat (5-15 µm):** Yağ tutucu yüzey, dişli ve rodaj aşınma direnci.
+- **Sert Eloksal (25-50 µm):** Alüminyumda 450-550 HV sertlik ve aşınma koruması.
+- **Kimyasal Nikel (10-30 µm):** Kör deliklerde bile homojen kalınlık, yüksek kimyasal ve aşınma direnci.
 
 ## Değişken açıklamaları
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
+      <th>Parametre</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Korozyon Ortamı</td>
+      <td>ISO 12944 sınıflandırması (C1 iç ortam - C5M agresif denizel)</td>
+    </tr>
+    <tr>
+      <td>Ölçü Toleransı</td>
+      <td>Kaplama kalınlığının nominal tolerans zincirine etkisi</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Kaplama Belirleme" steps={["Ana malzemeyi seç", "Çalışma ortamı korozyon sınıfını belirle", "Tolerans ve aşınma gereksinimini doğrula"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+10.9 ve 12.9 kalite yüksek mukavemetli cıvatalarda elektro-kaplama sonrası hidrojen kırılganlığını önlemek için 200°C'de fırınlama zorunludur.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: çelik dış ortam
+## Örnek 1: Dış Ortam Bağlantı Parçası Kaplaması
 
-çelik için çinko kaplama.
-
-**Girdiler**
-- Ortam: dış ortam
-- Malzeme: çelik
-
-**Çıktılar**
-- Kaplama: çinko, 8-12 µm
-
-**Notlar**
-- Tuz sisi testi hedefle.
-
-## Örnek 2: Alüminyum aşınma
-
-Alüminyum için sert anodize.
+Deniz kenarında çalışacak şasi braketi için kaplama seçimi.
 
 **Girdiler**
-- Parça: Al6061
-- Hedef: aşınma direnci
+- Malzeme: S355 Çelik plaka
+- Ortam: C4 / C5 Dış denizel atmosfer
+- Tolerans: Standart kaynaklı sac toleransı (±0.5 mm)
 
-**Çıktılar**
-- Kaplama: sert anodize, 25 µm
-
-**Notlar**
-- Boyutsal pay bırak.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+**Öneri**
+- Sıcak Daldırma Galvaniz (ISO 1461, 65-85 µm)
+- Beklenen korozyon direnci: 25+ yıl bakım gerektirmeyen koruma.

@@ -1,45 +1,12 @@
-﻿{/* Tool: gear-design/calculators */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu modül; silindirik düz ve helisel dişli mekanizmalarına ait tüm alt hesaplayıcıları (modül tayini, çevrim oranı, diş boşluğu, temas oranı, kuvvet/tork dağılımı, eksenel itme, viskozite ve ağırlık optimizasyonu) DIN 3960 ve ISO 6336 normlarında toplar.
 </Callout>
 
-## Formüller
+## Hesaplayıcı Modülleri ve Yetkinlikler
 
-<Formula label="Temel ilişki">
-Formül burada.
-</Formula>
-
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
-
+- **Modül Belirleme:** Taksimat çapından ISO 54 standart modül ve alttan kesme kontrolü.
+- **Diş Boşluğu (Backlash):** Termal genleşme ve eksen mesafesi toleransına bağlı çalışma boşluğu.
+- **Kavrama Oranı (Contact Ratio):** Sürekli temas için profil (εα) ve helis (εβ) kavrama analizi.
+- **Kuvvet ve Tork:** Teğetsel (Ft), radyal (Fr) ve eksenel (Fa) diş temas kuvvetleri.
+- **Yağlama Viskozitesi:** Çevre hızı ve yüzey basıncına göre DIN 51517 ISO VG sınıfı tayini.

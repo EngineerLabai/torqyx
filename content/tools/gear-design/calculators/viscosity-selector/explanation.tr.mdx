@@ -1,45 +1,24 @@
-﻿{/* Tool: gear-design/calculators/viscosity-selector */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/viscosity-selector */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; endüstriyel kapalı dişli kutularında çevre hızına, çalışma sıcaklığına ve diş temas basıncına göre DIN 51517-3 ve ISO 12925-1 uyarınca doğru yağlama viskozite sınıfını (ISO VG 68 ila VG 680) belirler.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Pinyon taksimat dairesi çevre hızı ($v$ [m/s]):
+
+<Formula label="Taksimat Çevre Hızı">
+v = (π · d₁ · n₁) / 60000 [m/s]
 </Formula>
 
-## Değişken açıklamaları
+Çevre hızına ve diş yüküne göre DIN 51517 standardı kılavuz viskozite değerleri (40°C kinematiği):
 
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
+- **Yüksek Hız ($v > 10\text{ m/s}$), Düşük Yük:** ISO VG 68 – VG 150 (Püskürtmeli yağlama)
+- **Orta Hız ($2 < v \le 10\text{ m/s}$), Orta Yük:** ISO VG 220 – VG 320 (Çarpma yağlama)
+- **Düşük Hız ($v \le 2\text{ m/s}$), Ağır Yük:** ISO VG 460 – VG 680 (Sentetik PAO / mineral)
 
-## Birimler
+## Doğrulama ve Güvenlik Uyarıları
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Aşırı viskoz yağlar yüksek hızda hidrodinamik sürtünme ısısını artırırken, yetersiz viskozite diş yüzeyinde mikropitting ve aşınmaya yol açar.
 </Callout>
-

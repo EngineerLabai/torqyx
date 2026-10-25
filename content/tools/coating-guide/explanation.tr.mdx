@@ -1,45 +1,95 @@
-﻿{/* Tool: coating-guide */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: coating-guide */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu rehber; makine parçaları, bağlantı elemanları ve sac konstrüksiyonlarda korozyon koruması, aşınma direnci ve boyutsal tolerans uyumu için uygun yüzey kaplama yönteminin (Elektrolitik Çinko, Sıcak Daldırma, Çinko-Nikel, Fosfat, Sert Eloksal, Kimyasal Nikel) ISO 2081, ISO 1461 ve ISO 9227 standartlarına göre seçilmesini sağlar.
 </Callout>
 
-## Formüller
+## Kaplama Türleri ve Mühendislik Özellikleri
 
-<Formula label="Temel ilişki">
-Formül burada.
-</Formula>
+### 1. Elektrolitik Çinko ve Çinko Alaşımları
+- **Elektrolitik Çinko (ISO 2081):** Tipik kalınlık 5–15 µm. Ekonomik ve hassas toleranslı parçalara uygundur. Pasivasyon (mavi, sarı, siyah) ile tuz sisi dayanımı 72–240 saate çıkarılır.
+- **Çinko-Nikel (Zn-Ni, ISO 19598):** %12–15 nikel alaşımı. Otomotiv ve ağır sanayi standardıdır; 720–1000 saat kırmızı pas direnci sağlar. 150°C sıcaklığa kadar korozyon direncini korur.
+- **Sıcak Daldırma Galvaniz (ISO 1461):** 450°C erimiş çinko banyosunda kaplanır; 50–100 µm kalınlık oluşturur. Dış ortam, köprü ve enerji nakil hatlarında 20–50 yıl korozyon koruması sunar. Kalınlık nedeniyle dişli parçalarda özel boşluk (overtapping) gerekir.
 
-## Değişken açıklamaları
+### 2. Dönüşüm ve Fonksiyonel Kaplamalar
+- **Mangan Fosfat (ISO 9717):** 5–15 µm kalınlıkta yağ tutucu mikrokristalin tabaka. Dişli, kam mili ve kızaklarda rodaj kolaylığı ve aşınma direnci sağlar.
+- **Siyah Oksit (Karartma - DIN 50938):** ~1 µm kimyasal dönüşüm tabakası. Boyutsal ölçüyü değiştirmez; yağ emdirilerek hafif iç ortam korozyon direnci ve yansıma önleme sağlar.
+- **Sert Eloksal (Hard Anodizing - ISO 10074):** Alüminyum alaşımlarında 25–50 µm kalınlık ve 450–550 HV sertlik kazandırarak çelik benzeri aşınma dayanımı oluşturur.
+- **Akımsız Kimyasal Nikel (ENP - ISO 4527):** Elektriksiz indirgemeyle kör deliklerde dahi tamamen homojen kalınlık (10–30 µm) sağlar; ısıl işlemle 900–1000 HV sertliğe ulaşır.
+
+## Kaplama Karşılaştırma Matrisi
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Kaplama Türü</th>
+      <th>Standart</th>
+      <th>Tipik Kalınlık</th>
+      <th>Tuz Sisi (Kırmızı Pas)</th>
+      <th>Ana Uygulama Alanı</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Elektrolitik Çinko (Fe/Zn 8)</td>
+      <td>ISO 2081</td>
+      <td>8–12 µm</td>
+      <td>120–240 saat</td>
+      <td>Genel makine parçaları, cıvatalar</td>
+    </tr>
+    <tr>
+      <td>Çinko-Nikel (Zn-Ni)</td>
+      <td>ISO 19598</td>
+      <td>8–15 µm</td>
+      <td>720–1000+ saat</td>
+      <td>Otomotiv, şasi, agresif dış ortam</td>
+    </tr>
+    <tr>
+      <td>Sıcak Daldırma Galvaniz</td>
+      <td>ISO 1461</td>
+      <td>50–100 µm</td>
+      <td>1500+ saat</td>
+      <td>Yapısal çelikler, korkuluklar, direkler</td>
+    </tr>
+    <tr>
+      <td>Mangan Fosfat</td>
+      <td>ISO 9717</td>
+      <td>5–15 µm</td>
+      <td>24–48 saat (yağlı)</td>
+      <td>Dişliler, segmanlar, rodaj yüzeyleri</td>
+    </tr>
+    <tr>
+      <td>Sert Eloksal (Tip III)</td>
+      <td>ISO 10074</td>
+      <td>25–50 µm</td>
+      <td>336+ saat</td>
+      <td>Alüminyum pnömatik silindirler, kılavuzlar</td>
+    </tr>
+    <tr>
+      <td>Kimyasal Nikel (ENP)</td>
+      <td>ISO 4527</td>
+      <td>15–30 µm</td>
+      <td>400–1000 saat</td>
+      <td>Vana gövdeleri, hassas kalıplar, pompalar</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Kaplama Seçim Kriterleri"
+  steps={[
+    "Parçanın temel malzemesini belirleyin (Karbon çeliği, paslanmaz, alüminyum, pirinç).",
+    "Çalışma ortamının korozyon sınıfını (ISO 12944 C1'den C5-M'ye kadar) tespit edin.",
+    "Tolerans hassasiyetini kontrol edin: ±0.01 mm toleranslı miller sıcak daldırma galvanize verilemez; kimyasal nikel veya ince Zn-Ni seçilmelidir.",
+    "Hidrojen kırılganlığı (Hydrogen Embrittlement) riskini değerlendirin: 10.9 ve 12.9 cıvatalarda kaplama sonrası derhal fırınlama (baking) şarttır."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Kritik Mühendislik Uyarıları">
+1. **Hidrojen Gevrekleşmesi:** Sertliği 320 HV / 32 HRC üzerindeki yüksek mukavemetli çelikler (8.8 üstü cıvatalar, yaylar) asitle temizleme ve elektro-galvaniz sırasında hidrojen emer. Kaplamadan sonra 4 saat içinde 200–220°C fırınlama (De-embrittlement) yapılmalıdır.
+2. **Dişli Bağlantılarda Boşluk:** 50 µm sıcak daldırma kaplama diş profilinde 200 µm eksenel adımı etkiler; cıvatalar galvanizli somunla (overtapped 6AZ/6AX) eşleşmelidir.
+3. **Galvanik Korozyon:** Alüminyum ile çıplak karbon çeliği temas ederse alüminyum hızla kurban olur; araya izolasyon pulu veya çinko-nikel kaplama uygulanmalıdır.
 </Callout>
-

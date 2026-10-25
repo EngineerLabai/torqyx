@@ -1,45 +1,107 @@
-﻿{/* Tool: materials-manufacturing */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: materials-manufacturing */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; CNC frezeleme işlemlerinde kesme parametrelerini (kesme hızı, devir, ilerleme ve talaş kaldırma hacmi), ISO 286 sistemine göre mil-delik tolerans geçmelerini ve Eurocode 3 (EN 1993-1-8) uyarınca köşe kaynak dikişlerinin statik mukavemetini entegre olarak hesaplar.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. CNC Frezeleme Kesme Parametreleri
+İş parçası malzemesi ve karbür takım geometrisine göre önerilen kesme hızı ($V_c$ [m/dak]) ve takım çapından ($D$ [mm]) iş mili dönme hızı ($n$ [rpm]):
+
+<Formula label="İş Mili Devri (Spindle Speed)">
+n = (1000 · V_c) / (π · D) [rpm]
 </Formula>
 
-## Değişken açıklamaları
+Diş başına ilerleme ($f_z$ [mm/diş]) ve kesici ağız sayısı ($z$) ile tablanın doğrusal ilerleme hızı ($V_f$ [mm/dak]):
+
+<Formula label="Tabla İlerleme Hızı">
+V_f = f_z · z · n [mm/dak]
+</Formula>
+
+Eksenel kesme derinliği ($a_p$ [mm]) ve radyal kesme genişliği ($a_e$ [mm]) ile birim zamandaki talaş kaldırma hacimsel debisi (MRR):
+
+<Formula label="Talaş Hacimsel Debisi (MRR)">
+Q = (a_p · a_e · V_f) / 1000 [cm³/dak]
+</Formula>
+
+### 2. ISO 286 Tolerans ve Geçme Sistemi
+Nominal çapa göre temel delik (H7) ve mil tolerans sınıflarının (h7 boşluklu, k6/m6 geçiş, p6/s6 sıkı geçme) üst sapma ($ES, es$) ve alt sapmaları ($EI, ei$) ile min/maksimum boşluk veya sıkılık hesaplanır.
+
+### 3. Köşe Kaynağı Mukavemeti (EN 1993-1-8)
+Etkili boğaz kalınlığı ($a$ [mm]) ve kaynak boyu ($L$ [mm]) olan köşe kaynak dikişinin eksenel veya kesme yükü altındaki gerilmesi:
+
+<Formula label="Kaynak Kesme Gerilmesi">
+A_w = a · L [mm²] | τ_w = F / A_w ≤ f_{vw,d}
+</Formula>
+
+S235 çeliği için tasarım dayanımı $f_{vw,d} \approx 208\text{ MPa}$, S355 için $f_{vw,d} \approx 250\text{ MPa}$'dır.
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Mühendislik Açıklaması</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Kesme Hızı</td>
+      <td>V_c</td>
+      <td>m/dak</td>
+      <td>Kesici takım ucunun teğetsel doğrusal hızı (C45 için karbürde 150–220 m/dak)</td>
+    </tr>
+    <tr>
+      <td>Takım Çapı</td>
+      <td>D</td>
+      <td>mm</td>
+      <td>Freze veya matkap anma dış çapı</td>
+    </tr>
+    <tr>
+      <td>Ağız Sayısı</td>
+      <td>z</td>
+      <td>adet</td>
+      <td>Kesici takımın etkin kesme yapan helis ağız sayısı</td>
+    </tr>
+    <tr>
+      <td>Diş Başına İlerleme</td>
+      <td>f_z</td>
+      <td>mm/diş</td>
+      <td>Her bir kesici ağzın paso başına aldığı talaş kalınlığı</td>
+    </tr>
+    <tr>
+      <td>Kesme Derinliği</td>
+      <td>a_p / a_e</td>
+      <td>mm</td>
+      <td>Eksenel derinlik (ap) ve radyal bindirme genişliği (ae)</td>
+    </tr>
+    <tr>
+      <td>Kaynak Boğazı</td>
+      <td>a</td>
+      <td>mm</td>
+      <td>Köşe kaynağının kökünden hipotenüse olan dik yükseklik</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="İmalat ve Tasarım Akışı"
+  steps={[
+    "İşlenecek malzemenin sertliğini ve karbür takım kaplamasını belirleyin.",
+    "Takım çapı ve ağız sayısına göre devir (n) ve ilerlemeyi (Vf) tezgah gücünü aşmayacak şekilde hesaplayın.",
+    "Montaj parça çiftinde hedeflenen mekanik işlevi seçin (Kayar yataklama için H7/h6, pres geçme için H7/p6).",
+    "Kaynaklı birleşimlerde minimum boğaz kalınlığını ($a \ge 3\text{ mm}$ ve $a \le 0.7 \times t_{min}$) kuralına göre doğrulayın."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli İmalat Uyarıları">
+1. **Tezgah Gücü ve Tork:** Yüksek talaş debilerinde (MRR) gereken kesme gücü ($P_c = Q \times k_c / 60 000$) tezgah motor gücünü aşmamalıdır.
+2. **Köşe Kaynağı Başlangıç ve Bitiş Kraterleri:** Kaynak dikişinin başındaki ve sonundaki krater zayıflığı nedeniyle efektif boy hesaba katılırken $L_{efektif} = L_{toplam} - 2a$ kuralı uygulanmalıdır.
 </Callout>
-

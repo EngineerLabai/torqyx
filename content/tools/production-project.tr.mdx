@@ -1,14 +1,14 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: production-project */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; Takt zamanı planlamasını, Genel Ekipman Verimliliğini (OEE), sac kesme pres tonajı hesabını ve elektrik motoru güç tüketimini analiz eder.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Üretim ve Pres Bağıntıları">
+Takt = (Net Süre · 60) / Talep | OEE = A · P · Q | F_{kesme} = L_{cevre} · t · τ_{kesme} · S | P_{mil} = (T · n) / 9550
 </Formula>
 
 ## Değişken açıklamaları
@@ -16,68 +16,53 @@ Formül burada.
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
+      <th>Parametre</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Takt Zamanı</td>
+      <td>sn/adet</td>
+      <td>Müşteri talebine göre gereken üretim çevrim hızı</td>
+    </tr>
+    <tr>
+      <td>OEE</td>
+      <td>%</td>
+      <td>Kullanılabilirlik × Performans × Kalite</td>
+    </tr>
+    <tr>
+      <td>Pres Kesme Kuvveti</td>
+      <td>kN, Ton</td>
+      <td>Sac kalıplama zımbalama tonajı</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Proje ve Üretim Planlama" steps={["Vardiya süresi ve talep adedini gir", "Kalıp kesme geometrisini belirle", "Pres tonajı ve motor gücünü doğrula"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Hesaplanan kesme tonajı pres kapasitesinin %80'ini aşmamalıdır; aşırı yük pres krank mili ve gövdesine kalıcı hasar verir.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: Takt time
+## Örnek 1: Sac Metal Zımbalama Pres Tonajı
 
-Takt time hesaplama.
-
-**Girdiler**
-- Çalışma 420 dk
-- Talep 210 adet
-
-**Çıktılar**
-- Takt ~2.0 dk/adet
-
-**Notlar**
-- Durusleri dus.
-
-## Örnek 2: OEE
-
-OEE hesaplama.
+2.0 mm kalınlığında S235 sac parçada toplam 420 mm kesme çevresi.
 
 **Girdiler**
-- Availability 0.90
-- Performance 0.95
-- Quality 0.98
+- Sac Kalınlığı: 2.0 mm
+- Kesme Çevresi: 420 mm
+- Kayma Mukavemeti: 320 MPa
+- Güvenlik Faktörü: 1.2
 
 **Çıktılar**
-- OEE ~0.84 (%84)
-
-**Notlar**
-- Gerçek veri ile güncelle.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+- Kesme Alanı: 840 mm²
+- Kesme Kuvveti: ~322.5 kN
+- Gerekli Pres Tonajı: ~33 Ton (En az 40–50 tonluk pres önerilir)

@@ -1,85 +1,20 @@
 # Açıklama
 
 {/* Tool: gear-design/calculators */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu modül; silindirik düz ve helisel dişli mekanizmalarına ait tüm alt hesaplayıcıları (modül, çevrim oranı, diş boşluğu, temas oranı, kuvvet/tork, viskozite ve ağırlık optimizasyonu) DIN 3960 ve ISO 6336 normlarında sunar.
 </Callout>
 
-## Formüller
+## Modüller
 
-<Formula label="Temel ilişki">
-Formül burada.
-</Formula>
-
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
+- **Modül Hesabı:** ISO 54 standart modül ve Z < 17 alttan kesme analizi.
+- **Diş Boşluğu:** DIN 3967 montaj ve termal genleşme boşluğu.
+- **Kavrama Oranı:** ISO 21771 profil ve helis kavrama oranları.
+- **Kuvvetler:** Teğetsel, radyal ve eksenel itme kuvvetleri.
+- **Yağlama:** DIN 51517 çevre hızına göre viskozite seçimi.
 
 # Örnekler
 
-## Örnek 1: Oran + modül
+## Örnek 1: Dişli Hesaplayıcılar Paketi
 
-Oran ve modül hesaplayıcıları birlikte kullanma.
-
-**Girdiler**
-- Oran 3:1
-- Modül 2
-- Z1=20
-
-**Çıktılar**
-- Z2=60, dış çapları
-- Hız oranı sonucu
-
-**Notlar**
-- Oran ve modül birlikte kontrol edilir.
-
-## Örnek 2: Temas oranı kontrolü
-
-Temas oranı kontrolü.
-
-**Girdiler**
-- Helis açısı 15
-- Z1/Z2
-- Genişlik
-
-**Çıktılar**
-- Temas oranı raporu
-
-**Notlar**
-- Temas oranı 1.2 üstü hedefle.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+Redüktör ön tasarımında pinyon ve çark geometrisi, temas oranı ve rulman yükleri hesaplanır.

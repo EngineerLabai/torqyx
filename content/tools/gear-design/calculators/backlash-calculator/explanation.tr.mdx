@@ -1,45 +1,59 @@
-﻿{/* Tool: gear-design/calculators/backlash-calculator */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/backlash-calculator */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; silindirik dişli çiftlerinde imalat ve montaj toleransları ile termal genleşmenin gerektirdiği minimum ve maksimum diş boşluğunu (Backlash - DIN 3967 / AGMA 2002) hesaplar.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Normal diş boşluğu ($j_n$) ve çevresel diş boşluğu ($j_t$):
+
+<Formula label="Normal ve Çevresel Diş Boşluğu">
+j_t = j_n / (cos(α_t) · cos(β))
 </Formula>
 
-## Değişken açıklamaları
+Eksen mesafesi sapmasına ($\Delta a$) bağlı diş boşluğu değişimi:
+
+<Formula label="Eksen Mesafesi Etkisi">
+Δj_n = 2 · Δa · sin(α_n)
+</Formula>
+
+Sıcaklık farkı altında dişli ve gövdenin termal genleşme farkından kaynaklanan boşluk daralması:
+
+<Formula label="Termal Boşluk Daralması">
+Δj_{th} = 2 · a · [ α_{disli} · ΔT_{disli} - α_{govde} · ΔT_{govde} ] · sin(α_n)
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Normal Boşluk (jn)</td>
+      <td>mm, µm</td>
+      <td>Diş profiline dik net çalışma boşluğu (DIN 3967)</td>
+    </tr>
+    <tr>
+      <td>Kavrama Açısı (αn)</td>
+      <td>derece</td>
+      <td>Normal kavrama açısı (Standart 20°)</td>
+    </tr>
+    <tr>
+      <td>Eksen Mesafesi (a)</td>
+      <td>mm</td>
+      <td>İki mil arasındaki merkez mesafesi</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Doğrulama ve Güvenlik Uyarıları
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Yetersiz diş boşluğu ısınma esnasında dişlerin birbirine sıkışmasına (jamming), aşırı gürültüye ve diş kırılmasına yol açar.
 </Callout>
-

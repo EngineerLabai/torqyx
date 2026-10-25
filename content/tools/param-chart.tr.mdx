@@ -1,83 +1,18 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: param-chart */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; mekanik yaylarda Hooke kanununa dayalı kuvvet-yer değiştirme eğrisini ve parametrik adımlarını EN 13906-1 standardına göre üretir.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Hooke Kanunu">
+F = k · x | x [m] = x_{mm} / 1000
 </Formula>
-
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
 
 # Örnekler
 
-## Örnek 1: Standart yay
+## Örnek 1: Geri Çekme Yayı Eğrisi
 
-Yay sabiti ve yer değiştirme aralığı belirleme.
-
-**Girdiler**
-- Yay sabiti k=25 N/mm
-- Yer değiştirme 0-20 mm
-
-**Çıktılar**
-- Kuvvet aralığı 0-500 N
-- Grafik dogrusal olur
-
-**Notlar**
-- Maks stroku sinirla.
-
-## Örnek 2: Uzun strok
-
-Uzun stroklu yay için grafik.
-
-**Girdiler**
-- k=8 N/mm
-- Yer değiştirme 0-40 mm
-
-**Çıktılar**
-- Kuvvet aralığı 0-320 N
-
-**Notlar**
-- Grafikte çalışma noktasını işaretle.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+500 N/m rijitliğindeki yay 20 mm sıkıştırıldığında 10 N maksimum kuvvete ulaşır.

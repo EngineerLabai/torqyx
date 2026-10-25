@@ -1,45 +1,116 @@
-﻿{/* Tool: fluids-hvac */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: fluids-hvac */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; endüstriyel boru hatlarındaki hidrolik sürtünme ve basınç kayıplarını (Darcy-Weisbach ve Colebrook-White), havalandırma kanallarında hava debisi ve akış hızı optimizasyonunu ve mekanların hava değişim katsayısına (ACH) göre gerekli taze hava debisini ASHRAE ve DIN 1988 standartlarına uygun olarak hesaplar.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Boru Hatlarında Sürtünme ve Basınç Kaybı (Darcy-Weisbach)
+Boru içi akış rejimini belirleyen boyutsuz Reynolds sayısı ($Re$):
+
+<Formula label="Reynolds Sayısı">
+Re = (ρ · v · D) / μ = (v · D) / ν
 </Formula>
 
-## Değişken açıklamaları
+Burada $Re < 2300$ laminer, $Re > 4000$ türbülanslı akış rejimidir. Türbülanslı akışta sürtünme faktörü ($f$) Swamee-Jain / Colebrook-White yaklaşımıyla çözülür:
+
+<Formula label="Sürtünme Faktörü (Swamee-Jain)">
+f = 0.25 / [ log₁₀( (ε / (3.7 · D)) + (5.74 / Re⁰·⁹) ) ]²
+</Formula>
+
+Boru boyunca sürtünmeden kaynaklanan toplam basınç düşümü ($\Delta p$ [Pa]):
+
+<Formula label="Darcy-Weisbach Basınç Kaybı">
+Δp = f · (L / D) · (ρ · v² / 2)
+</Formula>
+
+### 2. Havalandırma Kanalı Boyutlandırma (Duct Sizing)
+Süreklilik denklemine göre belirli bir hava debisini ($Q$ [$m^3/h$]) izin verilen hız sınırında ($v$ [$m/s$]) taşımak için gereken net kesit alanı ($A$) ve eşdeğer dairesel kanal çapı ($D$):
+
+<Formula label="Kanal Kesiti ve Eşdeğer Çap">
+A = Q / (3600 · v) | D = √(4 · A / π)
+</Formula>
+
+### 3. Hava Değişim Katsayısı (ACH - Air Changes per Hour)
+Oda hacmi ($V_{oda}$ [$m^3$]) ve ortam kullanım amacına göre belirlenen saatlik hava değişim katsayısına göre toplam debi:
+
+<Formula label="Havalandırma İhtiyacı">
+Q = V_oda · ACH [m³/h]
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Mühendislik Açıklaması</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Hacimsel Debi</td>
+      <td>Q</td>
+      <td>m³/h, L/s</td>
+      <td>Boru veya havalandırma kanalından geçen akışkan debisi</td>
+    </tr>
+    <tr>
+      <td>İç Çap</td>
+      <td>D</td>
+      <td>mm</td>
+      <td>Boru veya kanalın net akış kesiti iç çapı</td>
+    </tr>
+    <tr>
+      <td>Boru Uzunluğu</td>
+      <td>L</td>
+      <td>m</td>
+      <td>Düz boru segmentinin nominal uzunluğu</td>
+    </tr>
+    <tr>
+      <td>Yüzey Pürüzlülüğü</td>
+      <td>ε</td>
+      <td>mm</td>
+      <td>Boru iç cidar mutlak pürüzlülüğü (Çelik ≈ 0.045 mm, Plastik ≈ 0.007 mm)</td>
+    </tr>
+    <tr>
+      <td>Akış Hızı</td>
+      <td>v</td>
+      <td>m/s</td>
+      <td>Kesitteki ortalama akışkan hızı (Kanalda gürültü için v ≤ 5–7 m/s)</td>
+    </tr>
+    <tr>
+      <td>Oda Hacmi</td>
+      <td>V_oda</td>
+      <td>m³</td>
+      <td>Havalandırılacak mahalin net iç hacmi (En × Boy × Yükseklik)</td>
+    </tr>
+    <tr>
+      <td>Hava Değişim Sayısı</td>
+      <td>ACH</td>
+      <td>1/h</td>
+      <td>Saatte ortam havasının kaç kez tazeleneceği katsayısı</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Akışkan ve HVAC Hesaplama Akışı"
+  steps={[
+    "Akışkan tipini ve çalışma sıcaklığını belirleyin (Suyun yoğunluğu ve kinematik viskozitesi sıcaklıkla değişir).",
+    "Boru sürtünme kaybı için debi, çap, boru malzemesi pürüzlülüğü ve hat uzunluğunu girin.",
+    "Havalandırma kanalı için gürültü ve enerji optimizasyonu hız kriterini seçin (Konut/Ofis: 4–6 m/s, Endüstriyel: 8–12 m/s).",
+    "Ortam hijyen standartlarına göre ACH katsayısını belirleyerek fan kapasitesini doğrulayın."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Tasarım Sınırları">
+1. **Lokal Kayıplar (Fitting):** Hesaplama düz boru sürtünmesini kapsar; vanalar, dirsekler ve daralmalar için eşdeğer uzunluk veya $\zeta$ lokal kayıp katsayıları toplam basınca eklenmelidir.
+2. **Kavitasyon ve Erozyon:** Su borularında hızın 2.5–3.0 m/s üzerine çıkması gürültüye, boru aşınmasına ve kavitasyona yol açabilir.
+3. **Akustik Konfor:** Havalandırma kanallarında yüksek hava hızı menfezlerde rahatsız edici ıslık ve uğultu gürültüsü üretir.
 </Callout>
-

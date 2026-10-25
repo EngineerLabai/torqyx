@@ -1,45 +1,94 @@
-﻿{/* Tool: gear-design */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu merkez; silindirik düz ve helisel evolvent dişli çark mekanizmalarının geometrik boyutlandırmasını (DIN 3960 / ISO 21771), diş temas oranını, eksen mesafesi toleranslarını ve ISO 6336 standartlarına uygun yük kapasitesi analizini yürütür.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Temel Dişli Geometrisi (Düz ve Helisel)
+Normal modül ($m_n$) ve helis açısı ($\beta$) ile taksimat dairesi çapları ($d_1, d_2$):
+
+<Formula label="Taksimat Çapı ve Eksen Mesafesi">
+d = (m_n · z) / cos(β) | a = (d₁ + d₂) / 2 = m_n · (z₁ + z₂) / (2 · cos(β))
 </Formula>
 
-## Değişken açıklamaları
+Standart temel kremayer profili (ISO 53) için diş başı ($d_a$) ve diş dibi ($d_f$) çapları:
+
+<Formula label="Diş Başı ve Diş Dibi Çapları">
+d_a = d + 2 · m_n | d_f = d - 2.5 · m_n
+</Formula>
+
+### 2. Çevrim Oranı ve Hız Bağıntısı
+Pinyon ve çark arasındaki kinematik hız düşürme veya artırma oranı ($i$):
+
+<Formula label="Çevrim Oranı">
+i = z₂ / z₁ = n₁ / n₂ = d₂ / d₁ = T₂ / (T₁ · η)
+</Formula>
+
+### 3. Dişli Çark Yük Kapasitesi İlkeleri (ISO 6336)
+- **B / Diş Dibi Kırılması (Bending Fatigue):** Diş dibi gerilmesinin malzemenin yorulma sınırını ($F_{lim}$) aşmaması gerekir.
+- **H / Yüzey Ezilmesi ve Pitting (Contact Pitting):** Diş temas noktasındaki Hertz basma gerilmesinin ($\sigma_H$) malzemenin yüzey yorulma sınırını ($\sigma_{Hlim}$) aşmaması gerekir.
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Mühendislik Açıklaması</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Normal Modül</td>
+      <td>m_n</td>
+      <td>mm</td>
+      <td>Diş büyüklüğünü belirleyen standart ISO 54 modülü</td>
+    </tr>
+    <tr>
+      <td>Diş Sayısı</td>
+      <td>z₁, z₂</td>
+      <td>adet</td>
+      <td>Pinyon (z1) ve çark (z2) diş sayıları</td>
+    </tr>
+    <tr>
+      <td>Helis Açısı</td>
+      <td>β</td>
+      <td>derece</td>
+      <td>Helis dişlide diş doğrultusunun eksene yaptığı açı (Standart 8°–20°)</td>
+    </tr>
+    <tr>
+      <td>Eksen Mesafesi</td>
+      <td>a</td>
+      <td>mm</td>
+      <td>İki mil ekseni arasındaki anma merkez mesafesi</td>
+    </tr>
+    <tr>
+      <td>Diş Genişliği</td>
+      <td>b</td>
+      <td>mm</td>
+      <td>Dişlinin eksenel temas yüzeyi genişliği (Tipik b ≈ 8–15 × mn)</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Dişli Tasarım Aşamaları"
+  steps={[
+    "Güç, giriş devri ve çıkış devrinden hedef çevrim oranını (i) belirleyin.",
+    "Alttan kesmeyi önlemek için pinyon diş sayısını seçin (z1 ≥ 17 önerilir).",
+    "Gerekli tork ve yüzey basıncına göre standart modülü (ISO 54) belirleyin.",
+    "Sessiz çalışma için helis açısını seçip eksenel kuvveti karşılayacak yataklamayı planlayın."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Tasarım Sınırları">
+1. **Alttan Kesme (Undercut):** 20° kavrama açısında profil kaydırmasız $z < 17$ dişlerde diş dibi zayıflar; profil kaydırma ($x > 0$) uygulanmalıdır.
+2. **Eksenel İtme Kuvveti:** Helisel dişliler mil üzerinde eksenel kuvvet ($F_a = F_t \tan\beta$) üretir; konik makaralı veya eğik bilyalı rulman kullanılmalıdır.
 </Callout>
-

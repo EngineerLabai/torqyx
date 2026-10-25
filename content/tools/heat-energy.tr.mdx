@@ -1,14 +1,14 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: heat-energy */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; ısı değiştiricilerin LMTD yöntemiyle boyutlandırılmasını, duvar yalıtım ısı kayıplarını ve fotovoltaik güneş enerjisi üretimini TEMA ve ISO 12241 normlarına göre analiz eder.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="LMTD ve Isı Transferi">
+ΔT_{lm} = (ΔT₁ - ΔT₂) / ln(ΔT₁ / ΔT₂) | A = Q / (U · ΔT_{lm}) | Q_{duvar} = U · A · ΔT
 </Formula>
 
 ## Değişken açıklamaları
@@ -17,70 +17,58 @@ Formül burada.
   <thead>
     <tr>
       <th>Değişken</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Isı Yükü (Q)</td>
+      <td>kW</td>
+      <td>Transfer edilecek güç</td>
+    </tr>
+    <tr>
+      <td>Toplam Isı Katsayısı (U)</td>
+      <td>W/(m²·K)</td>
+      <td>Bileşik ısı transfer katsayısı</td>
+    </tr>
+    <tr>
+      <td>Sıcaklık Farkı (ΔTlm)</td>
+      <td>°C</td>
+      <td>Logaritmik ortalama sıcaklık farkı</td>
+    </tr>
+    <tr>
+      <td>Yüzey Alanı (A)</td>
+      <td>m²</td>
+      <td>Gerekli transfer alanı</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Termal Boyutlandırma" steps={["Akışkan sıcaklıklarını gir", "LMTD değerini hesapla", "Eşanjör alanını belirle"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Zamanla oluşacak kireç ve kirlenme faktörü (fouling factor) için alana en az %15-20 emniyet payı eklenmelidir.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: LMTD
+## Örnek 1: Su-Su Plakalı Eşanjör
 
-LMTD hesaplama.
-
-**Girdiler**
-- Th_in 120 C
-- Th_out 80 C
-- Tc_in 20 C
-- Tc_out 50 C
-
-**Çıktılar**
-- LMTD ~65 C
-
-**Notlar**
-- Çok geçişli ise düzelt.
-
-## Örnek 2: İletim
-
-İletimle ısı transferi.
+50 kW ısı yükü altında 120°C/90°C sıcak su ile 40°C/70°C soğuk suyun karşıt akışlı ısı değişimi.
 
 **Girdiler**
-- k=45 W/mK
-- Alan 0.2 m2
-- Kalınlık 0.01 m
-- DeltaT 40 C
+- Isı Yükü: 50 kW
+- Sıcak Giriş / Çıkış: 120°C / 90°C
+- Soğuk Giriş / Çıkış: 40°C / 70°C
+- Toplam Isı Katsayısı (U): 800 W/(m²·K)
 
 **Çıktılar**
-- Isı transferi ~36 kW
-
-**Notlar**
-- Isıl temas direncini unutma.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+- ΔT₁ = 120 - 70 = 50°C
+- ΔT₂ = 90 - 40 = 50°C
+- ΔT_{lm} = 50.0°C
+- Gerekli Transfer Alanı (A): 1.25 m²

@@ -1,45 +1,13 @@
-﻿{/* Tool: torque-power */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: torque-power */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; elektrik motorları, redüktörler ve tahrik millerinde mekanik güç (kW, HP), döndürme torku (N·m) ve dönme devri (rpm) arasındaki fiziksel ilişkiyi hesaplar.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Güç ve Tork İlişkisi">
+P [kW] = (T [N·m] · n [rpm]) / 9550 | T [N·m] = (9550 · P [kW]) / n [rpm]
 </Formula>
 
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
-
+## Doğrulama Notu
+Açısal hız rad/s cinsinden $\omega = 2\pi n / 60$ olarak ifade edilir; $P = T \cdot \omega$ bağıntısı temel fiziksel tanımdır.

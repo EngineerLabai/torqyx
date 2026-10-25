@@ -1,45 +1,112 @@
-﻿{/* Tool: heat-energy */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: heat-energy */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; karşıt akışlı ve paralel akışlı kabuk-boru (shell & tube) ve plakalı ısı değiştiricilerin logaritmik ortalama sıcaklık farkı (LMTD) yöntemiyle boyutlandırılmasını, çok katmanlı yapı elemanlarında kompozit iletim ve taşınım ısı kayıplarını ve fotovoltaik (PV) güneş enerjisi panel güç üretimini TEMA ve ISO 12241 standartları esas alınarak analiz eder.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Isı Değiştirici Boyutlandırması (LMTD Yöntemi)
+Karşıt akışlı bir eşanjörde sıcak akışkan ($T_{h,in} \to T_{h,out}$) ile soğuk akışkan ($T_{c,in} \to T_{c,out}$) arasındaki logaritmik ortalama sıcaklık farkı ($\Delta T_{lm}$):
+
+<Formula label="Logaritmik Ortalama Sıcaklık Farkı (LMTD)">
+ΔT₁ = T_{h,in} - T_{c,out} | ΔT₂ = T_{h,out} - T_{c,in} | ΔT_{lm} = (ΔT₁ - ΔT₂) / ln(ΔT₁ / ΔT₂)
 </Formula>
 
-## Değişken açıklamaları
+Isı değiştiricinin hedef ısı yükünü ($Q$ [W veya kW]) transfer etmesi için gereken efektif yüzey alanı ($A$ [$m^2$]):
+
+<Formula label="Isı Değiştirici Alanı">
+A = Q / (U · ΔT_{lm})
+</Formula>
+
+Burada $U$ toplam ısı transfer katsayısıdır [$\text{W/(m}^2\cdot\text{K)}$].
+
+### 2. Yapı Elemanlarında İletim ve Taşınım Isı Kaybı
+İç ortamdan dış ortama duvar üzerinden transfer edilen ısı akışı, iç/dış taşınım katsayıları ($h_{ic}, h_{dis}$) ve duvar iletim direnci ($s/k$) toplamıyla belirlenir:
+
+<Formula label="Toplam Isıl Direnç ve U Değeri">
+R_{toplam} = (1 / h_{ic}) + (s / k) + (1 / h_{dis}) | U = 1 / R_{toplam} | Q = U · A · (T_{ic} - T_{dis})
+</Formula>
+
+### 3. Fotovoltaik Güç Üretim Modeli
+Güneş panelinin anlık ürettiği elektriksel güç ($P$ [W]), panel alanı ($A$), güneş ışınım şiddeti ($G$ [$\text{W/m}^2$]), standart test verimi ($\eta$) ve sıcaklık kayıp katsayısına ($\gamma$) bağlıdır:
+
+<Formula label="PV Panel Çıkış Gücü">
+P = A · G · (η / 100) · [ 1 + (γ / 100) · (T_{hucre} - 25) ]
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Mühendislik Açıklaması</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Isı Yükü</td>
+      <td>Q</td>
+      <td>kW, W</td>
+      <td>Transfer edilmesi hedeflenen termal enerji debisi</td>
+    </tr>
+    <tr>
+      <td>Toplam Isı Katsayısı</td>
+      <td>U</td>
+      <td>W/(m²·K)</td>
+      <td>Akışkanlar ve cidar arasındaki birleşik ısı transfer katsayısı</td>
+    </tr>
+    <tr>
+      <td>Isıl İletkenlik</td>
+      <td>k</td>
+      <td>W/(m·K)</td>
+      <td>Cidar veya yalıtım malzemesinin iletim katsayısı</td>
+    </tr>
+    <tr>
+      <td>Et Kalınlığı</td>
+      <td>s</td>
+      <td>mm, m</td>
+      <td>Yalıtım veya duvar tabakasının ısı akış yönündeki kalınlığı</td>
+    </tr>
+    <tr>
+      <td>Taşınım Katsayısı</td>
+      <td>h</td>
+      <td>W/(m²·K)</td>
+      <td>Yüzey ile hava arasındaki sınır tabaka konveksiyon katsayısı</td>
+    </tr>
+    <tr>
+      <td>Işınım Şiddeti</td>
+      <td>G</td>
+      <td>W/m²</td>
+      <td>Panel yüzeyine dik gelen güneş radyasyon gücü (Tipik max 1000 W/m²)</td>
+    </tr>
+    <tr>
+      <td>Sıcaklık Katsayısı</td>
+      <td>γ</td>
+      <td>%/°C</td>
+      <td>Panel sıcaklığı arttıkça verim düşüş oranı (Tipik -0.35 ila -0.45 %/°C)</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Termal Hesaplama Adımları"
+  steps={[
+    "Eşanjör tipini ve akış yönünü (karşıt akış veya paralel akış) belirleyin.",
+    "Giriş ve çıkış sıcaklıklarından sıcaklık yaklaşım farkını (approach temperature) doğrulayın (ΔT1 ve ΔT2 > 0 olmalıdır).",
+    "Akışkan çiftine uygun toplam ısı transfer katsayısını (U) seçin (Örn: Su-Su: 800–1500, Yağ-Su: 200–400 W/m²K).",
+    "Gereken eşanjör plaka veya boru alanını hesaplayıp kirlenme payı (fouling factor) ekleyin."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Tasarım Sınırları">
+1. **Sıcaklık Çaprazlaşması (Temperature Cross):** Paralel akışlı sistemlerde soğuk akışkan çıkış sıcaklığı sıcak akışkan çıkış sıcaklığını geçemez; yüksek verim için karşıt akış seçilmelidir.
+2. **Kirlenme Direnci (Fouling):** Kireçlenme ve tortu zamanla U değerini %20–40 oranında düşürebilir; tasarımda emniyet payı bırakılmalıdır.
+3. **Isıl Köprüler:** Duvar hesaplamalarında mekanik bağlantı elemanlarının oluşturduğu termal köprüler ihmal edilmemelidir.
 </Callout>
-

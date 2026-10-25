@@ -1,45 +1,126 @@
-﻿{/* Tool: strength-statics */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: strength-statics */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; eksenel çekme/basma ile kesmenin birlikte etki ettiği bileşik gerilme hallerini (Von Mises kriteri), elastik sütunlarda Euler burkulma sınırlarını ve eğilme ile burulmaya aynı anda maruz kalan transmisyon millerinin statik mukavemetini EN 1993-1-1 ve DIN 4114 standartlarına uygun olarak analiz eder.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Bileşik Gerilme ve Von Mises Eşdeğer Gerilmesi
+Aynı kesite etki eden eksenel normal kuvvet ($F_{aksial}$) ve kesme kuvveti ($F_{kesme}$) altında:
+
+<Formula label="Normal ve Kayma Gerilmeleri">
+σ = F_aksial / A | τ = F_kesme / A
 </Formula>
 
-## Değişken açıklamaları
+Sünek metallerde akma kriteri olarak kabul edilen Von Mises hipotezine (Maksimum Şekil Değiştirme Enerjisi Teorisi) göre eşdeğer gerilme:
+
+<Formula label="Von Mises Eşdeğer Gerilmesi">
+σ_vm = √(σ² + 3·τ²)
+</Formula>
+
+Statik akma emniyeti katsayısı ($n$):
+
+<Formula label="Statik Emniyet Katsayısı">
+n = R_e / σ_vm
+</Formula>
+
+### 2. Euler Elastik Burkulma Analizi
+Basma yükü altındaki narin çubukların elastik stabilitesi Euler eşitliği ile incelenir:
+
+<Formula label="Euler Kritik Burkulma Yükü">
+F_kr = (π² · E · I) / (K · L)²
+</Formula>
+
+Burada:
+- **K**: Mesnet sınır şartı katsayısı (İki ucu mafsallı/pim: K = 1.0, Bir ucu ankastre diğeri serbest: K = 2.0, İki ucu ankastre: K = 0.5, Bir ucu ankastre diğeri mafsallı: K = 0.7)
+- **Narinlik Derecesi (λ)**: $\lambda = \frac{K \cdot L}{\sqrt{I / A}}$. Euler teorisi yalnızca kritik narinliğin üzerindeki çubuklar ($\lambda \ge \lambda_p \approx 89-105$) için geçerlidir.
+
+### 3. Millerde Birleşik Eğilme ve Burulma
+Döner transmisyon millerinde eğilme momenti ($M$) ile burulma momenti ($T$) etkileşimi:
+
+<Formula label="Eşdeğer Moment ve Gerilme">
+M_e = √(M² + T²) | W = π · d³ / 32 | σ_es = M_e / W
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Mühendislik Açıklaması</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Eksenel Yük</td>
+      <td>F_aksial</td>
+      <td>N</td>
+      <td>Kesite dik etkiyen çekme (+) veya basma (-) kuvveti</td>
+    </tr>
+    <tr>
+      <td>Kesme Yükü</td>
+      <td>F_kesme</td>
+      <td>N</td>
+      <td>Kesit düzlemine paralel teğetsel makaslama kuvveti</td>
+    </tr>
+    <tr>
+      <td>Kesit Alanı</td>
+      <td>A</td>
+      <td>mm²</td>
+      <td>Yüke direnç gösteren net taşıyıcı kesit alanı</td>
+    </tr>
+    <tr>
+      <td>Akma Dayanımı</td>
+      <td>R_e</td>
+      <td>MPa</td>
+      <td>Malzemenin kalıcı şekil değişimine başladığı elastik sınır</td>
+    </tr>
+    <tr>
+      <td>Kolon Boyu</td>
+      <td>L</td>
+      <td>mm</td>
+      <td>Burkulmaya maruz kalan elemanın mesnetler arası serbest boyu</td>
+    </tr>
+    <tr>
+      <td>Elastisite Modülü</td>
+      <td>E</td>
+      <td>GPa</td>
+      <td>Young modülü (Yapı çelikleri için tipik 210 GPa)</td>
+    </tr>
+    <tr>
+      <td>Atalet Momenti</td>
+      <td>I</td>
+      <td>mm⁴</td>
+      <td>Minimum burkulma eksenine ait kesit atalet momenti</td>
+    </tr>
+    <tr>
+      <td>Mil Çapı</td>
+      <td>d</td>
+      <td>mm</td>
+      <td>Dolu dairesel transmisyon mili anma dış çapı</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Mukavemet Doğrulama Adımları"
+  steps={[
+    "Yük durumunu sınıflandırın: Salt eksenel çekme/basma, bileşik gerilme, narin kolon burkulması veya döner mil yükü.",
+    "Kesit geometrisinden alan (A), atalet momenti (I) ve mukavemet momentini (W) tespit edin.",
+    "Malzeme standart kalitesine göre (S235, S355, C45, 42CrMo4) akma dayanımı (Re) ve elastisite modülünü (E) girin.",
+    "Hesaplanan emniyet katsayısının endüstriyel kabul kriterini (Statik yükte n ≥ 1.5–2.0, dinamik yükte n ≥ 2.5–3.0) karşıladığını doğrulayın."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Tasarım Sınırları">
+1. **Kısa Kolonlarda Euler Geçersizliği:** Narinlik derecesi $\lambda < 89$ olan kalın ve kısa kolonlarda Euler formülü yerine Johnson parbolik veya Tetmajer bağıntıları esas alınmalıdır.
+2. **Dinamik Yorulma (Fatigue):** Döner miller zamanla değişen çevrimsel gerilmelere maruz kaldığından, statik Von Mises emniyeti yeterli görünse dahi Goodman veya Soderberg yorulma kriterleri kontrol edilmelidir.
+3. **Gerilme Yığılmaları:** Kama kanalları, fatura kavisleri ve delik kenarlarında teorik gerilme yığılması faktörü ($K_t$) hesaba katılmalıdır.
 </Callout>
-

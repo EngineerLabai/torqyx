@@ -1,82 +1,18 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: simple-stress */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; eksenel çekme veya basma yükü altındaki kesitlerde nominal gerilme ve statik güvenlik faktörünü hesaplar.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Nominal Gerilme">
+σ = F / A | n = R_e / σ
 </Formula>
-
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
 
 # Örnekler
 
-## Örnek 1: Çekme gerilmesi
+## Örnek 1: Çekme Gergi Çubuğu
 
-Çekme kuvveti altinda net kesit gerilmesi.
-
-**Girdiler**
-- Kuvvet 12 kN
-- Alan 100 mm2
-
-**Çıktılar**
-- Gerilme 120 MPa
-
-**Notlar**
-- Net kesit kullan.
-
-## Örnek 2: Geniş kesit
-
-Daha büyük kesit için gerilme kontrolü.
-
-**Girdiler**
-- Kuvvet 35 kN
-- Alan 250 mm2
-
-**Çıktılar**
-- Gerilme 140 MPa
-
-**Notlar**
-- Emniyet katsayisini kontrol et.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+1963.5 mm² alana sahip S355 çelik çubuk 200 kN eksenel çekme yükünde 101.9 MPa gerilme ve n = 3.48 güvenlik katsayısına sahiptir.

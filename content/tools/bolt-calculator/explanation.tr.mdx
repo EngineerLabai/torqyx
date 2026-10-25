@@ -1,45 +1,13 @@
-﻿{/* Tool: bolt-calculator */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: bolt-calculator */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; metrik cıvataların gerilme kesit alanını, hedeflenen ön yükleme kuvvetini ve kuru/yağlı sürtünme katsayılarına göre gereken sıkma torkunu ISO 898-1 ve VDI 2230 standartlarına göre hesaplar.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Ön Yük ve Tork">
+A_s = (π / 4) · [ d - 0.9382 · P ]² | F_v = 0.90 · R_{p0.2} · A_s | T = F_v · [ 0.16 · P + 0.58 · d_2 · μ_th + 0.50 · D_b · μ_b ]
 </Formula>
 
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
-
+## Doğrulama Notu
+Tork hesabı sürtünme katsayısına son derece duyarlıdır. Kritik flanş bağlantılarında tork anahtarı kalibrasyonu ve yağlama durumu kontrol edilmelidir.

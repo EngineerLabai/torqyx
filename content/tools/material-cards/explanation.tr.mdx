@@ -1,45 +1,117 @@
-﻿{/* Tool: material-cards */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: material-cards */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu kütüphane; makine tasarımı, talaşlı imalat, havacılık ve otomotiv endüstrisinde en sık kullanılan mühendislik malzemelerinin (yapı çelikleri, ıslah ve sementasyon çelikleri, östenitik paslanmazlar, havacılık alüminyumları, pirinç/bronz alaşımları ve yüksek performans mühendislik plastikleri) mekanik, termal ve fiziksel özelliklerini EN, ISO ve ASTM normlarına göre sunar.
 </Callout>
 
-## Formüller
+## Malzeme Grupları ve Tasarım Karakteristikleri
 
-<Formula label="Temel ilişki">
-Formül burada.
-</Formula>
+### 1. Karbon ve Alaşımlı Çelikler (EN 10025 / EN 10083)
+- **S235JR / S355J2 (Yapı Çelikleri):** Mükemmel kaynaklanabilirlik ve yüksek tokluk. Kaynaklı konstrüksiyon, şasi ve taşıyıcı yapılarda kullanılır ($E = 210\text{ GPa}$, $R_e = 235 / 355\text{ MPa}$).
+- **C45 (İmalat / Islah Çeliği):** Orta karbonlu çelik. Şaftlar, kamalar, cıvatalar ve hafif yüklü dişliler için uygundur; ıslah veya indüksiyon sertleştirmeye elverişlidir.
+- **42CrMo4 / 4140 (Yüksek Mukavemetli Islah Çeliği):** Krom-molibden alaşımlı; yüksek dinamik yorulma dayanımı ve burulma direnci ($R_m \approx 900–1200\text{ MPa}$). Krank milleri, akslar ve ağır hizmet cıvatalarında standarttır.
 
-## Değişken açıklamaları
+### 2. Paslanmaz Çelikler (EN 10088 / ASTM A240)
+- **1.4301 / AISI 304 (Östenitik):** %18 Cr, %8 Ni. Mükemmel korozyon direnci, yüksek süneklik ve gıda uyumu. Manyetik değildir; ısıl işlemle sertleştirilemez.
+- **1.4404 / AISI 316L (Molibdenli Östenitik):** %2 Mo ilavesiyle klorür ve deniz suyu çukurcuk (pitting) korozyonuna karşı AISI 304'e kıyasla çok daha dayanıklıdır.
+- **1.4542 / 17-4 PH (Çökelme Sertleşmeli):** Hem paslanmaz korozyon direncini hem de yaşlandırma ısıl işlemiyle 40–44 HRC sertliği ve 1100 MPa akma mukavemetini bir arada sunar.
+
+### 3. Alüminyum Alaşımları (EN 573 / EN 485)
+- **AW-6061-T6 / AW-6082-T6:** Genel mühendislik ve yapısal alüminyum standardı. Orta-yüksek dayanım ($R_p0.2 \approx 250–270\text{ MPa}$), mükemmel korozyon direnci, eloksallanabilirlik ve talaşlı işlenebilirlik. Yoğunluğu çeliğin üçte biridir ($\rho = 2.70\text{ g/cm}^3$).
+- **AW-7075-T6 (Havacılık Alüminyumu):** Çinko alaşımlı süper duralüminyum. $500\text{ MPa}$ akma dayanımıyla yapısal çelikleri yakalar; havacılık parçaları, hafif fikstürler ve yarış araçlarında kullanılır.
+
+### 4. Mühendislik Plastikleri (Termoplastikler)
+- **POM-C (Polioksimetilen / Delrin):** Yüksek boyutsal stabilite, düşük sürtünme ve yüksek rijitlik ($E \approx 3000\text{ MPa}$). Hassas dişliler, burçlar ve kılavuz parçalar.
+- **PA6 / PA66 (Poliamid / Kestamid):** Mükemmel darbe sönümleme ve aşınma direnci; nem alma eğilimi nedeniyle su temasında boyutsal şişme yapar.
+- **PEEK (Polietereterketon):** 250°C sürekli çalışma sıcaklığı, üstün kimyasal ve mekanik dayanım.
+
+## Malzeme Mekanik Özellikler Matrisi
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Malzeme</th>
+      <th>Standart No</th>
+      <th>Yoğunluk (g/cm³)</th>
+      <th>Elastisite E (GPa)</th>
+      <th>Akma Re (MPa)</th>
+      <th>Çekme Rm (MPa)</th>
+      <th>Termal Genleşme (10⁻⁶/K)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>S355J2</td>
+      <td>1.0577</td>
+      <td>7.85</td>
+      <td>210</td>
+      <td>355</td>
+      <td>470–630</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <td>42CrMo4+QT</td>
+      <td>1.7225</td>
+      <td>7.85</td>
+      <td>210</td>
+      <td>650–900</td>
+      <td>900–1200</td>
+      <td>11.8</td>
+    </tr>
+    <tr>
+      <td>AISI 304</td>
+      <td>1.4301</td>
+      <td>7.90</td>
+      <td>193</td>
+      <td>230</td>
+      <td>540–750</td>
+      <td>16.5</td>
+    </tr>
+    <tr>
+      <td>Al 6061-T6</td>
+      <td>3.3211</td>
+      <td>2.70</td>
+      <td>70</td>
+      <td>270</td>
+      <td>310</td>
+      <td>23.5</td>
+    </tr>
+    <tr>
+      <td>Al 7075-T6</td>
+      <td>3.4365</td>
+      <td>2.81</td>
+      <td>72</td>
+      <td>500</td>
+      <td>570</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <td>POM-C</td>
+      <td>Polioksimetilen</td>
+      <td>1.41</td>
+      <td>3.0</td>
+      <td>65</td>
+      <td>70</td>
+      <td>110.0</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Malzeme Seçim Süreci"
+  steps={[
+    "Mekanik yükleme tipini tanımlayın: Statik yük, çevrimsel dinamik yorulma, darbe veya aşınma.",
+    "Ağırlık kısıtını değerlendirin: Özgül dayanım ($R_e / \rho$) kriteri hafif yapılar için alüminyum veya titanyumu öne çıkarır.",
+    "Çevre şartlarını kontrol edin: Korozif sıvı veya nem varsa AISI 304/316 veya eloksallı 6082 seçin.",
+    "Maliyet ve temin edilebilirlik dengesini gözetin (C45 ve S355 sac/mil formunda piyasada en kolay bulunan malzemelerdir)."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Tasarım Sınırları">
+1. **Elastisite Modülü Değişmezliği:** Isıl işlem çeliğin sertliğini ve akma sınırını artırır fakat elastisite modülünü ($E \approx 210\text{ GPa}$) değiştirmez. Sehim veya rijitlik problemi varsa parça kesiti büyütülmelidir.
+2. **Termal Genleşme Farkı:** Alüminyumun termal genleşmesi ($\approx 23 \times 10^{-6}$) çeliğin ($\approx 12 \times 10^{-6}$) iki katıdır; bimetalik montajlarda sıcaklık değişiminde sıkışma veya boşluk oluşur.
+3. **Plastiklerde Sürünme (Creep):** Polimerler oda sıcaklığında dahi sürekli statik yük altında zamana bağlı şekil değişimi (sürünme) gösterir.
 </Callout>
-

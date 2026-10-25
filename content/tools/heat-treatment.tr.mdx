@@ -1,82 +1,60 @@
 # Açıklama
 
 {/* Tool: heat-treatment */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu kılavuz; makine imalatında kullanılan çelik ve alaşımlarda mekanik mukavemet, aşınma ve tokluk hedeflerine yönelik ısıl işlem yöntemlerinin (DIN EN ISO 683) seçimini sağlar.
 </Callout>
 
-## Formüller
+## Yöntemler ve Karakteristikler
 
-<Formula label="Temel ilişki">
-Formül burada.
-</Formula>
+- **Islah (840-880°C su verme + 550-650°C temper):** Yüksek çekme ve akma mukavemeti, tokluk dengesi (C45, 42CrMo4).
+- **Sementasyon (900-930°C karbonlama):** 58-62 HRC sert yüzey kabuğu, darbelere dayanıklı tok çekirdek (16MnCr5, 17CrNiMo6 dişliler).
+- **İndüksiyonla Sertleştirme (880-950°C lokal):** Mil ve yatak faturalarında 54-60 HRC lokal aşınma sertliği, düşük çarpılma.
+- **Nitrasyon (500-540°C):** 800-1200 HV aşırı sert yüzey, sıfıra yakın distorsiyon.
+- **Gerilim Giderme (550-650°C):** Kaynak ve işleme gerilmelerini düşürme, boyutsal stabilite.
 
 ## Değişken açıklamaları
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
+      <th>Parametre</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Malzeme Grubu</td>
+      <td>Karbon çeliği, alaşımlı ıslah çeliği, sementasyon çeliği, takım çeliği</td>
+    </tr>
+    <tr>
+      <td>Hedef Özellik</td>
+      <td>Aşınma direnci, çekme dayanımı, tokluk, boyutsal stabilite</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
 ## Kullanım senaryoları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<StepList title="Isıl İşlem Belirleme" steps={["Çelik alaşımını ve karbon oranını kontrol et", "Hedef yüzey sertliğini ve derinliği seç", "Çarpılma toleransına göre fırınlama yöntemini doğrula"]} />
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Keskin iç köşeler su verme sırasında çatlama riski oluşturur. Yüksek hassasiyetli parçalarda nitrasyon tercih edilmelidir.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: Quench + temper
+## Örnek 1: Ağır Hizmet Redüktör Pinyon Mili
 
-Quench + temper örneği.
-
-**Girdiler**
-- Malzeme 4140
-- İşlem: soğutma + meneviş
-
-**Çıktılar**
-- Hedef sertlik ~30-35 HRC
-
-**Notlar**
-- Çatlama riskine dikkat.
-
-## Örnek 2: Sementasyon
-
-Sementasyon (case hardening) örneği.
+17CrNiMo6 çeliğinden imal edilen redüktör pinyon dişlisi.
 
 **Girdiler**
-- Malzeme 20MnCr5
-- Derinlik 0.8 mm
+- Malzeme: 17CrNiMo6
+- Hedef: 60 ± 2 HRC diş yüzey sertliği, yüksek dinamik darbe dayanımı
 
-**Çıktılar**
-- Yüzey sertliği ~58 HRC
-
-**Notlar**
-- Çekirdek tokluğunu koru.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+**Öneri**
+- Sementasyon (Gaz karbürleme + su verme + düşük sıcaklık temperi)
+- Etkili Sementasyon Derinliği (CHD): 1.2 +0.2 mm
+- Çekirdek Dayanımı: ~1100–1300 MPa

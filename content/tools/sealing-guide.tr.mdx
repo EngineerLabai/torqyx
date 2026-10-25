@@ -1,83 +1,46 @@
 # Açıklama
 
 {/* Tool: sealing-guide */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu kılavuz; hidrolik, pnömatik ve mekanik sistemlerde akışkan, sıcaklık ve basınca göre sızdırmazlık malzemesi seçimini ve ISO 3601-2 O-ring kanal tasarımını sunar.
 </Callout>
 
-## Formüller
+## Malzeme Karşılaştırması
 
-<Formula label="Temel ilişki">
-Formül burada.
+- **NBR (-30/+100°C):** Mineral yağlar, hidrolik akışkanlar ve gres için ekonomik standart.
+- **FKM / Viton (-20/+200°C):** Yüksek sıcaklık, sentetik yağlar ve kimyasallar.
+- **EPDM (-45/+135°C):** Sıcak su, buhar ve fren hidroliği (mineral yağla temas etmemelidir).
+- **PTFE (-200/+260°C):** Neredeyse tüm kimyasallara dayanıklı, düşük sürtünme.
+
+## Kanal Boyutlandırma
+
+<Formula label="O-Ring Sıkışma Oranı">
+Sıkışma (%) = [ (W - Derinlik) / W ] × 100
 </Formula>
 
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+- Statik uygulamalar: %15-30 sıkışma
+- Dinamik uygulamalar: %10-20 sıkışma
+- Kanal doluluk oranı: maksimum %85
 
 ## Doğrulama ve uyarı notları
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+100 bar üzerindeki hidrolik basınçlarda contanın aralıktan taşmasını önlemek için PTFE destek halkası (Back-up ring) kullanılmalıdır.
 </Callout>
 
 # Örnekler
 
-## Örnek 1: Statik yüzey
+## Örnek 1: Hidrolik Silindir Kapağı Statik Flanş Contası
 
-Statik yüzey sızdırmazlık seçimi.
-
-**Girdiler**
-- Basınç 5 bar
-- Çap 30 mm
-- Uygulama: statik
-
-**Çıktılar**
-- O-ring: NBR 70, %20 sıkışma
-
-**Notlar**
-- Yüzey pürüzlülüğünü kontrol et.
-
-## Örnek 2: Döndürmeli mil
-
-Döndürmeli mil sızdırmazlığı.
+160 bar çalışma basıncında mineral yağ (HLP 46) için O-ring seçimi.
 
 **Girdiler**
-- Mil hızı 1500 rpm
-- Çap 20 mm
+- Akışkan: Mineral yağ
+- Basınç: 160 bar
+- Sıcaklık: 60°C
+- O-ring Kordon Çapı: 3.53 mm
 
-**Çıktılar**
-- Lip seal: NBR, tek dudak
-
-**Notlar**
-- Toz varsa çift dudak düşün.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+**Öneri**
+- Malzeme: NBR 90 Shore A (yüksek sertlik ekstrüzyon direncini artırır)
+- PTFE Destek Halkası (Back-up ring) ilavesi
+- Kanal derinliği: 2.75 mm (yaklaşık %22 statik sıkışma)

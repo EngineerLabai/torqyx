@@ -1,45 +1,52 @@
-﻿{/* Tool: gear-design/calculators/helix-axial-calculator */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/helix-axial-calculator */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; helisel dişlilerde helis açısının (β) kavrama oranı, akustik gürültü ve eksenel itme kuvveti (Fa) üzerindeki etkisini optimize eder.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Helis açısı ($\beta$), dişli genişliği ($b$) ve normal modül ($m_n$) ile helis kavrama oranı ($\epsilon_\beta$):
+
+<Formula label="Helis Kavrama Oranı">
+ε_β = (b · sin(β)) / (π · m_n)
 </Formula>
 
-## Değişken açıklamaları
+Helis açısından kaynaklanan eksenel itme kuvvetinin teğetsel kuvvete oranı:
+
+<Formula label="Eksenel İtme Oranı">
+F_a / F_t = tan(β)
+</Formula>
+
+- $\beta = 8^\circ \to F_a = 0.14 \times F_t$
+- $\beta = 15^\circ \to F_a = 0.27 \times F_t$
+- $\beta = 25^\circ \to F_a = 0.47 \times F_t$
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
+      <th>Parametre</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Helis Açısı (β)</td>
+      <td>derece</td>
+      <td>Tek kademeli helisel dişlide tipik 8°–20°, çift helis (çavuş) dişlide 25°–45°</td>
+    </tr>
+    <tr>
+      <td>Eksenel Kuvvet (Fa)</td>
+      <td>N</td>
+      <td>Yataklara binen eksenel reaksiyon kuvveti</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Doğrulama ve Güvenlik Uyarıları
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Helis açısını gereksiz yere büyük seçmek ($\beta > 20^\circ$) eksenel kuvveti aşırı büyüterek rulman maliyetini ve sürtünme ısısını artırır.
 </Callout>
-

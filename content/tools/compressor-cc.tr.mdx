@@ -1,87 +1,18 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: compressor-cc */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; pistonlu kompresörlerde silindir süpürme hacmi ve efektif debi hesaplarını ISO 1217 normuna göre hesaplar.
 </Callout>
 
 ## Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Süpürme Hacmi ve Debi">
+V_{geom} = (π/4) · D² · S · n_{silindir} · f_{etki} | Q = V_{geom} · rpm · (η_v / 100)
 </Formula>
-
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={['Girdileri belirle', 'Hesapla', 'Sonucu kontrol et']} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
-
 
 # Örnekler
 
-## Örnek 1: Küçük hacim
+## Örnek 1: Tek Kademeli Kompresör
 
-Küçük hacimli kompresör tahmini.
-
-**Girdiler**
-- Bore 60 mm
-- Stroke 45 mm
-- RPM 1500
-
-**Çıktılar**
-- Hacim ~127 cc/devir
-- Teorik debi ~190 L/dk
-
-**Notlar**
-- Verim kayıpları hariç.
-
-## Örnek 2: Büyük hacim
-
-Daha büyük bore/stroke için hesap.
-
-**Girdiler**
-- Bore 80 mm
-- Stroke 60 mm
-- RPM 1000
-
-**Çıktılar**
-- Hacim ~302 cc/devir
-- Teorik debi ~302 L/dk
-
-**Notlar**
-- Silindir sayısını ayrıca çarp.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+80 mm çap ve 60 mm strokta tek silindirli kompresör 1450 rpm devirde 349.4 L/dak hava üretir.

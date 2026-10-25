@@ -1,45 +1,53 @@
-﻿{/* Tool: gear-design/calculators/module-calculator */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/module-calculator */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; taksimat çapı ve diş sayısından ham modülü hesaplar, ISO 54 ve DIN 780 standart serisinden en uygun standart modülü seçer ve alttan kesme (undercut) riskini analiz eder.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Ham modül ($m_{ham}$) ve standart taksimat çapı ($D_{std}$):
+
+<Formula label="Modül ve Taksimat Çapı">
+m_{ham} = D / z | D_{std} = m_{std} · z | Sapma (%) = |D_{std} - D| / D × 100
 </Formula>
 
-## Değişken açıklamaları
+Standart 20° kavrama açısında alttan kesme sınır şartı:
+
+<Formula label="Alttan Kesme Sınırı">
+z_{min} = 2 / sin²(20°) ≈ 17.1 (z < 17 risklidir)
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
+      <th>Parametre</th>
+      <th>Birim</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Taksimat Çapı (D)</td>
+      <td>mm</td>
+      <td>Dişlinin referans yuvarlanma dairesi çapı</td>
+    </tr>
+    <tr>
+      <td>Diş Sayısı (z)</td>
+      <td>adet</td>
+      <td>Diş sayısı (z ≥ 17 önerilir)</td>
+    </tr>
+    <tr>
+      <td>Standart Modül (m)</td>
+      <td>mm</td>
+      <td>ISO 54 Serisi: 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10...</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Doğrulama ve Güvenlik Uyarıları
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Standart dışı modül seçmek özel azdırma çakısı imalatı gerektireceğinden imalat maliyetini katlar; daima standart ISO 54 modülü tercih edilmelidir.
 </Callout>
-

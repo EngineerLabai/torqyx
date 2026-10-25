@@ -1,83 +1,18 @@
-﻿# Açıklama
+# Açıklama
 
 {/* Tool: gear-design/simulations */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu simülasyon modülü; evolvent diş profilinin kinematik kavrama temasını, temas noktasının hareketini ve anlık hız sürekliliğini modeller.
 </Callout>
 
-## Formüller
+## Kinematik Model
 
-<Formula label="Temel ilişki">
-Formül burada.
+<Formula label="Evolvent Temas">
+r_b = r · cos(α) | p_b = π · m · cos(α)
 </Formula>
-
-## Değişken açıklamaları
-
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
-
-## Birimler
-
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
-</Callout>
 
 # Örnekler
 
-## Örnek 1: Nominal yük
+## Örnek 1: Evolvent Diş Temas Simülasyonu
 
-Nominal yük simülasyonu.
-
-**Girdiler**
-- Tork 60 Nm
-- Hız 1000 rpm
-- Yük profili sabit
-
-**Çıktılar**
-- Temas izi ve gerilme haritasi
-
-**Notlar**
-- Giriş veri setini kaydet.
-
-## Örnek 2: Hızalama hatası
-
-Hızalama hatası simülasyonu.
-
-**Girdiler**
-- Hızalama hatası 0.2 mm
-- Tork 40 Nm
-
-**Çıktılar**
-- Kenar temas uyarisi
-
-**Notlar**
-- Montaj toleranslarini kontrol et.
-
-
-## İlgili içerikler
-- <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
+Standart 20° kavrama açısında temel daire üzerinde evolvent profil oluşumu ve temas noktası izi kontrol edilir.

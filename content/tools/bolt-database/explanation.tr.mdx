@@ -1,45 +1,122 @@
-﻿{/* Tool: bolt-database */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: bolt-database */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu veritabanı; mekanik montajlarda kullanılan metrik standart cıvataların (ISO 4014, ISO 4017 / DIN 933, ISO 4762 / DIN 912, DIN 7991) diş geometrilerini, anma adımlarını, gerilme kesit alanlarını ($A_s$), anahtar ağzı ölçülerini ve ISO 898-1 uyarınca mukavemet sınıflarını (4.8, 8.8, 10.9, 12.9) kapsamlı olarak listeler.
 </Callout>
 
-## Formüller
+## Cıvata Geometrisi ve Standart Formüller
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Metrik Diş Gerilme Kesit Alanı ($A_s$)
+Cıvatanın eksenel çekme ve ön yük kuvvetini taşıyan efektif mukavemet alanı, ISO 898-1 standardına göre anma çapı ($d$ [mm]) ve hatve/adım ($P$ [mm]) üzerinden hesaplanır:
+
+<Formula label="Gerilme Kesit Alanı (ISO 898-1)">
+A_s = (π / 4) · [ d - 0.9382 · P ]²
 </Formula>
 
-## Değişken açıklamaları
+### 2. ISO 898-1 Mukavemet Sınıfı Gösterim Kuralı
+Metrik cıvatalarda kalite sınıfı (örn: 8.8, 10.9, 12.9) iki rakamdan oluşur:
+- **Birinci Rakam:** Nominal çekme mukavemetinin ($R_m$) yüzde biridir ($R_m = \text{ilk rakam} \times 100\text{ MPa}$).
+- **İkinci Rakam:** Akma dayanımının ($R_e$ veya $R_{p0.2}$) çekme mukavemetine oranının onda biridir ($R_e = R_m \times (\text{ikinci rakam} / 10)$).
+
+<Formula label="Cıvata Mukavemet Değerleri">
+8.8 Sınıfı: R_m = 800 MPa, R_e = 640 MPa | 10.9 Sınıfı: R_m = 1000 MPa, R_e = 900 MPa | 12.9 Sınıfı: R_m = 1200 MPa, R_e = 1080 MPa
+</Formula>
+
+### 3. İzin Verilen Maksimum Ön Yük (Preload) Kapasitesi
+VDI 2230 standardına göre sıkma esnasında cıvata gerilme alanının akma sınırının %90'ına kadar zorlanması önerilir:
+
+<Formula label="Maksimum Eksenel Ön Yük">
+F_{0.2} = A_s · R_{p0.2} [N] | F_{v,max} ≈ 0.90 · F_{0.2} / √(1 + 3·(katsayı)²)
+</Formula>
+
+## Standart Metrik Cıvata Boyut Tablosu (Kaba Adım)
 
 <Table>
   <thead>
     <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Anma Çapı</th>
+      <th>Standart Adım (P)</th>
+      <th>Gerilme Alanı (As)</th>
+      <th>Anahtar Ağzı (s)</th>
+      <th>8.8 Akma Yükü (kN)</th>
+      <th>10.9 Akma Yükü (kN)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>M6</td>
+      <td>1.00 mm</td>
+      <td>20.1 mm²</td>
+      <td>10 mm</td>
+      <td>12.9 kN</td>
+      <td>18.1 kN</td>
+    </tr>
+    <tr>
+      <td>M8</td>
+      <td>1.25 mm</td>
+      <td>36.6 mm²</td>
+      <td>13 mm</td>
+      <td>23.4 kN</td>
+      <td>32.9 kN</td>
+    </tr>
+    <tr>
+      <td>M10</td>
+      <td>1.50 mm</td>
+      <td>58.0 mm²</td>
+      <td>16 / 17 mm</td>
+      <td>37.1 kN</td>
+      <td>52.2 kN</td>
+    </tr>
+    <tr>
+      <td>M12</td>
+      <td>1.75 mm</td>
+      <td>84.3 mm²</td>
+      <td>18 / 19 mm</td>
+      <td>54.0 kN</td>
+      <td>75.9 kN</td>
+    </tr>
+    <tr>
+      <td>M16</td>
+      <td>2.00 mm</td>
+      <td>157.0 mm²</td>
+      <td>24 mm</td>
+      <td>100.5 kN</td>
+      <td>141.3 kN</td>
+    </tr>
+    <tr>
+      <td>M20</td>
+      <td>2.50 mm</td>
+      <td>245.0 mm²</td>
+      <td>30 mm</td>
+      <td>156.8 kN</td>
+      <td>220.5 kN</td>
+    </tr>
+    <tr>
+      <td>M24</td>
+      <td>3.00 mm</td>
+      <td>353.0 mm²</td>
+      <td>36 mm</td>
+      <td>225.9 kN</td>
+      <td>317.7 kN</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Cıvata Seçim Adımları"
+  steps={[
+    "Bağlantıya etki eden statik ve dinamik eksenel kuvveti belirleyin.",
+    "Tasarım emniyeti için hedef ön yükü hesaplayın (Ön yükün çalışma yükünden büyük olması aralanmayı önler).",
+    "ISO 898-1 tablosundan çap ve mukavemet sınıfını seçerek gerilme alanını kontrol edin.",
+    "DIN 931 (kısmi dişli) ile DIN 933 (tam boy dişli) seçimini kesme düzleminin dişli kısma denk gelmemesi kuralına göre yapın."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Tasarım Kuralları">
+1. **Kesme Düzleminde Diş Bulunması:** Kesme yükü taşıyan cıvatalarda dişli kısmın kesme düzlemine denk gelmesi mukavemeti %30 düşürür; gövdesi pürüzsüz ISO 4014 / DIN 931 seçilmelidir.
+2. **Paslanmaz Çelik Sarma (Galling):** A2-70 ve A4-80 paslanmaz cıvataların somunla montajında sıkışarak kaynamasını önlemek için mutlaka anti-seize montaj pastası kullanılmalıdır.
+3. **Somun Kalitesi Uyumu:** 10.9 kalite cıvata ile asla 8 kalite somun kullanılmamalıdır; somun mukavemeti daima cıvataya eşit veya üstün (10 kalite) olmalıdır.
 </Callout>
-

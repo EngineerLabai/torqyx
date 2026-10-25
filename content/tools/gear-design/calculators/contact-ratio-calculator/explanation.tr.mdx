@@ -1,45 +1,53 @@
-﻿{/* Tool: gear-design/calculators/contact-ratio-calculator */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/contact-ratio-calculator */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; düz ve helisel dişli mekanizmalarında hareket iletiminin sürekliliği, sessizliği ve dinamik yük paylaşımı için kritik olan profil kavrama oranını (εα), helis kavrama oranını (εβ) ve toplam kavrama oranını (εγ) ISO 21771 standardına göre hesaplar.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Profil kavrama oranı ($\epsilon_\alpha$), kavrama doğrusu uzunluğunun temel adıma oranıdır:
+
+<Formula label="Profil Kavrama Oranı (ISO 21771)">
+ε_α = [ √(r_{a1}² - r_{b1}²) + √(r_{a2}² - r_{b2}²) - a · sin(α_t) ] / [ π · m_t · cos(α_t) ]
 </Formula>
 
-## Değişken açıklamaları
+Helisel dişlilerde diş genişliği ($b$) ve helis açısından gelen ilave helis kavrama oranı ($\epsilon_\beta$):
+
+<Formula label="Helis ve Toplam Kavrama Oranı">
+ε_β = (b · sin(β)) / (π · m_n) | ε_γ = ε_α + ε_β
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
+      <th>Sembol</th>
       <th>Açıklama</th>
-      <th>Not</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Profil Kavrama</td>
+      <td>ε_α</td>
+      <td>Profil boyundaki temas oranı (Güvenli aktarım için εα ≥ 1.20 olmalıdır)</td>
+    </tr>
+    <tr>
+      <td>Helis Kavrama</td>
+      <td>ε_β</td>
+      <td>Helis eğiminden gelen ek örtme oranı (Helisel dişlide εβ ≥ 1.0 önerilir)</td>
+    </tr>
+    <tr>
+      <td>Toplam Kavrama</td>
+      <td>ε_γ</td>
+      <td>Toplam temas oranı (εγ = εα + εβ)</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Doğrulama ve Güvenlik Uyarıları
 
-- X: birim burada
-- Y: birim burada
-
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Profil kavrama oranının $\epsilon_\alpha < 1.0$ olması durumunda bir diş temastan çıkmadan diğeri devreye giremez; mekanizma kilitlenir veya şiddetli darbeyle kırılır.
 </Callout>
-

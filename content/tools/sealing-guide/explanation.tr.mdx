@@ -1,45 +1,65 @@
-﻿{/* Tool: sealing-guide */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: sealing-guide */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu kılavuz; hidrolik, pnömatik ve mekanik sistemlerde akışkan ortamı, çalışma sıcaklığı ve basınca göre optimum sızdırmazlık malzemesi (NBR, FKM, EPDM, VMQ, PTFE, FFKM) seçimini ve ISO 3601-2 ile DIN 3760 standartlarına uygun O-ring kanal boyutlandırma kriterlerini sunar.
 </Callout>
 
-## Formüller
+## Sızdırmazlık Malzemeleri ve Kimyasal Uyumluluk
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Temel Elastomer Türleri ve Çalışma Aralıkları
+- **NBR (Nitril Bütadien Kauçuk):** -30°C ila +100°C. Mineral yağlar, hidrolik yağlar ve gresler için genel endüstri standardıdır. Ozon ve UV ışınlarına karşı zayıftır.
+- **FKM / Viton (Floroelastomer):** -20°C ila +200°C. Yüksek sıcaklık, sentetik yağlar, yakıtlar ve agresif hidrokarbonlar için mükemmel direnç sağlar.
+- **EPDM (Etilen Propilen Dien Kauçuk):** -45°C ila +135°C. Sıcak su, düşük basınçlı buhar, fren hidrolikleri (DOT 3/4/5.1) ve polar solventlerde üstündür. *Mineral yağ veya gresle temas ettirilmemelidir; hızla şişerek tahrip olur.*
+- **VMQ (Silikon):** -60°C ila +200°C. Geniş sıcaklık aralığı ve fizyolojik zararsızlık (FDA uyumlu). Düşük mekanik yırtılma direnci nedeniyle dinamik keçelerde önerilmez.
+- **PTFE (Teflon):** -200°C ila +260°C. Neredeyse evrensel kimyasal inertlik ve çok düşük sürtünme katsayısı. Elastik hafızası zayıf olduğu için yay takviyeli (spring-energized) kullanılır.
+
+## O-Ring Kanal Boyutlandırma Kriterleri (ISO 3601-2)
+
+### Sıkışma Oranı (Squeeze Ratio)
+O-ring et kalınlığının ($W$) kanal montaj boşluğundaki yüzde sıkışma miktarı:
+
+<Formula label="O-Ring Sıkışma Oranı">
+Sıkışma (%) = [ (W - Derinlik) / W ] × 100
 </Formula>
 
-## Değişken açıklamaları
+- **Statik Radyal/Eksenel Uygulamalar:** %15 ila %30 sıkışma hedeflenir.
+- **Dinamik Pnömatik/Hidrolik Piston-Mil:** %10 ila %20 sıkışma (düşük sürtünme ve aşınma için).
 
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
+### Kanal Doluluk Oranı (Groove Fill)
+O-ring kesit alanının kanal dikdörtgen alanına oranı maksimum **%80–%85** olmalıdır:
+- Kalan %15–%20 hacim; akışkanla temas sonucu elastomerin şişmesi ve termal genleşmesi için rezerv alandır. Kanal %100 dolarsa conta metal yüzeyleri zorlayarak deforme olur.
 
-## Birimler
+### Yüksek Basınç ve Destek Halkası (Back-up Ring)
+- Basınç $P > 100\text{ bar}$ (veya dar montaj boşluğunda $P > 50\text{ bar}$) olduğunda O-ring contanın montaj aralığına doğru akması (ekstrüzyon) engellenmelidir.
+- Basınç yönünün tersine PTFE destek halkası (Back-up ring) yerleştirilmelidir.
 
-- X: birim burada
-- Y: birim burada
+## Döner Mil Dudak Keçeleri (DIN 3760)
 
-## Kullanım senaryoları
+Millerin yataklama sızdırmazlığında teğetsel çevresel hız limiti ($v$):
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
+<Formula label="Mil Çevre Hızı">
+v = (π · d · n) / 60000 [m/s]
+</Formula>
 
-## Doğrulama ve uyarı notları
+- NBR Keçeler: $v_{max} \le 10–12\text{ m/s}$
+- FKM (Viton) Keçeler: $v_{max} \le 25–30\text{ m/s}$
+- Mil Yüzeyi: Sertlik en az 45–55 HRC olmalı, yüzey pürüzlülüğü $Ra = 0.2–0.6\text{ µm}$ aralığında dalarak taşlanmış (plunge ground, sıfır helis izi) olmalıdır.
 
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+## Kullanım Senaryoları ve Tasarım Akışı
+
+<StepList
+  title="Sızdırmazlık Tasarım Adımları"
+  steps={[
+    "Sistem akışkanını belirleyin (Mineral yağ, sentetik ester, su-glikol, fren hidroliği, gıda vb.).",
+    "Sürekli ve tepe çalışma sıcaklığını kontrol ederek elastomer malzeme grubunu seçin.",
+    "Maksimum sistem basıncını değerlendirin; 70-100 bar üzerinde PTFE destek halkası planlayın.",
+    "ISO 3601-2 tablosundan kordon çapına uygun kanal genişlik ve derinlik toleranslarını uygulayın."
+  ]}
+/>
+
+## Doğrulama ve Güvenlik Uyarıları
+
+<Callout type="warning" title="Önemli Sızdırmazlık Hataları">
+1. **Yanlış Gresleme:** EPDM contaların montajında mineral yağlı gres kullanılması contayı saatler içinde eritip şişirir; silikon gres kullanılmalıdır.
+2. **Kanal Köşe Pahları:** O-ring montajı sırasında dişler veya keskin köşe pahları ($< 15^\circ$) contayı kesmemelidir.
+3. **Ekstrüzyon Hasarı:** Büyük radyal montaj boşluğu ($> 0.15\text{ mm}$) yüksek basınçta contanın parçalanmasına neden olur.
 </Callout>
-

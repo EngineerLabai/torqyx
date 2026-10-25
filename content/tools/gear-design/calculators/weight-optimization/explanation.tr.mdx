@@ -1,45 +1,26 @@
-﻿{/* Tool: gear-design/calculators/weight-optimization */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: gear-design/calculators/weight-optimization */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; büyük çaplı dişli çarklarda dayanımı düşürmeden atalet momentini ve parça ağırlığını azaltmak için web kalınlığı, flanş/göbek oranları ve hafifletme deliklerini optimize eder.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+Dolu silindirik dişli diski kütle atalet momenti ($J_{dolu}$):
+
+<Formula label="Kütle Atalet Momenti">
+J = (1 / 2) · m_{disli} · r² [kg·m²]
 </Formula>
 
-## Değişken açıklamaları
+Hafifletme cebi ve gövde web kalınlığı ($b_w$) tasarım kuralı:
 
-<Table>
-  <thead>
-    <tr>
-      <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
-    </tr>
-  </tbody>
-</Table>
+<Formula label="Web ve Çember Kalınlığı">
+b_w ≈ 0.25 - 0.35 · b | s_R ≈ 2.0 - 2.5 · m_n
+</Formula>
 
-## Birimler
+Burada $s_R$ diş dibi altındaki çember et kalınlığıdır; diş dibi çatlaklarını önlemek için asla modülün 2 katının altına inilmemelidir.
 
-- X: birim burada
-- Y: birim burada
+## Doğrulama ve Güvenlik Uyarıları
 
-## Kullanım senaryoları
-
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Uyarılar">
+Diş çemberi kalınlığının ($s_R$) yetersiz olması jant esnemesine ve diş kavrama hattının bozulmasına neden olur.
 </Callout>
-

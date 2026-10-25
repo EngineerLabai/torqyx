@@ -1,45 +1,122 @@
-﻿{/* Tool: machine-elements */}
-<Callout type="info" title="Taslak">
-Bu açıklama taslak olarak oluşturuldu. Formüller ve değişkenleri araca göre güncelle.
+{/* Tool: machine-elements */}
+<Callout type="info" title="Mühendislik Kapsamı">
+Bu araç; makine konstrüksiyonunun temel taşıyıcı elemanları olan rulmanların nominal ömür hesabını (ISO 281), mil-göbek bağlantılarında paralel kamaların kesme ve ezilme mukavemetini (DIN 6885-1) ve silindirik düz alın dişlilerde teğetsel/radyal kuvvetler ile diş dibi eğilme gerilmesini (ISO 6336 ve Lewis teorisi) entegre olarak çözümler.
 </Callout>
 
-## Formüller
+## Formüller ve Hesaplama Metodolojisi
 
-<Formula label="Temel ilişki">
-Formül burada.
+### 1. Rulman Nominal Yorulma Ömrü (ISO 281)
+Rulmanın dinamik yük kapasitesi ($C$ [kN]) ve eşdeğer dinamik yükü ($P$ [kN]) altında $10^6$ devir cinsinden temel ömrü ($L_{10}$) ve $n$ [rpm] devirdeki çalışma ömrü ($L_{10h}$ [saat]):
+
+<Formula label="Rulman Ömür Eşitliği">
+L₁₀ = (C / P)^p [milyon devir] | L₁₀h = (10⁶ / (60 · n)) · (C / P)^p [saat]
 </Formula>
 
-## Değişken açıklamaları
+Burada ömür üssü $p$:
+- Bilyalı rulmanlar için: $p = 3$
+- Makaralı rulmanlar için: $p = 10/3 \approx 3.333$
+
+### 2. Paralel Kama Mukavemeti (DIN 6885-1)
+Mil çapı $d$ [mm] üzerinden aktarılan tork $T$ [N·m] iken kamaya etki eden teğetsel çevresel kuvvet:
+
+<Formula label="Çevresel Kuvvet ve Kesme Gerilmesi">
+F_t = (2000 · T) / d [N] | τ = F_t / (b · L) ≤ τ_{em}
+</Formula>
+
+Kama yan yüzeyinde mil veya göbek faturasına binen ezilme (yüzey basıncı) gerilmesi:
+
+<Formula label="Kama Yüzey Ezilme Basıncı">
+p = F_t / ( (h / 2) · L ) ≤ p_{em}
+</Formula>
+
+Burada $b$ kama genişliği, $h$ kama yüksekliği, $L$ kama boyudur. Çelik göbekler için tipik izin verilen ezilme basıncı $p_{em} \approx 100-150\text{ MPa}$, dökme demir için $p_{em} \approx 50-80\text{ MPa}$'dır.
+
+### 3. Düz Dişli Kuvvet ve Diş Dibi Gerilmesi
+Pinyon dişlinin aktardığı güç ($P$ [kW]) ve devir ($n$ [rpm]) ile oluşan taksimat çapı $d_1$ üzerindeki kuvvetler:
+
+<Formula label="Dişli Çevresel ve Radyal Kuvvetleri">
+F_t = (19.1 × 10⁶ · P) / (n · d₁) [N] | F_r = F_t · tan(20°)
+</Formula>
+
+Lewis yaklaşımına göre diş dibi eğilme gerilmesi:
+
+<Formula label="Lewis Diş Dibi Gerilmesi">
+σ_F = F_t / (b · m · Y) ≤ σ_{F,em}
+</Formula>
+
+## Değişken Açıklamaları
 
 <Table>
   <thead>
     <tr>
       <th>Değişken</th>
-      <th>Açıklama</th>
-      <th>Not</th>
+      <th>Sembol</th>
+      <th>Birim</th>
+      <th>Mühendislik Açıklaması</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>X</td>
-      <td>Değişken açıklaması</td>
-      <td>Aralık/varsayım</td>
+      <td>Dinamik Kapasite</td>
+      <td>C</td>
+      <td>kN</td>
+      <td>Rulmanın 1 milyon devir dayanabileceği temel dinamik yük</td>
+    </tr>
+    <tr>
+      <td>Eşdeğer Yük</td>
+      <td>P</td>
+      <td>kN</td>
+      <td>Radyal ve eksenel yüklerin kombinasyonundan doğan efektif yük</td>
+    </tr>
+    <tr>
+      <td>Mil Torku</td>
+      <td>T</td>
+      <td>N·m</td>
+      <td>Milden aktarılan nominal burulma momenti</td>
+    </tr>
+    <tr>
+      <td>Mil Çapı</td>
+      <td>d</td>
+      <td>mm</td>
+      <td>Kamanın oturduğu mil anma çapı</td>
+    </tr>
+    <tr>
+      <td>Kama Boyutları</td>
+      <td>b × h × L</td>
+      <td>mm</td>
+      <td>DIN 6885 standardına göre kama genişlik, yükseklik ve boyu</td>
+    </tr>
+    <tr>
+      <td>İletilen Güç</td>
+      <td>P</td>
+      <td>kW</td>
+      <td>Dişli çark üzerinden iletilen mekanik nominal güç</td>
+    </tr>
+    <tr>
+      <td>Kavrama Açısı</td>
+      <td>α</td>
+      <td>derece</td>
+      <td>Standart evolvent profil için genellikle 20°</td>
     </tr>
   </tbody>
 </Table>
 
-## Birimler
+## Kullanım Senaryoları ve Tasarım Akışı
 
-- X: birim burada
-- Y: birim burada
+<StepList
+  title="Makine Elemanları Seçim Akışı"
+  steps={[
+    "İletilecek güç ve devirden şaft torkunu tespit edin.",
+    "Mil çapına uygun standart DIN 6885 kama kesitini seçip boyunu ezilme emniyetine göre kontrol edin.",
+    "Yataklama noktalarındaki radyal ve eksenel reaksiyon kuvvetlerinden rulman eşdeğer yükünü hesaplayın.",
+    "Hedef servis ömrünü (Endüstriyel makineler için tipik 20 000 – 40 000 saat) sağlayacak dinamik yük kapasitesini (C) doğrulayın."
+  ]}
+/>
 
-## Kullanım senaryoları
+## Doğrulama ve Güvenlik Uyarıları
 
-<StepList title="Kullanım akışı" steps={["Girdileri belirle", "Hesapla", "Sonucu kontrol et"]} />
-
-## Doğrulama ve uyarı notları
-
-<Callout type="warning" title="Uyarı">
-Geçerli aralıkları kontrol et. Kritik uygulamalarda standartları ve üretici verilerini doğrula.
+<Callout type="warning" title="Önemli Tasarım Sınırları">
+1. **Kama Kanalı Çentik Etkisi:** Mil üzerine açılan kama kanalı milin burulma ve eğilme yorulma mukavemetini %20–30 oranında düşürür.
+2. **Rulman Minimum Yükü:** Çok hafif yüklü yüksek devirli rulmanlarda kayma (skidding) hasarını önlemek için minimum yük şartı ($P > 0.02 C$) sağlanmalıdır.
+3. **Dişli Yüzey Basıncı (Pitting):** Dişlinin yalnızca eğilme mukavemeti değil, Hertz temas basıncı (pitting direnci) de kontrol edilmelidir.
 </Callout>
-
