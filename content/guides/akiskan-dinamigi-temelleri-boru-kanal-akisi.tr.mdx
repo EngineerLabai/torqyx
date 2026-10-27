@@ -1,107 +1,77 @@
 ---
-title: 'Akışkan dinamiği temelleri: boru ve kanal akışı'
-description: >-
-  Laminer ve türbülanslı akış, Reynolds sayısı, hidrolik çap, Darcy-Weisbach
-  basınç kaybı ve pompa hidroliği mühendislik rehberi.
-date: '2026-05-09'
-tags:
-  - akışkanlar
-  - Reynolds
-  - basınç kaybı
-  - boru
-  - hidrolik
-category: Akışkanlar
+title: "Akışkanlar Mekaniği ve Boru Akışı Rehberi: Laminer, Türbülanslı Akış, Reynolds ve Kavitasyon"
+description: "Akış rejimleri (Laminer vs Türbülanslı), Reynolds sayısı, Darcy-Weisbach basınç düşüşü, Colebrook-White denklemi ve pompa kavitasyonu (NPSH) mühendislik kılavuzu."
+date: "2026-05-23"
+tags: ["akışkanlar mekaniği", "Reynolds sayısı", "Darcy-Weisbach", "kavitasyon", "NPSH", "boru basınç kaybı", "ISO 5167"]
+category: "Akışkanlar"
 draft: false
-readingTime: 9
+readingTime: 12
+canonical: "https://torqyx.com/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi"
 ---
 
 <Callout type="info" title="Mühendislik Kullanım Notu">
-Bu rehber, endüstriyel boru hatları ve hava kanallarında hidrolik sürtünme kaybı, akış rejimi ve pompa/fan seçim parametrelerini doğrulamak için hazırlanmıştır. Kritik yüksek basınçlı proses tesislerinde DIN EN 10255 ve ISO 5167 standartlarına uygun hidrolik boyutlandırma yapılmalıdır.
+Bu rehber; endüstriyel proses boru hatları, hidrolik güç üniteleri, soğutma suyu devreleri ve santrifüj pompa istasyonlarında akış rejimlerinin belirlenmesini, sürtünme basınç kayıplarını ve pompa kavitasyon riskini (NPSH analizi) ISO 5167 ve Crane TP 410 standartları doğrultusunda inceler.
 </Callout>
 
 ## Problem / Amaç
 
-Boru ve kanal akışında yalnızca debi (`Q`) bilgisine bakarak hat boyutlandırmak mühendislikte sık karşılaşılan bir hatadır. Akışkanın viskozitesi, boru iç çapı, akış hızı ve yüzey pürüzlülüğü bir araya gelerek sistem direncini oluşturur. Akış rejiminin (laminer veya türbülanslı) doğru tayin edilmemesi:
-- Pompa veya fan motor gücünün yetersiz kalmasına,
-- Hatta aşırı hız sebebiyle gürültü, erozyon ve su koçu (water hammer) riskine,
-- Yetersiz hız sebebiyle çökelme ve ısı transfer veriminin düşmesine neden olur.
+Kimya tesisleri, enerji santralleri ve rafinerilerde boru hattının boyutlandırılmasında yapılan en büyük hata, boru çapını sadece "depodaki boruya" bakarak seçmektir. Boru içindeki akışkanın viskozitesi, yoğunluğu, hızı ve yüzey pürüzlülüğü bir araya gelerek sistemin dinamik direncini oluşturur.
+
+Boru çapının gereğinden dar seçilmesi akış hızını aşırı yükseltir; basınç kayıplarını üssel olarak katlar, pompalama enerjisi maliyetlerini artırır ve boru dirseklerinde şiddetli erozyon ile su darbesi (water hammer) hasarlarına yol açar. Tüm bunların ötesinde, pompa emiş hattındaki basınç kayıplarının yanlış hesaplanması **Kavitasyon** felaketini tetikler; pompa çarklarını aylar içinde sünger gibi delik deşik eder. Doğru akış hesabı Reynolds sayısı ile akış rejiminin belirlenmesini, Darcy-Weisbach basınç kayıplarının hesaplanmasını ve NPSH dengesinin kurulmasını zorunlu kılar.
 
 ## Varsayımlar
 
-- Akışkan Newtonian özellik gösterir ve akış sıkıştırılamaz (`ρ  ≈   sabit`) kabul edilir.
-- Akışkan özellikleri (yoğunluk `ρ` ve dinamik viskozite `μ`) çalışma sıcaklığındaki ortalama değerler üzerinden alınır.
-- Boru hattı boyunca akış tam gelişmiş (fully developed) sürekli rejimdedir.
-- Dairesel olmayan kesitlerde hidrolik çap (`D_h`) yaklaşımı kullanılır.
+- Akışkan Newtonyen özellik gösterir; akış sıkıştırılamaz (`rho = sabit`) kabul edilir.
+- Akışkan özellikleri (yoğunluk ve dinamik viskozite) çalışma sıcaklığındaki ortalama değerlerden alınır.
+- Boru hattı boyunca akış tam gelişmiş (fully developed) kararlı rejimdedir.
+- Dairesel olmayan kesitlerde Hidrolik Çap (`D_h`) yaklaşımı geçerlidir.
 
 ## Adım adım yöntem
 
-1. **Kesit Alanı ve Akış Hızını Belirleyin:**
-   Debi (`Q` [`m ^3 /s`]) ve boru iç çapı (`D` [`m`]) bilindiğinde ortalama akış hızı:
-   
-`v = (4  *  Q / pi  *  D^2)`
+1. **Kesit Alanı ve Ortalama Akış Hızını Hesaplayın:**
+   Debi (`Q`) ve boru iç çapı (`D`) bilindiğinde ortalama akış hızı:
+   `v = (4 * Q) / (pi * D^2)`
 
+2. **Reynolds Sayısını Hesaplayın ve Akış Rejimini Belirleyin:**
+   `Re = (rho * v * D) / mu = (v * D) / nu`
+   - Laminer Akış: `Re < 2300`
+   - Geçiş Bölgesi: `2300 <= Re <= 4000`
+   - Türbülanslı Akış: `Re > 4000`
 
-2. **Dairesel Olmayan Kesitlerde Hidrolik Çapı Hesaplayın:**
-   Dikdörtgen veya özel kesitli kanallarda akış alanı (`A`) ve ıslak çevre (`P_islak`) üzerinden:
-   
-`D_h = frac4  *  AP_islak`
+3. **Darcy-Weisbach Basınç Kaybını Hesaplayın:**
+   `Delta P = f_D * (L / D) * (rho * v^2 / 2)`
+   - Laminer akışta: `f_D = 64 / Re`
+   - Türbülanslı akışta: Colebrook-White denklemi ile `f_D` belirlenir.
 
+4. **Pompa Kavitasyon Kontrolü (NPSH Dengesi):**
+   `NPSH_a = (P_atm - P_buhar) / (rho * g) + z_s - h_f,emis`
+   Şartname: `NPSH_a >= NPSH_r + 0.5 m emniyet payı`
 
-3. **Reynolds Sayısı ile Akış Rejimini Belirleyin:**
-   Atalet kuvvetlerinin viskoz kuvvetlere oranını temsil eden boyutsuz Reynolds sayısı:
-   
-`Re = (ρ  *  v  *  D_h / μ) = (v  *  D_h / ν)`
-
-   - **`Re &lt; 2300`:** Laminer akış (parabolik hız profili).
-   - **`2300  <=  Re  <=  4000`:** Kararsız geçiş bölgesi.
-   - **`Re > 4000`:** Türbülanslı akış (girdaplı, homojen çekirdek profil).
-
-4. **Darcy Sürtünme Katsayısını (`f`) Belirleyin:**
-   - Laminer akışta sürtünme pürüzlülükten bağımsızdır:
-     
-`f = (64 / Re)`
-
-   - Türbülanslı akışta Haaland formülüyle hızlı ve güvenilir yaklaşık hesap yapılır (`varepsilon`: boru iç pürüzlülüğü):
-     
-`frac1sqrtf  ≈  -1.8  *  log_10 <= ft[ ((varepsilon / D / 3.7))^1.11 + (6.9 / Re) right]`
-
-
-5. **Darcy-Weisbach ile Sürtünme Basınç Kaybını Hesaplayın:**
-   `L` boyundaki düz boruda meydana gelen basınç düşüşü (`Δ P_s` [`Pa`]):
-   
-`Δ P_s = f  *  (L / D_h)  *  (ρ  *  v^2 / 2)`
-
-
-6. **Lokal Direnç Kayıplarını (Dirsek, Vana, Redüksiyon) Ekleyin:**
-   Her lokal bağlantının direnç katsayısı (`K`) kullanılarak toplam kayıp:
-   
-`Δ P_toplam = Δ P_s + sum K  *  (ρ  *  v^2 / 2)`
-
-
-7. **Çözümlü Endüstriyel Uygulama Örneği:**
-   20 °C su (`ρ = 998  kg/m ^3`, `μ = 1.002  *  10^-3  Pa  *  s`), `Q = 10  m ^3 /h` (`0.00278  m ^3 /s`) debiyle 50 metre uzunluğunda DN50 ticari çelik borudan (`D = 53  mm`, `varepsilon = 0.045  mm`) iletilmektedir:
-   - Akış hızı: `v = (4  *  0.00278 / pi  *  0.053^2) = mathbf1.26  m/s` *(Tavsiye edilen aralıkta: 1.0 - 2.0 m/s)*
-   - Reynolds sayısı: `Re = (998  *  1.26  *  0.053 / 0.001002) = mathbf66,480` *(Tam türbülanslı)*
-   - Bağıl pürüzlülük: `varepsilon / D = 0.045 / 53  ≈  0.00085`
-   - Haaland ile `f  ≈  0.0224`
-   - 50 m düz boru kaybı: `Δ P_s = 0.0224  *  (50 / 0.053)  *  (998  *  1.26^2 / 2) = mathbf16,740  Pa   ≈  mathbf0.167  bar`
+5. **Gerçek Dünya Vaka Analizi: Kimya Fabrikası Solvent Transfer Pompası:**
+   - DN80 emiş borunda `v = 6.63 m/s` (önerilen maksimum 2 m/s iken), toplam emiş kaybı `h_f = 14.77 m` çıktı.
+   - `NPSH_a = 8.12 - 1.5 - 14.77 = -8.15 m`! Pompa tamamen kavitasyon içinde çalışarak çark kanatlarını delik deşik etti.
+   - Çözüm: Emiş borusu DN150'ye büyütülmüş, `v = 1.88 m/s`, `NPSH_a = 8.30 m` (emniyet marjı 5.10 m) elde edilmiştir.
 
 ## Sık hatalar
 
-- **Dikdörtgen Havalandırma Kanalında Hidrolik Çapı Atlamak:** Kanalın genişlik ve yükseklik ortalamasını doğrudan çap almak hidrolik direnci %20'den fazla yanlış hesaplatır.
-- **Sıcaklıkla Viskozite Değişimini İhmal Etmek:** Yağ ve yakıt hatlarında 20 °C ile 60 °C arasındaki viskozite farkı 5 ila 10 kat olabilir; soğuk başlatma anında pompa aşırı yüke girebilir.
-- **Tavsiye Edilen Hat Hızlarını Aşmak:** Sıvı basma hatlarında 2.5 m/s, emme hatlarında 1.2 m/s üzerine çıkıldığında kavitasyon ve gürültü kaçınılmazdır.
-- **Lokal Armatür Kayıplarını Unutmak:** Çok sayıda dirsek, çekvalf ve filtre içeren kısa hatlarda armatür kayıpları düz boru kaybından daha büyük olabilir.
+- **Eksantrik Yerine Konsantrik Redüksiyon Kullanmak:** Yatay emiş borularında konsantrik redüksiyon üstte hava cebi oluşturur. Daima düz tarafı üstte eksantrik redüksiyon kullanılmalıdır.
+- **Pompa Girişinde Yetersiz Düz Boru Bırakmak:** Pompa girişinden önce `5 * D` (tercihen `10 * D`) düz boru zorunludur.
+- **Viskozitenin Sıcaklıkla Değişimini Unutmak:** Kışın ağır yağların viskozitesi 10-30 kat artabilir; yaz parametreleri kış koşullarında işe yaramaz.
+- **İdeal Bernoulli'yi Gerçek Borularda Uygulamak:** Darcy-Weisbach sürtünme terimi eklenmeden yapılan hesap yüzde 30-50 oranında yanıltır.
 
 ## İlgili hesaplayıcılar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Hidrolik Silindir Kuvvet ve Hız](/tr/tools/hydraulic-cylinder)
-- [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Darcy-Weisbach Denklem Rehberi](/tr/blog/darcy-weisbach-boru-basinc-kaybi)
+- [Boru Çapı Seçiminde Hız ve Basınç Dengesi](/tr/blog/boru-capi-seciminde-hiz-ve-basinc-dengesi)
+- [Viskozite Sınıflandırması Rehberi](/tr/guides/viskozite-siniflandirmasi-rehberi)
 
-## İlgili sözlük terimleri
+## İlgili standartlar
 
-- [Reynolds sayısı](/tr/glossary/reynolds-number)
-- [Viskozite](/tr/glossary/viscosity)
-- [Laminer akış](/tr/glossary/laminar-flow)
-- [Türbülanslı akış](/tr/glossary/turbulent-flow)
+- **ISO 5167:** Kapalı devre borularda akış ölçümü.
+- **DIN EN 10255:** Kaynaklı ve dişli dikişli çelik boru standartları.
+- **Crane Technical Paper No. 410:** Flow of Fluids Through Valves, Fittings and Pipe.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Akışkanlar ve Termodinamik Masası) tarafından ISO 5167 standartları doğrultusunda hazırlanmış ve doğrulanmıştır.*

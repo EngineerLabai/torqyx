@@ -1,0 +1,77 @@
+---
+title: "Helisel Basma Yayları Tasarımı ve Yay Kuvvet Grafiği Rehberi: EN 13906-1"
+description: "Helisel basma yaylarında yay sabiti k, strok, Wahl gerilme faktörü, blok boyu ve dinamik yorulma hesapları. EN 13906-1 standardına uygun mühendislik kılavuzu."
+date: "2026-05-20"
+tags: ["yay hesabı", "EN 13906-1", "yay sabiti", "Wahl faktörü", "mekanik tasarım"]
+category: "Makine Elemanları"
+draft: false
+readingTime: 9
+canonical: "https://torqyx.com/guides/helisel-yay-tasarimi-ve-kuvvet-grafigi-en-13906"
+---
+
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu kılavuz; endüstriyel kalıplar, valf mekanizmaları, süspansiyon sistemleri ve hassas aktüatörlerde kullanılan helisel silindirik basma yaylarının statik ve dinamik boyutlandırma kriterlerini EN 13906-1 ve DIN 2095 standartlarına dayalı olarak açıklar.
+</Callout>
+
+## Problem / Amaç
+
+Mekanik sistemlerde helisel basma yayları; enerji depolama, titreşim sönümleme, geri çağırma kuvveti üretme veya temas yüzeylerinde sabit ön yük oluşturma görevlerini üstlenir. Bir saç kalıp presinde sıyırıcı plakayı geri iten yay grubu ile bir emniyet valfinde sızdırmazlık tapasını baskılayan yayın çalışma çevrimi temelde aynı fiziksel prensiplere dayanır. Ancak sahada en sık rastlanan mekanik kırılma veya işlev kaybı vakaları, yayın yalnızca lineer Hooke kanununa göre boyutlandırılıp iç çap gerilme yığılmaları, rezonans ve blok boyu oturma etkilerinin göz ardı edilmesinden kaynaklanır.
+
+Kalıp veya mekanizma tasarımcısı genellikle yer darlığı sebebiyle yuvaya sığabilecek en sert yayı seçme eğilimindedir. Bu yaklaşım; tel çapı, ortalama yay çapı ve aktif sarım sayısı arasındaki geometrik dengeyi bozar. Sonuçta yay ya montaj anında kalıcı deformasyona uğrar ya da ilk birkaç bin çevrimde iç liflerden başlayan yorulma çatlaklarıyla erken kırılır. Doğru bir yay hesabı; yay rijitliğinin (k), çalışma strok aralığının, Wahl gerilme faktörünün ve blok boyunun bir bütün olarak doğrulanmasını zorunlu kılar.
+
+## Varsayımlar
+
+- Yay malzemesi homojen, izotropik ve lineer elastik bölgede çalışan soğuk çekilmiş veya yağda temperlenmiş yay çeliğidir (EN 10270-1 / EN 10270-2).
+- Eksenel basma yükü yay merkez ekseni boyunca simetrik olarak etkir; uç sarımlar taşlanmış ve dik basmaktadır.
+- Yay indeksi `C = D / d` oranı 4 ile 12 aralığında seçilmiştir.
+- Çalışma sıcaklığı standart ortam koşullarında (-20 °C ile +80 °C) olup elastik kayma modülü (G) sabit kabul edilmiştir.
+
+## Adım adım yöntem
+
+1. **Yay Rijitliğini (k) ve Kuvvet-Strok Bağıntısını Belirleyin:**
+   Lineer bölgede yay kuvveti ile strok ilişkisi `F = k * s` bağıntısıyla hesaplanır. Yay rijitliği:
+   `k = (G * d^4) / (8 * D^3 * n)`
+   - `d`: Yay tel çapı (mm)
+   - `D`: Ortalama yay çapı (`D = D_dis - d`) (mm)
+   - `n`: Aktif sarım sayısı (adet)
+   - `G`: Malzemenin kayma modülü (Yay çeliği için yaklaşık 81500 MPa)
+
+2. **Wahl Gerilme Düzeltme Faktörünü (k_w) Hesaplayın:**
+   Tel iç yüzeyindeki eğrilik ve doğrudan kesme gerilmesi yığılmasını düzeltmek için:
+   `C = D / d` (Yay İndeksi)
+   `k_w = [(4*C - 1) / (4*C - 4)] + (0.615 / C)`
+   Düzeltilmiş maksimum burulma gerilmesi:
+   `tau = k_w * [(8 * F * D) / (pi * d^3)]`
+
+3. **Blok Boyu (L_c) ve Emniyet Açıklığı Kontrolü:**
+   Taşlanmış uçlu yaylar için toplam sarım `n_t = n + 2` ve blok boyu `L_c <= n_t * d` formülüyle kontrol edilir. Maksimum strokta blok boyuna oturma yasaktır.
+
+4. **Gerçek Dünya Vaka Analizi: Sac Presi Kalıp Sıyırıcı Yayı:**
+   - 250 tonluk eksantrik preste 4 adet yay kullanılmaktadır (`d = 6 mm`, `D = 30 mm`, `n = 6`, strok `s_2 = 40 mm`).
+   - `k = 81.5 N/mm`, `F_2 = 3260 N`, `C = 5` için `k_w = 1.31`.
+   - Oluşan gerilme: `tau_2 = 1510 MPa`. Malzemenin dinamik yorulma limiti `tau_zul = 963 MPa` aşıldığı için yaylar 18.000 vuruşta kırılmıştır.
+   - Tasarım revizyonu: `D = 36 mm`, `d = 7 mm`, `n = 8.5` yapılarak gerilme 875 MPa seviyesine çekilmiş ve kalıp 1.5 milyon vuruşu hasarsız tamamlamıştır.
+
+## Sık hatalar
+
+- **Toplam Sarım ile Aktif Sarım Karmaşası:** Kapatılıp taşlanan uç sarımları elastik deformasyona katılmaz. Formüle toplam sarım yazıldığında rijitlik yüzde 25-30 daha düşük hesaplanır.
+- **Kılavuz Pimi Kullanılmaması (Burkulma):** `L_0 / D > 4` olduğunda basma yayları yana doğru burkulur; kovan cidarını aşındırır.
+- **Yay Rezonansı (Surge):** Kam veya eksantrik tahrik frekansı yayın 1. doğal frekansına yaklaşırsa dalgalanma gerilmeleri 3 katına çıkar.
+- **Taşlama Sırasında Aşırı Isınma:** Kontrolsüz kuru taşlama uç sarımları tavlayarak yayın dikliğini bozar.
+
+## İlgili hesaplayıcılar
+
+- [Yay Kuvveti ve Parametrik Çizim Aracı](/tr/tools/param-chart)
+- [Basit Gerilme ve Emniyet Faktörü](/tr/tools/simple-stress)
+- [Şaft Boyutlandırma ve Burulma Gerilmesi](/tr/tools/shaft-torsion)
+- [Tolerans Zinciri ve GD&T Rehberi](/tr/guides/tolerans-zinciri-ve-gdt-rehberi)
+
+## İlgili standartlar
+
+- **EN 13906-1:** Silindirik helisel basma yaylarının hesap ve tasarım standardı.
+- **DIN 2095 (EN 15800):** Soğuk şekillendirilmiş helisel basma yaylarında kalite sınıfları ve toleranslar.
+- **ISO 26909:** Yay terminolojisi ve sembol standartları.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Mekanik Tasarım Masası) tarafından EN 13906-1 normları doğrultusunda hazırlanmış ve doğrulanmıştır.*

@@ -1,110 +1,72 @@
 ---
-title: 'Tolerans zinciri ve GD&T rehberi: ASME Y14.5 ve ISO 1101'
-description: >-
-  Tolerans yığılması (Worst-Case ve RSS), datum referans çerçevesi (3-2-1
-  kuralı), MMC/LMC modifiyerleri ve geometrik toleranslar rehberi.
-date: '2026-05-09'
-tags:
-  - GD&T
-  - tolerans
-  - datum
-  - ASME Y14.5
-  - ISO 1101
-  - tolerans yığılması
-  - RSS
-category: Tolerans
+title: "Geometrik Ölçülendirme ve Toleranslandırma (GD&T) Rehberi: ASME Y14.5 ve ISO 1101"
+description: "GD&T sembolleri, Datum Referans Çerçevesi (3-2-1), Dairesel ve Toplam Salgı, Eşmerkezlilik, Konum Toleransı ve MMC bonus tolerans hesabı mühendislik kılavuzu."
+date: "2026-05-24"
+tags: ["GD&T", "ASME Y14.5", "ISO 1101", "salgı toleransı", "eşmerkezlilik", "paralellik", "datum", "kalite kontrol"]
+category: "Tolerans"
 draft: false
-readingTime: 9
+readingTime: 12
+canonical: "https://torqyx.com/guides/tolerans-zinciri-ve-gdt-rehberi"
 ---
 
 <Callout type="info" title="Mühendislik Kullanım Notu">
-Bu rehber, mekanik montajlarda boyutsal uyumluluk, datum referans sistemleri ve geometrik ürün şartnamelerinin (GPS) ASME Y14.5-2018 ve ISO 1101 standartlarına göre doğrulanması amacıyla hazırlanmıştır. Seri üretimde maliyet düşürmek için istatistiksel toleranslandırma (RSS) ve 3-2-1 datum kuralı uygulanmalıdır.
+Bu rehber; talaşlı imalat, kalıpçılık ve CMM kalite kontrol süreçlerinde parçaların geometrik form, yön, konum ve salgı sınırlarını netleştirmek amacıyla ASME Y14.5-2018 ve ISO 1101:2017 standartlarına uygun Datum ve GD&T kurallarını açıklar.
 </Callout>
 
 ## Problem / Amaç
 
-İmalat resimlerinde her bir ölçü toleransı ayrı ayrı teknik resim sınırları içinde kalsa bile, parçalar montaj hattında bir araya geldiğinde eksen kaçıklığı, sıkışma veya aşırı boşluk (backlash) sorunları ortaya çıkar. Tolerans zinciri analizi ve GD&T ilkeleri uygulanmadığında:
-- Montaj hattında parçaların birbirine uymaması ve pahalı el işçiliği (eğeleme, raspalama, şimleme),
-- Tasarımcıların riski azaltmak için gereksiz yere aşırı dar toleranslar vererek talaşlı imalat maliyetlerini 3 ila 5 kat artırması,
-- Kalite kontrol ve CMM (Koordinat Ölçüm Cihazı) ölçümlerinde parçanın montaj fonksiyonunu yansıtmayan hatalı ret kararları verilir.
+Geleneksel artı/eksi (+/-) boyutsal toleranslandırma sistemi, parçaları hayali dikdörtgen veya kübik tolerans bölgeleri içine hapseder. Oysa dönel millerde, flanş deliklerinde ve yatak kovanlarında delikler ve miller daireseldir. Geleneksel ölçülendirme parçanın uzayda hangi yüzeylerden mesnetleneceğini (Datum) tarif etmez. Örneğin torna operatörü parçayı aynaya alın yüzeyinden bağlarken, CMM kalite kontrol uzmanı parçayı dış çaptan sıfırlarsa, aynı parça imalatta "uygun" çıkarken kalite kontrolde "ıskarta" olarak etiketlenir.
+
+Geometrik Ölçülendirme ve Toleranslandırma (GD&T - Geometric Dimensioning and Tolerancing); parçanın fonksiyonel tasarım amacını, montaj ilişkilerini ve muayene referanslarını evrensel bir sembolik dille teknik resme aktarır. GD&T uygulanmayan hassas mekanizmalarda: montaj hattında eksen kaçıklığı ve sıkışma, CMM ölçümlerinde hatalı hurda kararları ve pahalı yeniden işleme maliyetleri kaçınılmazdır.
 
 ## Varsayımlar
 
-- Parçalar rijit kabul edilir (esnek sac ve kauçuk parçalar için özel serbest durum toleransları hariç).
-- İstatistiksel toleranslandırmada (RSS) üretim ölçüleri normal (Gauss) dağılıma uyar ve süreç yeterlilik katsayısı `C_p  >=  1.33` seviyesindedir.
-- 1 Boyutlu (1D) eksenel veya radyal doğrultuda tolerans yığılması analizi yapılır.
+- Parçalar rijit cisim olarak davranır; esneme ve lastik deformasyonu ihmal edilir.
+- Tüm geometrik toleranslar ASME Y14.5-2018 veya ISO 1101:2017 sembol setine göre tanımlanır.
+- Ölçüm referans sıcaklığı ISO 1:2016 uyarınca 20 °C'dir.
+- Yüzey pürüzlülüğü (Ra) geometrik toleransın altında kalacak şekilde tasarım onaylanmıştır.
 
 ## Adım adım yöntem
 
-1. **Montajın Kritik Fonksiyon Ölçüsünü (Kapanış Ölçüsü / Gap) Belirleyin:**
-   Montajın çalışmasını belirleyen eksenel boşluk, conta basma mesafesi veya dişli boşluğu zincirin nihai hedefidir (`Y`).
+1. **Datum Referans Çerçevesini (DRF) 3-2-1 Kuralıyla Kurun:**
+   Serbest uzaydaki parçanın 6 serbestlik derecesini (3 öteleme, 3 dönme) kilitlemek için 3 birbirine dik datum düzlemi gerekir:
+   - Birincil Datum (A): 3 temas noktası, 3 serbestlik derecesini kilitler.
+   - İkincil Datum (B): 2 temas noktası, 2 serbestlik derecesini kilitler.
+   - Üçüncül Datum (C): 1 temas noktası, son serbestlik derecesini kilitler.
 
-2. **Tolerans Zinciri Vektör Döngüsünü Kurun:**
-   Başlangıç noktasından hedef noktaya doğru pozitif yön tayin edilir. Döngüyü oluşturan artı yönlü parçalar (`A_i`) ve eksi yönlü parçalar (`B_j`) toplanır:
-   
-`Y_nom = sum A_i,nom - sum B_j,nom`
+2. **Form ve Yön Toleranslarını Seçin:**
+   - Dairesel Salgı: Belirli bir kesitteki dairesellik ve eksen kaçıklığını kontrol eder.
+   - Toplam Salgı: Silindirik yüzeyin tamamında; dairesellik, silindiriklik, doğrusallık ve eksen kaçıklığını tek parametre altında kontrol eder.
 
+3. **Konum Toleransı ve MMC Bonus Tolerans Hesabı:**
+   MMC modifiyeri `(M)` eklenen delik konumunda, gerçek delik çapı büyüdükçe ek bonus tolerans tanınır:
+   `Toplam_Tolerans = Belirtilen_Tolerans + (Gercek_Delik - Minimum_Delik)`
 
-3. **En Kötü Durum (Worst Case - WC) Analizini Yapın:**
-   Tüm parçaların aynı anda en olumsuz tolerans sınırlarında üretildiği aşırı senaryo:
-   
-`T_WC = sum_i=1^n |a_i|  *  T_i`
-
-   
-`Y_min = Y_nom - sum T_negatif,   Y_max = Y_nom + sum T_pozitif`
-
-
-4. **İstatistiksel Toleranslandırma (Root Sum Squares - RSS) ile Toleransları Rahatlatın:**
-   Seri imalatta tüm parçaların aynı anda uç değerde çıkma olasılığı sıfıra yakındır. Bağımsız normal dağılım kabulüyle (`3σ`):
-   
-`T_RSS = sqrtsum_i=1^n (a_i  *  T_i)^2`
-
-   RSS yaklaşımı, montaj hurda oranını %0.27 (3 Sigma) seviyesinde tutarak toleransları **%40 ile %60 oranında genişletme** ve maliyeti düşürme imkanı tanır.
-
-5. **Datum Referans Çerçevesini (3-2-1 Kuralı) Tanımlayın:**
-   - **Birincil Datum (Primary Datum):** En az 3 temas noktası ile 3 serbestlik derecesini (1 öteleme, 2 dönme) kilitler. Montajın oturduğu ana düzlemdir.
-   - **İkincil Datum (Secondary Datum):** En az 2 temas noktası ile 2 serbestlik derecesini kilitler. Dayama pimi veya hizalama yüzeyidir.
-   - **Üçüncül Datum (Tertiary Datum):** En az 1 temas noktası ile son kalan serbestlik derecesini kilitler. Konum sabitleme noktasıdır.
-
-6. **Çözümlü Endüstriyel Tolerans Zinciri Örneği:**
-   Bir redüktör gövdesinde rulman yuvası derinliği `L_1 = 50.00 pm 0.15  mm`, rulman dış bilezik genişliği `L_2 = 20.00 pm 0.05  mm` ve segman dayama burcu `L_3 = 28.00 pm 0.08  mm`'dir. Eksenel montaj boşluğu (`Gap`):
-   - Nominal boşluk:
-     
-`Gap_nom = 50.00 - 20.00 - 28.00 = mathbf2.00  mm`
-
-   - En Kötü Durum (Worst Case) toleransı:
-     
-`T_WC = 0.15 + 0.05 + 0.08 = mathbf0.28  mm`
-
-     
-`Gap_WC = 2.00 pm 0.28  mm  implies [1.72  mm  dots 2.28  mm ]`
-
-   - İstatistiksel (RSS) toleransı:
-     
-`T_RSS = sqrt0.15^2 + 0.05^2 + 0.08^2 = sqrt0.0225 + 0.0025 + 0.0064 = sqrt0.0314 = mathbf0.177  mm`
-
-     
-`Gap_RSS = 2.00 pm 0.177  mm  implies [1.823  mm  dots 2.177  mm ]`
-
-   - *Mühendislik Yorumu:* RSS analizi ile boşluk dalgalanması 0.28 mm'den 0.18 mm'ye düşürülmüş; gövde işleme toleransı `pm 0.15`'ten `pm 0.22`'ye gevşetilerek tezgah işleme süresi kısaltılabilir.
+4. **Gerçek Dünya Vaka Analizi: CNC Fener Mili (Spindle) Kovanı:**
+   - 18.000 d/dk çalışan fener mili kovanında `0.008 mm Eşmerkezlilik` şartı üretilen 50 kovanın 38'ini hurdaya göndermiş ve 18.000 d/dk'da rulman kasılarak yağlanma sorununa yol açmıştır.
+   - GD&T revizyonu: Eşmerkezlilik yerine `Datum A-B'ye göre 0.005 mm Toplam Salgı (Total Runout)` ve `0.006 mm Konum Toleransı (Position)` verilmiştir.
+   - Sonuç: Hurda oranı yüzde 76'dan yüzde 2'nin altına düşmüş; CMM ölçüm süresi 45 dakikadan 6 dakikaya inmiştir.
 
 ## Sık hatalar
 
-- **Datumları İmalat ve Montaj Fonksiyonundan Bağımsız Seçmek:** Çizimde parça fonksiyonuna uymayan bir referans yüzeyi seçmek, CMM ölçümü ile gerçek montaj davranışı arasında uyumsuzluk yaratır.
-- **Düşük Adetli İmalatta RSS Yöntemi Kullanmak:** 5-10 adetlik prototip üretimlerinde istatistiksel dağılım garantisi yoktur; kesinlikle Worst-Case yöntemi kullanılmalıdır.
-- **Malzeme Durumu Modifiyerlerini (MMC - `textcircled M`) Atlamak:** Maksimum Malzeme Koşulu (MMC) kullanılmadığında parçaya bonus tolerans verilmez ve hurda oranı yükselir.
-- **Konum Toleransı (True Position) Yerine Artı-Eksi (`pm`) Kutu Toleransı Vermek:** İki eksenli delik merkezlerinde `pm` toleransı kare bölge oluştururken, konum toleransı dairesel bölge tanımlayarak imalata %57 daha fazla tolerans alanı sağlar.
+- **Ölçü Toleransını Geometrik Toleransı Aşmak İçin Kullanmak:** Geometrik tolerans bölgesi daima boyutsal tolerans bandının içinde kalmalıdır.
+- **Datum Önceliğini Yanlış Kurmak:** Uzun ince pimin ucundaki deliği konumlandırırken kısa alın yüzünü birincil datum seçmek açısal amplifikasyon hatasına yol açar.
+- **CMM'de Yetersiz Nokta Sayısı:** Silindiriklik ölçümünde 4-8 nokta üçgenleşme (lobing) hatasını gizler; en az 36-72 nokta taranmalıdır.
+- **MMC Modifiyerini Atlayarak Gereksiz Iskartalamak:** Çakma deliklerine `(M)` modifiyeri konulmadığında, delik büyük çıktığında bile pozisyon hatası nedeniyle parça hurda edilir.
 
 ## İlgili hesaplayıcılar
 
-- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
-- [Fikstür ve Merkezleme Araçları](/fixture-tools)
-- [Birim Dönüştürücü](/tr/tools/unit-converter)
-- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+- [Tolerans Zinciri Analizi (Worst-Case ve RSS)](/tr/guides/tolerans-zinciri-analizi-kotu-durum-ve-rss)
+- [Rulman Toleransları ve ISO 286 Sistemi](/tr/blog/rulman-toleranslari-iso-286-sistemi)
+- [Press-fit Bağlantıları ve Tolerans Seçimi](/tr/guides/press-fit-baglantilari-tolerans-secimi)
+- [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
 
 ## İlgili standartlar
 
-- **ASME Y14.5-2018:** Dimensioning and Tolerancing Standard.
-- **ISO 1101:** Geometrical Product Specifications (GPS) - Geometrical Tolerancing.
-- **ISO 286-1:** Toleranslar, Sınırlar ve Geçmeler Sistemi.
-- **ISO 5459:** Geometrik Ürün Şartnameleri (GPS) - Datumlar ve Datum Sistemleri.
+- **ASME Y14.5-2018:** Dimensioning and Tolerancing (Geometrik Ölçülendirme ve Toleranslandırma).
+- **ISO 1101:2017:** Geometrical product specifications (GPS) - Geometrical tolerancing.
+- **ISO 5459:** Geometrical product specifications (GPS) - Datums and datum systems.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (İmalat ve Tolerans Masası) tarafından ASME Y14.5 normları doğrultusunda hazırlanmış ve doğrulanmıştır.*

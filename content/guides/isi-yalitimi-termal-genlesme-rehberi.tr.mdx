@@ -1,95 +1,79 @@
 ---
-title: Isı Yalıtımı ve Termal Genleşme Mühendislik Rehberi
-description: >-
-  Yüksek sıcaklık endüstriyel hatlarında ısı kaybı, yalıtım kalınlığı, Fourier
-  iletimi ve termal genleşme hesabı (DIN/ISO/ASTM).
-date: '2026-05-09'
-tags:
-  - ısı transferi
-  - yalıtım
-  - termal genleşme
-  - fourier
-  - mekanik tasarım
-category: Termal
+title: "Termal ve Elektrik Sistemler Rehberi: Isıl Genleşme, Joule Isınması ve Termal Gerilmeler"
+description: "Doğrusal ısıl genleşme, kısıtlanmış sistemlerde termal gerilme, Euler boru burkulması, elektrik baralarında Joule ısınması ve IEC 60947 mühendislik kılavuzu."
+date: "2026-05-27"
+tags: ["ısıl genleşme", "termal gerilme", "Joule ısınması", "elektrik barası", "EN 13480", "IEC 60947", "ısı transferi"]
+category: "Termal"
 draft: false
-readingTime: 9
+readingTime: 12
+canonical: "https://torqyx.com/guides/isi-yalitimi-termal-genlesme-rehberi"
 ---
 
-<Callout type="info" title="Mühendislik Doğrulama Notu">
-Bu rehber, endüstriyel boru hatları, fırın gövdeleri ve mekanik flanş bağlantılarında ısı geçişi ile boyutsal genleşmenin eş zamanlı kontrolü için ISO 12241 ve ASTM C547 esas alınarak hazırlanmıştır. Kritik yüksek basınç ve sıcaklık uygulamalarında borulama stres analizi (ASME B31.3 / B31.1) ve yetkili mühendis onayı şarttır.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber; endüstriyel buhar boru hatlarında, kojenerasyon santrallerinde ve yüksek akımlı elektrik dağıtım panolarında sıcaklık farkından kaynaklanan boyutsal uzamaları, mekanik kısıtlama gerilmelerini ve Joule kayıplarını EN 13480, ISO 12241 ve IEC 60947 standartları doğrultusunda inceler.
 </Callout>
 
 ## Problem / Amaç
 
-Endüstriyel tesislerde ısı yalıtımı yalnızca enerji verimliliği ve yakıt tasarrufu sağlamakla kalmaz; aynı zamanda:
-- **Personel İş Güvenliği:** Yüzey temas sıcaklığının 60 °C (ISO 13732-1 standardına göre) altına indirilmesi,
-- **Termal Genleşme Yönetimi:** Sıcaklıkla uzayan boruların mesnetlere, pompalara ve vana gövdelerine aşırı eksenel gerilme iletmesini engellemek,
-- **Kondenzasyon ve Korozyon Kontrolü (CUI):** Boru dış yüzeyinde yoğuşma oluşumunun önlenmesi için kritik bir mühendislik parametresidir.
+Endüstriyel tesislerde termal enerji ile elektrik enerjisi daima iç içe çalışır. Bir buhar türbininin besleme borusunda taşınan kızgın buhar boru çeliğini genleştirirken; ana dağıtım panosundaki bakır baralardan geçen binlerce amperlik akım, iletkenin iç direncinde ısıya (Joule kaybı) dönüşerek barayı ısıtır ve uzatır.
+
+Mühendislerin tasarımda yaptığı en ölümcül ihmal, serbest genleşmeye izin vermeyen **rijit kısıtlanmış yapay engeller** yaratmaktır. Sıcaklığı artan bir metal uzamak ister; eğer bu uzama iki rijit mesnet arasına hapsedilirse, malzeme kendi elastisite modülü mertebesinde devasa termal basma gerilmeleri üretir. Bu gerilme; boru hattının kolon gibi burkulmasına, pompa gövdelerinin ekseninden kopmasına veya elektrik panolarında bara izolatörlerinin kırılarak kısa devreye yol açmasına neden olur. Doğru termal-mekanik tasarım; doğrusal genleşmenin, kısıtlanma durumundaki reaksiyon kuvvetlerinin ve Joule ısınmasının entegre bir mühendislik modeliyle hesaplanmasını şart koşar.
 
 ## Varsayımlar
 
-- Sabit rejimde 1 boyutlu ısı iletimi (Fourier yasası) geçerlidir; kenar etkileri ve geçici rejim dalgalanmaları ihmal edilmiştir.
-- Malzemenin elastisite modülü ve termal genleşme katsayısı çalışma sıcaklığı aralığında homojen ve izotropik kabul edilir.
-- Doğrusal genleşme hesabı eksenel serbestlik doğrultusunda ele alınır; kısıtlanmış sistemlerde termal gerilme analizi yapılır.
-- Yalıtım malzemesi gözeneksiz ve kuru kabul edilmiş olup nem kaynaklı iletkenlik artışı güvenlik faktörüyle karşılanır.
+- Doğrusal genleşme katsayısı (`alpha`) ve elastisite modülü (E) çalışma sıcaklığı aralığında sabit kabul edilir.
+- Kısıtlanmış sistemlerde malzeme lineer elastik bölgede kalmaktadır; hesaplanan gerilme akma sınırı ile karşılaştırılır.
+- Elektrik iletkenlerinde DC veya AC akım için efektif RMS değerleri kullanılır.
+- Joule ısınması hesabında bağlantı dirençleri ve deri etkisi (skin effect) ihmal edilmiştir.
 
 ## Adım adım yöntem
 
-1. **Sıcaklık Farkını ve Ortam Koşullarını Belirleyin:**
-   Montaj ortam sıcaklığı (`T_ortam`) ile akışkan çalışma sıcaklığı (`T_calisma`) arasındaki farkı tespit edin:
-   
-`Δ T = T_calisma - T_ortam`
+1. **Serbest Doğrusal Isıl Genleşmeyi Hesaplayın:**
+   `Delta L = alpha * L_0 * Delta T`
+   - Karbon çeliği: `alpha = 12 * 10^-6 1/K`
+   - Östenitik paslanmaz çelik (AISI 304/316): `alpha = 16.5 * 10^-6 1/K` (yüzde 37 daha fazla!)
+   - Alüminyum alaşımları: `alpha = 23 * 10^-6 1/K` (çeliğin 2 katı)
 
+2. **Tam Kısıtlanmış Sistemlerde Termal Gerilmeyi Hesaplayın:**
+   `sigma_th = E * alpha * Delta T`
+   Bu formüldeki kritik gerçek: **Oluşan termal gerilme borunun uzunluğundan tamamen bağımsızdır!**
 
-2. **Fourier Yasası ile Yalıtım Isı Akısını Hesaplayın:**
-   Düzlem yüzeyler için birim alandan geçen ısı akısı (`q` [`W/m ^2`]):
-   
-`q = (k / s)  *  (T_ic - T_dis) = fracΔ TR_th`
+3. **Euler Termal Burkulma Kontrolünü Yapın:**
+   `F_kr = (pi^2 * E * I) / (K * L)^2`
+   Termal kuvvet `F_th = E * A * alpha * Delta T` değeri `F_kr`'ı aştığında boru/bara aniden yanal olarak burkulur.
 
-   Silindirik borularda birim boy başına ısı kaybı (`q_L` [`W/m`]):
-   
-`q_L = frac2pi  *  k  *  (T_boru - T_dis)ln(D_dis / D_ic)`
+4. **Elektrik İletkenlerde Joule Isınmasını Hesaplayın:**
+   `P = I^2 * R = I^2 * (rho_el * L) / A`
+   Sıcaklığa bağlı direnç değişimi: `R(T) = R_0 * [1 + alpha_e * (T - T_0)]`
+   Bu durum termal kaçak (thermal runaway) riskini doğurur; IEC 60947 uyarınca uygun kesit ve havalandırma zorunludur.
 
-
-3. **Doğrusal Termal Genleşme Miktarını Hesaplayın:**
-   Hattın serbest uzama payı (`Δ L`):
-   
-`Δ L = α  *  L_0  *  Δ T`
-
-   *(Örn: Karbon çeliği için `α  ≈  12  *  10^-6  / °C`, Paslanmaz AISI 304 için `α  ≈  16.5  *  10^-6  / °C`)*
-
-4. **Kısıtlanmış Sistemde Termal Gerilmeyi Kontrol Edin:**
-   Eğer boru rijit sabit mesnetlerle (anchor) kilitlenmişse oluşan basma gerilmesi:
-   
-`σ_termal = E  *  α  *  Δ T`
-
-   Bu gerilme akma sınırını (`R_e`) aşıyorsa hatta mutlaka genleşme döngüsü (U-loop) veya kompansatör eklenmelidir.
-
-5. **Çözümlü Endüstriyel Tasarım Senaryosu:**
-   25 metre uzunluğunda DN100 (Dış çap: 114.3 mm) karbon çelik buhar hattı 150 °C çalışma ve 20 °C montaj sıcaklığına sahiptir:
-   - `Δ T = 150 - 20 = 130  °C`
-   - `Δ L = (12  *  10^-6  / °C )  *  25,000  mm   *  130  °C  = mathbf39.0  mm`
-   - *Sonuç:* 25 metrelik boru 39 mm uzar; sabit mesnetler arasına eksenel kompansatör yerleştirilir.
+5. **Gerçek Dünya Vaka Analizi: Kağıt Fabrikası Buhar Hattı Burkulması:**
+   - 80 metre karbon çelik boru (`Delta T = 170 °C`): Serbest uzama potansiyeli `Delta L = 163.2 mm` (16.3 cm!).
+   - İki ucu rijit sabitlendiğinde `sigma_th = 418.2 MPa` (S235 akma sınırının 2 katı!).
+   - Oluşan eksenel itme kuvveti: `F_th = 1761 kN` (176 ton!). Euler kritik burkulma yükünün 5 katı olan bu kuvvetle boru hattı 40. dakikada patlayarak 4 gün üretime mal oldu.
+   - Çözüm: Omega genleşme lupu + kayar mesnetler ile gerilme 418 MPa'dan 68 MPa'ya, duvar reaksiyon kuvveti 176 tondan 4.2 tona düşürüldü.
 
 ## Sık hatalar
 
-- **Yalıtım Kalınlığını Mekanik Mesnet Boşluklarından Bağımsız Seçmek:** Kelepçelerin doğrudan boruya basması termal köprü ve yerel gerilme oluşturur; yalıtımlı boru takozu (shoe) kullanılmalıdır.
-- **Sıcaklıkla Isıl İletkenliğin Değişimini Göz Ardı Etmek:** Taş yününde `k` değeri 50 °C'de `0.038  W/(m  *  K)` iken 250 °C'de `0.070  W/(m  *  K)` seviyesine çıkabilir; ortalama sıcaklık `k` değeri alınmalıdır.
-- **İki Sabit Mesnet Arasına Genleşme Elemanı Koymamak:** Genleşme engellendiğinde flanş cıvataları aşırı çekme ve kesmeye maruz kalır.
-- **Farklı Malzemelerin Bimetalik Genleşme Farkını Unutmak:** Çelik şase ile paslanmaz boru arasındaki %40 genleşme farkı kayar mesnet boşluklarıyla dengelenmelidir.
-- **CUI (Yalıtım Altı Korozyonu) Korumasını Atlamak:** Dış ceket sızdırmazlığı sağlanmadığında yalıtıma sızan nem boruyu hızla deler.
+- **Buhar Hatlarında Kayar Mesnetleri Sabit Mesnet Yapmak:** U-cıvatalar sonuna kadar sıkıldığında boru kayamaz; konsolları büker.
+- **Pano Baralarında Bimetalik Galvanik Korozyon:** Bakır bara ile alüminyum pabuç doğrudan temas edildiğinde galvanik erozyon ve temas direnci artışı yangın riskini doğurur. Bimetalik geçiş pulu zorunludur.
+- **Kompansatörde Kılavuz Borular Atlamak:** Körüklü kompansatör koyup her iki yanına kılavuz boru (guide) koymamak, iç basınç itkisiyle körüğün yana katlanıp patlamasına sebep olur.
+- **IEC 60947 Derating Kuralını Uygulamamamak:** 25 °C açık hava için seçilen bara 55 °C pano iç sıcaklığında aşırı ısınır; akım taşıma kapasitesi en az yüzde 20 düşürülmelidir.
 
 ## İlgili hesaplayıcılar
 
-- [Birim Dönüştürücü](/tr/tools/unit-converter)
-- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)
-- [Boru Basınç Kaybı Hesabı](/tr/tools/pipe-pressure-loss)
-- [Hidrolik Silindir Güç Hesabı](/tr/tools/hydraulic-cylinder)
-- [Malzeme Kütüphanesi ve Mekanik Dayanım Değerleri](/tr/materials)
+- [Isı Enerjisi Hesaplayıcı](/tr/tools/heat-energy)
+- [Boru Basınç Kaybı ve Akış Analizi](/tr/tools/pipe-pressure-loss)
+- [Akışkanlar Mekaniği ve Boru Akışı Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
+- [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
 
 ## İlgili standartlar
 
-- **ISO 12241:** Endüstriyel Tesisatta Isı Yalıtımı Hesaplama Kuralları.
-- **ASTM C547:** Mineral Yün Boru İzolasyonu Standart Şartnamesi.
-- **ASME B31.3:** Proses Borulama ve Termal Genleşme Gerilmesi Esasları.
-- **DIN EN ISO 13732-1:** Sıcak Yüzeylerle Temasta Ergonomi ve Yanık Eşikleri.
+- **EN 13480-3:** Endüstriyel metalik boru tesisatı - Tasarım ve hesaplama (boru gerilme analizi).
+- **ASME B31.3 / B31.1:** Process and Power Piping Standards.
+- **IEC 60947-1:** Alçak gerilim anahtarlama ve kontrol düzenleri - Bara sıcaklık artış sınırları.
+- **ISO 12241:** Bina tesisatı ve endüstriyel tesisler için ısı yalıtımı hesaplama kuralları.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Termal ve Enerji Sistemleri Masası) tarafından EN 13480 ve IEC 60947 normları doğrultusunda hazırlanmış ve doğrulanmıştır.*

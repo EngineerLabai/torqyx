@@ -1,0 +1,74 @@
+---
+title: "Tolerance Stack-up Analysis Guide: Worst-Case and Statistical RSS Methods"
+description: "Engineering guide on 1D/2D tolerance stack-up analysis: Worst-Case, Root Sum of Squares (RSS), Six Sigma limits, and process capability (Cp, Cpk) under ASME Y14.5."
+date: "2026-05-22"
+tags: ["tolerance stack-up", "worst-case", "RSS", "tolerance analysis", "ASME Y14.5", "ISO 286", "quality control"]
+category: "Tolerances"
+draft: false
+readingTime: 10
+canonical: "https://torqyx.com/en/guides/tolerans-zinciri-analizi-kotu-durum-ve-rss"
+---
+
+<Callout type="info" title="Engineering Practice Note">
+This guide details 1D and 2D tolerance stack-up analysis methodologies—Worst-Case and statistical Root Sum of Squares (RSS)—ensuring mechanical clearance and interference fits across automotive gearboxes, aerospace linkages, and precision valves under ASME Y14.5-2018 and ISO 286.
+</Callout>
+
+## Problem / Objective
+
+In precision mechanical assemblies (automotive transmissions, aircraft actuation linkages, hydraulic spool valves), every individual component may conform perfectly to its respective manufacturing drawing. Yet, when mated together on an assembly line, the accumulated dimensional variations frequently lead to binding, interference, or excessive leakage gaps. This phenomenon is known as **Tolerance Stack-up**.
+
+Design engineers routinely fall into two counterproductive traps:
+1. **Hyper-Conservative Tolerancing:** Assigning ultra-tight micron-level tolerances (e.g., +/-0.01 mm) across all components to guarantee function. This inflates precision machining, grinding, and inspection costs by 400 to 600 percent while spiking factory scrap rates.
+2. **Nominal CAD Complacency:** Modeling complex assemblies using purely nominal dimensions without conducting a mathematical stack-up loop. This leads to assembly line stalls, unauthorized field hammering, and severe field warranty claims from oil leaks and vibration. Rigorous engineering requires selecting either the Worst-Case or the Statistical RSS method based on production volume and functional criticality.
+
+## Assumptions
+
+- Parts are treated as rigid bodies; elastic and plastic deformation under assembly force is neglected.
+- For statistical tolerancing (RSS), part dimensions follow a Gaussian normal distribution and process capability satisfies `C_p >= 1.0` (3-Sigma minimum).
+- Analysis is performed as a 1-dimensional closed vector loop in the axial or radial direction.
+- Thermal expansion effects are neglected at standard reference temperature (20 °C).
+
+## Step by step method
+
+1. **Identify the Critical Functional Gap (Closure Dimension):**
+   The assembly's operational clearance is the loop closure target:
+   `U_closure = sum(A_positive) - sum(A_negative)`
+
+2. **Calculate Worst-Case (Deterministic Boundary) Tolerance:**
+   Assumes every part is simultaneously at its most adverse dimensional extreme:
+   `T_wc = sum(T_i)`
+   - Maximum Gap: `U_max = U_nom + sum(Upper_dev_pos) - sum(Lower_dev_neg)`
+   - Minimum Gap: `U_min = U_nom + sum(Lower_dev_pos) - sum(Upper_dev_neg)`
+
+3. **Apply Statistical Root Sum of Squares (RSS) Method:**
+   In mature mass production, variances sum as independent random variables:
+   `T_rss = sqrt( sum(T_i^2) )`
+   This predicts 50 to 60 percent tighter stack variation than Worst-Case, unlocking wider machining tolerances and cutting production cost.
+
+4. **Real-World Case Study: Automotive Planetary Carrier End-Play:**
+   - Gearbox axial end-play required: `0.15 mm <= Gap <= 0.65 mm`. Nominal gap: `0.40 mm`.
+   - Worst-Case analysis yielded a minimum gap of `0.09 mm`, violating the 0.15 mm floor (binding risk).
+   - RSS analysis across 250,000 units/year showed variation of only `+/- 0.082 mm`, keeping all assemblies between `0.318 mm` and `0.482 mm`. Firm avoided expensive precision grinding, saving over 450,000 Euros annually.
+
+## Common mistakes
+
+- **Applying RSS to Low-Volume Prototypes:** RSS is only valid where statistical normal distributions have formed in mass production. On 5-piece prototype runs, Worst-Case is mandatory.
+- **Vector Sign Errors:** Failing to rigorously assign positive (gap-opening) and negative (gap-closing) directions invalidates the entire analysis.
+- **Excluding GD&T Form Tolerances:** Parallelism, perpendicularity, and runout errors consume functional clearance exactly like size tolerances do.
+
+## Related calculators
+
+- [Tolerance Stack-up and GD&T Guide](/en/guides/tolerans-zinciri-ve-gdt-rehberi)
+- [Bearing Life and Tolerance Selection](/en/blog/rulman-omru-l10-iso-281)
+- [Bolt Preload and Tightening Torque](/en/blog/civata-on-yuku-vdi-2230)
+- [Simple Stress Calculator](/en/tools/simple-stress)
+
+## Relevant standards
+
+- **ASME B89.7.3.1:** Guidelines for evaluating compliance with specification limits.
+- **ISO 286-1 / ISO 286-2:** ISO system of limits and fits.
+- **ASME Y14.5-2018:** Dimensioning and Tolerancing (GD&T).
+
+---
+
+*This guide has been prepared and verified by the TORQYX Engineering Editorial Board (Manufacturing and Tolerancing Desk) in compliance with ASME Y14.5 and ISO 286 standards.*

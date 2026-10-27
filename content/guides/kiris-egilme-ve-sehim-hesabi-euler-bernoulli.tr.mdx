@@ -1,0 +1,76 @@
+---
+title: "Kiriş Eğilme ve Sehim Hesabı Rehberi: Euler-Bernoulli Teorisi ve Standartlar"
+description: "Statik ve dinamik yükler altında kiriş eğilme gerilmesi, atalet momenti, sehim formülleri ve L/300, L/500 sehim sınırları. Eurocode 3 ve DIN 1052 standart kılavuzu."
+date: "2026-05-21"
+tags: ["kiriş sehimi", "eğilme gerilmesi", "Euler-Bernoulli", "atalet momenti", "Eurocode 3", "statik analiz"]
+category: "Mukavemet"
+draft: false
+readingTime: 10
+canonical: "https://torqyx.com/guides/kiris-egilme-ve-sehim-hesabi-euler-bernoulli"
+---
+
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu kılavuz; endüstriyel çelik konstrüksiyonlar, vinç köprüleri, taşıyıcı şaseler ve makine gövdelerinde kullanılan kirişlerin eğilme momenti, kayma gerilmesi ve elastik sehim (çökme) doğrulamalarını Euler-Bernoulli teorisi ve Eurocode 3 (EN 1993-1-1) standartlarına göre ele alır.
+</Callout>
+
+## Problem / Amaç
+
+Mekanik tasarımda ve çelik yapılarda kiriş elemanları; tavan vinçleri, platform taşıyıcıları, şaseler ve konveyör hatlarında ana yük taşıyıcı bileşenler olarak görev yapar. Bir kirişin boyutlandırılmasında tasarımcıların düştüğü en yaygın yanılgı, kiriş kesitini sadece **akma gerilmesi emniyetine** göre belirlemektir. Sahadaki pratik gerçek ise şudur: Bir kiriş kopma veya plastik akma açısından yüzde 100 güvenli olsa bile, aşırı elastik sehim (esneme) yapması nedeniyle tüm sistemi kullanılmaz hale getirebilir.
+
+Örneğin bir gezer köprülü vinçte kirişin aşırı esnemesi, vinç arabasının (kedi) yokuş yukarı tırmanmasına, tekerlek rulmanlarının eksen dışı kasılarak erken dağılmasına ve ray kılavuzlarının aşınmasına neden olur. Aynı şekilde hassas bir CNC takım tezgahı şasesinde kirişin mikron mertebesindeki sehimleri doğrudan parça işleme toleranslarının bozulmasıyla sonuçlanır. Bu nedenle modern mühendislik standartları, kiriş tasarımını Taşıma Gücü (ULS) ve Kullanılabilirlik (SLS - Sehim) olarak iki aşamada doğrulamayı şart koşar.
+
+## Varsayımlar
+
+- Kiriş malzemesi homojen, izotropik ve doğrusal elastik davranış sergiler (Hooke kanunu geçerlidir).
+- Kiriş narin bir elemandır; açıklığın kesit yüksekliğine oranı `L / h > 10` olup Euler-Bernoulli (düzlem kesitler düzlem kalır) hipotezi geçerlidir.
+- Deformasyonlar küçük sehim teorisi sınırları içindedir; eksenel çekme-basma etkileşimi ihmal edilmiştir.
+- Yanal burulmalı burkulma (LTB) uygun mesnetlemelerle önlenmiştir.
+
+## Adım adım yöntem
+
+1. **Eğilme Gerilmesini (Navier Formülü) Hesaplayın:**
+   Kesitte oluşan maksimum normal eğilme gerilmesi:
+   `sigma = (M_b * y) / I = M_b / W_b`
+   - `M_b`: İlgili kesitteki eğilme momenti (N*mm)
+   - `I`: Kesitin eğilme eksenine göre alan atalet momenti (mm^4)
+   - `W_b`: Kesit mukavemet momenti (mm^3) (`W_b = I / y_maks`)
+
+2. **Diferansiyel Sehim Denklemini ve Kapalı Formülleri Uygulayın:**
+   Elastik eğrinin diferansiyel denklemi: `E * I * (d^2 w / dx^2) = - M_b(x)`.
+   - İki ucu basit mesnetli, ortadan tekil yüklü kiriş (Açıklık L, Yük F):
+     `f_maks = (F * L^3) / (48 * E * I)` (Orta noktada)
+   - İki ucu basit mesnetli, düzgün yayılı yüklü kiriş (Yayılı Yük q):
+     `f_maks = (5 * q * L^4) / (384 * E * I)` (Orta noktada)
+
+3. **Standart Sehim Sınırlarını (SLS) Kontrol Edin:**
+   - Genel çelik yapı döşeme kirişleri: `f_zul = L / 300`
+   - Gezer köprülü vinç köprüleri (EN 13001): `f_zul = L / 500` ila `L / 1000`
+   - Hassas makine tezgah milleri: `f_zul = L / 1000` ila `L / 3000`
+
+4. **Gerçek Dünya Vaka Analizi: 10 Tonluk Vinç Köprüsü:**
+   - Açıklık `L = 12000 mm`, düşey tekerlek yükü `F = 50 kN`.
+   - İlk seçim IPE 360 profilinde gerilme `177.1 MPa < 235 MPa` (emniyetli görünüyordu), ancak sehim `57.09 mm` çıktı (`f_zul = L / 600 = 20 mm` limitinin 3 katı!).
+   - Çözüm: Kiriş HEB 450 profiline büyütülerek sehim `12.88 mm <= 20 mm` seviyesine indirilmiş ve vinç araba tırmanma arızası çözülmüştür.
+
+## Sık hatalar
+
+- **Atalet Momenti Eksenini Karıştırmak (`I_x` vs `I_y`):** I profili yatay monte etmek rijitliği yüzde 90 düşürür.
+- **Kısa ve Kalın Kirişlerde Kayma Deformasyonunu Atlamak:** `L / h < 5` kirişlerde Timoshenko kayma etkisi hesaba katılmalıdır.
+- **Yanal Burulmalı Burkulmayı (LTB) Unutmak:** Bası flanşı mesnetlenmezse kiriş aniden yana bükülerek çöker.
+
+## İlgili hesaplayıcılar
+
+- [Kiriş Eğilme ve Sehim Hesaplayıcı](/tr/tools/bending-stress)
+- [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
+- [Tolerans Zinciri Analizi Aracı](/tr/guides/tolerans-zinciri-analizi-kotu-durum-ve-rss)
+
+## İlgili standartlar
+
+- **EN 1993-1-1 (Eurocode 3):** Çelik yapıların tasarımı - Genel kurallar.
+- **DIN 1052:** Taşıyıcı sistemlerde sehim ve deformasyon sınırları.
+- **EN 13001 / DIN 15018:** Vinçler - Çelik konstrüksiyon sehim sınır kriterleri.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Statik ve Mukavemet Masası) tarafından Eurocode 3 normları doğrultusunda hazırlanmış ve doğrulanmıştır.*

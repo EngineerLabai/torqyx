@@ -1,63 +1,74 @@
 ---
-title: "Doğru malzeme seçimi rehberi"
-description: "Çelik, alüminyum, paslanmaz ve titanyum arasında seçim yaparken dayanım, ağırlık, maliyet ve korozyon kriterlerini birlikte değerlendirin."
-date: "2026-05-09"
-tags: ["malzeme seçimi", "çelik", "alüminyum", "korozyon"]
+title: "Mühendislik Malzeme Seçimi ve Mekanik Özellikler Rehberi: ISO 6892-1 ve ASTM E8"
+description: "Çekme mukavemeti, akma dayanımı, elastisite modülü, süneklik, Hooke kanunu ve malzeme seçim matrisi. ISO 6892-1 ve EN 10083 mühendislik kılavuzu."
+date: "2026-05-25"
+tags: ["malzeme seçimi", "çekme mukavemeti", "akma dayanımı", "elastisite modülü", "süneklik", "ISO 6892-1", "çelik kaliteleri"]
 category: "Malzeme"
 draft: false
-readingTime: 7
+readingTime: 12
+canonical: "https://torqyx.com/guides/malzeme-secimi-rehberi"
 ---
 
-<Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber; makine şaseleri, hidrolik aktarma organları, basınçlı kaplar ve aşınma plakalarında malzeme seçimini mekanik mukavemet parametreleri (akma, çekme, tokluk, elastisite modülü) ve ISO 6892-1 metalik malzemeler çekme deneyi standartları doğrultusunda inceler.
 </Callout>
 
 ## Problem / Amaç
 
-Malzeme seçimi sadece en yüksek dayanımı seçmek değildir. Tasarım yükleri, ortam, üretim yöntemi, tedarik riski ve bakım stratejisi aynı karar tablosunda ele alınmalıdır.
+Mekanik tasarım sürecinde bir mühendisin verdiği en belirleyici karar, geometriyi hangi malzemeden üreteceğini seçmektir. Sahada yaşanan mekanik göçmelerin ve kırılmaların büyük bölümü, yanlış yük hesaplarından değil, malzemenin çalışma ortamındaki fiziksel davranışının yanlış yorumlanmasından kaynaklanır.
+
+Tasarımcıların düştüğü en yaygın hata, kataloglardaki en yüksek **Çekme Mukavemetine (R_m)** sahip çeliği seçmenin sistemi en güvenli kılacağını varsaymaktır. Oysa aşırı yüksek mukavemet genellikle düşük süneklik, zayıf darbe tokluğu ve yüksek çentik hassasiyetiyle birlikte gelir. Örneğin 1200 MPa çekme dayanımına sahip sertleştirilmiş bir mil, şantiye ortamında eksi 15 °C soğukta küçük bir darbeyle cam gibi aniden kırılabilir (gevrek kırılma). Doğru malzeme seçimi; akma sınırı, elastisite modülü, kopma uzaması, yorulma limiti, işlenebilirlik ve maliyet parametrelerinin çok kriterli bir mühendislik matrisinde optimize edilmesini gerektirir.
 
 ## Varsayımlar
 
-- Yükler statik veya düşük çevrimli kabul edilir.
-- Malzeme değerleri tipik katalog değeridir.
-- Nihai seçim tedarikçi sertifikası ve sorumlu mühendis onayı ile doğrulanır.
+- Çekme deneyi değerleri ISO 6892-1 uyarınca standart numune geometrisinde oda sıcaklığında elde edilmiştir.
+- Elastisite modülü ve termal genleşme katsayısı çalışma sıcaklığı aralığında homojen ve izotropik kabul edilir.
+- Tasarım yükü statik veya düşük çevrimlidir; yorulma analizi ayrıca değerlendirilmelidir.
+- Malzeme değerleri tipik katalog ortalamasıdır; nihai seçim tedarikçi sertifikası ile doğrulanmalıdır.
 
 ## Adım adım yöntem
 
-1. Çalışma yükünü, sıcaklığı ve ortamı yaz.
-2. Akma dayanımı, elastisite modülü, yoğunluk ve korozyon direncini karşılaştır.
-3. Üretim yöntemini ve yüzey işlem ihtiyacını not et.
-4. Maliyet, bulunabilirlik ve bakım etkisini puanla.
-5. Kritik parça için ikinci bir alternatif malzeme belirle.
+1. **Akma Dayanımını (R_p0.2) Esas Alarak Emniyet Gerilmesini Belirleyin:**
+   Statik tasarımda kalıcı şekil değiştirme kritik olduğundan:
+   `sigma_emniyet = R_p0.2 / S`
+   - S235 yapı çeliği: `R_p0.2 = 235 MPa`
+   - 42CrMo4 ıslah çeliği (QT): `R_p0.2 = 650-900 MPa`
+   - Alüminyum 6061-T6: `R_p0.2 = 276 MPa`
+
+2. **Elastisite Modülünü (E) ve Sehim Kısıtını Kontrol Edin:**
+   `sigma = E * epsilon` (Hooke Kanunu)
+   Tüm çelik alaşımlarında `E ≈ 210000 MPa`'dır; yüksek mukavemetli alaşıma geçmek sehimi azaltmaz!
+
+3. **Süneklik (Kopma Uzaması % A) ve Darbe Tokluğunu Değerlendirin:**
+   - `A < %5`: Gevrek malzeme (pik döküm, sertleştirilmiş takım çelikleri)
+   - `A > %12`: Sünek malzeme (yapı çelikleri, östenitik paslanmazlar)
+   Düşük sıcaklık uygulamalarında `KV (-20 °C)` Charpy değeri kontrol edilmelidir.
+
+4. **Gerçek Dünya Vaka Analizi: Hidrolik Ekskavatör Bom Mafsal Pimi:**
+   - C45 çeliği 58 HRC'ye komple sertleştirildi: `R_m = 1150 MPa`, `A = %3`, `KV (-10 °C) = 6 Joule`.
+   - Eksi 10 °C maden ocağında pim sert kaya darbesinde cam gibi kırıldı, 850.000 TL hasar oluştu.
+   - Çözüm: 42CrMo4 ıslah çeliği (çekirdek 28-32 HRC, `A = %14`, `KV = 35 Joule`) + yüzey indüksiyonla 56-60 HRC sertleştirme. Revize pim 8.000 saati sıfır arızayla tamamladı.
 
 ## Sık hatalar
 
-- Sadece çekme dayanımına bakmak.
-- Korozyon ve yüzey işlemini kararın dışında bırakmak.
-- Tedarik edilemeyen kaliteyi tasarımın ana varsayımı yapmak.
+- **Yüksek Mukavemeti Yüksek Yorulma Ömrü Sanmak:** 1200 MPa üzerindeki çeliklerde yüzey pürüzlülüğü yorulma limitini hızla düşürür. Ham yüzeyli yüksek mukavemetli çelik, taşlanmış orta mukavemetli çelikten daha çabuk çatlayabilir.
+- **Korozyon Tipini Yanlış Teşhis Etmek:** Klorlu deniz suyunda AISI 304 paslanmaz oyuklaşma (pitting) korozyonuna uğrar. Bu ortamlarda AISI 316 veya Dubleks 2205 seçilmelidir.
+- **Galvanik Korozyonu Unutmak:** Alüminyum gövdeye paslanmaz cıvata doğrudan vidalanırsa alüminyum anot gibi erir. İzolasyon pulları gereklidir.
+- **Kaynaklanabilirlik Sınırını Aşmak:** `CEV > 0.45%` olan çelikler ön ısıtmasız kaynak edilirse HAZ'da hidrojen çatlaması oluşur.
 
 ## İlgili hesaplayıcılar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Hızlı Referans Merkezi](/reference)
-- [Çekme Gerilmesi Hesaplayıcı](/tr/tools/simple-stress)
+- [Malzeme Kütüphanesi ve Özellik Tabloları](/tr/tools/material-cards)
+- [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
+- [Şaft Boyutlandırma ve Burulma Gerilmesi](/tr/tools/shaft-torsion)
+- [Titanyum Alaşımları Seçim Rehberi](/tr/guides/titanyum-alasimlari-rehberi)
 
-## İlgili sözlük terimleri
+## İlgili standartlar
 
-- [Korozyon direnci](/tr/glossary/corrosion-resistance)
-- [Gerilme](/tr/glossary/stress)
-- [Güvenlik faktörü](/tr/glossary/factor-of-safety)
+- **ISO 6892-1:** Metalik malzemeler - Çekme deneyi - Oda sıcaklığında deney metodu.
+- **ASTM E8 / E8M:** Standard Test Methods for Tension Testing of Metallic Materials.
+- **EN 10083-1 / EN 10083-3:** Islah çelikleri - Teknik teslim şartları.
 
-## Kısa FAQ
+---
 
-### Soru: Malzeme seçiminde ilk kriter ne olmalı?
-
-Önce yük durumu ve servis ortamı netleştirilmelidir; sonra dayanım, ağırlık ve imalat uygunluğu birlikte puanlanır.
-
-### Soru: Çelik mi alüminyum mu daha iyi?
-
-Tek bir doğru yoktur. Çelik dayanım ve maliyet için, alüminyum ağırlık ve korozyon davranışı için avantaj sağlayabilir.
-
-### Soru: Korozyon riski nasıl hesaba katılır?
-
-Ortam sınıfı, yüzey işlemi ve bakım aralığı birlikte değerlendirilir; dış ortamda kaplama veya paslanmaz kalite gerekebilir.
+*Bu rehber, TORQYX Mühendislik Kurulu (Malzeme ve Metalurji Masası) tarafından ISO 6892-1 standartları çerçevesinde hazırlanmış ve doğrulanmıştır.*

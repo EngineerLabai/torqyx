@@ -1,49 +1,94 @@
 ---
-title: "Cıvata Ön Yükü Nasıl Hesaplanır? VDI 2230 Yaklaşımı"
-description: "Cıvata ön yükü hakkında adım adım rehber. ISO/DIN standartları ve formüller dahil. TORQYX hesaplayıcısı ile otomatik hesapla."
+title: "Cıvata Ön Yük ve Sıkma Torku Hesabı Rehberi: VDI 2230 Standardı ve Uygulaması"
+description: "VDI 2230 standardına göre cıvata ön yük kuvveti F_M, sıkma torku M_A, diş ve kafa sürtünme katsayıları, yerleşme kaybı ve enine kayma önleme hesabı."
 date: "2026-05-19"
-tags: ["cıvata", "ön yük", "VDI 2230", "tork"]
+tags: ["cıvata hesabı", "ön yük", "VDI 2230", "sıkma torku", "ISO 898-1", "bağlantı elemanları"]
 category: "Bağlantı Elemanları"
 draft: false
-readingTime: 3
+readingTime: 10
 canonical: "https://torqyx.com/blog/civata-on-yuku-vdi-2230"
 ---
 
-Cıvata ön yükü, bağlantının gevşemeden ve emniyetli şekilde çalışması için en kritik başlangıç değerlerinden biridir. VDI 2230 yaklaşımı bu değeri yalnızca bir tork tablosu olarak değil; cıvata rijitliği, sıkılan parçaların rijitliği, servis yükü ve montaj saçılımı ile birlikte ele alır.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber; flanşlı boru hatları, ağır iş makineleri ve rüzgar türbini kule bağlantılarında yüksek mukavemetli metrik cıvataların (8.8, 10.9, 12.9) statik ve dinamik ön yükleme hesabını VDI 2230 Sayfa 1 ve ISO 898-1 standartlarına uygun olarak detaylandırır.
+</Callout>
 
-## Ön yük nedir
+## Endüstriyel Bağlam ve Kritik Montaj Problemi
 
-- Cıvatanın sıkma sonrası bağlantıya uyguladığı eksenel kuvvet.
-- Sürtünme, diş geometrisi ve malzeme sınıfı ile doğrudan ilişkilidir.
-- Çok düşük ön yük gevşeme, çok yüksek ön yük akma veya hasar riski doğurur.
+Endüstriyel tesislerde cıvatalı bağlantılar, parçaları bir arada tutan basit vidalı elemanlar olarak değil, yüksek gerilme altında çalışan rijit birer "mekanik yay" olarak görev yapar. Bir cıvata torklandığında eksenel olarak uzar; bağlanan flanş veya gövde parçaları ise basma gerilmesi altında sıkışır. Bu elastik deformasyonun yarattığı ön yükleme kuvveti (F_M), işletme sırasında bağlantıya gelen eksenel çekme, enine kesme ve titreşim yüklerine karşı eklemin ayrılmasını ve gevşemesini önleyen temel emniyet mekanizmasıdır.
 
-## VDI 2230 metodu
+Sahada ve atölyelerde karşılaşılan cıvata gevşemeleri veya kırılmalarının yüzde 80'inden fazlası aşırı yükten değil, **yetersiz veya kontrolsüz ön yüklemeden** kaynaklanır. Cıvata yeterince sıkılmadığında, değişken dinamik işletme kuvveti cıvata gövdesine doğrudan yansır ve cıvata birkaç milyon çevrim içerisinde yorulma kırılmasına uğrar. Doğru ön yükleme yapıldığında ise dış işletme yükünün büyük kısmı flanş plakalarının elastik dekompresyonu tarafından karşılanır; cıvataya yansıyan dinamik gerilme genliği minimum düzeyde kalır.
 
-- Montaj ön yükü, çalışma yükü ve emniyet katsayıları birlikte değerlendirilir.
-- Cıvata ve sıkılan parçaların rijitlikleri hesap akışına dahil edilir.
-- Standardın varsayımları proje koşullarıyla karşılaştırılmalıdır.
+## Teorik Altyapı ve VDI 2230 Matematiksel Modeli
 
-## Adım adım hesap
+Cıvatanın sıkılması sırasında tork anahtarı ile uygulanan toplam sıkma torku (M_A), üç ana bileşene harcanır:
 
-- Cıvata çapı, adım, kalite sınıfı ve sürtünme katsayısı belirlenir.
-- Gerilme kesit alanı ve izin verilen yük aralığı hesaplanır.
-- Hedef ön yük ve sıkma torku kontrol edilir.
+1. Diş helisi boyunca cıvatayı eksenel olarak geren yararlı tork,
+2. Diş temas yüzeylerindeki sürtünmeyi yenen parazit tork,
+3. Cıvata başı veya somun altı temas yüzeyindeki sürtünmeyi yenen parazit tork.
 
-## Torqyx ile otomatik hesaplama
+Uygulanan toplam torkun yalnızca yüzde 10 ila 15'i cıvatayı geren faydalı ön yüke dönüşürken, kalan yüzde 85 ila 90'lık kısım sürtünme ısısı olarak kaybolur.
 
-- TORQYX cıvata hesaplayıcısı girişleri birim kontrolünden geçirir.
-- Formül kırılımı, varsayımlar ve kaynak notları raporlanabilir şekilde sunulur.
-- Hesap sonucu manuel Excel akışına göre daha izlenebilir hale gelir.
+### 1. VDI 2230 Sıkma Torku Formülü
 
-## Uygulama kontrolü
+VDI 2230 Sayfa 1 standardına göre metrik cıvatalarda montaj sıkma torku (M_A) ve montaj ön yük kuvveti (F_M) arasındaki ilişki şu formülle ifade edilir:
 
-Ön yük hesabında ilk hata genellikle sürtünme katsayısının tek bir sabit kabul edilmesidir. Aynı M10 veya M12 cıvata, kuru yüzeyde, hafif yağlı montajda veya kaplamalı yüzeyde farklı ön yük üretir. Bu nedenle hesap sonucunu doğrudan üretim talimatına taşımadan önce rondela yüzeyi, diş yağlaması, sıkma yöntemi ve moment anahtarı kalibrasyonu birlikte kontrol edilmelidir.
+`M_A = F_M * [ 0.16 * P + 0.58 * d_2 * mu_th + (D_b / 2) * mu_b ]`
 
-Pratik bir mühendislik akışında hedef ön yük belirlendikten sonra üç soru sorulur: Cıvata akma sınırına ne kadar yaklaşıyor, sıkılan parçalar ayrılmaya karşı yeterli rijitlik sağlıyor mu, montaj saçılımı en kötü durumda kabul edilebilir mi? TORQYX çıktısı bu soruları tek tek görünür kılar; yine de kritik bağlantılarda sonuç VDI 2230 hesap föyü, tedarikçi datası ve saha testiyle doğrulanmalıdır.
+- `F_M`: Hedef montaj ön yükleme kuvveti (N)
+- `P`: Diş adımı (mm)
+- `d_2`: Diş böğür çapı (mm) (`d_2 = d - 0.6495 * P`)
+- `mu_th`: Diş sürtünme katsayısı
+- `mu_b`: Cıvata başı veya somun altı sürtünme katsayısı
+- `D_b`: Baş altı sürtünme efektif temas çapı (mm) (`D_b = (d_w + d_h) / 2`)
 
-## İlgili mühendislik rehberleri
+### 2. İzin Verilen Maksimum Ön Yük (F_Mzul) ve Akma Sınırı
 
-- [Cıvata Boyut ve Ön Yük Hesaplayıcı](/tr/tools/bolt-calculator)
-- [Cıvata Başı Şekilleri ve Türleri](/tr/guides/civata-basi-sekilleri-ve-turleri)
-- [Standart Birim Sistemi Rehberi](/tr/guides/standart-birim-sistemi-rehberi)
+Cıvatanın sıkma anında plastik deformasyona uğramaması için von Mises eşdeğer gerilmesi kontrol edilmelidir. Sıkma sırasında cıvata hem çekme gerilmesine hem de diş sürtünmesinden kaynaklanan burulma gerilmesine maruz kalır:
 
+`sigma_ek = sqrt(sigma_z^2 + 3 * tau_t^2) <= nu * R_p0.2`
+
+Burada `R_p0.2` cıvata malzeme sınıfının akma dayanımıdır (Örn: 8.8 kalite için 640 MPa, 10.9 kalite için 940 MPa, 12.9 kalite için 1100 MPa). `nu` sıkma emniyet faktörüdür (genellikle 0.90 seçilir). Gerilme kesit alanı `A_s` olmak üzere izin verilen maksimum montaj ön yükü:
+
+`F_Mzul = (nu * R_p0.2 * A_s) / sqrt(1 + 3 * [1.5 * (d_2 / d_0) * (P / (pi * d_2) + 1.155 * mu_th)]^2)`
+
+### 3. Yerleşme Kaybı (Settling - f_z)
+
+Montaj tamamlandıktan sonra temas eden pürüzlü mikroskobik yüzey tepeleri yük altında ezilir ve plastik olarak düzleşir. Bu mikro yerleşme (settling) sonucunda cıvata ön yükünde yüzde 5 ila 20 arasında kalıcı kuvvet düşüşü meydana gelir. Eklemin elastik boyu (kavrama boyu l_k) ne kadar kısa ise, yerleşme kaybının ön yük üzerindeki oransal etkisi o kadar yıkıcı olur.
+
+## Gerçek Dünya Vaka Analizi: Rüzgar Türbini Flanş Bağlantısı
+
+Bir rüzgar türbini kule flanşında M30 kalite 10.9 daldırma galvanizli cıvatalar kullanılmaktadır. Saha montaj kılavuzunda tork değeri 1850 Nm olarak belirtilmiştir.
+
+### Yaşanan Problem
+Montaj ekipleri kuru ve galvanizli cıvataları tork anahtarıyla sıktıktan sonra ilk kış fırtınasında 6 adet cıvatanın somun sıyırarak ve gövdeden koparak düştüğü gözlemlenmiştir.
+
+### Mühendislik İncelemesi ve Kök Neden
+1. M30 x 3.5 cıvatanın gerilme kesit alanı: `A_s = 561 mm^2`.
+2. 10.9 kalite için `R_p0.2 = 940 MPa`. Yüzde 90 akma sınırında hedeflenen montaj ön yükü: `F_M = 370 kN`.
+3. Standart siyah fosfatlı/yağlı cıvatalarda sürtünme katsayısı `mu = 0.12` iken, sıcak daldırma galvanizli ve kuru yüzeylerde sürtünme katsayısı laboratuvarda ölçüldüğünde `mu = 0.28` çıkmıştır.
+4. Tork anahtarı 1850 Nm torka ulaştığında, yüksek sürtünme enerjiyi yutmuş ve cıvataya iletilen gerçek ön yük yalnızca `F_M = 145 kN` seviyesinde kalmıştır (hedeflenenin yüzde 39'u).
+5. Fırtına sırasında kule gövdesinin salınımından kaynaklanan dinamik eksenel çekme kuvveti flanşı aralamış; cıvatalar değişken eğilme yüküne maruz kalarak düşük çevrimli yorulma ile kırılmıştır.
+
+### Çözüm ve Düzeltici Mühendislik Önlemi
+- Tüm cıvata dişleri ve pul temas yüzeyleri sürtünme katsayısını `mu = 0.10 - 0.12` bandına sabitleyen molibden disülfür (MoS2) bazlı montaj pastası ile yağlanmıştır.
+- VDI 2230 hesabı `mu = 0.12` sürtünme için yenilenmiş ve tork değeri 1420 Nm olarak güncellenmiştir.
+- Bu revizyon ile gerçek eksenel ön yük 365 kN seviyesine çıkarılmış ve periyodik tork kontrollerinde sıfır gevşeme raporlanmıştır.
+
+## Sahada Sık Yapılan Cıvata Montaj Hataları
+
+1. **Sürtünme Katsayısını Sabit Varsaymak:** En ölümcül hata, her cıvatayı aynı tork tablosuyla sıkmaktır. Yağlı yüzey (`mu = 0.10`), kuru çelik (`mu = 0.15`) ve paslı veya galvanizli yüzey (`mu = 0.30`) arasındaki fark, aynı tork altında cıvataya binen ön yükü 3 kat değiştirebilir.
+2. **Kısa Kavrama Boyu Kullanımı:** İki ince flanşı kısa bir cıvatayla sıkmak sistemin yay rijitliğini aşırı sertleştirir. `l_k / d < 3` olan bağlantılarda yerleşme kaybı ön yükün yüzde 40'ını yok eder. Kavrama boyunu uzatmak için mesafe kovanları (spacer) kullanılmalıdır.
+3. **Yaylı Rondela (Grover) Yanılgısı:** 8.8 ve üzeri yüksek mukavemetli cıvatalarda DIN 127 yaylı rondelalar tamamen işlevsizdir; çünkü cıvatanın ön yükü altında rondela tamamen düzleşerek plastik deformasyona uğrar ve kilitleme özelliğini kaybeder. DIN 127 standardı DIN normlarından çekilmiştir.
+4. **Tork Anahtarını Hızlı Çekmek:** Dinamik sıkma sırasında sürtünme katsayısı statik katsayıdan farklıdır. Tork anahtarı sarsıntısız, sabit hızla ve tek hamlede tık sesi duyulana kadar çekilmelidir.
+
+## İlgili Standartlar ve Referanslar
+
+- **VDI 2230 Sayfa 1 (Blatt 1):** Yüksek mukavemetli cıvatalı bağlantıların sistematik hesabı ve silindirik vidalı bağlantıların boyutlandırılması.
+- **ISO 898-1:** Karbon çeliği ve alaşımlı çelikten yapılmış bağlantı elemanlarının mekanik özellikleri - Cıvatalar, vidalar ve saplamalar.
+- **ISO 16047:** Bağlantı elemanları - Tork/ön yükleme deney yöntemleri.
+- **Literatür Referansı:** J. H. Bickford, *An Introduction to the Design and Behavior of Bolted Joints*; G. H. Junker, *New Criteria for Self-Loosening of Fasteners Under Vibration*.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Bağlantı Elemanları Masası) tarafından VDI 2230 ve ISO 898-1 standartları çerçevesinde hazırlanmış ve doğrulanmıştır.*

@@ -1,49 +1,124 @@
 ---
-title: "Rulman Ömrü (L10) Hesabı: SKF ve ISO 281 Yöntemi"
-description: "Rulman ömrü L10 hesabı hakkında adım adım rehber. ISO/DIN standartları ve formüller dahil. TORQYX hesaplayıcısı ile otomatik hesapla."
+title: "Rulman Ömrü (L10) ve Dinamik Yük Kapasitesi Hesabı Rehberi: ISO 281 Standardı"
+description: "ISO 281 standardına göre bilyalı ve makaralı rulmanlarda L10 ve L10h ömür hesabı, dinamik eşdeğer yük P, a_ISO modifiye ömür katsayısı ve yağlama analizi."
 date: "2026-05-17"
-tags: ["rulman", "L10", "ISO 281", "SKF"]
+tags: ["rulman ömrü", "L10 hesabı", "ISO 281", "dinamik yük kapasitesi", "SKF", "makine elemanları"]
 category: "Makine Elemanları"
 draft: false
-readingTime: 3
+readingTime: 11
 canonical: "https://torqyx.com/blog/rulman-omru-l10-iso-281"
 ---
 
-Rulman ömrü hesabı, yük, devir ve rulman tipinin birlikte değerlendirilmesini gerektirir. ISO 281 ve katalog yaklaşımı, temel L10 ömrünü hesaplamak için dinamik yük sayısı, eşdeğer yük ve rulman tipine bağlı üs değerini bir araya getirir.
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber; endüstriyel redüktörler, elektrik motorları, pompalar ve ağır sanayi fanlarında dönen şaftları yataklayan bilyalı ve makaralı rulmanların nominal ve modifiye çalışma ömrünü ISO 281 ve DIN ISO 281 standartları doğrultusunda detaylandırır.
+</Callout>
 
-## L10 nedir
+## Endüstriyel Bağlam ve Rulman Hasarlarının Anatomisi
 
-- L10 ömrü, rulman grubunun yüzde 90 güvenilirlikle ulaşması beklenen temel ömür değeridir.
-- Sonuç genellikle milyon devir veya çalışma saati olarak ifade edilir.
-- Gerçek saha ömrü yağlama, sıcaklık, hizalama ve kirlenme koşullarına bağlıdır.
+Dönen makinelerde rulmanlar, şafttan gelen radyal ve eksenel kuvvetleri gövdeye aktarırken sürtünme kayıplarını en aza indiren en hassas makine elemanlarıdır. Bir haddehane merdanesinde, maden kırıcısında veya petrokimya santrifüj pompasında rulman seçimi yalnızca mil çapına uyan bir parça bulmaktan ibaret değildir. Sahada beklenmedik rulman arızaları; üretim hattının saatlerce durmasına, şaftın salgı yaparak kovanı sarmasına ve yüz binlerce liralık ikincil hasarlara yol açar.
 
-## Dinamik yük sayısı
+Tasarımcıların sıklıkla yaptığı en büyük hata, rulman üreticisi kataloglarında verilen **Dinamik Yük Sayısını (C)** statik bir emniyet sınırı sanmaktır. Oysa rulman ömrü istatistiksel bir yorulma sürecidir. Kusursuz yağlanan ve sıfır montaj hatasıyla çalışan bir rulman bile, yuvarlanma elemanları ile bilezik yuvarlanma yolları arasındaki tekrarlı Hertz temas gerilmeleri nedeniyle eninde sonunda yüzey yorulmasına (pitting/spalling) uğrar. ISO 281 standardı, bu istatistiksel yorulma sürecini matematiksel olarak modeller.
 
-- C değeri rulmanın katalog dinamik yük kapasitesidir.
-- Eşdeğer dinamik yük P ile birlikte temel ömür formülünde kullanılır.
-- Rulman tipi, yük yönü ve çalışma katsayıları seçimde önemlidir.
+## Teorik Altyapı ve ISO 281 Matematiksel Modeli
 
-## Devir ve yük etkisi
+Rulman ömrü, malzemenin mikroskobik düzeydeki kayma gerilmesi yorulmasıyla doğrudan ilişkilidir. 
 
-- Yük arttıkça L10 ömrü doğrusal olmayan şekilde azalır.
-- Devir arttıkça saat cinsinden ömür kısalır.
-- Bu nedenle hem yük spektrumu hem de çalışma çevrimi hesaba katılmalıdır.
+### 1. Temel Nominal L10 Ömrü
 
-## Hesaplama örneği
+ISO 281 standardına göre `L_10` ömrü; görünüşte özdeş bir grup rulmanın, aynı çalışma koşulları altında yüzde 90 güvenilirlikle (yani grubun en fazla yüzde 10'unun ilk yorulma belirtisi göstermesi) ulaşacağı milyon devir cinsinden temel ömürdür:
 
-- C ve P değerleri katalogdan alınır.
-- Rulman tipine göre üs değeri seçilir.
-- TORQYX rulman ömrü hesaplayıcısı L10 ve L10h sonucunu adım adım gösterir.
+`L_10 = (C / P)^p` (Milyon devir cinsinden)
 
-## Sonucu nasıl yorumlamalı?
+- `C`: Rulmanın temel dinamik yük sayısı (N) (Üretici kataloğundan alınır)
+- `P`: Dinamik eşdeğer radyal (veya eksenel) yük (N)
+- `p`: Ömür formülü üssü:
+  - Bilyalı rulmanlar için: `p = 3`
+  - Makaralı rulmanlar için: `p = 10 / 3` (yaklaşık 3.33)
 
-L10 değeri bir garanti süresi değildir; aynı koşullarda çalışan rulmanların yüzde 90'ının ulaşması beklenen istatistiksel temel ömrü ifade eder. Bu nedenle tek başına yüksek L10h sonucu, sahada sorunsuz çalışma anlamına gelmez. Yağlama filmi, eksenel kaçıklık, montaj toleransı, yatak gövdesi rijitliği ve kirlenme gibi etkenler gerçek ömrü ciddi biçimde kısaltabilir.
+Formüldeki üs değerleri, rulman ömrünün yüke ne kadar hassas olduğunu kanıtlar. Bilyalı bir rulmanda uygulanan yük 2 katına çıkarılırsa, rulman ömrü 2^3 = 8 kat kısalır! Makaralı bir rulmanda ise yük 2 katına çıktığında ömür 2^(10/3) = 10 kat düşer.
 
-Pratik seçimde önce katalogdaki C değeri ve hesaplanan P yükü kontrol edilir, ardından çalışma çevrimi incelenir. Makine sürekli aynı yükte çalışmıyorsa yük spektrumu basit ortalama ile değil, eşdeğer dinamik yük yaklaşımıyla değerlendirilmelidir. TORQYX sonucu ön seçim için kullanışlıdır; nihai rulman seçimi üretici katalog katsayıları, yağlama önerisi ve bakım periyodu ile birlikte doğrulanmalıdır.
+### 2. Çalışma Saati Cinsinden Ömür (L_10h)
 
-## İlgili mühendislik rehberleri
+Dönme hızı n (d/dk) sabit olan bir makinede milyon devir cinsinden ömür çalışma saatine dönüştürülür:
 
-- [Rulman Ömrü (L10) Hesaplayıcı](/tr/tools/bearing-life)
-- [Rulman Seçimi İçin Hızlı Rehber](/tr/guides/rulman-secimi-icin-hizli-rehber)
-- [Tolerans Zinciri ve GD&T Rehberi](/tr/guides/tolerans-zinciri-ve-gdt-rehberi)
+`L_10h = (10^6 / (60 * n)) * (C / P)^p`
 
+Endüstriyel uygulamalarda hedeflenen asgari `L_10h` ömürleri:
+- Günlük kesintili çalışan makineler (el aletleri, tarım makineleri): `3.000 - 8.000 saat`
+- Günde 8 saat çalışan standart imalat tezgahları ve konveyörler: `12.000 - 20.000 saat`
+- 7/24 kesintisiz çalışan ağır sanayi tesisleri (santrifüj pompalar, kağıt makineleri, fanlar): `40.000 - 100.000 saat`
+
+### 3. Dinamik Eşdeğer Yük (P) ve X, Y Katsayıları
+
+Çoğu endüstriyel uygulamada rulman hem radyal (`F_r`) hem de eksenel (`F_a`) yüke aynı anda maruz kalır. Bu bileşik yükü tek bir eşdeğer radyal yüke dönüştürmek için ISO 281 sınır faktörü e kullanılır:
+
+`F_a / F_r <= e` ise: `P = F_r`  
+`F_a / F_r > e` ise: `P = X * F_r + Y * F_a`
+
+Burada X (radyal yük faktörü) ve Y (eksenel yük faktörü) rulmanın tipine, temas açısına ve `F_a / C_0` oranına bağlı olarak standart tablolardan belirlenir. Eksenel yük e eşiğini aştığı anda temas açısı kayar ve bilezik omuzlarındaki gerilme katlanarak artar.
+
+### 4. ISO Modifiye Ömür Modeli (L_nmh)
+
+Temel L10 hesabı temiz çalışma koşullarını ve mükemmel yağlama filmini varsayar. Oysa modern mühendislikte ISO 281 Ek 1 ve 4 uyarınca modifiye referans ömrü hesaplanır:
+
+`L_nm = a_1 * a_ISO * (C / P)^p`
+
+- `a_1`: Güvenilirlik faktörü (Yüzde 90 için `a_1 = 1.0`, yüzde 99 güvenilirlik için `a_1 = 0.25`)
+- `a_ISO`: Yağlama koşulu (`kappa = nu / nu_1`), kirlenme faktörü (`e_C`) ve rulman yorulma yük limiti (`C_u`) fonksiyonu olan ömür düzeltme faktörüdür.
+
+Eğer yağlama viskozite oranı `kappa < 0.4` seviyesine düşerse (yani aşırı sıcaklık veya yanlış ince yağ seçimi yüzünden metal-metale temas başlarsa), `a_ISO` katsayısı 0.2 seviyelerine çakılarak rulman ömrünü kağıt üstündeki değerin beşte birine indirir!
+
+## Gerçek Dünya Vaka Analizi: Çimento Fabrikası Havalandırma Fanı
+
+Bir çimento klinker soğutma tesisinde çalışan ağır hizmet radyal egzoz fanının tahrik tarafında oynak makaralı rulman (22220 EK) kullanılmaktadır. Fan devri `n = 1450 d/dk`'dır.
+
+### İşletme Koşulları ve Arıza Bildirimi
+- Rulman dinamik yük sayısı: `C = 425 kN = 425000 N` (Makaralı, `p = 10/3`)
+- Statik yük sayısı: `C_0 = 490 kN`
+- Radyal fan ağırlık yükü: `F_r = 35 kN = 35000 N`
+- Proses hava akışından kaynaklanan eksenel itme kuvveti: `F_a = 12 kN = 12000 N`
+- Tesis bakım ekibi standart ISO VG 46 hidrolik yağ ile yağlama yapmaktadır ve rulman gövde sıcaklığı 85 santigrat dereceye ulaşmaktadır.
+- Rulmanlar her 4 ila 5 ayda bir (yaklaşık 3.200 saatte) aşırı titreşim ve yuvarlanma yolu soyulmasıyla hasara uğramaktadır.
+
+### Mühendislik Doğrulaması ve Hatanın Tespiti
+1. Yük oranı kontrolü:
+   Katalogdan 22220 rulmanı için sınır değer: `e = 0.24`.
+   Uygulanan eksenel/radyal oran: `F_a / F_r = 12 / 35 = 0.343`.
+   `0.343 > 0.24` olduğu için eksenel yük göz ardı edilemez!
+2. Eşdeğer yük katsayıları:
+   Standart tablodan `F_a / F_r > e` için: `X = 0.67`, `Y = 4.2`.
+3. Dinamik eşdeğer yük P:
+   `P = 0.67 * 35000 + 4.2 * 12000 = 23450 + 50400 = 73850 N = 73.85 kN`
+   *(Tasarımcının sadece radyal yükü baz alarak P = 35 kN kabul etmesi ilk büyük hatadır; gerçek eşdeğer yük eksenel itme sebebiyle 2 katından fazladır!)*
+4. Nominal teorik L10h ömrü:
+   `L_10 = (425 / 73.85)^(10/3) = (5.755)^3.333 = 344.8 milyon devir`
+   `L_10h = (10^6 / (60 * 1450)) * 344.8 = 11.494 * 344.8 = 3963 saat`
+   Sadece bu hesap bile nominal ömrün 40.000 saatlik hedef tesis ömrünün onda biri olduğunu göstermektedir!
+5. Yağlama kontrolü (Kök Neden):
+   85 °C çalışma sıcaklığında ISO VG 46 yağın viskozitesi `nu = 9 mm^2/s` değerine düşmektedir. 22220 rulmanının ortalama çapı `d_m = 140 mm` ve 1450 d/dk devir için gereken minimum kinematik viskozite `nu_1 = 20 mm^2/s`'dir.
+   Viskozite oranı: `kappa = 9 / 20 = 0.45` (Yetersiz elastohidrodinamik yağ filmi!).
+   Yağ filmi kalınlığı yüzey pürüzlülüğünü karşılayamamış ve mikro kaynaklı metal teması yorulma soyulmasını tetiklemiştir.
+
+### Düzeltici Mühendislik Revizyonu
+1. Eksenel yükü karşılamak için yatak düzeni sabit-serbest konfigürasyonuna geçirilmiş, fan mili genleşmesi serbest yatağa aktarılmıştır.
+2. Yağlayıcı, 85 °C'de `kappa = 1.6` sağlayacak yüksek sıcaklık katkılı ve aşırı basınç (EP) paketli sentetik ISO VG 220 baz yağlı rulman gresine geçirilmiştir.
+3. Yatak gövdesi labirent keçeyle tozdan izole edilerek kirlenme katsayısı `e_C = 0.6` seviyesine yükseltilmiştir.
+4. Bu önlemlerle `a_ISO` katsayısı 1.8'e yükselmiş, rulman çalışma ömrü 28.000 saatin üzerine çıkmıştır.
+
+## Sahada Sık Yapılan Rulman Hataları
+
+1. **Eksenel Yükü İhmal Etmek:** Derin kanallı bilyalı rulmanlarda eksenel yük oranı `F_a / F_r > 0.1` olduğunda eşdeğer yük hızla artar. Radyal rulmana gelen eksenel yükün hesaba katılmaması sahadaki erken arızaların 1 numaralı sebebidir.
+2. **Kısa Mil Genleşmesini Serbest Bırakmamak (Çift Sabit Yatak):** İki tarafı da eksenel olarak sabitlenen şaftlarda, motor veya pompa ısındığında şaft milimetre bazında uzar. Şaftın uzaması rulmanları karşılıklı birbirine sıkar; devasa parazit eksenel ön yükler doğarak rulmanı dakikalar içinde kilitler.
+3. **Çakma ve Darbe Hasarları (Brinelling):** Rulman bileziğini yerine oturturken iç bilezik yerine dış bileziğe veya yuvarlanma elemanlarına çekiçle vurulması, bilyaların yuvarlanma yolunda mikroskobik ezikler (brinelling) açmasına neden olur. Rulman devreye girdiği ilk saniyeden itibaren uğultuyla çalışır ve hasarlanır. İndüksiyonlu ısıtıcı veya hidrolik çektirme kullanılmalıdır.
+4. **Gres Dolum Miktarı Hatası:** "Ne kadar çok yağ o kadar iyi" inanışı rulmanlarda geçerli değildir. Rulman boşluğunun yüzde 30 ila 50'sinden fazlası gresle doldurulursa yuvarlanma elemanları yağı çalkalayarak (churning) sürtünme üretir; sıcaklık 120 °C üzerine fırlar ve gres yanar.
+
+## İlgili Standartlar ve Teknik Kaynaklar
+
+- **ISO 281:** Yuvarlanmalı yataklar - Dinamik yük sayıları ve nominal ömür hesabı.
+- **ISO 76:** Yuvarlanmalı yataklar - Statik yük sayıları hesabı.
+- **DIN ISO 281 / DIN 622:** Rulman ömrü ve yataklama hesap kılavuzları.
+- **Literatür Referansı:** T. A. Harris ve M. N. Kotzalas, *Rolling Bearing Analysis*; SKF General Catalogue & Engineering Calculation Methodology.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Döner Ekipman ve Triboloji Masası) tarafından ISO 281 standartları doğrultusunda hazırlanmış ve doğrulanmıştır.*

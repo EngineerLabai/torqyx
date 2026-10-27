@@ -1,0 +1,76 @@
+---
+title: "Beam Bending Stress and Deflection Guide: Euler-Bernoulli Theory and Standards"
+description: "Engineering guide on beam bending stress, moment of inertia, deflection equations, and L/300, L/500 serviceability limits under Eurocode 3 and DIN 1052."
+date: "2026-05-21"
+tags: ["beam deflection", "bending stress", "Euler-Bernoulli", "moment of inertia", "Eurocode 3", "structural analysis"]
+category: "Structural Analysis"
+draft: false
+readingTime: 10
+canonical: "https://torqyx.com/en/guides/kiris-egilme-ve-sehim-hesabi-euler-bernoulli"
+---
+
+<Callout type="info" title="Engineering Practice Note">
+This guide addresses bending moments, shear stresses, and elastic deflection verifications for structural beams across crane girders, machine frames, and skid structures following classical Euler-Bernoulli theory and Eurocode 3 (EN 1993-1-1).
+</Callout>
+
+## Problem / Objective
+
+In mechanical engineering and structural steel design, beams serve as primary load-bearing members across overhead cranes, support platforms, machine skids, and material handling systems. Sizing beam cross-sections solely against **yield stress limits (strength)** is a dangerous shortcut. Field reality demonstrates that even if a beam remains completely safe against plastic yield, excessive elastic deflection can render an entire mechanical system inoperable.
+
+For example, excessive deflection across an overhead crane runway girder forces the hoist trolley to continuously climb an uphill slope toward runway supports, overloading travel motors and causing severe wheel flange scuffing. Similarly, micro-deflections within a precision CNC machine gantry destroy part machining tolerances. Consequently, modern structural standards enforce a dual-verification workflow: Ultimate Limit State (ULS - Strength) and Serviceability Limit State (SLS - Deflection).
+
+## Assumptions
+
+- Beam material is homogeneous, isotropic, and obeys Hooke's Law within its linear elastic regime.
+- The beam is slender, with span-to-depth ratio `L / h > 10`, validating the Euler-Bernoulli plane section assumption.
+- Deformations fall within small-deflection theory; axial force interactions are neglected.
+- Lateral-torsional buckling (LTB) is prevented through proper compressive flange bracing.
+
+## Step by step method
+
+1. **Calculate Bending Stress (Navier's Formula):**
+   Maximum normal stress in the cross-section is:
+   `sigma = (M_b * y) / I = M_b / W_b`
+   - `M_b`: Bending moment at the section (N*mm)
+   - `I`: Second moment of area about the bending axis (mm^4)
+   - `W_b`: Elastic section modulus (mm^3) (`W_b = I / y_max`)
+
+2. **Apply Closed-Form Deflection Equations:**
+   The governing differential equation is `E * I * (d^2 w / dx^2) = - M_b(x)`.
+   - Simply supported beam with center point load (Span L, Load F):
+     `f_max = (F * L^3) / (48 * E * I)` (at mid-span)
+   - Simply supported beam with uniform distributed load (Load q):
+     `f_max = (5 * q * L^4) / (384 * E * I)` (at mid-span)
+
+3. **Verify Standard Deflection Limits (SLS):**
+   - Floor and platform girders: `f_perm = L / 300`
+   - Overhead crane bridge girders (EN 13001): `f_perm = L / 500` to `L / 1000`
+   - Machine tool spindle beds: `f_perm = L / 1000` to `L / 3000`
+
+4. **Real-World Case Study: 10-Ton Overhead Crane Girder:**
+   - Span `L = 12000 mm`, wheel point load `F = 50 kN`.
+   - Initial IPE 360 profile satisfied stress (`177.1 MPa < 235 MPa`), but sag reached `57.09 mm` (nearly triple the `L / 600 = 20 mm` legal limit).
+   - Solution: Upgraded to an HEB 450 beam profile, reducing sag to `12.88 mm <= 20 mm` and eliminating motor overload stalls.
+
+## Common mistakes
+
+- **Confusing Moment of Inertia Axes (`I_x` vs `I_y`):** Installing wide-flange beams horizontally reduces flexural stiffness by up to 90 percent.
+- **Neglecting Shear Distortion in Deep Beams:** For short stocky beams (`L / h < 5`), Timoshenko shear terms must be included.
+- **Overlooking Lateral-Torsional Buckling:** Unbraced compression flanges can buckle sideways catastrophically before reaching nominal moment capacity.
+
+## Related calculators
+
+- [Beam Bending and Deflection Calculator](/en/tools/bending-stress)
+- [Simple Stress and Safety Factor](/en/tools/simple-stress)
+- [Shaft Torsion Calculator](/en/tools/shaft-torsion)
+- [Tolerance Stack-up Analysis Tool](/en/guides/tolerans-zinciri-analizi-kotu-durum-ve-rss)
+
+## Relevant standards
+
+- **EN 1993-1-1 (Eurocode 3):** Design of steel structures - General rules.
+- **DIN 1052:** Serviceability and deflection limits in structural engineering.
+- **EN 13001 / DIN 15018:** Cranes - Structural steelwork deflection criteria.
+
+---
+
+*This guide has been prepared and verified by the TORQYX Engineering Editorial Board (Statics and Structural Desk) in compliance with Eurocode 3 and DIN standards.*

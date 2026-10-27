@@ -1,0 +1,75 @@
+---
+title: "Tolerans Zinciri Analizi Rehberi: Worst-Case ve RSS İstatistiksel Yöntemler"
+description: "Mekanik montajlarda tolerans yığılması analizi: Kötü Durum (Worst-Case), Kök-Kare-Toplam (RSS), 6 Sigma ve süreç yeterlilik katsayıları (Cp, Cpk) hesap kılavuzu."
+date: "2026-05-22"
+tags: ["tolerans zinciri", "worst-case", "RSS", "tolerans yığılması", "ASME Y14.5", "ISO 286", "kalite kontrol"]
+category: "Tolerans"
+draft: false
+readingTime: 10
+canonical: "https://torqyx.com/guides/tolerans-zinciri-analizi-kotu-durum-ve-rss"
+---
+
+<Callout type="info" title="Mühendislik Kullanım Notu">
+Bu rehber; seri üretim montaj hatlarında parçaların birbirine mekanik uyumunu, eksenel ve radyal montaj boşluklarını güvence altına almak için uygulanan 1B/2B Tolerans Zinciri Analizi metodolojilerini (En Kötü Durum ve İstatistiksel RSS) ASME Y14.5-2018 ve ISO 286 standartlarına uygun olarak açıklar.
+</Callout>
+
+## Problem / Amaç
+
+Hassas mekanik montajlarda (otomotiv şanzımanları, uçak iniş takımları, hidrolik valf blokları) her bir parça tek başına imalat teknik resmine uygun üretilse dahi, parçalar montaj hattında üst üste eklendiğinde beklenmedik fonksiyonel kilitlenmeler veya aşırı boşluklar ortaya çıkar. Bu duruma **Tolerans Yığılması (Tolerance Stack-up)** adı verilir.
+
+Tasarımcıların sahada düştüğü en yaygın iki tuzak şunlardır:
+1. **Aşırı Muhafazakar Tasarım:** Montajın kesinlikle çalışmasını garanti etmek amacıyla her bir parçaya mikron mertebesinde dar toleranslar (Örn: +/-0.01 mm) vermek. Bu yaklaşım, talaşlı imalat ve taşlama maliyetlerini 4 ila 6 kat artırır, ıskarta oranını patlatır.
+2. **Körlemesine Güven:** Tolerans zinciri analizi yapmadan parçaları nominal ölçülerle modellemek. Sonuç; montaj hattında parçaların birbirine geçmemesi, çekiçle çakılması veya sahada aşırı boşluktan dolayı yağ kaçakları ve titreşim oluşmasıdır. Doğru tolerans analizi, En Kötü Durum (Worst-Case) veya İstatistiksel (RSS) modelinin doğru seçilmesini gerektirir.
+
+## Varsayımlar
+
+- Parçalar rijit kabul edilir; montaj kuvveti altında elastik ve plastik şekil değiştirme ihmal edilir.
+- İstatistiksel toleranslandırmada (RSS) parça boyutları Gauss normal dağılımına uyar ve süreç yeterlilik katsayısı `C_p >= 1.0` (3-Sigma) seviyesindedir.
+- 1 Boyutlu (1D) eksenel veya radyal doğrultuda kapalı boyut döngüsü geçerlidir.
+- Sıcaklık farkından kaynaklanan genleşmeler standart referans sıcaklığında (20 °C) sabit kabul edilir.
+
+## Adım adım yöntem
+
+1. **Kritik Fonksiyonel Boşluğu (Kapanış Boyutu) Belirleyin:**
+   Montajın çalışmasını belirleyen eksenel boşluk döngünün hedefidir:
+   `U_kapanis = sum(A_pozitif) - sum(A_negatif)`
+
+2. **En Kötü Durum (Worst-Case) Toleransını Hesaplayın:**
+   Tüm parçaların aynı anda en olumsuz sınırlarda üretildiği senaryo:
+   `T_wc = sum(T_i)`
+   - Maksimum Boşluk: `U_maks = U_nom + sum(Ust_sapma_poz) - sum(Alt_sapma_neg)`
+   - Minimum Boşluk: `U_min = U_nom + sum(Alt_sapma_poz) - sum(Ust_sapma_neg)`
+
+3. **İstatistiksel Kök-Kare-Toplam (RSS) Yöntemini Uygulayın:**
+   Seri üretimde varyansların toplamı üzerinden:
+   `T_rss = sqrt( sum(T_i^2) )`
+   Bu formül, montaj boşluğu varyasyonunu Worst-Case'e göre yüzde 50-60 daha dar tahmin ederek imalat maliyetlerini düşürür.
+
+4. **Gerçek Dünya Vaka Analizi: Otomotiv Planet Redüktör Eksenel Boşluğu:**
+   - Şanzıman eksenel boşluğu `0.15 mm <= Boşluk <= 0.65 mm` aralığında olmalıdır.
+   - Nominal boşluk: `0.40 mm`.
+   - Worst-Case analizinde minimum boşluk `0.09 mm`'ye düşerek 0.15 mm alt limitini ihlal etmiştir (sıkışma riski).
+   - Yıllık 250.000 adetlik seri imalatta RSS analizi yapıldığında, varyasyon `+/- 0.082 mm` çıkmış ve boşluğun `0.318 mm - 0.482 mm` bandında güvenle kaldığı kanıtlanmıştır. Firma pahalı taşlama maliyetinden kurtulmuştur.
+
+## Sık hatalar
+
+- **İstatistiksel RSS Yöntemini Düşük Adetli Üretimde Kullanmak:** RSS yalnızca istatistiksel dağılımın oluştuğu seri imalatta geçerlidir; 5 adetlik prototipte parçalar kilitlenir.
+- **İşaret Hatası (Vektörel Yön Karmaşası):** Zincirde hangi boyutun boşluğu açtığını, hangisinin kapattığını doğru belirlememek analizi geçersiz kılar.
+- **Geometrik Toleransları (GD&T) Zincire Katmamak:** Diklik veya salgı kaçıklığı efektif boşluğu yer; formüle eklenmelidir.
+
+## İlgili hesaplayıcılar
+
+- [Tolerans Zinciri ve Boşluk Analizi Aracı](/tr/guides/tolerans-zinciri-ve-gdt-rehberi)
+- [Rulman Ömrü ve Tolerans Seçimi](/tr/blog/rulman-omru-l10-iso-281)
+- [Cıvata Ön Yük ve Sıkma Torku](/tr/blog/civata-on-yuku-vdi-2230)
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+
+## İlgili standartlar
+
+- **ASME B89.7.3.1:** Boyutsal ölçümlerde uygunluk ve tolerans sınırları.
+- **ISO 286-1 / ISO 286-2:** ISO limitler ve geçmeler sistemi.
+- **ASME Y14.5-2018:** Geometrik Ölçülendirme ve Toleranslandırma (GD&T).
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (İmalat ve Tolerans Masası) tarafından ASME Y14.5 standartları doğrultusunda hazırlanmış ve doğrulanmıştır.*
