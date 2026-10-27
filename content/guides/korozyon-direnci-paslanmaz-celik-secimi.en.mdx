@@ -1,62 +1,167 @@
 ---
 title: "Corrosion resistance and stainless steel selection"
-description: "Compare 304, 316, and martensitic stainless steels by environment, temperature, and manufacturing needs."
+description: "Engineering guide comparing 304, 316, 321, and martensitic stainless steels for chloride, temperature, welding, and cleaning chemical environments. ASTM A240 and EN 10088 referenced."
 date: "2026-05-09"
-tags: ["stainless steel", "corrosion", "material selection"]
+tags: ["stainless steel", "corrosion", "material selection", "ASTM", "316", "304"]
 category: "Materials"
 draft: false
-readingTime: 7
+readingTime: 10
 ---
 
 <Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard (ASTM A240, EN 10088, NACE MR0175), supplier data, and engineering approval.
 </Callout>
 
 ## Problem / Objective
 
-Stainless steel selection is not just a chromium percentage check. Chlorides, temperature, welding, cleaning chemicals, and surface roughness change corrosion behavior.
+"Stainless steel is corrosion resistant" is too broad and insufficient for engineering decisions. Grade 304 can develop localized corrosion in seawater within weeks, while the same grade survives decades in food processing. The variables that govern selection are: chloride concentration, temperature, surface roughness, post-weld condition, and cleaning chemical type.
+
+This guide compares the four most common stainless steel grades — 304, 316, 321, and 410 (martensitic) — against real corrosion mechanisms and builds a systematic selection path.
 
 ## Assumptions
 
-- Service environment and cleaning chemicals are known.
-- Surface finish can be controlled.
-- Mechanical strength and corrosion resistance are reviewed together.
+- Service environment is defined: temperature range, chloride concentration (or environment class), pH, and exposure duration are known.
+- Material processing history (annealing, deep drawing, welding) matches the current condition.
+- Surface treatment is controllable (electropolishing, passivation, blasting).
+- Mechanical strength and corrosion resistance must be evaluated together (e.g., stress corrosion cracking risk).
+- Cleaning and sterilization chemicals — especially chloride-containing ones — are identified.
 
 ## Step by step method
 
-1. Classify the environment as dry, humid, chloride, or chemical.
-2. Compare common options such as 304 and 316.
-3. Define post-weld passivation needs.
-4. Write the surface roughness and cleanability target.
-5. Score cost and availability as the final check.
+### Step 1 — Classify the environment
+
+Divide stainless steel corrosion risk into four main environment classes:
+
+| Environment Class | Description | Risk Level |
+|---|---|---|
+| Dry / Controlled indoor | No condensation, no chloride | Low |
+| Humid / Outdoor | Condensation present, trace chloride | Medium |
+| Chloride (marine, pool, CIP) | 100–10,000 ppm Cl⁻, variable temperature | High |
+| Chemical process | Acid, base, or oxidizer present | Very High |
+
+When chloride concentration exceeds 50 ppm, the safe default is to move from 304 to 316 rather than investigate further.
+
+### Step 2 — Compare main grades
+
+**304 (1.4301 / UNS S30400):**
+- 18% Cr, 8% Ni
+- Food processing, kitchen equipment, architecture
+- Passive film: protective oxide layer generally stable between pH 3–10
+- Weakness: pitting corrosion in chloride environments, especially above 60°C
+- PREN = Cr + 3.3Mo approximately 18; low value
+
+**316 (1.4401 / UNS S31600):**
+- 16–18% Cr, 10–14% Ni, 2–3% Mo
+- Molybdenum reinforces the passive film against chlorite and thiosulfate ions
+- PREN approximately 24–26; significant advantage over 304
+- Preferred in: seawater contact, pool chemicals, CIP systems, pharmaceuticals
+- Cost: 20–35% more expensive than 304
+
+**321 (1.4541 / UNS S32100):**
+- 304 base but titanium-stabilized
+- Reduces sensitization (intergranular corrosion) risk at high temperature
+- Application: service between 425–900°C, exhaust systems, heat exchangers
+- Does not provide 316's chloride resistance; specific to sensitization prevention
+
+**410 (1.4006 / UNS S41000) — Martensitic:**
+- 12–13% Cr, low Ni
+- High mechanical strength (HRC 40–50 hardenable), used in cutlery, bearings, valve stems
+- Corrosion resistance much lower than austenitics; dry, low-humidity environments only
+- Never used in chloride environments
+
+### Step 3 — Evaluate post-weld condition
+
+Weld heat creates two critical problems in stainless steel:
+
+**1. Sensitization:** Between 425–850°C, Cr carbides precipitate at grain boundaries; grain boundaries become chromium-depleted and corrosion initiates. Risk in 304; reduced in 316L or 321. Solution: post-weld solution annealing, or selection of 316L / 321.
+
+**2. HAZ discoloration:** Blue-yellow-grey color change indicates oxide buildup; the passive film is disrupted in this zone. In food and pharmaceutical industries, post-weld passivation (citric acid or nitric acid treatment, ASTM A380) is mandatory.
+
+Passivation verification: ASTM A967 tests — water drop test, copper sulfate test — can be applied.
+
+### Step 4 — Target surface roughness and cleanability
+
+Roughness value Ra is a critical parameter for biofilm accumulation and corrosion initiation:
+
+- Ra greater than 1.6 μm: unsuitable for food processing or sterile applications (EHEDG guideline)
+- Ra 0.8 μm: acceptable for most food applications
+- Ra 0.4 μm: pharmaceutical industry, ultra-clean applications
+- Electropolishing reduces Ra more homogeneously than mechanical polishing; it opens hidden pits and strengthens the passive film
+
+At welded joints, surface integrity is maintained by avoiding dead volumes and sharp geometries (zero dead leg principle).
+
+### Step 5 — Evaluate cost and availability as final check
+
+Material cost comparison (2024 market, sheet, approximate):
+
+| Grade | Relative Cost |
+|---|---|
+| 304 | 1.0× (base) |
+| 316 | 1.25–1.40× |
+| 316L | 1.30–1.45× |
+| 321 | 1.35–1.55× |
+| Duplex 2205 | 1.60–1.90× |
+
+Availability: 304 and 316 are standard stock; 321 and duplex typically require order with 4–8 week lead time.
 
 ## Common mistakes
 
-- Assuming every stainless steel suits marine service.
-- Forgetting heat affected zones and passivation after welding.
-- Ignoring dirt retention on rough surfaces.
+**1. Assuming all stainless steel is suitable for marine environments**
+
+304 developing surface corrosion in seawater within weeks is a typical field error. When chloride concentration exceeds 100 ppm, 316 is the minimum; above 1,000 ppm, superduplex or Hastelloy should be evaluated.
+
+**2. Skipping post-weld passivation**
+
+Weld heat disrupts the passive film in the HAZ. Stainless steel without post-weld passivation can show localized corrosion adjacent to welds within months.
+
+**3. Ignoring dirt and biofilm retention on rough surfaces**
+
+Surface geometry and roughness affect not just cleanliness but corrosion initiation. Surfaces without a specified Ra value can be delivered with non-standard finishing, invalidating qualification.
+
+**4. Treating 316 as resistant to everything**
+
+316 is better than 304 against chloride; however, at high temperature (above 60°C) against concentrated chloride or hypochlorite cleaning agents it may be insufficient. Against concentrated HCl, no austenitic stainless steel is adequate; PTFE, C-276, or ceramic lining is required.
+
+**5. Equating martensitic stainless corrosion resistance with austenitic**
+
+The trade-off for 410's high hardness and mechanical strength is low corrosion resistance. Outside dry environments, surface protection (coating, painting) becomes mandatory.
+
+## Case summary — TORQYX Engineering Board, Materials Desk
+
+A dairy processing facility used grade 304 stainless steel for CIP (clean-in-place) connection piping. Annual inspection reported pitting and discoloration on the pipes. The facility CIP cycle included 2% NaOH + 1.5% HNO3 + occasional hypochlorite sanitizer at 80°C.
+
+Analysis: the hypochlorite sanitizer and 80°C temperature combination exceeded the critical pitting temperature (CPT) of 304 with PREN approximately 18. Solution: pipes were replaced with 316L (PREN approximately 25); post-weld electropolishing and passivation protocol was applied. Zero corrosion findings at 3-year inspection.
 
 ## Related calculators
 
-- [Materials Library](/en/
-- [Quick Reference Center](/reference)
-- [Fillet Weld Sizing Calculator](/en/tools/fillet-weld)
+- [Pipe Pressure Loss Calculator](/en/tools/pipe-pressure-loss)
+- [Unit Converter](/en/tools/unit-converter)
+- [Material Selection Guide](/en/guides/malzeme-secimi-rehberi)
 
 ## Related glossary terms
 
 - [Corrosion resistance](/en/glossary/corrosion-resistance)
 - [Stress](/en/glossary/stress)
+- [Factor of safety](/en/glossary/factor-of-safety)
 
-## Quick FAQ
+## Frequently asked questions
 
-### Question: What is the main difference between 304 and 316?
+### Question: What is the key difference between 304 and 316?
 
-316 contains molybdenum and usually performs better in chloride environments.
+The 2–3% molybdenum in 316 strengthens the passive film in chloride environments, raising PREN to approximately 25. Grade 304's PREN is approximately 18; the meaningful difference in chloride environments is captured in these numbers.
 
 ### Question: Can stainless steel rust?
 
-Yes. Wrong environment, surface damage, or aggressive cleaning chemicals can cause local corrosion.
+Yes, outside appropriate environments: local chloride accumulation, mechanical damage, incorrect cleaning chemicals, or welded zones without passivation can lead to pitting and crevice corrosion.
 
-### Question: Why passivate after welding?
+### Question: Why is post-weld passivation performed?
 
-It helps recover the protective surface layer and reduces corrosion risk.
+Weld heat locally disrupts the protective oxide layer. Passivation (nitric acid or citric acid treatment) rebuilds this layer, returning corrosion risk to baseline levels.
+
+### Question: Which stainless steel standard is used in food industry?
+
+AISI 304 or 316 are common for food contact; surface Ra ≤ 0.8 μm and EHEDG-compliant weld geometry are required. For pharmaceutical and biotech: 316L + electropolishing + ASME BPE standard applies.
+
+---
+
+*This guide was prepared by the TORQYX Engineering Board (Materials Desk). References: ASTM A240, ASTM A380, ASTM A967, EN 10088, NACE MR0175, EHEDG guidelines.*

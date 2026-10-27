@@ -1,89 +1,169 @@
-﻿---
-title: "Rulman seçimi için hızlı rehber"
-description: "Yük, hız ve servis şartlarını kısa adımlarla değerlendirmek için özet kontrol listesi."
+---
+title: "Rulman seçimi için mühendislik rehberi"
+description: "Yük türü, hız, sıcaklık ve servis şartlarını ISO 281 L10 ömür hesabıyla birleştiren kapsamlı rulman seçim kılavuzu. SKF, FAG ve ISO 15312 referanslı."
 date: "2026-01-12"
-tags: ["rulman", "rehber", "bakım"]
-category: "Guide"
+tags: ["rulman", "ISO 281", "L10 ömür", "yağlama", "seçim"]
+category: "Makine Elemanları"
 draft: false
+readingTime: 10
 ---
 
 <Callout type="warning" title="Dikkat">
-Bu rehber, ilk hızlı değerlendirme içindir. Kritik uygulamalarda üretici kataloglarını mutlaka kontrol et.
+Bu rehber, ilk mühendislik değerlendirmesi içindir. Kritik uygulamalarda üretici katalogları (SKF, FAG, NSK), ISO 281 ve ISO 15312 standartlarını mutlaka kontrol edin.
 </Callout>
 
 ## Problem / Amaç
 
-Rulman seçiminde hedef, yük ve hız koşullarını dengeli şekilde taşıyacak uygun rulman tipini belirlemektir.
+Rulman seçimi mühendislik pratiğinde sık küçümsenen bir adımdır. "Büyük rulman daha güvenli" algısı fazla boyutlandırmaya, gereksiz maliyete ve bazen daha kısa ömre yol açar (aşırı boyutlarda iç boşluk artışı ve yüksüz bölge yorulması). Öte yandan düşük katalog L10 ömrü seçmek erken arızayla sonuçlanır. Bu rehber, yük analizi, hız kontrolü, yağlama ve ömür hesabını birleştiren sistematik bir rulman seçim süreci sunar.
 
 ## Varsayımlar
 
-- Yük dağılımı dengeli kabul edilir.
-- Yağlama ve sıcaklık koşulları tipik üretim şartlarındadır.
-- Montaj toleransları katalog sınırları içindedir.
+- Radyal ve eksenel yük bileşenleri belirlenmiştir (statik ve dinamik).
+- Devir sayısı (d/dak) veya lineer hız sabit ya da bilinen döngü spektrumunda değişkendir.
+- Çalışma sıcaklığı aralığı bilinmektedir.
+- Yağlama yöntemi (gres veya yağ) ve yenileme aralığı tanımlanmıştır.
+- Beklenen çalışma ömrü veya hedef güvenilirlik seviyesi belirtilmiştir.
 
 ## Adım adım yöntem
 
-<StepList
-  title="Hızlı seçim adımları"
-  steps={["Yükü ve hız aralığını belirle", "Çalışma sıcaklığını not et", "Servis faktörlerini hesapla", "Uygun rulman tipini seç"]}
-/>
+### Adım 1 — Yük türünü ve büyüklüğünü belirle
+
+Rulman seçiminin başlangıç noktası, milden rulman arayüzüne gelen kuvvetin tam olarak tanımlanmasıdır.
+
+**Eşdeğer dinamik yük P:**
+
+Radyal ve eksenel yükü birleştiren eşdeğer dinamik yük formülü:
+
+`P = X * Fr + Y * Fa`
+
+Burada:
+- Fr = radyal kuvvet (N)
+- Fa = eksenel kuvvet (N)
+- X, Y = rulman tipine göre katalog katsayıları (sabit yük veya çift yön)
+
+Tek sıra bilyeli rulmanlarda `Fa/Fr > e` koşulunda eksenel etki devreye girer. e değeri iç geometriye göre katalogdan okunur.
+
+**Statik güvenlik faktörü S0:**
+
+Darbe veya titreşim yükü varsa: `S0 = C0 / P0` (C0: statik yük kapasitesi, P0: statik eşdeğer yük). ISO 76'ya göre S0 ≥ 1,5–2 olmalıdır.
+
+### Adım 2 — Rulman tipini seç
+
+| Rulman Tipi | Radyal Yük | Eksenel Yük | Hız | Not |
+|---|---|---|---|---|
+| Derin oluklu (deep groove) | İyi | Orta | Yüksek | Evrensel, en yaygın |
+| Silindirik makaralı (CRB) | Çok İyi | Zayıf | Yüksek | Mil uzamasına uyumlu |
+| Eğik bilyeli (angular contact) | İyi | İyi | Orta-Yüksek | Çift yön eksenel |
+| Konik makaralı (tapered roller) | İyi | Çok İyi | Orta | Ön yük gerektiren |
+| Sferli makaralı (spherical roller) | Mükemmel | Orta | Orta | Hata açısı toleransı yüksek |
+
+Tipik seçim kılavuzu:
+- Saf radyal yük, yüksek hız → Derin oluklu
+- Ağır radyal + hafif eksenel → Silindirik makaralı
+- Eksenel ağırlıklı + yüksek hız → Eğik bilyeli (çift)
+- Ağır kombine yük, düşük hız → Konik makaralı
+
+### Adım 3 — L10 rulman ömrünü hesapla (ISO 281)
+
+Temel L10 ömrü (10 milyon devirde):
+
+`L10 = (C / P)^p`
+
+- C = dinamik yük kapasitesi (N) — katalog değeri
+- P = eşdeğer dinamik yük (N)
+- p = 3 (bilyeli rulmanlar), 10/3 (makaralı rulmanlar)
+
+Milyon devir cinsinden çıkan değeri saate çevirmek için:
+
+`Lh = (L10 * 10^6) / (60 * n)`
+
+n = devir sayısı (d/dak)
+
+**Örnek:** C = 35 kN, P = 10 kN, n = 1.500 d/dak bilyeli rulman için:
+
+- L10 = (35/10)³ = 42,875 milyon devir
+- Lh = (42,875 × 10⁶) / (60 × 1500) = 476 saat
+
+Not: Bu temel hesap yağlama, sıcaklık ve kirlilik faktörlerini içermez. Modifiye L10m hesabı için ISO 281 Ek A gereklidir.
+
+### Adım 4 — Hız sınırını ve yağlama viskozitesini kontrol et
+
+Her rulmanın iki hız limiti vardır:
+- **Termal hız sınırı (katalog):** Standart yağlama koşullarında maksimum çalışma hızı
+- **Kinematik hız sınırı:** Yağ sürükleme kuvvetinin akselerasyon kuvvetini aştığı sınır
+
+Yağlama viskozitesi: ISO VG sınıfı çalışma sıcaklığında gerekli minimum kinematik viskoziteyi `ν1` karşılamalıdır. SKF katalogundaki viskozite oranı `κ = ν / ν1`, `κ ≥ 1` optimum film kalınlığını gösterir.
+
+Gres kullanımında: çalışma sıcaklığı, taban yağ viskozitesi ve kıvamlaştırıcı türü birlikte değerlendirilir. Standart lityum kompleks gres –20°C ile +120°C aralığında kullanılabilir.
+
+### Adım 5 — Tolerans ve boşluk uyumunu doğrula
+
+Mil ve yatak deligi toleransları rulman iç boşluğunu değiştirir. Aşırı sıkı geçme iç boşluğu sıfırlayabilir ve sıcaklık artışı ile erken yorulmaya yol açar; çok gevşek geçme titreşim ve oynak çalışmaya neden olur.
+
+Tipik öneri (ISO 286-1):
+- Dönen iç bilezik (mile dönen yük): k5, m5, n6
+- Sabit iç bilezik (noktasal yük): h5, js5, k5
+- Dönen dış bilezik: K7, M7
+- Sabit dış bilezik (noktasal yük): H7, G7
 
 ## Sık hatalar
 
-<Callout type="info" title="Kontrol noktası">
-Hızlı seçimlerde servis faktörünün atlanması, rulman ömrünü dramatik şekilde kısaltabilir.
-</Callout>
+**1. Radyal ve eksenel yükü karıştırmak**
 
-- Radyal ve eksenel yükü karıştırmak.
-- Yetersiz yağlama koşullarını göz ardı etmek.
-- Servis faktörünü 1 varsaymak.
+Derin oluklu rulmanlara yalnızca radyal yük gelmesi beklenen konumlarda eksenel kuvvetlerin (motor sürükleme, dişli eksenel bileşen) hesaplanmaması rulman ömrünü 3–5 kat kısaltabilir.
 
-## İlk doğrulama kontrolü
+**2. Servis faktörünü 1 varsaymak**
 
-Seçimi kilitlemeden önce eşdeğer dinamik yükü katalogdaki dinamik yük kapasitesiyle karşılaştırın ve planlanan yağlama yöntemine göre hız sınırını kontrol edin. Rulman katalog hız sınırına yakın çalışıyorsa sıcaklık artışı, gres ömrü ve kafes tipi seçim girdisi haline gelir. Kompakt gövdelerde mil ve yatak geçmelerinin üretilebilirliğini de kontrol edin; doğru rulman, yanlış boşluk veya zayıf gövde rijitliği nedeniyle erken arıza verebilir.
+Titreşim, darbe ve hizalama hatası için servis faktörü `fs` ayrılmalıdır. İyi hizalanmış, titreşimsiz sistemde fs = 1–1,2; orta titreşimde 1,5–2; yüksek darbe yükünde 2,5–3 uygulanır.
+
+**3. Yağlama viskozitesini çalışma sıcaklığına göre ayarlamamak**
+
+Gres veya yağın viskozitesi 40°C referansına göredir; ama rulman çalışma sıcaklığı farklıdır. 80°C'de çalışan bir rulmanın ihtiyaç duyduğu gerçek viskozite ISO 40°C sınıfından çok farklı olabilir.
+
+**4. Sıkı geçmeden sonra iç boşluğu kontrol etmemek**
+
+Sıkı geçme sonrası iç bilezik açılır ve rulman iç boşluğu azalır. CN (Normal) boşluk yerine C3 veya C4 boşluk sınıfı seçilerek montaj sonrası optimum boşluk sağlanmalıdır.
+
+**5. Termal uzamayı görmezden gelmek**
+
+Uzun şaftlarda ısıl uzama, sabit rulmandan uzaklaştıkça mil eksenel yük üretir. Serbest (dalgıçlı) taraf rulmana eksenel hareket payı bırakılmalıdır (mil + yatak deliği tolerans kombinasyonu bunu sağlar).
+
+## Vaka özeti — TORQYX Mühendislik Kurulu Makine Elemanları Masası
+
+Bir proses pompasının rotor milinde çift sıra eğik bilyeli rulman kullanılmaktaydı (C = 42 kN). Pompa 2.900 d/dak'da çalışıyordu ve eksenel yük kapasitesi için bu rulman seçilmişti. Arıza kayıtları 8 aylık bir dönemde iki rulman değişimi gösterdi.
+
+İnceleme: P hesabında Fa/Fr oranı doğru girilmemişti; kombine yük faktörü Y gözden kaçmış ve eşdeğer yük P fiilen %40 daha yüksek çıktı. Düzeltilmiş L10h = 2.800 saat (önceki hatalı hesap: 6.500 saat). Ayrıca gres yenileme aralığı 6.000 saatti; gerçek gereksinime göre 2.000 saat olması gerekiyordu. Çözüm: rulman C = 62 kN'a yükseltildi, gres yenileme aralığı revize edildi. Sonraki 24 ayda arıza sıfır.
 
 ## İlgili hesaplayıcılar
 
-<ToolLink
-  href="/tr/tools/torque-power"
-  title="Tork / Güç hesaplayıcı"
-  description="Hız ve güç değerlerinden tork hesapla."
-  badge="Hesaplayıcı"
-/>
+- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
+- [Tork / Güç Hesaplayıcı](/tr/tools/torque-power)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
 
-<ToolLink
-  href="/quality-tools"
-  title="Kalite araçları"
-  description="Ölçü ve kontrol akışlarını tek yerde topla."
-  badge="Araç"
-/>
+## İlgili sözlük terimleri
 
-## İlgili içerikler
+- [Yorulma](/tr/glossary/fatigue)
+- [Gerilme](/tr/glossary/stress)
+- [Güvenlik faktörü](/tr/glossary/factor-of-safety)
 
-- <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
-- <a href="/tr/glossary/backlash">Backlash terimi</a>
-- <a href="/tr/tools/bearing-life">Rulman ömrü hesaplayıcı</a>
+## Sık sorulan sorular
 
-## Basit kontrol tablosu
+### Soru: L10 ömrü ne anlama gelir?
 
-<Table>
-  <thead>
-    <tr>
-      <th>Durum</th>
-      <th>Öncelik</th>
-      <th>Not</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Yüksek hız</td>
-      <td>Düşük sürtünme</td>
-      <td>Kafes yapısı kritik</td>
-    </tr>
-    <tr>
-      <td>Ağır yük</td>
-      <td>Dayanım</td>
-      <td>Temas açısı artar</td>
-    </tr>
-  </tbody>
-</Table>
+ISO 281'e göre aynı koşulda çalışan 100 rulmanın %90'ının bu devirden fazla dayanacağı ömür tahminidir. Yani L10 = 500.000 devir demek, %10 arıza olasılığına karşılık gelen eşik değeridir.
+
+### Soru: Büyük rulman her zaman daha uzun ömürlü mü?
+
+Hayır. L10 ömrü `(C/P)^3` oranına bağlıdır. Daha büyük C değeri P sabitken ömrü artırır; ancak aşırı büyük rulman iç boşluk artışına ve yorulma gerilmesi konsantrasyonuna neden olabilir. Optimum boyutlandırma kritik.
+
+### Soru: Gres mi, yağ mı seçmeli?
+
+Gres: düşük-orta hız, kolay bakım, sızdırmazlık avantajı; yağ: yüksek hız, uzak besleme, yağ gömleği soğutma. Dn sayısı (delik çapı × d/dak) gres sınırını belirler: Dn > 300.000 için yağ tercih edilir.
+
+### Soru: Eğer montaj sırasında rulmanın iç geçmesi çok sıkı geldiyse ne yapmalıyım?
+
+Baskı kuvvetini ölçün ve montaj ısı yöntemi (yağ banyosu 80–100°C) ile yeniden deneyin. İç bilezik kuvvetle çakılmamalıdır; çekiç darbesi kafes veya bilyeye hasar verebilir.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Makine Elemanları Masası) tarafından hazırlanmıştır. Referanslar: ISO 281, ISO 76, ISO 15312, ISO 286-1, SKF Genel Katalog.*

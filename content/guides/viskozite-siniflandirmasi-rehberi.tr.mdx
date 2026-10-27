@@ -1,62 +1,165 @@
 ---
-title: "Viskozite sınıflandırması rehberi"
-description: "ISO VG, SAE ve yağ sınıflarını karıştırmadan viskozite seçimi yapmak için pratik mühendislik notları."
+title: "Viskozite sınıflandırması ve yağ seçimi rehberi"
+description: "ISO VG, SAE ve AGMA viskozite sınıflarını işletme sıcaklığına, hıza ve uygulamaya göre doğru seçmek için mühendislik notları. ISO 3448 ve DIN 51519 referanslı."
 date: "2026-05-09"
-tags: ["viskozite", "yağlama", "ISO VG", "SAE"]
+tags: ["viskozite", "yağlama", "ISO VG", "SAE", "AGMA", "yağ seçimi"]
 category: "Akışkanlar"
 draft: false
-readingTime: 7
+readingTime: 10
 ---
 
 <Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Nihai yağ seçiminde yağ üreticisinin teknik veri sayfası ve uygulama spesifikasyonu ile birlikte değerlendirme yapınız.
 </Callout>
 
 ## Problem / Amaç
 
-Yanlış viskozite seçimi sürtünmeyi, sıcaklığı, enerji tüketimini ve yatak ömrünü etkiler. ISO VG ve SAE sınıfları aynı şeyi anlatmaz; kullanım sıcaklığı mutlaka hesaba katılmalıdır.
+Yanlış viskozite seçimi dört ayrı mekanizmayla hasar üretir: yetersiz film kalınlığı (metal-metal temas → aşınma), aşırı viskozite (pompalama kayıpları, ısı birikimi), kış şartlarında donma veya yüksek akış direnci ve yağlama aralıklarının yanlış belirlenmesi. ISO VG ve SAE sınıfları aynı büyüklüğü ölçse de farklı referans noktaları ve metodolojiler kullanır; bunları bire bir eşleştirmeye çalışmak sistemik hataya davetiye çıkarır.
+
+Bu rehber viskozite ölçüm sistemlerini, doğru seçim yöntemini ve sık karşılaşılan hataları açıklar.
 
 ## Varsayımlar
 
-- Yağ üreticisi veri sayfası mevcuttur.
-- Çalışma sıcaklığı aralığı bilinir.
-- Uygulama sürekli yağ filmine ihtiyaç duyar.
+- Yağ üreticisi teknik veri sayfası mevcuttur ve 40°C ile 100°C kinematik viskozitesi belgelenmiştir.
+- Çalışma sıcaklığı aralığı (minimum soğuk start ve maksimum steady-state) bilinmektedir.
+- Uygulama türü bellidir: hidrolik sistem, dişli kutusu, rulman, motor, slayt kılavuzu.
+- Servis aralığı veya yağ değişim döngüsü belirlenmiştir.
+- Yağın sürekli film oluşturması gereken bir uygulamada kullanılacağı varsayılmaktadır (elasto-hidrodinamik veya hidrodinamik rejim).
 
 ## Adım adım yöntem
 
-1. Çalışma sıcaklığı ve hızını belirle.
-2. Üretici tavsiyesindeki viskozite aralığını oku.
-3. ISO VG sınıfını işletme sıcaklığına göre kontrol et.
-4. Düşük sıcaklık ilk hareket ve yüksek sıcaklık film kalınlığını birlikte değerlendir.
-5. Bakım planına uygun stok sınıfı seç.
+### Adım 1 — Kinematik viskozite ölçüm sistemlerini anlayın
+
+Viskozite mühendislikte üç farklı birimle ifade edilir:
+
+**Kinematik viskozite (ν):** cSt (centiStokes) veya mm²/s cinsinden. Sıvının kendi yoğunluğuyla normalize edilmiş akış direncidir. ISO VG sınıfları ve ISO 3448 bu temeli kullanır.
+
+**Dinamik viskozite (μ):** mPa·s (milliPaskal·saniye) veya cP (centipoise) cinsinden. `μ = ν * ρ` (ρ = yoğunluk kg/m³).
+
+**Viskozite indeksi (VI):** Sıcaklıkla viskozite değişimini ölçen boyutsuz sayı. Yüksek VI, geniş sıcaklık aralığında daha stabil viskozite anlamına gelir. Mineral yağlar VI ≈ 100; sentetik PAO VI ≈ 130–150; VI iyileştiricili çok dereceli yağlar VI > 150 olabilir.
+
+### Adım 2 — ISO VG sınıfını çalışma sıcaklığına göre seç
+
+ISO VG (Viscosity Grade) sistemi ISO 3448 / DIN 51519 tarafından tanımlanır. Her sınıf 40°C'de nominal kinematik viskoziteye karşılık gelir (±10% tolerans):
+
+| ISO VG Sınıfı | 40°C Viskozite (cSt) | Tipik Uygulama |
+|---|---|---|
+| VG 10 | 10 | Hassas aletler, pnömatik |
+| VG 22 | 22 | Tekstil, ufak dişliler |
+| VG 32 | 32 | Hidrolik sistemler (orta baskı) |
+| VG 46 | 46 | Hidrolik, endüstriyel dişliler |
+| VG 68 | 68 | Ağır hidrolik, redüktörler |
+| VG 100 | 100 | Endüstriyel dişli kutuları |
+| VG 150 | 150 | Büyük dişli kutuları, kılavuz vidalar |
+| VG 220 | 220 | Ağır yük redüktörleri |
+| VG 320 | 320 | Çok ağır dişliler, açık dişliler |
+| VG 460 | 460 | Düşük hız, çok yüksek yük |
+
+Seçim yolu: çalışma sıcaklığınızda istenen viskoziteyi belirleyin; ardından Walther viskozite-sıcaklık eğrisini veya üretici grafiğini kullanarak 40°C eşdeğerini okuyun ve en yakın VG sınıfını seçin.
+
+### Adım 3 — SAE sınıfını ve AGMA dişli sınıfını anlayın
+
+**SAE Motor Yağı Sınıfları (SAE J300):**
+
+SAE sınıfları ikili bir sistemle çalışır:
+- Kış (W) sınıfları: `0W, 5W, 10W, 15W, 20W, 25W` — düşük sıcaklık viskozitesini (cP @ –15°C veya –35°C'de) sınırlar
+- Yaz sınıfları: `20, 30, 40, 50, 60` — 100°C kinematik viskozitesini (cSt) sınırlar
+- Çok dereceli: `5W-30, 10W-40` gibi; hem soğuk hem sıcak gereksinimi karşılar
+
+SAE motor yağı sınıfı ile ISO VG endüstriyel yağ sınıfı karıştırılmamalıdır. SAE 30 ≈ ISO VG 100 yaklaşık bir eşdeğerliktir; ancak test yöntemi, katkı paketi ve uygulama alanı tamamen farklıdır.
+
+**AGMA Dişli Yağı Sınıfları (AGMA 9005):**
+
+AGMA sınıfları endüstriyel dişli kutularına özgüdür:
+
+| AGMA | Yaklaşık ISO VG Eşdeğeri |
+|---|---|
+| 0 | VG 46 |
+| 1 | VG 68 |
+| 2 | VG 100 |
+| 3 | VG 150 |
+| 4 | VG 220 |
+| 5 | VG 320 |
+| 6 | VG 460 |
+| 7 | VG 680 |
+| 8 | VG 1000 |
+
+### Adım 4 — Soğuk start ve yüksek sıcaklık filmini birlikte değerlendir
+
+Soğuk start'ta yağın akışkanlığı pompalama, hızlanma ve ilk yükleme için kritiktir. Yüksek viskozite soğuk start'ta:
+
+- Pompa basınç düşümünü artırır
+- Yağın yataklara ulaşma süresini uzatır (kuru sürtünme dönemi)
+- Elektrik motorlu sistemlerde yüksek kalkış akımına katkıda bulunur
+
+Buna karşın düşük çalışma sıcaklığında aşırı düşük viskozite hydrodynamic film oluşumunu bozar.
+
+Pratik yol: yağın `ν` değerini hem minimum soğuk start sıcaklığında hem de maksimum steady-state sıcaklığında kontrol edin. Eğer tek bir viskozite sınıfı her iki ucu karşılamıyorsa çok dereceli (multigrade) yağ veya sentetik formülasyon gereklidir.
+
+### Adım 5 — Bakım aralığına uygun stok sınıfını seç
+
+Yağ seçiminde son kontrol: seçilen sınıfın mevcut depodan, tedarikçiden ve stok rotasyonundan elde edilebilir olması. Mevcut envantere uymayan yağ sınıfı, sahadaki karışıklık ve yanlış yağ dolumu riskini artırır.
+
+Birden fazla makine için yağ standartlaştırması yapılırken performans gereksinimi örtüşen makinelerde aynı yağ sınıfını kullanmak hem bakım basitliği hem de yanlış doldurma hatasını azaltır.
 
 ## Sık hatalar
 
-- 40 C değerini işletme sıcaklığı sanmak.
-- SAE motor yağı sınıfını endüstriyel yağla bire bir eşleştirmek.
-- Viskozite arttıkça her zaman daha iyi koruma olacağını varsaymak.
+**1. ISO VG 40°C değerini işletme sıcaklığı sanmak**
+
+ISO VG sınıfının referans noktası 40°C'dir. Makine 80°C'de çalışıyorsa bu sıcaklıktaki gerçek viskozite ISO VG değerinin çok altına düşebilir ve film kalınlığı yetersiz hale gelir. Her zaman işletme sıcaklığındaki gerçek viskozite değerini kontrol edin.
+
+**2. SAE motor yağı sınıfını endüstriyel yağla bire bir eşleştirmek**
+
+SAE 30 motor yağı ≠ ISO VG 100 endüstriyel yağ. Katkı paketi, oksidatif stabilite, köpük direnci ve uyumlu malzeme özellikleri tamamen farklıdır. Motor yağı dişli kutusuna, dişli yağı motora konmamalıdır.
+
+**3. Viskozite arttıkça her zaman daha iyi koruma olacağını varsaymak**
+
+Belirli bir viskozite eşiğinin üzerinde film kalınlığı yeterlidir; daha yüksek viskozite yalnızca pompalama kaybını, ısı birikimini ve enerji tüketimini artırır. Yüksek hızlı, düşük yüklü uygulamalarda aşırı viskozite köpük ve kavitasyona katkı sağlayabilir.
+
+**4. Karışık marka yağları uyumsuzluk kontrolü yapmadan kullanmak**
+
+Farklı markalar aynı VG sınıfını ve API kategoriyi paylaşsa da katkı paketleri çelişebilir. En güvenli yol: yağ değişiminde sistemi temizlemek veya aynı üreticinin tavsiyesi doğrultusunda karıştırmak. Karıştırılabilirlik tablosu genellikle üretici sitesinde mevcuttur.
+
+**5. Yağ değişim aralığını ortam sıcaklığına göre ayarlamamak**
+
+Yüksek çalışma sıcaklığı yağın oksidasyon ve termal bozunma hızını artırır. 10°C her artış oksidatif bozunma hızını yaklaşık 2 kat hızlandırır (Arrhenius yaklaşımı). Aşırı ısınan sistemlerde katalogdaki yağ değişim aralığı ikiye bölünmelidir.
+
+## Vaka özeti — TORQYX Mühendislik Kurulu Akışkanlar Masası
+
+Bir endüstriyel redüktörde ISO VG 220 mineral yağ kullanılıyordu. Kış aylarında (ortam –5°C) yağ pompalama güçlüğü yaşanıyor, motor kalkış süresi uzuyor ve yüksek akım alarmları tetikleniyordu.
+
+İnceleme: yağın –5°C'deki kinematik viskozitesi yaklaşık 2.200 cSt'e çıkıyordu; pompa tasarım sınırı 400 cSt'ti. Çözüm: kış operasyonu için ISO VG 68 PAO (polialfeolefin) sentetik yağa geçildi. PAO'nun VI ≈ 145 olması sayesinde –5°C'de yaklaşık 280 cSt ve 80°C'de 18 cSt sağlandı; her iki uç da yeterliydi. Kalkış alarmları durdu; yıllık enerji tüketimi %4 azaldı.
 
 ## İlgili hesaplayıcılar
 
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
 - [Dişli Tasarımı](/tr/tools/gear-design)
-- [Hızlı Referans Merkezi](/reference)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
 
 ## İlgili sözlük terimleri
 
 - [Viskozite](/tr/glossary/viscosity)
 - [Reynolds sayısı](/tr/glossary/reynolds-number)
+- [Basınç](/tr/glossary/pressure)
 
-## Kısa FAQ
+## Sık sorulan sorular
 
 ### Soru: ISO VG neyi ifade eder?
 
-Yağın 40 C sıcaklıktaki kinematik viskozite sınıfını belirtir.
+ISO VG (Viscosity Grade), ISO 3448 standardına göre yağın 40°C'deki nominal kinematik viskozitesini belirtir. VG 46 demek, 40°C'de 46 ± 4,6 cSt kinematik viskozite demektir.
 
 ### Soru: Yüksek viskozite her zaman iyi midir?
 
-Hayır. Film dayanımı artabilir ama pompalama kaybı ve sıcaklık da artabilir.
+Hayır. Optimum viskozite, çalışma koşulunda yeterli film kalınlığını sağlayan minimum değerdir. Aşırı viskozite enerji kaybı, ısı birikimi ve düşük sıcaklıkta pompalama sorununa yol açar.
 
 ### Soru: SAE ile ISO VG aynı mı?
 
-Hayır; farklı sınıflandırma sistemleridir ve doğrudan eşleştirme dikkat ister.
+Hayır. SAE motor yağı sınıfları J300 standardına göre, ISO VG endüstriyel yağlar ISO 3448'e göre tanımlanır. Test metodları, katkı paketleri ve uygulama alanları farklıdır. Bir sınıfı diğerinin yerine kullanmak uyumsuzluk ve arızaya yol açabilir.
+
+### Soru: Çok dereceli yağ (multigrade) ne zaman seçilmeli?
+
+Geniş sıcaklık aralığında çalışan sistemlerde (mevsimsel ortam değişimi, soğuk start + yüksek işletme sıcaklığı kombinasyonu) tek viskozite sınıfı her iki ucu karşılamıyorsa çok dereceli veya sentetik yağ gereklidir.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Akışkanlar Masası) tarafından hazırlanmıştır. Referanslar: ISO 3448, DIN 51519, SAE J300, AGMA 9005, ISO 15380.*

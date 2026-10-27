@@ -1,62 +1,148 @@
 ---
-title: "Standard unit system guide"
-description: "A practical checklist for SI, metric, and imperial engineering calculations without hidden unit conversion errors."
+title: "Engineering unit systems and conversion guide"
+description: "Engineering guide for conscious use of SI, metric, and imperial units, preventing calculation errors, and maintaining consistent technical documentation. ISO 80000 and ASTM SI10 referenced."
 date: "2026-05-09"
-tags: ["unit conversion", "SI", "ISO", "standards"]
+tags: ["unit conversion", "SI", "ISO 80000", "standard", "engineering"]
 category: "Standards"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
 <Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+This guide is prepared for quick engineering review. For project documentation standards, consult the relevant institutional guidelines (ISO 80000, ASTM SI10, BIPM SI Brochure).
 </Callout>
 
 ## Problem / Objective
 
-Unit mistakes can turn a correct formula into a wrong result. Pressure, torque, energy, and section calculations need a locked unit system before calculation starts.
+A unit error is the most common path from a correct formula to a wrong answer. Engineering history offers concrete examples: in 1999, the Mars Climate Orbiter was lost due to a unit mismatch between N·s and lbf·s between NASA and its contractor. Closer examples: a designer forgetting that N/mm² and MPa are equivalent, a team confusing kPa and bar in internal communication, or a spreadsheet blending mm and m in the same diameter calculation.
+
+This guide systematically organizes unit management in engineering calculations step by step and documents the most common traps.
 
 ## Assumptions
 
-- SI is selected as the primary calculation system.
-- Supplier data keeps its source unit in the notes.
-- Reports show input and output units together.
+- The project's primary unit system is decided at the start (preferably SI).
+- Suppliers, clients, or standards may use a different unit system.
+- Calculation templates explicitly show units alongside input values.
+- Report output includes both input and result units side by side.
+- The rounding policy is decided and documented at the start of the project.
 
 ## Step by step method
 
-1. Choose the project base unit system.
-2. Record incoming data with source units.
-3. Convert before calculation and document rounding.
-4. Report results in one unit family.
-5. Check critical values with a reverse conversion.
+### Step 1 — Lock the project unit set
+
+The unit set to be used in an engineering project must be established in writing at the start and shared with all relevant parties. Typical SI-based mechanical engineering unit set:
+
+| Quantity | Unit | Symbol |
+|---|---|---|
+| Length | millimetre | mm |
+| Mass | kilogram | kg |
+| Force | Newton | N |
+| Pressure / Stress | Megapascal | MPa |
+| Temperature | Celsius | °C |
+| Torque | Newton-metre | N·m |
+| Power | Kilowatt | kW |
+| Energy | Joule | J |
+
+Fixing this set at the top of the project notebook or calculation template reduces downstream confusion to near zero.
+
+### Step 2 — Record incoming data with its source unit
+
+Data from suppliers or clients may arrive in a different unit system. The source unit must be visible on the document before conversion is performed. Example:
+
+- Supplier data sheet: `Flow capacity: 12 GPM` → Record: `12 GPM (source), conversion: 0.758 L/s`
+- Standard pressure value: `150 PSI` → `1,034 kPa` or `10.34 bar`
+
+Practical rule: note the source value and unit next to every converted value; add a source document reference where needed.
+
+### Step 3 — Convert before the calculation and set the rounding level
+
+Conversion must be performed before entering the formula, not inside it. Intermediate rounding shifts the result; retain full precision throughout.
+
+Frequently used conversion factors:
+
+| Conversion | Factor |
+|---|---|
+| 1 inch → mm | 25.4 |
+| 1 ft → m | 0.3048 |
+| 1 lbf → N | 4.4482 |
+| 1 psi → kPa | 6.8948 |
+| 1 bar → MPa | 0.1 |
+| 1 HP (mechanical) → kW | 0.7457 |
+| 1 ft·lbf → N·m | 1.3558 |
+| 1 BTU/h → W | 0.2931 |
+
+Rounding policy: retain a minimum of 5 significant figures in intermediate steps. In reports, significant figures must match measurement precision. Reporting a dimension measured to ±0.01 mm as 12.34567 mm implies misleading precision.
+
+### Step 4 — Report results in the same unit family
+
+If a calculation input is in mm and output is in N/mm², the report must preserve both units together. When the result feeds another calculation, expressing it in MPa is important for both unit consistency and error traceability.
+
+Every table or spreadsheet must include a unit column or row; a dimensionless number in an engineering document is a dangerous omission.
+
+### Step 5 — Perform a reverse-conversion sanity check for critical values
+
+After reaching an important result, verify by reverse conversion:
+
+Example: `σ = 285 MPa` → convert to N/mm²: `285 N/mm²` → convert to inch-pound: `285 / 0.00689476 ≈ 41,340 PSI`. Is this value within the expected range for the material's yield strength in inch-pound units? This cross-check catches gross-scale errors.
 
 ## Common mistakes
 
-- Forgetting that N/mm2 equals MPa.
-- Mixing mm and m in the same formula.
-- Missing the 1000 factor between N m and N mm torque.
+**1. Forgetting that N/mm² and MPa are equivalent**
+
+1 N/mm² = 1 MPa is a mathematical fact. But confusing `E = 210 GPa` with `σ = 210 N/mm²` in a spreadsheet, or treating "210,000 N/mm²" and "210,000 MPa" as different magnitudes, is an observed real-world error.
+
+**2. Mixing mm and m in the same formula**
+
+Entering length in mm and force in N while reading area in m² is a common mistake. Dimensional analysis: `σ = F/A` → `N / mm²` = MPa is correct; `N / m²` = Pa means the same numerical value carries a factor of 1,000,000 difference.
+
+**3. Skipping the factor of 1,000 between N·m and N·mm in torque calculations**
+
+`T = 100 N·m = 100,000 N·mm`. In bolt preload formulas (VDI 2230), torque is typically entered in N·m; when shear pin or shaft calculations use N·mm, the factor of 1,000 is easily missed and produces an order-of-magnitude error.
+
+**4. Forgetting the zero shift in temperature conversion**
+
+°F → °C: `T_C = (T_F - 32) / 1.8`. The multiplier 5/9 is usually recalled correctly but forgetting to subtract 32 is the classic error. When thermodynamic calculations require absolute temperature (Kelvin or Rankine), note that 0°C = 273.15 K.
+
+**5. Confusing pressure units (bar, atm, psi, kPa, Pa)**
+
+1 bar ≠ 1 atm (1 atm = 1.01325 bar). 1 PSI = 6.8948 kPa ≈ 0.0689 bar. In industry, bar and kPa are frequently used together; which is displayed depends on the gauge or display device. Never trust a unitless pressure value from an ambiguous source.
+
+## Real engineering incident — concrete consequences of unit confusion
+
+Mars Climate Orbiter (1999): JPL's navigation software expected SI units while Lockheed Martin's software transmitted data in pound-force·seconds. Result: a \$327 million spacecraft deviated from orbit and was lost. The incident entered the record as the standard reference case for the critical importance of unit management in engineering documentation.
+
+This example may seem extreme, but in smaller-scale projects, two engineers working independently or data from two different suppliers can produce the same unit clash with the same consequences.
 
 ## Related calculators
 
 - [Unit Converter](/en/tools/unit-converter)
-- [Quick Reference Center](/reference)
 - [Pipe Pressure Loss Calculator](/en/tools/pipe-pressure-loss)
+- [Bolt Size and Torque Calculator](/en/tools/bolt-calculator)
 
 ## Related glossary terms
 
 - [Stress](/en/glossary/stress)
 - [Torque](/en/glossary/torque)
+- [Pressure](/en/glossary/pressure)
 
-## Quick FAQ
+## Frequently asked questions
 
-### Question: Are N/mm2 and MPa equivalent?
+### Question: Are N/mm² and MPa the same?
 
-Yes. 1 N/mm2 equals 1 MPa.
+Yes, mathematically 1 N/mm² = 1 MPa. Unit confusion arises not from writing different numbers in two notations, but from shifting the magnitude scale during use.
 
-### Question: How do I choose a base unit system?
+### Question: Which unit system should be chosen for an engineering project?
 
-Use the system required by the team, supplier, and standard; SI is usually the safest engineering baseline.
+Unless the client or standard mandates otherwise, SI (millimetre-based mechanical engineering set) is the best starting point. The majority of international standards are SI-based.
 
-### Question: When should values be rounded?
+### Question: When should rounding be performed?
 
-Keep raw values through intermediate steps and round only for report readability.
+Retain raw values through intermediate steps; in the final report, significant figures must align with measurement precision. Premature rounding accumulates error.
+
+### Question: How should I work with two suppliers using different unit systems?
+
+Document the source unit for every incoming value; perform all conversions to the project unit set in a central conversion table that is approved and version-controlled. Cross-checking by two independent reviewers is recommended for critical values.
+
+---
+
+*This guide was prepared by the TORQYX Engineering Board (Standards Desk). References: ISO 80000, ASTM SI10, BIPM SI Brochure (9th Edition), NASA SP-7012.*

@@ -1,46 +1,133 @@
 ---
 title: "Kaynaklı tasarımda güvenlik ve maliyet dengesi"
-description: "Köşe kaynak ve tam nüfuziyet kaynak seçiminde yük yolu, kalite kontrol, deformasyon ve maliyet etkilerini birlikte değerlendirin."
+description: "Köşe kaynak ve tam nüfuziyet kaynak seçiminde yük yolu, kalite kontrol, deformasyon ve maliyet etkilerini mühendislik hesaplarıyla birlikte değerlendirin. AWS D1.1 ve EN 1993 referanslı."
 date: "2026-05-09"
-tags: ["kaynak", "fillet weld", "maliyet", "kalite"]
+tags: ["kaynak", "fillet weld", "maliyet", "kalite", "yorulma", "EN 1993"]
 category: "İmalat"
 draft: false
-readingTime: 7
+readingTime: 10
 ---
 
 <Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart (AWS D1.1, EN 1993-1-8, ISO 5817), tedarikçi verisi ve sorumlu mühendis onayı gerekir.
 </Callout>
 
 ## Problem / Amaç
 
-Kaynaklı tasarımda fazla güvenli görünen çözüm gereksiz maliyet ve deformasyon oluşturabilir; zayıf çözüm ise yorulma ve çatlak riski taşır.
+Kaynaklı tasarımda "daha fazla kaynak = daha güvenli" mantığı çoğu zaman yanlış çıkar. Aşırı kaynak, çarpılma, artık gerilme, termal bozunma ve gereksiz maliyet getirir. Yetersiz kaynak ise yorulma çatlağı, statik kopma ve kaynaktaki uygunsuzluk riski taşır. Bu rehber köşe kaynak (fillet weld) ile tam nüfuziyet kaynak (full-penetration weld) arasındaki seçimi mühendislik kanıtıyla yapar ve maliyet etkilerini sistematik biçimde ayırır.
+
+Temel soruyu doğru sormak: *Bu bağlantı, hangi yük tipinde çalışıyor ve söz konusu yük kaynağın neresini ne kadar zorlayacak?*
 
 ## Varsayımlar
 
-- Yük yolu ve kaynak erişimi bilinir.
-- Malzeme kaynaklanabilirliği kontrol edilir.
-- Kalite kontrol seviyesi uygulama kritikliğine göre seçilir.
+- Yük yolu, yön ve büyüklük önceden belirlenmiştir.
+- Malzeme kaynaklanabilirliği karbon eşdeğeri (CE) ile kontrol edilmiştir.
+- Kaynak erişimi ve pozisyonu (düz, yatay, dikey, tavan) bilinmektedir.
+- Kalite kontrol seviyesi uygulamanın kritikliğine göre seçilmiştir (EN ISO 5817 kalite seviyesi B, C veya D).
+- Tasarım yorulma yükü altında çalışıyorsa ömür hesabı S-N eğrisiyle desteklenmiştir.
 
 ## Adım adım yöntem
 
-1. Yük yönünü ve etkin kaynak boyunu belirle.
-2. Köşe kaynak ve tam nüfuziyet seçeneklerini karşılaştır.
-3. Isı girdisi ve çarpılma riskini not et.
-4. Kontrol yöntemini ve kabul kriterini yaz.
-5. Maliyet etkisini kaynak boyu, hazırlık ve kontrol olarak ayır.
+### Adım 1 — Yük yönünü ve etkin kaynak boyunu tanımla
+
+Kaynak boyunun tamamı yük taşımaz. Etkin kaynak boyu `l_eff`, başlangıç ve bitiş kraterleri çıkarıldıktan sonra kalan uzunluktur. EN 1993-1-8'e göre: `l_eff = l_toplam - 2 * a`, burada a boğaz kalınlığıdır.
+
+Yük yönü kritiktir:
+- **Boyuna kaynaklarda (paralel yük):** Kaynak gerilmesi kayma bileşeniyle kontrol edilir. Formül: `tau_paralel = F / (a * l_eff)`
+- **Enine kaynaklarda (dik yük):** Kaynak hem normal hem kayma gerilmesine maruz kalır. Enine yük dayanımı boyuna yüke göre yaklaşık %50 daha yüksektir, ancak plastik deformasyon kapasitesi daha düşüktür.
+
+### Adım 2 — Köşe kaynak ve tam nüfuziyet seçeneklerini karşılaştır
+
+**Köşe kaynak (Fillet Weld):**
+
+- Hazırlık gerektirmez (T-bağlantı, örtme bağlantı, köşe bağlantı)
+- Boğaz kalınlığı `a = 0.707 * s` (s = kanat uzunluğu)
+- Görsel ve boyutsal kontrol (VT) çoğu durumda yeterlidir
+- Kaynak sonrası ilave işlem minimal
+- İstisnalar: kaynak erişimi sınırlı çift taraflı T-bağlantılarda tek taraf köşe yetersiz kalabilir
+
+**Tam nüfuziyet kaynak (Full-Penetration / CJP Weld):**
+
+- Pah açma, kök hazırlığı ve sıklıkla destek plakası gerektirir
+- Ana malzeme tam kesiti taşır; boyun vesilesiyle "zincirin en zayıf halkası" kaynak değil ana malzeme olur
+- Yıkıcı olmayan muayene (NDT) — UT, RT — gereklidir
+- Minimum 3–5 kat daha yüksek hazırlık + muayene maliyeti
+
+Seçim kuralı:
+
+| Kriter | Köşe Kaynak | Tam Nüfuziyet |
+|---|---|---|
+| Statik yük, düşük gerilme | Yeterli | Gereksiz |
+| Yorulma yükü, yüksek döngü | Sınıra bağlı | Tercih edilir |
+| Dinamik + çekme yükü | Dikkatli değerlendirme | Tercih edilir |
+| Baskı kabı, gemi, köprü | Standart gerektirir | Zorunlu |
+
+### Adım 3 — Isı girdisini ve çarpılma riskini hesapla
+
+Isı girdisi `HI = (U * I * 60) / (v * 1000)` formülüyle kJ/mm cinsinden hesaplanır (U: gerilim V, I: akım A, v: kaynak hızı mm/dak).
+
+Çarpılma için risk faktörleri:
+- İnce malzeme (t < 6 mm): yüksek risk, küçük dikişler ve simetrik sıra planı gerekir
+- Asimetrik kesit: tek taraf kaynak ısısı eğilme momentine dönüşür
+- Yüksek HI değeri: HAZ (ısıdan etkilenen bölge) genişler, martensit oluşumu ve çatlak riski artar
+
+Çarpılma önleme araçları: fikstür ve pensleme, simetrik kaynak sırası (önce–sonra, çift yön), ön ısıtma (CE > 0,45 için önerilen).
+
+### Adım 4 — Kontrol yöntemini ve kabul kriterini belirle
+
+| NDT Yöntemi | Uygulama | Maliyet Faktörü |
+|---|---|---|
+| VT (Görsel) | Her kaynak | 1× |
+| PT (Penetrant) | Yüzey süreksizlikleri | 2–3× |
+| MT (Manyetik) | Ferromanyetik yüzey + yüzeyaltı | 3–4× |
+| UT (Ultrasonik) | Tam nüfuziyet iç kusurlar | 5–8× |
+| RT (Radyografik) | Tam nüfuziyet, boru, kritik | 8–15× |
+
+Kabul kriterleri: EN ISO 5817 Seviye B (yüksek kalite), Seviye C (orta), Seviye D (düşük). Yorulma uygulamalarında en az Seviye C, basınçlı kaplarda ise Seviye B uygulanmalıdır.
+
+### Adım 5 — Maliyeti bileşenlere ayır
+
+Kaynak maliyeti beş unsura ayrılır:
+
+1. **Kaynak metali maliyeti:** Biriktirilen metal miktarına bağlı (kg cinsinden köşe vs. tam nüfuziyet karşılaştırması)
+2. **Hazırlık maliyeti:** Pah açma, temizlik, kök destek plakası; tam nüfuziyet için köşe kaynağa göre 2–4× daha yüksek
+3. **Kaynak zamanı:** Tek paso vs. çok paso; tam nüfuziyet bağlantı tipine göre 2–6× daha uzun
+4. **Kontrol maliyeti:** UT veya RT ekler; köşe için VT taban alındığında 5–15× maliyet farkı
+5. **Düzeltme maliyeti:** Ret oranı × ortalama onarım süresi; düşük kalite kontrolde toplam maliyetin %20–30'una ulaşabilir
 
 ## Sık hatalar
 
-- Kaynak boyunu tüm geometrik çevre sanmak.
-- Yorulma etkisini statik hesapla geçmek.
-- Kaynak sonrası deformasyon için fikstür planlamamak.
+**1. Kaynak boyunu geometrik çevreyle eşitlemek**
+
+T-bağlantıda kapak plakasının tüm kenarı kaynak gibi görünse de köşe ve başlangıç-bitiş noktaları etkin değildir. Etkin boy `l_eff` hesaplanmazsa dayanım aşırı tahmin edilir.
+
+**2. Yorulma yükünü statik hesapla geçmek**
+
+Statik olarak güvenli görünen bir kaynak, yorulma S-N eğrisine göre yetersiz olabilir. EN 1993-1-9 yorulma kategorileri (FAT sınıfları) kaynak geometrisine göre seçilmelidir; yanlış FAT sınıfı 2–3 kat ömür hatasına yol açar.
+
+**3. Kaynak sonrası deformasyon için fikstür planlamamak**
+
+İnce levha konstrüksiyonlarda fikstürsüz kaynak yüzey planarlığını bozar. Bu montaj sorunlarına, boya süreksizliğine ve yorulma gerilmesi artışına neden olabilir.
+
+**4. Tam nüfuziyeti her zaman üstün saymak**
+
+Basit statik yüklerde tam nüfuziyet kaynağın ekstra maliyeti ve NDT gereksinimi sadece bütçeye yük bindirir. Köşe kaynağın doğru boğaz kalınlığıyla yeterli olduğu durumda tam nüfuziyet seçmek mühendislik hatası değil; mühendislik israfıdır.
+
+**5. Isıdan etkilenen bölgeyi (HAZ) görmezden gelmek**
+
+Yüksek mukavemetli çeliklerde (S355 ve üzeri) HAZ'daki sertlik artışı çatlak duyarlılığını yükseltir. Ön ısıtma tablosu (EN ISO 13916 veya AWS D1.1 Ek) karbon eşdeğerine göre kullanılmalıdır.
+
+## Vaka özeti — TORQYX Mühendislik Kurulu İmalat Masası
+
+Bir endüstriyel platform konstrüksiyonunda, S275 çelik profillerin birleşim noktaları köşe kaynak olarak tasarlanmıştı. Platform yorulma yüklü taşıma işini yapıyor, günde 3–4 tam yük döngüsü atıyordu. Yıllık incelemede köşe kaynak kökünde mikro çatlaklar tespit edildi.
+
+İnceleme: kaynak boğaz kalınlığı `a = 5 mm` seçilmişti; yorulma FAT sınıfı 63 (köşe kaynak, stres yoğunlaşması dahil) üzerinden hesaplandığında ömür 120.000 döngü olarak çıktı; gerçek kullanım 3 yılda bu seviyeye ulaşmıştı. Çözüm: boğaz kalınlığı `a = 7 mm`'ye çıkarıldı ve kaynak geometrisi optimize edildi. Gözden geçirilmiş hesap 420.000+ döngü ömür öngördü.
 
 ## İlgili hesaplayıcılar
 
 - [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
 - [Eğilme ve Sehim Hesaplayıcı](/tr/tools/bending-stress)
-- [Kalite Araçları](/quality-tools)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
 
 ## İlgili sözlük terimleri
 
@@ -48,16 +135,20 @@ Kaynaklı tasarımda fazla güvenli görünen çözüm gereksiz maliyet ve defor
 - [Yorulma](/tr/glossary/fatigue)
 - [Güvenlik faktörü](/tr/glossary/factor-of-safety)
 
-## Kısa FAQ
+## Sık sorulan sorular
 
 ### Soru: Köşe kaynak ne zaman yeterlidir?
 
-Yük seviyesi ve yorulma etkisi sınırlıysa, doğru boğaz kalınlığı ile yeterli olabilir.
+Statik yük baskın, yorulma döngüsü sınırlı ve gerilme seviyesi EN 1993-1-8 tasarım dayanımının altında kaldığında doğru boğaz kalınlığıyla yeterlidir. Boğaz kalınlığını seçerken `a_min >= 0,7 * t_ince_malzeme` kuralı başlangıç noktasıdır.
 
 ### Soru: Tam nüfuziyet kaynak her zaman daha iyi mi?
 
-Hayır. Daha yüksek kalite sağlayabilir ama hazırlık, kontrol ve deformasyon maliyeti artar.
+Hayır. Daha yüksek yapısal bütünlük sağlayabilir, ancak hazırlık, kontrol ve deformasyon maliyeti buna eşlik eder. Statik baskın yüklerde aşırı spesifikasyon hem bütçe hem de üretim süresi açısından zararlıdır.
 
 ### Soru: Kaynakta en sık hata nedir?
 
-Etkin kaynak boyu ve yük yönünü gerçek montaj koşuluna göre kontrol etmemektir.
+Etkin kaynak boyunu ve yük yönünü gerçek montaj koşuluna göre hesaplamamaktır. İkinci sırada ise yorulma etkisini statik hesapla "geçirmek" gelmektedir.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (İmalat Masası) tarafından hazırlanmıştır. Referanslar: AWS D1.1, EN 1993-1-8, EN 1993-1-9, EN ISO 5817, EN ISO 13916.*

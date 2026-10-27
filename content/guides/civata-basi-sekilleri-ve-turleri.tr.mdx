@@ -1,46 +1,120 @@
 ---
 title: "Cıvata başı şekilleri ve türleri rehberi"
-description: "Altı köşe, alyan, bombe baş ve havşa baş cıvataların tasarım, montaj ve servis açısından karşılaştırması."
+description: "Altı köşe, alyan, bombe baş ve havşa baş cıvataların tasarım, montaj, tork ve servis gereksinimleri açısından mühendislik karşılaştırması. ISO 4762, ISO 4014 ve DIN 931 referanslı."
 date: "2026-05-09"
-tags: ["cıvata", "bağlantı", "tork", "ISO"]
+tags: ["cıvata", "bağlantı", "tork", "ISO", "bağlantı elemanları"]
 category: "Bağlantı Elemanları"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
 <Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart (ISO 4014, ISO 4762, DIN 931), tedarikçi verisi ve sorumlu mühendis onayı gerekir.
 </Callout>
 
 ## Problem / Amaç
 
-Cıvata başı seçimi montaj alanını, sıkma torkunu, servis erişimini ve yüzey temasını doğrudan etkiler. Yanlış baş tipi iyi hesaplanmış bir bağlantıyı sahada zorlaştırabilir.
+Bir bağlantı elemanı tasarımında cıvata çapı ve kalitesi doğru seçilse bile yanlış baş tipi sahada ciddi problemlere yol açabilir: montaj takımı giremez, gerekli ön yük uygulanamaz, yüzey hasarı kaçınılmaz olur ya da sökme sırasında başa zarar verilir. Bu rehber, en yaygın dört cıvata başı tipini (altı köşe, alyan, bombe baş, havşa baş) mühendislik kriterleriyle karşılaştırır ve seçim için sistematik bir yol sunar.
+
+Cıvata başı seçimi şu değişkenleri doğrudan etkiler:
+
+- Uygulanabilecek maksimum sıkma torku
+- Takım erişim alanı ve boşluk gereksinimleri
+- Yüzey temas alanı ve temas gerilmesi
+- Servis sıklığı ve sökme güçlüğü riski
+- Korozyon direnci ve kaplama uyumluluğu
 
 ## Varsayımlar
 
-- Bağlantı yükü ve ön yük hedefi belirlenmiştir.
-- Standart metrik cıvata aileleri kullanılır.
-- Montaj takımı erişimi tasarım sırasında kontrol edilir.
+- Bağlantı yükü, ön yük hedefi ve güvenlik faktörü belirlenmiştir (VDI 2230 metodolojisi referans alınır).
+- Standart metrik cıvata aileleri kullanılır; özel baş profilleri kapsam dışıdır.
+- Montaj takımı erişimi tasarım aşamasında kontrol edilir.
+- Cıvata malzemesi ve kalite sınıfı (8.8, 10.9 vb.) ayrı seçilmiş ve baş tipiyle uyumlu olduğu doğrulanmıştır.
+- Tekrarlı sökme takma ihtiyacı varsa aşınma payı hesaba katılmıştır.
 
 ## Adım adım yöntem
 
-1. Erişim ve takım boşluğunu kontrol et.
-2. Ön yük ve tork ihtiyacını belirle.
-3. Yüzey temasını ve rondela gereksinimini incele.
-4. Korozyon ve sökme takma sıklığını not et.
-5. Standart baş tipleriyle parça ağacını sadeleştir.
+### Adım 1 — Takım erişimini ve boşlukları belirle
+
+Tasarım aşamasında her cıvata konumu için iki boyutu kontrol et:
+
+**Üstten erişim:** Anahtarın veya tornavidanın başa dikey inebilmesi için gereken boşluk. Altı köşe için açık ağızlı anahtar genişliği (SW) + yan boşluk; alyan baş için L-anahtar dönme yarıçapı; bombe baş için torx/yıldız ucu dönme boşluğu.
+
+**Yandan erişim:** Alyan başlı cıvatalarda L-anahtar kolunun uzanabileceği mesafe. Sınırlı yan boşlukta T-kollu veya açılı anahtar gereksinimi doğar; bu da montaj süresini artırır.
+
+Kural: Erişim açısı 15° üzerinde yatık olacaksa alyan başta tork iletimi belirgin şekilde düşer; altı köşe veya tork anahtarı adaptörlü çözüm tercih edilmelidir.
+
+### Adım 2 — Ön yük ve tork kapasitesini değerlendir
+
+Her baş tipinin iletebileceği maksimum sıkma torku, yuva ya da köşe geometrisiyle sınırlıdır. Genel karşılaştırma (M10, 10.9 kalite için tipik değerler):
+
+| Baş Tipi | Maks. Tork (yaklaşık) | Standart |
+|---|---|---|
+| Altı köşe | 70–80 N·m | ISO 4014 / DIN 931 |
+| Alyan baş (Hex Socket) | 55–65 N·m | ISO 4762 |
+| Bombe baş (Button) | 30–40 N·m | ISO 7380 |
+| Havşa baş (Countersunk) | 30–45 N·m | ISO 10642 |
+
+Bombe baş ve havşa baş düşük tork kapasitesi nedeniyle yüksek ön yük gerektiren bağlantılarda birincil seçenek olmamalıdır.
+
+### Adım 3 — Yüzey temas alanını ve temas gerilmesini kontrol et
+
+Altı köşe başın oturma çapı, eşdeğer alyan başa göre genellikle daha büyüktür; bu da altlık malzeme üzerindeki temas gerilmesini (bearing stress) düşürür.
+
+Havşa başta koni temas açısı genellikle 90° ya da 120°'dir. Yüzey kalitesi ve delme hassasiyeti yetersiz olduğunda koni temas alanı hesaplananın altına düşer; bu durumda ön yük kaybı ve bağlantı gevşemesi görülür. Hesap: `sigma_b = F / A_contact`, A_contact koni geometrisinden türetilir.
+
+Rondela kullanımı kararı: Alyan başta konik federli rondela ön yük stabilitesini artırır. Altı köşe başta düz rondela temas alanını genişletir ve yumuşak alt malzemelerde gereklidir.
+
+### Adım 4 — Korozyon ve servis sıklığı notunu oluştur
+
+Yüzeyde kaplama varsa (çinko, fosfat, Geomet, Dacromet) baş tipi kaplama bütünlüğünü etkileyebilir:
+
+- Alyan başın iç yuvası kaplanmış bağlantıda gres veya paslı döküntüden dolabilir; açma sırasında yuva bozulur.
+- Deniz ortamında paslanmaz A2 veya A4 altı köşe başın sökülmesi alyan başa göre daha güvenilirdir.
+- Tekrarlı söküm takım (5 veya daha fazla döngü) öngörülüyorsa alyan yuva boyutunda bir üst çap seçimi aşınmayı geciktirir.
+
+### Adım 5 — Standart baş tipleriyle parça ağacını sınırlandır
+
+Proje boyunca farklı baş tiplerinin karışması takım envanterini, montaj talimatlarını ve hata riskini artırır. Mümkünse iki veya üç tipte standardizasyon yap:
+
+- **Yapısal bağlantılar:** Altı köşe (ISO 4014 / 4017)
+- **Dar alan, yüksek tork:** Alyan baş (ISO 4762)
+- **Kapak, panel, görünen yüzey:** Bombe baş (ISO 7380)
+- **Düz yüzey, sıfır çıkıntı gereksinimi:** Havşa baş (ISO 10642)
 
 ## Sık hatalar
 
-- Alyan baş için takım giriş derinliğini unutmak.
-- Havşa başta temas alanını fazla iyimser almak.
-- Cıvata sınıfı ile baş tipi standardını karıştırmak.
+**1. Alyan başta takım giriş derinliğini unutmak**
+
+Alyan yuva derinliği ISO 4762'de tanımlıdır; ancak tasarımcılar kanal içi, kör delik kenarlı veya altlık üstü montajda yeterli gibi derinlik olmadığını gözden kaçırabilir. Sonuç: L-anahtar kayar, yuva bozulur, cıvata sıkıştırılamaz.
+
+**2. Havşa başta temas alanını fazla iyimser almak**
+
+Koni açısı tutarsız delinmiş veya pah kırılmamış yüzeyde koni sadece dış kenardan temas eder. Bu hem lokal temas gerilmesini hem de çekme yüklü bağlantıda ayrılma riskini artırır.
+
+**3. Cıvata kalite sınıfı ile baş tipi standardını karıştırmak**
+
+8.8 ve 10.9 malzeme kalitesini ifade eder; baş tipi standardından (ISO 4014, 4762 vb.) bağımsızdır. Alyan başlı bir cıvata 8.8 kalitede de 10.9 kalitede de üretilebilir.
+
+**4. Bombe baş cıvatayı yüksek tork bağlantısında kullanmak**
+
+ISO 7380 bombe başın tork kapasitesi sınırlıdır. Yüksek ön yük gerektiren yapısal bağlantılarda baş boyundan arıza görülür.
+
+**5. Korozif ortamda siyah fosfatlı alyan baş seçmek**
+
+Siyah fosfat kaplama korozyon koruması açısından zayıftır. Dış ortamda veya kimyasal maruziyet altında A2-70 paslanmaz veya Geomet kaplı altı köşe tercih edilmelidir.
+
+## Vaka özeti — TORQYX Mühendislik Kurulu Bağlantı Masası
+
+Bir makine gövdesinde vida kapakları alyan baş M6 × 12, ISO 4762 ile birleştirilmişti. Kapak 5 mm kalınlığında aluminyum alaşımdı. Saha servis döngüsünde ortalama her 3 ayda bir sökülen cıvataların yuvaları, 8–10 döngü sonunda kullanılamaz hale geldi; montaj takımı sürçüyor, ön yük uygulanamıyordu.
+
+Analiz şunu gösterdi: kör delik kenar payı yetersizdi, başa tam giriş yapılamıyor ve her sıkma-sökme döngüsünde yuva burkuluyordu. Çözüm: giriş derinliği optimize edilen Torx başlı M6 ISO 14583 cıvataya geçiş. Sonuç 18 döngü sonrasında bile sağlam yuva bütünlüğü.
 
 ## İlgili hesaplayıcılar
 
 - [Cıvata Boyut ve Ön Yük Hesaplayıcı](/tr/tools/bolt-calculator)
-- [Hızlı Referans Merkezi](/reference)
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Tork / Güç Hesaplayıcı](/tr/tools/torque-power)
 
 ## İlgili sözlük terimleri
 
@@ -48,16 +122,24 @@ Cıvata başı seçimi montaj alanını, sıkma torkunu, servis erişimini ve y�
 - [Gerilme](/tr/glossary/stress)
 - [Tolerans](/tr/glossary/tolerance)
 
-## Kısa FAQ
+## Sık sorulan sorular
 
 ### Soru: Altı köşe cıvata ne zaman uygundur?
 
-Yüksek sıkma torku ve kolay servis erişimi istendiğinde iyi bir varsayılan seçimdir.
+Yüksek sıkma torku, geniş takım erişimi ve sık servis döngüsü bir arada varsa altı köşe iyi bir varsayılan seçimdir. ISO 4014 (kısmi dişli) ve ISO 4017 (tam dişli) arasındaki fark, kenar mesafesi kısıtlı bağlantılarda önemlidir.
 
 ### Soru: Havşa baş cıvata taşıyıcı bağlantıda kullanılır mı?
 
-Kullanılabilir ama temas gerilmesi ve yüzey kalitesi dikkatle kontrol edilmelidir.
+Kullanılabilir; ancak koni temas geometrisi ve yüzey kalitesi dikkatle kontrol edilmelidir. Kayma yüklü bağlantılarda havşa baş, kesme kuvvetinin koni üzerine iletimini dengelemekte güçlük çekebilir.
 
 ### Soru: Alyan başın avantajı nedir?
 
-Dar alanlarda kompakt montaj sağlar; takım kalitesi ve yuva aşınması kontrol edilmelidir.
+Dar alanlarda kompakt montaj sağlar; yüksek tork kapasitesiyle birleşince endüstriyel makinelerde en yaygın tercih haline gelir. Ancak yuva aşınması, erişim derinliği ve korozif ortam uyumluluğu tasarımda önceden çözülmelidir.
+
+### Soru: M8 alyan başa hangi anahtar boyutu gerekir?
+
+ISO 4762'ye göre M8 alyan başın iç altı köşe boyutu 6 mm'dir (SW6). Giriş derinliği en az 5,5 mm olmalıdır; bu mesafe kör delik ve kapak kalınlığıyla birlikte kontrol edilmelidir.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Bağlantı Elemanları Masası) tarafından hazırlanmıştır. Referanslar: ISO 4014, ISO 4762, ISO 7380, ISO 10642, VDI 2230.*

@@ -1,46 +1,133 @@
 ---
 title: "Welded design safety and cost balance"
-description: "Evaluate load path, inspection, distortion, and cost when choosing fillet or full-penetration welds."
+description: "Engineering evaluation of load path, inspection methods, distortion, and cost when choosing fillet or full-penetration welds. AWS D1.1 and EN 1993 referenced."
 date: "2026-05-09"
-tags: ["welding", "fillet weld", "cost", "quality"]
+tags: ["welding", "fillet weld", "cost", "quality", "fatigue", "EN 1993"]
 category: "Manufacturing"
 draft: false
-readingTime: 7
+readingTime: 10
 ---
 
 <Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard (AWS D1.1, EN 1993-1-8, ISO 5817), supplier data, and engineering approval.
 </Callout>
 
 ## Problem / Objective
 
-In welded design, an overly conservative solution can add cost and distortion, while a weak solution can create fatigue and crack risk.
+In welded design, "more weld equals more safety" is usually wrong. Over-welding introduces distortion, residual stress, thermal degradation, and unnecessary cost. Under-welding creates fatigue crack, static failure, and non-conformance risk. This guide uses engineering evidence to make the selection between fillet weld and full-penetration (CJP) weld, and systematically separates the cost drivers.
+
+Asking the right question: *In what load type does this joint operate, and where in the weld will that load create the most demand?*
 
 ## Assumptions
 
-- Load path and weld access are known.
-- Material weldability is checked.
-- Inspection level is selected by application criticality.
+- Load path, direction, and magnitude are defined in advance.
+- Material weldability is verified by carbon equivalent (CE) calculation.
+- Weld access and position (flat, horizontal, vertical, overhead) are known.
+- Inspection level is selected by application criticality (EN ISO 5817 quality level B, C, or D).
+- If the design is under fatigue loading, life calculation is supported by an S-N curve.
 
 ## Step by step method
 
-1. Define load direction and effective weld length.
-2. Compare fillet and full-penetration options.
-3. Record heat input and distortion risk.
-4. Write inspection method and acceptance criteria.
-5. Split cost into weld length, preparation, and inspection.
+### Step 1 — Define load direction and effective weld length
+
+The full weld length does not carry load. Effective weld length `l_eff` is what remains after start and stop craters are removed. Per EN 1993-1-8: `l_eff = l_total - 2 * a`, where a is throat thickness.
+
+Load direction is critical:
+- **Longitudinal welds (parallel load):** Weld stress is governed by shear. Formula: `tau_parallel = F / (a * l_eff)`
+- **Transverse welds (perpendicular load):** The weld is subject to both normal and shear stress. Transverse resistance is approximately 50% higher than longitudinal, but plastic deformation capacity is lower.
+
+### Step 2 — Compare fillet and full-penetration weld options
+
+**Fillet Weld:**
+
+- No joint preparation required (T-joint, lap joint, corner joint)
+- Throat thickness `a = 0.707 * s` (s = leg size)
+- Visual and dimensional inspection (VT) is sufficient in most cases
+- Minimal post-weld work
+- Exception: single-sided T-joint with limited access may be inadequate
+
+**Full-Penetration (CJP) Weld:**
+
+- Requires beveling, root preparation, and typically a backing bar
+- The full parent material cross-section carries load; the joint throat is not the weak link
+- Non-destructive testing (NDT) — UT, RT — is required
+- Minimum 3–5× higher preparation + inspection cost
+
+Selection rule:
+
+| Criterion | Fillet Weld | Full Penetration |
+|---|---|---|
+| Static load, low stress | Adequate | Unnecessary |
+| Fatigue load, high cycles | Limit-dependent | Preferred |
+| Dynamic + tensile load | Careful evaluation | Preferred |
+| Pressure vessel, bridge | Standard-mandated | Required |
+
+### Step 3 — Calculate heat input and distortion risk
+
+Heat input: `HI = (U * I * 60) / (v * 1000)` in kJ/mm (U: voltage V, I: current A, v: travel speed mm/min).
+
+Distortion risk factors:
+- Thin material (t less than 6 mm): high risk; small beads and symmetric sequence required
+- Asymmetric cross-section: single-side heat converts to bending moment
+- High HI: widens heat-affected zone (HAZ), increases martensite formation and crack risk
+
+Distortion control tools: fixtures and clamps, symmetric weld sequence (alternating sides, balanced passes), preheat (recommended when CE exceeds 0.45).
+
+### Step 4 — Set inspection method and acceptance criteria
+
+| NDT Method | Application | Relative Cost |
+|---|---|---|
+| VT (Visual) | Every weld | 1× |
+| PT (Penetrant) | Surface discontinuities | 2–3× |
+| MT (Magnetic Particle) | Ferromagnetic surface + near-surface | 3–4× |
+| UT (Ultrasonic) | Full-penetration internal | 5–8× |
+| RT (Radiographic) | Full-pen, pipe, critical | 8–15× |
+
+Acceptance criteria: EN ISO 5817 Level B (high quality), Level C (medium), Level D (low). Fatigue applications require at least Level C; pressure vessels require Level B.
+
+### Step 5 — Break down cost into components
+
+Weld cost has five elements:
+
+1. **Weld metal material:** Proportional to deposited metal volume (kg comparison: fillet vs. full-penetration)
+2. **Preparation cost:** Beveling, cleaning, backing bar; 2–4× higher for full penetration vs. fillet
+3. **Welding time:** Single pass vs. multi-pass; full penetration takes 2–6× longer depending on joint type
+4. **Inspection cost:** UT or RT; starting from VT baseline for fillet, 5–15× cost difference
+5. **Rework cost:** Rejection rate × average repair time; can reach 20–30% of total cost when quality control is inadequate
 
 ## Common mistakes
 
-- Treating the full geometric perimeter as effective weld length.
-- Passing fatigue risk with a static-only check.
-- Not planning fixtures for post-weld distortion.
+**1. Treating the full geometric perimeter as effective weld length**
+
+In a T-joint, the full plate edge may look welded, but corners and start-stop craters are ineffective. Calculating without `l_eff` overestimates capacity.
+
+**2. Passing fatigue risk with a static-only check**
+
+A weld that passes static analysis may fail the fatigue S-N curve. EN 1993-1-9 fatigue categories (FAT classes) must be selected based on weld geometry; an incorrect FAT class causes a 2–3× life error.
+
+**3. Not planning fixtures for post-weld distortion**
+
+In thin-plate structures, welding without fixtures ruins surface flatness. This leads to assembly problems, paint discontinuities, and increased fatigue stress.
+
+**4. Always treating full penetration as superior**
+
+Under simple static loading, full-penetration weld's extra cost and NDT requirement add no structural value. Choosing full penetration when fillet weld with correct throat thickness is adequate is not engineering conservatism; it is engineering waste.
+
+**5. Ignoring the heat-affected zone (HAZ)**
+
+In high-strength steels (S355 and above), hardness increase in the HAZ raises crack susceptibility. The preheat table (EN ISO 13916 or AWS D1.1 Annex) must be applied based on carbon equivalent.
+
+## Case summary — TORQYX Engineering Board, Manufacturing Desk
+
+An industrial platform structure in S275 steel had its connection nodes designed as fillet welds. The platform performed load-cycling transport work at 3–4 full load cycles per day. Annual inspection revealed micro-cracks at the fillet weld root.
+
+Review: selected throat thickness was `a = 5 mm`. Fatigue life calculated at FAT class 63 (fillet weld with stress concentration included) yielded 120,000 cycles; actual service had reached this threshold within 3 years. Solution: throat increased to `a = 7 mm` and weld geometry optimized. Revised calculation predicted 420,000+ cycle life.
 
 ## Related calculators
 
 - [Fillet Weld Sizing Calculator](/en/tools/fillet-weld)
 - [Bending and Deflection Calculator](/en/tools/bending-stress)
-- [Quality Tools](/quality-tools)
+- [Unit Converter](/en/tools/unit-converter)
 
 ## Related glossary terms
 
@@ -48,16 +135,20 @@ In welded design, an overly conservative solution can add cost and distortion, w
 - [Fatigue](/en/glossary/fatigue)
 - [Factor of safety](/en/glossary/factor-of-safety)
 
-## Quick FAQ
+## Frequently asked questions
 
-### Question: When is a fillet weld enough?
+### Question: When is a fillet weld adequate?
 
-It may be enough when load and fatigue effects are limited and throat size is correct.
+When static load dominates, fatigue cycles are limited, and stress level is below the EN 1993-1-8 design resistance. Starting rule for throat: `a_min >= 0.7 * t_thinner_part`.
 
 ### Question: Is full-penetration welding always better?
 
-No. It can improve quality but adds preparation, inspection, and distortion cost.
+No. It can improve structural integrity but brings preparation, inspection, and distortion cost with it. Under statically dominant loads, over-specifying hurts both budget and schedule.
 
 ### Question: What is the most common weld design mistake?
 
-Not checking effective weld length and load direction against the real assembly.
+Not calculating effective weld length and load direction against the real assembly condition. Second most common: treating fatigue risk as passed by a static check alone.
+
+---
+
+*This guide was prepared by the TORQYX Engineering Board (Manufacturing Desk). References: AWS D1.1, EN 1993-1-8, EN 1993-1-9, EN ISO 5817, EN ISO 13916.*

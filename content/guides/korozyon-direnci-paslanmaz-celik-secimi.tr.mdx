@@ -1,62 +1,167 @@
 ---
 title: "Korozyon direnci ve paslanmaz çelik seçimi"
-description: "304, 316 ve martenzitik paslanmaz çelikleri ortam, sıcaklık ve üretim ihtiyacına göre karşılaştırın."
+description: "304, 316, 321 ve martenzitik paslanmaz çelikleri klorür, sıcaklık, kaynak ve temizlik kimyasalları açısından karşılaştıran mühendislik rehberi. ASTM A240 ve EN 10088 referanslı."
 date: "2026-05-09"
-tags: ["paslanmaz çelik", "korozyon", "malzeme seçimi"]
+tags: ["paslanmaz çelik", "korozyon", "malzeme seçimi", "ASTM", "316", "304"]
 category: "Malzeme"
 draft: false
-readingTime: 7
+readingTime: 10
 ---
 
 <Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart (ASTM A240, EN 10088, NACE MR0175), tedarikçi verisi ve sorumlu mühendis onayı gerekir.
 </Callout>
 
 ## Problem / Amaç
 
-Paslanmaz çelik seçimi sadece krom oranına bakılarak yapılmaz. Klorür, sıcaklık, kaynak, temizlik kimyasalları ve yüzey pürüzlülüğü korozyon davranışını değiştirir.
+"Paslanmaz çelik korozyona dayanıklıdır" ifadesi aşırı geneldir ve mühendislik kararı için yetersizdir. 304 sınıfı paslanmaz çelik tuzlu suda birkaç haftada lokal korozyona uğrayabilirken aynı sınıf gıda işleme ortamında onlarca yıl dayanabilir. Seçimi belirleyen değişkenler şunlardır: klorür konsantrasyonu, sıcaklık, yüzey pürüzlülüğü, kaynak sonrası durum ve temizlik kimyasalı türü.
+
+Bu rehber, en yaygın dört paslanmaz çelik sınıfını — 304, 316, 321 ve 410 (martenzitik) — gerçek korozyon mekanizmaları üzerinden karşılaştırır ve seçimi adım adım sistematik hale getirir.
 
 ## Varsayımlar
 
-- Servis ortamı ve temizlik kimyası bilinir.
-- Parça yüzey işlemi kontrol edilebilir.
-- Mekanik dayanım ve korozyon direnci birlikte değerlendirilir.
+- Servis ortamı tanımlanmıştır: sıcaklık aralığı, klorür konsantrasyonu (veya ortam sınıfı), pH ve temas süresi bilinmektedir.
+- Malzeme işlem geçmişi (tavlama, derin çekme, kaynak) mevcut durumla eşleşmektedir.
+- Yüzey işlemi kontrol edilebilir (elektro-parlatma, pasivasyon, kumlama).
+- Mekanik dayanım ve korozyon direnci birlikte değerlendirme zorunluluğu var (örneğin gerilme korozyonu riski).
+- Temizlik ve sterilizasyon kimyasalları — özellikle klorür içerenler — tanımlanmıştır.
 
 ## Adım adım yöntem
 
-1. Ortamı kuru, nemli, klorürlü veya kimyasal olarak sınıflandır.
-2. 304 ve 316 gibi yaygın seçenekleri karşılaştır.
-3. Kaynak sonrası pasivasyon ihtiyacını belirle.
-4. Yüzey pürüzlülüğü ve temizlenebilirlik hedefini yaz.
-5. Maliyet ve bulunabilirliği son kontrol olarak puanla.
+### Adım 1 — Ortamı sınıflandır
+
+Paslanmaz çelik korozyon riskini dört ana ortam sınıfına ayır:
+
+| Ortam Sınıfı | Tanım | Risk Seviyesi |
+|---|---|---|
+| Kuru / Kontrollü iç mekan | Yoğuşma yok, klorür yok | Düşük |
+| Nemli / Açık hava | Yoğuşma var, klorür iz seviyede | Orta |
+| Klorürlü (deniz, havuz, CIP) | 100–10.000 ppm Cl⁻, sıcaklık değişken | Yüksek |
+| Kimyasal süreç | Asit, baz veya oksitleyici mevcut | Çok Yüksek |
+
+Klorür konsantrasyonu 50 ppm üzerine çıktığında 304 sınıfını değerlendirmek yerine 316'ya geçmek güvenli varsayılandır.
+
+### Adım 2 — Ana sınıfları karşılaştır
+
+**304 (1.4301 / UNS S30400):**
+- %18 Cr, %8 Ni
+- Gıda işleme, mutfak ekipmanı, mimari
+- Pasif film: koruyucu oksit tabakası pH 3–10 arasında genellikle stabildir
+- Zayıf nokta: klorürlü ortamda çukur korozyonu (pitting), özellikle 60°C üzerinde
+- CE (kritik pitting eşdeğeri): PREN = Cr + 3.3Mo yaklaşık 18; düşük
+
+**316 (1.4401 / UNS S31600):**
+- %16–18 Cr, %10–14 Ni, %2–3 Mo
+- Molibden, klorit ve tiyosülfat iyonlarına karşı pasif filmi güçlendirir
+- PREN ≈ 24–26; 304'e göre belirgin üstünlük
+- Tercih durumları: deniz suyu teması, havuz kimyasalları, CIP (Temizleme-Yerinde) sistemleri, ilaç
+- Maliyet: 304'e göre %20–35 daha pahalı
+
+**321 (1.4541 / UNS S32100):**
+- 304 bazlı ancak titanyum stabilize
+- Yüksek sıcaklıkta sensitizasyon (tane sınırı korozyonu) riskini azaltır
+- Kullanım alanı: 425–900°C arası servis, egzoz sistemleri, ısı eşanjörleri
+- 316'nın klorür direncini sağlamaz; sensitizasyon önleme için özeldir
+
+**410 (1.4006 / UNS S41000) — Martenzitik:**
+- %12–13 Cr, düşük Ni
+- Yüksek mekanik dayanım (HRC 40–50 sertleştirilebilir), bıçak, rulman, vana mili
+- Korozyon direnci östenitiklere göre çok düşük; kuru, az nemli ortamlar
+- Asla klorürlü ortamda kullanılmaz
+
+### Adım 3 — Kaynak sonrası durumu değerlendir
+
+Kaynak ısısı paslanmaz çelikte iki kritik sorun yaratır:
+
+**1. Sensitizasyon:** 425–850°C aralığında Cr karbürleri tane sınırlarında çöker; tane sınırları krom bakımından fakirleşir ve korozyon başlar. 304'te risk; 316L veya 321'de azalır. Çözüm: kaynak sonrası çözelti tavlaması veya 316L / 321 seçimi.
+
+**2. Isıdan etkilenen bölge (HAZ) renk değişimi:** Mavi-sarı-gri renk değişimi oksit birikimini gösterir; bu bölgede pasif film bozulmuştur. Gıda ve ilaç endüstrisinde kaynak sonrası pasivasyon (sitrik asit veya nitrik asit işlemi, ASTM A380) zorunludur.
+
+Pasivasyon kontrolü: ASTM A967 testleri — su damlası testi, bakır sülfat testi — uygulanabilir.
+
+### Adım 4 — Yüzey pürüzlülüğünü ve temizlenebilirliği hedefle
+
+Pürüzlülük değeri Ra, biyofilm birikimi ve korozyon başlangıcı için kritik bir parametredir:
+
+- Ra > 1.6 μm: gıda işleme veya steril uygulamalar için uygun değil (EDA/EHEDG kılavuzu)
+- Ra 0.8 μm: çoğu gıda uygulaması için kabul edilebilir
+- Ra 0.4 μm: ilaç endüstrisi, ultratemiz uygulamalar
+- Elektropolisaj Ra değerini mekanik cilalamadan daha homojen düşürür; gizli çukurları açar ve pasif filmi güçlendirir
+
+Kaynaklı birleşimlerde yüzey bütünlüğü kırık veya keskin geometrilerden kaçınarak sürdürülür (ölü hacim sıfırlanmalı).
+
+### Adım 5 — Maliyeti ve bulunabilirliği son kontrol olarak değerlendir
+
+Malzeme maliyeti karşılaştırması (2024 piyasası, levha, yaklaşık):
+
+| Sınıf | Relatif Maliyet |
+|---|---|
+| 304 | 1.0× (baz) |
+| 316 | 1.25–1.40× |
+| 316L | 1.30–1.45× |
+| 321 | 1.35–1.55× |
+| Duplex 2205 | 1.60–1.90× |
+
+Bulunabilirlik: 304 ve 316 standart stok; 321 ve dupleks genellikle sipariş gerektirir, 4–8 hafta temin süresi.
 
 ## Sık hatalar
 
-- Her paslanmaz çeliği deniz ortamına uygun sanmak.
-- Kaynak sonrası ısı etkisini ve pasivasyonu unutmak.
-- Pürüzlü yüzeyde kir tutunmasını hesaba katmamak.
+**1. Her paslanmaz çeliği deniz ortamına uygun saymak**
+
+304'ün tuzlu suda birkaç haftada yüzey korozyonuna uğraması tipik bir sahadaki yanılgıdır. Klorür konsantrasyonu 100 ppm üzerinde 316 minimum; 1.000 ppm üzerinde superdupleks veya Hastelloy değerlendirilmelidir.
+
+**2. Kaynak sonrası pasivasyon yapmamak**
+
+Kaynak ısısı HAZ'daki pasif filmi bozar. Pasivasyon yapılmayan paslanmaz çelik, kaynağa komşu bölgede birkaç ay içinde lokal korozyon gösterebilir.
+
+**3. Pürüzlü yüzeyde kir ve biyofilm tutunmasını hesaba katmamak**
+
+Yüzey geometrisi ve pürüzlülüğü kir tutunması kadar korozyon başlangıcını da etkiler. Ra değeri spesifikasyona konmayan yüzeyler standart dışı cilalama ile teslim edilebilir ve bu da kalifikasyonu geçersiz kılar.
+
+**4. 316'yı her şeye karşı dayanıklı saymak**
+
+316, klorüre karşı 304'ten iyidir; ancak yüksek sıcaklıkta (60°C üzeri) konsantre klorüre veya hipoklorit asit içeren temizleyicilere karşı yeterli olmayabilir. Konsantre HCl karşısında hiçbir östenitik paslanmaz yeterli değildir; PTFE, C-276 veya seramik astar gerekir.
+
+**5. Martenzitik paslanmaz çeliği korozyon direnci açısından östenitikle eşitlemek**
+
+410'un yüksek sertliği ve mekanik dayanımı için makul ödün, düşük korozyon direncidir. Kuru ortam dışına çıkılırsa yüzey koruma (kaplama, boyama) zorunlu hale gelir.
+
+## Vaka özeti — TORQYX Mühendislik Kurulu Malzeme Masası
+
+Bir süt işleme tesisinde CIP (clean-in-place) bağlantı borularında 304 sınıfı paslanmaz çelik kullanılıyordu. Yıllık muayenede borularda çukur korozyonu (pitting) ve renk değişimi raporlandı. Tesiste CIP döngüsünde %2 NaOH + %1.5 HNO3 + ara sıra hipoklorit dezenfektanı kullanılmaktaydı.
+
+Analiz: hipoklorit dezenfektanı ve 80°C sıcaklık kombinasyonu PREN ≈ 18 olan 304'ün kritik pitting gerilim eşiğini (CPT) aşıyordu. Çözüm: borular 316L (PREN ≈ 25) ile değiştirildi; kaynak sonrası elektropolisaj ve pasivasyon protokolü uygulandı. 3 yıl sonraki muayenede korozyon bulgusu sıfır.
 
 ## İlgili hesaplayıcılar
 
-- [Malzeme Kütüphanesi](/tr/
-- [Hızlı Referans Merkezi](/reference)
-- [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
+- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
+- [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Malzeme Seçimi Rehberi](/tr/guides/malzeme-secimi-rehberi)
 
 ## İlgili sözlük terimleri
 
 - [Korozyon direnci](/tr/glossary/corrosion-resistance)
 - [Gerilme](/tr/glossary/stress)
+- [Güvenlik faktörü](/tr/glossary/factor-of-safety)
 
-## Kısa FAQ
+## Sık sorulan sorular
 
 ### Soru: 304 ile 316 arasındaki temel fark nedir?
 
-316 molibden içerdiği için klorürlü ortamlarda genellikle daha iyi direnç verir.
+316'nın içindeki %2–3 molibden, klorür ortamında pasif filmi güçlendirir ve PREN değerini yaklaşık 25'e taşır. 304'ün PREN değeri yaklaşık 18'dir; klorürlü ortamda anlamlı fark bu sayılarda gizlidir.
 
 ### Soru: Paslanmaz çelik paslanır mı?
 
-Uygun olmayan ortam, yüzey hasarı veya yanlış temizlik kimyası ile lokal korozyon görülebilir.
+Uygun ortam dışında evet: lokal klorür birikmesi, mekanik hasar, yanlış temizlik kimyasalı veya kaynaklanmış ve pasivasyon yapılmamış bölge pitting ve yarık korozyonuna yol açabilir.
 
 ### Soru: Kaynak sonrası neden pasivasyon yapılır?
 
-Isı etkisiyle bozulan yüzey tabakasını geri kazanmak ve korozyon riskini azaltmak için yapılır.
+Kaynak ısısı pasif oksit tabakasını bölgesel olarak bozar. Pasivasyon (nitrik asit veya sitrik asit işlemi) bu tabakayı yeniden oluşturarak korozyon riskini başlangıç seviyesine geri döndürür.
+
+### Soru: Gıda endüstrisinde hangi paslanmaz çelik standardı kullanılır?
+
+Gıda teması için AISI 304 veya 316 yaygındır; yüzey Ra ≤ 0.8 μm ve EHEDG uyumlu kaynak geometrisi şarttır. İlaç ve biyoteknoloji için 316L + elektropolisaj + ASME BPE standardı uygulanır.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Malzeme Masası) tarafından hazırlanmıştır. Referanslar: ASTM A240, ASTM A380, ASTM A967, EN 10088, NACE MR0175, EHEDG kılavuzları.*

@@ -1,46 +1,120 @@
 ---
 title: "Bolt head types guide"
-description: "Compare hex, socket head, button head, and countersunk bolts for design, assembly, and service access."
+description: "Engineering comparison of hex, socket head, button head, and countersunk bolts for design, assembly, torque capacity, and service requirements. ISO 4762, ISO 4014, and DIN 931 referenced."
 date: "2026-05-09"
-tags: ["bolt", "fastener", "torque", "ISO"]
+tags: ["bolt", "fastener", "torque", "ISO", "assembly"]
 category: "Fasteners"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
 <Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard (ISO 4014, ISO 4762, DIN 931), supplier data, and engineering approval.
 </Callout>
 
 ## Problem / Objective
 
-Bolt head selection affects tool clearance, tightening torque, service access, and bearing contact. A poor head choice can make a well-calculated joint difficult to assemble.
+Even when bolt diameter and property class are correctly chosen, a wrong head type can cause significant field problems: the tool cannot reach, required preload cannot be applied, surface damage is unavoidable, or the head strips during disassembly. This guide compares the four most common bolt head types — hex, socket head cap (SHCS), button head, and countersunk — against engineering criteria and provides a systematic selection path.
+
+Bolt head selection directly affects:
+
+- Maximum achievable tightening torque
+- Tool clearance and access requirements
+- Bearing contact area and bearing stress
+- Service frequency and stripping risk
+- Corrosion resistance and coating compatibility
 
 ## Assumptions
 
-- Joint load and preload target are known.
-- Standard metric bolt families are used.
-- Tool access is checked during design.
+- Joint load, preload target, and safety factor are defined (VDI 2230 methodology is referenced).
+- Standard metric bolt families are used; special head profiles are out of scope.
+- Tool access is verified during the design phase.
+- Bolt material and property class (8.8, 10.9, etc.) are selected separately and confirmed compatible with the chosen head type.
+- Repeated disassembly cycles, if required, are factored in with appropriate wear allowance.
 
 ## Step by step method
 
-1. Check tool access and clearance.
-2. Define preload and tightening torque needs.
-3. Review bearing contact and washer needs.
-4. Record corrosion and service frequency.
-5. Keep the bill of materials simple with standard head types.
+### Step 1 — Identify tool access and clearances
+
+At each bolt location, check two dimensions:
+
+**Top access:** The clearance needed for a wrench or driver to approach the head vertically. For hex: open-end wrench width (SW) plus lateral clearance; for socket head: L-key rotation radius; for button head: Torx/star bit rotation envelope.
+
+**Side access:** For socket head bolts, the length of the L-key arm that must swing freely. Restricted side clearance requires a T-handle or angled driver, which increases assembly time.
+
+Rule: If the access angle exceeds 15° from vertical for socket head bolts, torque transmission drops significantly. Hex head with an adaptor or a direct-drive solution is preferred.
+
+### Step 2 — Evaluate preload and torque capacity
+
+Each head type limits the maximum tightening torque through its drive geometry. Typical comparison (M10, property class 10.9):
+
+| Head Type | Approx. Max Torque | Standard |
+|---|---|---|
+| Hex head | 70–80 N·m | ISO 4014 / DIN 931 |
+| Socket head cap | 55–65 N·m | ISO 4762 |
+| Button head | 30–40 N·m | ISO 7380 |
+| Countersunk | 30–45 N·m | ISO 10642 |
+
+Button head and countersunk bolts should not be the primary choice for high-preload structural joints.
+
+### Step 3 — Check bearing contact area and bearing stress
+
+The bearing face diameter of a hex head is generally larger than that of an equivalent socket head cap bolt, reducing bearing stress on the mating surface.
+
+For countersunk bolts, the conical contact angle is typically 90° or 120°. When surface finish or drilling accuracy is inadequate, the cone contacts only at its outer edge. This reduces effective preload and increases separation risk under tensile load. Calculation: `sigma_b = F / A_contact`, where A_contact is derived from the cone geometry.
+
+Washer decision: For socket head bolts, a conical spring washer improves preload stability. For hex head bolts, a flat washer distributes load over a wider area and is required on soft substrates.
+
+### Step 4 — Note corrosion and service frequency
+
+If coatings are present (zinc, phosphate, Geomet, Dacromet), head type affects coating integrity:
+
+- The hex socket of a socket head bolt can fill with grease or rust debris in coated joints; stripping occurs during removal.
+- In marine environments, A2 or A4 stainless hex head bolts are more reliably removable than socket head bolts.
+- When more than five disassembly cycles are expected, selecting one socket size larger reduces wear rate.
+
+### Step 5 — Limit head type variety for BOM simplicity
+
+Mixing different head types throughout a project increases tool inventory, assembly instructions complexity, and error risk. Where possible, standardize to two or three types:
+
+- **Structural joints:** Hex head (ISO 4014 / 4017)
+- **Confined space, high torque:** Socket head cap (ISO 4762)
+- **Cover panels, visible surfaces:** Button head (ISO 7380)
+- **Flush surface, zero-protrusion requirement:** Countersunk (ISO 10642)
 
 ## Common mistakes
 
-- Forgetting socket key insertion depth.
-- Overestimating countersunk bearing contact.
-- Mixing bolt property class with head style standards.
+**1. Forgetting socket key insertion depth**
+
+The socket depth is defined in ISO 4762, but designers often overlook that inside channels, at blind hole edges, or on raised pads there is insufficient clearance for full key engagement. Result: the L-key cams out, the socket strips, and the bolt cannot be tightened.
+
+**2. Overestimating countersunk bearing contact**
+
+When the countersink angle is inconsistent or the chamfer is missing, contact occurs only at the outer cone edge. This increases local bearing stress and raises separation risk under tensile loading.
+
+**3. Mixing property class with head style standard**
+
+8.8 and 10.9 refer to material strength; they are independent from head style standards (ISO 4014, 4762, etc.). A socket head cap bolt is available in both 8.8 and 10.9.
+
+**4. Using button head in high-torque joints**
+
+ISO 7380 button head bolts have limited torque capacity. Head-side failure occurs when high preload is attempted in structural applications.
+
+**5. Choosing black phosphate socket head bolts in corrosive environments**
+
+Black phosphate provides minimal corrosion protection. In outdoor or chemical exposure environments, A2-70 stainless or Geomet-coated hex head bolts are the appropriate choice.
+
+## Case summary — TORQYX Engineering Board, Fastener Desk
+
+Machine housing covers were joined with socket head M6 × 12, ISO 4762 bolts. The covers were 5 mm thick aluminium alloy. After 8–10 field service cycles (approximately every 3 months), the socket sockets became unusable — the L-key slipped and preload could no longer be achieved.
+
+Analysis showed: blind hole edge clearance was insufficient, the key could not fully engage, and each tighten-loosen cycle buckled the socket incrementally. Solution: transition to Torx-drive M6 ISO 14583 bolts with optimized insertion depth. Result: intact socket integrity after 18 cycles.
 
 ## Related calculators
 
 - [Bolt Size and Torque Calculator](/en/tools/bolt-calculator)
-- [Quick Reference Center](/reference)
 - [Unit Converter](/en/tools/unit-converter)
+- [Torque / Power Calculator](/en/tools/torque-power)
 
 ## Related glossary terms
 
@@ -48,16 +122,24 @@ Bolt head selection affects tool clearance, tightening torque, service access, a
 - [Stress](/en/glossary/stress)
 - [Tolerance](/en/glossary/tolerance)
 
-## Quick FAQ
+## Frequently asked questions
 
-### Question: When is a hex head bolt suitable?
+### Question: When is a hex head bolt the right choice?
 
-It is a strong default when high tightening torque and easy service access are needed.
+When high tightening torque, good tool access, and frequent service cycles are combined, hex head is a solid default. The difference between ISO 4014 (partial thread) and ISO 4017 (full thread) matters when edge distance is tight.
 
-### Question: Can countersunk bolts carry structural loads?
+### Question: Can countersunk bolts be used in load-bearing joints?
 
-They can, but contact stress and surface quality must be checked carefully.
+Yes, but conical contact geometry and surface quality must be carefully verified. In shear-loaded joints, the countersunk head may have difficulty distributing shear into the cone geometry evenly.
 
-### Question: What is the advantage of socket head bolts?
+### Question: What is the advantage of socket head cap bolts?
 
-They save space in compact assemblies, but tool quality and socket wear matter.
+Compact installation in confined spaces combined with high torque capacity makes them the most common choice in industrial machinery. However, socket wear, access depth, and corrosive environment compatibility must be addressed during design.
+
+### Question: What key size is required for an M8 socket head bolt?
+
+Per ISO 4762, the M8 socket head cap bolt uses a 6 mm hex socket (SW6). Minimum insertion depth is 5.5 mm; this must be checked against blind hole depth and cover thickness.
+
+---
+
+*This guide was prepared by the TORQYX Engineering Board (Fastener Desk). References: ISO 4014, ISO 4762, ISO 7380, ISO 10642, VDI 2230.*

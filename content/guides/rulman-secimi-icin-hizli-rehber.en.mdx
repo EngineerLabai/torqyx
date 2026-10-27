@@ -1,89 +1,169 @@
 ---
-title: "Quick guide for bearing selection"
-description: "A short checklist to evaluate load, speed, and service conditions."
+title: "Bearing selection engineering guide"
+description: "Systematic bearing selection guide combining load type, speed, temperature, and service conditions with ISO 281 L10 life calculation. SKF, FAG, and ISO 15312 referenced."
 date: "2026-01-12"
-tags: ["bearing", "guide", "maintenance"]
-category: "Guide"
+tags: ["bearing", "ISO 281", "L10 life", "lubrication", "selection"]
+category: "Machine Elements"
 draft: false
+readingTime: 10
 ---
 
 <Callout type="warning" title="Attention">
-This guide is for first-pass evaluation. For critical applications, always confirm with manufacturer catalogs.
+This guide is for initial engineering assessment. For critical applications, always verify with manufacturer catalogs (SKF, FAG, NSK), ISO 281, and ISO 15312.
 </Callout>
 
 ## Problem / Objective
 
-In bearing selection, the goal is to identify a bearing type that balances load and speed requirements.
+Bearing selection is frequently underestimated in engineering practice. The "larger bearing equals more safety" perception leads to oversizing, unnecessary cost, and sometimes shorter life (internal clearance increases and unloaded-zone fatigue in oversized bearings). Conversely, selecting a low catalog L10 life results in early failure. This guide provides a systematic bearing selection process that integrates load analysis, speed check, lubrication, and life calculation.
 
 ## Assumptions
 
-- Load distribution is assumed to be balanced.
-- Lubrication and temperature conditions are within typical production ranges.
-- Assembly tolerances are inside catalog limits.
+- Radial and axial load components are defined (static and dynamic).
+- Rotational speed (rpm) or linear speed is either constant or varies within a known duty cycle spectrum.
+- Operating temperature range is known.
+- Lubrication method (grease or oil) and relubrication interval are defined.
+- Expected service life or target reliability level is stated.
 
 ## Step by step method
 
-<StepList
-  title="Fast selection flow"
-  steps={["Define load and speed range", "Note operating temperature", "Calculate service factors", "Select bearing type"]}
-/>
+### Step 1 — Determine load type and magnitude
+
+The starting point of bearing selection is fully defining the force at the shaft-to-bearing interface.
+
+**Equivalent dynamic load P:**
+
+Combined formula for radial and axial load:
+
+`P = X * Fr + Y * Fa`
+
+Where:
+- Fr = radial force (N)
+- Fa = axial force (N)
+- X, Y = catalog coefficients per bearing type (fixed or bidirectional load)
+
+For single-row ball bearings, the axial factor engages when `Fa/Fr exceeds e`. The value e is read from the catalog based on internal geometry.
+
+**Static safety factor S0:**
+
+When impact or vibration load is present: `S0 = C0 / P0` (C0: static load capacity, P0: static equivalent load). Per ISO 76, S0 must be at least 1.5–2.
+
+### Step 2 — Select bearing type
+
+| Bearing Type | Radial Load | Axial Load | Speed | Notes |
+|---|---|---|---|---|
+| Deep groove ball | Good | Medium | High | Universal, most common |
+| Cylindrical roller (CRB) | Very Good | Poor | High | Accommodates shaft elongation |
+| Angular contact ball | Good | Good | Medium-High | Bidirectional axial |
+| Tapered roller | Good | Very Good | Medium | Requires preload |
+| Spherical roller | Excellent | Medium | Medium | High misalignment tolerance |
+
+Typical selection guidance:
+- Pure radial load, high speed → Deep groove ball
+- Heavy radial + light axial → Cylindrical roller
+- Axial-dominant + high speed → Angular contact (matched pair)
+- Heavy combined load, low speed → Tapered roller
+
+### Step 3 — Calculate L10 bearing life (ISO 281)
+
+Basic L10 life (in millions of revolutions):
+
+`L10 = (C / P)^p`
+
+- C = dynamic load rating (N) — catalog value
+- P = equivalent dynamic load (N)
+- p = 3 (ball bearings), 10/3 (roller bearings)
+
+Converting millions of revolutions to hours:
+
+`Lh = (L10 * 10^6) / (60 * n)`
+
+n = rotational speed (rpm)
+
+**Example:** C = 35 kN, P = 10 kN, n = 1,500 rpm, ball bearing:
+
+- L10 = (35/10)³ = 42.875 million revolutions
+- Lh = (42.875 × 10⁶) / (60 × 1,500) = 476 hours
+
+Note: This basic calculation excludes lubrication, temperature, and contamination factors. Modified L10m calculation requires ISO 281 Annex A.
+
+### Step 4 — Check speed limit and lubrication viscosity
+
+Every bearing has two speed limits:
+- **Thermal speed limit (catalog):** Maximum operating speed under standard lubrication conditions
+- **Kinematic speed limit:** The limit where oil drag force exceeds acceleration forces
+
+Lubrication viscosity: The ISO VG grade must meet the required minimum kinematic viscosity `ν1` at operating temperature. The viscosity ratio `κ = ν / ν1` from the SKF catalog; `κ ≥ 1` indicates optimal film thickness.
+
+For grease: base oil viscosity, thickener type, and operating temperature are evaluated together. Standard lithium complex grease is suitable from –20°C to +120°C.
+
+### Step 5 — Verify tolerance and clearance compatibility
+
+Shaft and housing bore tolerances affect bearing internal clearance. An excessively tight fit can zero out internal clearance, causing temperature rise and early fatigue; too loose a fit leads to vibration and rocking.
+
+Typical recommendations (ISO 286-1):
+- Rotating inner ring (rotating load on inner): k5, m5, n6
+- Stationary inner ring (point load): h5, js5, k5
+- Rotating outer ring: K7, M7
+- Stationary outer ring (point load): H7, G7
 
 ## Common mistakes
 
-<Callout type="info" title="Checkpoint">
-Skipping service factors in quick selection can dramatically reduce bearing life.
-</Callout>
+**1. Confusing radial and axial loads**
 
-- Mixing radial and axial loads.
-- Ignoring weak lubrication conditions.
-- Assuming service factor equals 1.
+Failing to calculate axial forces (motor side-pull, gear axial component) at locations where only radial load is expected can reduce bearing life by a factor of 3–5.
 
-## First-pass validation
+**2. Assuming service factor of 1**
 
-Before locking the selection, compare the calculated equivalent dynamic load with the catalog load rating and check the speed limit for the planned lubrication method. If the bearing runs near the catalog speed limit, temperature rise, grease life, and cage type become selection inputs, not afterthoughts. For compact assemblies, also check whether the housing and shaft fits can be produced repeatably; a correct bearing can fail early when mounting clearance is consumed by poor fits.
+A service factor `fs` must be applied for vibration, impact, and misalignment. Well-aligned, vibration-free systems: fs = 1–1.2; moderate vibration: 1.5–2; high impact: 2.5–3.
+
+**3. Not adjusting lubrication viscosity for operating temperature**
+
+Grease and oil viscosity is referenced at 40°C; but bearing operating temperature is different. The actual viscosity needed at 80°C operating temperature can differ substantially from the ISO 40°C classification.
+
+**4. Not checking internal clearance after interference fit**
+
+Interference fit expands the inner ring and reduces internal clearance. Instead of CN (Normal) clearance, C3 or C4 clearance class should be selected to achieve optimal clearance after mounting.
+
+**5. Ignoring thermal shaft elongation**
+
+On long shafts, thermal elongation generates axial load toward the fixed bearing. The free (floating) side bearing must be allowed axial movement (shaft + bore tolerance combination provides this).
+
+## Case summary — TORQYX Engineering Board, Machine Elements Desk
+
+A process pump rotor shaft used a double-row angular contact bearing (C = 42 kN) running at 2,900 rpm selected for its axial load capacity. Failure records showed two bearing replacements within an 8-month period.
+
+Investigation: the Fa/Fr ratio in the P calculation was entered incorrectly; combined load factor Y was overlooked and actual equivalent load P came out 40% higher. Corrected L10h = 2,800 hours (versus the erroneous prior calculation of 6,500 hours). Additionally, the grease relubrication interval was 6,000 hours; correct interval per actual requirements was 2,000 hours. Solution: bearing upgraded to C = 62 kN, relubrication interval revised. Zero failures in the following 24 months.
 
 ## Related calculators
 
-<ToolLink
-  href="/en/tools/torque-power"
-  title="Torque / Power calculator"
-  description="Compute torque from speed and power."
-  badge="Calculator"
-/>
+- [Bearing Life Calculator](/en/tools/bearing-life)
+- [Torque / Power Calculator](/en/tools/torque-power)
+- [Unit Converter](/en/tools/unit-converter)
 
-<ToolLink
-  href="/quality-tools"
-  title="Quality tools"
-  description="Collect measurement and control flows in one place."
-  badge="Tool"
-/>
+## Related glossary terms
 
-## Related content
+- [Fatigue](/en/glossary/fatigue)
+- [Stress](/en/glossary/stress)
+- [Factor of safety](/en/glossary/factor-of-safety)
 
-- <a href="/en/blog/icerik-altyapisina-hizli-giris">Quick intro to the content pipeline</a>
-- <a href="/en/glossary/backlash">Backlash term</a>
-- <a href="/en/tools/bearing-life">Bearing life calculator</a>
+## Frequently asked questions
 
-## Simple check table
+### Question: What does L10 life mean?
 
-<Table>
-  <thead>
-    <tr>
-      <th>Condition</th>
-      <th>Priority</th>
-      <th>Note</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>High speed</td>
-      <td>Low friction</td>
-      <td>Cage structure is critical</td>
-    </tr>
-    <tr>
-      <td>Heavy load</td>
-      <td>Durability</td>
-      <td>Contact angle increases</td>
-    </tr>
-  </tbody>
-</Table>
+Per ISO 281, it is the life estimate at which 90% of a group of nominally identical bearings running under identical conditions will survive. L10 = 500,000 revolutions means the threshold corresponding to a 10% failure probability.
+
+### Question: Is a larger bearing always longer-lived?
+
+No. L10 life depends on `(C/P)^3`. A higher C value increases life when P is constant; however, an excessively large bearing introduces increased internal clearance and fatigue stress concentration. Optimum sizing is critical.
+
+### Question: Should I choose grease or oil lubrication?
+
+Grease: low-to-medium speed, easy maintenance, sealing advantage. Oil: high speed, remote feed, oil jacket cooling. The Dn number (bore diameter × rpm) defines the grease limit: Dn greater than 300,000 favors oil.
+
+### Question: If the bearing fit feels too tight during assembly, what should I do?
+
+Measure the press force and retry using the heat method (oil bath at 80–100°C). The inner ring must never be driven in by hammer blows; impact can damage the cage or balls.
+
+---
+
+*This guide was prepared by the TORQYX Engineering Board (Machine Elements Desk). References: ISO 281, ISO 76, ISO 15312, ISO 286-1, SKF General Catalogue.*

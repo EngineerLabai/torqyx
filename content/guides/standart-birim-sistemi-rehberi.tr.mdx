@@ -1,62 +1,148 @@
 ---
-title: "Standart birim sistemi rehberi"
-description: "SI, metrik ve imperial birimleri karıştırmadan hesap yapmak için temel dönüşüm ve dokümantasyon kontrol listesi."
+title: "Standart birim sistemi ve mühendislik dönüşüm rehberi"
+description: "SI, metrik ve imperial birimleri bilinçli şekilde kullanmak, hesap hatalarını önlemek ve teknik dokümantasyonu tutarlı tutmak için mühendislik rehberi. ISO 80000, ASTM SI10 referanslı."
 date: "2026-05-09"
-tags: ["birim dönüşümü", "SI", "ISO", "standart"]
+tags: ["birim dönüşümü", "SI", "ISO 80000", "standart", "mühendislik"]
 category: "Standartlar"
 draft: false
-readingTime: 7
+readingTime: 9
 ---
 
 <Callout type="info" title="Kullanım notu">
-Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Kritik tasarım kararlarında ilgili standart, tedarikçi verisi ve sorumlu mühendis onayı gerekir.
+Bu rehber hızlı mühendislik kontrolü için hazırlanmıştır. Proje dokümantasyon standartlarında ilgili kurum rehberlerine (ISO 80000, ASTM SI10, BIPM SI El Kitabı) başvurunuz.
 </Callout>
 
 ## Problem / Amaç
 
-Birim hataları doğru formülü yanlış sonuca çevirebilir. Özellikle basınç, moment, enerji ve kesit alanı hesaplarında birim seti baştan kilitlenmelidir.
+Birim hatası, doğru formüle karşın yanlış sonuca ulaşmanın en yaygın yoludur. Mühendislik tarihinde bu hatanın somut örnekleri vardır: 1999 yılında Mars İklim Yörüngeleyicisi, NASA ile tedarikçisi arasındaki N·s / lbf·s birim karışıklığı nedeniyle kaybolmuştur. Daha yakın örnekler: N/mm² ile MPa eşdeğerliğini unutan bir tasarımcı, oda içi iletişimde kPa ile bar'ı karıştıran bir ekip, ya da iç çap hesabında mm ile m birimini harmanlayan bir sayfa.
+
+Bu rehber, mühendislik hesaplarında birim yönetimini adım adım sistematik hale getirir ve en sık karşılaşılan tuzakları kayıt altına alır.
 
 ## Varsayımlar
 
-- Ana hesap sistemi SI olarak seçilir.
-- Tedarikçi verisi farklı birimde gelirse kaynak birim not edilir.
-- Rapor çıktısında giriş ve sonuç birimleri birlikte gösterilir.
+- Projenin ana birim sistemi başında kararlaştırılmıştır (tercihen SI).
+- Tedarikçi, müşteri veya standart farklı birim sistemi kullanıyor olabilir.
+- Hesap şablonları birim bilgisini giriş değerlerinin yanında açıkça göstermektedir.
+- Rapor çıktısında hem giriş hem sonuç birimleri yan yana yer almaktadır.
+- Yuvarlama politikası projenin başında kararlaştırılmış ve belgelenmiştir.
 
 ## Adım adım yöntem
 
-1. Proje ana birimini belirle.
-2. Gelen veriyi kaynak birimiyle birlikte kaydet.
-3. Dönüşümü hesap öncesinde yap ve yuvarlama seviyesini yaz.
-4. Sonuçları aynı birim ailesinde raporla.
-5. Kritik değerler için ters dönüşümle hızlı kontrol yap.
+### Adım 1 — Proje birim setini kilitle
+
+Mühendislik projesinde kullanılacak birim seti başta, yazılı olarak belirlenmeli ve ilgili tüm taraflarla paylaşılmalıdır. Tipik SI tabanlı makine mühendisliği seti:
+
+| Büyüklük | Birim | Sembol |
+|---|---|---|
+| Uzunluk | milimetre | mm |
+| Kütle | kilogram | kg |
+| Kuvvet | Newton | N |
+| Basınç / Gerilme | Megapaskal | MPa |
+| Sıcaklık | Celsius | °C |
+| Tork | Newton-metre | N·m |
+| Güç | Kilowatt | kW |
+| Enerji | Joule | J |
+
+Bu seti proje not defteri veya hesap şablonunun başına sabitlemek, ilerleyen aşamalarda oluşabilecek karışıklığı sıfıra çeker.
+
+### Adım 2 — Gelen veriyi kaynak birimiyle birlikte kaydet
+
+Tedarikçi veya müşteriden gelen veri farklı birim sisteminde olabilir. Dönüşüm yapılmadan önce kaynak birimini belge üzerinde görmek şarttır. Örnek:
+
+- Tedarikçi veri sayfası: `Akış kapasitesi: 12 GPM` → Kayıt: `12 GPM (kaynak), dönüşüm: 0,758 L/s`
+- Standart basınç değeri: `150 PSI` → `1.034 kPa` veya `10,34 bar`
+
+Pratik kural: dönüşüm yapılan her değerin yanına kaynak değer ve birim not edilmeli, gerekirse kaynak belge referansı eklenmelidir.
+
+### Adım 3 — Dönüşümü hesap öncesinde yap ve yuvarlama seviyesini belirle
+
+Dönüşüm, formül içinde değil formüle girmeden önce yapılmalıdır. Ara adımlarda yuvarlama hesabın sonucunu kaydırır; tam değerleri koruyun.
+
+Sık kullanılan dönüşüm faktörleri:
+
+| Dönüşüm | Çarpan |
+|---|---|
+| 1 inç → mm | 25,4 |
+| 1 ft → m | 0,3048 |
+| 1 lbf → N | 4,4482 |
+| 1 psi → kPa | 6,8948 |
+| 1 bar → MPa | 0,1 |
+| 1 HP (mekanik) → kW | 0,7457 |
+| 1 ft·lbf → N·m | 1,3558 |
+| 1 BTU/h → W | 0,2931 |
+
+Yuvarlama politikası: Ara adımlarda minimum 5 anlamlı basamak tutun. Raporda anlamlı basamak sayısı ölçüm hassasiyetiyle uyumlu olmalıdır. Örneğin ±0,01 mm hassasiyetle ölçülen bir uzunluğu 12,34567 mm olarak rapor etmek yanıltıcı kesinlik sunar.
+
+### Adım 4 — Sonuçları aynı birim ailesinde raporla
+
+Bir hesabın girdisi mm, çıktısı N/mm² ise raporda bu iki birim bir arada tutulmalı; sonuç başka bir hesapta kullanılacaksa MPa cinsinden verilmesi hem birim tutarlılığı hem de hata takibi açısından önemlidir.
+
+Tablo veya hesap sayfalarında birim sütunu veya satırı mutlaka olmalıdır; birimsiz sayı mühendislik belgesinde tehlikeli bir eksikliktir.
+
+### Adım 5 — Kritik değerler için ters dönüşümle hızlı kontrol yap
+
+Önemli bir sonuca ulaştığınızda ters dönüşümle kontrol edin:
+
+Örnek: `σ = 285 MPa` → N/mm²'ye çevir: `285 N/mm²` → inç-pound sistemine: `285 / 0.00689476 ≈ 41.340 PSI`. Bu değer malzemenin inç-pound sistemindeki akma gerilmesinin beklenen aralığında mı? Bu çapraz kontrol büyük ölçekli hataları yakalar.
 
 ## Sık hatalar
 
-- N/mm2 ile MPa eşdeğerliğini unutmak.
-- mm ve m birimlerini aynı formülde karıştırmak.
-- Torkta N m ile N mm arasındaki 1000 katsayısını atlamak.
+**1. N/mm² ile MPa eşdeğerliğini unutmak**
+
+1 N/mm² = 1 MPa matematiksel gerçektir. Ancak hesap sayfasında `E = 210 GPa` ile `σ = 210 N/mm²`'yi karıştırmak veya "210.000 N/mm²" ile "210.000 MPa" farklı büyüklüklermiş gibi yorumlamak pratikte gözlemlenen hatadır.
+
+**2. mm ile m'yi aynı formülde kullanmak**
+
+Kesit alanı hesabında uzunluğu mm ile, kuvveti N ile girip alanı m² cinsinden okumak yaygın hatadır. Boyutsal analiz: `σ = F/A` → `N / mm²` = MPa doğru; `N / m²` = Pa ise aynı sayısal değer 1.000.000 kat farklı anlam ifade eder.
+
+**3. Torkta N·m ile N·mm arasındaki 1.000 katsayısını atlamak**
+
+Tork hesabı: `T = 100 N·m = 100.000 N·mm`. Cıvata ön yük formüllerinde (VDI 2230) tork genellikle N·m cinsinden girilir; kayma pimi veya mil hesabında N·mm kullanılıyorsa katsayı 1.000 kolayca atlanır ve yatay ölçekli bir hata üretir.
+
+**4. Sıcaklık dönüşümünde sıfır kaymasını kaçırmak**
+
+°F → °C: `T_C = (T_F - 32) / 1,8`. Çarpan 5/9 doğru hatırlanır ama 32 çıkarılmayı unutmak klasik hatadır. Termodinamik hesaplarda mutlak sıcaklık (Kelvin veya Rankine) gerekiyorsa 0°C = 273,15 K olduğunu not edin.
+
+**5. Basınç birimlerini karıştırmak (bar, atm, psi, kPa, Pa)**
+
+1 bar ≠ 1 atm (1 atm = 1,01325 bar). 1 PSI = 6,8948 kPa ≈ 0,0689 bar. Endüstride bar ve kPa sıklıkla birlikte kullanılır; hangisinin görüntüleneceği ekran veya ölçüm cihazına bağlıdır. Kaynak belirsizse birimsiz basınç değerine güvenmeyin.
+
+## Gerçek mühendislik kazası — birim karışıklığının somut sonuçları
+
+Mars İklim Yörüngeleyicisi (1999): Jet Propulsion Laboratory'nin navigasyon yazılımı SI birimi beklerken Lockheed Martin'in yazılımı pound-force·saniye cinsinden veri gönderdi. Sonuç: 327 milyon dolarlık uzay aracı yörüngeden saptı ve kayboldu. Olay, birim yönetiminin mühendislik dokümantasyonundaki kritik önemine dair standart referans vakası olarak kayıtlara geçti.
+
+Bu örnek aşırı görünse de proje ölçeği küçüldüğünde bağımsız hesap yapan iki mühendis veya iki farklı tedarikçiden gelen veri arasında benzer birim çelişkisi yaşanması olasıdır.
 
 ## İlgili hesaplayıcılar
 
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
-- [Hızlı Referans Merkezi](/reference)
 - [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
+- [Cıvata Boyut ve Ön Yük Hesaplayıcı](/tr/tools/bolt-calculator)
 
 ## İlgili sözlük terimleri
 
 - [Gerilme](/tr/glossary/stress)
 - [Tork](/tr/glossary/torque)
+- [Basınç](/tr/glossary/pressure)
 
-## Kısa FAQ
+## Sık sorulan sorular
 
-### Soru: N/mm2 ile MPa aynı mı?
+### Soru: N/mm² ile MPa aynı mı?
 
-Evet, 1 N/mm2 değeri 1 MPa değerine eşittir.
+Evet, matematiksel olarak 1 N/mm² = 1 MPa. Birim karışıklığı bu iki gösterimin farklı sistemlerde aynı sayısal değerle yazılmasından değil, büyüklük ölçeğinin kaydırılmasından kaynaklanır.
 
-### Soru: Ana birim sistemi nasıl seçilir?
+### Soru: Mühendislik projesi için hangi birim sistemi seçilmeli?
 
-Ekip, tedarikçi ve standart gereksinimine göre seçilir; mekanik hesaplarda SI tabanı en güvenli başlangıçtır.
+Müşteri veya standart zorunluluğu yoksa SI (milimetre tabanlı makine mühendisliği seti) en iyi başlangıçtır. Uluslararası standartların büyük çoğunluğu SI temellidir.
 
 ### Soru: Yuvarlama ne zaman yapılmalı?
 
-Ara adımlarda ham değer korunmalı, raporda anlamlı basamakla yuvarlanmalıdır.
+Ara adımlarda ham değer korunmalı, nihai raporda anlamlı basamak sayısı ölçüm hassasiyetiyle uyumlu olmalıdır. Gereksiz yuvarlama hata birikimini artırır.
+
+### Soru: Farklı birim sistemleri kullanan iki tedarikçiyle nasıl çalışılır?
+
+Her tedarikçiden gelen verinin kaynak birimi belgelenir; proje birim setine dönüşüm merkezi bir dönüşüm tablosunda yapılır ve onaylanır. Dönüşümün iki bağımsız kişi tarafından çapraz kontrol edilmesi kritik değerlerde önerilir.
+
+---
+
+*Bu rehber, TORQYX Mühendislik Kurulu (Standartlar Masası) tarafından hazırlanmıştır. Referanslar: ISO 80000, ASTM SI10, BIPM SI El Kitabı (9. Baskı), NASA SP-7012.*

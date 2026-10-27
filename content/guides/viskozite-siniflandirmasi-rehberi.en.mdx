@@ -1,62 +1,165 @@
 ---
-title: "Viscosity classification guide"
-description: "Practical notes for choosing viscosity without mixing ISO VG, SAE, and lubricant grade systems."
+title: "Viscosity classification and lubricant selection guide"
+description: "Engineering notes for selecting ISO VG, SAE, and AGMA viscosity grades correctly based on operating temperature, speed, and application. ISO 3448 and DIN 51519 referenced."
 date: "2026-05-09"
-tags: ["viscosity", "lubrication", "ISO VG", "SAE"]
+tags: ["viscosity", "lubrication", "ISO VG", "SAE", "AGMA", "oil selection"]
 category: "Fluids"
 draft: false
-readingTime: 7
+readingTime: 10
 ---
 
 <Callout type="info" title="Usage note">
-This guide is prepared for quick engineering review. Critical design decisions still require the relevant standard, supplier data, and engineering approval.
+This guide is prepared for quick engineering review. Final lubricant selection must be verified against the oil manufacturer's technical data sheet and application specification.
 </Callout>
 
 ## Problem / Objective
 
-Wrong viscosity affects friction, temperature, energy use, and bearing life. ISO VG and SAE grades do not describe the same scale, and operating temperature must be included.
+Wrong viscosity selection produces damage through four distinct mechanisms: insufficient film thickness (metal-to-metal contact → wear), excessive viscosity (pumping losses, heat accumulation), cold-start freezing or high flow resistance, and incorrect lubrication interval determination. ISO VG and SAE grades measure the same physical quantity but use different reference points and methodologies; attempting to interchange them directly invites systemic error.
+
+This guide explains viscosity measurement systems, the correct selection method, and the most common mistakes.
 
 ## Assumptions
 
-- A lubricant data sheet is available.
-- Operating temperature range is known.
-- The application needs a continuous oil film.
+- The oil manufacturer's technical data sheet is available, with kinematic viscosity at 40°C and 100°C documented.
+- The operating temperature range (minimum cold start and maximum steady-state) is known.
+- The application type is defined: hydraulic system, gearbox, bearing, engine, slideway.
+- Service interval or oil change cycle is established.
+- The lubricant is used in an application that requires continuous film formation (elastohydrodynamic or hydrodynamic regime).
 
 ## Step by step method
 
-1. Define operating temperature and speed.
-2. Read the manufacturer recommended viscosity range.
-3. Check ISO VG at operating temperature.
-4. Balance cold start behavior and high temperature film thickness.
-5. Choose a stocked grade that fits maintenance practice.
+### Step 1 — Understand kinematic viscosity measurement systems
+
+Viscosity is expressed in three different units in engineering:
+
+**Kinematic viscosity (ν):** in cSt (centistokes) or mm²/s. This is flow resistance normalized by the fluid's own density. ISO VG grades and ISO 3448 use this basis.
+
+**Dynamic viscosity (μ):** in mPa·s (millipascal-seconds) or cP (centipoise). `μ = ν * ρ` (ρ = density in kg/m³).
+
+**Viscosity index (VI):** A dimensionless number measuring how viscosity changes with temperature. Higher VI means more stable viscosity over a wide temperature range. Mineral oils: VI approximately 100; synthetic PAO: VI approximately 130–150; multigrade oils with VI improvers: VI greater than 150.
+
+### Step 2 — Select ISO VG grade based on operating temperature
+
+The ISO VG (Viscosity Grade) system is defined by ISO 3448 / DIN 51519. Each grade corresponds to a nominal kinematic viscosity at 40°C (±10% tolerance):
+
+| ISO VG Grade | 40°C Viscosity (cSt) | Typical Application |
+|---|---|---|
+| VG 10 | 10 | Precision instruments, pneumatics |
+| VG 22 | 22 | Textiles, small gears |
+| VG 32 | 32 | Hydraulic systems (medium pressure) |
+| VG 46 | 46 | Hydraulics, industrial gears |
+| VG 68 | 68 | Heavy hydraulics, reducers |
+| VG 100 | 100 | Industrial gearboxes |
+| VG 150 | 150 | Large gearboxes, lead screws |
+| VG 220 | 220 | Heavy-duty reducers |
+| VG 320 | 320 | Very heavy gears, open gears |
+| VG 460 | 460 | Low speed, very high load |
+
+Selection path: determine the required viscosity at your operating temperature; then use the Walther viscosity-temperature equation or the manufacturer's graph to read the 40°C equivalent and select the nearest VG grade.
+
+### Step 3 — Understand SAE grades and AGMA gear grades
+
+**SAE Engine Oil Grades (SAE J300):**
+
+SAE grades operate with a dual system:
+- Winter (W) grades: `0W, 5W, 10W, 15W, 20W, 25W` — limit low-temperature viscosity (cP at –15°C or –35°C)
+- Summer grades: `20, 30, 40, 50, 60` — limit kinematic viscosity at 100°C (cSt)
+- Multigrade: such as `5W-30, 10W-40`; satisfies both cold and hot requirements
+
+SAE engine oil grades must not be confused with ISO VG industrial oil grades. SAE 30 ≈ ISO VG 100 is an approximate equivalence only; test method, additive package, and application area are entirely different.
+
+**AGMA Gear Oil Grades (AGMA 9005):**
+
+AGMA grades are specific to industrial gearboxes:
+
+| AGMA | Approximate ISO VG Equivalent |
+|---|---|
+| 0 | VG 46 |
+| 1 | VG 68 |
+| 2 | VG 100 |
+| 3 | VG 150 |
+| 4 | VG 220 |
+| 5 | VG 320 |
+| 6 | VG 460 |
+| 7 | VG 680 |
+| 8 | VG 1000 |
+
+### Step 4 — Evaluate cold start and high-temperature film together
+
+At cold start, oil fluidity is critical for pumping, acceleration, and initial loading. High viscosity at cold start:
+
+- Increases pump pressure drop
+- Delays oil reaching bearings (dry friction period)
+- Contributes to high inrush current in electric motor-driven systems
+
+Conversely, excessively low viscosity at operating temperature disrupts hydrodynamic film formation.
+
+Practical path: check the oil's `ν` value at both the minimum cold start temperature and the maximum steady-state temperature. If a single viscosity grade cannot satisfy both extremes, a multigrade oil or synthetic formulation is required.
+
+### Step 5 — Select a stock grade compatible with maintenance intervals
+
+Final check in oil selection: the chosen grade must be available from current stock, suppliers, and rotation schedule. A grade that does not match existing inventory increases field confusion and wrong-oil-fill risk.
+
+When standardizing oil grades across multiple machines, using the same grade for machines with overlapping performance requirements simplifies maintenance and reduces wrong-fill errors.
 
 ## Common mistakes
 
-- Treating the 40 C value as operating temperature.
-- Mapping SAE engine oil grades directly to industrial oils.
-- Assuming higher viscosity is always better protection.
+**1. Treating ISO VG 40°C as the operating temperature**
+
+The reference point for ISO VG grades is 40°C. If the machine runs at 80°C, the actual viscosity at that temperature can drop far below the ISO VG number and film thickness becomes insufficient. Always verify actual viscosity at operating temperature.
+
+**2. Directly substituting SAE engine oil grade for industrial oil**
+
+SAE 30 engine oil ≠ ISO VG 100 industrial oil. Additive package, oxidative stability, foam resistance, and compatible material properties are entirely different. Engine oil must not go into a gearbox; gear oil must not go into an engine.
+
+**3. Assuming higher viscosity always provides better protection**
+
+Above a certain viscosity threshold, film thickness is sufficient; higher viscosity only increases pumping losses, heat accumulation, and energy consumption. In high-speed, low-load applications, excessive viscosity can contribute to foaming and cavitation.
+
+**4. Mixing brands without compatibility check**
+
+Even when two brands share the same VG grade and API category, their additive packages may conflict. The safest path: flush the system at oil change, or mix only per the same manufacturer's recommendation. Compatibility charts are generally available on manufacturer websites.
+
+**5. Not adjusting oil change interval for ambient temperature**
+
+High operating temperature accelerates oil oxidation and thermal degradation. Each 10°C increase approximately doubles the oxidative degradation rate (Arrhenius approximation). In overheating systems, the catalog oil change interval should be halved.
+
+## Case summary — TORQYX Engineering Board, Fluids Desk
+
+An industrial reducer was running on ISO VG 220 mineral oil. During winter months (ambient –5°C), oil pumping difficulty occurred, motor ramp-up time extended, and high-current alarms triggered.
+
+Investigation: kinematic viscosity of the oil at –5°C reached approximately 2,200 cSt; pump design limit was 400 cSt. Solution: switched to ISO VG 68 PAO (polyalphaolefin) synthetic oil for winter operation. With PAO's VI approximately 145, approximately 280 cSt at –5°C and 18 cSt at 80°C were achieved; both extremes were satisfied. Start-up alarms ceased; annual energy consumption decreased by 4%.
 
 ## Related calculators
 
 - [Pipe Pressure Loss Calculator](/en/tools/pipe-pressure-loss)
-- [Gear Design](/en/tools/gear-design)
-- [Quick Reference Center](/reference)
+- [Gear Design Calculator](/en/tools/gear-design)
+- [Unit Converter](/en/tools/unit-converter)
 
 ## Related glossary terms
 
 - [Viscosity](/en/glossary/viscosity)
 - [Reynolds number](/en/glossary/reynolds-number)
+- [Pressure](/en/glossary/pressure)
 
-## Quick FAQ
+## Frequently asked questions
 
 ### Question: What does ISO VG mean?
 
-It defines the kinematic viscosity class of the oil at 40 C.
+ISO VG (Viscosity Grade), per ISO 3448, specifies the nominal kinematic viscosity of an oil at 40°C. VG 46 means 46 ± 4.6 cSt kinematic viscosity at 40°C.
 
-### Question: Is high viscosity always better?
+### Question: Is higher viscosity always better?
 
-No. Film strength may improve, but pumping loss and temperature can also increase.
+No. Optimum viscosity is the minimum value that provides adequate film thickness under operating conditions. Excessive viscosity causes energy loss, heat accumulation, and cold-start pumping problems.
 
 ### Question: Are SAE and ISO VG the same?
 
-No. They are different grading systems and should be compared carefully.
+No. SAE engine oil grades are defined per J300; ISO VG industrial oils are defined per ISO 3448. Test methods, additive packages, and application areas differ. Substituting one for the other can cause incompatibility and failure.
+
+### Question: When should a multigrade oil be selected?
+
+When a single viscosity grade cannot satisfy both the cold-start extreme and the high operating temperature extreme in a system that sees a wide temperature range (seasonal ambient variation, cold start combined with high steady-state temperature).
+
+---
+
+*This guide was prepared by the TORQYX Engineering Board (Fluids Desk). References: ISO 3448, DIN 51519, SAE J300, AGMA 9005, ISO 15380.*
