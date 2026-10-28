@@ -99,6 +99,64 @@ Endüstriyel akışkan transferinde yanlış pompa türü seçmek sistem verimin
 - [Hidrolik Silindir Hacim ve Debi](/tr/tools/hydraulic-cylinder)
 - [Birim Dönüştürücü](/tr/tools/unit-converter)
 
+## Pompa Karakteristik Eğrisi ve Sistem Eğrisi Kesişimi
+
+Bir pompanın çalışma noktası, pompa H-Q eğrisiyle sistem direnç eğrisinin kesiştiği noktadır. Bu kesişim noktasını anlamadan pompa boyutlandırması eksik kalır.
+
+**Pompa H-Q Eğrisi:** Debiye göre toplam basma yüksekliğini gösterir. Santrifüj pompanın H-Q eğrisi tipik olarak düşen bir eğridir: sıfır debi → maksimum yük (kapalı vana yüksekliği), maksimum debi → sıfır yük (serbest akış).
+
+**Sistem Eğrisi:** Statik yük (H_statik = sabit) + sürtünme kaybı (Q'ye göre karesel artan). Formül:
+
+`H_sistem = H_statik + R * Q^2`
+
+R = sistem direnci katsayısı (tüm boru, vana ve yerel kayıpların toplamından türetilir).
+
+**Çalışma Noktası Analizi:**
+
+Pompa seçiminde dikkat edilmesi gereken: seçilen pompa, sistem eğrisiyle BEP'e yakın kesiştiyse verimli çalışır. Sistem eğrisi değiştiğinde (örneğin vana kısıldığında veya boru hatları uzadığında) çalışma noktası kayar; verim düşer ve titreşim artar.
+
+Seri bağlı pompalar (aynı Q, yük toplamı): yüksek toplam yük için, sabit Q gerektiğinde.
+Paralel bağlı pompalar (yük aynı, Q toplamı): yüksek debi için, orta yük gerektiğinde.
+
+## Pompa Türleri Karşılaştırma Tablosu
+
+| Pompa Türü | Q Aralığı | H Aralığı | Verimlilik | Tipik Uygulama |
+|---|---|---|---|---|
+| Santrifüj (radyal) | Orta-Yüksek | Orta | %70–85 | Su, proses sıvıları |
+| Santrifüj (eksenel) | Çok yüksek | Düşük | %85–92 | Sulama, soğutma |
+| Dişli pompa | Düşük-Orta | Yüksek | %70–85 | Yağ, viskoz sıvılar |
+| Pistonlu | Düşük | Çok yüksek | %85–95 | Yüksek basınç, dozaj |
+| Vida pompa | Orta | Yüksek | %60–75 | Ham petrol, çamur |
+| Membran | Çok düşük | Orta | %50–70 | Kimyasal, aşındırıcı |
+| Peristaltik | Çok düşük | Orta | %40–60 | Hassas dozaj, gıda |
+
+## Pompa Malzeme Seçimi
+
+Pompa gövde ve çark malzemesi, taşınan akışkanın kimyasal agresifliğine ve aşındırıcılığına göre seçilir:
+
+| Malzeme | Uygulama | Sınırlama |
+|---|---|---|
+| Gri dökme demir | Temiz su, soğutma | Korozif akışkanlarda uygun değil |
+| Sfero dökme demir | Genel sanayi | Orta korozyon direnci |
+| 316L paslanmaz | Kimyasal, gıda | Konsantre asitlerde zayıf |
+| Duplex 2205 | Deniz suyu, klorür | Yüksek maliyet |
+| Hastelloy C-276 | Konsantre asit | Çok yüksek maliyet |
+| PVDF/PP (plastik) | Agresif kimyasal | Sıcaklık ve basınç sınırlı |
+
+## Sık sorulan sorular
+
+### Soru: Santrifüj pompa ile pozitif deplasmanlı pompa arasında nasıl seçim yapılır?
+
+Yüksek debi ve orta-düşük basınçta santrifüj; düşük debi ve yüksek basınçta veya yüksek viskoziteli akışkanlarda pozitif deplasmanlı pompa tercih edilir. Santrifüj pompa kapalı vanaya karşı maksimum basınçla çalışabilir; pozitif deplasmanlı pompa ise kapalı sisteme karşı mekanik arızaya veya motor yanmasına yol açar — mutlaka emniyet ventili gerektirir.
+
+### Soru: Pompa verimi nasıl korunur?
+
+BEP ± %20 aralığında çalıştırmak verimi korur. Bu bölgenin dışında özellikle düşük debide çark içi devridaim, kavitasyon ve rulman aşırı yüklenmesi oluşur. Değişken hızlı tahrik (VFD) sistemi geniş debi aralığında verimi korur.
+
+### Soru: Pompa seçiminde hangi güvenlik marjı uygulanır?
+
+Motor gücü seçiminde BEP gücünün %15–25 üzerinde motor seçmek yaygın pratiktir. Emiş tasarımında NPSH_A ≥ NPSH_R + 0.5 m minimum emniyet marjı korunmalıdır.
+
 ## İlgili standartlar
 
 - **ISO 5199:** Santrifüj Pompalar için Teknik Şartname - Sınıf II.

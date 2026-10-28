@@ -65,6 +65,61 @@ Mekanik tasarımda ve çelik yapılarda kiriş elemanları; tavan vinçleri, pla
 - [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
 - [Tolerans Zinciri Analizi Aracı](/tr/guides/tolerans-zinciri-analizi-kotu-durum-ve-rss)
 
+## Kesit Seçimi: I-Profil, HEB, IPE ve Kutu Profil Karşılaştırması
+
+Kiriş tasarımında doğru kesit geometrisi malzeme kullanımı açısından kritiktir. Aynı alan için farklı profiller çok farklı rijitlik değerleri sunar:
+
+| Profil | Ağırlık (kg/m) | Ix (cm⁴) | Wx (cm³) | Ix/W (cm) |
+|---|---|---|---|---|
+| IPE 300 | 42.2 | 8.356 | 557 | 15.0 |
+| HEB 240 | 83.2 | 11.260 | 938 | 12.0 |
+| IPE 360 | 57.1 | 16.270 | 904 | 18.0 |
+| HEB 300 | 117 | 25.170 | 1.678 | 15.0 |
+| Kutu 200×200×10 | 59.0 | 5.820 | 582 | 10.0 |
+
+IPE profili malzeme etkinliği açısından mükemmeldir (yüksek Ix/ağırlık oranı); HEB ise kayma yükü ve basma baskın olduğunda tercih edilir. Kutu profil çift eksenli yükte avantajlıdır.
+
+## Yanal Burulmalı Burkulma (LTB) Hesabı — Özet
+
+Yanal burulmalı burkulma (Lateral Torsional Buckling), basma flanşı yeterince desteklenmediğinde kirişin yana bükülerek aniden kollapsa geçmesidir. EN 1993-1-1 Bölüm 6.3.2'ye göre tasarım burkulma momenti:
+
+`M_b,Rd = chi_LT * W_y * f_y / gamma_M1`
+
+chi_LT LTB indirgeme katsayısıdır (0 ile 1 arasında); `lambda_LT` boyutsuz narinlik parametresine bağlıdır:
+
+`lambda_LT = sqrt(W_y * f_y / M_cr)`
+
+M_cr elastik kritik devrilme momentini temsil eder; mesnet koşulları ve yük uygulama noktasına bağlıdır.
+
+**Pratik önlem:** Üst flanş 600–900 mm aralıkta yanal mesnetlemelerle (yatay kasnak, döşeme plakası, kayma sömeli) desteklendiğinde LTB riski büyük ölçüde azalır ve chi_LT = 1.0 alınabilir.
+
+## Dinamik Yük ve Çarışma Katsayısı
+
+Sabit yüklü statik hesap hareketli makineler için yeterli değildir. Hareketli vinç yüklerinde Eurocode ve DIN standartları dinamik büyütme (çarışma) katsayısı phi uygular:
+
+| Uygulama | phi_2 Katsayısı |
+|---|---|
+| Sabit yük | 1.0 |
+| Kaldırılan yük (kademeli) | 1.05 – 1.25 |
+| Kaldırılan yük (ani) | 1.25 – 1.60 |
+| Kamyon trafiği (köprü) | 1.3 – 2.0 |
+
+Hesap: Tasarım yükü `F_d = phi * F_statik`. Bu katsayı atlandığında gerilme ve sehim hesapları 25–60% hafif sonuç üretir.
+
+## Sık sorulan sorular
+
+### Soru: Kiriş tasarımında önce gerilme mi, sehim mi kontrol edilmeli?
+
+İkisi de zorunludur. Genellikle uzun açıklıklarda (L > 8 m) ve vinç köprülerinde sehim kriteri belirleyici olur; kısa açıklıklarda veya yüksek yük yoğunluğunda gerilme kriteri belirleyici olabilir. Her ikisi kontrol edilmeden tasarım tamamlanmış sayılmaz.
+
+### Soru: Konsol kiriş için maksimum sehim formülü nedir?
+
+Uç noktadan tekil yük F taşıyan L uzunluklu konsol için: `f_maks = (F * L^3) / (3 * E * I)` (serbest uçta). Düzgün yayılı yük q için: `f_maks = (q * L^4) / (8 * E * I)`.
+
+### Soru: Kiriş sehimini azaltmak için hangi yöntem daha ekonomiktir?
+
+Profil değişikliği (yüksek Ix değerli) genellikle malzeme kalitesi değişikliğinden daha etkilidir. E modülü tüm çeliklerde yaklaşık aynıdır; dolayısıyla yüksek mukavemetli S460 çelik seçmek IPE 300 yerine IPE 360 seçmekle karşılaştırıldığında sehim açısından hiçbir avantaj sağlamaz.
+
 ## İlgili standartlar
 
 - **EN 1993-1-1 (Eurocode 3):** Çelik yapıların tasarımı - Genel kurallar.

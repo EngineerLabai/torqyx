@@ -67,6 +67,58 @@ Mühendislerin tasarımda yaptığı en ölümcül ihmal, serbest genleşmeye iz
 - [Akışkanlar Mekaniği ve Boru Akışı Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
 - [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
 
+## Isı Yalıtım Malzemeleri Karşılaştırması
+
+Boru hattı ve ekipman yalıtımında malzeme seçimi termal performans, sıcaklık sınırı ve korozyon uyumuna göre yapılır:
+
+| Malzeme | Lambda (W/m·K) | Maks. Sıcaklık | Yoğunluk (kg/m³) | Uygulama |
+|---|---|---|---|---|
+| Taşyünü (mineral wool) | 0.034–0.045 | 700°C | 30–200 | Sıcak boru, fırın |
+| Cam yünü | 0.032–0.040 | 250°C | 10–80 | Bina, HVAC |
+| Poliüretan köpük (PUR) | 0.022–0.028 | 110°C | 30–60 | Soğuk boru, çatı |
+| EPS (genleştirilmiş polistiren) | 0.033–0.040 | 80°C | 15–30 | İnşaat yalıtımı |
+| Aerogel battaniye | 0.014–0.020 | 300°C | 150–200 | Uzay kısıtlı uygulamalar |
+| Seramik elyaf | 0.10–0.15 | 1.400°C | 96–256 | Fırın, döküm |
+| Köpük cam | 0.038–0.052 | 480°C | 100–150 | Kimyasal dirençli |
+
+Lambda değerleri 50°C ortalama sıcaklıkta verilmiştir; sıcaklıkla önemli ölçüde değişir.
+
+## Termal Köprü ve Kondensasyon Riski
+
+Soğuk boru hatlarında ve ısı yalıtımlı yapılarda termal köprü, ısı geçiş direncinin yerel olarak düştüğü noktalardır. Bu noktalarda yüzey sıcaklığı çiğ noktasının altına düşerse yoğuşma ve ardından korozyon başlar.
+
+Çiğ noktası hesabı: ortam sıcaklığı Ta = 25°C, bağıl nem %70 ise çiğ noktası yaklaşık Td = 19°C'dir. Boru yüzey sıcaklığı bunun altında kalırsa nem yüzeyde yoğuşur.
+
+Önlem: Soğuk boru hatlarında yalıtım katmanı nem bariyeriyle (PE film, alüminyum folyo) sarılmalıdır. Boru destek noktaları metalden plastik veya taşyünü takoz aracılığıyla geçirilmelidir; aksi halde destek noktası termal köprü oluşturur.
+
+## Kompansatör Tipleri ve Seçimi
+
+Boru hattında termal uzamayı absorbe eden başlıca kompansatör türleri:
+
+| Tip | Absorbe Edilen Hareket | Avantaj | Dezavantaj |
+|---|---|---|---|
+| U-lup (Omega) | Eksenel + Yanal | Güvenilir, bakım yok | Yer kaplar |
+| Körüklü kompansatör | Eksenel (esas) | Kompakt | Eksenel kuvvet iletir; kılavuz zorunlu |
+| Kayar eklem | Eksenel | Büyük hareket | Sızdırmazlık bakımı |
+| Yaylı askı | Dikey + Yanal | Ağırlığı taşır | Yay periyodik ayarı |
+| Burulma | Uzun boru sistemleri | Düşük eksenel kuvvet | Yüksek maliyet |
+
+Körüklü kompansatör seçildiğinde boru hattına tutma kuvveti (anchor force) hesabı zorunludur: eksenel kuvvet `F_anchor = p * A + F_yay_rijitligi`, burada p basınç ve A et kesit alanıdır. Bu kuvvet boru desteğine ve yapıya iletildiğinde yapısal hesaba dahil edilmelidir.
+
+## Sık sorulan sorular
+
+### Soru: Boru hattı tasarımında sıcaklık farkı olarak ne alınmalı?
+
+Tasarım Delta T, soğuk montaj (en düşük ortam sıcaklığı) ile en yüksek işletme sıcaklığı arasındaki farktır. Donma riski olan bölgelerde montaj -20°C, işletme sıcaklığı +200°C ise Delta T = 220°C olarak alınmalıdır.
+
+### Soru: Alüminyum boru hatlarında termal genleşme çeliğe göre nasıldır?
+
+Alüminyumun termal genleşme katsayısı yaklaşık 23.5 × 10⁻⁶ 1/°C, çeliğin 12 × 10⁻⁶ 1/°C'dir. Aynı Delta T için alüminyum yaklaşık 2 kat daha fazla uzar; kompansasyon tasarımı buna göre yapılmalıdır.
+
+### Soru: Sabit mesnet ve kayar mesnet arasındaki fark nedir?
+
+Sabit mesnet (anchor) boru hattının bir noktasını tüm yönde tutuklar ve termal kuvvetleri yapıya iletir. Kayar mesnet (sliding support/guide) yalnızca boru ağırlığını taşır, eksenel harekete izin verir; iki sabit mesnet arasındaki uzama kayar mesnetten absorbe edilir.
+
 ## İlgili standartlar
 
 - **EN 13480-3:** Endüstriyel metalik boru tesisatı - Tasarım ve hesaplama (boru gerilme analizi).

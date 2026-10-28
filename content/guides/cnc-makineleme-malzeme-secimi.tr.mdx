@@ -63,6 +63,67 @@ Mühendislik optimizasyonu; talaş kaldırma debisi (MRR) ile takım ömrü (T) 
 - [Şaft Boyutlandırma ve Burulma Gerilmesi](/tr/tools/shaft-torsion)
 - [Malzeme Seçimi Rehberi](/tr/guides/malzeme-secimi-rehberi)
 
+## Kesici Takım Malzemeleri ve Kaplama Seçimi
+
+Doğru kesici takım malzemesi seçimi, kesme parametrelerinden bağımsız olarak süreç verimliliğini belirler:
+
+| Takım Malzemesi | Sertlik (HV) | Sıcaklık Direnci | Uygulama Alanı |
+|---|---|---|---|
+| Yüksek hız çeliği (HSS) | 800–900 | 600°C | Matkap, kılavuz, düşük hız |
+| Sementit karbür (kaplasız) | 1400–1700 | 800°C | Çelik, dökme demir |
+| TiN kaplı karbür | 1400–1700 | 700°C | Genel amaç, çelik |
+| TiAlN kaplı karbür | 1800–2400 | 900°C | Paslanmaz, ısıl alaşımlar |
+| AlTiSiN nano kaplı | 2400–3200 | 1000°C | Titanyum, yüksek hız |
+| CBN (Kübik Bor Nitrür) | 3000–4000 | 1000°C | Sertleştirilmiş çelik (> 45 HRC) |
+| PCD (Polikristalin Elmas) | 6000–9000 | 700°C | Alüminyum, bakır, kompozit |
+
+Kaplama seçim kuralı: işlem sıcaklığı kaplamanın sıcaklık direncini aşmamalıdır. TiN kaplamanın 700°C üzerinde oksitlendiğini ve kaplama koruma etkisini yitirdiğini unutmamak gerekir.
+
+## Soğutma Sıvısı Stratejisi
+
+Soğutma (kesme sıvısı) stratejisi takım ömrünü ve yüzey kalitesini doğrudan etkiler:
+
+**Islak kesme (konvansiyonel soğutma):**
+- Dış soğutma: kesme bölgesine dışarıdan yönlendirilir; erişimi sınırlıdır
+- İçten soğutma (through-coolant): talaşı hızla boşaltır, takım ömrünü 2–5 kat artırır; titanyum ve paslanmaz için neredeyse zorunludur
+
+**Minimum miktarlı yağlama (MQL):**
+- 20–100 mL/saat hava-yağ karışımı
+- Alüminyum ve dökme demir frezelemede çevreci ve etkili
+- Paslanmaz ve titanyumda yetersiz kalabilir
+
+**Kuru kesme:**
+- Sertleştirilmiş çeliklerde CBN ile uygulanabilir
+- Bazı karbür-çelik kombinasyonlarında termal çatlak riskini artırır
+
+## Yüzey Pürüzlülüğü Tahmini
+
+Tornalama operasyonunda teorik yüzey pürüzlülüğü Rt (pik-dip yüksekliği):
+
+`Rt = f^2 / (8 * r_epsilon)`
+
+f = ilerleme (mm/devir), r_epsilon = uç yarıçapı (mm).
+
+Ra değeri Rt'nin yaklaşık 1/4'üdür: `Ra ≈ Rt / 4`
+
+Örnek: f = 0,12 mm/devir, r_epsilon = 0,4 mm → `Rt = 0,0144 / 3,2 = 0,0045 mm = 4,5 μm` → `Ra ≈ 1,13 μm`.
+
+Ra ≤ 0.8 μm için ya ilerleme azaltılır (f ≤ 0.08 mm/devir) ya da uç yarıçapı büyütülür.
+
+## Sık sorulan sorular
+
+### Soru: Tırmanarak frezeleme (climb milling) neden tercih edilir?
+
+Tırmanan frezelemede kesici ağız en kalın talaştan başlayarak inceye doğru keser; ısı ve sürtünme azalır, yüzey kalitesi iyileşir. Zıt yönlü frezelemede ağız ilk temastan itibaren sürtünerek inceye doğru kalınlaşan talaş aldığından körleşme artar.
+
+### Soru: Titanyum işlerken neden özel koşullar gerekiyor?
+
+Titanyumun ısı iletkenliği düşüktür (6.7 W/m·K vs çelik için 50 W/m·K); kesme ısısının büyük bölümü takuç ucunda birikir. Reaktif özelliği nedeniyle yüksek sıcaklıkta takıma yapışır. Bu nedenle düşük kesme hızı, yüksek ilerleme ve bol soğutma zorunludur.
+
+### Soru: HSS ile karbür arasındaki fiyat farkını haklı kılan nedir?
+
+Karbür takımlar HSS'ye göre 5–15 kat daha pahalıdır; ancak çok daha yüksek kesme hızı ve takım ömrüyle parça başı işleme maliyeti genellikle daha düşük çıkar. Küçük adet prototip üretiminde HSS mantıklı; seri üretimde karbür genellikle zorunludur.
+
 ## İlgili standartlar
 
 - **ISO 3685:** Tornalama takımları için takım ömrü deneyleri standardı.

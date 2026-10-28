@@ -63,6 +63,48 @@ Tasarımcıların düştüğü en yaygın hata, kataloglardaki en yüksek **Çek
 - [Şaft Boyutlandırma ve Burulma Gerilmesi](/tr/tools/shaft-torsion)
 - [Titanyum Alaşımları Seçim Rehberi](/tr/guides/titanyum-alasimlari-rehberi)
 
+## Malzeme Seçim Matrisi — Çok Kriterli Değerlendirme
+
+Gerçek mühendislik tasarımında tek bir parametre üzerinden malzeme seçmek genellikle yetersizdir. Aşağıdaki çok kriterli ağırlıklı puan tablosu yaygın makine elemanı malzemelerini karşılaştırmak için bir başlangıç çerçevesi sunar:
+
+| Kriter | Ağırlık | S235 Yapı Çeliği | 42CrMo4 Islah | 304 Paslanmaz | Al 6061-T6 | Ti-6Al-4V |
+|---|---|---|---|---|---|---|
+| Mekanik dayanım | 30% | 3 | 9 | 6 | 7 | 10 |
+| Korozyon direnci | 20% | 2 | 3 | 9 | 7 | 10 |
+| İşlenebilirlik | 15% | 9 | 6 | 5 | 9 | 3 |
+| Maliyet | 20% | 10 | 7 | 5 | 6 | 1 |
+| Özgül ağırlık | 15% | 4 | 4 | 4 | 9 | 8 |
+| **Toplam** | 100% | **5.15** | **5.85** | **5.95** | **7.60** | **6.50** |
+
+Puan: 1 (en zayıf) — 10 (en iyi). Bu tablo sabit değil; ağırlıklar uygulamaya göre değiştirilmelidir.
+
+## Isıl İşlem ve Mekanik Özellik İlişkisi
+
+Aynı çelik alaşımı farklı ısıl işlemlerle çok farklı mekanik özellikler sergileyebilir. Örnek: 42CrMo4 (1.7225):
+
+| Durum | Rm (MPa) | Rp0.2 (MPa) | A (%) | Sertlik (HB) |
+|---|---|---|---|---|
+| Normalize | 900–1050 | 650–750 | 14–18 | 260–310 |
+| Islah (QT) 550°C | 1000–1200 | 800–1000 | 12–16 | 300–350 |
+| Islah (QT) 500°C | 1100–1300 | 900–1100 | 10–14 | 330–390 |
+| Yüzey sertleştirme (56 HRC) | Yüzey: >1800 / Çekirdek: ~900 | Çekirdek: ~750 | Çekirdek: ~14 | Yüzey: 56 HRC |
+
+Bu tablo, "daha sert = daha dayanıklı" yanılgısını somutlaştırır: yüzeyi 56 HRC'ye sertleştirilen milin çekirdeği yeterince sünek kalır; tüm kesit sertleştirilirse tokluk dramatik biçimde düşer.
+
+## Sık sorulan sorular
+
+### Soru: Elastisite modülü yüksek çelik mü, düşük modüllü alüminyum mu daha az sehim yapar?
+
+Aynı kesit geometrisiyle alüminyum (E ≈ 70.000 MPa) çeliğe (E ≈ 210.000 MPa) göre 3 kat daha fazla sehim yapar. Sehimi azaltmak için alüminyumda ya kesit büyütülür ya da daha rijit profil geometrisi seçilir. Yüksek mukavemetli alüminyum seçmek sehimi değiştirmez.
+
+### Soru: S355 mi, S235 mi seçilmeli?
+
+Gerilme sınırlıysa S355 daha ince kesitle aynı dayanımı sağlar; ancak elastisite modülü aynı olduğundan sehim azalmaz. Kaynaklı yapılarda S355'in yüksek CEV nedeniyle ön ısıtma gerektirip gerektirmediği kontrol edilmelidir.
+
+### Soru: Titanyum ne zaman ekonomik olur?
+
+Birincil gerekçe ağırlık kısıtı veya korozyon direncidir. Havacılık, medikal implant ve deniz suyu ekipmanında titanyumun toplam ömür maliyeti düşük mukavemetli alaşımlardan çok daha düşük olabilir. Sadece ilk malzeme maliyetine bakarak karar vermek yanıltıcıdır.
+
 ## İlgili standartlar
 
 - **ISO 6892-1:** Metalik malzemeler - Çekme deneyi - Oda sıcaklığında deney metodu.

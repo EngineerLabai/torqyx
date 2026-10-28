@@ -94,6 +94,74 @@ Döner makinelerde kütle merkezinin geometrik dönme ekseninden kaçık olması
 - [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
 - [Kalite ve Hata Analizi Araçları](/quality-tools)
 
+## Titreşim Frekans Analizi ve Hata Teşhisi
+
+Titreşim verisi yalnızca amplitüd (RMS hız veya ivme) olarak değil, frekans spektrumu olarak analiz edildiğinde sorunun kaynağı belirlenebilir. FFT (Hızlı Fourier Dönüşümü) analizi ile temel teşhis kuralları:
+
+| Frekans İçeriği | Olası Neden |
+|---|---|
+| 1X (devir frekansı) | Rotor dengesizliği (unbalance), eksen kaçıklığı, eğri mil |
+| 2X | Paralel eksen kaçıklığı, gevşeklik, yatak bozukluğu |
+| 3X, 4X | Mekanik gevşeklik, çatlak rotor |
+| 0.5X veya 0.43–0.48X | Hidrodinamik instabilite (yağ filmi kama hareketleri) |
+| Dişli frekansı (Z × n/60) | Dişli profil hatası, yorulma |
+| Rulman frekanslari (BPFI, BPFO, BSF) | Rulman iç/dış bilezik veya bilyeli hasar |
+| Yüksek frekans (> 1 kHz) | Erken rulman hasarı, kavitasyon |
+
+**Rulman hasar frekansları:**
+- BPFO (dış bilezik geçiş): `BPFO = (Z/2) * n/60 * (1 - d/D * cos(alpha))`
+- BPFI (iç bilezik geçiş): `BPFI = (Z/2) * n/60 * (1 + d/D * cos(alpha))`
+
+Z = bilye sayısı, d = bilye çapı, D = aralık çapı, alpha = temas açısı.
+
+## Eksen Hizalama (Alignment) Yöntemleri
+
+Titreşimin en sık kaynağı rotor dengesizliği değil, eksen kaçıklığıdır. İki makine milinin hizalama tipi:
+
+**Açısal kaçıklık (angular misalignment):** İki mil ekseninin uç uç açı yaptığı durum; 1X ve 2X baskın, eksenel yönde yüksek titreşim.
+
+**Paralel kaçıklık (offset misalignment):** İki mil ekseninin paralel ama birbirinden ofset olduğu durum; 2X baskın, çift tepeli FFT spektrumu.
+
+Hizalama yöntemleri:
+
+| Yöntem | Hassasiyet | Süre |
+|---|---|---|
+| Düz kenar + mastar | ±0.5 mm | Kısa |
+| Saat kadranı (dial gauge) | ±0.05 mm | Orta |
+| Lazer hizalama | ±0.01 mm | Orta |
+| Çift lazer (optoelektronik) | ±0.005 mm | Uzun |
+
+Modern endüstriyel uygulamalarda API 686 standart toleransları karşılamak için lazer hizalama tercih edilir. Elastik kaplin ve rigid kaplin için tolerans değerleri farklıdır; kaplin üreticisi kataloğu referans alınmalıdır.
+
+## Kritik Hız ve Rotor Dinamiği
+
+Her dönen mil, belirli devir sayılarında rezonans (kritik hız) yaşar. Bu devirde titreşim genliği teorik olarak sınırsız büyür. İlk kritik hız (Rayleigh yaklaşımı):
+
+`n_krit = 30/pi * sqrt(g / f_statik)`
+
+f_statik = statik sehim (m), g = 9.81 m/s².
+
+Örnek: Mil kendi ağırlığı altında f_statik = 0.2 mm = 0.0002 m sehim yapıyorsa:
+`n_krit = 30/pi * sqrt(9.81/0.0002) ≈ 30/pi * 221.4 ≈ 2.115 rpm`
+
+İşletme devri kritik hızın %70–80'ini aşmamalı veya %120'sinin üstünde olmalıdır. Kritik hız bölgesinde geçiş süresi minimuma indirilmelidir.
+
+## Sık sorulan sorular
+
+### Soru: Balans kalitesi sınıfı seçiminde hangi kılavuz kullanılır?
+
+ISO 21940-11 (eski ISO 1940-1) Tablo 1, rotor tipini ve işletme devrine göre G sınıfını listeler. Elektrik motoru rotorları için genellikle G2.5, yüksek hassasiyetli takım tezgahları için G1.0 veya daha düşük seçilir.
+
+### Soru: Titreşim ölçümünde ivme mi, hız mı, deplasman mı ölçülür?
+
+Düşük frekans (1–10 Hz): deplasman (mm veya μm) bilgi verici.
+Orta frekans (10–1000 Hz): hız (mm/s RMS) en yaygın ISO 20816 parametresi.
+Yüksek frekans (> 1000 Hz): ivme (g veya m/s²) rulman hasarı teşhisi için uygundur.
+
+### Soru: Dinamik balans makinesi olmadan saha balansı yapılabilir mi?
+
+Evet. Tek düzlemli rotorlar için saha balansı yapılabilir: referans titreşim ölçülür, deneme ağırlığı takılır, faz ve genlik değişimi kaydedilir, vektörel hesapla düzeltme ağırlığı belirlenir. Bu yöntem taşınabilir balans analizörleri ile uygulanır.
+
 ## İlgili standartlar
 
 - **ISO 21940-11:** Mekanik Titreşim - Rotor Dengeleme Kalitesi ve Kalan Dengesizlik Değerlendirmesi.

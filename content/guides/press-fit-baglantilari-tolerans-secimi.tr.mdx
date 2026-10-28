@@ -112,6 +112,66 @@ Sıkı geçme (press fit / shrink fit), parça üzerinde kama yuvası veya cıva
 - [Fikstür ve Merkezleme Araçları](/fixture-tools)
 - [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
 
+## Sıkı Geçme Standardı Tolerans Çiftleri — ISO 286 Özeti
+
+ISO 286-1 tolerans çiftleri, sıkı geçme (interference fit) ve kaymalı geçme (clearance fit) için standart kombinasyonlar tanımlar. Delik bazlı sistem (hole-basis) en yaygın uygulamadır:
+
+| Geçme Türü | ISO Çifti (Delik/Mil) | Girişim / Boşluk (Ø50 mm için) | Uygulama |
+|---|---|---|---|
+| Kaymalı (gevşek) | H7/g6 | 9–50 μm boşluk | Dönebilir göbek, kaplin |
+| Kaymalı (sıkı) | H7/h6 | 0–25 μm boşluk | Yönlendirme, kayar mil |
+| Konum geçme | H7/k6 | -7 ila +18 μm | Hassas konumlandırma |
+| Hafif sıkı geçme | H7/n6 | 17–42 μm girişim | El presi veya ısıl montaj |
+| Orta sıkı geçme | H7/r6 | 34–59 μm girişim | Büyük kuvvetli bağlantı |
+| Ağır sıkı geçme | H7/s6 | 43–72 μm girişim | Kalıcı bağlantı, ağır yük |
+| Tam sıkı geçme | H7/u6 | 60–97 μm girişim | Sökülemez bağlantı |
+
+Tolerans değerleri çap arttıkça büyür; tablodaki değerler Ø50 mm için verilmiştir.
+
+## Montaj Kuvveti ve Isıl Montaj Karşılaştırması
+
+**Pres montaj kuvveti:**
+
+`F_montaj = pi * d * L * p_max * mu_montaj`
+
+mu_montaj = montaj sürtünme katsayısı (kuru çelik-çelik pres: 0.10–0.13). Montaj süreci boyunca yüzey kaplaması bozulur; bu nedenle mu_servis (yük altında tutma) mu_montaj'dan genellikle %10–15 düşük alınır.
+
+**Isıl montaj sıcaklık hesabı:**
+
+Göbek ısıtılarak mil üzerine serbestçe geçirilmesi için gerekli montaj boşluğu delta_m ≈ 0.001 × d (pratik kural):
+
+`T_isitma = (Delta_max + delta_m) / (alpha * d)`
+
+alpha = termal genleşme katsayısı (çelik: 12 × 10⁻⁶ 1/°C)
+
+Örnek: d = 80 mm, Delta_max = 0.10 mm, delta_m = 0.08 mm → T_isitma = (0.10 + 0.08) / (12 × 10⁻⁶ × 80) = 187°C → Göbek 200°C'ye ısıtılır.
+
+**Isıl montaj avantajları:** Yüzey hasarı minimumdur; büyük çaplı (Ø > 100 mm) bağlantılarda pres kuvveti aşırı büyüdüğünden ısıl montaj tercih edilir.
+
+## Söküm (Demontaj) Planlaması
+
+Sıkı geçme bağlantı tasarımında söküm ihtiyacı baştan değerlendirilmelidir:
+
+- **H7/n6 ve altı:** El presi veya hidrolik pres ile sökülebilir; söküm kuvveti montaj kuvvetine yakındır.
+- **H7/s6 ve üzeri:** Isıl söküm (göbek ısıtılarak) veya itici somun (jackbolt) sistemi gerekebilir.
+- **Kalıcı bağlantı (H7/u6):** Sökme niyetiyle tasarlanmamıştır; söküm sırasında yüzey hasarı kaçınılmazdır.
+
+Tasarımda söküm için dişli delikler (M6, M8 itici civataları) veya hidrolik basınç kanalı (oil injection groove) planlama pratiği tavsiye edilir; özellikle büyük şaft geçmelerinde hidrolik yağ basıncı girişimi neredeyse sıfıra indirir.
+
+## Sık sorulan sorular
+
+### Soru: H7/s6 ile H7/r6 arasındaki pratik fark nedir?
+
+H7/r6 hafif ila orta sıkı geçme; el presi veya küçük hidrolik presle montaj mümkündür. H7/s6 ağır sıkı geçme; standart uygulamalarda ısıl montaj veya yüksek kuvvetli hidrolik pres gerektirir. Tork kapasitesi H7/s6'da H7/r6'ya göre yaklaşık %30–50 daha yüksektir.
+
+### Soru: Girişim miktarı çok büyük seçilirse ne olur?
+
+Göbek iç yüzeyinde teğetsel (çekme) gerilme artar. Bu gerilme akma sınırını aşarsa göbek kalıcı olarak açılır (bore expansion) ve sonraki tork kapasitesi hesaplanan değerin çok altına düşer; hatta göbek çatlayabilir.
+
+### Soru: Yüzey pürüzlülüğü neden bu kadar kritik?
+
+Yüzey tepeleri (asperities) girişim miktarını fiilen azaltır. Ra = 1.6 μm yüzeyde ortalama ezilme payı yaklaşık 6 μm'dir; Ra = 3.2 μm için bu değer 12–15 μm'ye çıkar. Kaba yüzeylerde hesaplanan girişimin %30–40'ı ezilme kayıplarına gider; bu da tork kapasitesini dramatik biçimde düşürür.
+
 ## İlgili standartlar
 
 - **ISO 286-1 / ISO 286-2:** ISO Tolerans ve Geçme Sistemi (Hole-basis / Shaft-basis).

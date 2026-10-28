@@ -93,6 +93,61 @@ Döner millerde torku dişliye, kasnağa veya kapline aktarırken en yaygın kul
 - [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
 - [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
 
+## Kama Alternatifi: Spline ve Kamalı Disk Bağlantıları
+
+Paralel kama bağlantısının tork kapasitesi sınırlandığında veya konumlandırma hassasiyeti kritik olduğunda alternatif çözümler devreye girer:
+
+**Dişli (Spline) Bağlantılar (DIN 5480 / ISO 4156):**
+
+- Tork çok sayıda diş üzerinden dağıtılır; yüzey basıncı belirgin biçimde düşer
+- Eksenel kayma gerekiyorsa dişli spline tercih edilir (ör. üniversal mafsal mili)
+- İç/dış sertleştirme ile yüksek döngüsel yük kapasitesi
+- Üretim maliyeti kamalı bağlantıya göre daha yüksektir
+
+**Çekme Geçme (Taper Interference) Bağlantılar:**
+
+- Koniklik (1:10 veya 1:20) eksenel kuvvetle tork iletimini sürtünme yoluyla sağlar
+- Kendiliğinden merkezleme; demontaj için itme somunu veya çekme aparatı gerekir
+- Kama yuvasının yarattığı gerilme yoğunlaşması yoktur — yorulma ömrü avantajlıdır
+
+**Profil Bağlantıları (Polygonal, Loblar):**
+
+- Üçgen veya P3G / P4C profil mil-göbek bağlantısı
+- Kama yuvası yok → stres konsantrasyonu minimumdur
+- Çok eksenli yüklerde (eğilme + burulma) avantajlı
+- Özel takım ve işleme gerektirir
+
+## Stres Yoğunlaşması ve Yorulma Faktörü
+
+Kama kanalının milin yorulma dayanımına etkisi genellikle düşük tahmin edilir. Temel gerçek: kama kanalı köşesi gerilme yoğunlaştırıcı görevi görür.
+
+Teorik gerilme yoğunlaşma faktörü Kt, kanal köşe yarıçapı r ve mil çapı d oranına bağlıdır:
+
+| r/d | Kt (eğilme) | Kt (burulma) |
+|---|---|---|
+| 0.005 | 3.0 | 2.8 |
+| 0.010 | 2.6 | 2.4 |
+| 0.020 | 2.2 | 2.0 |
+| 0.050 | 1.8 | 1.6 |
+
+Gerçek uygulamada yüzey işlemi ve malzeme hassasiyeti faktörü (q) eklenerek yorulma stres konsantrasyon faktörü Kf = 1 + q * (Kt - 1) elde edilir.
+
+**Pratik kural:** Kama kanalı köşe yarıçapı minimum r = 0.5 mm (tercihen r = 0.8–1.0 mm) olmalıdır. Keskin köşe hem üretimde çatlak başlangıç noktası hem de kanalı frezeleme sırasında takım ucu gerilmesi yaratır.
+
+## Sık sorulan sorular
+
+### Soru: Kama bağlantısı moment aktarımını tek başına üstlenir mi?
+
+Evet, paralel kama bağlantısı tork iletiminin ana elemanıdır. Ancak çok yüksek momentlerde veya şok yüklerinde kama ile birlikte sıkı geçme (pres veya sıcak geçme) kombinasyonu kullanılması tork kapasitesini ve güvenilirliği artırır.
+
+### Soru: Kama kanalı frezesinde hangi tolerans verilir?
+
+DIN 6885 Form A için kama kanalı eni toleransı genellikle JS9 (göbek tarafı) ve N9 (mil tarafı) şeklinde verilir. Değişken yüklü uygulamalarda P9 (dar geçme) tercih edilir.
+
+### Soru: Kama bağlantısı dinamik yük altında neden gevşeyebilir?
+
+Yüzey basıncı döngüsel olduğunda fretting korozyonu (temas aşınması) başlar; kama ile yuva arasındaki temas yüzeyinde oksit partikülleri birikerek salınım yaratır. Antikorrozif yağ ve doğru ön yük bu riski azaltır.
+
 ## İlgili standartlar
 
 - **DIN 6885-1:** Sürüş Kamaları ve Paralel Kamalar (Form A, Form B).

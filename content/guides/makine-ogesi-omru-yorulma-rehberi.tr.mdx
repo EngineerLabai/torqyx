@@ -91,6 +91,63 @@ Mekanik arızaların %80'inden fazlası statik aşırı yükten değil, malzeme 
 - [Köşe Kaynak Boyutlandırma](/tr/tools/fillet-weld)
 - [Rulman Ömrü Hesaplayıcı (ISO 281)](/tr/tools/bearing-life)
 
+## Yorulma Hasar Mekanizmaları ve Makroskobik Belirtiler
+
+Yorulma hasarı sahada üç aşamada ilerler:
+
+**1. Çatlak başlangıcı (Initiation):** Genellikle yüzey veya yüzey altındaki süreksizlikten (çentik, kaplama hataları, içsel kalıntı, işleme izi) başlar. Görünmez olan bu aşama toplam ömrün %80–90'ını oluşturabilir.
+
+**2. Çatlak büyümesi (Propagation):** Paris yasası çatlak büyüme hızını tanımlar:
+
+`da/dN = C * (Delta K)^m`
+
+da/dN = her döngüde çatlak büyümesi (m/döngü), Delta K = gerilme şiddet faktörü değişimi (MPa·√m), C ve m malzeme sabitleri.
+
+Makroskobik olarak "deniz dalgası" (beach mark) izleri olarak görülür; kırma yüzeyinde dönemsel yük değişimlerini gösterir.
+
+**3. Ani kırılma (Final fracture):** Kalan kesit yeterli statik yükü taşıyamadığında ani veya gevrek kırılma ile tamamlanır.
+
+## Yorulma Testleri ve S-N Eğrisi Yorumu
+
+**Wöhler (S-N) Eğrisi Bölgeleri:**
+
+- Kısa ömür bölgesi (N < 10⁴ devrim): Gerilme akma sınırına yakın; statik deformasyon baskındır.
+- Yorulma bölgesi (10⁴ < N < 10⁶): Gerilme azaldıkça ömür logaritmik olarak artar.
+- Yorulma limiti (N > 10⁶–10⁷): Çeliklerde net bir limit gözlemlenir; alüminyumda bu limit belirsizdir (eğri aşağı meyletmeye devam eder).
+
+**Malzeme yorulma limiti (Se') tahmin kuralı (Shigley):**
+
+- `Se' ≈ 0.504 * Sut` (MPa), Sut ≤ 1.400 MPa ise
+- Sut > 1.400 MPa ise Se' = 700 MPa (plastik sınır)
+
+**Test ortamı etkisi:** Laboratuvar S-N eğrisi ideal koşulda elde edilir. Saha faktörleri (korozyon, sıcaklık, yüzey kalitesi) gerçek yorulma limitini önemli ölçüde düşürür.
+
+## Yorulma Ömrünü Uzatan Yüzey İşlemleri
+
+| İşlem | Etki | Ömür Faktörü |
+|---|---|---|
+| Taşlama ve parlatma | Yüzey pürüzlülüğünü düşürür | 1.2–1.5× |
+| Gülle atma (shot peening) | Basma artık gerilmesi oluşturur | 1.5–3× |
+| Rulo haddeleme (roller burnishing) | Yüzey soğuk şekillendirme | 1.5–2.5× |
+| Nitrürleme / karbürleme | Sert kabuk + basma artık gerilmesi | 2–4× |
+| Lazer şok peening | Derin basma artık gerilmesi | 2–5× |
+
+Önemli: Bu işlemlerin etkisi yüzey başlangıçlı yorulmada belirgindir; kalıntı, kaynak, iç kusur gibi iç kaynaklı çatlak başlangıçlarında katkısı sınırlıdır.
+
+## Sık sorulan sorular
+
+### Soru: Bir parça yorulma limitinin üzerinde çalışıyorsa ne olur?
+
+Yorulma limitinin üzerinde olan her döngü hasarı biriktirmeye devam eder. Miner kuralına göre toplam D = Σ(ni/Ni) = 1 olduğunda kırılma beklenir; ancak gerçek hasar birikimi lineer Miner tahmininden sapabilir.
+
+### Soru: Alüminyum alaşımlarında yorulma limiti var mı?
+
+Hayır. Alüminyum alaşımları (AA6061, AA7075 gibi) belirsiz yorulma limiti göstermez; S-N eğrisi 10⁸–10⁹ devir'e kadar aşağı meyletmeye devam eder. Bu nedenle alüminyum tasarımlarında sabit döngü sayısı (ör. 10⁷ devir) referans ömür olarak alınır.
+
+### Soru: Çentik faktörü Kf nasıl azaltılır?
+
+En etkili yol: köşe yarıçapını büyütmek ve yüzey kalitesini iyileştirmek. Kt ise geometriye bağlıdır; r/d oranı arttıkça Kt düşer. Çentik hassasiyet faktörü q malzemeye ve çentik büyüklüğüne bağlıdır — yüksek mukavemetli çelikler daha yüksek q değerine sahiptir (çentik duyarlılığı daha fazla).
+
 ## İlgili standartlar
 
 - **DIN 50100:** Malzeme Testleri - Sürekli Titreşim ve Yorulma Testi (Wöhler Testi).

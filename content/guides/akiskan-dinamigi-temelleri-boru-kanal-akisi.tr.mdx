@@ -66,6 +66,82 @@ Boru çapının gereğinden dar seçilmesi akış hızını aşırı yükseltir;
 - [Boru Çapı Seçiminde Hız ve Basınç Dengesi](/tr/blog/boru-capi-seciminde-hiz-ve-basinc-dengesi)
 - [Viskozite Sınıflandırması Rehberi](/tr/guides/viskozite-siniflandirmasi-rehberi)
 
+## Boru Akışı Ek Konular: Yerel Kayıplar, Su Darbesi ve Ekonomik Boru Çapı
+
+### Yerel (Minör) Kayıplar
+
+Darcy-Weisbach sadece düz boru sürtünmesini verir. Gerçek sistemlerde vana, dirsek, T-parça ve daralma gibi bağlantı elemanlarının yarattığı yerel kayıplar genellikle toplam kaybın %20–40'ını oluşturur.
+
+`h_yerel = K * (v^2 / 2g)`
+
+K değerleri (tipik):
+- 90° standart dirsek: K ≈ 0.9
+- 90° geniş yarıçaplı dirsek: K ≈ 0.4
+- Tam açık küresel vana: K ≈ 0.1–0.2
+- Tam açık kelebek vana: K ≈ 0.3
+- Ani daralma (A2/A1 = 0.5): K ≈ 0.5
+- Ani genişleme: Borda-Carnot formülü geçerlidir
+
+Eşdeğer uzunluk yöntemi: yerel kaybı `L_eq = K * D / f_D` ile düz boru uzunluğuna dönüştürüp toplam sürtünme kaybına eklemek pratik bir yaklaşımdır.
+
+### Su Darbesi (Water Hammer)
+
+Boru hattında vana ani kapandığında akışkanın momentumu yüksek basınç dalgasına dönüşür. Bu basınç dalgası akustik dalga hızıyla yayılır:
+
+`c = sqrt( K / (rho * (1 + K * D / (E_boru * t))) )`
+
+K = akışkanın bulk modulus, E_boru = boru elastisite modülü, t = et kalınlığı.
+
+Joukowsky basınç artışı:
+
+`Delta P = rho * c * Delta_v`
+
+Örnek: 10 m/s hızla akan su, c = 1.000 m/s, ani kapanmada Delta P = 1.000 × 1.000 × 10 = 10.000.000 Pa = 100 bar! Bu nedenle su darbeli sistemlerde yavaş kapanan vanalar (t_kapanma > 2L/c), basınç tahliye vanaları veya genleşme kapları zorunludur.
+
+### Ekonomik Boru Çapı Seçimi
+
+Boru çapı büyüdükçe boru maliyeti ve montaj maliyeti artar; ancak pompalama enerji maliyeti düşer. Ekonomik optimum çap ikisinin toplamını minimize eder.
+
+Pratik rehber (sıvı sistemleri, tipik hız aralıkları):
+
+| Uygulama | Önerilen Hız (m/s) |
+|---|---|
+| Pompa emiş hattı | 0.5 – 1.5 |
+| Pompa basma hattı | 1.5 – 3.0 |
+| Genel proses borusu | 1.0 – 2.5 |
+| Yüksek basınç hidrolik | 3.0 – 6.0 |
+| Buhar (alçak basınç) | 15 – 25 |
+| Sıkıştırılmış hava | 6 – 15 |
+
+## Colebrook-White Denkleminden Pratik Moody Grafiği Okuma
+
+Türbülanslı akışta sürtünme katsayısı `f_D`, Re ve göreli pürüzlülük `epsilon/D`'nin fonksiyonudur. Colebrook-White örtülü denklem iterasyon gerektirdiğinden mühendislik pratiğinde Swamee-Jain açık formu kullanılır:
+
+`f_D = 0.25 / [log10(epsilon / (3.7 * D) + 5.74 / Re^0.9)]^2`
+
+Bu formül %2 hata payıyla Colebrook-White sonucunu verir; iterasyon gerektirmez.
+
+Tipik malzeme pürüzlülükleri (epsilon, mm):
+- Yeni ticari çelik: 0.046
+- Galvanizli çelik: 0.15
+- Dökme demir: 0.26
+- Beton: 0.3 – 3.0
+- PVC / PE (yeni): 0.0015
+
+## Sık sorulan sorular
+
+### Soru: Laminer akış mı, türbülanslı akış mı daha avantajlı?
+
+Mühendislik sistemlerinde türbülanslı akış genellikle kaçınılmazdır. Laminer akış (Re < 2300) düşük basınç kaybı sağlar ama düşük ısı transferi katsayısına sahiptir. Isı eşanjörlerinde türbülanslı akış tercih edilirken pompalama maliyetini minimize eden tasarımda laminer bölge avantajlıdır.
+
+### Soru: NPSH hesabında en sık yapılan hata nedir?
+
+Buhar basıncını hesaplamaya katmamak. Sıcak su (80°C) sistemlerinde buhar basıncı atmosferik basıncın önemli bir oranına ulaşır; NPSH_a hesabında bu terim atlandığında kavitasyon kaçınılmaz hale gelir.
+
+### Soru: Boru hattında kavitasyon nasıl önlenir?
+
+Emiş borusu kısa ve geniş tutulur, yüksek dirençli vana ve dirseklerden kaçınılır, pompa emniyet marjı NPSH_a - NPSH_r > 0.5 m sağlanır, sıcaklık kontrolü yapılır ve pompanın tasarım noktası dışında çalışması engellenir.
+
 ## İlgili standartlar
 
 - **ISO 5167:** Kapalı devre borularda akış ölçümü.

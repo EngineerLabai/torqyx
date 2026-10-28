@@ -64,6 +64,77 @@ Tasarımcıların sahada düştüğü en yaygın iki tuzak şunlardır:
 - [Cıvata Ön Yük ve Sıkma Torku](/tr/blog/civata-on-yuku-vdi-2230)
 - [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
 
+## 6 Sigma ve Süreç Yeterlilik Katsayıları (Cp ve Cpk)
+
+Seri üretimde tolerans analizini tamamlayan bir adım daha vardır: gerçek imalat sürecinin toleransı ne kadar iyi karşıladığını ölçmek. Bu ölçüm için Cp ve Cpk katsayıları kullanılır.
+
+**Süreç Yeterlilik Katsayısı Cp:**
+
+`Cp = (UTL - LTL) / (6 * sigma)`
+
+- UTL: Üst tolerans limiti
+- LTL: Alt tolerans limiti
+- sigma: Süreç standart sapması
+
+Cp yalnızca süreç yayılımını tolerans genişliğiyle karşılaştırır; sürecin tolerans aralığında ortalanmış olup olmadığını görmez.
+
+**Merkez Alma Katsayısı Cpk:**
+
+`Cpk = min[ (UTL - X_ort) / (3 * sigma), (X_ort - LTL) / (3 * sigma) ]`
+
+X_ort süreç ortalamasıdır. Cpk, sürecin hem yayılımını hem de merkezlenme durumunu birlikte değerlendirir.
+
+| Cpk Değeri | Süreç Durumu | Beklenen Iskarta Oranı |
+|---|---|---|
+| 1.00 | Yeterli (3-sigma) | yaklaşık 2.700 ppm |
+| 1.33 | İyi (4-sigma) | yaklaşık 63 ppm |
+| 1.67 | Çok iyi (5-sigma) | yaklaşık 0.57 ppm |
+| 2.00 | Mükemmel (6-sigma) | yaklaşık 0.002 ppm |
+
+RSS yöntemi `Cp >= 1.0` varsayımıyla geçerlidir. Eğer süreç yeterlilik katsayısı bu seviyenin altındaysa RSS analizi iyimser sonuçlar üretir ve sahadaki gerçek ıskarta oranı hesaplananın çok üzerinde çıkar.
+
+## Tolerans Analizi Yöntem Seçim Kılavuzu
+
+Hangi yöntemi seçeceğinizi belirleyen üç ana faktör:
+
+**1. Üretim adedi:**
+- Prototip veya 10 adet altı: Worst-Case zorunlu; istatistiksel dağılım oluşmaz.
+- 100–500 adet: RSS uygulanabilir, ancak süreç verisi doğrulanmalıdır.
+- 10.000+ adet: RSS ve 6-sigma analizi verimli ve geçerlidir.
+
+**2. Arıza riski ve güvenlik kritikliği:**
+- Güvenlik kritik (havacılık, tıbbi cihaz, otomotiv fren sistemi): Worst-Case tercih edilir veya zorunludur.
+- Endüstriyel makine, tüketici ürünü: RSS kabul edilebilir.
+
+**3. Süreç verisi mevcudiyeti:**
+- Cp/Cpk verisi yoksa RSS'in 3-sigma varsayımı doğrulanamaz; ihtiyatlı yaklaşım Worst-Case'dir.
+
+## Monte Carlo Simülasyonu ile İleri Analiz
+
+Worst-Case ve RSS yöntemleri 1B doğrusal zincirlere pratik olarak uygulanır. Ancak karmaşık 2B/3B montajlarda, asimetrik dağılımlarda veya bağımsızlık varsayımının geçersiz olduğu durumlarda Monte Carlo simülasyonu daha doğru sonuç verir.
+
+Monte Carlo yaklaşımı:
+1. Her parça boyutunu olasılık dağılımıyla tanımla (normal, düzgün, log-normal).
+2. Rastgele örnekleme ile 10.000–100.000 monte aj senaryosu üret.
+3. Kapanış boyutu histogramını ve risk oranını hesapla.
+4. Süreç iyileştirme etkisini (sigma seviyesi değişimi) anında görselleştir.
+
+Yazılım araçları: Sigmetrix CETOL 6σ, Siemens Variation Analysis, VisVSA ve Excel tabanlı @RISK bu analizi destekler.
+
+## Sık sorulan sorular
+
+### Soru: Worst-Case tolerans zinciri analizi nasıl raporlanır?
+
+Analiz tablosunda her parçanın nominal değeri, üst sapması, alt sapması ve vektörel yönü (+/-) ayrı sütunlarda gösterilir. Kapanış boyutunun maksimum ve minimum değerleri tasarım gereksinimlerinin iki ucuyla karşılaştırılır.
+
+### Soru: RSS analizi ne zaman güvensizdir?
+
+Parça sayısı az (3'ten az), üretim süreci Cp < 1.0 veya dağılım normal değilse (asimetrik, bimodal) RSS sonuçları güvenilmez hale gelir. Bu durumlarda Monte Carlo simülasyonu daha doğru bir tahmin sağlar.
+
+### Soru: Geometrik toleranslar (GD&T) zincire nasıl dahil edilir?
+
+Diklik, paralellik ve salgı toleransları efektif eksenel boşluğu değiştirdiğinde zincir formülüne ek terim olarak eklenir. ASME Y14.5-2018 Bölüm 9 bu birleşik analizin metodolojisini tanımlar.
+
 ## İlgili standartlar
 
 - **ASME B89.7.3.1:** Boyutsal ölçümlerde uygunluk ve tolerans sınırları.

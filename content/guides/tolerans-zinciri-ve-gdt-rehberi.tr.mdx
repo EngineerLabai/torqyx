@@ -61,6 +61,81 @@ Geometrik Ölçülendirme ve Toleranslandırma (GD&T - Geometric Dimensioning an
 - [Press-fit Bağlantıları ve Tolerans Seçimi](/tr/guides/press-fit-baglantilari-tolerans-secimi)
 - [Basit Gerilme ve Güvenlik Faktörü](/tr/tools/simple-stress)
 
+## GD&T Sembol Seti ve Temel Tanımlar
+
+ASME Y14.5-2018 ve ISO 1101:2017, geometrik toleransları beş kategoriye ayırır:
+
+| Kategori | Tolerans Türü | Sembol |
+|---|---|---|
+| Form | Düzlük | Düz çizgi |
+| Form | Dairesellik | Çember |
+| Form | Silindiriklik | Silindir |
+| Form | Doğrusallık | Tek çizgi |
+| Yön | Paralellik | Çift yatay çizgi |
+| Yön | Diklik | Dik açı |
+| Yön | Açısallık | Açı sembolü |
+| Konum | Konum (Position) | Artı simgesi daire içinde |
+| Konum | Eşmerkezlilik (Concentricity) | İki iç içe daire |
+| Konum | Simetrilik (Symmetry) | Orta çizgi sembolü |
+| Salgı | Dairesel Salgı (Circular Runout) | Ok |
+| Salgı | Toplam Salgı (Total Runout) | Çift ok |
+
+## Datum Referans Çerçevesi Kurulumunda Kritik Noktalar
+
+3-2-1 kuralı teorik olarak açıktır; ancak sahadaki uygulamada üç kritik nokta gözden kaçar:
+
+**1. Birincil datum yüzeyinin form kalitesi:**
+
+Birincil datum olarak seçilen yüzey düzlemden sapıyorsa (planarlık hatası varsa) ölçüm aparatıyla yüzey arasındaki temasta üç temas noktasının konumu değişir. Bu durum tüm koordinat sistemini kaydırır. Bu nedenle birincil datum yüzeyine düzlük (flatness) toleransı mutlaka konulmalıdır.
+
+**2. Uzun ince pim veya mil datumları:**
+
+Uzun bir pimin dış çapı datum olarak seçildiğinde CMM'in o çapı ölçmek için taradığı nokta sayısı kritiktir. Az nokta, dış yuvarlama (lobing) hatasını maskeleyebilir.
+
+**3. Datum önceliği sıralamasının montaj fikriyle eşleşmesi:**
+
+Datum A, B, C sıralaması montaj sırasının tersine kurulmamalıdır. Parçanın üretimde nasıl tutulacağı, CMM'de nasıl sıfırlanacağı ve montajda nasıl oturacağı aynı datum çerçevesini paylaşmalıdır; bu üçünün uyumsuzluğu "yanlış referanstan doğru ölçüm" hatasını üretir.
+
+## MMC ve LMC Modifiyerleri Uygulama Rehberi
+
+**MMC (Maximum Material Condition — Maksimum Malzeme Koşulu):**
+
+Delik çapı en küçük olduğunda (MMC) parça en çok malzemeye sahiptir. Montaj boşluğu en dar bu noktadadır. MMC modifiyeri `(M)` ile, gerçek delik çapı MMC'den büyüdükçe bonus tolerans tanınır.
+
+Örnek: Delik M12 H7 (+0 / +0.018 mm). Konum toleransı MMC'de `0.05 mm` belirtilmiş.
+- MMC delik çapı = 12.000 mm → Konum toleransı = 0.05 mm
+- Gerçek çap = 12.012 mm → Bonus = 12.012 - 12.000 = 0.012 → Toplam = 0.062 mm
+- Gerçek çap = 12.018 mm → Bonus = 0.018 → Toplam = 0.068 mm
+
+Bu yaklaşım gereksiz ıskartayı önler.
+
+**LMC (Least Material Condition — Minimum Malzeme Koşulu):**
+
+Delik çapı maksimum olduğunda (LMC) malzeme en az, kesit kalınlığı en düşüktür. Kırılma riski veya kenar mesafesi kritik olan uygulamalarda LMC modifiyeri `(L)` kullanılır.
+
+## CMM Ölçüm Stratejisi
+
+GD&T toleranslarını doğrulamak için CMM (Coordinate Measuring Machine) programı yazarken dikkat edilmesi gereken noktalar:
+
+- **Nokta sayısı:** Dairesellik için minimum 12 nokta, silindiriklik için minimum 3 kesit × 12 nokta = 36 nokta; hassas uygulamalarda 72+ nokta.
+- **Ölçüm hızı:** Hızlı tarama yumuşak malzemelerde yüzey izleme hatasına yol açabilir.
+- **Sıcaklık bekleme süresi:** CMM ölçüm odasına getirilen parça 20°C dengesine ulaşmadan ölçülmemelidir (minimum 1 saat bekleme).
+- **Uç kalibrasyonu:** Uzun uca veya küçük yarıçaplı uca geçişte kalibrasyon yenilenmezse datum kayması oluşur.
+
+## Sık sorulan sorular
+
+### Soru: GD&T ve boyutsal tolerans aynı anda kullanılabilir mi?
+
+Evet. Boyutsal tolerans kesit büyüklüğünü (Ör: çap, genişlik) sınırlar; GD&T form, yön, konum ve salgıyı sınırlar. Her ikisi de aynı teknik resimde zorunlu olarak birlikte bulunabilir.
+
+### Soru: Toplam salgı ile dairesel salgı arasındaki fark nedir?
+
+Dairesel salgı belirli bir kesit düzleminde ölçülür; yalnızca o kesitin dairesellik ve eksen kaçıklığını kontrol eder. Toplam salgı tüm silindirik yüzey boyunca yapılan ölçümdür; silindiriklik, diklik ve eksen kaçıklığını aynı anda kontrol eder. Toplam salgı her zaman daha kısıtlayıcıdır.
+
+### Soru: Eşmerkezlilik toleransı neden nadir kullanılır?
+
+Eşmerkezlilik (concentricity), eksenin gerçek konumunu median noktaları üzerinden tanımlar; ölçümü son derece zordur ve çoğu CMM programının bunu doğru uygulaması güçtür. ASME Y14.5-2018 bu nedenle fonksiyonel olarak eşdeğer olan Toplam Salgı veya Konum Toleransını tercih etmektedir.
+
 ## İlgili standartlar
 
 - **ASME Y14.5-2018:** Dimensioning and Tolerancing (Geometrik Ölçülendirme ve Toleranslandırma).
