@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Titanium alloys engineering guide: Ti-6Al-4V and pure titanium'
 description: >-
   Ti-6Al-4V Grade 5 and CP titanium mechanical properties, specific strength,
@@ -24,33 +24,33 @@ This guide details the structural and chemical selection criteria for titanium a
 
 Titanium alloys offer exceptional specific strength (strength-to-weight ratio) and virtually complete immunity to atmospheric and marine corrosion. However, integrating titanium without understanding its fundamental mechanical and thermal idiosyncrasies triggers severe engineering and cost penalties:
 - Twice the elastic deflection and compliance compared to structural steel due to its low elastic modulus, leading to chatter and dimensional instability,
-- Severe tool wear and thermal breakdown in CNC machining caused by exceptionally low thermal conductivity (`k  ≈  7  W/m  *  K`) concentrating heat at the tool edge,
+- Severe tool wear and thermal breakdown in CNC machining caused by exceptionally low thermal conductivity (`k  Ôëê  7  W/m  *  K`) concentrating heat at the tool edge,
 - Severe galling and thread cold-welding when fasteners or sliding interfaces lack appropriate barrier coatings.
 
 ## Assumptions
 
 - Grade 5 alloy (Ti-6Al-4V / UNS R56400) is evaluated in the mill-annealed state.
-- Continuous operating temperatures remain below `350 - 400  °C` to prevent interstitial embrittlement from oxygen and hydrogen uptake.
+- Continuous operating temperatures remain below `350 - 400  ┬░C` to prevent interstitial embrittlement from oxygen and hydrogen uptake.
 - Compatibility with carbon fiber reinforced polymers (CFRP) is considered for galvanic corrosion isolation.
 
 ## Step by step method
 
 1. **Select the Applicable Titanium Alloy Grade:**
    - **Grades 1 to 4 (Commercially Pure - CP Titanium):** Yield strength `170 - 480  MPa`; unmatched resistance to wet chlorine, organic acids, and marine immersion; easily formable and weldable.
-   - **Grade 5 (Ti-6Al-4V - `α+β` Alloy):** Yield strength `R_p0.2  >=  830  MPa`, ultimate strength `950  MPa`; workhorse for aerospace airframes, aero-engine discs, and high-performance motorsports.
+   - **Grade 5 (Ti-6Al-4V - `╬▒+╬▓` Alloy):** Yield strength `R_p0.2  >=  830  MPa`, ultimate strength `950  MPa`; workhorse for aerospace airframes, aero-engine discs, and high-performance motorsports.
    - **Grade 23 (Ti-6Al-4V ELI):** Extra-low interstitial variant optimized for cryogenic toughness and surgical orthopaedic implants.
 
 2. **Evaluate Specific Strength (Strength-to-Density Ratio):**
-   Compare structural efficiency across material candidates (`σ / ρ`):
-   - AISI 4340 Alloy Steel: `(1000  MPa  / 7.85  g/cm ^3)  ≈  127  kN  *  m/kg`
-   - Aluminum 7075-T6: `(540  MPa  / 2.81  g/cm ^3)  ≈  192  kN  *  m/kg`
-   - Ti-6Al-4V Grade 5: `(950  MPa  / 4.43  g/cm ^3)  ≈  mathbf214  kN  *  m/kg`
+   Compare structural efficiency across material candidates (`¤â / ¤ü`):
+   - AISI 4340 Alloy Steel: `(1000  MPa  / 7.85  g/cm ^3)  Ôëê  127  kN  *  m/kg`
+   - Aluminum 7075-T6: `(540  MPa  / 2.81  g/cm ^3)  Ôëê  192  kN  *  m/kg`
+   - Ti-6Al-4V Grade 5: `(950  MPa  / 4.43  g/cm ^3)  Ôëê  mathbf214  kN  *  m/kg`
    Titanium delivers up to a **40% to 55% direct weight reduction** over high-strength steel.
 
 3. **Compensate for Low Elastic Modulus Deflection:**
-   Because `E_Ti  ≈  110  GPa` is roughly half that of structural steel (`210  GPa`), identical cross-sections deflect roughly twice as much under bending:
+   Because `E_Ti  Ôëê  110  GPa` is roughly half that of structural steel (`210  GPa`), identical cross-sections deflect roughly twice as much under bending:
    
-`f_Ti = fracE_steelE_Ti  *  f_steel  ≈  1.91  *  f_steel`
+`f_Ti = fracE_steelE_Ti  *  f_steel  Ôëê  1.91  *  f_steel`
 
    Rigidity-driven shafts and spindles require increased section moments of inertia (`I`).
 
@@ -69,7 +69,7 @@ Titanium alloys offer exceptional specific strength (strength-to-weight ratio) a
      
 `m_Ti = (81.3  *  10^-6  m ^2)  *  0.20  m   *  4430  kg/m ^3 = mathbf0.072  kg  (72  g )`
 
-   - Comparison with quenched & tempered 42CrMo4 steel (`S_y = 600  MPa`, `ρ = 7850  kg/m ^3`):
+   - Comparison with quenched & tempered 42CrMo4 steel (`S_y = 600  MPa`, `¤ü = 7850  kg/m ^3`):
      
 `A_req,steel = (67,500 / 600) = 112.5  mm ^2 implies m_steel = 112.5  *  10^-6  *  0.20  *  7850 = mathbf0.177  kg  (177  g )`
 
@@ -78,7 +78,7 @@ Titanium alloys offer exceptional specific strength (strength-to-weight ratio) a
 ## Common mistakes
 
 - **Running Tooling at Steel Surface Speeds:** Exceeding `v_c = 90  m/min` creates catastrophic thermal tool failure within seconds due to titanium's low thermal dissipation.
-- **Ignoring Springback in Sheet Metal Forming:** Titanium springs back twice as much as cold-rolled steel upon die release; hot forming or creep forming at `550 - 650  °C` is standard practice.
+- **Ignoring Springback in Sheet Metal Forming:** Titanium springs back twice as much as cold-rolled steel upon die release; hot forming or creep forming at `550 - 650  ┬░C` is standard practice.
 - **Dry Assembly of Fasteners (Galling):** Uncoated titanium threads seize instantly during torque tightening; solid film MoS2 or silver plating must be specified.
 - **Direct Aluminum-CFRP Contact:** Aluminum forms an aggressive galvanic couple with carbon fiber in moist marine environments, whereas titanium is galvanically compatible with CFRP.
 
@@ -88,6 +88,54 @@ Titanium alloys offer exceptional specific strength (strength-to-weight ratio) a
 - [Tensile Stress and Factor of Safety](/en/tools/simple-stress)
 - [Unit Converter](/en/tools/unit-converter)
 - [Bolt Strength and Preload Calculator](/en/tools/bolt-calculator)
+
+
+
+## Titanium Alloy Family Comparison
+
+Titanium alloys are classified by microstructure: alpha (pure or near-alpha), alpha-beta (two-phase), and beta (metastable). Each class offers distinct trade-offs.
+
+| Grade | Alloy | Class | Rm (MPa) | Density (g/cm3) | Notable Property |
+|---|---|---|---|---|---|
+| Grade 1 | CP-Ti | Alpha | 240 | 4.51 | Maximum formability, medical implants |
+| Grade 2 | CP-Ti | Alpha | 345 | 4.51 | General corrosion resistance, chemical |
+| Grade 5 | Ti-6Al-4V | Alpha-Beta | 950 | 4.43 | Most common; aerospace, implants |
+| Grade 9 | Ti-3Al-2.5V | Alpha-Beta | 620 | 4.48 | Tubes, bicycle frames, hydraulic tubing |
+| Grade 23 | Ti-6Al-4V ELI | Alpha-Beta | 860 | 4.43 | Extra low interstitials; surgical implants |
+| Beta-C | Ti-3Al-8V-6Cr-4Zr-4Mo | Beta | 1310 | 4.82 | Springs, fasteners, high-strength |
+
+Grade 5 (Ti-6Al-4V) accounts for approximately 50 % of all titanium used globally. Its specific strength (Rm/rho) of ~215 MPa*cm3/g exceeds most structural materials. For corrosion resistance in non-oxidizing acids, Grade 2 often outperforms Grade 5 at lower cost.
+
+## Weldability and Shielding Gas Requirements
+
+Titanium reacts with oxygen, nitrogen, and hydrogen above 250 degC, forming brittle TiO2, TiN, and TiH2 phases. Weld quality is directly judged by the color of the heat-affected zone:
+
+| HAZ Color | Contamination Level | Action |
+|---|---|---|
+| Bright Silver | None - excellent | No action |
+| Light Straw / Yellow | Minimal - acceptable | Re-evaluate shielding |
+| Dark Gold / Purple | Moderate - borderline | Improve shielding |
+| Blue | Significant - unacceptable | Reject and reweld |
+| White/Gray Oxide | Severe | Reject |
+
+Shielding requirements: pure argon (99.999 %), trailing shield extending 75-100 mm behind the weld pool, backing gas purge to below 50 ppm oxygen, and acetone-cleaned surfaces before welding.
+
+## Fatigue and Fretting Sensitivity
+
+Titanium alloys have excellent fatigue performance in pristine condition but are sensitive to fretting. Micro-slip (typically below 50 um amplitude) between mating surfaces causes TiO2 debris formation, surface pitting, and fatigue crack initiation at stresses 30-60 % below the smooth-specimen endurance limit.
+
+Prevention: fretting-resistant coatings (copper-nickel plating, anodizing, MoS2 dry film), compliant shim materials between mating titanium surfaces, increased clamping pressure, and shot peening to introduce compressive residual stress at the contact interface.
+
+## Frequently Asked Questions
+
+**Why is titanium lighter than stainless steel but heavier than aluminum?**
+Titanium density is 4.5 g/cm3, between aluminum (2.7 g/cm3) and steel (7.85 g/cm3). The advantage is specific strength: Ti-6Al-4V achieves 950 MPa at 4.5 g/cm3, giving specific strength of 211 MPa*cm3/g - higher than both high-strength aluminum (7075-T6: 160) and heat-treated steel (42CrMo4 QT: 115). When strength-to-weight ratio governs the design, titanium enables the thinnest and lightest structure.
+
+**What makes titanium biocompatible for surgical implants?**
+The stable TiO2 oxide layer (2-5 nm thick, self-regenerating) provides a chemically inert interface with biological tissue, preventing ion release into the body. Additionally, titanium's elastic modulus (110 GPa) is closer to cortical bone (15-25 GPa) than cobalt-chrome (210 GPa), reducing stress shielding. Grade 23 (ELI) is specified for implants because extra-low interstitial limits eliminate hard particles that initiate fatigue cracks in cyclic loading.
+
+**Do I need special tooling to machine titanium?**
+Yes. Titanium's low thermal conductivity (7 W/(m*K) vs. 50 for carbon steel) concentrates heat at the cutting zone. Use sharp TiAlN-coated carbide inserts, low cutting speed (Vc = 40-60 m/min), high feed rates to maintain chip thickness, and high-pressure coolant directed to the cutting edge. Never allow the tool to dwell at zero feed - titanium work-hardens immediately and the insert fails within seconds.
 
 ## Related standards
 

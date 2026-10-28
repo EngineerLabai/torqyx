@@ -1,4 +1,4 @@
----
+﻿---
 title: "Geometric Dimensioning and Tolerancing (GD&T) Guide: ASME Y14.5 and ISO 1101"
 description: "Engineering guide on GD&T symbols, Datum Reference Frames (3-2-1 rule), Circular and Total Runout, Concentricity vs Position, and MMC bonus tolerances."
 date: "2026-05-24"
@@ -23,7 +23,7 @@ Geometric Dimensioning and Tolerancing (GD&T) bridges this gap by establishing a
 
 - Parts behave as rigid bodies; elastic and rubber deformation is neglected.
 - All geometric tolerances are defined using the ASME Y14.5-2018 or ISO 1101:2017 symbol set.
-- Measurement reference temperature is 20 °C per ISO 1:2016.
+- Measurement reference temperature is 20 ┬░C per ISO 1:2016.
 - Surface roughness (Ra) is designed to remain below the geometric tolerance boundary.
 
 ## Step by step method
@@ -68,5 +68,72 @@ Geometric Dimensioning and Tolerancing (GD&T) bridges this gap by establishing a
 - **ISO 5459:** Geometrical product specifications (GPS) - Datums and datum systems.
 
 ---
+
+
+
+## GD&T Symbol Set Overview
+
+GD&T controls are organized into five categories. Understanding the category determines which datum structure and measurement strategy applies.
+
+| Category | Symbols | Controls |
+|---|---|---|
+| Form | Straightness, Flatness, Circularity, Cylindricity | Shape of individual surface; no datum required |
+| Orientation | Parallelism, Perpendicularity, Angularity | Angle relative to datum; datum required |
+| Location | Position, Concentricity, Symmetry | True position relative to datum frame |
+| Runout | Circular Runout, Total Runout | Surface variation during rotation |
+| Profile | Profile of a Line, Profile of a Surface | Complex surface form and location |
+
+**Form tolerances (flatness, straightness)** require no datum - they control only the shape of the individual surface. They are the highest-priority controls for datum surfaces themselves: a datum that is not flat will introduce error into every subsequent orientation and location measurement.
+
+**Runout vs. position:** Circular runout controls variation at each cross-section as the part rotates. Total runout controls the full surface, including taper and conicity. Position controls the location of the axis of a cylindrical feature relative to the datum frame - it does not require rotation.
+
+## Datum Reference Frame Critical Points
+
+The datum reference frame (DRF) constrains all six degrees of freedom: three translations (X, Y, Z) and three rotations (Rx, Ry, Rz).
+
+**Primary datum requirements:**
+- The primary datum plane must make contact with at least 3 points on the actual surface. If the surface is not flat (flatness error exceeds the form tolerance), the simulated datum plane - defined by the highest-point contact - will tilt, introducing error into all downstream measurements.
+- Long cylindrical features (pins, shafts) as primary datums constrain 4 degrees of freedom (2 translations + 2 rotations). Their form error (straightness, cylindricity) becomes the limiting factor for datum stability. Specify cylindricity on primary datum features, not just diameter tolerance.
+
+**Datum precedence (primary, secondary, tertiary):** The order of datum labels in the feature control frame is not arbitrary. Primary datum is the most geometrically significant contact - typically the largest, flattest surface. Secondary and tertiary datums further constrain remaining degrees of freedom. Incorrect precedence leads to ambiguous measurement results - different fixtures will produce different values for the same part.
+
+## MMC and LMC Modifier Application
+
+The Maximum Material Condition (MMC) modifier (circled M) allows bonus tolerance when the controlled feature departs from MMC size.
+
+**Bonus tolerance rule:**
+`Total allowed position tolerance = specified tolerance + (actual size - MMC size)`
+
+**Example:** A hole with specified diameter 10.00-10.05 mm, position tolerance 0.10 mm at MMC (10.00 mm).
+- If actual hole diameter = 10.03 mm: Bonus = 10.03 - 10.00 = 0.03 mm
+- Total allowed position = 0.10 + 0.03 = 0.13 mm
+
+This bonus tolerance reflects the physical reality that a larger hole can accommodate more positional deviation and still pass a functional gauge.
+
+**LMC (circled L) modifier:** Applied when minimum wall thickness is the concern, not mating part assembly. Less common; used in aerospace castings and thin-wall components where breaking through a wall is the failure mode.
+
+## CMM Measurement Strategy
+
+Coordinate Measuring Machine (CMM) results are only as reliable as the measurement strategy that defines them.
+
+**Point sampling requirements per feature type:**
+- Plane: minimum 9 points in a grid pattern; avoid clustering points near edges where burrs and chamfers affect readings.
+- Cylinder: minimum 3 cross-sections, 5 points per section = 15 points total. Measure over the full length, not just near the open end.
+- Sphere: minimum 7 points distributed over the hemisphere.
+
+**Temperature stabilization:** Steel parts must equilibrate to 20 degC (ISO 1 reference temperature) for at least 4 hours before precision measurement. A 10 degC temperature difference on a 200 mm steel shaft produces 23 um dimensional change - significant for IT6 and finer tolerances.
+
+**Stylus calibration:** Qualify the ruby ball stylus on a calibrated reference sphere before each measurement session. Stylus tip diameter error directly maps to feature size error. Use the smallest stylus that can reach the feature - long styli introduce bending error under contact force.
+
+## Frequently Asked Questions
+
+**Can I use GD&T and dimensional tolerances simultaneously on the same drawing?**
+Yes, and this is standard practice. Dimensional tolerances (plus/minus) control size; GD&T controls form, orientation, location, and runout. The two systems work in parallel. Note: a size tolerance also implies a form constraint (Rule 1 / Taylor Principle in ASME Y14.5) - a feature of size at MMC must fit within a perfect form envelope. This interaction is critical for mating cylindrical features.
+
+**What is the difference between total runout and circular runout?**
+Circular runout is measured at each individual cross-section as the part rotates - it controls variation at that slice only. Total runout is measured over the entire surface simultaneously - it also detects taper, conicity, and axial wobble. Total runout is a stricter control and subsumes circular runout. Use total runout for bearing journals and high-speed rotating surfaces where cumulative surface variation matters.
+
+**Why is concentricity specified so rarely in modern drawings?**
+Concentricity is a median-point control - it requires establishing the median of all diametrically opposite surface points and checking that the median lies within a cylindrical tolerance zone. This is extremely difficult and expensive to measure on a CMM. In practice, runout or position tolerances (which control the axis, not the median) achieve the functional intent of concentricity more reliably and measurably. Concentricity is now rarely specified outside legacy aerospace drawings.
 
 *This guide has been prepared and verified by the TORQYX Engineering Editorial Board (Manufacturing and Tolerancing Desk) in accordance with ASME Y14.5 and ISO 1101 standards.*

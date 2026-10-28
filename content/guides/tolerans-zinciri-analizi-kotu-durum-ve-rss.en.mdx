@@ -1,4 +1,4 @@
----
+﻿---
 title: "Tolerance Stack-up Analysis Guide: Worst-Case and Statistical RSS Methods"
 description: "Engineering guide on 1D/2D tolerance stack-up analysis: Worst-Case, Root Sum of Squares (RSS), Six Sigma limits, and process capability (Cp, Cpk) under ASME Y14.5."
 date: "2026-05-22"
@@ -10,7 +10,7 @@ canonical: "https://torqyx.com/en/guides/tolerans-zinciri-analizi-kotu-durum-ve-
 ---
 
 <Callout type="info" title="Engineering Practice Note">
-This guide details 1D and 2D tolerance stack-up analysis methodologies—Worst-Case and statistical Root Sum of Squares (RSS)—ensuring mechanical clearance and interference fits across automotive gearboxes, aerospace linkages, and precision valves under ASME Y14.5-2018 and ISO 286.
+This guide details 1D and 2D tolerance stack-up analysis methodologiesÔÇöWorst-Case and statistical Root Sum of Squares (RSS)ÔÇöensuring mechanical clearance and interference fits across automotive gearboxes, aerospace linkages, and precision valves under ASME Y14.5-2018 and ISO 286.
 </Callout>
 
 ## Problem / Objective
@@ -26,7 +26,7 @@ Design engineers routinely fall into two counterproductive traps:
 - Parts are treated as rigid bodies; elastic and plastic deformation under assembly force is neglected.
 - For statistical tolerancing (RSS), part dimensions follow a Gaussian normal distribution and process capability satisfies `C_p >= 1.0` (3-Sigma minimum).
 - Analysis is performed as a 1-dimensional closed vector loop in the axial or radial direction.
-- Thermal expansion effects are neglected at standard reference temperature (20 °C).
+- Thermal expansion effects are neglected at standard reference temperature (20 ┬░C).
 
 ## Step by step method
 
@@ -70,5 +70,67 @@ Design engineers routinely fall into two counterproductive traps:
 - **ASME Y14.5-2018:** Dimensioning and Tolerancing (GD&T).
 
 ---
+
+
+
+## Six Sigma and Process Capability Indices
+
+The statistical methods for tolerance stack analysis are inseparable from process capability. The process capability index Cp and Cpk define how well a manufacturing process fits within its tolerance band:
+
+`Cp = (USL - LSL) / (6 * sigma)`
+
+`Cpk = min[(USL - mu) / (3 * sigma), (mu - LSL) / (3 * sigma)]`
+
+Where USL = upper spec limit, LSL = lower spec limit, mu = process mean, sigma = process standard deviation.
+
+| Cp / Cpk Value | Sigma Level | Defect Rate (ppm) | Interpretation |
+|---|---|---|---|
+| 0.67 | 2-sigma | 45,500 ppm | Unacceptable for production |
+| 1.00 | 3-sigma | 2,700 ppm | Minimum acceptable (old standard) |
+| 1.33 | 4-sigma | 63 ppm | Good - industry baseline |
+| 1.67 | 5-sigma | 0.57 ppm | Automotive/aerospace standard |
+| 2.00 | 6-sigma | 0.002 ppm | Six Sigma level |
+
+**RSS method assumption:** The RSS formula `T_total = sqrt(T1^2 + T2^2 + ... + Tn^2)` is only valid when each dimension follows a normal distribution AND the process is centered (Cpk approximately equal to Cp). If processes are off-center (Cpk below 1.0), the RSS prediction is non-conservative - actual rejects will exceed the predicted rate.
+
+**Corrected RSS for off-center processes:** Multiply each individual tolerance by the process capability ratio before applying RSS:
+`T_effective,i = T_i * (1.5 / Cpk_i)` (conservative adjustment for off-center processes)
+
+## Method Selection Guide
+
+| Criterion | Worst-Case Method | RSS Method | Monte Carlo |
+|---|---|---|---|
+| Production volume | Any | High volume (>1000) | Very high volume |
+| Consequence of failure | Safety-critical | Commercial | Commercial/statistical |
+| Process capability data | Not required | Required (Cpk known) | Required (full distribution) |
+| Result type | Zero-defect guarantee | Statistical yield estimate | Statistical yield + sensitivity |
+| Typical application | Medical, aerospace | Automotive, consumer | Complex assemblies, 6-sigma programs |
+
+**Selection rule:** Always start with worst-case analysis during concept design. Transition to RSS only when: (1) production volume justifies statistical yields, (2) process capability data exists for each dimension, and (3) the cost of occasional rejects is explicitly accepted and budgeted.
+
+## Monte Carlo Simulation in Tolerance Analysis
+
+When an assembly involves more than 8-10 components or non-normal distributions (castings, forming processes), Monte Carlo simulation provides the most accurate yield prediction.
+
+**How it works:**
+1. Assign a statistical distribution to each component dimension (normal, uniform, or measured distribution from process data).
+2. Generate N random samples (typically 100,000 to 1,000,000 iterations).
+3. Calculate the assembly dimension for each sample set.
+4. Count the fraction of assemblies outside the functional limit.
+
+**Software tools:** Variation Analyst (VisVSA), CETOL 6-Sigma (Sigmetrix), DFMPro, 3DCS Variation Analyst for CATIA/NX, or custom Python scripts using NumPy random sampling.
+
+**When Monte Carlo is justified:** When RSS overestimates yield for non-normal inputs; when sensitivity analysis is needed to identify the top contributors to variation; when correlation between dimensions exists (e.g., features machined in the same setup).
+
+## Frequently Asked Questions
+
+**What format should a tolerance stack report include for design review?**
+A complete tolerance chain report should contain: (1) the functional gap definition with its bilateral limits; (2) a loop diagram showing each contributing dimension with its nominal value, tolerance, and direction multiplier (+1 or -1); (3) worst-case result; (4) RSS result with assumed Cpk values; (5) sensitivity ranking showing which components contribute most variance; (6) manufacturing or supplier note specifying the required Cpk for each critical dimension.
+
+**When is RSS analysis unsafe to use?**
+RSS is unsafe when: (1) individual component Cpk values are below 1.0; (2) the assembly contains non-normal distributions (uniform, bimodal); (3) there are strong correlations between dimensions; (4) the tail of the assembly distribution matters (safety-critical joints where even 0.001 % failure rate is unacceptable). In these cases, worst-case or Monte Carlo analysis is required.
+
+**How does GD&T integration affect tolerance stack analysis?**
+GD&T controls introduce non-linear contributions that standard algebraic stacks cannot handle. For example, a position tolerance of 0.5 mm diameter creates an allowable deviation of 0.25 mm in any direction - not a simple plus/minus value. Use vector loop methods (not scalar) and dedicated software to properly handle circularity of position zones, bonus tolerance from MMC modifiers, and datum shift. Scalar methods underestimate the available tolerance when MMC conditions apply.
 
 *This guide has been prepared and verified by the TORQYX Engineering Editorial Board (Manufacturing and Tolerancing Desk) in compliance with ASME Y14.5 and ISO 286 standards.*

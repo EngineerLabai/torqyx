@@ -66,6 +66,80 @@ Selecting an undersized pipe diameter produces excessive flow velocities, drivin
 - [Pipe Sizing: Speed and Pressure Balance](/en/blog/boru-capi-seciminde-hiz-ve-basinc-dengesi)
 - [Viscosity Classification Guide](/en/guides/viskozite-siniflandirmasi-rehberi)
 
+## Minor (Local) Losses, Water Hammer, and Economic Pipe Diameter
+
+### Minor (Local) Losses
+
+Darcy-Weisbach covers straight-pipe friction only. In real systems, fittings such as valves, elbows, tees, and reducers typically account for 20–40% of total head loss.
+
+`h_minor = K * (v^2 / 2g)`
+
+Typical K values:
+- 90° standard elbow: K ≈ 0.9
+- 90° long-radius elbow: K ≈ 0.4
+- Fully open ball valve: K ≈ 0.1–0.2
+- Fully open butterfly valve: K ≈ 0.3
+- Sudden contraction (A2/A1 = 0.5): K ≈ 0.5
+- Sudden expansion: Borda-Carnot formula applies
+
+Equivalent length method: convert minor loss to straight-pipe equivalent length via `L_eq = K * D / f_D` and add to the friction calculation.
+
+### Water Hammer
+
+When a valve closes suddenly, fluid momentum converts to a high-pressure shock wave that travels at acoustic wave speed:
+
+`c = sqrt( K / (rho * (1 + K * D / (E_pipe * t))) )`
+
+K = bulk modulus of the fluid, E_pipe = pipe elastic modulus, t = wall thickness.
+
+Joukowsky pressure rise:
+
+`Delta P = rho * c * Delta_v`
+
+Example: water flowing at 10 m/s, c = 1,000 m/s, sudden closure → Delta P = 1,000 × 1,000 × 10 = 10,000,000 Pa = 100 bar. This is why slow-closing valves (t_close > 2L/c), pressure relief valves, or expansion vessels are mandatory in water-hammer-prone systems.
+
+### Economic Pipe Diameter
+
+As pipe diameter increases, pipe and installation cost rises while pumping energy cost falls. The economic optimum minimizes the combined total. Practical velocity ranges (liquid systems):
+
+| Application | Recommended Velocity (m/s) |
+|---|---|
+| Pump suction line | 0.5 – 1.5 |
+| Pump discharge line | 1.5 – 3.0 |
+| General process pipe | 1.0 – 2.5 |
+| High-pressure hydraulic | 3.0 – 6.0 |
+| Low-pressure steam | 15 – 25 |
+| Compressed air | 6 – 15 |
+
+## Colebrook-White and the Practical Swamee-Jain Formula
+
+In turbulent flow the friction factor `f_D` depends on Re and relative roughness `epsilon/D`. Because Colebrook-White is implicit and requires iteration, the open-form Swamee-Jain equation is preferred in engineering practice:
+
+`f_D = 0.25 / [log10(epsilon / (3.7 * D) + 5.74 / Re^0.9)]^2`
+
+This gives results within 2% of Colebrook-White with no iteration.
+
+Typical material roughness (epsilon, mm):
+- New commercial steel: 0.046
+- Galvanized steel: 0.15
+- Cast iron: 0.26
+- Concrete: 0.3 – 3.0
+- PVC / PE (new): 0.0015
+
+## Frequently asked questions
+
+### Question: Is laminar or turbulent flow more advantageous in engineering?
+
+Turbulent flow is generally unavoidable at industrial flow rates. Laminar flow (Re less than 2,300) yields lower pressure drop but poor heat transfer. Heat exchangers favor turbulent flow; systems minimizing pumping cost favor laminar where feasible.
+
+### Question: What is the most common mistake in NPSH calculation?
+
+Omitting vapor pressure. In hot water systems (80°C), vapor pressure reaches a significant fraction of atmospheric pressure; when this term is excluded from NPSH_A, cavitation is unavoidable.
+
+### Question: How is cavitation prevented in a pipeline?
+
+Keep the suction line short and large-bore, avoid high-resistance valves and elbows close to the pump, maintain NPSH_A minus NPSH_R greater than 0.5 m, control fluid temperature, and avoid operating the pump far from its design point.
+
 ## Relevant standards
 
 - **ISO 5167:** Measurement of fluid flow by means of pressure differential devices.

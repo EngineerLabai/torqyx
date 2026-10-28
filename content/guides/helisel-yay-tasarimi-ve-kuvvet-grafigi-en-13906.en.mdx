@@ -1,4 +1,4 @@
----
+﻿---
 title: "Helical Compression Spring Design and Force-Deflection Guide: EN 13906-1"
 description: "Comprehensive engineering guide on helical compression spring rate k, deflection, Wahl stress correction, solid length, and fatigue limits under EN 13906-1."
 date: "2026-05-20"
@@ -73,5 +73,53 @@ Machine designers frequently select the stiffest spring capable of fitting into 
 - **ISO 26909:** Springs - Vocabulary and graphical symbols.
 
 ---
+
+
+## Spring Material Selection and Temperature Limits
+
+Spring material selection determines both mechanical performance and service life. The spring index `C = D/d` must remain between 4 and 12 for reliable manufacturing; below C = 4 coiling becomes impractical, above C = 12 the spring buckles or loses stiffness predictability.
+
+| Material | Max Service Temp. | Tensile Strength | Typical Application |
+|---|---|---|---|
+| SH (Patented Carbon Wire, EN 10270-1) | 120 °C | 1300–2050 MPa | General-purpose springs |
+| VDSiCr (Si-Cr Alloy, EN 10270-2) | 200 °C | 1600–2000 MPa | Automotive valve springs |
+| 1.4310 / 302 Stainless Steel | 250 °C | 1100–1450 MPa | Corrosive environments |
+| Inconel 718 | 600 °C | 1350 MPa | High-temperature gas turbine |
+| Inconel X-750 | 650 °C | 1200 MPa | Nuclear and aerospace springs |
+
+**Pre-setting (presetting):** After coiling, springs are compressed to solid height one or more times. This introduces favorable compressive residual stresses on the surface, increasing the effective elastic range by 10–20 %. Always specify whether the spring has been preset — a preset spring must not be installed backwards (direction of coiling matters for torsional residual stress distribution).
+
+## Fatigue Life and Goodman Diagram
+
+A helical compression spring under cyclic loading must satisfy the modified Goodman fatigue criterion:
+
+`tau_a / tau_zul,a + tau_m / tau_zul,m <= 1`
+
+Where:
+- `tau_a` = stress amplitude = (tau_max - tau_min) / 2
+- `tau_m` = mean stress = (tau_max + tau_min) / 2
+- `tau_zul,a` = allowable stress amplitude (from EN 13906-1 diagram for the material)
+- `tau_zul,m` = allowable mean stress
+
+The EN 13906-1 Goodman diagram provides fatigue boundary lines for various wire materials and diameters. Points inside the diagram represent infinite life (> 10^7 cycles); points outside require finite-life design and a defined replacement interval.
+
+**Shot peening effect:** Shot peening the spring wire surface introduces compressive residual stress to a depth of approximately 0.1–0.3 mm. This shifts the effective mean stress toward compression, moving the operating point away from the fatigue boundary. Shot peened springs achieve 30–50 % longer fatigue life under equivalent loading. EN 13906-1 explicitly permits a shift in allowable stress amplitude for shot peened springs.
+
+**Wahl correction factor (Kw):**
+`Kw = (4C - 1) / (4C - 4) + 0.615 / C`
+
+This factor accounts for curvature effects and direct shear stress concentration at the inner coil surface. For C = 6: Kw ≈ 1.25 — meaning the actual maximum stress is 25 % higher than the nominally calculated value. Ignoring Kw leads to non-conservative design and premature fatigue failure.
+
+## Frequently Asked Questions
+
+**How can I increase spring stiffness without changing the wire diameter?**
+Spring rate `k = (G × d^4) / (8 × D^3 × n_a)`. To increase k: reduce the number of active coils (n_a) or reduce the mean coil diameter (D). Increasing wire diameter (d) is the most effective lever — stiffness scales with d^4. However, wire diameter is often constrained by envelope requirements.
+
+**How do I calculate the free length from design parameters?**
+`L0 = Lc + (n_a + 1.5) × d` for springs with ground and closed ends.
+Where Lc = solid length = (n_total) × d. Always verify that `L0 / D < 4` to avoid buckling; if the ratio exceeds 4, add a guide rod or change to a nested spring configuration.
+
+**When does a helical spring buckle during compression?**
+Buckling occurs when the deflection ratio `s/L0 > 0.6` combined with a slenderness ratio `L0/D > 5.2` (for springs with both ends free to pivot). To prevent buckling: use a guide pin, reduce free length, or increase wire diameter. Buckling is most common in long automotive suspension springs operating in compression-only mode.
 
 *This guide has been prepared and verified by the TORQYX Engineering Editorial Board (Mechanical Design Desk) in compliance with EN 13906-1 standards.*

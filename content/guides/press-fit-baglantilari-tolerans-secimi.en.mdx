@@ -1,4 +1,4 @@
----
+﻿---
 title: Press-fit tolerance selection and interference fit calculation
 description: >-
   ISO 286 tolerance classes, DIN 7190 contact pressure, Lamé thick-walled
@@ -111,6 +111,69 @@ Interference fits provide keyless, backlash-free, and high-fatigue-strength mech
 - [Unit Converter](/en/tools/unit-converter)
 - [Fixture & Clamping Tools](/fixture-tools)
 - [Simple Stress and Factor of Safety](/en/tools/simple-stress)
+
+
+## ISO 286 Standard Tolerance Pairs Summary
+
+ISO 286 defines the fundamental deviation (position of tolerance zone) and IT grade (width of tolerance zone). For interference fits, the following pairs are most commonly specified:
+
+| Fit Code | Interference Range (for 50mm shaft) | Application |
+|---|---|---|
+| H7/g6 | -25 to -9 µm (clearance) | Sliding fit, easy assembly |
+| H7/h6 | 0 to -16 µm (transition) | Location fit, push by hand |
+| H7/k6 | +2 to +18 µm (transition) | Light press, precision positioning |
+| H7/m6 | +4 to +20 µm (transition-interference) | Medium press, key-hub assemblies |
+| H7/n6 | +8 to +33 µm (light interference) | Pressed fits, gear hubs |
+| H7/p6 | +17 to +42 µm (interference) | Permanent assembly, no key needed |
+| H7/r6 | +25 to +50 µm (interference) | High torque transmission |
+| H7/s6 | +34 to +59 µm (heavy interference) | Drive fits, flywheels |
+| H7/u6 | +54 to +79 µm (forced fit) | Maximum interference, thermal assembly |
+
+**Selection rule:** H7/k6 and H7/m6 can be assembled by press without heat. H7/r6 and heavier require either a hydraulic press (> 50 kN for typical shafts) or thermal differential assembly. Never cold-press H7/u6 — the interference pressure will yield the shaft or hub bore material.
+
+## Press Force vs. Thermal Assembly
+
+**Press force calculation (Lame's thick-wall cylinder theory):**
+`F_press = mu * P_fit * pi * d * L`
+
+Where:
+- `mu` = friction coefficient (0.10–0.15 for dry steel; 0.08–0.12 with lubricant)
+- `P_fit` = interface pressure from interference (MPa), calculated from Lame's equation
+- `d` = nominal diameter (m)
+- `L` = engagement length (m)
+
+Interface pressure for equal-material pair (E_hub = E_shaft):
+`P_fit = (delta / d) * E / (1 + (d/D)^2) / (1 - (d/D)^2)`
+where `delta` = interference (mm), `D` = outer diameter of hub (mm).
+
+**Thermal assembly (shrink fit):** Heat the hub to:
+`Delta T = delta / (alpha * d) + 10 °C (assembly clearance margin)`
+
+For steel: `alpha = 11.5e-6 /°C`. Example: 50 µm interference on a 60 mm shaft:
+`Delta T = 0.050 / (11.5e-6 * 60) + 10 ≈ 72 + 10 = 82 °C above ambient.`
+
+Use an oven (not open flame) to avoid localized overheating and distortion. Maximum recommended heating temperature for most steels: 200 °C to avoid tempering and property loss in heat-treated components.
+
+## Disassembly Planning
+
+Press-fit disassembly is often more destructive than assembly. Plan for it at the design stage:
+
+**Hydraulic nut / oil injection groove:** Machine a circumferential groove at the interference interface and provide a radial port for high-pressure oil injection (typically 200–300 bar). The oil expands the hub slightly, reducing friction by 80–95 % and enabling extraction with minimal force. This method is standard in large rolling mill and turbine shaft assemblies. Add to design drawings — retrospective drilling is expensive.
+
+**Jackbolt holes:** Threaded holes in the hub face that accept jackbolts bearing against the shaft shoulder. Provides controlled axial force for extraction. Use equally spaced holes (minimum 3) to avoid cocking the hub during extraction.
+
+**Sacrificial design:** If the hub (e.g., a bronze bushing) is the lower-cost component, design for destruction. A cut with a thin-kerf saw along one generator line relieves interference and allows hub extraction without shaft damage.
+
+## Frequently Asked Questions
+
+**What is the practical difference between H7/s6 and H7/r6 for a gear hub?**
+H7/s6 provides approximately 15–20 µm more interference than H7/r6 on a 50 mm shaft, translating to ~15 % higher torque transmission capacity without a key. Use H7/r6 when disassembly is planned during maintenance. Use H7/s6 when the joint is intended to be permanent or when keyless torque transmission is required in reversing-load applications.
+
+**What happens if interference is too high?**
+Excessive interference yields the hub bore material plastically. The effective diameter increases permanently, and after disassembly, the fit becomes loose. This is irreversible. Always check that assembly stress (hoop stress in hub): `sigma_hoop = P_fit * (D^2 + d^2) / (D^2 - d^2)` remains below the material yield strength with at least a 1.5× safety factor.
+
+**Why does surface roughness matter for interference fits?**
+Surface asperities at the interface partially "flatten" during press-fit assembly, reducing effective contact — the real interference is lower than the nominal by approximately `Ra_shaft + Ra_hub`. For tight fits (H7/s6, H7/u6), this reduction can be 10–20 µm on rough-turned surfaces. Specify Ra ≤ 0.8 µm for interference fit surfaces; grind or fine-turn to achieve this.
 
 ## Related standards
 

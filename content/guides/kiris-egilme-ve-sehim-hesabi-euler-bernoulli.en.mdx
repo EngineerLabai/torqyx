@@ -1,4 +1,4 @@
----
+﻿---
 title: "Beam Bending Stress and Deflection Guide: Euler-Bernoulli Theory and Standards"
 description: "Engineering guide on beam bending stress, moment of inertia, deflection equations, and L/300, L/500 serviceability limits under Eurocode 3 and DIN 1052."
 date: "2026-05-21"
@@ -72,5 +72,74 @@ For example, excessive deflection across an overhead crane runway girder forces 
 - **EN 13001 / DIN 15018:** Cranes - Structural steelwork deflection criteria.
 
 ---
+
+
+## Section Selection: I-Beam, HEB, IPE, and Box Section
+
+Selecting the correct beam cross-section involves balancing flexural stiffness (I), section modulus (W), weight, and fabrication cost. European standard sections are governed by EN 10365.
+
+| Section | Weight (kg/m) | Ix (cm^4) | Wx (cm^3) | Typical Application |
+|---|---|---|---|---|
+| IPE 200 | 22.4 | 1943 | 194 | Light floor beams, purlins |
+| HEB 200 | 61.3 | 7340 | 534 | Columns, heavy crane beams |
+| HEA 200 | 42.3 | 3692 | 330 | Medium-duty beams |
+| UB 203x102 (British) | 23.1 | 1818 | 179 | British standard; similar to IPE |
+| Box Section (200x200x8) | 48.0 | 4985 | 499 | Torsion-critical, crane runway |
+
+**Selection strategy:**
+- **IPE:** High section modulus-to-weight ratio for bending; narrow flanges suit tight spaces but limit lateral stability.
+- **HEB:** Very wide flanges provide superior lateral stability and column performance. Use for beams with high lateral-torsional buckling risk or when moment connections are required.
+- **Box sections:** Highest torsional stiffness. Mandatory for overhead crane runway beams and structures with significant eccentric loading.
+
+## Lateral Torsional Buckling (LTB)
+
+A beam loaded in bending can fail by buckling laterally and twisting simultaneously before reaching the full plastic moment capacity. This mode — lateral torsional buckling — governs long spans with unbraced compression flanges.
+
+The buckling moment resistance according to Eurocode 3 (EN 1993-1-1):
+
+`M_b,Rd = chi_LT * W_y * f_y / gamma_M1`
+
+Where:
+- `chi_LT` = LTB reduction factor (from EN 1993-1-1 curves, depending on lambda_LT)
+- `W_y` = plastic or elastic section modulus about major axis
+- `f_y` = yield strength (MPa)
+- `gamma_M1` = partial safety factor = 1.0 (EN) or 1.1 (recommended for welds)
+
+**Non-dimensional slenderness:**
+`lambda_LT = sqrt(W_y * f_y / M_cr)`
+
+Where `M_cr` is the elastic critical moment, calculated from section properties and unbraced length. When `lambda_LT < 0.4`, LTB is not a governing mode (chi_LT = 1.0).
+
+**Practical measures to prevent LTB:**
+- Add lateral restraint (bracing) at compression flange at maximum L/6 spacing.
+- Use compact sections (HEB, box) with high flange-to-web area ratio.
+- Provide continuous concrete slab acting compositely — the slab restrains the compression flange laterally.
+
+## Dynamic Loads and Impact Factors
+
+Static beam design covers dead loads. For moving or dynamic loads, an impact factor (phi) amplifies the equivalent static force.
+
+| Load Type | Impact Factor phi | Source |
+|---|---|---|
+| Pedestrian on floor beam | 1.0 (static) | EN 1991-1-1 |
+| Overhead crane, class HC1 | 1.10 | EN 1991-3 |
+| Overhead crane, class HC3 | 1.25–1.45 | EN 1991-3 |
+| Road vehicle on bridge | 1.25–1.50 | EN 1991-2 |
+| Forklift on industrial floor | 1.40 | EN 1991-1 |
+
+The design load is therefore: `F_design = phi * F_static`
+
+For crane beams, additionally check the horizontal surge force (20 % of crane bridge weight applied laterally) and longitudinal braking force (10 % of sum of all wheel loads). These secondary forces frequently govern the connection design.
+
+## Frequently Asked Questions
+
+**Should I check bending stress or deflection first?**
+Always check deflection (serviceability limit state, SLS) first for beams in buildings — it is almost always the governing criterion. Typical limits: L/250 for floors under imposed loads; L/200 for crane beams; L/400 for brittle finishes. Strength (ULS) may govern for heavily loaded transfer beams or short spans.
+
+**What is the deflection formula for a cantilever under a point load at the free end?**
+`delta_max = F * L^3 / (3 * E * I)` at the free tip. For a cantilever under uniform load: `delta_max = q * L^4 / (8 * E * I)`. E = 210,000 MPa for structural steel; I in mm^4; F in N; L in mm → result in mm.
+
+**What is the most material-efficient method for a heavily loaded simply supported beam?**
+Use a haunch (tapered section deeper at midspan) or a plate girder with variable flange thickness. Both methods concentrate material where the bending moment is highest. For spans above 12 m in industrial buildings, a welded plate girder with a depth-to-span ratio of L/12 to L/15 is typically the most economical solution.
 
 *This guide has been prepared and verified by the TORQYX Engineering Editorial Board (Statics and Structural Desk) in compliance with Eurocode 3 and DIN standards.*

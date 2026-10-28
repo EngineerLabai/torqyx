@@ -1,4 +1,4 @@
----
+﻿---
 title: "Engineering Materials Selection and Mechanical Properties Guide: ISO 6892-1 and ASTM E8"
 description: "Comprehensive guide on tensile strength, yield strength, Young's modulus, ductility, Hooke's Law, and materials selection matrices under ISO 6892-1 and EN 10083."
 date: "2026-05-25"
@@ -70,5 +70,52 @@ The most frequent design pitfall is assuming that specifying the alloy with the 
 - **EN 10083-1 / EN 10083-3:** Steels for quenching and tempering - Technical delivery conditions.
 
 ---
+
+
+## Multi-Criteria Material Selection Matrix
+
+When multiple materials meet the minimum requirements, a weighted scoring matrix prevents subjective selection. Assign weights based on application priority (sum of weights = 1.0), score each material on a 1–5 scale, and multiply.
+
+| Property | Weight | S235 | 42CrMo4 (T) | 304 SS | Al 6061-T6 | Ti-6Al-4V |
+|---|---|---|---|---|---|---|
+| Yield Strength | 0.25 | 2 (235 MPa) | 5 (700 MPa) | 3 (210 MPa) | 3 (276 MPa) | 5 (880 MPa) |
+| Density (lower=better) | 0.20 | 2 | 2 | 2 | 4 | 5 |
+| Corrosion Resistance | 0.20 | 1 | 2 | 5 | 4 | 5 |
+| Machinability | 0.15 | 5 | 3 | 3 | 5 | 2 |
+| Cost (lower=better) | 0.20 | 5 | 4 | 3 | 3 | 1 |
+| **Weighted Score** | | **3.00** | **3.30** | **3.20** | **3.75** | **3.65** |
+
+**Interpretation:** Al 6061-T6 scores highest for this particular weight set — optimal for lightweight, moderate-strength, corrosion-resistant applications. Ti-6Al-4V is close behind but loses on cost. S235 scores lowest due to poor corrosion resistance and lower strength.
+
+Adjust weights to reflect your application: a chemical process component will weight corrosion resistance at 0.40+; a racing component will weight density at 0.35+.
+
+## Heat Treatment and Mechanical Property Relationships
+
+Heat treatment dramatically alters the mechanical properties of alloy steels. The same alloy can span a 2× range in yield strength depending on treatment.
+
+**42CrMo4 (1.7225) — Quench and Temper (QT) Conditions:**
+
+| Condition | Tensile Strength Rm (MPa) | Yield Strength Re (MPa) | Elongation A (%) | Hardness (HB) |
+|---|---|---|---|---|
+| Normalized (+N) | 650–800 | 450 | 20 | 190–235 |
+| Q+T at 600 °C (+QT600) | 800–950 | 650 | 16 | 235–280 |
+| Q+T at 500 °C (+QT500) | 1000–1200 | 900 | 12 | 290–350 |
+| Q+T at 400 °C (+QT400) | 1100–1400 | 1000 | 10 | 320–400 |
+| Case hardened (CHT) | Core: 800 | Core: 600 | 12 | Surface 60 HRC |
+
+**Design implication:** Specifying only the material grade without the delivery condition leads to ambiguous mechanical properties. Always specify: material + standard + delivery condition + required Rm range. Example: "42CrMo4 per EN 10083-3, delivery condition +QT, Rm = 900–1100 MPa."
+
+**Through-hardening diameter limit:** 42CrMo4 achieves full through-hardening (core hardness ≥ 90 % of surface) up to approximately 60 mm diameter. For larger sections, use 34CrNiMo6 or 30CrNiMo8 with higher hardenability (larger Jominy equivalent diameter).
+
+## Frequently Asked Questions
+
+**Does Young's modulus (E) change with heat treatment?**
+No. Young's modulus is a bonding-level property — it depends on atomic spacing, not microstructure. For steel: E = 210,000 MPa regardless of heat treatment. Heat treatment changes yield strength, tensile strength, and hardness, but not E. This means that a stiffer steel cannot be achieved by alloying or heat treatment — only by geometric design (larger cross-section or higher I value).
+
+**When should I specify S355 instead of S235?**
+When weight reduction is the goal (thinner plates for same load), when deflection is controlled by strength rather than stiffness, or when welded connections are under high stress. Note: S355 and S235 have the same E modulus — using S355 does NOT reduce deflection of a beam (deflection is E-driven). It only reduces required plate thickness when stress governs.
+
+**When does titanium become economically justified despite its high raw material cost?**
+Titanium becomes cost-competitive when: (1) corrosion in aggressive media eliminates the need for coating and maintenance; (2) weight savings translate to operating cost savings (aerospace, motorsport, offshore lifting); (3) titanium's specific strength (Rm/rho) eliminates the need for secondary heat treatment of steel, reducing total process cost. For components below 5 kg in high-volume production, titanium is almost never economic vs. high-strength aluminum.
 
 *This guide has been prepared and verified by the TORQYX Engineering Editorial Board (Materials and Metallurgy Desk) in accordance with ISO 6892-1 and ASTM E8 standards.*

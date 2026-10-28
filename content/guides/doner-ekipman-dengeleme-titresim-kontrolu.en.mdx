@@ -1,4 +1,4 @@
----
+﻿---
 title: Rotating equipment balancing and vibration control
 description: >-
   Rotor static and dynamic balancing, ISO 21940 balance quality grades, ISO
@@ -93,6 +93,73 @@ In rotating machinery, any offset between the center of mass and the geometric a
 - [Power - Torque - Speed Calculator](/en/tools/torque-power)
 - [Shaft Sizing and Torsion](/en/tools/shaft-torsion)
 - [Quality and Failure Analysis Tools](/quality-tools)
+
+
+## Vibration Frequency Analysis and Fault Diagnosis
+
+Vibration data is only useful when interpreted in the frequency domain. Time-domain amplitude (mm/s RMS) confirms severity; the FFT spectrum identifies the source.
+
+| Frequency Component | Typical Source | Diagnostic Meaning |
+|---|---|---|
+| 1X (1 × RPM) | Residual unbalance, bow | Dominant 1X + phase shift → mass unbalance |
+| 2X | Misalignment (parallel or angular) | High 2X with axial component → angular misalignment |
+| 0.5X | Oil whirl in sleeve bearings | Subsynchronous instability in journal bearings |
+| BPFO, BPFI | Outer/inner race defect | Ball Pass Frequency Outer/Inner = bearing damage |
+| nX (high harmonics) | Gear mesh, looseness | Sidebands around gear mesh frequency → wear |
+
+**Ball Pass Frequency Outer Race (BPFO):**
+`BPFO = (Z / 2) * RPM/60 * (1 - Bd/Pd * cos(alpha))`
+
+Where Z = number of rolling elements, Bd = ball diameter, Pd = pitch diameter, alpha = contact angle.
+
+When amplitude at BPFO exceeds 3× background noise and sideband spacing matches shaft RPM, bearing replacement should be planned within 500 operating hours.
+
+## Shaft Alignment Methods
+
+Shaft misalignment accounts for approximately 50 % of all rotating machine failures. It causes elevated vibration at 2X RPM, increased bearing loads, and seal failures.
+
+| Method | Accuracy | Equipment Cost | Recommended Application |
+|---|---|---|---|
+| Straight Edge | ±0.5 mm | Low | Pre-alignment check only |
+| Dial Gauge (Rim-Face) | ±0.05 mm | Low | General industrial use |
+| Reverse Dial Indicator | ±0.02 mm | Moderate | Long couplings, high RPM |
+| Laser Alignment | ±0.005 mm | High | Precision machinery, turbines |
+
+**Alignment targets (per ISO 10816, API 686):**
+- Angular misalignment: < 0.05 mm/100 mm shaft length
+- Parallel (offset) misalignment: < 0.05 mm for machines above 3000 RPM; < 0.10 mm below 1500 RPM
+
+**Soft foot check:** Before final alignment, verify that all four machine feet contact the base simultaneously. A gap of even 0.1 mm under one foot creates a stress-induced distortion that invalidates the alignment. Use feeler gauges; correct with precision shims.
+
+## Critical Speed and Rotor Dynamics
+
+The critical speed is the rotational frequency at which the rotor's natural frequency coincides with the excitation frequency, causing resonance amplification.
+
+For a simply supported Jeffcott rotor, the first critical speed is approximated by:
+
+`n_krit = (30 / pi) * sqrt(g / f_static)`
+
+Where:
+- `g` = gravitational acceleration = 9.81 m/s²
+- `f_static` = static deflection of the shaft under its own weight (m)
+- `n_krit` = first critical speed (RPM)
+
+**Example:** A shaft deflects 2 mm under self-weight → `n_krit = (30/π) × √(9.81/0.002) ≈ 2100 RPM`. Operating speed must stay at least 20 % below or 30 % above this value.
+
+**Design rule:** For machines running above the first critical speed (supercritical operation), the rotor must pass through resonance during startup and shutdown. A sufficient damping ratio (ζ > 0.1) must be confirmed by rotor dynamics analysis before commissioning.
+
+## Frequently Asked Questions
+
+**Which ISO balance quality grade (G class) should I use for my application?**
+ISO 21940 defines G classes from G0.4 (precision grinders, gas turbines) to G100 (agricultural machinery crankshafts). For general industrial pumps and fans, G6.3 is standard. For electric motors at 3000 RPM, use G2.5. When in doubt, use a lower (stricter) G class — the cost of field balancing is always lower than an unplanned outage.
+
+**Should I measure vibration in acceleration, velocity, or displacement?**
+- **Displacement (µm):** Best for low-frequency vibration (<10 Hz); relevant for slow machinery and structural monitoring.
+- **Velocity (mm/s):** The universal metric for rotating machinery (10–1000 Hz). ISO 10816 limits are given in mm/s RMS.
+- **Acceleration (g or m/s²):** Best for high-frequency defects (>1000 Hz); used for bearing and gear fault detection.
+
+**Can field balancing be performed without removing the rotor from the machine?**
+Yes — single-plane and two-plane in-situ balancing are standard procedures. Measure initial vibration amplitude and phase (reference signal from a tachometer). Add a trial weight, remeasure, then calculate the correction weight using the influence coefficient method. Modern portable balancers perform this calculation automatically.
 
 ## Related standards
 

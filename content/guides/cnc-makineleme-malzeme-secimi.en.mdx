@@ -1,4 +1,4 @@
----
+﻿---
 title: "Manufacturing Technologies and CNC Machining Guide: Speeds, Feeds, and Taylor Tool Life"
 description: "Engineering guide on CNC turning and milling cutting speed Vc, feed per tooth fz, MRR chip volume, Taylor tool life equations, and precision grinding under ISO 3685."
 date: "2026-05-26"
@@ -62,6 +62,68 @@ Engineering optimization mathematically balances Material Removal Rate (MRR) aga
 - [Simple Stress and Safety Factor](/en/tools/simple-stress)
 - [Shaft Torsion Calculator](/en/tools/shaft-torsion)
 - [Materials Selection Guide](/en/guides/malzeme-secimi-rehberi)
+
+
+## Cutting Tool Materials and Coatings
+
+Selecting the correct cutting tool material is as important as selecting the workpiece material. Tool hardness must exceed workpiece hardness at operating temperature — not only at room temperature.
+
+| Tool Material | Hardness (HV) | Max Temp. Resistance | Typical Application |
+|---|---|---|---|
+| High-Speed Steel (HSS) | 800–900 | ~600 °C | Drilling, tapping, broaching |
+| Cemented Carbide (WC-Co) | 1400–1800 | ~900 °C | Turning, milling, boring |
+| Cermet (TiC-Ni) | 1500–1700 | ~950 °C | Finishing of steel |
+| CBN (Cubic Boron Nitride) | 3000–3500 | ~1000 °C | Hard turning (>55 HRC) |
+| PCD (Polycrystalline Diamond) | 6000–8000 | ~700 °C | Non-ferrous, composites |
+
+**Coatings** significantly extend tool life by reducing friction and protecting against heat:
+
+- **TiN (Titanium Nitride):** Gold-colored, general-purpose, increases hardness to ~2300 HV.
+- **TiAlN (Titanium Aluminum Nitride):** Suitable for high-speed dry cutting; forms Al2O3 layer at elevated temperature, protecting the substrate.
+- **AlCrN:** Superior oxidation resistance up to 1100 °C; preferred for hardened steel and stainless.
+- **DLC (Diamond-Like Carbon):** Ultra-low friction (~0.1); ideal for aluminum, copper, and non-ferrous alloys. Avoid on ferrous materials due to graphitization above 350 °C.
+
+**Rule of thumb:** Never use a PCD tool on ferrous materials — carbon in the diamond reacts with iron at cutting temperatures, causing rapid tool dissolution.
+
+## Coolant Strategy in CNC Machining
+
+Coolant choice directly affects tool life, surface quality, and chip evacuation. There is no universally optimal strategy — each material and operation requires evaluation.
+
+**Wet Cutting (Flood Coolant):** The most common approach. Reduces thermal load, flushes chips, and extends tool life. However, thermal shock from intermittent coolant application can cause insert cracking, particularly in milling of hardened steels. Use continuous flood or switch to dry cutting.
+
+**MQL (Minimum Quantity Lubrication):** A mist of oil (typically 10–100 ml/h) is directed precisely at the cutting edge. Reduces lubricant consumption by up to 95 % vs. flood cooling. Particularly effective for aluminum alloys, cast iron, and medium-carbon steels. Not sufficient for deep-hole drilling — chip evacuation becomes a limiting factor.
+
+**Dry Cutting:** No coolant, no contamination. Requires tools with adequate heat resistance (TiAlN, AlCrN coatings). Suitable for cast iron, where chips are brittle and coolant can cause thermal cracks. Prohibited for austenitic stainless steels due to their poor thermal conductivity and tendency to work-harden.
+
+**High-Pressure Coolant (HPC, 70–200 bar):** Directs coolant at high velocity through the tool spindle directly to the cutting edge. Breaks long, stringy chips in titanium and Inconel machining. Reduces built-up edge formation. Required for Ti-6Al-4V above 60 m/min cutting speed.
+
+## Surface Roughness Estimation
+
+Surface roughness is not purely a quality metric — it affects fatigue life, sealing effectiveness, and bearing contact pressure. For turning operations with a sharp tool, theoretical peak-to-valley roughness is:
+
+`Rt = f^2 / (8 * r_epsilon)`
+
+Where:
+- `f` = feed rate (mm/rev)
+- `r_epsilon` = nose radius of insert (mm)
+- `Rt` = theoretical peak-to-valley roughness (µm)
+
+**Example:** f = 0.15 mm/rev, r_epsilon = 0.8 mm → `Rt = 0.15^2 / (8 × 0.8) = 0.0035 mm = 3.5 µm`
+
+This corresponds approximately to Ra ≈ 0.8–1.0 µm — acceptable for general bearing seats. For fine finishing (Ra < 0.4 µm), use: f < 0.08 mm/rev or increase nose radius.
+
+**Note:** This formula applies to ideal conditions. Built-up edge, vibration, and tool wear each increase actual Ra beyond the theoretical minimum.
+
+## Frequently Asked Questions
+
+**Should I use climb milling or conventional milling?**
+Climb milling (also called down milling) produces thinner chips at exit, resulting in better surface finish and less heat generation. It is preferred for most modern CNC setups with rigid spindles and ballscrew feeds. Conventional milling (up milling) is used on old machines with significant backlash to avoid table jerking.
+
+**What cutting parameters apply to titanium Ti-6Al-4V?**
+Titanium's low thermal conductivity keeps heat concentrated at the cutting zone. Use: Vc = 40–60 m/min (carbide, uncoated or TiAlN), f = 0.1–0.2 mm/rev, deep radial engagement (ae = 0.3 × D) with shallow axial depth. High-pressure coolant is mandatory. Never allow the tool to dwell — titanium work-hardens instantly at zero feed.
+
+**When does HSS make economic sense over carbide?**
+HSS inserts are 5–20× cheaper than carbide. For small-batch production of low-hardness steel (<250 HBN) with frequent tool changes (tapping, threading), HSS remains cost-competitive. Carbide becomes economically justified when cycle time reduction outweighs tool cost — typically above 50 parts/shift for turning operations.
 
 ## Relevant standards
 

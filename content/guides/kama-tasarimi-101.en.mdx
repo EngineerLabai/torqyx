@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Key design 101: parallel keys and mechanical wedges'
 description: >-
   DIN 6885 shaft-hub parallel keys, shear and bearing crushing stress
@@ -92,6 +92,54 @@ DIN 6885 parallel keys (feather keys) are the most prevalent mechanical coupling
 - [Power - Torque - Speed Calculator](/en/tools/torque-power)
 - [Tensile Stress and Safety Factor](/en/tools/simple-stress)
 - [Fixture & Tooling Clamp Calculators](/fixture-tools)
+
+
+## Spline, Taper Key, and Polygon Alternatives
+
+Parallel keys are limited in torque capacity by the shear area of the key and the bearing stress on the keyway walls. For higher torques, the following alternatives should be evaluated:
+
+**Involute Splines (DIN 5480 / ANSI B92.1):** Multiple teeth distribute the load across a large contact area. Torque capacity is 3–5× higher than a single key of equivalent shaft diameter. Used in gearboxes, automotive driveshafts, and machine tool spindles. Requires precise hobbing or broaching — not suitable for job-shop machining.
+
+**Taper Key and Gib Head Key (DIN 6883/6884):** The taper creates a friction-based clamp between hub and shaft. Self-locking under torque reversal — no fastener required. Limited to low-speed, moderate-torque applications. Difficult to achieve repeatable assembly position.
+
+**Polygon Profiles (P3G, DIN 32711):** Three-lobe polygon shafts use geometric interference to transmit torque without any separate key. Zero keyway stress concentration. Used in wood-working machinery, hydraulic pump drives, and high-speed spindles. Requires a specialized grinding process; not interchangeable with standard round bores.
+
+| Feature | Parallel Key | Involute Spline | Taper Key | Polygon P3G |
+|---|---|---|---|---|
+| Torque capacity | Moderate | High | Moderate | High |
+| Axial positioning | Via retaining ring | Via snap ring/nut | Fixed | Via clamp nut |
+| Keyway stress conc. | High (Kt ≈ 1.6–2.5) | Low | Low | Negligible |
+| Machining complexity | Low | High | Low | Very High |
+
+## Stress Concentration and Fatigue Factor
+
+The keyway creates a significant stress concentration at the shaft surface. The theoretical stress concentration factor Kt depends on the ratio of keyway radius to shaft diameter:
+
+| r/d Ratio | Kt (Bending) | Kt (Torsion) |
+|---|---|---|
+| 0.005 | 2.50 | 2.20 |
+| 0.010 | 2.20 | 1.95 |
+| 0.020 | 1.85 | 1.70 |
+| 0.040 | 1.60 | 1.50 |
+
+The fatigue notch factor Kf accounts for material notch sensitivity:
+
+`Kf = 1 + q * (Kt - 1)`
+
+Where q is the notch sensitivity index (0 to 1), dependent on material ultimate tensile strength and notch radius. For hardened steel (Su > 900 MPa), q ≈ 0.9, meaning the full Kt value must be considered. For mild steel (Su < 500 MPa), q ≈ 0.6 — the actual notch effect is reduced because the material redistributes stress locally.
+
+**Practical implication:** A machined keyway reduces the shaft fatigue life by a factor of 2–4 compared to a plain shaft under reversed bending. If the shaft experiences combined bending and torsion at the keyway location, use the von Mises equivalent stress criterion with full Kf applied to both components.
+
+## Frequently Asked Questions
+
+**Does a key alone transmit torque, or does the shaft-hub interference fit also contribute?**
+In practice, both contribute. For a standard H7/k6 (transition fit) or H7/m6 assembly, the friction between shaft and hub transfers a portion of the torque — reducing the key's load. However, design codes (DIN 6885, ISO 773) treat the key as carrying 100 % of the torque, with the interference fit providing only axial retention. This conservative approach accounts for fretting wear and fit relaxation over time.
+
+**What keyway tolerance class should I specify for CNC machining?**
+DIN 6885 specifies keyway width tolerances as JS9 (symmetric, ±IT9/2) for loose-fit keys and P9 for interference-fit keys. For general shaft-hub assemblies, use: shaft keyway = N9, hub keyway = JS9. For precision fits where backlash must be minimized, specify H9/n9 and lap the key to fit.
+
+**What causes fretting corrosion at key-keyway interfaces and how can it be prevented?**
+Fretting occurs when micro-slip (< 0.1 mm) takes place under cyclic loading between mating surfaces. The slip causes oxidation debris (brown powder, Fe2O3) and surface pitting, which initiates fatigue cracks. Prevention: use anti-fretting paste (molybdenum disulfide or copper-based), apply interference press fit alongside the key, minimize clearance in key-keyway fit, or switch to an involute spline.
 
 ## Related standards
 

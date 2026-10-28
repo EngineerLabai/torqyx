@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Machine element life, S-N Wöhler curves, and fatigue guide'
 description: >-
   High-cycle fatigue analysis, S-N Wöhler curves, Marin modification factors,
@@ -90,6 +90,63 @@ Over 80% of mechanical component failures occur not from monotonic static overlo
 - [Bolt Strength and Preload Calculator](/en/tools/bolt-calculator)
 - [Fillet Weld Sizing](/en/tools/fillet-weld)
 - [Bearing Life Calculator (ISO 281)](/en/tools/bearing-life)
+
+
+## Fatigue Failure Mechanisms
+
+Fatigue failure proceeds through three distinct stages: crack initiation, crack propagation, and final fracture. Understanding these stages determines which engineering intervention prevents failure.
+
+**Stage 1 — Initiation:** Begins at a stress concentration — machined notch, corrosion pit, inclusion, or surface scratch. Even below the yield strength, cyclic loading causes local plastic slip along slip planes, forming a persistent slip band. A micro-crack nucleates at the surface or just below it. Shot peening and surface hardening are effective here: they introduce compressive residual stress at the initiation site, suppressing early crack opening.
+
+**Stage 2 — Propagation:** The crack grows incrementally with each load cycle. The Paris-Erdogan law describes the growth rate:
+
+`da/dN = C * (Delta K)^m`
+
+Where:
+- `da/dN` = crack growth per cycle (m/cycle)
+- `Delta K` = stress intensity factor range = `Y * Delta sigma * sqrt(pi * a)` (MPa·√m)
+- `C, m` = material constants (for steel: C ≈ 6×10^-12, m ≈ 3)
+
+**Stage 3 — Fracture:** When the remaining cross-section can no longer support peak load, sudden overload fracture occurs. On the fracture surface, beach marks (visible concentric arcs) mark each crack front position during propagation — a definitive indicator of fatigue failure in post-fracture analysis.
+
+## S-N Curve Interpretation
+
+The S-N (Wöhler) diagram plots alternating stress amplitude vs. cycles to failure. Three regions:
+
+- **Low cycle fatigue (LCF, N < 10^4):** Plastic strains dominate; material yields per cycle. Use strain-life (epsilon-N) approach. Relevant for pressure vessels and engine components under infrequent overload.
+- **High cycle fatigue (HCF, 10^4 < N < 10^7):** Elastic behavior with damage accumulation. The S-N curve is valid here; design stress must remain below the curve for the required cycle count.
+- **Endurance limit region (N > 10^7):** For ferrous materials (steels), the S-N curve becomes horizontal — the endurance limit Se. Below Se, infinite life is theoretically achieved. Aluminum alloys do NOT have a true endurance limit — the S-N curve continues to decline, requiring a finite-life approach for all aluminum structural applications.
+
+**Endurance limit estimation (Shigley / MIL-HDBK-5):**
+`Se' ≈ 0.5 * Su` for Su < 1400 MPa (steel)
+`Se' ≈ 700 MPa` for Su > 1400 MPa
+
+These are material endurance limits. The corrected endurance limit `Se = ka * kb * kc * kd * Se'` applies Marin factors for surface finish (ka), size (kb), load type (kc), and temperature (kd).
+
+## Surface Treatments for Fatigue Life
+
+Post-machining surface condition significantly alters fatigue performance:
+
+| Treatment | Surface Roughness Ra | Fatigue Life Factor | Mechanism |
+|---|---|---|---|
+| Ground (Ra 0.4 µm) | 0.2–0.4 µm | 1.0 (baseline) | Smooth surface reference |
+| Shot Peened | 0.8–2.0 µm (increased) | 1.2–1.5× | Compressive residual stress |
+| Nitrided (gas/plasma) | 0.4–0.8 µm | 1.5–2.5× | Hard case + compressive stress |
+| Hard Chrome Plated | 0.3–0.8 µm | 0.7–0.9× | Tensile residual, hydrogen embrittlement risk |
+| Electroless Nickel | 0.4–0.6 µm | 0.85–1.0× | Slightly beneficial if baked |
+
+**Key insight:** Grinding produces tensile residual stress in the surface if performed aggressively (burn). This reduces fatigue life below the calculated value. Always specify "no thermal damage" or verify with Barkhausen noise inspection for fatigue-critical components.
+
+## Frequently Asked Questions
+
+**What happens when a component exceeds the endurance limit for a single cycle?**
+Nothing irreversible if the exceedance is brief and the stress stays below yield. However, the cumulative damage model (Palmgren-Miner, D = Sum of ni/Ni) accumulates damage from each cycle above the limit. If D ≥ 1.0, failure is predicted. For safety-critical parts, design to D ≤ 0.3–0.5 to account for statistical scatter.
+
+**Does aluminum have a fatigue endurance limit?**
+No. Unlike steel, aluminum alloys show a continuously declining S-N curve with no horizontal asymptote. Design aluminum structures for a specific life (typically 10^7 or 10^8 cycles) with a defined stress level, never for "infinite life." This is critical for aircraft structures, bicycle frames, and rotating aluminum components.
+
+**How can I reduce Kf without changing geometry?**
+Increasing the notch radius (r) reduces Kt — machine a generous fillet radius at all transitions, keyways, and shoulder steps. Additionally, shot peening the notch region reduces effective Kf by introducing compressive residual stress. Specifying a lower surface roughness at the notch (Ra < 0.8 µm) further reduces the surface factor ka, improving the corrected endurance limit Se.
 
 ## Related standards
 
