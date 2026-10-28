@@ -39,6 +39,67 @@ Bu tarz haftalık içerikler, okuyucuya düzenli bilgi sağlar ve blogunuzun kat
 - <a href="/tr/tools/sanity-check">Sanity check laboratuvarı</a>
 - <a href="/tr/guides/standart-birim-sistemi-rehberi">Standart birim sistemi rehberi</a>
 
+
+## Hesap sürecinin beş kritik noktası
+
+Mühendislik hesabı yalnızca formül uygulamak değildir. Her adımda alınan karar, sonucun güvenilirliğini doğrudan etkiler:
+
+### 1. Problem tanımı — sınırları çizmek
+
+Hesabın başlangıcında "neyi hesaplıyoruz ve neyi hesaplamıyoruz?" sorusu yanıtlanmalıdır. Örneğin bir kirişin eğilme hesabında yalnızca statik yük mü ele alınıyor, yoksa dinamik yük etkisi de dahil mi? Bu sınır belirtilmezse sonuç doğru olsa bile eksik yorumlanır.
+
+### 2. Girdi kaynağı — belirsizliği kayıt altına almak
+
+Giriş verilerinin nereden geldiğini not edin: ölçüm (kim, ne zaman?), katalog değeri (hangi sıcaklık için?), tahmin veya standart minimum değeri. Bir rulman yük hesabında "P = 2500 N" değerini doğrudan yazmak yerine "P = 2500 N (müşteri şartnamesindeki maksimum yük, sıcaklık etkisi dahil değil)" yazmak ilerideki revizyonlarda netlik sağlar.
+
+### 3. Emniyet katsayısı seçimi — standarda dayandırmak
+
+Emniyet katsayısı "mühendis öyle dedi" gerekçesiyle belirlenmemelidir. Her alan için standart bir referans mevcuttur:
+- Makine öğeleri: DIN 743, FKM kılavuzu
+- Boru sistemleri: ASME B31.3, EN 13480
+- Kaynaklı konstrüksiyonlar: EN 1993-1-8, ISO 5817
+
+Hangi standartta hangi faktörün seçildiği kayıt altına alındığında hem iç denetim hem de müşteri talebi kolayca yanıtlanır.
+
+### 4. Hesap yöntemi — standarda uygunluk
+
+Aynı problemi çözen birden fazla yöntem olabilir. Rulman ömrü için basit L10 formülü veya ISO 281 genişletilmiş hesabı; tolerans zinciri için kötü durum veya istatistiksel (RSS) yöntem. Seçilen yöntemin gerekçesi kayıt altında olmalıdır. Basit yöntem seçilmişse neden yeterli olduğu açıklanmalıdır.
+
+### 5. Sonuç doğrulama — bağımsız kontrol
+
+Hesap sonucu farklı bir yöntemle veya referans vaka ile karşılaştırılmalıdır. TORQYX hesaplayıcısının "sanity check" bölümü bu amaçla tasarlanmıştır: hızlı oran kontrolü, boyutsal analiz veya sınır değer testi ile hesabın makul aralıkta olup olmadığı doğrulanır.
+
+## Ekip içi hesap standardı oluşturmak
+
+Mühendislik ekiplerinde hesap süreci kişiye bağlı kaldığında ekip büyüdükçe tutarsızlık artar. Ortak bir hesap standardı oluşturmak için şu adımlar uygulanabilir:
+
+**Şablon dosyası:** Her hesap türü için problem tanımı, girdi, yöntem, sonuç ve doğrulama alanlarını içeren standart bir şablon. Şablon boş bırakılan alan bırakılmaz — bilinmeyen değerler için "N/A" veya "varsayım: X" yazılır.
+
+**Standart referans listesi:** Hangi hesap türünde hangi standart kullanılacağını belirten ekip içi liste. Bu liste değiştiğinde tüm ekip haberdar edilir.
+
+**Çapraz kontrol kuralı:** Kritik hesaplar ikinci bir mühendis tarafından bağımsız olarak doğrulanır. "Bağımsız" kelimesinin altı çizilmeli — aynı dosyayı açıp bakmak değil, aynı girdilerle bağımsız hesap yapmak.
+
+## TORQYX'in hesap sürecindeki rolü
+
+TORQYX her hesap için problem tanımını, formülü, standart referansını ve sayısal sonucu birleşik bir çıktıda sunar. Bu yapı yukarıda açıklanan beş kritik noktanın ilk dördünü otomatik olarak belgeler:
+
+- Problem sınırı: hesap türüne göre önceden tanımlı
+- Girdi alanları: birim ve açıklama ile birlikte
+- Yöntem: standart referanslı
+- Sonuç: belgelenmiş çıktı
+
+Beşinci adım (bağımsız doğrulama) mühendis sorumluluğunda kalır. TORQYX bu adım için "sanity check" aracıyla oran ve boyutsal analizi destekler.
+
+## Sık yapılan hesap hataları ve önleme yöntemleri
+
+| Hata | Önleme yöntemi |
+|---|---|
+| Birim karışıklığı (kN ile N, mm ile m) | Hesap başında birim sistemi sabitleme; TORQYX otomatik birim kontrolü |
+| Yanlış emniyet katsayısı seçimi | Her katsayı için standart referansı kayıt altına alma |
+| Güvenli taraf yanlış seçmek | "Konservatif" tarafın hangi parametre için olduğunu belirtme |
+| Yerel etkileri ihmal etmek (kirişte dirsek zorlaması gibi) | Yük diyagramını tümüyle çizmek |
+| Eski standarda göre hesap | Standart güncelleme takibi; en son revizyon tarihi kayıt altına alma |
+
 ## Süreci kayıt altına almak
 
 Bir hesaplama sonucunun güvenilir olması için yalnızca doğru formül yeterli değildir. Girdinin kaynağı, kullanılan birim, kabul edilen emniyet katsayısı, standart referansı ve sonucu kontrol eden kişi de kayıt altında olmalıdır. Bu bilgiler yoksa sonuç bugün doğru görünse bile birkaç hafta sonra aynı hesabı yeniden doğrulamak zorlaşır.

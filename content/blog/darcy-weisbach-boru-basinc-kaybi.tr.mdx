@@ -1,4 +1,4 @@
----
+﻿---
 title: "Darcy-Weisbach Formülü ile Boru Basınç Kaybı Hesabı"
 description: "Darcy-Weisbach boru basınç kaybı hesabı hakkında adım adım rehber. ISO/DIN standartları ve formüller dahil. TORQYX hesaplayıcısı ile otomatik hesapla."
 date: "2026-05-16"
@@ -40,6 +40,80 @@ Boru hatlarında basınç kaybı, pompa seçimi ve sistem verimi için erken tas
 Basınç kaybı hesabı yalnızca boru segmentinin sonunda kaç kPa kayıp olduğunu söylemez; aynı zamanda çap seçiminin enerji tüketimine etkisini de gösterir. Küçük çap yatırım maliyetini azaltabilir fakat akış hızını ve sürtünme kaybını artırır. Büyük çap ise pompa gücünü düşürürken tesisat maliyetini yükseltir. Bu denge, özellikle sürekli çalışan soğutma suyu, proses suyu ve HVAC hatlarında yıllık enerji tüketimini doğrudan etkiler.
 
 Hesap yapılırken yerel kayıplar ihmal edilmemelidir. Dirsek, vana, filtre, daralma ve ani genişleme gibi elemanlar toplam kaybı düz boru kaybından daha yüksek hale getirebilir. TORQYX sonucunu kullanırken önce düz boru kaybını kontrol edin, ardından sistemdeki bağlantı elemanları için kayıp katsayılarını ayrıca toplayın. Böylece pompa seçiminde hem nominal çalışma noktasını hem de emniyet payını daha gerçekçi belirleyebilirsiniz.
+
+
+## Formülün bileşenleri ve fiziksel anlamı
+
+Darcy-Weisbach denklemi: `delta_P = f * (L/D) * (rho * v^2 / 2)`
+
+Her terimin fiziksel karşılığı şöyledir:
+
+- **f (sürünme katsayısı):** Boru iç yüzeyi ile akışkan arasındaki etkileşimi temsil eder. Laminer akışta (`Re < 2300`) doğrudan hesaplanır: `f = 64 / Re`. Türbülanslı akışta (`Re > 4000`) Colebrook-White denklemi kullanılır.
+- **L/D (uzunluk-çap oranı):** Boru uzunluğunun çapa oranıdır. Aynı debi ve çap için uzun boru daha yüksek basınç kaybı üretir — bu oran geometrik direnci temsil eder.
+- **rho * v^2 / 2 (dinamik basınç):** Akışkanın kinetik enerjisi. Hız ikinci kuvvetle orantılı olduğundan boru çapındaki küçük bir azalma basınç kaybını büyük ölçüde artırır: çap yarıya düşürülürse hız dört kat artar, basınç kaybı on altı kat büyür.
+
+## Reynolds sayısı ve akış rejimi
+
+`Re = rho * v * D / mu`
+
+Reynolds sayısı 2300'ün altında ise akış laminardır — düzenli katmanlar halinde ilerler, sürünme katsayısı sadece Re'ye bağlıdır. 4000'in üzerinde ise akış türbülanslıdır; sürünme katsayısı hem Re'ye hem de boru iç pürüzlülüğüne (eps/D) bağımlı hale gelir.
+
+**Geçiş bölgesi (2300 < Re < 4000):** Bu aralıkta akış kararsızdır; laminer ve türbülanslı yapı arasında geçiş yapar. Mühendislik hesaplarında geçiş bölgesi için türbülanslı formüller muhafazakar tarafta kullanılır.
+
+## Colebrook-White denklemi ve pratik alternatifler
+
+Türbülanslı akış için sürünme katsayısı iteratif Colebrook-White denklemiyle belirlenir:
+
+`1 / sqrt(f) = -2 * log10( eps/(3.71*D) + 2.51/(Re*sqrt(f)) )`
+
+Bu denklem doğrudan çözülemez; iterasyon gerekir. TORQYX hesaplayıcısı bu iterasyonu otomatik yapar ve sonuçları görünür kılar.
+
+**Haaland yaklaşımı (açık form):**
+`1 / sqrt(f) = -1.8 * log10( (eps/(3.7*D))^1.11 + 6.9/Re )`
+
+Bu form doğrudan hesaplanabilir. Colebrook-White'a göre hata oranı genellikle %2'nin altındadır; ön boyutlandırma için yeterlidir.
+
+## Yerel kayıplar: dirsek, vana ve bağlantı elemanları
+
+Gerçek sistemlerde toplam basınç kaybı yalnızca düz boru kaybından oluşmaz. Her fitins, vana ve yön değişikliği yerel kayıp üretir:
+
+`delta_P_yerel = K * rho * v^2 / 2`
+
+Yaygın kayıp katsayıları (K):
+
+| Eleman | Tip | K değeri (yaklaşık) |
+|---|---|---|
+| 90° standart dirsek | Kısa yarıçap | 1.5 |
+| 90° uzun yarıçaplı dirsek | Geniş yarıçap | 0.4 |
+| Küresel vana (tam açık) | Gate valve | 0.2 |
+| Glob vana (tam açık) | Globe valve | 6–10 |
+| Ani daralma | d2/d1 = 0.5 | 0.5 |
+| Ani genişleme | Borda-Carnot | `(1 - A1/A2)^2` |
+
+Sistemde birden fazla glob vana veya filtre varsa yerel kayıpların toplamı düz boru kaybını geçebilir. Pompa seçimi yapılırken bu elemanların kayıpları sistematik olarak toplanmalıdır.
+
+## Pratik tasarım örneği
+
+**Durum:** DN50 (iç çap 52 mm) çelik boru, 40 m uzunluk, su debisi 8 m³/h, su sıcaklığı 20 °C.
+
+**Adımlar:**
+1. Hız: `v = Q / A = (8/3600) / (pi * 0.052^2 / 4) = 1.06 m/s`
+2. Re: `Re = 1000 * 1.06 * 0.052 / 0.001002 = 55 000` → türbülanslı
+3. Pürüzlülük: çelik boru eps = 0.046 mm → eps/D = 0.00088
+4. Sürünme katsayısı (Haaland): f ≈ 0.021
+5. Basınç kaybı: `delta_P = 0.021 * (40/0.052) * (1000 * 1.06^2 / 2) = 9 070 Pa ≈ 0.91 m su kolonu`
+6. Yerel kayıplar (3 adet 90° dirsek, 1 adet küresel vana): K toplam ≈ 4.9 → `delta_P_yerel ≈ 2 750 Pa`
+7. **Toplam:** ≈ 11 800 Pa = 1.18 m su kolonu
+
+Bu bilgi pompa seçiminde emniyet payı dahil minimum 1.5 m basma yüksekliği gerektiğini gösterir.
+
+## Çap optimizasyonu ve ekonomik denge
+
+Küçük boru çapı ilk yatırım maliyetini düşürür ancak yıllık enerji giderini artırır. Büyük çap enerji verimlidir fakat tesisat maliyeti yüksektir. Bu dengeyi bulmak için yıllık işletme maliyetini çap fonksiyonu olarak hesaplayın:
+
+`Maliyet_toplam = Maliyet_yatırım(D) + Maliyet_enerji(D) * yıl`
+
+Sürekli çalışan sistemlerde (pompa >4000 saat/yıl) genellikle bir üst nominal çap seçmek 5–10 yıl içinde enerji tasarrufu ile kendini amorti eder. Bu hesabı TORQYX boru basınç kaybı hesaplayıcısının farklı çap senaryoları üzerinden çalıştırarak karşılaştırabilirsiniz.
 
 ## İlgili mühendislik rehberleri
 

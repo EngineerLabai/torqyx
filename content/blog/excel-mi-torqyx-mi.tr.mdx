@@ -1,4 +1,4 @@
----
+﻿---
 title: "Excel mi, TORQYX mi? Mekanik Mühendislerin Hesap Aracı Seçimi"
 description: "Excel ve TORQYX hesap aracı seçimi hakkında adım adım rehber. ISO/DIN standartları ve formüller dahil. TORQYX hesaplayıcısı ile otomatik hesapla."
 date: "2026-05-15"
@@ -40,6 +40,60 @@ Excel mühendislik ekipleri için esnek bir araçtır, ancak izlenebilirlik ve s
 Excel hâlâ özel veri düzenleme, tek seferlik tablo çalışması ve şirket içi formatlara hızlı uyarlama için güçlüdür. Buna karşılık cıvata ön yükü, boru basınç kaybı, rulman ömrü veya birim dönüşümü gibi tekrar eden hesaplarda dosya kopyalamak uzun vadede risk oluşturur. Aynı dosyanın farklı sürümleri, gizli hücreler, kırılan formüller ve belirsiz kaynak notları tasarım onayında zaman kaybettirir.
 
 TORQYX’i Excel’in yerine değil, standartlaşmış hesapların güvenilir başlangıç noktası olarak düşünmek daha doğrudur. Ekip, önce TORQYX ile izlenebilir bir sonuç alabilir; sonra gerekiyorsa proje özelindeki ek katsayıları Excel veya şirket içi PLM akışında değerlendirebilir. Böyle bir hibrit kullanım, hem mühendislik esnekliğini korur hem de temel hesapların kim tarafından, hangi varsayımla yapıldığını daha net gösterir.
+
+
+## Excel'in güçlü olduğu ve zayıf kaldığı alanlar
+
+Excel'i tamamen reddetmek mühendislik gerçekliğiyle örtüşmez. Doğru kullanım alanı seçildiğinde Excel hâlâ güçlü bir araçtır:
+
+**Excel'in güçlü olduğu durumlar:**
+- Proje özelinde özel veri formatı gerektiğinde (müşteri şartnamesi sütunları, maliyet cetveli, satın alma listesi)
+- Tek seferlik analiz veya hızlı regresyon hesabı
+- Şirket içi PLM veya ERP sistemleriyle doğrudan entegrasyon gerektiren iş akışları
+- Karmaşık çok değişkenli parametrik çalışmalar (what-if tablosu, senaryo yöneticisi)
+
+**Excel'in zayıf kaldığı durumlar:**
+- Birden fazla mühendis aynı hesap dosyasını kullandığında (versiyon karmaşası)
+- Birim dönüşümü elle yapıldığında — özellikle m/mm, kN/N, bar/Pa geçişlerinde
+- ISO veya DIN formüllerinin birkaç adım geriye dönüp doğrulanması gerektiğinde
+- Hesabın tekrar edilebilirliğini ve kimin hangi varsayımla yaptığını kanıtlamak gerektiğinde
+
+## Hesap izlenebilirliği neden kritik?
+
+Bir mühendislik kararının belgelenmesi yalnızca bürokratik bir gereklilik değildir. Ürün ömrü boyunca (tasarım revizyonu, sertifikasyon, hasar analizi) orijinal hesap verisine dönmek gerekir. Bu noktada:
+
+- Formülün doğru versiyonun hangi dosyada olduğu bilinmiyorsa yeniden başlamak gerekir.
+- Güvenlik katsayısının hangi standartta belirlendiği kayıt altında değilse taşeron veya müşteri sorduğunda cevap verilemez.
+- Girdi değerlerinin kaynağı (ölçüm, katalog, tahmin) belirtilmemişse saha ile ofis arasındaki fark tespit edilemez.
+
+TORQYX her hesapta hangi formülün hangi standarda göre uygulandığını, giriş değerlerini ve çıkış birimlerini aynı sayfada gösterir. Bu yapı teknik onay sürecini kısaltır ve revizyonda aynı hesabın tekrar kurulma ihtiyacını ortadan kaldırır.
+
+## Hangi hesaplar önce TORQYX'e taşınmalı?
+
+Öncelik sırası şu kriterlere göre belirlenebilir:
+
+1. **Sıklık:** Haftada birden fazla yapılan hesaplar — cıvata ön yükü, rulman ömrü, boru basınç kaybı, birim dönüşümü
+2. **Standart bağlantısı:** ISO 281, DIN 6885, ASME B31 gibi belirli bir standarda bağlı hesaplar
+3. **Ekip paylaşımı:** Birden fazla kişinin kullandığı ve versiyon uyuşmazlığı riski olan hesaplar
+4. **Onay gereksinimi:** Müşteri, tedarikçi veya sertifikasyon kuruluşuna sunulacak hesaplar
+
+Bu kriterlere göre ilk geçişte genellikle birim dönüştürücü, tork-güç-devir hesabı ve boru basınç kaybı öne çıkar. Bu üç hesap düşük riskle başlangıç için idealdir.
+
+## Paralel kullanım stratejisi
+
+TORQYX ve Excel birbirini dışlamak zorunda değildir. Yaygın bir hibrit yaklaşım şöyledir:
+
+- **1. adım:** TORQYX ile standart tabanlı temel hesabı yapın. Sonucu kaydedin.
+- **2. adım:** Projeye özel katsayıları (müşteri emniyet payı, yerel malzeme özelliği, saha ölçüm verisi) Excel'de değerlendirin.
+- **3. adım:** İki sonucu karşılaştırın. Eğer fark %5'ten büyükse girdi farklılığının kaynağını araştırın.
+
+Bu yaklaşım hem esnekliği korur hem de temel hesabın izlenebilirliğini güvenceye alır. Sonuçta mühendis iki araçtan birini değil, ikisinin doğru kombinasyonunu seçmiş olur.
+
+## Yaygın geçiş hataları
+
+- **Eski Excel dosyasını referans almaya devam etmek:** İlk geçiş sonrasında yeni hesaplar Excel'den alınmaya devam edilirse çift kaynak sorunu oluşur. Temel hesaplar için tek kaynak belirlenmeli ve ekip bu konuda bilgilendirilmelidir.
+- **Sonucu kopyalayıp bağlamı atmak:** TORQYX çıktısından yalnızca sayısal sonucu kopyalamak ve varsayımı, standartta hangi maddeye göre hesaplandığını not etmemek, ileriki revizyonlarda bilgi kaybına yol açar.
+- **Küçük hesapları es geçmek:** "Sadece bir birim dönüşümü" diye geçilen hatalar genellikle tasarım geç aşamasında tespit edilir. Küçük hesapta da standart girdi-çıktı yapısı tutmak uzun vadede zaman kazandırır.
 
 ## İlgili mühendislik rehberleri
 

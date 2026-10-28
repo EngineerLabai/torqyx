@@ -59,6 +59,57 @@ T = 9550 * P / n
   badge="Hesaplayıcı"
 />
 
+
+## MDX bileşen seçiminde karar ağacı
+
+Her MDX bileşeninin bir amacı olmalıdır. Sayfayı görsel olarak doldurmak değil, mühendislik içeriğinin anlaşılmasını kolaylaştırmak hedeflenir:
+
+**Formül bileşeni ne zaman kullanılır?**
+Hesap sürecinde okuyucunun uyguladığı matematiksel ilişki. Örnek: Darcy-Weisbach denklemi, tork formülü, Euler-Bernoulli kirişi. Yalnızca metin içinde geçen eşitlikler için kullanmak yeterli; çok sayıda küçük formülü ayrı bileşenlere koymak sayfayı gürültülü yapar.
+
+**Tablo bileşeni ne zaman kullanılır?**
+Birden fazla seçeneğin karşılaştırıldığı durumlar. Malzeme özellikleri karşılaştırması, tolerans sınıfları, yüzey pürüzlülüğü sınıflandırması. Satır sayısı 3'ten az olduğunda düz metin tercih edilebilir.
+
+**Adım listesi ne zaman kullanılır?**
+Hesap sırası veya kontrol süreci. Okuyucunun satır satır takip etmesi gereken adımlar için. Sıralamanın önemi olmadığı genel öneriler için madde listesi yeterlidir.
+
+**Araç bağlantısı (ToolLink) ne zaman kullanılır?**
+İçerik bir hesaplayıcıya doğrudan yönlendirme yapıyorsa. Blog yazısında veya rehberde bir hesabı açıkladıktan sonra okuyucunun hemen uygulamasını sağlar. Her sayfada en az bir ToolLink bulunması, kullanıcının içerikten araca geçiş sürecini kısaltır.
+
+## İçerik türleri ve MDX yapısı eşleşmesi
+
+| İçerik türü | Önerilen bileşenler | Kaçınılacak durum |
+|---|---|---|
+| Hesap rehberi (guides) | Formül, tablo, adım listesi, araç bağlantısı | Görsel ağırlıklı galeri bileşeni |
+| Blog yazısı | Araç bağlantısı, iç link | Karmaşık tablo listesi |
+| Sözlük terimi | Formül (varsa), ilgili rehber bağlantısı | Uzun adım listeleri |
+| Araç sayfası | Girdi açıklama tablosu, çıktı yorumu | Gereksiz bileşen yığını |
+
+Bu eşleşme tablosu, her yazar için "bu sayfada hangi bileşeni kullanmalıyım?" sorusunu yanıtlar. Yapıyı standart tutmak, farklı yazarlardan gelen içeriklerin tutarlı görünmesini sağlar.
+
+## Yayın öncesi teknik doğrulama adımları
+
+MDX içeriği yayına almadan önce teknik katman da kontrol edilmelidir:
+
+1. **Build hatası kontrolü:** Yerel ortamda `next build` çalıştırarak MDX parse hatasının olmadığını doğrulayın. Açık JSX etiketi veya kaçan köşeli parantez sık görülen hatalardır.
+2. **Bileşen prop doğruluğu:** Her bileşenin zorunlu prop'larının dolu olduğunu kontrol edin. Örneğin ToolLink için `href`, `title`, `description` gereklidir.
+3. **Bağlantı testi:** İç bağlantılar için hedef sayfanın var olduğunu doğrulayın. Silinmiş veya taşınmış bir rehbere yapılan bağlantı 404 üretir.
+4. **Mobil görünüm:** Tablolar dar ekranda yatay kaydırma gerektirebilir. Çok sütunlu tablolar mobilde kullanılabilirlik açısından test edilmelidir.
+5. **Meta veri tamamlığı:** `title`, `description`, `date`, `tags`, `category` ve `readingTime` alanları doldurulmuş mu?
+
+## Formül gösteriminde dikkat edilmesi gerekenler
+
+MDX içinde açık süslü parantez (`{`), küçüktür işareti (`<`) ve büyüktür işareti (`>`) JSX parser tarafından bileşen açılışı olarak yorumlanabilir. Bu karakterler formül bağlamında kullanılacaksa backtick içine alınmalı veya HTML entity ile yazılmalıdır:
+
+- `{` yerine backtick içinde `{` veya HTML entity `&#123;`
+- Formül içinde: `F = m * a` doğru; `F = m * {a}` parse hatası üretir
+
+Karmaşık formüller için LaTeX notasyonu yerine düz metin gösterimi önerilir: `tau = T / W_p` gibi. Bu yaklaşım sitedeki MDX parse hata riskini minimize eder ve formülün farklı ekranlarda tutarlı görünmesini sağlar.
+
+## İçerik altyapısı ve AdSense değerlendirmesi
+
+Google AdSense "Değerli İçerik" değerlendirmesi her sayfanın bağımsız bir kullanıcı sorusunu yanıtladığını beklenir. MDX bileşen zenginliği tek başına yeterli değildir; asıl belirleyici içeriğin mühendislik derinliğidir. Formül bileşeni gerçek bir hesap adımını gösteriyorsa, tablo bir karar matrisini sunuyorsa ve araç bağlantısı okuyucuyu uygulamaya taşıyorsa bu yapı kaliteli içeriğin somut göstergelerini oluşturur.
+
 ## İlgili içerikler
 
 - <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>

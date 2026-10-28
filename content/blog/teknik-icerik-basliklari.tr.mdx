@@ -40,6 +40,74 @@ Her yeni yazı, önceki içeriklerle bağlantılı olmalı ve okuyucunun takip e
 - <a href="/tr/blog/icerik-altyapisina-hizli-giris">İçerik altyapısına hızlı giriş</a>
 - <a href="/tr/guides/rulman-secimi-icin-hizli-rehber">Rulman seçimi için hızlı rehber</a>
 
+
+## Teknik başlık anatomisi
+
+İyi bir mühendislik başlığı üç unsuru birleştirir: **konu** + **yöntem** + **bağlam**. Bu formül başlığın hem arama motorunda hem de okuyucu zihninde ne anlama geldiğini netleştirir.
+
+**Zayıf başlık:** "Rulman hesabı"
+**Güçlü başlık:** "L10 rulman ömrü ISO 281'e göre dinamik yük katsayısıyla nasıl hesaplanır?"
+
+Fark neden önemlidir? Güçlü başlık hem yöntemi (L10 ömrü, ISO 281) hem de bağlamı (dinamik yük katsayısı) belirtiyor. Okuyucu sayfaya gelmeden önce bu içeriğin ne sunacağını biliyor. Bu netlik hem tıklama oranını artırır hem de konuya hakim olmayan okuyucunun sayfayı boşuna açıp kapatmasını önler.
+
+## Hesap odaklı başlıklar için kalıplar
+
+Teknik hesap içerikleri için çalışan başlık kalıpları:
+
+**Kalıp 1 — "Nasıl hesaplanır?"**
+"[X] [Y standardına göre] nasıl hesaplanır?"
+Örnek: "Kaynaklı bağlantı kayma gerilmesi ISO 5817'ye göre nasıl hesaplanır?"
+
+**Kalıp 2 — Karşılaştırma**
+"[A] vs [B]: [Bağlam]'da hangisi?"
+Örnek: "S235 vs S355: hafif çelik konstrüksiyonda hangisi doğru seçim?"
+
+**Kalıp 3 — Hata odaklı**
+"[X] hesabında yapılan [N] yaygın hata"
+Örnek: "Tolerans zinciri analizinde yapılan 3 yaygın hata ve çözümü"
+
+**Kalıp 4 — Adım adım**
+"[X] adım adım: [Bağlam]"
+Örnek: "Press-fit bağlantı hesabı adım adım: girişim seçimi ve montaj kuvveti"
+
+**Kalıp 5 — Neden?**
+"[X] neden [Y] gerektirir?"
+Örnek: "Titanyum işlemede neden yüksek basınçlı soğutma gerektirir?"
+
+## Başlıkla meta açıklama tutarlılığı
+
+Başlık ne vaat ediyorsa meta açıklama bunu doğrulamalı ve bir adım öteye taşımalıdır:
+
+**Başlık:** "L10 rulman ömrü nasıl hesaplanır?"
+**Meta açıklama:** "L10 rulman ömrü hesabını ISO 281'e göre adım adım anlatan bu rehber; dinamik yük katsayısı, ömür düzeltme faktörü ve TORQYX hesaplayıcısı ile sayısal örnek içerir."
+
+Meta açıklama 150–160 karakterde olmalı ve en az bir spesifik içerik detayı içermelidir. "Bu rehberde rulman hesabını öğrenebilirsiniz" gibi genel ifadeler değer taşımaz.
+
+## İç bağlantı yapısı ve başlık uyumu
+
+Teknik başlık iç bağlantı kurulumunu da etkiler. Sayfa başlığı ne kadar spesifikse ilgili hesaplayıcı veya rehbere bağlantı o kadar doğal ve anlamlı olur:
+
+- Blog: "L10 rulman ömrü nasıl hesaplanır?" → İç link: Rulman Seçimi Rehberi + Rulman Hesaplayıcısı
+- Blog: "Tolerans zinciri analizinde 3 hata" → İç link: Tolerans Zinciri RSS Rehberi + İlgili Hesaplayıcı
+
+Bu yapı okuyucunun blog yazısından rehbere, rehberden hesaplayıcıya doğal olarak ilerlemesini sağlar. Her geçiş noktası kullanıcının bilgi düzeyini artırır ve sitede geçirilen süreyi uzatır — her ikisi de AdSense kalite değerlendirmesinde olumlu sinyal olarak yorumlanır.
+
+## Teknik başlık yazmak için pratik kontrol listesi
+
+Başlık taslağı hazırlandıktan sonra şu sorular yanıtlanmalıdır:
+
+- **Spesifiklik:** Başlık bir standartta, yöntemde veya malzemede somutlaşıyor mu?
+- **Eylem:** Okuyucu başlığı okuyunca ne yapacağını veya ne öğreneceğini anlıyor mu?
+- **Karakter sayısı:** 55–65 karakter arasında mı? (Google arama snippet sınırı)
+- **Hedef kitle:** Mühendis mi, teknisyen mi, öğrenci mi? Dil ve teknik düzey uyuşuyor mu?
+- **Rakip başlıkları:** Arama motorunda ilk sayfada bu konuda başka ne var? Başlık farklılaşıyor mu?
+
+Beşinci soru çoğu zaman atlanır. Rakip içeriklerle aynı başlıkla çıkmak, içerik kalitesi ne kadar iyi olursa olsun görünürlüğü kısıtlar. Özellikle yaygın konularda (cıvata hesabı, boru basınç kaybı gibi) başlıkta bir spesifik açı veya bağlam eklemek rekabet avantajı sağlar.
+
+## Başlık testinin tek kural özeti
+
+**Başlığı okuyucu açısından test edin:** Bir mühendis "bu sayfada tam olarak ne bulacağım?" sorusuna başlığı okuyarak yanıt verebilmelidir. Veremiyorsa başlık spesifik değildir ve yeniden yazılmalıdır.
+
 ## Mühendislik başlığı nasıl güçlenir?
 
 Teknik başlık, okuyucunun hangi problemi çözeceğini ilk bakışta göstermelidir. "Rulman ömrü" yerine "L10 rulman ömrü C ve P değerleriyle nasıl hesaplanır?" başlığı daha faydalıdır; çünkü hem yöntemi hem de beklenen girdileri belirtir. Aynı ilke boru basınç kaybı, cıvata ön yükü, tolerans seçimi ve birim dönüşümü gibi tüm hesap içerikleri için geçerlidir.

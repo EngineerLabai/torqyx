@@ -43,6 +43,62 @@ Her yazıda kategori ve etiket kullanmak, ziyaretçilerin ilgili konuları kolay
 - <a href="/tr/blog/teknik-icerik-basliklari">Teknik içerik başlıkları</a>
 - <a href="/tr/tools/unit-converter">Birim dönüştürücü</a>
 
+
+## Mühendislik blogunda konu derinliği nasıl belirlenir?
+
+Her haftalık yayın için "bu konuyu ne kadar derine götüreceğiz?" sorusu yanıtlanmalıdır. Üç düzey tanımlamak pratik bir çerçeve sunar:
+
+**Düzey 1 — Genel bakış:** Problem tanımı, yaygın kullanım alanı, ilgili hesaplayıcı bağlantısı. Kelime hedefi: 400–600. Amacı okuyucuyu doğru araca yönlendirmek.
+
+**Düzey 2 — Yöntem açıklaması:** Formül, adım adım hesap süreci, referans standart, sayısal örnek. Kelime hedefi: 800–1200. Amacı okuyucunun konuyu bağımsız anlayabilmesini sağlamak.
+
+**Düzey 3 — Derinlemesine rehber:** Karşılaştırmalı tablo, tasarım senaryosu, sık hata analizi, standart referans. Kelime hedefi: 1200+. Amacı konunun birincil kaynak olarak Google'da öne çıkmasını sağlamak.
+
+Haftalık planlama yaparken her dört yazıdan birinin Düzey 3 olmasını hedeflemek, kategorilerin içerik ağırlığını dengeler.
+
+## Hesap kategorileri için içerik takvimi örneği
+
+Mühendislik hesap sitesinde içerik takvimi, hesap kategorileriyle eşleştirildiğinde sistematik yayın yapısı ortaya çıkar:
+
+| Hafta | Kategori | Konu örneği | Düzey |
+|---|---|---|---|
+| 1 | Akışkanlar | Darcy-Weisbach adım adım | 2 |
+| 2 | Bağlantı elemanları | M10 cıvata ön yükü hesabı | 2 |
+| 3 | Malzeme seçimi | S235 vs S355: ne zaman hangisi? | 3 |
+| 4 | Rulman | L10 ömrü ve yük faktörü | 2 |
+| 5 | Tolerans | Tolerans zinciri kötü durum örneği | 3 |
+| 6 | Birim | MPa – kPa – bar dönüşümü | 1 |
+
+Bu döngü tekrar ederken her dönemde bir önceki yazının ilgili konu bağlantısına iç link eklenir. Böylece site mimarisi arama motorlarına kategoriler arası bağlantıyı gösterir.
+
+## Yayın sonrası kalite kontrol listesi
+
+Her yayın sonrasında şu maddeleri kontrol etmek içerik kalitesini sistematik olarak korur:
+
+- [ ] Başlık ve meta açıklama 150 karakterin altında mı?
+- [ ] Sayfada en az bir hesaplayıcı bağlantısı var mı?
+- [ ] Formül veya tablo içeriyorsa doğruluğu teyit edildi mi?
+- [ ] İç bağlantı (ilgili rehber, diğer blog yazısı) eklendi mi?
+- [ ] Görsel alt metin açıklayıcı mı?
+- [ ] Tarayıcıda mobil görünümü kontrol edildi mi?
+
+Bu liste her yazar veya editör için ortak referans haline getirildiğinde yayın kalitesi kişiye bağlı olmaktan çıkar.
+
+## Haftalık yayın ritmi neden önemlidir?
+
+Düzensiz yayın yapmak hem okuyucu beklentisini hem de arama motoru tarama sıklığını olumsuz etkiler. Haftalık düzenli yayın yapan bir site, ayda birkaç kez yayın yapan rakibine kıyasla ortalama iki kat daha fazla sayfayı tarama listesine alır (Google Search Console'da "Crawl Stats" bölümünden takip edilebilir).
+
+TORQYX özelinde bunu somutlaştırmak gerekirse: hesap kategorilerindeki her yeni yazı, ilgili hesaplayıcı sayfasına iç bağlantı taşıyorsa tarayıcı bu sayfaları düzenli olarak ziyaret eder ve yeni içeriği daha hızlı dizine ekler. Bu da AdSense gelir sürecinde sayfa kalitesinin daha kısa sürede değerlendirilmesini sağlar.
+
+## Konu tükenmesini önlemek
+
+Haftalık yayın yaparken bir süre sonra "artık konu bulamıyorum" hissi yaşanabilir. Mühendislik hesap sitesinde bu sorunun pratik çözümü şudur:
+
+- Her hesaplayıcı sayfası en az üç ayrı blog yazısının konusudur: giriş seviyesi kullanım, orta düzey hesap örneği, ileri düzey standart karşılaştırması.
+- Mevcut hesaplayıcı sayfalarını gözden geçirin: hangi sayfa çok fazla trafik alıyor ama ilgili blog yazısı yok?
+- Kullanıcı soruları kaynak olarak değerlendirilebilir: "Cıvata sıkma momentini yazan var mı?" sorusu doğrudan bir blog konusuna dönüşebilir.
+- Standart güncellemeleri (yeni ISO, DIN revizyonu) içerik fırsatı yaratır.
+
 ## TORQYX için haftalık içerik ölçütü
 
 Mühendislik sitesinde haftalık yayın yalnızca takvimi doldurmak için yapılmamalıdır. Her yazı bir karar noktasına bağlanmalıdır: hangi veri toplanacak, hangi formül seçilecek, hangi standart kontrol edilecek ve sonuç hangi araçla doğrulanacak? Bu yapı okuyucunun yazıdan sonra doğrudan hesaplayıcıya veya ilgili rehbere geçmesini sağlar.
