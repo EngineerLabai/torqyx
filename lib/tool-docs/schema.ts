@@ -12,7 +12,7 @@ export const toolDocExampleSchema = z.object({
   inputs: z.record(z.string(), z.string()),
   outputs: z.record(z.string(), z.string()),
   inputValues: z.record(z.string(), z.any()),
-  expected: z.record(z.string(), z.number()),
+  expected: z.record(z.string(), z.union([z.number(), z.boolean(), z.string()])),
   notes: z.array(z.string()).optional(),
 });
 

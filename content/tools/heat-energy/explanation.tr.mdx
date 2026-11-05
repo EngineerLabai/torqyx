@@ -6,10 +6,10 @@ Bu araç; karşıt akışlı ve paralel akışlı kabuk-boru (shell & tube) ve p
 ## Formüller ve Hesaplama Metodolojisi
 
 ### 1. Isı Değiştirici Boyutlandırması (LMTD Yöntemi)
-Karşıt akışlı bir eşanjörde sıcak akışkan ($T_{h,in} \to T_{h,out}$) ile soğuk akışkan ($T_{c,in} \to T_{c,out}$) arasındaki logaritmik ortalama sıcaklık farkı ($\Delta T_{lm}$):
+Karşıt akışlı bir eşanjörde sıcak akışkan (T_h,in → T_h,out) ile soğuk akışkan (T_c,in → T_c,out) arasındaki logaritmik ortalama sıcaklık farkı (ΔT_lm):
 
 <Formula label="Logaritmik Ortalama Sıcaklık Farkı (LMTD)">
-ΔT₁ = T_{h,in} - T_{c,out} | ΔT₂ = T_{h,out} - T_{c,in} | ΔT_{lm} = (ΔT₁ - ΔT₂) / ln(ΔT₁ / ΔT₂)
+ΔT₁ = T_h,in - T_c,out | ΔT₂ = T_h,out - T_c,in | ΔT_lm = (ΔT₁ - ΔT₂) / ln(ΔT₁ / ΔT₂)
 </Formula>
 
 Isı değiştiricinin hedef ısı yükünü ($Q$ [W veya kW]) transfer etmesi için gereken efektif yüzey alanı ($A$ [$m^2$]):
@@ -18,7 +18,7 @@ Isı değiştiricinin hedef ısı yükünü ($Q$ [W veya kW]) transfer etmesi i�
 A = Q / (U · ΔT_{lm})
 </Formula>
 
-Burada $U$ toplam ısı transfer katsayısıdır [$\text{W/(m}^2\cdot\text{K)}$].
+Burada $U$ toplam ısı transfer katsayısıdır [W/(m²·K)].
 
 ### 2. Yapı Elemanlarında İletim ve Taşınım Isı Kaybı
 İç ortamdan dış ortama duvar üzerinden transfer edilen ısı akışı, iç/dış taşınım katsayıları ($h_{ic}, h_{dis}$) ve duvar iletim direnci ($s/k$) toplamıyla belirlenir:

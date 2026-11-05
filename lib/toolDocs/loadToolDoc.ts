@@ -322,13 +322,19 @@ export const loadToolDoc = async ({
   };
 };
 
-const serializeMdx = async (source: string) =>
-  serialize(source, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeSlug],
-    },
-  });
+const serializeMdx = async (source: string) => {
+  try {
+    return await serialize(source, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [rehypeSlug],
+      },
+    });
+  } catch (error) {
+    console.error("[loadToolDoc] MDX serialization failed:", error);
+    return null;
+  }
+};
 
 const getToolBySlug = (slug: string) => {
   const normalized = normalizeSlug(slug);
@@ -336,10 +342,11 @@ const getToolBySlug = (slug: string) => {
 };
 
 export const getToolDocsResponse = async (slug: string, locale: Locale): Promise<ToolDocsResponse> => {
-  const tool = getToolBySlug(slug);
-  const relatedLocale = locale;
-  const related = tool ? await getRelatedForTool(tool, { locale: relatedLocale }) : { guides: [], glossary: [] };
-  const standard = await readToolDocStandard(slug, locale);
+  try {
+    const tool = getToolBySlug(slug);
+    const relatedLocale = locale;
+    const related = tool ? await getRelatedForTool(tool, { locale: relatedLocale }) : { guides: [], glossary: [] };
+    const standard = await readToolDocStandard(slug, locale);
 
   if (standard) {
     return {
@@ -400,7 +407,8 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
   if (Array.isArray(doc.examples)) {
     examples = { kind: "json", items: doc.examples };
   } else if (typeof doc.examples === "string") {
-    examples = { kind: "mdx", source: await serializeMdx(doc.examples) };
+    const serialized = await serializeMdx(doc.examples);
+    examples = serialized ? { kind: "mdx", source: serialized } : null;
   }
 
   const hasDocs = Boolean(explanation) || Boolean(examples);
@@ -417,4 +425,20 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
     examples,
     related,
   };
+  } catch (error) {
+    console.error(`[loadToolDoc] Unexpected error loading docs for ${slug} (${locale}):`, error);
+    const tool = getToolBySlug(slug);
+    return {
+      tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
+      hasDocs: false,
+      isDraft: false,
+      requestedLocale: locale,
+      docsLocale: null,
+      metaInfo: null,
+      standard: null,
+      explanation: null,
+      examples: null,
+      related: { guides: [], glossary: [] },
+    };
+  }
 };

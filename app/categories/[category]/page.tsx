@@ -19,10 +19,12 @@ import { buildLanguageAlternates } from "@/utils/seo";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { getToolCopy, toolCatalog } from "@/tools/_shared/catalog";
 
-const formatDate = (value: string, locale: "tr" | "en") =>
-  new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(
-    new Date(value),
-  );
+const formatDate = (value: string | undefined | null, locale: "tr" | "en") => {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", { dateStyle: "medium" }).format(date);
+};
 
 type CategoryPageProps = {
   params: Promise<{ category: string }>;
