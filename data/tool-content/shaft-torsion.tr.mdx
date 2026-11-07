@@ -1,0 +1,182 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+
+- **Transmisyon Mili Boyutlandırması:** Motor veya şanzıman çıkışından aktarılan torku ileten tahrik millerinin çap belirlenmesinde, hem kesme gerilmesinin izin verilen değeri altında kalmasını hem de bükülme açısının kinematik toleransı aşmamasını doğrulamak için kullanılır.
+- **Pompa ve Kompresör Milleri:** Santrifüj pompa, vida kompresörü ve türbin şaftlarında işletme torku altında oluşan kesme gerilmesini ve mil burulma rijitliğini doğrulamak amacıyla hesap döngüsünün standart bir adımıdır.
+- **Mil-Göbek Bağlantı Kontrolü:** Paralel pim, Woodruff takoz veya çiçek profilli miller (spline) içeren birleşimlerde mil gövdesindeki gerilme dağılımı ve bağlantı noktasındaki konsantrasyon faktörü incelenirken temel hesap referansı olarak kullanılır.
+- **Konstrüktif Karşılaştırma:** İçi dolu mil ile içi boş milin aynı moment kapasitesi için gerektirdiği malzeme ağırlıklarını karşılaştırmada ve hafifletilmiş tasarımın gerilme açısından kabul edilebilirliğini denetlemede uygulanır.
+- **Öğrenme ve Eğitim Ortamı:** Makine elemanları ve dayanım dersleri kapsamında kutupsal eylemsizlik momenti (J), kesme gerilmesi ve burulma açısı arasındaki doğrusal ilişkiyi somut sayısal değerlerle kavramak için idealdir.
+
+### Ne Zaman Kullanılmamalıdır?
+
+- **Bileşik Yük Durumları:** Mil aynı anda eğilme momenti, eksenel çekme veya basınç ve burulma momentine maruz kalıyorsa von Mises veya Tresca bileşik gerilme hipotezlerini içeren tam mil hesabı (Shigley 7. bölüm, ASME B106.1M) uygulanmalıdır.
+- **Kritik Dönme Hızı (Rezonans) Kontrolü:** Uzun ve ince miller yüksek devirde burulma rezonansına veya yanal kritik hıza ulaşabilir. Bu durumda Rayleigh-Ritz veya sonlu eleman yöntemiyle titreşim analizi gerekmektedir.
+- **Kesit Değişkenliği ve Basamaklı Miller:** Çap boyunca değişken veya basamaklı (stepped) miller için Castigliano veya entegrasyon yöntemiyle toplam açısal esneme hesaplanmalıdır; bu araç sabit dairesel kesit varsayımıyla çalışmaktadır.
+- **Elastik-Plastik Gerilme Analizi:** Mil gövdesi kesme akma sınırını aşan aşırı yük durumunda plastik burulma teorisi ve kalıcı deformasyon hesapları gereklidir; araç tamamen elastik davranış için tasarlanmıştır.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Dairesel kesitli bir mil döndürme momenti (torku) altında bükülürken, yük merkezi eksen üzerinde sıfıra düşer ve en dış lifde maksimuma erişir. Bu dağılım belirli varsayımlar altında analitik olarak türetilebilir.
+
+### 1. Kesme Gerilmesi Dağılımı ve Polar Atalet Momenti (J)
+
+Dairesel kesitte düzlemsel kesme deformasyonu (shear strain) eksen mesafesi (r) ile orantılı değiştiğinden gerinim uyumluluğu koşulu (compatibility) küçük deformasyonlar için:
+
+```
+gamma(r) = r * (d_theta / dz)   [rad/m]
+```
+
+Hooke yasasıyla kesme gerilmesi:
+
+```
+tau(r) = G * gamma(r) = G * r * phi/L
+```
+
+Kesit bütününde kesme gerilmesinin oluşturduğu iç moment, dış tork T'ye eşitlendiğinde:
+
+```
+T = integral[ r * tau(r) * dA ] = G * (phi/L) * integral[ r^2 dA ] = G * phi * J / L
+```
+
+Burada J = integral[ r^2 dA ] polar atalet momentidir. Dolu daire kesit için:
+
+<Formula label="Dolu Daire Polar Atalet Momenti">
+J = pi * d^4 / 32   [mm^4]
+</Formula>
+
+### 2. Maksimum Kesme Gerilmesi
+
+En dış lifde (r = d/2) kesme gerilmesi maksimuma ulaşır:
+
+<Formula label="Maksimum Kesme Gerilmesi">
+tau_max = T * c / J = 16 * T / (pi * d^3)   [MPa]
+</Formula>
+
+Burada c = d/2 (dış yarıçap), T Newton-milimetre, d milimetre cinsinden alındığında tau_max MPa biriminde çıkar.
+
+### 3. Burulma Açısı (Bükülme Açısı) Hesabı
+
+T = G * phi * J / L bağıntısından phi (radyan cinsinden burulma açısı) çekilirse:
+
+<Formula label="Burulma Açısı">
+phi = T * L / (J * G)   [radyan]
+</Formula>
+
+Mühendislik pratiğinde genellikle derece cinsinden ifade edilir:
+
+```
+phi_deg = phi * (180 / pi)
+```
+
+### 4. Güvenlik Oranı
+
+İzin verilen kesme gerilmesi (tau_allow), malzemenin yorulma dayanımı veya ASME/DIN'in tablolarından alınır. Statik güvenlik oranı:
+
+```
+n = tau_allow / tau_max
+```
+
+n büyüktür 1 ise tasarım kabul edilebilirdir. n küçüktür 1 ise çap artırılmalı ya da malzeme değiştirilmelidir.
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın fabrika varsayılan değerleri kullanılarak yapılan doğrulama hesabı:
+
+### Girdi Değerleri:
+- Uygulanan Tork (T): **250 N·m = 250.000 N·mm**
+- Mil Çapı (d): **30 mm**
+- Mil Boyu (L): **800 mm**
+- Kayma Modülü (G): **80.000 MPa (80 GPa, çelik)**
+- İzin Verilen Kesme Gerilmesi (tau_allow): **80 MPa**
+
+### Adım 1 — Polar Atalet Momenti (J):
+
+```
+J = pi * 30^4 / 32 = pi * 810.000 / 32 = pi * 25.312,5 = 79.521,6 mm^4
+```
+
+Polar atalet momenti **J = 79.521,6 mm⁴** olarak hesaplanır.
+
+### Adım 2 — Maksimum Kesme Gerilmesi (tau_max):
+
+```
+tau_max = 16 * 250.000 N·mm / (pi * 30^3)
+       = 4.000.000 / (pi * 27.000)
+       = 4.000.000 / 84.823
+       = 47,16 MPa
+```
+
+Mil yüzeyindeki en yüksek kesme gerilmesi **tau_max = 47,16 MPa** olarak bulunur.
+
+### Adım 3 — Burulma Açısı (phi):
+
+```
+phi = (250.000 N·mm * 800 mm) / (79.521,6 mm^4 * 80.000 N/mm^2)
+    = 200.000.000 / 6.361.728.000
+    = 0,03144 radyan
+```
+
+Derece cinsinden:
+
+```
+phi_deg = 0,03144 * (180 / pi) = 0,03144 * 57,296 = 1,801°
+```
+
+Burulma açısı **1,801 derece** olarak belirlenir.
+
+### Adım 4 — Güvenlik Oranı:
+
+```
+n = tau_allow / tau_max = 80 / 47,16 = 1,70
+```
+
+Güvenlik oranı **1,70** olup mil kesmede yeterince güvenlidir (n büyüktür 1,0).
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Birimi Karıştırmak (N·m ile N·mm):** T değerini Newton-metre cinsinden doğrudan pi*d³ formülüne milimetre cinsinden d ile birlikte yazarsanız sonuç 1000 kat hatalı çıkar. Hesapta tüm uzunlukları mm, kuvvetleri N, gerilmeleri MPa (N/mm²) cinsinden birleşik tutun.
+2. **İçi Dolu ile İçi Boş Mil Polar Atalet Formülünü Karıştırmak:** İçi boş mil için J = pi*(D_dış^4 - D_iç^4)/32 formülü uygulanmalıdır. Bu araç dolu kesit için tasarlanmıştır; içi boş milinizi değerlendirmek için dış ve iç çapı ayrıca hesaba katın.
+3. **Kayma Modülü Yerine Elastik Modül Girmek:** Çelik için E = 210.000 MPa, G = 80.000 MPa'dır. Burulma açısı formülünde G yerine E girilirse açı değeri neredeyse 2,6 kat daha küçük, yani gerçekte olduğundan çok daha rijit hesaplanır.
+4. **Mil Uzunluğunun Burulma Gerilmesine Etkisiz Olduğunu Sanmak:** tau_max = 16T/(pi*d³) formülünde L terimi yer almaz; uzunluk yalnızca açı hesabını etkiler. Ancak uzun miller kritik burulma hızına daha düşük devirde ulaşır, bu yüzden uzun mil tasarımında titreşim kontrolü zorunludur.
+5. **Çentik Etkisi (Stress Concentration) ve Basamak Faktörünü Atlamak:** Çap değişimlerinde, anahtar yuvalarında veya pim deliklerinde gerilme yığılma faktörü Kt uygulanmazsa gerçek tepe gerilmesi hesaplanan değerin 1,5 ile 3 katına ulaşabilir.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Burulma açısı ne kadar olmalıdır, bir sınır değer var mıdır?
+
+Makine mühendisliği kuralı olarak genel amaçlı transmisyon milleri için uzunluk başına bükülme açısı metre başına 0,5 ila 1,5 derece olarak önerilir (bazı otomotiv uygulamalarında 3°/m'ye kadar tolerans edilir). Bu örnekte 800 mm'de 1,801 derece yani 2,25°/m değeri genel sınıra yakın olmakla birlikte kabul edilebilir aralıktadır.
+
+### 2. İzin verilen kesme gerilmesi (tau_allow) nasıl belirlenir?
+
+Statik yüklemede ASME B106.1M çelik miller için tau_allow = 0,3 * Re veya 0,18 * Rm (hangisi küçükse) önerir. Dinamik ve yorulmalı yükleme durumunda ise Shigley yöntemiyle S_e (düzeltilmiş yorulma dayanımı) üzerinden kesme yorulma dayanımı hesaplanmalıdır.
+
+### 3. Dolu mil yerine içi boş mil kullanmanın avantajı nedir?
+
+Aynı dış çap ve duvar kalınlığına sahip içi boş mil, dolu mile kıyasla önemli ağırlık tasarrufu sağlarken polar atalet momentini (J) yalnızca küçük bir oranda azaltır. Bu durum ağırlık başına tork kapasitesini artırır. Özellikle havacılık ve yarış araçlarında içi boş titanyum veya alüminyum miller bu nedenle tercih edilir.
+
+### 4. Ölçüm sonuçları teorik değerle neden uyuşmuyor olabilir?
+
+Mil yüzeyindeki kayma modülü (G) malzeme sertleştirme, üretim prosesi ve sıcaklık değişimleriyle teorik değerden sapabilir. Bunun yanı sıra ölçüm cihazının uç bağlantısındaki sürtünme ve yatak boşlukları gerçek burulma açısını etkileyebilir.
+
+### 5. Güvenlik oranı ne kadar olmalıdır?
+
+Statik yükleme için n büyüktür 1,5 genel kabul değerdir. Darbeli ve dinamik yük uygulamalarında n büyüktür 2,0 tavsiye edilir. Bu örnekte n = 1,70 değeri statik uygulamalar için yeterlidir ancak dinamik yükleme durumunda çap artışı veya malzeme iyileştirmesi önerilir.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **ASME B106.1M:** Çelik transmisyon milleri için tasarım standardı — statik ve yorulma kapasitesi, minimum çap hesabı.
+- **DIN 743-1:** Makine millerinin taşıma kapasitesinin hesabı — kesit geometrisi, gerilme yığılma faktörleri ve güvenlik oranları.
+- **ISO 281 / ISO 76:** Yuvarlanma yataklarının dinamik ve statik yük taşıma kapasitesi — mil destekleriyle birlikte değerlendirilir.
+- **Shigley's Mechanical Engineering Design (10. baskı):** Bölüm 5 ve 6 — statik ve yorulmalı yükleme altında mil tasarımı için kapsamlı referans.
+- **AGMA 6001-E08:** Mil ve bağlantı elemanlarında torku ileten spline ve kama bağlantılarının boyutlandırılması.

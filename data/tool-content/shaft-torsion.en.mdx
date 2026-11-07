@@ -1,0 +1,182 @@
+## When to Use and When Not to Use
+
+### When to Use
+
+- **Transmission Shaft Sizing:** Use this calculator to determine the minimum diameter of a drive shaft that keeps the peak shear stress below the material allowable and the twist angle within kinematic limits for couplings and gear meshes.
+- **Pump and Compressor Shafts:** For centrifugal pumps, screw compressors, and turbine shafts, verifying shear stress and torsional stiffness under operating torque is a mandatory step in every shaft design review.
+- **Shaft-Hub Connection Checks:** When analysing key, spline, or Woodruff-key joints, the shaft body shear stress distribution derived here forms the starting reference before applying stress concentration factors at the connection geometry.
+- **Hollow vs. Solid Shaft Comparison:** Quickly compare the weight efficiency of a hollow shaft versus a solid one carrying the same torque capacity, confirming that the wall thickness chosen is adequate against torsional yielding.
+- **Education and Training:** An excellent tool for mechanical engineering students to build intuition about the relationship between polar second moment of area (J), shear stress, and angle of twist using real numerical values.
+
+### When Not to Use
+
+- **Combined Loading (Bending + Torsion):** When the shaft simultaneously carries bending moments, axial forces, and torsion, the full combined-stress procedure from Shigley Chapter 7 or ASME B106.1M must be applied, using the von Mises or Tresca yield criteria.
+- **Critical Speed (Resonance) Analysis:** Slender shafts running at high speed may reach torsional or lateral critical speeds. This requires a Rayleigh-Ritz or finite-element vibration analysis and cannot be inferred from static shear stress alone.
+- **Stepped or Variable-Section Shafts:** For shafts with diameter changes, Castigliano's theorem or numerical integration must be used to compute the total angular deflection. This calculator assumes a uniform circular cross-section throughout the full length L.
+- **Elastic-Plastic (Post-Yield) Analysis:** Once the outer fibre shear stress exceeds the material shear yield strength, plastic torsion theory governs. This tool is valid only in the fully elastic regime.
+
+---
+
+## Formula Derivation and Physical Background
+
+When a circular shaft transmits a torque, the cross-section rotates relative to an adjacent cross-section. The resulting shear strain varies linearly from zero at the neutral axis to a maximum at the outer surface, allowing a closed-form analytical solution.
+
+### 1. Shear Stress Distribution and Polar Second Moment of Area (J)
+
+Assuming plane sections remain plane and circular sections remain circular (valid for homogeneous, isotropic elastic material), the shear strain at radius r from the centroidal axis is:
+
+```
+gamma(r) = r * (d_theta / dz)   [rad]
+```
+
+Combining with Hooke's law for shear (tau = G * gamma):
+
+```
+tau(r) = G * r * phi / L
+```
+
+Equilibrium requires the resultant moment of internal shear forces to equal the applied torque T:
+
+```
+T = integral[ r * tau(r) dA ] = (G * phi / L) * integral[ r^2 dA ] = G * J * phi / L
+```
+
+For a solid circular cross-section, the polar second moment of area is:
+
+<Formula label="Polar Second Moment of Area — Solid Circle">
+J = pi * d^4 / 32   [mm^4]
+</Formula>
+
+### 2. Maximum Shear Stress
+
+Shear stress reaches its maximum at the outermost fibre (r = d/2):
+
+<Formula label="Maximum Shear Stress">
+tau_max = T * c / J = 16 * T / (pi * d^3)   [MPa]
+</Formula>
+
+Here c = d/2 is the outer radius, T is in N·mm, d in mm, so tau_max is obtained directly in MPa.
+
+### 3. Angle of Twist
+
+Re-arranging T = G * J * phi / L to isolate the angle of twist phi:
+
+<Formula label="Angle of Twist">
+phi = T * L / (J * G)   [radians]
+</Formula>
+
+Convert to degrees for engineering reporting:
+
+```
+phi_deg = phi * (180 / pi)
+```
+
+### 4. Safety Ratio
+
+The allowable shear stress (tau_allow) is obtained from the material specification or design standard. The static safety ratio is:
+
+```
+n = tau_allow / tau_max
+```
+
+If n is greater than 1.0 the design is acceptable; if n is less than 1.0 the shaft diameter must be increased or the material upgraded.
+
+---
+
+## Worked Example — Default Calculator Inputs
+
+Step-by-step numerical verification using the calculator's factory default values:
+
+### Input Values:
+- Applied Torque (T): **250 N·m = 250,000 N·mm**
+- Shaft Diameter (d): **30 mm**
+- Shaft Length (L): **800 mm**
+- Shear Modulus (G): **80,000 MPa (80 GPa, steel)**
+- Allowable Shear Stress (tau_allow): **80 MPa**
+
+### Step 1 — Polar Second Moment of Area (J):
+
+```
+J = pi * 30^4 / 32 = pi * 810,000 / 32 = pi * 25,312.5 = 79,521.6 mm^4
+```
+
+Polar second moment of area: **J = 79,521.6 mm⁴**.
+
+### Step 2 — Maximum Shear Stress (tau_max):
+
+```
+tau_max = 16 * 250,000 / (pi * 30^3)
+        = 4,000,000 / (pi * 27,000)
+        = 4,000,000 / 84,823
+        = 47.16 MPa
+```
+
+Peak surface shear stress: **tau_max = 47.16 MPa**.
+
+### Step 3 — Angle of Twist (phi):
+
+```
+phi = (250,000 * 800) / (79,521.6 * 80,000)
+    = 200,000,000 / 6,361,728,000
+    = 0.03144 radians
+```
+
+Converting to degrees:
+
+```
+phi_deg = 0.03144 * (180 / pi) = 0.03144 * 57.296 = 1.801 degrees
+```
+
+Angle of twist: **1.801 degrees**.
+
+### Step 4 — Safety Ratio:
+
+```
+n = tau_allow / tau_max = 80 / 47.16 = 1.70
+```
+
+Safety ratio **n = 1.70** — the shaft is adequate for static shear loading (n is greater than 1.0).
+
+---
+
+## Common Engineering Mistakes
+
+1. **Unit Mixing (N·m vs. N·mm):** Entering T in Newton-metres while d is in millimetres gives a result that is 1000 times too low. Keep all lengths in mm, forces in N, and stress in MPa (N/mm²) throughout the calculation.
+2. **Applying the Solid Shaft Formula to a Hollow Shaft:** For a hollow shaft, J = pi*(D_outer^4 - D_inner^4)/32. Using the solid formula ignores the contribution of the removed core and overestimates J, thereby under-predicting the shear stress.
+3. **Entering Elastic Modulus E Instead of Shear Modulus G:** For steel, E = 210,000 MPa but G = 80,000 MPa. Substituting E into the angle-of-twist formula produces an angle that is 2.6 times smaller than the actual twist, giving a dangerously optimistic stiffness estimate.
+4. **Assuming Shaft Length Has No Effect on Shear Stress:** The formula tau_max = 16T/(pi*d³) is independent of length, which is correct. However, length directly affects the angle of twist and the torsional critical speed — longer shafts resonate at lower speeds, making vibration analysis mandatory for high-speed drives.
+5. **Neglecting Stress Concentration Factors:** At diameter changes, keyways, transverse holes, and press-fit interfaces, local stress concentration factors Kt of 1.5 to 3.0 are common. Ignoring these in fatigue design leads to premature shaft fracture at the shoulder fillet radius.
+
+---
+
+## Frequently Asked Questions
+
+### 1. Is there a recommended limit for the angle of twist per unit length?
+
+A commonly cited rule of thumb for general-purpose transmission shafts is 0.5 to 1.5 degrees per metre of shaft length, with up to 3 degrees per metre tolerated in some automotive driveshaft applications. In this example the twist rate is 1.801° over 0.8 m, equivalent to 2.25°/m, which approaches the upper end of the typical range and may warrant review if precise angular positioning is required.
+
+### 2. How is the allowable shear stress (tau_allow) determined?
+
+For static loading, ASME B106.1M recommends tau_allow = 0.3 × yield strength in tension or 0.18 × ultimate tensile strength (whichever is smaller). For fatigue loading, the corrected endurance limit in shear is calculated using the Shigley method, which accounts for surface finish, size, reliability, and load-type modifying factors.
+
+### 3. What is the advantage of a hollow shaft over a solid one?
+
+A hollow shaft delivers a significantly higher specific torsional stiffness (torque capacity per unit mass) than a solid shaft of the same outer diameter. The polar moment of area falls only slightly as the core is removed, while the mass reduction is proportional to the square of the bore-to-outer diameter ratio. This is why aerospace, motorsport, and marine driveshafts routinely use hollow titanium or aluminium sections.
+
+### 4. Why might measured twist angle differ from the calculated value?
+
+Measured deflection can exceed the theoretical prediction for several reasons: bearing clearances and coupling compliance add extra rotation that is not captured by the shaft-only formula; the actual shear modulus of a given heat of steel may differ from the nominal 80 GPa; and surface friction in spline interfaces can redistribute torsional compliance along the drivetrain.
+
+### 5. What safety ratio should I target?
+
+For static loading with well-characterised loads, a safety ratio n greater than 1.5 is the generally accepted minimum. For shock or dynamic loading, n greater than 2.0 is recommended. In this example n = 1.70 is satisfactory for static duty but should be revisited if the application involves start-up shock torque peaks significantly above the rated value.
+
+---
+
+## Related Standards and Design Clauses
+
+- **ASME B106.1M:** Design of transmission shafting — shaft diameter calculation methodology, allowable stress determination, and service factor guidance.
+- **DIN 743-1:** Computation of load capacity of shafts and axles — section geometry, stress concentration factors, and safety evaluation.
+- **ISO 281 / ISO 76:** Rolling bearing dynamic and static load capacity — evaluated in conjunction with shaft reaction forces at bearing supports.
+- **Shigley's Mechanical Engineering Design (10th edition):** Chapters 5 and 6 provide comprehensive shaft design procedures for both static and fatigue loading conditions.
+- **AGMA 6001-E08:** Shaft and coupling design for enclosed gear drives — torque capacity, spline sizing, and shaft deflection limits.
