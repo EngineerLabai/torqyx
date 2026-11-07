@@ -1,0 +1,236 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+
+- **Mekanik Montaj Zinciri Analizi (1D Stack-up):** Seri üretimde üretilen millerin, burçların, segman kanallarının, gövde faturalarının ve ara pulların ardışık montajında kritik montaj açıklığının (clearance) veya sıkılık payının (interference) garanti edilmesinde kullanılır.
+- **Worst-Case (En Kötü Durum) ile RSS Kıyaslaması:** Yüzde 100 montaj garantisi gerektiren emniyet kritik parçalar ile istatistiksel toleranslama uygulayarak işleme maliyetlerini düşürmeyi hedefleyen seri üretim parçaları arasındaki tolerans aralığını mukayese etmek için uygulanır.
+- **Tolerans Bütçelemesi ve Hassasiyet (Sensitivity) Analizi:** Toplam varyansa en yüksek katkıyı yapan kritik bileşeni tespit ederek dar tolerans bütçesini rastgele değil, en yüksek etkiyi yapacak elemana tahsis etmek amacıyla tercih edilir.
+- **Asimetrik ve Tek Yönlü Toleransların Dengelenmesi:** Üst ve alt sapmaları eşit olmayan (+0,2 / -0,0 gibi) ölçüleri efektif orta nokta ve simetrik yarı aralık cinsine çevirerek nominal montaj kaymasını hesaplamada kullanılır.
+- **Tasarım ve Üretilebilirlik (DFM) İyileştirmesi:** Talaşlı imalat, enjeksiyon kalıplama veya saç büküm parçaların tolerans kabiliyetleri (Cp, Cpk) doğrultusunda montaj firesini önceden kestirmede uygulanır.
+
+### Ne Zaman Kullanılmamalıdır?
+
+- **2 Boyutlu ve 3 Boyutlu Karmaşık Mekanizmalar:** Parçalar açısal eğrilik, düzlemsizlik veya silindirik dönme serbestliğine sahipse 1D doğrusal yığma yetersiz kalır; vektörel tolerans analizi veya kinematik 3D yazılımlar (monte carlo simülasyonları) gereklidir.
+- **Proses Yeteneği Doğrulanmamış Küçük Partili İmalat:** İmalat prosesinin istatistiksel olarak kontrol altında olduğu (Cp büyük veya eşittir 1,33) ve ölçülerin normal (Gauss) dağıldığı kanıtlanmamışsa RSS yöntemi yanıltıcı olabilir; prototip veya az adetli üretimde sadece worst-case esas alınmalıdır.
+- **Termal Genleşme ve Elastik Deformasyonun Baskın Olduğu Koşullar:** Çalışma sıcaklığı ortam sıcaklığından belirgin farklıysa farklı genleşme katsayılarına sahip malzemelerin uzamaları tolerans zincirine eklenmelidir; bu araç yalnızca geometrik imalat sapmalarını çözer.
+- **Bonus Tolerans ve Malzeme Koşulu (MMC / LMC) Gerektiren Durumlar:** Boyut ölçüsü ile geometrik konum toleransının birbirini etkilediği durumlarda (ASME Y14.5 veya ISO 1101 sanal durum sınırları) doğrudan 1D doğrusal toplama yapılamaz, sanal mastar analizi yapılmalıdır.
+- **Aşınma ve Zamanla Değişen Boşluklar:** Rulman ve kızak boşluklarında zamanla oluşan mekanik aşınma payı imalat toleransı değildir; ömür hesabı ile birlikte ayrı ele alınmalıdır.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Doğrusal bir ölçü zincirinde toplam montaj boyutu (X), zinciri oluşturan bileşenlerin işaretli toplamıdır.
+
+### 1. Zincir Denklemi ve Efektif Sapmalar
+
+Zincirde yer alan her bir boyut için nominal değer L_i, üst sapma U_i, alt sapma D_i ve yön katsayısı s_i (ekleyen yön için +1, çıkaran yön için -1) tanımlanır:
+
+```
+X_nominal = toplam[ s_i * L_i ]
+```
+
+Çıkaran yöndeki (s_i = -1) boyutlarda fiziksel kural gereği maksimum parça boyutu montaj açıklığını küçültürken, minimum parça boyutu montaj açıklığını büyütür. Bu sebeple efektif sapmalar yön işaretine göre ters çevrilir:
+- Eğer s_i = +1 ise: delta_alt_efektif = D_i, delta_ust_efektif = U_i
+- Eğer s_i = -1 ise: delta_alt_efektif = -U_i, delta_ust_efektif = -D_i
+
+Her elemanın tolerans yarı aralığı (t_i) ve merkez kayması (c_i):
+
+```
+t_i = (delta_ust_efektif - delta_alt_efektif) / 2
+c_i = (delta_ust_efektif + delta_alt_efektif) / 2
+```
+
+### 2. Worst-Case (En Kötü Durum) Yöntemi
+
+Deterministik sınır modelinde tüm parçaların aynı anda en olumsuz imalat sınırlarında üretildiği varsayılır:
+
+<Formula label="Worst-Case Minimum Boyut">
+X_wc_min = X_nominal + toplam[ delta_alt_efektif ]
+</Formula>
+
+<Formula label="Worst-Case Maksimum Boyut">
+X_wc_max = X_nominal + toplam[ delta_ust_efektif ]
+</Formula>
+
+Toplam worst-case tolerans aralığı:
+
+```
+T_wc = X_wc_max - X_wc_min = toplam[ (delta_ust_efektif - delta_alt_efektif) ] = 2 * toplam[ t_i ]
+```
+
+Bu yöntem hiçbir istatistiksel dağılım varsayımı yapmaz ve yüzde 100 kesin montaj güvencesi sunar.
+
+### 3. RSS (Root Sum of Squares - Karelerin Karekökü) Yöntemi
+
+Merkezi Limit Teoremi'ne göre, birbirinden bağımsız çok sayıda değişkenin toplamı yaklaşık normal (Gauss) dağılım sergiler. Her bileşenin tolerans yarı aralığı t_i üretim dağılımının 3 standart sapmasına (3·sigma_i) karşılık geliyorsa, montaj toplam standart sapması:
+
+```
+sigma_toplam = sqrt( toplam[ sigma_i^2 ] )
+```
+
+Buradan toplam RSS tolerans yarı aralığı türetilir:
+
+<Formula label="RSS İstatistiksel Tolerans Yarı Aralığı">
+T_rss_yari = sqrt( toplam[ t_i^2 ] )
+</Formula>
+
+RSS istatistiksel montaj sınırları:
+- X_rss_min = (X_nominal + toplam[ c_i ]) - T_rss_yari
+- X_rss_max = (X_nominal + toplam[ c_i ]) + T_rss_yari
+
+RSS yöntemi, tüm parçaların aynı anda aşırı uçlarda üretilme olasılığının pratikte çok düşük olduğunu varsayarak montaj toleransını daraltmadan parça işleme toleranslarını genişletme avantajı sağlar (yaklaşık yüzde 99,73 güven aralığı).
+
+### 4. Hassasiyet (Varyans Katkısı) Analizi
+
+Toplam varyans V_toplam = toplam[ t_i² ] olarak hesaplanır. i. bileşenin toplam montaj varyansına yüzdesel katkısı:
+
+<Formula label="Bileşen Varyans Katkısı">
+Katki_yuzde_i = (t_i^2 / toplam[ t_k^2 ]) * 100   [%]
+</Formula>
+
+Varyans katkısı en yüksek olan parça, toleransı sıkılaştırıldığında montaj açıklığını en çok iyileştirecek olan ana darboğazdır.
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın varsayılan parametreleri kullanılarak yapılan adım adım mühendislik doğrulaması:
+
+### Girdi Değerleri:
+- **Eleman A:** Nominal = 20 mm, Üst = +0,10 mm, Alt = -0,10 mm, Yön = +1 (Topla)
+- **Eleman B:** Nominal = 10 mm, Üst = +0,05 mm, Alt = -0,05 mm, Yön = +1 (Topla)
+- **Eleman C:** Nominal = 5 mm, Üst = +0,02 mm, Alt = -0,02 mm, Yön = -1 (Çıkar)
+
+Zincir denklemi: **X = A + B - C**
+
+### Adım 1 — Nominal Montaj Ölçüsü:
+
+```
+X_nominal = (+1 * 20) + (+1 * 10) + (-1 * 5) = 20 + 10 - 5 = 25,000 mm
+```
+
+Nominal sonuç **25 mm** olarak belirlenir.
+
+### Adım 2 — Efektif Sapmalar ve Yarı Aralıklar:
+
+- **Eleman A (yön +1):**
+  - delta_alt = -0,10 mm, delta_ust = +0,10 mm
+  - t_A = (0,10 - (-0,10)) / 2 = 0,10 mm
+  - c_A = 0,00 mm
+- **Eleman B (yön +1):**
+  - delta_alt = -0,05 mm, delta_ust = +0,05 mm
+  - t_B = (0,05 - (-0,05)) / 2 = 0,05 mm
+  - c_B = 0,00 mm
+- **Eleman C (yön -1):**
+  - delta_alt = - (+0,02) = -0,02 mm
+  - delta_ust = - (-0,02) = +0,02 mm
+  - t_C = (0,02 - (-0,02)) / 2 = 0,02 mm
+  - c_C = 0,00 mm
+
+### Adım 3 — Worst-Case (En Kötü Durum) Hesabı:
+
+Toplam efektif alt sapma:
+
+```
+Toplam_alt = (-0,10) + (-0,05) + (-0,02) = -0,17 mm
+```
+
+Toplam efektif üst sapma:
+
+```
+Toplam_ust = (+0,10) + (+0,05) + (+0,02) = +0,17 mm
+```
+
+Worst-case montaj sınırları:
+
+```
+X_wc_min = 25,000 + (-0,17) = 24,830 mm
+X_wc_max = 25,000 + (+0,17) = 25,170 mm
+T_wc_toplam = 25,170 - 24,830 = 0,340 mm
+```
+
+Worst-case aralığı **24,83 mm ile 25,17 mm** arasıdır (toplam tolerans 0,34 mm).
+
+### Adım 4 — RSS (Karelerin Karekökü) İstatistiksel Hesabı:
+
+Yarı aralık kareleri (varyans bileşenleri):
+
+```
+t_A^2 = (0,10)^2 = 0,0100 mm²
+t_B^2 = (0,05)^2 = 0,0025 mm²
+t_C^2 = (0,02)^2 = 0,0004 mm²
+Toplam varyans = 0,0100 + 0,0025 + 0,0004 = 0,0129 mm²
+```
+
+RSS yarı aralığı:
+
+```
+T_rss_yari = sqrt(0,0129) = 0,11358 mm ≈ 0,114 mm
+```
+
+RSS istatistiksel sınırları:
+
+```
+X_rss_min = 25,000 - 0,11358 = 24,886 mm
+X_rss_max = 25,000 + 0,11358 = 25,114 mm
+T_rss_toplam = 2 * 0,11358 = 0,227 mm
+```
+
+RSS toplam tolerans bandı **0,227 mm** olup worst-case'e (0,340 mm) kıyasla yüzde 33 daha dar bir montaj yayılımı öngörür.
+
+### Adım 5 — Hassasiyet ve Varyans Katkısı Analizi:
+
+Her elemanın toplam varyansa oranı:
+
+```
+Katki_A = (0,0100 / 0,0129) * 100 = %77,52
+Katki_B = (0,0025 / 0,0129) * 100 = %19,38
+Katki_C = (0,0004 / 0,0129) * 100 = %3,10
+```
+
+Bu kritik analiz, toplam montaj belirsizliğinin yüzde 77,5'inin tek başına A elemanından kaynaklandığını açıkça gösterir. Montaj hassasiyetini artırmak istenirse A parçasının toleransı daraltılmalıdır; C parçasını daha hassas işlemeye çalışmak zaman ve maliyet israfıdır.
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Çıkaran Yöndeki Tolerans Sapmalarını Düz Toplamak:** Yönü eksi (-1) olan bir parçanın üst sapmasını doğrudan toplam sapmaya eklemek hatalıdır. Parça büyüdüğünde montaj boşluğu küçüleceğinden üst sapma eksiye, alt sapma artıya dönüştürülmelidir.
+2. **Küçük Seri İmalatta Körlemesine RSS Kullanmak:** Yılda 50 adet üretilen bir mekanizmada Merkezi Limit Teoremi geçerli olmaz; aşırı uçtaki parçaların birbiriyle karşılaşma olasılığı istatistiksel modelden çok daha yüksektir. Seri üretim hacmi binleri bulmuyorsa montaj güvenliği worst-case ile doğrulanmalıdır.
+3. **Asimetrik Toleranslarda Merkez Kaymasını Unutmak:** Örneğin 20 (+0,2 / 0,0) toleransında parça ortalaması 20,0 mm değil 20,1 mm'dir. Merkez kayması (c_i) hesaba katılmazsa RSS sonucu gerçek montaj dağılımının merkezinden 0,1 mm sapar.
+4. **Bağımsızlık Varsayımının İhlali:** Aynı fikstürde veya aynı takımla art arda işlenen iki yüzey aynı takım aşınması veya ısıl genleşmeden etkilenir. Bu durumda değişkenler bağımsız değildir (kovaryans sıfır değildir) ve klasik RSS toleransı olduğundan dar tahmin eder.
+5. **GD&T Bonus Toleransını Doğrudan 1D Zincire Eklemek:** Konum toleransında MMC çağrısı varsa delik çapı büyüdükçe ek bonus tolerans doğar. Bu bonus tolerans her zaman doğrusal eksene paralel çalışmaz; doğrudan 1D stack zincirine skaler eklenmesi yanlış sonuçlar doğurabilir.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Worst-case yöntemi ile RSS yöntemi arasındaki temel fark nedir?
+
+Worst-case yöntemi deterministiktir ve imal edilen tüm parçaların toleranslarının en uç sınırlarda buluştuğu senaryoyu hesaplar; yüzde 100 montaj garantisi verir ancak parça imalat maliyetlerini yükseltir. RSS yöntemi ise istatistikseldir; parçaların normal dağıldığını ve aynı anda aşırı uçlarda üretilme ihtimalinin çok düşük olduğunu varsayar. RSS ile elde edilen tolerans bandı daha dardır ve üretimde daha geniş toleranslar kullanılmasına izin verir.
+
+### 2. Hangi durumlarda RSS yerine Worst-case tercih edilmelidir?
+
+Uçak iniş takımları, nükleer santral valfleri veya fren mekanizmaları gibi sıkışma durumunda can güvenliğini doğrudan tehlikeye atacak mekanizmalarda risk alınamaz ve worst-case uygulanır. Ayrıca üretim adedinin çok düşük olduğu özel imalatlarda veya proses yetenek indeksi (Cpk küçüktür 1,33) yetersiz tezgahlarda mutlaka worst-case kullanılmalıdır.
+
+### 3. Hassasiyet analizi tasarımcıya pratikte ne kazandırır?
+
+Hassasiyet analizi, montaj varyansına en çok katkı sağlayan elemanları sıralar. Bu örnekte olduğu gibi A elemanı varyansın yüzde 77,5'ini oluşturuyorsa, tasarımcı toleransı sıkılaştırmak için yalnızca A parçasının taşlama/tornalama kalitesini artırır; diğer parçaların ucuz operasyonlarla (örneğin kaba talaş veya sac kesim) üretilmesine izin vererek maliyeti düşürür.
+
+### 4. 6 Sigma kalitesi için RSS toleransı nasıl uyarlanır?
+
+Standart RSS yöntemi 3-sigma (yüzde 99,73 başarı, bin parçada yaklaşık 3 hata) varsayımına dayanır. 6-sigma seviyesinde (milyonda 3,4 hata) çalışmak istendiğinde ya da takım aşınması nedeniyle süreç merkezinin 1,5 sigma kayacağı varsayıldığında (Bender katsayısı = 1,5), RSS toleransı 1,5 faktörüyle genişletilerek güvenli tarafta kalınır.
+
+### 5. ISO ve ASME standartlarında tolerans gösterim farkı analizi etkiler mi?
+
+ISO GPS (Geometrical Product Specifications) sistemi Bağımsızlık Prensibini (Independence Principle) esas alır; yani boyut toleransı form hatasını kısıtlamaz (Envelope requirement - E sembolü yoksa). ASME Y14.5 ise Kural 1 (Rule #1 / Envelope Principle) gereği boyut sınırlarının mükemmel form sınırını zorunlu tutar. 1D doğrusal zincir analizinde boyut sınırları aynı kalsa da parça geometrik dalgalanmalarının montaja etkisi standardın yorumuna göre mastar kontrolünde fark yaratabilir.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **ISO 286-1:** Geometrik ürün özellikleri (GPS) — Doğrusal boyutlar için ISO tolerans sistemi, temel toleranslar ve sapmalar.
+- **ASME Y14.5-2018:** Dimensioning and Tolerancing — Boyutlandırma, toleranslama, Kural 1 zarf prensibi ve datum referans sistemleri.
+- **ISO 14405-1:** Geometrik ürün özellikleri (GPS) — Boyutsal toleranslama — Bölüm 1: Doğrusal boyutlar ve spesifikasyon operatörleri.
+- **ISO 1101:** Geometrik ürün özellikleri (GPS) — Geometrik toleranslama — Şekil, yön, konum ve salgı toleransları.
+- **NIST Technical Note 1297:** Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results — Ölçüm belirsizliği ve varyans yayılımı metodolojisi.

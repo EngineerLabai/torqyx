@@ -1,0 +1,236 @@
+## When to Use and When Not to Use
+
+### When to Use
+
+- **Mechanical 1D Stack-Up Dimension Loop Analysis:** Calculate the critical clearance or interference between mating components in sequential assemblies, such as shafts, bushings, retaining ring grooves, housing shoulders, and precision shims.
+- **Comparing Worst-Case and Statistical (RSS) Assembly Limits:** Contrast deterministic 100-percent assembly guarantees against statistical tolerancing strategies to relax manufacturing tolerances and reduce machining costs without sacrificing assembly yield.
+- **Tolerance Budgeting and Sensitivity Contribution:** Identify which dimension contributor accounts for the dominant share of assembly variation so tight manufacturing tolerances can be allocated deliberately rather than uniformly.
+- **Balancing Asymmetric and Unilateral Tolerances:** Automatically transform unilateral tolerances (such as +0.20 / -0.00) into effective mean shifts and symmetric half-ranges, ensuring the nominal assembly center is properly tracked.
+- **Design for Manufacturing (DFM) and Quality Engineering:** Predict assembly scrap rates and gauge compliance based on established process capabilities (Cp, Cpk) across CNC machining, stamping, and injection moulding.
+
+### When Not to Use
+
+- **Complex 2D and 3D Vector Loops:** When assemblies involve angular tilt, perpendicularity errors, flatness waviness, or rotational degrees of freedom, 1D scalar addition is insufficient; 3D kinematic vector loop simulation or Monte Carlo modelling is required.
+- **Low-Volume Production with Unvalidated Process Capability:** If the manufacturing process is not under statistical process control (Cp less than 1.33) and parts do not exhibit normal (Gaussian) distributions, the RSS method produces overly optimistic results; low-volume custom work should rely exclusively on worst-case analysis.
+- **Dominant Thermal Expansion and Elastic Compliance:** When components operate at elevated temperatures or experience significant mechanical deflection under clamping loads, thermal elongation and strain must be superimposed onto the geometric tolerance loop.
+- **Features Requiring Material Condition Modifiers (MMC / LMC Bonus Tolerance):** When size tolerances interact with geometric position callouts under Maximum Material Condition (MMC) per ASME Y14.5 or ISO 1101, bonus tolerance expands allowable variation; direct 1D linear addition does not capture this dynamic boundary.
+- **Wear Allowances and Dynamic Backlash Over Time:** Mechanical wear occurring in journal bearings, gear teeth, or slideways is a time-dependent tribological degradation, not a static dimensional manufacturing tolerance.
+
+---
+
+## Formula Derivation and Physical Background
+
+In a one-dimensional linear tolerance stack, the overall resultant assembly gap or dimension (X) is the signed linear combination of individual component dimensions.
+
+### 1. Stack Equation and Effective Deviations
+
+For each contributor i in the tolerance loop, let L_i be the nominal dimension, U_i the upper deviation, D_i the lower deviation, and s_i the directional sign (+1 for additive members, -1 for subtractive members):
+
+```
+X_nominal = sum[ s_i * L_i ]
+```
+
+When a contributor acts in the subtractive direction (s_i = -1), physical mechanics dictates that an increase in component size decreases the remaining assembly gap, while a smaller component expands the gap. Therefore, effective deviations are inverted for negative contributors:
+- If s_i = +1: effective_lower = D_i, effective_upper = U_i
+- If s_i = -1: effective_lower = -U_i, effective_upper = -D_i
+
+For each contributor, the tolerance half-range (t_i) and mean shift (c_i) are defined as:
+
+```
+t_i = (effective_upper - effective_lower) / 2
+c_i = (effective_upper + effective_lower) / 2
+```
+
+### 2. Worst-Case (Deterministic) Method
+
+The worst-case boundary assumes every component in the assembly simultaneously reaches its extreme worst manufacturing limit in the most unfavourable direction:
+
+<Formula label="Worst-Case Minimum Result">
+X_wc_min = X_nominal + sum[ effective_lower ]
+</Formula>
+
+<Formula label="Worst-Case Maximum Result">
+X_wc_max = X_nominal + sum[ effective_upper ]
+</Formula>
+
+The total worst-case tolerance interval is:
+
+```
+T_wc = X_wc_max - X_wc_min = sum[ (effective_upper - effective_lower) ] = 2 * sum[ t_i ]
+```
+
+This deterministic boundary makes zero assumptions regarding statistical probability distributions, ensuring 100 percent assembly interchangeability even under the most adverse combination of machining errors.
+
+### 3. Root Sum of Squares (RSS) Statistical Method
+
+By the Central Limit Theorem, the sum of independent random variables tends toward a normal (Gaussian) distribution, regardless of the individual underlying component distributions. If each component tolerance half-range t_i represents a 3-sigma process capability boundary (3·sigma_i), the total assembly standard deviation is:
+
+```
+sigma_total = sqrt( sum[ sigma_i^2 ] )
+```
+
+Multiplying by 3 yields the total statistical RSS half-range:
+
+<Formula label="RSS Statistical Half-Range">
+T_rss_half = sqrt( sum[ t_i^2 ] )
+</Formula>
+
+The statistical assembly limits are centered about the shifted nominal:
+- X_rss_min = (X_nominal + sum[ c_i ]) - T_rss_half
+- X_rss_max = (X_nominal + sum[ c_i ]) + T_rss_half
+
+The RSS method recognises that the statistical probability of all components arriving simultaneously at their extreme dimensional limits is vanishingly small, enabling design engineers to widen individual component manufacturing tolerances while holding tight assembly envelopes (approximately 99.73 percent confidence level).
+
+### 4. Sensitivity and Variance Contribution Analysis
+
+The total assembly variance is V_total = sum[ t_i² ]. The percentage contribution of component i to total assembly variance is:
+
+<Formula label="Variance Contribution Ratio">
+Contribution_percent_i = (t_i^2 / sum[ t_k^2 ]) * 100   [%]
+</Formula>
+
+The component exhibiting the largest variance contribution represents the principal tolerance bottleneck; tightening this contributor delivers the highest return on investment in tolerance optimization.
+
+---
+
+## Worked Example — Default Calculator Inputs
+
+The following step-by-step calculation validates the tool against its factory-default input parameters:
+
+### Input Values:
+- **Member A:** Nominal = 20 mm, Upper = +0.10 mm, Lower = -0.10 mm, Direction = +1 (Add)
+- **Member B:** Nominal = 10 mm, Upper = +0.05 mm, Lower = -0.05 mm, Direction = +1 (Add)
+- **Member C:** Nominal = 5 mm, Upper = +0.02 mm, Lower = -0.02 mm, Direction = -1 (Subtract)
+
+Dimension loop equation: **X = A + B - C**
+
+### Step 1 — Nominal Assembly Dimension:
+
+```
+X_nominal = (+1 * 20) + (+1 * 10) + (-1 * 5) = 20 + 10 - 5 = 25.000 mm
+```
+
+The nominal assembly result is **25.000 mm**.
+
+### Step 2 — Effective Deviations and Half-Ranges:
+
+- **Member A (direction +1):**
+  - effective_lower = -0.10 mm, effective_upper = +0.10 mm
+  - t_A = (0.10 - (-0.10)) / 2 = 0.10 mm
+  - c_A = 0.00 mm
+- **Member B (direction +1):**
+  - effective_lower = -0.05 mm, effective_upper = +0.05 mm
+  - t_B = (0.05 - (-0.05)) / 2 = 0.05 mm
+  - c_B = 0.00 mm
+- **Member C (direction -1):**
+  - effective_lower = - (+0.02) = -0.02 mm
+  - effective_upper = - (-0.02) = +0.02 mm
+  - t_C = (0.02 - (-0.02)) / 2 = 0.02 mm
+  - c_C = 0.00 mm
+
+### Step 3 — Worst-Case (Deterministic) Assembly Limits:
+
+Sum of effective lower deviations:
+
+```
+Sum_lower = (-0.10) + (-0.05) + (-0.02) = -0.17 mm
+```
+
+Sum of effective upper deviations:
+
+```
+Sum_upper = (+0.10) + (+0.05) + (+0.02) = +0.17 mm
+```
+
+Worst-case boundaries:
+
+```
+X_wc_min = 25.000 + (-0.17) = 24.830 mm
+X_wc_max = 25.000 + (+0.17) = 25.170 mm
+T_wc_total = 25.170 - 24.830 = 0.340 mm
+```
+
+The worst-case envelope spans **24.830 mm to 25.170 mm** (total range = 0.340 mm).
+
+### Step 4 — Root Sum of Squares (RSS) Statistical Limits:
+
+Squared half-ranges (variance contributions):
+
+```
+t_A^2 = (0.10)^2 = 0.0100 mm²
+t_B^2 = (0.05)^2 = 0.0025 mm²
+t_C^2 = (0.02)^2 = 0.0004 mm²
+Total variance = 0.0100 + 0.0025 + 0.0004 = 0.0129 mm²
+```
+
+Statistical RSS half-range:
+
+```
+T_rss_half = sqrt(0.0129) = 0.11358 mm ≈ 0.114 mm
+```
+
+Statistical RSS limits:
+
+```
+X_rss_min = 25.000 - 0.11358 = 24.886 mm
+X_rss_max = 25.000 + 0.11358 = 25.114 mm
+T_rss_total = 2 * 0.11358 = 0.227 mm
+```
+
+The statistical RSS range is **0.227 mm**, which is 33.2 percent narrower than the deterministic worst-case band of 0.340 mm.
+
+### Step 5 — Sensitivity and Variance Contribution Analysis:
+
+Percentage of total assembly variance per member:
+
+```
+Contribution_A = (0.0100 / 0.0129) * 100 = 77.52 %
+Contribution_B = (0.0025 / 0.0129) * 100 = 19.38 %
+Contribution_C = (0.0004 / 0.0129) * 100 = 3.10 %
+```
+
+This quantitative breakdown reveals that Member A alone accounts for 77.52 percent of the overall assembly variation. If an engineer must tighten the assembly gap, tightening Member A from ±0.10 to ±0.06 mm delivers dramatic improvement, whereas tightening Member C is commercially unproductive.
+
+---
+
+## Common Engineering Mistakes
+
+1. **Adding Subtractive Tolerances Without Inverting Signs:** In subtractive members (s_i = -1), an oversized part closes the gap. Forgetting to invert upper and lower deviations causes positive and negative shifts to cancel out erroneously in asymmetric callouts.
+2. **Applying Statistical RSS to Low-Volume Batches:** If only 50 to 100 assemblies are produced annually, the Law of Large Numbers cannot take effect. Extreme parts can pair together, causing assembly line seizures; high-risk custom designs should always be checked against worst-case limits.
+3. **Omitting Mean Shifts on Asymmetrical Tolerances:** A dimension called out as 20 (+0.20 / -0.00) has an effective manufacturing midpoint of 20.10 mm. Neglecting this 0.10 mm offset skews the statistical mean, producing false scrap rate predictions.
+4. **Violating Statistical Independence:** If two mating faces in the loop are machined on the same fixture in the same setup, tooling wear or thermal drift introduces strong positive correlation. Assuming zero covariance causes the standard RSS formula to underestimate real variation.
+5. **Treating GD&T Profile or Position as Simple Scalar Tolerances:** Geometric tolerances with datums and material condition modifiers create multi-dimensional tolerance zones. Collapsing a composite positional tolerance into a simple 1D plus-minus number without virtual condition analysis can lead to clearance failures during inspection.
+
+---
+
+## Frequently Asked Questions
+
+### 1. What is the fundamental difference between Worst-Case and RSS analysis?
+
+Worst-case is a deterministic bounding method that assumes every single component is simultaneously manufactured at its absolute extreme limit in the worst possible direction. It guarantees 100 percent interchangeability but enforces costly tight part tolerances. RSS (Root Sum of Squares) is a statistical method assuming normal distributions and independent variables; it recognizes that extreme parts rarely assemble together, resulting in a narrower predicted assembly tolerance band.
+
+### 2. When should an engineer insist on Worst-Case rather than RSS?
+
+Worst-case must be mandated for safety-critical mechanisms where binding or interference could cause catastrophic failure, such as commercial aircraft flight-control linkages, medical drug delivery pumps, and nuclear isolation valves. It is also required for low-volume production or when machining processes lack documented Cpk data.
+
+### 3. How does sensitivity analysis guide engineering budget allocation?
+
+Sensitivity analysis quantifies the relative variance contribution of each member. In our default example, Member A contributes 77.52 percent of total variance while Member C contributes only 3.10 percent. Rather than tightening all tolerances (which drives up manufacturing costs exponentially), the engineer focuses solely on tightening Member A, achieving the tightest assembly clearance at minimum production cost.
+
+### 4. How can RSS be modified for Six Sigma manufacturing?
+
+Standard RSS assumes a 3-sigma process yield (approximately 99.73 percent success rate, or 2,700 defects per million opportunities). For Six Sigma capability (3.4 defects per million), or to account for typical 1.5-sigma process mean shifts over long production runs, engineers apply a Bender factor (typically k = 1.5), scaling the RSS half-range: T_mod = 1.5 · T_rss.
+
+### 5. Do ISO GPS and ASME Y14.5 standards interpret tolerance limits identically?
+
+Not in all cases. ASME Y14.5 enforces Rule #1 (Envelope Principle) by default, meaning that size tolerances also control form (straightness, roundness) at Maximum Material Condition. ISO GPS enforces the Independence Principle (ISO 8015) by default, where size tolerances do not constrain form unless the Envelope requirement (symbol E) is explicitly invoked. While 1D arithmetic formulas remain identical, physical verification on coordinate measuring machines may differ.
+
+---
+
+## Related Standards and Design Clauses
+
+- **ISO 286-1:** Geometrical product specifications (GPS) — ISO code system for tolerances on linear sizes — Part 1: Basis of tolerances, deviations, and fits.
+- **ASME Y14.5-2018:** Dimensioning and Tolerancing — National standard governing linear dimensions, datum reference frames, and Rule #1 envelope boundaries.
+- **ISO 14405-1:** Geometrical product specifications (GPS) — Dimensional tolerancing — Part 1: Linear sizes and specification operators.
+- **ISO 1101:** Geometrical product specifications (GPS) — Geometrical tolerancing — Tolerances of form, orientation, location, and run-out.
+- **NIST Technical Note 1297:** Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results — Mathematical basis for root-sum-squares variance propagation.
