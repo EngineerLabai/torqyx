@@ -1,0 +1,221 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+
+- **Basit Destekli Kiriş Ön Boyutlandırması:** İki mesnet arasına oturtulmuş ve ortasından tekil yük taşıyan makine şasisi traversleri, platform kirişleri ve taşıyıcı konsolların ilk mukavemet kontrolünde kullanılır.
+- **Kesit Yönelimi ve Bükülme Rijitliği İncelemesi:** Dikdörtgen veya dairesel kesitli profillerin uygulanan yük yönüne göre doğru eksende yerleştirilip yerleştirilmediğini (kuvvetli eksen ile zayıf eksen kıyası) mukayese etmek için tercih edilir.
+- **Maksimum Çökme (Sehim) Sınırlarının Denetimi:** Takım tezgahı kızakları, vinç köprüleri veya konveyör şasilerinde izin verilen sehim sınırının (L/300 veya L/500 gibi işletme kriterleri) aşılıp aşılmadığını belirlemede uygulanır.
+- **Statik Akma Güvenlik Faktörü Tespiti:** Yapı çelikleri (S235, S275, S355 vb.) için hesaplanan en yüksek lif çekme ve basma gerilmesinin malzemenin akma dayanımına oranlanarak güvenli bölgede kalındığını hızlıca doğrulamak için kullanılır.
+- **Akademik Mukavemet Eğitimi:** Euler-Bernoulli kiriş teorisi, kesit atalet momenti (I) ve mukavemet momenti (W) kavramlarının mekanik davranışa etkisini adım adım incelemek amacıyla idealdir.
+
+### Ne Zaman Kullanılmamalıdır?
+
+- **Sürekli Yayılı veya Çoklu Noktasal Yükler:** Yük kiriş boyuna homojen yayılmışsa (q N/m) veya birden fazla farklı noktadan etkiyorsa maksimum moment FL/4 formülüyle hesaplanamaz; kesme kuvveti ve eğilme momenti diyagramları (V-M diyagramı) çizilmelidir.
+- **Ankastre (Konsol) veya Çok Açıklıklı Kirişler:** Bir ucu duvara gömülü konsol kirişlerde (M_max = F·L) veya hiperstatik çok mesnetli kirişlerde mesnet reaksiyonları ve moment dağılımı farklı sınır koşullarına bağlıdır; bu hesaplayıcı yalnızca iki ucu basit mesnetli sistemi çözer.
+- **Kısa ve Derin Kirişlerde Kayma Gerilmesi:** Kiriş açıklığının kesit yüksekliğine oranı küçük olduğunda (L/h oranı 10'dan küçükse) Timoshenko kiriş teorisi uyarınca enine kesme deformasyonları ihmal edilemez; Euler-Bernoulli yaklaşımı sehim değerini eksik hesaplar.
+- **İnce Cidarlı Açık Kesitlerde Yanal Burulmalı Burkulma:** I-profilleri, U-kanalları veya yüksek-dar lamalarda flanş basma gerilmesi nedeniyle elastik yanal burkulma (lateral torsional buckling) meydana gelebilir; bu araç kesit burkulması riskini kapsamaz.
+- **Plastik Mafsal ve Akma Ötesi Davranış:** Hesaplanan gerilme akma dayanımını aştığında kesitte elastik çekirdek daralır ve plastik mafsal oluşumu başlar; bu araç yalnızca doğrusal elastik gerilme bölgesinde geçerlidir.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Euler-Bernoulli kiriş teorisi, kiriş eksenine dik yükleme altında deforme olan liflerin davranışını analitik bağıntılara döker. Temel varsayım, deformasyon öncesinde kiriş eksenine dik olan düzlemsel kesitlerin deformasyon sonrasında da düzlem kalması ve eksene dikliğini korumasıdır.
+
+### 1. Eğilme Gerilmesi (Navier Bağıntısı) ve Mukavemet Momenti
+
+Tarafsız eksenden y mesafesindeki boyuna lif uzaması (birim deformasyon):
+
+```
+epsilon(y) = -y / rho
+```
+
+Burada rho eğrilik yarıçapıdır. Tek eksenli Hooke yasası (sigma = E · epsilon) uyarınca lif gerilmesi:
+
+```
+sigma(y) = -E * y / rho
+```
+
+Kesitteki iç eğilme momenti dengesi kurulduğunda:
+
+```
+M = integral[ -y * sigma(y) dA ] = (E / rho) * integral[ y^2 dA ] = (E / rho) * I
+```
+
+Burada I kesitin tarafsız eksene göre alan eylemsizlik momentidir (mm⁴). Maksimum gerilme, tarafsız eksenden en uzak lifte (y_max = c) meydana gelir:
+
+<Formula label="Navier Eğilme Gerilmesi">
+sigma_max = M * c / I = M / W   [MPa]
+</Formula>
+
+Burada W = I / c kesit mukavemet momentidir (mm³):
+- **Dikdörtgen Kesit (genişlik b, yükseklik h):**
+  - I = (b * h^3) / 12   [mm⁴]
+  - W = (b * h^2) / 6   [mm³]
+- **Dairesel Kesit (çap d):**
+  - I = (pi * d^4) / 64   [mm⁴]
+  - W = (pi * d^3) / 32   [mm³]
+
+### 2. Basit Mesnetli Kirişte Merkez Tekil Yük İçin Maksimum Moment
+
+Açıklığı L olan iki ucu serbest mesnetli bir kirişin tam ortasına etkiyen F tekil kuvveti durumunda mesnet tepki kuvvetleri simetriden dolayı R_A = R_B = F / 2 olur.
+
+Kirişin sol yarısında (0 ile L/2 arasında) kesit momenti x mesafesine bağlı olarak:
+
+```
+M(x) = R_A * x = (F / 2) * x
+```
+
+Maksimum moment tam merkezde (x = L / 2) oluşur:
+
+<Formula label="Merkez Noktasal Yük Maksimum Momenti">
+M_max = (F / 2) * (L / 2) = (F * L) / 4   [N·mm]
+</Formula>
+
+### 3. Elastik Eğri Diferansiyel Denklemi ve Maksimum Sehim
+
+Kirişin elastik eğrisi E · I · v''(x) = -M(x) diferansiyel denkleminin iki kez integrali ile elde edilir:
+
+```
+E * I * v'(x) = - (F / 4) * x^2 + C1
+```
+
+Simetri gereği tam ortada eğim sıfırdır: v'(L/2) = 0, buradan C1 = (F · L²) / 16 bulunur. İkinci integral:
+
+```
+E * I * v(x) = - (F / 12) * x^3 + (F * L^2 / 16) * x + C2
+```
+
+x = 0 mesnedinde çökme sıfır olduğundan C2 = 0 çıkar. Maksimum sehim kirişin tam ortasında (x = L/2) hesaplanır:
+
+<Formula label="Merkezde Maksimum Sehim Formülü">
+delta_max = (F * L^3) / (48 * E * I)   [mm]
+</Formula>
+
+### 4. Statik Güvenlik Faktörü
+
+Akma dayanımı Re ve hesaplanan tepe çekme/basma gerilmesi sigma_max oranlanarak emniyet kontrolü yapılır:
+
+```
+n = Re / sigma_max
+```
+
+Güvenlik faktörü 1,0'dan büyükse kesit elastik sınırlar içindedir. Güvenlik faktörü 1,0'ın altında kaldığında malzeme akma sınırını aşmış demektir ve kalıcı plastik deformasyon meydana gelir.
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın varsayılan parametreleri kullanılarak yapılan adım adım mühendislik doğrulaması:
+
+### Girdi Değerleri:
+- Kiriş Açıklığı (L): **500 mm**
+- Uygulanan Merkez Yükü (F): **2 kN = 2.000 N**
+- Kesit Tipi: **Dikdörtgen (Lamadan yatay veya dikey profil)**
+- Kesit Genişliği (b): **40 mm**
+- Kesit Yüksekliği (h): **8 mm**
+- Elastisite Modülü (E): **210.000 MPa (yapı çeliği)**
+- Akma Dayanımı (Re): **355 MPa (S355 çelik kalite sınıfı)**
+
+### Adım 1 — Maksimum Eğilme Momentinin Hesaplanması:
+
+```
+M_max = (F * L) / 4 = (2.000 N * 500 mm) / 4 = 1.000.000 / 4 = 250.000 N·mm
+```
+
+KiloNewton-metre birimine çevrildiğinde:
+
+```
+M_max = 250.000 N·mm / 1.000.000 = 0,250 kN·m
+```
+
+Kiriş merkezindeki tepe momenti **0,250 kN·m** (250 N·m) olarak bulunur.
+
+### Adım 2 — Kesit Eylemsizlik ve Mukavemet Momentleri:
+
+Genişlik b = 40 mm ve eğilme doğrultusundaki yükseklik h = 8 mm için:
+
+```
+I = (b * h^3) / 12 = (40 * 8^3) / 12 = (40 * 512) / 12 = 20.480 / 12 = 1.706,67 mm⁴
+```
+
+Bilimsel gösterimle **1,707e+3 mm⁴** elde edilir. Mukavemet momenti:
+
+```
+W = (b * h^2) / 6 = (40 * 8^2) / 6 = (40 * 64) / 6 = 2.560 / 6 = 426,67 mm³
+```
+
+Bilimsel gösterimle **4,267e+2 mm³** elde edilir.
+
+### Adım 3 — Maksimum Eğilme Gerilmesi (sigma):
+
+```
+sigma = M_max / W = 250.000 N·mm / 426,67 mm³ = 585,94 MPa
+```
+
+En yakın tam sayıya yuvarlandığında **586 MPa** çekme/basma gerilmesi hesaplanır.
+
+### Adım 4 — Maksimum Çökme (Sehim, delta):
+
+```
+F * L^3 = 2.000 * (500)^3 = 2.000 * 125.000.000 = 250.000.000.000 N·mm³
+48 * E * I = 48 * 210.000 * 1.706,67 = 10.080.000 * 1.706,67 = 17.203.200.000 N·mm²
+delta = 250.000.000.000 / 17.203.200.000 = 14,53 mm
+```
+
+Merkezdeki elastik sehim **14,53 mm** olarak bulunur.
+
+### Adım 5 — Güvenlik Faktörü Değerlendirmesi:
+
+```
+n = Re / sigma = 355 / 585,94 = 0,61
+```
+
+Güvenlik katsayısı **0,61** seviyesinde kalmaktadır (1,0'dan küçüktür). Bu kritik sonuç, 40×8 mm kesitli bir çelik lamaya zayıf ekseninde 500 mm açıklıkta 2 kN (yaklaşık 204 kg) yük uygulandığında kirişin akma sınırını fazlasıyla aştığını ve kalıcı büküleceğini gösterir. Profil 90 derece döndürülerek b=8 mm, h=40 mm konumuna getirilirse atalet momenti 25 kat artar, gerilme 117 MPa'ya düşer ve emniyet katsayısı 3,03'e yükselir.
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Kesit Yönelimini (Kuvvetli ve Zayıf Eksen) Ters Almak:** Dikdörtgen kesitli lamalarda h parametresi eğilme yükü doğrultusundaki boyuttur. 40×8 mm bir lama yatay konursa I = 1.707 mm⁴ iken, dik konursa I = (8·40³)/12 = 42.667 mm⁴ olur. Yanlış oryantasyon 25 kat rijitlik kaybına ve erken çökmeye yol açar.
+2. **Kiriş Kendi Ağırlığını İhmal Etmek:** Uzun açıklıklı veya ağır çelik profillerde kirişin kendi ölü yükü yayılı yük olarak ek moment üretir; yalnızca tekil dış yükü almak özellikle sehim hesabında iyimser sonuç verir.
+3. **Sehim Sınırlarını Kontrol Etmemek:** Mukavemet katsayısı n büyüktür 1 olsa dahi, örneğin makine şasilerinde izin verilen sehim L/500 = 1 mm iken hesaplanan çökme 5 mm çıkabilir. Birçok mühendislik uygulamasında tasarımı gerilme değil doğrudan sehim sınırı belirler.
+4. **Gerilme Yığılmasını (Çentik Etkisini) Hesaba Katmamak:** Kiriş üzerinde delik, kama yuvası veya fatura geçişi varsa o bölgedeki tepe gerilmesi sigma_max nominal değerin 2 ila 3 katına fırlayabilir; bu durum yorulma kırılmalarının ana nedenidir.
+5. **Akma Sınırı ile Çekme Dayanımını Karıştırmak:** Emniyet hesabında Rm (kopma dayanımı) yerine Re (akma dayanımı) kullanılmalıdır. Akma sınırı aşıldığında parça kopmasa dahi kalıcı geometrik bozulma yaşanır ve makine fonksiyonunu yitirir.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Eğilme gerilmesi ile kesme gerilmesi aynı anda nasıl değerlendirilir?
+
+Kirişin üst ve alt yüzey liflerinde eğilme gerilmesi maksimum iken kesme gerilmesi sıfırdır. Tarafsız eksende ise eğilme gerilmesi sıfır, kesme gerilmesi maksimumdur. Ara bölgelerde iki gerilme bileşeni von Mises eşdeğer gerilme hipotezi (sigma_eş = sqrt(sigma² + 3·tau²)) ile birleştirilerek akma emniyeti kontrol edilmelidir.
+
+### 2. İzin verilen maksimum çökme (sehim) oranı nedir?
+
+Standart mühendislik uygulamalarında izin verilen sehim açıklığa oranla tanımlanır:
+- Genel makine şasileri ve platformlar: L / 250 ile L / 300 arası
+- Hassas takım tezgahı yatakları ve vinç köprüleri: L / 500 ile L / 1000 arası
+- Çatı aşıkları ve bina tali kirişleri (Eurocode 3): L / 200 ile L / 250 arası
+
+### 3. Neden dikdörtgen kesitte mukavemet momenti formülü bh²/6'dır?
+
+Navier formülünde sigma = M·c / I olup, dikdörtgen kesitte simetri nedeniyle c = h / 2'dir. I = b·h³ / 12 bağıntısı yerine konulduğunda W = I / c = (b·h³ / 12) / (h / 2) = b·h² / 6 ifadesi doğrudan elde edilir.
+
+### 4. Malzemenin elastisite modülü (E) gerilmeyi etkiler mi?
+
+Statik olarak belirli (izostatik) basit mesnetli bir kirişte iç moment ve eğilme gerilmesi elastisite modülünden tamamen bağımsızdır; gerilme sadece kesit geometrisi ve yüke bağlıdır. Ancak sehim formülünde E paydada yer alır; yani çelik yerine alüminyum (E = 70.000 MPa) kullanılırsa gerilme değişmezken çökme 3 katına çıkar.
+
+### 5. Varsayılan örnekteki 0,61 güvenlik katsayısı ne anlama gelir?
+
+0,61 katsayısı, kesitin 355 MPa akma sınırının yüzde 165'ine kadar zorlandığını (586 MPa) ve sistemin elastik aralıktan çıkarak kalıcı plastik deformasyona uğrayacağını gösterir. Güvenli bir tasarım için kesit yüksekliği h artırılmalı, malzeme akma sınırı yükseltilmeli veya mesnet açıklığı kısaltılmalıdır.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **EN 1993-1-1 (Eurocode 3):** Çelik yapıların tasarımı — Bölüm 1-1: Genel kurallar, kesit dayanımı ve yapısal eleman sınır durumları.
+- **DIN 18800-1:** Çelik yapılar — Boyutlandırma ve konstrüksiyon prensipleri, kiriş sehim ve gerilme sınırları.
+- **AISC 360:** Yapısal çelik binalar için şartname — eğilme elemanlarının tasarımı ve sehim kriterleri.
+- **ISO 10721-1:** Çelik yapılar — Bölüm 1: Malzemeler ve tasarım hesap yöntemleri.
+- **Shigley's Mechanical Engineering Design:** Bölüm 3 (Yük ve Gerilme Analizi) ve Bölüm 4 (Sehim ve Rijitlik) — kirişlerde analitik eğilme teorisi.

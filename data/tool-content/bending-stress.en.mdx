@@ -1,0 +1,225 @@
+## When to Use and When Not to Use
+
+### When to Use
+
+- **Simply Supported Beam Preliminary Sizing:** Ideal for calculating initial bending stresses, section capacity, and maximum mid-span deflection in machine chassis crossmembers, platform support bars, and spreader beams supported at both ends with a single central point load.
+- **Section Orientation and Bending Stiffness Optimization:** Quickly verify whether a rectangular flat bar or profile is oriented along its strong axis or weak axis, demonstrating how depth h dramatically influences moment of inertia compared to width b.
+- **Serviceability Deflection Limit Checks:** Assess whether the elastic deflection satisfies operational criteria (such as L/300, L/500, or crane girder guidelines) to prevent jamming of linear guides, machine tool chatter, or excessive structural sag.
+- **Static Yield Safety Factor Verification:** Compute the peak tensile and compressive outer-fibre stresses against the specified yield strength (such as S235, S275, S355 structural steels or 6061-T6 aluminium alloys) to guarantee elastic performance.
+- **Engineering Education and Training:** Serves as a clear, rigorous illustration of Euler-Bernoulli beam theory, the flexure formula, and the direct relationship between section modulus and flexural rigidity.
+
+### When Not to Use
+
+- **Uniformly Distributed or Multiple Point Loads:** If the load is distributed over the span (q in N/mm) or consists of multiple offset concentrated loads, the peak moment does not equal FL/4. Shear force and bending moment diagrams (V-M diagrams) must be constructed to locate the true maximum moment.
+- **Cantilever or Continuous Multi-Span Beams:** For beams clamped at one end (cantilever, where M_max = F·L) or statically indeterminate continuous beams across three or more supports, support reactions and moments depend on boundary conditions not modelled by this simple span tool.
+- **Short, Deep Beams Governed by Shear:** When the span-to-depth ratio L/h is less than 10, transverse shear deformations become significant. Under such proportions, Timoshenko beam theory must be employed because Euler-Bernoulli theory underestimates deflection.
+- **Thin-Walled Profiles Susceptible to Lateral-Torsional Buckling:** Slender I-beams, channels, or deep narrow rectangular plates subjected to flexure can undergo out-of-plane lateral-torsional buckling long before yield stress is reached; this calculator evaluates section strength only.
+- **Post-Yield and Plastic Hinge Analysis:** Once outer-fibre stress exceeds the material yield point, an elastic core recedes and a plastic hinge develops. This calculator operates strictly within the linear elastic regime.
+
+---
+
+## Formula Derivation and Physical Background
+
+Euler-Bernoulli beam theory describes the relationship between transverse applied forces, internal bending moments, resulting stresses, and elastic deflections along a flexural member. The fundamental kinematic assumption states that plane sections perpendicular to the beam axis before deformation remain plane and perpendicular to the deformed neutral axis afterwards.
+
+### 1. Flexure Formula (Navier's Equation) and Section Modulus
+
+At a distance y from the neutral axis, the longitudinal axial strain is proportional to beam curvature (1 / rho):
+
+```
+epsilon(y) = -y / rho
+```
+
+Applying one-dimensional Hooke's law (sigma = E · epsilon) for isotropic, homogeneous linear-elastic material:
+
+```
+sigma(y) = -E * y / rho
+```
+
+Equating the internal resisting moment to the applied bending moment M:
+
+```
+M = integral[ -y * sigma(y) dA ] = (E / rho) * integral[ y^2 dA ] = (E / rho) * I
+```
+
+Where I is the second moment of area (area moment of inertia) about the neutral bending axis (mm⁴). The peak stress occurs at the extreme outer fibres where y is at its maximum distance (c):
+
+<Formula label="Navier Flexure Formula">
+sigma_max = M * c / I = M / W   [MPa]
+</Formula>
+
+Here W = I / c is the elastic section modulus (mm³):
+- **Rectangular Cross-Section (width b, height h):**
+  - I = (b * h^3) / 12   [mm⁴]
+  - W = (b * h^2) / 6   [mm³]
+- **Solid Circular Cross-Section (diameter d):**
+  - I = (pi * d^4) / 64   [mm⁴]
+  - W = (pi * d^3) / 32   [mm³]
+
+### 2. Maximum Bending Moment for Simply Supported Central Point Load
+
+Consider a beam of span L supported on pin and roller supports with a concentrated load F applied at mid-span (x = L / 2). By symmetry, each vertical reaction force is:
+
+```
+R_A = R_B = F / 2
+```
+
+For the span interval 0 to L / 2, the internal bending moment as a function of position x is:
+
+```
+M(x) = R_A * x = (F / 2) * x
+```
+
+The maximum moment occurs directly beneath the point load at x = L / 2:
+
+<Formula label="Mid-Span Maximum Bending Moment">
+M_max = (F / 2) * (L / 2) = (F * L) / 4   [N·mm]
+</Formula>
+
+### 3. Differential Equation of the Elastic Curve and Mid-Span Deflection
+
+The elastic deflection curve v(x) satisfies the second-order differential equation E · I · v''(x) = -M(x). Integrating once along the left half (0 to L / 2):
+
+```
+E * I * v'(x) = - (F / 4) * x^2 + C1
+```
+
+Due to symmetry, the slope at mid-span is zero: v'(L / 2) = 0, which yields C1 = (F · L²) / 16. Integrating a second time:
+
+```
+E * I * v(x) = - (F / 12) * x^3 + (F * L^2 / 16) * x + C2
+```
+
+At the support x = 0, vertical displacement v(0) = 0, giving C2 = 0. Evaluating at mid-span (x = L / 2) produces the maximum downward deflection:
+
+<Formula label="Mid-Span Maximum Deflection">
+delta_max = (F * L^3) / (48 * E * I)   [mm]
+</Formula>
+
+### 4. Static Safety Factor Against Yielding
+
+Comparing the specified yield strength Re to the peak computed outer-fibre bending stress sigma_max yields the safety factor:
+
+```
+n = Re / sigma_max
+```
+
+When n is greater than 1.0, the entire cross-section remains fully in the linear elastic state. If n is less than 1.0, outer fibres experience plastic deformation and permanent set occurs.
+
+---
+
+## Worked Example — Default Calculator Inputs
+
+The following step-by-step calculation validates the tool using its factory-default input parameters:
+
+### Input Values:
+- Beam Span (L): **500 mm**
+- Applied Center Force (F): **2 kN = 2,000 N**
+- Section Type: **Rectangular flat bar**
+- Section Width (b): **40 mm**
+- Section Height (h): **8 mm**
+- Young's Modulus (E): **210,000 MPa (structural steel)**
+- Material Yield Strength (Re): **355 MPa (grade S355 steel)**
+
+### Step 1 — Peak Bending Moment (M_max):
+
+```
+M_max = (F * L) / 4 = (2,000 N * 500 mm) / 4 = 1,000,000 / 4 = 250,000 N·mm
+```
+
+Converting to kiloNewton-metres:
+
+```
+M_max = 250,000 N·mm / 1,000,000 = 0.250 kN·m
+```
+
+The peak internal bending moment is **0.250 kN·m** (250 N·m).
+
+### Step 2 — Section Properties (Inertia I and Modulus W):
+
+For width b = 40 mm and height along the bending plane h = 8 mm:
+
+```
+I = (b * h^3) / 12 = (40 * 8^3) / 12 = (40 * 512) / 12 = 20,480 / 12 = 1,706.67 mm⁴
+```
+
+In scientific notation, this displays as **1.707e+3 mm⁴**. The section modulus is:
+
+```
+W = (b * h^2) / 6 = (40 * 8^2) / 6 = (40 * 64) / 6 = 2,560 / 6 = 426.67 mm³
+```
+
+In scientific notation, this displays as **4.267e+2 mm³**.
+
+### Step 3 — Maximum Bending Stress (sigma):
+
+```
+sigma = M_max / W = 250,000 N·mm / 426.67 mm³ = 585.94 MPa
+```
+
+Rounding to the nearest whole integer gives **586 MPa**.
+
+### Step 4 — Maximum Elastic Deflection (delta):
+
+```
+F * L^3 = 2,000 * (500)^3 = 2,000 * 125,000,000 = 250,000,000,000 N·mm³
+48 * E * I = 48 * 210,000 * 1,706.67 = 10,080,000 * 1,706.67 = 17,203,200,000 N·mm²
+delta = 250,000,000,000 / 17,203,200,000 = 14.53 mm
+```
+
+The mid-span downward deflection is **14.53 mm**.
+
+### Step 5 — Safety Factor Evaluation:
+
+```
+n = Re / sigma = 355 / 585.94 = 0.61
+```
+
+The calculated safety factor is **0.61** (less than 1.0). This vital engineering result demonstrates that placing a 40×8 mm flat bar on its flat (weak) side under 2 kN across a 500 mm span causes extensive yielding and severe permanent deformation (deflecting over 14.5 mm on a 500 mm span). Rotating the bar by 90 degrees so that b = 8 mm and h = 40 mm increases the moment of inertia to 42,667 mm⁴ (a 25-fold increase), drops the peak stress to 117 MPa, reduces deflection to 0.58 mm, and raises the safety factor to 3.03.
+
+---
+
+## Common Engineering Mistakes
+
+1. **Confusing Width and Height Orientation:** In rectangular profiles, the depth h must always align parallel to the load direction. Orienting a 40×8 mm bar flat produces I = 1,707 mm⁴, whereas standing it on edge produces I = 42,667 mm⁴. Misinterpreting orientation leads to a 25-fold error in flexural stiffness.
+2. **Ignoring Self-Weight on Longer Spans:** For spans exceeding 1.5 to 2 metres, the beam's own mass contributes a continuous distributed dead load that increases both mid-span moment and total deflection. Omitting self-weight produces unconservative safety margins.
+3. **Overlooking Serviceability Deflection Criteria:** A beam design may satisfy static stress requirements (n greater than 1.0) while still deflecting excessively under load. In precision machinery and architectural glazing supports, deflection limits of L/500 or tighter govern section sizing rather than stress.
+4. **Neglecting Stress Concentrations Near Holes and Cutouts:** Mounting holes or notches located in high-moment regions create local stress raisers (Kt factors between 2.0 and 3.0). Using the gross section modulus without an allowance for net section reduction invites fatigue cracking.
+5. **Treating Ultimate Tensile Strength as the Limit State:** Evaluating safety against ultimate strength Rm instead of yield strength Re produces a misleading margin. Beyond yield, large plastic deformations occur, impairing machine alignment and clearances.
+
+---
+
+## Frequently Asked Questions
+
+### 1. How do bending stress and shear stress interact in a beam?
+
+Along the extreme top and bottom surfaces, bending stress reaches its maximum while transverse shear stress is identically zero. At the neutral axis (centreline), bending stress is zero while shear stress reaches its parabolic peak (tau_max = 1.5 · V / A for a rectangular section). At intermediate fibres, both exist simultaneously and can be combined via the von Mises failure criterion (sigma_vm = sqrt(sigma² + 3·tau²)) to assess overall yield resistance.
+
+### 2. What deflection limits are commonly specified in industry?
+
+Standard engineering practice specifies allowable deflections as a fraction of the clear span L:
+- General machinery frames and platform walkways: L / 250 to L / 300
+- Overhead crane runway girders and precision shafts: L / 500 to L / 1000
+- Structural steel floor joists and roof purlins (Eurocode 3 / AISC): L / 200 to L / 360
+
+### 3. Does Young's modulus E affect the bending stress in a statically determinate beam?
+
+No. In a statically determinate simply supported beam, internal bending moments and outer-fibre stresses depend strictly on equilibrium and section geometry (W = I / c). Switching from steel (E = 210,000 MPa) to aluminium (E = 70,000 MPa) leaves the bending stress unchanged, but triples the elastic deflection.
+
+### 4. Why does the default example show a safety factor of 0.61?
+
+The default configuration intentionally illustrates a weak-axis loading scenario: a 40 mm wide by 8 mm deep bar spanning 500 mm carrying 2 kN. The resulting stress of 586 MPa exceeds the 355 MPa yield point by 65 percent. The remedy is simply to stand the bar on edge (h = 40 mm, b = 8 mm), which instantly restores the safety factor to 3.03.
+
+### 5. What is the difference between elastic section modulus W and plastic section modulus Z?
+
+The elastic section modulus W = I / c assumes linear stress distribution up to the onset of outer-fibre yielding. The plastic section modulus Z assumes full section plastification where all fibres reach the yield stress (one half in tension, the other in compression). For a solid rectangle, Z = b·h² / 4, yielding a shape factor of Z / W = 1.5, representing 50 percent reserve capacity before total plastic collapse.
+
+---
+
+## Related Standards and Design Clauses
+
+- **EN 1993-1-1 (Eurocode 3):** Design of steel structures — Part 1-1: General rules and rules for buildings, defining cross-section classification and flexural resistance.
+- **AISC 360:** Specification for Structural Steel Buildings — Chapter F (Design of Members for Flexure) and serviceability deflection guidelines.
+- **DIN 18800-1:** Structural steelwork — Design and construction, providing standard formulas for beam bending stresses and deflection limits.
+- **ISO 10721-1:** Steel structures — Part 1: Materials and design calculation methods.
+- **Shigley's Mechanical Engineering Design:** Chapters 3 (Load and Stress Analysis) and 4 (Deflection and Stiffness), providing classical mechanical beam analysis foundations.
