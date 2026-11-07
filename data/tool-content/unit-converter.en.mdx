@@ -1,0 +1,178 @@
+## When to Use and When Not to Use
+
+### When to Use
+
+- **Cross-Border Engineering Specifications and Documentation:** Convert parameters seamlessly between US Customary (Imperial) and Metric (SI) engineering standards, drawings, supplier datasheets, and procurement specifications (such as mm to inches, bar to psi, kN to lbf).
+- **Harmonizing Inputs for FEA and Analytical Mechanics:** Ensure consistent base SI units (Newtons, metres, Pascals, Joules) prior to populating finite-element boundary conditions or classical stress formulas.
+- **CNC Machining and Manufacturing Toolpath Generation:** Verify coordinate dimensions when programming CNC mills or lathes from part prints dimensioned in decimal inches or fractional feet into metric machine offsets.
+- **Fluid Power and Hydraulic System Commissioning:** Correlate pump discharge ratings, accumulator pre-charge values, and pressure relief valve settings across bar, MPa, and psi units.
+- **Thermodynamic and Energy Efficiency Audits:** Convert power and energy metrics between Joules, kilowatt-hours (kWh), watt-hours (Wh), and calories (cal) for heat exchangers, electric drives, and cooling circuits.
+
+### When Not to Use
+
+- **Non-Linear Temperature Scale Transformations:** Converting between Celsius (°C), Kelvin (K), and Fahrenheit (°F) cannot be performed by simple multiplicative ratio alone because of additive zero-point offsets (affine transformations such as +273.15 or -32·5/9).
+- **Compound Transport Properties (Viscosity and Heat Transfer):** Multi-dimensional parameters such as dynamic viscosity (cP vs. Pa·s), kinematic viscosity (cSt vs. m²/s), or thermal transmittance (U-factor vs. W/m²K) require multivariate dimensional matrix transformations.
+- **Gas Volumetric Flow at Standard vs. Normal Conditions (Nm³/h vs. SCFM):** Flow conversions between Normal (0°C, 1 atm) and Standard (typically 15°C or 20°C, 1 atm) cubic metres depend on specific thermodynamic reference temperatures and the ideal gas equation of state.
+- **Gauge vs. Absolute Pressure Transducer Readouts:** A gauge reading (barg or psig) differs from absolute pressure (bara or psia) by the local atmospheric barometric pressure (typically 1.01325 bar); simple scaling without adding atmospheric offset introduces error.
+- **Mass vs. Weight Force Equivalence:** Kilograms (kg) measure mass (matter quantity), whereas kilogram-force (kgf) or pound-force (lbf) measure gravitational force; local gravitational acceleration (standard g = 9.80665 m/s²) must be applied when transforming mass into weight.
+
+---
+
+## Formula Derivation and Physical Background
+
+Unit conversion is governed by Dimensional Analysis and the factor-label chain method, ensuring invariance of physical reality across arbitrary measurement systems.
+
+### 1. Star-Topology Base Unit Architecture
+
+Rather than maintaining N·(N-1) individual pairwise conversion relationships between every conceivable pair of units within a physical category, a single foundational base unit defined by the International System of Units (BIPM SI) serves as the central hub:
+- **Length:** Metre (m)
+- **Force:** Newton (N = kg·m/s²)
+- **Pressure:** Pascal (Pa = N/m²)
+- **Energy:** Joule (J = N·m = kg·m²/s²)
+
+Every unit definition carries an exact conversion factor (toBase, f) relating that unit to the designated category base unit:
+
+```
+V_base = V_in * f_from
+```
+
+### 2. General Conversion Equation
+
+The normalized base magnitude is subsequently divided by the target unit's base factor (f_to) to determine the output magnitude:
+
+```
+V_out = V_base / f_to
+```
+
+Synthesizing both steps yields the general governing conversion relation:
+
+<Formula label="Governing Unit Conversion Relation">
+V_out = V_in * (f_from / f_to)
+</Formula>
+
+### 3. Canonical Engineering Conversion Factors
+
+- **Length Base Multipliers (referenced to 1 Metre):**
+  - 1 mm = 0.001 m = 10⁻³ m
+  - 1 cm = 0.01 m = 10⁻² m
+  - 1 m = 1.0 m
+  - 1 km = 1,000 m = 10³ m
+  - 1 in (inch) = 0.0254 m (exact international definition established in 1959)
+  - 1 ft (foot) = 12 inches = 0.3048 m
+- **Force Base Multipliers (referenced to 1 Newton):**
+  - 1 N = 1.0 N
+  - 1 kN = 1,000 N
+  - 1 lbf (pound-force) = 4.4482216 N (derived from standard gravity 9.80665 m/s² and 0.45359237 kg avoirdupois pound)
+- **Pressure Base Multipliers (referenced to 1 Pascal):**
+  - 1 Pa = 1.0 Pa
+  - 1 kPa = 1,000 Pa
+  - 1 bar = 100,000 Pa = 10⁵ Pa
+  - 1 MPa = 1,000,000 Pa = 10⁶ Pa
+  - 1 psi (lbf/in²) = 6,894.757 Pa (4.4482216 N / 0.00064516 m²)
+- **Energy Base Multipliers (referenced to 1 Joule):**
+  - 1 J = 1.0 J
+  - 1 kJ = 1,000 J
+  - 1 MJ = 1,000,000 J
+  - 1 Wh (watt-hour) = 3,600 J
+  - 1 kWh (kilowatt-hour) = 3,600,000 J = 3.6 MJ
+  - 1 cal (thermochemical calorie) = 4.184 J
+
+---
+
+## Worked Example — Default Calculator Inputs
+
+The following step-by-step calculation validates the tool using its factory-default input parameters:
+
+### Input Values:
+- Category: **Length**
+- Input Magnitude (V_in): **100**
+- Source Unit (fromUnit): **Millimetre (mm)**
+- Destination Unit (toUnit): **Metre (m)**
+
+### Step 1 — Input Registration:
+
+```
+V_in = 100 mm
+```
+
+### Step 2 — Conversion to SI Base Unit (Metre):
+
+The base factor for millimetres relative to metres is:
+
+```
+f_from = 0.001
+V_base = V_in * f_from = 100 * 0.001 = 0.1000 m
+```
+
+In adaptive engineering notation, this value corresponds to **1.000e-1 m** (0.1 metres).
+
+### Step 3 — Conversion from Base Unit to Output Unit:
+
+Because the destination unit is the base unit itself (metre, m), the target factor is unity:
+
+```
+f_to = 1.0
+V_out = V_base / f_to = 0.1000 / 1.0 = 0.1000 m
+```
+
+The explicit conversion formula evaluates as:
+
+```
+V_out = V_in * 0.001 / 1 = 100 * 0.001 / 1 = 0.1 m
+```
+
+The output displays cleanly as **1.000e-1 m** (or 0.1000 m).
+
+### Step 4 — Bidirectional Consistency Verification:
+
+Reversing the calculation from metres back into millimetres:
+
+```
+V_reversed = 0.1 m * (1.0 / 0.001) = 0.1 * 1,000 = 100 mm
+```
+
+The reverse transformation recovers the initial input without truncation loss.
+
+---
+
+## Common Engineering Mistakes
+
+1. **Omitting Area and Volume Exponents in Dimensional Scaling:** While 1 m = 1,000 mm, the area scaling factor is (1,000)² = 1,000,000 mm²/m², and volume scales as (1,000)³ = 1,000,000,000 mm³/m³. Applying linear conversion factors to area or moment of inertia creates catastrophic multi-thousand-fold errors.
+2. **Confusing Mass (lbm or kg) with Force (lbf or N):** An object with 100 lbm mass exerts approximately 100 lbf weight under standard earth gravity, but in dynamic acceleration equations (F = m·a), substituting lbf directly for mass causes a factor of 32.174 error unless slugs or ft/s² units are handled correctly.
+3. **Overlooking Atmospheric Offset in Gauge Pressure:** A pressure transducer reading 10 barg indicates 10 bar above atmospheric pressure. In thermodynamic equations requiring absolute pressure (such as Boyle's law), failure to add atmospheric pressure (10 + 1.013 = 11.013 bara) before converting to psia leads to substantial thermodynamic under-prediction.
+4. **Rounding Defined Conversion Factors Prematurely:** Using 1 inch = 25 mm rather than the exact international standard 25.4 mm introduces a 1.57 percent dimensional discrepancy; over a 1,000 mm machine bed, this cumulative error exceeds 15.7 mm.
+5. **Confusing Pascal and Megapascal in Material Stress Calculations:** Structural stress and Young's modulus are frequently tabulated in MPa (where 1 MPa = 1 N/mm² = 10⁶ Pa). Entering pure Pascals into a formula expecting MPa overestimates material strength or underestimates stress by a factor of one million.
+
+---
+
+## Frequently Asked Questions
+
+### 1. Why does the converter route all calculations through a single Base Unit?
+
+Routing through an intermediate base unit creates a star topology. In a physical category with N units, direct conversions would require N·(N-1) hardcoded pairwise equations (30 equations for 6 length units). By anchoring each unit to a single SI base reference, only N conversion factors are needed (6 multipliers). This prevents compounding numerical roundoff errors and ensures code maintainability.
+
+### 2. Why is 1 inch defined as exactly 25.4 millimetres?
+
+Under the 1959 International Yard and Pound Agreement ratified by the United States, United Kingdom, Canada, Australia, New Zealand, and South Africa, the international yard was defined as exactly 0.9144 metres. Dividing by 36 yields exactly 0.0254 metres per inch (25.4 mm). This is an exact definition by international treaty, not an approximation.
+
+### 3. What is the practical relationship between bar and Megapascal (MPa)?
+
+1 bar is equal to 100,000 Pascals (0.1 MPa), and 1 MPa equals 10 bar. This decimal convenience makes mental conversion rapid in fluid power and structural design: for example, a hydraulic cylinder operating at 250 bar generates 25 MPa fluid pressure, which can be directly compared against plate yield strengths in N/mm².
+
+### 4. Is the kilowatt-hour (kWh) a unit of power or energy?
+
+The kilowatt-hour is a unit of energy, not power. Power is the time rate of energy transfer measured in kilowatts (1 kW = 1,000 Joules/second). Multiplying power by time (1 hour = 3,600 seconds) yields total energy: 1 kWh = 1,000 W · 3,600 s = 3,600,000 Joules (3.6 MJ).
+
+### 5. What is the physical derivation of the PSI unit?
+
+PSI stands for "Pounds per Square Inch" (lbf/in²). One pound-force equals 4.4482216 N, and one square inch equals (0.0254 m)² = 0.00064516 m². Dividing force by area produces: 4.4482216 / 0.00064516 = 6,894.757 Pascals (approximately 6.895 kPa or 0.06895 bar).
+
+---
+
+## Related Standards and Design Clauses
+
+- **BIPM SI Brochure (9th Edition):** The International System of Units — Official foundational reference establishing base SI units, derived units, and coherent prefix definitions.
+- **NIST Special Publication 811 (SP 811):** Guide for the Use of the International System of Units (SI) — Comprehensive unit transformation tables and metrological usage rules.
+- **ISO 80000-1:** Quantities and units — Part 1: General principles, symbols, and mathematical conventions.
+- **ISO 80000-4:** Quantities and units — Part 4: Mechanics — Definitions for force, pressure, work, energy, and power.
+- **IEEE/ASTM SI 10:** American National Standard for Metric Practice — Rules for converting and rounding industrial engineering dimensions.

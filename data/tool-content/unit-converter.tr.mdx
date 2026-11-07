@@ -1,0 +1,177 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+
+- **Uluslararası Mühendislik Dokümantasyonu ve Proje Uyarlaması:** Amerikan (Imperial / US Customary) ve Avrupa (Metrik / SI) standartlarında hazırlanmış teknik şartnameler, imalat resimleri ve malzeme katalogları arasındaki birim dönüşümlerinde (örneğin mm ile inç, bar ile psi, kN ile lbf) kullanılır.
+- **Tasarım Hesap Raporlarında Boyut Tutarlılığı:** Sonlu elemanlar (FEA) simülasyonları veya analitik mukavemet formüllerinde kuvvet, basınç, uzunluk ve enerji birimlerinin birbiriyle tutarlı SI tabanında (Newton, metre, Pascal, Joule) girdi haline getirilmesinde uygulanır.
+- **Talaşlı İmalat ve Takım Tezgahı Programlama:** CNC işleme merkezlerinde inç formatında çizilmiş CAD modellerinden milimetrik takım yolları ve kesme parametreleri türetirken uzunluk dönüşümlerini doğrulamada tercih edilir.
+- **Hidrolik ve Pnömatik Devre Basınç Doğrulaması:** Pompa etiketlerinde veya manometrelerde bar, MPa ve psi cinsinden verilen basınçların emniyet ventili ayarlarıyla uyumunu denetlemede kullanılır.
+- **Enerji ve Termodinamik Verimlilik Raporları:** Isıtma-soğutma, motor tüketimi veya mekanik iş hesaplarında Joule, kilowatt-saat (kWh) ve kalori (cal) arasındaki dönüşümleri hızlı ve kesin şekilde yapmak amacıyla uygulanır.
+
+### Ne Zaman Kullanılmamalıdır?
+
+- **Doğrusal Olmayan Sıcaklık Ölçekleri Dönüşümü:** Santigrat (°C), Kelvin (K) ve Fahrenhayt (°F) arasındaki dönüşümler yalnızca çarpımsal bir katsayı ile yapılamaz; 273,15 veya 32 gibi toplamsal sıfır noktası ofsetleri (affine transformations) içerir.
+- **Bileşik Viskozite ve Isı Transferi Katsayıları:** Dinamik viskozite (cP ile Pa·s), kinematik viskozite (cSt ile m²/s) veya ısı taşınım katsayısı (W/m²K ile BTU/hr·ft²·°F) gibi çok terimli türetilmiş büyüklükler tek eksenli katsayı yerine çok değişkenli boyutsal dönüşüm matrisi gerektirir.
+- **Hacimsel Gaz Akışında Standart ve Normal Koşullar (Nm³/h ile SCFM):** Standart metreküp ile normal metreküp arasındaki dönüşüm basınç ve sıcaklık referans koşullarına (0°C veya 15°C) ve ideal gaz kanununa bağlıdır; sabit bir katsayıyla doğrudan çarpılamaz.
+- **Dinamik ve Göreli Basınç Çevrimleri (Mutlak vs. Manometrik):** Gösterge basıncı (barg veya psig) ile mutlak basınç (bara veya psia) arasında 1,01325 bar yerel atmosferik basınç farkı vardır; bu ofset eklenmeden yalnızca katsayı ile dönüştürülemez.
+- **Kütle ile Ağırlık/Kuvvet Eşleştirmesi:** Kilogram (kg) bir kütle birimi iken, kilogram-kuvvet (kgf) veya pound-kuvvet (lbf) bir kuvvet birimidir; yerel yerçekimi ivmesi (g = 9,80665 m/s²) hesaba katılmadan birbiri yerine kullanılamaz.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Fiziksel büyüklüklerin birim dönüşümü, Boyut Analizi (Dimensional Analysis) ve birim çarpan zinciri (Factor-Label Method) ilkelerine dayanır.
+
+### 1. SI Taban Birimi Mimarisi (Star-Topology Conversion)
+
+Her bir fiziksel kategori (uzunluk, kuvvet, basınç, enerji) için Uluslararası Birimler Sistemi (BIPM SI) tarafından tanımlanmış bir "taban birim" (base unit) merkez olarak belirlenir:
+- **Uzunluk:** Metre (m)
+- **Kuvvet:** Newton (N = kg·m/s²)
+- **Basınç:** Pascal (Pa = N/m²)
+- **Enerji:** Joule (J = N·m = kg·m²/s²)
+
+N adet birim arasında doğrudan N·(N-1) adet ikili dönüştürücü formül yazmak yerine, her bir birim için merkeze dönüş katsayısı (toBase, f) tanımlanır. Bu yıldız topolojisi mimarisi dönüşüm hatasını minimize eder:
+
+```
+V_taban = V_girdi * f_kaynak
+```
+
+### 2. Çıktı Birimine Dönüşüm ve Genel Formül
+
+Taban birimdeki değer, hedef birimin taban katsayısına (f_hedef) bölünerek istenen çıktı büyüklüğü elde edilir:
+
+```
+V_cikti = V_taban / f_hedef
+```
+
+İki adım birleştirildiğinde tek adımlı genel dönüşüm denklemi elde edilir:
+
+<Formula label="Genel Birim Dönüşüm Denklemi">
+V_cikti = V_girdi * (f_kaynak / f_hedef)
+</Formula>
+
+### 3. Tanımlı Mühendislik Dönüşüm Katsayıları
+
+- **Uzunluk Taban Katsayıları (Metre cinsinden):**
+  - 1 mm = 0,001 m = 10⁻³ m
+  - 1 cm = 0,01 m = 10⁻² m
+  - 1 m = 1,0 m
+  - 1 km = 1000 m = 10³ m
+  - 1 inç (in) = 0,0254 m (tam ve kesin uluslararası tanım, 1959 antlaşması)
+  - 1 foot (ft) = 12 inç = 0,3048 m
+- **Kuvvet Taban Katsayıları (Newton cinsinden):**
+  - 1 N = 1,0 N
+  - 1 kN = 1000 N
+  - 1 lbf = 4,4482216 N (standart yerçekimi 9,80665 m/s² ve 0,45359237 kg üzerinden kesin tanım)
+- **Basınç Taban Katsayıları (Pascal cinsinden):**
+  - 1 Pa = 1,0 Pa
+  - 1 kPa = 1.000 Pa
+  - 1 bar = 100.000 Pa = 10⁵ Pa
+  - 1 MPa = 1.000.000 Pa = 10⁶ Pa
+  - 1 psi = 6.894,757 Pa (1 lbf / 1 in²)
+- **Enerji Taban Katsayıları (Joule cinsinden):**
+  - 1 J = 1,0 J
+  - 1 kJ = 1.000 J
+  - 1 MJ = 1.000.000 J
+  - 1 Wh = 3.600 J (1 Watt · 3600 saniye)
+  - 1 kWh = 3.600.000 J = 3,6 MJ
+  - 1 cal = 4,184 J (Termokimyasal kalori tanımı)
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın fabrika varsayılan parametreleri kullanılarak yapılan adım adım mühendislik doğrulaması:
+
+### Girdi Değerleri:
+- Seçilen Kategori: **Uzunluk (length)**
+- Girdi Değeri (V_in): **100**
+- Kaynak Birim (fromUnit): **Milimetre (mm)**
+- Hedef Birim (toUnit): **Metre (m)**
+
+### Adım 1 — Giriş Büyüklüğünün Okunması:
+
+```
+V_girdi = 100 mm
+```
+
+### Adım 2 — SI Taban Birimine (Metre) İndirgeme:
+
+Kategori haritasına göre milimetrenin metreye taban katsayısı:
+
+```
+f_kaynak = 0,001
+V_taban = V_girdi * f_kaynak = 100 * 0,001 = 0,1000 m
+```
+
+Bilimsel formatta gösterimle **1,000e-1 m** (0,1 metre) elde edilir.
+
+### Adım 3 — Taban Birimden Hedef Birime Dönüşüm:
+
+Hedef birim metre (m) olup taban birimle aynıdır; dolayısıyla f_hedef = 1,0'dır:
+
+```
+V_cikti = V_taban / f_hedef = 0,1000 / 1,0 = 0,1000 m
+```
+
+Dönüşüm formülü açık hali:
+
+```
+V_out = V_in * 0.001 / 1 = 100 * 0.001 / 1 = 0.1 m
+```
+
+Ekranda uyarlamalı sayı formatıyla **1,000e-1 m** olarak doğrulanır.
+
+### Adım 4 — Çift Yönlü Sağlama Kontrolü:
+
+Metreden milimetreye ters dönüşüm yapıldığında:
+
+```
+V_ters = 0,1 m * (1,0 / 0,001) = 0,1 * 1000 = 100 mm
+```
+
+Ters işlem girdiyi tam ve kayıpsız olarak geri verir.
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Alan ve Hacim Dönüşümünde Katsayı Üssünü Unutmak:** 1 m = 1000 mm iken, 1 m² = (1000)² = 1.000.000 mm² ve 1 m³ = (1000)³ = 1.000.000.000 mm³'tür. Alan veya hacim hesabı yaparken boyutsal uzunluk katsayısını doğrudan çarpan olarak kullanmak 1000 ila 1.000.000 katlık devasa hatalara neden olur.
+2. **Kuvvet (lbf) ile Kütle (lbm veya kg) Kavramını Karıştırmak:** Pound kütle (lbm) ile pound kuvvet (lbf) yerçekimi 32,174 ft/s² iken sayısal olarak eşit görünse de fiziksel boyutları farklıdır (F = m · a). Newton'a dönüştürürken kütle mi yoksa kuvvet mi dönüştürüldüğü mutlaka ayırt edilmelidir.
+3. **Manometrik Basınç ile Mutlak Basıncı Birbiriyle Çevirmek:** Hidrolik ve pnömatikte sıkça 6 bar gösterge basıncı (barg) okunur. İdeal gaz formüllerinde veya termodinamik denklemlerde mutlak basınca (P_mutlak = 6 + 1,013 = 7,013 bara) geçilmeden doğrudan psi'ye dönüştürülürse yaklaşık 14,7 psi eksik hesap yapılmış olur.
+4. **Yuvarlatılmış İnç Katsayısı Kullanmak:** 1 inç = 25,4 mm tam ve kesin bir standarttır. Bazı eski kaynaklardaki 25 mm veya 25,40005 mm gibi yaklaşık değerlerin büyük boyutlu parçalarda veya kalıplarda kullanılması kümülatif tolerans hatalarına sebep olur.
+5. **Basınçta Megapascal (MPa) ile N/mm² Eşitliğini Unutmak:** 1 MPa = 1.000.000 Pa = 1.000.000 N/m² = 1 N/mm²'dir. Mukavemet hesaplarında gerilme birimini MPa yerine yanlışlıkla Pa almak sonuçların 1.000.000 kat sapmasına neden olur.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Neden tüm dönüşümler ara bir taban birim (Base Unit) üzerinden yapılır?
+
+N adet birim içeren bir kategoride her birimi diğer tüm birimlere doğrudan bağlamak N·(N-1) adet formül yazmayı ve bakımını gerektirir (örneğin 6 uzunluk birimi için 30 ayrı formül). Merkezi bir taban birim (örneğin metre) seçildiğinde yalnızca N adet toBase katsayısı yeterlidir (6 katsayı). Bu mimari hem yazılımda hesaplama tutarlılığını garanti eder hem de katsayıların uluslararası SI tanımlarıyla birebir eşleşmesini sağlar.
+
+### 2. 1 inç neden tam olarak 25,4 mm olarak tanımlanmıştır?
+
+1959 yılında ABD, İngiltere, Kanada, Avustralya, Yeni Zelanda ve Güney Afrika arasında imzalanan "Uluslararası Yard ve Pound Antlaşması" (International Yard and Pound Agreement) ile 1 yard tam olarak 0,9144 metre, dolayısıyla 1 inç tam olarak 25,4 milimetre olarak standartlaştırılmıştır. Bu değer yaklaşık değil, yasal ve fiziksel olarak tam bir tanımdır.
+
+### 3. Bar ile Megapascal (MPa) arasındaki pratik ilişki nedir?
+
+1 bar = 100.000 Pa = 0,1 MPa'dır. Tersine 1 MPa = 10 bar'dır. Bu bağıntı endüstriyel hidrolik ve malzeme mukavemetinde pratik bir kuraldır: Örneğin 160 bar hidrolik basınç doğrudan 16 MPa (veya 16 N/mm²) gerilmeye karşılık gelir.
+
+### 4. Kilowatt-saat (kWh) enerji midir yoksa güç müdür?
+
+Kilowatt (kW) bir güç birimidir (1 kW = 1000 J/s). Gücün zamanla çarpılması (kWh = kW · saat) enerjiyi verir. 1 saat = 3600 saniye olduğundan 1 kWh = 1000 W · 3600 s = 3.600.000 Joule = 3,6 MJ enerjiye eşittir. Bu nedenle elektrik faturalarında tüketilen enerji kWh cinsinden ölçülür.
+
+### 5. PSI birimi ne anlama gelir ve Pascal'a nasıl çevrilir?
+
+PSI, "Pounds per Square Inch" (inç kare başına pound-kuvvet) ifadesinin kısaltmasıdır (lbf/in²). 1 lbf = 4,4482216 N ve 1 inç = 0,0254 m (yani 1 in² = 0,00064516 m²) olduğundan: 1 psi = 4,4482216 / 0,00064516 = 6.894,757 Pascal (yaklaşık 6,895 kPa veya 0,06895 bar) olarak türetilir.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **BIPM SI Brochure (9. Baskı):** Uluslararası Birimler Sistemi — Temel ve türetilmiş SI birimleri, önekler ve metrolojik standartlar.
+- **NIST Special Publication 811 (SP 811):** Guide for the Use of the International System of Units (SI) — Birim dönüşüm katsayıları ve metroloji kuralları.
+- **ISO 80000-1:** Nicelikler ve birimler — Bölüm 1: Genel prensipler ve terminoloji.
+- **ISO 80000-4:** Nicelikler ve birimler — Bölüm 4: Mekanik (kuvvet, basınç, enerji ve güç tanımları).
+- **IEEE/ASTM SI 10:** American National Standard for Metric Practice — Endüstriyel tasarım ve Amerikan mühendisliğinde SI metrik kullanım rehberi.
