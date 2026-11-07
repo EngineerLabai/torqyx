@@ -1,0 +1,27 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "torqyx.vercel.app"
+        }
+      ],
+      "destination": "https://torqyx.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.torqyx.com"
+        }
+      ],
+      "destination": "https://torqyx.com/$1",
+      "permanent": true
+    }
+  ]
+}
