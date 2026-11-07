@@ -341,11 +341,27 @@ const getToolBySlug = (slug: string) => {
   return toolCatalog.find((tool) => tool.href.replace(/^\/tools\//, "") === normalized) ?? null;
 };
 
+const readToolDeepContent = async (slug: string, locale: Locale) => {
+  const safeSlug = normalizeSlug(slug);
+  const deepFileCandidates = [
+    path.join(process.cwd(), "data", "tool-content", `${safeSlug}.${locale}.mdx`),
+    path.join(process.cwd(), "data", "tool-content", `${safeSlug}.${locale}.md`),
+  ];
+  for (const candidate of deepFileCandidates) {
+    const content = await readFileIfExists(candidate);
+    if (content) {
+      return await serializeMdx(content);
+    }
+  }
+  return null;
+};
+
 export const getToolDocsResponse = async (slug: string, locale: Locale): Promise<ToolDocsResponse> => {
   try {
     const tool = getToolBySlug(slug);
     const relatedLocale = locale;
     const related = tool ? await getRelatedForTool(tool, { locale: relatedLocale }) : { guides: [], glossary: [] };
+    const deepContent = await readToolDeepContent(slug, locale);
     const standard = await readToolDocStandard(slug, locale);
 
   if (standard) {
@@ -361,6 +377,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
         lastTranslatedAt: null,
       },
       standard,
+      deepContent,
       explanation: null,
       examples: null,
       related,
@@ -373,13 +390,14 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
   if (!doc) {
     return {
       tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
-      hasDocs: false,
+      hasDocs: Boolean(deepContent),
       isDraft: false,
       requestedLocale: locale,
       docsLocale: null,
       metaInfo: null,
       standard: null,
       explanation: null,
+      deepContent,
       examples: null,
       related,
     };
@@ -389,13 +407,14 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
   if (doc.isDraft) {
     return {
       tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
-      hasDocs: false,
-      isDraft: true,
+      hasDocs: Boolean(deepContent),
+      isDraft: !deepContent,
       requestedLocale: locale,
       docsLocale,
       metaInfo,
       standard: null,
       explanation: null,
+      deepContent,
       examples: null,
       related,
     };
@@ -411,7 +430,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
     examples = serialized ? { kind: "mdx", source: serialized } : null;
   }
 
-  const hasDocs = Boolean(explanation) || Boolean(examples);
+  const hasDocs = Boolean(explanation) || Boolean(examples) || Boolean(deepContent);
 
   return {
     tool: tool ? { id: tool.id, title: getToolCopy(tool, locale).title, tags: tool.tags ?? [] } : null,
@@ -422,6 +441,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
     metaInfo,
     standard: null,
     explanation,
+    deepContent,
     examples,
     related,
   };
@@ -437,6 +457,7 @@ export const getToolDocsResponse = async (slug: string, locale: Locale): Promise
       metaInfo: null,
       standard: null,
       explanation: null,
+      deepContent: null,
       examples: null,
       related: { guides: [], glossary: [] },
     };

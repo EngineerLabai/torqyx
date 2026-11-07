@@ -43,6 +43,7 @@ export type ToolDocsResponse = {
   metaInfo?: ToolDocMetaInfo | null;
   standard?: ToolDocStandard | null;
   explanation: MDXRemoteSerializeResult | null;
+  deepContent?: MDXRemoteSerializeResult | null;
   examples:
     | { kind: "mdx"; source: MDXRemoteSerializeResult }
     | { kind: "json"; items: ToolDocExampleItem[] }

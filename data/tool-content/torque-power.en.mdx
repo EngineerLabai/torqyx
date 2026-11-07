@@ -1,0 +1,143 @@
+## When to Use and When Not to Use
+
+### When to Use This Calculator
+- **Electric Motor and Gearbox Preliminary Sizing:** Sizing shafts, flexible couplings, keyways, and sprockets when the nameplate electric power rating (kW) and operating shaft speed (rpm) are known.
+- **Drivetrain Component Selection:** Sizing mechanical transmission elements such as universal joints, torque limiters, and planetary gearheads by verifying their continuous operating torque capacity.
+- **Quantifying Mechanical Transmission Losses:** Determining the net deliverable shaft torque when rolling-element bearing drag, oil seal friction, and mesh losses are consolidated into a lumped mechanical efficiency (eta).
+- **International Specification and Unit Reconciliation:** Converting seamlessly between metric kilowatts (kW) and imperial mechanical horsepower (hp) while establishing the corresponding output torque in Newton-metres (N·m).
+- **Steady-State Industrial Machinery Verification:** Calculating drive loads for continuous-duty applications like centrifugal pumps, fans, screw compressors, and belt conveyors operating at constant rotational speed.
+
+### When Not to Use This Calculator
+- **Motor Starting and Transient Acceleration Analysis:** Direct-on-line (DOL) squirrel-cage induction motors exhibit locked-rotor and breakdown torques up to 2.5 to 3.5 times their rated torque. This calculator predicts steady-state full-load torque only; transient acceleration loads require transient motor curve analysis.
+- **High-Shock and Cyclic Impact Loads:** Machines subject to severe cyclic reversals or impact shocks (e.g., jaw crushers, punch presses, heavy reciprocating compressors with service factor Ka 1.75 and above) cannot be sized on nominal torque alone; dynamic fatigue factors must be applied.
+- **Variable Frequency Drives (VFD) Across Wide Speed Ranges:** When an AC motor operates above base frequency in the field-weakening (constant power) regime or well below base frequency where thermal derating governs, a single point calculation is inadequate to characterize torque availability.
+- **Fluid Power and Thermodynamic Cycles:** For hydraulic motors, displacement and pressure drop equations must be employed; for steam or gas expansion turbines, enthalpy drop dictates shaft work, rendering pure rotational kinematics insufficient.
+
+---
+
+## Formula Derivation and Physical Principles
+
+Mechanical power is defined physically as the rate at which work is performed over time. In rectilinear motion, power is the dot product of force and linear velocity (P = F · v). In rotational mechanics, this translates directly to the product of shaft torque and angular velocity:
+
+<Formula label="Fundamental Power Relation">
+P = T · ω
+</Formula>
+
+Where:
+- **P:** Mechanical power (W = J/s = N·m/s)
+- **T:** Torsional moment or torque (N·m)
+- **ω:** Angular velocity (rad/s)
+
+### Step-by-Step Mathematical Derivation:
+
+1. **Conversion of Rotational Speed:** In engineering practice, shaft speed is universally specified in revolutions per minute (n, rpm). Since one complete revolution represents an angular sweep of 2π radians, and one minute comprises 60 seconds:
+```
+ω = (2 * π * n) / 60 ≈ (π * n) / 30  [rad/s]
+```
+
+2. **Substitution into the Fundamental Power Relation:**
+```
+P_watts = T * (2 * π * n / 60) = (2 * π / 60) * T * n
+```
+
+3. **Scaling to Kilowatts and Isolating Torque:** In industrial applications, power is standardly expressed in kilowatts (P_kW = P_watts / 1000). Substituting this definition into the equation:
+```
+1000 * P_kW = (2 * π / 60) * T * n
+T = (1000 * 60) / (2 * π) * (P_kW / n)
+```
+Evaluating the numerical scalar term:
+```
+60000 / (2 * π) = 30000 / π ≈ 9549.29658... ≈ 9550
+```
+This yields the widely adopted mechanical engineering design formula:
+
+<Formula label="Standard Shaft Torque Formula">
+T = (9550 * P_kW) / n  [N·m]
+</Formula>
+
+4. **Incorporation of Mechanical Efficiency:** Due to viscous friction in bearings, seal lip contact friction, and gear churning, real machinery delivers reduced shaft torque. Modeling mechanical efficiency as a percentage factor eta:
+```
+T_eff = T_ideal * (η / 100)
+```
+
+5. **Equivalence of Mechanical Horsepower:** By international definition, one imperial mechanical horsepower equals exactly 745.69987 Watts. The conversion constant between metric kilowatts and mechanical horsepower is therefore:
+```
+1 kW = 1000 / 745.69987 ≈ 1.34102 hp
+hp = kW * 1.34102
+```
+
+---
+
+## Worked Numerical Example (Default Tool Inputs)
+
+A practical verification using the calculator's out-of-the-box parameters illustrates the workflow:
+
+### Input Parameters:
+- Nominal Rated Power (P_kW): **5.5 kW**
+- Shaft Operating Speed (n): **1500 rpm**
+- Mechanical Efficiency (η): **95%**
+
+### 1. Calculation of Nominal Ideal Torque:
+```
+T_ideal = (9550 * 5.5) / 1500
+T_ideal = 52525 / 1500 = 35.0167 N·m
+```
+Rounding to standard two decimal places yields **35.02 N·m**.
+
+### 2. Determination of Net Effective Torque:
+Accounting for the 5% mechanical transmission dissipation:
+```
+T_eff = 35.0167 * (95 / 100) = 35.0167 * 0.95 = 33.2658 N·m
+```
+The net available torque at the driven load is **33.27 N·m**.
+
+### 3. Computation of Equivalent Horsepower:
+```
+P_hp = 5.5 * 1.34102 = 7.3756 hp ≈ 7.38 hp
+```
+
+### 4. Cross-Verification via Angular Velocity:
+```
+ω = (2 * π * 1500) / 60 = 157.08 rad/s
+P_net = 33.2658 N·m * 157.08 rad/s = 5225.4 W = 5.225 kW
+```
+Since 5.5 kW * 0.95 = 5.225 kW, the energy balance is verified exactly.
+
+---
+
+## Common Engineering Pitfalls
+
+1. **Confusing Metric Horsepower (PS) with Mechanical Horsepower (HP):** DIN 735.5 W (Pferdestarke) is often mistakenly equated with SAE 745.7 W (mechanical horsepower), introducing a systematic 1.4% discrepancy.
+2. **Neglecting Induction Motor Slip:** A nominal 4-pole 50 Hz induction motor has a synchronous speed of 1500 rpm, but its actual full-load shaft speed typically ranges between 1430 and 1465 rpm. Using synchronous speed underestimates operating torque by 2% to 5%.
+3. **Overlooking Starting Torque Demands:** Sizing shaft diameters and couplings strictly for steady-state running torque (35 N·m) often causes premature keyway shear or coupling hub cracking when starting under full conveyor load (80 to 110 N·m).
+4. **Incorrect Efficiency Formatting:** Entering efficiency as a decimal scalar (e.g., 0.95) into a field expecting a percentage (95) divides the resulting torque by 100.
+5. **Directly Using rpm in Pure Physics Equations:** Inserting rpm into P = T · ω without the 2π/60 scaling factor results in an error factor of roughly 105.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### 1. Why does the engineering formula use 9550 instead of 9549.3?
+The exact conversion term 60000 / (2π) equals 9549.29658. Rounding to 9550 simplifies workshop calculations and introduces an error of only 0.0073%, which is vastly smaller than standard commercial motor voltage tolerances (typically ±5%) or manufacturing variations in efficiency.
+
+### 2. Can this torque be used directly to select a shaft diameter?
+No, torque alone yields only pure torsional shear stress: tau = 16 * T / (pi * d^3). Practical drive shafts also experience bending moments caused by overhung belt tensions, gear meshing forces, and weight, as well as stress concentration notches at shoulders and keyways. A full ASME B106.1M or Soderberg fatigue analysis is required for definitive shaft sizing.
+
+### 3. What does 100% mechanical efficiency indicate?
+A setting of 100% efficiency represents an idealized, lossless machine where no energy is dissipated by bearing friction, churning, or windage. In this theoretical limit, effective torque equals ideal torque (T_eff = T_ideal).
+
+### 4. How does torque behave when motor speed is altered using a VFD?
+Below rated base frequency (e.g., below 50 Hz), modern VFDs maintain a constant V/f ratio, preserving rated magnetic flux and delivering constant available torque while power scales linearly with speed. Above base frequency, the motor enters the field-weakening zone where voltage is capped, maintaining constant power while torque drops inversely with speed.
+
+### 5. What is the difference between rated torque, pull-up torque, and breakdown torque?
+Rated torque is the continuous operating torque at nominal nameplate power. Pull-up torque is the minimum torque developed during acceleration from rest to breakdown speed. Breakdown torque is the peak torque capability before the motor stalls, typically 200% to 350% of rated torque.
+
+---
+
+## Applicable Standards and Reference Codes
+
+- **DIN 70020-3:** Automotive power and drivetrain definitions, reference atmospheric conditions, and conversion norms.
+- **ISO 3046-1:** Reciprocating internal combustion engines — Performance declarations, power ratings, and test methods.
+- **IEC 60034-1:** Rotating electrical machines — Rating and performance specifications for continuous and intermittent duty cycles (S1-S9).
+- **ISO 10816-3:** Mechanical vibration evaluation on industrial drives and rotating machinery shafts under continuous torque.
+- **AGMA 6013-B16:** Standard for industrial enclosed gear drives — Specifications for ratings, service factors, and thermal power limits.

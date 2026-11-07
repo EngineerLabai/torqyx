@@ -1,0 +1,147 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+- **Elektrik Motoru ve Redüktör Ön Boyutlandırması:** Anma etiket gücü (kW) ve nominal çalışma devri (rpm) bilinen asenkron, senkron veya DC motorların milinde üretilecek statik burulma momentini bulmak için kullanılır.
+- **Güç Aktarım Elemanlarının Seçimi:** Motor mili ile iş makinesi arasına yerleştirilecek elastik kaplin, hidrolik kavrama, kama veya kovanlı bağlantıların nominal moment sınırını doğrulamak için idealdir.
+- **Mekanik Verim Kayıplarının Hesaplanması:** Rulman sürtünmesi, keçe direnci ve dişli temas kayıpları gibi etkenleri tek bir mekanik verim katsayısı (eta) altında toplayarak mil ucundaki net kullanılabilir torku belirlemede uygulanır.
+- **Uluslararası Birim Dönüşümü ve Şartname Uyumu:** Kuzey Amerika veya İngiliz şartnamelerinde yer alan beygir gücü (hp / imperial mechanical horsepower) değerlerini metrik kilovat (kW) ve Newton-metre (N·m) cinsine hatasız aktarmak amacıyla tercih edilir.
+- **Konveyör, Pompa ve Fan Tahrik Kontrolü:** Sabit devirli ve sürekli yük altında çalışan endüstriyel tesis bileşenlerinin mil zorlanmasını ilk tasarım fazında doğrulamak için kullanılır.
+
+### Ne Zaman Kullanılmamalıdır?
+- **Kalkış ve Geçici Rejim Analizleri:** Sincap kafesli asenkron motorların ilk kalkış anındaki anlık kilitli rotor torku (pull-up / locked rotor torque) nominal momentin 2,5 ila 3,5 katına kadar çıkabilir. Bu hesaplayıcı yalnızca kararlı hal (steady-state) nominal momentini verir; kalkış pikleri için motorun T-n eğrisi incelenmelidir.
+- **Darbeli ve Dinamik Yük Koşulları:** Kırıcılar, eksantrik presler veya pistonlu kompresörler gibi yüksek şok faktörüne (Ka 1,75 ve üzeri) sahip tahrik sistemlerinde nominal tork doğrudan mil boyutlandırmasında kullanılamaz; dinamik servis faktörleri hesaba katılmalıdır.
+- **Değişken Hızlı ve Tork Kontrollü Tahrikler (VFD):** Frekans invertörü ile sürülen motorlarda zayıf alan bölgesinde (sabit güç aralığı) ve düşük frekanslarda (sabit tork aralığı) tork karakteristikleri değişkenlik gösterir; tekil sabit hız formülü tüm frekans skalasını kapsamaz.
+- **Akışkan Gücü ve Termal Güç Sistemleri:** Hidrolik pompa yer değiştirmesi veya buhar türbini ısı düşüşü gibi termodinamik ve akışkan güç hesaplamalarında özgül entalpi veya debi-basınç bağıntıları gerekir; saf mekanik dönme formülü yetersiz kalır.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Mekanik güç, dönen bir cismin birim zamanda yaptığı iş olarak tanımlanır. Çizgisel hareketteki P = F · v ifadesi, dairesel harekette tork ve açısal hızın çarpımına dönüşür.
+
+<Formula label="Temel Fiziksel Bağıntı">
+P = T · ω
+</Formula>
+
+Burada:
+- **P:** Mekanik güç (W = J/s = N·m/s)
+- **T:** Burulma momenti / tork (N·m)
+- **ω:** Açısal hız (rad/s)
+
+### Adım Adım Matematiksel Dönüşüm:
+
+1. **Açısal Hızın Dönüşümü:** Mil dönme hızı endüstride dakikadaki devir sayısı (n, rpm) olarak ifade edilir. Bir tam devir 2π radyana, bir dakika ise 60 saniyeye eşit olduğundan:
+```
+ω = (2 * π * n) / 60 ≈ (π * n) / 30  [rad/s]
+```
+
+2. **Güç Eşitliğine Yerleştirme:** Açısal hız terimi güç denklemine yazıldığında:
+```
+P_watt = T * (2 * π * n / 60) = (2 * π / 60) * T * n
+```
+
+3. **Kilovata Geçiş ve Sabitin Belirlenmesi:** Güç kilovat (P_kW = P_watt / 1000) cinsinden tanımlandığında denklem şu biçimi alır:
+```
+1000 * P_kW = (2 * π / 60) * T * n
+T = (1000 * 60) / (2 * π) * (P_kW / n)
+```
+Katsayıyı hesaplarsak:
+```
+60000 / (2 * π) = 30000 / π ≈ 9549,29658... ≈ 9550
+```
+Böylece mühendislik pratiğinde yaygın olarak kabul edilen temel bağıntı elde edilir:
+
+<Formula label="Mühendislik Tork Bağıntısı">
+T = (9550 * P_kW) / n  [N·m]
+</Formula>
+
+4. **Mekanik Verim Etkisi:** Rulman friksiyonu, keçe sürtünmesi ve aktarım organlarındaki mekanik kayıplar nedeniyle giriş milinden çıkış miline aktarılan net efektif tork azalır:
+```
+T_eff = T_ideal * (η / 100)
+```
+
+5. **Metrik / İngiliz Güç Birimi İlişkisi:** 1 mekanik beygir gücü (hp) tam olarak 745,69987 Watt değerine karşılık gelir. Buradan dönüşüm katsayısı türetilir:
+```
+1 kW = 1000 / 745,69987 ≈ 1,34102 hp
+hp = kW * 1,34102
+```
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın varsayılan parametreleri kullanılarak adım adım çözüm aşağıda sunulmuştur:
+
+### Girdi Değerleri:
+- Nominal Giriş Gücü (P_kW): **5,5 kW**
+- Nominal Mil Hızı (n): **1500 rpm**
+- Mekanik Verim Katsayısı (η): **%95**
+
+### 1. İdeal Mil Torkunun Hesaplanması:
+```
+T_ideal = (9550 * 5,5) / 1500
+T_ideal = 52525 / 1500 = 35,0167 N·m
+```
+İki ondalık basamağa yuvarlandığında nominal ideal tork **35,02 N·m** olarak bulunur.
+
+### 2. Mekanik Verim Dikkate Alınarak Efektif Torkun Belirlenmesi:
+Rulman ve sürtünme kaynaklı %5 kayıp düşüldükten sonra çıkış miline iletilen net tork:
+```
+T_eff = 35,0167 * (95 / 100) = 35,0167 * 0,95 = 33,2658 N·m
+```
+Net çıkış torku **33,27 N·m** seviyesindedir.
+
+### 3. Eşdeğer Beygir Gücünün Belirlenmesi:
+```
+P_hp = 5,5 * 1,34102 = 7,3756 hp ≈ 7,38 hp
+```
+
+### 4. Net Çıkış Gücünün Kontrolü:
+```
+P_çıkış = 5,5 * 0,95 = 5,225 kW ≈ 5,23 kW
+```
+Açısal hız üzerinden sağlaması yapılırsa:
+```
+ω = (2 * π * 1500) / 60 = 157,08 rad/s
+P_çıkış = 33,2658 N·m * 157,08 rad/s = 5225,4 W = 5,225 kW
+```
+Tüm birimler ve fiziksel korunumlar tam olarak doğrulanmıştır.
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Beygir Gücü ve Kilovat Ayrımının İhmali:** Motor etiketinde 5,5 HP yazan bir makineyi hesaplayıcıya doğrudan 5,5 kW olarak girmek, torku yaklaşık %34 oranında hatalı yüksek hesaplamaya yol açar.
+2. **Kalkış Momentini Nominal Moment ile Karıştırmak:** Konveyör veya vinç gibi yüksek eylemsizlik kütleli sistemlerde motor mili çapı sadece 35 N·m nominal torka göre hesaplanırsa, kalkış anındaki 85-100 N·m tepe momentleri kamayı veya mili plastik deformasyona uğratabilir.
+3. **Verimi Ondalık ve Yüzde Olarak Karıştırmak:** Formül kutusuna %95 yerine 0,95 yazılması durumunda verim %0,95 kabul edilir ve tork sonucu 100 kat küçük hesaplanır.
+4. **Motor Kayması (Slip) Değerini Yok Saymak:** 4 kutuplu 50 Hz şebeke motorunun senkron hızı 1500 rpm iken tam yükteki anma hızı genellikle 1440-1460 rpm aralığındadır. Gerçek çalışma devri yerine senkron hızın girilmesi torkun %3-4 oranında eksik tahmin edilmesine sebep olur.
+5. **Açısal Hız (rad/s) ile Devir (rpm) Birimlerini Karıştırmak:** Klasik fizikteki P = T · ω bağıntısına rpm cinsinden hız doğrudan yazılırsa sonuç 105 kat hatalı çıkar.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Neden 9549,3 yerine 9550 katsayısı kullanılıyor?
+60000 / (2π) matematiksel olarak 9549,29658 değerini verir. Mühendislik pratiğinde 9550 değerinin benimsenmesi hesaplamayı pratikleştirir ve oluşturduğu bağıl hata sadece %0,0073 mertebesindedir. Bu hata payı, motorların üretim toleransı ve voltaj dalgalanmalarından kaynaklanan toleransların yanında tamamen ihmal edilebilir düzeydedir.
+
+### 2. Motor milinin çapını hesaplamak için bu tork değeri tek başına yeterli midir?
+Hayır, yeterli değildir. Elde edilen tork saf burulma gerilmesini hesaplamada kullanılır: tau = 16 * T / (pi * d^3). Ancak gerçek uygulamalarda kasnak veya dişli kuvvetlerinden doğan radyal eğilme momentleri, mil üzerindeki fatura ve kama yuvası gerilme yığılma faktörleri (Kt) ve mil malzemesinin yorulma dayanımı (ASME mil tasarım standardı) birlikte değerlendirilmelidir.
+
+### 3. Mekanik verim %100 seçilirse ne anlama gelir?
+Mekanik verimin %100 seçilmesi, motor milinden iş makinesine aktarım sırasında rulman sürtünmesi, hava direnci veya sızdırmazlık elemanı temas kaybı gibi hiçbir kayıp olmadığını varsayan ideal (teorik) durumu ifade eder. Bu durumda efektif çıkış torku nominal torka tam olarak eşit olur.
+
+### 4. Metrik beygir gücü (PS / DIN) ile mekanik beygir gücü (HP / SAE) arasında fark var mıdır?
+Evet. Alman DIN 70020 standardına dayanan metrik beygir gücü (PS veya BG) 735,49875 Watt iken, Anglo-Sakson mekanik beygir gücü (HP) 745,69987 Watt olarak tanımlanır. Bu hesaplayıcı uluslararası endüstriyel kabul gören mekanik HP (1 kW = 1,34102 HP) katsayısını kullanır.
+
+### 5. Frekans invertörü (VFD) ile motor hızı yarıya düşürülürse tork ne olur?
+Sabit tork bölgesinde (nominal frekansın altındaki hızlar, örneğin 50 Hz'den 25 Hz'e düşüş) motorun üretebileceği anma momenti sabit kalırken mil çıkış gücü yarı yarıya azalır. Ancak motor hızının nominalin üzerine çıkarıldığı sabit güç bölgesinde (örneğin 50 Hz'den 75 Hz'e) tork devir ile ters orantılı olarak düşüş gösterir.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **DIN 70020-3:** Karayolu taşıtları ve motor sistemlerinde güç, tork ve hız tanımları ile birim dönüşüm normları.
+- **ISO 3046-1:** İçten yanmalı pistonlu motorlarda güç beyanı, yakıt tüketimi ve tork ölçüm referans atmosfer koşulları.
+- **IEC 60034-1:** Dönen elektrik makineleri — Nominal karakteristikler, etiket değerleri ve çalışma rejim sınıfları (S1-S9).
+- **ISO 10816-3:** Endüstriyel elektrik motorları ve tahrik gruplarında şaft tork dalgalanmaları ve mekanik titreşim sınırları.
+- **VDI 2241:** Mekanik güç aktarım sistemlerinde kaplin ve kavrama seçimi için dinamik yük faktörleri ve tork eşitleme yönergeleri.

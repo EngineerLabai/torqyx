@@ -271,6 +271,13 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
 
       <div className={activeTab === "calculator" ? "space-y-6" : "hidden"}>
         {children}
+        {docs.deepContent ? (
+          <article className="rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+            <div className="prose prose-slate max-w-none text-slate-700">
+              <MDXClient source={docs.deepContent} />
+            </div>
+          </article>
+        ) : null}
         {documentation.isSpecific ? (
           <ToolDocumentation
             toolTitle={resolvedTool?.title ?? slug}
