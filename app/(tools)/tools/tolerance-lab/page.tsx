@@ -5,6 +5,8 @@ import ToleranceLabWorkspace from "@/components/tools/ToleranceLabWorkspace";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildToolMetadata } from "@/utils/tool-seo";
 import { NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
+import MDXClient from "@/components/mdx/MDXClient";
 
 type PageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -23,11 +25,19 @@ export default async function ToleranceLabPage() {
   /* seo-h1: delegated-to-child */
   const locale = await getLocaleFromCookies();
   const isTurkish = locale === "tr";
+  const initialDocs = await getToolDocsResponse("tolerance-lab", locale);
 
   return (
     <PageShell>
       <ToolSeo toolId="tolerance-lab" locale={locale} />
       <ToleranceLabWorkspace locale={locale} />
+      {initialDocs?.deepContent ? (
+        <article className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+          <div className="prose prose-slate max-w-none text-slate-700">
+            <MDXClient source={initialDocs.deepContent} />
+          </div>
+        </article>
+      ) : null}
       <article className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-2xl font-semibold text-slate-900">
           {isTurkish ? "Doğrusal tolerans zinciri nasıl yorumlanır?" : "How to interpret a linear tolerance stack"}

@@ -1,0 +1,170 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+
+- **Flanş ve Kapak Bağlantıları:** Basınçlı kap kapakları, boru flanşları ve pompa gövdelerinde sızdırmazlık contasını sıkıştırmak ve işletme basıncında açılmayı önlemek için gereken ön yük kuvvetini ve sıkma torkunu hesaplamada kullanılır.
+- **Çelik Konstrüksiyon ve Şasi Montajı:** Taşıt şasileri, makine gövdeleri ve kolon-kiriş birleşimlerinde ISO 898-1 kalite sınıfı (8.8, 10.9, 12.9) cıvataların akma sınırını aşmadan güvenle sıkılmasını sağlamak için uygulanır.
+- **Montaj Talimatı Hazırlama:** İmalat hattında çalışan teknisyenler için sürtünme durumuna (kuru, yağlı, kaplamalı) göre doğru tork anahtarı ayar değerlerini belirlemede tercih edilir.
+- **Kalite Yükseltme Karşılaştırması:** Mevcut 8.8 kalite cıvatanın 10.9 kalite ile değiştirilmesi durumunda elde edilecek ek ön yük artışını ve gerekecek tork farkını karşılaştırmak amacıyla kullanılır.
+- **Titreşim Kaynaklı Gevşeme Önleme:** Dinamik titreşim altındaki sistemlerde cıvatanın kendiliğinden gevşemesini önleyen kritik sürtünme kilitleme kuvvetini denetlemede kullanılır.
+
+### Ne Zaman Kullanılmamalıdır?
+
+- **Dinamik Yorulma Yükleri:** Biyel kolu cıvataları veya rüzgar türbini kule bağlantıları gibi değişken çevrimsel yüklere maruz birleşimlerde VDI 2230 Sayfa 1 uyarınca tam eklem elastikliği ve cıvata/flanş rijitlikleri ayrıca hesaplanmalıdır.
+- **Standart Dışı Diş Geometrileri:** Trapez (Tr), testere diş veya ACME diş formlarında ISO metrik gerilme alanı katsayısı (0,9382) geçerliliğini yitirir.
+- **Açı Kontrolü veya Hidrolik Gerdirme:** Sıkma işlemi dönme açısı yöntemi veya hidrolik silindirle eksenel gerdirme ile yapılıyorsa somun faktörü (K) uygulanmaz; doğrudan gerilme ve uzama formülleri kullanılmalıdır.
+- **Yüksek Sıcaklık ve Sünme Koşulları:** 300 derece üzerindeki buhar türbinleri veya egzoz manifoldlarında cıvata malzemesi gevşeme (relaxation) davranışı gösterir; ISO 898-1 yerine yüksek sıcaklık alaşımları (EN 10269) ve sıcaklığa bağlı akma değerleri kullanılmalıdır.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Cıvatalı bağlantılarda temel amaç, dişe uygulanan burulma momenti ile gövdede kontrollü bir eksenel çekme kuvveti (ön yük) meydana getirmektir.
+
+### 1. ISO Metrik Diş Gerilme Alanı (As)
+
+ISO 68-1 ve ISO 898-1 standartlarına göre cıvatanın diş açılmış bölgesinin çekme dayanımı, nominal çap (d) ile diş dibi çapı (d3) arasında tanımlanan bir sanal gerilme alanına (As) dayanır. 60 derece simetrik üçgen diş profilinde temel diş yüksekliği:
+
+```
+H = (sqrt(3) / 2) * P ≈ 0,866025 * P
+```
+
+Diş eğimi ve kök yuvarlatmaları hesaba katılarak ortalama gerilme çapı (ds) şöyle tanımlanır:
+
+```
+ds = d - (3/8) * sqrt(3) * P ≈ d - 0,938194 * P
+```
+
+Bu çapın daire kesit alanı gerilme alanını verir:
+
+<Formula label="Cıvata Gerilme Alanı">
+As = (pi / 4) * (d - 0,9382 * P)^2  [mm²]
+</Formula>
+
+### 2. İzin Verilen Eksenel Ön Yük Kuvveti (Fv)
+
+ISO 898-1 standardında kalite sınıfı iki sayı ile gösterilir (örneğin 8.8):
+- Birinci sayı çekme dayanımını tanımlar: Rm = 8 × 100 = 800 MPa
+- İkinci sayı akma/çekme oranını verir: Re = 800 × 0,8 = 640 MPa
+
+VDI 2230, montaj anında cıvatanın plastik deformasyona uğramasını engellemek için akma sınırının belirli bir yüzdesinin ön yük olarak seçilmesini önerir. Tork anahtarlı montajlarda yaygın olarak yüzde 70 oranı kullanılır:
+
+```
+Fv = (preloadPercent / 100) * Re * As  [N]
+```
+
+### 3. Sıkma Torku ve Somun Faktörü (K)
+
+Uygulanan sıkma torku (T) üç bileşene harcanır:
+1. Diş helis açısını tırmanarak eksenel kuvvet üreten yararlı tork (yaklaşık yüzde 10)
+2. Diş temas yüzeylerindeki sürtünmeyi yenen tork (yaklaşık yüzde 40)
+3. Somun veya cıvata başı altındaki fatura sürtünmesini yenen tork (yaklaşık yüzde 50)
+
+Bu karmaşık sürtünme mekanizması mühendislik pratiğinde boyutsuz somun faktörü (nut factor, K) ile basitleştirilir:
+
+<Formula label="Kısa Sıkma Torku Formülü">
+T = K * Fv * (d / 1000)  [N·m]
+</Formula>
+
+Burada d milimetre, Fv Newton ve T Newton-metre cinsindedir. Tipik somun faktörü değerleri:
+- Kuru ve kaplamasız çelik: K ≈ 0,25
+- Hafif yağlanmış veya fosfat kaplı çelik: K ≈ 0,20
+- PTFE veya MoS2 yağlayıcılı kaplamalar: K ≈ 0,15 ile 0,18 arası
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın varsayılan parametreleri kullanılarak yapılan adım adım mühendislik doğrulaması:
+
+### Girdi Değerleri:
+- Standart Cıvata Tipi: **M8 × 1,25**
+- Nominal Çap (d): **8 mm**
+- Diş Adımı (P): **1,25 mm**
+- Kalite Sınıfı: **8.8** (Re = 640 MPa, Rm = 800 MPa)
+- Hedef Ön Yük Seviyesi: **yüzde 70 Re**
+- Sürtünme Durumu: **Kuru (Dry, K = 0,25)**
+
+### Adım 1 — Etkin Gerilme Alanının (As) Hesaplanması:
+
+```
+ds = 8 - (0,9382 × 1,25) = 8 - 1,17275 = 6,82725 mm
+As = (pi / 4) × (6,82725)^2 = 0,785398 × 46,61135 = 36,61 mm²
+```
+
+Standart yuvarlama ile etkin gerilme alanı **36,61 mm²** elde edilir.
+
+### Adım 2 — Hedef Ön Yük Kuvvetinin (Fv) Belirlenmesi:
+
+Akma sınırı Re = 640 MPa ve hedeflenen seviye yüzde 70 olduğundan:
+
+```
+σ_ön = 640 × 0,70 = 448 MPa (N/mm²)
+Fv = 448 × 36,61 = 16.401 N ≈ 16,40 kN
+```
+
+Eksenel sıkma kuvveti **16,40 kN** olarak hesaplanır.
+
+### Adım 3 — Gerekli Sıkma Torkunun (T) Hesaplanması:
+
+Kuru montaj için somun faktörü K = 0,25 ve nominal çap d = 8 mm kullanılarak:
+
+```
+T = 0,25 × 16.401 N × (8 / 1000) m = 32,80 N·m
+```
+
+Gerekli tork anahtarı ayarı **32,8 N·m** olarak belirlenir.
+
+### Adım 4 — Güvenlik Faktörü Kontrolü:
+
+Saf eksenel çekme gerilmesine göre akma emniyet katsayısı:
+
+```
+n_statik = Re / σ_ön = 640 / 448 = 1,43
+```
+
+Kalan yüzde 30'luk marj, tork anahtarı toleranslarını ve burulma gerilmesi bileşenini karşılamak için ayrılmıştır.
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Yağlı Cıvatayı Kuru Tork Değeriyle Sıkmak:** K=0,20 olan yağlı bir cıvataya kuru durum için hesaplanan 32,8 N·m tork uygulanırsa ön yük 20,5 kN seviyesine çıkar (yüzde 88 Re). Bu durum montaj sırasında cıvatanın akmasına veya diş sıyırmasına neden olur.
+2. **İnce ve Kaba Diş Ayrımını Göz Ardı Etmek:** M8 normal adım 1,25 mm iken ince adım 1,0 mm veya 0,75 mm olabilir. İnce adımda gerilme alanı daha geniştir (yaklaşık 39,2 mm²); formüle yanlış adım girilirse tork değeri hatalı çıkar.
+3. **Gerilme Alanı Yerine Dış Çap Kesitini Almak:** M8 için pi × 8² / 4 = 50,27 mm² alanı kullanılırsa gerçek gerilme alanı olan 36,61 mm²'ye kıyasla yüzde 37 daha yüksek kuvvet hesaplanır ve cıvata aşırı yüklenir.
+4. **Paslanmaz Çelikte Kaynama (Galling) Etkisini İhmal Etmek:** A2-70 veya A4-80 paslanmaz cıvatalar kuru temas durumunda sıkılırken diş yüzeyleri mikroskobik olarak kaynar ve kilitlenir; bu malzemelerde sürtünmeyi düşüren özel montaj macunları mutlaka kullanılmalıdır.
+5. **Cıvata Uzama Payını Kontrol Etmemek:** Çok kısa sıkma boyuna (Lk küçüktür 2d) sahip birleşimlerde oturma (embedding) kaybı ön yükün yüzde 50'sinden fazlasını eritebilir.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Neden ön yük seviyesi akma dayanımının yüzde 100'ü yerine yüzde 70 olarak seçilir?
+
+Tork anahtarı ile sıkma sırasında cıvata gövdesi yalnızca eksenel çekmeye değil, aynı zamanda diş sürtünmesinden kaynaklanan burulma gerilmesine de maruz kalır. Von Mises eşdeğer gerilme hipotezine göre bileşik gerilme artar. Bunun yanı sıra tork anahtarlarının yaklaşık ±yüzde 15 dağılımı ve sürtünme katsayısı belirsizlikleri göz önüne alındığında yüzde 70 seviyesi cıvatanın plastik deformasyona girmesini önleyen güvenli üst sınırdır.
+
+### 2. Somun faktörü K ile sürtünme katsayısı aynı şey midir?
+
+Hayır. Sürtünme katsayısı (mu), diş yüzeyi veya baş altındaki temas yüzeyinin friksiyon özelliğidir. Somun faktörü (K) ise helis açısı geometrisi, diş sürtünmesi ve flanş yüzey sürtünmesini tek bir çarpanda toplayan ampirik ve boyutsuz bir parametredir. İki değer sayısal olarak yakın görünebilir ancak fiziksel olarak aynı büyüklüğü temsil etmez.
+
+### 3. Kalite 10.9 seçilirse sıkma torku neden artar?
+
+10.9 kalite cıvatanın akma sınırı 640 MPa yerine 940 MPa'dır (yaklaşık yüzde 47 daha yüksek). Hedef ön yük yüzdesi sabit tutulduğunda taşınabilir eksenel kuvvet 16,4 kN'dan 24,1 kN'a yükselir. Bu yüksek kuvveti oluşturmak için uygulanması gereken tork da aynı oranla artarak yaklaşık 48,2 N·m seviyesine çıkar.
+
+### 4. Yaylı rondela gevşemeyi önler mi?
+
+Modern bağlantı tekniğinde (VDI 2230 ve DIN 25201) geleneksel yaylı rondelaların yüksek mukavemetli cıvatalarda gevşemeyi önlemede etkisiz olduğu kanıtlanmıştır; çünkü rondela yüksek ön yük altında tamamen düzleşir. Gevşemeyi önlemenin en güvenilir yolu cıvataya yeterli esneme boyu (Lk büyük veya eşit 4d) vererek doğru torkla elastik aralıkta ön yüklemektir.
+
+### 5. Ana malzeme alüminyum ise ne dikkat edilmeli?
+
+Düşük mukavemetli bir döküm gövdeye (alüminyum veya dökme demir) çelik cıvata vidalanırken cıvata gövdesinden önce gövdedeki dişlerin sıyrılma riski vardır. Bu durumda vidalanma boyu en az 1,5d ile 2d arasında seçilmeli veya Helicoil gibi çelik diş takviye yayları kullanılmalıdır.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **ISO 898-1:** Karbon çeliği ve alaşımlı çelikten yapılmış cıvata, vida ve saplamaların mekanik özellikleri ve kalite sınıfları.
+- **VDI 2230 Sayfa 1 (Blatt 1):** Yüksek mukavemetli cıvatalı bağlantıların sistematik hesabı — statik ve dinamik analiz metodolojisi.
+- **ISO 68-1:** Genel amaçlı ISO metrik vidalar — temel profil geometrisi ve 60 derece üçgen diş bağıntıları.
+- **ISO 4014 / ISO 4017:** Altıköşe başlı cıvatalar — ürün sınıfları A ve B, kısmi ve tam dişli gövde boyutları.
+- **EN 14399:** Yapısal çelik montajında kullanılan ön yüklemeli yüksek dayanımlı cıvata takımları (HV ve HR sistemleri).

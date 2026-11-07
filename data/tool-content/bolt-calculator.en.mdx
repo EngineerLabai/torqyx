@@ -1,0 +1,170 @@
+## When to Use and When Not to Use
+
+### When to Use
+
+- **Flanged and Pressure Vessel Connections:** Use this calculator whenever you need to determine the clamping force and tightening torque for bolted covers, pipe flanges, pump casings, and heat exchanger heads where a gasket must be compressed and joint separation must be prevented under operating pressure.
+- **Structural Steel and Chassis Assembly:** Ideal for metric bolts (ISO 898-1 property classes 8.8, 10.9, 12.9) in vehicle frames, machine bodies, and column-beam connections where the fastener must be tightened safely to a known fraction of its yield strength.
+- **Assembly Instruction Preparation:** Use to generate torque wrench set-point values for manufacturing line technicians when the lubrication condition varies between dry, lightly oiled, and coated fasteners.
+- **Property Class Upgrade Comparison:** Quickly evaluate the additional preload gained and the new torque required when upgrading from class 8.8 to 10.9, allowing the engineer to compare clamping force vs. available wrench capacity.
+- **Vibration-Loosening Prevention:** Suitable for checking that the initial clamping force is high enough to generate the friction-locking force that resists self-loosening under dynamic vibration.
+
+### When Not to Use
+
+- **Fatigue and Cyclic Axial Loading:** For connecting rod bolts, cylinder-head studs, or wind-turbine tower flanges subject to cyclic loads, the full VDI 2230 Part 1 procedure must be followed, including joint compliance (delta_M and delta_S). The simple preload equation used here is insufficient for such applications.
+- **Non-Standard Thread Forms:** Trapezoidal (Tr), buttress, ACME, or round thread profiles have different stress-area factors. The 0.9382 coefficient is specific to the 60-degree ISO metric thread and must not be applied to other thread forms.
+- **Angle-Controlled or Hydraulic Tensioning:** When tightening is performed by turn-of-nut or hydraulic bolt-tensioning equipment, the nut factor K is not applicable; direct axial elongation or strain measurements are used instead.
+- **Elevated Temperature and Creep:** At temperatures above 300 degrees C (steam turbines, exhaust manifolds), bolting material exhibits relaxation and creep. ISO 898-1 property classes are not valid there; use elevated-temperature alloy data from EN 10269 and apply temperature-dependent yield values.
+
+---
+
+## Formula Derivation and Physical Background
+
+The purpose of a bolted joint is to convert an applied torque into a controlled axial tensile force (preload) in the bolt shank, which keeps the joint members clamped together under service loads.
+
+### 1. ISO Metric Thread Stress Area (As)
+
+According to ISO 68-1 and ISO 898-1, the tensile strength of a threaded bolt is based on a notional stress area (As) derived from the average of the pitch diameter (d2) and the minor diameter (d3), because the actual fracture occurs somewhere between the outer and inner thread profiles. For the 60-degree symmetric triangular thread profile, the basic thread depth is:
+
+```
+H = (sqrt(3) / 2) * P ≈ 0.866025 * P
+```
+
+Accounting for thread crest truncation and root rounding, the mean stress diameter (ds) is defined as:
+
+```
+ds = d - (3/8) * sqrt(3) * P ≈ d - 0.938194 * P
+```
+
+The circular cross-sectional area of this mean diameter gives the stress area:
+
+<Formula label="Bolt Stress Area">
+As = (pi / 4) * (d - 0.9382 * P)^2  [mm²]
+</Formula>
+
+### 2. Allowable Axial Preload Force (Fv)
+
+Under ISO 898-1, the property class is coded as two digits (e.g., 8.8):
+- First digit: nominal tensile strength in units of 100 MPa, so 8 × 100 = 800 MPa
+- Second digit: ratio of yield to tensile strength, so 0.8 × 800 = 640 MPa yield
+
+VDI 2230 recommends selecting a preload at a specified percentage of the yield strength, leaving headroom for the combined effect of bending, torsion, and wrench scatter. The standard 70-percent preload level for torque-controlled tightening gives:
+
+```
+Fv = (preloadPercent / 100) * Re * As  [N]
+```
+
+### 3. Tightening Torque and Nut Factor (K)
+
+The applied tightening torque (T) is consumed by three distinct mechanisms:
+1. The useful torque that climbs the helix angle and produces axial force (roughly 10 percent)
+2. The torque overcoming thread-flank friction (roughly 40 percent)
+3. The torque overcoming bearing friction under the bolt head or nut (roughly 50 percent)
+
+This complex friction mechanism is condensed into the dimensionless nut factor (K), sometimes called the torque coefficient:
+
+<Formula label="Short-Form Tightening Torque">
+T = K * Fv * (d / 1000)  [N·m]
+</Formula>
+
+Here d is in millimetres, Fv in Newtons, and T in Newton-metres. Representative nut factor values:
+- Dry uncoated steel: K ≈ 0.25
+- Lightly oiled or phosphate-coated steel: K ≈ 0.20
+- PTFE or MoS2-lubricated coatings: K ≈ 0.15 to 0.18
+
+---
+
+## Worked Example — Default Calculator Inputs
+
+Step-by-step engineering verification using the calculator's factory-default parameters:
+
+### Input Values:
+- Bolt size: **M8 × 1.25**
+- Nominal diameter (d): **8 mm**
+- Thread pitch (P): **1.25 mm**
+- Property class: **8.8** (Re = 640 MPa, Rm = 800 MPa)
+- Target preload: **70 percent of Re**
+- Lubrication condition: **Dry (K = 0.25)**
+
+### Step 1 — Stress Area (As):
+
+```
+ds = 8 - (0.9382 × 1.25) = 8 - 1.17275 = 6.82725 mm
+As = (pi / 4) × (6.82725)^2 = 0.785398 × 46.6113 = 36.61 mm²
+```
+
+The effective tensile stress area is **36.61 mm²**.
+
+### Step 2 — Target Preload Force (Fv):
+
+Yield strength Re = 640 MPa and target fraction = 70 percent:
+
+```
+σ_pre = 640 × 0.70 = 448 MPa (N/mm²)
+Fv = 448 × 36.61 = 16,401 N ≈ 16.40 kN
+```
+
+The axial clamping force achieved is **16.40 kN**.
+
+### Step 3 — Required Tightening Torque (T):
+
+Using K = 0.25 (dry) and d = 8 mm:
+
+```
+T = 0.25 × 16,401 N × (8 / 1000) m = 32.80 N·m
+```
+
+The torque wrench must be set to **32.8 N·m**.
+
+### Step 4 — Static Safety Factor Check:
+
+Under pure axial tension, the yield safety factor is:
+
+```
+n_static = Re / σ_pre = 640 / 448 = 1.43
+```
+
+The remaining 30 percent margin accommodates wrench scatter (typically ±15 percent) and the torsional stress component induced during tightening.
+
+---
+
+## Common Engineering Mistakes
+
+1. **Applying the Dry Torque Value to a Lubricated Bolt:** If 32.8 N·m (dry, K = 0.25) is applied to a lightly oiled bolt with K = 0.20, the actual preload becomes 20.5 kN, which is 88 percent of yield. Including the simultaneous torsional stress component during tightening can push the bolt past its yield point.
+2. **Ignoring the Coarse vs. Fine Thread Distinction:** M8 coarse pitch is 1.25 mm but fine-pitch variants at 1.0 mm or 0.75 mm have a larger stress area (approximately 39.2 mm²). Entering the wrong pitch overestimates the stress area and underestimates the actual stress in the bolt.
+3. **Using the Nominal Shank Area Instead of Stress Area:** Calculating pi × 8² / 4 = 50.27 mm² for an M8 bolt overestimates the cross-sectional capacity by 37 percent compared to the correct 36.61 mm², leading to an unconservative preload prediction.
+4. **Neglecting Galling in Stainless Steel Bolts:** A2-70 or A4-80 stainless bolts tightened dry will micro-weld at thread contact asperities, causing sudden seizure. Anti-galling paste (molybdenum disulfide or copper-based) must always be applied, reducing K to approximately 0.15 and requiring a corresponding torque reduction.
+5. **Not Checking Minimum Clamp Length:** In joints with very short grip length (Lk less than 2d), even small elastic embedding losses (settlement of surface asperities) can consume more than half the initial preload, rendering the joint dangerously under-clamped in service.
+
+---
+
+## Frequently Asked Questions
+
+### 1. Why is the preload percentage set at 70 percent of yield rather than 100 percent?
+
+During torque-controlled tightening, the bolt experiences combined axial tension and torsional shear simultaneously. By the von Mises distortion-energy criterion, the equivalent stress is higher than the pure axial component alone. Factoring in typical torque wrench scatter of ±15 percent and uncertainty in the friction coefficient, a 70-percent target provides enough safety margin to avoid yielding even in the worst-case tightening scenario.
+
+### 2. Is the nut factor K the same as the coefficient of friction?
+
+No. The coefficient of friction (mu) is the tribological property of the contact surfaces at the thread flanks and under the bearing face. The nut factor (K) is a dimensionless lumped parameter that combines the helix-angle geometry, thread-flank friction (mu_th), and bearing-face friction (mu_b) into a single multiplier. The two quantities happen to be numerically similar for typical steel-on-steel contact but they represent fundamentally different physical quantities.
+
+### 3. How does upgrading from class 8.8 to 10.9 affect torque?
+
+Class 10.9 has a yield strength of 940 MPa versus 640 MPa for class 8.8, an increase of approximately 47 percent. Keeping the preload percentage at 70 percent, the target axial force rises from 16.4 kN to approximately 24.1 kN. The required tightening torque scales proportionally from 32.8 N·m to roughly 48.2 N·m. The engineer must verify that the mating thread or clamped component can sustain the higher compressive bearing stress.
+
+### 4. Do spring washers prevent loosening?
+
+Modern fastener engineering (VDI 2230, DIN 25201) has demonstrated that conventional split lock washers are ineffective for high-strength bolts: the washer fully flattens under the high preload before the bolt reaches its working load, and once flattened it provides no spring-back force whatsoever. Reliable loosening prevention is achieved by achieving the correct preload level on a bolt with an adequate grip length (Lk greater than or equal to 4d), optionally combined with thread-locking compounds for smaller bolts.
+
+### 5. What must be considered when tapping into aluminium or cast iron?
+
+When a steel bolt threads into a lower-strength cast body (aluminium alloy or grey cast iron), the threaded insert strips before the bolt itself yields. The minimum thread engagement length must be at least 1.5d to 2d for aluminium, and Helicoil wire-thread inserts (or Keensert solid inserts) should be specified for applications subject to repeated assembly. The reduced strip-out strength of the parent material, not the bolt proof load, then governs the maximum permitted preload.
+
+---
+
+## Related Standards and Design Clauses
+
+- **ISO 898-1:** Mechanical properties of fasteners made of carbon steel and alloy steel — bolts, screws, and studs, covering property class designations and minimum tensile/yield requirements.
+- **VDI 2230 Part 1 (Blatt 1):** Systematic calculation of high-duty bolted joints — comprehensive static and dynamic analysis procedure for cylindrical bolt connections.
+- **ISO 68-1:** General-purpose ISO metric screw threads — basic profile geometry defining the 60-degree triangular thread and all derived diameter relationships.
+- **ISO 4014 / ISO 4017:** Hexagon head bolts — product grades A and B, covering dimensional requirements for partially and fully threaded shanks.
+- **EN 14399:** High-strength structural bolting assemblies for preloading — HV and HR system requirements for use in steel construction.
