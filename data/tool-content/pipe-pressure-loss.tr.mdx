@@ -1,0 +1,237 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+
+- **Endüstriyel Boru Hattı Hidrolik Tasarımı:** Kimya tesisleri, enerji santralleri, su arıtma tesisleri ve HVAC soğutma suyu devrelerinde boru hattı boyunca akışkan sürtünmesinden kaynaklanan basınç düşüşünü ve yük kaybını belirlemede kullanılır.
+- **Pompa Seçimi ve Basma Yüksekliği (Basma Manometrik Yüksekliği) Hesabı:** Sirkülasyon veya besleme pompalarının basma hattında yenmesi gereken toplam dinamik direnci (head loss, metre akışkan sütunu) hesaplayarak pompa çalışma noktasını pompa eğrisiyle eşleştirmede tercih edilir.
+- **Ekonomik Boru Çapı Optimizasyonu:** Çap küçüldükçe boru yatırım maliyeti düşer ancak akış hızı ve basınç kaybı hızla artarak pompa elektrik sarfiyatını yükseltir. İlk yatırım maliyeti ile işletme enerji maliyeti arasındaki ekonomik dengeyi analiz etmek için kullanılır.
+- **Farklı Akışkan Türlerinin Modellenmesi:** Su, hidrolik yağ, glikol karışımları veya akaryakıt gibi farklı yoğunluk (rho) ve dinamik viskoziteye (mu) sahip Newton tipi akışkanların laminar veya türbülanslı rejimdeki sürtünme faktörlerini belirlemede uygulanır.
+- **Mevcut Tesisatların Hidrolik Denetimi:** Boru iç yüzeyinde kireçlenme, paslanma veya tortu birikimi nedeniyle bağıl pürüzlülük arttığında oluşacak ek basınç kaybını ve pompa motorunun aşırı yüklenme riskini öngörmede kullanılır.
+
+### Ne Zaman Kullanılmamalıdır?
+
+- **Sıkıştırılabilir Yüksek Hızlı Gaz ve Buhar Akışları:** Gaz veya aşırı kızgın buhar hatlarında hat boyunca basınç düşüşü yüzde 10'u aşıyorsa gaz genleşir, yoğunluk hızla değişir ve Mach sayısı etkili olur; bu durumda izotermal veya adyabatik sıkıştırılabilir akış diferansiyel denklemleri çözülmelidir.
+- **Newton Tipi Olmayan (Non-Newtonian) Akışkanlar:** Çamur, beton harcı, sondaj sıvısı, boya, gıda püreleri veya polimer eriyikleri gibi viskozitesi kayma hızına göre değişen sıvılarda Darcy-Weisbach ve Swamee-Jain formülleri geçerliliğini yitirir; Bingham plastik veya Herschel-Bulkley modelleri gereklidir.
+- **Çok Fazlı Akışlar (Gaz-Sıvı Karışımları):** Buhar kapanı tahliye hatları, soğutucu akışkan evaporatörleri veya petrol kuyusu borularında sıvı ve gaz fazları bir arada akar; iki fazlı akış sürtünme çarpanları (Lockhart-Martinelli yöntemi) uygulanmalıdır.
+- **Lokal (Yerel) Kayıp Odaklı Kısa Tesisatlar:** Dirsek, vana, redüksiyon ve te bağlantılarının yoğun olduğu kısa hatlarda yerel kayıplar düz boru sürtünme kaybının kat kat üzerine çıkabilir; bu araç yalnızca düz boru doğrusal sürtünmesini hesaplar.
+- **Açık Kanal ve Serbest Yüzeyli Akışlar:** Yerçekimiyle akan kanalizasyon boruları veya kısmen dolu drenaj hatlarında basınçlı boru formülleri yerine Manning veya Kutter hidrolik bağıntıları kullanılmalıdır.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Boru içi viskoz akışlarda basınç kaybı, akışkan moleküllerinin birbiriyle ve boru cidarının mikroskobik pürüzleriyle olan viskoz kayma gerilmesi etkileşiminden doğar.
+
+### 1. Süreklilik Denklemi ve Akış Hızı
+
+Sıkıştırılamaz ve sürekli akışta debi (Q) kesit alanı (A) boyunca sabittir:
+
+```
+Q = v * A
+```
+
+İç çapı D olan dairesel boru kesit alanı:
+
+```
+A = (pi * D^2) / 4   [m²]
+```
+
+Buradan ortalama kesit hızı:
+
+<Formula label="Ortalama Akış Hızı">
+v = Q / A = (4 * Q) / (pi * D^2)   [m/s]
+</Formula>
+
+### 2. Reynolds Sayısı ve Akış Rejimi
+
+Atalet kuvvetlerinin viskoz sürtünme kuvvetlerine oranı Reynolds sayısı (Re) ile tanımlanır:
+
+<Formula label="Reynolds Sayısı">
+Re = (rho * v * D) / mu   [boyutsuz]
+</Formula>
+
+Burada rho akışkan yoğunluğu (kg/m³), v hız (m/s), D boru iç çapı (m) ve mu dinamik viskozitedir (Pa·s = N·s/m²). Dairesel borularda akış rejimi şu eşiklerle sınıflandırılır:
+- Re küçüktür 2300: **Laminar akış** (parabolik hız profili, pürüzlülükten bağımsız)
+- 2300 küçük veya eşittir Re küçüktür 4000: **Geçiş bölgesi (Transition)**
+- Re büyük veya eşittir 4000: **Tam gelişmiş türbülanslı akış**
+
+### 3. Darcy Sürtünme Faktörü (f)
+
+- **Laminar Akışta (Re küçüktür 2300):** Hagen-Poiseuille analitik çözümünden doğrudan elde edilir:
+  ```
+  f = 64 / Re
+  ```
+- **Türbülanslı Akışta (Re büyüktür 4000):** Colebrook-White örtük denklemi endüstriyel referanstır:
+  ```
+  1 / sqrt(f) = -2 * log10[ (epsilon / (3,7 * D)) + (2,51 / (Re * sqrt(f))) ]
+  ```
+  Bu örtük denklem iterasyon gerektirdiğinden, mühendislik hesaplarında yüzde 1'den az sapmayla doğrudan sonuç veren Swamee-Jain bağıntısı kullanılır:
+
+<Formula label="Swamee-Jain Sürtünme Faktörü">
+f = 0,25 / [ log10( (epsilon / (3,7 * D)) + (5,74 / (Re^0,9)) ) ]^2
+</Formula>
+
+Burada epsilon boru iç yüzey mutlak pürüzlülüğüdür (metre cinsinden), epsilon / D ise boyutsuz bağıl pürüzlülüktür.
+
+### 4. Darcy-Weisbach Basınç Düşüşü ve Yük Kaybı
+
+Uzunluğu L ve iç çapı D olan düz boru kesitindeki sürtünme kaynaklı basınç kaybı:
+
+<Formula label="Darcy-Weisbach Basınç Kaybı">
+Delta_P = f * (L / D) * (rho * v^2 / 2)   [Pa]
+</Formula>
+
+Bar cinsine dönüşüm: Delta_P_bar = Delta_P / 100.000. Yük kaybı (metre akışkan sütunu, head loss):
+
+```
+h_f = Delta_P / (rho * g)   [m]
+```
+
+Burada standart yerçekimi ivmesi g = 9,80665 m/s² alınır. Pompanın bu sürtünmeyi yenmek için akışkana aktarması gereken hidrolik güç (yüzde 70 pompa verimi varsayımıyla):
+
+<Formula label="Hidrolik Pompa Gücü">
+P_pompa = (Delta_P * Q) / (eta * 1000)   [kW]
+</Formula>
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın fabrika varsayılan parametreleri kullanılarak yapılan adım adım mühendislik doğrulaması:
+
+### Girdi Değerleri:
+- Akışkan Yoğunluğu (rho): **998 kg/m³ (yaklaşık 20°C su)**
+- Dinamik Viskozite (mu): **0,001 Pa·s = 1,00 mPa·s**
+- Hacimsel Debi (Q): **0,01 m³/s (36 m³/h veya 600 L/dk)**
+- Boru İç Çapı (D): **50 mm = 0,050 m**
+- Boru Uzunluğu (L): **30 m**
+- Boru Mutlak Pürüzlülüğü (epsilon): **0,045 mm (ticari çekme çelik boru)**
+
+### Adım 1 — Kesit Alanı ve Akış Hızı:
+
+```
+A = (pi * D^2) / 4 = (pi * 0,050^2) / 4 = pi * 0,0025 / 4 = 0,0019635 m²
+v = Q / A = 0,01 m³/s / 0,0019635 m² = 5,093 m/s
+```
+
+Boru içerisindeki akış hızı **5,09 m/s** olarak hesaplanır.
+
+### Adım 2 — Reynolds Sayısı ve Rejim:
+
+```
+Re = (rho * v * D) / mu = (998 * 5,09296 * 0,050) / 0,001
+Re = 254.138,6 ≈ 254.139
+```
+
+Re büyük veya eşittir 4000 olduğundan akış **tam türbülanslı rejimdedir (turbulent)**.
+
+### Adım 3 — Bağıl Pürüzlülük ve Darcy Sürtünme Faktörü (f):
+
+Bağıl pürüzlülük oranı:
+
+```
+epsilon / D = 0,045 mm / 50 mm = 0,0009
+```
+
+Swamee-Jain bağıntısının terimleri:
+
+```
+Terim 1 = (epsilon / (3,7 * D)) = 0,0009 / 3,7 = 0,00024324
+Terim 2 = 5,74 / (Re^0,9) = 5,74 / (254.139^0,9) = 5,74 / 74.053,7 = 0,00007751
+Toplam terim = 0,00024324 + 0,00007751 = 0,00032075
+log10(0,00032075) = -3,4938
+[-3,4938]^2 = 12,2068
+f = 0,25 / 12,2068 = 0,02049 ≈ 0,0205
+```
+
+Darcy sürtünme katsayısı **f = 0,0205** olarak belirlenir.
+
+### Adım 4 — Basınç Düşüşü (Delta_P):
+
+Dinamik basınç (rho · v² / 2):
+
+```
+q_dinamik = 998 * (5,09296)^2 / 2 = 998 * 25,9382 / 2 = 12.943,18 Pa
+```
+
+Boru boyu ve çap oranı:
+
+```
+L / D = 30 / 0,050 = 600
+```
+
+Toplam sürtünme basınç kaybı:
+
+```
+Delta_P = f * (L / D) * q_dinamik = 0,0204945 * 600 * 12.943,18 = 159.159 Pa
+```
+
+Bar biriminde:
+
+```
+Delta_P_bar = 159.159 / 100.000 = 1,592 bar (yaklaşık 1,59 bar)
+```
+
+### Adım 5 — Yük Kaybı (Head Loss) ve Pompa Gücü:
+
+Metre cinsinden yük kaybı:
+
+```
+h_f = Delta_P / (rho * g) = 159.159 / (998 * 9,80665) = 159.159 / 9.787,04 = 16,26 m
+```
+
+Pompanın bu sürtünmeyi yenmek için harcadığı mekanik şaft gücü (eta = 0,70 kabulüyle):
+
+```
+P_pompa = (159.159 Pa * 0,01 m³/s) / (0,70 * 1000) = 1.591,59 / 700 = 2,27 kW
+```
+
+Pompa gücü **2,27 kW** olarak hesaplanır.
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Fanning ile Darcy Sürtünme Faktörünü Karıştırmak:** Kimya mühendisliğinde sıkça Fanning katsayısı (f_F) kullanılır ve Darcy katsayısının dörtte birine eşittir (f_Darcy = 4 · f_F). Yanlış katsayı seçimi basınç kaybının 4 kat eksik veya 4 kat fazla hesaplanmasına yol açar.
+2. **5 m/s Üzeri Aşırı Yüksek Hız Seçimi:** Sıvı hatlarında hızın 2,5 ila 3 m/s'yi aşması durumunda basınç kaybı hızın karesiyle katlanarak artar, boru cidarlarında erozyon-korozyon başlar ve koç darbesi (water hammer) riski tehlikeli seviyelere çıkar. Genel su tesisatlarında ekonomik hız 1,5 ile 2,5 m/s aralığında tutulmalıdır.
+3. **Eski Borularda Pürüzlülük Artışını İhmal Etmek:** Yeni çekme çelik boruda pürüzlülük 0,045 mm iken 10 yıllık korozyonlu veya kireçli bir boruda pürüzlülük 0,5 ila 2,0 mm seviyesine çıkabilir; bu durum sürtünme faktörünü ve dolayısıyla basınç düşüşünü iki katına çıkarabilir.
+4. **Dinamik Viskozite ile Kinematik Viskoziteyi Birbirine Karıştırmak:** Formülde dinamik viskozite mu (Pa·s) kullanılır. Akışkan tablosundan kinematik viskozite nu (cSt veya m²/s) alınmışsa, dinamik viskoziteye geçmek için yoğunlukla çarpılmalıdır (mu = nu · rho).
+5. **Yerel Ekipman Kayıplarını Unutmak:** Tesisat boyunca yer alan çekvalf, pislik tutucu ve dirseklerin eşdeğer uzunlukları veya K katsayıları eklenmezse gerçek tesisat basınç kaybı hesaplanandan yüzde 30 ila yüzde 60 daha yüksek gerçekleşir.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Su hatları için tavsiye edilen ekonomik boru akış hızı nedir?
+
+Genel endüstriyel soğutma ve besleme suyu devrelerinde önerilen ekonomik hız limitleri:
+- Pompa emiş hatları (kavitasyon riskini önlemek için): 0,8 ile 1,5 m/s arası
+- Pompa basma ve dağıtım ana hatları: 1,5 ile 2,5 m/s arası
+- Kısa servis hatları veya yangın koruma devreleri: 3,0 ile 4,0 m/s'ye kadar kabul edilebilir
+Varsayılan örnekteki 5,09 m/s hızı hidrolik açıdan yüksek olup boru çapının DN50 yerine DN65 veya DN80'e büyütülmesi enerji verimliliği sağlar.
+
+### 2. Colebrook-White formülü ile Swamee-Jain formülü arasında fark var mıdır?
+
+Colebrook-White örtük (implicit) bir denklemdir ve f katsayısı eşitliğin her iki tarafında yer aldığı için sayısal kök bulma (Newton-Raphson gibi) gerektirir. Swamee-Jain bağıntısı ise Colebrook denkleminin doğrudan analitik bir yaklaşımıdır. Pratikte bağıl pürüzlülüğün 1e-6 ile 1e-2 ve Reynolds sayısının 5000 ile 1e8 aralığında olduğu durumlarda hata yüzde 1'in altındadır.
+
+### 3. Boru çapını iki katına çıkarırsak basınç kaybı nasıl değişir?
+
+Debi sabit tutulduğunda akış hızı çapın karesiyle ters orantılı olarak 4 katına düşer (v ~ 1/D²). Darcy-Weisbach formülünde Delta_P ~ (f / D) · v² olduğundan basınç kaybı kabaca çapın 5. kuvvetiyle ters orantılı değişir (Delta_P ~ 1/D⁵). Dolayısıyla boru çapını 2 katına çıkarmak basınç kaybını yaklaşık 32 kat azaltır.
+
+### 4. Laminar akışta boru pürüzlülüğü neden basınç kaybını etkilemez?
+
+Laminar akışta akışkan tabakaları birbiri üzerinde düzgün laminasyonlar halinde kayar ve cidar yüzeyinde hareketsiz bir sınır tabakası bulunur. Cidardaki pürüz tepeleri bu durgun tabakanın içinde kaldığından akış çekirdeğinde türbülanslı girdaplar oluşturamaz. Bu yüzden f = 64 / Re formülünde pürüzlülük terimi yer almaz.
+
+### 5. Basınç kaybından hesaplanan yük kaybı (head loss) metre cinsinden ne ifade eder?
+
+Metre akışkan sütunu cinsinden yük kaybı (h_f), akışkanın sürtünme nedeniyle kaybettiği özgül enerjinin yerçekimi eşdeğeridir. Örneğin 16,26 metre yük kaybı, pompanın su sütununu statik olarak 16,26 metre yukarı basmak için harcadığı basınca eşdeğer bir enerjinin boru sürtünmesinde ısıya dönüşüp kaybolduğu anlamına gelir.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **Crane Technical Paper No. 410 (TP-410):** Flow of Fluids Through Valves, Fittings, and Pipe — Boru donanımı hidrolik hesaplarında dünya çapında temel mühendislik referansı.
+- **ISO 4006:** Kapalı kanallarda akışkan debisinin ölçülmesi — Terimler ve tanımlar.
+- **DIN EN 10255 / EN 10216:** Kaynaklı ve dikişsiz çelik boruların boyut ve tolerans standartları (boru et kalınlığı ve anma çapları).
+- **ASME B31.3:** Proses Borulama Standardı — Akışkan iletim hatlarında basınç düşüşü, hız limitleri ve hidrolik tasarım kuralları.
+- **ASHRAE Handbook - Fundamentals:** Bölüm 22 (Boru Tasarımı) — Su ve hidronik sistemlerde sürtünme kaybı ve ekonomik boru boyutlandırma çizelgeleri.

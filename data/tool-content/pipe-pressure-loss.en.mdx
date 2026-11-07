@@ -1,0 +1,237 @@
+## When to Use and When Not to Use
+
+### When to Use
+
+- **Industrial Piping Hydraulic Design:** Calculate frictional pressure drop and friction head loss along straight pipe runs in chemical processing plants, thermal power stations, municipal water treatment systems, and commercial HVAC chilled-water circuits.
+- **Pump Sizing and Total Dynamic Head (TDH) Determination:** Accurately evaluate the pipe friction resistance (expressed in metres or feet of liquid column) required to establish the system head curve and select the optimal pump impeller trim.
+- **Economic Pipe Diameter Optimization:** Conduct trade-off studies balancing capital expenditure (smaller pipe, lower initial material cost) against long-term operating power expenditure (higher velocity, drastically increased pump electricity consumption).
+- **Evaluating Various Newtonian Fluids:** Model liquids with distinct densities (rho) and dynamic viscosities (mu), including cooling water, thermal oils, glycol solutions, and liquid fuels across laminar, transitional, and turbulent flow regimes.
+- **Aging Pipe Asset Integrity Audits:** Quantify how internal pipe scale buildup, corrosion tuberculation, or biofilm formation increases surface roughness and restricts operating flow rates or overloads existing pump motors.
+
+### When Not to Use
+
+- **Compressible High-Velocity Gas and Steam Flows:** If the pressure drop along the pipeline exceeds 10 percent of the inlet absolute pressure, gas expansion alters density and velocity significantly; isothermal or adiabatic compressible flow formulations must be solved.
+- **Non-Newtonian Slurries and Suspensions:** For drilling muds, cement grouts, paints, paper pulp, or food pastes whose apparent viscosity varies with shear rate, standard Darcy-Weisbach and Swamee-Jain friction factors are invalid; rheological models (Bingham plastic or power-law) are required.
+- **Two-Phase Gas-Liquid Mixtures:** Steam-condensate return lines, refrigeration evaporator circuits, or oil-gas wellhead lines exhibit stratified, annular, or slug flow regimes that require empirical two-phase pressure drop multipliers (such as the Lockhart-Martinelli method).
+- **Fittings-Dominated Short Manifolds:** In compact pipe spools crowded with elbows, tees, control valves, and strainers, minor (local) losses frequently outweigh straight-pipe friction; this tool evaluates straight-pipe friction loss alone.
+- **Open-Channel and Gravity Drainage Flows:** For partially filled culverts, storm drains, or gravity sewers, free-surface flow formulas such as the Manning or Kutter equations must be applied rather than pressurized closed-conduit relations.
+
+---
+
+## Formula Derivation and Physical Background
+
+Fluid flowing inside a closed circular conduit loses mechanical energy due to viscous shear stresses operating between adjacent fluid layers and against the microscopic asperities of the internal pipe wall.
+
+### 1. Continuity Equation and Mean Velocity
+
+For steady, incompressible flow of a fluid through a conduit of uniform internal diameter D, mass conservation dictates constant volumetric flow rate Q:
+
+```
+Q = v * A
+```
+
+The cross-sectional flow area A is:
+
+```
+A = (pi * D^2) / 4   [m²]
+```
+
+Solving for the area-averaged cross-sectional velocity:
+
+<Formula label="Mean Flow Velocity">
+v = Q / A = (4 * Q) / (pi * D^2)   [m/s]
+</Formula>
+
+### 2. Reynolds Number and Flow Regime Classification
+
+The ratio of inertial forces to viscous forces within the flow field is governed by the dimensionless Reynolds number (Re):
+
+<Formula label="Reynolds Number">
+Re = (rho * v * D) / mu   [dimensionless]
+</Formula>
+
+Where rho is the fluid density (kg/m³), v is mean velocity (m/s), D is internal pipe diameter (m), and mu is dynamic viscosity (Pa·s = N·s/m²). For circular closed conduits, the flow regimes are defined as:
+- Re less than 2300: **Laminar flow** (streamline parabolic velocity profile, completely independent of pipe roughness)
+- 2300 less than or equal to Re less than 4000: **Transition zone** (intermittent turbulent bursts)
+- Re greater than or equal to 4000: **Fully developed turbulent flow** (chaotic eddy mixing and logarithmic boundary layer profile)
+
+### 3. Darcy Friction Factor (f)
+
+- **Laminar Flow (Re less than 2300):** Derived analytically from the exact Hagen-Poiseuille parabolic profile solution:
+  ```
+  f = 64 / Re
+  ```
+- **Turbulent Flow (Re greater than or equal to 4000):** The universally accepted industrial benchmark is the implicit Colebrook-White equation:
+  ```
+  1 / sqrt(f) = -2 * log10[ (epsilon / (3.7 * D)) + (2.51 / (Re * sqrt(f))) ]
+  ```
+  Because the Colebrook equation is implicit in f and requires numerical iteration, the explicit Swamee-Jain approximation is applied, providing accuracy within 1 percent of Colebrook across standard industrial conditions:
+
+<Formula label="Swamee-Jain Friction Factor">
+f = 0.25 / [ log10( (epsilon / (3.7 * D)) + (5.74 / (Re^0.9)) ) ]^2
+</Formula>
+
+Here epsilon represents the absolute surface roughness of the conduit wall (in metres), and epsilon / D is the dimensionless relative roughness.
+
+### 4. Darcy-Weisbach Pressure Drop and Head Loss
+
+The fundamental Darcy-Weisbach equation for frictional pressure loss over a pipe length L is:
+
+<Formula label="Darcy-Weisbach Pressure Loss">
+Delta_P = f * (L / D) * (rho * v^2 / 2)   [Pa]
+</Formula>
+
+To express pressure drop in bar: Delta_P_bar = Delta_P / 100,000. Frictional head loss (h_f), expressed in equivalent metres of fluid column:
+
+```
+h_f = Delta_P / (rho * g)   [m]
+```
+
+Where standard gravitational acceleration g = 9.80665 m/s². The theoretical hydraulic shaft power required from a pumping unit assuming a typical nominal wire-to-water efficiency eta = 0.70 (70 percent) is:
+
+<Formula label="Hydraulic Pump Power">
+P_pump = (Delta_P * Q) / (eta * 1000)   [kW]
+</Formula>
+
+---
+
+## Worked Example — Default Calculator Inputs
+
+The following step-by-step calculation validates the tool against its factory-default input parameters:
+
+### Input Values:
+- Fluid Density (rho): **998 kg/m³ (water at approximately 20°C)**
+- Dynamic Viscosity (mu): **0.001 Pa·s = 1.00 mPa·s (1.00 cP)**
+- Volumetric Flow Rate (Q): **0.01 m³/s (36 m³/h or 158.5 US gpm)**
+- Internal Pipe Diameter (D): **50 mm = 0.050 m**
+- Pipe Length (L): **30 m**
+- Absolute Surface Roughness (epsilon): **0.045 mm = 0.000045 m (commercial carbon steel)**
+
+### Step 1 — Flow Area and Mean Flow Velocity:
+
+```
+A = (pi * D^2) / 4 = (pi * 0.050^2) / 4 = pi * 0.0025 / 4 = 0.0019635 m²
+v = Q / A = 0.01 m³/s / 0.0019635 m² = 5.093 m/s
+```
+
+The mean flow velocity is **5.09 m/s**.
+
+### Step 2 — Reynolds Number and Flow Regime:
+
+```
+Re = (rho * v * D) / mu = (998 * 5.09296 * 0.050) / 0.001
+Re = 254,138.6 ≈ 254,139
+```
+
+Because Re is well above 4000, the flow is in the **fully turbulent regime**.
+
+### Step 3 — Relative Roughness and Darcy Friction Factor (f):
+
+Relative roughness ratio:
+
+```
+epsilon / D = 0.045 mm / 50 mm = 0.0009
+```
+
+Evaluating the terms of the Swamee-Jain equation:
+
+```
+Term 1 = (epsilon / (3.7 * D)) = 0.0009 / 3.7 = 0.00024324
+Term 2 = 5.74 / (Re^0.9) = 5.74 / (254,139^0.9) = 5.74 / 74,053.7 = 0.00007751
+Sum of terms = 0.00024324 + 0.00007751 = 0.00032075
+log10(0.00032075) = -3.4938
+[-3.4938]^2 = 12.2068
+f = 0.25 / 12.2068 = 0.02049 ≈ 0.0205
+```
+
+The Darcy friction factor is **f = 0.0205**.
+
+### Step 4 — Frictional Pressure Loss (Delta_P):
+
+Dynamic pressure component (rho · v² / 2):
+
+```
+q_dynamic = 998 * (5.09296)^2 / 2 = 998 * 25.9382 / 2 = 12,943.18 Pa
+```
+
+Length-to-diameter ratio:
+
+```
+L / D = 30 / 0.050 = 600
+```
+
+Total frictional pressure loss:
+
+```
+Delta_P = f * (L / D) * q_dynamic = 0.0204945 * 600 * 12,943.18 = 159,159 Pa
+```
+
+Converting to bar:
+
+```
+Delta_P_bar = 159,159 / 100,000 = 1.592 bar (approximately 1.59 bar)
+```
+
+### Step 5 — Frictional Head Loss and Pumping Power:
+
+Frictional head loss in metres of fluid column:
+
+```
+h_f = Delta_P / (rho * g) = 159,159 / (998 * 9.80665) = 159,159 / 9,787.04 = 16.26 m
+```
+
+Required mechanical pumping shaft power (assuming eta = 0.70 pump efficiency):
+
+```
+P_pump = (159,159 Pa * 0.01 m³/s) / (0.70 * 1000) = 1,591.59 / 700 = 2.27 kW
+```
+
+The required pumping power is **2.27 kW**.
+
+---
+
+## Common Engineering Mistakes
+
+1. **Confusing Darcy Friction Factor with Fanning Friction Factor:** In chemical engineering literature, the Fanning friction factor (f_F) is widely tabulated and is exactly one-quarter of the Darcy factor (f_Darcy = 4 · f_F). Substituting f_F directly into the Darcy-Weisbach equation underestimates pressure drop by 75 percent.
+2. **Selecting Excessively High Liquid Velocities:** Operating liquid piping above 3.0 m/s leads to quadratic escalation in pressure losses, severe erosion-corrosion on pipe walls, acoustic noise, and extreme water hammer surge pressures during rapid valve closure. Standard practice recommends keeping process water velocities between 1.5 and 2.5 m/s.
+3. **Ignoring Pipe Aging and Internal Fouling:** While newly installed drawn carbon steel has an absolute roughness of 0.045 mm, older pipes subject to scale or pitting can see roughness climb to 0.5 to 2.0 mm, doubling friction factor f and severely curtailing discharge flow.
+4. **Confusing Dynamic Viscosity and Kinematic Viscosity:** The Reynolds number formula requires dynamic viscosity mu in Pa·s (N·s/m²). If kinematic viscosity nu (in cSt or mm²/s) is taken from a fluids handbook, it must be multiplied by fluid density (mu = nu · rho / 10⁶) before substitution.
+5. **Omitting Minor Fitting Losses in Compact Networks:** Neglecting the loss coefficients (K-values) of valves, elbows, reducers, and strainers in compact plant layouts can cause actual system pressure drops to exceed straight-pipe predictions by 30 to 70 percent.
+
+---
+
+## Frequently Asked Questions
+
+### 1. What are the recommended economic velocity limits for liquid piping?
+
+Typical industrial piping engineering guidelines recommend the following velocity windows:
+- Pump suction lines (to prevent cavitation and ensure positive suction head): 0.8 to 1.5 m/s
+- Pump discharge and main process water lines: 1.5 to 2.5 m/s
+- Intermittent fire protection lines: up to 3.5 to 4.0 m/s
+The default example velocity of 5.09 m/s is hydraulically high and suggests that stepping up pipe size from DN50 to DN65 or DN80 would substantially reduce pump operating power.
+
+### 2. How close is the Swamee-Jain formula to the Colebrook-White equation?
+
+The Swamee-Jain equation is an explicit mathematical approximation of the implicit Colebrook-White relationship. For relative roughness values between 1e-6 and 1e-2, and Reynolds numbers between 5,000 and 100,000,000, Swamee-Jain matches Colebrook within 1.0 percent deviation, eliminating the need for iterative solver convergence.
+
+### 3. How does doubling the pipe internal diameter impact friction loss?
+
+At a constant volumetric flow rate Q, doubling internal diameter D reduces velocity by a factor of 4 (v ~ 1 / D²). In the Darcy-Weisbach relation Delta_P ~ (f / D) · v², the pressure drop scales roughly with the inverse fifth power of diameter (Delta_P ~ 1 / D⁵). Therefore, doubling pipe diameter reduces pressure loss by approximately a factor of 32.
+
+### 4. Why does pipe roughness have no effect on friction in laminar flow?
+
+In laminar flow, fluid moves in smooth concentric cylindrical laminas, and a viscous boundary sublayer remains stationary at the wall. The microscopic wall asperities are entirely submerged within this stagnant sublayer, meaning they cannot trigger turbulent eddies in the core flow. Consequently, the friction factor is solely a function of Reynolds number: f = 64 / Re.
+
+### 5. What physical concept does head loss in metres represent?
+
+Frictional head loss (h_f) represents the specific mechanical energy dissipated as heat by viscous friction, expressed as an equivalent vertical height of fluid column. A head loss of 16.26 m indicates that the pumping unit expends as much pressure energy overcoming 30 m of pipe friction as it would lifting the liquid column 16.26 m vertically against gravity.
+
+---
+
+## Related Standards and Design Clauses
+
+- **Crane Technical Paper No. 410 (TP-410):** Flow of Fluids Through Valves, Fittings, and Pipe — The globally accepted handbook for industrial piping hydraulics.
+- **ISO 4006:** Measurement of fluid flow in closed conduits — Vocabulary and symbols.
+- **DIN EN 10255 / EN 10216:** Non-alloy and seamless steel tubes for pressure purposes — Standard dimensional gauges, wall thicknesses, and tolerances.
+- **ASME B31.3:** Process Piping Code — Chapter II provides pressure design criteria, velocity guidelines, and allowable piping friction limits.
+- **ASHRAE Handbook - Fundamentals:** Chapter 22 (Pipe Sizing) — Comprehensive design criteria for hydronic cooling and heating water networks.
