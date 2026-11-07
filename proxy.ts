@@ -57,6 +57,17 @@ const getClientIp = (request: NextRequest) => {
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Crucial: bypass middleware completely for crawler and system verification files
+  if (
+    pathname === "/ads.txt" ||
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml" ||
+    pathname.startsWith("/.well-known/")
+  ) {
+    return NextResponse.next();
+  }
+
   const hostname = getRequestHostname(request);
 
   if (shouldRedirectToCanonicalHost(hostname)) {
@@ -163,3 +174,19 @@ export default function proxy(request: NextRequest) {
   const hasStoredLocale = isLocale(request.cookies.get(LOCALE_COOKIE)?.value);
   return NextResponse.redirect(redirected, hasStoredLocale && shouldLocaleRedirect ? 307 : 308);
 }
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - ads.txt
+     * - robots.txt
+     * - sitemap.xml
+     * - .well-known
+     */
+    "/((?!_next/static|_next/image|favicon.ico|ads\\.txt|robots\\.txt|sitemap\\.xml|\\.well-known).*)",
+  ],
+};
