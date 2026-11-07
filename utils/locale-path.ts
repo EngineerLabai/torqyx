@@ -23,6 +23,8 @@ const isExternalPath = (value: string) => {
 const LOCALE_PUBLIC_ALIASES = {
   tr: {
     "/hakkinda": "/hakkinda",
+    "/metodoloji": "/metodoloji",
+    "/sorumluluk-reddi": "/sorumluluk-reddi",
     "/gizlilik": "/gizlilik",
     "/cerez-politikasi": "/cerez-politikasi",
     "/kullanim-sartlari": "/kullanim-sartlari",
@@ -31,6 +33,8 @@ const LOCALE_PUBLIC_ALIASES = {
   },
   en: {
     "/hakkinda": "/about",
+    "/metodoloji": "/methodology",
+    "/sorumluluk-reddi": "/disclaimer",
     "/gizlilik": "/privacy",
     "/cerez-politikasi": "/cookies",
     "/kullanim-sartlari": "/terms",

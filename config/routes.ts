@@ -32,8 +32,8 @@ export const ROUTES = {
   terms: "/kullanim-sartlari",
   salesPolicy: "/satis-iade-teslimat",
   about: "/hakkinda",
-  methodology: "/hakkinda#methodology",
-  disclaimer: "/hakkinda#disclaimer",
+  methodology: "/metodoloji",
+  disclaimer: "/sorumluluk-reddi",
   sitemap: "/sitemap.xml",
   blog: "/blog",
 } as const;
