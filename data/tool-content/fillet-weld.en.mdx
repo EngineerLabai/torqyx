@@ -1,0 +1,162 @@
+## When to Use and When Not to Use
+
+### When to Use
+
+- **Structural Steel Fillet Weld Preliminary Sizing:** Calculate the minimum required leg size (a) and effective throat thickness for gusset plates, stiffener ribs, column base plates, and angle brackets carrying static shear or tensile forces.
+- **Weld Verification of Existing Shop Drawings:** Evaluate the average shear stress in a specified weld leg size (such as a = 4 mm or a = 6 mm) under service loading to verify that resultant stress remains safely below allowable stress limits.
+- **Electrode and Base Metal Matching:** Compare design stress margins across structural carbon steels (S235, S275, S355, ASTM A36, A572) paired with corresponding welding consumables (such as E7018, ER70S-6).
+- **Weld Length vs. Leg Size Trade-Off Studies:** Evaluate whether extending weld seam length (L) allows a smaller leg size, thereby reducing total weld volume, heat input, and associated angular distortion.
+- **Welding Engineering and Mechanics Education:** Clarify why the critical failure plane in an equal-leg 45-degree fillet weld is oriented along the throat dimension (0.707·a) rather than along the plate fusion faces.
+
+### When Not to Use
+
+- **Combined In-Plane and Out-of-Plane Bending and Torsion:** If the weld seam carries eccentric loads generating simultaneous shear, bending, and torsional moments, the elastic vector method (unit area polar moment of inertia) or finite element weld modelling must be employed.
+- **Cyclic Fatigue Environments in Bridges and Crane Runways:** Welded joints subject to millions of stress cycles develop severe stress concentrations at the weld toe and root; fatigue design must follow Eurocode 3 Part 1-9 (FAT classes) or AWS D1.1 tubular/nontubular fatigue curves.
+- **Complete Joint Penetration (CJP) Butt Welds:** In groove butt joints where plates are welded end-to-end with full penetration, load transfers directly across the plate cross-section; the 0.707 throat factor does not apply.
+- **Acute or Skewed Non-90-Degree Joints:** When the dihedral angle between joined plates deviates significantly from 90 degrees (less than 60 degrees or greater than 120 degrees), effective throat geometry changes; specialized formulation from EN 1993-1-8 or AWS D1.1 Clause 9 applies.
+- **High-Temperature Creep and Plastic Shakedown:** Welded pressure vessels operating in the creep range (above 400°C) require elevated-temperature metallurgical assessment and creep-fatigue interaction damage rules (ASME Section VIII Div 2).
+
+---
+
+## Formula Derivation and Physical Background
+
+In a standard 90-degree T-joint or lap joint, an ideal equal-leg fillet weld assumes the profile of an isosceles right triangle (45-45-90 degrees).
+
+### 1. Theoretical Throat Thickness (a_throat)
+
+Under applied shear or tensile loads, shear failure invariably initiates across the minimum cross-sectional path extending from the root of the joint perpendicular to the weld face (hypotenuse). This shortest dimension is termed the "theoretical throat thickness":
+
+By Euclidean trigonometry in an isosceles right triangle with equal leg lengths a:
+
+```
+a_throat = a * sin(45°) = a * cos(45°) = a / sqrt(2) ≈ 0.7071 * a   [mm]
+```
+
+This establishes that the minimum load-bearing thickness is approximately 70.7 percent of the visible weld leg size.
+
+### 2. Effective Throat Area (A_eff)
+
+For a continuous weld seam of effective length L, the total shear-resisting throat area is:
+
+<Formula label="Effective Throat Area">
+A_eff = a_throat * L = 0.707 * a * L   [mm²]
+</Formula>
+
+Where L represents the net effective length after deducting start stops, cold laps, and end crater depressions.
+
+### 3. Mean Throat Shear Stress Formulation (AWS and Shigley Approach)
+
+Standard structural welding codes (AWS D1.1, AISC, and classical machine design texts such as Shigley) adopt the conservative simplification that all applied resultant forces (F), whether acting parallel or transverse to the weld axis, are resolved as pure shear stress across the throat plane:
+
+<Formula label="Fillet Weld Average Stress">
+sigma = F / A_eff = F / (0.707 * a * L)   [MPa]
+</Formula>
+
+Where F is applied force in Newtons (N), a is leg size in millimetres (mm), and L is effective weld length in millimetres (mm).
+
+### 4. Sizing the Minimum Required Leg Size (a_req)
+
+To guarantee that the induced stress does not exceed the material allowable design limit (sigma_allow):
+
+```
+sigma <= sigma_allow  ==>  F / (0.707 * a * L) <= sigma_allow
+```
+
+Solving algebraically for the required leg size a:
+
+<Formula label="Required Leg Size Sizing Formula">
+a_req = F / (0.707 * L * sigma_allow)   [mm]
+</Formula>
+
+This design equation provides the minimum leg dimension necessary to safely transfer the specified static load.
+
+---
+
+## Worked Example — Default Calculator Inputs
+
+The following step-by-step calculation validates the tool using its factory-default input parameters:
+
+### Input Values:
+- Applied Static Force (F): **15,000 N (15 kN)**
+- Effective Weld Seam Length (L): **120 mm**
+- Allowable Shear Stress (sigma_allow): **140 MPa (N/mm²)**
+- Input Fillet Leg Size (fillet): **0 mm (sizing / design mode)**
+
+### Step 1 — Calculating Required Minimum Leg Size (a_req):
+
+Applying the sizing equation:
+
+```
+Numerator = F = 15,000 N
+Denominator = 0.707 * L * sigma_allow = 0.707 * 120 mm * 140 N/mm²
+Denominator = 84.84 * 140 = 11,877.6 N/mm
+a_req = 15,000 / 11,877.6 = 1.26288 mm ≈ 1.26 mm
+```
+
+The minimum theoretical leg size required to transmit 15 kN is **1.26 mm**.
+
+### Step 2 — Calculating Corresponding Throat Thickness (throat):
+
+```
+a_throat = a_req * 0.707 = 1.26288 mm * 0.7071 = 0.8929 mm ≈ 0.89 mm
+```
+
+The theoretical throat thickness is **0.89 mm**.
+
+### Step 3 — Practical Workshop Sizing and Code Compliance Check:
+
+While theoretical statics indicates a 1.26 mm leg suffices, practical welding codes (AWS D1.1 Table 7.7 and EN 1993-1-8 Table 4.1) mandate minimum leg sizes to ensure adequate fusion and avoid rapid quenching in steel plates:
+- For plate thickness t up to 6 mm: minimum practical leg size a_min = 3 mm
+- For plate thickness t between 6 and 12 mm: minimum practical leg size a_min = 4 to 5 mm
+
+If the design engineer inputs an actual practical shop size of **fillet = 4 mm**:
+
+```
+sigma_check = 15,000 N / (0.707 * 4 mm * 120 mm) = 15,000 / 339.36 = 44.20 MPa
+```
+
+Because 44.20 MPa is well below the allowable limit of 140 MPa, the connection is classified as safe (safety margin n = 140 / 44.20 = 3.17).
+
+---
+
+## Common Engineering Mistakes
+
+1. **Confusing Leg Size with Throat Thickness:** Leg size (a) is the length of the triangular side fusing against the plate; throat thickness is the perpendicular height (0.707·a). Substituting leg size directly into the stress equation overstates load capacity by 41 percent, resulting in undersized welds.
+2. **Failing to Deduct End Crater Losses from Seam Length:** Weld arc strikes and end craters lack full penetration. Good detailing practices dictate calculating net effective length as L_eff = L_total - 2·a, rather than using the gross drawn seam length.
+3. **Over-Welding Thin Sheet Metals:** Depositing an 8 mm fillet on a 3 mm sheet metal bracket delivers excessive heat input, inducing severe angular distortion, grain coarsening in the Heat-Affected Zone (HAZ), and risk of burn-through without increasing joint strength.
+4. **Ignoring Minimum Weld Sizes on Heavy Base Metal:** Depositing a 2 mm fillet on 25 mm thick plates causes rapid heat dissipation into the cold mass. This severe quench effect forms brittle martensite in the weld root, precipitating hydrogen-induced cold cracking.
+5. **Assuming Transverse and Longitudinal Fillets Behave Identically:** Transverse fillet welds (loaded perpendicular to weld axis) are approximately 30 to 45 percent stronger than longitudinal fillet welds (loaded parallel to weld axis) due to triaxial constraint; treating both as identical is safe for sizing but conservative in weight optimization.
+
+---
+
+## Frequently Asked Questions
+
+### 1. Where does the factor 0.707 originate in fillet weld equations?
+
+Standard fillet welds in 90-degree corner joints form a 45-45-90 degree right isosceles triangle. The critical shear plane runs from the internal root corner perpendicular to the weld face. Trigonometrically, sin(45°) = cos(45°) = 1 / sqrt(2) ≈ 0.707106. Multiplying leg size a by 0.707 produces the exact throat dimension.
+
+### 2. How is the allowable stress (sigma_allow) established?
+
+In structural steelwork designed under AWS D1.1 or AISC, allowable shear stress on the effective throat of an E70-series electrode (tensile strength 70 ksi ≈ 482 MPa) is taken as 30 percent of nominal tensile strength, yielding approximately 140 to 145 MPa. Under Eurocode 3 (EN 1993-1-8), allowable design resistance incorporates a correlation factor beta_w (0.8 to 1.0 depending on steel grade) and material partial safety factor gamma_M2 = 1.25.
+
+### 3. Can a fillet weld leg size exceed the plate thickness?
+
+No. General mechanical detailing rules specify that the leg size should not exceed the thickness of the thinner joined component (a less than or equal to t_min). Exceeding plate thickness concentrates excessive thermal energy into the joint without adding usable shear area, creating a metallurgical weak spot in the Heat-Affected Zone.
+
+### 4. How does a double-sided fillet weld modify the calculation?
+
+When an identical fillet weld is deposited on both sides of a T-joint, total weld length doubles (L_total = 2 · L_single). Consequently, the effective throat area is multiplied by two, halving the required leg size for a given applied static load.
+
+### 5. When should intermittent fillet welds be selected over continuous seams?
+
+Intermittent welds (such as 50 mm beads spaced at 150 mm pitch) are specified on long stiffened girders or machine covers where full continuous strength is unnecessary, saving filler metal and minimising heat distortion. However, in corrosive environments, maritime atmospheres, or pressure-tight compartments, continuous sealing welds are mandatory to prevent crevice corrosion.
+
+---
+
+## Related Standards and Design Clauses
+
+- **AWS D1.1 / D1.1M:** Structural Welding Code — Steel: Design requirements for tubular and nontubular welded connections, effective throat definitions, and minimum/maximum leg size guidelines.
+- **EN 1993-1-8 (Eurocode 3):** Design of steel structures — Part 1-8: Design of joints, detailing directional and simplified methods for fillet weld verification.
+- **ISO 2553:** Welding and allied processes — Symbolic representation on drawings — Welded joints (leg size z vs. throat thickness a notation).
+- **ISO 5817:** Welding — Fusion-welded joints in steel, nickel, titanium and their alloys — Quality levels for imperfections.
+- **AISC Steel Construction Manual:** Specification for Structural Steel Buildings — Section J2 (Welds), covering allowable strength design (ASD) and load and resistance factor design (LRFD).

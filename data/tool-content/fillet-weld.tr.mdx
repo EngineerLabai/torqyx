@@ -1,0 +1,162 @@
+## Ne Zaman Kullanılır ve Ne Zaman Kullanılmaz?
+
+### Ne Zaman Kullanılmalıdır?
+
+- **Çelik Konstrüksiyon Köşe Kaynak Ön Boyutlandırması:** Gusset plakaları, berkitme levhaları, kolon ayak plakaları ve profil birleşimlerinde statik kayma veya çekme yüklerini aktaracak köşe kaynağının (fillet weld) gereken asgari bacak boyunu (a) ve boğaz kalınlığını (throat) belirlemede kullanılır.
+- **Mevcut Kaynak Dikişinin Mukavemet Tahkiki:** İmalat çiziminde belirtilmiş bir bacak boyunun (örneğin a = 4 mm veya a = 6 mm) işletme yükü altında maruz kalacağı ortalama kayma gerilmesini hesaplayarak malzemenin izin verilen emniyet sınırında (sigma_izin) kalıp kalmadığını kontrol etmede uygulanır.
+- **Farklı Çelik Kaliteleri için Emniyet Gerilmesi Eşleştirmesi:** S235, S275 veya S355 gibi yapı çeliklerinde kullanılan elektrot veya gazaltı kaynak telinin akma ve çekme dayanımlarına göre izin verilen gerilme sınırlarını kıyaslamada tercih edilir.
+- **Toplam Dikiş Boyu Optimizasyonu:** Belirli bir montaj alanında dikiş boyunu (L) uzatarak kaynak bacak boyunu küçültmek ve böylece aşırı ısı girdisiyle oluşacak çarpılmaları (distorsiyon) önleme analizlerinde kullanılır.
+- **Kaynak Mühendisliği ve Mukavemet Eğitimi:** 45 derece eşkenar üçgen köşe kaynak dikişinde kritik kırılma düzleminin neden boğaz kesitinde (0,707·a) meydana geldiğini analitik olarak kavramak için ideal bir başvuru kaynağıdır.
+
+### Ne Zaman Kullanılmamalıdır?
+
+- **Bileşik Eğilme ve Burulma Momentine Maruz Birleşimler:** Dikiş tekil kesme kuvveti yerine düzlem içi veya düzlem dışı eğilme momenti, burulma ve eksenel çekmenin bileşkesini taşıyorsa birim alan atalet momenti ve kutupsal atalet momenti yöntemiyle (vektörel gerilme analizi) hesaplanmalıdır.
+- **Dinamik Yorulma (Fatigue) Yükleri Taşıyan Köprü ve Vinç Kirişleri:** Değişken tekrarlı yük altında köşe kaynağının kök ve ayak bölgelerinde yüksek gerilme yığılmaları (çentik etkisi) oluşur; EN 1993-1-9 FAT yorulma sınıfları ve Wöhler eğrileri kullanılmalıdır.
+- **Tam Nüfuziyetli Küt Kaynaklar (Butt Welds):** Alın alına birleştirilen levhalarda yük doğrudan levha kesitinden aktarılır; boğaz kalınlığı katsayısı (0,707) geçerli değildir, doğrudan ana malzeme akma formülleri uygulanır.
+- **Köşegen Olmayan veya Asimetrik Kaynak Ağızları:** İki birleşen plaka arasındaki açı 90 dereceden belirgin farklıysa (60 dereceden dar veya 120 dereceden geniş açılı birleşimler) boğaz kalınlığı geometrisi değişir; EN 1993-1-8 uyarınca açılı boğaz formülleri kullanılmalıdır.
+- **Plastik Şekil Değiştirme ve Sünme Koşulları:** Yüksek sıcaklık basınçlı kap veya borulama kaynaklarında kaynak dikişinin akma ötesi davranışı ve tokluğu ayrı metalurjik analizler gerektirir.
+
+---
+
+## Formül Türetmesi ve Fiziksel Temeller
+
+Standart 90 derece T-birleşiminde uygulanan köşe kaynağı, teorik olarak 45-45-90 derece eşkenar dik üçgen enkesitine sahiptir.
+
+### 1. Boğaz Kalınlığı (Throat Thickness, a_boğaz)
+
+Köşe kaynak dikişinde en zayıf kesit, dik açılı köşeden hipotenüse çizilen en kısa dikme hattıdır. Bu hat "teorik boğaz kalınlığı" (throat thickness) olarak adlandırılır.
+
+Bacak boyu a olan bir eşkenar dik üçgende Pisagor ve trigonometri bağıntısından:
+
+```
+a_bogaz = a * sin(45°) = a * cos(45°) = a / sqrt(2) ≈ 0,7071 * a   [mm]
+```
+
+Bu bağıntı, kaynağın yük taşıyan en dar kesitinin bacak boyunun yaklaşık yüzde 70,7'si olduğunu gösterir.
+
+### 2. Efektif Kaynak Alanı (A_eff)
+
+Toplam etkin kaynak boyu L olan bir dikişte yük taşıyan boğaz alanı:
+
+<Formula label="Efektif Boğaz Alanı">
+A_eff = a_bogaz * L = 0,707 * a * L   [mm²]
+</Formula>
+
+Burada L, krater yanıkları ve başlangıç-bitiş durakları düşüldükten sonra kalan net taşıyıcı boydur.
+
+### 3. Ortalama Kayma Gerilmesi Yaklaşımı (AWS ve Shigley Modeli)
+
+Köşe kaynağına etki eden dış kuvvet (F) doğrultusu ne olursa olsun (paralel kayma veya enine çekme), mühendislik standardı uygulamalarında gerilmenin boğaz kesitinde saf kayma olarak taşındığı kabul edilir (konservatif yaklaşım):
+
+<Formula label="Köşe Kaynak Gerilmesi">
+sigma = F / A_eff = F / (0,707 * a * L)   [MPa]
+</Formula>
+
+Burada F Newton (N), a milimetre (mm) ve L milimetre (mm) cinsindendir.
+
+### 4. Gerekli Minimum Bacak Boyunun (a_req) Türetilmesi
+
+Hesaplanan gerilmenin malzemenin izin verilen sınırını (sigma_izin) aşmaması koşulundan:
+
+```
+sigma <= sigma_izin  ==>  F / (0,707 * a * L) <= sigma_izin
+```
+
+Bacak boyu a çekilirse:
+
+<Formula label="Gereken Minimum Bacak Boyu">
+a_req = F / (0,707 * L * sigma_izin)   [mm]
+</Formula>
+
+Bu formül, uygulanan yükü ve izin verilen emniyet sınırını karşılamak için gereken asgari köşe kaynak bacak kalınlığını verir.
+
+---
+
+## Sayılarla Çözümlü Örnek (Varsayılan Sistem Değerleri)
+
+Aracın fabrika varsayılan parametreleri kullanılarak yapılan adım adım mühendislik doğrulaması:
+
+### Girdi Değerleri:
+- Toplam Uygulanan Yük (F): **15.000 N (15 kN)**
+- Toplam Etkin Kaynak Boyu (L): **120 mm**
+- İzin Verilen Emniyet Gerilmesi (sigma_izin): **140 MPa (N/mm²)**
+- Girilen Kaynak Bacak Boyu (fillet): **0 mm (boyutlandırma modu)**
+
+### Adım 1 — Gerekli Minimum Bacak Boyunun (a_req) Hesaplanması:
+
+Tasarım formülü uygulanarak:
+
+```
+Pay = F = 15.000 N
+Payda = 0,707 * L * sigma_izin = 0,707 * 120 mm * 140 N/mm²
+Payda = 84,84 * 140 = 11.877,6 N/mm
+a_req = 15.000 / 11.877,6 = 1,26288 mm ≈ 1,26 mm
+```
+
+Statik yükü taşımak için teorik olarak gereken minimum bacak boyu **1,26 mm** olarak bulunur.
+
+### Adım 2 — Karşılık Gelen Boğaz Kalınlığı (throat):
+
+```
+a_bogaz = a_req * 0,707 = 1,26288 mm * 0,7071 = 0,8929 mm ≈ 0,89 mm
+```
+
+Gereken teorik boğaz kalınlığı **0,89 mm** olarak hesaplanır.
+
+### Adım 3 — Pratik İmalat ve Standart Uygunluk Kontrolü:
+
+Teorik hesap 1,26 mm bacak boyu verse de endüstriyel standartlar (AWS D1.1 ve EN 1993-1-8) uyarınca manuel ark veya gazaltı kaynağında homojen bir dikiş oluşturabilmek için uygulanabilecek minimum bacak boyu kuralı vardır:
+- Levha kalınlığı t = 6 mm veya altı için: pratik asgari bacak boyu a_min = 3 mm
+- Levha kalınlığı t = 6 mm ile 12 mm arası için: pratik asgari bacak boyu a_min = 4 ila 5 mm
+
+Eğer kullanıcı kontrol amacıyla bacak boyunu **a = 4 mm** girerse:
+
+```
+sigma_kontrol = 15.000 N / (0,707 * 4 mm * 120 mm) = 15.000 / 339,36 = 44,20 MPa
+```
+
+Hesaplanan 44,20 MPa değeri izin verilen 140 MPa sınırının çok altında kaldığından birleşim tam güvenliktedir (emniyet katsayısı n = 140 / 44,20 = 3,17).
+
+---
+
+## Yaygın Yapılan Mühendislik Hataları
+
+1. **Bacak Boyu ile Boğaz Kalınlığını Birbirine Karıştırmak:** Bacak boyu (a) kaynağın plaka yüzeyine basan dik kenarıdır; boğaz kalınlığı ise en dar hipotenüs dikmesidir (0,707·a). Gerilme formülünde bacak boyunu doğrudan boğaz yerine koymak kaynak alanını yüzde 41 daha büyük göstererek tehlikeli derecede yetersiz kaynak seçimine yol açar.
+2. **Krater ve Başlangıç Hatalarını Kaynak Boyundan Düşmemek:** Kaynak başlangıcındaki soğuk yapışma ve bitiş noktasındaki krater çukuru tam taşıma yapmaz. Standart kural olarak efektif dikiş boyu L_eff = L_toplam - 2·a olarak alınmalıdır.
+3. **İnce Plakaya Aşırı Kalın Kaynak Yapmak:** 3 mm'lik bir saca 8 mm bacak boyunda kaynak çekmek ana malzemede aşırı ısı girdisi yaratarak metalurjik yanmaya (burn-through) ve şiddetli açısal distorsiyona yol açar; köşe kaynak bacak boyu ince parçanın et kalınlığını aşmamalıdır.
+4. **Kalın Plakalarda Minimum Kaynak Boyutunu İhmal Etmek:** 20 mm kalınlığında bir ana plakaya teorik formüle dayanarak 2 mm'lik ince bir kaynak çekilirse, kalın plakanın hızlı soğutma etkisi (quenching) kaynak dikişinde martensitik gevrek yapı ve soğuk çatlaklar oluşturur.
+5. **Dikiş Uçlarındaki Gerilme Yığılmasını Unutmak:** Boyuna bindirme dikişlerinde kuvvet akışı dikişin ilk ve son yüzde 15'lik uç kısımlarında tepe noktası yapar; uzun dikişlerde yükün tüm boya homojen dağıldığını varsaymak statik modelde kabul edilse de yorulmalı tasarımlarda yanıltıcıdır.
+
+---
+
+## Sıkça Sorulan Sorular (SSS)
+
+### 1. Köşe kaynak formülündeki 0,707 sayısı nereden gelmektedir?
+
+Standart köşe kaynak dikişi 90 derece dik açı oluşturan iki plaka arasına çekilen 45-45-90 derece dik üçgen kesitlidir. Kaynağın kırılmaya en duyarlı olduğu en dar kesit, dik köşeden hipotenüse olan mesafedir. Trigonometrik olarak sin(45°) = cos(45°) = 1 / sqrt(2) ≈ 0,707106 olduğundan boğaz kalınlığı bacak boyunun 0,707 katı olarak türetilir.
+
+### 2. İzin verilen gerilme (sigma_izin) değeri nasıl seçilmelidir?
+
+İzin verilen gerilme, kullanılan dolgu metalinin (kaynak teli/elektrot) akma dayanımına ve ana malzemenin sınıfına bağlıdır. Örneğin AWS D1.1 uyarınca E70 serisi elektrotlar (çekme dayanımı 70 ksi ≈ 482 MPa) için statik emniyetli kayma gerilmesi nominal çekme dayanımının yüzde 30'u olarak alınır (sigma_izin ≈ 140-150 MPa). Eurocode 3 (EN 1993-1-8) ise korelasyon faktörü beta_w üzerinden hesap yapar.
+
+### 3. Kaynak bacak boyu ana plaka kalınlığından büyük olabilir mi?
+
+Hayır, genel makine imalat kurallarına göre köşe kaynağının bacak boyu (a), birleşen en ince plakanın et kalınlığından (t_min) büyük seçilmemelidir (a küçük veya eşittir t_min). Plakadan daha kalın bir kaynak çekmek bağlantıyı güçlendirmez; aksine aşırı ısı girdisiyle ısı tesiri altındaki bölgede (ITAB / HAZ) tane irileşmesine ve artık gerilmelere yol açar.
+
+### 4. Simetrik çift taraflı köşe kaynağında hesap nasıl değişir?
+
+Bir T-birleşiminde parçanın her iki tarafına da boydan boya köşe kaynağı çekilirse toplam kaynak boyu iki katına çıkar (L_toplam = 2 · L_tek). Efektif taşıma alanı iki kat arttığı için her bir kaynağın taşıyacağı gerilme yarıya düşer veya gereken bacak boyu yarıya iner.
+
+### 5. Sürekli kaynak yerine kesintili kaynak ne zaman tercih edilir?
+
+Yükün düşük olduğu ancak parçaların birbirine sabitlenmesi gereken uzun şasilerde sürekli kaynak çekmek yüksek maliyet ve aşırı ısı distorsiyonu yaratır. Bu durumlarda belirli aralıklarla (örneğin 50 mm kaynak, 100 mm boşluk) kesintili köşe kaynağı tercih edilir; ancak korozif ortamlarda aradaki boşluklara su dolup paslanma yapabileceği için sızdırmazlık gereken yerlerde sürekli dikiş zorunludur.
+
+---
+
+## İlgili Standartlar ve Tasarım Maddeleri
+
+- **AWS D1.1 / D1.1M:** Structural Welding Code — Steel: Çelik yapılar için kaynak tasarım kuralları, köşe kaynak gerilme sınırları ve minimum/maksimum bacak boyu tabloları.
+- **EN 1993-1-8 (Eurocode 3):** Çelik yapıların tasarımı — Bölüm 1-8: Birleşimlerin tasarımı (Köşe kaynak yönsel ve basitleştirilmiş hesap yöntemleri).
+- **ISO 2553:** Kaynak ve lehimleme — Çizimler üzerinde sembolik gösterim kuralları (bacak boyu z veya boğaz kalınlığı a gösterimleri).
+- **ISO 5817:** Kaynak — Çelik, nikel, titanyum ve alaşımlarında ergitme kaynaklı birleşimler — Kusurlar için kalite seviyeleri.
+- **AISC Steel Construction Manual:** Bölüm J (Birleşim Elemanları ve Kaynak Tasarımı) — İzin verilen gerilme tasarımı (ASD) ve yük ve direnç faktörü tasarımı (LRFD).
