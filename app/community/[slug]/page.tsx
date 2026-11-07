@@ -3,7 +3,8 @@ import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -18,6 +19,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: copy.description,
     path: `/community/${slug}`,
     locale,
+    robots: INDEXING_CONFIG.indexCommunity ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

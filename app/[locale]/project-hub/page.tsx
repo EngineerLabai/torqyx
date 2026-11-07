@@ -2,7 +2,8 @@ import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
 import ActionCard from "@/components/ui/ActionCard";
 import { getHeroImageSrc } from "@/lib/assets";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { getUiLabel, warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
@@ -137,6 +138,7 @@ export async function generateMetadata({ params }: PageProps) {
     path: "/project-hub",
     locale,
     useLocalizedCanonical: true,
+    robots: INDEXING_CONFIG.indexProjectHub ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

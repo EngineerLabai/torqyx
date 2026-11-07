@@ -1,7 +1,8 @@
 import Client from "./Client";
 import { PROJECT_COPY } from "./copy";
 import { getHeroImageSrc } from "@/lib/assets";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
 
 type PageProps = {
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }: PageProps) {
     path: "/project-hub/project-tools",
     locale,
     useLocalizedCanonical: true,
+    robots: INDEXING_CONFIG.indexProjectHub ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 
