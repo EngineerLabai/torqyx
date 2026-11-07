@@ -28,7 +28,19 @@
       "linkHome": "Ana Sayfa",
       "linkBlog": "Blog",
       "sectionFaq": "SSS",
-      "linkFaq": "SSS"
+      "linkFaq": "SSS",
+      "sectionReference": "Referans",
+      "linkGuides": "Rehberler",
+      "linkGlossary": "Sözlük",
+      "linkMethodology": "Metodoloji ve Doğrulama",
+      "linkDisclaimer": "Sorumluluk Reddi",
+      "linkSitemap": "Site Haritası",
+      "catPowerDrives": "Güç ve Aktarma",
+      "catFastenersStrength": "Bağlantı Elemanları ve Mukavemet",
+      "catFluidsHeat": "Akışkanlar ve Isı",
+      "catManufacturingTolerance": "İmalat ve Tolerans",
+      "catUtilities": "Genel Araçlar",
+      "allCalculators": "Tüm Hesaplayıcılar"
     },
     "descriptions": {
       "sectionCalculators": "Dişli, tork, kuvvet ve mekanik hesaplayıcılar.",
@@ -37,7 +49,13 @@
       "sectionContact": "Geri bildirim ve destek kanalları.",
       "sectionStandards": "Mühendislik standartları ve hızlı başvuru kaynakları.",
       "sectionQuality": "Kalite planlama ve problem çözme araçları.",
-      "sectionFaq": "Sık sorulan sorulara hızlı yanıtlar."
+      "sectionFaq": "Sık sorulan sorulara hızlı yanıtlar.",
+      "sectionReference": "Standartlar, terimler sözlüğü, hızlı referans ve kalite araçları.",
+      "descPowerDrives": "Motor gücü, tork, kayışlar, miller ve dişli hesapları.",
+      "descFastenersStrength": "Cıvata ön yükü, kaynak, kiriş sehim ve gerilme analizleri.",
+      "descFluidsHeat": "Boru basınç kaybı, hidrolik silindir ve termal iletim.",
+      "descManufacturingTolerance": "Tolerans yığını analizi, malzeme kartları ve kaplamalar.",
+      "descUtilities": "Birim dönüştürücü, mantık kontrol labı ve referanslar."
     },
     "badges": {
       "new": "Yeni",
@@ -814,16 +832,52 @@
       }
     },
     "toleranceStackup": {
-      "badges": { "primary": "Kalite ve Üretim", "secondary": "Tolerans Yığılma (RSS)" },
-      "header": { "title": "1D Tolerans Yığılma Analizi", "description": "Parçaların nominal ölçüleri ve toleransları ile en kötü durum ve istatistiksel (RSS) tolerans yığılmasını hesaplayın." },
-      "inputs": { "title": "Parça Listesi", "addPart": "Parça Ekle", "partName": "Parça Adı", "nominal": "Nominal", "tolerance": "Tolerans (±)", "remove": "Sil" },
-      "results": { "title": "Analiz Sonuçları", "nominalSum": "Toplam Nominal Ölçü", "worstCase": "En kötü durum toleransı", "rss": "RSS toleransı (istatistiksel)", "note": "RSS yöntemi parçaların normal dağılıma sahip olduğunu ve tolerans sınırlarının ±3σ'ya denk geldiğini varsayar." }
+      "badges": {
+        "primary": "Kalite ve Üretim",
+        "secondary": "Tolerans Yığılma (RSS)"
+      },
+      "header": {
+        "title": "1D Tolerans Yığılma Analizi",
+        "description": "Parçaların nominal ölçüleri ve toleransları ile en kötü durum ve istatistiksel (RSS) tolerans yığılmasını hesaplayın."
+      },
+      "inputs": {
+        "title": "Parça Listesi",
+        "addPart": "Parça Ekle",
+        "partName": "Parça Adı",
+        "nominal": "Nominal",
+        "tolerance": "Tolerans (±)",
+        "remove": "Sil"
+      },
+      "results": {
+        "title": "Analiz Sonuçları",
+        "nominalSum": "Toplam Nominal Ölçü",
+        "worstCase": "En kötü durum toleransı",
+        "rss": "RSS toleransı (istatistiksel)",
+        "note": "RSS yöntemi parçaların normal dağılıma sahip olduğunu ve tolerans sınırlarının ±3σ'ya denk geldiğini varsayar."
+      }
     },
     "weldStrength": {
-      "badges": { "primary": "Yapısal Analiz", "secondary": "Köşe Kaynağı (Fillet Weld)" },
-      "header": { "title": "Kaynaklı Bağlantı Dayanımı", "description": "Basit köşe kaynağı (fillet weld) için doğrudan kesme kuvveti altındaki gerilme hesabı." },
-      "inputs": { "title": "Giriş Parametreleri", "force": "Uygulanan Yük F [kN]", "weldLength": "Toplam Kaynak Boyu L [mm]", "legSize": "Kaynak bacak ölçüsü z [mm]" },
-      "results": { "title": "Hesap Sonuçları", "throatSize": "Boğaz Kalınlığı a [mm]", "weldArea": "Efektif Kaynak Alanı A [mm²]", "shearStress": "Kesme Gerilmesi τ [MPa]", "note": "Gerilme değerini kaynak elektrodunun emniyetli kesme dayanımı ile (genellikle akma dayanımının %30-40'ı) karşılaştırın." }
+      "badges": {
+        "primary": "Yapısal Analiz",
+        "secondary": "Köşe Kaynağı (Fillet Weld)"
+      },
+      "header": {
+        "title": "Kaynaklı Bağlantı Dayanımı",
+        "description": "Basit köşe kaynağı (fillet weld) için doğrudan kesme kuvveti altındaki gerilme hesabı."
+      },
+      "inputs": {
+        "title": "Giriş Parametreleri",
+        "force": "Uygulanan Yük F [kN]",
+        "weldLength": "Toplam Kaynak Boyu L [mm]",
+        "legSize": "Kaynak bacak ölçüsü z [mm]"
+      },
+      "results": {
+        "title": "Hesap Sonuçları",
+        "throatSize": "Boğaz Kalınlığı a [mm]",
+        "weldArea": "Efektif Kaynak Alanı A [mm²]",
+        "shearStress": "Kesme Gerilmesi τ [MPa]",
+        "note": "Gerilme değerini kaynak elektrodunun emniyetli kesme dayanımı ile (genellikle akma dayanımının %30-40'ı) karşılaştırın."
+      }
     },
     "notFound": {
       "title": "Sayfa bulunamadı",
@@ -1099,20 +1153,20 @@
     },
     "consent": {
       "title": "Çerez tercihleri",
-    "description": "Sitenin çalışması için gerekli çerezleri kullanıyoruz. Analitik ve reklam çerezleri yalnızca açık rızanla etkinleşir.",
+      "description": "Sitenin çalışması için gerekli çerezleri kullanıyoruz. Analitik ve reklam çerezleri yalnızca açık rızanla etkinleşir.",
       "accept": "Kabul et",
       "reject": "Reddet",
       "preferences": "Tercihler",
       "preferencesTitle": "Çerez tercihleri",
-    "preferencesDescription": "Zorunlu çerezler hizmetin çalışması için açık kalır; analitik ve reklam kategorileri açık rızana bağlıdır.",
+      "preferencesDescription": "Zorunlu çerezler hizmetin çalışması için açık kalır; analitik ve reklam kategorileri açık rızana bağlıdır.",
       "save": "Tercihleri kaydet",
       "close": "Kapat",
       "necessaryLabel": "Gerekli",
-    "necessaryDescription": "Dil, güvenlik, oturum ve tercih yönetimi gibi temel işlevler için zorunludur.",
+      "necessaryDescription": "Dil, güvenlik, oturum ve tercih yönetimi gibi temel işlevler için zorunludur.",
       "analyticsLabel": "Analitik",
-    "analyticsDescription": "Kullanımı ölçmemize ve deneyimi iyileştirmemize yardımcı olur; yalnızca izin verirsen etkinleşir.",
+      "analyticsDescription": "Kullanımı ölçmemize ve deneyimi iyileştirmemize yardımcı olur; yalnızca izin verirsen etkinleşir.",
       "advertisingLabel": "Reklam",
-    "advertisingDescription": "Reklam gösterimi, kişiselleştirme ve performans ölçümü için kullanılır; yalnızca izin verirsen etkinleşir.",
+      "advertisingDescription": "Reklam gösterimi, kişiselleştirme ve performans ölçümü için kullanılır; yalnızca izin verirsen etkinleşir.",
       "alwaysOn": "Her zaman açık"
     },
     "toolLibrary": {

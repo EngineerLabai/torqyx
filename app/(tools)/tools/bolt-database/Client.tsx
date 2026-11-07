@@ -1,10 +1,10 @@
 "use client";
 
-// app/tools/bolt-database/page.tsx
 import { useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 type ThreadInfo = {
   name: string;
@@ -15,7 +15,7 @@ type ThreadInfo = {
 };
 
 const THREADS: ThreadInfo[] = [
-  // METRİK (coarse)
+  // METRIC (coarse)
   { name: "M3", majorDia: 3, pitch: "0.50", drill: "2.5 mm", category: "metric" },
   { name: "M4", majorDia: 4, pitch: "0.70", drill: "3.3 mm", category: "metric" },
   { name: "M5", majorDia: 5, pitch: "0.80", drill: "4.2 mm", category: "metric" },
@@ -76,10 +76,11 @@ const THREADS: ThreadInfo[] = [
 
 type BoltGrade = {
   grade: string;
-  tensile: number; // çekme dayanımı (MPa)
-  yield: number; // akma dayanımı (MPa)
+  tensile: number;
+  yield: number;
   hardness: string;
-  toughness: string;
+  toughnessTr: string;
+  toughnessEn: string;
 };
 
 const BOLT_GRADES: BoltGrade[] = [
@@ -88,178 +89,225 @@ const BOLT_GRADES: BoltGrade[] = [
     tensile: 800,
     yield: 640,
     hardness: "22–34 HRC",
-    toughness: "Orta seviye, genel kullanım",
+    toughnessTr: "Orta seviye, genel kullanım",
+    toughnessEn: "Medium strength, general structural fasteners",
   },
   {
     grade: "10.9",
     tensile: 1040,
     yield: 940,
     hardness: "32–39 HRC",
-    toughness: "Yüksek dayanım, süspansiyon parçalarında yaygın",
+    toughnessTr: "Yüksek dayanım, süspansiyon parçalarında yaygın",
+    toughnessEn: "High tensile strength, automotive & structural joints",
   },
   {
     grade: "12.9",
     tensile: 1220,
     yield: 1100,
     hardness: "39–44 HRC",
-    toughness: "Çok yüksek dayanım, yüksek ön yük gereken yerler",
+    toughnessTr: "Çok yüksek dayanım, yüksek ön yük gereken yerler",
+    toughnessEn: "Very high strength, high preload & compact joints",
   },
   {
-    grade: "A2 Paslanmaz",
+    grade: "A2 Paslanmaz / Stainless",
     tensile: 700,
     yield: 450,
     hardness: "~25 HRC",
-    toughness: "İyi korozyon direnci, daha düşük dayanım",
+    toughnessTr: "İyi korozyon direnci, daha düşük mekanik dayanım",
+    toughnessEn: "Good corrosion resistance, lower mechanical strength",
   },
   {
-    grade: "A4 Paslanmaz",
+    grade: "A4 Paslanmaz / Stainless",
     tensile: 800,
     yield: 600,
     hardness: "~29 HRC",
-    toughness: "Asit/kimyasal ortamlara dayanıklı",
+    toughnessTr: "Asit/kimyasal ve deniz suyuna dayanıklı",
+    toughnessEn: "Acid/chemical & marine salt-spray resistant",
   },
 ];
+
+const COPY = {
+  tr: {
+    title: "Standart Cıvata Veri Merkezi",
+    threadLabel: "Cıvata Ölçüsü",
+    metricGroup: "Metrik",
+    majorDia: "Dış çap:",
+    pitch: "Adım / TPI:",
+    drill: "Matkap çapı:",
+    gradeLabel: "Cıvata Kalitesi",
+    tensile: "Çekme Dayanımı:",
+    yield: "Akma Dayanımı:",
+    hardness: "Sertlik:",
+    toughness: "Tokluk:",
+    evalTitle: "Uygunluk Değerlendirmesi",
+    evalIntro: "cıvatası tipik olarak şu sınıflarda bulunabilir:",
+    tenNineMost: "10.9 (çoğu uygulamada)",
+    eightEightCommon: "8.8 (yaygın)",
+    tenNineSpecial: "10.9 (özel tedarik)",
+    stainlessNote: "A2 / A4 paslanmaz (korozyon ortamında)",
+    disclaimer:
+      "Not: Değerler genel mühendislik pratiğine göredir. Kritik uygulamalarda mutlaka ilgili standartlara ve üretici kataloglarına bakınız.",
+  },
+  en: {
+    title: "Standard Bolt Database",
+    threadLabel: "Bolt Thread Size",
+    metricGroup: "Metric",
+    majorDia: "Major Diameter:",
+    pitch: "Pitch / TPI:",
+    drill: "Tapping Drill Size:",
+    gradeLabel: "Bolt Strength Grade",
+    tensile: "Tensile Strength:",
+    yield: "Yield Strength:",
+    hardness: "Hardness:",
+    toughness: "Toughness & Application:",
+    evalTitle: "Application & Grade Suitability",
+    evalIntro: "bolts are typically sourced in these property classes:",
+    tenNineMost: "10.9 (most applications)",
+    eightEightCommon: "8.8 (common)",
+    tenNineSpecial: "10.9 (special procurement)",
+    stainlessNote: "A2 / A4 Stainless (marine & corrosive environments)",
+    disclaimer:
+      "Note: Data is provided for general engineering reference. Check relevant ISO/DIN/ASME standards and fastener supplier catalogs for critical engineering designs.",
+  },
+} as const;
 
 type BoltDatabaseClientProps = {
   initialDocs?: ToolDocsResponse | null;
 };
 
 export default function BoltDatabasePage({ initialDocs }: BoltDatabaseClientProps) {
+  const { locale } = useLocale();
+  const isEn = locale === "en";
+  const t = COPY[isEn ? "en" : "tr"];
+
   const [selectedThread, setSelectedThread] = useState<string>(THREADS[0].name);
   const [selectedGrade, setSelectedGrade] = useState<string>(BOLT_GRADES[0].grade);
 
-  const thread = THREADS.find((t) => t.name === selectedThread)!;
-  const grade = BOLT_GRADES.find((g) => g.grade === selectedGrade)!;
+  const thread = THREADS.find((item) => item.name === selectedThread) ?? THREADS[0];
+  const grade = BOLT_GRADES.find((item) => item.grade === selectedGrade) ?? BOLT_GRADES[0];
 
   return (
     <PageShell>
       <ToolDocTabs slug="bolt-database" initialDocs={initialDocs}>
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 text-sm shadow-sm">
-        <h1 className="mb-4 text-2xl font-bold text-slate-900">
-          Standart Cıvata Veri Merkezi
-        </h1>
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 text-sm shadow-sm">
+          <h1 className="mb-4 text-2xl font-bold text-slate-900">{t.title}</h1>
 
-        {/* Cıvata ölçüsü seçimi */}
-        <div className="mb-6">
-          <label htmlFor="bolt-thread-size" className="text-sm font-medium text-gray-700">
-            Cıvata Ölçüsü
-          </label>
-          <select
-            id="bolt-thread-size"
-            className="mt-1 w-full rounded border p-2 text-sm"
-            value={selectedThread}
-            onChange={(e) => setSelectedThread(e.target.value)}
-          >
-            <optgroup label="Metrik">
-              {THREADS.filter((t) => t.category === "metric").map((t) => (
-                <option key={t.name} value={t.name}>
-                  {t.name}
-                </option>
-              ))}
-            </optgroup>
+          {/* Cıvata ölçüsü seçimi */}
+          <div className="mb-6">
+            <label htmlFor="bolt-thread-size" className="text-sm font-medium text-gray-700">
+              {t.threadLabel}
+            </label>
+            <select
+              id="bolt-thread-size"
+              className="mt-1 w-full rounded border p-2 text-sm"
+              value={selectedThread}
+              onChange={(e) => setSelectedThread(e.target.value)}
+            >
+              <optgroup label={t.metricGroup}>
+                {THREADS.filter((item) => item.category === "metric").map((item) => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </optgroup>
 
-            <optgroup label="UNC">
-              {THREADS.filter((t) => t.category === "unc").map((t) => (
-                <option key={t.name} value={t.name}>
-                  {t.name}
-                </option>
-              ))}
-            </optgroup>
+              <optgroup label="UNC">
+                {THREADS.filter((item) => item.category === "unc").map((item) => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </optgroup>
 
-            <optgroup label="UNF">
-              {THREADS.filter((t) => t.category === "unf").map((t) => (
-                <option key={t.name} value={t.name}>
-                  {t.name}
-                </option>
-              ))}
-            </optgroup>
-          </select>
+              <optgroup label="UNF">
+                {THREADS.filter((item) => item.category === "unf").map((item) => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
 
-          <div className="mt-3 text-sm">
-            <p>
-              <strong>Dış çap:</strong> {thread.majorDia.toFixed(2)} mm
-            </p>
-            <p>
-              <strong>Adım / TPI:</strong> {thread.pitch}
-            </p>
-            <p>
-              <strong>Matkap çapı:</strong> {thread.drill}
-            </p>
+            <div className="mt-3 text-sm">
+              <p>
+                <strong>{t.majorDia}</strong> {thread.majorDia.toFixed(2)} mm
+              </p>
+              <p>
+                <strong>{t.pitch}</strong> {thread.pitch}
+              </p>
+              <p>
+                <strong>{t.drill}</strong> {thread.drill}
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Cıvata kalitesi seçimi */}
-        <div className="mb-6">
-          <label htmlFor="bolt-grade" className="text-sm font-medium text-gray-700">
-            Cıvata Kalitesi
-          </label>
-          <select
-            id="bolt-grade"
-            className="mt-1 w-full rounded border p-2 text-sm"
-            value={selectedGrade}
-            onChange={(e) => setSelectedGrade(e.target.value)}
-          >
-            {BOLT_GRADES.map((g) => (
-              <option key={g.grade} value={g.grade}>
-                {g.grade}
-              </option>
-            ))}
-          </select>
+          {/* Cıvata kalitesi seçimi */}
+          <div className="mb-6">
+            <label htmlFor="bolt-grade" className="text-sm font-medium text-gray-700">
+              {t.gradeLabel}
+            </label>
+            <select
+              id="bolt-grade"
+              className="mt-1 w-full rounded border p-2 text-sm"
+              value={selectedGrade}
+              onChange={(e) => setSelectedGrade(e.target.value)}
+            >
+              {BOLT_GRADES.map((g) => (
+                <option key={g.grade} value={g.grade}>
+                  {g.grade}
+                </option>
+              ))}
+            </select>
 
-          <div className="mt-3 text-sm">
-            <p>
-              <strong>Çekme Dayanımı:</strong> {grade.tensile} MPa
-            </p>
-            <p>
-              <strong>Akma Dayanımı:</strong> {grade.yield} MPa
-            </p>
-            <p>
-              <strong>Sertlik:</strong> {grade.hardness}
-            </p>
-            <p>
-              <strong>Tokluk:</strong> {grade.toughness}
-            </p>
+            <div className="mt-3 text-sm">
+              <p>
+                <strong>{t.tensile}</strong> {grade.tensile} MPa
+              </p>
+              <p>
+                <strong>{t.yield}</strong> {grade.yield} MPa
+              </p>
+              <p>
+                <strong>{t.hardness}</strong> {grade.hardness}
+              </p>
+              <p>
+                <strong>{t.toughness}</strong> {isEn ? grade.toughnessEn : grade.toughnessTr}
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Uygunluk yorumları */}
-        <div className="mt-6 border-t pt-4">
-          <h2 className="mb-2 text-lg font-semibold">Uygunluk Değerlendirmesi</h2>
+          {/* Uygunluk yorumları */}
+          <div className="mt-6 border-t pt-4">
+            <h2 className="mb-2 text-lg font-semibold">{t.evalTitle}</h2>
 
-          <p className="mb-1 text-sm">
-            <strong>{thread.name}</strong> cıvatası tipik olarak şu sınıflarda bulunabilir:
-          </p>
+            <p className="mb-1 text-sm">
+              <strong>{thread.name}</strong> {t.evalIntro}
+            </p>
 
-          <ul className="list-inside list-disc text-sm text-gray-700">
-            {thread.majorDia <= 30 ? (
-              <>
-                <li>8.8</li>
-                <li>10.9</li>
-                <li>12.9</li>
-              </>
-            ) : thread.majorDia <= 48 ? (
-              <>
-                <li>8.8</li>
-                <li>10.9 (çoğu uygulamada)</li>
-              </>
-            ) : (
-              <>
-                <li>8.8 (yaygın)</li>
-                <li>10.9 (özel tedarik)</li>
-              </>
-            )}
-            <li>A2 / A4 paslanmaz (korozyon ortamında)</li>
-          </ul>
+            <ul className="list-inside list-disc text-sm text-gray-700">
+              {thread.majorDia <= 30 ? (
+                <>
+                  <li>8.8</li>
+                  <li>10.9</li>
+                  <li>12.9</li>
+                </>
+              ) : thread.majorDia <= 48 ? (
+                <>
+                  <li>8.8</li>
+                  <li>{t.tenNineMost}</li>
+                </>
+              ) : (
+                <>
+                  <li>{t.eightEightCommon}</li>
+                  <li>{t.tenNineSpecial}</li>
+                </>
+              )}
+              <li>{t.stainlessNote}</li>
+            </ul>
 
-          <p className="mt-3 text-sm text-gray-600">
-            Not: Değerler genel mühendislik pratiğine göredir. Kritik uygulamalarda mutlaka
-            ilgili standartlara ve üretici kataloglarına bakınız.
-          </p>
-        </div>
-      </section>
-          </ToolDocTabs>
+            <p className="mt-3 text-sm text-gray-600">{t.disclaimer}</p>
+          </div>
+        </section>
+      </ToolDocTabs>
     </PageShell>
   );
 }
-
-

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
@@ -16,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     path: "/project-hub/part-tracking",
     locale,
+      robots: INDEXING_CONFIG.indexProjectHub ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

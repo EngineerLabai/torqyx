@@ -28,7 +28,19 @@
       "linkHome": "Home",
       "linkBlog": "Blog",
       "sectionFaq": "FAQ",
-      "linkFaq": "FAQ"
+      "linkFaq": "FAQ",
+      "sectionReference": "Reference",
+      "linkGuides": "Guides",
+      "linkGlossary": "Glossary",
+      "linkMethodology": "Methodology & Validation",
+      "linkDisclaimer": "Disclaimer",
+      "linkSitemap": "Sitemap",
+      "catPowerDrives": "Power & Drives",
+      "catFastenersStrength": "Fasteners & Strength",
+      "catFluidsHeat": "Fluids & Heat",
+      "catManufacturingTolerance": "Manufacturing & Tolerance",
+      "catUtilities": "Utilities",
+      "allCalculators": "All Calculators"
     },
     "descriptions": {
       "sectionCalculators": "Gear, torque, force, and mechanical calculators.",
@@ -37,7 +49,13 @@
       "sectionQuality": "Quality planning and problem-solving tools.",
       "sectionCommunity": "Community discussions and knowledge sharing.",
       "sectionContact": "Feedback and support channels.",
-      "sectionFaq": "Answers to common questions."
+      "sectionFaq": "Answers to common questions.",
+      "sectionReference": "Standards, glossary terms, quick reference, and quality tools.",
+      "descPowerDrives": "Motors, torque, belts, shafts, and gear calculations.",
+      "descFastenersStrength": "Bolts, preloads, welds, beams, and stress analysis.",
+      "descFluidsHeat": "Pipes, pressure loss, hydraulics, and heat conduction.",
+      "descManufacturingTolerance": "Tolerance stackup, materials, and surface coatings.",
+      "descUtilities": "Unit converter, sanity check lab, and quick references."
     },
     "badges": {
       "new": "New",
@@ -755,14 +773,39 @@
       }
     },
     "bearingLife": {
-      "badges": { "primary": "Mechanical Calculator", "secondary": "Bearing Life (ISO 281)" },
-      "header": { "title": "Bearing Life Calculator", "description": "Calculate L10 and L10h life for ball and roller bearings according to ISO 281." },
-      "inputs": { "title": "Inputs", "bearingType": "Bearing Type", "typeBall": "Ball Bearing", "typeRoller": "Roller Bearing", "dynamicLoadC": "Dynamic Load C [kN]", "equivalentLoadP": "Equivalent Load P [kN]", "speedN": "Speed n [rpm]" },
-      "results": { "title": "Results", "l10": "Nominal Life L10 [10⁶ Revs]", "l10h": "Nominal Life L10h [Hours]", "note": "Formulas based on ISO 281 (L10 = (C/P)^p). This is the basic rating life with 90% reliability." }
+      "badges": {
+        "primary": "Mechanical Calculator",
+        "secondary": "Bearing Life (ISO 281)"
+      },
+      "header": {
+        "title": "Bearing Life Calculator",
+        "description": "Calculate L10 and L10h life for ball and roller bearings according to ISO 281."
+      },
+      "inputs": {
+        "title": "Inputs",
+        "bearingType": "Bearing Type",
+        "typeBall": "Ball Bearing",
+        "typeRoller": "Roller Bearing",
+        "dynamicLoadC": "Dynamic Load C [kN]",
+        "equivalentLoadP": "Equivalent Load P [kN]",
+        "speedN": "Speed n [rpm]"
+      },
+      "results": {
+        "title": "Results",
+        "l10": "Nominal Life L10 [10⁶ Revs]",
+        "l10h": "Nominal Life L10h [Hours]",
+        "note": "Formulas based on ISO 281 (L10 = (C/P)^p). This is the basic rating life with 90% reliability."
+      }
     },
     "keywayDesign": {
-      "badges": { "primary": "Mechanical Calculator", "secondary": "Keyway (DIN 6885)" },
-      "header": { "title": "Shaft-Hub Keyway Strength", "description": "Calculate shear and crushing stresses for keyway connections according to DIN 6885." },
+      "badges": {
+        "primary": "Mechanical Calculator",
+        "secondary": "Keyway (DIN 6885)"
+      },
+      "header": {
+        "title": "Shaft-Hub Keyway Strength",
+        "description": "Calculate shear and crushing stresses for keyway connections according to DIN 6885."
+      },
       "inputs": {
         "title": "Inputs",
         "torque": "Transmitted Torque T [Nm]",
@@ -789,16 +832,52 @@
       }
     },
     "toleranceStackup": {
-      "badges": { "primary": "Quality & Mfg", "secondary": "Tolerance Stack-up (RSS)" },
-      "header": { "title": "1D Tolerance Stack-up Analysis", "description": "Calculate Worst-Case and Statistical (RSS) tolerance stack-up for assemblies." },
-      "inputs": { "title": "Part List", "addPart": "Add Part", "partName": "Part Name", "nominal": "Nominal", "tolerance": "Tolerance (±)", "remove": "Remove" },
-      "results": { "title": "Analysis Results", "nominalSum": "Total Nominal Dimension", "worstCase": "Worst-Case Tolerance", "rss": "RSS Tolerance", "note": "RSS assumes part dimensions are normally distributed and tolerances represent ±3σ limits." }
+      "badges": {
+        "primary": "Quality & Mfg",
+        "secondary": "Tolerance Stack-up (RSS)"
+      },
+      "header": {
+        "title": "1D Tolerance Stack-up Analysis",
+        "description": "Calculate Worst-Case and Statistical (RSS) tolerance stack-up for assemblies."
+      },
+      "inputs": {
+        "title": "Part List",
+        "addPart": "Add Part",
+        "partName": "Part Name",
+        "nominal": "Nominal",
+        "tolerance": "Tolerance (±)",
+        "remove": "Remove"
+      },
+      "results": {
+        "title": "Analysis Results",
+        "nominalSum": "Total Nominal Dimension",
+        "worstCase": "Worst-Case Tolerance",
+        "rss": "RSS Tolerance",
+        "note": "RSS assumes part dimensions are normally distributed and tolerances represent ±3σ limits."
+      }
     },
     "weldStrength": {
-      "badges": { "primary": "Structural Analysis", "secondary": "Fillet Weld" },
-      "header": { "title": "Fillet Weld Strength", "description": "Calculate shear stress for a simple fillet weld under direct load." },
-      "inputs": { "title": "Inputs", "force": "Applied Load F [kN]", "weldLength": "Total Weld Length L [mm]", "legSize": "Weld Leg Size z [mm]" },
-      "results": { "title": "Results", "throatSize": "Throat Thickness a [mm]", "weldArea": "Effective Weld Area A [mm²]", "shearStress": "Shear Stress τ [MPa]", "note": "Compare this stress to the allowable shear stress of the weld electrode (typically 30-40% of yield)." }
+      "badges": {
+        "primary": "Structural Analysis",
+        "secondary": "Fillet Weld"
+      },
+      "header": {
+        "title": "Fillet Weld Strength",
+        "description": "Calculate shear stress for a simple fillet weld under direct load."
+      },
+      "inputs": {
+        "title": "Inputs",
+        "force": "Applied Load F [kN]",
+        "weldLength": "Total Weld Length L [mm]",
+        "legSize": "Weld Leg Size z [mm]"
+      },
+      "results": {
+        "title": "Results",
+        "throatSize": "Throat Thickness a [mm]",
+        "weldArea": "Effective Weld Area A [mm²]",
+        "shearStress": "Shear Stress τ [MPa]",
+        "note": "Compare this stress to the allowable shear stress of the weld electrode (typically 30-40% of yield)."
+      }
     },
     "notFound": {
       "title": "Page not found",
@@ -1074,20 +1153,20 @@
     },
     "consent": {
       "title": "Cookie preferences",
-    "description": "We use essential cookies to run the site. Analytics and advertising cookies are enabled only with your consent.",
+      "description": "We use essential cookies to run the site. Analytics and advertising cookies are enabled only with your consent.",
       "accept": "Accept",
       "reject": "Reject",
       "preferences": "Preferences",
       "preferencesTitle": "Cookie preferences",
-    "preferencesDescription": "Necessary cookies stay on for the service to work; analytics and advertising depend on your consent.",
+      "preferencesDescription": "Necessary cookies stay on for the service to work; analytics and advertising depend on your consent.",
       "save": "Save preferences",
       "close": "Close",
       "necessaryLabel": "Necessary",
-    "necessaryDescription": "Required for language, security, session, and preference management.",
+      "necessaryDescription": "Required for language, security, session, and preference management.",
       "analyticsLabel": "Analytics",
-    "analyticsDescription": "Helps us measure usage and improve the experience; enabled only if you allow it.",
+      "analyticsDescription": "Helps us measure usage and improve the experience; enabled only if you allow it.",
       "advertisingLabel": "Advertising",
-    "advertisingDescription": "Used for ad delivery, personalization, and performance measurement; enabled only if you allow it.",
+      "advertisingDescription": "Used for ad delivery, personalization, and performance measurement; enabled only if you allow it.",
       "alwaysOn": "Always on"
     },
     "toolLibrary": {

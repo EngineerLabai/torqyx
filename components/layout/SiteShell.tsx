@@ -13,16 +13,24 @@ import { openCommandPalette } from "@/components/search/commandPaletteEvents";
 import { UnitSystemSwitcher } from "@/components/units/UnitSystemSwitcher";
 import { getBrandCopy, SITE_CONTACT_EMAIL } from "@/config/brand";
 import { getRoute } from "@/config/routes";
-import { navConfig, type NavLinkConfig, type NavSectionConfig } from "@/config/nav";
+import { navConfig, type NavLinkConfig } from "@/config/nav";
 import { stripLocaleFromPath } from "@/utils/locale-path";
 import { isAdsAllowedPath } from "@/utils/ads";
 import type { Messages } from "@/utils/messages";
+
+type NavSectionLink = {
+  label: string;
+  href: string;
+  route: NavLinkConfig["route"];
+  description?: string;
+  badge?: string;
+};
 
 type NavSection = {
   id: string;
   label: string;
   description: string;
-  links: { label: string; href: string; route: NavLinkConfig["route"]; badge?: string }[];
+  links: NavSectionLink[];
 };
 
 type DirectNavLink = {
@@ -82,57 +90,125 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
     descriptions?: Record<string, string>;
     badges?: Record<string, string>;
   };
-  const { navSections, directNavLinks, sidebarSections } = useMemo(() => {
+
+  const {
+    calculatorSection,
+    referenceSection,
+    guidesLink,
+    blogLink,
+    aboutLink,
+    contactLink,
+    sidebarSections,
+    footerCategoryLinks,
+    footerMainLinks,
+  } = useMemo(() => {
     const resolveLabel = (key: string) => navCopy.labels?.[key] ?? key;
     const resolveDescription = (key?: string) => (key ? navCopy.descriptions?.[key] ?? "" : "");
     const resolveBadge = (key?: string) => (key ? navCopy.badges?.[key] : undefined);
     const resolveHref = (route: NavLinkConfig["route"]) => getRoute(route, locale);
 
-    const nextNavSections: NavSection[] = (navConfig.megaMenu as unknown as NavSectionConfig[])
-      .filter((section) => section.id === "calculators" || section.id === "tools")
-      .map((section) => ({
-      id: section.id,
-      label: resolveLabel(section.labelKey),
-      description: resolveDescription(section.descriptionKey ?? section.labelKey),
-      links: (section.links as NavLinkConfig[])
-        .filter((link) => link.route !== "blog")
-        .map((link) => ({
-          label: resolveLabel(link.labelKey),
-          href: resolveHref(link.route),
-          route: link.route,
-          badge: resolveBadge(link.badgeKey),
-        })),
+    // 1. Calculators Mega Menu
+    const calcCategoryLinks: NavSectionLink[] = navConfig.calculatorCategories.map((cat) => ({
+      label: resolveLabel(cat.labelKey),
+      description: resolveDescription(cat.descriptionKey),
+      href: resolveHref(cat.route),
+      route: cat.route,
     }));
 
-    const directLinkConfigs: Array<{ id: string; labelKey: string; route: NavLinkConfig["route"] }> = [
-      { id: "standards", labelKey: "sectionStandards", route: "standards" },
-      { id: "quality", labelKey: "sectionQuality", route: "qualityTools" },
-      { id: "blog", labelKey: "linkBlog", route: "blog" },
-      { id: "faq", labelKey: "sectionFaq", route: "faq" },
-      { id: "contact", labelKey: "sectionContact", route: "support" },
-    ];
+    const calcSection: NavSection = {
+      id: "calculators",
+      label: resolveLabel("sectionCalculators"),
+      description: resolveDescription("sectionCalculators"),
+      links: [
+        ...calcCategoryLinks,
+        {
+          label: resolveLabel("allCalculators"),
+          description: resolveDescription("sectionCalculators"),
+          href: resolveHref("tools"),
+          route: "tools",
+          badge: resolveBadge("new"),
+        },
+      ],
+    };
 
-    const nextDirectNavLinks: DirectNavLink[] = directLinkConfigs.map((link) => ({
-      id: link.id,
-      label: resolveLabel(link.labelKey),
-      href: resolveHref(link.route),
-      route: link.route,
-    }));
+    // 2. Reference Dropdown
+    const refSection: NavSection = {
+      id: "reference",
+      label: resolveLabel("sectionReference"),
+      description: resolveDescription("sectionReference"),
+      links: navConfig.referenceLinks.map((item) => ({
+        label: resolveLabel(item.labelKey),
+        href: resolveHref(item.route),
+        route: item.route,
+      })),
+    };
 
-    const nextSidebarSections: SidebarSection[] = (navConfig.sidebar as unknown as NavSectionConfig[]).map((section) => ({
+    // 3. Direct Header Links
+    const guides: DirectNavLink = {
+      id: "guides",
+      label: resolveLabel("linkGuides"),
+      href: resolveHref("guides"),
+      route: "guides",
+    };
+
+    const blog: DirectNavLink = {
+      id: "blog",
+      label: resolveLabel("linkBlog"),
+      href: resolveHref("blog"),
+      route: "blog",
+    };
+
+    const about: DirectNavLink = {
+      id: "about",
+      label: resolveLabel("linkAbout"),
+      href: resolveHref("about"),
+      route: "about",
+    };
+
+    const contact: DirectNavLink = {
+      id: "contact",
+      label: resolveLabel("linkContact"),
+      href: resolveHref("contact"),
+      route: "contact",
+    };
+
+    // 4. Sidebar Sections
+    const sideSections: SidebarSection[] = navConfig.sidebar.map((section) => ({
       label: resolveLabel(section.labelKey),
-      links: (section.links as NavLinkConfig[]).map((link) => ({
+      links: section.links.map((link) => ({
         label: resolveLabel(link.labelKey),
         href: resolveHref(link.route),
       })),
     }));
 
+    // 5. Footer Links
+    const footerCats = navConfig.calculatorCategories.map((cat) => ({
+      label: resolveLabel(cat.labelKey),
+      href: resolveHref(cat.route),
+    }));
+    footerCats.push({
+      label: resolveLabel("allCalculators"),
+      href: resolveHref("tools"),
+    });
+
+    const footerMain = navConfig.footerLinks.map((item) => ({
+      label: resolveLabel(item.labelKey),
+      href: resolveHref(item.route),
+    }));
+
     return {
-      navSections: nextNavSections,
-      directNavLinks: nextDirectNavLinks,
-      sidebarSections: nextSidebarSections,
+      calculatorSection: calcSection,
+      referenceSection: refSection,
+      guidesLink: guides,
+      blogLink: blog,
+      aboutLink: about,
+      contactLink: contact,
+      sidebarSections: sideSections,
+      footerCategoryLinks: footerCats,
+      footerMainLinks: footerMain,
     };
   }, [locale, navCopy]);
+
   const pathname = usePathname() ?? "/";
   const isHome = stripLocaleFromPath(pathname) === "/";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -141,12 +217,13 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
   const mobileMenuToggleCopy = locale === "tr" ? { open: "Menu", close: "Kapat" } : { open: "Menu", close: "Close" };
   const currentPath = stripLocaleFromPath(pathname);
   const showAdDisclosure = isAdsAllowedPath(pathname);
-  const mobileDirectNavLinks = directNavLinks.filter((link) => link.id !== "quality");
+
   const mobileLegalLinks = [
     { label: navCopy.labels.linkPrivacy, href: getRoute("privacy", locale) },
     { label: navCopy.labels.linkCookies, href: getRoute("cookies", locale) },
     { label: navCopy.labels.linkTerms, href: getRoute("terms", locale) },
     { label: navCopy.labels.linkSalesPolicy, href: getRoute("salesPolicy", locale) },
+    { label: navCopy.labels.linkDisclaimer, href: getRoute("disclaimer", locale) },
   ];
   const contactEmail = SITE_CONTACT_EMAIL;
 
@@ -195,13 +272,13 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
               </div>
             </Link>
 
+            {/* Desktop Navigation: Calculators ▾ | Guides | Reference ▾ | Blog | About */}
             <nav className="hidden items-center gap-4 text-[13px] font-medium text-gray-600 lg:flex lg:gap-5">
-              {navSections.map((section) => (
-                <MegaMenuItem key={section.label} section={section} currentPath={currentPath} />
-              ))}
-              {directNavLinks.map((link) => (
-                <DirectNavItem key={link.id} link={link} currentPath={currentPath} />
-              ))}
+              <MegaMenuItem section={calculatorSection} currentPath={currentPath} isWide />
+              <DirectNavItem link={guidesLink} currentPath={currentPath} />
+              <MegaMenuItem section={referenceSection} currentPath={currentPath} />
+              <DirectNavItem link={blogLink} currentPath={currentPath} />
+              <DirectNavItem link={aboutLink} currentPath={currentPath} />
             </nav>
 
             <form
@@ -249,6 +326,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
             </button>
           </div>
 
+          {/* Mobile Drawer Menu */}
           {mobileMenuOpen ? (
             <div className="border-t border-slate-100 bg-white pb-3 pt-3 shadow-sm lg:hidden">
               <div className="flex max-h-[calc(100vh-4rem)] flex-col gap-3 overflow-y-auto">
@@ -271,43 +349,51 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
 
                 <div className="space-y-2 px-4 pt-1">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                    {locale === "tr" ? "Ana linkler" : "Main links"}
+                    {locale === "tr" ? "Menü" : "Menu"}
                   </p>
-                  {navSections.map((section) => (
-                    <MobileAccordionSection
-                      key={section.id}
-                      section={section}
-                      currentPath={currentPath}
-                      isOpen={mobileOpenSectionId === section.id}
-                      onToggle={() =>
-                        setMobileOpenSectionId((current) => (current === section.id ? null : section.id))
-                      }
-                      onNavigate={() => setMobileMenuOpen(false)}
-                    />
-                  ))}
-                  {mobileDirectNavLinks.map((link) => {
-                    const isActive = isPathActive(currentPath, link.href);
-                    return (
-                    <Link
-                      key={link.id}
-                      href={link.href}
-                      prefetch={false}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`tap-target flex min-h-11 items-center rounded-lg border px-4 text-sm font-semibold shadow-sm transition ${
-                        isActive
-                          ? "border-brand bg-brand/10 text-brand"
-                          : "border-slate-200 bg-white text-slate-700 hover:border-brand hover:text-brand"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                    );
-                  })}
+
+                  {/* Mobile Calculators Accordion */}
+                  <MobileAccordionSection
+                    section={calculatorSection}
+                    currentPath={currentPath}
+                    isOpen={mobileOpenSectionId === calculatorSection.id}
+                    onToggle={() =>
+                      setMobileOpenSectionId((current) =>
+                        current === calculatorSection.id ? null : calculatorSection.id
+                      )
+                    }
+                    onNavigate={() => setMobileMenuOpen(false)}
+                  />
+
+                  {/* Mobile Guides Link */}
+                  <MobileDirectLink link={guidesLink} currentPath={currentPath} onNavigate={() => setMobileMenuOpen(false)} />
+
+                  {/* Mobile Reference Accordion */}
+                  <MobileAccordionSection
+                    section={referenceSection}
+                    currentPath={currentPath}
+                    isOpen={mobileOpenSectionId === referenceSection.id}
+                    onToggle={() =>
+                      setMobileOpenSectionId((current) =>
+                        current === referenceSection.id ? null : referenceSection.id
+                      )
+                    }
+                    onNavigate={() => setMobileMenuOpen(false)}
+                  />
+
+                  {/* Mobile Blog Link */}
+                  <MobileDirectLink link={blogLink} currentPath={currentPath} onNavigate={() => setMobileMenuOpen(false)} />
+
+                  {/* Mobile About Link */}
+                  <MobileDirectLink link={aboutLink} currentPath={currentPath} onNavigate={() => setMobileMenuOpen(false)} />
+
+                  {/* Mobile Contact Link */}
+                  <MobileDirectLink link={contactLink} currentPath={currentPath} onNavigate={() => setMobileMenuOpen(false)} />
                 </div>
 
                 <div className="space-y-2 px-4 pt-1">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                    {locale === "tr" ? "Yasal sayfalar" : "Legal pages"}
+                    {locale === "tr" ? "Yasal ve Referans" : "Legal & Reference"}
                   </p>
                   <div className="grid gap-2">
                     {mobileLegalLinks.map((link) => (
@@ -368,8 +454,10 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
         </aside>
       ) : null}
 
+      {/* Footer */}
       <footer className="border-t border-slate-200 bg-white/90">
         <div className="site-container grid gap-8 py-8 md:grid-cols-3">
+          {/* Column 1: Brand Info */}
           <div className="space-y-3">
             <Link href={getRoute("home", locale)} className="inline-flex items-center gap-2" aria-label={brandContent.siteName}>
               <Image
@@ -391,30 +479,16 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
             </a>
           </div>
 
+          {/* Column 2: Calculator Categories */}
           <FooterLinkColumn
-            title={locale === "tr" ? "Araçlar" : "Tools"}
-            links={[
-              { label: navCopy.labels.linkToolLibrary, href: getRoute("tools", locale) },
-              { label: navCopy.labels.linkGearCalculators, href: getRoute("gearCalculators", locale) },
-              { label: navCopy.labels.linkTorquePower, href: getRoute("torquePower", locale) },
-              { label: navCopy.labels.linkStandards, href: getRoute("standards", locale) },
-              { label: navCopy.labels.linkQualityTools, href: getRoute("qualityTools", locale) },
-            ]}
+            title={locale === "tr" ? "Hesaplayıcılar" : "Calculators"}
+            links={footerCategoryLinks}
           />
 
+          {/* Column 3: Corporate & Legal (About, Methodology & Validation, Contact, Privacy, Cookies, Terms, Disclaimer, Sitemap) */}
           <FooterLinkColumn
-            title={locale === "tr" ? "Site" : "Site"}
-            links={[
-              { label: navCopy.labels.linkHome, href: getRoute("home", locale) },
-              { label: navCopy.labels.linkAbout, href: getRoute("about", locale) },
-              { label: navCopy.labels.linkBlog, href: getRoute("blog", locale) },
-              { label: navCopy.labels.linkFaq, href: getRoute("faq", locale) },
-              { label: navCopy.labels.sectionContact, href: getRoute("support", locale) },
-              { label: navCopy.labels.linkPrivacy, href: getRoute("privacy", locale) },
-              { label: navCopy.labels.linkCookies, href: getRoute("cookies", locale) },
-              { label: navCopy.labels.linkTerms, href: getRoute("terms", locale) },
-              { label: navCopy.labels.linkSalesPolicy, href: getRoute("salesPolicy", locale) },
-            ]}
+            title={locale === "tr" ? "Kurumsal & Yasal" : "Corporate & Legal"}
+            links={footerMainLinks}
           />
         </div>
 
@@ -448,7 +522,15 @@ function DirectNavItem({ link, currentPath }: { link: DirectNavLink; currentPath
   );
 }
 
-function MegaMenuItem({ section, currentPath }: { section: NavSection; currentPath: string }) {
+function MegaMenuItem({
+  section,
+  currentPath,
+  isWide = false,
+}: {
+  section: NavSection;
+  currentPath: string;
+  isWide?: boolean;
+}) {
   const isActive = section.links.some((link) => isPathActive(currentPath, link.href));
 
   return (
@@ -461,32 +543,71 @@ function MegaMenuItem({ section, currentPath }: { section: NavSection; currentPa
         aria-expanded="false"
       >
         {section.label}
-        <span aria-hidden="true" className="text-[10px] text-slate-400">v</span>
+        <span aria-hidden="true" className="text-[10px] text-slate-400">▾</span>
       </button>
-      <div className="pointer-events-none absolute left-0 top-full z-[60] w-[360px] pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
-        <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-lg ring-1 ring-slate-100">
+      <div
+        className={`pointer-events-none absolute left-0 top-full z-[60] pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 ${
+          isWide ? "w-[560px]" : "w-[360px]"
+        }`}
+      >
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xl ring-1 ring-slate-100">
           <p className="mb-3 text-[11px] leading-relaxed text-slate-500">{section.description}</p>
-          <div className="grid gap-2">
+          <div className={isWide ? "grid grid-cols-2 gap-2.5" : "grid gap-2"}>
             {section.links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 prefetch={false}
-                className="group/card relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-3 transition-colors duration-150 hover:border-brand"
+                className="group/card relative block overflow-hidden rounded-xl border border-slate-200 bg-white p-3 transition-colors duration-150 hover:border-brand hover:bg-slate-50/50"
               >
-                <h3 className="mb-1 text-sm font-semibold text-slate-900 group-hover/card:text-slate-950">{link.label}</h3>
-                {link.badge ? (
-                  <span className="mt-2 inline-flex items-center gap-1 rounded border border-sky-200 px-2 py-0.5 text-[10px] font-semibold text-sky-700">
-                    {link.badge}
-                  </span>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-slate-900 group-hover/card:text-brand">
+                    {link.label}
+                  </h3>
+                  {link.badge ? (
+                    <span className="inline-flex items-center rounded border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-700">
+                      {link.badge}
+                    </span>
+                  ) : null}
+                </div>
+                {link.description ? (
+                  <p className="mt-1 line-clamp-2 text-[11px] leading-normal text-slate-500">
+                    {link.description}
+                  </p>
                 ) : null}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-brand transition-all duration-200 group-hover/card:w-full" />
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand transition-all duration-200 group-hover/card:w-full" />
               </Link>
             ))}
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function MobileDirectLink({
+  link,
+  currentPath,
+  onNavigate,
+}: {
+  link: DirectNavLink;
+  currentPath: string;
+  onNavigate: () => void;
+}) {
+  const isActive = isPathActive(currentPath, link.href);
+  return (
+    <Link
+      href={link.href}
+      prefetch={false}
+      onClick={onNavigate}
+      className={`tap-target flex min-h-11 items-center rounded-lg border px-4 text-sm font-semibold shadow-sm transition ${
+        isActive
+          ? "border-brand bg-brand/10 text-brand"
+          : "border-slate-200 bg-white text-slate-700 hover:border-brand hover:text-brand"
+      }`}
+    >
+      {link.label}
+    </Link>
   );
 }
 
@@ -515,12 +636,12 @@ function MobileAccordionSection({
       >
         <span>{section.label}</span>
         <span className={`text-xs text-slate-500 transition-transform ${isOpen ? "rotate-180" : ""}`} aria-hidden="true">
-          v
+          ▾
         </span>
       </button>
       <div
         className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
-        style={{ maxHeight: isOpen ? `${section.links.length * 56 + 12}px` : "0px" }}
+        style={{ maxHeight: isOpen ? `${section.links.length * 64 + 16}px` : "0px" }}
       >
         <div className="space-y-1 px-2 pb-2">
           {section.links.map((link) => {

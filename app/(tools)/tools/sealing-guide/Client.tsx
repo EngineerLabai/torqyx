@@ -1,184 +1,348 @@
 "use client";
 
-// app/tools/sealing-guide/page.tsximport { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 type Media = "oil" | "fuel" | "water" | "steam" | "chem" | "food" | "air";
 type Temp = "low" | "mid" | "high";
 type Pressure = "low" | "mid" | "high";
 
 type SealOption = {
-  material: string;
-  types: string;
+  materialTr: string;
+  materialEn: string;
+  typesTr: string;
+  typesEn: string;
   media: Media[];
   temps: Temp[];
   pressures: Pressure[];
-  description: string;
-  notes?: string;
+  descTr: string;
+  descEn: string;
+  notesTr?: string;
+  notesEn?: string;
 };
 
 const SEALS: SealOption[] = [
   {
-    material: "NBR (Nitril)",
-    types: "O-ring, V-ring, dudak keçesi",
+    materialTr: "NBR (Nitril)",
+    materialEn: "NBR (Nitrile Butadiene)",
+    typesTr: "O-ring, V-ring, döner mil keçesi",
+    typesEn: "O-rings, V-rings, rotary shaft oil seals",
     media: ["oil", "fuel"],
     temps: ["low", "mid"],
     pressures: ["low", "mid"],
-    description: "Mineral yağ, gres ve yakıtlarla uyumlu; ekonomik ve yaygın.",
-    notes: "Ozon/UV zayıf; -30/+100°C tipik.",
+    descTr: "Mineral yağ, gres ve yakıtlarla uyumlu; ekonomik ve sanayide en yaygın elastomer.",
+    descEn:
+      "Excellent compatibility with mineral oils, petroleum greases, and fuels; cost-effective general-purpose elastomer.",
+    notesTr: "Ozon ve UV direnci zayıftır; -30°C / +100°C tipik çalışma aralığıdır.",
+    notesEn: "Poor ozone/UV weather resistance; typical operational range -30°C to +100°C.",
   },
   {
-    material: "HNBR",
-    types: "O-ring, dinamik keçe",
+    materialTr: "HNBR (Hidrojene Nitril)",
+    materialEn: "HNBR (Hydrogenated Nitrile)",
+    typesTr: "O-ring, dinamik hidrolik keçe",
+    typesEn: "High-pressure O-rings, dynamic hydraulic packings",
     media: ["oil", "fuel"],
     temps: ["mid", "high"],
     pressures: ["mid", "high"],
-    description: "Yağ/yakıt uyumu ve sıcaklık dayanımı NBR’den yüksek.",
-    notes: "-30/+140°C tipik; ozon direnci daha iyi.",
+    descTr: "Yağ/yakıt uyumu ve termal dayanımı NBR'den belirgin şekilde yüksektir.",
+    descEn:
+      "Higher mechanical strength, oil/fuel resistance, and thermal headroom compared to standard NBR.",
+    notesTr: "-30°C / +140°C tipik; aşınma ve ozon direnci mükemmeldir.",
+    notesEn: "Typical range -30°C to +140°C; outstanding ozone, abrasion, and sour-gas resistance.",
   },
   {
-    material: "FKM (Viton)",
-    types: "O-ring, shaft keçe, flat gasket",
+    materialTr: "FKM (Viton / Floroelastomer)",
+    materialEn: "FKM (Viton / Fluoroelastomer)",
+    typesTr: "O-ring, şaft keçesi, flanş contası",
+    typesEn: "O-rings, rotary lip seals, sheet gaskets",
     media: ["oil", "fuel", "chem"],
     temps: ["mid", "high"],
     pressures: ["mid", "high"],
-    description: "Yakıt, yağ ve birçok kimyasala yüksek direnç; yüksek sıcaklık.",
-    notes: "-20/+200°C; buhar/amin ortamında dikkat.",
+    descTr: "Yakıt, sentetik yağlar ve agresif kimyasallara olağanüstü direnç; yüksek sıcaklık.",
+    descEn:
+      "Exceptional resistance to aggressive hydrocarbons, synthetic lubricants, acids, and elevated temperatures.",
+    notesTr: "-20°C / +200°C; yüksek basınçlı buhar ve amin içeren ortamlarda özel kaliteler seçilmelidir.",
+    notesEn: "-20°C to +200°C; avoid high-pressure steam and amine-rich additives unless specialized grade.",
   },
   {
-    material: "FFKM",
-    types: "O-ring",
+    materialTr: "FFKM (Perfloroelastomer)",
+    materialEn: "FFKM (Perfluoroelastomer)",
+    typesTr: "Hassas O-ring, özel sızdırmazlık",
+    typesEn: "Ultra-pure O-rings, chemical process seals",
     media: ["chem"],
     temps: ["mid", "high"],
     pressures: ["mid", "high"],
-    description: "En yüksek kimyasal ve sıcaklık direnci; çok pahalı.",
+    descTr: "Elastomer esnekliğine sahip PTFE benzeri evrensel kimyasal dayanım; yarı iletken ve nükleer standart.",
+    descEn:
+      "Ultimate chemical inertness virtually matching PTFE with full elastomeric sealing recovery; ultra-high purity & semiconductor grade.",
   },
   {
-    material: "EPDM",
-    types: "O-ring, flat gasket",
+    materialTr: "EPDM (Etilen Propilen)",
+    materialEn: "EPDM (Ethylene Propylene Diene)",
+    typesTr: "O-ring, düz su contası, boru contası",
+    typesEn: "O-rings, flat sanitary gaskets, pipe couplings",
     media: ["water", "steam", "food"],
     temps: ["low", "mid"],
     pressures: ["low", "mid"],
-    description: "Su, buhar ve dış hava için iyi; mineral yağa uyumsuz.",
-    notes: "-40/+130°C; sıcak buhar için özel derece gerekebilir.",
+    descTr: "Sıcak su, buhar, fren hidrolikleri ve dış hava şartları için ideal; mineral yağlara temas etmemelidir.",
+    descEn:
+      "Outstanding resistance to hot water, steam, polar solvents, brake fluids, and outdoor ozone; attacked by hydrocarbon oils.",
+    notesTr: "-40°C / +130°C (+150°C peroksit kürlü); mineral yağda hızla şişer.",
+    notesEn: "-40°C to +130°C (+150°C peroxide cured); sulfur cured grades degrade faster in steam.",
   },
   {
-    material: "VMQ (Silikon)",
-    types: "O-ring, düz conta",
+    materialTr: "VMQ (Silikon)",
+    materialEn: "VMQ (Silicone Rubber)",
+    typesTr: "O-ring, profil conta, fırın contası",
+    typesEn: "Sanitary O-rings, oven door profiles, flat gaskets",
     media: ["food", "air"],
     temps: ["low", "high"],
     pressures: ["low"],
-    description: "Geniş sıcaklık aralığı ve gıda uyumu; yakıt/yağ için zayıf.",
-    notes: "-50/+200°C; yırtılma/aşınma dayanımı düşük.",
+    descTr: "Geniş sıcaklık aralığı ve gıda uyumu (FDA); yakıt ve madeni yağ ortamlarında mekanik mukavemeti zayıftır.",
+    descEn:
+      "Broadest thermal flexibility and clean biocompatibility (FDA/USP); mechanically soft with low tensile/tear strength.",
+    notesTr: "-50°C / +200°C; dinamik sürtünme ve yırtılma direnci düşüktür.",
+    notesEn: "-50°C to +200°C; poor resistance to aromatic fuels and dynamic abrasive wear.",
   },
   {
-    material: "PTFE (Saf)",
-    types: "Flat gasket, PTFE lip seal",
+    materialTr: "PTFE (Saf Teflon)",
+    materialEn: "Virgin PTFE (Polytetrafluoroethylene)",
+    typesTr: "Düz conta, dudaklı mil contası",
+    typesEn: "Flat flange gaskets, machined rotary lip seals",
     media: ["chem", "food", "steam"],
     temps: ["mid", "high"],
     pressures: ["mid"],
-    description: "Kimyasal inert, düşük sürtünme; soğuk akma riski.",
-    notes: "Sızdırmazlık için arka destek (back-up ring) önerilir.",
+    descTr: "Sıfıra yakın kimyasal reaktivite ve en düşük sürtünme katsayısı; soğuk akma (sünme) eğilimi vardır.",
+    descEn:
+      "Nearly universal chemical immunity, zero moisture absorption, and lowest dry friction coefficient; prone to cold flow (creep).",
+    notesTr: "Cıvata torkunu korumak için yaylı flanş rondelası veya back-up ring önerilir.",
+    notesEn: "Often paired with Belleville spring energizers or back-up rings to sustain contact pressure.",
   },
   {
-    material: "PTFE + FKM elastomer takviyeli",
-    types: "PTFE O-ring / kaplamalı",
+    materialTr: "PTFE Kaplı Elastomer (FEP/FKM)",
+    materialEn: "FEP/PFA Encapsulated Elastomer",
+    typesTr: "Kapsüllenmiş O-ring",
+    typesEn: "Encapsulated O-rings (FKM or VMQ core)",
     media: ["chem", "food"],
     temps: ["mid", "high"],
     pressures: ["mid"],
-    description: "Elastomer çekirdekli PTFE kaplı; düşük sürtünme + kimyasal direnç.",
+    descTr: "Elastomer çekirdeğin yaylanma kabiliyeti ile PTFE dış kılıfın kimyasal korumasını birleştirir.",
+    descEn:
+      "Combines the elastic resilience of an FKM or VMQ core with the near-universal chemical barrier of a seamless FEP/PFA jacket.",
   },
   {
-    material: "Graphite Spiral Wound",
-    types: "Spiral wound gasket",
+    materialTr: "Spiral Sarımlı Grafit Conta (SPW)",
+    materialEn: "Spiral Wound Graphite Gasket (SWG)",
+    typesTr: "Flanş contası (ASME B16.20)",
+    typesEn: "Spiral wound flange gaskets (ASME B16.20)",
     media: ["steam", "chem", "oil"],
     temps: ["high"],
     pressures: ["high"],
-    description: "Yüksek sıcaklık ve basınçta flanş contası; metal + grafit dolgu.",
-    notes: "Yüzey pürüzlülüğü ve sıkma torku kontrol edilmeli.",
+    descTr: "V-profilli paslanmaz çelik şerit ve esnek grafit dolgu; termal şok ve yüksek basınçlı flanşlarda standarttır.",
+    descEn:
+      "Engineered V-shaped metallic winding with flexible exfoliated graphite filler for cyclic pressure/thermal flange joints.",
+    notesTr: "Flanş yüzey pürüzlülüğü (Ra 3.2–6.3 µm) ve kontrollü torklama şarttır.",
+    notesEn: "Strict bolt torque pattern and ASME B16.5 flange surface finish (3.2–6.3 µm Ra) required.",
   },
   {
-    material: "Klingerit / Elyaf Takviyeli (CAF)",
-    types: "Flat gasket",
+    materialTr: "Klingerit / Aramid Elyaf Takviyeli (CNAF)",
+    materialEn: "Compressed Non-Asbestos Fiber (CNAF)",
+    typesTr: "Düz boru ve flanş contası",
+    typesEn: "Cut sheet pipe flange gaskets (EN 1514 / ASME B16.21)",
     media: ["steam", "oil", "chem"],
     temps: ["mid", "high"],
     pressures: ["mid"],
-    description: "Çok amaçlı flanş contası; yüksek sıcaklık ve basınçta kullanılan tipler.",
-    notes: "Asbest içermeyen tipler tercih edilmeli.",
+    descTr: "Aramid ve inorganik elyafların NBR bağlayıcı ile preslenmesi; buhar ve proses borularında çok amaçlı çözüm.",
+    descEn:
+      "Aramid/inorganic fibers bonded with NBR elastomer; standard general-utility pipe flange and boiler casing gasket.",
+    notesTr: "Modern asbestsiz tipler tercih edilmelidir.",
+    notesEn: "Ensure modern non-asbestos grades complying with DIN 3754 / ASME B16.21.",
   },
   {
-    material: "PTFE Dolgulu (Glass/Carbon Filled)",
-    types: "Flat gasket, back-up ring",
+    materialTr: "Dolgulu PTFE (Karbon / Cam Takviyeli)",
+    materialEn: "Filled PTFE (Glass / Carbon Filled)",
+    typesTr: "Düz conta, back-up ring",
+    typesEn: "High-pressure flat gaskets, anti-extrusion rings",
     media: ["chem", "steam"],
     temps: ["mid", "high"],
     pressures: ["high"],
-    description: "Soğuk akma azalır, kimyasal direnç korunur.",
+    descTr: "%15–25 cam veya karbon dolgu ile soğuk akma minimuma indirilir; kimyasal direnç korunur.",
+    descEn:
+      "Compounded with 15–25% glass or carbon fibers to curtail creep and cold-flow deformation while resisting acids.",
   },
   {
-    material: "PU (Poliüretan)",
-    types: "Hidrolik/Pnömatik rod-piston keçesi",
+    materialTr: "PU (Poliüretan)",
+    materialEn: "Polyurethane (PU / AU / EU)",
+    typesTr: "Hidrolik piston/boğaz keçesi, sıyırıcı",
+    typesEn: "Hydraulic rod & piston seals, wiper scrapers",
     media: ["oil", "air"],
     temps: ["low", "mid"],
     pressures: ["mid", "high"],
-    description: "Yüksek aşınma direnci, hidrolikte yaygın.",
-    notes: "-30/+90°C tipik; sıcak su/buhar için uygun değil.",
+    descTr: "Yüksek mekanik darbe, aşınma ve ekstrüzyon direnci; hidrolik silindirlerde vazgeçilmezdir.",
+    descEn:
+      "High tear strength, abrasion resistance, and extrusion resistance for heavy-duty hydraulic cylinder rods and pistons.",
+    notesTr: "-30°C / +90°C tipik; sıcak su ve sulu emülsiyonlarda hidroliz riski vardır.",
+    notesEn: "-30°C to +90°C; susceptible to hydrolysis in hot water, acids, and strong alkaline media.",
   },
   {
-    material: "NBR + Teflon Back-up",
-    types: "O-ring + back-up",
+    materialTr: "NBR + PTFE Destek Halkası (Back-up Ring)",
+    materialEn: "NBR O-Ring with PTFE Back-up Ring",
+    typesTr: "Yüksek basınç O-ring takımı",
+    typesEn: "Anti-extrusion O-ring + back-up assembly",
     media: ["oil", "fuel"],
     temps: ["low", "mid"],
     pressures: ["high"],
-    description: "Yüksek basınçta ekstrüzyonu engellemek için PTFE back-up ile kombinasyon.",
+    descTr: "Yüksek basınç altında O-ring elastomerinin radyal boşluktan taşmasını önlemek için PTFE halka ile desteklenir.",
+    descEn:
+      "O-ring supported by contoured PTFE anti-extrusion rings in clearance gaps above 100–150 bar.",
   },
   {
-    material: "Metal C-Ring / E-Ring",
-    types: "Metal contalar",
-    media: ["high_temp", "steam", "chem", "fuel"].filter((m) => m !== "high_temp") as Media[], // placeholder, not used
+    materialTr: "Metalik C-Ring / E-Ring",
+    materialEn: "Metallic C-Ring / E-Ring",
+    typesTr: "Metalik basınçla enerjilenen conta",
+    typesEn: "Resilient metal pressure-energized seals",
+    media: ["steam", "chem", "fuel"],
     temps: ["high"],
     pressures: ["high"],
-    description: "Metal sızdırmazlık elemanları; çok yüksek sıcaklık ve basınç.",
-    notes: "Yüksek yüzey kalitesi ve sıkma kuvveti gerekir.",
+    descTr: "Kriyojenik ve 500°C+ aşırı sıcaklıklarda çalışan Inconel/paslanmaz metalik sızdırmazlık elemanı.",
+    descEn:
+      "Pressure-energized metallic seal designed for extreme cryogenics, nuclear service, and ultra-high pressures exceeding 1000 bar.",
+    notesTr: "Çok hassas taşlanmış kanal yüzey kalitesi (Ra < 0.4 µm) ve yüksek cıvata ön yükü gerektirir.",
+    notesEn: "Demands fine diamond-turned or ground flange groove finishes (Ra < 0.4–0.8 µm).",
   },
   {
-    material: "Alüminyum / Bakır Ring Joint",
-    types: "RTJ metal ring gasket",
+    materialTr: "RTJ Metalik Halka Conta (API 6A / 17D)",
+    materialEn: "Ring Type Joint (RTJ Metal Ring)",
+    typesTr: "Oval veya sekizgen RTJ metal halka",
+    typesEn: "Octagonal / oval solid metal RTJ rings",
     media: ["oil", "chem", "steam"],
     temps: ["high"],
     pressures: ["high"],
-    description: "RTJ flanşlarda yüksek basınç sızdırmazlık; metal halka.",
+    descTr: "Petrol-gaz kuyubaşı ve yüksek basınçlı buhar hatlarında metal-metale temasla mutlak sızdırmazlık.",
+    descEn:
+      "Solid precision-machined octagonal or oval metallic ring for API 6A oilfield wellhead and high-pressure steam headers.",
   },
 ];
 
-const MEDIA_LABELS: Record<Media, string> = {
-  oil: "Yağ/Gres",
-  water: "Su",
-  steam: "Buhar",
-  fuel: "Yakıt",
-  chem: "Kimyasal",
-  food: "Gıda/Hijyen",
-  air: "Hava",
-};
+const MEDIA_LABELS = {
+  tr: {
+    oil: "Yağ / Gres",
+    water: "Su",
+    steam: "Buhar",
+    fuel: "Yakıt / Hidrokarbon",
+    chem: "Kimyasal / Asit",
+    food: "Gıda / Hijyen",
+    air: "Hava / Gaz",
+  },
+  en: {
+    oil: "Oil / Petroleum Grease",
+    water: "Water",
+    steam: "Steam",
+    fuel: "Fuel / Hydrocarbons",
+    chem: "Chemicals / Acids",
+    food: "Food / Sanitary",
+    air: "Air / Inert Gas",
+  },
+} as const;
 
-const TEMP_LABELS: Record<Temp, string> = {
-  low: "Düşük (-50/+60°C)",
-  mid: "Orta (+60/+140°C)",
-  high: "Yüksek (+140°C üstü)",
-};
+const TEMP_LABELS = {
+  tr: {
+    low: "Düşük (-50 / +60°C)",
+    mid: "Orta (+60 / +140°C)",
+    high: "Yüksek (+140°C üstü)",
+  },
+  en: {
+    low: "Low (-50 to +60°C)",
+    mid: "Medium (+60 to +140°C)",
+    high: "High (> +140°C)",
+  },
+} as const;
 
-const PRESSURE_LABELS: Record<Pressure, string> = {
-  low: "Düşük (<10 bar)",
-  mid: "Orta (10–40 bar)",
-  high: "Yüksek (40+ bar)",
-};
+const PRESSURE_LABELS = {
+  tr: {
+    low: "Düşük (< 10 bar)",
+    mid: "Orta (10–40 bar)",
+    high: "Yüksek (40+ bar)",
+  },
+  en: {
+    low: "Low (< 10 bar)",
+    mid: "Medium (10–40 bar)",
+    high: "High (40+ bar)",
+  },
+} as const;
+
+const COPY = {
+  tr: {
+    badge: "Sızdırmazlık",
+    subBadge: "Rehber",
+    title: "Sızdırmazlık ve Contalar Rehberi",
+    desc: "Ortam (yağ, su/buhar, kimyasal), sıcaklık ve basınca göre uygun malzeme/conta tiplerini hızlıca filtrele. Sonuçlar hızlı öneridir; tedarikçi datasheet ve yüzey/tolerans şartları mutlaka kontrol edilmelidir.",
+    selectionsTitle: "Seçimler",
+    mediaLabel: "Ortam",
+    tempLabel: "Sıcaklık",
+    pressureLabel: "Basınç",
+    paramNote:
+      "Not: Yüksek basınçta (40+ bar) O-ring için PTFE back-up önerilir. Buhar için EPDM/FKM tipi ve sıcaklık derecesi doğrulanmalıdır. Gıda/hijyen için FDA/CE uygunluk iste.",
+    recTitle: "Önerilen Malzeme / Conta Tipleri",
+    typePrefix: "Tip:",
+    noMatch:
+      "Bu kombinasyonda öneri bulunamadı. Parametreleri değiştir veya özel malzeme (FFKM/metalik) talep et.",
+    notesTitle: "Hızlı Tasarım Notları",
+    notes: [
+      "Yüzey pürüzlülüğü, sıkma oranı (%15–30 squeeze) ve kanal toleransı sızdırmazlık ömrü için kritiktir.",
+      "Dinamik uygulamalarda akışkan filmi yağlaması dudak aşınmasını belirler; kuru sürtünmeden kaçınılmalıdır.",
+      "Kimyasal ortamlarda elastomer hacimsel şişmesi ve sertlik değişimi için üretici uyumluluk tabloları kontrol edilmelidir.",
+      "Darbeli yüksek basınçta O-ring ekstrüzyonunu önlemek için sertleştirilmiş PTFE destek halkaları (back-up) kullanılmalıdır.",
+    ],
+    graphicTitle: "Conta Kesiti & Kanal Görselleştirmesi",
+    graphicSubtitle: "Basit sızdırmazlık ve akış geometrisi",
+    graphicFooter:
+      "Bu eskizi tedarikçi verisiyle destekleyin: yüzey pürüzlülük, sıkma torku, sıcaklık ve basınç çok kritiktir.",
+  },
+  en: {
+    badge: "Sealing Systems",
+    subBadge: "Engineering Guide",
+    title: "Seals & Gaskets Selection Guide",
+    desc: "Filter standard elastomers, engineering plastics, and metallic gaskets based on operating fluid, operating temperature, and system pressure. Engineering guidance for hydraulic, pneumatic, and process piping design.",
+    selectionsTitle: "Operating Parameters",
+    mediaLabel: "Fluid / Media",
+    tempLabel: "Temperature",
+    pressureLabel: "System Pressure",
+    paramNote:
+      "Design Tip: At 40+ bar, use contoured PTFE back-up rings to avoid radial extrusion. For steam systems verify peroxide-cured EPDM or specialized fluoroelastomers. Request FDA/EC1935 certificates for sanitary applications.",
+    recTitle: "Recommended Seal & Gasket Materials",
+    typePrefix: "Styles:",
+    noMatch:
+      "No standard recommendation for this exact operational envelope. Consider custom perfluoroelastomers (FFKM) or engineered metallic seals.",
+    notesTitle: "Key Engineering Rules",
+    notes: [
+      "Gland groove depth, diametral clearance gap, and surface roughness (Ra) directly dictate extrusion limits and sealing integrity.",
+      "In dynamic reciprocating and rotary seals, fluid film lubrication determines lip wear; never operate dry.",
+      "Consult chemical compatibility matrices for volume swell, hardness change, and elongation loss in contact fluids.",
+      "Under pulsating high pressure (> 50 bar), incorporate spiral or solid PTFE anti-extrusion back-up rings.",
+    ],
+    graphicTitle: "Seal Cavity Cross-Section",
+    graphicSubtitle: "Gland compression and pressure energization behavior",
+    graphicFooter:
+      "Verify gland squeeze (15–30%), lead-in chamfers, and groove surface finish (Ra 0.4–1.6 µm) against manufacturer seal catalogs.",
+  },
+} as const;
 
 type SealingGuideClientProps = {
   initialDocs?: ToolDocsResponse | null;
 };
 
 export default function SealingGuidePage({ initialDocs }: SealingGuideClientProps) {
+  const { locale } = useLocale();
+  const isEn = locale === "en";
+  const t = COPY[isEn ? "en" : "tr"];
+  const mediaLabels = MEDIA_LABELS[isEn ? "en" : "tr"];
+  const tempLabels = TEMP_LABELS[isEn ? "en" : "tr"];
+  const pressureLabels = PRESSURE_LABELS[isEn ? "en" : "tr"];
+
   const [media, setMedia] = useState<Media>("oil");
   const [temp, setTemp] = useState<Temp>("mid");
   const [pressure, setPressure] = useState<Pressure>("mid");
@@ -186,10 +350,10 @@ export default function SealingGuidePage({ initialDocs }: SealingGuideClientProp
   const filtered = useMemo(
     () =>
       SEALS.filter(
-        (s) =>
-          s.media.includes(media) &&
-          s.temps.includes(temp) &&
-          s.pressures.includes(pressure),
+        (seal) =>
+          seal.media.includes(media) &&
+          seal.temps.includes(temp) &&
+          seal.pressures.includes(pressure),
       ),
     [media, temp, pressure],
   );
@@ -197,90 +361,111 @@ export default function SealingGuidePage({ initialDocs }: SealingGuideClientProp
   return (
     <PageShell>
       <ToolDocTabs slug="sealing-guide" initialDocs={initialDocs}>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-3 flex items-center gap-2 text-xs">
-          <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-            Sızdırmazlık
-          </span>
-          <span className="rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-medium text-emerald-700">
-            Rehber
-          </span>
-        </div>
-        <h1 className="text-lg font-semibold text-slate-900">Sızdırmazlık ve Contalar Rehberi</h1>
-        <p className="mt-2 text-xs text-slate-600">
-          Ortam (yağ, su/buhar, kimyasal), sıcaklık ve basınca göre uygun malzeme/conta tiplerini
-          hızlıca filtrele. Sonuçlar hızlı öneridir; tedarikçi datasheet ve yüzey/tolerans şartları
-          mutlaka kontrol edilmelidir.
-        </p>
-      </section>
-
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h2 className="mb-3 text-sm font-semibold text-slate-900">Seçimler</h2>
-          <div className="grid gap-3 sm:grid-cols-3">
-            <SelectField label="Ortam" value={media} onChange={(v) => setMedia(v as Media)} options={MEDIA_LABELS} />
-            <SelectField label="Sıcaklık" value={temp} onChange={(v) => setTemp(v as Temp)} options={TEMP_LABELS} />
-            <SelectField
-              label="Basınç"
-              value={pressure}
-              onChange={(v) => setPressure(v as Pressure)}
-              options={PRESSURE_LABELS}
-            />
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-3 flex items-center gap-2 text-xs">
+            <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+              {t.badge}
+            </span>
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-medium text-emerald-700">
+              {t.subBadge}
+            </span>
           </div>
-          <p className="mt-2 text-[11px] text-slate-600">
-            Not: Yüksek basınçta (40+ bar) O-ring için PTFE back-up önerilir. Buhar için EPDM/
-            FKM tipi ve sıcaklık derecesi doğrulanmalıdır. Gıda/hijyen için FDA/CE uygunluk iste.
-          </p>
-        </div>
+          <h1 className="text-lg font-semibold text-slate-900">{t.title}</h1>
+          <p className="mt-2 text-xs text-slate-600">{t.desc}</p>
+        </section>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold text-slate-900">Önerilen Malzeme/Conta</h3>
-          <div className="space-y-3">
-            {filtered.map((s) => (
-              <article key={s.material + s.types} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                <h4 className="text-sm font-semibold text-slate-900">{s.material}</h4>
-                <p className="text-[11px] text-slate-700">
-                  <span className="font-semibold">Tip: </span>
-                  {s.types}
-                </p>
-                <p className="text-[11px] text-slate-700">{s.description}</p>
-                {s.notes && <p className="mt-1 text-[11px] text-slate-500">{s.notes}</p>}
-              </article>
+        <section className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+            <h2 className="mb-3 text-sm font-semibold text-slate-900">{t.selectionsTitle}</h2>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <SelectField
+                label={t.mediaLabel}
+                value={media}
+                onChange={(v) => setMedia(v as Media)}
+                options={mediaLabels}
+              />
+              <SelectField
+                label={t.tempLabel}
+                value={temp}
+                onChange={(v) => setTemp(v as Temp)}
+                options={tempLabels}
+              />
+              <SelectField
+                label={t.pressureLabel}
+                value={pressure}
+                onChange={(v) => setPressure(v as Pressure)}
+                options={pressureLabels}
+              />
+            </div>
+            <p className="mt-2 text-[11px] text-slate-600">{t.paramNote}</p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+            <h3 className="mb-3 text-sm font-semibold text-slate-900">{t.recTitle}</h3>
+            <div className="space-y-3">
+              {filtered.map((item) => (
+                <article
+                  key={item.materialTr + item.typesTr}
+                  className="rounded-xl border border-slate-200 bg-slate-50 p-3"
+                >
+                  <h4 className="text-sm font-semibold text-slate-900">
+                    {isEn ? item.materialEn : item.materialTr}
+                  </h4>
+                  <p className="text-[11px] text-slate-700">
+                    <span className="font-semibold">{t.typePrefix} </span>
+                    {isEn ? item.typesEn : item.typesTr}
+                  </p>
+                  <p className="text-[11px] text-slate-700">{isEn ? item.descEn : item.descTr}</p>
+                  {(isEn ? item.notesEn : item.notesTr) && (
+                    <p className="mt-1 text-[11px] text-slate-500">
+                      {isEn ? item.notesEn : item.notesTr}
+                    </p>
+                  )}
+                </article>
+              ))}
+              {filtered.length === 0 && (
+                <p className="text-[11px] text-slate-600">{t.noMatch}</p>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <SealGraphic
+          title={t.graphicTitle}
+          subtitle={t.graphicSubtitle}
+          footer={t.graphicFooter}
+        />
+
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
+          <h3 className="mb-2 text-sm font-semibold text-slate-900">{t.notesTitle}</h3>
+          <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
+            {t.notes.map((note) => (
+              <li key={note}>{note}</li>
             ))}
-            {filtered.length === 0 && (
-              <p className="text-[11px] text-slate-600">
-                Bu kombinasyonda öneri bulunamadı. Parametreleri değiştir veya özel malzeme iste.
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
-
-
-            <SealGraphic />
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-        <h3 className="mb-2 text-sm font-semibold text-slate-900">Hızlı Notlar</h3>
-        <ul className="list-disc space-y-1 pl-4 text-[11px] text-slate-700">
-          <li>Yüzey pürüzlülüğü, boşluk (squeeze) ve kanal toleransı sızdırmazlık için kritiktir.</li>
-          <li>Dinamik uygulamada yağlama ve dudak tasarımı ömrü belirler; kuru çalışmadan kaçın.</li>
-          <li>Kimyasal ortamda elastomer şişmesi/sertleşmesi için datasheet kontrolü şart.</li>
-          <li>Yüksek basınçta O-ring ekstrüzyonu için back-up ring ve uygun boşluk seç.</li>
-        </ul>
-      </section>
-
-      
-          </ToolDocTabs>
+          </ul>
+        </section>
+      </ToolDocTabs>
     </PageShell>
   );
 }
 
-function SealGraphic() {
+function SealGraphic({
+  title,
+  subtitle,
+  footer,
+}: {
+  title: string;
+  subtitle: string;
+  footer: string;
+}) {
   return (
     <section className="rounded-2xl border border-slate-200 bg-gradient-to-br from-emerald-50 via-white to-slate-50 p-5 text-xs shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-700">Conta kesiti</p>
-          <p className="text-[11px] text-slate-600">Basit sızdırmazlık ve akış görselleştirmesi</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-700">
+            {title}
+          </p>
+          <p className="text-[11px] text-slate-600">{subtitle}</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-semibold text-white">
           PSI
@@ -297,10 +482,27 @@ function SealGraphic() {
             <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.6" />
           </radialGradient>
         </defs>
-        <rect x="15" y="46" width="250" height="52" rx="10" fill="url(#sealBody)" stroke="#cbd5e1" strokeWidth="2" />
+        <rect
+          x="15"
+          y="46"
+          width="250"
+          height="52"
+          rx="10"
+          fill="url(#sealBody)"
+          stroke="#cbd5e1"
+          strokeWidth="2"
+        />
         <rect x="32" y="62" width="90" height="24" rx="6" fill="#94a3b8" opacity="0.65" />
         <rect x="140" y="62" width="70" height="24" rx="6" fill="#94a3b8" opacity="0.5" />
-        <circle className="seal-pulse" cx="210" cy="72" r="16" fill="url(#sealCore)" stroke="#059669" strokeWidth="3" />
+        <circle
+          className="seal-pulse"
+          cx="210"
+          cy="72"
+          r="16"
+          fill="url(#sealCore)"
+          stroke="#059669"
+          strokeWidth="3"
+        />
         <path
           className="seal-flow"
           d="M35 40 C 90 52, 150 34, 230 46"
@@ -309,12 +511,22 @@ function SealGraphic() {
           strokeWidth="4"
           strokeLinecap="round"
         />
-        <path d="M32 46 L32 92" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
-        <path d="M245 46 L245 92" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
+        <path
+          d="M32 46 L32 92"
+          stroke="#0f172a"
+          strokeWidth="3"
+          strokeLinecap="round"
+          opacity="0.3"
+        />
+        <path
+          d="M245 46 L245 92"
+          stroke="#0f172a"
+          strokeWidth="3"
+          strokeLinecap="round"
+          opacity="0.3"
+        />
       </svg>
-      <p className="mt-2 text-[11px] text-slate-600">
-        Bu eskizi tedarikçi verisiyle destekleyin: yüzey pürüzlülük, sıkma torku, sıcaklık ve basınç çok kritiktir.
-      </p>
+      <p className="mt-2 text-[11px] text-slate-600">{footer}</p>
       <style jsx>{`
         @keyframes sealPulse {
           0% {
@@ -379,5 +591,3 @@ function SelectField({
     </label>
   );
 }
-
-

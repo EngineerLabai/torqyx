@@ -7,41 +7,62 @@ import { withLocalePrefix } from "@/utils/locale-path";
 import { SITE_URL, buildLanguageAlternates } from "@/utils/seo";
 import { getCategoryIndex, getTagIndex, isIndexableTaxonomyEntry } from "@/utils/taxonomy";
 import { getToolIndexReadyLocales } from "@/utils/tool-content-readiness";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 const resolveUrl = (path: string) => new URL(path, SITE_URL).toString();
 const locales = ["tr", "en"] as const;
 type SitemapLocale = (typeof locales)[number];
 
-const staticPaths = [
+const baseStaticPaths = [
   "/tools",
+  "/tools/power-drives",
+  "/tools/fasteners-strength",
+  "/tools/fluids-heat",
+  "/tools/manufacturing-tolerance",
+  "/tools/utilities",
   "/blog",
   "/guides",
   "/glossary",
   "/faq",
-  "/support",
   "/iletisim",
   "/gizlilik",
   "/cerez-politikasi",
   "/kullanim-sartlari",
   "/satis-iade-teslimat",
   "/hakkinda",
-  "/standards",
-  "/project-hub",
-  "/project-hub/devreye-alma",
-  "/project-hub/part-tracking",
-  "/project-hub/project-tools",
-  "/project-hub/rfq",
-  "/quality-tools",
-  "/quality-tools/5n1k",
-  "/quality-tools/5why",
-  "/quality-tools/8d",
-  "/quality-tools/kaizen",
-  "/quality-tools/poka-yoke",
-  "/fixture-tools",
-  "/fixture-tools/locating",
-  "/fixture-tools/clamping",
-  "/fixture-tools/base-plate",
 ] as const;
+
+const staticPaths = [
+  ...baseStaticPaths,
+  ...(INDEXING_CONFIG.indexStandards ? ["/standards"] : []),
+  ...(INDEXING_CONFIG.indexProjectHub
+    ? [
+        "/project-hub",
+        "/project-hub/devreye-alma",
+        "/project-hub/part-tracking",
+        "/project-hub/project-tools",
+        "/project-hub/rfq",
+      ]
+    : []),
+  ...(INDEXING_CONFIG.indexQualityTools
+    ? [
+        "/quality-tools",
+        "/quality-tools/5n1k",
+        "/quality-tools/5why",
+        "/quality-tools/8d",
+        "/quality-tools/kaizen",
+        "/quality-tools/poka-yoke",
+      ]
+    : []),
+  ...(INDEXING_CONFIG.indexFixtureTools
+    ? [
+        "/fixture-tools",
+        "/fixture-tools/locating",
+        "/fixture-tools/clamping",
+        "/fixture-tools/base-plate",
+      ]
+    : []),
+];
 
 const toolRoutes = Array.from(
   new Map(
@@ -257,12 +278,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     }
 
-    standardsManifest.categories.forEach((category) => {
-      addEntry(`/standards/${category.slug}`, locale, {
-        changeFrequency: "monthly",
-        priority: 0.65,
+    if (INDEXING_CONFIG.indexStandards) {
+      standardsManifest.categories.forEach((category) => {
+        addEntry(`/standards/${category.slug}`, locale, {
+          changeFrequency: "monthly",
+          priority: 0.65,
+        });
       });
-    });
+    }
 
   }
 

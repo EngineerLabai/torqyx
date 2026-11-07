@@ -15,7 +15,9 @@ describe("sitemap indexability policy", () => {
     const paths = entries.map((entry) => new URL(entry.url).pathname);
 
     expect(paths).toContain("/tr/tools/gear-design");
-    expect(paths).not.toContain("/en/tools/gear-design");
+    expect(paths).toContain("/en/tools/gear-design");
+    expect(paths).toContain("/tr/tools/gear-design/simulations");
+    expect(paths).not.toContain("/en/tools/gear-design/simulations");
     expect(paths).toContain("/en/tools/bearing-life");
   });
 

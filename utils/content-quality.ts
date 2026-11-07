@@ -1,3 +1,5 @@
+import { INDEXING_CONFIG, GENERIC_GLOSSARY_PATTERN } from "@/config/indexing";
+
 type ContentQualityCandidate = {
   type: "blog" | "guides" | "glossary" | "qa";
   title: string;
@@ -26,6 +28,7 @@ const LOW_VALUE_MARKERS = [
 ] as const;
 
 const GENERATED_GLOSSARY_MARKERS = [
+  GENERIC_GLOSSARY_PATTERN,
   "is a core engineering term. definition, usage notes, and a practical example.",
   "in a design check, first define the relevant load, dimension, material, or flow condition.",
 ] as const;
@@ -55,7 +58,7 @@ export const getContentQualityIssues = (item: ContentQualityCandidate) => {
     }
   });
 
-  if (item.type === "glossary") {
+  if (item.type === "glossary" && !INDEXING_CONFIG.indexGenericGlossaryTerms) {
     GENERATED_GLOSSARY_MARKERS.forEach((marker) => {
       if (searchableText.includes(normalizeText(marker))) {
         issues.push(`generated_glossary_marker:${marker}`);

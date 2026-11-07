@@ -4,6 +4,7 @@ export type NavLinkConfig = {
   id: string;
   labelKey: string;
   route: RouteKey;
+  descriptionKey?: string;
   badgeKey?: string;
   debugId?: string;
 };
@@ -17,209 +18,219 @@ export type NavSectionConfig = {
 };
 
 export const navConfig = {
-  megaMenu: [
+  // Calculators Mega Menu Categories
+  calculatorCategories: [
+    {
+      id: "power-drives",
+      labelKey: "catPowerDrives",
+      descriptionKey: "descPowerDrives",
+      route: "powerDrives" as RouteKey,
+    },
+    {
+      id: "fasteners-strength",
+      labelKey: "catFastenersStrength",
+      descriptionKey: "descFastenersStrength",
+      route: "fastenersStrength" as RouteKey,
+    },
+    {
+      id: "fluids-heat",
+      labelKey: "catFluidsHeat",
+      descriptionKey: "descFluidsHeat",
+      route: "fluidsHeat" as RouteKey,
+    },
+    {
+      id: "manufacturing-tolerance",
+      labelKey: "catManufacturingTolerance",
+      descriptionKey: "descManufacturingTolerance",
+      route: "manufacturingTolerance" as RouteKey,
+    },
+    {
+      id: "utilities",
+      labelKey: "catUtilities",
+      descriptionKey: "descUtilities",
+      route: "utilities" as RouteKey,
+    },
+  ],
+
+  // Reference Dropdown Items
+  referenceLinks: [
+    {
+      id: "standards",
+      labelKey: "linkStandards",
+      route: "standards" as RouteKey,
+    },
+    {
+      id: "glossary",
+      labelKey: "linkGlossary",
+      route: "glossary" as RouteKey,
+    },
+    {
+      id: "reference",
+      labelKey: "linkReference",
+      route: "reference" as RouteKey,
+    },
+    {
+      id: "quality-tools",
+      labelKey: "linkQualityTools",
+      route: "qualityTools" as RouteKey,
+    },
+  ],
+
+  // Direct header links
+  directLinks: [
+    {
+      id: "guides",
+      labelKey: "linkGuides",
+      route: "guides" as RouteKey,
+    },
+    {
+      id: "blog",
+      labelKey: "linkBlog",
+      route: "blog" as RouteKey,
+    },
+    {
+      id: "about",
+      labelKey: "linkAbout",
+      route: "about" as RouteKey,
+    },
+  ],
+
+  // Footer links (About, Methodology & Validation, Contact, Privacy, Cookies, Terms, Disclaimer, Sitemap)
+  footerLinks: [
+    {
+      id: "about",
+      labelKey: "linkAbout",
+      route: "about" as RouteKey,
+    },
+    {
+      id: "methodology",
+      labelKey: "linkMethodology",
+      route: "methodology" as RouteKey,
+    },
+    {
+      id: "contact",
+      labelKey: "linkContact",
+      route: "contact" as RouteKey,
+    },
+    {
+      id: "privacy",
+      labelKey: "linkPrivacy",
+      route: "privacy" as RouteKey,
+    },
+    {
+      id: "cookies",
+      labelKey: "linkCookies",
+      route: "cookies" as RouteKey,
+    },
+    {
+      id: "terms",
+      labelKey: "linkTerms",
+      route: "terms" as RouteKey,
+    },
+    {
+      id: "disclaimer",
+      labelKey: "linkDisclaimer",
+      route: "disclaimer" as RouteKey,
+    },
+    {
+      id: "salesPolicy",
+      labelKey: "linkSalesPolicy",
+      route: "salesPolicy" as RouteKey,
+    },
+    {
+      id: "sitemap",
+      labelKey: "linkSitemap",
+      route: "sitemap" as RouteKey,
+    },
+  ],
+
+  // Inner pages desktop sidebar
+  sidebar: [
     {
       id: "calculators",
       labelKey: "sectionCalculators",
-      descriptionKey: "sectionCalculators",
       links: [
         {
-          id: "gear-calculators",
-          labelKey: "linkGearCalculators",
-          route: "gearCalculators",
-          badgeKey: "new",
+          id: "power-drives",
+          labelKey: "catPowerDrives",
+          route: "powerDrives" as RouteKey,
         },
         {
-          id: "tool-library",
-          labelKey: "linkToolLibrary",
-          route: "tools",
+          id: "fasteners-strength",
+          labelKey: "catFastenersStrength",
+          route: "fastenersStrength" as RouteKey,
         },
         {
-          id: "torque-power",
-          labelKey: "linkTorquePower",
-          route: "torquePower",
+          id: "fluids-heat",
+          labelKey: "catFluidsHeat",
+          route: "fluidsHeat" as RouteKey,
+        },
+        {
+          id: "manufacturing-tolerance",
+          labelKey: "catManufacturingTolerance",
+          route: "manufacturingTolerance" as RouteKey,
+        },
+        {
+          id: "utilities",
+          labelKey: "catUtilities",
+          route: "utilities" as RouteKey,
+        },
+        {
+          id: "all-tools",
+          labelKey: "allCalculators",
+          route: "tools" as RouteKey,
         },
       ],
     },
     {
-      id: "tools",
-      labelKey: "sectionTools",
-      descriptionKey: "sectionTools",
-      links: [
-        {
-          id: "project-hub",
-          labelKey: "linkProjectHub",
-          route: "projectHub",
-          badgeKey: "fresh",
-        },
-        {
-          id: "reference",
-          labelKey: "linkReference",
-          route: "reference",
-        },
-        {
-          id: "blog",
-          labelKey: "linkBlog",
-          route: "blog",
-        },
-        {
-          id: "fixture-tools",
-          labelKey: "linkFixtureTools",
-          route: "fixtureTools",
-        },
-      ],
-    },
-    {
-      id: "standards",
-      labelKey: "sectionStandards",
-      descriptionKey: "sectionStandards",
+      id: "reference",
+      labelKey: "sectionReference",
       links: [
         {
           id: "standards",
           labelKey: "linkStandards",
-          route: "standards",
+          route: "standards" as RouteKey,
         },
-      ],
-    },
-    {
-      id: "quality",
-      labelKey: "sectionQuality",
-      descriptionKey: "sectionQuality",
-      links: [
+        {
+          id: "glossary",
+          labelKey: "linkGlossary",
+          route: "glossary" as RouteKey,
+        },
+        {
+          id: "reference",
+          labelKey: "linkReference",
+          route: "reference" as RouteKey,
+        },
         {
           id: "quality-tools",
           labelKey: "linkQualityTools",
-          route: "qualityTools",
+          route: "qualityTools" as RouteKey,
         },
       ],
     },
-    {
-      id: "faq",
-      labelKey: "sectionFaq",
-      descriptionKey: "sectionFaq",
-      links: [
-        {
-          id: "faq",
-          labelKey: "linkFaq",
-          route: "faq",
-        },
-      ],
-    },
-    {
-      id: "contact",
-      labelKey: "sectionContact",
-      descriptionKey: "sectionContact",
-      links: [
-        {
-          id: "support",
-          labelKey: "linkSupport",
-          route: "support",
-        },
-      ],
-    },
-  ],
-  sidebar: [
     {
       id: "general",
       labelKey: "sectionGeneral",
       links: [
         {
-          id: "home",
-          labelKey: "linkHome",
-          route: "home",
+          id: "guides",
+          labelKey: "linkGuides",
+          route: "guides" as RouteKey,
         },
         {
           id: "blog",
           labelKey: "linkBlog",
-          route: "blog",
+          route: "blog" as RouteKey,
         },
         {
           id: "about",
           labelKey: "linkAbout",
-          route: "about",
-        },
-        {
-          id: "privacy",
-          labelKey: "linkPrivacy",
-          route: "privacy",
-        },
-        {
-          id: "cookies",
-          labelKey: "linkCookies",
-          route: "cookies",
-        },
-        {
-          id: "terms",
-          labelKey: "linkTerms",
-          route: "terms",
-        },
-        {
-          id: "sales-policy",
-          labelKey: "linkSalesPolicy",
-          route: "salesPolicy",
+          route: "about" as RouteKey,
         },
         {
           id: "contact",
           labelKey: "linkContact",
-          route: "contact",
-        },
-        {
-          id: "tool-library",
-          labelKey: "linkToolLibrary",
-          route: "tools",
-        },
-      ],
-    },
-    {
-      id: "tools",
-      labelKey: "sectionTools",
-      links: [
-        {
-          id: "project-hub",
-          labelKey: "linkProjectHub",
-          route: "projectHub",
-        },
-        {
-          id: "reference",
-          labelKey: "linkReference",
-          route: "reference",
-        },
-        {
-          id: "standards",
-          labelKey: "linkStandards",
-          route: "standards",
-        },
-        {
-          id: "quality-tools",
-          labelKey: "linkQualityTools",
-          route: "qualityTools",
-        },
-        {
-          id: "fixture-tools",
-          labelKey: "linkFixtureTools",
-          route: "fixtureTools",
-        },
-      ],
-    },
-    {
-      id: "faq",
-      labelKey: "sectionFaq",
-      links: [
-        {
-          id: "faq",
-          labelKey: "linkFaq",
-          route: "faq",
-        },
-      ],
-    },
-    {
-      id: "contact",
-      labelKey: "sectionContact",
-      links: [
-        {
-          id: "support",
-          labelKey: "linkSupport",
-          route: "support",
+          route: "contact" as RouteKey,
         },
       ],
     },

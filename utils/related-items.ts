@@ -1,6 +1,7 @@
-﻿import "server-only";
+import "server-only";
 import { getIndexableContentList, type ContentListItem } from "@/utils/content";
 import { getToolCopy, toolCatalog, type ToolCatalogItem } from "@/tools/_shared/catalog";
+import { TOOL_RELATED_CONTENT } from "@/data/tool-related-content";
 import type { Locale } from "@/utils/locale";
 
 export type RelatedBase = {
@@ -144,10 +145,22 @@ export const getRelatedForTool = async (
   tool: ToolCatalogItem,
   options: { guideLimit?: number; glossaryLimit?: number; locale?: Locale } = {},
 ) => {
+  const mapping = TOOL_RELATED_CONTENT[tool.id];
+  if (!mapping) {
+    return { guides: [], glossary: [] };
+  }
+
+  const guideSlugs = mapping.guideSlugs ?? [];
+  const glossarySlugs = mapping.glossarySlugs ?? [];
+
+  if (guideSlugs.length === 0 && glossarySlugs.length === 0) {
+    return { guides: [], glossary: [] };
+  }
+
   const locale = options.locale ?? "tr";
   const [guides, glossary] = await Promise.all([
-    getIndexableContentList("guides", { locale }),
-    getIndexableContentList("glossary", { locale }),
+    guideSlugs.length > 0 ? getIndexableContentList("guides", { locale }) : Promise.resolve([]),
+    glossarySlugs.length > 0 ? getIndexableContentList("glossary", { locale }) : Promise.resolve([]),
   ]);
 
   const toolCopy = getToolCopy(tool, locale);
@@ -160,12 +173,40 @@ export const getRelatedForTool = async (
   const guideLimit = options.guideLimit ?? 4;
   const glossaryLimit = options.glossaryLimit ?? 4;
 
-  const relatedGuides = rankRelatedItems(base, guides, locale);
-  const relatedGlossary = rankRelatedItems(base, glossary, locale);
+  const guideSlugSet = new Set(guideSlugs);
+  const matchedGuides = guides.filter((item) => guideSlugSet.has(item.slug));
+
+  const glossarySlugSet = new Set(glossarySlugs);
+  const matchedGlossary = glossary.filter((item) => glossarySlugSet.has(item.slug));
+
+  const rankMappedItems = <T extends ContentListItem>(items: T[]) => {
+    const scored = items.map((candidate) => {
+      let score = 1; // base match from explicit mapping
+      const baseTags = new Set((base.tags ?? []).map(normalizeText).filter(Boolean));
+      (candidate.tags ?? []).forEach((tag) => {
+        if (baseTags.has(normalizeText(tag))) {
+          score += 3;
+        }
+      });
+      if (base.category && candidate.category) {
+        if (normalizeText(base.category) === normalizeText(candidate.category)) {
+          score += 2;
+        }
+      }
+      if (hasTitleOverlap(base.title, candidate.title)) {
+        score += 1;
+      }
+      return { ...candidate, score };
+    });
+    return sortByScore(scored, locale);
+  };
+
+  const rankedGuides = rankMappedItems(matchedGuides);
+  const rankedGlossary = rankMappedItems(matchedGlossary);
 
   return {
-    guides: takeTop(relatedGuides, guideLimit),
-    glossary: takeTop(relatedGlossary, glossaryLimit),
+    guides: takeTop(rankedGuides, guideLimit),
+    glossary: takeTop(rankedGlossary, glossaryLimit),
   };
 };
 

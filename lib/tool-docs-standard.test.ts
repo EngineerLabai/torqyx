@@ -44,7 +44,7 @@ describe("tool doc standard examples", () => {
             const value = result[key];
             expect(typeof value, `${toolId}.${locale} result ${key} must be numeric`).toBe("number");
             expect(Number.isFinite(value), `${toolId}.${locale} result ${key} must be finite`).toBe(true);
-            expect(value as number).toBeCloseTo(expected, 2);
+            expect(value as number).toBeCloseTo(expected as number, 2);
           });
         });
       });

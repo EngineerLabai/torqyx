@@ -25,9 +25,14 @@ describe("structured-data policy", () => {
     expect(schema).not.toContain('"aggregateRating"');
   });
 
-  it("builds consistent 3-level BreadcrumbList and WebApplication data", async () => {
+  it("builds consistent 4-level BreadcrumbList and WebApplication data", async () => {
     const { buildToolJsonLd } = await import("@/utils/tool-seo");
     const { CANONICAL_SITE_URL } = await import("@/utils/seo");
+    const { getCategoryForToolId } = await import("@/data/tool-categories");
+
+    const category = getCategoryForToolId("bolt-calculator")!;
+    expect(category).toBeDefined();
+    expect(category.slug).toBe("fasteners-strength");
 
     for (const locale of ["tr", "en"] as const) {
       const toolData = buildToolJsonLd("bolt-calculator", locale);
@@ -39,15 +44,17 @@ describe("structured-data policy", () => {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: locale === "tr" ? "Ana Sayfa" : "Home", item: `${CANONICAL_SITE_URL}/${locale}` },
-          { "@type": "ListItem", position: 2, name: locale === "tr" ? "Hesaplayıcılar" : "Tools", item: `${CANONICAL_SITE_URL}/${locale}/tools` },
-          { "@type": "ListItem", position: 3, name: toolData.name, item: toolData.url },
+          { "@type": "ListItem", position: 2, name: locale === "tr" ? "Hesaplayıcılar" : "Calculators", item: `${CANONICAL_SITE_URL}/${locale}/tools` },
+          { "@type": "ListItem", position: 3, name: category.title[locale], item: `${CANONICAL_SITE_URL}/${locale}/tools/${category.slug}` },
+          { "@type": "ListItem", position: 4, name: toolData.name, item: toolData.url },
         ],
       };
 
-      expect(breadcrumb.itemListElement).toHaveLength(3);
+      expect(breadcrumb.itemListElement).toHaveLength(4);
       expect(breadcrumb.itemListElement[0].item).toBe(`https://torqyx.com/${locale}`);
       expect(breadcrumb.itemListElement[1].item).toBe(`https://torqyx.com/${locale}/tools`);
-      expect(breadcrumb.itemListElement[2].item).toBe(`https://torqyx.com/${locale}/tools/bolt-calculator`);
+      expect(breadcrumb.itemListElement[2].item).toBe(`https://torqyx.com/${locale}/tools/fasteners-strength`);
+      expect(breadcrumb.itemListElement[3].item).toBe(`https://torqyx.com/${locale}/tools/bolt-calculator`);
     }
   });
 });

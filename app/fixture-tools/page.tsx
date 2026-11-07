@@ -7,7 +7,8 @@ import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { getMessages } from "@/utils/messages";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
@@ -19,6 +20,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/fixture-tools",
     locale,
+      robots: INDEXING_CONFIG.indexFixtureTools ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

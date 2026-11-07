@@ -6,7 +6,8 @@ import { getHeroImageSrc } from "@/lib/assets";
 import { materials } from "@/src/data/materials";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/utils/locale";
 import { getMessages } from "@/utils/messages";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: PageProps) {
     path: "/materials",
     locale,
     useLocalizedCanonical: true,
+      robots: INDEXING_CONFIG.indexMaterialsList ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

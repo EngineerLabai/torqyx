@@ -6,7 +6,8 @@ import { getStandardsCategory, getTablesForCategory } from "@/data/standards";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
   const locale = await getLocaleFromCookies();
@@ -20,7 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
       description: copy.description,
       path: "/standards",
       locale,
-    });
+        robots: INDEXING_CONFIG.indexStandards ? undefined : NOINDEX_FOLLOW_ROBOTS,
+  });
   }
 
   return buildPageMetadata({
@@ -28,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
     description: category.description[locale],
     path: `/standards/${category.slug}`,
     locale,
+      robots: INDEXING_CONFIG.indexStandards ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

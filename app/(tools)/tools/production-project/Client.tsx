@@ -1,9 +1,10 @@
 "use client";
 
-// app/tools/production-project/page.tsximport { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 type TaktInputs = {
   netTime: string; // available time per shift (min)
@@ -53,60 +54,145 @@ const POWER_INIT: PowerInputs = {
   load: "85",
 };
 
+const COPY = {
+  tr: {
+    badge: "Üretim & Proje",
+    subBadge: "Çoklu Hesap",
+    title: "Üretim & Proje Hızlı Paket",
+    desc: "Üretim için hızlı hesaplar: (1) takt time, (2) OEE, (3) pres tonaj tahmini, (4) motor güç/tork. Hızlı fikir verir; sahada detaylı analiz ve verifikasyon şart.",
+    graphicTitle: "Hızlı görselleştirme",
+    graphicSubtitle: "Takt/OEE/pres/güç nabzı",
+    bars: [
+      { label: "Takt", value: 68 },
+      { label: "OEE", value: 82 },
+      { label: "Pres", value: 74 },
+      { label: "Güç", value: 88 },
+    ],
+    positivePrompt: "Pozitif değerler gir.",
+    taktTitle: "1) Takt Time",
+    taktTimeLabel: "Net süre (dk/mesai)",
+    demandLabel: "Talep (adet/mesai)",
+    taktMin: "Takt (dk/adet)",
+    taktSec: "Takt (sn/adet)",
+    oeeTitle: "2) OEE (Overall Equipment Effectiveness)",
+    oeeNote:
+      "Hızlı değerlendirme: < 60% zayıf, 60-75% orta, 75-85% iyi, > 85% dünya klası (genel kural). Kayıp analizi için A/P/Q bileşenlerini ayrı izleyin.",
+    pressTitle: "3) Pres Tonaj Tahmini (kesme)",
+    thicknessLabel: "Kalınlık t (mm)",
+    perimeterLabel: "Kesim çevresi P (mm)",
+    shearLabel: "Kesme dayanımı (MPa)",
+    safetyLabel: "Emniyet kats.",
+    pressNote:
+      "Not: Kesme için kullanılır. Delme/blanking için P, parçanın kesim çevresidir; malzeme kesme dayanımı datasheet'ten alınmalıdır.",
+    powerTitle: "4) Motor Güç/Tork",
+    torqueLabel: "Tork (Nm)",
+    rpmLabel: "Devir (rpm)",
+    loadLabel: "Yükleme [%]",
+    loadHelper: "Tipik: 70-90%",
+    powerLoaded: "P (kW) - yükte",
+    powerNote:
+      "Not: P[kW] = T[Nm] x n[rpm] / 9550. Servis faktörleri ve verim için motor datasına bak.",
+  },
+  en: {
+    badge: "Production & Project",
+    subBadge: "Multi-Calculator",
+    title: "Production & Operations Fast Pack",
+    desc: "Fast engineering estimates for operations: (1) takt time, (2) OEE calculation, (3) press tonnage prediction, and (4) motor power/torque sizing. Practical approximations for shop-floor and project scoping.",
+    graphicTitle: "Operational Pulse",
+    graphicSubtitle: "Takt / OEE / Press / Power metrics",
+    bars: [
+      { label: "Takt", value: 68 },
+      { label: "OEE", value: 82 },
+      { label: "Press", value: 74 },
+      { label: "Power", value: 88 },
+    ],
+    positivePrompt: "Enter positive values.",
+    taktTitle: "1) Takt Time",
+    taktTimeLabel: "Available time (min/shift)",
+    demandLabel: "Customer demand (units/shift)",
+    taktMin: "Takt (min/unit)",
+    taktSec: "Takt (sec/unit)",
+    oeeTitle: "2) OEE (Overall Equipment Effectiveness)",
+    oeeNote:
+      "Benchmark guide: < 60% poor, 60-75% fair, 75-85% good, > 85% world-class (general rule of thumb). Track individual A, P, Q components to identify root bottlenecks.",
+    pressTitle: "3) Press Tonnage Estimation (Shearing/Punching)",
+    thicknessLabel: "Thickness t (mm)",
+    perimeterLabel: "Cutting perimeter P (mm)",
+    shearLabel: "Shear strength (MPa)",
+    safetyLabel: "Safety factor",
+    pressNote:
+      "Note: Sized for shearing and blanking. P is total cutting perimeter; shear strength should be verified from sheet metal material datasheets (typically 70-80% of ultimate tensile strength).",
+    powerTitle: "4) Motor Power & Torque",
+    torqueLabel: "Torque (Nm)",
+    rpmLabel: "Speed (rpm)",
+    loadLabel: "Load factor [%]",
+    loadHelper: "Typical: 70–90%",
+    powerLoaded: "P (kW) - loaded",
+    powerNote:
+      "Note: P[kW] = T[Nm] x n[rpm] / 9550. Account for service factors, gearbox efficiency, and duty cycles from supplier catalog data.",
+  },
+} as const;
+
 type ProductionProjectClientProps = {
   initialDocs?: ToolDocsResponse | null;
 };
 
 export default function ProductionProjectPage({ initialDocs }: ProductionProjectClientProps) {
+  const { locale } = useLocale();
+  const isEn = locale === "en";
+  const t = COPY[isEn ? "en" : "tr"];
+
   return (
     <PageShell>
       <ToolDocTabs slug="production-project" initialDocs={initialDocs}>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-3 flex items-center gap-2">
-          <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-            Üretim & Proje
-          </span>
-          <span className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-medium text-indigo-700">
-            Çoklu Hesap
-          </span>
-        </div>
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
-          <div>
-            <h1 className="text-lg font-semibold text-slate-900">
-              Üretim & Proje Hızlı Paket
-            </h1>
-            <p className="mt-2 text-xs text-slate-600">
-              Üretim için hızlı hesaplar: (1) takt time, (2) OEE, (3) pres tonaj tahmini, (4) motor güç/tork.
-              Hızlı fikir verir; sahada detaylı analiz ve verifikasyon şart.
-            </p>
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="rounded-full bg-slate-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+              {t.badge}
+            </span>
+            <span className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-medium text-indigo-700">
+              {t.subBadge}
+            </span>
           </div>
-          <ProductionGraphic />
-        </div>
-      </section>
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+            <div>
+              <h1 className="text-lg font-semibold text-slate-900">{t.title}</h1>
+              <p className="mt-2 text-xs text-slate-600">{t.desc}</p>
+            </div>
+            <ProductionGraphic
+              title={t.graphicTitle}
+              subtitle={t.graphicSubtitle}
+              bars={t.bars}
+            />
+          </div>
+        </section>
 
-      <TaktBlock />
-      <OeeBlock />
-      <PressForceBlock />
-      <MotorPowerBlock />
-          </ToolDocTabs>
+        <TaktBlock t={t} />
+        <OeeBlock t={t} />
+        <PressForceBlock t={t} />
+        <MotorPowerBlock t={t} />
+      </ToolDocTabs>
     </PageShell>
   );
 }
 
-function ProductionGraphic() {
-  const bars = [
-    { label: "Takt", value: 68 },
-    { label: "OEE", value: 82 },
-    { label: "Pres", value: 74 },
-    { label: "Güç", value: 88 },
-  ];
-
+function ProductionGraphic({
+  title,
+  subtitle,
+  bars,
+}: {
+  title: string;
+  subtitle: string;
+  bars: readonly { label: string; value: number }[];
+}) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-indigo-50 via-white to-slate-50 p-4 shadow-[0_12px_35px_-22px_rgba(15,23,42,0.4)]">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-indigo-700">Hızlı görselleştirme</p>
-          <p className="text-[11px] text-slate-600">Takt/OEE/pres/güç nabzı</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-indigo-700">
+            {title}
+          </p>
+          <p className="text-[11px] text-slate-600">{subtitle}</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-[11px] font-semibold text-white">
           Ops
@@ -185,38 +271,46 @@ function ProductionGraphic() {
   );
 }
 
-function TaktBlock() {
+function TaktBlock({ t }: { t: (typeof COPY)["tr"] | (typeof COPY)["en"] }) {
   const [inp, setInp] = useState<TaktInputs>(TAKT_INIT);
 
   const res = useMemo(() => {
-    const t = Number(inp.netTime);
+    const timeVal = Number(inp.netTime);
     const d = Number(inp.demand);
-    if (t <= 0 || d <= 0) return null;
-    const taktMin = t / d; // min/unit
+    if (timeVal <= 0 || d <= 0) return null;
+    const taktMin = timeVal / d; // min/unit
     const taktSec = taktMin * 60;
     return { taktMin, taktSec };
   }, [inp]);
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold text-slate-900">1) Takt Time</h2>
+      <h2 className="mb-3 text-sm font-semibold text-slate-900">{t.taktTitle}</h2>
       <div className="grid gap-3 sm:grid-cols-2">
-        <Field label="Net süre (dk/mesai)" value={inp.netTime} onChange={(v) => setInp({ ...inp, netTime: v })} />
-        <Field label="Talep (adet/mesai)" value={inp.demand} onChange={(v) => setInp({ ...inp, demand: v })} />
+        <Field
+          label={t.taktTimeLabel}
+          value={inp.netTime}
+          onChange={(v) => setInp({ ...inp, netTime: v })}
+        />
+        <Field
+          label={t.demandLabel}
+          value={inp.demand}
+          onChange={(v) => setInp({ ...inp, demand: v })}
+        />
       </div>
       {res ? (
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
-          <ResultRow label="Takt (dk/adet)" value={res.taktMin.toFixed(3)} />
-          <ResultRow label="Takt (sn/adet)" value={res.taktSec.toFixed(1)} />
+          <ResultRow label={t.taktMin} value={res.taktMin.toFixed(3)} />
+          <ResultRow label={t.taktSec} value={res.taktSec.toFixed(1)} />
         </div>
       ) : (
-        <p className="mt-2 text-[11px] text-red-600">Pozitif değerler gir.</p>
+        <p className="mt-2 text-[11px] text-red-600">{t.positivePrompt}</p>
       )}
     </section>
   );
 }
 
-function OeeBlock() {
+function OeeBlock({ t }: { t: (typeof COPY)["tr"] | (typeof COPY)["en"] }) {
   const [inp, setInp] = useState<OeeInputs>(OEE_INIT);
 
   const res = useMemo(() => {
@@ -230,37 +324,46 @@ function OeeBlock() {
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold text-slate-900">2) OEE</h2>
+      <h2 className="mb-3 text-sm font-semibold text-slate-900">{t.oeeTitle}</h2>
       <div className="grid gap-3 sm:grid-cols-3">
-        <Field label="Availability %" value={inp.availability} onChange={(v) => setInp({ ...inp, availability: v })} />
-        <Field label="Performance %" value={inp.performance} onChange={(v) => setInp({ ...inp, performance: v })} />
-        <Field label="Quality %" value={inp.quality} onChange={(v) => setInp({ ...inp, quality: v })} />
+        <Field
+          label="Availability %"
+          value={inp.availability}
+          onChange={(v) => setInp({ ...inp, availability: v })}
+        />
+        <Field
+          label="Performance %"
+          value={inp.performance}
+          onChange={(v) => setInp({ ...inp, performance: v })}
+        />
+        <Field
+          label="Quality %"
+          value={inp.quality}
+          onChange={(v) => setInp({ ...inp, quality: v })}
+        />
       </div>
       {res ? (
         <div className="mt-3">
           <ResultRow label="OEE" value={`${(res.oee * 100).toFixed(2)} %`} />
-          <p className="mt-1 text-[11px] text-slate-600">
-            Hızlı değerlendirme: &lt; 60% zayıf, 60-75% orta, 75-85% iyi, &gt; 85% dünya klası
-            (genel kural). Kayıp analizi için A/P/Q bileşenlerini ayrı izleyin.
-          </p>
+          <p className="mt-1 text-[11px] text-slate-600">{t.oeeNote}</p>
         </div>
       ) : (
-        <p className="mt-2 text-[11px] text-red-600">Pozitif değerler gir.</p>
+        <p className="mt-2 text-[11px] text-red-600">{t.positivePrompt}</p>
       )}
     </section>
   );
 }
 
-function PressForceBlock() {
+function PressForceBlock({ t }: { t: (typeof COPY)["tr"] | (typeof COPY)["en"] }) {
   const [inp, setInp] = useState<PressInputs>(PRESS_INIT);
 
   const res = useMemo(() => {
-    const t = Number(inp.thickness);
+    const thicknessVal = Number(inp.thickness);
     const p = Number(inp.perimeter);
     const tau = Number(inp.shear);
     const sf = Number(inp.safety);
-    if (t <= 0 || p <= 0 || tau <= 0 || sf <= 0) return null;
-    const forceN = p * t * tau * sf; // N (MPa = N/mm^2)
+    if (thicknessVal <= 0 || p <= 0 || tau <= 0 || sf <= 0) return null;
+    const forceN = p * thicknessVal * tau * sf; // N (MPa = N/mm^2)
     const forcekN = forceN / 1000;
     const tonf = forceN / 9810;
     return { forceN, forcekN, tonf };
@@ -268,12 +371,28 @@ function PressForceBlock() {
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold text-slate-900">3) Pres Tonaj Tahmini (kesme)</h2>
+      <h2 className="mb-3 text-sm font-semibold text-slate-900">{t.pressTitle}</h2>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Field label="Kalınlık t (mm)" value={inp.thickness} onChange={(v) => setInp({ ...inp, thickness: v })} />
-        <Field label="Kesim çevresi P (mm)" value={inp.perimeter} onChange={(v) => setInp({ ...inp, perimeter: v })} />
-        <Field label="Kesme dayanımı (MPa)" value={inp.shear} onChange={(v) => setInp({ ...inp, shear: v })} />
-        <Field label="Emniyet kats." value={inp.safety} onChange={(v) => setInp({ ...inp, safety: v })} />
+        <Field
+          label={t.thicknessLabel}
+          value={inp.thickness}
+          onChange={(v) => setInp({ ...inp, thickness: v })}
+        />
+        <Field
+          label={t.perimeterLabel}
+          value={inp.perimeter}
+          onChange={(v) => setInp({ ...inp, perimeter: v })}
+        />
+        <Field
+          label={t.shearLabel}
+          value={inp.shear}
+          onChange={(v) => setInp({ ...inp, shear: v })}
+        />
+        <Field
+          label={t.safetyLabel}
+          value={inp.safety}
+          onChange={(v) => setInp({ ...inp, safety: v })}
+        />
       </div>
       {res ? (
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
@@ -282,16 +401,14 @@ function PressForceBlock() {
           <ResultRow label="F (N)" value={res.forceN.toFixed(0)} />
         </div>
       ) : (
-        <p className="mt-2 text-[11px] text-red-600">Pozitif değerler gir.</p>
+        <p className="mt-2 text-[11px] text-red-600">{t.positivePrompt}</p>
       )}
-      <p className="mt-2 text-[11px] text-slate-600">
-        Not: Kesme için kullanılır. Delme/blanking için P, parçanın kesim çevresidir; malzeme kesme dayanımı datasheet&apos;ten alınmalıdır.
-      </p>
+      <p className="mt-2 text-[11px] text-slate-600">{t.pressNote}</p>
     </section>
   );
 }
 
-function MotorPowerBlock() {
+function MotorPowerBlock({ t }: { t: (typeof COPY)["tr"] | (typeof COPY)["en"] }) {
   const [inp, setInp] = useState<PowerInputs>(POWER_INIT);
 
   const res = useMemo(() => {
@@ -307,24 +424,35 @@ function MotorPowerBlock() {
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold text-slate-900">4) Motor Güç/Tork</h2>
+      <h2 className="mb-3 text-sm font-semibold text-slate-900">{t.powerTitle}</h2>
       <div className="grid gap-3 sm:grid-cols-3">
-        <Field label="Tork (Nm)" value={inp.torque} onChange={(v) => setInp({ ...inp, torque: v })} />
-        <Field label="Devir (rpm)" value={inp.rpm} onChange={(v) => setInp({ ...inp, rpm: v })} />
-        <Field label="Yükleme [%]" value={inp.load} onChange={(v) => setInp({ ...inp, load: v })} helper="Tipik: 70-90%" />
+        <Field
+          label={t.torqueLabel}
+          value={inp.torque}
+          onChange={(v) => setInp({ ...inp, torque: v })}
+        />
+        <Field
+          label={t.rpmLabel}
+          value={inp.rpm}
+          onChange={(v) => setInp({ ...inp, rpm: v })}
+        />
+        <Field
+          label={t.loadLabel}
+          value={inp.load}
+          onChange={(v) => setInp({ ...inp, load: v })}
+          helper={t.loadHelper}
+        />
       </div>
       {res ? (
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
           <ResultRow label="P (kW)" value={res.p_kw.toFixed(2)} />
-          <ResultRow label="P (kW) - yükte" value={res.p_loaded.toFixed(2)} />
+          <ResultRow label={t.powerLoaded} value={res.p_loaded.toFixed(2)} />
           <ResultRow label="omega (rad/s)" value={res.omega.toFixed(1)} />
         </div>
       ) : (
-        <p className="mt-2 text-[11px] text-red-600">Pozitif değerler gir.</p>
+        <p className="mt-2 text-[11px] text-red-600">{t.positivePrompt}</p>
       )}
-      <p className="mt-2 text-[11px] text-slate-600">
-        Not: P[kW] = T[Nm] x n[rpm] / 9550. Servis faktörleri ve verim için motor datasına bak.
-      </p>
+      <p className="mt-2 text-[11px] text-slate-600">{t.powerNote}</p>
     </section>
   );
 }
@@ -348,7 +476,8 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900/40"
-       aria-label="Input field"/>
+        aria-label="Input field"
+      />
       {helper && <span className="text-[10px] text-slate-500">{helper}</span>}
     </label>
   );
@@ -362,5 +491,3 @@ function ResultRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-
-

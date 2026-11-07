@@ -16,15 +16,24 @@ export const toolDocExampleSchema = z.object({
   notes: z.array(z.string()).optional(),
 });
 
+export const toolDocFaqSchema = z.object({
+  question: z.string().min(1),
+  answer: z.string().min(1),
+});
+
 export const toolDocStandardSchema = z.object({
   version: z.string().min(1),
   lastUpdated: z.string().min(1),
   howTo: z.array(z.string()).min(3),
   formula: z.string().min(1),
+  formulaDerivation: z.array(z.string()).optional(),
+  whenToUse: z.array(z.string()).optional(),
+  whenNotToUse: z.array(z.string()).optional(),
   examples: z.array(toolDocExampleSchema).min(2),
   references: z.array(toolDocReferenceSchema).min(1),
   commonMistakes: z.array(z.string()).min(3),
   assumptions: z.array(z.string()).optional(),
+  faq: z.array(toolDocFaqSchema).optional(),
 });
 
 export type ToolDocReference = z.infer<typeof toolDocReferenceSchema>;

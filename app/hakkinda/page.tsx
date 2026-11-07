@@ -261,7 +261,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Metodoloji ve QA */}
-        <section className="space-y-4">
+        <section id="methodology" className="scroll-mt-24 space-y-4">
           <div className="flex items-center gap-2 text-primary-600">
             <CheckCircle2 className="h-6 w-6" />
             <h2 className="text-xl font-bold text-slate-900">{copy.sections.methodologyTitle}</h2>
@@ -302,7 +302,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Sorumluluk Reddi / Limitations */}
-        <section className="space-y-3 rounded-2xl border border-amber-200 bg-amber-50/80 p-6 text-amber-900">
+        <section id="disclaimer" className="scroll-mt-24 space-y-3 rounded-2xl border border-amber-200 bg-amber-50/80 p-6 text-amber-900">
           <div className="flex items-center gap-2 text-amber-800">
             <ShieldCheck className="h-5 w-5" />
             <h2 className="text-lg font-bold">{copy.sections.limitationsTitle}</h2>

@@ -1,7 +1,8 @@
 import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 const STEPS = [
   {
@@ -38,6 +39,7 @@ export async function generateMetadata() {
     description: "Proje devreye alma aşamaları, checklist ve sızdırmazlık testleri.",
     path: "/project-hub/devreye-alma",
     locale,
+      robots: INDEXING_CONFIG.indexProjectHub ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

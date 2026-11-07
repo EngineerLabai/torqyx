@@ -319,7 +319,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
                     key={item.slug}
                     title={item.title}
                     description={item.description}
-                    href={`/guides/${item.slug}`}
+                    href={withLocalePrefix(`/guides/${item.slug}`, locale)}
                     badge={item.category}
                     ctaLabel={copy.read}
                   />
@@ -341,7 +341,7 @@ export default function ToolDocTabs({ slug, children, initialDocs = null }: Tool
                     key={item.slug}
                     title={item.title}
                     description={item.description}
-                    href={`/glossary/${item.slug}`}
+                    href={withLocalePrefix(`/glossary/${item.slug}`, locale)}
                     badge={item.category}
                     ctaLabel={copy.read}
                   />

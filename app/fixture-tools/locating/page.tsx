@@ -1,6 +1,7 @@
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 import LocatingCardClient from "./Client";
 
 export async function generateMetadata() {
@@ -24,6 +25,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/fixture-tools/locating",
     locale,
+      robots: INDEXING_CONFIG.indexFixtureTools ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 
