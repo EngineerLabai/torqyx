@@ -52,9 +52,6 @@ const sitemap = read("app/sitemap.ts");
 if (sitemap.includes("materials.forEach")) {
   failures.push("Templated material detail pages are still added to the sitemap.");
 }
-if (!sitemap.includes('"/satis-iade-teslimat"')) {
-  failures.push("Sales/refund/delivery policy is missing from the sitemap.");
-}
 if (/addEntry\(`\$\{path\}\/guide`/u.test(sitemap) && !sitemap.includes('guide?.source === "file"')) {
   failures.push("Fallback tool guides can still be added to the sitemap.");
 }
@@ -68,8 +65,8 @@ if (!routes.includes('salesPolicy: "/satis-iade-teslimat"')) {
 }
 
 const footer = read("components/layout/SiteShell.tsx");
-if (!footer.includes("linkCookies") || !footer.includes("linkSalesPolicy")) {
-  failures.push("Footer must link to cookie and sales/refund/delivery policy pages.");
+if (!footer.includes("linkCookies")) {
+  failures.push("Footer must link to cookie policy page.");
 }
 
 const toolTabs = read("components/tools/ToolDocTabs.tsx");

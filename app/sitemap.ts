@@ -28,7 +28,6 @@ const baseStaticPaths = [
   "/gizlilik",
   "/cerez-politikasi",
   "/kullanim-sartlari",
-  "/satis-iade-teslimat",
   "/hakkinda",
   "/metodoloji",
   "/sorumluluk-reddi",
@@ -36,6 +35,7 @@ const baseStaticPaths = [
 
 const staticPaths = [
   ...baseStaticPaths,
+  ...(INDEXING_CONFIG.showSalesPolicy ? ["/satis-iade-teslimat"] : []),
   ...(INDEXING_CONFIG.indexStandards ? ["/standards"] : []),
   ...(INDEXING_CONFIG.indexProjectHub
     ? [

@@ -123,11 +123,6 @@ export const navConfig = {
       route: "disclaimer" as RouteKey,
     },
     {
-      id: "salesPolicy",
-      labelKey: "linkSalesPolicy",
-      route: "salesPolicy" as RouteKey,
-    },
-    {
       id: "sitemap",
       labelKey: "linkSitemap",
       route: "sitemap" as RouteKey,

@@ -3,7 +3,8 @@ import PageShell from "@/components/layout/PageShell";
 import { getBrandCopy, SITE_CONTACT_EMAIL } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
-import { buildPageMetadata } from "@/utils/metadata";
+import { buildPageMetadata, NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
+import { INDEXING_CONFIG } from "@/config/indexing";
 
 type PolicySection = {
   title: string;
@@ -145,6 +146,7 @@ export async function generateMetadata() {
     description: copy.description,
     path: "/satis-iade-teslimat",
     locale,
+    robots: INDEXING_CONFIG.showSalesPolicy ? undefined : NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

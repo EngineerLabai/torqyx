@@ -14,6 +14,7 @@ import { UnitSystemSwitcher } from "@/components/units/UnitSystemSwitcher";
 import { getBrandCopy, SITE_CONTACT_EMAIL } from "@/config/brand";
 import { getRoute } from "@/config/routes";
 import { navConfig, type NavLinkConfig } from "@/config/nav";
+import { INDEXING_CONFIG } from "@/config/indexing";
 import { stripLocaleFromPath } from "@/utils/locale-path";
 import { isAdsAllowedPath } from "@/utils/ads";
 import type { Messages } from "@/utils/messages";
@@ -222,7 +223,9 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
     { label: navCopy.labels.linkPrivacy, href: getRoute("privacy", locale) },
     { label: navCopy.labels.linkCookies, href: getRoute("cookies", locale) },
     { label: navCopy.labels.linkTerms, href: getRoute("terms", locale) },
-    { label: navCopy.labels.linkSalesPolicy, href: getRoute("salesPolicy", locale) },
+    ...(INDEXING_CONFIG.showSalesPolicy
+      ? [{ label: navCopy.labels.linkSalesPolicy, href: getRoute("salesPolicy", locale) }]
+      : []),
     { label: navCopy.labels.linkDisclaimer, href: getRoute("disclaimer", locale) },
   ];
   const contactEmail = SITE_CONTACT_EMAIL;
