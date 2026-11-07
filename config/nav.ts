@@ -52,13 +52,8 @@ export const navConfig = {
     },
   ],
 
-  // Reference Dropdown Items
+  // Reference Dropdown Items (only indexed, high-value content)
   referenceLinks: [
-    {
-      id: "standards",
-      labelKey: "linkStandards",
-      route: "standards" as RouteKey,
-    },
     {
       id: "glossary",
       labelKey: "linkGlossary",
@@ -68,11 +63,6 @@ export const navConfig = {
       id: "reference",
       labelKey: "linkReference",
       route: "reference" as RouteKey,
-    },
-    {
-      id: "quality-tools",
-      labelKey: "linkQualityTools",
-      route: "qualityTools" as RouteKey,
     },
   ],
 
@@ -187,11 +177,6 @@ export const navConfig = {
       labelKey: "sectionReference",
       links: [
         {
-          id: "standards",
-          labelKey: "linkStandards",
-          route: "standards" as RouteKey,
-        },
-        {
           id: "glossary",
           labelKey: "linkGlossary",
           route: "glossary" as RouteKey,
@@ -200,11 +185,6 @@ export const navConfig = {
           id: "reference",
           labelKey: "linkReference",
           route: "reference" as RouteKey,
-        },
-        {
-          id: "quality-tools",
-          labelKey: "linkQualityTools",
-          route: "qualityTools" as RouteKey,
         },
       ],
     },
