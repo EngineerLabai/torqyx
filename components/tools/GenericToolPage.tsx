@@ -24,6 +24,9 @@ import { getToolById, type ToolDefinition, type ToolInputDefinition, type ToolIn
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
 import { toolCatalog } from "@/tools/_shared/catalog";
 import { categoryLabels } from "@/src/lib/i18n/categoryLabels";
+import AdSense from "@/components/ads/AdSense";
+import { ADSENSE_PUBLISHER_ID } from "@/config/adsense";
+import { isToolAdEligible } from "@/utils/tool-ad-eligibility";
 
 type GenericToolPageProps = {
   toolId: string;
@@ -302,6 +305,7 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
 
   return (
     <PageShell>
+      {isToolAdEligible(tool.id, locale) ? <AdSense publisherId={ADSENSE_PUBLISHER_ID} /> : null}
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
         <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-3 flex flex-wrap items-center gap-2">

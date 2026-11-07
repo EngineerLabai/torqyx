@@ -21,8 +21,11 @@ const getSupplement = (slug, locale) => {
 const layout = read("app/layout.tsx");
 const adsenseConfig = read("config/adsense.ts");
 const blogAdLayout = read("app/(blog)/blog/[slug]/layout.tsx");
-if (!layout.includes("pagead2.googlesyndication.com")) {
-  failures.push("app/layout.tsx must contain the official AdSense script in <head> for site verification.");
+const genericToolPage = read("components/tools/GenericToolPage.tsx");
+const blogAdEligibility = read("utils/blog-ad-eligibility.ts");
+
+if (layout.includes("pagead2.googlesyndication.com")) {
+  failures.push("app/layout.tsx must not contain global AdSense script; ads must be loaded only on indexable, 600+ word, consent-gated pages.");
 }
 if (/<AdSense\b/u.test(layout)) {
   failures.push("app/layout.tsx must not mount AdSense before route-level content eligibility is known.");
@@ -37,6 +40,12 @@ if (!publisherId || !adsTxtPublisherId || publisherId.replace(/^ca-/u, "") !== a
 }
 if (!blogAdLayout.includes("isBlogPostAdEligible") || !blogAdLayout.includes("getContentBySlug")) {
   failures.push("Blog AdSense loading must be gated by a server-verified, indexable post.");
+}
+if (!blogAdEligibility.includes("600") && !blogAdEligibility.includes("BLOG_AD_MIN_WORDS")) {
+  failures.push("Blog AdSense eligibility must enforce 600+ word minimum threshold.");
+}
+if (!genericToolPage.includes("isToolAdEligible")) {
+  failures.push("GenericToolPage must gate AdSense loading with isToolAdEligible.");
 }
 
 const sitemap = read("app/sitemap.ts");
