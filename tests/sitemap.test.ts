@@ -93,13 +93,12 @@ describe("taxonomy quality gate", () => {
       const sitemapPaths = entries
         .map((entry) => new URL(entry.url).pathname)
         .filter((path) => path.startsWith(`/${locale}/`));
+      // Tag and category archive pages are globally noindex — none should appear in sitemap.
       for (const tag of tags) {
-        expect(sitemapPaths.includes(`/${locale}/tags/${tag.slug}`)).toBe(isIndexableTaxonomyEntry(tag));
+        expect(sitemapPaths.includes(`/${locale}/tags/${tag.slug}`), `${locale} tag ${tag.slug} must be absent`).toBe(false);
       }
       for (const category of categories) {
-        expect(sitemapPaths.includes(`/${locale}/categories/${category.slug}`)).toBe(
-          isIndexableTaxonomyEntry(category),
-        );
+        expect(sitemapPaths.includes(`/${locale}/categories/${category.slug}`), `${locale} category ${category.slug} must be absent`).toBe(false);
       }
     }
   });

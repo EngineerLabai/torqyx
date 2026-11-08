@@ -5,7 +5,7 @@ import { standardsManifest } from "@/data/standards";
 import { getToolGuideBySlug } from "@/lib/tool-guides";
 import { withLocalePrefix } from "@/utils/locale-path";
 import { SITE_URL, buildLanguageAlternates } from "@/utils/seo";
-import { getCategoryIndex, getTagIndex, isIndexableTaxonomyEntry } from "@/utils/taxonomy";
+import { getCategoryIndex, getTagIndex } from "@/utils/taxonomy";
 import { getToolIndexReadyLocales } from "@/utils/tool-content-readiness";
 import { INDEXING_CONFIG } from "@/config/indexing";
 
@@ -213,25 +213,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-    categories.filter(isIndexableTaxonomyEntry).forEach((category) => {
-      addEntry(`/categories/${category.slug}`, locale, {
-        changeFrequency: "weekly",
-        priority: 0.55,
-        supportedLocales: supportedLocalesFor((content) =>
-          isIndexableTaxonomyEntry(content.categories.find((candidate) => candidate.slug === category.slug)),
-        ),
-      });
-    });
-
-    tags.filter(isIndexableTaxonomyEntry).forEach((tag) => {
-      addEntry(`/tags/${tag.slug}`, locale, {
-        changeFrequency: "weekly",
-        priority: 0.45,
-        supportedLocales: supportedLocalesFor((content) =>
-          isIndexableTaxonomyEntry(content.tags.find((candidate) => candidate.slug === tag.slug)),
-        ),
-      });
-    });
+    // Tag and category archive pages are noindex: excluded from sitemap.
 
     for (const tool of toolRoutes) {
       const path = tool.href;

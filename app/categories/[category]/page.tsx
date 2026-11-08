@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
     path: `/categories/${categorySlug}`,
     locale,
     alternatesLanguages,
-    robots: isIndexableTaxonomyEntry(currentCategory) ? undefined : NOINDEX_FOLLOW_ROBOTS,
+    robots: NOINDEX_FOLLOW_ROBOTS,
   });
 }
 

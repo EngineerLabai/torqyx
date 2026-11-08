@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: TagPageProps) {
     path: `/tags/${tagSlug}`,
     locale,
     alternatesLanguages,
-    robots: isIndexableTaxonomyEntry(currentTag) ? undefined : NOINDEX_FOLLOW_ROBOTS,
+    robots: NOINDEX_FOLLOW_ROBOTS,
   });
 }
 
