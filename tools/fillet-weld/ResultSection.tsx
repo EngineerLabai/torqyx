@@ -9,15 +9,59 @@ import type { FilletWeldResult } from "./types";
 const formatNumber = (value: number | null, digits = 2, locale: "tr" | "en") =>
   formatNumberFixed(value, locale, digits);
 
+const COPY = {
+  tr: {
+    title: "Sonuçlar",
+    description: "Gereken a, boğaz kalınlığı ve gerilme kontrolü.",
+    requiredALabel: "Gereken a",
+    throatLabel: "Boğaz kalınlığı",
+    stressCheckLabel: "Gerilme kontrolü",
+    safe: "Uygun",
+    unsafe: "Yetersiz",
+    explanationTitle: "Formül ve değişkenler",
+    variables: [
+      { symbol: "F", description: "Toplam yük (N)." },
+      { symbol: "L", description: "Toplam kaynak boyu (mm)." },
+      { symbol: "a", description: "Köşe kaynak bacak boyu (mm)." },
+      { symbol: "sigma_izin", description: "İzin verilen gerilme (MPa)." },
+    ],
+    notes: [
+      "0.707 katsayısı boğaz kalınlığından gelir.",
+      "Gerçek katsayılar standartlara göre değişir.",
+    ],
+  },
+  en: {
+    title: "Results",
+    description: "Required leg size, throat thickness, and stress verification.",
+    requiredALabel: "Required leg size a",
+    throatLabel: "Throat thickness",
+    stressCheckLabel: "Stress verification",
+    safe: "Safe",
+    unsafe: "Insufficient",
+    explanationTitle: "Formula and variables",
+    variables: [
+      { symbol: "F", description: "Applied resultant load (N)." },
+      { symbol: "L", description: "Effective weld length (mm)." },
+      { symbol: "a", description: "Fillet weld leg size (mm)." },
+      { symbol: "sigma_izin", description: "Allowable weld shear stress (MPa)." },
+    ],
+    notes: [
+      "The 0.707 factor represents theoretical throat thickness (a * cos 45°).",
+      "Actual design factors depend on applicable standards (AWS D1.1 / EN 1993-1-8).",
+    ],
+  },
+};
+
 export default function ResultSection({ result }: ToolResultProps<FilletWeldResult>) {
   const { locale } = useLocale();
-  const statusLabel = result.isSafe === null ? "-" : result.isSafe ? "Uygun" : "Yetersiz";
+  const copy = COPY[locale];
+  const statusLabel = result.isSafe === null ? "-" : result.isSafe ? copy.safe : copy.unsafe;
 
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Sonuçlar</h2>
-        <p className="text-xs text-slate-500">Gereken a, boğaz kalınlığı ve gerilme kontrolü.</p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       {result.error ? (
@@ -28,15 +72,15 @@ export default function ResultSection({ result }: ToolResultProps<FilletWeldResu
 
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Gereken a</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.requiredALabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.requiredA, 2, locale)} mm</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Boğaz kalınlığı</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.throatLabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.throat, 2, locale)} mm</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Gerilme kontrolü</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{copy.stressCheckLabel}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">
             {result.stress === null ? "-" : `${formatNumber(result.stress, 2, locale)} MPa`}
           </p>
@@ -45,15 +89,10 @@ export default function ResultSection({ result }: ToolResultProps<FilletWeldResu
       </div>
 
       <ExplanationPanel
-        title="Formül ve değişkenler"
+        title={copy.explanationTitle}
         formulas={["sigma = F / (0.707 * a * L)", "a_req = F / (0.707 * L * sigma_izin)"]}
-        variables={[
-          { symbol: "F", description: "Toplam yük (N)." },
-          { symbol: "L", description: "Toplam kaynak boyu (mm)." },
-          { symbol: "a", description: "Köşe kaynak bacak boyu (mm)." },
-          { symbol: "sigma_izin", description: "İzin verilen gerilme (MPa)." },
-        ]}
-        notes={["0.707 katsayısı boğaz kalınlığından gelir.", "Gerçek katsayılar standartlara göre değişir."]}
+        variables={copy.variables}
+        notes={copy.notes}
       />
     </div>
   );

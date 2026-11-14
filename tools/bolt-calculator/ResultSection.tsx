@@ -75,6 +75,7 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
       </p>
 
       <ExplanationPanel
+        title={locale === "tr" ? "Formül ve değişkenler" : "Formula and variables"}
         formulas={[
           "As = (pi/4) * (d - 0.9382 * P)^2",
           "Fv = preload * Re * As",
@@ -82,21 +83,37 @@ export default function ResultSection({ result }: ToolResultProps<BoltResult>) {
           "sigma = Fv / As",
           "S = Re / sigma",
         ]}
-        variables={[
+        variables={locale === "tr" ? [
           { symbol: "d", description: "Nominal çap (mm)." },
           { symbol: "P", description: "Diş adımı (mm)." },
           { symbol: "As", description: "Gerilme alanı (mm^2)." },
           { symbol: "Re", description: "Akma dayanımı (MPa)." },
           { symbol: "Fv", description: "Ön yük (N)." },
-          { symbol: "K", description: locale === "tr" ? "Ampirik tork (nut) faktörü; μ değildir." : "Empirical torque/nut factor; not μ." },
+          { symbol: "K", description: "Ampirik tork (nut) faktörü; μ değildir." },
           { symbol: "T", description: "Tork (Nm). d metreye çevrilerek kullanılır." },
           { symbol: "sigma", description: "Çekme gerilmesi (MPa)." },
           { symbol: "S", description: "Güvenlik katsayısı." },
+        ] : [
+          { symbol: "d", description: "Nominal diameter (mm)." },
+          { symbol: "P", description: "Thread pitch (mm)." },
+          { symbol: "As", description: "Tensile stress area (mm^2)." },
+          { symbol: "Re", description: "Yield strength (MPa)." },
+          { symbol: "Fv", description: "Preload clamping force (N)." },
+          { symbol: "K", description: "Empirical torque/nut factor; not μ." },
+          { symbol: "T", description: "Tightening torque (Nm). d is converted to metres." },
+          { symbol: "sigma", description: "Tensile stress (MPa)." },
+          { symbol: "S", description: "Safety factor." },
         ]}
         notes={[
-          "Metrik dişler için yaklaşık gerilme alanı formülü kullanılır.",
-          locale === "tr" ? "K değeri bağlantı geometrisi, yağlama ve kaplamaya göre deneysel olarak doğrulanmalıdır." : "K should be verified experimentally for the joint geometry, lubrication, and coating.",
-          locale === "tr" ? "Kritik bağlantılarda VDI 2230 gibi ayrıntılı bir bağlantı modeli kullanın." : "Use a detailed joint model such as VDI 2230 for critical connections.",
+          locale === "tr"
+            ? "Metrik dişler için yaklaşık gerilme alanı formülü kullanılır."
+            : "Approximate tensile stress area formula for ISO metric threads is used.",
+          locale === "tr"
+            ? "K değeri bağlantı geometrisi, yağlama ve kaplamaya göre deneysel olarak doğrulanmalıdır."
+            : "K should be verified experimentally for the joint geometry, lubrication, and coating.",
+          locale === "tr"
+            ? "Kritik bağlantılarda VDI 2230 gibi ayrıntılı bir bağlantı modeli kullanın."
+            : "Use a detailed joint model such as VDI 2230 for critical connections.",
         ]}
       />
     </div>

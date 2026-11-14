@@ -5,7 +5,7 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/utils/metadata";
 
-const simulations = [
+const simulationsTr = [
   {
     title: "MAAG Sistemi Hareket Animasyonu",
     description: "Planya stroku ve kremayer bıçak senkronu; çift yüzey işleme diyagramı.",
@@ -33,9 +33,38 @@ const simulations = [
   },
 ];
 
+const simulationsEn = [
+  {
+    title: "MAAG System Motion Animation",
+    description: "Planing stroke and rack-cutter synchronisation; dual-flank machining diagram.",
+    status: "Reference",
+  },
+  {
+    title: "FELLOW System Dynamics",
+    description: "Gear cutter rotates on the upstroke and cuts on the downstroke; tilting-table adjustment visualisation.",
+    status: "Reference",
+  },
+  {
+    title: "Hobbing Process Animation",
+    description: "Hob helix motion, radial/axial feed, and helix-angle setup; multi-tooth hob wear scenario.",
+    status: "Reference",
+  },
+  {
+    title: "Grinding Simulation",
+    description: "Profile vs form grinding, coolant flow, burn risk, and honing/superfinish effects.",
+    status: "Reference",
+  },
+  {
+    title: "Casting Solidification Animation",
+    description: "Riser/core placement, solidification sequence, and shrinkage risk zone visualisation.",
+    status: "Reference",
+  },
+];
+
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title = locale === "tr" ? "Dişli Üretim Süreçleri" : "Gear Manufacturing Process Notes";
+  const title =
+    locale === "tr" ? "Dişli Üretim Süreçleri" : "Gear Manufacturing Process Notes";
   const description =
     locale === "tr"
       ? "MAAG, FELLOW, azdırma ve taşlama süreçlerini anlatan dişli simülasyonları ile mühendislik hesaplayıcıları içeriğini görsel olarak destekler."
@@ -52,6 +81,21 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function GearSimulationsPage() {
   const locale = await getLocaleFromCookies();
   const initialDocs = await getToolDocsResponse("gear-design/simulations", locale);
+  const simulations = locale === "tr" ? simulationsTr : simulationsEn;
+
+  const badgeLabel =
+    locale === "tr" ? "Dişli Üretim Simülasyonları" : "Gear Manufacturing Simulations";
+  const heading =
+    locale === "tr"
+      ? "MAAG, FELLOW, Azdırma ve taşlama/döküm simülasyonları"
+      : "MAAG, FELLOW, Hobbing and Grinding / Casting Simulations";
+  const subtext =
+    locale === "tr"
+      ? "Hareket ve proses adımları öğrenciler ve mühendisler için hızlı görsel rehber olarak özetlenir. Her kart, prosesin kontrol odağını ve hangi risklerin izlenmesi gerektiğini gösterir."
+      : "Motion and process steps are summarised as quick visual references for students and engineers. Each card shows the control focus of the process and which risks to monitor.";
+  const noteLabel = locale === "tr" ? "Proses kontrol notu" : "Process control note";
+  const statusLabel = locale === "tr" ? "Referans" : "Reference";
+
   return (
     <PageShell>
       <ToolDocTabs slug="gear-design/simulations" initialDocs={initialDocs}>
@@ -60,18 +104,17 @@ export default async function GearSimulationsPage() {
         <div className="relative space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-sky-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-sky-700">
-              Dişli Üretim Simülasyonları
+              {badgeLabel}
             </span>
             <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-              Referans
+              {statusLabel}
             </span>
           </div>
           <h1 className="text-balance text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">
-            MAAG, FELLOW, Azdırma ve taşlama/döküm simülasyonları
+            {heading}
           </h1>
           <p className="text-sm leading-relaxed text-slate-700">
-            Hareket ve proses adımları öğrenciler ve mühendisler için hızlı görsel rehber olarak özetlenir. Her kart,
-            prosesin kontrol odağını ve hangi risklerin izlenmesi gerektiğini gösterir.
+            {subtext}
           </p>
         </div>
       </section>
@@ -92,12 +135,12 @@ export default async function GearSimulationsPage() {
               <p className="text-[12px] leading-relaxed text-slate-700 break-words">{sim.description}</p>
             </div>
             <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-              <span>Proses kontrol notu</span>
+              <span>{noteLabel}</span>
               <button
                 disabled
                 className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-500"
               >
-                Referans
+                {statusLabel}
               </button>
             </div>
           </article>

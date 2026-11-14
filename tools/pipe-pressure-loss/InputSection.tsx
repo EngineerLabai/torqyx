@@ -1,7 +1,36 @@
+"use client";
+
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { ToolInputProps } from "@/tools/_shared/types";
 import type { PipePressureLossInput } from "./types";
 
+const COPY = {
+  tr: {
+    title: "Darcy–Weisbach hesaplaması",
+    description: "Akışkan özellikleri, debi ve boru verilerini girerek basınç kaybını gör.",
+    rhoLabel: "Yoğunluk ρ (kg/m³)",
+    muLabel: "Viskozite μ (Pa·s)",
+    flowLabel: "Debi Q (m³/s)",
+    diameterLabel: "İç çap D (mm)",
+    lengthLabel: "Hat uzunluğu L (m)",
+    roughnessLabel: "Pürüzlülük ε (mm)",
+  },
+  en: {
+    title: "Darcy–Weisbach Calculation",
+    description: "Enter fluid properties, flow rate, and pipe geometry to calculate frictional pressure drop.",
+    rhoLabel: "Density ρ (kg/m³)",
+    muLabel: "Viscosity μ (Pa·s)",
+    flowLabel: "Flow rate Q (m³/s)",
+    diameterLabel: "Inner diameter D (mm)",
+    lengthLabel: "Pipe length L (m)",
+    roughnessLabel: "Roughness ε (mm)",
+  },
+};
+
 export default function InputSection({ input, onChange, errors }: ToolInputProps<PipePressureLossInput>) {
+  const { locale } = useLocale();
+  const copy = COPY[locale];
+
   const handleChange = <K extends keyof PipePressureLossInput>(key: K, value: PipePressureLossInput[K]) => {
     onChange({ ...input, [key]: value });
   };
@@ -9,15 +38,13 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-slate-900">Darcy–Weisbach hesaplaması</h2>
-        <p className="text-xs text-slate-500">
-          Akışkan özellikleri, debi ve boru verilerini girerek basınç kaybını gör.
-        </p>
+        <h2 className="text-sm font-semibold text-slate-900">{copy.title}</h2>
+        <p className="text-xs text-slate-500">{copy.description}</p>
       </div>
 
       <div className="grid gap-3 text-xs sm:grid-cols-2">
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Yoğunluk ρ (kg/m3)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.rhoLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -29,7 +56,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Viskozite mu (Pa·s)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.muLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -41,7 +68,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Debi Q (m3/s)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.flowLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -53,7 +80,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">İç çap D (mm)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.diameterLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -65,7 +92,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Hat uzunluğu L (m)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.lengthLabel}</label>
           <input
             type="number"
             inputMode="decimal"
@@ -77,7 +104,7 @@ export default function InputSection({ input, onChange, errors }: ToolInputProps
         </div>
 
         <div className="space-y-1">
-          <label className="block text-[11px] font-medium text-slate-700">Pürüzlülük ε (mm)</label>
+          <label className="block text-[11px] font-medium text-slate-700">{copy.roughnessLabel}</label>
           <input
             type="number"
             inputMode="decimal"

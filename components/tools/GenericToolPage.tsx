@@ -22,7 +22,7 @@ import { buildShareUrl, decodeToolState, encodeToolState } from "@/utils/tool-sh
 import { warnIfEnglishLabelsInTurkish } from "@/utils/ui-labels";
 import { getToolById, type ToolDefinition, type ToolInputDefinition, type ToolInputOption } from "@/tools/registry";
 import { getToolMethodNotes } from "@/lib/tool-method-notes";
-import { toolCatalog } from "@/tools/_shared/catalog";
+import { toolCatalog, getToolCopy } from "@/tools/_shared/catalog";
 import { categoryLabels } from "@/src/lib/i18n/categoryLabels";
 import AdSense from "@/components/ads/AdSense";
 import { ADSENSE_PUBLISHER_ID } from "@/config/adsense";
@@ -102,6 +102,9 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
   const common = messages.common;
   const tool = getToolById(toolId) as ToolDefinition<GenericToolInputs, Record<string, unknown>> | null;
   const catalogEntry = tool ? toolCatalog.find((item) => item.id === tool.id) ?? null : null;
+  const catalogCopy = catalogEntry ? getToolCopy(catalogEntry, locale) : null;
+  const localizedTitle = catalogCopy?.title ?? tool?.title ?? toolId;
+  const localizedDescription = catalogCopy?.description ?? tool?.description ?? "";
   const access = catalogEntry?.access ?? "free";
   const status = catalogEntry?.status ?? "beta";
   const validationStandard = catalogEntry?.validationStandard;
@@ -254,7 +257,7 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
   useEffect(() => {
     if (!tool) return;
     warnIfEnglishLabelsInTurkish("GenericToolPage", locale, {
-      title: tool.title,
+      title: localizedTitle,
       categories: localizedCategories,
     });
   }, [localizedCategories, locale, tool]);
@@ -329,13 +332,13 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <h1 className="text-lg font-semibold text-slate-900">{tool.title}</h1>
+            <h1 className="text-lg font-semibold text-slate-900">{localizedTitle}</h1>
             <InfoTooltip
               label={toolPageCopy.howItWorksLabel}
               content={toolPageCopy.howItWorksDescription}
             />
           </div>
-          <p className="mt-2 text-xs text-slate-600">{tool.description}</p>
+          <p className="mt-2 text-xs text-slate-600">{localizedDescription}</p>
         </section>
 
         <section className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
@@ -380,7 +383,7 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
         {normalizedInputs && gatedResults ? (
           <ToolDataActions
             toolSlug={tool.id}
-            toolTitle={tool.title}
+            toolTitle={localizedTitle}
             inputs={values}
             outputs={gatedResults}
             reportUrl={reportUrl}

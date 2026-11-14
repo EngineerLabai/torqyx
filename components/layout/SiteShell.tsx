@@ -270,7 +270,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                   {brandContent.siteName}
                 </span>
                 <span className="hidden whitespace-nowrap text-[11px] text-gray-500 sm:block">
-                  Deterministik mühendislik hesaplayıcıları
+                  {brandContent.tagline}
                 </span>
               </div>
             </Link>

@@ -19,6 +19,7 @@ export default function ResultSection({ result }: ToolResultProps<PipePressureLo
       : result.regime === "turbulent"
         ? isTr ? "Türbülanslı" : "Turbulent"
         : "-";
+
   return (
     <div className="space-y-4 text-sm">
       <div className="space-y-1">
@@ -83,7 +84,7 @@ export default function ResultSection({ result }: ToolResultProps<PipePressureLo
           <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.headLoss, 3, locale)}</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Hız (m/s)</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{isTr ? "Hız (m/s)" : "Velocity (m/s)"}</p>
           <p className="mt-1 text-base font-semibold text-slate-900">{formatNumber(result.velocity, 2, locale)}</p>
         </div>
       </div>
@@ -91,12 +92,18 @@ export default function ResultSection({ result }: ToolResultProps<PipePressureLo
       <ExplanationPanel
         title={isTr ? "Formül ve değişkenler" : "Formula and variables"}
         formulas={["A = pi * D^2 / 4", "v = Q / A", "Re = rho * v * D / mu", "f = 64 / Re (laminar)", "f = 0.25 / [log10(eps/3.7D + 5.74/Re^0.9)]^2 (Swamee-Jain)", "DeltaP = f * (L/D) * (rho v^2 / 2)"]}
-        variables={[
-          { symbol: "rho", description: "Yoğunluk (kg/m3)." },
+        variables={isTr ? [
+          { symbol: "rho", description: "Yoğunluk (kg/m³)." },
           { symbol: "mu", description: "Viskozite (Pa·s)." },
-          { symbol: "Q", description: "Debi (m3/s)." },
+          { symbol: "Q", description: "Debi (m³/s)." },
           { symbol: "D", description: "İç çap (m)." },
           { symbol: "L", description: "Hat uzunluğu (m)." },
+        ] : [
+          { symbol: "rho", description: "Fluid density (kg/m³)." },
+          { symbol: "mu", description: "Dynamic viscosity (Pa·s)." },
+          { symbol: "Q", description: "Volumetric flow rate (m³/s)." },
+          { symbol: "D", description: "Internal pipe diameter (m)." },
+          { symbol: "L", description: "Pipe length (m)." },
         ]}
         notes={isTr
           ? ["Re < 2300 laminer; Re 2300-4000 geçiş; Re > 4000 türbülanslı kabul edilir.", "Yerel kayıplar dahil değildir: ΔPminor = Ktoplam·ρ·v²/2 ayrıca eklenmelidir.", "Pompa gücü %70 verim varsayılır."]
