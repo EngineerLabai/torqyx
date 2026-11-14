@@ -1,30 +1,60 @@
 ---
-title: "Backlash"
-description: "The clearance between mating gear teeth and assembly tolerance."
+title: "Backlash in Gear Systems"
+description: "Definition, engineering formulas, calculation methods, and tolerance criteria for gear tooth backlash under ISO 21771 and AGMA standards."
 date: "2026-01-15"
-tags: ["gear", "terminology"]
+tags: ["gear", "terminology", "mechanical-design", "tolerances"]
 category: "Glossary"
 draft: false
 ---
 
-Backlash describes the amount of clearance between mating gear teeth. This clearance is needed for thermal expansion and assembly tolerances.
+In gear design and precision power transmission, **backlash** is the clearance between the non-driving tooth surfaces of adjacent mating gears when their working flanks are in contact. Backlash is not an accidental manufacturing flaw; it is an intentionally engineered gap essential for thermal expansion, hydrodynamic lubricant film maintenance, and manufacturing/assembly tolerances.
 
-<Formula label="Simple approach">
-Backlash = total clearance / number of teeth
-</Formula>
+## Engineering Definition & Directions
 
-<Callout type="success" title="Tips">
-Higher backlash can increase noise and vibration. Very low backlash can stress lubrication conditions.
-</Callout>
+Backlash is measured and defined across three primary planes:
 
-## Related calculators and guides
+1. **Circumferential (Tangential) Backlash ($j_t$):** The length of the arc of the pitch circle through which a gear can be rotated while its mating gear is held stationary.
+2. **Normal Backlash ($j_n$):** The shortest distance between non-driving tooth profiles, measured along the line of action normal to the tooth flank:
+   $$j_n = j_t \cdot \cos(\alpha_t) \cdot \cos(\beta)$$
+   where $\alpha_t$ is the transverse pressure angle and $\beta$ is the helix angle.
+3. **Radial Backlash ($j_r$):** The variation in operating center distance required to eliminate tooth clearance:
+   $$j_r = \frac{j_n}{2 \cdot \sin(\alpha_n)}$$
+
+## Governing Formulas & Thermal Compensation
+
+Operating backlash must always accommodate thermal expansion of gears relative to the gearbox housing:
+
+$$\Delta j_{th} = 2 \cdot a \cdot [\alpha_{gear} \cdot (T_{gear} - T_0) - \alpha_{housing} \cdot (T_{housing} - T_0)] \cdot \tan(\alpha_n)$$
+
+where $a$ is the operating center distance, $\alpha$ is the coefficient of thermal expansion, and $T - T_0$ is the operational temperature rise above ambient ($20^\circ\text{C}$).
+
+## Worked Practical Example
+
+Consider an external spur gear mesh operating in an industrial reducer:
+
+- Normal module: $m_n = 3.0\text{ mm}$
+- Number of teeth: $z_1 = 20$, $z_2 = 40$
+- Pressure angle: $\alpha_n = 20^\circ$
+- Operating center distance: $a = 90.0\text{ mm}$
+
+Under ISO 21771 quality class 7, the recommended minimum normal backlash is:
+$$j_{n,\min} \approx 0.03 \cdot m_n + 0.04 = 0.03 \cdot 3 + 0.04 = 0.13\text{ mm}$$
+
+If the operating temperature rises by $\Delta T = 45^\circ\text{C}$ in an aluminum casing ($\alpha_{housing} = 23 \times 10^{-6}\text{ /K}$) with steel gears ($\alpha_{gear} = 11 \times 10^{-6}\text{ /K}$), the housing expands more than the gears, naturally increasing operational backlash by $0.035\text{ mm}$, preventing tooth seizure.
+
+## Why Backlash Management Matters
+
+- **Insufficient Backlash:** Results in tooth interference, extreme contact stresses, hydrodynamic oil squeeze-out, excessive friction heat, and rapid gear failure (scoring or micro-pitting).
+- **Excessive Backlash:** Causes lost motion in positioning servo systems, positional hysteresis, dynamic shock loads during torque reversals, and gear chatter/rattle noise.
+
+## Related Calculators and Standards
 
 <ToolLink
   href="/en/tools/gear-design/calculators/backlash-calculator"
-  title="Gear backlash calculator"
-  description="Quickly validate backlash range."
+  title="Gear Backlash Calculator"
+  description="Compute normal, circumferential, and radial backlash according to ISO 21771."
   badge="Calculator"
 />
 
-- <a href="/en/guides/rulman-secimi-icin-hizli-rehber">Quick guide for bearing selection</a>
-- <a href="/en/blog/icerik-altyapisina-hizli-giris">Quick intro to the content pipeline</a>
+- Relevant Standards: **ISO 21771:2007** (Cylindrical gears — Concepts and geometry), **AGMA 2002-C16** (Tooth Thickness and Backlash Measurement).
+- Related Guide: [Gear Ratio and Transmission Design Guide](/en/guides/disli-orani-ve-aktarma-orani-rehberi)
