@@ -30,6 +30,7 @@ export type ContentFrontmatter = {
   draft: boolean;
   readingTime?: number | string;
   canonical?: string;
+  noindex?: boolean;
 };
 
 export type ContentItem = {
@@ -43,6 +44,7 @@ export type ContentItem = {
   draft: boolean;
   readingTimeMinutes: number;
   canonical?: string;
+  noindex?: boolean;
   content: string;
 };
 
@@ -230,6 +232,9 @@ const validateFrontmatter = (data: Record<string, unknown>, sourcePath: string):
   if (data.canonical !== undefined && typeof data.canonical !== "string") {
     errors.push("canonical must be a string when provided");
   }
+  if (data.noindex !== undefined && typeof data.noindex !== "boolean") {
+    errors.push("noindex must be a boolean when provided");
+  }
 
   if (errors.length > 0) {
     throw new Error(`[content] Invalid frontmatter in ${sourcePath}: ${errors.join("; ")}`);
@@ -246,6 +251,7 @@ const validateFrontmatter = (data: Record<string, unknown>, sourcePath: string):
     draft: frontmatter.draft,
     readingTime: frontmatter.readingTime,
     canonical: frontmatter.canonical,
+    noindex: frontmatter.noindex,
   };
 };
 
@@ -309,6 +315,7 @@ const parseContentFile = async (sourcePath: string, type: ContentType, slug: str
     draft: frontmatter.draft,
     readingTimeMinutes,
     canonical: frontmatter.canonical,
+    noindex: frontmatter.noindex,
     content: enrichedContent,
     sourcePath,
   };
@@ -352,6 +359,7 @@ export const getContentItems = async (type: ContentType, options: ContentQueryOp
       draft: item.draft,
       readingTimeMinutes: item.readingTimeMinutes,
       canonical: item.canonical,
+      noindex: item.noindex,
       content: item.content,
     }));
 };
@@ -369,6 +377,7 @@ export const getContentList = async (type: ContentType, options: ContentQueryOpt
     draft: item.draft,
     readingTimeMinutes: item.readingTimeMinutes,
     canonical: item.canonical,
+    noindex: item.noindex,
   }));
 };
 

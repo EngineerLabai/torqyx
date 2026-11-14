@@ -50,4 +50,46 @@ describe("content quality", () => {
       "generated_glossary_marker:is a core engineering term. definition, usage notes, and a practical example.",
     );
   });
+
+  it("rejects thin glossary terms with under 300 words", () => {
+    const item = {
+      type: "glossary" as const,
+      title: "Yorulma",
+      description: "Yorulma tanımı ve analitik formülleri.",
+      content: "Yorulma dinamik çevrimsel yükler altında malzemenin hasara uğramasıdır. ".repeat(10),
+    };
+
+    expect(countContentWords(item.content)).toBeLessThan(300);
+    expect(isContentIndexable(item)).toBe(false);
+    expect(getContentQualityIssues(item)).toContain("body_under_300_words");
+  });
+
+  it("accepts rich glossary terms with 300+ words and no draft markers", () => {
+    const item = {
+      type: "glossary" as const,
+      title: "Yük Kaybı",
+      description: "Darcy-Weisbach denklemi ve çözümlü pompa basma yüksekliği hesabı.",
+      content:
+        "Yük kaybı akış esnasında mekanik enerjinin geri döndürülemez biçimde ısıya dönüşmesidir. Darcy-Weisbach denklemi sürtünmeyi hesaplar. ".repeat(
+          20,
+        ),
+    };
+
+    expect(countContentWords(item.content)).toBeGreaterThanOrEqual(300);
+    expect(isContentIndexable(item)).toBe(true);
+    expect(getContentQualityIssues(item)).toHaveLength(0);
+  });
+
+  it("respects explicit noindex flag on content items", () => {
+    const item = {
+      type: "glossary" as const,
+      title: "Özel Terim",
+      description: "Açıklama",
+      content: "Uzun içerik metni açıklaması ile birlikte detaylı tasarım bilgileri. ".repeat(40),
+      noindex: true,
+    };
+
+    expect(isContentIndexable(item)).toBe(false);
+    expect(getContentQualityIssues(item)).toContain("explicit_noindex");
+  });
 });

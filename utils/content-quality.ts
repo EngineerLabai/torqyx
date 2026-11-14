@@ -5,12 +5,13 @@ type ContentQualityCandidate = {
   title: string;
   description: string;
   content: string;
+  noindex?: boolean;
 };
 
 const MIN_BODY_WORDS: Partial<Record<ContentQualityCandidate["type"], number>> = {
   blog: 250,
   guides: 220,
-  glossary: 80,
+  glossary: 300,
 };
 
 const LOW_VALUE_MARKERS = [
@@ -47,6 +48,10 @@ export const getContentQualityIssues = (item: ContentQualityCandidate) => {
   const issues: string[] = [];
   const minWords = MIN_BODY_WORDS[item.type];
   const searchableText = normalizeText(`${item.title}\n${item.description}\n${item.content}`);
+
+  if (item.noindex) {
+    issues.push("explicit_noindex");
+  }
 
   if (minWords && countContentWords(item.content) < minWords) {
     issues.push(`body_under_${minWords}_words`);
