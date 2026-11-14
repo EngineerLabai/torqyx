@@ -1,8 +1,8 @@
 ---
 title: Laminer akış
 description: >-
-  Laminer akış rejimi ($Re < 2300$), düzenli katmanlı akış, Hagen-Poiseuille
-  yasası ve düşük sürtünmeli boru hidroliği.
+  Laminer akış rejimi ($Re < 2300$), Hagen-Poiseuille denklemi, parabolik hız profili,
+  hidrolik yağ devresi çözümlü örneği ve viskoz sürtünme analizi.
 date: '2026-05-09'
 tags:
   - laminer akış
@@ -12,31 +12,59 @@ tags:
   - Poiseuille
 category: Akışkanlar
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Laminer akış, akışkan parçacıklarının birbirine karışmadan, düzgün paralel katmanlar (laminalar) halinde ve düzenli yörüngelerde hareket ettiği akış rejimidir. Viskoz kuvvetlerin atalet kuvvetlerine baskın olduğu düşük hızlarda görülür.
+Laminer akış, akışkan parçacıklarının birbirleriyle yanal olarak karışmadan, birbirine paralel pürüzsüz akış katmanları (laminalar) halinde ve düzenli yörüngeler boyunca hareket ettiği kararlı akış rejimidir. Akış dinamiğinde iç viskoz kayma kuvvetleri eylemsizlik (atalet) kuvvetlerine üstün geldiğinde ortaya çıkar; dairesel boru hatlarında Reynolds sayısı `Re < 2300` olduğunda akış kesin olarak laminer karakter sergiler.
 
-## Neden önemli?
+## Hız Profili ve Hagen-Poiseuille Yasası
 
-Laminer akışta çeper sürtünmesi pürüzlülükten tamamen bağımsızdır ve akış direnci türbülanslı akışa göre çok daha düşüktür. Yağlama kanallarında, mikroakışkanlarda ve ağır yağ transfer hatlarında laminer rejim geçerlidir.
+Laminer akışın en belirgin fiziksel özelliği, boru enkesitinde tam simetrik ve kusursuz bir parabolik hız profili oluşturmasıdır. Boru cidarında kaymama (no-slip) koşulu nedeniyle akışkan hızı sıfırdır; boru merkez ekseninde ise hız ortalama kesit hızının tam iki katına ulaşır (`v_max = 2 · v_ort`):
 
-## Mühendislik uygulaması ve standartlar
+```text
+v(r) = v_max · [1 - (r / R)²]
+```
 
-- **Reynolds Sayısı Kriteri:** Dairesel borularda `Re &lt; 2300` olduğunda akış kesin olarak laminerdir.
-- **Parabolik Hız Profili:** Boru çeperinde hız sıfır (kaymama koşulu), merkez eksende ise ortalama hızın iki katıdır (`v_max = 2 cdot v_ort`).
-- **Hagen-Poiseuille Yasası:** Laminer akışta basınç kaybı boru pürüzlülüğünden bağımsızdır ve viskoziteyle doğru orantılıdır:
-  
-`Delta P = rac32 cdot mu cdot L cdot vD^2 = rac128 cdot mu cdot L cdot Qpi cdot D^4`
+Bu rejimde Darcy sürtünme faktörü (`f`), boru yüzeyinin pürüzlülüğünden tamamen bağımsızdır ve yalnızca Reynolds sayısına bağlıdır:
 
-  *(Darcy sürtünme faktörü: `f = rac64Re`)*.
+```text
+f = 64 / Re
+```
 
-<Callout type="info" title="Akışkan Karşılaştırması">
-Laminer akışta boru iç yüzeyinin pürüzlü veya ayna gibi olması basınç kaybını zerre kadar değiştirmez; sürtünme tamamen akışkanın iç vizkozitesi tarafından belirlenir.
-</Callout>
+Düz borudaki sürtünme basınç kaybı, Fransız bilim insanları Gotthilf Hagen ve Jean Poiseuille tarafından türetilen **Hagen-Poiseuille** bağıntısıyla doğrudan hesaplanır:
 
-## İlgili hesaplayıcılar ve kaynaklar
+```text
+\Delta P = (32 · μ · L · v) / D² = (128 · μ · L · Q) / (\pi · D⁴)
+```
 
-- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
-- [Birim Dönüştürücü](/tr/tools/unit-converter)
+Burada `μ` akışkanın dinamik viskozitesi [Pa·s], `L` boru uzunluğu [m], `D` boru iç çapı [m], `v` ortalama hız [m/s] ve `Q` hacimsel debidir [m³/s].
+
+## Sayılarla Çözümlü Uygulama Örneği
+
+Bir CNC takım tezgahının hidrolik yağlama devresinde `D = 20 mm` (`0.020 m`) iç çapında, toplam boyu `L = 15 m` olan çelik borudan debisi `Q = 18.85 L/dk` (`0.0003142 m³/s`) olan ISO VG 46 hidrolik yağ basılmaktadır. Yağın 40 °C'deki özellikleri:
+Yoğunluk `ρ = 875 kg/m³`, kinematik viskozite `ν = 46 cSt = 46 × 10⁻⁶ m²/s`, dinamik viskozite `μ = ρ · ν = 875 × 46 × 10⁻⁶ = 0.04025 Pa·s`.
+
+1. **Ortalama Akış Hızı:**
+   `A = (\pi × 0.020²) / 4 = 0.00031416 m²`
+   `v = Q / A = 0.0003142 / 0.00031416 \approx 1.0 m/s`
+2. **Reynolds Sayısı ve Rejim Tespiti:**
+   `Re = (v · D) / ν = (1.0 × 0.020) / (46 × 10⁻⁶) = 0.020 / (46 × 10⁻⁶) \approx 435`
+   `Re = 435 < 2300` olduğundan akış kesinlikle kararlı laminer rejimdedir.
+3. **Darcy Sürtünme Faktörü:**
+   `f = 64 / Re = 64 / 435 \approx 0.1471`
+4. **Hagen-Poiseuille ile Basınç Düşüşü:**
+   `\Delta P = (32 × 0.04025 × 15 × 1.0) / (0.020)² = 19.32 / 0.0004 = 48,300 Pa = 48.3 kPa` (yaklaşık `0.483 bar`).
+
+Sistem pompası seçilirken hidrolik silindirin itme basıncına bu `0.483 bar` boru sürtünme kaybı ilave edilmelidir.
+
+## Tasarımda En Sık Yapılan Hatalar
+
+- **Boru Çapındaki Dördüncü Kuvvet Etkisini Unutmak:** Hagen-Poiseuille formülünden görüleceği üzere basınç kaybı boru çapının dördüncü kuvvetiyle (`D⁴`) ters orantılıdır. Boru iç çapını 20 mm'den 16 mm'ye düşürmek (%20 daralma) basınç kaybını `(20/16)⁴ \approx 2.44` katına (yani %144 artışa) çıkarır.
+- **Pürüzsüz Boru Kullanarak Sürtünmeyi Düşürmeye Çalışmak:** Laminer akışta sürtünme tamamen akışkan katmanlarının birbiri üzerinde kaymasından kaynaklanır; borunun ayna gibi parlatılması basınç kaybını zerre kadar azaltmaz.
+- **Düşük Sıcaklıkta Viskozite Artışını Öngörmemek:** Hidrolik sistem kışın ilk çalıştırmada 10 °C iken yağ viskozitesi 4 katına çıkabilir; bu durum laminer basınç düşüşünü de anında 4 katına katlayarak filtre baypas valflerini açtırabilir.
+
+## İlgili Araçlar ve Rehberler
+
+- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss) — Laminer ve türbülanslı akış rejimleri için otomatik viskoz basınç kaybı analizi.
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi) — Hagen-Poiseuille yasası ve boru tesisatı çap tayini ilkeleri.
+- [Birim Dönüştürücü](/tr/tools/unit-converter) — Viskozite, debi ve basınç birimlerini anlık çevirme.

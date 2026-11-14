@@ -1,6 +1,8 @@
 ---
 title: Tork (döndürme momenti)
-description: "Tork formülü ($T = F \times r$), motor gücü ve devir sayısı ilişkisi ($P = T cdot omega$), burulma gerilmesi ve tork hesabı."
+description: >-
+  Tork formülü ($T = F \times r$), motor gücü ve devir sayısı ilişkisi ($P = 9550·P/n$),
+  şaft burulma gerilmesi, redüktör tork hesabı ve çözümlü mil çapı tayini.
 date: '2026-05-09'
 tags:
   - tork
@@ -11,41 +13,60 @@ tags:
   - Nm
 category: Mekanik
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Tork (`T`), bir kuvvetin bir cismi belirli bir dönme ekseni veya merkez noktası etrafında döndürme eğilimini ifade eden mekanik döndürme momentidir. SI birim sisteminde Newton metre [`extNm`] olarak ifade edilir.
+Tork (`T` veya `M_d`), bir dış kuvvetin bir rijit cismi belirli bir dönme ekseni veya mesnet merkezi etrafında açısal olarak döndürme eğilimini ve kapasitesini temsil eden vektörel mekanik büyüklüktür. SI birim sisteminde Newton metre (`N·m` veya `Nm`) olarak ifade edilir. Dönen tahrik milleri, elektrik motorları, dişli kutuları ve cıvatalı bağlantıların tasarımında en kritik temel parametredir.
 
-## Neden önemli?
+## Güç, Devir ve Burulma Formülleri
 
-Elektrik motorları, redüktörler ve tahrik milleri tork üreterek ve aktararak iş yapar. Şaft çaplarının burulma dayanımı, kamaların ezilme hesabı ve cıvataların sıkılması doğrudan tork değerine dayanır.
+Statik mekanikte tork, uygulanan kuvvet vektörü ile dönme merkezine olan dik kol mesafesinin çarpımıdır:
 
-## Mühendislik uygulaması ve standartlar
+```text
+T = F · r · \sin(\theta)  [Nm]
+```
 
-- **Temel Tork Formülü:** Kuvvet (`F`) ve dönme merkezine olan dik mesafe (`r`):
-  
-`T = F  *  r quad [	extNm]`
+Dönen güç aktarım sistemlerinde açısal hız (`\omega = 2\pi n / 60`) ve mekanik güç (`P`) arasındaki bağıntı pratik mühendislik denklemine dönüşür:
 
-- **Güç, Tork ve Devir Sayısı İlişkisi:**
-  
-`P = T  *  omega = T  *  (2pi  *  n / 60) implies T = (9550  *  P / n)`
+```text
+P = T · \omega = T · (2\pi · n / 60) \implies T = (9550 · P) / n
+```
 
-  *(burada `P` mekanik güç [`extkW`], `n` dönme devri [`extrpm`], `T` torktur [`extNm`]).*
-- **Burulma Kayma Gerilmesi:**
-  
-`au = (16  *  T / pi  *  d^3) le 	au_em`
+Burada:
+- `P`: Sisteme iletilen mekanik güç [kW],
+- `n`: Dönme hızı (devir sayısı) [rpm veya d/dk],
+- `T`: Mil kesitindeki tork momenti [Nm],
+- `9550`: Birim dönüşümünden (`60 × 1000 / 2\pi \approx 9549.3`) gelen standart mühendislik sabitidir.
 
+Dairesel dolu bir milde bu torkun yarattığı maksimum burulma kayma gerilmesi:
 
-<Callout type="info" title="Motor Torku Hesabı">
-`15	ext kW` gücünde ve `n = 1450	ext rpm` devirle dönen bir asenkron elektrik motorunun milindeki tork:
+```text
+\tau = (T · r) / J_p = (16 · T) / (\pi · d³) \le \tau_em
+```
 
-`T = (9550 	imes 15 / 1450) approx mathbf98.8	ext Nm`
+## Sayılarla Çözümlü Uygulama Örneği
 
-Redüktör ile devir 10 kat düşürülürse (`145	ext rpm`), tork yaklaşık 10 katına (`988	ext Nm`) çıkar.
-</Callout>
+Nominal gücü `P = 22 kW` olan 4 kutuplu bir asenkron elektrik motoru `n = 1460 rpm` devirle dönmektedir. Motor miline bağlı `i = 5` tahvil oranına ve `\eta = 0.96` mekanik verime sahip bir dişli redüktör tahrik sistemine güç iletecektir. Çıkış milinde kullanılacak C45 ıslah çeliği için emniyetli kayma gerilmesi `\tau_em = 45 MPa` olarak belirlenmiştir.
 
-## İlgili hesaplayıcılar ve kaynaklar
+1. **Motor Mili Nominal Torku:**
+   `T_motor = (9550 × 22) / 1460 = 210,100 / 1460 \approx 143.9 Nm`
+2. **Redüktör Çıkış Mili Torku:**
+   `T_çıkış = T_motor × i × \eta = 143.9 × 5 × 0.96 = 690.7 Nm`
+3. **Emniyetli Minimum Mil Çapı:**
+   `d \ge \sqrt[3]{(16 · T_çıkış) / (\pi · \tau_em)}`
+   `d \ge \sqrt[3]{(16 × 690.7 × 10³) / (\pi × 45)}`
+   `d \ge \sqrt[3]{11,051,200 / 141.37} = \sqrt[3]{78,172} \approx 42.76 mm`
+4. **Mühendislik Kararı:**
+   Standart mil toleransı ve kama kanalı gerilme yığılması da dikkate alınarak en yakın standart anma çapı olan `d = 45 mm` mil çapı seçilmelidir.
 
-- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power)
-- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
-- [Cıvata Mukavemeti ve Tork Hesabı](/tr/tools/bolt-calculator)
+## Tasarımda En Sık Yapılan Hatalar
+
+- **Kalkış Pik Torkunu İhmal Etmek:** Asenkron motorlar ilk kalkış anında (şebekeye doğrudan yol verildiğinde) nominal torklarının 2.2 ila 3.0 katı kalkış torku (`T_kalkış`) üretir. Milleri, kavramaları ve kamaları sadece nominal torka göre boyutlandırmak ilk devreye almada mil kırılmasına yol açabilir.
+- **Tork (`Nm`) ile Enerji (`Joule`) Birimlerini Karıştırmak:** Boyutsal olarak ikisi de `N·m` olmasına karşın enerji skaler bir büyüklüktür, tork ise dönme ekseni doğrultusunda etkiyen bir moment vektörüdür.
+- **Darbe Katsayısını (Service Factor) Eklememek:** Kırıcılar, pistonlu kompresörler ve mikserler gibi darbeli yük altında çalışan tahrik hatlarında tork hesaplarına AGMA servis faktörü (`K_A = 1.5 - 2.0`) uygulanmalıdır.
+
+## İlgili Araçlar ve Rehberler
+
+- [Güç - Tork - Devir Hesaplayıcı](/tr/tools/torque-power) — Motor gücü, devir ve tork dönüşümlerini anlık hesaplayan etkileşimli araç.
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion) — Burulma gerilmesi, açısal sehim ve kama kanalı mukavemet hesabı.
+- [Cıvata Mukavemeti ve Sıkma Torku](/tr/tools/bolt-calculator) — VDI 2230 standardına göre cıvata ön yükü ve sıkma torku tayini.

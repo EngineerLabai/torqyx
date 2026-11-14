@@ -1,46 +1,57 @@
 ---
 title: "Reynolds sayısı (Re)"
-description: "Boyutsuz Reynolds sayısı formülü (Re = ρ * v * D / μ), laminer ve türbülanslı akış geçiş kriteri ve boru sürtünme faktörü."
+description: "Boyutsuz Reynolds sayısı formülü (Re = ρ·v·D / μ), laminer-türbülanslı geçiş kriteri, viskozite sıcaklık ilişkisi ve çözümlü boru akışı hesabı."
 date: "2026-05-09"
 tags: ["Reynolds sayısı","akış rejimleri","laminer","türbülanslı","akışkanlar"]
 category: "Akışkanlar"
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Reynolds sayısı (`Re`), akışkanlar mekaniğinde akışkanın atalet kuvvetlerinin viskoz sürtünme kuvvetlerine oranını temsil eden en temel boyutsuz sayıdır. Akışın düzenli laminer mi yoksa girdaplı türbülanslı mı davranacağını belirler.
+Reynolds sayısı (`Re`), akışkanlar dinamiğinde bir akış alanında etkiyen **eylemsizlik (atalet) kuvvetlerinin, akışkanın iç viskoz kayma kuvvetlerine oranını** veren en temel boyutsuz kriterdir. İngiliz fizikçi Osborne Reynolds tarafından tanımlanan bu katsayı, boru, kanal veya serbest cisim etrafındaki akışın düzenli katmanlı (laminer), kararsız (geçiş) ya da kaotik girdaplı (türbülanslı) rejimde gerçekleşeceğini kesin olarak belirler.
 
-## Neden önemli?
+## Matematiksel Formül ve Fiziksel Büyüklükler
 
-Boru çapı, debi, viskozite veya sıcaklık değiştiğinde akış rejiminin değişip değişmediğini bilmenin tek yolu Reynolds sayısıdır. Isı transfer katsayıları ve sürtünme basınç kayıpları doğrudan Reynolds sayısına bağlıdır.
+Dairesel boru içi akışlarda Reynolds sayısı formülü şu şekildedir:
 
-## Mühendislik uygulaması ve standartlar
+```text
+Re = (ρ · v · D) / μ = (v · D) / ν
+```
 
-Dairesel boru akışında Reynolds sayısı formülü:
+Denklemdeki değişkenler ve birimleri:
+- `ρ`: Akışkanın çalışma sıcaklığındaki kütlesel yoğunluğu [kg/m³],
+- `v`: Akış kesitindeki debi ortalamalı akış hızı [m/s] (`v = 4Q / (\pi D²)`),
+- `D`: Borunun iç hidrolik çapı [m] (dairesel olmayan kanallarda `D_h = 4A / P_islak`),
+- `μ`: Akışkanın dinamik viskozitesi [Pa·s veya kg/(m·s)],
+- `ν`: Akışkanın kinematik viskozitesi [m²/s] (`ν = μ / ρ`).
 
-`Re = (ρ * v * D) / μ = (v * D) / ν`
+### Boru İçi Kritik Akış Sınırları
 
-- `ρ`: Akışkan yoğunluğu [kg/m³],
-- `v`: Ortalama akış hızı [m/s],
-- `D`: Boru iç çapı [m],
-- `μ`: Dinamik viskozite [Pa·s],
-- `ν`: Kinematik viskozite [m²/s].
+- **Laminer Rejim (`Re < 2300`):** Viskoz kuvvetler baskındır. Akışkan paralel laminalar halinde akar; basınç düşüşü çeper pürüzlülüğünden bağımsızdır (`f = 64/Re`).
+- **Geçiş Bölgesi (`2300 \le Re \le 4000`):** Akış kararsızdır; küçük bir yüzey pürüzü veya vana sarsıntısı laminer akışı aniden türbülansa dönüştürebilir.
+- **Türbülanslı Rejim (`Re > 4000`):** Atalet kuvvetleri viskoziteyi bastırır. Güçlü üç boyutlu girdaplar oluşur, sürtünme artar, ısı ve kütle transferi hızlanır.
 
-**Kritik Sınırlar:**
-- `Re < 2300`: Kararlı Laminer Akış.
-- `2300 <= Re <= 4000`: Geçiş Bölgesi (kararsız akış).
-- `Re > 4000`: Tam Türbülanslı Akış.
+## Sayılarla Çözümlü Uygulama Örneği
 
-<Callout type="info" title="Pratik Örnek">
-20 °C su (ν = 1.0 * 10^-6 m²/s), D = 50 mm borudan v = 1.5 m/s hızla akarken:
+İç çapı `D = 50 mm` (`0.050 m`) olan paslanmaz çelik bir boru hattından `60 °C` sıcaklığında sıcak su basılmaktadır. Hattan geçen debi `Q = 3.93 L/s` (`0.00393 m³/s`) olarak ölçülmüştür. Suyun 60 °C'deki termofiziksel özellikleri:
+`ρ = 983.2 kg/m³`, `μ = 0.467 × 10⁻³ Pa·s` (`ν = 0.475 × 10⁻⁶ m²/s`).
 
-`Re = (1.5 * 0.050) / (1.0 * 10^-6) = 75,000`
+1. **Boru İçi Ortalama Akış Hızı:**
+   `A = (\pi × 0.050²) / 4 = 0.0019635 m²`
+   `v = Q / A = 0.00393 / 0.0019635 \approx 2.0 m/s`
+2. **Reynolds Sayısı Hesabı:**
+   `Re = (v · D) / ν = (2.0 × 0.050) / (0.475 × 10⁻⁶) = 0.10 / (0.475 × 10⁻⁶) \approx 210,526`
+3. **Mühendislik Yorumu:**
+   Hesaplanan `Re = 210,526` değeri `4000` kritik eşiğinin çok üzerindedir. Akış tam türbülanslı rejimdedir. Boru hattının basınç kaybı hesaplanırken düz boru laminer formülü kesinlikle kullanılamaz; Colebrook-Haaland bağıntısı ile yüzey pürüzlülüğü (`ε = 0.015 mm` paslanmaz çelik) dikkate alınarak Darcy sürtünme faktörü belirlenmelidir.
 
-75,000 değeri 4000 limitinden çok büyük olduğundan akış tam türbülanslıdır.
-</Callout>
+## Tasarımda Dikkat Edilmesi Gereken Hatalar
 
-## İlgili hesaplayıcılar ve kaynaklar
+- **Sıcaklıkla Viskozite Değişimini Yok Saymak:** Sıvıların viskozitesi sıcaklıkla logaritmik olarak düşer. Örneğin su 20 °C'den 80 °C'ye ısıtıldığında dinamik viskozitesi `1.002 × 10⁻³ Pa·s`'den `0.355 × 10⁻³ Pa·s`'ye geriler; bu da akış hız ve boru çapı sabitken Reynolds sayısını neredeyse 3 katına çıkarır.
+- **Dairesel Olmayan Kanallarda Dış Boyut Kullanmak:** Dikdörtgen kanallarda kenarlardan birini formüldeki `D` yerine yazmak büyük hatadır; mutlaka `D_h = (2ab)/(a+b)` eşdeğer hidrolik çapı kullanılmalıdır.
+- **Kritik Eşiklerin Geometriye Bağımlılığını Unutmak:** Boru içinde kritik Reynolds sayısı 2300 iken, düz plaka üzerinden dış akışta laminerden türbülansa geçiş sınırı `Re_kritik \approx 5 × 10⁵`, küre etrafındaki akışta ise `Re \approx 2 × 10⁵` mertebesindedir.
 
-- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
-- [Birim Dönüştürücü](/tr/tools/unit-converter)
+## İlgili Araçlar ve Rehberler
+
+- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss) — Akışkan türü, sıcaklık ve boru çapına göre otomatik Reynolds ve sürtünme hesabı.
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi) — Laminer ve türbülanslı rejim sınırları ile Moody diyagramı kullanımı.
+- [Birim Dönüştürücü](/tr/tools/unit-converter) — Dinamik ve kinematik viskozite (cSt, Poise, Pa·s) dönüşümleri.

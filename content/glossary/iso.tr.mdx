@@ -1,32 +1,66 @@
 ---
 title: "ISO (Uluslararası Standartlar Teşkilatı)"
-description: "ISO standartları, ISO 286 tolerans sistemi, ISO 281 rulman ömrü ve küresel makine imalatında uluslararası uyumluluk."
+description: "ISO normları, ISO 286 tolerans sistemi ve formülü (IT sınıfları), ISO 281 rulman ömrü, ISO 898-1 cıvata sınıfları ve çözümlü geçme hesabı."
 date: "2026-05-09"
 tags: ["ISO","uluslararası standartlar","kalite","toleranslar","ISO 286"]
 category: "Standartlar"
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-ISO (International Organization for Standardization), dünya genelinde 160'tan fazla ülkenin ulusal standart kuruluşlarının katılımıyla kurulan, teknik şartnamelerin ve endüstriyel normların küresel düzeyde uyumlaştırılmasını sağlayan bağımsız kuruluştur.
+ISO (International Organization for Standardization - Uluslararası Standardizasyon Teşkilatı), 160'tan fazla ülkenin ulusal metroloji ve norm kuruluşlarının (örneğin Türkiye'de TSE, Almanya'da DIN, ABD'de ANSI, İngiltere'de BSI) katılımıyla oluşturulan, küresel endüstriyel üretimde, parça boyutlandırmasında, malzeme testlerinde ve mühendislik hesap kurallarında teknik uyum ve güvenilirliği sağlayan bağımsız dünya teşkilatıdır. Cenevre merkezli kuruluş, makine elemanlarının küresel tedarik zincirinde sorunsuz birbiriyle eşleşebilmesini güvenceye alır.
 
-## Neden önemli?
+## Makine Mühendisliğinde Temel ISO Standartları ve Formülleri
 
-Küresel ticaret ve tedarik zincirinde farklı ülkelerde üretilen cıvataların, rulmanların ve işlenmiş millerin birbirine tam oturması ve aynı kalite kriterlerini karşılaması ISO standartları ile güvence altına alınır.
+Mekanik tasarım ve imalat projelerinde en sık kullanılan temel ISO normları şunlardır:
 
-## Mühendislik uygulaması ve standartlar
+### 1. ISO 286-1 / ISO 286-2 (Geometrik Tolerans ve Geçmeler)
 
-- **ISO 286-1 / 286-2:** Delik ve mil tolerans sınıfları (H7, h6, js6 vb.) ve temel sapmalar sistemi.
-- **ISO 281:** Döner rulmanların dinamik yük kapasitesi ve $L_{10}$ ömür hesabı formülü.
-- **ISO 898-1:** Karbon çeliği ve alaşımlı cıvataların mekanik özellikleri (8.8, 10.9, 12.9 mukavemet sınıfları).
-- **ISO 12241:** Endüstriyel borularda ve tesisatta ısı yalıtımı hesap kuralları.
+Delik ve mil sistemlerinde temel tolerans faktörü (`i`), anma çapı geometrik ortalaması (`D`) üzerinden mikrometre cinsinden hesaplanır:
 
-<Callout type="info" title="Küresel Standartlaşma">
-Bir cıvata üzerinde "ISO 4014 M12x50 8.8" ibaresi, geometrisinin ISO 4014'e, mekanik dayanımının ise ISO 898-1 Sınıf 8.8 şartnamesine tam uyduğunu garanti eder.
-</Callout>
+```text
+i = 0.45 · \sqrt[3]{D} + 0.001 · D  [\mu m]
+```
 
-## İlgili hesaplayıcılar ve kaynaklar
+Bu temel değer `IT01` ile `IT18` arasındaki kalite sınıflarıyla (`IT7 = 16i`, `IT6 = 10i`) çarpılarak izin verilen boyutsal tolerans bandını belirler.
 
-- [Rulman Ömrü Hesaplayıcı (ISO 281)](/tr/tools/bearing-life)
-- [Cıvata Mukavemeti ve Tork Hesabı (ISO 898-1)](/tr/tools/bolt-calculator)
-- [Standartlar Kütüphanesi](/tr/standards)
+### 2. ISO 281 (Döner Rulman $L_{10}$ Ömür Hesabı)
+
+Dinamik eşdeğer yük (`P`) ve dinamik yük sayısı (`C`) ile milyon devir cinsinden anma ömrü:
+
+```text
+L_10 = (C / P)^p  [milyon devir]
+```
+
+Burada üs değeri bilyalı rulmanlar için `p = 3`, makaralı rulmanlar için `p = 10/3` olarak tanımlanmıştır.
+
+### 3. ISO 898-1 (Cıvata Mekanik Özellikleri)
+
+Cıvata mukavemet sınıflarındaki iki basamaklı kod (8.8, 10.9, 12.9):
+- İlk rakam `× 100`: Minimum çekme dayanımı `R_m` [MPa] (ör. `8 × 100 = 800 MPa`),
+- İlk rakam `×` ikinci rakam `× 10`: Minimum akma dayanımı `R_e` [MPa] (ör. `8 × 8 × 10 = 640 MPa`).
+
+## Sayılarla Çözümlü Geçme Hesabı Örneği
+
+`50 mm` nominal çapa sahip bir mil ve bronz burç deliği için teknik resimde **50 H7/h6** kaygan geçme toleransı verilmiştir. ISO 286-2 cetvelinden `D = 50 mm` için sapma değerleri:
+- **Burç Deliği (50 H7):** Alt sapma `EI = 0 \mu m`, Üst sapma `ES = +25 \mu m` (`D_delik = 50.000 mm` ila `50.025 mm`),
+- **Çelik Mil (50 h6):** Üst sapma `es = 0 \mu m`, Alt sapma `ei = -16 \mu m` (`d_mil = 49.984 mm` ila `50.000 mm`).
+
+1. **Maksimum Boşluk (`S_max`):**
+   `S_max = D_delik,max - d_mil,min = 50.025 - 49.984 = +0.041 mm = 41 \mu m`
+2. **Minimum Boşluk (`S_min`):**
+   `S_min = D_delik,min - d_mil,max = 50.000 - 50.000 = 0.000 mm = 0 \mu m`
+3. **Mühendislik Yorumu:**
+   Sistemde negatif boşluk (girişim) olasılığı sıfırdır; montaj hiçbir zaman zorlanmaz veya sıkışmaz. Yağlama filmi için en dar toleransta sıfır, en geniş toleransta `41 \mu m` çalışma boşluğu elde edilir; hassas döner burçlar için ideal geçmedir.
+
+## Tasarım ve Satınalmada En Sık Yapılan Hatalar
+
+- **Eski DIN Normları ile Güncel ISO Normlarını Karıştırmak:** DIN 931 / DIN 933 cıvata standartlarının yerini alan ISO 4014 / ISO 4017 standartlarında M10, M12, M14 ve M22 cıvataların anahtar ağız ölçüleri (AF) değiştirilmiştir (örneğin M10 cıvatada DIN standardı 17 mm anahtar isterken, güncel ISO normu 16 mm anahtar ister; dar hacimli makine montajlarında takım uyumsuzluğuna yol açar).
+- **Her Yere Aşırı Sıkı ISO Toleransı Koymak:** Gereksiz yere kaba parçalara IT6 veya IT7 toleransı yazmak parça taşlama ve tel erozyon maliyetini 3 ila 5 kat artırır. Fonksiyonun gerektirdiği en kaba ISO sınıfı tercih edilmelidir.
+- **Rulman Hesabında Yağlama Düzeltmesini (ISO 281 / a_iso) Atlamak:** Standart $L_{10}$ hesabı temiz ve ideal yağlama varsayar; kirli ortamda viskozite oranı $\kappa < 1$ ise gerçek ömür teorik ömrün beşte birine düşebilir.
+
+## İlgili Araçlar ve Rehberler
+
+- [Rulman Ömrü Hesaplayıcı (ISO 281)](/tr/tools/bearing-life) — Dinamik yük sayısı, eşdeğer yük ve $L_{10h}$ çalışma saati hesabı.
+- [Cıvata Mukavemeti ve Tork Hesabı (ISO 898-1)](/tr/tools/bolt-calculator) — Cıvata kalite sınıflarına göre gerilme alanı ve sıkma torku tayini.
+- [Standartlar Kütüphanesi](/tr/standards) — Makine imalatında kullanılan uluslararası ISO, DIN ve EN standartları rehberi.

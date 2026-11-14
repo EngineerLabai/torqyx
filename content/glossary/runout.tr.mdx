@@ -1,32 +1,57 @@
 ---
 title: "Salgı ve yalpalama (runout)"
-description: "Dairesel ve toplam salgı toleransları ($\nearrow$, $\\unicode{x2330}$), komparatör saati ile TIR ölçümü ve rotor balansına etkisi."
+description: "Dairesel salgı ve toplam salgı toleransları (ASME Y14.5 / ISO 1101), komparatör saati TIR ölçümü, pompa mili çözümlü örneği ve balans analizi."
 date: "2026-05-09"
 tags: ["salgı","yalpalama","GD&T","ASME Y14.5","komparatör","TIR"]
 category: "Tolerans"
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Salgı (Runout), dönel bir parçanın kendi referans ekseni etrafında $360^circ$ döndürülmesi sırasında yüzeyinin referans eksene göre gösterdiği radyal veya eksenel sapma (yalpalama) miktarıdır. İbreli komparatör saati (TIR - Total Indicator Reading) ile ölçülür.
+Salgı (Runout), dönel geometriye sahip mekanik elemanların (tahrik milleri, dişli çark gövdeleri, kasnaklar, rulman faturaları ve pompa rotorları) kendi teorik referans ekseni (datum ekseni) etrafında 360° tam tur döndürülmesi sırasında denetlenen yüzey noktalarının ideal geometrik yörüngesinden gösterdiği kümülatif radyal veya eksenel sapma miktarıdır. İbreli veya dijital komparatör saati ile ölçülen bu sapma literatürde **TIR (Total Indicator Reading)** veya **FIM (Full Indicator Movement)** olarak adlandırılır.
 
-## Neden önemli?
+## GD&T Standartlarında Salgı Tipleri
 
-Döner millerde, volanlarda ve kasnaklarda salgı olması; merkezkaç kuvvetler, dinamik titreşim, kayışların kasnaktan atması, keçelerin erken yağ kaçırması ve yatak ömrünün tükenmesine sebep olur.
+**ASME Y14.5** ve **ISO 1101** Geometrik Boyutlandırma ve Toleranslandırma standartlarında iki temel salgı sınıfı tanımlanır:
 
-## Mühendislik uygulaması ve standartlar
+### 1. Dairesel Salgı (Circular Runout - Sembolü: `\nearrow`)
 
-ASME Y14.5 ve ISO 1101 standartlarında iki tür salgı denetlenir:
-- **Dairesel Salgı (Circular Runout - $
-earrow$):** Parça döndürülürken komparatör tek bir dairesel kesitte sabit tutulur; dairesellik ve eşmerkezlilik sapmalarının bileşkesini denetler.
-- **Toplam Salgı (Total Runout - $\unicode{x2330}$):** Komparatör parça dönerken eksen boyunca boydan boya taranır; dairesellik, eşmerkezlilik, silindiriklik ve doğrusallık hatalarını aynı anda denetleyen en sıkı toleranstır.
+Komparatör saatinin ölçüm ucu parça ekseni boyunca hareket ettirilmeksizin sabit tek bir radyal enkesitte tutulur ve parça bir tam tur döndürülür:
 
-<Callout type="info" title="Ölçüm İpucu">
-Radyal salgı milin ovalliğini ve kaçıklığını ölçerken, eksenel salgı (alın yalpalaması) mil faturasının dönme eksenine dikliğini denetler.
-</Callout>
+```text
+TIR_dairesel = R_max - R_min \le t_salgı
+```
 
-## İlgili hesaplayıcılar ve kaynaklar
+Dairesel salgı, o kesitteki dairesellik (ovallik) ve datum eksenine göre eksenel kaçıklık (eşmerkezlilik) sapmalarının kümülatif bileşkesini tek bir değerle sınırlar.
 
-- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
-- [Döner Ekipmanda Dengeleme ve Titreşim Rehberi](/tr/guides/doner-ekipman-dengeleme-titresim-kontrolu)
-- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life)
+### 2. Toplam Salgı (Total Runout - Sembolü: `\unicode{x2330}`)
+
+Komparatör saati, parça sürekli dönerken dönme ekseni boyunca boydan boya doğrusal olarak taranır. Bu denetim yüzeydeki dairesellik, eşmerkezlilik, silindiriklik ve doğrusallık hatalarının tamamını tek bir silindirik tolerans bölgesine hapseden en katı geometrik denetimdir.
+
+Alın yüzeylerinde yapılan eksenel salgı denetimi ise faturanın dönme eksenine dikliğini ve düzlemselliğini garanti eder (`TIR_eksenel = Z_max - Z_min \le t_alın`).
+
+## Sayılarla Çözümlü Uygulama Örneği
+
+`3000 rpm` devirle çalışan yüksek basınçlı bir santrifüj pompa milinde çark oturma faturası için teknik resimde `\nearrow | 0.015 | A-B` dairesel salgı toleransı verilmiştir (Datum A ve B rulman yataklama çaplarıdır).
+
+Muayene atölyesinde mil V yataklar üzerine yerleştirilmiş, komparatör probu çark oturma faturasına temas ettirilerek 360° döndürülmüştür:
+1. Komparatör saatinin ibresi en yüksek noktada `+0.018 mm`, en düşük noktada `-0.005 mm` değerlerini göstermiştir.
+2. **Ölçülen Toplam Gösterge Hareketi (TIR):**
+   `TIR = (+0.018) - (-0.005) = 0.023 mm = 23 \mu m`
+3. **Uygunluk Değerlendirmesi:**
+   İzin verilen tolerans: `t_izin = 0.015 mm = 15 \mu m`
+   `TIR = 23 \mu m > t_izin = 15 \mu m` olduğundan parça **RED** edilir.
+4. **Mühendislik Düzeltmesi:**
+   Mil taşlama tezgahında merkezleme delikleri üzerinden yeniden taşlanmış ve ikinci ölçümde `TIR = 0.009 mm = 9 \mu m` elde edilerek parça şartnameye uygun bulunmuştur. Bu hassasiyet sağlanmasaydı `3000 rpm` devirde çark merkezkaç kuvveti nedeniyle ISO 1940 balans sınırları aşılacak ve rulmanlar 500 saat içinde dağılacaktı.
+
+## İmalatta En Sık Yapılan Yanılgılar
+
+- **Dairesel Salgı ile Toplam Salgıyı Birbirinin Yerine Kullanmak:** Bir mil boydan boya konik işlenmişse her bağımsız enkesitte dairesel salgıyı sağlayabilir; fakat komparatör eksen boyunca yürütüldüğünde toplam salgı toleransını fersah fersah aşar.
+- **Rastgele Bir Yüzeyi Sıfır Kabul Etmek:** Salgı bağımsız bir yüzey şekil toleransı değildir; mutlaka bir referans datum eksenine (genellikle rulman oturma yüzeyleri) göre ölçülmelidir.
+- **Dinamik Balans ile Statik Salgıyı Karıştırmak:** Salgısı sıfır olan bir mil kütle homojensizliği nedeniyle balansı bozuk olabilir; tam tersi balansı alınmış bir milde geometrik salgı bulunabilir. İkisi ayrı ayrı doğrulanmalıdır.
+
+## İlgili Araçlar ve Rehberler
+
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab) — Dairesel ve toplam salgı tolerans zinciri ve montaj boşluğu analizi.
+- [Rulman Ömrü Hesaplayıcı](/tr/tools/bearing-life) — Salgı kaynaklı ek dinamik radyal yüklerin rulman $L_{10}$ ömrüne etkisi.
+- [Döner Ekipman Dengeleme ve Titreşim Rehberi](/tr/guides/doner-ekipman-dengeleme-titresim-kontrolu) — ISO 1940 balans sınıfları ve şaft salgısı titreşim sınırları.

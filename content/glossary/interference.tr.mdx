@@ -2,7 +2,7 @@
 title: Sıkı geçme girişimi (interference)
 description: >-
   ISO 286 sıkı geçmelerde negatif boşluk (girişim), Lamé temas basıncı formülü,
-  iletilebilir tork ve ısıl büzülme montajı.
+  DIN 7190 tork iletim kapasitesi ve çözümlü pres geçme gerilme analizi.
 date: '2026-05-09'
 tags:
   - sıkı geçme
@@ -13,34 +13,59 @@ tags:
   - tork iletimi
 category: Tolerans
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Girişim (Interference), montaj öncesinde dış elemanın (şaft / mil) dış çapının, iç elemanın (delik / göbek) iç çapından büyük olması durumunda aradaki negatif boyutsal farktır (`Delta = d_mil - D_delik > 0`). Sıkı geçme bağlantısının temelidir.
+Girişim (Interference), montaj öncesinde erkek elemanın (mil, şaft, pim) dış anma çapının, dişi elemanın (delik, dişli göbeği, rulman bileziği) iç çapından büyük olması durumunda aradaki boyutsal farktır (`\Delta = d_mil - D_delik > 0`). Bu elastik boyutsal örtüşme, silindirik temas yüzeyinde çok yüksek radyal basınç oluşturarak kama, cıvata veya pim gerektirmeksizin sürtünme bağıyla büyük tork ve eksenel kuvvetlerin taşınmasını sağlar.
 
-## Neden önemli?
+## DIN 7190 ve Lamé Temas Basıncı Formülü
 
-Kamasız, boşluksuz ve yüksek dinamik yorulma dayanımlı mil-göbek bağlantıları (H7/s6, H7/u6) bu elastik girişim sayesinde tork aktarır. Yetersiz girişim kaymaya, aşırı girişim ise göbeğin radyal çatlamasına yol açar.
+ISO 286 tolerans sınıflarına (örneğin H7/p6, H7/s6, H7/u6) göre imal edilen parçaların montajında elastik temas teorisi (**Lamé denklemleri**) kullanılır:
 
-## Mühendislik uygulaması ve standartlar
+```text
+p = (\Delta_eff / d) · (E / 2) · [1 - (d / D_o)²]  [MPa]
+```
 
-ISO 286 ve DIN 7190 standartlarına göre:
-- **Minimum ve Maksimum Girişim:**
-  
-`Delta_min = d_mil,min - D_delik,max, quad Delta_max = d_mil,max - D_delik,min`
+Denklem parametreleri:
+- `\Delta_eff`: Yüzey mikro pürüzlülüklerinin ezilme payı düşülmüş net efektif girişim [mm] (`\Delta_eff = \Delta - 1.2 · (R_z,mil + R_z,delik)`),
+- `d`: Mil ve deliğin nominal temas çapı [mm],
+- `D_o`: Dış gövdenin (kovan/kasnak) dış çapı [mm],
+- `E`: Malzemenin elastisite modülü [MPa] (karbon çeliği için `210,000 MPa`),
+- `p`: Montaj arayüzünde oluşan radyal elastik temas basıncı [MPa].
 
-- **Lamé Temas Basıncı (`p`):** Katı çelik mil ve göbek için (`E = 210,000	ext MPa`):
-  
-`p = racDelta_effd cdot racE2 cdot left(1 - racd^2D_o^2ight)`
+Bu radyal basınç altında bağlantının kaymadan iletebileceği maksimum statik tork:
 
-- **Tork Aktarım Kapasitesi:** `T = rac12 pi cdot d^2 cdot L cdot p cdot mu`.
+```text
+T = (1/2) · \pi · d² · L · p · \mu  [Nm]
+```
 
-<Callout type="info" title="Tasarım Uyarısı">
-Yüzey pürüzlülük tepeleri montaj esnasında ezildiği için efektif girişim $Delta_{eff} = Delta - 1.2(R_{z,mil} + R_{z,delik})$ formülüyle düzeltilmelidir.
-</Callout>
+Burada `L` temas boyu [m] ve `\mu` arayüz sürtünme katsayısıdır (kuru çelik/çelik için `0.15 - 0.18`, yağlı pres montajında `0.10 - 0.12`).
 
-## İlgili hesaplayıcılar ve kaynaklar
+## Sayılarla Çözümlü Uygulama Örneği
 
-- [Press Fit ve Tolerans Seçim Rehberi](/tr/guides/press-fit-baglantilari-tolerans-secimi)
-- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab)
-- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion)
+Dolu çelik bir mil çapı `d = 50 mm` (`0.050 m`), dişli göbeği dış çapı `D_o = 100 mm` (`0.100 m`) ve temas boyu `L = 60 mm` (`0.060 m`) olarak verilmiştir. Parçalar ISO 286 H7/s6 toleransıyla işlenmiş olup pürüzlülük ezilmesi sonrası efektif girişim `\Delta_eff = 0.030 mm` (`30 \mu m`) ölçülmüştür. Kuru montajda sürtünme katsayısı `\mu = 0.15`'tir (`E = 210,000 MPa`).
+
+1. **Çap Oranı:**
+   `d / D_o = 50 / 100 = 0.50 \implies (d / D_o)² = 0.25`
+2. **Lamé Temas Basıncı (`p`):**
+   `p = (0.030 / 50) × (210,000 / 2) × (1 - 0.25)`
+   `= 0.0006 × 105,000 × 0.75 = 63.0 × 0.75 = 47.25 MPa`
+3. **İletilebilir Tork Kapasitesi (`T`):**
+   `T = 0.5 × \pi × (0.050)² × 0.060 × (47.25 × 10⁶) × 0.15`
+   `= 0.5 × 3.1416 × 0.0025 × 0.060 × 47,250,000 × 0.15`
+   `= 0.0002356 × 7,087,500 \approx 1670 Nm`
+4. **Göbek İç Çeperinde Maksimum Tanjansiyel Çekme Gerilmesi:**
+   `\sigma_t = p · [(D_o² + d²) / (D_o² - d²)] = 47.25 × [(100² + 50²) / (100² - 50²)] = 47.25 × (12500 / 7500) = 47.25 × 1.667 \approx 78.8 MPa`
+   S275 çeliğinin akma dayanımı `R_e = 275 MPa` olduğundan göbek iç yüzeyi akma ve çatlama riskine karşı tam emniyetlidir (`S = 275 / 78.8 \approx 3.5`).
+
+## İmalatta En Sık Yapılan Yanılgılar
+
+- **Yüzey Pürüzlülüğünün Ezilmesini İhmal Etmek:** Kaba torna edilmiş yüzeylerde tepe noktaları presleme sırasında kalıcı ezilir. Bu durum mikron mertebesindeki nominal girişimin %20 ila %35'ini yok eder; efektif girişim düşüldüğünde tork aktarım kapasitesi beklentinin yarısına inebilir.
+- **Göbekte Teğetsel Çekme Gerilmesini Kontrol Etmemek:** Aşırı sıkı geçmelerde iç basınç göbeği bir bilezik gibi içten patlatmaya zorlar. Döküm göbeklerde çekme mukavemeti düşük olduğu için göbek boydan boya radyal çatlar.
+- **Kuru Pres Montajında Kaynama ve Çizilme (Galling):** Pres fit montajı soğuk yapılırken temas yüzeyleri mikro kaynakla kaynayabilir. Yüksek girişimli parçalar göbeği fırında 150-200 °C ısıtarak veya mili sıvı azotta soğutarak termal büzülmeyle monte edilmelidir.
+
+## İlgili Araçlar ve Rehberler
+
+- [Press Fit ve Tolerans Seçim Rehberi](/tr/guides/press-fit-baglantilari-tolerans-secimi) — ISO 286 geçme seçimi, montaj sıcaklığı ve pres kuvveti hesaplama rehberi.
+- [Tolerans Yığılması ve GD&T Laboratuvarı](/tr/tools/tolerance-lab) — Miller ve delikler için boyutsal tolerans analizi.
+- [Şaft Boyutlandırma ve Burulma](/tr/tools/shaft-torsion) — Millerde burulma torku ve kayma gerilmesi hesaplama aracı.

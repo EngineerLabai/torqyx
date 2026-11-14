@@ -1,8 +1,8 @@
 ---
 title: Türbülanslı akış
 description: >-
-  Türbülanslı akış rejimi ($Re > 4000$), kaotik girdaplar, çeper pürüzlülüğü
-  etkisi, Colebrook denklemi ve yüksek ısı transferi.
+  Türbülanslı akış rejimi ($Re > 4000$), girdap dinamiği, Colebrook-Haaland sürtünme katsayısı,
+  çeper pürüzlülüğü etkisi ve çözümlü basınç düşüşü hesabı.
 date: '2026-05-09'
 tags:
   - türbülanslı akış
@@ -12,31 +12,51 @@ tags:
   - basınç kaybı
 category: Akışkanlar
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Türbülanslı akış, akışkan parçacıklarının kaotik, düzensiz ve üç boyutlu girdaplar (eddies) halinde hızla birbirine karıştığı yüksek enerjili akış rejimidir. Atalet kuvvetlerinin viskoz sönümleme kuvvetlerine baskın geldiği durumlarda oluşur.
+Türbülanslı akış, akışkan parçacıklarının düzenli hatlar boyunca akmak yerine üç boyutlu, kaotik ve yüksek frekanslı girdaplar (eddies) oluşturarak birbirine şiddetle karıştığı yüksek enerjili akış rejimidir. Akış alanında eylemsizlik (atalet) kuvvetleri viskoz sönümleme kuvvetlerine baskın geldiğinde meydana gelir; dairesel boru tesisatlarında Reynolds sayısının `Re > 4000` olduğu durumlarda kararlı türbülanslı akış gelişir.
 
-## Neden önemli?
+## Hız Profili ve Sürtünme Mekanizması
 
-Endüstriyel su borularında, havalandırma kanallarında ve proses hatlarında akışın %95'ten fazlası türbülanslı rejimdedir. Türbülans akış sürtünmesini artırırken, ısı ve kütle transfer verimini katbekat yükseltir.
+Laminer akışın sivri parabolik hız profilinin (`v_max = 2 · v_ort`) aksine türbülanslı akışta hız profili kütleşir ve boru çekirdeğinde neredeyse homojen düz bir hal alır (`1/7` güç yasası: `v(r) \approx v_{max}(1 - r/R)^{1/7}`). Ancak boru çeperine çok yakın bölgede ("viskoz alt tabaka") hız çok kısa mesafede sıfıra indiğinden, çeperdeki kayma gerilmesi ve sürtünme direnci laminer akışa kıyasla katbekat yüksektir.
 
-## Mühendislik uygulaması ve standartlar
+Türbülanslı akışta Darcy sürtünme katsayısı (`f`), hem Reynolds sayısına hem de borunun bağıl pürüzlülüğüne (`ε / D`) bağlıdır. Açık biçimli **Haaland** formülü ile hassas şekilde hesaplanır:
 
-- **Reynolds Kriteri:** Dairesel borularda `Re > 4000` olduğunda akış tam türbülanslıdır.
-- **Yüzey Pürüzlülüğü Etkisi:** Laminer akışın aksine türbülanslı akışta boru çeper pürüzlülüğü (`arepsilon`) sürtünme faktörünü doğrudan etkiler.
-- **Colebrook-White ve Haaland Denklemi:** Darcy sürtünme faktörü (`f`):
-  
-`rac1sqrtf approx -1.8 cdot log_10left[ left(racarepsilon / D3.7ight)^1.11 + rac6.9Re ight]`
+```text
+1 / \sqrt{f} \approx -1.8 · \log_{10} [ ((ε / D) / 3.7)¹·¹¹ + 6.9 / Re ]
+```
 
-- **Hız Profili:** Türbülanslı akışta hız profili laminerdeki gibi sivri parabolik değil; çekirdek bölgesinde düz ve homojen, çeperde ise çok dik bir gradyene sahiptir.
+Basınç kaybı ise Darcy-Weisbach formülü ile belirlenir: `\Delta P = f · (L / D) · (ρ · v² / 2)`.
 
-<Callout type="info" title="Eşanjör Tasarımı">
-Isı eşanjörlerinde boru içindeki akışın türbülanslı olması istenir; girdaplı karışma akışkanın çeperle ısı alışverişini 5 ila 10 kat hızlandırır.
-</Callout>
+## Sayılarla Çözümlü Uygulama Örneği
 
-## İlgili hesaplayıcılar ve kaynaklar
+İç çapı `D = 80 mm` (`0.080 m`), uzunluğu `L = 50 m` olan ticari çelik bir borudan (`ε = 0.045 mm = 0.000045 m`) ortalama `v = 2.5 m/s` hızla 20 °C sıcaklığında su taşınmaktadır (`ρ = 1000 kg/m³`, `ν = 1.0 × 10⁻⁶ m²/s`).
 
-- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
-- [Birim Dönüştürücü](/tr/tools/unit-converter)
+1. **Bağıl Pürüzlülük:**
+   `ε / D = 0.000045 / 0.080 = 0.0005625`
+2. **Reynolds Sayısı Kontrolü:**
+   `Re = (v · D) / ν = (2.5 × 0.080) / (1.0 × 10⁻⁶) = 200,000` (`Re > 4000`, tam türbülanslı rejim).
+3. **Haaland Formülü ile Sürtünme Katsayısı (`f`):**
+   `1 / \sqrt{f} = -1.8 · \log_{10} [ (0.0005625 / 3.7)¹·¹¹ + 6.9 / 200,000 ]`
+   `= -1.8 · \log_{10} [ (0.000152)¹·¹¹ + 0.0000345 ]`
+   `= -1.8 · \log_{10} [ 0.0000574 + 0.0000345 ] = -1.8 · \log_{10} [ 0.0000919 ]`
+   `= -1.8 · (-4.037) \approx 7.266`
+   `\sqrt{f} = 1 / 7.266 \approx 0.1376 \implies f \approx (0.1376)² \approx 0.0189`
+4. **Sürtünme Basınç Düşüşü:**
+   `\Delta P = 0.0189 × (50 / 0.080) × (1000 × 2.5² / 2)`
+   `= 0.0189 × 625 × 3125 \approx 36,914 Pa = 36.9 kPa` (yaklaşık `3.76 mSS`).
+
+Bu basınç kaybı, boru tesisatını besleyecek sirkülasyon pompasının basma yüksekliği gereksinimine doğrudan eklenir.
+
+## Mühendislikte Sık Karşılaşılan Yanılgılar
+
+- **Yüzey Pürüzlülüğünü İhmal Etmek:** Laminer akışta boru pürüzlülüğü sürtünmeyi etkilemezken, türbülanslı rejimde viskoz alt tabakayı aşan yüzey pürüzleri doğrudan ana girdap mekanizmasına katılarak sürtünme faktörünü %50 ila %200 oranında yükseltebilir.
+- **Eşanjör Tasarımında Hızı Fazla Düşürmek:** Basınç kaybından kaçınmak amacıyla boru çapını aşırı büyüterek akışı laminere düşürmek büyük bir tasarım hatasıdır. Türbülanslı girdaplar ısı taşınım katsayısını (`h`) laminere göre 5 ila 8 kat hızlandırır; ısı değiştiricilerinde türbülans rejimi zorunlu bir hedeftir.
+- **Kavitasyon Tehlikesini Öngörmemek:** Yüksek hızlı türbülanslı akışta daralma kesitlerinde veya vana boğazlarında yerel basınç akışkanın buharlaşma basıncının altına indiğinde buhar kabarcıkları patlar (kavitasyon) ve boru cidarlarını oyarak tahrip eder.
+
+## İlgili Araçlar ve Rehberler
+
+- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss) — Colebrook ve Haaland modelleriyle türbülanslı basınç kaybı hesaplama aracı.
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi) — Moody diyagramı okuma ve türbülanslı akış boru optimizasyonu.
+- [Birim Dönüştürücü](/tr/tools/unit-converter) — Pa, bar, psi ve mSS basınç birimleri dönüşümü.

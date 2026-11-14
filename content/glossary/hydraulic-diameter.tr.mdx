@@ -1,8 +1,8 @@
 ---
 title: Hidrolik çap (hydraulic diameter)
 description: >-
-  Dairesel olmayan boru ve havalandırma kanallarında hidrolik çap ($D_h$), ıslak
-  çevre hesabı ve Reynolds sayısı eşdeğerliği.
+  Dairesel olmayan boru, kanal ve ısı değiştiricilerde hidrolik çap ($D_h$), ıslak çevre formülü,
+  HVAC kanalı çözümlü örneği ve Reynolds eşdeğerliği.
 date: '2026-05-09'
 tags:
   - hidrolik çap
@@ -12,41 +12,58 @@ tags:
   - basınç kaybı
 category: Akışkanlar
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Hidrolik çap (`D_h`), dairesel olmayan enkesitlere (dikdörtgen kanallar, eliptik borular, eşmerkezli boru halkaları) sahip akış hatlarında akış dinamiği ve sürtünme kaybı hesaplarını eşdeğer dairesel boru formüllerine uyarlamak için kullanılan karakteristik boyuttur.
+Hidrolik çap (`D_h`), geometrisi dairesel olmayan akış kesitlerinde (dikdörtgen havalandırma kanalları, eşmerkezli çift borulu eşanjörler, kare profiller ve açık kanallar) akışkanlar mekaniğinin temel formüllerini (Reynolds sayısı, Darcy-Weisbach basınç düşüşü ve sürtünme faktörü) dairesel boru teorisine tam uyumlu kılmak için türetilmiş karakteristik doğrusal boyuttur.
 
-## Neden önemli?
+## Temel Formül ve Geometrik Bağıntılar
 
-Dikdörtgen bir havalandırma kanalında doğrudan genişlik veya yükseklik üzerinden hesap yapmak hidrolik sürtünmeyi %20'den fazla saptırır. Hidrolik çap doğru Reynolds sayısını ve sürtünme faktörünü bulmanın tek yoludur.
+Hidrolik çap, akışın gerçekleştiği net kesit alanının, akışkanın katı çeperle temas ettiği ıslak çevreye oranının 4 katı olarak tanımlanır:
 
-## Mühendislik uygulaması ve standartlar
+```text
+D_h = (4 · A) / P_islak
+```
 
-Hidrolik çap akış kesit alanı (`A`) ve ıslak çevre (`P_islak`) üzerinden tanımlanır:
+Burada:
+- `A`: Akışkanın aktığı net enkesit alanı [m²],
+- `P_islak`: Akışkanın temas ettiği katı yüzeylerin toplam çevre uzunluğu (ıslak çevre) [m].
 
-`D_h = frac4  *  AP_islak`
+Farklı enkesit geometrileri için pratik açılımlar şöyledir:
+- **Dikdörtgen Kanal (`a` genişlik, `b` yükseklik):**
+  `A = a · b` ve `P_islak = 2(a + b)` olduğundan:
+  `D_h = (4 · a · b) / [2(a + b)] = (2 · a · b) / (a + b)`
+- **Eşmerkezli Boru Boşluğu (Annulus - `D_o` dış boru iç çapı, `d_i` iç boru dış çapı):**
+  `A = (\pi / 4) · (D_o² - d_i²)` ve `P_islak = \pi · (D_o + d_i)` olduğundan:
+  `D_h = D_o - d_i`
+- **Kare Kanal (`a × a`):**
+  `D_h = (2 · a · a) / (a + a) = a` (Kare kesitin hidrolik çapı doğrudan kenar uzunluğuna eşittir).
 
-- **Genişliği `a`, yüksekliği `b` olan dikdörtgen kanal:**
-  
-`D_h = (4  *  (a  *  b) / 2(a + b)) = (2  *  a  *  b / a + b)`
+## Sayılarla Çözümlü Uygulama Örneği
 
-- **İç çapı `D_i`, dış çapı `D_o` olan konsantrik boru halkası (annulus):**
-  
-`D_h = D_o - D_i`
+Bir fabrika binasının iklimlendirme santralinde `a = 600 mm` (`0.60 m`) genişliğinde ve `b = 300 mm` (`0.30 m`) yüksekliğinde sac havalandırma kanalı kullanılmaktadır. Kanaldan geçen hava debisi `Q = 1.08 m³/s` (`3888 m³/h`) olup 20 °C havanın kinematik viskozitesi `\nu = 1.51 × 10⁻⁵ m²/s` olarak alınmıştır.
 
-- Reynolds sayısı ve Darcy sürtünme kaybı hesaplarında doğrudan `D_h` kullanılır.
+1. **Net Kesit Alanı:**
+   `A = 0.60 × 0.30 = 0.18 m²`
+2. **Islak Çevre:**
+   `P_islak = 2 × (0.60 + 0.30) = 1.80 m`
+3. **Kanalın Hidrolik Çapı:**
+   `D_h = (2 × 0.60 × 0.30) / (0.60 + 0.30) = 0.36 / 0.90 = 0.40 m = 400 mm`
+4. **Ortalama Akış Hızı:**
+   `v = Q / A = 1.08 / 0.18 = 6.0 m/s`
+5. **Eşdeğer Reynolds Sayısı:**
+   `Re = (v · D_h) / \nu = (6.0 × 0.40) / (1.51 × 10⁻⁵) = 2.40 / (1.51 × 10⁻⁵) \approx 158,940`
 
-<Callout type="info" title="Hesaplama Örneği">
-`a = 400	ext mm`, `b = 200	ext mm` dikdörtgen hava kanalının hidrolik çapı:
+Elde edilen Reynolds sayısı 4000 değerinin çok üzerinde olduğu için kanal içindeki hava akışının tam türbülanslı olduğu kesinleşir; Moody diyagramında bağıl pürüzlülük kontrolü için doğrudan `D_h = 400 mm` değeri kullanılır.
 
-`D_h = (2 	imes 400 	imes 200 / 400 + 200) = (160,000 / 600) approx mathbf266.7	ext mm`
+## Mühendislikte Sık Yapılan Yanılgılar
 
-Akış hızı ve Reynolds hesabı bu eşdeğer çap üzerinden yapılır.
-</Callout>
+- **Basit Kenar Ortalaması Almak:** Dikdörtgen kesitlerde kenarların aritmetik ortalamasını almak (`(600 + 300)/2 = 450 mm`), hidrolik çapı %12.5 hatalı buldurur; en-boy oranı arttıkça bu hata %30'u aşar.
+- **Açık Kanallarda Serbest Sıvı Yüzeyini Çevreye Katmak:** Kanalizasyon veya oluk gibi üstü açık akışlarda hava ile temas eden sıvı yüzeyi katı çeper oluşturmadığı için ıslak çevre hesabına dahil edilmemelidir.
+- **Yüksek En-Boy Oranında Simetri Varsayımı:** `a/b > 4` olan dar yarık kesitlerde köşe ikincil girdapları sürtünmeyi artırdığından standart hidrolik çap formülü yerine literatür düzeltme faktörleri uygulanmalıdır.
 
-## İlgili hesaplayıcılar ve kaynaklar
+## İlgili Araçlar ve Rehberler
 
-- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
-- [Birim Dönüştürücü](/tr/tools/unit-converter)
+- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss) — Eşdeğer hidrolik çap kullanarak kanal ve borularda basınç düşüşü analizi.
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi) — Dikdörtgen kanal boyutlandırma ve hız kriterleri.
+- [Birim Dönüştürücü](/tr/tools/unit-converter) — Debi, hız ve viskozite birimleri arasında hızlı dönüşüm.

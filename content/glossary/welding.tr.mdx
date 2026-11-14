@@ -1,8 +1,8 @@
 ---
 title: Kaynaklı birleştirme (welding)
 description: >-
-  Kaynak yöntemleri (MIG/MAG, TIG, Elektrot), köşe kaynak dikişi boynu ($a$),
-  ısıdan etkilenen bölge (HAZ) ve kaynak statik dayanım hesabı.
+  Köşe kaynak dikişi tasarımı, boğaz kalınlığı ($a$), Eurocode 3 (EN 1993-1-8) dayanım formülü,
+  HAZ metalurjisi ve sayılarla çözümlü çekme bağlantısı hesabı.
 date: '2026-05-09'
 tags:
   - kaynak
@@ -13,31 +13,62 @@ tags:
   - birleştirme
 category: İmalat
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Kaynaklı birleştirme (Welding), birbiriyle birleştirilecek metal parçaların temas yüzeylerinin ısı, basınç veya her ikisi birden kullanılarak ilave dolgu teli ile ergitilip atomik bağlar oluşturularak monoblok hale getirilmesi işlemidir.
+Kaynaklı birleştirme (welding), birbiriyle birleştirilecek metal parçaların temas kenarlarının kontrollü ısı, mekanik basınç veya her ikisi kullanılarak, çoğunlukla ilave dolgu metali (elektrot, tel) eşliğinde ergitilip atomik düzeyde metalurjik bağ kurulması suretiyle sökülemez ve monoblok tek bir yapı haline getirilmesi imalat yöntemidir. Endüstriyel çelik konstrüksiyonlarda, basınçlı kaplarda, vinçlerde ve makine şasilerinde en yaygın birleştirme yöntemidir.
 
-## Neden önemli?
+## Eurocode 3 Köşe Kaynak Mukavemet Formülü
 
-Çelik yapılarda, vinç kollarında ve basınçlı kaplarda cıvata deliği delmeden ve sızdırmaz şekilde en yüksek mukavemet kaynak dikişleriyle sağlanır. Ancak kaynak dikişindeki gözenekler, cüruf kalıntıları ve çentik etkisi yorulma çatlaklarının en yaygın başlangıç noktasıdır.
+Köşe kaynak dikişlerinin boyutlandırılmasında **Eurocode 3 (EN 1993-1-8)** ve **AWS D1.1** standartları esas alınır. Kaynak dikişinin mukavemetini belirleyen temel geometrik parametre boğaz (boyun) kalınlığıdır (`a`):
 
-## Mühendislik uygulaması ve standartlar
+```text
+a = z · \sin(45°) \approx 0.707 · z
+```
 
-Eurocode 3 (EN 1993-1-8) ve AWS D1.1 standartlarına göre köşe kaynak boyutu:
-- **Kaynak Dikiş Boynu (Boğaz Kalınlığı - `a`):** Köşe kaynağının üçgen kesitinde kökten hipotenüse çizilen en kısa dik mesafedir (`a = z cdot sin 45^circ approx 0.7 cdot z`).
-- **Köşe Kaynak Gerilmesi:**
-  
-`au_kaynak = racFa cdot sum L_kaynak le f_vw,d = racf_usqrt3 cdot eta_w cdot gamma_M2`
+Burada `z` dikişin bacak (kenar) uzunluğudur. Dikiş kesitinde oluşan ortalama kayma gerilmesi:
 
-- **Isıdan Etkilenen Bölge (HAZ - Heat Affected Zone):** Kaynak dikişinin hemen yanındaki erimemiş ancak yüksek ısıyla mikroyapısı değişmiş bölgedir; sertleşme ve soğuk çatlak riskine karşı ön ısıtma (preheating) uygulanır.
+```text
+\tau_w = F / (a · \sum L_eff) \le f_vw,d
+```
 
-<Callout type="info" title="Tasarım Kuralı">
-Köşe kaynak boyun kalınlığı ($a$) birleştirilen en ince sac kalınlığının en az %70'i olmalı ($a approx 0.7 cdot t_{min}$), ancak hiçbir zaman sac kalınlığını aşmamalıdır.
-</Callout>
+Eurocode 3 basitleştirilmiş yöntemine göre kaynak metalinin tasarım kayma dayanımı sınırı (`f_vw,d`):
 
-## İlgili hesaplayıcılar ve kaynaklar
+```text
+f_vw,d = f_u / (\sqrt{3} · \beta_w · \gamma_M2)
+```
 
-- [Köşe Kaynak Boyutlandırma Hesaplayıcı](/tr/tools/fillet-weld)
-- [Malzeme Kütüphanesi ve Kaynak Edilebilirlik](/tr/materials)
-- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress)
+Denklem parametreleri:
+- `f_u`: Birleştirilen ana sacların nominal çekme dayanımı [MPa],
+- `\beta_w`: Çelik sınıfına bağlı korelasyon katsayısı (S235 için `0.80`, S275 için `0.85`, S355 için `0.90`),
+- `\gamma_M2`: Kaynaklı birleşimler için kısmi güvenlik katsayısı (`1.25`),
+- `L_eff`: Kaynak dikişinin krater kayıpları düşülmüş net efektif boyu (`L_eff = L - 2a`).
+
+## Sayılarla Çözümlü Uygulama Örneği
+
+S275 yapı çeliğinden (`f_u = 430 MPa`, `\beta_w = 0.85`) üretilmiş iki çekme laması, çift taraflı köşe kaynağıyla birleştirilmiştir. Dikiş bacak boyu `z = 7 mm`, her iki taraftaki toplam dikiş uzunluğu `L = 160 mm`'dir. Bağlantıya etkiyen statik çekme kuvveti `F = 180 kN` (`180,000 N`) olarak verilmiştir.
+
+1. **Boğaz Kalınlığı (`a`):**
+   `a = 0.707 × 7 mm \approx 4.95 mm` (pratikte `5.0 mm` alınır).
+2. **Efektif Dikiş Boyu (`L_eff`):**
+   Başlangıç ve bitiş kraterleri için her dikişten `2a` düşülür:
+   Her dikiş için: `L_eff,tek = 160 - (2 × 5) = 150 mm`
+   İki dikiş toplamı: `\sum L_eff = 2 × 150 = 300 mm`
+3. **Tasarım Kayma Dayanımı Sınırı (`f_vw,d`):**
+   `f_vw,d = 430 / (\sqrt{3} × 0.85 × 1.25) = 430 / (1.732 × 1.0625) = 430 / 1.840 \approx 233.7 MPa`
+4. **Dikişte Oluşan Ortalama Kayma Gerilmesi:**
+   `\tau_w = 180,000 / (5.0 × 300) = 180,000 / 1500 = 120.0 MPa`
+5. **Güvenlik Doğrulaması:**
+   `\tau_w = 120.0 MPa \le f_vw,d = 233.7 MPa` (bağlantı emniyetlidir, emniyet faktörü `S = 233.7 / 120.0 \approx 1.95`).
+
+## İmalatta En Sık Yapılan Hatalar
+
+- **Krater Boyunu Düşmeden Tam Boy Hesabı Yapmak:** Kaynak başlangıç ve bitiş noktalarında ark tutuşması ve sönmesi nedeniyle ergime tam olmaz ve krater boşlukları kalır. Standart gereği dikiş boyundan `2a` düşülmemesi kaynak mukavemetini %15-20 fazla varsaymaya yol açar.
+- **Aşırı Kalın Kaynak Dikişi Çekmek:** İnce sac üzerine kalın kaynak dikişi (`a > t_sac`) çekmek dayanımı artırmaz; aksine aşırı ısı girdisi sebebiyle sacda çarpılmaya, yüksek kalıntı gerilmelere ve Isıdan Etkilenen Bölgede (HAZ) kırılgan mikroyapı oluşumuna sebep olur.
+- **Farklı Kalınlıklardaki Parçalarda Yanlış Bacak Seçimi:** İki farklı sac birleştirilirken boğaz kalınlığı daima daha ince sacın kalınlığına göre belirlenmelidir (`a \approx 0.7 · t_min`).
+
+## İlgili Araçlar ve Rehberler
+
+- [Köşe Kaynak Boyutlandırma Hesaplayıcı](/tr/tools/fillet-weld) — Eurocode 3 ve AWS standartlarına göre boğaz kalınlığı ve gerilme doğrulama aracı.
+- [Basit Gerilme Hesaplayıcı](/tr/tools/simple-stress) — Çekme, basma ve kayma yükleri altında mekanik parça gerilme analizi.
+- [Malzeme Kütüphanesi ve Kaynak Edilebilirlik](/tr/materials) — Karbon eşdeğeri (CEV) ve ön ısıtma gereksinimleri.

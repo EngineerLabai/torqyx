@@ -2,7 +2,7 @@
 title: Yük kaybı (head loss)
 description: >-
   Boru hatlarında ve hidrolik devrelerde sürtünme yük kaybı ($h_f$),
-  Darcy-Weisbach denklemi, armatür lokal kayıpları ve pompa gücü.
+  Darcy-Weisbach denklemi, armatür yerel kayıpları ve çözümlü pompa basma yüksekliği hesabı.
 date: '2026-05-09'
 tags:
   - yük kaybı
@@ -12,36 +12,60 @@ tags:
   - boru
 category: Akışkanlar
 draft: false
-readingTime: 4
+readingTime: 5
 ---
 
-Yük kaybı (`h_f` veya `Delta H`), bir akışkanın boru, kanal veya hidrolik devrede akışı esnasında akışkanın iç viskoz sürtünmesi ve çeper pürüzlülüğü sebebiyle kaybettiği mekanik enerji miktarının sıvı sütunu yüksekliği [`extmSS`] cinsinden ifadesidir.
+Yük kaybı (`h_f` veya `\Delta H`), viskoz bir akışkanın kapalı bir boru, açık kanal veya hidrolik kontrol devresinde hareketi esnasında iç moleküler kayma sürtünmesi ve çeper pürüzlülüğü nedeniyle mekanik enerjisini geri döndürülemez biçimde ısıya dönüştürmesidir. Akışkanlar mekaniğinde bu enerji kaybı, akışkan sütununun dikey yüksekliği cinsinden metre sıvı sütunu (`mSS` veya `m`) olarak tanımlanır.
 
-## Neden önemli?
+## Temel Mühendislik Formülü ve Değişkenler
 
-Pompa seçiminde debi ile birlikte basma yüksekliğini (`H`) belirleyen ana bileşen yük kaybıdır. Yük kayıplarının yanlış hesaplanması pompanın sistemi basamamasına veya aşırı büyük motor seçilerek enerji israf edilmesine yol açar.
+Düz dairesel boru hatlarındaki sürekli sürtünme yük kaybı evrensel **Darcy-Weisbach** bağıntısıyla hesaplanır:
 
-## Mühendislik uygulaması ve standartlar
+```text
+h_f = f · (L / D) · (v² / 2g)  [mSS]
+```
 
-Darcy-Weisbach denklemi düz borulardaki ana sürtünme yük kaybını (`h_f`) verir:
+Bu denklemdeki değişkenlerin fiziksel anlamları şunlardır:
+- `f`: Boyutsuz Darcy-Weisbach sürtünme katsayısı (laminer akışta `64/Re`, türbülanslı rejimde çeper bağıl pürüzlülüğüne ve Reynolds sayısına bağlı Colebrook-Haaland çözümü),
+- `L`: Boru hattının doğrusal toplam boyu [m],
+- `D`: Borunun net iç çapı [m],
+- `v`: Kesitteki ortalama akış hızı [m/s] (`v = 4Q / (\pi D²)`),
+- `g`: Standart yerçekimi ivmesi (`9.81 m/s²`).
 
-`h_f = f cdot racLD cdot racv^22g quad [	extm]`
+Düz borudaki sürtünmenin yanı sıra vana, dirsek, redüksiyon ve te gibi armatürlerin sebep olduğu yerel (minör) kayıplar katsayı yöntemiyle belirlenir:
 
-- `f`: Darcy sürtünme faktörü (Laminer akışta `f = 64/Re`, türbülanslı akışta Colebrook veya Haaland formülü),
-- `L`: Boru hattı toplam boyu [`extm`],
-- `D`: Boru iç çapı [`extm`],
-- `v`: Akış hızı [`extm/s`], `g = 9.81	ext m/s^2`.
-**Lokal / Minör Kayıplar (`h_lokal`):** Dirsekler, vanalar ve redüksiyonlar için kayıp katsayısı (`K`) kullanılarak toplanır:
+```text
+h_m = \sum K_L · (v² / 2g)  [mSS]
+```
 
-`h_lokal = sum K cdot racv^22g`
+Toplam hidrolik yük kaybı, sürekli sürtünme ve yerel dirençlerin skaler toplamıdır: `H_toplam = h_f + h_m`.
 
+## Sayılarla Çözümlü Uygulama Örneği
 
-<Callout type="info" title="Hızın Karesi Etkisi">
-Boru çapı yarıya indirilirse akış hızı 4 katına, sürtünme kaybı ise hızın karesi ve çapın etkisiyle ($v^2/D$) tam **32 katına** çıkar!
-</Callout>
+Bir endüstriyel soğutma tesisatında `D = 100 mm` (`0.10 m`) iç çapında, toplam boyu `L = 120 m` olan karbon çelik borudan debisi `Q = 14.13 L/s` (`0.01413 m³/s`) olan su basılmaktadır. Tesisatta 4 adet 90° standart dirsek (`K_L = 0.75`) ve 1 adet yaylı çekvalf (`K_L = 2.0`) yer almaktadır. Akış rejiminde hesaplanan Darcy sürtünme faktörü `f = 0.022` olarak verilmiştir.
 
-## İlgili hesaplayıcılar ve kaynaklar
+1. **Akış Hızı:**
+   `v = (4 × 0.01413) / (\pi × 0.10²) = 0.05652 / 0.031416 = 1.80 m/s`
+2. **Dinamik Yük:**
+   `v² / 2g = (1.80)² / (2 × 9.81) = 3.24 / 19.62 = 0.1651 mSS`
+3. **Sürekli Sürtünme Kaybı:**
+   `h_f = 0.022 × (120 / 0.10) × 0.1651 = 0.022 × 1200 × 0.1651 = 4.36 mSS`
+4. **Yerel Kayıplar Toplamı:**
+   `\sum K_L = (4 × 0.75) + 2.0 = 5.0`
+   `h_m = 5.0 × 0.1651 = 0.83 mSS`
+5. **Toplam Yük Kaybı:**
+   `H_toplam = 4.36 + 0.83 = 5.19 mSS` (yaklaşık `50.9 kPa` basınç düşüşü).
 
-- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss)
-- [Pompa Türleri ve Seçim Rehberi](/tr/guides/pompa-turleri-secim-rehberi)
-- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi)
+Pompa seçimi yapılırken basma yüksekliğine statik kot farkının yanı sıra bu `5.19 mSS` sürtünme kaybı güvenlik payıyla eklenmelidir.
+
+## Tasarımda En Sık Yapılan Hatalar
+
+- **Fanning ve Darcy Katsayılarının Karıştırılması:** Amerikan kimya mühendisliği literatüründe sıkça geçen Fanning sürtünme katsayısı (`f_F`), Darcy katsayısının dörtte biridir (`f_D = 4 × f_F`). Fanning değerini doğrudan Darcy formülünde kullanmak yük kaybını %75 eksik hesaplatır.
+- **Yerel Kayıpları İhmal Etmek:** Kısa mesafeli ancak çok sayıda dirsek, filtre ve vana barındıran makine dairesi hatlarında yerel kayıplar toplam düşüşün %40 ila %60'ına ulaşabilir. Bunları ihmal etmek pompanın çalışma noktasını kavitasyona sürükler.
+- **Eski Boru Pürüzlülüğünü Öngörmemek:** Kireçlenme ve paslanma zamanla iç çapı daraltırken pürüzlülüğü katlar; yeni boru katsayısıyla yapılan hesap 5 yıl sonra yetersiz debiye yol açar.
+
+## İlgili Araçlar ve Rehberler
+
+- [Boru Basınç Kaybı Hesaplayıcı](/tr/tools/pipe-pressure-loss) — Debi, boru çapı ve malzeme seçimiyle Darcy-Weisbach ve yerel kayıp hesabı.
+- [Akışkan Dinamiği Temelleri Rehberi](/tr/guides/akiskan-dinamigi-temelleri-boru-kanal-akisi) — Boru içi akış hız sınırları ve hidrolik hesap standartları.
+- [Pompa Türleri ve Seçim Rehberi](/tr/guides/pompa-turleri-secim-rehberi) — Sistem eğrisi, NPSH ve basma yüksekliği optimizasyonu.
