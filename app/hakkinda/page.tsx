@@ -10,36 +10,36 @@ import { BookOpen, CheckCircle2, Cpu, FileText, Layers, ShieldCheck, Users } fro
 const pageCopy = {
   title: "TORQYX Hakkında — Mühendisler İçin Geliştirilen Deterministik Hesap Motoru",
   description:
-    "TORQYX'in makine mühendisliği hesaplama metodolojisi, E-E-A-T kalite güvence protokolü, akademik kaynakları ve kurumsal vizyonu.",
+    "TORQYX'in makine mühendisliği hesaplama metodolojisi, 412+ vitest test güvencesi, akademik kaynakları ve kurumsal vizyonu.",
   imageAlt: "TORQYX hakkında görsel",
   sections: {
     whyTitle: "Neden TORQYX? — Deterministik Mühendislik Vizyonu",
     whyBody:
       "Mekanik tasarım ve ürün geliştirme süreçlerinde en kritik zaman kaybı, hesaplamaların doğruluğundan ve izlenebilirliğinden emin olmak için harcanan çabadır. Karmaşık Excel tablolarında gizlenmiş formüller, kaynak gösterilmemiş varsayımlar ve mühendisten mühendise farklılık gösteren sonuçlar, modern endüstride tasarım hatalarına ve maliyetli prototip revizyonlarına yol açmaktadır. TORQYX, mekanik hesaplama süreçlerini şeffaf, tekrarlanabilir ve bağımsız biçimde doğrulanabilir hale getirmek için geliştirildi: aynı girdide her zaman aynı fiziksel sonucu veren, uluslararası normlara dayalı deterministik bir hesaplama altyapısı.",
 
-    editorialTitle: "Mühendislik Kurulu ve Editoryal İnceleme Süreci",
+    editorialTitle: "Mühendislik Ekibi ve Uzmanlık Alanları",
     editorialBody:
-      "TORQYX üzerindeki tüm araçlar, formüller ve teknik rehberler; makine mühendisliği, mekanik tasarım, imalat yöntemleri ve yazılım güvenilirliği alanlarında uzmanlaşmış çalışma gruplarımız tarafından geliştirilir ve denetlenir.",
+      "TORQYX, makine tasarımı, imalat yöntemleri ve analitik mühendislik yazılımları geliştiren odaklanmış bir mühendislik ekibi (TORQYX Engineering Team) tarafından tasarlanmakta ve sürdürülmektedir. Her modül, endüstriyel standartlara ve akademik referanslara dayalı pratik mühendislik disiplinlerine göre yapılandırılmıştır.",
     editorialDesks: [
       {
-        title: "Mekanik Tasarım ve Mukavemet Masası",
+        title: "Mekanik Tasarım ve Mukavemet",
         description:
           "Makine elemanları (cıvata, şaft, kama, yay, dişli), statik ve yorulma mukavemeti analizleri, analitik gerilme ve şekil değiştirme hesaplarının normlara uygunluğu denetlenir.",
       },
       {
-        title: "İmalat ve Tolerans Masası",
+        title: "İmalat ve Tolerans Sistemleri",
         description:
-          "ISO tolerans sistemleri (ISO 286), genel toleranslar (ISO 2768), kaynak hesapları (Eurocode 3) ve yüzey işleme standartları değerlendirilir.",
+          "ISO tolerans sistemleri (ISO 286), genel toleranslar (ISO 2768), kaynak hesapları (Eurocode 3) ve geometri standartları değerlendirilir.",
       },
       {
-        title: "Termal ve Akışkan Sistemleri Masası",
+        title: "Termal ve Akışkan Sistemleri",
         description:
-          "Boru sürtünme kayıpları (Darcy-Weisbach), hidrolik/pnömatik silindir güçleri, ısı yalıtımı ve termal genleşme hesapları kontrol edilir.",
+          "Boru sürtünme kayıpları (Darcy-Weisbach), hidrolik silindir güçleri, akış rejimleri ve hidrolik basınç kayıpları analitik denklemlerle modellenir.",
       },
       {
-        title: "Yazılım ve Algoritma Doğrulama Masası",
+        title: "Algoritma ve Otomatik Test Doğrulama",
         description:
-          "Her formül 250'den fazla otomatik birim test (Vitest) ile CI/CD ortamında test edilir; birim dönüşümleri ve sınır şartları deterministik olarak kilitlenir.",
+          "Hesaplama motoru, 412'den fazla otomatik birim test (Vitest) ile CI/CD ortamında test edilir; birim dönüşümleri ve sınır şartları deterministik olarak kilitlenir.",
       },
     ],
 
@@ -50,7 +50,7 @@ const pageCopy = {
         text: "Hiçbir araçta formüller kapalı kutu değildir; uygulanan fiziksel eşitlikler ve ara adımlar matematiksel notasyonla açıkça gösterilir.",
       },
       {
-        title: "250+ Otomatik Birim Test",
+        title: "412+ Otomatik Birim Test",
         text: "Tüm hesaplayıcılar, akademik literatürdeki çözümlü örnek senaryolarla kod seviyesinde test edilerek sürüm güncellemelerinde geriye dönük tutarlılık korunur.",
       },
       {
@@ -93,36 +93,36 @@ const pageCopy = {
 const pageCopyEn = {
   title: "About TORQYX — A Deterministic Calculation Engine Built for Engineers",
   description:
-    "TORQYX's mechanical engineering calculation methodology, E-E-A-T quality assurance protocol, academic references, and platform vision.",
+    "TORQYX's mechanical engineering calculation methodology, 412+ vitest test assurance, academic references, and platform vision.",
   imageAlt: "About TORQYX visual",
   sections: {
     whyTitle: "Why TORQYX? — Deterministic Engineering Vision",
     whyBody:
       "The most significant bottleneck in mechanical design and product development is the effort required to verify the accuracy and traceability of calculations. Complex spreadsheets with hidden formulas, uncited assumptions, and results that vary from engineer to engineer lead to design errors and expensive prototype revisions in modern industry. TORQYX was engineered to make mechanical calculation transparent, repeatable, and independently verifiable: a deterministic computing platform rooted in international engineering standards that delivers identical results for identical inputs every time.",
 
-    editorialTitle: "Engineering Board & Editorial Review Process",
+    editorialTitle: "Engineering Team & Core Disciplines",
     editorialBody:
-      "All calculation tools, formulas, and technical guides on TORQYX are developed and peer-reviewed by specialized engineering working groups spanning mechanical design, manufacturing processes, and software reliability.",
+      "TORQYX is developed and maintained by a dedicated engineering software team (TORQYX Engineering Team) with background in mechanical design and analytical software development. Every calculation module is structured around established industrial standards and academic references.",
     editorialDesks: [
       {
-        title: "Mechanical Design & Strength Desk",
+        title: "Mechanical Design & Strength",
         description:
-          "Oversees machine elements (fasteners, shafts, keys, springs, gears), static and fatigue strength evaluations, and analytical stress/deflection modeling.",
+          "Machine elements (fasteners, shafts, keys, springs, gears), static and fatigue strength evaluations, and analytical stress/deflection modeling.",
       },
       {
-        title: "Manufacturing & Tolerancing Desk",
+        title: "Manufacturing & Tolerancing Systems",
         description:
-          "Evaluates ISO tolerance systems (ISO 286), general manufacturing tolerances (ISO 2768), weld sizing (Eurocode 3), and surface finish criteria.",
+          "ISO tolerance systems (ISO 286), general manufacturing tolerances (ISO 2768), fillet weld sizing (Eurocode 3), and geometric standards.",
       },
       {
-        title: "Thermal & Fluid Systems Desk",
+        title: "Thermal & Fluid Systems",
         description:
-          "Validates pipe friction losses (Darcy-Weisbach), hydraulic/pneumatic cylinder force & power sizing, thermal insulation, and thermal expansion algorithms.",
+          "Pipe friction losses (Darcy-Weisbach), hydraulic cylinder sizing, flow regimes, and pressure drop modeling via analytical equations.",
       },
       {
-        title: "Software & Algorithm Verification Desk",
+        title: "Algorithm & Automated Test Verification",
         description:
-          "Enforces over 250 automated unit tests (Vitest) in continuous integration pipelines, locking dimensional units and boundary condition integrity.",
+          "More than 412 automated unit tests (Vitest) in continuous integration pipelines, locking dimensional units and boundary condition integrity.",
       },
     ],
 
@@ -133,7 +133,7 @@ const pageCopyEn = {
         text: "Calculations are never black boxes; governing physical equations and intermediate variables are published with clear mathematical notation.",
       },
       {
-        title: "250+ Automated Unit Tests",
+        title: "412+ Automated Unit Tests",
         text: "Every calculator is continuously tested against textbook benchmark problems and boundary conditions to ensure zero regression across deployments.",
       },
       {
@@ -237,7 +237,7 @@ export default async function AboutPage() {
           <p className="leading-relaxed text-slate-600">{copy.sections.whyBody}</p>
         </section>
 
-        {/* Editoryal Kurul ve Masalar */}
+        {/* Mühendislik Ekibi ve Alanlar */}
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-primary-600">
             <Users className="h-6 w-6" />
@@ -249,10 +249,10 @@ export default async function AboutPage() {
             {copy.sections.editorialDesks.map((desk) => (
               <div
                 key={desk.title}
-                className="rounded-2xl border border-slate-100 bg-slate-50/80 p-5 transition-colors hover:border-slate-300"
+                className="rounded-2xl border border-slate-100 bg-slate-50/50 p-4 transition-colors hover:border-slate-200 hover:bg-slate-50"
               >
                 <h3 className="font-semibold text-slate-900">{desk.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600 md:text-sm">
+                <p className="mt-1 text-xs leading-relaxed text-slate-600 md:text-sm">
                   {desk.description}
                 </p>
               </div>
@@ -260,56 +260,56 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* Metodoloji ve QA */}
-        <section id="methodology" className="scroll-mt-24 space-y-4">
+        {/* Kalite Güvence ve Metodoloji */}
+        <section className="space-y-4">
           <div className="flex items-center gap-2 text-primary-600">
-            <CheckCircle2 className="h-6 w-6" />
+            <ShieldCheck className="h-6 w-6" />
             <h2 className="text-xl font-bold text-slate-900">{copy.sections.methodologyTitle}</h2>
           </div>
-
-          <div className="space-y-3">
+          <div className="grid gap-4 md:grid-cols-2">
             {copy.sections.methodologyItems.map((item) => (
-              <div key={item.title} className="flex items-start gap-3">
-                <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary-500" />
+              <div key={item.title} className="flex gap-3">
+                <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-500" />
                 <div>
                   <h3 className="font-semibold text-slate-900">{item.title}</h3>
-                  <p className="text-xs leading-relaxed text-slate-600 md:text-sm">{item.text}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600 md:text-sm">{item.text}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Kaynakça ve Standartlar */}
+        {/* Referans Standartlar ve Literatür */}
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-primary-600">
             <BookOpen className="h-6 w-6" />
             <h2 className="text-xl font-bold text-slate-900">{copy.sections.literatureTitle}</h2>
           </div>
-          <p className="text-sm text-slate-600">{copy.sections.literatureDescription}</p>
-
+          <p className="leading-relaxed text-slate-600">{copy.sections.literatureDescription}</p>
           <ul className="grid gap-2 sm:grid-cols-2">
-            {copy.sections.literatureItems.map((item) => (
+            {copy.sections.literatureItems.map((lit) => (
               <li
-                key={item}
-                className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 text-xs font-medium text-slate-700 md:text-sm"
+                key={lit}
+                className="flex items-start gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 text-xs text-slate-700 md:text-sm"
               >
-                <FileText className="h-4 w-4 flex-shrink-0 text-slate-400" />
-                <span>{item}</span>
+                <FileText className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary-500" />
+                <span>{lit}</span>
               </li>
             ))}
           </ul>
         </section>
 
-        {/* Sorumluluk Reddi / Limitations */}
-        <section id="disclaimer" className="scroll-mt-24 space-y-3 rounded-2xl border border-amber-200 bg-amber-50/80 p-6 text-amber-900">
+        {/* Kullanım Kapsamı ve Sorumluluk Reddi */}
+        <section className="space-y-4 rounded-2xl border border-amber-200 bg-amber-50/50 p-5">
           <div className="flex items-center gap-2 text-amber-800">
-            <ShieldCheck className="h-5 w-5" />
-            <h2 className="text-lg font-bold">{copy.sections.limitationsTitle}</h2>
+            <Layers className="h-5 w-5" />
+            <h3 className="font-semibold">{copy.sections.limitationsTitle}</h3>
           </div>
-          <ul className="list-disc space-y-1.5 pl-5 text-xs leading-relaxed text-amber-900 md:text-sm">
-            {copy.sections.limitationsItems.map((item) => (
-              <li key={item}>{item}</li>
+          <ul className="list-disc space-y-2 pl-5 text-xs text-amber-900/80 md:text-sm">
+            {copy.sections.limitationsItems.map((lim, index) => (
+              <li key={index} className="leading-relaxed">
+                {lim}
+              </li>
             ))}
           </ul>
         </section>
