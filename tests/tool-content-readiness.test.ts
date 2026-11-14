@@ -1,18 +1,31 @@
 import { describe, expect, it } from "vitest";
-import { getToolIndexReadyLocales, isToolLocaleIndexReady } from "@/utils/tool-content-readiness";
+import {
+  ENGLISH_GUIDE_PENDING_TOOL_IDS,
+  getToolIndexReadyLocales,
+  isToolLocaleIndexReady,
+} from "@/utils/tool-content-readiness";
 import { buildToolMetadata } from "@/utils/tool-seo";
+import { NOINDEX_FOLLOW_ROBOTS } from "@/utils/metadata";
 
-const RECOVERED_TOOL_IDS = [
+const READY_EN_TOOL_IDS = [
+  "basic-engineering",
+  "bearing-life",
+  "belt-length",
+  "bending-stress",
+  "bolt-calculator",
+  "compressor-cc",
+  "fillet-weld",
+  "hydraulic-cylinder",
+  "param-chart",
+  "pipe-pressure-loss",
+  "sanity-check",
+  "shaft-torsion",
+  "simple-stress",
+  "tolerance-lab",
+  "torque-power",
+  "unit-converter",
   "gear-design",
-  "material-cards",
-  "gear-weight",
-  "gear-contact-ratio",
-  "gear-helix-axial",
-  "gear-force-torque",
-  "gear-backlash",
-  "bolt-database",
   "gear-ratio",
-  "gear-viscosity",
   "production-project",
   "heat-treatment",
   "strength-statics",
@@ -25,36 +38,40 @@ const RECOVERED_TOOL_IDS = [
 ] as const;
 
 describe("tool content index-readiness policy", () => {
-  it("keeps genuine unready tools out of English search indexing", () => {
-    expect(isToolLocaleIndexReady("unready-draft-tool", "tr")).toBe(true);
-    expect(isToolLocaleIndexReady("unready-draft-tool", "en")).toBe(false);
-    expect(getToolIndexReadyLocales("unready-draft-tool")).toEqual(["tr"]);
+  it("keeps tools pending guides out of English search indexing and sitemap", () => {
+    for (const toolId of ENGLISH_GUIDE_PENDING_TOOL_IDS) {
+      expect(isToolLocaleIndexReady(toolId, "tr")).toBe(true);
+      expect(
+        isToolLocaleIndexReady(toolId, "en"),
+        `Expected ${toolId} without guide to be non-indexed in English`,
+      ).toBe(false);
+      expect(getToolIndexReadyLocales(toolId)).toEqual(["tr"]);
+
+      const metadata = buildToolMetadata(toolId, "en");
+      expect(metadata.robots).toEqual(NOINDEX_FOLLOW_ROBOTS);
+    }
   });
 
-  it("automatically marks all 19 fixed and translated tools as index-ready in English", () => {
-    for (const toolId of RECOVERED_TOOL_IDS) {
+  it("marks all tools with verified guides as index-ready in English", () => {
+    for (const toolId of READY_EN_TOOL_IDS) {
       expect(isToolLocaleIndexReady(toolId, "tr")).toBe(true);
       expect(
         isToolLocaleIndexReady(toolId, "en"),
         `Expected ${toolId} to be index-ready for English`,
       ).toBe(true);
       expect(getToolIndexReadyLocales(toolId)).toEqual(["tr", "en"]);
-    }
-  });
 
-  it("sets robots to undefined (indexable) for recovered tools and noindex for unready tools", () => {
-    // Verified tools now return indexable (robots: undefined)
-    for (const toolId of RECOVERED_TOOL_IDS) {
       const metadata = buildToolMetadata(toolId, "en");
       expect(
         metadata.robots,
         `Expected ${toolId} to be indexable (robots: undefined)`,
       ).toBeUndefined();
     }
+  });
 
-    // Draft / unready tool should have noindex, follow
-    const unready = buildToolMetadata("unready-draft-tool", "en");
-    // If not in catalog, tool is null so robots is undefined; test with an unready catalog item if one exists
+  it("handles unready draft tool IDs cleanly", () => {
+    expect(isToolLocaleIndexReady("unready-draft-tool", "tr")).toBe(true);
     expect(isToolLocaleIndexReady("unready-draft-tool", "en")).toBe(false);
+    expect(getToolIndexReadyLocales("unready-draft-tool")).toEqual(["tr"]);
   });
 });

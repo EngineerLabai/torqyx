@@ -9,7 +9,7 @@ import type { Locale } from "@/utils/locale";
  * UI strings have been fully translated and reviewed.
  */
 const ENGLISH_INDEX_READY_TOOL_IDS = new Set([
-  // Original verified tools
+  // Original verified tools with full guides
   "basic-engineering",
   "bearing-life",
   "belt-length",
@@ -17,7 +17,6 @@ const ENGLISH_INDEX_READY_TOOL_IDS = new Set([
   "bolt-calculator",
   "compressor-cc",
   "fillet-weld",
-  "gear-module",
   "hydraulic-cylinder",
   "param-chart",
   "pipe-pressure-loss",
@@ -28,17 +27,9 @@ const ENGLISH_INDEX_READY_TOOL_IDS = new Set([
   "torque-power",
   "unit-converter",
 
-  // 19 newly translated & index-ready tools
+  // Verified rich reference guides and composite hubs
   "gear-design",
-  "material-cards",
-  "gear-weight",
-  "gear-contact-ratio",
-  "gear-helix-axial",
-  "gear-force-torque",
-  "gear-backlash",
-  "bolt-database",
   "gear-ratio",
-  "gear-viscosity",
   "production-project",
   "heat-treatment",
   "strength-statics",
@@ -49,6 +40,22 @@ const ENGLISH_INDEX_READY_TOOL_IDS = new Set([
   "sealing-guide",
   "coating-guide",
 ]);
+
+/**
+ * Tools whose English guides or standalone documentation are not yet written.
+ * Kept noindex and out of English sitemap until a guide is authored.
+ */
+export const ENGLISH_GUIDE_PENDING_TOOL_IDS = [
+  "gear-force-torque",
+  "material-cards",
+  "gear-helix-axial",
+  "gear-weight",
+  "gear-viscosity",
+  "gear-contact-ratio",
+  "gear-module",
+  "bolt-database",
+  "gear-backlash",
+] as const;
 
 export const isToolLocaleIndexReady = (toolId: string, locale: Locale) =>
   locale === "tr" || ENGLISH_INDEX_READY_TOOL_IDS.has(toolId);
