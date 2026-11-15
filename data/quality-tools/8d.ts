@@ -182,7 +182,7 @@ export const eightDCopy: Record<Locale, EightDCopy> = {
           "Aksiyonların gecikme sebepleri ve B planı.",
         ],
         placeholder:
-          "Takım tedarik süresi 2 hafta; stok kritik. Sayaçlı sistem kurulumunda PLC I/O eksikliği riski; bakım ekibi ek modül sipariş etti.",
+          "Takım tedarik süresi 2 hafta; stok kritik. Sayaçlı sistem kurulumunda PLC I/O eksikliği riski; bakım personeli ek modül sipariş etti.",
       },
       {
         id: "metrics",

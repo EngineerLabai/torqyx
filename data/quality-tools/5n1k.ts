@@ -86,7 +86,7 @@ export const fiveN1kCopy: Record<Locale, FiveN1kCopy> = {
       },
       who: {
         label: "Kim? (Who)",
-        placeholder: "Örn. Araç kullanıcısı, montaj operatörü, kalite kontrol, bayi teknik ekibi...",
+        placeholder: "Örn. Araç kullanıcısı, montaj operatörü, kalite kontrol, bayi teknik personeli...",
       },
       why: {
         label: "Neden? (Why) - İlk tahmin / hipotez",
