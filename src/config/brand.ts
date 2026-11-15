@@ -34,9 +34,9 @@ export const brandConfig: BrandConfig = {
     "Bu platform eğitim ve ön tasarım amaçlıdır; kritik uygulamalarda resmi standartlar ve üretici verileri esas alınmalıdır. Sonuçlar; malzeme, emniyet katsayıları, çalışma koşulları ve üretim toleranslarına göre değişebilir. Profesyonel mühendislik onayı veya sertifikasyon yerine geçmez.",
   disclaimerEN:
     "This platform is for education and preliminary design; official standards and manufacturer data must be used for critical applications. Results may vary with material, safety factors, operating conditions, and manufacturing tolerances. It does not replace professional engineering approval or certification.",
-  editorialTeamName: "TORQYX Engineering Team",
+  editorialTeamName: "Bağımsız Makine Mühendisi / Geliştirici (TORQYX)",
   editorialTeamDescription:
-    "The TORQYX Engineering Team maintains the calculation methods, references, unit checks, and publication reviews used across the platform.",
+    "TORQYX is developed and maintained by an independent mechanical engineer and software developer, verified against standard textbook benchmarks and automated Vitest suites.",
 };
 
 export const getBrandCopy = (locale: Locale): BrandCopy => {

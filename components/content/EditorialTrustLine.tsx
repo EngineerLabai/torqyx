@@ -18,8 +18,8 @@ export default function EditorialTrustLine({ locale, lastUpdated }: EditorialTru
         <ShieldCheck className="h-4 w-4 text-emerald-600" />
         <span>
           {isTurkish
-            ? "Mühendislik İncelemesi: TORQYX Mekanik Tasarım Masası"
-            : "Engineering Review: TORQYX Mechanical Design Desk"}
+            ? "Mühendislik İncelemesi: Bağımsız Makine Mühendisi / Geliştirici"
+            : "Engineering Review: Independent Mechanical Engineer & Developer"}
         </span>
       </div>
       <span className="text-slate-300">|</span>
@@ -29,7 +29,7 @@ export default function EditorialTrustLine({ locale, lastUpdated }: EditorialTru
           href={withLocalePrefix("/hakkinda", locale)}
           className="font-semibold text-primary-700 underline-offset-2 hover:underline"
         >
-          {isTurkish ? "Doğrulama Metodolojisi & Ekip" : "Verification Methodology & Team"}
+          {isTurkish ? "Doğrulama Metodolojisi" : "Verification Methodology"}
         </Link>
       </div>
       {lastUpdated && (

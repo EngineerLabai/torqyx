@@ -27,7 +27,7 @@ const STEPS = [
   },
   {
     title: "6) Devretme ve loglama",
-    detail: "Test sonuçları, tork logları, kullanılan contalar ve bakım periyotlarını kaydet; bakım ekibine devret.",
+    detail: "Test sonuçları, tork logları, kullanılan contalar ve bakım periyotlarını kaydet; bakım personeline devret.",
   },
 ];
 

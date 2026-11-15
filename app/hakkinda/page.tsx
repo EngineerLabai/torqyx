@@ -10,36 +10,36 @@ import { BookOpen, CheckCircle2, Cpu, FileText, Layers, ShieldCheck, Users } fro
 const pageCopy = {
   title: "TORQYX Hakkında — Mühendisler İçin Geliştirilen Deterministik Hesap Motoru",
   description:
-    "TORQYX'in makine mühendisliği hesaplama metodolojisi, 412+ vitest test güvencesi, akademik kaynakları ve kurumsal vizyonu.",
+    "TORQYX'in makine mühendisliği hesaplama metodolojisi, 415 vitest test güvencesi, akademik kaynakları ve kurumsal vizyonu.",
   imageAlt: "TORQYX hakkında görsel",
   sections: {
     whyTitle: "Neden TORQYX? — Deterministik Mühendislik Vizyonu",
     whyBody:
       "Mekanik tasarım ve ürün geliştirme süreçlerinde en kritik zaman kaybı, hesaplamaların doğruluğundan ve izlenebilirliğinden emin olmak için harcanan çabadır. Karmaşık Excel tablolarında gizlenmiş formüller, kaynak gösterilmemiş varsayımlar ve mühendisten mühendise farklılık gösteren sonuçlar, modern endüstride tasarım hatalarına ve maliyetli prototip revizyonlarına yol açmaktadır. TORQYX, mekanik hesaplama süreçlerini şeffaf, tekrarlanabilir ve bağımsız biçimde doğrulanabilir hale getirmek için geliştirildi: aynı girdide her zaman aynı fiziksel sonucu veren, uluslararası normlara dayalı deterministik bir hesaplama altyapısı.",
 
-    editorialTitle: "Mühendislik Ekibi ve Uzmanlık Alanları",
+    editorialTitle: "Geliştirici ve Çalışma Alanları",
     editorialBody:
-      "TORQYX, makine tasarımı, imalat yöntemleri ve analitik mühendislik yazılımları geliştiren odaklanmış bir mühendislik ekibi (TORQYX Engineering Team) tarafından tasarlanmakta ve sürdürülmektedir. Her modül, endüstriyel standartlara ve akademik referanslara dayalı pratik mühendislik disiplinlerine göre yapılandırılmıştır.",
+      "TORQYX, bağımsız bir makine mühendisi/geliştirici tarafından hazırlanır ve sürdürülür. Platformda yer alan her hesaplama modülü; uluslararası standartlar (ISO, DIN, EN, VDI) ve temel akademik mühendislik literatürü esas alınarak doğrudan tek elden geliştirilmektedir.",
     editorialDesks: [
       {
         title: "Mekanik Tasarım ve Mukavemet",
         description:
-          "Makine elemanları (cıvata, şaft, kama, yay, dişli), statik ve yorulma mukavemeti analizleri, analitik gerilme ve şekil değiştirme hesaplarının normlara uygunluğu denetlenir.",
+          "Makine elemanları (cıvata, şaft, kama, yay, dişli), statik mukavemet ve yorulma analizleri analitik mühendislik formülleriyle kodlanmıştır.",
       },
       {
         title: "İmalat ve Tolerans Sistemleri",
         description:
-          "ISO tolerans sistemleri (ISO 286), genel toleranslar (ISO 2768), kaynak hesapları (Eurocode 3) ve geometri standartları değerlendirilir.",
+          "ISO tolerans sistemleri (ISO 286), genel toleranslar (ISO 2768) ve kaynak hesapları (Eurocode 3) standart normlara tam uyumlu olarak modellenmiştir.",
       },
       {
         title: "Termal ve Akışkan Sistemleri",
         description:
-          "Boru sürtünme kayıpları (Darcy-Weisbach), hidrolik silindir güçleri, akış rejimleri ve hidrolik basınç kayıpları analitik denklemlerle modellenir.",
+          "Boru sürtünme kayıpları (Darcy-Weisbach), hidrolik silindir güçleri ve akış rejimleri analitik eşitliklerle hesaplanır.",
       },
       {
-        title: "Algoritma ve Otomatik Test Doğrulama",
+        title: "Algoritmik Doğrulama ve Test",
         description:
-          "Hesaplama motoru, 412'den fazla otomatik birim test (Vitest) ile CI/CD ortamında test edilir; birim dönüşümleri ve sınır şartları deterministik olarak kilitlenir.",
+          "Hesaplama motoru, 415'ten fazla otomatik birim test (Vitest) ile test edilmekte; birim dönüşümleri ve sınır şartları deterministik olarak kilitlenmektedir.",
       },
     ],
 
@@ -93,36 +93,36 @@ const pageCopy = {
 const pageCopyEn = {
   title: "About TORQYX — A Deterministic Calculation Engine Built for Engineers",
   description:
-    "TORQYX's mechanical engineering calculation methodology, 412+ vitest test assurance, academic references, and platform vision.",
+    "TORQYX's mechanical engineering calculation methodology, 415 vitest test assurance, academic references, and platform vision.",
   imageAlt: "About TORQYX visual",
   sections: {
     whyTitle: "Why TORQYX? — Deterministic Engineering Vision",
     whyBody:
       "The most significant bottleneck in mechanical design and product development is the effort required to verify the accuracy and traceability of calculations. Complex spreadsheets with hidden formulas, uncited assumptions, and results that vary from engineer to engineer lead to design errors and expensive prototype revisions in modern industry. TORQYX was engineered to make mechanical calculation transparent, repeatable, and independently verifiable: a deterministic computing platform rooted in international engineering standards that delivers identical results for identical inputs every time.",
 
-    editorialTitle: "Engineering Team & Core Disciplines",
+    editorialTitle: "Developer & Core Disciplines",
     editorialBody:
-      "TORQYX is developed and maintained by a dedicated engineering software team (TORQYX Engineering Team) with background in mechanical design and analytical software development. Every calculation module is structured around established industrial standards and academic references.",
+      "TORQYX is developed and maintained by an independent mechanical engineer and software developer. Every calculation module on the platform is authored from the ground up based on governing international standards (ISO, DIN, EN, VDI) and foundational academic engineering literature.",
     editorialDesks: [
       {
         title: "Mechanical Design & Strength",
         description:
-          "Machine elements (fasteners, shafts, keys, springs, gears), static and fatigue strength evaluations, and analytical stress/deflection modeling.",
+          "Machine elements (fasteners, shafts, keys, springs, gears), static and fatigue strength evaluations coded via analytical equations.",
       },
       {
         title: "Manufacturing & Tolerancing Systems",
         description:
-          "ISO tolerance systems (ISO 286), general manufacturing tolerances (ISO 2768), fillet weld sizing (Eurocode 3), and geometric standards.",
+          "ISO tolerance systems (ISO 286), general manufacturing tolerances (ISO 2768), and fillet weld sizing (Eurocode 3) built directly to standard norms.",
       },
       {
         title: "Thermal & Fluid Systems",
         description:
-          "Pipe friction losses (Darcy-Weisbach), hydraulic cylinder sizing, flow regimes, and pressure drop modeling via analytical equations.",
+          "Pipe friction losses (Darcy-Weisbach), hydraulic cylinder sizing, and flow regimes solved using analytical equations.",
       },
       {
-        title: "Algorithm & Automated Test Verification",
+        title: "Algorithmic Verification & Testing",
         description:
-          "More than 412 automated unit tests (Vitest) in continuous integration pipelines, locking dimensional units and boundary condition integrity.",
+          "The calculation engine is continuously verified by more than 415 automated unit tests (Vitest), locking dimensional units and boundary condition integrity.",
       },
     ],
 
@@ -198,9 +198,12 @@ export default async function AboutPage() {
     description: copy.description,
     url: "https://torqyx.com/hakkinda",
     mainEntity: {
-      "@type": "Organization",
+      "@type": "Person",
       name: "TORQYX",
-      alternateName: "TORQYX Engineering Platform",
+      jobTitle:
+        locale === "en"
+          ? "Independent Mechanical Engineer & Software Developer"
+          : "Bağımsız Makine Mühendisi ve Yazılım Geliştirici",
       url: "https://torqyx.com",
       description: copy.sections.whyBody,
       email: "infotorqyx@gmail.com",
@@ -237,7 +240,7 @@ export default async function AboutPage() {
           <p className="leading-relaxed text-slate-600">{copy.sections.whyBody}</p>
         </section>
 
-        {/* Mühendislik Ekibi ve Alanlar */}
+        {/* Geliştirici ve Çalışma Alanları */}
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-primary-600">
             <Users className="h-6 w-6" />

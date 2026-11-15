@@ -1063,7 +1063,7 @@
         "subject": {
           "label": "Subject",
           "options": {
-            "technical": "Technical Question",
+            "technical": "Technical correction report",
             "feature": "Feature Suggestion",
             "bug": "Bug Report",
             "other": "Other"

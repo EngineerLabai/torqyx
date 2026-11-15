@@ -910,7 +910,7 @@
               "a": "Uyarılar aralık dışı girişleri, eksik birimleri veya tutarsız seçimleri işaretler."
             },
             {
-              "q": "Hesabı ekibimle paylaşabilir miyim?",
+              "q": "Hesabı çalışma arkadaşlarımla paylaşabilir miyim?",
               "a": "Paylaş & Rapor ile bağlantı oluşturabilir veya PDF özetini indirebilirsiniz."
             },
             {
@@ -1063,7 +1063,7 @@
         "subject": {
           "label": "Konu",
           "options": {
-            "technical": "Teknik Soru",
+            "technical": "Teknik düzeltme bildirimi",
             "feature": "Özellik Önerisi",
             "bug": "Hata Bildirimi",
             "other": "Diğer"
@@ -1088,7 +1088,7 @@
         "submitFailed": "Talep gönderilemedi."
       },
       "success": "Talebin alındı. En kısa sürede geri döneceğiz.",
-      "successToast": "Talebin alındı - ekibimiz en kısa sürede sana dönüş yapacak."
+      "successToast": "Talebin alındı - en kısa sürede sana dönüş yapılacak."
     },
     "commentStream": {
       "kicker": "Canlı",

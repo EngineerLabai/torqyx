@@ -126,14 +126,14 @@ export default async function ContactPage() {
           <div className="flex items-center gap-2 font-semibold text-slate-900">
             <FileCheck className="h-5 w-5 text-primary-600" />
             <h2 className="text-base font-semibold">
-              {isEn ? "Editorial & Peer-Review Verification" : "Editoryal ve Hakemli İnceleme Süreci"}
+              {isEn ? "Technical Correction Report" : "Teknik Düzeltme Bildirimi"}
             </h2>
           </div>
           <ul className="mt-3 list-disc space-y-1.5 pl-5 text-slate-600">
             <li>
               {isEn
-                ? "Technical tickets are reviewed directly by mechanical design engineers."
-                : "Teknik bildirimler doğrudan makine tasarım mühendislerimiz tarafından incelenir."}
+                ? "Technical tickets are reviewed directly against published textbook benchmarks and standard literature."
+                : "Teknik bildirimler doğrudan yayınlanmış ders kitapları ve standart literatür üzerinden incelenir."}
             </li>
             <li>
               {isEn

@@ -120,8 +120,11 @@ export default async function GuidePage({ params }: GuidePageProps) {
       "@id": canonical,
     },
     author: {
-      "@type": "Organization",
-      name: "TORQYX Engineering Team",
+      "@type": "Person",
+      name:
+        locale === "tr"
+          ? "Bağımsız Makine Mühendisi / Geliştirici (TORQYX)"
+          : "Independent Mechanical Engineer & Developer (TORQYX)",
       url: buildLocalizedCanonical("/hakkinda", locale),
     },
     publisher: {

@@ -94,7 +94,7 @@ const COPY: Record<Locale, {
     hero: {
       title: "Project Hub",
       description:
-        "Lightweight, local-first modules for engineering teams. Data stays in your browser unless exported.",
+        "Lightweight, local-first modules for engineers. Data stays in your browser unless exported.",
       eyebrow: LABELS_BY_LOCALE.en.projectHub,
       imageAlt: "Project hub overview",
     },

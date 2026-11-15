@@ -8,14 +8,14 @@ import { buildPageMetadata } from "@/utils/metadata";
 const pageCopyTr = {
   title: "Hesaplama Metodolojisi ve Doğrulama",
   description:
-    "TORQYX'in deterministik mühendislik hesaplama yaklaşımı: formül kaynakları, standart referansları, 412+ vitest otomatik test kapsamı ve doğrulama süreci.",
+    "TORQYX'in deterministik mühendislik hesaplama yaklaşımı: formül kaynakları, standart referansları, 415 vitest otomatik test kapsamı ve doğrulama süreci.",
   imageAlt: "Hesaplama metodolojisi görseli",
 };
 
 const pageCopyEn = {
   title: "Calculation Methodology & Validation",
   description:
-    "TORQYX's deterministic engineering calculation approach: formula sources, standard references, 412+ vitest automated test coverage, and validation process.",
+    "TORQYX's deterministic engineering calculation approach: formula sources, standard references, 415 vitest automated test coverage, and validation process.",
   imageAlt: "Calculation methodology visual",
 };
 
@@ -67,19 +67,20 @@ const contentTr = {
     },
     {
       id: "testing",
-      title: "3. Test Kapsamı (412+ Otomatik Vitest Birimi)",
+      title: "3. Test Kapsamı (415 Otomatik Vitest Birimi)",
       paragraphs: [
-        "Hesaplama doğruluğunu garanti altına almak için platform kod tabanında Vitest çerçevesiyle çalışan 412'den fazla otomatik birim testi bulunmaktadır. Bu testler üretim ortamına çıkan her sürümde sürekli olarak çalıştırılır.",
+        "Hesaplama doğruluğunu garanti altına almak için platform kod tabanında Vitest çerçevesiyle çalışan 415 adet otomatik birim testi bulunmaktadır. Bu testler üretim ortamına çıkan her sürümde sürekli olarak çalıştırılır.",
         "Test paketimizin kapsamı şu alanları içerir: (a) Yukarıda listelenen akademik ders kitaplarındaki çözümlü örnek problemlerin sayısal çıktılarıyla çapraz kontrol; (b) Sınır ve uç koşulları (sıfır çap, negatif yük, aşırı yüksek sıcaklık veya basınç gibi fiziksel sınır aşımları); (c) Giriş doğrulama ve kullanıcı hata yakalama mekanizmaları; (d) Çift yönlü birim dönüşüm matematiksel hassasiyeti; (e) Kod tabanında yapılan herhangi bir optimizasyonda geriye dönük tutarlılığın (regression) korunması.",
-        "GitHub Actions üzerinde çalışan sürekli entegrasyon (CI/CD) boru hattı sayesinde, test paketindeki 412 testin tamamı geçmeden hiçbir kod değişikliği ana üretim dalına (main) birleştirilemez.",
+        "GitHub Actions üzerinde çalışan sürekli entegrasyon (CI/CD) boru hattı sayesinde, test paketindeki 415 testin tamamı geçmeden hiçbir kod değişikliği ana üretim dalına (main) birleştirilemez.",
       ],
     },
     {
       id: "validation",
       title: "4. Doğrulama Süreci ve Sınır Koşulları",
       paragraphs: [
-        "Kodlanan her araç, önce kaynak standart veya ders kitabındaki çözümlü örnek senaryolarla adım adım manuel olarak karşılaştırılır. Ardından bu senaryolar sayısal toleranslarla Vitest test kütüphanesine birim test olarak eklenir.",
-        "Araçlarımız, ön boyutlandırma ve mühendislik fizibilite hesapları için tasarlanmıştır. Hesaplamanın geçerlilik sınırları (örneğin Hooke yasasının geçerli olduğu elastik bölge, akış rejiminin türbülansa geçiş sınırları veya cıvatanın akma sınırına yaklaşma oranı) hem arayüzde bilgi panelleriyle hem de sonuç uyarılarıyla kullanıcıya açıkça iletilir.",
+        "Platformdaki tüm hesaplayıcıların doğrulama süreci doğrudan sahada uygulanan somut adımlara dayanır: Her araç kodlanırken öncelikle yayınlanmış standart örneklerine ve üniversite ders kitaplarındaki problemlere karşı elle (manuel olarak) adım adım doğrulanır.",
+        "Elle doğrulanmış sayısal benchmark senaryoları Vitest test paketine otomatik birim test olarak işlenir; her yeni dağıtımda 415 otomatik test kesintisiz çalışarak matematiksel tutarlılığı kilitler.",
+        "Araçlarımız ön boyutlandırma ve mühendislik fizibilite hesapları içindir. Hooke yasasının elastik sınırları, akış rejimleri veya malzeme akma eşikleri gibi fiziksel geçerlilik limitleri arayüzde açık uyarı ve bilgi notlarıyla kullanıcıya açıkça iletilir.",
         "Girdiler fiziksel gerçekçilik sınırlarını aştığında veya kritik güvenlik sınırına yaklaşıldığında araçlar koruyucu hata/uyarı mesajları üretir.",
       ],
     },
@@ -87,9 +88,9 @@ const contentTr = {
       id: "authorship",
       title: "5. Kim Geliştiriyor ve Hata Bildirme Kanalı",
       paragraphs: [
-        "TORQYX, makine mühendisliği temelli yazılım geliştiriciler (TORQYX Engineering Team) tarafından tasarlanmakta, kodlanmakta ve bakımı yapılmaktadır. Amacımız, karmaşık el kitapları ve formül karmaşasını mühendisler ve teknik ekipler için şeffaf, hızlı ve güvenilir bir web aracına dönüştürmektir.",
-        "Platformda yer alan herhangi bir formülde, hesap sonucunda veya birim dönüşümünde bir tutarsızlık, hata ya da iyileştirme önerisi fark eden kullanıcılarımızın geri bildirimlerini son derece önemsiyoruz.",
-        "Teknik hata bildirimlerinizi İletişim sayfamız (/iletisim) üzerinden veya doğrudan infotorqyx@gmail.com e-posta adresine iletebilirsiniz. Bildirilen her teknik konu referans literatür ve test paketi üzerinden incelenerek gerekli güncellemeler derhal işleme alınır.",
+        "TORQYX, bağımsız bir makine mühendisi/geliştirici tarafından hazırlanır ve sürdürülür. Temel amaç, karmaşık mühendislik el kitaplarını ve formül karmaşasını mühendisler, tasarımcılar ve teknik uygulayıcılar için şeffaf, hızlı ve güvenilir bir web aracına dönüştürmektir.",
+        "Doğrulama süreci yalnızca gerçekte yapılan pratik adımlara dayanır: Yayınlanmış standart örneklerine ve ders kitabı problemlerine karşı elle doğrulama, Vitest ile otomatik testler ve hata bildirimleri için doğrudan e-posta iletişimi.",
+        "Platformda yer alan herhangi bir formülde, hesap sonucunda veya birim dönüşümünde bir tutarsızlık, hata ya da iyileştirme önerisi fark eden kullanıcılarımızın bildirimlerini son derece önemsiyoruz. Teknik düzeltme bildirimlerinizi İletişim sayfamız (/iletisim) üzerinden veya doğrudan infotorqyx@gmail.com e-posta adresine iletebilirsiniz. Bildirilen her konu kaynak normlar üzerinden bizzat incelenerek gerekli güncellemeler derhal test paketine yansıtılır.",
       ],
     },
     {
@@ -138,29 +139,31 @@ const contentEn = {
     },
     {
       id: "testing",
-      title: "3. Automated Test Coverage (412+ Vitest Units)",
+      title: "3. Automated Test Coverage (415 Vitest Units)",
       paragraphs: [
-        "To guarantee numerical accuracy and prevent regressions, our codebase is safeguarded by more than 412 automated unit tests powered by the Vitest testing framework. These tests run continuously across all production deployments.",
+        "To guarantee numerical accuracy and prevent regressions, our codebase is safeguarded by 415 automated unit tests powered by the Vitest testing framework. These tests run continuously across all production deployments.",
         "Our test suite systematically exercises: (a) Cross-validation against solved benchmark problems published in standard textbooks; (b) Boundary and edge conditions (zero values, negative inputs, extreme pressure or load thresholds); (c) User input validation and defensive error handling; (d) Bidirectional unit conversion mathematical accuracy; (e) Regression prevention across formula enhancements.",
-        "Integrated within our GitHub Actions continuous integration (CI/CD) pipeline, every pull request must pass all 412 unit tests before any code can be merged into the production main branch.",
+        "Integrated within our GitHub Actions continuous integration (CI/CD) pipeline, every pull request must pass all 415 unit tests before any code can be merged into the production main branch.",
       ],
     },
     {
       id: "validation",
       title: "4. Validation Process and Application Limits",
       paragraphs: [
-        "Each newly implemented tool is first manually verified step-by-step against published standard worked examples and textbook problems. Once verified, these numerical benchmarks are codified into automated Vitest test specifications.",
+        "The numerical validation of all calculators on TORQYX is grounded strictly in concrete engineering practices: Every newly implemented tool is first manually verified step-by-step against published standard worked examples and university textbook benchmark problems.",
+        "Once verified by hand, these benchmark numerical cases are codified into automated Vitest test specifications; 415 automated unit tests execute continuously across every deployment to prevent regressions.",
         "Our tools are intended for preliminary sizing, screening, and design feasibility verification. The physical limits of applicability (such as the linear elastic limit of Hooke's Law, transition zones in fluid flow, or yield stress thresholds in bolted joints) are explicitly communicated through interface tooltips, status badges, and contextual warnings.",
         "Whenever user inputs exceed recommended physical thresholds or yield safety factors below standard guidelines, protective warning notices are automatically generated.",
       ],
     },
     {
       id: "authorship",
-      title: "5. Development Team & Issue Reporting Channel",
+      title: "5. Developer & Issue Reporting Channel",
       paragraphs: [
-        "TORQYX is engineered and maintained by a dedicated engineering software team (TORQYX Engineering Team) with background in mechanical design and software development. Our objective is to translate cumbersome engineering handbooks and calculation steps into clear, accessible, and dependable digital tools.",
-        "We welcome technical feedback, peer reviews, and discrepancy reports from engineers and academic practitioners.",
-        "If you identify a potential discrepancy, formula ambiguity, or improvement opportunity, please report it via our Contact page (/en/contact) or directly by email to infotorqyx@gmail.com. All technical reports are evaluated against standard literature and verified within our test suite.",
+        "TORQYX is developed and maintained by an independent mechanical engineer and software developer. The primary objective is to translate cumbersome engineering handbooks and calculation steps into clear, accessible, and dependable deterministic digital tools.",
+        "The validation workflow relies solely on what is actually performed: Step-by-step manual cross-validation against published standard worked examples and textbook benchmark problems, automated unit testing with Vitest, and an open email channel for technical bug reports.",
+        "We welcome technical feedback, user reviews, and discrepancy reports from engineers and academic practitioners.",
+        "If you identify a potential discrepancy, formula ambiguity, or improvement opportunity, please report it via our Contact page (/en/contact) or directly by email to infotorqyx@gmail.com. All technical reports are evaluated personally against standard literature and codified into the automated test suite.",
       ],
     },
     {
