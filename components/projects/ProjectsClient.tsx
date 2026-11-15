@@ -57,6 +57,7 @@ export default function ProjectsClient() {
                   </div>
                   <Link
                     href={reportUrl}
+                    rel="nofollow"
                     className="mt-4 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
                   >
                     {copy.openReport}

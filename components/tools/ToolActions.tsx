@@ -35,6 +35,7 @@ export default function ToolActions({ shareUrl, reportUrl }: { shareUrl?: string
       {reportUrl ? (
         <Link
           href={reportUrl}
+          rel="nofollow"
           className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-400"
         >
           {copy.report}

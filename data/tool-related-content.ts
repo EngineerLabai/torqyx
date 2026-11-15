@@ -57,7 +57,7 @@ export const TOOL_RELATED_CONTENT: Record<string, ToolRelatedMapping> = {
     glossarySlugs: ["coefficient-of-friction", "torque", "concentricity", "runout"],
   },
   "torque-power": {
-    guideSlugs: ["doner-ekipman-dengeleme-titresim-kontrolu", "makine-ogesi-omru-yorulma-rehberi"],
+    guideSlugs: ["kama-tasarimi-101", "doner-ekipman-dengeleme-titresim-kontrolu", "makine-ogesi-omru-yorulma-rehberi"],
     glossarySlugs: ["torque", "power-factor", "resonance", "stress"],
   },
   "bearing-life": {

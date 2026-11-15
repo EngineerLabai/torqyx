@@ -236,9 +236,15 @@ export const getRelatedForGuide = async (
     locale,
   );
   const relatedGlossary = rankRelatedItems(base, glossary, locale);
-  const relatedTools = rankRelatedItems(
-    base,
-    toolCatalog.map((tool) => {
+
+  // Directly map only genuinely related tools from TOOL_RELATED_CONTENT
+  const mappedToolIds = Object.entries(TOOL_RELATED_CONTENT)
+    .filter(([_, mapping]) => mapping.guideSlugs?.includes(guide.slug))
+    .map(([toolId]) => toolId);
+
+  const matchedTools = toolCatalog
+    .filter((tool) => mappedToolIds.includes(tool.id))
+    .map((tool) => {
       const copy = getToolCopy(tool, locale);
       return {
         title: copy.title,
@@ -248,14 +254,12 @@ export const getRelatedForGuide = async (
         href: tool.href,
         id: tool.id,
       };
-    }),
-    locale,
-  );
+    });
 
   return {
     guides: takeTop(relatedGuides, guideLimit),
     glossary: takeTop(relatedGlossary, glossaryLimit),
-    tools: takeTop(relatedTools, toolLimit),
+    tools: matchedTools.slice(0, toolLimit),
   };
 };
 

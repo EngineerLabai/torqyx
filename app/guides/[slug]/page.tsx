@@ -242,7 +242,7 @@ function GuideRelatedLinks({
       ? {
           heading: "İlgili mühendislik bağlantıları",
           description: "Bu rehberle aynı kavramları kullanan hesaplayıcılar, terimler ve tamamlayıcı rehberler.",
-          tools: "Hesaplayıcılar",
+          tools: related.tools.length > 1 ? "İlgili hesaplayıcılar" : "İlgili hesaplayıcı",
           guides: "Rehberler",
           glossary: "Sözlük",
           openTool: "Hesaplayıcıyı aç",
@@ -251,7 +251,7 @@ function GuideRelatedLinks({
       : {
           heading: "Related engineering links",
           description: "Calculators, terms, and companion guides that share the same engineering concepts.",
-          tools: "Calculators",
+          tools: related.tools.length > 1 ? "Related calculators" : "Related calculator",
           guides: "Guides",
           glossary: "Glossary",
           openTool: "Open calculator",
@@ -274,7 +274,7 @@ function GuideRelatedLinks({
                 key={tool.id}
                 title={tool.title}
                 description={tool.description}
-                href={tool.href}
+                href={withLocalePrefix(tool.href, locale)}
                 badge={tool.category}
                 toolId={tool.id}
                 ctaLabel={copy.openTool}

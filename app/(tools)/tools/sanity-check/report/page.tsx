@@ -5,7 +5,7 @@ import ReportPageShell from "@/components/tools/ReportPageShell";
 import { decodeSession } from "@/lib/sanityCheck/share";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
-import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
+import { NOINDEX_NOFOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 
 type ReportPageProps = {
   searchParams?: Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
@@ -45,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     path: "/tools/sanity-check/report",
     locale,
-    robots: NOINDEX_FOLLOW_ROBOTS,
+    robots: NOINDEX_NOFOLLOW_ROBOTS,
   });
 }
 

@@ -261,6 +261,75 @@
         "title": "Responsible use",
         "body": "Independently verify outputs against project conditions, official standards, and qualified engineering review."
       }
+    },
+    "featuredGuides": {
+      "kicker": "Engineering guides",
+      "title": "Featured guides",
+      "description": "In-depth engineering guides with formula derivations, standard references and worked examples.",
+      "readMore": "Read guide →",
+      "cta": "See all guides",
+      "items": [
+        {
+          "title": "Key Design 101",
+          "description": "Shaft–hub key sizing, shear and compressive stress checks, and standard key selection steps."
+        },
+        {
+          "title": "Beam Bending & Deflection",
+          "description": "Bending moment, shear force and deflection diagrams for supported beams using Euler–Bernoulli theory."
+        },
+        {
+          "title": "Tolerance Stack-Up Analysis",
+          "description": "Worst-case and RSS methods for computing total tolerance in multi-part assemblies with worked examples."
+        },
+        {
+          "title": "Fatigue Life & S-N Curves",
+          "description": "S-N curve interpretation, Goodman diagram and modified endurance limit methods for fatigue life estimation."
+        },
+        {
+          "title": "Bearing Selection Guide",
+          "description": "Basic dynamic load rating, L10 life calculation and bearing type selection based on operating conditions."
+        },
+        {
+          "title": "Fluid Mechanics Fundamentals",
+          "description": "Reynolds number, Darcy–Weisbach equation and pressure loss calculation methods for pipe and duct flow."
+        }
+      ]
+    },
+    "popularCalculators": {
+      "kicker": "Guided calculators",
+      "title": "Popular calculators",
+      "description": "Guided calculation tools with formula explanations and standard references at every step.",
+      "tryNow": "Calculate →",
+      "cta": "See all tools",
+      "items": [
+        {
+          "description": "DIN/ISO bolt preload, tightening torque and safety factor calculation."
+        },
+        {
+          "description": "Bending stress and deflection analysis for rectangular, circular and I-profile beams."
+        },
+        {
+          "description": "Torsional stress, angular twist and power transmission for solid and hollow shafts."
+        },
+        {
+          "description": "Basic dynamic load rating and L10 bearing life calculator per ISO 281."
+        },
+        {
+          "description": "Pipe pressure loss calculation using Darcy–Weisbach and Hazen–Williams methods."
+        },
+        {
+          "description": "ISO 286 tolerance class hole–shaft fit, clearance and interference analysis."
+        },
+        {
+          "description": "Fillet weld sizing and stress check per EN 1993."
+        },
+        {
+          "description": "Push/pull force and oil flow rate from piston diameter, stroke and pressure."
+        },
+        {
+          "description": "Automatic unit consistency and engineering range validation for entered values."
+        }
+      ]
     }
   },
   "pages": {

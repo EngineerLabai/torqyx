@@ -261,6 +261,75 @@
         "title": "Sorumlu kullanım",
         "body": "Sonuçları proje koşulları, resmi standartlar ve yetkili mühendislik değerlendirmesiyle bağımsız olarak kontrol edin."
       }
+    },
+    "featuredGuides": {
+      "kicker": "Mühendislik rehberleri",
+      "title": "Öne çıkan rehberler",
+      "description": "Formül türetmeleri, standart referansları ve pratik örneklerle desteklenen mühendislik rehberleri.",
+      "readMore": "Rehberi oku →",
+      "cta": "Tüm rehberleri gör",
+      "items": [
+        {
+          "title": "Kama Tasarımı 101",
+          "description": "Mil–göbek bağlantısında kama boyutlandırma, gerilme kontrolü ve standart kama seçim adımları."
+        },
+        {
+          "title": "Kiriş Eğilme ve Sehim Hesabı",
+          "description": "Euler–Bernoulli teorisiyle mesnetli kirişlerde eğilme momenti, kesme kuvveti ve sehim diyagramları."
+        },
+        {
+          "title": "Tolerans Zinciri Analizi",
+          "description": "Worst-case ve RSS yöntemleriyle çok parçalı montajlarda toplam tolerans hesabı ve pratik örnekler."
+        },
+        {
+          "title": "Makine Elemanı Ömrü ve Yorulma",
+          "description": "S-N eğrileri, Goodman diyagramı ve modifiye dayanım hesabıyla yorulma ömrü tahmin yöntemleri."
+        },
+        {
+          "title": "Rulman Seçimi Rehberi",
+          "description": "Temel dinamik yük, L10 ömür hesabı ve uygulama koşullarına göre rulman tipi belirleme adımları."
+        },
+        {
+          "title": "Akışkan Dinamiği Temelleri",
+          "description": "Reynolds sayısı, Darcy–Weisbach denklemi ve boru/kanal akışında basınç kaybı hesaplama yöntemleri."
+        }
+      ]
+    },
+    "popularCalculators": {
+      "kicker": "Kılavuzlu hesaplayıcılar",
+      "title": "Popüler hesaplayıcılar",
+      "description": "Her adımda formül açıklaması ve standart referansı sunan kılavuzlu hesaplama araçları.",
+      "tryNow": "Hesapla →",
+      "cta": "Tüm araçları gör",
+      "items": [
+        {
+          "description": "DIN/ISO cıvata ön gerilme, sıkma torku ve emniyet faktörü hesabı."
+        },
+        {
+          "description": "Dikdörtgen, dairesel ve I-profil kirişlerde eğilme gerilmesi ve sehim analizi."
+        },
+        {
+          "description": "Dairesel ve içi boş miller için burulma gerilmesi, açısal dönme ve güç iletimi hesabı."
+        },
+        {
+          "description": "ISO 281 standardına göre temel dinamik yük kapasitesi ve L10 rulman ömrü hesaplayıcı."
+        },
+        {
+          "description": "Darcy–Weisbach ve Hazen–Williams yöntemleriyle boru hattı basınç kaybı hesabı."
+        },
+        {
+          "description": "ISO 286 tolerans sınıfları ile delik–mil uyumu, boşluk ve sıkı geçme analizi."
+        },
+        {
+          "description": "EN 1993 standardına göre köşe kaynağı boyutlandırma ve gerilme kontrolü."
+        },
+        {
+          "description": "Piston çapı, strok ve basınçtan itme/çekme kuvveti ve yağ debisi hesabı."
+        },
+        {
+          "description": "Girilen değerlerin birim tutarlılığını ve mühendislik aralıklarını otomatik kontrol."
+        }
+      ]
     }
   },
   "pages": {

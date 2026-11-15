@@ -88,6 +88,9 @@ export default function AdvisorPanel({ insights }: AdvisorPanelProps) {
                 {group.items.map((item, index) => {
                   const actionLabel = item.actionHref ? resolveActionLabel(item.actionHref, copy) : null;
                   const resolvedHref = item.actionHref ? localizeHref(item.actionHref, locale) : null;
+                  const isReportLink = resolvedHref
+                    ? resolvedHref.includes("/report") || resolvedHref.includes("?input=") || resolvedHref.includes("?session=")
+                    : false;
                   return (
                     <div
                       key={`${item.severity}-${item.title}-${index}`}
@@ -103,7 +106,7 @@ export default function AdvisorPanel({ insights }: AdvisorPanelProps) {
                             <a
                               href={resolvedHref}
                               target="_blank"
-                              rel="noreferrer"
+                              rel={isReportLink ? "noreferrer nofollow" : "noreferrer"}
                               className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 text-[10px] font-semibold text-slate-700 transition hover:border-slate-400"
                             >
                               {actionLabel}
@@ -111,6 +114,7 @@ export default function AdvisorPanel({ insights }: AdvisorPanelProps) {
                           ) : (
                             <Link
                               href={resolvedHref}
+                              rel={isReportLink ? "nofollow" : undefined}
                               className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 text-[10px] font-semibold text-slate-700 transition hover:border-slate-400"
                             >
                               {actionLabel}

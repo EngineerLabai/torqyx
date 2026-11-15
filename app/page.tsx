@@ -1,5 +1,7 @@
 import WebPageJsonLd from "@/components/seo/WebPageJsonLd";
 import HeroSection from "@/sections/home/HeroSection";
+import FeaturedGuidesSection from "@/sections/home/FeaturedGuidesSection";
+import PopularCalculatorsSection from "@/sections/home/PopularCalculatorsSection";
 import PopularToolsSection from "@/sections/home/PopularToolsSection";
 import ValuePropsSection from "@/sections/home/ValuePropsSection";
 import { getBrandCopy } from "@/config/brand";
@@ -54,6 +56,8 @@ export default async function Home() {
       <WebPageJsonLd />
       <HeroSection locale={locale} />
       <ValuePropsSection locale={locale} />
+      <FeaturedGuidesSection locale={locale} />
+      <PopularCalculatorsSection locale={locale} />
       <PopularToolsSection locale={locale} />
     </main>
   );

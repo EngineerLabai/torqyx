@@ -245,18 +245,21 @@ export default async function MaterialDetailPage({ params }: PageProps) {
               <div className="mt-3 flex flex-wrap gap-2">
                 <Link
                   href={boltHref}
+                  rel={boltEncoded ? "nofollow" : undefined}
                   className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
                 >
                   {copy.detail.useBolt}
                 </Link>
                 <Link
                   href={beamHref}
+                  rel={beamEncoded ? "nofollow" : undefined}
                   className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
                 >
                   {copy.detail.useBeam}
                 </Link>
                 <Link
                   href={sanityHref}
+                  rel={sanityEncoded ? "nofollow" : undefined}
                   className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
                 >
                   {copy.detail.useSanity}
