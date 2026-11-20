@@ -183,13 +183,12 @@ export default async function TagPage({ params }: TagPageProps) {
           ) : (
             <div className="flex flex-wrap gap-2">
               {relatedTags.map((tag) => (
-                <Link
+                <span
                   key={tag.slug}
-                  href={withLocalePrefix(`/tags/${tag.slug}`, locale)}
-                  className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 hover:border-slate-300"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600"
                 >
                   #{tag.label}
-                </Link>
+                </span>
               ))}
             </div>
           )}
@@ -259,13 +258,12 @@ function ContentSection({
                 <span>|</span>
                 <span>{item.readingTime}</span>
                 {item.tags.slice(0, 3).map((tag) => (
-                  <Link
+                  <span
                     key={tag}
-                    href={withLocalePrefix(`/tags/${slugify(tag)}`, locale)}
                     className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600"
                   >
                     #{tag}
-                  </Link>
+                  </span>
                 ))}
               </div>
               <div className="mt-4">
