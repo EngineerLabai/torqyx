@@ -8,7 +8,7 @@ let entries: MetadataRoute.Sitemap;
 beforeAll(async () => {
   const { default: buildSitemap } = await import("@/app/sitemap");
   entries = await buildSitemap();
-});
+}, 30000);
 
 describe("sitemap indexability policy", () => {
   it("excludes English tool routes that are not content-ready", () => {

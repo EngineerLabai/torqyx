@@ -40,4 +40,8 @@ export const ROUTES = {
 
 export type RouteKey = keyof typeof ROUTES;
 
-export const getRoute = (key: RouteKey, locale?: Locale) => withLocalePrefix(ROUTES[key], locale);
+/** Routes that must never receive a locale prefix (served from root). */
+const ROOT_ONLY_ROUTES: ReadonlySet<RouteKey> = new Set(["sitemap"] as RouteKey[]);
+
+export const getRoute = (key: RouteKey, locale?: Locale) =>
+  ROOT_ONLY_ROUTES.has(key) ? ROUTES[key] : withLocalePrefix(ROUTES[key], locale);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, Suspense, type ComponentProps } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback, Suspense, type ComponentProps } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
@@ -84,9 +84,50 @@ const isPrimitive = (value: unknown) =>
   typeof value === "number" ||
   typeof value === "boolean";
 
+function GenericToolSkeleton() {
+  return (
+    <div aria-hidden="true" className="space-y-6 p-6 animate-pulse" role="status">
+      <div className="h-8 w-48 rounded-lg bg-slate-200" />
+      <div className="h-4 w-96 max-w-full rounded bg-slate-100" />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="h-64 rounded-2xl border border-slate-200 bg-slate-50" />
+        <div className="h-64 rounded-2xl border border-slate-200 bg-slate-50" />
+      </div>
+    </div>
+  );
+}
+
+function SearchParamsLoader({
+  tool,
+  onApplyShared,
+}: {
+  tool: ToolDefinition<GenericToolInputs, Record<string, unknown>> | null;
+  onApplyShared: (normalized: Record<string, string>) => void;
+}) {
+  const searchParams = useSearchParams();
+  const hasHydrated = useRef(false);
+
+  useEffect(() => {
+    if (!tool || hasHydrated.current) return;
+    const raw = searchParams?.get("input") ?? null;
+    const shared = decodeToolState<Record<string, string | number>>(raw);
+    if (shared) {
+      const defaults = getDefaultValues(tool.inputs);
+      const normalized: Record<string, string> = { ...defaults };
+      Object.entries(shared).forEach(([key, value]) => {
+        normalized[key] = String(value);
+      });
+      onApplyShared(normalized);
+    }
+    hasHydrated.current = true;
+  }, [searchParams, tool, onApplyShared]);
+
+  return null;
+}
+
 export default function GenericToolPage(props: GenericToolPageProps) {
   return (
-    <Suspense fallback={<div className="p-8 text-center text-sm text-slate-500">Yükleniyor...</div>}>
+    <Suspense fallback={<GenericToolSkeleton />}>
       <GenericToolPageContent {...props} />
     </Suspense>
   );
@@ -112,29 +153,16 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
   const [values, setValues] = useState<Record<string, string>>(() => getDefaultValues(tool?.inputs ?? []));
   const chartRef = useRef<ChartInstance | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const searchParams = useSearchParams();
   const pathname = usePathname();
-  const hasHydrated = useRef(false);
+
+  const handleApplyShared = useCallback((normalized: Record<string, string>) => {
+    setValues(normalized);
+  }, []);
 
   useEffect(() => {
     if (!tool) return;
     Promise.resolve().then(() => setValues(getDefaultValues(tool.inputs)));
   }, [tool]);
-
-  useEffect(() => {
-    if (!tool) return;
-    if (hasHydrated.current) return;
-    const shared = decodeToolState<Record<string, string | number>>(searchParams?.get("input") ?? null);
-    if (shared) {
-      const defaults = getDefaultValues(tool.inputs);
-      const normalized: Record<string, string> = { ...defaults };
-      Object.entries(shared).forEach(([key, value]) => {
-        normalized[key] = String(value);
-      });
-      Promise.resolve().then(() => setValues(normalized));
-    }
-    hasHydrated.current = true;
-  }, [searchParams, tool]);
 
   const { errors, normalizedInputs } = validateInputs(tool?.inputs ?? [], values, validationCopy);
 
@@ -308,6 +336,9 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
 
   return (
     <PageShell>
+      <Suspense fallback={null}>
+        <SearchParamsLoader tool={tool} onApplyShared={handleApplyShared} />
+      </Suspense>
       {isToolAdEligible(tool.id, locale) ? <AdSense publisherId={ADSENSE_PUBLISHER_ID} /> : null}
       <ToolDocTabs slug={tool.id} initialDocs={initialDocs}>
         <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

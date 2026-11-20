@@ -188,12 +188,11 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
             {copy.back}
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
-            <Link
-              href={categoriesHref}
+            <span
               className="rounded-full bg-orange-50 px-2 py-0.5 text-orange-700"
             >
               {term.category}
-            </Link>
+            </span>
             <span>{formatDate(term.date, locale)}</span>
             <span>|</span>
             <span>{formatMessage(copy.readingTime, { count: term.readingTimeMinutes })}</span>
@@ -205,13 +204,12 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
           <EditorialTrustLine locale={locale} />
           <div className="flex flex-wrap gap-2">
             {term.tags.map((tag) => (
-              <Link
+              <span
                 key={tag}
-                href={withLocalePrefix(`/tags/${slugify(tag)}`, locale)}
                 className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600"
               >
                 #{tag}
-              </Link>
+              </span>
             ))}
           </div>
         </div>

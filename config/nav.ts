@@ -64,6 +64,11 @@ export const navConfig = {
       labelKey: "linkReference",
       route: "reference" as RouteKey,
     },
+    {
+      id: "faq",
+      labelKey: "linkFaq",
+      route: "faq" as RouteKey,
+    },
   ],
 
   // Direct header links
@@ -101,6 +106,11 @@ export const navConfig = {
       id: "contact",
       labelKey: "linkContact",
       route: "contact" as RouteKey,
+    },
+    {
+      id: "faq",
+      labelKey: "linkFaq",
+      route: "faq" as RouteKey,
     },
     {
       id: "privacy",
@@ -206,6 +216,11 @@ export const navConfig = {
           id: "contact",
           labelKey: "linkContact",
           route: "contact" as RouteKey,
+        },
+        {
+          id: "faq",
+          labelKey: "linkFaq",
+          route: "faq" as RouteKey,
         },
       ],
     },

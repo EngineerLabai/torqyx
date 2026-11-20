@@ -15,18 +15,20 @@ Backlash is measured and defined across three primary planes:
 
 1. **Circumferential (Tangential) Backlash ($j_t$):** The length of the arc of the pitch circle through which a gear can be rotated while its mating gear is held stationary.
 2. **Normal Backlash ($j_n$):** The shortest distance between non-driving tooth profiles, measured along the line of action normal to the tooth flank:
-   $$j_n = j_t \cdot \cos(\alpha_t) \cdot \cos(\beta)$$
-   where $\alpha_t$ is the transverse pressure angle and $\beta$ is the helix angle.
+   `j_n = j_t · cos(α_t) · cos(β)`
+   where $α_t$ is the transverse pressure angle and $β$ is the helix angle.
 3. **Radial Backlash ($j_r$):** The variation in operating center distance required to eliminate tooth clearance:
-   $$j_r = \frac{j_n}{2 \cdot \sin(\alpha_n)}$$
+   `j_r = j_n / (2 · sin(α_n))`
 
 ## Governing Formulas & Thermal Compensation
 
 Operating backlash must always accommodate thermal expansion of gears relative to the gearbox housing:
 
-$$\Delta j_{th} = 2 \cdot a \cdot [\alpha_{gear} \cdot (T_{gear} - T_0) - \alpha_{housing} \cdot (T_{housing} - T_0)] \cdot \tan(\alpha_n)$$
+<Formula label="Thermal Expansion Compensation">
+Δj_th = 2 · a · [α_gear · (T_gear - T_0) - α_housing · (T_housing - T_0)] · tan(α_n)
+</Formula>
 
-where $a$ is the operating center distance, $\alpha$ is the coefficient of thermal expansion, and $T - T_0$ is the operational temperature rise above ambient ($20^\circ\text{C}$).
+where $a$ is the operating center distance, $α$ is the coefficient of thermal expansion, and $T - T_0$ is the operational temperature rise above ambient (20°C).
 
 ## Worked Practical Example
 
@@ -34,13 +36,16 @@ Consider an external spur gear mesh operating in an industrial reducer:
 
 - Normal module: $m_n = 3.0\text{ mm}$
 - Number of teeth: $z_1 = 20$, $z_2 = 40$
-- Pressure angle: $\alpha_n = 20^\circ$
+- Pressure angle: $α_n = 20°$
 - Operating center distance: $a = 90.0\text{ mm}$
 
 Under ISO 21771 quality class 7, the recommended minimum normal backlash is:
-$$j_{n,\min} \approx 0.03 \cdot m_n + 0.04 = 0.03 \cdot 3 + 0.04 = 0.13\text{ mm}$$
 
-If the operating temperature rises by $\Delta T = 45^\circ\text{C}$ in an aluminum casing ($\alpha_{housing} = 23 \times 10^{-6}\text{ /K}$) with steel gears ($\alpha_{gear} = 11 \times 10^{-6}\text{ /K}$), the housing expands more than the gears, naturally increasing operational backlash by $0.035\text{ mm}$, preventing tooth seizure.
+<Formula label="Minimum Normal Backlash (ISO 21771 Class 7)">
+j_n,min ≈ 0.03 · m_n + 0.04 = 0.03 · 3 + 0.04 = 0.13 mm
+</Formula>
+
+If the operating temperature rises by $ΔT = 45°C$ in an aluminum casing (thermal expansion coefficient 23 × 10⁻⁶ 1/K) with steel gears (thermal expansion coefficient 11 × 10⁻⁶ 1/K), the housing expands more than the gears, naturally increasing operational backlash by 0.035 mm, preventing tooth seizure.
 
 ## Why Backlash Management Matters
 
@@ -50,9 +55,9 @@ If the operating temperature rises by $\Delta T = 45^\circ\text{C}$ in an alumin
 ## Related Calculators and Standards
 
 <ToolLink
-  href="/en/tools/gear-design/calculators/backlash-calculator"
-  title="Gear Backlash Calculator"
-  description="Compute normal, circumferential, and radial backlash according to ISO 21771."
+  href="/en/tools/gear-design/calculators/module-calculator"
+  title="Gear Module and Geometry Calculator"
+  description="Compute reference diameters, tooth heights, contact ratios, and center distances."
   badge="Calculator"
 />
 

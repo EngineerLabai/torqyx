@@ -235,6 +235,11 @@ const nextConfig: NextConfig = {
       { source: "/premium", destination: "/tr/tools", permanent: true },
       { source: "/tr/premium", destination: "/tr/tools", permanent: true },
       { source: "/en/premium", destination: "/en/tools", permanent: true },
+      { source: "/tr/sitemap.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/en/sitemap.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/tools/gear-module", destination: "/tr/tools/gear-design/calculators/module-calculator", permanent: true },
+      { source: "/tr/tools/gear-module", destination: "/tr/tools/gear-design/calculators/module-calculator", permanent: true },
+      { source: "/en/tools/gear-module", destination: "/en/tools/gear-design/calculators/module-calculator", permanent: true },
     ];
   },
 };
