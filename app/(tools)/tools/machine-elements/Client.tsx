@@ -456,7 +456,8 @@ function ComponentGallery({ t }: { t: (typeof COPY)["tr"] | (typeof COPY)["en"] 
                 src={component.image}
                 alt={component.name}
                 fill
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+                loading="lazy"
                 className="object-contain"
               />
             </div>

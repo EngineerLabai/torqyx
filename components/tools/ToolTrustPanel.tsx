@@ -103,7 +103,7 @@ export default function ToolTrustPanel({
                   src={image.src}
                   alt={image.alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 36vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 550px"
                   className="object-contain"
                   loading="lazy"
                 />

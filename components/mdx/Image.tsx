@@ -54,8 +54,9 @@ export default function Image({
         height={resolvedHeight}
         title={title}
         priority={shouldPrioritize}
-        fetchPriority={shouldPrioritize ? "high" : undefined}
+        fetchPriority={shouldPrioritize ? "high" : "low"}
         loading={shouldPrioritize ? undefined : "lazy"}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 768px, 800px"
         unoptimized={shouldBypassOptimization}
         className={mergeClassName("rounded-xl border border-slate-200 bg-white", className)}
       />

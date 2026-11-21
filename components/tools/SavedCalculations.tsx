@@ -104,6 +104,7 @@ export default function SavedCalculations() {
               alt="Empty State"
               width={160}
               height={160}
+              loading="lazy"
               className="h-40 w-40 object-cover opacity-90"
             />
           </div>

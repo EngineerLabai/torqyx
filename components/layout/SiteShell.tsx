@@ -468,6 +468,7 @@ export default function SiteShell({ children, messages }: { children: ReactNode;
                 alt={`${brandContent.siteName} logo`}
                 width={40}
                 height={44}
+                loading="lazy"
                 className="h-10 w-10 object-contain"
               />
               <span className="text-sm font-semibold text-slate-950">{brandContent.siteName}</span>

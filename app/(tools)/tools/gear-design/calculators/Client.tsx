@@ -90,8 +90,9 @@ export default function GearCalculatorsPage({ initialDocs }: GearCalculatorsClie
               src={getBlueprintImageSrc("gear")}
               alt="Makine Montaj Blueprint"
               fill
+              sizes="(max-width: 768px) 100vw, 400px"
+              loading="lazy"
               className="object-cover object-right"
-              priority
             />
           </div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_24%)]" />

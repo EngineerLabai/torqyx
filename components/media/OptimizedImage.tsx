@@ -39,6 +39,9 @@ export default function OptimizedImage({
   className,
   unoptimized,
   onError,
+  priority,
+  loading,
+  sizes,
   ...props
 }: OptimizedImageProps) {
   const normalizedFallback = normalizeSrc(fallbackSrc, DEFAULT_FALLBACK_SRC);
@@ -53,11 +56,17 @@ export default function OptimizedImage({
     isDataUrl(currentSrc) ||
     currentSrc.toLowerCase().endsWith(".svg");
 
+  const resolvedLoading = priority ? undefined : (loading ?? "lazy");
+  const resolvedSizes = sizes ?? (props.fill ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" : undefined);
+
   return (
     <Image
       {...props}
       src={currentSrc}
       alt={alt}
+      priority={priority}
+      loading={resolvedLoading}
+      sizes={resolvedSizes}
       unoptimized={shouldBypassOptimization}
       className={mergeClassName("object-cover", className)}
       onError={(event) => {

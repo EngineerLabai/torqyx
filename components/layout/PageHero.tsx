@@ -65,7 +65,7 @@ export default function PageHero({
               src={normalizedImageSrc}
               alt={imageAlt}
               fill
-              sizes="(min-width: 1024px) 42vw, 100vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
               className="object-cover"
               placeholder="blur"
               blurDataURL={BLUR_DATA_URL}

@@ -451,7 +451,8 @@ export default function ReferenceCenter() {
                     src={blueprint.image}
                     alt={blueprint.title}
                     fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+                    loading="lazy"
                     className="object-contain"
                   />
                 </div>

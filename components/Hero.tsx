@@ -30,7 +30,7 @@ export default function Hero({ title, subtitle, imageSrc, imageAlt, priority = t
                 src={normalizedImageSrc}
                 alt={imageAlt}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 92vw, 50vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 92vw, 600px"
                 className="object-cover"
                 priority={priority}
                 fetchPriority={priority ? "high" : undefined}
