@@ -58,8 +58,8 @@ const buildFeatureList = (tool: ToolCatalogItem | null) => {
 const hasCalculatorWord = (value: string, locale: Locale) => {
   const normalized = value.toLocaleLowerCase(locale === "tr" ? "tr-TR" : "en-US");
   return locale === "tr"
-    ? /hesap|hesaplayıcı|kalkülatör/.test(normalized)
-    : /calculator|calculation|converter|selector|sizing/.test(normalized);
+    ? /hesap|hesabı|hesaplayıcı|kalkülatör|dönüştürücü|analiz|tablo|merkez|laboratuvar|rehber|paket|seçim|optimizasyon|kart|grafik/.test(normalized)
+    : /calculator|calculation|converter|selector|sizing|lab|center|guide|chart|table|analysis|suite|tools|optimization|cards/.test(normalized);
 };
 
 const buildSeoTitle = (tool: ToolCatalogItem | null, name: string, brandName: string, locale: Locale) => {
@@ -74,6 +74,7 @@ const buildSeoTitle = (tool: ToolCatalogItem | null, name: string, brandName: st
   }
 
   if (tool.type === "bundle") {
+    if (hasCalculatorWord(name, locale)) return name;
     return locale === "tr" ? `${name} Araçları` : `${name} Tools`;
   }
 
@@ -85,20 +86,10 @@ const buildSeoDescription = (
   tool: ToolCatalogItem | null,
   description: string,
   brandTagline: string,
-  locale: Locale,
+  _locale: Locale,
 ) => {
   if (!tool) return brandTagline;
-
-  const support =
-    locale === "tr"
-      ? " Formüller, birim kontrolü ve ilgili mühendislik hesaplayıcılarıyla hızlı sonuç alın."
-      : " Get fast results with formulas, unit checks, and related engineering calculators.";
-
-  const normalized = description.replace(/\s+/g, " ").trim();
-  if (normalized.length >= 120) {
-    return normalized;
-  }
-  return `${normalized}${support}`;
+  return description.replace(/\s+/g, " ").trim();
 };
 
 export const buildToolSeo = (toolKey: string, locale: Locale): ToolSeoPayload => {
