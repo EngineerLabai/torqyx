@@ -26,6 +26,7 @@ import {
 } from "@/tools/_shared/catalog";
 import type { SearchIndexItem } from "@/utils/search-index";
 import { categoryLabels } from "@/src/lib/i18n/categoryLabels";
+import { TOOL_RELATED_CONTENT } from "@/data/tool-related-content";
 
 const TYPE_ALL = "All" as const;
 const CATEGORY_ALL = "All" as const;
@@ -308,10 +309,10 @@ export default function ToolLibrary({ locale, searchParams }: ToolLibraryProps) 
           tool,
           title,
           description,
-          guideHref:
-            tool.href.startsWith("/tools/")
-              ? withLocalePrefix(`${tool.href.replace(/\/+$/g, "")}/guide`, locale)
-              : undefined,
+          guideHref: (() => {
+            const mappedGuide = TOOL_RELATED_CONTENT[tool.id]?.guideSlugs?.[0];
+            return mappedGuide ? withLocalePrefix(`/guides/${mappedGuide}`, locale) : undefined;
+          })(),
           categoryLabel,
           tagLabels,
           accessLabel,

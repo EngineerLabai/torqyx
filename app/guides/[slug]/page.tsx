@@ -293,7 +293,7 @@ function GuideRelatedLinks({
                 key={item.slug}
                 title={item.title}
                 description={item.description}
-                href={`/guides/${item.slug}`}
+                href={withLocalePrefix(`/guides/${item.slug}`, locale)}
                 badge={item.category}
                 ctaLabel={copy.read}
               />
