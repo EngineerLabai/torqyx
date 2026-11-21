@@ -3,7 +3,8 @@ import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/utils/metadata";
+import ToolSeo from "@/components/tools/ToolSeo";
+import { buildToolMetadata } from "@/utils/tool-seo";
 
 const simulationsTr = [
   {
@@ -63,19 +64,7 @@ const simulationsEn = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const title =
-    locale === "tr" ? "Dişli Üretim Süreçleri" : "Gear Manufacturing Process Notes";
-  const description =
-    locale === "tr"
-      ? "MAAG, FELLOW, azdırma ve taşlama süreçlerini anlatan dişli simülasyonları ile mühendislik hesaplayıcıları içeriğini görsel olarak destekler."
-      : "Gear simulations that visually support engineering calculators content with MAAG, FELLOW, hobbing, grinding, and casting process flows.";
-
-  return buildPageMetadata({
-    title,
-    description,
-    path: "/tools/gear-design/simulations",
-    locale,
-  });
+  return buildToolMetadata("gear-simulations", locale);
 }
 
 export default async function GearSimulationsPage() {
@@ -98,6 +87,7 @@ export default async function GearSimulationsPage() {
 
   return (
     <PageShell>
+      <ToolSeo toolId="gear-simulations" locale={locale} />
       <ToolDocTabs slug="gear-design/simulations" initialDocs={initialDocs}>
       <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_24%)]" />

@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.dateModified || post.date,
     url: canonical,
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -113,10 +113,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     author: {
       "@type": "Person",
-      name:
-        locale === "tr"
-          ? "Bağımsız Makine Mühendisi / Geliştirici (TORQYX)"
-          : "Independent Mechanical Engineer & Developer (TORQYX)",
+      name: "Şükrü Erdem Çitil",
+      jobTitle: locale === "tr" ? "Makine Mühendisi" : "Mechanical Engineer",
       url: buildLocalizedCanonical("/hakkinda", locale),
     },
     publisher: {

@@ -121,10 +121,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
     },
     author: {
       "@type": "Person",
-      name:
-        locale === "tr"
-          ? "Bağımsız Makine Mühendisi / Geliştirici (TORQYX)"
-          : "Independent Mechanical Engineer & Developer (TORQYX)",
+      name: "Şükrü Erdem Çitil",
+      jobTitle: locale === "tr" ? "Makine Mühendisi" : "Mechanical Engineer",
       url: buildLocalizedCanonical("/hakkinda", locale),
     },
     publisher: {

@@ -25,6 +25,7 @@ export type ContentFrontmatter = {
   title: string;
   description: string;
   date: string;
+  dateModified?: string;
   tags: string[];
   category: string;
   draft: boolean;
@@ -39,6 +40,7 @@ export type ContentItem = {
   title: string;
   description: string;
   date: string;
+  dateModified?: string;
   tags: string[];
   category: string;
   draft: boolean;
@@ -235,6 +237,9 @@ const validateFrontmatter = (data: Record<string, unknown>, sourcePath: string):
   if (data.noindex !== undefined && typeof data.noindex !== "boolean") {
     errors.push("noindex must be a boolean when provided");
   }
+  if (data.dateModified !== undefined && (typeof data.dateModified !== "string" || Number.isNaN(Date.parse(data.dateModified)))) {
+    errors.push("dateModified must be a valid date string when provided");
+  }
 
   if (errors.length > 0) {
     throw new Error(`[content] Invalid frontmatter in ${sourcePath}: ${errors.join("; ")}`);
@@ -252,6 +257,7 @@ const validateFrontmatter = (data: Record<string, unknown>, sourcePath: string):
     readingTime: frontmatter.readingTime,
     canonical: frontmatter.canonical,
     noindex: frontmatter.noindex,
+    dateModified: typeof (data as Record<string, unknown>).dateModified === "string" ? (data as Record<string, unknown>).dateModified as string : undefined,
   };
 };
 
@@ -316,6 +322,7 @@ const parseContentFile = async (sourcePath: string, type: ContentType, slug: str
     readingTimeMinutes,
     canonical: frontmatter.canonical,
     noindex: frontmatter.noindex,
+    dateModified: frontmatter.dateModified,
     content: enrichedContent,
     sourcePath,
   };

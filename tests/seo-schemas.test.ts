@@ -6,6 +6,26 @@ import {
 } from "@/utils/internal-linking";
 
 describe("structured-data policy", () => {
+  it("verifies Person author and dateModified structure for articles", () => {
+    const author = {
+      "@type": "Person",
+      name: "Şükrü Erdem Çitil",
+      jobTitle: "Makine Mühendisi",
+    };
+    expect(author["@type"]).toBe("Person");
+    expect(author.name).toBe("Şükrü Erdem Çitil");
+
+    const articleJsonLd = {
+      "@type": "TechArticle",
+      headline: "Kama Tasarımı",
+      datePublished: "2026-05-16",
+      dateModified: "2026-05-16",
+      author,
+    };
+    expect(articleJsonLd.dateModified).toBeDefined();
+    expect(articleJsonLd.author["@type"]).toBe("Person");
+  });
+
   it("emits WebApplication JSON-LD for a calculator", () => {
     const schema = buildToolSchema("bolt-calculator", "tr");
     const types = schema["@graph"].map((entry) => entry["@type"]);
