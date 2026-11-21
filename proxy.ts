@@ -63,6 +63,8 @@ export default function proxy(request: NextRequest) {
     pathname === "/ads.txt" ||
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
+    pathname === "/feed.xml" ||
+    pathname === "/changelog/feed.xml" ||
     pathname.startsWith("/.well-known/")
   ) {
     return NextResponse.next();

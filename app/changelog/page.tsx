@@ -49,6 +49,9 @@ export async function generateMetadata() {
       tr: buildLocalizedCanonical("/changelog", "tr"),
       "x-default": buildLocalizedCanonical("/changelog", "tr"),
     },
+    alternatesTypes: {
+      "application/rss+xml": "/changelog/feed.xml",
+    },
   });
 }
 

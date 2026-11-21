@@ -22,6 +22,7 @@ type PageMetadataOptions = {
   openGraph?: Metadata["openGraph"];
   twitter?: Metadata["twitter"];
   alternatesLanguages?: NonNullable<Metadata["alternates"]> extends { languages?: infer L } ? L | null : null;
+  alternatesTypes?: Record<string, string>;
   useLocalizedCanonical?: boolean;
   absoluteTitle?: boolean;
 };
