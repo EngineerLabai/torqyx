@@ -27,11 +27,16 @@ const POPULAR_CALC_IDS = [
 export default function PopularCalculatorsSection({ locale }: PopularCalculatorsSectionProps) {
   const copy = getMessages(locale).home.popularCalculators;
   const tools = POPULAR_CALC_IDS
-    .map((item, i) => ({
-      ...item,
-      tool: toolCatalog.find((t) => t.id === item.id) ?? null,
-      description: copy.items[i].description,
-    }))
+    .map((item, i) => {
+      const tool = toolCatalog.find((t) => t.id === item.id) ?? null;
+      const toolCopy = tool ? getToolCopy(tool, locale) : null;
+      return {
+        ...item,
+        tool,
+        title: toolCopy?.title ?? "",
+        description: toolCopy?.description ?? copy.items[i]?.description ?? "",
+      };
+    })
     .filter((item): item is typeof item & { tool: NonNullable<typeof item.tool> } => Boolean(item.tool));
 
   const libraryHref = withLocalePrefix("/tools", locale);
@@ -46,31 +51,29 @@ export default function PopularCalculatorsSection({ locale }: PopularCalculators
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map(({ tool, icon: Icon, description }) => {
-            const toolCopy = getToolCopy(tool, locale);
-            return (
-              <Link
-                key={tool.id}
-                href={withLocalePrefix(tool.href, locale)}
-                className="group flex min-h-[180px] flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand hover:shadow-md"
-              >
-                <div className="flex items-start gap-3">
-                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-brand">
-                    <Icon size={19} />
-                  </span>
-                  <h3 className="text-sm font-semibold text-slate-900 group-hover:text-slate-950">
-                    {toolCopy.title}
-                  </h3>
-                </div>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{description}</p>
-                <div className="mt-5 flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-2 text-xs font-semibold text-brand">
-                    {copy.tryNow}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
+          {tools.map(({ tool, icon: Icon, title, description }) => (
+            <Link
+              key={tool.id}
+              href={withLocalePrefix(tool.href, locale)}
+              aria-label={`${title} — ${copy.tryNow}`}
+              className="group flex min-h-[180px] flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand hover:shadow-md"
+            >
+              <div className="flex items-start gap-3">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-brand">
+                  <Icon size={19} />
+                </span>
+                <h3 className="text-sm font-semibold text-slate-900 group-hover:text-slate-950">
+                  {title}
+                </h3>
+              </div>
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{description}</p>
+              <div className="mt-5 flex items-center justify-between gap-3">
+                <span className="inline-flex items-center gap-2 text-xs font-semibold text-brand">
+                  {copy.tryNow}
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
 
         <Link

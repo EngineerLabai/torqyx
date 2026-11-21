@@ -40,6 +40,7 @@ export default function FeaturedGuidesSection({ locale }: FeaturedGuidesSectionP
             <Link
               key={guide.slug}
               href={withLocalePrefix(`/guides/${guide.slug}`, locale)}
+              aria-label={`${guide.title} — ${copy.readMore}`}
               className="group flex min-h-[180px] flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand hover:shadow-md"
             >
               <div className="flex items-start gap-3">
