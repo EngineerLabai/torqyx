@@ -78,6 +78,10 @@ const SECTION_LINKS: Record<string, ReferenceLink[]> = {
   ],
   fits: [
     {
+      href: "/reference/kama-olculeri-ve-tolerans-tablosu",
+      label: { tr: "Paralel Kama ve Tolerans Tablosu (DIN 6885-1)", en: "Parallel Key & Tolerance Table (DIN 6885-1)" },
+    },
+    {
       href: "/tools/materials-manufacturing",
       label: { tr: "Malzeme ve İmalat", en: "Materials & Manufacturing" },
     },

@@ -101,6 +101,11 @@ async function buildKnownPaths() {
     add(match[1]);
   }
 
+  const localePathTs = await readText(path.join(ROOT, "utils", "locale-path.ts"));
+  for (const match of localePathTs.matchAll(/:\s*"(\/[^"]+)"/g)) {
+    add(match[1]);
+  }
+
   for (const [type, dirName] of Object.entries(CONTENT_TYPES)) {
     const dir = path.join(CONTENT_ROOT, dirName);
     const files = await listFiles(dir, (filePath) => /\.(mdx|md)$/i.test(filePath));

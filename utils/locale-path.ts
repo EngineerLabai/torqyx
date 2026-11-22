@@ -31,6 +31,7 @@ const LOCALE_PUBLIC_ALIASES = {
     "/satis-iade-teslimat": "/satis-iade-teslimat",
     "/iletisim": "/iletisim",
     "/reference/civata-sikma-torku-tablosu": "/referans/civata-sikma-torku-tablosu",
+    "/reference/kama-olculeri-ve-tolerans-tablosu": "/referans/kama-olculeri-ve-tolerans-tablosu",
   },
   en: {
     "/hakkinda": "/about",
@@ -42,6 +43,7 @@ const LOCALE_PUBLIC_ALIASES = {
     "/satis-iade-teslimat": "/sales-refunds-delivery",
     "/iletisim": "/contact",
     "/reference/civata-sikma-torku-tablosu": "/reference/bolt-tightening-torque-table",
+    "/reference/kama-olculeri-ve-tolerans-tablosu": "/reference/parallel-key-size-and-tolerance-table",
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

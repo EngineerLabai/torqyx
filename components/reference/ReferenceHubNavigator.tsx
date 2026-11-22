@@ -20,6 +20,14 @@ const referenceLinks: HubLink[] = [
     },
   },
   {
+    href: "/reference/kama-olculeri-ve-tolerans-tablosu",
+    title: { tr: "Paralel kama ve tolerans tablosu", en: "Parallel key size and tolerance table" },
+    description: {
+      tr: "DIN 6885-1 / ISO 773 standardı; 6–500 mm mil çapı, b×h kesitleri, t1/t2 kanal derinlikleri ve tork kapasitesi.",
+      en: "DIN 6885-1 / ISO 773 standard; 6–500 mm shaft diameters, b×h dimensions, t1/t2 keyway depths, and torque ratings.",
+    },
+  },
+  {
     href: "/reference#threads",
     title: { tr: "Dişler ve cıvata delikleri", en: "Threads and bolt holes" },
     description: {
