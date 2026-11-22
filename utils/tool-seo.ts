@@ -86,7 +86,6 @@ const buildSeoDescription = (
   tool: ToolCatalogItem | null,
   description: string,
   brandTagline: string,
-  _locale: Locale,
 ) => {
   if (!tool) return brandTagline;
   return description.replace(/\s+/g, " ").trim();
@@ -98,7 +97,7 @@ export const buildToolSeo = (toolKey: string, locale: Locale): ToolSeoPayload =>
 
   const toolCopy = tool ? getToolCopy(tool, locale) : null;
   const title = buildSeoTitle(tool, toolCopy?.title ?? brand.siteName, brand.siteName, locale);
-  const description = buildSeoDescription(tool, toolCopy?.description ?? brand.tagline, brand.tagline, locale);
+  const description = buildSeoDescription(tool, toolCopy?.description ?? brand.tagline, brand.tagline);
   const canonical = buildLocalizedCanonical(path, locale);
 
   return {

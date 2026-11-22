@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import matter from 'gray-matter';
 import { glossaryPart1 } from './glossary-data-1.mjs';
 import { glossaryPart2 } from './glossary-data-2.mjs';
 

@@ -281,7 +281,7 @@ function FitBlock({ t }: { t: (typeof COPY)["tr"] | (typeof COPY)["en"] }) {
     const key = `${hole}/${shaft}` as keyof typeof t.fitsMap;
     const fit = t.fitsMap[key] ?? null;
     return { fit, nominal };
-  }, [inp, t.fitsMap]);
+  }, [inp, t]);
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs shadow-sm">

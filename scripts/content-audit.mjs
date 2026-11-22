@@ -309,7 +309,7 @@ async function runAudit() {
   const concurrency = 8;
   let completed = 0;
 
-  async function worker(workerId) {
+  async function worker() {
     while (allUrls.length > 0) {
       const url = allUrls.shift();
       if (!url) break;
@@ -373,7 +373,7 @@ async function runAudit() {
     }
   }
 
-  await Promise.all(Array.from({ length: concurrency }, (_, i) => worker(i)));
+  await Promise.all(Array.from({ length: concurrency }, () => worker()));
   console.log(`\nAudit completed! Total valid/audited rows: ${results.length}`);
 
   // Sort results by word_count ascending (weakest first), prioritizing indexable 200 pages

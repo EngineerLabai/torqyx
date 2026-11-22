@@ -91,7 +91,7 @@ describe("unit-converter calculator", () => {
   it("handles missing units", () => {
     const res = calculateUnit({
       category: "length",
-      fromUnit: "unknown" as any,
+      fromUnit: "unknown" as never,
       toUnit: "m",
       value: "100",
     });

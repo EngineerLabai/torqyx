@@ -179,7 +179,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     supportedLocales: ["tr"],
   });
 
-  for (const { locale, blog, guides, glossary, tags, categories } of localizedContent) {
+  for (const { locale, blog, guides, glossary } of localizedContent) {
 
     blog.forEach((post) => {
       addEntry(`/blog/${post.slug}`, locale, {

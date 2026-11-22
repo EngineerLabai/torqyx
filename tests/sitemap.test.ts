@@ -55,7 +55,7 @@ describe("taxonomy quality gate", () => {
   it("keeps only tags and categories backed by visible indexable content or a tool", async () => {
     const [
       { getIndexableContentList },
-      { getCategoryIndex, getTagIndex, isIndexableTaxonomyEntry, matchesSlug },
+      { getCategoryIndex, getTagIndex, matchesSlug },
       { toolCatalog },
     ] =
       await Promise.all([

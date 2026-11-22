@@ -118,7 +118,6 @@ export default async function GlossaryPage({ params }: GlossaryPageProps) {
   const canonical = buildLocalizedCanonical(`/glossary/${term.slug}`, locale);
   const glossaryIndexUrl = buildLocalizedCanonical("/glossary", locale);
   const glossaryHref = withLocalePrefix("/glossary", locale);
-  const categoriesHref = withLocalePrefix(`/categories/${slugify(term.category)}`, locale);
   const termJsonLd = {
     "@context": "https://schema.org",
     "@graph": [

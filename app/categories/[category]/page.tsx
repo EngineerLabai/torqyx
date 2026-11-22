@@ -8,9 +8,7 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import {
-  getCategoryIndex,
   getNavigableCategoryIndex,
-  isIndexableTaxonomyEntry,
   matchesSlug,
   resolveLabelBySlug,
 } from "@/utils/taxonomy";
@@ -46,16 +44,12 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
   const { category: categoryParam } = await params;
-  const [trCategories, enCategories, trIndexableCategories, enIndexableCategories] = await Promise.all([
+  const [trCategories, enCategories] = await Promise.all([
     getNavigableCategoryIndex("tr"),
     getNavigableCategoryIndex("en"),
-    getCategoryIndex("tr"),
-    getCategoryIndex("en"),
   ]);
   const categories = locale === "tr" ? trCategories : enCategories;
-  const indexableCategories = locale === "tr" ? trIndexableCategories : enIndexableCategories;
   const categorySlug = decodeURIComponent(categoryParam);
-  const currentCategory = indexableCategories.find((entry) => entry.slug === categorySlug);
   const label = resolveLabelBySlug(categorySlug, categories) ?? categorySlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} kategorisi` : `${label} category`;
   const description =

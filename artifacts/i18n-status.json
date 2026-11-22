@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-14T20:47:41.038Z",
+  "generatedAt": "2026-11-22T17:26:46.478Z",
   "contentMissing": [],
   "toolDocs": {
-    "totalTools": 37,
+    "totalTools": 38,
     "missingRequired": [],
     "missingOptional": []
   },
   "messages": {
-    "totalTr": 1370,
-    "totalEn": 1370,
+    "totalTr": 1359,
+    "totalEn": 1359,
     "missingInTr": [],
     "missingInEn": []
   }

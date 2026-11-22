@@ -8,9 +8,7 @@ import { getLocaleFromCookies } from "@/utils/locale-server";
 import { formatMessage, getMessages } from "@/utils/messages";
 import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import {
-  getTagIndex,
   getNavigableTagIndex,
-  isIndexableTaxonomyEntry,
   matchesSlug,
   resolveLabelBySlug,
 } from "@/utils/taxonomy";
@@ -41,16 +39,12 @@ export async function generateMetadata({ params }: TagPageProps) {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
   const { tag: tagParam } = await params;
-  const [trTags, enTags, trIndexableTags, enIndexableTags] = await Promise.all([
+  const [trTags, enTags] = await Promise.all([
     getNavigableTagIndex("tr"),
     getNavigableTagIndex("en"),
-    getTagIndex("tr"),
-    getTagIndex("en"),
   ]);
   const tags = locale === "tr" ? trTags : enTags;
-  const indexableTags = locale === "tr" ? trIndexableTags : enIndexableTags;
   const tagSlug = decodeURIComponent(tagParam);
-  const currentTag = indexableTags.find((entry) => entry.slug === tagSlug);
   const label = resolveLabelBySlug(tagSlug, tags) ?? tagSlug.replace(/-/g, " ");
   const titleBase = locale === "tr" ? `${label} etiketi` : `${label} tag`;
   const description =

@@ -239,7 +239,7 @@ export const getRelatedForGuide = async (
 
   // Directly map only genuinely related tools from TOOL_RELATED_CONTENT
   const mappedToolIds = Object.entries(TOOL_RELATED_CONTENT)
-    .filter(([_, mapping]) => mapping.guideSlugs?.includes(guide.slug))
+    .filter(([, mapping]) => mapping.guideSlugs?.includes(guide.slug))
     .map(([toolId]) => toolId);
 
   const matchedTools = toolCatalog

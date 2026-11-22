@@ -288,7 +288,7 @@ function GenericToolPageContent({ toolId, initialDocs }: GenericToolPageProps) {
       title: localizedTitle,
       categories: localizedCategories,
     });
-  }, [localizedCategories, locale, tool]);
+  }, [localizedCategories, localizedTitle, locale, tool]);
 
   if (!tool) {
     const notFoundCopy = messages.pages.notFound;

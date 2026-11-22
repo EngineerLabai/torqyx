@@ -1,6 +1,6 @@
 # i18n status
 
-Generated: 2026-05-14T20:47:41.038Z
+Generated: 2026-11-22T17:26:46.478Z
 
 - Content missing locale variants: 0
 - Tool docs missing required TR: 0
