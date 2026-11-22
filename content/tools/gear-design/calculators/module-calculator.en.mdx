@@ -1,5 +1,70 @@
----
-title: Module Calculator (EN)
----
+## Calculation Explanation
 
-Placeholder English documentation for the Module Calculator.
+<Callout type="info" title="How to use">
+<StepList title="Step-by-step sizing" steps={["Enter pitch diameter (d) and tooth count (z)", "Review calculated raw module (m)", "Compare with recommended ISO 54 standard module series"]} />
+</Callout>
+
+<Formula label="Module and Pitch">
+m = d / z
+p = π · m
+d_std = m_std · z
+</Formula>
+
+**Assumptions**
+- Standard ISO 54 Preferred Series 1 (1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16 mm).
+- Zero profile shift (x = 0); geometry is referenced to the standard pitch circle.
+- Standard normal pressure angle α = 20°.
+
+**Units**
+- Pitch diameter (d), standard pitch diameter (d_std): mm
+- Module (m), pitch (p): mm
+- Tooth count (z): dimensionless integer
+
+**Engineering Standards**
+- ISO 54:1996 (Cylindrical gears for general engineering and heavy engineering — Modules)
+- ISO 53:1998 (Cylindrical gears — Basic rack profile for general engineering)
+- DIN 780 Series 1 and Series 2 preferred modular pitches
+
+<Callout type="warning" title="Design Limitations & Undercut Criteria">
+For standard 20° involute gears without positive profile shift, tooth undercut occurs when z &lt; z_min = 2 / sin²(20°) ≈ 17. Sizing non-standard modules requires dedicated custom hob tooling and significantly increases machining costs.
+</Callout>
+
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-11-22"
+  assumptions={["Standard ISO 54 series", "Zero profile shift", "20° involute profile"]}
+  references={["ISO 54", "ISO 53", "DIN 780"]}
+/>
+
+## Examples
+
+### Example 1: Standard Spur Gear Pitch and Module Check
+
+Determine module and circular pitch for an industrial spur pinion.
+
+**Inputs**
+- Pitch diameter d = 200 mm
+- Number of teeth z = 40
+
+**Outputs**
+- Raw module m = 5.000 mm
+- Circular pitch p = 15.708 mm
+- Selected standard module m_std = 5.0 mm (ISO 54 Series 1)
+- Standard pitch circle d_std = 200.0 mm
+- Addendum ha = 5.0 mm, Dedendum hf = 6.25 mm
+- Tip diameter da = d + 2m = 210.0 mm
+
+### Example 2: Non-Standard Pitch Diameter Rounding
+
+Sizing a reduction gear with non-standard preliminary spacing.
+
+**Inputs**
+- Pitch diameter d = 125 mm
+- Number of teeth z = 38
+
+**Outputs**
+- Raw module m = 125 / 38 = 3.289 mm
+- Nearest ISO 54 standard module: m = 3.5 mm (Series 2) or m = 3.0 mm (Series 1)
+- If m_std = 3.0 mm selected: adjusted operating pitch diameter d_std = 3.0 × 38 = 114.0 mm
+- If m_std = 3.5 mm selected: adjusted operating pitch diameter d_std = 3.5 × 38 = 133.0 mm

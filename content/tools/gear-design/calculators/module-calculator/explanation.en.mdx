@@ -1,0 +1,53 @@
+{/* Tool: gear-design/calculators/module-calculator */}
+<Callout type="info" title="Engineering Scope">
+This tool calculates the raw gear module from operating pitch diameter and tooth count, aligns the pitch with standard ISO 54 / DIN 780 modular series, and verifies minimum tooth thresholds against kinematic undercut risks.
+</Callout>
+
+## Governing Formulas & Methodology
+
+Raw module (m) and standard reference pitch diameter (D_std):
+
+<Formula label="Module and Pitch Diameter">
+m_raw = D / z | D_std = m_std · z | Deviation (%) = |D_std - D| / D × 100
+</Formula>
+
+Under standard 20° normal pressure angle without positive profile modification, the theoretical threshold for undercut is governed by:
+
+<Formula label="Undercut Limit">
+z_min = 2 / sin²(α) = 2 / sin²(20°) ≈ 17.1 (z &lt; 17 requires positive addendum correction)
+</Formula>
+
+## Parameter Definitions
+
+<Table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Unit</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pitch Diameter (D)</td>
+      <td>mm</td>
+      <td>Operating reference kinematic pitch circle diameter</td>
+    </tr>
+    <tr>
+      <td>Tooth Count (z)</td>
+      <td>dimensionless</td>
+      <td>Number of teeth on gear or pinion (z ≥ 17 recommended for standard racks)</td>
+    </tr>
+    <tr>
+      <td>Standard Module (m)</td>
+      <td>mm</td>
+      <td>ISO 54 Series 1: 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16</td>
+    </tr>
+  </tbody>
+</Table>
+
+## Manufacturing & Quality Considerations
+
+<Callout type="warning" title="Tooling & Cost Impacts">
+Specifying non-standard custom gear modules necessitates dedicated custom gear hobs, shaper cutters, and grinding profiles, significantly inflating tooling lead time and manufacturing costs. Always design around standard ISO 54 Series 1 or Series 2 modules.
+</Callout>

@@ -1,0 +1,65 @@
+{/* Tool: gear-design/calculators/helix-axial-calculator */}
+<Callout type="info" title="Engineering Scope">
+This tool calculates the axial thrust (Fa), tangential driving (Ft), and radial separating (Fr) forces produced by single helical gearing, enabling accurate sizing of thrust bearings and shaft bending fatigue checks.
+</Callout>
+
+## Governing Formulas & Methodology
+
+Torque and tangential load:
+
+<Formula label="Torque and Tangential Force">
+T = 9550 · P / n | Ft = 2000 · T / d
+</Formula>
+
+Axial thrust and transverse radial separation:
+
+<Formula label="Axial and Radial Force Resolution">
+Fa = Ft · tan(β) | Fr = Ft · (tan(α_n) / cos(β))
+</Formula>
+
+## Parameter Definitions
+
+<Table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Unit</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Power (P)</td>
+      <td>kW</td>
+      <td>Operating mechanical power</td>
+    </tr>
+    <tr>
+      <td>Speed (n)</td>
+      <td>rpm</td>
+      <td>Shaft rotational speed</td>
+    </tr>
+    <tr>
+      <td>Pitch Diameter (d)</td>
+      <td>mm</td>
+      <td>Operating pitch circle diameter</td>
+    </tr>
+    <tr>
+      <td>Helix Angle (β)</td>
+      <td>degrees</td>
+      <td>Tooth helix angle measured on pitch cylinder</td>
+    </tr>
+    <tr>
+      <td>Pressure Angle (α_n)</td>
+      <td>degrees</td>
+      <td>Normal profile pressure angle (standard 20°)</td>
+    </tr>
+  </tbody>
+</Table>
+
+## Hand of Helix and Thrust Direction Rules
+
+<Callout type="warning" title="Determining Thrust Vector Direction">
+- Right-Hand Helix (RH): Viewed along the shaft with clockwise rotation pushing away, thrust is directed toward the observer.
+- Opposite Hands: Mating external helical gears must have opposite hands (RH pinion meshes with LH gear).
+- Thrust Reversal: Under electric braking, regenerative torque, or reverse rotation, axial thrust reverses direction 180°.
+</Callout>

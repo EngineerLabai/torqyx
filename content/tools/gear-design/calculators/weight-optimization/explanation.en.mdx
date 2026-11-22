@@ -1,0 +1,58 @@
+{/* Tool: gear-design/calculators/weight-optimization */}
+<Callout type="info" title="Engineering Scope">
+This tool calculates the volume, solid annular mass, and web-lightened weight of cylindrical gear blanks, supporting rapid inertia estimation and material optimization for power transmissions.
+</Callout>
+
+## Governing Formulas & Methodology
+
+Annular hollow cylinder volume and solid mass:
+
+<Formula label="Volume and Solid Mass">
+V = (π / 4) · (D² - d²) · b | m_solid = V · 1e-9 · ρ
+</Formula>
+
+Optimized lightened mass accounting for pocket or web turning:
+
+<Formula label="Lightened Mass and Weight Reduction">
+m_light = m_solid · (1 - Lightening Factor) | Δm = m_solid · Lightening Factor
+</Formula>
+
+## Material Densities Reference
+
+<Table>
+  <thead>
+    <tr>
+      <th>Material</th>
+      <th>Density (ρ in kg/m³)</th>
+      <th>Typical Application</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Case-hardening steel (16MnCr5)</td>
+      <td>7850</td>
+      <td>Standard industrial automotive gears</td>
+    </tr>
+    <tr>
+      <td>Through-hardened steel (42CrMo4)</td>
+      <td>7850</td>
+      <td>High-strength heavy machinery gearing</td>
+    </tr>
+    <tr>
+      <td>Ductile iron (EN-GJS-700-2)</td>
+      <td>7150</td>
+      <td>Large cast bull gears, good damping</td>
+    </tr>
+    <tr>
+      <td>Aerospace aluminum (7075-T6)</td>
+      <td>2810</td>
+      <td>High-speed aerospace and robotic drives</td>
+    </tr>
+  </tbody>
+</Table>
+
+## Manufacturing & Dynamic Considerations
+
+<Callout type="warning" title="Rotational Balance and Rim Rigidity">
+Lightening holes and cutouts must be symmetrically spaced to maintain dynamic balance quality (ISO 1940-1 Class G2.5 or G6.3). Backing rim thickness below the root circle must never fall below 1.5 · module to prevent web flexure under load.
+</Callout>

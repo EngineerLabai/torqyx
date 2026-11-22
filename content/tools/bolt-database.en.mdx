@@ -1,5 +1,110 @@
----
-title: Bolt Database (EN)
----
+# Explanation
 
-Placeholder English documentation for the Bolt Database tool.
+{/* Tool: bolt-database */}
+<Callout type="info" title="Engineering Scope">
+This reference database provides metric fastener geometries (ISO 4014, ISO 4017, DIN 931, DIN 933, DIN 912), tensile stress areas (As), and mechanical property class ratings (4.8, 8.8, 10.9, 12.9) governed by ISO 898-1 and VDI 2230.
+</Callout>
+
+## Governing Formulas & Mechanical Properties
+
+Tensile stress area (As) calculation per ISO 898-1 and nominal yield/proof capacity:
+
+<Formula label="Tensile Stress Area and Yield Load (ISO 898-1)">
+As = (π / 4) · (d - 0.9382 · P)² | F_yield = As · Re | F_proof = As · Sp
+</Formula>
+
+Under ISO 898-1 property class designation X.Y:
+- Nominal tensile strength: Rm = X × 100 MPa
+- Nominal yield strength: Re = X × Y × 10 MPa (or 0.2% proof strength Rp0.2)
+- Proof load stress: Sp ≈ 0.90 · Re (typical proof stress ratio)
+
+## Parameter Definitions
+
+<Table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Unit</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Nominal Diameter (d)</td>
+      <td>mm</td>
+      <td>Major thread diameter of the fastener body (e.g. 12 mm for M12)</td>
+    </tr>
+    <tr>
+      <td>Pitch (P)</td>
+      <td>mm</td>
+      <td>Axial distance between adjacent thread crests (Coarse or Fine per ISO 261 / ISO 262)</td>
+    </tr>
+    <tr>
+      <td>Tensile Stress Area (As)</td>
+      <td>mm²</td>
+      <td>Effective cross-sectional area bearing tensile axial load</td>
+    </tr>
+    <tr>
+      <td>Property Class</td>
+      <td>-</td>
+      <td>ISO 898-1 steel property rating: 8.8 (Re = 640 MPa), 10.9 (Re = 900 MPa), 12.9 (Re = 1080 MPa)</td>
+    </tr>
+  </tbody>
+</Table>
+
+## Application Workflow
+
+<StepList title="Fastener Selection Steps" steps={["Determine total axial tensile clamping load and joint shear requirements", "Select preliminary bolt diameter (d) and thread pitch (P) from metric standard tables", "Verify proof load (F_proof) and yield capacity (F_yield) against required safety factor", "Calculate required tightening torque based on under-head and thread friction factors (VDI 2230)"]} />
+
+## Fastener Assembly Warnings
+
+<Callout type="warning" title="Nut & Bolt Class Compatibility">
+Always match bolt strength classes with corresponding nut proof load classes conforming to ISO 898-2 (e.g., use Class 8 nuts with Grade 8.8 bolts, Class 10 nuts with Grade 10.9 bolts). Pairing high-strength bolts with undersized nuts causes catastrophic thread stripping before the bolt reaches design clamping preload.
+</Callout>
+
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-11-22"
+  assumptions={["ISO 898-1 carbon steel property classes", "Standard ISO 68-1 60° metric thread form"]}
+  references={["ISO 898-1", "ISO 898-2", "ISO 261", "VDI 2230"]}
+/>
+
+# Examples
+
+## Example 1: M16 Grade 8.8 vs Grade 10.9 Load Capacity
+
+Comparing the tensile capacity of M16 standard coarse fasteners (P = 2.0 mm).
+
+**Inputs**
+- Nominal diameter: d = 16 mm
+- Thread pitch: P = 2.0 mm (coarse)
+- Tensile stress area: As = (π/4) × (16 - 0.9382 × 2.0)² = 156.67 mm² ≈ 157 mm²
+
+**Outputs**
+- Grade 8.8 (Rm = 800 MPa, Re = 640 MPa):
+  - Yield load: F_yield = 157 × 640 = 100.48 kN
+  - Proof load (Sp = 580 MPa): F_proof = 157 × 580 = 91.06 kN
+- Grade 10.9 (Rm = 1000 MPa, Re = 900 MPa):
+  - Yield load: F_yield = 157 × 900 = 141.30 kN
+  - Proof load (Sp = 830 MPa): F_proof = 157 × 830 = 130.31 kN
+- Upgrading from Grade 8.8 to 10.9 yields a 40.6% increase in clamp load within the exact same envelope diameter.
+
+## Example 2: Metric Coarse vs Fine Thread Tensile Advantage
+
+Evaluating cross-sectional advantage of M12 fine thread (P = 1.25 mm) over coarse thread (P = 1.75 mm).
+
+**Inputs**
+- Fastener: M12 Grade 10.9 (Re = 900 MPa)
+
+**Outputs**
+- Coarse pitch (P = 1.75 mm): As = (π/4) × (12 - 0.9382 × 1.75)² = 84.27 mm²
+  - Yield capacity: F_yield = 84.27 × 900 = 75.84 kN
+- Fine pitch (P = 1.25 mm): As = (π/4) × (12 - 0.9382 × 1.25)² = 92.07 mm²
+  - Yield capacity: F_yield = 92.07 × 900 = 82.86 kN
+- Fine pitch provides 9.3% higher tensile stress area and superior resistance against vibrational self-loosening.
+
+## Related Content
+- <a href="/en/tools/bolt-calculator">Bolt Tightening Torque & Preload Calculator</a>
+- <a href="/en/reference/bolt-tightening-torque-table">Bolt Tightening Torque Table (M3–M36)</a>
+- <a href="/en/blog/civata-on-yuk-kuvveti-nedir">What is Bolt Preload Force and Why is it Critical?</a>

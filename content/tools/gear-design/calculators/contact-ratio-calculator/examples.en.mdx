@@ -1,0 +1,33 @@
+## Example 1: Helical Mesh Sizing
+
+Checking contact ratio optimization for a turbine reduction gearbox.
+
+**Inputs**
+- Normal module: $m_n = 3.0\text{ mm}$
+- Pinion: $z_1 = 21$, Gear: $z_2 = 63$
+- Pressure angle: $\alpha_n = 20^\circ$, Helix angle: $\beta = 18^\circ$
+- Face width: $b = 45\text{ mm}$
+
+**Outputs**
+- Transverse module: $m_t = 3.154\text{ mm}$
+- Transverse contact ratio: $\epsilon_\alpha = 1.624$
+- Overlap ratio: $\epsilon_\beta = 1.475$
+- Total contact ratio: $\epsilon_\gamma = 3.099$
+
+## Example 2: Low-Teeth Pinion Spur Check
+
+Investigating boundary conditions on an 13-tooth pinion spur pair.
+
+**Inputs**
+- Module: $m = 5.0\text{ mm}$
+- Pinion: $z_1 = 13$, Gear: $z_2 = 26$
+- Pressure angle: $\alpha = 20^\circ$
+
+**Outputs**
+- Profile contact ratio: $\epsilon_\alpha = 1.285$
+- Note: Contact ratio meets the bare minimum criterion ($> 1.20$), but tooth profile undercut check or positive addendum shift is strongly advised.
+
+## Related Content
+- <a href="/en/tools/gear-design/calculators/module-calculator">Gear Module Calculator</a>
+- <a href="/en/tools/gear-design/calculators/helix-axial-calculator">Helical Gear Axial Force Calculator</a>
+- <a href="/en/blog/disli-orani-hesabi">Gear Ratio Engineering Guide</a>

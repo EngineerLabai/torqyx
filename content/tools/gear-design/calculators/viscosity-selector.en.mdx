@@ -1,5 +1,72 @@
----
-title: Viscosity Selector (EN)
----
+## Calculation Explanation
 
-Placeholder English documentation for the Viscosity Selector.
+<Callout type="info" title="How to use">
+<StepList title="Step-by-step viscosity selection" steps={["Enter specific tooth load factor (ks in N/mm) and pitch line velocity (v in m/s)", "Select lubrication method (splash, dip, or forced circulating oil) and operating sump temperature (°C)", "Read recommended ISO VG viscosity grade and operational tolerance band conforming to ISO 3448 and AGMA 9005"]} />
+</Callout>
+
+<Formula label="Lubrication Selection Index">
+Index Factor = ks / v
+v = (π · d · n) / 60000
+ks = (Ft / b) · KA
+</Formula>
+
+**Assumptions**
+- Industrial enclosed cylindrical and bevel gear drives operating under elastohydrodynamic lubrication (EHL) regime.
+- Mineral or PAO synthetic gear oils containing extreme pressure (EP) anti-wear additives conforming to DIN 51517 Part 3 (CLP).
+- Sump temperature normalized around standard 40°C ISO rating baseline.
+
+**Units**
+- Specific tooth load (ks): N/mm
+- Pitch line velocity (v): m/s
+- Operating temperature (T): °C
+- Kinematic viscosity: mm²/s (cSt) at 40°C (ISO VG)
+
+**Engineering Standards**
+- ISO 3448:1992 (Industrial liquid lubricants — ISO viscosity classification)
+- AGMA 9005-F16 (Industrial Gear Lubrication)
+- DIN 51517-3:2018 (Lubricants — Lubricating oils — Part 3: CLP lubricating oils; Minimum requirements)
+
+<Callout type="warning" title="Viscosity-Temperature Relationship">
+Oil viscosity drops exponentially with increasing temperature. If the gearbox sump exceeds 75°C under continuous duty, select one ISO VG grade higher or switch to high-viscosity-index synthetic polyalphaolefin (PAO) base stocks to maintain minimum EHL film thickness and prevent micropitting.
+</Callout>
+
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-11-22"
+  assumptions={["Elastohydrodynamic lubrication (EHL)", "ks/v empirical index", "ISO 3448 classification"]}
+  references={["ISO 3448", "AGMA 9005-F16", "DIN 51517-3"]}
+/>
+
+## Examples
+
+### Example 1: Splash-Lubricated Industrial Speed Reducer
+
+Determining oil viscosity for an intermediate industrial conveyor reducer.
+
+**Inputs**
+- Specific load factor: ks = 25 N/mm
+- Pitch line velocity: v = 12 m/s
+- Lubrication method: Splash (oil bath)
+- Operating temperature: T = 70 °C
+
+**Outputs**
+- Index factor: ks / v = 25 / 12 = 2.083
+- Baseline viscosity at 40°C: ISO VG 100
+- Temperature-adjusted operating recommendation: ISO VG 100 to ISO VG 150 (AGMA 3EP / 4EP)
+- Ensures continuous splash distribution without excessive churning power loss.
+
+### Example 2: Heavy-Duty Low-Speed Mill Drive
+
+Selecting lubricant for high-load, low-speed enclosed gearing.
+
+**Inputs**
+- Specific load factor: ks = 120 N/mm
+- Pitch line velocity: v = 1.5 m/s
+- Lubrication method: Splash / dip
+- Operating temperature: T = 65 °C
+
+**Outputs**
+- Index factor: ks / v = 120 / 1.5 = 80.0
+- Recommended viscosity grade: ISO VG 320 to ISO VG 460 (AGMA 6EP / 7EP)
+- High viscosity required to prevent boundary metal-to-metal contact at low shearing velocities.

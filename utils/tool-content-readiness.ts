@@ -39,23 +39,24 @@ const ENGLISH_INDEX_READY_TOOL_IDS = new Set([
   "machine-elements",
   "sealing-guide",
   "coating-guide",
+
+  // Newly verified gear calculators, fastener & material databases
+  "gear-module",
+  "gear-backlash",
+  "gear-contact-ratio",
+  "gear-force-torque",
+  "gear-helix-axial",
+  "gear-viscosity",
+  "gear-weight",
+  "bolt-database",
+  "material-cards",
 ]);
 
 /**
  * Tools whose English guides or standalone documentation are not yet written.
  * Kept noindex and out of English sitemap until a guide is authored.
  */
-export const ENGLISH_GUIDE_PENDING_TOOL_IDS = [
-  "gear-force-torque",
-  "material-cards",
-  "gear-helix-axial",
-  "gear-weight",
-  "gear-viscosity",
-  "gear-contact-ratio",
-  "gear-module",
-  "bolt-database",
-  "gear-backlash",
-] as const;
+export const ENGLISH_GUIDE_PENDING_TOOL_IDS: readonly string[] = [] as const;
 
 export const isToolLocaleIndexReady = (toolId: string, locale: Locale) =>
   locale === "tr" || ENGLISH_INDEX_READY_TOOL_IDS.has(toolId);

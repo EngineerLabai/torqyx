@@ -1,5 +1,76 @@
----
-title: Helix Axial Calculator (EN)
----
+## Calculation Explanation
 
-Placeholder English documentation for the Helix Axial Calculator.
+<Callout type="info" title="How to use">
+<StepList title="Step-by-step axial force analysis" steps={["Enter transmitted power (P in kW) and rotational speed (n in rpm), or enter torque (T in N·m)", "Specify operating pitch diameter (d in mm), normal pressure angle (α_n), and helix angle (β)", "Evaluate tangential driving force (Ft), axial thrust reaction (Fa), and radial separating force (Fr)"]} />
+</Callout>
+
+<Formula label="Helical Gear Tooth Forces">
+T = 9550 · P / n
+Ft = 2000 · T / d
+Fa = Ft · tan(β)
+Fr = Ft · (tan(α_n) / cos(β))
+</Formula>
+
+**Assumptions**
+- Uniform load distribution across operating face width.
+- Steady torque transmission without transient dynamic shock multipliers.
+- Single helical gear mesh (double helical / herringbone gears eliminate external axial thrust).
+
+**Units**
+- Power (P): kW, Speed (n): rpm, Torque (T): N·m
+- Pitch diameter (d): mm
+- Angles (α_n, β): degrees
+- Tooth forces (Ft, Fa, Fr): N
+
+**Engineering Standards**
+- ISO 6336-1:2019 (Calculation of load capacity of spur and helical gears)
+- AGMA 2001-D04 (Fundamental Rating Factors for Involute Spur and Helical Gear Teeth)
+- DIN 3990 (Calculation of load capacity of cylindrical gears)
+
+<Callout type="warning" title="Thrust Reaction and Bearing Arrangement">
+Axial thrust (Fa) acts along the shaft centerline and must be absorbed by locating bearings (such as angular contact ball bearings, tapered roller bearings, or deep groove ball bearings with axial capacity). Furthermore, the direction of thrust reverses when motor rotation reverses or during dynamic braking.
+</Callout>
+
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-11-22"
+  assumptions={["Steady torque", "Single helical mesh", "Uniform face load"]}
+  references={["ISO 6336-1", "AGMA 2001-D04", "DIN 3990"]}
+/>
+
+## Examples
+
+### Example 1: Helical Gear Reducer Intermediate Shaft
+
+Decomposing forces for a helical intermediate stage operating under continuous duty.
+
+**Inputs**
+- Transmitted power P = 7.5 kW
+- Rotational speed n = 1450 rpm
+- Pitch diameter d = 140 mm
+- Normal pressure angle α_n = 20°
+- Helix angle β = 15°
+
+**Outputs**
+- Operating torque: T = 9550 × 7.5 / 1450 = 49.40 N·m
+- Tangential driving force: Ft = 2000 × 49.40 / 140 = 705.7 N
+- Radial separating force: Fr = 705.7 × (tan(20°)/cos(15°)) = 265.9 N
+- Axial thrust force: Fa = 705.7 × tan(15°) = 189.1 N
+- Locating bearing must sustain 189.1 N pure thrust in addition to shaft bending loads.
+
+### Example 2: High Helix Angle Drive (β = 25°)
+
+Assessing the impact of increased helix angle on axial bearing requirements.
+
+**Inputs**
+- Torque T = 250.0 N·m
+- Pitch diameter d = 120 mm
+- Normal pressure angle α_n = 20°
+- Helix angle β = 25°
+
+**Outputs**
+- Tangential force: Ft = 2000 × 250 / 120 = 4166.7 N
+- Axial thrust: Fa = 4166.7 × tan(25°) = 1943.0 N (46.6% of tangential load)
+- Radial force: Fr = 4166.7 × (tan(20°)/cos(25°)) = 1673.5 N
+- Demonstrates that higher helix angles increase contact ratio and reduce noise, but significantly expand thrust bearing sizing.

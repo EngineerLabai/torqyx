@@ -1,5 +1,76 @@
----
-title: Backlash Calculator (EN)
----
+## Calculation Explanation
 
-Placeholder English documentation for the Backlash Calculator.
+<Callout type="info" title="How to use">
+<StepList title="Step-by-step backlash analysis" steps={["Enter module (m), face width (b), and nominal center distance (a)", "Set operational temperature differential (ΔT) and thermal expansion coefficient (α_th)", "Evaluate nominal, minimum, maximum, and thermal-compensated operational backlash"]} />
+</Callout>
+
+<Formula label="Gear Backlash Estimation">
+j_nom = 0.04 · m + 0.001 · b
+j_min = 0.80 · j_nom
+j_max = 1.20 · j_nom
+Δa = a · α_th · ΔT
+j_adj = j_nom + 2 · Δa · tan(α_n)
+</Formula>
+
+**Assumptions**
+- Recommended preliminary backlash baseline conforming to DIN 3967 and ISO 1328 accuracy class standards.
+- Housing and gear thermal differential applies across operating center distance a.
+- Normal pressure angle α_n = 20°.
+
+**Units**
+- Module (m), face width (b), center distance (a): mm
+- Coefficient of thermal expansion (α_th): µm/(m·°C) or 1e-6/K
+- Temperature differential (ΔT): °C
+- Backlash clearance (j_nom, j_min, j_max, j_adj): mm
+
+**Engineering Standards**
+- ISO 1328-1:2013 (Cylindrical gears — ISO system of flank tolerance classification)
+- DIN 3967 (System of gear fits — Backlash, tooth thickness allowances)
+- AGMA 2002-C16 (Tooth Thickness and Backlash Measurement of Cylindrical Involute Gearing)
+
+<Callout type="warning" title="Operational Caveat">
+Backlash estimation formulas provide preliminary design targets. Critical precision drivetrains (such as CNC axes or robotics) require strict adherence to gear tooth tolerance classes and gear housing expansion match. Insufficient backlash causes binding, lubricant displacement, and tooth scoring under thermal equilibrium.
+</Callout>
+
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-11-22"
+  assumptions={["DIN 3967 fit guidelines", "Center distance thermal expansion compensation"]}
+  references={["ISO 1328", "DIN 3967", "AGMA 2002-C16"]}
+/>
+
+## Examples
+
+### Example 1: Industrial Reducer Backlash Sizing
+
+Determine nominal backlash and temperature adjustment for an industrial gearbox stage.
+
+**Inputs**
+- Module m = 4 mm
+- Face width b = 50 mm
+- Operating center distance a = 160 mm
+- Steel thermal expansion coefficient α_th = 11.5 µm/(m·°C)
+- Temperature rise ΔT = 45 °C
+
+**Outputs**
+- Nominal backlash: j_nom = 0.04 × 4 + 0.001 × 50 = 0.16 + 0.05 = 0.210 mm
+- Minimum allowable backlash: j_min = 0.8 × 0.210 = 0.168 mm
+- Maximum allowable backlash: j_max = 1.2 × 0.210 = 0.252 mm
+- Center distance expansion: Δa = 160 × 11.5e-6 × 45 = 0.0828 mm
+- Operational backlash expansion allowance prevents tooth binding at elevated equilibrium temperatures.
+
+### Example 2: High-Precision Positioning Drive
+
+Sizing a precision spur gear set for minimal lost motion without binding.
+
+**Inputs**
+- Module m = 1.5 mm
+- Face width b = 20 mm
+- Operating center distance a = 60 mm
+- Controlled environment: ΔT = 10 °C
+
+**Outputs**
+- Nominal backlash: j_nom = 0.04 × 1.5 + 0.001 × 20 = 0.080 mm (80 µm)
+- Backlash window: 0.064 mm to 0.096 mm
+- Lost motion arc angle on a 60 mm pitch diameter: ≈ 0.15° (9 arc-min)

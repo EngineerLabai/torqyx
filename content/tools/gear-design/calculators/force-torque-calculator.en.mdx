@@ -1,5 +1,77 @@
----
-title: Force & Torque Calculator (EN)
----
+## Calculation Explanation
 
-Placeholder English documentation for the Force & Torque Calculator.
+<Callout type="info" title="How to use">
+<StepList title="Step-by-step force resolution" steps={["Enter transmitted power (P in kW) and rotational speed (n in rpm), or enter nominal torque (T in N·m)", "Specify pitch diameter (d in mm), normal pressure angle (α_n), and helix angle (β)", "Evaluate resultant tangential (Ft), radial (Fr), and axial thrust (Fa) gear mesh forces"]} />
+</Callout>
+
+<Formula label="Gear Mesh Force Resolution">
+T = 9550 · P / n
+Ft = 2000 · T / d
+Fr = Ft · (tan(α_n) / cos(β))
+Fa = Ft · tan(β)
+Fres = √(Ft² + Fr² + Fa²)
+</Formula>
+
+**Assumptions**
+- Steady-state operating conditions with static load transmission.
+- Forces act on the operating pitch diameter cylinder (d).
+- Friction angle between tooth contact flanks is neglected in primary sizing.
+
+**Units**
+- Transmitted power (P): kW
+- Rotational speed (n): rpm
+- Torque (T): N·m
+- Pitch diameter (d): mm
+- Mesh forces (Ft, Fr, Fa, Fres): N
+
+**Engineering Standards**
+- ISO 6336-1:2019 (Calculation of load capacity of spur and helical gears — Basic principles)
+- AGMA 2001-D04 (Fundamental Rating Factors and Calculation Methods for Involute Spur and Helical Gear Teeth)
+- DIN 3990 (Calculation of load capacity of cylindrical gears)
+
+<Callout type="warning" title="Dynamic Factors and Bearing Loads">
+Calculated forces represent static mesh loads. For structural shaft deflection and bearing L10h rating calculations, multiply these values by application service factor (KA), internal dynamic factor (Kv), and face load distribution factor (KHβ).
+</Callout>
+
+<Confidence
+  locale="en"
+  version="v1.0"
+  lastUpdated="2026-11-22"
+  assumptions={["Steady torque", "Pitch diameter resolution", "Zero flank friction"]}
+  references={["ISO 6336-1", "AGMA 2001-D04", "DIN 3990"]}
+/>
+
+## Examples
+
+### Example 1: Helical Gear Drive Force Decomposition
+
+Determining 3D tooth forces for shaft and bearing design in an industrial mixer drive.
+
+**Inputs**
+- Input power P = 15 kW
+- Rotational speed n = 960 rpm
+- Pitch diameter d = 150 mm
+- Normal pressure angle α_n = 20°
+- Helix angle β = 16°
+
+**Outputs**
+- Transmitted torque: T = 9550 × 15 / 960 = 149.22 N·m
+- Tangential force: Ft = 2000 × 149.22 / 150 = 1989.6 N
+- Radial separating force: Fr = 1989.6 × (tan(20°)/cos(16°)) = 753.3 N
+- Axial thrust force: Fa = 1989.6 × tan(16°) = 570.5 N
+- Resultant 3D tooth load: Fres = √(1989.6² + 753.3² + 570.5²) = 2203.2 N
+
+### Example 2: Straight Spur Pinion Mesh (β = 0°)
+
+Sizing electric motor pinion forces for cylindrical roller bearing selection.
+
+**Inputs**
+- Direct input torque T = 75.0 N·m
+- Pitch diameter d = 80 mm
+- Pressure angle α = 20°, Helix angle β = 0°
+
+**Outputs**
+- Tangential force: Ft = 2000 × 75 / 80 = 1875.0 N
+- Radial force: Fr = 1875.0 × tan(20°) = 682.4 N
+- Axial thrust: Fa = 0.0 N
+- Resultant force: Fres = √(1875.0² + 682.4²) = 1995.3 N

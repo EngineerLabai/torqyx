@@ -1,0 +1,63 @@
+{/* Tool: gear-design/calculators/viscosity-selector */}
+<Callout type="info" title="Engineering Scope">
+This tool maps tooth specific loading, pitch line velocity, and operating temperatures to recommended ISO 3448 / AGMA 9005 industrial gear oil viscosity grades (ISO VG 68 through VG 460) to maintain elastohydrodynamic lubricant film integrity.
+</Callout>
+
+## Governing Formulas & Methodology
+
+Kinematic pitch velocity and unit loading:
+
+<Formula label="Pitch Velocity and Tooth Load Factor">
+v = (π · d · n) / 60000 | ks = Ft / b
+</Formula>
+
+Empirical lubrication ratio index:
+
+<Formula label="Viscosity Selection Index">
+Index = ks / v = (Ft / b) / v
+</Formula>
+
+## Standard ISO Viscosity Grades (ISO 3448)
+
+<Table>
+  <thead>
+    <tr>
+      <th>ISO VG Grade</th>
+      <th>Midpoint Kinematic Viscosity at 40°C (mm²/s)</th>
+      <th>Typical Application Regimes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ISO VG 68</td>
+      <td>68</td>
+      <td>High speed (v &gt; 15 m/s), light load, circulating pressure lubrication</td>
+    </tr>
+    <tr>
+      <td>ISO VG 100</td>
+      <td>100</td>
+      <td>Medium-high speed (10 - 15 m/s), moderate load</td>
+    </tr>
+    <tr>
+      <td>ISO VG 150</td>
+      <td>150</td>
+      <td>General industrial drives (5 - 10 m/s), splash lubricated</td>
+    </tr>
+    <tr>
+      <td>ISO VG 220</td>
+      <td>220</td>
+      <td>Standard industrial standard workhorse (2 - 6 m/s), splash bath</td>
+    </tr>
+    <tr>
+      <td>ISO VG 320 / 460</td>
+      <td>320 / 460</td>
+      <td>Low speed (v &lt; 2 m/s), heavy shock load, mining and crushers</td>
+    </tr>
+  </tbody>
+</Table>
+
+## Thermal & Additive Requirements
+
+<Callout type="warning" title="Viscosity Selection Criteria">
+Operating at higher viscosity than required leads to excessive churning friction, increased gearbox bulk temperature, and hydraulic power loss. Conversely, under-viscous lubricants cause asperities to penetrate the oil film, resulting in accelerated adhesive wear and tooth surface pitting.
+</Callout>

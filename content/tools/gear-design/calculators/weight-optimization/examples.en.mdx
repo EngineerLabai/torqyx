@@ -1,0 +1,38 @@
+## Example 1: Webbed Steel Bull Gear Weight Reduction
+
+Calculating mass and volume for an industrial steel spur gear.
+
+**Inputs**
+- Outer diameter: $D = 250\text{ mm}$
+- Bore diameter: $d = 60\text{ mm}$
+- Face width: $b = 40\text{ mm}$
+- Material density: $\rho = 7850\text{ kg/m}^3$ (alloy steel)
+- Lightening factor: $0.20$ ($20\%$ mass reduction via web pockets)
+
+**Outputs**
+- Solid annular volume: $V = (\pi / 4) \times (250^2 - 60^2) \times 40 = 1.850 \times 10^6\text{ mm}^3 = 0.00185\text{ m}^3$
+- Solid blank mass: $m_{solid} = 0.00185 \times 7850 = 14.53\text{ kg}$
+- Lightened mass: $m_{light} = 14.53 \times (1 - 0.20) = 11.62\text{ kg}$
+- Net mass savings: $\Delta m = 2.91\text{ kg}$
+
+## Example 2: High-Speed Aluminum Pinion
+
+Evaluating rotational inertia and mass for an aerospace actuator gear.
+
+**Inputs**
+- Outer diameter: $D = 80\text{ mm}$
+- Shaft bore: $d = 20\text{ mm}$
+- Face width: $b = 18\text{ mm}$
+- Material density: $\rho = 2810\text{ kg/m}^3$ (7075-T6 aluminum)
+- Lightening factor: $0.10$
+
+**Outputs**
+- Solid volume: $V = 8.482 \times 10^4\text{ mm}^3 = 8.482 \times 10^{-5}\text{ m}^3$
+- Solid mass: $m_{solid} = 8.482 \times 10^{-5} \times 2810 = 0.238\text{ kg}$
+- Lightened mass: $m_{light} = 0.238 \times 0.90 = 0.214\text{ kg}$
+- Low rotor mass significantly suppresses motor starting torque spikes and dynamic torsional vibration.
+
+## Related Content
+- <a href="/en/tools/gear-design/calculators/module-calculator">Gear Module Calculator</a>
+- <a href="/en/guides/doner-ekipman-dengeleme-titresim-kontrolu">Rotating Equipment Balancing & Vibration Guide</a>
+- <a href="/en/tools/torque-power">Power - Torque - RPM Calculator</a>

@@ -1,0 +1,63 @@
+{/* Tool: gear-design/calculators/force-torque-calculator */}
+<Callout type="info" title="Engineering Scope">
+This tool calculates the orthogonal 3D gear mesh reaction forces—tangential (Ft), radial (Fr), and axial (Fa)—from transmitted shaft power, speed, pitch geometry, and tooth angles under ISO 6336 and AGMA 2001 principles.
+</Callout>
+
+## Governing Formulas & Methodology
+
+Shaft torque derived from mechanical power:
+
+<Formula label="Torque and Tangential Force">
+T = 9550 · P / n | Ft = 2000 · T / d
+</Formula>
+
+Radial separating force and axial thrust resolution:
+
+<Formula label="Radial and Axial Forces">
+Fr = Ft · (tan(α_n) / cos(β)) | Fa = Ft · tan(β) | Fnet = √(Ft² + Fr² + Fa²)
+</Formula>
+
+## Parameter Definitions
+
+<Table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Unit</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Transmitted Power (P)</td>
+      <td>kW</td>
+      <td>Nominal driving power transmitted across the mesh</td>
+    </tr>
+    <tr>
+      <td>Shaft Speed (n)</td>
+      <td>rpm</td>
+      <td>Rotational speed of the gear or pinion under evaluation</td>
+    </tr>
+    <tr>
+      <td>Pitch Diameter (d)</td>
+      <td>mm</td>
+      <td>Operating kinematic pitch circle diameter</td>
+    </tr>
+    <tr>
+      <td>Pressure Angle (α_n)</td>
+      <td>degrees</td>
+      <td>Normal involute tooth flank pressure angle (typically 20°)</td>
+    </tr>
+    <tr>
+      <td>Helix Angle (β)</td>
+      <td>degrees</td>
+      <td>Helix angle at pitch diameter (0° for straight spur gears)</td>
+    </tr>
+  </tbody>
+</Table>
+
+## Application to Downstream Machine Elements
+
+<Callout type="warning" title="Bearing Reaction Design">
+Tangential force (Ft) generates shaft bending and transmission torque; radial force (Fr) creates additional radial bearing loads; axial thrust force (Fa) creates shaft tilting moments and requires thrust bearings (such as tapered roller or angular contact bearings).
+</Callout>

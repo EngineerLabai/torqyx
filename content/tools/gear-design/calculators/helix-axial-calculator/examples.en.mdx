@@ -1,0 +1,33 @@
+## Example 1: Helical Pinion Thrust Reaction
+
+Determining locating bearing thrust force for an electric drivetrain.
+
+**Inputs**
+- Power: $P = 22\text{ kW}$
+- Speed: $n = 2900\text{ rpm}$
+- Pitch diameter: $d = 65\text{ mm}$
+- Helix angle: $\beta = 18^\circ$
+- Pressure angle: $\alpha_n = 20^\circ$
+
+**Outputs**
+- Torque: $T = 72.45\text{ N}\cdot\text{m}$
+- Tangential force: $F_t = 2229.2\text{ N}$
+- Axial thrust: $F_a = 2229.2 \times \tan(18^\circ) = 724.3\text{ N}$
+- Radial force: $F_r = 2229.2 \times (\tan(20^\circ)/\cos(18^\circ)) = 853.1\text{ N}$
+
+## Example 2: Double Helical Comparison
+
+Comparing single helical with opposed herringbone layout.
+
+**Inputs**
+- Tangential load: $F_t = 12000\text{ N}$
+- Helix angle: $\beta = 22^\circ$
+
+**Outputs**
+- Single helical axial force: $F_a = 12000 \times \tan(22^\circ) = 4848.3\text{ N}$ (must be carried by bearings).
+- Double helical / herringbone: Net external $F_a = 0\text{ N}$ as opposing helices balance internal thrust on the same rotor.
+
+## Related Content
+- <a href="/en/tools/bearing-life">Bearing Life (L10) Calculation</a>
+- <a href="/en/tools/gear-design/calculators/force-torque-calculator">Gear Force & Torque Calculator</a>
+- <a href="/en/tools/gear-design/calculators/contact-ratio-calculator">Gear Contact Ratio Calculator</a>

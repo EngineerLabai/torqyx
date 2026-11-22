@@ -1,0 +1,59 @@
+{/* Tool: gear-design/calculators/backlash-calculator */}
+<Callout type="info" title="Engineering Scope">
+This calculator determines recommended operational backlash boundaries for cylindrical involute gears based on module, face width, and thermal expansion differentials between gears and gearboxes under ISO 1328 and DIN 3967 standards.
+</Callout>
+
+## Governing Formulas & Methodology
+
+Nominal backlash calculation based on DIN 3967 empirical practice:
+
+<Formula label="Backlash Boundaries and Thermal Expansion">
+j_nom = 0.04 · m + 0.001 · b | j_min = 0.8 · j_nom | j_max = 1.2 · j_nom
+</Formula>
+
+Thermal elongation across operating center distance (a):
+
+<Formula label="Center Distance Thermal Growth">
+Δa = a · (α_housing · ΔT_housing - α_gear · ΔT_gear)
+</Formula>
+
+## Parameter Definitions
+
+<Table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Unit</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Module (m)</td>
+      <td>mm</td>
+      <td>Standard gear module</td>
+    </tr>
+    <tr>
+      <td>Face Width (b)</td>
+      <td>mm</td>
+      <td>Axial gear tooth width</td>
+    </tr>
+    <tr>
+      <td>Center Distance (a)</td>
+      <td>mm</td>
+      <td>Operating distance between pinion and gear rotational axes</td>
+    </tr>
+    <tr>
+      <td>Thermal Expansion Coeff (α_th)</td>
+      <td>µm/(m·°C)</td>
+      <td>Linear thermal coefficient (Steel: ~11.5, Aluminum: ~23, Cast Iron: ~10.5)</td>
+    </tr>
+  </tbody>
+</Table>
+
+## Functional Significance of Backlash
+
+<Callout type="warning" title="Critical Design Balance">
+- Insufficient Backlash: Results in tooth interference during thermal transients, lubricant film breakdown, friction spikes, micro-welding, and tooth flank scuffing.
+- Excessive Backlash: Generates torsional impact shocks upon torque reversal, audible gear rattle, and excessive kinematic hysteresis in positioning servo loops.
+</Callout>

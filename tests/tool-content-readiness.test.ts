@@ -35,6 +35,15 @@ const READY_EN_TOOL_IDS = [
   "machine-elements",
   "sealing-guide",
   "coating-guide",
+  "gear-module",
+  "gear-backlash",
+  "gear-contact-ratio",
+  "gear-force-torque",
+  "gear-helix-axial",
+  "gear-viscosity",
+  "gear-weight",
+  "bolt-database",
+  "material-cards",
 ] as const;
 
 describe("tool content index-readiness policy", () => {
