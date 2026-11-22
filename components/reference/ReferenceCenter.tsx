@@ -58,6 +58,10 @@ const SECTION_LINKS: Record<string, ReferenceLink[]> = {
   ],
   threads: [
     {
+      href: "/reference/civata-sikma-torku-tablosu",
+      label: { tr: "Cıvata Sıkma Torku Tablosu", en: "Bolt Tightening Torque Table" },
+    },
+    {
       href: "/tools/bolt-calculator",
       label: { tr: "Cıvata Boyut & Tork", en: "Bolt Size & Torque" },
     },

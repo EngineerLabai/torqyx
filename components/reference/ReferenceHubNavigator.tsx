@@ -12,6 +12,14 @@ type HubLink = {
 
 const referenceLinks: HubLink[] = [
   {
+    href: "/reference/civata-sikma-torku-tablosu",
+    title: { tr: "Cıvata sıkma torku tablosu", en: "Bolt tightening torque table" },
+    description: {
+      tr: "M3–M36 metrik kaba ve ince diş, 8.8, 10.9 ve 12.9 kalite kuru/yağlı sıkma torkları.",
+      en: "M3–M36 coarse and fine pitch, 8.8, 10.9, 12.9 property classes, dry/oiled tightening torques.",
+    },
+  },
+  {
     href: "/reference#threads",
     title: { tr: "Dişler ve cıvata delikleri", en: "Threads and bolt holes" },
     description: {
