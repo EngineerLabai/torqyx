@@ -129,6 +129,19 @@ export default function ToolPage<TInput extends ToolInputRecord, TResult extends
         } catch {
           // ignore invalid shared data
         }
+      } else if (searchParams) {
+        const directParams: ToolInputRecord = {};
+        let hasDirect = false;
+        Object.keys(tool.initialInput as ToolInputRecord).forEach((key) => {
+          const val = searchParams.get(key);
+          if (val !== null) {
+            directParams[key] = val;
+            hasDirect = true;
+          }
+        });
+        if (hasDirect) {
+          mergedInput = { ...(tool.initialInput as ToolInputRecord), ...directParams };
+        }
       }
 
       if (mergedInput) {

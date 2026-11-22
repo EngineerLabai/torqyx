@@ -30,6 +30,7 @@ const LOCALE_PUBLIC_ALIASES = {
     "/kullanim-sartlari": "/kullanim-sartlari",
     "/satis-iade-teslimat": "/satis-iade-teslimat",
     "/iletisim": "/iletisim",
+    "/reference/civata-sikma-torku-tablosu": "/referans/civata-sikma-torku-tablosu",
   },
   en: {
     "/hakkinda": "/about",
@@ -40,6 +41,7 @@ const LOCALE_PUBLIC_ALIASES = {
     "/kullanim-sartlari": "/terms",
     "/satis-iade-teslimat": "/sales-refunds-delivery",
     "/iletisim": "/contact",
+    "/reference/civata-sikma-torku-tablosu": "/reference/bolt-tightening-torque-table",
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

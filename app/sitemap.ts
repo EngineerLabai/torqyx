@@ -31,6 +31,7 @@ const baseStaticPaths = [
   "/hakkinda",
   "/metodoloji",
   "/sorumluluk-reddi",
+  "/reference/civata-sikma-torku-tablosu",
 ] as const;
 
 const staticPaths = [
