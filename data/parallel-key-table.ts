@@ -593,8 +593,8 @@ export function generateParallelKeyTable(): ParallelKeyRow[] {
     });
 
     const params = new URLSearchParams({
-      d: String(def.dNominal),
-      T: String(Math.round(capA.torqueSteelNm)),
+      diameter: String(def.dNominal),
+      torque: String(Math.round(capA.torqueSteelNm)),
     });
 
     return {
@@ -620,8 +620,8 @@ export function generateParallelKeyTable(): ParallelKeyRow[] {
       torqueSteelDefaultNm: capA.torqueSteelNm,
       torqueCastIronDefaultNm: capA.torqueCastIronNm,
       lengthsList: def.standardLengths,
-      calculatorUrlTr: `/tr/tools/torque-power?${params.toString()}`,
-      calculatorUrlEn: `/en/tools/torque-power?${params.toString()}`,
+      calculatorUrlTr: `/tr/tools/shaft-torsion?${params.toString()}`,
+      calculatorUrlEn: `/en/tools/shaft-torsion?${params.toString()}`,
     };
   });
 }

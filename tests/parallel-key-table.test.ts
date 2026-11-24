@@ -89,8 +89,12 @@ describe("DIN 6885-1 Parallel Key Reference Table", () => {
       expect(row.torqueSteelDefaultNm).toBeCloseTo(row.torqueCastIronDefaultNm * (100 / 60), 1);
 
       // Verify prefilled calculator URLs
-      expect(row.calculatorUrlTr).toContain(`/tr/tools/torque-power?d=${row.dNominal}&T=`);
-      expect(row.calculatorUrlEn).toContain(`/en/tools/torque-power?d=${row.dNominal}&T=`);
+      expect(row.calculatorUrlTr).toContain(
+        `/tr/tools/shaft-torsion?diameter=${row.dNominal}&torque=${Math.round(row.torqueSteelDefaultNm)}`,
+      );
+      expect(row.calculatorUrlEn).toContain(
+        `/en/tools/shaft-torsion?diameter=${row.dNominal}&torque=${Math.round(row.torqueSteelDefaultNm)}`,
+      );
     }
   });
 
@@ -170,5 +174,24 @@ describe("DIN 6885-1 Parallel Key Reference Table", () => {
     expect(fileContent).toContain("/tools/shaft-torsion");
     expect(fileContent).toContain("/tools/torque-power");
     expect(fileContent).toContain("/blog/mil-gobek-baglantisi-kamali-flansli-gecme-cakma");
+  });
+
+  it("avoids Turkish leakage in EN KeyTableClient JSX and prevents SEO title truncation", () => {
+    const clientPath = path.join(process.cwd(), "components/reference/KeyTableClient.tsx");
+    const clientSrc = fs.readFileSync(clientPath, "utf8");
+    const jsxPart = clientSrc.slice(clientSrc.indexOf("export default function KeyTableClient"));
+
+    expect(jsxPart).toContain("/tools/shaft-torsion?diameter=");
+    expect(jsxPart).not.toContain("(anma:");
+    expect(jsxPart).not.toContain("pah:");
+    expect(jsxPart).not.toContain("Çelik pem");
+    expect(jsxPart).not.toContain("Döküm pem");
+    expect(jsxPart).not.toContain("Aramayı temizle");
+    expect(jsxPart).not.toContain(">Hesapla<");
+
+    const pagePath = path.join(process.cwd(), "app/reference/kama-olculeri-ve-tolerans-tablosu/page.tsx");
+    const pageSrc = fs.readFileSync(pagePath, "utf8");
+    expect(pageSrc).toContain('"Paralel Kama ve Tolerans Tablosu (DIN 6885-1)"');
+    expect(pageSrc).toContain('"Parallel Key Size & Tolerance Table (DIN 6885-1)"');
   });
 });

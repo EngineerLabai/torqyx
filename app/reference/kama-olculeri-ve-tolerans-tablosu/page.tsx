@@ -15,8 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return buildPageMetadata({
     title: isTr
-      ? "Paralel Kama Ölçüleri ve Tolerans Tablosu (DIN 6885-1)"
-      : "Parallel Key Size and Tolerance Table (DIN 6885-1)",
+      ? "Paralel Kama ve Tolerans Tablosu (DIN 6885-1)"
+      : "Parallel Key Size & Tolerance Table (DIN 6885-1)",
     description: isTr
       ? "6–500 mm mil çapları için DIN 6885-1 / ISO 773 standart paralel kama ölçüleri, b×h kesitleri, t1/t2 kanal derinlikleri, P9/JS9 toleransları ve tork kapasitesi tablosu."
       : "Standard parallel key size and tolerance table for shaft diameters 6–500 mm per DIN 6885-1 and ISO 773. Includes keyway depths, P9/JS9 fits, and torque capacities.",

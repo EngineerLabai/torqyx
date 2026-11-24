@@ -43,7 +43,13 @@ const COPY = {
     },
     tableFootnote:
       "* Tüm tork değerleri DIN 6885-1 ve Niemann ilkelerine göre göbek yüzey ezilme emniyeti (çelik 100 MPa, döküm 60 MPa) esas alınarak TORQYX mühendislik motoru ile deterministik olarak hesaplanmıştır.",
-    calculateBtn: "Tork & Güç ile İncele",
+    calculateBtn: "Mil Burulması Hesapla",
+    calculateBtnMobile: "Hesapla",
+    clearSearchAria: "Aramayı temizle",
+    nominalLabel: "anma",
+    chamferLabel: "pah",
+    steelPemLabel: "Çelik pem",
+    castIronPemLabel: "Döküm pem",
     emptyTitle: "Eşleşen kama ölçüsü bulunamadı",
     emptyDesc: "Arama teriminizi veya aktif filtreleri değiştirerek tekrar deneyin.",
     calcBannerTitle: "Mil Burulması ve Çentik Yorulmasını Kontrol Edin",
@@ -83,7 +89,13 @@ const COPY = {
     },
     tableFootnote:
       "* All torque capacities are deterministically calculated according to DIN 6885-1 and Niemann machine element standards based on permissible surface pressure (steel 100 MPa, cast iron 60 MPa).",
-    calculateBtn: "Analyze Torque & Power",
+    calculateBtn: "Check Shaft Torsion",
+    calculateBtnMobile: "Calc",
+    clearSearchAria: "Clear search",
+    nominalLabel: "nom.",
+    chamferLabel: "chamfer",
+    steelPemLabel: "Steel pem",
+    castIronPemLabel: "Cast iron pem",
     emptyTitle: "No matching key sizes found",
     emptyDesc: "Try adjusting your search query or diameter range filters.",
     calcBannerTitle: "Verify Shaft Torsion and Keyway Fatigue Notch Factor",
@@ -185,7 +197,7 @@ export default function KeyTableClient() {
                 type="button"
                 onClick={() => setQuery("")}
                 className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600"
-                aria-label="Aramayı temizle"
+                aria-label={copy.clearSearchAria}
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -329,7 +341,7 @@ export default function KeyTableClient() {
 
                   const activeTorque = material === "steel" ? cap.torqueSteelNm : cap.torqueCastIronNm;
 
-                  const calcUrl = `/${locale}/tools/torque-power?d=${def.dNominal}&T=${Math.round(activeTorque)}`;
+                  const calcUrl = `/${locale}/tools/shaft-torsion?diameter=${def.dNominal}&torque=${Math.round(activeTorque)}`;
 
                   return (
                     <tr
@@ -340,7 +352,7 @@ export default function KeyTableClient() {
                       <td className="px-3.5 py-3 sm:px-4 font-semibold text-slate-900 whitespace-nowrap">
                         <span className="font-mono">{def.dMin} – {def.dMax}</span> {copy.unitMm}
                         <span className="block text-[11px] font-normal text-slate-400">
-                          (anma: {def.dNominal} mm)
+                          ({copy.nominalLabel}: {def.dNominal} {copy.unitMm})
                         </span>
                       </td>
 
@@ -350,7 +362,7 @@ export default function KeyTableClient() {
                           {def.b} × {def.h}
                         </span>
                         <span className="block text-[11px] font-normal text-slate-400">
-                          pah: {def.chamfer}
+                          {copy.chamferLabel}: {def.chamfer}
                         </span>
                       </td>
 
@@ -392,7 +404,7 @@ export default function KeyTableClient() {
                       <td className="px-3.5 py-3 sm:px-4 text-right font-mono font-bold text-emerald-700 whitespace-nowrap">
                         <span>{formatTorque(activeTorque)}</span> {copy.unitNm}
                         <span className="block text-[10px] font-normal text-slate-400">
-                          {material === "steel" ? "Çelik pem" : "Döküm pem"}
+                          {material === "steel" ? copy.steelPemLabel : copy.castIronPemLabel}
                         </span>
                       </td>
 
@@ -407,7 +419,7 @@ export default function KeyTableClient() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                           </svg>
                           <span className="hidden sm:inline">{copy.calculateBtn}</span>
-                          <span className="sm:hidden">Hesapla</span>
+                          <span className="sm:hidden">{copy.calculateBtnMobile}</span>
                         </Link>
                       </td>
                     </tr>
