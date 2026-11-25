@@ -30,21 +30,21 @@ const COPY = {
       `${total} standart ölçüden ${shown} kademe gösteriliyor`,
     resetFilters: "Filtreleri Sıfırla",
     tableHeaders: {
-      shaftRange: "Mil Çapı (d)",
-      crossSection: "Kama Kesiti (b × h)",
-      t1: "Mil Kanalı (t₁)",
-      t2: "Göbek Kanalı (t₂)",
-      tolerances: "Toleranslar (P9 / JS9)",
+      shaftRange: "Mil (d)",
+      crossSection: "Kesit (b×h)",
+      t1: "Mil (t₁)",
+      t2: "Göbek (t₂)",
+      tolerances: "Tolerans (P9/JS9)",
       standardLengths: "Standart Boylar (L)",
-      defaultLength: "Örnek Boy (L)",
-      leff: "Etkin Boy (leff)",
-      torque: "Maks. Tork (Tmax)",
-      action: "Hesaplayıcı",
+      defaultLength: "Boy (L)",
+      leff: "Etkin (leff)",
+      torque: "Maks. Tork",
+      action: "Hesap",
     },
     tableFootnote:
       "* Tüm tork değerleri DIN 6885-1 ve Niemann ilkelerine göre göbek yüzey ezilme emniyeti (çelik 100 MPa, döküm 60 MPa) esas alınarak TORQYX mühendislik motoru ile deterministik olarak hesaplanmıştır.",
     calculateBtn: "Mil Burulması Hesapla",
-    calculateBtnMobile: "Hesapla",
+    calculateBtnCompact: "Burulma",
     clearSearchAria: "Aramayı temizle",
     nominalLabel: "anma",
     chamferLabel: "pah",
@@ -76,21 +76,21 @@ const COPY = {
       `Showing ${shown} of ${total} standard shaft size steps`,
     resetFilters: "Reset Filters",
     tableHeaders: {
-      shaftRange: "Shaft Dia. (d)",
-      crossSection: "Key Size (b × h)",
-      t1: "Shaft Depth (t₁)",
-      t2: "Hub Depth (t₂)",
-      tolerances: "Tolerances (P9 / JS9)",
+      shaftRange: "Shaft (d)",
+      crossSection: "Key (b×h)",
+      t1: "Shaft (t₁)",
+      t2: "Hub (t₂)",
+      tolerances: "Fits (P9/JS9)",
       standardLengths: "Standard Lengths (L)",
-      defaultLength: "Sample Length (L)",
-      leff: "Effective (leff)",
-      torque: "Max Torque (Tmax)",
-      action: "Calculator",
+      defaultLength: "Len (L)",
+      leff: "Eff. (leff)",
+      torque: "Max Torque",
+      action: "Tool",
     },
     tableFootnote:
       "* All torque capacities are deterministically calculated according to DIN 6885-1 and Niemann machine element standards based on permissible surface pressure (steel 100 MPa, cast iron 60 MPa).",
     calculateBtn: "Check Shaft Torsion",
-    calculateBtnMobile: "Calc",
+    calculateBtnCompact: "Torsion",
     clearSearchAria: "Clear search",
     nominalLabel: "nom.",
     chamferLabel: "chamfer",
@@ -294,34 +294,34 @@ export default function KeyTableClient() {
       ) : (
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
-              <thead className="bg-slate-50 text-slate-700 font-semibold">
+            <table className="min-w-full border-collapse text-left text-xs">
+              <thead className="border-b border-slate-200 bg-slate-50 text-[11px] font-semibold uppercase tracking-wider text-slate-600">
                 <tr>
-                  <th scope="col" className="px-3.5 py-3.5 sm:px-4">
+                  <th scope="col" className="px-2.5 py-3 sm:px-3 whitespace-nowrap">
                     {copy.tableHeaders.shaftRange}
                   </th>
-                  <th scope="col" className="px-3.5 py-3.5 sm:px-4">
+                  <th scope="col" className="px-2.5 py-3 sm:px-3 whitespace-nowrap">
                     {copy.tableHeaders.crossSection}
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-center">
+                  <th scope="col" className="px-2 py-3 text-center whitespace-nowrap">
                     {copy.tableHeaders.t1}
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-center">
+                  <th scope="col" className="px-2 py-3 text-center whitespace-nowrap">
                     {copy.tableHeaders.t2}
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-center hidden md:table-cell">
+                  <th scope="col" className="px-2.5 py-3 text-center hidden lg:table-cell whitespace-nowrap">
                     {copy.tableHeaders.tolerances}
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-center">
+                  <th scope="col" className="px-2 py-3 text-center whitespace-nowrap">
                     {copy.tableHeaders.defaultLength}
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-center">
+                  <th scope="col" className="px-2 py-3 text-center whitespace-nowrap">
                     {copy.tableHeaders.leff}
                   </th>
-                  <th scope="col" className="px-3.5 py-3.5 sm:px-4 text-right font-mono">
+                  <th scope="col" className="px-2.5 py-3 sm:px-3 text-right font-mono whitespace-nowrap">
                     {copy.tableHeaders.torque}
                   </th>
-                  <th scope="col" className="px-3.5 py-3.5 sm:px-4 text-center">
+                  <th scope="col" className="px-2.5 py-3 sm:px-3 text-center whitespace-nowrap">
                     {copy.tableHeaders.action}
                   </th>
                 </tr>
@@ -349,43 +349,43 @@ export default function KeyTableClient() {
                       className={idx % 2 === 0 ? "bg-white hover:bg-slate-50/80" : "bg-slate-50/40 hover:bg-slate-50/80"}
                     >
                       {/* Shaft Range */}
-                      <td className="px-3.5 py-3 sm:px-4 font-semibold text-slate-900 whitespace-nowrap">
-                        <span className="font-mono">{def.dMin} – {def.dMax}</span> {copy.unitMm}
-                        <span className="block text-[11px] font-normal text-slate-400">
+                      <td className="px-2.5 py-2.5 sm:px-3 font-semibold text-slate-900 whitespace-nowrap">
+                        <span className="font-mono">{def.dMin}–{def.dMax}</span> {copy.unitMm}
+                        <span className="block text-[10px] font-normal text-slate-400">
                           ({copy.nominalLabel}: {def.dNominal} {copy.unitMm})
                         </span>
                       </td>
 
                       {/* Key Size (b x h) */}
-                      <td className="px-3.5 py-3 sm:px-4 font-mono font-medium text-slate-900 whitespace-nowrap">
-                        <span className="inline-block rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-bold text-emerald-800 border border-emerald-200">
-                          {def.b} × {def.h}
+                      <td className="px-2.5 py-2.5 sm:px-3 font-mono font-medium text-slate-900 whitespace-nowrap">
+                        <span className="inline-block rounded-md bg-emerald-50 px-1.5 py-0.5 text-xs font-bold text-emerald-800 border border-emerald-200">
+                          {def.b}×{def.h}
                         </span>
-                        <span className="block text-[11px] font-normal text-slate-400">
+                        <span className="block text-[10px] font-normal text-slate-400">
                           {copy.chamferLabel}: {def.chamfer}
                         </span>
                       </td>
 
                       {/* Shaft Depth (t1) */}
-                      <td className="px-3 py-3 text-center font-mono whitespace-nowrap">
+                      <td className="px-2 py-2.5 text-center font-mono whitespace-nowrap">
                         <span className="font-semibold text-slate-800">{def.t1.toFixed(1)}</span>
                         <span className="text-[10px] text-slate-400 block">{def.tolDepth}</span>
                       </td>
 
                       {/* Hub Depth (t2) */}
-                      <td className="px-3 py-3 text-center font-mono whitespace-nowrap">
+                      <td className="px-2 py-2.5 text-center font-mono whitespace-nowrap">
                         <span className="font-semibold text-slate-800">{def.t2.toFixed(1)}</span>
                         <span className="text-[10px] text-slate-400 block">{def.tolDepth}</span>
                       </td>
 
                       {/* Tolerances */}
-                      <td className="px-3 py-3 text-center text-xs hidden md:table-cell whitespace-nowrap">
+                      <td className="px-2.5 py-2.5 text-center text-[11px] hidden lg:table-cell whitespace-nowrap">
                         <span className="font-mono text-slate-700 block">P9: {def.tolShaftKeywayP9}</span>
                         <span className="font-mono text-slate-500 block">JS9: {def.tolHubKeywayJS9}</span>
                       </td>
 
                       {/* Default Length */}
-                      <td className="px-3 py-3 text-center font-mono whitespace-nowrap">
+                      <td className="px-2 py-2.5 text-center font-mono whitespace-nowrap">
                         <span className="font-medium text-slate-900">{def.defaultLength}</span> {copy.unitMm}
                         <span className="block text-[10px] text-slate-400">
                           ({def.standardLengths[0]}–{def.standardLengths[def.standardLengths.length - 1]})
@@ -393,7 +393,7 @@ export default function KeyTableClient() {
                       </td>
 
                       {/* Effective Length leff */}
-                      <td className="px-3 py-3 text-center font-mono font-semibold text-slate-900 whitespace-nowrap">
+                      <td className="px-2 py-2.5 text-center font-mono font-semibold text-slate-900 whitespace-nowrap">
                         {cap.leff} {copy.unitMm}
                         <span className="block text-[10px] font-normal text-slate-400">
                           {shapeForm === "A" ? "L - b" : "L"}
@@ -401,7 +401,7 @@ export default function KeyTableClient() {
                       </td>
 
                       {/* Torque Capacity */}
-                      <td className="px-3.5 py-3 sm:px-4 text-right font-mono font-bold text-emerald-700 whitespace-nowrap">
+                      <td className="px-2.5 py-2.5 sm:px-3 text-right font-mono font-bold text-emerald-700 whitespace-nowrap">
                         <span>{formatTorque(activeTorque)}</span> {copy.unitNm}
                         <span className="block text-[10px] font-normal text-slate-400">
                           {material === "steel" ? copy.steelPemLabel : copy.castIronPemLabel}
@@ -409,17 +409,17 @@ export default function KeyTableClient() {
                       </td>
 
                       {/* Action */}
-                      <td className="px-3.5 py-3 sm:px-4 text-center whitespace-nowrap">
+                      <td className="px-2.5 py-2.5 sm:px-3 text-center whitespace-nowrap">
                         <Link
                           href={calcUrl}
-                          className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:border-emerald-500 hover:text-emerald-700 hover:bg-emerald-50/50 transition"
+                          className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:border-emerald-500 hover:text-emerald-700 hover:bg-emerald-50/50 transition"
                           title={copy.calculateBtn}
+                          aria-label={copy.calculateBtn}
                         >
-                          <svg className="mr-1.5 h-3.5 w-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="mr-1 h-3.5 w-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                           </svg>
-                          <span className="hidden sm:inline">{copy.calculateBtn}</span>
-                          <span className="sm:hidden">{copy.calculateBtnMobile}</span>
+                          <span>{copy.calculateBtnCompact}</span>
                         </Link>
                       </td>
                     </tr>

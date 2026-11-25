@@ -76,6 +76,8 @@ const THREADS: ThreadInfo[] = [
 
 type BoltGrade = {
   grade: string;
+  labelTr?: string;
+  labelEn?: string;
   tensile: number;
   yield: number;
   hardness: string;
@@ -109,7 +111,9 @@ const BOLT_GRADES: BoltGrade[] = [
     toughnessEn: "Very high strength, high preload & compact joints",
   },
   {
-    grade: "A2 Paslanmaz / Stainless",
+    grade: "A2",
+    labelTr: "A2 Paslanmaz",
+    labelEn: "A2 Stainless",
     tensile: 700,
     yield: 450,
     hardness: "~25 HRC",
@@ -117,7 +121,9 @@ const BOLT_GRADES: BoltGrade[] = [
     toughnessEn: "Good corrosion resistance, lower mechanical strength",
   },
   {
-    grade: "A4 Paslanmaz / Stainless",
+    grade: "A4",
+    labelTr: "A4 Paslanmaz",
+    labelEn: "A4 Stainless",
     tensile: 800,
     yield: 600,
     hardness: "~29 HRC",
@@ -254,7 +260,7 @@ export default function BoltDatabasePage({ initialDocs }: BoltDatabaseClientProp
             >
               {BOLT_GRADES.map((g) => (
                 <option key={g.grade} value={g.grade}>
-                  {g.grade}
+                  {isEn ? (g.labelEn ?? g.grade) : (g.labelTr ?? g.grade)}
                 </option>
               ))}
             </select>
