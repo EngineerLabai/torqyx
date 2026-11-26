@@ -179,8 +179,7 @@ export default function proxy(request: NextRequest) {
   const redirected = request.nextUrl.clone();
   redirected.pathname = toLocalePath(redirectLocale, localizedPath);
   redirected.search = request.nextUrl.search;
-  const hasStoredLocale = isLocale(request.cookies.get(LOCALE_COOKIE)?.value);
-  return NextResponse.redirect(redirected, hasStoredLocale && shouldLocaleRedirect ? 307 : 308);
+  return NextResponse.redirect(redirected, 308);
 }
 
 export const config = {

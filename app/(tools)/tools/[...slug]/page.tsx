@@ -360,12 +360,6 @@ export default async function ToolReportRoute({ params, searchParams }: PageProp
                         >
                           {guideCopy.openTool}
                         </Link>
-                        <Link
-                          href={withLocalePrefix(item.guideHref, locale)}
-                          className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white hover:bg-slate-800"
-                        >
-                          {guideCopy.openGuide}
-                        </Link>
                       </div>
                     </div>
                   ))}
