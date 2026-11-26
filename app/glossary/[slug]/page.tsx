@@ -42,7 +42,7 @@ type GlossaryPageProps = {
 };
 
 const buildGlossarySeoTitle = (title: string, description: string) => {
-  const definitionLead = description.split(/[.!?]/)[0]?.trim();
+  const definitionLead = description.split(/[,.!?]/)[0]?.replace(/\$/g, "").trim();
   if (!definitionLead) return title;
   return `${title} - ${definitionLead}`;
 };

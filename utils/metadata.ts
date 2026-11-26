@@ -54,7 +54,7 @@ const trimToWordBoundary = (value: string, maxLength: number) => {
   const sliced = value.slice(0, maxLength + 1);
   const lastSpace = sliced.lastIndexOf(" ");
   if (lastSpace > 20) {
-    return sliced.slice(0, lastSpace).trimEnd();
+    return sliced.slice(0, lastSpace).trimEnd().replace(/[,;:(+\-–—]+$/g, "").trimEnd();
   }
   return value.slice(0, maxLength).trimEnd();
 };
