@@ -120,6 +120,7 @@ export const buildPageMetadata = ({
   openGraph,
   twitter,
   alternatesLanguages: alternatesLanguagesArg,
+  alternatesTypes,
   useLocalizedCanonical = true,
   absoluteTitle = false,
 }: PageMetadataOptions): Metadata => {
@@ -132,6 +133,7 @@ export const buildPageMetadata = ({
   const alternates = {
     canonical,
     ...(alternatesLanguages ? { languages: alternatesLanguages } : {}),
+    ...(alternatesTypes ? { types: alternatesTypes } : {}),
   };
   const resolvedImage =
     image ??

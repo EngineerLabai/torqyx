@@ -59,6 +59,12 @@ export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Crucial: bypass middleware completely for crawler and system verification files
+  if (pathname === "/tr/changelog/feed.xml" || pathname === "/en/changelog/feed.xml") {
+    const feedUrl = request.nextUrl.clone();
+    feedUrl.pathname = "/changelog/feed.xml";
+    return NextResponse.redirect(feedUrl, 308);
+  }
+
   if (
     pathname === "/ads.txt" ||
     pathname === "/robots.txt" ||
