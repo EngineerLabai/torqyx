@@ -143,3 +143,16 @@ export const buildOgImageMeta = (options: OgImageOptions) => ({
   height: 630,
   alt: `${options.title} - TORQYX`,
 });
+
+export const buildBreadcrumbJsonLd = (
+  items: Array<{ name: string; path: string }>,
+  locale: Locale,
+) => ({
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((item, idx) => ({
+    "@type": "ListItem",
+    position: idx + 1,
+    name: item.name,
+    item: buildLocalizedCanonical(item.path, locale),
+  })),
+});

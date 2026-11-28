@@ -1,5 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import ReferenceCenterLazy from "@/components/reference/ReferenceCenterLazy";
 import ReferenceHubNavigator from "@/components/reference/ReferenceHubNavigator";
 import { getBrandCopy } from "@/config/brand";
@@ -28,6 +30,7 @@ export default async function ReferencePage() {
 
   return (
     <PageShell>
+      <JsonLd id="reference-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.badge, path: "/reference" }], locale)} />
       <PageHero
         title={copy.title}
         description={copy.description}

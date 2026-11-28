@@ -1,12 +1,13 @@
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
 import ChangelogToolFilter from "@/components/changelog/ChangelogToolFilter";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
 import { getBrandCopy } from "@/config/brand";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
 import { getChangelogEntries, type ChangelogBadge } from "@/utils/changelog";
-import { buildLocalizedCanonical } from "@/utils/seo";
+import { buildLocalizedCanonical, buildBreadcrumbJsonLd } from "@/utils/seo";
 import type { Locale } from "@/utils/locale";
 
 export const dynamic = "force-static";
@@ -77,6 +78,7 @@ export default async function ChangelogPage() {
 
   return (
     <PageShell>
+      <JsonLd id="changelog-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.badge, path: "/changelog" }], locale)} />
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-2">

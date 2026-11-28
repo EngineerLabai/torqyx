@@ -5,6 +5,7 @@ import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { buildPageMetadata } from "@/utils/metadata";
+import { buildBreadcrumbJsonLd, buildLocalizedCanonical } from "@/utils/seo";
 import { BookOpen, CheckCircle2, Cpu, FileText, Layers, ShieldCheck, Users } from "lucide-react";
 
 const pageCopy = {
@@ -196,7 +197,7 @@ export default async function AboutPage() {
     "@type": "AboutPage",
     name: copy.title,
     description: copy.description,
-    url: "https://torqyx.com/hakkinda",
+    url: buildLocalizedCanonical("/hakkinda", locale),
     mainEntity: {
       "@type": "Person",
       name: "TORQYX",
@@ -222,6 +223,7 @@ export default async function AboutPage() {
   return (
     <PageShell>
       <JsonLd id="about-page-jsonld" data={aboutJsonLd} />
+      <JsonLd id="about-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: locale === "tr" ? "Hakkında" : "About", path: "/hakkinda" }], locale)} />
 
       <PageHero
         title={copy.title}

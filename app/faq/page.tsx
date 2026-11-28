@@ -1,5 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
@@ -30,6 +32,7 @@ export default async function FaqPage() {
 
   return (
     <PageShell>
+      <JsonLd id="faq-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.badge, path: "/faq" }], locale)} />
       <PageHero
         title={copy.title}
         description={copy.description}

@@ -1,5 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -183,6 +185,7 @@ export default async function MetodolojiPage() {
 
   return (
     <PageShell>
+      <JsonLd id="methodology-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: locale === "tr" ? "Metodoloji" : "Methodology", path: "/metodoloji" }], locale)} />
       <PageHero
         title={locale === "en" ? pageCopyEn.title : pageCopyTr.title}
         description={locale === "en" ? pageCopyEn.description : pageCopyTr.description}

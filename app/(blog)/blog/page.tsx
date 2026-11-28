@@ -1,6 +1,8 @@
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getIndexableContentList } from "@/utils/content";
 import { getBrandCopy } from "@/config/brand";
@@ -86,6 +88,7 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
 
   return (
     <PageShell>
+      <JsonLd id="blog-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.badge, path: "/blog" }], locale)} />
       <PageHero
         title={copy.title}
         description={copy.description}

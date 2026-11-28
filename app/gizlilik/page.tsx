@@ -1,6 +1,8 @@
 import CookiePreferencesButton from "@/components/consent/CookiePreferencesButton";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -212,6 +214,7 @@ export default async function PrivacyPolicyPage() {
 
   return (
     <PageShell>
+      <JsonLd id="privacy-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.title, path: "/gizlilik" }], locale)} />
       <PageHero
         title={copy.title}
         description={copy.description}

@@ -1,5 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import ToolLibraryLazy from "@/components/tools/ToolLibraryLazy";
 import { getBrandCopy } from "@/config/brand";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -39,6 +41,7 @@ export default async function ToolsIndexPage({ searchParams }: ToolsIndexPagePro
 
   return (
     <PageShell>
+      <JsonLd id="tools-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.badge, path: "/tools" }], locale)} />
       <PageHero
         title={copy.title}
         description={copy.description}

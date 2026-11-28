@@ -1,6 +1,8 @@
 import CookiePreferencesButton from "@/components/consent/CookiePreferencesButton";
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import { getBrandCopy } from "@/config/brand";
 import { HERO_PLACEHOLDER } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -176,6 +178,7 @@ export default async function CookiePolicyPage() {
 
   return (
     <PageShell>
+      <JsonLd id="cookies-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.title, path: "/cerez-politikasi" }], locale)} />
       <PageHero
         title={copy.title}
         description={copy.description}

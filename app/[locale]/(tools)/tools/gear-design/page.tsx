@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import { getToolDocsResponse } from "@/lib/toolDocs/loadToolDoc";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -868,6 +870,7 @@ export default async function GearDesignPage() {
 
   return (
     <PageShell>
+      <JsonLd id="gear-design-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: locale === "tr" ? "Hesaplayıcılar" : "Calculators", path: "/tools" }, { name: t.categoryBadge, path: "/tools/gear-design" }], locale)} />
       <ToolDocTabs slug="gear-design" initialDocs={initialDocs}>
         <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_24%)]" />

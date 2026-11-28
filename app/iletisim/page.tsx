@@ -7,6 +7,7 @@ import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
 import { getMessages } from "@/utils/messages";
 import { buildPageMetadata } from "@/utils/metadata";
+import { buildBreadcrumbJsonLd, buildLocalizedCanonical } from "@/utils/seo";
 import { Mail, ShieldCheck, Timer, CheckCircle, FileCheck } from "lucide-react";
 
 const pageCopy = {
@@ -46,7 +47,7 @@ export default async function ContactPage() {
     "@type": "ContactPage",
     name: isEn ? pageCopyEn.title : pageCopy.title,
     description: isEn ? pageCopyEn.description : pageCopy.description,
-    url: "https://torqyx.com/iletisim",
+    url: buildLocalizedCanonical("/iletisim", locale),
     mainEntity: {
       "@type": "Organization",
       name: "TORQYX",
@@ -64,6 +65,7 @@ export default async function ContactPage() {
   return (
     <PageShell>
       <JsonLd id="contact-page-jsonld" data={contactJsonLd} />
+      <JsonLd id="contact-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: locale === "tr" ? "İletişim" : "Contact", path: "/iletisim" }], locale)} />
 
       <PageHero
         title={isEn ? pageCopyEn.title : pageCopy.title}

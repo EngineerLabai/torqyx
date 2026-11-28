@@ -1,5 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import { getBrandCopy } from "@/config/brand";
 import { buildPageMetadata } from "@/utils/metadata";
 
@@ -222,11 +224,13 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function TermsPage({ params }: PageProps) {
   const { locale } = await params;
+  const resolvedLocale = locale as "tr" | "en";
   const copy = locale === "en" ? pageCopyEn : pageCopy;
   const sections = locale === "en" ? termsSectionsEn : termsSectionsTr;
 
   return (
     <PageShell>
+      <JsonLd id="terms-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: resolvedLocale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: copy.title, path: "/kullanim-sartlari" }], resolvedLocale)} />
       <PageHero
         title={copy.title}
         description={copy.description}

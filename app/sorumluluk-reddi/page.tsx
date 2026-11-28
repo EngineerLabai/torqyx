@@ -1,5 +1,7 @@
 import PageHero from "@/components/layout/PageHero";
 import PageShell from "@/components/layout/PageShell";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/utils/seo";
 import { getBrandCopy } from "@/config/brand";
 import { getHeroImageSrc } from "@/lib/assets";
 import { getLocaleFromCookies } from "@/utils/locale-server";
@@ -134,6 +136,7 @@ export default async function SorumlulukReddiPage() {
 
   return (
     <PageShell>
+      <JsonLd id="disclaimer-breadcrumb-jsonld" data={buildBreadcrumbJsonLd([{ name: locale === "tr" ? "Ana Sayfa" : "Home", path: "/" }, { name: locale === "tr" ? "Sorumluluk Reddi" : "Disclaimer", path: "/sorumluluk-reddi" }], locale)} />
       <PageHero
         title={locale === "en" ? pageCopyEn.title : pageCopyTr.title}
         description={locale === "en" ? pageCopyEn.description : pageCopyTr.description}
