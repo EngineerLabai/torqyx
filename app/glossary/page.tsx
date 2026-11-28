@@ -21,8 +21,15 @@ const MIN_INDEXABLE_GLOSSARY_TERMS = 3;
 export async function generateMetadata() {
   const locale = await getLocaleFromCookies();
   const brandContent = getBrandCopy(locale);
-  const termCount = (await getIndexableContentList("glossary", { locale, includeDrafts: false })).length;
+  const [trTerms, enTerms] = await Promise.all([
+    getIndexableContentList("glossary", { locale: "tr", includeDrafts: false }),
+    getIndexableContentList("glossary", { locale: "en", includeDrafts: false }),
+  ]);
+  const termCount = locale === "tr" ? trTerms.length : enTerms.length;
   const isIndexable = termCount >= MIN_INDEXABLE_GLOSSARY_TERMS;
+  const bothIndexable =
+    trTerms.length >= MIN_INDEXABLE_GLOSSARY_TERMS &&
+    enTerms.length >= MIN_INDEXABLE_GLOSSARY_TERMS;
   const title =
     locale === "tr"
       ? "Mühendislik Sözlüğü - Teknik Terimler ve Tanımlar"
@@ -38,6 +45,7 @@ export async function generateMetadata() {
     path: "/glossary",
     locale,
     robots: isIndexable ? undefined : NOINDEX_FOLLOW_ROBOTS,
+    alternatesLanguages: bothIndexable ? undefined : null,
   });
 }
 

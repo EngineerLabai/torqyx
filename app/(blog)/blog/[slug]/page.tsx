@@ -34,22 +34,23 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const notFoundCopy = getMessages(locale).pages.notFound;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
-  const [post, availability] = await Promise.all([
-    getContentBySlug("blog", slug, { locale }),
-    getContentLocaleAvailability("blog", slug),
+  const [trPost, enPost] = await Promise.all([
+    getContentBySlug("blog", slug, { locale: "tr" }),
+    getContentBySlug("blog", slug, { locale: "en" }),
   ]);
+  const post = locale === "tr" ? trPost : enPost;
+  const hasAnyLocale = Boolean(trPost || enPost);
+  const bothIndexable = Boolean(trPost && enPost && isContentIndexable(trPost) && isContentIndexable(enPost));
 
   if (!post) {
-    const hasAnyLocale = availability.tr || availability.en;
     const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
     const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
-    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/blog/${slug}`) : null;
     return buildPageMetadata({
       title,
       description,
       path: `/blog/${slug}`,
       locale,
-      alternatesLanguages,
+      alternatesLanguages: bothIndexable ? buildLanguageAlternates(`/blog/${slug}`) : null,
       noIndex: true,
     });
   }
@@ -62,7 +63,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     type: "article",
     robots: isContentIndexable(post) ? undefined : NOINDEX_FOLLOW_ROBOTS,
     keywords: post.tags,
-    alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/blog/${post.slug}`) : null,
+    alternatesLanguages: bothIndexable ? buildLanguageAlternates(`/blog/${post.slug}`) : null,
     openGraph: {
       type: "article",
       publishedTime: post.date,

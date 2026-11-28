@@ -40,22 +40,23 @@ export async function generateMetadata({ params }: GuidePageProps) {
   const { slug } = await params;
   const notFoundCopy = getMessages(locale).pages.notFound;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
-  const [guide, availability] = await Promise.all([
-    getContentBySlug("guides", slug, { locale }),
-    getContentLocaleAvailability("guides", slug),
+  const [trGuide, enGuide] = await Promise.all([
+    getContentBySlug("guides", slug, { locale: "tr" }),
+    getContentBySlug("guides", slug, { locale: "en" }),
   ]);
+  const guide = locale === "tr" ? trGuide : enGuide;
+  const hasAnyLocale = Boolean(trGuide || enGuide);
+  const bothIndexable = Boolean(trGuide && enGuide && isContentIndexable(trGuide) && isContentIndexable(enGuide));
 
   if (!guide) {
-    const hasAnyLocale = availability.tr || availability.en;
     const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
     const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
-    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/guides/${slug}`) : null;
     return buildPageMetadata({
       title,
       description,
       path: `/guides/${slug}`,
       locale,
-      alternatesLanguages,
+      alternatesLanguages: bothIndexable ? buildLanguageAlternates(`/guides/${slug}`) : null,
       noIndex: true,
     });
   }
@@ -69,7 +70,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
     type: "article",
     keywords: guide.tags,
     robots: isIndexable ? undefined : NOINDEX_FOLLOW_ROBOTS,
-    alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/guides/${guide.slug}`) : null,
+    alternatesLanguages: bothIndexable ? buildLanguageAlternates(`/guides/${guide.slug}`) : null,
     openGraph: {
       type: "article",
       publishedTime: guide.date,

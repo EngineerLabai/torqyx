@@ -4,7 +4,7 @@ import type { Locale } from "@/utils/locale";
 import { getBrandCopy } from "@/config/brand";
 import { NOINDEX_FOLLOW_ROBOTS, buildPageMetadata } from "@/utils/metadata";
 import { buildLocalizedCanonical, CANONICAL_SITE_URL, SITE_URL } from "@/utils/seo";
-import { isToolLocaleIndexReady } from "@/utils/tool-content-readiness";
+import { getToolIndexReadyLocales, isToolLocaleIndexReady } from "@/utils/tool-content-readiness";
 import { getToolCopy, toolCatalog, type ToolCatalogItem } from "@/tools/_shared/catalog";
 
 const normalize = (value: string) => value.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
@@ -116,6 +116,9 @@ export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => 
   const canonicalUrl = seo.canonical ?? new URL(seo.path, CANONICAL_SITE_URL).toString();
   const socialTitle = seo.tool?.id === "belt-length" ? toolName : `${toolName} | TORQYX`;
 
+  const readyLocales = seo.tool ? getToolIndexReadyLocales(seo.tool.id) : (["tr", "en"] as const);
+  const hasBothIndexReady = readyLocales.includes("tr") && readyLocales.includes("en");
+
   return buildPageMetadata({
     title: seo.title,
     description: seo.description,
@@ -131,6 +134,7 @@ export const buildToolMetadata = (toolKey: string, locale: Locale): Metadata => 
       description: seo.description,
     },
     robots: seo.tool && !isToolLocaleIndexReady(seo.tool.id, locale) ? NOINDEX_FOLLOW_ROBOTS : undefined,
+    alternatesLanguages: hasBothIndexReady ? undefined : null,
     absoluteTitle: seo.tool?.id === "belt-length",
   });
 };

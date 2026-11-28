@@ -57,22 +57,23 @@ export async function generateMetadata({ params }: GlossaryPageProps) {
   const { slug } = await params;
   const notFoundCopy = getMessages(locale).pages.notFound;
   const fallbackCopy = getMessages(locale).pages.contentFallback;
-  const [term, availability] = await Promise.all([
-    getContentBySlug("glossary", slug, { locale }),
-    getContentLocaleAvailability("glossary", slug),
+  const [trTerm, enTerm] = await Promise.all([
+    getContentBySlug("glossary", slug, { locale: "tr" }),
+    getContentBySlug("glossary", slug, { locale: "en" }),
   ]);
+  const term = locale === "tr" ? trTerm : enTerm;
+  const hasAnyLocale = Boolean(trTerm || enTerm);
+  const bothIndexable = Boolean(trTerm && enTerm && isContentIndexable(trTerm) && isContentIndexable(enTerm));
 
   if (!term) {
-    const hasAnyLocale = availability.tr || availability.en;
     const title = hasAnyLocale ? fallbackCopy.title : notFoundCopy.title;
     const description = hasAnyLocale ? fallbackCopy.description : notFoundCopy.description;
-    const alternatesLanguages = availability.tr && availability.en ? buildLanguageAlternates(`/glossary/${slug}`) : null;
     return buildPageMetadata({
       title,
       description,
       path: `/glossary/${slug}`,
       locale,
-      alternatesLanguages,
+      alternatesLanguages: bothIndexable ? buildLanguageAlternates(`/glossary/${slug}`) : null,
       noIndex: true,
     });
   }
@@ -86,7 +87,7 @@ export async function generateMetadata({ params }: GlossaryPageProps) {
     type: "article",
     keywords: term.tags,
     robots: isIndexable ? undefined : NOINDEX_FOLLOW_ROBOTS,
-    alternatesLanguages: availability.tr && availability.en ? buildLanguageAlternates(`/glossary/${term.slug}`) : null,
+    alternatesLanguages: bothIndexable ? buildLanguageAlternates(`/glossary/${term.slug}`) : null,
   });
 }
 
