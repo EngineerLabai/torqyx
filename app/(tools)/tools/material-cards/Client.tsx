@@ -1,17 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { getMaterialData } from "./material-data";
 import type { MaterialCategory, MaterialInfo } from "./material-types";
 import PageShell from "@/components/layout/PageShell";
 import ToolDocTabs from "@/components/tools/ToolDocTabs";
 import type { ToolDocsResponse } from "@/lib/toolDocs/types";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-
-type MaterialData = {
-  labels: Record<MaterialCategory, string>;
-  extra: Partial<Record<MaterialCategory, string>>;
-  materials: MaterialInfo[];
-};
 
 const INITIAL_CATEGORY_BATCH = 3;
 const CATEGORY_BATCH = 2;
@@ -29,8 +24,6 @@ const COPY = {
     generalRef: "Genel mühendislik referansı",
     freeContent: "Ücretsiz içerik",
     loadMore: "Daha fazla kategori yükle",
-    loadError: "Kartlar yüklenemedi.",
-    loading: "Kartlar yükleniyor...",
   },
   en: {
     badge: "Reference Cards",
@@ -44,8 +37,6 @@ const COPY = {
     generalRef: "General engineering reference",
     freeContent: "Free reference",
     loadMore: "Load more categories",
-    loadError: "Could not load material cards.",
-    loading: "Loading cards...",
   },
 } as const;
 
@@ -59,36 +50,15 @@ export default function MaterialCardsPage({ initialDocs }: MaterialCardsClientPr
   const t = COPY[isEn ? "en" : "tr"];
 
   const [categoryFilter, setCategoryFilter] = useState<MaterialCategory | "all">("all");
-  const [data, setData] = useState<MaterialData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState("");
   const [visibleCategories, setVisibleCategories] = useState(INITIAL_CATEGORY_BATCH);
+  const data = useMemo(() => getMaterialData(locale), [locale]);
 
-  useEffect(() => {
-    let active = true;
-    setLoading(true);
-    import("./material-data")
-      .then((mod) => {
-        if (!active) return;
-        const localized = mod.getMaterialData(locale);
-        setData(localized);
-        setLoading(false);
-      })
-      .catch(() => {
-        if (!active) return;
-        setLoadError(t.loadError);
-        setLoading(false);
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [locale, t.loadError]);
-
-  useEffect(() => {
-    if (categoryFilter !== "all") return;
-    setVisibleCategories(INITIAL_CATEGORY_BATCH);
-  }, [categoryFilter]);
+  const handleCategoryChange = (nextCategory: MaterialCategory | "all") => {
+    setCategoryFilter(nextCategory);
+    if (nextCategory === "all") {
+      setVisibleCategories(INITIAL_CATEGORY_BATCH);
+    }
+  };
 
   const categories = useMemo(
     () => (data ? (Object.keys(data.labels) as MaterialCategory[]) : []),
@@ -137,40 +107,25 @@ export default function MaterialCardsPage({ initialDocs }: MaterialCardsClientPr
           {/* Filtre butonları */}
           <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
             <span className="text-slate-700">{t.filterLabel}</span>
-            {data ? (
-              <>
-                <FilterChip
-                  label={t.all}
-                  active={categoryFilter === "all"}
-                  onClick={() => setCategoryFilter("all")}
-                />
-                {categories.map((cat) => (
-                  <FilterChip
-                    key={cat}
-                    label={data.labels[cat]}
-                    active={categoryFilter === cat}
-                    onClick={() => setCategoryFilter(cat)}
-                  />
-                ))}
-              </>
-            ) : (
-              <span className="text-[11px] text-slate-500">{loadError || t.loading}</span>
-            )}
+            <FilterChip
+              label={t.all}
+              active={categoryFilter === "all"}
+              onClick={() => handleCategoryChange("all")}
+            />
+            {categories.map((cat) => (
+              <FilterChip
+                key={cat}
+                label={data.labels[cat]}
+                active={categoryFilter === cat}
+                onClick={() => handleCategoryChange(cat)}
+              />
+            ))}
           </div>
         </section>
 
         {/* Malzeme kartları */}
         <section className="space-y-6">
-          {loadError ? (
-            <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-xs text-rose-700">
-              {loadError}
-            </div>
-          ) : null}
-
-          {loading ? <LoadingGrid /> : null}
-
-          {!loading && data
-            ? visibleCategoryKeys.map((category) => {
+          {visibleCategoryKeys.map((category) => {
                 const items = grouped[category] ?? [];
                 if (items.length === 0) return null;
                 return (
@@ -231,8 +186,7 @@ export default function MaterialCardsPage({ initialDocs }: MaterialCardsClientPr
                     </div>
                   </section>
                 );
-              })
-            : null}
+          })}
 
           {hasMoreCategories ? (
             <div className="flex justify-center">
@@ -275,24 +229,3 @@ function FilterChip({ label, active, onClick }: FilterChipProps) {
   );
 }
 
-function LoadingGrid() {
-  const items = Array.from({ length: 6 });
-  return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {items.map((_, index) => (
-        <div
-          key={`loading-${index}`}
-          className="rounded-2xl border border-slate-200 bg-white p-4 text-xs shadow-sm"
-        >
-          <div className="mb-2 h-4 w-32 rounded bg-slate-100" />
-          <div className="mb-3 h-3 w-24 rounded bg-slate-100" />
-          <div className="space-y-2">
-            <div className="h-3 w-full rounded bg-slate-100" />
-            <div className="h-3 w-5/6 rounded bg-slate-100" />
-            <div className="h-3 w-4/6 rounded bg-slate-100" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
